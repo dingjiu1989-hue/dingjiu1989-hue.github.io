@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.png",
       "datePublished": "2026-05-04",
       "dateModified": "2026-05-19",
-      "wordCount": "1199",
+      "wordCount": "1191",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,22 +96,7 @@
       <h1 class="article-title">Materialized View Pattern</h1>
       <div class="article-meta">Published 2026-05-04 · Last active 2026-05-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.png" alt="Materialized View Pattern" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Materialized View Pattern</h2>
-<h3>Materialized View Pattern</h3>
-<h4>Materialized View Pattern</h4>
-<h4>Materialized View Pattern</h4>
-<h4>Materialized View Pattern</h4>
-<h4>Materialized View Pattern</h4>
-<h4>Materialized View Pattern</h4>
-<h4>Materialized View Pattern</h4>
-<h4>Materialized View Pattern</h4>
-<h4>Materialized View Pattern</h4>
-<h4>Materialized View Pattern</h4>
-<h4>Materialized View Pattern</h4>
-<h4>Materialized View Pattern</h4>
-<h4>Materialized View Pattern</h4>
-<h4>Materialized View Pattern</h4>
-<p>The materialized view pattern creates pre-computed, denormalized read models that are optimized for specific query patterns. Instead of querying multiple services or performing expensive joins at query time, the system maintains a dedicated data store containing exactly the data needed for each query. This pattern is essential for read-heavy workloads and complex cross-service queries in microservice architectures. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.png" alt="Materialized View Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>The materialized view pattern creates pre-computed, denormalized read models that are optimized for specific query patterns. Instead of querying multiple services or performing expensive joins at query time, the system maintains a dedicated data store containing exactly the data needed for each query. This pattern is essential for read-heavy workloads and complex cross-service queries in microservice architectures. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.png" alt="Materialized View Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The Problem </p>
 <p>In a microservice architecture, each service owns its database. A query that needs data from multiple services cannot use a simple database join. The alternatives—API composition (calling multiple services and combining results) or client-side joins—are slow, resource-intensive, and do not scale for complex queries. </p>
 <p>For example, a dashboard that shows "orders with customer names and product details" needs data from the Order, Customer, and Product services. A query-time join across these services would be slow and unreliable. The materialized view pattern solves this by maintaining a pre-joined read model. </p>
@@ -138,7 +123,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -150,7 +138,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/api-composition-pattern.html" class="related-card">API Composition Pattern</a><a href="/en/architecture/api-composition.html" class="related-card">API Composition and Aggregation</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/database-per-service.html" class="related-card">Database per Service Pattern</a></div>
+      <div class="related-grid"><a href="/en/architecture/api-composition-pattern.html" class="related-card"><span class="related-card-title">API Composition Pattern</span><span class="related-card-desc">Learn API composition: aggregation, parallel calls, error handling strategies, and cross-service dat</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a><a href="/en/architecture/cqrs-pattern.html" class="related-card"><span class="related-card-title">CQRS Pattern: Command Query Responsibility Segregation</span><span class="related-card-desc">Learn CQRS pattern with read/write separation, event sourcing integration, materialized views, and g</span></a><a href="/en/architecture/database-per-service.html" class="related-card"><span class="related-card-title">Database per Service Pattern</span><span class="related-card-desc">Learn the database per service pattern for microservices data management — data isolation, eventual </span></a><a href="/en/architecture/caching-http.html" class="related-card"><span class="related-card-title">HTTP Caching Architecture</span><span class="related-card-desc">Cache-Control, ETags, CDN caching, stale-while-revalidate, and cache invalidation strategies</span></a><a href="/en/architecture/cdn-architecture.html" class="related-card"><span class="related-card-title">CDN Architecture</span><span class="related-card-desc">Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content deliv</span></a></div>
     </section>
     
   </div>

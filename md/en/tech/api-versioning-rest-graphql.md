@@ -8,43 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/tech/api-versioning-rest-graphql.html
 
 # API Versioning Strategies: REST vs GraphQL Approaches
 
-## API Versioning Strategies: REST vs GraphQL Approaches
-
-### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
-#### API Versioning Strategies: REST vs GraphQL Approaches
-
 API versioning manages changes to public interfaces without breaking existing clients. REST and GraphQL handle versioning differently due to their architectural differences.
 
-#### REST Versioning
+## REST Versioning
 
 URL versioning embeds the version in the path: /v1/users, /v2/users. It is the most common approach. Simple to implement and discoverable. It encourages maintaining multiple API versions simultaneously.
 
@@ -52,13 +18,13 @@ Header versioning uses custom headers: Accept: application/vnd.api+json;version=
 
 Query parameter versioning uses ?version=2. Simple but easily overlooked. Not recommended for production APIs.
 
-#### GraphQL Versioning
+## GraphQL Versioning
 
 GraphQL avoids traditional versioning. The schema evolves by adding new fields and deprecating old ones. Clients request only the fields they need, so new fields do not break existing queries.
 
 Deprecated fields remain in the schema but are marked @deprecated. Clients receive deprecation warnings in responses. After sufficient migration time, deprecated fields can be removed.
 
-#### Choosing
+## Choosing
 
 For REST, use URL versioning for simple APIs and header versioning for API-first products. For GraphQL, use schema evolution with deprecation rather than versioned endpoints. Always document breaking changes and provide migration guides.
 
@@ -73,3 +39,9 @@ For REST, use URL versioning for simple APIs and header versioning for API-first
 **See also:** [Git Workflows](</en/tech/git-workflows.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
 
 **See also:** [Git Workflows](</en/tech/git-workflows.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
+
+**See also:** [Dependency Management](</en/tech/dependency-management.html>), [Error Handling Patterns](</en/tech/error-handling-patterns.html>), [Log Management](</en/tech/log-management.html>)
+
+**See also:** [Dependency Management](</en/tech/dependency-management.html>), [Error Handling Patterns](</en/tech/error-handling-patterns.html>), [Log Management](</en/tech/log-management.html>)
+
+**See also:** [Dependency Management](</en/tech/dependency-management.html>), [Error Handling Patterns](</en/tech/error-handling-patterns.html>), [Log Management](</en/tech/log-management.html>)

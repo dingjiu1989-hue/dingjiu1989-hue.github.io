@@ -78,4 +78,4 @@ asyncio.wait()| Low-level: wait for FIRST_COMPLETED or ALL_COMPLETED| Timeouts, 
 
 **Bottom line:** Use TaskGroup for structured concurrency — it replaces the error-prone gather() pattern. Keep async code purely async (offload blocking code to threads). Always limit concurrency with Semaphore when making external requests. See also: [Node.js Streams Guide](</en/tech/nodejs-streams-guide.html>) and [Error Handling Best Practices](</en/tech/error-handling-best-practices.html>).
 
-**See also:** [Node.js Streams: Complete Guide to Efficient Data Processing](</en/tech/nodejs-streams-guide.html>), [Webhook Implementation: Design, Security, and Best Practices (2026)](</en/tech/webhook-implementation-guide.html>), [REST API Best Practices: The Complete Guide for 2026](</en/tech/rest-api-best-practices.html>)
+**See also:** [Python Tutorial: From Zero to Your First Program](</en/tech/python-tutorial.html>), [Error Handling Best Practices: From Try/Catch to Structured Errors](</en/tech/error-handling-best-practices.html>), [GraphQL API Design: Schema Best Practices, Federation, and Performance](</en/tech/graphql-api-design.html>)

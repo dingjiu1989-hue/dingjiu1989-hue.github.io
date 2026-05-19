@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/owasp-top-10-2026.html
 
 # OWASP Top 10 2026
 
-## OWASP Top 10 2026
-
-### OWASP Top 10 2026
-
-#### OWASP Top 10 2026
-
-#### OWASP Top 10 2026
-
-#### OWASP Top 10 2026
-
-#### OWASP Top 10 2026
-
-#### OWASP Top 10 2026
-
-#### OWASP Top 10 2026
-
-#### OWASP Top 10 2026
-
-#### OWASP Top 10 2026
-
-#### OWASP Top 10 2026
-
-#### OWASP Top 10 2026
-
-#### OWASP Top 10 2026
-
-#### OWASP Top 10 2026
-
-#### OWASP Top 10 2026
-
 OWASP Top 10 2026 Overview 
 
 The OWASP Top 10 represents the most critical web application security risks. The 2026 edition introduces several new categories reflecting the evolving threat landscape. 
@@ -114,7 +84,7 @@ A03: Injection
 
 Injection remains prevalent. Parameterized queries are mandatory: 
 
-#### Secure: Parameterized query
+## Secure: Parameterized query
 
 def find_user(email):
 
@@ -122,7 +92,7 @@ query = "SELECT * FROM users WHERE email = $1"
 
 return db.execute(query, [email])
 
-#### Also secure: ORM abstraction
+## Also secure: ORM abstraction
 
 def find_user_safe(email):
 
@@ -184,7 +154,7 @@ A08: Software and Data Integrity Failures
 
 CI/CD pipeline security and supply chain attacks: 
 
-#### Supply chain security checks
+## Supply chain security checks
 
 supply_chain_checks:
 
@@ -206,19 +176,19 @@ def security_test_suite():
 
 results = []
 
-#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Automated DAST
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Automated DAST
 
 results.extend(run_dast_scan("https://staging.example.com"))
 
-#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. SAST scan
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. SAST scan
 
 results.extend(run_sast_scan("./src"))
 
-#### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Dependency check
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Dependency check
 
 results.extend(run_dependency_check("./package.json"))
 
-#### 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. API fuzzing
+## 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. API fuzzing
 
 results.extend(api_fuzz("https://staging.example.com/api"))
 
@@ -239,3 +209,9 @@ The OWASP Top 10 2026 reflects the maturing security landscape. Broken access co
 **See also:** [Penetration Testing Methodology](</en/security/penetration-testing.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>)
 
 **See also:** [Penetration Testing Methodology](</en/security/penetration-testing.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>)
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Container Image Security](</en/security/container-image-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Container Image Security](</en/security/container-image-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Container Image Security](</en/security/container-image-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)

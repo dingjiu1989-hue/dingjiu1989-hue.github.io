@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/xsrf-csrf-protection.html
 
 # XSRF/CSRF Protection Guide
 
-## XSRF/CSRF Protection Guide
-
-### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
-#### XSRF/CSRF Protection Guide
-
 What Is CSRF? 
 
 Cross-Site Request Forgery (CSRF or XSRF) is an attack that forces an authenticated user to execute unwanted actions on a web application. The attacker crafts a malicious page that, when visited by the victim, automatically submits a request to the target application using the victim's existing session cookies. 
@@ -104,11 +70,11 @@ Framework Built-In Support
 
 Most modern frameworks include CSRF protection: 
 
-#### Django
+## Django
 
 {% csrf_token %} 
 
-#### Rails
+## Rails
 
 <%= csrf_meta_tags %>
 
@@ -138,7 +104,7 @@ The `SameSite` cookie attribute tells the browser when to send cookies with cros
 
 | Attribute | Behavior | Security | |-----------|----------|----------| | `Strict` | Cookie sent only for same-site requests | Most secure, breaks some legitimate cross-site flows | | `Lax` | Cookie sent for top-level GET navigations | Good balance for most apps | | `None` | Cookie sent for all requests (requires Secure) | Insecure, use only when necessary | 
 
-#### Django settings
+## Django settings
 
 SESSION_COOKIE_SAMESITE = 'Lax'
 
@@ -255,3 +221,9 @@ CSRF attacks exploit the browser's automatic inclusion of credentials in cross-o
 **See also:** [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)
 
 **See also:** [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)

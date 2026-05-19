@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/blob-storage.png",
       "datePublished": "2026-04-13",
       "dateModified": "2026-05-02",
-      "wordCount": "851",
+      "wordCount": "855",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,42 +99,30 @@
       <h1 class="article-title">Blob Storage: S3, GCS, Azure Blob, MinIO</h1>
       <div class="article-meta">Published 2026-04-13 · Last active 2026-05-02 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/blob-storage.png" alt="Blob Storage: S3, GCS, Azure Blob, MinIO" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Blob Storage: S3, GCS, Azure Blob, MinIO</h2>
-<h3>Blob Storage: S3, GCS, Azure Blob, MinIO</h3>
-<h4>Blob Storage: S3, GCS, Azure Blob, MinIO</h4>
-<h4>Blob Storage: S3, GCS, Azure Blob, MinIO</h4>
-<h4>Blob Storage: S3, GCS, Azure Blob, MinIO</h4>
-<h4>Blob Storage: S3, GCS, Azure Blob, MinIO</h4>
-<h4>Blob Storage: S3, GCS, Azure Blob, MinIO</h4>
-<h4>Blob Storage: S3, GCS, Azure Blob, MinIO</h4>
-<h4>Blob Storage: S3, GCS, Azure Blob, MinIO</h4>
-<h4>Blob Storage: S3, GCS, Azure Blob, MinIO</h4>
-<h4>Blob Storage: S3, GCS, Azure Blob, MinIO</h4>
-<h4>Blob Storage: S3, GCS, Azure Blob, MinIO</h4>
-<h4>Blob Storage: S3, GCS, Azure Blob, MinIO</h4>
-<h4>Blob Storage: S3, GCS, Azure Blob, MinIO</h4>
-<h4>Blob Storage: S3, GCS, Azure Blob, MinIO</h4>
-<p>Blob (Binary Large Object) storage stores unstructured data such as images, videos, backups, logs, and archives. Unlike block storage (hard drives) or file storage (network file shares), blob storage manages objects with metadata identifiers and provides HTTP-based access.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/blob-storage.png" alt="Blob Storage: S3, GCS, Azure Blob, MinIO" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>AWS S3</h4>
+      <div class="article-body"><p>Blob (Binary Large Object) storage stores unstructured data such as images, videos, backups, logs, and archives. Unlike block storage (hard drives) or file storage (network file shares), blob storage manages objects with metadata identifiers and provides HTTP-based access.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/blob-storage.png" alt="Blob Storage: S3, GCS, Azure Blob, MinIO" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>AWS S3</h2>
 <p>Amazon S3 is the most mature and widely used object storage service. It offers 99.999999999% durability (11 nines) through automatic replication across multiple availability zones. S3 storage classes range from frequent access (Standard) to archive (Glacier Deep Archive at $1/TB/month).</p>
 <p>S3 features include versioning (protect against accidental deletion), lifecycle policies (automatically move objects between storage classes), server-side encryption, access control policies, and static website hosting. S3's strong consistency ensures all operations are immediately visible.</p>
-<h4>Google Cloud Storage</h4>
+<h2>Google Cloud Storage</h2>
 <p>GCS offers similar functionality with unique features like object holds (prevent deletion or overwriting), autoclass (automatically transitions objects to appropriate storage classes), and uniform bucket-level access control.</p>
 <p>GCS excels at integration with Google's AI and analytics services. Data in GCS can feed directly into BigQuery, Vertex AI, and Dataflow without data movement. GCS also offers lower network egress costs compared to S3.</p>
-<h4>Azure Blob Storage</h4>
+<h2>Azure Blob Storage</h2>
 <p>Azure Blob Storage offers three tiers: hot (frequent access), cool (infrequent access with 30-day minimum), and archive (with 180-day minimum and hours-long retrieval). Azure's unique feature is hierarchical namespace for data lake workloads.</p>
 <p>Azure Blob integrates deeply with Azure services—Azure CDN, Azure Functions, and Azure Machine Learning. The Azure portal provides comprehensive management tools.</p>
-<h4>MinIO</h4>
+<h2>MinIO</h2>
 <p>MinIO is an open-source, S3-compatible object storage server that runs on any infrastructure. It is suitable for on-premises deployments, edge computing, and development environments. MinIO provides S3 API compatibility, erasure coding for data protection, and encryption.</p>
 <p>MinIO's lightweight design allows it to run on Kubernetes as a stateful application. The operator automates deployment, scaling, and upgrades. Performance is impressive for Self-hosted storage—10+ GB/s read/write with NVMe drives.</p>
-<h4>Choosing a Blob Storage Solution</h4>
+<h2>Choosing a Blob Storage Solution</h2>
 <p>For cloud-native applications, use the cloud provider's native blob storage. For multi-cloud or on-premises requirements, use MinIO or similar S3-compatible solutions. For archival data, consider S3 Glacier or GCS Archive for lowest cost.</p>
 <p>Evaluate egress costs carefully. Cloud blob storage charges for data transfer, which can dominate total cost for data-heavy applications. Lifecycle policies significantly reduce storage costs for data with well-defined access patterns.</p>
 <p><strong>See also:</strong> <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -146,7 +134,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-backup-to-s3.html" class="related-card">Database Backup Strategies to Object Storage</a><a href="/en/database/document-databases.html" class="related-card">Document Databases: MongoDB, CouchDB, Firestore</a><a href="/en/database/database-capacity-planning.html" class="related-card">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a><a href="/en/database/database-compression.html" class="related-card">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a></div>
+      <div class="related-grid"><a href="/en/database/database-backup-to-s3.html" class="related-card"><span class="related-card-title">Database Backup Strategies to Object Storage</span><span class="related-card-desc">Automate database backups to S3/GCS: incremental backups, point-in-time recovery, and retention poli</span></a><a href="/en/database/document-databases.html" class="related-card"><span class="related-card-title">Document Databases: MongoDB, CouchDB, Firestore</span><span class="related-card-desc">Compare document databases: MongoDB, CouchDB, and Firestore for flexible schema and JSON document st</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="related-card-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="related-card-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monit</span></a><a href="/en/database/database-compression.html" class="related-card"><span class="related-card-title">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</span><span class="related-card-desc">Explore database compression techniques including page-level, tuple-level, and columnar compression.</span></a><a href="/en/database/database-cost-optimization.html" class="related-card"><span class="related-card-title">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</span><span class="related-card-desc">Learn database cost optimization strategies: right-sizing instances, reserved instances, storage tie</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="related-card-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="related-card-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategi</span></a></div>
     </section>
     
   </div>

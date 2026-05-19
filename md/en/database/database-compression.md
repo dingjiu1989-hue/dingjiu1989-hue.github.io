@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-compression.html
 
 # Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
 
-## Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
-### Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
-#### Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
-#### Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
-#### Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
-#### Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
-#### Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
-#### Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
-#### Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
-#### Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
-#### Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
-#### Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
-#### Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
-#### Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
-#### Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
-
 Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST 
 
 Database compression reduces storage footprint and, more importantly, improves query performance by reducing the amount of data read from disk. This article covers compression techniques across PostgreSQL, MySQL, and columnar databases. 
@@ -245,3 +215,9 @@ Compression is a rare optimization that reduces cost and improves performance si
 **See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
 
 **See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
+
+**See also:** [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
+
+**See also:** [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
+
+**See also:** [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)

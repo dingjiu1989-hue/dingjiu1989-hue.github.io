@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/cost-per-request.html
 
 # Cost Per Request Modeling
 
-## Cost Per Request Modeling
-
-### Cost Per Request Modeling
-
-#### Cost Per Request Modeling
-
-#### Cost Per Request Modeling
-
-#### Cost Per Request Modeling
-
-#### Cost Per Request Modeling
-
-#### Cost Per Request Modeling
-
-#### Cost Per Request Modeling
-
-#### Cost Per Request Modeling
-
-#### Cost Per Request Modeling
-
-#### Cost Per Request Modeling
-
-#### Cost Per Request Modeling
-
-#### Cost Per Request Modeling
-
-#### Cost Per Request Modeling
-
-#### Cost Per Request Modeling
-
 Cost per request modeling decomposes infrastructure costs into the cost of serving a single request. This metric enables data-driven optimization: if a request costs \$0.001 and you serve 100 million requests per month, a 20% reduction saves \$20,000 monthly. More importantly, understanding per-request costs reveals which features, endpoints, or user segments are profitable and which may need rethinking. 
 
 Compute cost is calculated from the resources consumed during request processing. For a containerized service with 500 millicores of CPU and 512 MB of memory allocation, running on instances costing \$50/month with 100 requests per second capacity, the per-request compute cost is approximately \$0.0000058 (50 / 30 / 86400 / 100 * 500/1000). This minimal per-request cost compounds through the chain of services involved — the API gateway, multiple backend services, and background job processors all contribute. 
@@ -69,3 +39,9 @@ Right-sizing infrastructure is the fundamental cost optimization. Over-provision
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)

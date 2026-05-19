@@ -8,43 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/tools/load-testing-tools.html
 
 # Load Testing Tools: k6, Locust, Gatling, Artillery
 
-## Load Testing Tools: k6, Locust, Gatling, Artillery
-
-### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Load Testing Tools: k6, Locust, Gatling, Artillery
-
-#### Introduction
+## Introduction
 
 Load testing ensures your application handles expected traffic without degradation. Modern load testing tools use real programming languages instead of XML/JSON configuration, making tests maintainable, version-controllable, and integrable with CI/CD pipelines. This article compares k6, Locust, Gatling, and Artillery.
 
-#### k6
+## k6
 
 Grafana k6 is a JavaScript-based load testing tool with excellent performance metrics:
 
@@ -138,21 +106,21 @@ sleep(1);
 
 }
 
-#### Run test
+## Run test
 
 k6 run load-test.js
 
-#### With HTML report
+## With HTML report
 
 k6 run load-test.js --out json=results.json --out html=report.html
 
 **Strengths** : Go-based (efficient), JavaScript scripting, rich metrics, threshold system, extensive protocol support (HTTP, gRPC, WebSocket, browser), cloud integration.
 
-#### Locust
+## Locust
 
 Python-based load testing with a web UI for real-time monitoring:
 
-#### locustfile.py
+## locustfile.py
 
 from locust import HttpUser, task, between, tag
 
@@ -220,13 +188,13 @@ payload = {
 
 self.client.post("/users", json=payload)
 
-#### Run: locust -f locustfile.py --headless -u 100 -r 10 -t 10m
+## Run: locust -f locustfile.py --headless -u 100 -r 10 -t 10m
 
-#### Web UI: locust -f locustfile.py (then open http://localhost:8089)
+## Web UI: locust -f locustfile.py (then open http://localhost:8089)
 
 **Strengths** : Python scripting (familiar for data teams), distributed execution, web UI for live monitoring, extensible with custom event hooks.
 
-#### Gatling
+## Gatling
 
 High-performance Scala/Java load testing with detailed HTML reports:
 
@@ -302,17 +270,17 @@ rampUsers(100).during(2.minutes),
 
 }
 
-#### Run
+## Run
 
 gatling.sh -s BasicSimulation -rf results/
 
 **Strengths** : Best performance (Akka-based), richest HTML reports, powerful DSL, excellent for high-throughput testing.
 
-#### Artillery
+## Artillery
 
 Node.js-based load testing focused on developer experience:
 
-#### artillery.yml
+## artillery.yml
 
 config:
 
@@ -376,17 +344,17 @@ json:
 
 payment_method: "card"
 
-#### Run
+## Run
 
 npx artillery run artillery.yml
 
-#### Report
+## Report
 
 natsby art run artillery.yml --output report.json
 
 npx artillery report report.json
 
-#### Comparison
+## Comparison
 
 | Feature | k6 | Locust | Gatling | Artillery |
 
@@ -406,7 +374,7 @@ npx artillery report report.json
 
 | Reports | JSON/HTML | CSV/HTML | HTML (excellent) | JSON/HTML |
 
-#### Recommendations
+## Recommendations
 
   * **JavaScript teams** : k6 for the best balance of scripting ease and performance.
 
@@ -434,3 +402,9 @@ All four tools support CI integration. k6 has the strongest Grafana ecosystem. L
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>), [Linter and Formatter: ESLint, Prettier, Biome, Ruff](</en/tools/linter-formatter.html>)
 
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>), [Linter and Formatter: ESLint, Prettier, Biome, Ruff](</en/tools/linter-formatter.html>)
+
+**See also:** [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
+
+**See also:** [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
+
+**See also:** [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)

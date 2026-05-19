@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/idempotency-patterns.html
 
 # Idempotency Patterns in Distributed Systems
 
-## Idempotency Patterns in Distributed Systems
-
-### Idempotency Patterns in Distributed Systems
-
-#### Idempotency Patterns in Distributed Systems
-
-#### Idempotency Patterns in Distributed Systems
-
-#### Idempotency Patterns in Distributed Systems
-
-#### Idempotency Patterns in Distributed Systems
-
-#### Idempotency Patterns in Distributed Systems
-
-#### Idempotency Patterns in Distributed Systems
-
-#### Idempotency Patterns in Distributed Systems
-
-#### Idempotency Patterns in Distributed Systems
-
-#### Idempotency Patterns in Distributed Systems
-
-#### Idempotency Patterns in Distributed Systems
-
-#### Idempotency Patterns in Distributed Systems
-
-#### Idempotency Patterns in Distributed Systems
-
-#### Idempotency Patterns in Distributed Systems
-
 Idempotency is the property that applying an operation multiple times produces the same result as applying it once. In distributed systems, networks are unreliable, services fail and restart, and clients naturally retry. Idempotency turns unreliable infrastructure into reliable semantics — it allows safe retries without data corruption or duplicate side effects. 
 
 The idempotency key pattern is the foundation. The client generates a unique key for each operation and includes it with the request. The server stores the key and its result. If the server receives a duplicate request with the same key, it returns the stored result without re-executing the operation. The idempotency key should be scoped to the client and operation type. UUIDs or ULIDs are typical key formats. 
@@ -69,3 +39,9 @@ Idempotency should be designed into every external-facing API and every event ha
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
+
+**See also:** [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)

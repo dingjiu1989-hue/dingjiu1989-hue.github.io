@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/container-runtime-security.ht
 
 # Container Runtime Security
 
-## Container Runtime Security
-
-### Container Runtime Security
-
-#### Container Runtime Security
-
-#### Container Runtime Security
-
-#### Container Runtime Security
-
-#### Container Runtime Security
-
-#### Container Runtime Security
-
-#### Container Runtime Security
-
-#### Container Runtime Security
-
-#### Container Runtime Security
-
-#### Container Runtime Security
-
-#### Container Runtime Security
-
-#### Container Runtime Security
-
-#### Container Runtime Security
-
-#### Container Runtime Security
-
 Runtime Security Fundamentals 
 
 Container runtime security monitors and restricts container behavior during execution. It prevents attackers who gain container access from breaking out or causing damage. 
@@ -114,21 +84,21 @@ AppArmor
 
 AppArmor uses path-based access control: 
 
-#### AppArmor profile for container
+## AppArmor profile for container
 
-#### include
+## include
 
 profile container-strict flags=(attach_disconnected) {
 
-#### include
+## include
 
-#### Network
+## Network
 
 network inet tcp,
 
 network inet udp,
 
-#### Filesystem
+## Filesystem
 
 / r,
 
@@ -140,7 +110,7 @@ network inet udp,
 
 /app/bin ix,
 
-#### Deny everything else
+## Deny everything else
 
 deny /etc/shadow r,
 
@@ -154,13 +124,13 @@ SELinux for Containers
 
 SELinux provides mandatory access control: 
 
-#### Enable SELinux for container runtime
+## Enable SELinux for container runtime
 
 sudo setenforce 1
 
 sudo semanage permissive -a container_t
 
-#### Apply SELinux context to container
+## Apply SELinux context to container
 
 podman run \
 
@@ -170,7 +140,7 @@ podman run \
 
 nginx
 
-#### Check SELinux context
+## Check SELinux context
 
 ps -eZ | grep container
 
@@ -178,7 +148,7 @@ Falco Runtime Detection
 
 Falco detects anomalous behavior: 
 
-#### falco-rules.yaml
+## falco-rules.yaml
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rule: Terminal shell in container
 
@@ -236,7 +206,7 @@ Write to sensitive host path from container
 
 priority: CRITICAL
 
-#### Falco event consumer
+## Falco event consumer
 
 import json
 
@@ -323,3 +293,9 @@ Container runtime security requires multiple layers. Use seccomp to restrict sys
 **See also:** [Container Image Security](</en/security/container-image-security.html>), [Helm Security](</en/security/helm-security.html>), [Kubernetes Security](</en/security/kubernetes-security.html>)
 
 **See also:** [Container Image Security](</en/security/container-image-security.html>), [Helm Security](</en/security/helm-security.html>), [Kubernetes Security](</en/security/kubernetes-security.html>)
+
+**See also:** [Endpoint Security](</en/security/endpoint-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Threat Hunting](</en/security/threat-hunting.html>)
+
+**See also:** [Endpoint Security](</en/security/endpoint-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Threat Hunting](</en/security/threat-hunting.html>)
+
+**See also:** [Endpoint Security](</en/security/endpoint-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Threat Hunting](</en/security/threat-hunting.html>)

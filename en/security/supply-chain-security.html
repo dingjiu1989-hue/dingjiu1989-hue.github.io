@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/supply-chain-security.png",
       "datePublished": "2026-03-14",
       "dateModified": "2026-05-10",
-      "wordCount": "1434",
+      "wordCount": "1413",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">Supply Chain Security</h1>
       <div class="article-meta">Published 2026-03-14 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/supply-chain-security.png" alt="Supply Chain Security" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Supply Chain Security</h2>
-<h3>Supply Chain Security</h3>
-<h4>Supply Chain Security</h4>
-<h4>Supply Chain Security</h4>
-<h4>Supply Chain Security</h4>
-<h4>Supply Chain Security</h4>
-<h4>Supply Chain Security</h4>
-<h4>Supply Chain Security</h4>
-<h4>Supply Chain Security</h4>
-<h4>Supply Chain Security</h4>
-<h4>Supply Chain Security</h4>
-<h4>Supply Chain Security</h4>
-<h4>Supply Chain Security</h4>
-<h4>Supply Chain Security</h4>
-<h4>Supply Chain Security</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/supply-chain-security.png" alt="Supply Chain Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/supply-chain-security.png" alt="Supply Chain Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Software supply chain attacks target the processes and tools used to build, package, and distribute software. High-profile incidents like SolarWinds and Codecov demonstrated that compromising a single trusted vendor can cascade into thousands of downstream victims. Defending the supply chain requires verifiable integrity, provenance, and policy enforcement at every stage. </p>
 <p>Software Bill of Materials (SBOM) </p>
 <p>An SBOM is a machine-readable inventory of all components in a software artifact. It enables consumers to quickly identify exposure when a vulnerability is disclosed. </p>
@@ -151,25 +136,25 @@
 <p>],</p>
 <p>"vulnerabilities": []</p>
 <p>}</p>
-<h4>Generate SPDX SBOM with syft</h4>
+<h2>Generate SPDX SBOM with syft</h2>
 <p>syft packages ./myapp:latest -o spdx-json &gt; sbom.spdx.json</p>
-<h4>Generate CycloneDX SBOM</h4>
+<h2>Generate CycloneDX SBOM</h2>
 <p>cyclonedx-bom -o bom.xml -t file</p>
-<h4>Compare SBOMs for change detection</h4>
+<h2>Compare SBOMs for change detection</h2>
 <p>diff &lt;(jq '.components[].purl' bom-v1.json | sort) \</p>
 <p>&lt;(jq '.components[].purl' bom-v2.json | sort)</p>
 <p>Sigstore and Artifact Signing </p>
 <p>Sigstore simplifies code signing and verification through ephemeral key material and transparency logs. </p>
-<h4>Sign a container image with cosign</h4>
+<h2>Sign a container image with cosign</h2>
 <p>cosign sign --key gcpkms://projects/my-project/locations/global/keyRings/my-ring/cryptoKeys/my-key/my-version \</p>
 <p>myregistry.io/myapp:latest</p>
-<h4>Keyless signing (OIDC-based)</h4>
+<h2>Keyless signing (OIDC-based)</h2>
 <p>cosign sign myregistry.io/myapp:latest</p>
-<h4>Verify a signed image</h4>
+<h2>Verify a signed image</h2>
 <p>cosign verify --key pubkey.pem myregistry.io/myapp:latest</p>
-<h4>Verify keyless signature</h4>
+<h2>Verify keyless signature</h2>
 <p>cosign verify myregistry.io/myapp:latest</p>
-<h4>Cosign keyless verification policy</h4>
+<h2>Cosign keyless verification policy</h2>
 <p>cosign_policy:</p>
 <p>identity:</p>
 <p>subject: "developer@acme.com"</p>
@@ -178,14 +163,14 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- hash: "sha256:abc123..."</p>
 <p>bundle: "sigstore-bundle.json"</p>
 <p>Generating provenance with SLSA </p>
-<h4>Generate SLSA provenance for a build</h4>
+<h2>Generate SLSA provenance for a build</h2>
 <p>gitsign --sign-commits HEAD</p>
-<h4>Attest provenance</h4>
+<h2>Attest provenance</h2>
 <p>cosign attest --predicate slsa-provenance.json --type slsa.dev/provenance/v1 \</p>
 <p>myregistry.io/myapp:latest</p>
 <p>in-toto: Framework for Supply Chain Integrity </p>
 <p>in-toto defines a framework to protect the integrity of the software supply chain by verifying that each step in the build and release pipeline was performed by authorized actors. </p>
-<h4>in-toto layout definition</h4>
+<h2>in-toto layout definition</h2>
 <p>layout = Layout(</p>
 <p>keys={</p>
 <p>'developer': load_key('developer.pub'),</p>
@@ -211,7 +196,7 @@
 <p>)</p>
 <p>Dependency Confusion </p>
 <p>Dependency confusion attacks exploit package manager behaviors where internal package names are also available in public registries. If a package manager prefers higher version numbers or public registries over private ones, attackers can publish malicious packages with the same name. </p>
-<h4>Detect potential dependency confusion</h4>
+<h2>Detect potential dependency confusion</h2>
 <p>import requests</p>
 <p>def check_dependency_confusion(requirements_file):</p>
 <p>vulnerable = []</p>
@@ -220,7 +205,7 @@
 <p>if '==' not in line:</p>
 <p>continue</p>
 <p>pkg_name = line.split('=')[0].strip().lower()</p>
-<h4>Check if package exists on PyPI</h4>
+<h2>Check if package exists on PyPI</h2>
 <p>resp = requests.get(f"https://pypi.org/pypi/{pkg_name}/json")</p>
 <p>if resp.status_code == 200:</p>
 <p>vulnerable.append({</p>
@@ -258,7 +243,10 @@
 <p><strong>See also:</strong> <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cors-security.html">CORS Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cors-security.html">CORS Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cors-security.html">CORS Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -270,7 +258,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/software-signing.html" class="related-card">Software Signing</a><a href="/en/security/forensics-guide.html" class="related-card">Digital Forensics Guide</a><a href="/en/security/microservice-security.html" class="related-card">Microservice Security</a><a href="/en/security/serverless-security.html" class="related-card">Serverless Security</a></div>
+      <div class="related-grid"><a href="/en/security/software-signing.html" class="related-card"><span class="related-card-title">Software Signing</span><span class="related-card-desc">Implementing software signing with GPG, Sigstore, cosign, and in-toto attestations for supply chain </span></a><a href="/en/security/forensics-guide.html" class="related-card"><span class="related-card-title">Digital Forensics Guide</span><span class="related-card-desc">Comprehensive guide to digital forensics covering evidence acquisition, analysis methodologies, chai</span></a><a href="/en/security/microservice-security.html" class="related-card"><span class="related-card-title">Microservice Security</span><span class="related-card-desc">Comprehensive guide to microservice security covering service mesh mTLS, API gateways, secret distri</span></a><a href="/en/security/serverless-security.html" class="related-card"><span class="related-card-title">Serverless Security</span><span class="related-card-desc">Guide to serverless security covering function permissions, event validation, cold start risks, depe</span></a><a href="/en/security/api-authentication.html" class="related-card"><span class="related-card-title">API Authentication Methods</span><span class="related-card-desc">Comprehensive guide to API authentication covering API keys, OAuth2 client credentials, mTLS, HMAC s</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a></div>
     </section>
     
   </div>

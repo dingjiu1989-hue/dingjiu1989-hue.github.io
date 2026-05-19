@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/soc2-technical.png",
       "datePublished": "2026-03-19",
       "dateModified": "2026-04-26",
-      "wordCount": "1610",
+      "wordCount": "1624",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">SOC 2 Technical Controls</h1>
       <div class="article-meta">Published 2026-03-19 · Last active 2026-04-26 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/soc2-technical.png" alt="SOC 2 Technical Controls" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>SOC 2 Technical Controls</h2>
-<h3>SOC 2 Technical Controls</h3>
-<h4>SOC 2 Technical Controls</h4>
-<h4>SOC 2 Technical Controls</h4>
-<h4>SOC 2 Technical Controls</h4>
-<h4>SOC 2 Technical Controls</h4>
-<h4>SOC 2 Technical Controls</h4>
-<h4>SOC 2 Technical Controls</h4>
-<h4>SOC 2 Technical Controls</h4>
-<h4>SOC 2 Technical Controls</h4>
-<h4>SOC 2 Technical Controls</h4>
-<h4>SOC 2 Technical Controls</h4>
-<h4>SOC 2 Technical Controls</h4>
-<h4>SOC 2 Technical Controls</h4>
-<h4>SOC 2 Technical Controls</h4>
-<p>SOC 2 Overview </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/soc2-technical.png" alt="SOC 2 Technical Controls" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>SOC 2 Overview </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/soc2-technical.png" alt="SOC 2 Technical Controls" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>SOC 2 audits trust service criteria: Security, Availability, Processing Integrity, Confidentiality, and Privacy. Technical controls are essential for meeting these criteria. </p>
 <p>Logging and Monitoring </p>
 <p>Comprehensive logging is the foundation of SOC 2: </p>
@@ -145,10 +130,10 @@
 <p>return log_entry</p>
 <p>def store_immutable(self, log_entry):</p>
 <p>"""Store logs in immutable storage for audit"""</p>
-<h4>Write to append-only log</h4>
+<h2>Write to append-only log</h2>
 <p>with open("/var/log/soc2/access.log", "a") as f:</p>
 <p>f.write(json.dumps(log_entry) + "\n")</p>
-<h4>Also send to SIEM</h4>
+<h2>Also send to SIEM</h2>
 <p>self.send_to_siem(log_entry)</p>
 <p>Access Review Automation </p>
 <p>Automate periodic access reviews: </p>
@@ -190,7 +175,7 @@
 <p>return disabled</p>
 <p>Change Management </p>
 <p>Track and approve all infrastructure changes: </p>
-<h4>change-management-pipeline.yaml</h4>
+<h2>change-management-pipeline.yaml</h2>
 <p>change_management:</p>
 <p>required_for:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- infrastructure_changes</p>
@@ -221,7 +206,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- monitoring_metrics_normal</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- smoke_tests_passed</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_security_events</p>
-<h4>Change management API</h4>
+<h2>Change management API</h2>
 <p>class ChangeManager:</p>
 <p>def <strong>init</strong>(self):</p>
 <p>self.changes = []</p>
@@ -262,7 +247,10 @@
 <p><strong>See also:</strong> <a href="/en/security/gdpr-technical.html">GDPR Technical Controls</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/gdpr-technical.html">GDPR Technical Controls</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/gdpr-technical.html">GDPR Technical Controls</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
-<p><strong>See also:</strong> <a href="/en/security/gdpr-technical.html">GDPR Technical Controls</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/gdpr-technical.html">GDPR Technical Controls</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/gdpr-technical.html">GDPR Technical Controls</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/gdpr-technical.html">GDPR Technical Controls</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/encryption-key-management.html">Encryption Key Management Best Practices</a>, <a href="/en/security/identity-access-management.html">IAM: Identity and Access Management Fundamentals</a>, <a href="/en/security/identity-provider-comparison.html">Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth</a></p>
+<p><strong>See also:</strong> <a href="/en/security/encryption-key-management.html">Encryption Key Management Best Practices</a>, <a href="/en/security/identity-access-management.html">IAM: Identity and Access Management Fundamentals</a>, <a href="/en/security/identity-provider-comparison.html">Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/encryption-key-management.html">Encryption Key Management Best Practices</a>, <a href="/en/security/identity-access-management.html">IAM: Identity and Access Management Fundamentals</a>, <a href="/en/security/identity-provider-comparison.html">Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -274,7 +262,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/gdpr-technical.html" class="related-card">GDPR Technical Controls</a><a href="/en/security/security-information-event-management.html" class="related-card">SIEM: Security Information and Event Management</a><a href="/en/security/certificate-management.html" class="related-card">Certificate Management</a><a href="/en/security/cloud-security-posture.html" class="related-card">Cloud Security Posture Management</a></div>
+      <div class="related-grid"><a href="/en/security/gdpr-technical.html" class="related-card"><span class="related-card-title">GDPR Technical Controls</span><span class="related-card-desc">Implementing GDPR technical controls for data mapping, consent management, right to deletion, and PI</span></a><a href="/en/security/security-information-event-management.html" class="related-card"><span class="related-card-title">SIEM: Security Information and Event Management</span><span class="related-card-desc">SIEM systems for security monitoring: log collection, correlation rules, threat detection, and incid</span></a><a href="/en/security/certificate-management.html" class="related-card"><span class="related-card-title">Certificate Management</span><span class="related-card-desc">Practical guide to TLS certificate management covering Let's Encrypt, ACME protocol, automated renew</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a><a href="/en/security/database-encryption.html" class="related-card"><span class="related-card-title">Database Encryption</span><span class="related-card-desc">Implementing database encryption with TDE, column-level encryption, application-level encryption, an</span></a><a href="/en/security/software-signing.html" class="related-card"><span class="related-card-title">Software Signing</span><span class="related-card-desc">Implementing software signing with GPG, Sigstore, cosign, and in-toto attestations for supply chain </span></a></div>
     </section>
     
   </div>

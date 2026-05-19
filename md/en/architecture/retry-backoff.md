@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/retry-backoff.html
 
 # Retry and Backoff Strategies
 
-## Retry and Backoff Strategies
-
-### Retry and Backoff Strategies
-
-#### Retry and Backoff Strategies
-
-#### Retry and Backoff Strategies
-
-#### Retry and Backoff Strategies
-
-#### Retry and Backoff Strategies
-
-#### Retry and Backoff Strategies
-
-#### Retry and Backoff Strategies
-
-#### Retry and Backoff Strategies
-
-#### Retry and Backoff Strategies
-
-#### Retry and Backoff Strategies
-
-#### Retry and Backoff Strategies
-
-#### Retry and Backoff Strategies
-
-#### Retry and Backoff Strategies
-
-#### Retry and Backoff Strategies
-
 In distributed systems, failures are inevitable. Networks drop packets, services restart, databases time out. Retry and backoff strategies are essential for building systems that gracefully handle transient failures without overwhelming downstream services. 
 
 When to Retry 
@@ -203,3 +173,9 @@ Effective retry strategies are essential for distributed system resilience. Alwa
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)

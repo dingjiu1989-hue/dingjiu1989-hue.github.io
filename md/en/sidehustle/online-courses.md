@@ -8,41 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/online-courses.html
 
 # Creating Technical Courses
 
-## Creating Technical Courses
-
-### Creating Technical Courses
-
-#### Creating Technical Courses
-
-#### Creating Technical Courses
-
-#### Creating Technical Courses
-
-#### Creating Technical Courses
-
-#### Creating Technical Courses
-
-#### Creating Technical Courses
-
-#### Creating Technical Courses
-
-#### Creating Technical Courses
-
-#### Creating Technical Courses
-
-#### Creating Technical Courses
-
-#### Creating Technical Courses
-
-#### Creating Technical Courses
-
-#### Creating Technical Courses
-
-#### Creating Technical Courses
-
 Creating and selling technical courses is one of the highest-income paths for developer side hustles. A well-produced course can generate $10,000-$100,000+ in revenue. With platforms handling hosting, payment processing, and delivery, the barrier to entry has never been lower.
 
-#### Why Technical Courses Sell
+## Why Technical Courses Sell
 
 The market for technical education is massive and growing:
 
@@ -59,7 +27,7 @@ The market for technical education is massive and growing:
 
 A course teaching developers a specific, valuable skill at $99-299 per student is a compelling value proposition when it saves them days or weeks of self-study.
 
-#### Choosing Your Course Topic
+## Choosing Your Course Topic
 
 The best course topics sit at the intersection of three factors:
 
@@ -97,7 +65,7 @@ The best course topics sit at the intersection of three factors:
 
 
 
-#### Course Structure and Curriculum
+## Course Structure and Curriculum
 
 A well-structured course follows a proven format:
 
@@ -122,7 +90,7 @@ A well-structured course follows a proven format:
 
 
 
-#### Production Quality
+## Production Quality
 
 Good production quality is important but does not need to be expensive:
 
@@ -134,7 +102,7 @@ Good production quality is important but does not need to be expensive:
 
 **Editing basics.** Remove long pauses, mistakes, and "umms." Add captions (automated tools make this easy). Use simple transitions. Each minute of final video takes 10-15 minutes of recording and editing.
 
-#### Hosting and Distribution
+## Hosting and Distribution
 
 **Self-hosted (highest profit margin):**
 
@@ -162,7 +130,7 @@ Good production quality is important but does not need to be expensive:
 
 **Hybrid approach:** Publish on Udemy for discovery and audience building. Create a premium, extended version on Teachable for higher revenue per student.
 
-#### Pricing
+## Pricing
 
 Technical course pricing guidelines:
 
@@ -181,7 +149,7 @@ Udemy pricing is different. Courses are typically priced at $19.99-49.99 due to 
 
 **Discounting strategy.** Launch at a discount (50% off for first week) to generate initial sales and reviews. Social proof (reviews and student count) drives future sales.
 
-#### Marketing Your Course
+## Marketing Your Course
 
 **Build an email list before you launch.** Offer a free mini-course or chapter in exchange for email signups. Launch to this list first.
 
@@ -193,7 +161,7 @@ Udemy pricing is different. Courses are typically priced at $19.99-49.99 due to 
 
 **Community.** Create a Discord or Slack community for course students. Community adds ongoing value and reduces refund requests.
 
-#### Ongoing Updates
+## Ongoing Updates
 
 Technical courses require maintenance:
 
@@ -208,7 +176,7 @@ Technical courses require maintenance:
 
 A 10% annual update effort (1-2 days per year for a 10-hour course) keeps content relevant and prevents negative reviews.
 
-#### Revenue Expectations
+## Revenue Expectations
 
 **First course (no existing audience):**
 
@@ -230,7 +198,7 @@ A 10% annual update effort (1-2 days per year for a 10-hour course) keeps conten
 
 Top technical course creators earn $50,000-500,000+/year with a portfolio of courses.
 
-#### Summary
+## Summary
 
 Technical courses offer exceptional income potential for developers. Choose a topic at the intersection of learner demand, your expertise, and high value density. Invest in good audio and focused editing. Use a hybrid distribution strategy (Udemy for reach, self-hosted for profit). Price based on the outcome your course delivers, not the hours of content. Keep courses updated to maintain relevance and revenue.
 
@@ -245,3 +213,9 @@ Technical courses offer exceptional income potential for developers. Choose a to
 **See also:** [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Selling Digital Products as a Developer](</en/sidehustle/digital-products.html>)
 
 **See also:** [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Selling Digital Products as a Developer](</en/sidehustle/digital-products.html>)
+
+**See also:** [Monetizing APIs](</en/sidehustle/api-monetization.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>), [SaaS Pricing Strategies](</en/sidehustle/saas-pricing.html>)
+
+**See also:** [Monetizing APIs](</en/sidehustle/api-monetization.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>), [SaaS Pricing Strategies](</en/sidehustle/saas-pricing.html>)
+
+**See also:** [Monetizing APIs](</en/sidehustle/api-monetization.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>), [SaaS Pricing Strategies](</en/sidehustle/saas-pricing.html>)

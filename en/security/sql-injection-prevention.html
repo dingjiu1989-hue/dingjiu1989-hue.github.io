@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/sql-injection-prevention.png",
       "datePublished": "2025-12-19",
       "dateModified": "2026-04-09",
-      "wordCount": "1169",
+      "wordCount": "1130",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
@@ -98,24 +98,7 @@
       <h1 class="article-title">SQL Injection Prevention Guide</h1>
       <div class="article-meta">Published 2025-12-19 · Last active 2026-04-09 · 120 views · 1 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/sql-injection-prevention.png" alt="SQL Injection Prevention Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>SQL Injection Prevention Guide</h2>
-<h3>SQL Injection Prevention Guide</h3>
-<h4>SQL Injection Prevention Guide</h4>
-<h4>SQL Injection Prevention Guide</h4>
-<h4>SQL Injection Prevention Guide</h4>
-<h4>SQL Injection Prevention Guide</h4>
-<h4>SQL Injection Prevention Guide</h4>
-<h4>SQL Injection Prevention Guide</h4>
-<h4>SQL Injection Prevention Guide</h4>
-<h4>SQL Injection Prevention Guide</h4>
-<h4>SQL Injection Prevention Guide</h4>
-<h4>SQL Injection Prevention Guide</h4>
-<h4>SQL Injection Prevention Guide</h4>
-<h4>SQL Injection Prevention Guide</h4>
-<h4>SQL Injection Prevention Guide</h4>
-<h4>SQL Injection Prevention Guide</h4>
-<h4>SQL Injection Prevention Guide</h4>
-<p>Understanding SQL Injection </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/sql-injection-prevention.png" alt="SQL Injection Prevention Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Understanding SQL Injection </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/sql-injection-prevention.png" alt="SQL Injection Prevention Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>SQL injection is a code injection technique where an attacker inserts malicious SQL statements into application queries. It has been the top vulnerability in the OWASP Top 10 for years and remains one of the most damaging attack vectors despite being well-understood. </p>
 <p>How It Works </p>
 <p>Consider a vulnerable login query built by string concatenation: </p>
@@ -152,21 +135,21 @@
 <p>Defense Layer 2: ORM Protections </p>
 <p>Modern ORMs provide built-in protection against SQL injection when used correctly. </p>
 <p>Django ORM </p>
-<h4>Safe: ORM parameterizes automatically</h4>
+<h2>Safe: ORM parameterizes automatically</h2>
 <p>users = User.objects.filter(email=user_input, is_active=True)</p>
-<h4>Safe: Raw queries with parameters</h4>
+<h2>Safe: Raw queries with parameters</h2>
 <p>users = User.objects.raw(</p>
 <p>'SELECT * FROM auth_user WHERE email = %s', [user_input]</p>
 <p>)</p>
-<h4>UNSAFE: String interpolation bypasses protections</h4>
+<h2>UNSAFE: String interpolation bypasses protections</h2>
 <p>users = User.objects.raw(f'SELECT * FROM auth_user WHERE email = "{user_input}"')</p>
 <p>SQLAlchemy </p>
-<h4>Safe</h4>
+<h2>Safe</h2>
 <p>result = session.execute(</p>
 <p>text("SELECT * FROM users WHERE email = :email"),</p>
 <p>{"email": user_input}</p>
 <p>)</p>
-<h4>UNSAFE</h4>
+<h2>UNSAFE</h2>
 <p>result = session.execute(</p>
 <p>text(f"SELECT * FROM users WHERE email = '{user_input}'")</p>
 <p>)</p>
@@ -199,7 +182,7 @@
 <p>Attackers infer information through boolean or time-based responses. Use uniform error messages and prevent timing-based inference by adding random delays. </p>
 <p>Detection Tools </p>
 <p>| Tool | Type | Coverage | |------|------|----------| | SQLMap | Automated exploitation testing | Dynamic analysis | | OWASP ZAP | DAST scanner | Runtime detection | | SonarQube | SAST | Static code analysis | | Semgrep | SAST | Custom rule patterns | </p>
-<h4>Scan Go code for string concatenation in SQL queries</h4>
+<h2>Scan Go code for string concatenation in SQL queries</h2>
 <p>semgrep --config "p/sql-injection" .</p>
 <p>Summary </p>
 <p>SQL injection is entirely preventable. Parameterized queries are the single most effective defense and should be the default pattern for every database interaction. Layer in ORM protections, input validation, least-privilege database accounts, and static analysis tools to create defense-in-depth. Never concatenate user input directly into SQL strings, and train every developer on these principles from day one.</p>
@@ -207,7 +190,10 @@
 <p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a>, <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a>, <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a>, <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -219,7 +205,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/api-rate-limiting.html" class="related-card">API Rate Limiting Implementation</a><a href="/en/security/two-factor-authentication.html" class="related-card">Two-Factor Authentication Guide</a><a href="/en/security/xsrf-csrf-protection.html" class="related-card">XSRF/CSRF Protection Guide</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a></div>
+      <div class="related-grid"><a href="/en/security/api-rate-limiting.html" class="related-card"><span class="related-card-title">API Rate Limiting Implementation</span><span class="related-card-desc">A comprehensive guide to implementing API rate limiting with token bucket, leaky bucket, and sliding</span></a><a href="/en/security/two-factor-authentication.html" class="related-card"><span class="related-card-title">Two-Factor Authentication Guide</span><span class="related-card-desc">A comprehensive guide to implementing two-factor authentication with TOTP, SMS, backup codes, and We</span></a><a href="/en/security/xsrf-csrf-protection.html" class="related-card"><span class="related-card-title">XSRF/CSRF Protection Guide</span><span class="related-card-desc">A practical guide to preventing Cross-Site Request Forgery attacks using CSRF tokens, SameSite cooki</span></a><a href="/en/security/data-loss-prevention.html" class="related-card"><span class="related-card-title">Data Loss Prevention (DLP) Strategies</span><span class="related-card-desc">Implement DLP strategies across endpoint, network, and cloud environments with data classification, </span></a><a href="/en/security/identity-management.html" class="related-card"><span class="related-card-title">Identity and Access Management (IAM) Guide</span><span class="related-card-desc">Comprehensive guide to IAM covering SSO, SAML, OIDC, SCIM provisioning, just-in-time access, and acc</span></a><a href="/en/security/encryption-at-rest.html" class="related-card"><span class="related-card-title">Encryption at Rest Guide</span><span class="related-card-desc">A comprehensive guide to encryption at rest covering disk encryption, database encryption, key manag</span></a></div>
     </section>
     
   </div>

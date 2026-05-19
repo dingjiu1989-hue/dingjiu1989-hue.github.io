@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/gateway-vs-mesh.png",
       "datePublished": "2026-04-24",
       "dateModified": "2026-05-13",
-      "wordCount": "904",
+      "wordCount": "873",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -107,22 +107,7 @@
       <h1 class="article-title">API Gateway vs Service Mesh</h1>
       <div class="article-meta">Published 2026-04-24 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/gateway-vs-mesh.png" alt="API Gateway vs Service Mesh" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>API Gateway vs Service Mesh</h2>
-<h3>API Gateway vs Service Mesh</h3>
-<h4>API Gateway vs Service Mesh</h4>
-<h4>API Gateway vs Service Mesh</h4>
-<h4>API Gateway vs Service Mesh</h4>
-<h4>API Gateway vs Service Mesh</h4>
-<h4>API Gateway vs Service Mesh</h4>
-<h4>API Gateway vs Service Mesh</h4>
-<h4>API Gateway vs Service Mesh</h4>
-<h4>API Gateway vs Service Mesh</h4>
-<h4>API Gateway vs Service Mesh</h4>
-<h4>API Gateway vs Service Mesh</h4>
-<h4>API Gateway vs Service Mesh</h4>
-<h4>API Gateway vs Service Mesh</h4>
-<h4>API Gateway vs Service Mesh</h4>
-<p>API Gateway and Service Mesh solve different problems but operate in overlapping territory, creating confusion about where each belongs. The API Gateway manages north-south traffic (client to service), while the Service Mesh manages east-west traffic (service to service). Understanding their distinct responsibilities, overlap, and coexistence patterns is essential for a well-architected system. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/gateway-vs-mesh.png" alt="API Gateway vs Service Mesh" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>API Gateway and Service Mesh solve different problems but operate in overlapping territory, creating confusion about where each belongs. The API Gateway manages north-south traffic (client to service), while the Service Mesh manages east-west traffic (service to service). Understanding their distinct responsibilities, overlap, and coexistence patterns is essential for a well-architected system. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/gateway-vs-mesh.png" alt="API Gateway vs Service Mesh" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The API Gateway is the single entry point for external clients. It handles cross-cutting concerns that belong at the edge of the system: authentication, TLS termination, rate limiting, request validation, response transformation, and API versioning. Kong, Apigee, and AWS API Gateway are common implementations. The gateway may also implement routing, load balancing, and caching for external traffic. It is explicitly part of your application architecture — it knows about your services, routes, and business-level concerns like rate limits per customer plan. </p>
 <p>The Service Mesh operates transparently within the service mesh. It injects sidecar proxies (typically Envoy) alongside each service instance. The sidecar intercepts all network traffic and handles service-level concerns: mTLS between services, fine-grained traffic routing (canary, blue-green), circuit breaking, retries, telemetry collection, and access policies. Istio, Linkerd, and Consul Connect are leading implementations. The mesh is infrastructure-level — services are generally unaware of its existence. </p>
 <p>Overlap occurs in several areas. Both can perform load balancing, traffic routing, retry logic, and telemetry. The key distinction is scope: the gateway manages external traffic with business-aware policies, while the mesh manages internal traffic with infrastructure-level policies. When both are present, decisions about where to place a given function must consider whether it applies to all traffic or only external traffic. </p>
@@ -134,7 +119,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -146,7 +134,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/api-composition.html" class="related-card">API Composition and Aggregation</a><a href="/en/architecture/graceful-shutdown.html" class="related-card">Graceful Shutdown Patterns</a><a href="/en/architecture/api-gateway-patterns.html" class="related-card">API Gateway Patterns</a><a href="/en/architecture/service-mesh-deep.html" class="related-card">Service Mesh Deep Dive</a></div>
+      <div class="related-grid"><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="related-card-title">Graceful Shutdown Patterns</span><span class="related-card-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful</span></a><a href="/en/architecture/api-gateway-patterns.html" class="related-card"><span class="related-card-title">API Gateway Patterns</span><span class="related-card-desc">Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementatio</span></a><a href="/en/architecture/service-mesh-deep.html" class="related-card"><span class="related-card-title">Service Mesh Deep Dive</span><span class="related-card-desc">Deep dive into service mesh: Istio vs Linkerd vs Consul, mTLS, traffic splitting, and operational co</span></a><a href="/en/architecture/service-mesh.html" class="related-card"><span class="related-card-title">Service Mesh Patterns: Istio and Linkerd</span><span class="related-card-desc">Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and wh</span></a><a href="/en/architecture/rate-limiting-patterns.html" class="related-card"><span class="related-card-title">Rate Limiting Patterns</span><span class="related-card-desc">Explore rate limiting patterns for protecting APIs and services from abuse — token bucket, sliding w</span></a></div>
     </section>
     
   </div>

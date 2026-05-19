@@ -8,39 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/security/ddos-mitigation.html
 
 # DDoS Mitigation
 
-## DDoS Mitigation
-
-### DDoS Mitigation
-
-#### DDoS Mitigation
-
-#### DDoS Mitigation
-
-#### DDoS Mitigation
-
-#### DDoS Mitigation
-
-#### DDoS Mitigation
-
-#### DDoS Mitigation
-
-#### DDoS Mitigation
-
-#### DDoS Mitigation
-
-#### DDoS Mitigation
-
-#### DDoS Mitigation
-
-#### DDoS Mitigation
-
-#### DDoS Mitigation
-
-#### DDoS Mitigation: Detection, Scrubbing, Rate Limiting, and CDN Protection
+## DDoS Mitigation: Detection, Scrubbing, Rate Limiting, and CDN Protection
 
 Distributed Denial of Service (DDoS) attacks flood services with traffic to exhaust resources and block legitimate users. Modern DDoS attacks have grown in scale (terabits per second), sophistication (multi-vector), and affordability (DDoS-for-hire services). Effective mitigation requires a layered defense strategy.
 
-#### Attack Types
+## Attack Types
 
 Volumetric attacks overwhelm network bandwidth with massive traffic volumes. Common vectors include UDP floods, ICMP floods, and DNS amplification. The attacker uses botnets or reflection techniques to generate more traffic than the target's network capacity.
 
@@ -48,31 +20,31 @@ Protocol attacks target network infrastructure at layers 3 and 4. SYN floods exh
 
 Application-layer attacks target the application itself with seemingly legitimate requests. HTTP floods request resource-intensive pages repeatedly. Slowloris opens many connections and sends partial requests, tying up server threads.
 
-#### Detection
+## Detection
 
 Baseline normal traffic patterns before an attack. Track requests per second, bandwidth utilization, connection counts, and error rates. DDoS attacks typically show sudden traffic spikes, unusual geographic concentration, and abnormal request patterns.
 
 Deploy network flow analysis (NetFlow, sFlow) to detect volumetric attacks at the network layer. Use application performance monitoring (APM) for application-layer anomaly detection. Configure alerting thresholds that balance sensitivity against false positives.
 
-#### Traffic Scrubbing
+## Traffic Scrubbing
 
 Scrubbing centers filter incoming traffic, removing malicious packets while forwarding legitimate requests. Major cloud providers (Cloudflare, AWS Shield, Akamai) operate global scrubbing networks. During an attack, traffic is routed through scrubbing centers via BGP announcements or DNS changes.
 
 Scrubbing uses multiple techniques: IP reputation filtering blocks known malicious sources. Rate limiting drops excessive requests from individual IPs. Challenge-response mechanisms (CAPTCHAs, JavaScript challenges) distinguish bots from humans.
 
-#### Rate Limiting
+## Rate Limiting
 
 Rate limiting is effective against application-layer attacks. Per-IP rate limits prevent individual sources from overwhelming the service. Per-endpoint limits protect expensive API calls. Token bucket and sliding window algorithms provide granular control.
 
 Tiered rate limiting applies different thresholds based on authentication state. Anonymous users get conservative limits. Authenticated users get higher limits. Internal and admin traffic bypasses rate limiting entirely.
 
-#### CDN-Based Protection
+## CDN-Based Protection
 
 Content Delivery Networks (CDNs) absorb DDoS traffic through their distributed infrastructure. Cloudflare, Fastly, and Akamai operate networks with Tbps-scale capacity. Their anycast networks distribute traffic across global points of presence, diluting attacks.
 
 CDN protection includes automatic DDoS detection, always-on mitigation for known attack patterns, and on-demand scrubbing for large-scale attacks. Most CDNs include DDoS protection in their standard plans.
 
-#### Layered Defense
+## Layered Defense
 
 A single defense layer is insufficient. Combine BGP-based network filtering, CDN traffic absorption, rate limiting at the application layer, and Web Application Firewall (WAF) rules. Each layer catches attacks that bypass the previous one.
 
@@ -91,3 +63,9 @@ Cloud providers offer DDoS protection services: AWS Shield Standard (included) a
 **See also:** [Secure API Design Principles](</en/security/secure-api-design.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Cloud Network Security](</en/security/cloud-network-security.html>)
 
 **See also:** [Secure API Design Principles](</en/security/secure-api-design.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Cloud Network Security](</en/security/cloud-network-security.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [IAM Audit](</en/security/iam-audit.html>), [MFA Implementation](</en/security/mfa-implementation.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [IAM Audit](</en/security/iam-audit.html>), [MFA Implementation](</en/security/mfa-implementation.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [IAM Audit](</en/security/iam-audit.html>), [MFA Implementation](</en/security/mfa-implementation.html>)

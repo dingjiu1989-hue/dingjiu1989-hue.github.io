@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/metrics-types.png",
       "datePublished": "2026-04-27",
       "dateModified": "2026-04-30",
-      "wordCount": "1190",
+      "wordCount": "1126",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,22 +96,7 @@
       <h1 class="article-title">Metrics Types and Monitoring Methodologies</h1>
       <div class="article-meta">Published 2026-04-27 · Last active 2026-04-30 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/metrics-types.png" alt="Metrics Types and Monitoring Methodologies" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Metrics Types and Monitoring Methodologies</h2>
-<h3>Metrics Types and Monitoring Methodologies</h3>
-<h4>Metrics Types and Monitoring Methodologies</h4>
-<h4>Metrics Types and Monitoring Methodologies</h4>
-<h4>Metrics Types and Monitoring Methodologies</h4>
-<h4>Metrics Types and Monitoring Methodologies</h4>
-<h4>Metrics Types and Monitoring Methodologies</h4>
-<h4>Metrics Types and Monitoring Methodologies</h4>
-<h4>Metrics Types and Monitoring Methodologies</h4>
-<h4>Metrics Types and Monitoring Methodologies</h4>
-<h4>Metrics Types and Monitoring Methodologies</h4>
-<h4>Metrics Types and Monitoring Methodologies</h4>
-<h4>Metrics Types and Monitoring Methodologies</h4>
-<h4>Metrics Types and Monitoring Methodologies</h4>
-<h4>Metrics Types and Monitoring Methodologies</h4>
-<p>Metrics provide the quantitative foundation for understanding system health, detecting anomalies, and driving alerts. The four primary metric types — counters, gauges, histograms, and summaries — each serve distinct purposes. Combined with monitoring methodologies like RED, USE, and the Four Golden Signals, they form a complete picture of system behavior and are essential for effective operations. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/metrics-types.png" alt="Metrics Types and Monitoring Methodologies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Metrics provide the quantitative foundation for understanding system health, detecting anomalies, and driving alerts. The four primary metric types — counters, gauges, histograms, and summaries — each serve distinct purposes. Combined with monitoring methodologies like RED, USE, and the Four Golden Signals, they form a complete picture of system behavior and are essential for effective operations. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/metrics-types.png" alt="Metrics Types and Monitoring Methodologies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Counters are monotonically increasing values that only go up (or reset to zero on restart). They measure cumulative events: total requests served, total errors, total bytes sent. Counters are useful for computing rates over time — requests per second, error rate — which are the most common observability signals. A counter alone is rarely useful; it is the rate of change that matters. Rate computation requires tracking the counter value over a time window and dividing the delta by the window duration. </p>
 <p>Gauges represent a single numeric value that can go up or down arbitrarily. They measure current state: memory usage, CPU utilization, queue depth, active connections, number of goroutines. Gauges are instantaneous snapshots and should be sampled frequently enough to capture meaningful variation. Unlike counters, gauges are useful as absolute values — a memory gauge at 95% of available memory is actionable on its own. </p>
 <p>Histograms sample observations and count them in configurable buckets. They measure distributions: request latency, response sizes, batch processing times. Histograms estimate quantiles (p50, p99, p999) that show what latency the typical user experiences versus the slowest users. The bucket configuration requires understanding the expected value range. Buckets should be roughly exponentially spaced: 1ms, 5ms, 10ms, 25ms, 50ms, 100ms, 250ms, 500ms, 1s, 2.5s, 5s, 10s. Fine buckets where most values fall and wider buckets at the extremes. </p>
@@ -125,7 +110,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/observability-three-pillars.html">Observability: Logs, Metrics, and Traces</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/observability-three-pillars.html">Observability: Logs, Metrics, and Traces</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/observability-three-pillars.html">Observability: Logs, Metrics, and Traces</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/observability-three-pillars.html">Observability: Logs, Metrics, and Traces</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/observability-three-pillars.html">Observability: Logs, Metrics, and Traces</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/observability-three-pillars.html">Observability: Logs, Metrics, and Traces</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/observability-three-pillars.html">Observability: Logs, Metrics, and Traces</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -137,7 +125,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/observability-three-pillars.html" class="related-card">Observability: Logs, Metrics, and Traces</a><a href="/en/architecture/circuit-breaker-vs-bulkhead.html" class="related-card">Circuit Breaker vs Bulkhead Pattern</a><a href="/en/architecture/domain-events.html" class="related-card">Domain Events: Design and Implementation</a><a href="/en/architecture/saga-choreography.html" class="related-card">Saga Choreography Pattern</a></div>
+      <div class="related-grid"><a href="/en/architecture/observability-three-pillars.html" class="related-card"><span class="related-card-title">Observability: Logs, Metrics, and Traces</span><span class="related-card-desc">Logs, metrics, traces correlation, cardinality, sampling, storage costs, and the three pillars of ob</span></a><a href="/en/architecture/circuit-breaker-vs-bulkhead.html" class="related-card"><span class="related-card-title">Circuit Breaker vs Bulkhead Pattern</span><span class="related-card-desc">Differences, when to use each, resilience patterns, and combined application of circuit breaker and </span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/saga-choreography.html" class="related-card"><span class="related-card-title">Saga Choreography Pattern</span><span class="related-card-desc">Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose c</span></a><a href="/en/architecture/choreography-patterns.html" class="related-card"><span class="related-card-title">Choreography Patterns</span><span class="related-card-desc">Learn choreography patterns: event contracts, monitoring, saga coordination, and decentralized workf</span></a><a href="/en/architecture/claim-check.html" class="related-card"><span class="related-card-title">Claim Check Pattern</span><span class="related-card-desc">Learn the claim check pattern: store large payloads, pass references, and enable asynchronous proces</span></a></div>
     </section>
     
   </div>

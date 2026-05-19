@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/modular-monolith.html
 
 # Modular Monolith Architecture
 
-## Modular Monolith Architecture
-
-### Modular Monolith Architecture
-
-#### Modular Monolith Architecture
-
-#### Modular Monolith Architecture
-
-#### Modular Monolith Architecture
-
-#### Modular Monolith Architecture
-
-#### Modular Monolith Architecture
-
-#### Modular Monolith Architecture
-
-#### Modular Monolith Architecture
-
-#### Modular Monolith Architecture
-
-#### Modular Monolith Architecture
-
-#### Modular Monolith Architecture
-
-#### Modular Monolith Architecture
-
-#### Modular Monolith Architecture
-
-#### Modular Monolith Architecture
-
 A modular monolith is a single deployment unit composed of well-defined modules with strict boundaries, explicit dependencies, and encapsulated internals. It captures the architectural benefits of microservices — separation of concerns, bounded contexts, independent evolvability — without the operational cost of distributed systems. For many organizations, it represents the optimal middle ground between a naive monolith and a premature microservice decomposition. 
 
 Module boundaries are the central design challenge. Each module should represent a coherent domain capability with its own data ownership, business logic, and public API. Modules communicate through in-process interfaces, typically defined as Java interfaces or Go interfaces, with implementation classes hidden behind the boundary. The module's internals, including its database tables, internal classes, and private functions, are inaccessible to other modules. 
@@ -65,3 +35,9 @@ The modular monolith is not a permanent state — it is a starting position. As 
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)
 
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)

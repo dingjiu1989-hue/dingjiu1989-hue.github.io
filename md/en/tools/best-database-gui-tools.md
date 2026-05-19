@@ -75,4 +75,4 @@ DBA tasks, ER diagrams, broad support| **DBeaver Pro**
   
 **Bottom line:** TablePlus for macOS developers (beautiful, fast, one-time purchase). DBeaver CE for everyone who wants a powerful free tool. Beekeeper for simplicity. DataGrip for JetBrains users and SQL power users. See also: [database comparison](</en/compare/postgresql-vs-mysql-vs-sqlite.html>) and [ORM comparison](</en/compare/prisma-vs-drizzle-vs-typeorm.html>).
 
-**See also:** [Best Authentication Solutions 2026: Clerk vs Auth0 vs Supabase Auth vs NextAuth vs Lucia](</en/tools/best-auth-solutions.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>), [Best Database GUI Clients](</en/tools/database-clients.html>)
+**See also:** [Best API Testing Tools 2026: Postman vs Insomnia vs Bruno vs Hurl](</en/tools/best-api-testing-tools.html>), [Best Web Performance Tools 2026: Lighthouse vs WebPageTest vs Sentry vs Checkly](</en/tools/best-web-performance-tools.html>), [Best Git GUI Clients 2026: GitKraken vs Sourcetree vs Fork vs GitFiend](</en/tools/best-git-gui-clients.html>)

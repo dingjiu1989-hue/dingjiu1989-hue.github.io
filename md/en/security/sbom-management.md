@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/sbom-management.html
 
 # SBOM Management
 
-## SBOM Management
-
-### SBOM Management
-
-#### SBOM Management
-
-#### SBOM Management
-
-#### SBOM Management
-
-#### SBOM Management
-
-#### SBOM Management
-
-#### SBOM Management
-
-#### SBOM Management
-
-#### SBOM Management
-
-#### SBOM Management
-
-#### SBOM Management
-
-#### SBOM Management
-
-#### SBOM Management
-
-#### SBOM Management
-
 What is an SBOM? 
 
 A Software Bill of Materials (SBOM) is a detailed inventory of all components in a software application. It enables vulnerability tracking, license compliance, and supply chain risk management. 
@@ -46,7 +16,7 @@ SBOM Generation
 
 Generate SBOMs using SPDX or CycloneDX formats: 
 
-#### Generate SBOM with Syft
+## Generate SBOM with Syft
 
 syft packages myapp:latest -o cyclonedx-json > sbom.cyclonedx.json
 
@@ -54,7 +24,7 @@ syft packages myapp:latest -o spdx-json > sbom.spdx.json
 
 syft dir:./src -o cyclonedx-json > src-sbom.json
 
-#### Generate SBOM for multiple languages
+## Generate SBOM for multiple languages
 
 syft packages package-lock.json -o cyclonedx-json
 
@@ -62,7 +32,7 @@ syft packages requirements.txt -o cyclonedx-json
 
 syft packages go.sum -o cyclonedx-json
 
-#### Programmatic SBOM generation
+## Programmatic SBOM generation
 
 import json
 
@@ -122,7 +92,7 @@ SBOM Verification
 
 Verify SBOM integrity and completeness: 
 
-#### sbom-verification-pipeline.yaml
+## sbom-verification-pipeline.yaml
 
 verification_steps:
 
@@ -174,7 +144,7 @@ if not purl:
 
 continue
 
-#### Query OSV database
+## Query OSV database
 
 response = requests.post(self.osv_api, json={
 
@@ -212,7 +182,7 @@ return vulnerabilities
 
 SBOM Storage and Management 
 
-#### SBOM storage strategy
+## SBOM storage strategy
 
 sbom_storage:
 
@@ -254,7 +224,7 @@ action: archive
 
 SBOM as Attestation 
 
-#### Sign SBOM with cosign
+## Sign SBOM with cosign
 
 cosign attest-blob sbom.cyclonedx.json \
 
@@ -264,7 +234,7 @@ cosign attest-blob sbom.cyclonedx.json \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--predicate sbom.cyclonedx.json
 
-#### Verify attestation
+## Verify attestation
 
 cosign verify-attestation --type cyclonedx sbom.cyclonedx.json
 
@@ -283,3 +253,9 @@ SBOMs are essential for supply chain security. Generate them automatically in yo
 **See also:** [Helm Security](</en/security/helm-security.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 
 **See also:** [Helm Security](</en/security/helm-security.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Compliance Automation](</en/security/compliance-automation.html>)
+
+**See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Compliance Automation](</en/security/compliance-automation.html>)
+
+**See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Compliance Automation](</en/security/compliance-automation.html>)

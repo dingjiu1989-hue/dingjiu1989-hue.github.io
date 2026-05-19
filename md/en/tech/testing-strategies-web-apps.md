@@ -88,4 +88,4 @@ Visual Regression| Chromatic / Percy| Design system components
   
 **Bottom line:** Write mostly integration tests. They provide the best confidence-to-effort ratio. Unit test pure logic. E2E test only critical flows (max 20 scenarios). A slow CI pipeline is a broken one — keep E2E count low. See also: [build tools](</en/compare/vite-vs-webpack-vs-turbopack.html>) (Vitest is built on Vite) and [CI/CD tools comparison](</en/tools/best-cicd-tools-2026.html>).
 
-**See also:** [WebSocket vs SSE vs Polling: Real-Time Data Patterns for Web Apps](</en/tech/websocket-vs-sse-vs-polling.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice](</en/tech/web-accessibility-guide.html>)
+**See also:** [Load Testing Guide 2026: k6 vs Artillery vs Locust vs wrk2 for Performance Testing](</en/tech/load-testing-guide.html>), [Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys](</en/tech/authentication-best-practices-2026.html>), [REST API Best Practices: The Complete Guide for 2026](</en/tech/rest-api-best-practices.html>)

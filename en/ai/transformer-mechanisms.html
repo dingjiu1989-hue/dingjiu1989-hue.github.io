@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/transformer-mechanisms.png",
       "datePublished": "2026-02-23",
       "dateModified": "2026-05-06",
-      "wordCount": "812",
+      "wordCount": "801",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -99,40 +99,27 @@
       <h1 class="article-title">Transformer Mechanisms in Deep Learning</h1>
       <div class="article-meta">Published 2026-02-23 · Last active 2026-05-06 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/transformer-mechanisms.png" alt="Transformer Mechanisms in Deep Learning" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Transformer Mechanisms in Deep Learning</h2>
-<h3>Transformer Mechanisms in Deep Learning</h3>
-<h4>Transformer Mechanisms in Deep Learning</h4>
-<h4>Transformer Mechanisms in Deep Learning</h4>
-<h4>Transformer Mechanisms in Deep Learning</h4>
-<h4>Transformer Mechanisms in Deep Learning</h4>
-<h4>Transformer Mechanisms in Deep Learning</h4>
-<h4>Transformer Mechanisms in Deep Learning</h4>
-<h4>Transformer Mechanisms in Deep Learning</h4>
-<h4>Transformer Mechanisms in Deep Learning</h4>
-<h4>Transformer Mechanisms in Deep Learning</h4>
-<h4>Transformer Mechanisms in Deep Learning</h4>
-<h4>Transformer Mechanisms in Deep Learning</h4>
-<h4>Transformer Mechanisms in Deep Learning</h4>
-<h4>Transformer Mechanisms in Deep Learning</h4>
-<h4>Transformer Mechanisms in Deep Learning</h4>
-<p>The transformer architecture, introduced in "Attention Is All You Need" (Vaswani et al., 2017), revolutionized deep learning. Understanding its mechanisms is essential for working with modern LLMs.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/transformer-mechanisms.png" alt="Transformer Mechanisms in Deep Learning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Self-Attention</h4>
+      <div class="article-body"><p>The transformer architecture, introduced in "Attention Is All You Need" (Vaswani et al., 2017), revolutionized deep learning. Understanding its mechanisms is essential for working with modern LLMs.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/transformer-mechanisms.png" alt="Transformer Mechanisms in Deep Learning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Self-Attention</h2>
 <p>Self-attention computes weighted representations of input sequences. Each input token generates Query (Q), Key (K), and Value (V) vectors through learned linear transformations. The attention score between tokens is computed as Q·K^T / sqrt(d_k), measuring how much each token should attend to others.</p>
 <p>The softmax function normalizes attention scores into a probability distribution over attended tokens. The weighted sum of Value vectors produces the attention output. Self-attention captures relationships between all token pairs regardless of distance—unlike RNNs which process sequentially.</p>
-<h4>Multi-Head Attention</h4>
+<h2>Multi-Head Attention</h2>
 <p>Multi-head attention runs multiple self-attention operations (heads) in parallel. Each head learns different relationship types: syntactic relationships, semantic relationships, positional relationships. Typical configurations use 8-96 heads with dimension 64-128 per head.</p>
 <p>Head outputs are concatenated and linearly projected to the model dimension. Different heads specialize in different patterns. Some heads learn positional relationships (next token prediction). Others learn syntactic dependencies (subject-verb agreement). Analyzing head patterns reveals how the model processes language.</p>
-<h4>Positional Encoding</h4>
+<h2>Positional Encoding</h2>
 <p>Transformers have no inherent notion of token order. Positional encodings add position information to input embeddings. Sinusoidal encodings (original paper) use sine and cosine functions of different frequencies. Learned positional embeddings train position vectors during pre-training.</p>
 <p>Rotary Position Embedding (RoPE) rotates query and key vectors based on position. RoPE provides relative position information—attention depends on token distance, not absolute position. RoPE is used in Llama, Mistral, and most modern LLMs. ALiBi (Attention with Linear Biases) adds position-based bias to attention scores.</p>
-<h4>Feed-Forward Networks</h4>
+<h2>Feed-Forward Networks</h2>
 <p>Each transformer layer includes a feed-forward network (FFN) after the attention sublayer. The FFN consists of two linear transformations with a non-linear activation (ReLU, GELU, SwiGLU). The hidden dimension is typically 2-4x the model dimension.</p>
 <p>The FFN stores factual knowledge learned during training. Intermediate representations at the FFN's wide layer capture complex patterns. The gating mechanism (SwiGLU, used in Llama 2/3) adds a learnable gate for improved expressiveness. Sparse MoE layers replace FFNs with multiple experts for efficient scaling.</p>
 <p><strong>See also:</strong> <a href="/en/ai/attention-mechanisms.html">Attention Mechanisms in Neural Networks</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/attention-mechanisms.html">Attention Mechanisms in Neural Networks</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/attention-mechanisms.html">Attention Mechanisms in Neural Networks</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/attention-mechanisms.html">Attention Mechanisms in Neural Networks</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/attention-mechanisms.html">Attention Mechanisms in Neural Networks</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/attention-mechanisms.html">Attention Mechanisms in Neural Networks</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/attention-mechanisms.html">Attention Mechanisms in Neural Networks</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/attention-mechanisms.html">Attention Mechanisms in Neural Networks</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -144,7 +131,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/attention-mechanisms.html" class="related-card">Attention Mechanisms in Neural Networks</a><a href="/en/ai/multi-agent-systems.html" class="related-card">Multi-Agent Systems: Coordination, Communication, Consensus</a><a href="/en/ai/mlops-pipeline.html" class="related-card">MLOps Pipeline: From Training to Production</a><a href="/en/ai/ai-gateway.html" class="related-card">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a></div>
+      <div class="related-grid"><a href="/en/ai/attention-mechanisms.html" class="related-card"><span class="related-card-title">Attention Mechanisms in Neural Networks</span><span class="related-card-desc">A comprehensive guide to attention mechanisms: from additive attention to multi-query attention and </span></a><a href="/en/ai/multi-agent-systems.html" class="related-card"><span class="related-card-title">Multi-Agent Systems: Coordination, Communication, Consensus</span><span class="related-card-desc">Design multi-agent systems with LLM-powered agents: coordination patterns, inter-agent communication</span></a><a href="/en/ai/mlops-pipeline.html" class="related-card"><span class="related-card-title">MLOps Pipeline: From Training to Production</span><span class="related-card-desc">Build MLOps pipelines for machine learning: data validation, model training, evaluation, deployment,</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="related-card-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="related-card-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fa</span></a><a href="/en/ai/model-evaluation-harness.html" class="related-card"><span class="related-card-title">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</span><span class="related-card-desc">Evaluate LLM models systematically using benchmarks, human evaluation, LLM-as-judge frameworks, and </span></a><a href="/en/ai/agent-planning.html" class="related-card"><span class="related-card-title">Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</span><span class="related-card-desc">Explore agent planning frameworks: ReAct for reasoning and acting, Plan-and-Execute for task decompo</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/helm-kubernetes-package-management.png",
       "datePublished": "2025-12-30",
       "dateModified": "2026-04-16",
-      "wordCount": "3152",
+      "wordCount": "3074",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
@@ -99,27 +99,10 @@
       <h1 class="article-title">Helm Charts: Kubernetes Package Management</h1>
       <div class="article-meta">Published 2025-12-30 · Last active 2026-04-16 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/helm-kubernetes-package-management.png" alt="Helm Charts: Kubernetes Package Management" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Helm Charts: Kubernetes Package Management</h2>
-<h3>Helm Charts: Kubernetes Package Management</h3>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Helm Charts: Kubernetes Package Management</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Helm is the de facto package manager for Kubernetes, enabling developers to define, install, and upgrade complex applications through reusable chart packages. A single Helm chart can encapsulate dozens of Kubernetes resources into a versioned, configurable unit that can be deployed across multiple environments with minimal repetition.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/helm-kubernetes-package-management.png" alt="Helm Charts: Kubernetes Package Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>This guide covers advanced Helm concepts including chart structure, templating, dependency management, CI/CD integration, and enterprise best practices.</p>
-<h4>Chart Structure</h4>
+<h2>Chart Structure</h2>
 <p>A well-organized Helm chart follows a standard directory layout:</p>
 <p>my-app/</p>
 <p>Chart.yaml # Metadata: name, version, dependencies</p>
@@ -153,7 +136,7 @@
 <p>version: "18.x"</p>
 <p>repository: https://charts.bitnami.com/bitnami</p>
 <p>condition: redis.enabled</p>
-<h4>Advanced Templating</h4>
+<h2>Advanced Templating</h2>
 <p>Helm uses Go templates with the Sprig function library for dynamic resource generation. Beyond simple variable substitution, you can implement complex logic:</p>
 <p>{{- /<em>Conditional resource creation</em> /}}</p>
 <p>{{- if .Values.ingress.enabled }}</p>
@@ -196,7 +179,7 @@
 <p>successThreshold: {{ .successThreshold | default 1 }}</p>
 <p>failureThreshold: {{ .failureThreshold | default 3 }}</p>
 <p>{{- end -}}</p>
-<h4>Values Management and Validation</h4>
+<h2>Values Management and Validation</h2>
 <p>JSON Schema validation catches configuration errors early:</p>
 <p>{</p>
 <p>"$schema": "https://json-schema.org/draft-07/schema#",</p>
@@ -230,11 +213,11 @@
 <p>"required": ["image", "replicaCount"]</p>
 <p>}</p>
 <p>Environment-specific overrides keep values DRY:</p>
-<h4>values.yaml (defaults)</h4>
+<h2>values.yaml (defaults)</h2>
 <p>replicaCount: 1</p>
 <p>image:</p>
 <p>tag: latest</p>
-<h4>values-staging.yaml</h4>
+<h2>values-staging.yaml</h2>
 <p>replicaCount: 2</p>
 <p>image:</p>
 <p>tag: staging-abc123</p>
@@ -242,7 +225,7 @@
 <p>enabled: true</p>
 <p>hosts:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- host: staging.my-app.com</p>
-<h4>values-production.yaml</h4>
+<h2>values-production.yaml</h2>
 <p>replicaCount: 6</p>
 <p>image:</p>
 <p>tag: v2.0.0</p>
@@ -258,7 +241,7 @@
 <p>hosts:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- host: my-app.com</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- host: www.my-app.com</p>
-<h4>Dependency Management</h4>
+<h2>Dependency Management</h2>
 <p>Lock dependency versions with <code>Chart.lock</code>:</p>
 <p>helm dependency update ./charts/my-app</p>
 <p>Use alias and condition fields for environment-optimized dependencies:</p>
@@ -273,9 +256,9 @@
 <p>version: "12.x"</p>
 <p>repository: https://charts.bitnami.com/bitnami</p>
 <p>condition: replica-db.enabled</p>
-<h4>CI/CD Integration</h4>
+<h2>CI/CD Integration</h2>
 <p>Integrate Helm linting and testing into pipelines:</p>
-<h4>.github/workflows/helm-release.yml</h4>
+<h2>.github/workflows/helm-release.yml</h2>
 <p>name: Helm Release</p>
 <p>on:</p>
 <p>push:</p>
@@ -300,15 +283,15 @@
 <p>run: |</p>
 <p>helm package ./charts/my-app</p>
 <p>helm push my-app-*.tgz oci://ghcr.io/${{ github.repository }}/charts</p>
-<h4>Chart Versioning and Publishing</h4>
+<h2>Chart Versioning and Publishing</h2>
 <p>Use OCI registries for chart distribution:</p>
-<h4>Login and push</h4>
+<h2>Login and push</h2>
 <p>helm registry login ghcr.io -u $USER</p>
 <p>helm push my-app-1.2.3.tgz oci://ghcr.io/my-org/charts</p>
-<h4>Install from OCI</h4>
+<h2>Install from OCI</h2>
 <p>helm install my-app oci://ghcr.io/my-org/charts/my-app --version 1.2.3</p>
 <p>Follow semantic versioning strictly. Breaking template changes require a major version bump, as <code>helm upgrade</code> must never silently break deployed resources.</p>
-<h4>Best Practices</h4>
+<h2>Best Practices</h2>
 <ul>
 <li>
 <p><strong>Use<code>helm create</code> scaffolds</strong> as a starting point but customize helpers aggressively.</p>
@@ -334,7 +317,10 @@
 <p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a>, <a href="/en/tech/git-workflows-2026.html">Git Workflows for Teams</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a>, <a href="/en/tech/git-workflows-2026.html">Git Workflows for Teams</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a>, <a href="/en/tech/git-workflows-2026.html">Git Workflows for Teams</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -346,7 +332,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/kubernetes-services-security.html" class="related-card">Kubernetes Security Best Practices</a><a href="/en/tech/infrastructure-testing.html" class="related-card">Infrastructure Testing with Terratest and Other Tools</a><a href="/en/tech/dev-environment-setup.html" class="related-card">Developer Environment Setup Guide</a><a href="/en/tech/nginx-configuration-guide.html" class="related-card">Nginx Configuration Guide</a></div>
+      <div class="related-grid"><a href="/en/tech/kubernetes-services-security.html" class="related-card"><span class="related-card-title">Kubernetes Security Best Practices</span><span class="related-card-desc">Essential Kubernetes security practices for pod security, network policies, RBAC, and secrets manage</span></a><a href="/en/tech/infrastructure-testing.html" class="related-card"><span class="related-card-title">Infrastructure Testing with Terratest and Other Tools</span><span class="related-card-desc">Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources</span></a><a href="/en/tech/dev-environment-setup.html" class="related-card"><span class="related-card-title">Developer Environment Setup Guide</span><span class="related-card-desc">Comprehensive guide to setting up a productive developer environment with tools, configuration, and </span></a><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="related-card-title">Nginx Configuration Guide</span><span class="related-card-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting</span></a><a href="/en/tech/terraform-infrastructure-code.html" class="related-card"><span class="related-card-title">Terraform Infrastructure as Code</span><span class="related-card-desc">Master Terraform for managing cloud infrastructure with state management, modules, and production be</span></a><a href="/en/tech/api-gateway-implementation.html" class="related-card"><span class="related-card-title">API Gateway Implementation Guide</span><span class="related-card-desc">Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformati</span></a></div>
     </section>
     
   </div>

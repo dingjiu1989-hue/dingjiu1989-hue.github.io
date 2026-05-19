@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/ssh-security-hardening.png",
       "datePublished": "2025-12-03",
       "dateModified": "2026-04-15",
-      "wordCount": "1218",
+      "wordCount": "1201",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
@@ -99,27 +99,10 @@
       <h1 class="article-title">SSH Security Hardening</h1>
       <div class="article-meta">Published 2025-12-03 · Last active 2026-04-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/ssh-security-hardening.png" alt="SSH Security Hardening" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>SSH Security Hardening</h2>
-<h3>SSH Security Hardening</h3>
-<h4>SSH Security Hardening</h4>
-<h4>SSH Security Hardening</h4>
-<h4>SSH Security Hardening</h4>
-<h4>SSH Security Hardening</h4>
-<h4>SSH Security Hardening</h4>
-<h4>SSH Security Hardening</h4>
-<h4>SSH Security Hardening</h4>
-<h4>SSH Security Hardening</h4>
-<h4>SSH Security Hardening</h4>
-<h4>SSH Security Hardening</h4>
-<h4>SSH Security Hardening</h4>
-<h4>SSH Security Hardening</h4>
-<h4>SSH Security Hardening</h4>
-<h4>SSH Security Hardening</h4>
-<h4>SSH Security Hardening</h4>
-<p>SSH is the gateway to your infrastructure. A compromised SSH key or misconfigured daemon can lead to complete server takeover. Hardening SSH is one of the highest-impact security improvements you can make.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/ssh-security-hardening.png" alt="SSH Security Hardening" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Disable Password Authentication</h4>
+      <div class="article-body"><p>SSH is the gateway to your infrastructure. A compromised SSH key or misconfigured daemon can lead to complete server takeover. Hardening SSH is one of the highest-impact security improvements you can make.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/ssh-security-hardening.png" alt="SSH Security Hardening" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Disable Password Authentication</h2>
 <p>Password authentication is susceptible to brute-force attacks. Disable it and use key-based authentication only:</p>
-<h4>/etc/ssh/sshd_config</h4>
+<h2>/etc/ssh/sshd_config</h2>
 <p>PasswordAuthentication no</p>
 <p>ChallengeResponseAuthentication no</p>
 <p>UsePAM no</p>
@@ -127,32 +110,32 @@
 <p>After making changes, restart the SSH daemon:</p>
 <p>sudo systemctl restart sshd</p>
 <p>Always keep an active SSH session open while testing changes. If something breaks, you can debug before the session closes.</p>
-<h4>Use Ed25519 Keys</h4>
+<h2>Use Ed25519 Keys</h2>
 <p>Ed25519 keys offer better security and performance than RSA:</p>
 <p>ssh-keygen -t ed25519 -a 100 -f ~/.ssh/id_ed25519</p>
 <p>The <code>-a 100</code> option increases the KDF rounds for the private key file, making it harder to crack if the file is stolen. For legacy systems that require RSA, use at least 4096-bit keys:</p>
 <p>ssh-keygen -t rsa -b 4096 -a 100 -f ~/.ssh/id_rsa</p>
-<h4>Restrict Key Usage</h4>
+<h2>Restrict Key Usage</h2>
 <p>Limit what individual keys can do using the <code>authorized_keys</code> file:</p>
-<h4>~/.ssh/authorized_keys</h4>
+<h2>~/.ssh/authorized_keys</h2>
 <p>restrict,command="/usr/bin/git-shell",from="192.168.1.0/24" ssh-ed25519 AAA...</p>
 <p>The <code>restrict</code> keyword denies all forwarding and agent access. <code>command=</code> limits the key to a specific command. <code>from=</code> restricts which IP addresses can use this key.</p>
-<h4>Disable Root Login</h4>
+<h2>Disable Root Login</h2>
 <p>Never allow direct root SSH access:</p>
 <p>PermitRootLogin no</p>
 <p>Use a regular user account with <code>sudo</code> access instead. This creates an audit trail -- every privileged command is logged with the user who ran it.</p>
-<h4>Change the Default Port</h4>
+<h2>Change the Default Port</h2>
 <p>Changing the default port (22) reduces automated attack noise:</p>
 <p>Port 2222</p>
 <p>This is not real security (a determined attacker will find your SSH port), but it dramatically reduces log noise from automated scanners.</p>
-<h4>Use a Strong Cipher Configuration</h4>
+<h2>Use a Strong Cipher Configuration</h2>
 <p>Modern SSH supports strong ciphers. Enforce them:</p>
 <p>Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com</p>
 <p>MACs hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com</p>
 <p>KexAlgorithms curve25519-sha256,diffie-hellman-group16-sha512</p>
 <p>HostKeyAlgorithms ssh-ed25519,rsa-sha2-512</p>
 <p>This configuration only allows algorithms with proven security. Remove legacy algorithms like <code>diffie-hellman-group14-sha1</code> and <code>hmac-sha1</code>.</p>
-<h4>SSH Timeout and Session Limits</h4>
+<h2>SSH Timeout and Session Limits</h2>
 <p>Prevent idle sessions from accumulating:</p>
 <p>ClientAliveInterval 300</p>
 <p>ClientAliveCountMax 2</p>
@@ -160,10 +143,10 @@
 <p>MaxSessions 10</p>
 <p>MaxStartups 10:30:60</p>
 <p><code>ClientAliveInterval=300</code> with <code>ClientAliveCountMax=2</code> means the server checks every 5 minutes and disconnects after 10 minutes of inactivity. <code>MaxStartups</code> limits concurrent unauthenticated connections to prevent DoS attacks.</p>
-<h4>Fail2Ban Integration</h4>
+<h2>Fail2Ban Integration</h2>
 <p>Install and configure Fail2Ban to block brute-force attempts:</p>
 <p>sudo apt install fail2ban</p>
-<h4>/etc/fail2ban/jail.local</h4>
+<h2>/etc/fail2ban/jail.local</h2>
 <p>[sshd]</p>
 <p>enabled = true</p>
 <p>port = ssh</p>
@@ -173,28 +156,28 @@
 <p>bantime = 3600</p>
 <p>findtime = 600</p>
 <p>This bans IPs for one hour after three failed attempts within ten minutes. For internet-facing SSH, consider longer ban times (24 hours) to be more aggressive.</p>
-<h4>Two-Factor Authentication</h4>
+<h2>Two-Factor Authentication</h2>
 <p>Add a second factor with <code>libpam-google-authenticator</code>:</p>
 <p>sudo apt install libpam-google-authenticator</p>
 <p>google-authenticator</p>
-<h4>/etc/pam.d/sshd</h4>
+<h2>/etc/pam.d/sshd</h2>
 <p>auth required pam_google_authenticator.so</p>
-<h4>/etc/ssh/sshd_config</h4>
+<h2>/etc/ssh/sshd_config</h2>
 <p>ChallengeResponseAuthentication yes</p>
 <p>AuthenticationMethods publickey,keyboard-interactive</p>
 <p>This requires both an SSH key and a TOTP code to authenticate. Use this for high-value jump boxes and production servers.</p>
-<h4>SSH Agent Forwarding</h4>
+<h2>SSH Agent Forwarding</h2>
 <p>Be careful with agent forwarding. Use <code>-J</code> (jump host) instead when possible:</p>
-<h4>Instead of forwarding your agent through a chain:</h4>
+<h2>Instead of forwarding your agent through a chain:</h2>
 <p>ssh -J bastion.example.com target.internal</p>
-<h4>Or use ProxyJump in ~/.ssh/config:</h4>
+<h2>Or use ProxyJump in ~/.ssh/config:</h2>
 <p>Host internal-*</p>
 <p>ProxyJump bastion.example.com</p>
 <p>If you must use agent forwarding, use <code>ssh -A</code> with the <code>-t</code> flag for a single session rather than enabling forwarding globally in your config.</p>
-<h4>Key Rotation</h4>
+<h2>Key Rotation</h2>
 <p>Regularly rotate SSH keys and audit authorized keys:</p>
-<h4>!/bin/bash</h4>
-<h4>audit-ssh-keys.sh</h4>
+<h2>!/bin/bash</h2>
+<h2>audit-ssh-keys.sh</h2>
 <p>for user in $(getent passwd | cut -d: -f1); do</p>
 <p>home=$(getent passwd "$user" | cut -d: -f6)</p>
 <p>if [[ -f "$home/.ssh/authorized_keys" ]]; then</p>
@@ -203,22 +186,25 @@
 <p>fi</p>
 <p>done</p>
 <p>Remove keys belonging to departed team members and replace keys that are over a year old. Integrate key management with your identity provider (Okta, Azure AD) using tools like <code>ssh-ca</code> for certificate-based auth.</p>
-<h4>Monitor SSH Access</h4>
+<h2>Monitor SSH Access</h2>
 <p>Monitor SSH access in real-time:</p>
-<h4>Watch auth log for SSH activity</h4>
+<h2>Watch auth log for SSH activity</h2>
 <p>tail -f /var/log/auth.log | grep sshd</p>
-<h4>Audit currently logged-in users</h4>
+<h2>Audit currently logged-in users</h2>
 <p>w</p>
-<h4>Last login times for all users</h4>
+<h2>Last login times for all users</h2>
 <p>lastlog</p>
 <p>Set up alerts for SSH logins from unexpected IP ranges or at unusual hours using log ingestion tools.</p>
-<h4>Summary</h4>
+<h2>Summary</h2>
 <p>SSH hardening follows defense in depth: disable passwords, use Ed25519 keys, lock down the daemon configuration, and add Fail2Ban. For production systems, add two-factor authentication and eliminate agent forwarding in favor of jump hosts. Regularly audit authorized keys and rotate them. Most SSH compromises come from weak configurations, not zero-days -- hardening your SSH setup prevents the majority of attack vectors.</p>
 <p><strong>See also:</strong> <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>.</p>
 <p><strong>See also:</strong> <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/monitoring-alerting-setup.html">Monitoring and Alerting Setup</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/monitoring-alerting-setup.html">Monitoring and Alerting Setup</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/monitoring-alerting-setup.html">Monitoring and Alerting Setup</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -230,7 +216,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/dev-environment-setup.html" class="related-card">Developer Environment Setup Guide</a><a href="/en/tech/kubernetes-services-security.html" class="related-card">Kubernetes Security Best Practices</a><a href="/en/tech/nginx-configuration-guide.html" class="related-card">Nginx Configuration Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a></div>
+      <div class="related-grid"><a href="/en/tech/dev-environment-setup.html" class="related-card"><span class="related-card-title">Developer Environment Setup Guide</span><span class="related-card-desc">Comprehensive guide to setting up a productive developer environment with tools, configuration, and </span></a><a href="/en/tech/kubernetes-services-security.html" class="related-card"><span class="related-card-title">Kubernetes Security Best Practices</span><span class="related-card-desc">Essential Kubernetes security practices for pod security, network policies, RBAC, and secrets manage</span></a><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="related-card-title">Nginx Configuration Guide</span><span class="related-card-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting</span></a><a href="/en/tech/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Principles and Practical Tools</span><span class="related-card-desc">Learn chaos engineering principles with Chaos Monkey, LitmusChaos, and Gremlin, covering steady-stat</span></a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card"><span class="related-card-title">Helm Charts: Kubernetes Package Management</span><span class="related-card-desc">A comprehensive guide to Helm chart structure, templates, values management, dependency handling, an</span></a><a href="/en/tech/service-discovery.html" class="related-card"><span class="related-card-title">Service Discovery in Microservices</span><span class="related-card-desc">Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, includ</span></a></div>
     </section>
     
   </div>

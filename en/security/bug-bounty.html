@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/bug-bounty.png",
       "datePublished": "2026-03-06",
       "dateModified": "2026-04-12",
-      "wordCount": "1951",
+      "wordCount": "1943",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,40 +99,23 @@
       <h1 class="article-title">Bug Bounty Guide</h1>
       <div class="article-meta">Published 2026-03-06 · Last active 2026-04-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/bug-bounty.png" alt="Bug Bounty Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Bug Bounty Guide</h2>
-<h3>Bug Bounty Guide</h3>
-<h4>Bug Bounty Guide</h4>
-<h4>Bug Bounty Guide</h4>
-<h4>Bug Bounty Guide</h4>
-<h4>Bug Bounty Guide</h4>
-<h4>Bug Bounty Guide</h4>
-<h4>Bug Bounty Guide</h4>
-<h4>Bug Bounty Guide</h4>
-<h4>Bug Bounty Guide</h4>
-<h4>Bug Bounty Guide</h4>
-<h4>Bug Bounty Guide</h4>
-<h4>Bug Bounty Guide</h4>
-<h4>Bug Bounty Guide</h4>
-<h4>Bug Bounty Guide</h4>
-<h4>Bug Bounty Guide</h4>
-<h4>Bug Bounty Guide</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/bug-bounty.png" alt="Bug Bounty Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/bug-bounty.png" alt="Bug Bounty Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Bug bounty programs invite security researchers to find and report vulnerabilities in exchange for monetary rewards or acknowledgment. They represent a paradigm shift from traditional security testing — continuous, crowd-sourced, and performance-based. Success requires methodical technique, clear communication, and platform-specific knowledge. </p>
 <p>Finding Vulnerabilities </p>
 <p>Reconnaissance-Driven Approach </p>
 <p>Successful bug bounty hunters invest heavily in reconnaissance. The more you know about a target, the more attack surface you can discover. </p>
-<h4>Subdomain enumeration pipeline</h4>
+<h2>Subdomain enumeration pipeline</h2>
 <p>subfinder -d target.com -silent | tee subs_raw.txt</p>
 <p>assetfinder --subs-only target.com | tee -a subs_raw.txt</p>
-<h4>Deduplicate and validate</h4>
+<h2>Deduplicate and validate</h2>
 <p>cat subs_raw.txt | sort -u | httprobe -c 50 &gt; live_subs.txt</p>
-<h4>Technology fingerprinting on discovered subdomains</h4>
+<h2>Technology fingerprinting on discovered subdomains</h2>
 <p>cat live_subs.txt | httpx -sc -title -tech-detect -o tech_report.txt</p>
-<h4>Directory brute-forcing</h4>
+<h2>Directory brute-forcing</h2>
 <p>ffuf -u https://admin.target.com/FUZZ -w /usr/share/wordlists/dirb/common.txt \</p>
 <p>-ac -t 100 -o admin_fuzz.json</p>
 <p>Attack-Specific Techniques </p>
-<h4>Automated XSS discovery</h4>
+<h2>Automated XSS discovery</h2>
 <p>import requests</p>
 <p>from urllib.parse import urljoin, urlparse, parse_qs</p>
 <p>def hunt_xss(base_url):</p>
@@ -143,9 +126,9 @@
 <p>'"&gt;',</p>
 <p>'{{constructor.constructor("alert(1)")()}}', # SSTI-based XSS</p>
 <p>]</p>
-<h4>Extract all forms</h4>
+<h2>Extract all forms</h2>
 <p>response = requests.get(base_url)</p>
-<h4>Parse and find all forms, inputs</h4>
+<h2>Parse and find all forms, inputs</h2>
 <p>for endpoint in discover_endpoints(base_url):</p>
 <p>params = extract_params(endpoint)</p>
 <p>for param in params:</p>
@@ -156,14 +139,14 @@
 <p>)</p>
 <p>resp = requests.get(test_url)</p>
 <p>if payload in resp.text and not resp.text.count('"') &gt; 3:</p>
-<h4>Check if payload rendered unescaped</h4>
+<h2>Check if payload rendered unescaped</h2>
 <p>print(f"[+] XSS found: {test_url}")</p>
-<h4>IDOR detection with autorize (Burp extension)</h4>
-<h4>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Record authenticated session cookies</h4>
-<h4>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Enable Autorize with victim cookie</h4>
-<h4>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Browse application as victim user</h4>
-<h4>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Monitor BApp output for unauthorized access</h4>
-<h4>GraphQL introspection for API discovery</h4>
+<h2>IDOR detection with autorize (Burp extension)</h2>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Record authenticated session cookies</h2>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Enable Autorize with victim cookie</h2>
+<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Browse application as victim user</h2>
+<h2>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Monitor BApp output for unauthorized access</h2>
+<h2>GraphQL introspection for API discovery</h2>
 <p>curl -X POST https://api.target.com/graphql \</p>
 <p>-H "Content-Type: application/json" \</p>
 <p>-d '{"query":"query { __schema { types { name fields { name } } } }"}'</p>
@@ -240,7 +223,10 @@
 <p><strong>See also:</strong> <a href="/en/security/soc-operations.html">SOC Operations</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/soc-operations.html">SOC Operations</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/soc-operations.html">SOC Operations</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
-<p><strong>See also:</strong> <a href="/en/security/soc-operations.html">SOC Operations</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/soc-operations.html">SOC Operations</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/soc-operations.html">SOC Operations</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/soc-operations.html">SOC Operations</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a></p>
+<p><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -252,7 +238,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/soc-operations.html" class="related-card">SOC Operations</a><a href="/en/security/waf-implementation.html" class="related-card">Web Application Firewall Implementation</a><a href="/en/security/certificate-management.html" class="related-card">Certificate Management</a><a href="/en/security/clickjacking-protection.html" class="related-card">Clickjacking Protection</a></div>
+      <div class="related-grid"><a href="/en/security/soc-operations.html" class="related-card"><span class="related-card-title">SOC Operations</span><span class="related-card-desc">Practical guide to Security Operations Center operations including tier model, SIEM tuning, playbook</span></a><a href="/en/security/waf-implementation.html" class="related-card"><span class="related-card-title">Web Application Firewall Implementation</span><span class="related-card-desc">Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuni</span></a><a href="/en/security/certificate-management.html" class="related-card"><span class="related-card-title">Certificate Management</span><span class="related-card-desc">Practical guide to TLS certificate management covering Let's Encrypt, ACME protocol, automated renew</span></a><a href="/en/security/clickjacking-protection.html" class="related-card"><span class="related-card-title">Clickjacking Protection</span><span class="related-card-desc">Complete guide to clickjacking defense covering X-Frame-Options, CSP frame-ancestors, framebusting t</span></a><a href="/en/security/cloud-iam.html" class="related-card"><span class="related-card-title">Cloud IAM Deep Dive</span><span class="related-card-desc">In-depth guide to cloud IAM covering AWS IAM policies, GCP IAM roles, least privilege principles, an</span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="related-card-title">Container Image Security</span><span class="related-card-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability sc</span></a></div>
     </section>
     
   </div>

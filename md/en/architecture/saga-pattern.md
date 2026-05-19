@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/saga-pattern.html
 
 # Saga Pattern for Distributed Transactions
 
-## Saga Pattern for Distributed Transactions
-
-### Saga Pattern for Distributed Transactions
-
-#### Saga Pattern for Distributed Transactions
-
-#### Saga Pattern for Distributed Transactions
-
-#### Saga Pattern for Distributed Transactions
-
-#### Saga Pattern for Distributed Transactions
-
-#### Saga Pattern for Distributed Transactions
-
-#### Saga Pattern for Distributed Transactions
-
-#### Saga Pattern for Distributed Transactions
-
-#### Saga Pattern for Distributed Transactions
-
-#### Saga Pattern for Distributed Transactions
-
-#### Saga Pattern for Distributed Transactions
-
-#### Saga Pattern for Distributed Transactions
-
-#### Saga Pattern for Distributed Transactions
-
-#### Saga Pattern for Distributed Transactions
-
 The Saga pattern manages distributed transactions across multiple services without requiring two-phase commit. Instead of a single, atomic distributed transaction, a saga breaks the operation into a series of local transactions, each with a compensating action that can undo its effects if a subsequent step fails. This article examines the two saga implementation approaches, compensation design, and monitoring strategies. 
 
 The Need for Sagas 
@@ -97,3 +67,9 @@ The Saga pattern is essential for maintaining data consistency in distributed sy
 **See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 
 **See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
+
+**See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
+
+**See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)

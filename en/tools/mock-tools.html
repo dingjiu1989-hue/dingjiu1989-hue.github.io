@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/mock-tools.png",
       "datePublished": "2026-02-04",
       "dateModified": "2026-05-06",
-      "wordCount": "1639",
+      "wordCount": "1529",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
@@ -110,25 +110,9 @@
       <h1 class="article-title">Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h1>
       <div class="article-meta">Published 2026-02-04 · Last active 2026-05-06 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/mock-tools.png" alt="Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h2>
-<h3>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h3>
-<h4>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h4>
-<h4>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h4>
-<h4>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h4>
-<h4>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h4>
-<h4>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h4>
-<h4>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h4>
-<h4>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h4>
-<h4>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h4>
-<h4>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h4>
-<h4>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h4>
-<h4>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h4>
-<h4>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h4>
-<h4>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h4>
-<h4>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Mocking is essential for isolated testing. The right mocking strategy depends on what you are testing: frontend components that make HTTP calls, backend services with external dependencies, or complex interactions between multiple services. This article covers four complementary mocking approaches.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/mock-tools.png" alt="Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>MSW (Mock Service Worker)</h4>
+<h2>MSW (Mock Service Worker)</h2>
 <p>MSW intercepts network requests at the service worker level, working in both browser and Node.js:</p>
 <p>// mocks/handlers.ts</p>
 <p>import { http, HttpResponse } from "msw";</p>
@@ -187,7 +171,7 @@
 <p>// Test error handling logic</p>
 <p>});</p>
 <p><strong>Strengths</strong> : Works at the network level (not module level), browser and Node.js support, realistic interception, first-class GraphQL support.</p>
-<h4>nock</h4>
+<h2>nock</h2>
 <p>nock intercepts HTTP requests at the Node.js <code>http</code> module level:</p>
 <p>const nock = require("nock");</p>
 <p>// Mock a GET request</p>
@@ -224,7 +208,7 @@
 <p>nock.cleanAll();</p>
 <p><strong>Strengths</strong> : Fine-grained request matching, supports regex URL matching, response templating, scope isolation.</p>
 <p><strong>Weaknesses</strong> : Node.js only, module-level interception (not browser), can be slow with many mocks.</p>
-<h4>Sinon</h4>
+<h2>Sinon</h2>
 <p>Sinon provides standalone test doubles (spies, stubs, mocks):</p>
 <p>const sinon = require("sinon");</p>
 <p>// Spy: observe function calls</p>
@@ -253,7 +237,7 @@
 <p>expect(callback.calledOnce).toBe(true);</p>
 <p>clock.restore();</p>
 <p><strong>Strengths</strong> : Rich assertion API, fake timers, standalone (framework-agnostic), excellent for module-level mocking.</p>
-<h4>WireMock</h4>
+<h2>WireMock</h2>
 <p>WireMock runs as a standalone HTTP server, perfect for integration tests:</p>
 <p>// Java example (WireMock also has HTTP API)</p>
 <p>import static com.github.tomakehurst.wiremock.client.WireMock.*;</p>
@@ -275,11 +259,11 @@
 <p>// Verify request was made</p>
 <p>verify(getRequestedFor(urlPathEqualTo("/api/users/1"))</p>
 <p>.withHeader("Authorization", containing("Bearer")));</p>
-<h4>Start WireMock standalone</h4>
+<h2>Start WireMock standalone</h2>
 <p>java -jar wiremock-standalone.jar --port 8089 --verbose</p>
-<h4>Configure via JSON files in mappings/ directory</h4>
-<h4>__files/response.json contains the response body</h4>
-<h4>Comparison</h4>
+<h2>Configure via JSON files in mappings/ directory</h2>
+<h2>__files/response.json contains the response body</h2>
+<h2>Comparison</h2>
 <p>| Feature | MSW | nock | Sinon | WireMock |</p>
 <p>|---------|-----|------|-------|----------|</p>
 <p>| Level | Network (SW) | Network (http) | Function | HTTP server |</p>
@@ -288,7 +272,7 @@
 <p>| Real HTTP | Yes | No (hijacked) | No | Yes |</p>
 <p>| Setup complexity | Medium | Low | Low | Medium |</p>
 <p>| Best for | Frontend tests | Backend tests | Unit tests | Integration tests |</p>
-<h4>Recommendations</h4>
+<h2>Recommendations</h2>
 <ul>
 <li>
 <p><strong>Frontend API mocking</strong> : MSW is the best choice — it works in both test and development environments.</p>
@@ -308,7 +292,10 @@
 <p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p>
-<p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/monorepo-tools.html">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</a>, <a href="/en/tools/productivity-tracking.html">Developer Productivity Tracking Tools</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/monorepo-tools.html">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</a>, <a href="/en/tools/productivity-tracking.html">Developer Productivity Tracking Tools</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/monorepo-tools.html">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</a>, <a href="/en/tools/productivity-tracking.html">Developer Productivity Tracking Tools</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -320,7 +307,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/api-testing-2026.html" class="related-card">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a><a href="/en/tools/load-testing-tools.html" class="related-card">Load Testing Tools: k6, Locust, Gatling, Artillery</a><a href="/en/tools/cloud-cli-tools.html" class="related-card">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a><a href="/en/tools/database-gui.html" class="related-card">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</a></div>
+      <div class="related-grid"><a href="/en/tools/api-testing-2026.html" class="related-card"><span class="related-card-title">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</span><span class="related-card-desc">Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, </span></a><a href="/en/tools/load-testing-tools.html" class="related-card"><span class="related-card-title">Load Testing Tools: k6, Locust, Gatling, Artillery</span><span class="related-card-desc">Compare load testing frameworks: k6 for JavaScript-based testing, Locust for Python, Gatling for Sca</span></a><a href="/en/tools/cloud-cli-tools.html" class="related-card"><span class="related-card-title">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</span><span class="related-card-desc">Compare cloud CLI tools: aws-cli for AWS, gcloud for GCP, az for Azure, and s5cmd for high-speed S3 </span></a><a href="/en/tools/database-gui.html" class="related-card"><span class="related-card-title">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</span><span class="related-card-desc">Compare database GUI tools: TablePlus for macOS-native experience, DBeaver for cross-platform versat</span></a><a href="/en/tools/documentation-tools.html" class="related-card"><span class="related-card-title">Documentation Tools for Developers 2026</span><span class="related-card-desc">Compare Docusaurus, Nextra, MkDocs, and Storybook for technical documentation and component librarie</span></a><a href="/en/tools/kafka-tools.html" class="related-card"><span class="related-card-title">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</span><span class="related-card-desc">Compare Apache Kafka management and monitoring tools: AKHQ for comprehensive cluster management, Kaf</span></a></div>
     </section>
     
   </div>

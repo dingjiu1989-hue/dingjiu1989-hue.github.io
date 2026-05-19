@@ -100,4 +100,4 @@ Charge monthly by default, offer a 20-30% discount for annual plans. Annual cust
 
 
 
-**See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [50 Micro-SaaS Ideas for Solo Developers in 2026](</en/sidehustle/micro-saas-ideas-2026.html>), [Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping](</en/sidehustle/side-project-validation.html>)
+**See also:** [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>), [Bootstrapping Essentials: Building a Startup Without VC Funding](</en/sidehustle/bootstrapping-essentials.html>)

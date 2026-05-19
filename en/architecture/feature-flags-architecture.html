@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/feature-flags-architecture.png",
       "datePublished": "2026-04-24",
       "dateModified": "2026-05-04",
-      "wordCount": "1102",
+      "wordCount": "1083",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">Feature Flags Architecture</h1>
       <div class="article-meta">Published 2026-04-24 · Last active 2026-05-04 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/feature-flags-architecture.png" alt="Feature Flags Architecture" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Feature Flags Architecture</h2>
-<h3>Feature Flags Architecture</h3>
-<h4>Feature Flags Architecture</h4>
-<h4>Feature Flags Architecture</h4>
-<h4>Feature Flags Architecture</h4>
-<h4>Feature Flags Architecture</h4>
-<h4>Feature Flags Architecture</h4>
-<h4>Feature Flags Architecture</h4>
-<h4>Feature Flags Architecture</h4>
-<h4>Feature Flags Architecture</h4>
-<h4>Feature Flags Architecture</h4>
-<h4>Feature Flags Architecture</h4>
-<h4>Feature Flags Architecture</h4>
-<h4>Feature Flags Architecture</h4>
-<h4>Feature Flags Architecture</h4>
-<p>Feature flags (also called feature toggles) provide runtime control over application behavior without deploying new code. They decouple deployment from release, enabling patterns like canary releases, A/B testing, trunk-based development, and instant rollbacks. The architecture of a feature flag system — how flags are evaluated, stored, distributed, and managed — is critical to both developer experience and system reliability. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/feature-flags-architecture.png" alt="Feature Flags Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Feature flags (also called feature toggles) provide runtime control over application behavior without deploying new code. They decouple deployment from release, enabling patterns like canary releases, A/B testing, trunk-based development, and instant rollbacks. The architecture of a feature flag system — how flags are evaluated, stored, distributed, and managed — is critical to both developer experience and system reliability. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/feature-flags-architecture.png" alt="Feature Flags Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Flag evaluation must be fast and reliable. Every request potentially evaluates multiple flags, so evaluation latency directly impacts overall request latency. The two primary evaluation models are client-side SDK evaluation and server-side evaluation. In client-side evaluation, the SDK holds a copy of all flag configurations and evaluates locally — this provides sub-millisecond evaluation but requires flag configuration synchronization. In server-side evaluation, the client sends user context to a server that evaluates flags and returns results — this adds a network hop but provides centralized control and audit. </p>
 <p>SDK design follows a consistent pattern. The SDK initializes with a connection to the flag management service, downloads flag configurations, and stores them in memory. When the application requests a flag value, the SDK evaluates the flag locally using the targeting rules. The SDK periodically polls or receives real-time updates (WebSocket, Server-Sent Events) for configuration changes. This ensures that flag changes take effect quickly without redeployment. </p>
 <p>Targeting rules determine which users see which flag variations. Rules can be based on user attributes (ID, email, plan tier), request properties (device type, geographic region), or random percentage splits. Rules are typically evaluated in priority order — the first matching rule determines the variant. Rule engines must be deterministic: the same user context must always produce the same result, which is essential for testing and debugging. </p>
@@ -128,7 +113,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -140,7 +128,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/alerting-strategies.html" class="related-card">Alerting Strategies for Production Systems</a><a href="/en/architecture/graceful-shutdown.html" class="related-card">Graceful Shutdown Patterns</a><a href="/en/architecture/structured-logging.html" class="related-card">Structured Logging</a><a href="/en/architecture/cdn-architecture.html" class="related-card">CDN Architecture</a></div>
+      <div class="related-grid"><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="related-card-title">Graceful Shutdown Patterns</span><span class="related-card-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful</span></a><a href="/en/architecture/structured-logging.html" class="related-card"><span class="related-card-title">Structured Logging</span><span class="related-card-desc">JSON log format, correlation IDs, log levels, logging libraries, and best practices for structured l</span></a><a href="/en/architecture/cdn-architecture.html" class="related-card"><span class="related-card-title">CDN Architecture</span><span class="related-card-desc">Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content deliv</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/leader-election.html" class="related-card"><span class="related-card-title">Leader Election in Distributed Systems</span><span class="related-card-desc">Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best </span></a></div>
     </section>
     
   </div>

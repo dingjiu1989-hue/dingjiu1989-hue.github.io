@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/cdn-architecture.html
 
 # CDN Architecture
 
-## CDN Architecture
-
-### CDN Architecture
-
-#### CDN Architecture
-
-#### CDN Architecture
-
-#### CDN Architecture
-
-#### CDN Architecture
-
-#### CDN Architecture
-
-#### CDN Architecture
-
-#### CDN Architecture
-
-#### CDN Architecture
-
-#### CDN Architecture
-
-#### CDN Architecture
-
-#### CDN Architecture
-
-#### CDN Architecture
-
-#### CDN Architecture
-
 Content Delivery Networks (CDNs) distribute content across geographically dispersed servers to reduce latency, offload origin infrastructure, and absorb large-scale traffic spikes. Modern CDNs have evolved from simple static asset caches into sophisticated application delivery platforms that cache dynamic content, execute edge compute, and provide security functions. Understanding CDN architecture is essential for architects designing global-scale systems. 
 
 Edge caching is the foundational CDN capability. Edge servers cache responses from the origin server and serve them directly to users. Cache placement is determined by the user's geographic proximity to the edge node. The CDN's global DNS resolves the domain to the nearest edge server IP based on latency measurements. When a request arrives, the edge server checks its cache — on hit, it serves the cached response instantly; on miss, it fetches from the origin, caches the response, and serves it. 
@@ -71,3 +41,9 @@ Performance monitoring includes cache hit ratio, time to first byte (TTFB), and 
 **See also:** [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 
 **See also:** [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)

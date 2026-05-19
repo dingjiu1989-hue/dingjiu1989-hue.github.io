@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/data-consistency-models.html
 
 # Data Consistency Models Explained
 
-## Data Consistency Models Explained
-
-### Data Consistency Models Explained
-
-#### Data Consistency Models Explained
-
-#### Data Consistency Models Explained
-
-#### Data Consistency Models Explained
-
-#### Data Consistency Models Explained
-
-#### Data Consistency Models Explained
-
-#### Data Consistency Models Explained
-
-#### Data Consistency Models Explained
-
-#### Data Consistency Models Explained
-
-#### Data Consistency Models Explained
-
-#### Data Consistency Models Explained
-
-#### Data Consistency Models Explained
-
-#### Data Consistency Models Explained
-
-#### Data Consistency Models Explained
-
 Consistency in Distributed Systems 
 
 Data consistency models define guarantees about when updates become visible to readers. Choosing the right model is critical. 
@@ -95,3 +65,9 @@ Use strong consistency where correctness is critical. Use eventual consistency f
 **See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
 
 **See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
+
+**See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
+
+**See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
+
+**See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)

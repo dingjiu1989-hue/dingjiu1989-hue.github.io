@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/software-signing.png",
       "datePublished": "2026-03-19",
       "dateModified": "2026-04-16",
-      "wordCount": "1417",
+      "wordCount": "1414",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,36 +99,21 @@
       <h1 class="article-title">Software Signing</h1>
       <div class="article-meta">Published 2026-03-19 · Last active 2026-04-16 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/software-signing.png" alt="Software Signing" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Software Signing</h2>
-<h3>Software Signing</h3>
-<h4>Software Signing</h4>
-<h4>Software Signing</h4>
-<h4>Software Signing</h4>
-<h4>Software Signing</h4>
-<h4>Software Signing</h4>
-<h4>Software Signing</h4>
-<h4>Software Signing</h4>
-<h4>Software Signing</h4>
-<h4>Software Signing</h4>
-<h4>Software Signing</h4>
-<h4>Software Signing</h4>
-<h4>Software Signing</h4>
-<h4>Software Signing</h4>
-<p>Why Sign Software? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/software-signing.png" alt="Software Signing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Why Sign Software? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/software-signing.png" alt="Software Signing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Software signing verifies the origin and integrity of code. It ensures that artifacts haven't been tampered with and come from a trusted source. </p>
 <p>GPG Signing </p>
 <p>Traditional signing with PGP/GPG: </p>
-<h4>Generate GPG key</h4>
+<h2>Generate GPG key</h2>
 <p>gpg --full-generate-key</p>
 <p>gpg --armor --export "developer@example.com" &gt; public.key</p>
-<h4>Sign artifacts</h4>
+<h2>Sign artifacts</h2>
 <p>gpg --armor --detach-sign myapp.tar.gz</p>
 <p>gpg --verify myapp.tar.gz.asc myapp.tar.gz</p>
-<h4>Sign git commits</h4>
+<h2>Sign git commits</h2>
 <p>git config commit.gpgsign true</p>
 <p>git config user.signingkey KEY_ID</p>
 <p>git commit -S -m "Signed commit"</p>
-<h4>Programmatic GPG verification</h4>
+<h2>Programmatic GPG verification</h2>
 <p>import gnupg</p>
 <p>def verify_signature(artifact, signature_file):</p>
 <p>gpg = gnupg.GPG()</p>
@@ -144,18 +129,18 @@
 <p>return {"valid": False}</p>
 <p>Sigstore and cosign </p>
 <p>Sigstore simplifies code signing with keyless options: </p>
-<h4>Keyless signing with cosign</h4>
+<h2>Keyless signing with cosign</h2>
 <p>cosign sign myregistry.io/myapp:latest</p>
-<h4>Sign with identity</h4>
+<h2>Sign with identity</h2>
 <p>cosign sign \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--identity-token $GITHUB_TOKEN \</p>
 <p>ghcr.io/myorg/myapp@sha256:abc123</p>
-<h4>Verify</h4>
+<h2>Verify</h2>
 <p>cosign verify \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--certificate-identity "developer@example.com" \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--certificate-oidc-issuer "https://github.com/login/oauth" \</p>
 <p>myregistry.io/myapp:latest</p>
-<h4>Cosign in CI pipeline</h4>
+<h2>Cosign in CI pipeline</h2>
 <p>jobs:</p>
 <p>sign:</p>
 <p>runs-on: ubuntu-latest</p>
@@ -178,7 +163,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--yes</p>
 <p>in-toto Attestations </p>
 <p>in-toto provides end-to-end supply chain integrity: </p>
-<h4>Create in-toto attestation</h4>
+<h2>Create in-toto attestation</h2>
 <p>from in_toto_attestation.v1 import Statement, Attestation</p>
 <p>def create_attestation(subject, predicate_type, predicate):</p>
 <p>statement = Statement(</p>
@@ -197,7 +182,7 @@
 <p>"keyid": get_key_id()</p>
 <p>}]</p>
 <p>)</p>
-<h4>SLSA provenance attestation</h4>
+<h2>SLSA provenance attestation</h2>
 <p>provenance = create_attestation(</p>
 <p>subject={"name": "myapp", "digest": {"sha256": "abc..."}},</p>
 <p>predicate_type="https://slsa.dev/provenance/v1",</p>
@@ -217,7 +202,7 @@
 <p>}</p>
 <p>)</p>
 <p>Verification Policies </p>
-<h4>signing-policy.yaml</h4>
+<h2>signing-policy.yaml</h2>
 <p>verification_policy:</p>
 <p>container_images:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- require_signature: true</p>
@@ -241,7 +226,10 @@
 <p><strong>See also:</strong> <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a>, <a href="/en/security/data-classification.html">Data Classification</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a>, <a href="/en/security/data-classification.html">Data Classification</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a>, <a href="/en/security/data-classification.html">Data Classification</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -253,7 +241,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/supply-chain-security.html" class="related-card">Supply Chain Security</a><a href="/en/security/container-image-security.html" class="related-card">Container Image Security</a><a href="/en/security/helm-security.html" class="related-card">Helm Security</a><a href="/en/security/oauth2-implementation.html" class="related-card">OAuth2 Implementation</a></div>
+      <div class="related-grid"><a href="/en/security/supply-chain-security.html" class="related-card"><span class="related-card-title">Supply Chain Security</span><span class="related-card-desc">Comprehensive guide to software supply chain security covering SBOM, Sigstore, in-toto, dependency c</span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="related-card-title">Container Image Security</span><span class="related-card-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability sc</span></a><a href="/en/security/helm-security.html" class="related-card"><span class="related-card-title">Helm Security</span><span class="related-card-desc">Securing Helm deployments with chart signing, provenance verification, secrets management, and best </span></a><a href="/en/security/oauth2-implementation.html" class="related-card"><span class="related-card-title">OAuth2 Implementation</span><span class="related-card-desc">Implementing OAuth2 with grant types, token handling, PKCE, and security best practices.</span></a><a href="/en/security/microservice-security.html" class="related-card"><span class="related-card-title">Microservice Security</span><span class="related-card-desc">Comprehensive guide to microservice security covering service mesh mTLS, API gateways, secret distri</span></a><a href="/en/security/waf-implementation.html" class="related-card"><span class="related-card-title">Web Application Firewall Implementation</span><span class="related-card-desc">Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuni</span></a></div>
     </section>
     
   </div>

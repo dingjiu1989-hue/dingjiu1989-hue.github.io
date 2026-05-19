@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-safety.png",
       "datePublished": "2026-02-16",
       "dateModified": "2026-04-14",
-      "wordCount": "1823",
+      "wordCount": "1744",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -99,41 +99,25 @@
       <h1 class="article-title">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h1>
       <div class="article-meta">Published 2026-02-16 · Last active 2026-04-14 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-safety.png" alt="LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h2>
-<h3>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h3>
-<h4>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h4>
-<h4>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h4>
-<h4>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h4>
-<h4>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h4>
-<h4>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h4>
-<h4>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h4>
-<h4>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h4>
-<h4>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h4>
-<h4>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h4>
-<h4>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h4>
-<h4>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h4>
-<h4>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h4>
-<h4>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h4>
-<h4>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>As LLMs are deployed in sensitive applications, safety mechanisms are essential. Models can produce harmful content, leak private information, or be manipulated through prompt injection. This article covers the four layers of LLM safety: training-time alignment through RLHF, runtime constraints with Constitutional AI, automated content filtering, and adversarial testing via red teaming.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-safety.png" alt="LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>RLHF (Reinforcement Learning from Human Feedback)</h4>
+<h2>RLHF (Reinforcement Learning from Human Feedback)</h2>
 <p>RLHF trains the model to prefer helpful and harmless responses:</p>
-<h4>RLHF training pipeline (simplified)</h4>
-<h4>Step 1: Supervised fine-tuning on demonstration data</h4>
-<h4>Step 2: Train a reward model on human preference comparisons</h4>
-<h4>Training a reward model</h4>
+<h2>RLHF training pipeline (simplified)</h2>
+<h2>Step 1: Supervised fine-tuning on demonstration data</h2>
+<h2>Step 2: Train a reward model on human preference comparisons</h2>
+<h2>Training a reward model</h2>
 <p>reward_training_data = [</p>
 <p>{"chosen": "I cannot help with that request.", "rejected": "Sure, here's how to...",</p>
 <p>"prompt": "How do I hack a website?"},</p>
 <p>{"chosen": "Here are some cybersecurity resources...", "rejected": "I don't know.",</p>
 <p>"prompt": "How can I protect my website from hackers?"},</p>
 <p>]</p>
-<h4>Step 3: Optimize the policy using PPO</h4>
-<h4>The model generates responses, the reward model scores them,</h4>
-<h4>and PPO updates the model weights toward higher-scoring responses</h4>
+<h2>Step 3: Optimize the policy using PPO</h2>
+<h2>The model generates responses, the reward model scores them,</h2>
+<h2>and PPO updates the model weights toward higher-scoring responses</h2>
 <p>RLHF produces models that refuse harmful requests, avoid biased language, and maintain helpfulness. The quality of the reward model and the diversity of the preference data are the primary determinants of alignment quality.</p>
-<h4>Constitutional AI</h4>
+<h2>Constitutional AI</h2>
 <p>Constitutional AI (CAI) provides a set of behavioral principles that guide model responses without requiring human feedback for every example:</p>
 <p>CONSTITUTION = [</p>
 <p>"Do not assist with illegal activities.",</p>
@@ -156,7 +140,7 @@
 <p>return revised, violations</p>
 <p>return response, []</p>
 <p>The model critiques its own output against the constitution and revises it when violations are detected. This RLAIF (RL from AI Feedback) approach scales alignment beyond what human annotation budgets allow.</p>
-<h4>Content Filtering</h4>
+<h2>Content Filtering</h2>
 <p>Automated filters provide a safety layer independent of the model:</p>
 <p>import re</p>
 <p>from typing import Optional</p>
@@ -184,18 +168,18 @@
 <p>def check_output(self, text: str) -&gt; tuple[bool, list[str]]:</p>
 <p>"""Check model output for violations."""</p>
 <p>violations = []</p>
-<h4>Use a classifier model for semantic content filtering</h4>
+<h2>Use a classifier model for semantic content filtering</h2>
 <p>classification = self.classify_content(text)</p>
 <p>if classification["toxicity"] &gt; 0.8:</p>
 <p>violations.append("toxic_content")</p>
 <p>if classification["self_harm"] &gt; 0.7:</p>
 <p>violations.append("self_harm_reference")</p>
-<h4>Pattern-based PII detection</h4>
+<h2>Pattern-based PII detection</h2>
 <p>for name, pattern in self.patterns.items():</p>
 <p>if pattern.search(text):</p>
 <p>violations.append(f"pii_leak: {name}")</p>
 <p>return len(violations) == 0, violations</p>
-<h4>Red Teaming</h4>
+<h2>Red Teaming</h2>
 <p>Red teaming systematically probes the model for vulnerabilities:</p>
 <p>class RedTeam:</p>
 <p>def <strong>init</strong>(self, target_model):</p>
@@ -239,13 +223,16 @@
 <p>"""Check if the response actually answers the harmful query."""</p>
 <p>refusal_patterns = ["I cannot", "I'm unable", "I apologize", "not appropriate"]</p>
 <p>return not any(pattern in response.lower() for pattern in refusal_patterns)</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>LLM safety requires defense in depth. RLHF and Constitutional AI align the model during training. Content filters provide runtime safety independent of the model's reliability. Red teaming identifies vulnerabilities before they are exploited in production. Establish a continuous safety pipeline: train with alignment techniques, filter inputs and outputs, run automated red-teaming on every model update, and maintain a vulnerability disclosure process for external reporters.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/fine-tuning-strategies.html">LLM Fine-Tuning Strategies and Techniques</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/ai-safety.html">AI Safety: Responsible Development and Deployment</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/ai-safety.html">AI Safety: Responsible Development and Deployment</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/ai-safety.html">AI Safety: Responsible Development and Deployment</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -257,7 +244,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-testing-frameworks.html" class="related-card">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a><a href="/en/ai/ai-red-teaming.html" class="related-card">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a><a href="/en/ai/llm-api-design.html" class="related-card">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a><a href="/en/ai/fine-tuning-strategies.html" class="related-card">LLM Fine-Tuning Strategies and Techniques</a></div>
+      <div class="related-grid"><a href="/en/ai/ai-testing-frameworks.html" class="related-card"><span class="related-card-title">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</span><span class="related-card-desc">Comprehensive guide to AI testing frameworks including DeepEval, Ragas, and LangSmith. Implement aut</span></a><a href="/en/ai/ai-red-teaming.html" class="related-card"><span class="related-card-title">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</span><span class="related-card-desc">Conduct AI red teaming to identify vulnerabilities: adversarial testing methodologies, jailbreak det</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="related-card-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="related-card-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handli</span></a><a href="/en/ai/fine-tuning-strategies.html" class="related-card"><span class="related-card-title">LLM Fine-Tuning Strategies and Techniques</span><span class="related-card-desc">Compare LLM fine-tuning approaches: full fine-tuning, LoRA, QLoRA, and RLHF for domain adaptation.</span></a><a href="/en/ai/llm-caching-deep.html" class="related-card"><span class="related-card-title">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</span><span class="related-card-desc">Deep dive into LLM caching strategies: semantic similarity caching, exact match caching, TTL-based e</span></a><a href="/en/ai/llm-version-management.html" class="related-card"><span class="related-card-title">LLM Version Management: Model Registry, A/B Testing, Rollback</span><span class="related-card-desc">Manage LLM versions in production with model registries, A/B testing frameworks, gradual rollouts, a</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

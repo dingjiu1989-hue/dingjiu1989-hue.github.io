@@ -45,4 +45,4 @@ Multi-tenant / B2B SaaS| Clerk or Auth0| Both have organizations/RBAC; Clerk for
   
 **Bottom line:** Clerk wins for React/Next.js projects where you want to move fast — the developer experience is the best in auth right now. Auth0 is the enterprise choice when you need every feature and have time to configure them. Lucia is for developers who want full control and are willing to invest the time to own their auth stack. See also: [Authentication Best Practices 2026](</en/tech/authentication-best-practices-2026.html>) and [Web Security Basics](</en/tech/web-security-basics.html>).
 
-**See also:** [Best Authentication Solutions 2026: Clerk vs Auth0 vs Supabase Auth vs NextAuth vs Lucia](</en/tools/best-auth-solutions.html>), [Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys](</en/tech/authentication-best-practices-2026.html>), [AWS vs Azure vs GCP 2026](</en/compare/aws-vs-azure-vs-gcp-2026.html>)
+**See also:** [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [GraphQL vs REST API](</en/compare/graphql-vs-rest.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>)

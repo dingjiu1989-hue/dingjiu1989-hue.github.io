@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/software-signing.html
 
 # Software Signing
 
-## Software Signing
-
-### Software Signing
-
-#### Software Signing
-
-#### Software Signing
-
-#### Software Signing
-
-#### Software Signing
-
-#### Software Signing
-
-#### Software Signing
-
-#### Software Signing
-
-#### Software Signing
-
-#### Software Signing
-
-#### Software Signing
-
-#### Software Signing
-
-#### Software Signing
-
-#### Software Signing
-
 Why Sign Software? 
 
 Software signing verifies the origin and integrity of code. It ensures that artifacts haven't been tampered with and come from a trusted source. 
@@ -46,19 +16,19 @@ GPG Signing
 
 Traditional signing with PGP/GPG: 
 
-#### Generate GPG key
+## Generate GPG key
 
 gpg --full-generate-key
 
 gpg --armor --export "developer@example.com" > public.key
 
-#### Sign artifacts
+## Sign artifacts
 
 gpg --armor --detach-sign myapp.tar.gz
 
 gpg --verify myapp.tar.gz.asc myapp.tar.gz
 
-#### Sign git commits
+## Sign git commits
 
 git config commit.gpgsign true
 
@@ -66,7 +36,7 @@ git config user.signingkey KEY_ID
 
 git commit -S -m "Signed commit"
 
-#### Programmatic GPG verification
+## Programmatic GPG verification
 
 import gnupg
 
@@ -98,11 +68,11 @@ Sigstore and cosign
 
 Sigstore simplifies code signing with keyless options: 
 
-#### Keyless signing with cosign
+## Keyless signing with cosign
 
 cosign sign myregistry.io/myapp:latest
 
-#### Sign with identity
+## Sign with identity
 
 cosign sign \
 
@@ -110,7 +80,7 @@ cosign sign \
 
 ghcr.io/myorg/myapp@sha256:abc123
 
-#### Verify
+## Verify
 
 cosign verify \
 
@@ -120,7 +90,7 @@ cosign verify \
 
 myregistry.io/myapp:latest
 
-#### Cosign in CI pipeline
+## Cosign in CI pipeline
 
 jobs:
 
@@ -166,7 +136,7 @@ in-toto Attestations
 
 in-toto provides end-to-end supply chain integrity: 
 
-#### Create in-toto attestation
+## Create in-toto attestation
 
 from in_toto_attestation.v1 import Statement, Attestation
 
@@ -204,7 +174,7 @@ signatures=[{
 
 )
 
-#### SLSA provenance attestation
+## SLSA provenance attestation
 
 provenance = create_attestation(
 
@@ -244,7 +214,7 @@ predicate={
 
 Verification Policies 
 
-#### signing-policy.yaml
+## signing-policy.yaml
 
 verification_policy:
 
@@ -295,3 +265,9 @@ Software signing is fundamental to supply chain security. GPG works well for tra
 **See also:** [Supply Chain Security](</en/security/supply-chain-security.html>), [Container Image Security](</en/security/container-image-security.html>), [Helm Security](</en/security/helm-security.html>)
 
 **See also:** [Supply Chain Security](</en/security/supply-chain-security.html>), [Container Image Security](</en/security/container-image-security.html>), [Helm Security](</en/security/helm-security.html>)
+
+**See also:** [Cloud Network Security](</en/security/cloud-network-security.html>), [Container Runtime Security](</en/security/container-runtime-security.html>), [Data Classification](</en/security/data-classification.html>)
+
+**See also:** [Cloud Network Security](</en/security/cloud-network-security.html>), [Container Runtime Security](</en/security/container-runtime-security.html>), [Data Classification](</en/security/data-classification.html>)
+
+**See also:** [Cloud Network Security](</en/security/cloud-network-security.html>), [Container Runtime Security](</en/security/container-runtime-security.html>), [Data Classification](</en/security/data-classification.html>)

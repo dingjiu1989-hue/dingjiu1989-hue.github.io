@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/batch-operations.html
 
 # Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
 
-## Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
-### Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
-#### Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
-#### Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
-#### Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
-#### Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
-#### Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
-#### Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
-#### Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
-#### Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
-#### Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
-#### Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
-#### Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
-#### Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
-#### Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
-
 Batch Operations: Bulk Insert, COPY, and Batch Size Tuning 
 
 Loading or updating large volumes of data row-by-row is prohibitively slow. Batch operations reduce overhead by orders of magnitude. This article covers bulk insert techniques, PostgreSQL's COPY command, batch updates, and the art of choosing the right batch size. 
@@ -59,7 +29,7 @@ Inserting one row at a time incurs overhead for each statement:
 
 
 
-#### SLOW: one round trip per row
+## SLOW: one round trip per row
 
 for row in dataset:
 
@@ -89,7 +59,7 @@ data = [
 
 ("bob@example.com", "Bob"),
 
-#### ... 1000 rows
+## ... 1000 rows
 
 ]
 
@@ -111,7 +81,7 @@ Using asyncpg
 
 import asyncpg
 
-#### executemany with prepared statement reuse
+## executemany with prepared statement reuse
 
 await conn.executemany(
 
@@ -193,7 +163,7 @@ WHERE users.id = data.id
 
 Using a Temporary Table 
 
-#### Create temp table
+## Create temp table
 
 cursor.execute("""
 
@@ -209,7 +179,7 @@ name TEXT
 
 """)
 
-#### COPY into temp table
+## COPY into temp table
 
 buffer = io.StringIO()
 
@@ -221,7 +191,7 @@ buffer.seek(0)
 
 cursor.copy_expert("COPY tmp_updates FROM STDIN WITH CSV", buffer)
 
-#### Join update
+## Join update
 
 cursor.execute("""
 
@@ -374,3 +344,9 @@ Batch operations are essential for ETL pipelines, data migrations, and any workf
 **See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
 
 **See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
+
+**See also:** [PostgreSQL Vacuuming: Maintenance, Tuning, and Automation](</en/database/database-vacuuming-maintenance.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [PostgreSQL Vacuuming: Maintenance, Tuning, and Automation](</en/database/database-vacuuming-maintenance.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [PostgreSQL Vacuuming: Maintenance, Tuning, and Automation](</en/database/database-vacuuming-maintenance.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)

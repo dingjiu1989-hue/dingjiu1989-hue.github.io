@@ -8,41 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/freelance-platform-strategy
 
 # Freelancing Platforms: Strategy for Developers
 
-## Freelancing Platforms: Strategy for Developers
-
-### Freelancing Platforms: Strategy for Developers
-
-#### Freelancing Platforms: Strategy for Developers
-
-#### Freelancing Platforms: Strategy for Developers
-
-#### Freelancing Platforms: Strategy for Developers
-
-#### Freelancing Platforms: Strategy for Developers
-
-#### Freelancing Platforms: Strategy for Developers
-
-#### Freelancing Platforms: Strategy for Developers
-
-#### Freelancing Platforms: Strategy for Developers
-
-#### Freelancing Platforms: Strategy for Developers
-
-#### Freelancing Platforms: Strategy for Developers
-
-#### Freelancing Platforms: Strategy for Developers
-
-#### Freelancing Platforms: Strategy for Developers
-
-#### Freelancing Platforms: Strategy for Developers
-
-#### Freelancing Platforms: Strategy for Developers
-
-#### Freelancing Platforms: Strategy for Developers
-
 Freelancing platforms connect developers with clients. Success requires a strategic approach to profiles, proposals, pricing, and client relationships.
 
-#### Choosing Platforms
+## Choosing Platforms
 
 Upwork is the largest general freelancing platform with the most job variety. Categories include web development, mobile apps, APIs, cloud infrastructure, and DevOps. Rates range from $30-150/hour. Upwork takes 20% for the first $500, then 5% after $10,000.
 
@@ -50,25 +18,25 @@ Toptal is an invite-only platform that accepts only the top 3% of applicants. Th
 
 Fiverr flips the model—you create "gigs" that clients purchase. Create detailed service packages with clear deliverables. Tiered pricing (basic, standard, premium) captures different budget levels. Fiverr works best for defined deliverables (build a landing page, create an API, fix a bug).
 
-#### Profile Optimization
+## Profile Optimization
 
 Your profile is your sales page. Write a clear headline: "Senior React Developer specializing in Next.js and TypeScript" not "Full Stack Developer." Showcase specific outcomes, not generic responsibilities.
 
 Portfolio projects demonstrate capability. Include links to live applications and case studies. Testimonials from previous clients provide social proof. Complete all profile sections—completed profiles rank higher in platform search.
 
-#### Winning Proposals
+## Winning Proposals
 
 Custom proposals outperform templates by 3-5x. Read the job post carefully. Address the client's specific requirements. Ask one or two relevant questions about project scope or constraints. Demonstrate understanding of their problem, not just your skills.
 
 Show similar work. "I built a similar dashboard for a logistics company" is more convincing than "I have 5 years of React experience." Propose a clear next step: a 30-minute call, a wireframe, or a small paid trial.
 
-#### Pricing Strategy
+## Pricing Strategy
 
 New freelancers should start below market rate to get initial reviews and platform history. Increase rates with each successful project and positive review. Track your ratings and adjust accordingly—initial low rates build portfolio, not long-term strategy.
 
 Fixed-price projects require clear scope. Define what's included and what's additional. Set milestone payments for projects over $1000. Hourly projects are lower risk—you get paid for all time worked. Use time tracking for hourly contracts.
 
-#### Client Management
+## Client Management
 
 Set clear expectations in writing: scope, timeline, deliverables, revision policy. Communicate proactively—status updates every 2-3 days even without progress. Use platform messaging for record. Move to complex communication tools only after establishing trust.
 
@@ -85,3 +53,9 @@ Deliver high-quality work consistently. Meet deadlines. Respond to messages with
 **See also:** [Remote Freelancing Guide: Finding Clients and Scaling Income](</en/sidehustle/remote-freelancing-guide.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>)
 
 **See also:** [Remote Freelancing Guide: Finding Clients and Scaling Income](</en/sidehustle/remote-freelancing-guide.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>)
+
+**See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>)
+
+**See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>)
+
+**See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>)

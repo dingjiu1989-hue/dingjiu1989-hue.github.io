@@ -8,45 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/tools/monitoring-tools.html
 
 # Monitoring Tools: Grafana vs Datadog vs New Relic
 
-## Monitoring Tools: Grafana vs Datadog vs New Relic
-
-### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Monitoring Tools: Grafana vs Datadog vs New Relic
-
-#### Introduction
+## Introduction
 
 Effective monitoring is the difference between discovering incidents through user complaints and catching them proactively through dashboards and alerts. The three dominant platforms in the observability space--Grafana, Datadog, and New Relic--each take distinct approaches to metrics, logging, tracing, and alerting. This article provides a technical comparison to guide your selection.
 
-#### Dashboarding Capabilities
+## Dashboarding Capabilities
 
-#### Grafana
+## Grafana
 
 Grafana excels at visualization with support for dozens of data sources:
 
@@ -128,7 +96,7 @@ Grafana excels at visualization with support for dozens of data sources:
 
 }
 
-#### Datadog
+## Datadog
 
 Datadog provides a more opinionated dashboarding experience with integrated template variables:
 
@@ -160,7 +128,7 @@ Datadog provides a more opinionated dashboarding experience with integrated temp
 
 }
 
-#### New Relic
+## New Relic
 
 New Relic uses NRQL, a SQL-like query language for dashboards:
 
@@ -188,11 +156,11 @@ FACET error.message
 
 LIMIT 10
 
-#### Alerting Configuration
+## Alerting Configuration
 
-#### Grafana Alerting
+## Grafana Alerting
 
-#### Grafana managed alert rule
+## Grafana managed alert rule
 
 apiVersion: grafana/v1
 
@@ -256,9 +224,9 @@ expression: "$A && $B"
 
 type: math
 
-#### Datadog Monitors
+## Datadog Monitors
 
-#### Datadog monitor via API
+## Datadog monitor via API
 
 monitor:
 
@@ -292,17 +260,17 @@ evaluation_delay: 60
 
 new_group_delay: 300
 
-#### APM and Distributed Tracing
+## APM and Distributed Tracing
 
-#### Datadog APM
+## Datadog APM
 
 from ddtrace import tracer, patch_all
 
-#### Auto-instrument supported libraries
+## Auto-instrument supported libraries
 
 patch_all()
 
-#### Custom instrumentation
+## Custom instrumentation
 
 @tracer.writer(service_name="payment-service")
 
@@ -320,11 +288,11 @@ span.set_tag("transaction_id", result.id)
 
 return result
 
-#### New Relic APM
+## New Relic APM
 
 import newrelic.agent
 
-#### Custom transaction
+## Custom transaction
 
 @newrelic.agent.background_task()
 
@@ -342,7 +310,7 @@ newrelic.agent.record_custom_metric(
 
 return refund_result
 
-#### Log Integration
+## Log Integration
 
 | Feature | Grafana + Loki | Datadog Logs | New Relic Logs |
 
@@ -366,7 +334,7 @@ Example Loki query for log correlation:
 
 | line_format "{{.timestamp}} {{.message}} (duration: {{.duration}})"
 
-#### Pricing Comparison
+## Pricing Comparison
 
 | Tier | Grafana (self-hosted) | Grafana Cloud | Datadog | New Relic |
 
@@ -380,7 +348,7 @@ Example Loki query for log correlation:
 
 Grafana self-hosted is the most cost-effective at scale because you only pay for infrastructure. Datadog and New Relic pricing scales with data volume and can become expensive for high-cardinality metrics or verbose logging.
 
-#### Self-Hosted vs SaaS
+## Self-Hosted vs SaaS
 
   * **Grafana** : Excellent self-hosted option with Prometheus, Loki, and Tempo forming a complete open-source stack. Grafana Cloud offers a managed alternative.
 
@@ -404,3 +372,9 @@ For startups and small teams, Grafana self-hosted provides the best balance of c
 **See also:** [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>), [Logging Tools: ELK Stack vs Loki vs Splunk](</en/tools/logging-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>)
 
 **See also:** [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>), [Logging Tools: ELK Stack vs Loki vs Splunk](</en/tools/logging-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>)
+
+**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>)
+
+**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>)
+
+**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>)

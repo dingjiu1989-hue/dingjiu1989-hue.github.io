@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/sql-query-optimization.html
 
 # SQL Query Optimization
 
-## SQL Query Optimization
-
-### SQL Query Optimization
-
-#### SQL Query Optimization
-
-#### SQL Query Optimization
-
-#### SQL Query Optimization
-
-#### SQL Query Optimization
-
-#### SQL Query Optimization
-
-#### SQL Query Optimization
-
-#### SQL Query Optimization
-
-#### SQL Query Optimization
-
-#### SQL Query Optimization
-
-#### SQL Query Optimization
-
-#### SQL Query Optimization
-
-#### SQL Query Optimization
-
-#### SQL Query Optimization
-
 Why Query Optimization Matters 
 
 A poorly written query can take seconds or minutes instead of milliseconds, consuming database resources and degrading the experience for all users. Optimizing queries is often the highest-ROI performance improvement you can make because it requires no infrastructure changes. 
@@ -281,3 +251,9 @@ SQL query optimization starts with understanding the query plan through EXPLAIN 
 **See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
 
 **See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
+
+**See also:** [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
+
+**See also:** [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
+
+**See also:** [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)

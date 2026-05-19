@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/structured-logging.png",
       "datePublished": "2026-04-30",
       "dateModified": "2026-05-07",
-      "wordCount": "1101",
+      "wordCount": "1113",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,22 +96,7 @@
       <h1 class="article-title">Structured Logging</h1>
       <div class="article-meta">Published 2026-04-30 · Last active 2026-05-07 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/structured-logging.png" alt="Structured Logging" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Structured Logging</h2>
-<h3>Structured Logging</h3>
-<h4>Structured Logging</h4>
-<h4>Structured Logging</h4>
-<h4>Structured Logging</h4>
-<h4>Structured Logging</h4>
-<h4>Structured Logging</h4>
-<h4>Structured Logging</h4>
-<h4>Structured Logging</h4>
-<h4>Structured Logging</h4>
-<h4>Structured Logging</h4>
-<h4>Structured Logging</h4>
-<h4>Structured Logging</h4>
-<h4>Structured Logging</h4>
-<h4>Structured Logging</h4>
-<p>Structured logging is the practice of emitting logs as structured data — typically JSON — rather than free-form text strings. This transformation is foundational to observability. Structured logs can be parsed, filtered, and queried by machines without requiring fragile regular expressions. The initial investment in structured logging pays dividends in every incident investigation, deployment verification, and system analysis. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/structured-logging.png" alt="Structured Logging" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Structured logging is the practice of emitting logs as structured data — typically JSON — rather than free-form text strings. This transformation is foundational to observability. Structured logs can be parsed, filtered, and queried by machines without requiring fragile regular expressions. The initial investment in structured logging pays dividends in every incident investigation, deployment verification, and system analysis. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/structured-logging.png" alt="Structured Logging" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The JSON log format is the standard. Each log line is a JSON object with required fields: timestamp (ISO 8601 with timezone and microseconds), level, logger (source file or component), message (human-readable summary), and trace_id (correlation ID for request tracing). Optional fields include: service, version, environment, request details, error stack traces, and any business-specific context. Every field should be consistently named and typed across all services in the organization. </p>
 <p>Correlation IDs bridge logs across service boundaries. When a request enters the system, it is assigned a trace ID (UUID). This ID is propagated to all downstream services through HTTP headers or message metadata. Every log entry within that request's scope includes the trace ID. When investigating an issue, the trace ID ties together logs from the API gateway, the order service, the payment service, and the database — providing a unified view of what happened during that specific request. </p>
 <p>Log levels should be used consistently across services. DEBUG: detailed information for development and troubleshooting, typically not enabled in production. INFO: high-level events that track normal operation (request started, payment processed). WARN: unexpected events that do not affect normal operation (slow query, retry attempt, degraded dependency). ERROR: failures that affect the current operation but not the overall service (validation error, downstream timeout). FATAL: events that require immediate human intervention (data corruption, configuration error). </p>
@@ -125,7 +110,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -137,7 +125,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/alerting-strategies.html" class="related-card">Alerting Strategies for Production Systems</a><a href="/en/architecture/feature-flags-architecture.html" class="related-card">Feature Flags Architecture</a><a href="/en/architecture/graceful-shutdown.html" class="related-card">Graceful Shutdown Patterns</a><a href="/en/architecture/leader-election.html" class="related-card">Leader Election in Distributed Systems</a></div>
+      <div class="related-grid"><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/feature-flags-architecture.html" class="related-card"><span class="related-card-title">Feature Flags Architecture</span><span class="related-card-desc">Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feat</span></a><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="related-card-title">Graceful Shutdown Patterns</span><span class="related-card-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful</span></a><a href="/en/architecture/leader-election.html" class="related-card"><span class="related-card-title">Leader Election in Distributed Systems</span><span class="related-card-desc">Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best </span></a><a href="/en/architecture/timeout-retry-patterns.html" class="related-card"><span class="related-card-title">Timeout and Retry Patterns</span><span class="related-card-desc">Deadline propagation, exponential backoff, jitter, circuit breaker integration, and retry best pract</span></a><a href="/en/architecture/api-versioning-strategies.html" class="related-card"><span class="related-card-title">API Versioning Strategies</span><span class="related-card-desc">Compare URI, header, and query parameter API versioning approaches with their trade-offs and best pr</span></a></div>
     </section>
     
   </div>

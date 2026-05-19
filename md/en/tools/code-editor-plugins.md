@@ -8,43 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/tools/code-editor-plugins.html
 
 # Code Editor Plugins: Must-Have Extensions for Productivity
 
-## Code Editor Plugins: Must-Have Extensions for Productivity
-
-### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Code Editor Plugins: Must-Have Extensions for Productivity
-
-#### Introduction
+## Introduction
 
 The right set of editor extensions can transform your development workflow. The key is finding the balance: enough plugins to boost productivity, but not so many that they slow down your editor. This article covers the essential plugins for VS Code and JetBrains IDEs, organized by category.
 
-#### AI Assistants
+## AI Assistants
 
 AI coding assistants have become indispensable:
 
@@ -88,7 +56,7 @@ AI coding assistants have become indispensable:
 
 
 
-#### Language Support
+## Language Support
 
 Extended beyond basic syntax highlighting:
 
@@ -117,7 +85,7 @@ Extended beyond basic syntax highlighting:
 
 }
 
-#### Git Integration
+## Git Integration
 
 Version control becomes seamless with these plugins:
 
@@ -132,7 +100,7 @@ Version control becomes seamless with these plugins:
 
 
 
-#### Testing Tools
+## Testing Tools
 
 Run and debug tests without leaving your editor:
 
@@ -147,7 +115,7 @@ Run and debug tests without leaving your editor:
 
 
 
-#### Productivity
+## Productivity
 
 These plugins save time on daily tasks:
 
@@ -176,7 +144,7 @@ These plugins save time on daily tasks:
 
 }
 
-#### Theme and Visual
+## Theme and Visual
 
 A pleasant visual environment reduces eye strain:
 
@@ -193,7 +161,7 @@ A pleasant visual environment reduces eye strain:
 
 
 
-#### Recommended Setup
+## Recommended Setup
 
 **Minimal setup** (performance focused):
 
@@ -205,7 +173,7 @@ Add Todo Tree, Import Cost, Test Explorer, Project Manager, Bookmarks, Path Inte
 
 **Never install** : Multiple large language extensions if you only use one language. Remove unused extensions quarterly. Each extension adds startup time and memory usage.
 
-#### Conclusion
+## Conclusion
 
 Invest time in selecting and configuring your editor plugins. The best setup is personal and changes as your workflow evolves. Start with the essentials for your language and workflow, add AI assistance, then layer on productivity tools as you identify specific pain points. Review your extension list quarterly and remove anything you have not used in the past month.
 
@@ -220,3 +188,9 @@ Invest time in selecting and configuring your editor plugins. The best setup is 
 **See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>)
 
 **See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>)
+
+**See also:** [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>)
+
+**See also:** [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>)
+
+**See also:** [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>)

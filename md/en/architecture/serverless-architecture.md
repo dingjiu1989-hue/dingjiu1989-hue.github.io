@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/serverless-architecture.h
 
 # Serverless Architecture Patterns
 
-## Serverless Architecture Patterns
-
-### Serverless Architecture Patterns
-
-#### Serverless Architecture Patterns
-
-#### Serverless Architecture Patterns
-
-#### Serverless Architecture Patterns
-
-#### Serverless Architecture Patterns
-
-#### Serverless Architecture Patterns
-
-#### Serverless Architecture Patterns
-
-#### Serverless Architecture Patterns
-
-#### Serverless Architecture Patterns
-
-#### Serverless Architecture Patterns
-
-#### Serverless Architecture Patterns
-
-#### Serverless Architecture Patterns
-
-#### Serverless Architecture Patterns
-
-#### Serverless Architecture Patterns
-
 Serverless architecture represents a shift from managing servers to writing code. In a serverless model, cloud providers dynamically manage the allocation and provisioning of servers. Developers focus on individual functions or containers, and the provider handles scaling, availability, and infrastructure maintenance. This article examines the key serverless compute options, architectural patterns, and operational considerations. 
 
 Functions as a Service (FaaS) 
@@ -85,3 +55,9 @@ Serverless architecture is not appropriate for every workload. Predictable, high
 **See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Clean Architecture Explained](</en/architecture/clean-architecture.html>)
 
 **See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Clean Architecture Explained](</en/architecture/clean-architecture.html>)
+
+**See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>)
+
+**See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>)
+
+**See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>)

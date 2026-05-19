@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/sql-vs-nosql.html
 
 # SQL vs NoSQL Decision Guide
 
-## SQL vs NoSQL Decision Guide
-
-### SQL vs NoSQL Decision Guide
-
-#### SQL vs NoSQL Decision Guide
-
-#### SQL vs NoSQL Decision Guide
-
-#### SQL vs NoSQL Decision Guide
-
-#### SQL vs NoSQL Decision Guide
-
-#### SQL vs NoSQL Decision Guide
-
-#### SQL vs NoSQL Decision Guide
-
-#### SQL vs NoSQL Decision Guide
-
-#### SQL vs NoSQL Decision Guide
-
-#### SQL vs NoSQL Decision Guide
-
-#### SQL vs NoSQL Decision Guide
-
-#### SQL vs NoSQL Decision Guide
-
-#### SQL vs NoSQL Decision Guide
-
-#### SQL vs NoSQL Decision Guide
-
 The Great Database Debate 
 
 The choice between SQL and NoSQL is one of the most consequential architectural decisions you will make. Neither is universally better; each excels in different scenarios. The key is understanding the trade-offs and matching them to your requirements. 
@@ -149,13 +119,13 @@ notifications: true
 
 Horizontal Scaling 
 
-#### MongoDB sharding
+## MongoDB sharding
 
 sh.shardCollection("mydb.users", { "region": "hashed" })
 
-#### Cassandra auto-sharding (no manual setup)
+## Cassandra auto-sharding (no manual setup)
 
-#### Just add nodes to the cluster
+## Just add nodes to the cluster
 
 High Write Throughput 
 
@@ -242,9 +212,9 @@ Hybrid: Using Both
 
 Many successful architectures use both SQL and NoSQL for different purposes: 
 
-#### Example: SQL for transactions, NoSQL for reads
+## Example: SQL for transactions, NoSQL for reads
 
-#### Write to PostgreSQL (ACID guarantee)
+## Write to PostgreSQL (ACID guarantee)
 
 db.execute("""
 
@@ -254,11 +224,11 @@ VALUES (%s, %s, %s)
 
 """, [order_id, customer_id, total])
 
-#### Update Redis cache for fast reads
+## Update Redis cache for fast reads
 
 redis.setex(f"order:{order_id}", 3600, json.dumps(order_data))
 
-#### Update Elasticsearch for search
+## Update Elasticsearch for search
 
 es.index(index='orders', id=order_id, body=order_data)
 
@@ -281,3 +251,9 @@ Choose SQL when you need complex queries, strong data integrity, and ACID transa
 **See also:** [Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip](</en/tools/best-database-gui-tools.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
 
 **See also:** [Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip](</en/tools/best-database-gui-tools.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
+
+**See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)
+
+**See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)
+
+**See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)

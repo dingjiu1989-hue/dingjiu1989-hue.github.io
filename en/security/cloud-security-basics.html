@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-security-basics.png",
       "datePublished": "2026-03-03",
       "dateModified": "2026-05-18",
-      "wordCount": "1657",
+      "wordCount": "1539",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
@@ -98,31 +98,15 @@
       <h1 class="article-title">Cloud Security Basics: Shared Responsibility Model Explained</h1>
       <div class="article-meta">Published 2026-03-03 · Last active 2026-05-18 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-security-basics.png" alt="Cloud Security Basics: Shared Responsibility Model Explained" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Cloud Security Basics: Shared Responsibility Model Explained</h2>
-<h3>Cloud Security Basics: Shared Responsibility Model Explained</h3>
-<h4>Cloud Security Basics: Shared Responsibility Model Explained</h4>
-<h4>Cloud Security Basics: Shared Responsibility Model Explained</h4>
-<h4>Cloud Security Basics: Shared Responsibility Model Explained</h4>
-<h4>Cloud Security Basics: Shared Responsibility Model Explained</h4>
-<h4>Cloud Security Basics: Shared Responsibility Model Explained</h4>
-<h4>Cloud Security Basics: Shared Responsibility Model Explained</h4>
-<h4>Cloud Security Basics: Shared Responsibility Model Explained</h4>
-<h4>Cloud Security Basics: Shared Responsibility Model Explained</h4>
-<h4>Cloud Security Basics: Shared Responsibility Model Explained</h4>
-<h4>Cloud Security Basics: Shared Responsibility Model Explained</h4>
-<h4>Cloud Security Basics: Shared Responsibility Model Explained</h4>
-<h4>Cloud Security Basics: Shared Responsibility Model Explained</h4>
-<h4>Cloud Security Basics: Shared Responsibility Model Explained</h4>
-<h4>Cloud Security Basics: Shared Responsibility Model Explained</h4>
-<p>The shared responsibility model is the foundational concept in cloud security. It defines what the cloud provider secures versus what the customer must secure. Misunderstanding this boundary is the root cause of most cloud data breaches.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-security-basics.png" alt="Cloud Security Basics: Shared Responsibility Model Explained" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>The Shared Responsibility Model</h4>
+      <div class="article-body"><p>The shared responsibility model is the foundational concept in cloud security. It defines what the cloud provider secures versus what the customer must secure. Misunderstanding this boundary is the root cause of most cloud data breaches.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-security-basics.png" alt="Cloud Security Basics: Shared Responsibility Model Explained" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>The Shared Responsibility Model</h2>
 <p>Every major cloud provider — AWS, Google Cloud, and Azure — operates under a shared responsibility model. The provider secures the infrastructure that runs the services. The customer secures everything they deploy on top of that infrastructure.</p>
 <p><strong>AWS shared responsibility</strong> : AWS secures the hardware, software, networking, and facilities that run AWS services. The customer secures their data, platform applications, identity and access management, operating system patches, network firewall configurations, and client-side encryption.</p>
 <p><strong>GCP shared responsibility</strong> : Google secures the physical infrastructure, storage, networking, and encryption-at-rest infrastructure. The customer secures their data classifications, access policies, application configurations, and identity management.</p>
 <p><strong>Azure shared responsibility</strong> : Microsoft secures physical hosts, networks, and datacenters. The customer secures their data, identities, applications, and account management. For platform-as-a-service (PaaS) services, Microsoft takes on more responsibility for the runtime.</p>
-<h4>Identity and Access Management (IAM)</h4>
+<h2>Identity and Access Management (IAM)</h2>
 <p>IAM is the gatekeeper of your cloud environment. Every API call to a cloud provider passes through IAM authorization.</p>
-<h4>AWS IAM</h4>
+<h2>AWS IAM</h2>
 <p>AWS IAM uses policies written in JSON to grant or deny permissions. Policies attach to users, groups, or roles.</p>
 <p>{</p>
 <p>"Version": "2012-10-17",</p>
@@ -152,33 +136,33 @@
 <p>Require multi-factor authentication for the root account and all privileged users.</p>
 </li>
 </ul>
-<h4>GCP IAM</h4>
+<h2>GCP IAM</h2>
 <p>GCP IAM uses roles that are collections of permissions. Primitive roles (Owner, Editor, Viewer) are broad. Predefined roles are service-specific and more granular.</p>
-<h4>Assign a predefined role to a service account</h4>
+<h2>Assign a predefined role to a service account</h2>
 <p>gcloud projects add-iam-policy-binding my-project \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--member="serviceAccount:sa@my-project.iam.gserviceaccount.com" \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--role="roles/storage.objectViewer"</p>
-<h4>Azure RBAC</h4>
+<h2>Azure RBAC</h2>
 <p>Azure uses Role-Based Access Control with built-in or custom roles. Roles are assigned at management group, subscription, resource group, or resource scope.</p>
 <p>az role assignment create \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--assignee user@example.com \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--role "Reader" \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--scope "/subscriptions/SUB_ID/resourceGroups/RG"</p>
-<h4>Network Security Groups</h4>
+<h2>Network Security Groups</h2>
 <p>Cloud virtual networks need traffic filtering at multiple layers.</p>
 <p><strong>AWS Security Groups</strong> : Stateful firewalls at the instance level. You define inbound and outbound rules. Allow rules only — there is no explicit deny in security groups. Network ACLs provide stateless filtering at the subnet level with both allow and deny rules.</p>
 <p><strong>GCP Firewall Rules</strong> : Applied at the VPC network level. They can be ingress or egress rules with allow or deny actions. Rules include source and destination IP ranges, protocols, and ports.</p>
 <p><strong>Azure Network Security Groups (NSGs)</strong> : Filter traffic at the subnet or NIC level. NSGs contain security rules with priority, source, destination, protocol, direction, and action (allow or deny).</p>
-<h4>Cloud Security Services</h4>
-<h4>AWS CloudTrail</h4>
+<h2>Cloud Security Services</h2>
+<h2>AWS CloudTrail</h2>
 <p>CloudTrail records every API call made in your AWS account. It logs the caller identity, time, source IP, request parameters, and response elements. Enable CloudTrail in all regions and use a single trail for all accounts in AWS Organizations.</p>
-<h4>AWS GuardDuty</h4>
+<h2>AWS GuardDuty</h2>
 <p>GuardDuty is a threat detection service that analyzes CloudTrail events, VPC flow logs, and DNS logs. It uses machine learning to detect unusual behavior such as crypto mining activity, anomalous API calls, or compromised credentials.</p>
-<h4>GCP Security Command Center</h4>
+<h2>GCP Security Command Center</h2>
 <p>Security Command Center provides threat detection, vulnerability scanning, and asset inventory for GCP. It surfaces misconfigurations like public buckets, open firewall ports, and IAM policy violations.</p>
-<h4>Azure Defender</h4>
+<h2>Azure Defender</h2>
 <p>Azure Defender (formerly Azure Security Center) provides unified security management and advanced threat protection across hybrid cloud workloads. It includes just-in-time VM access, file integrity monitoring, and vulnerability assessments.</p>
-<h4>Key Management</h4>
+<h2>Key Management</h2>
 <p>Encryption key management differs across providers:</p>
 <ul>
 <li>
@@ -192,13 +176,16 @@
 </li>
 </ul>
 <p>Never store secrets in code, configuration files, or environment variables exposed through debugging endpoints. Use a proper secrets manager with automatic rotation.</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>Cloud security starts with understanding the shared responsibility model. From there, it requires disciplined IAM management, proper network segmentation, and full utilization of your provider's security tooling. The shift to cloud does not eliminate security responsibilities — it transforms them.</p>
 <p><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/network-security.html">Network Security Fundamentals</a>, <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>.</p>
 <p><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/network-security.html">Network Security Fundamentals</a></p>
 <p><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/network-security.html">Network Security Fundamentals</a></p>
 <p><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/network-security.html">Network Security Fundamentals</a></p>
-<p><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/network-security.html">Network Security Fundamentals</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/network-security.html">Network Security Fundamentals</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/network-security.html">Network Security Fundamentals</a></p>
+<p><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/network-security.html">Network Security Fundamentals</a></p>
+<p><strong>See also:</strong> <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/identity-management.html">Identity and Access Management (IAM) Guide</a>, <a href="/en/security/incident-response.html">Incident Response Playbook for Developers</a></p>
+<p><strong>See also:</strong> <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/identity-management.html">Identity and Access Management (IAM) Guide</a>, <a href="/en/security/incident-response.html">Incident Response Playbook for Developers</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/identity-management.html">Identity and Access Management (IAM) Guide</a>, <a href="/en/security/incident-response.html">Incident Response Playbook for Developers</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -210,7 +197,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/encryption-at-rest.html" class="related-card">Encryption at Rest Guide</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/network-security.html" class="related-card">Network Security Fundamentals</a><a href="/en/security/secure-sdlc.html" class="related-card">Secure Software Development Lifecycle</a></div>
+      <div class="related-grid"><a href="/en/security/encryption-at-rest.html" class="related-card"><span class="related-card-title">Encryption at Rest Guide</span><span class="related-card-desc">A comprehensive guide to encryption at rest covering disk encryption, database encryption, key manag</span></a><a href="/en/security/data-loss-prevention.html" class="related-card"><span class="related-card-title">Data Loss Prevention (DLP) Strategies</span><span class="related-card-desc">Implement DLP strategies across endpoint, network, and cloud environments with data classification, </span></a><a href="/en/security/network-security.html" class="related-card"><span class="related-card-title">Network Security Fundamentals</span><span class="related-card-desc">Core network security concepts: firewalls, VPNs, IDS/IPS, zero-trust networking, segmentation, and m</span></a><a href="/en/security/secure-sdlc.html" class="related-card"><span class="related-card-title">Secure Software Development Lifecycle</span><span class="related-card-desc">Integrating security into every phase of the SDLC: threat modeling, secure coding, SAST, DAST, depen</span></a><a href="/en/security/cloud-iam.html" class="related-card"><span class="related-card-title">Cloud IAM Deep Dive</span><span class="related-card-desc">In-depth guide to cloud IAM covering AWS IAM policies, GCP IAM roles, least privilege principles, an</span></a><a href="/en/security/blockchain-security.html" class="related-card"><span class="related-card-title">Blockchain and Smart Contract Security</span><span class="related-card-desc">Smart contract vulnerabilities including reentrancy and oracle manipulation, plus auditing tools, fo</span></a></div>
     </section>
     
   </div>

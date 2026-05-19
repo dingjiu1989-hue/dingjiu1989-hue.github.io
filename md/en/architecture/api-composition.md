@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/api-composition.html
 
 # API Composition and Aggregation
 
-## API Composition and Aggregation
-
-### API Composition and Aggregation
-
-#### API Composition and Aggregation
-
-#### API Composition and Aggregation
-
-#### API Composition and Aggregation
-
-#### API Composition and Aggregation
-
-#### API Composition and Aggregation
-
-#### API Composition and Aggregation
-
-#### API Composition and Aggregation
-
-#### API Composition and Aggregation
-
-#### API Composition and Aggregation
-
-#### API Composition and Aggregation
-
-#### API Composition and Aggregation
-
-#### API Composition and Aggregation
-
-#### API Composition and Aggregation
-
 API composition addresses a fundamental challenge in distributed architectures: how to aggregate data from multiple backend services into a single, efficient client response. In a monolithic application, the database can join tables across domains with a single query. In a microservice architecture, each service owns its data, and aggregation must happen at the application layer. Three primary patterns address this: the API composition layer, GraphQL federation, and the Backend for Frontend (BFF) pattern. 
 
 The API composition layer is a dedicated service that orchestrates calls to downstream services, aggregates results, and returns a unified response. It is conceptually simple: the composer receives a request, calls the relevant services in parallel where possible, merges the data, and responds. The challenge lies in handling partial failures. If one of five downstream services fails, does the entire request fail, or does the composer return partial data? Strategies include timeout handling with fallback responses, circuit breaker integration, and return of partial results with error indicators. 
@@ -65,3 +35,9 @@ The choice between these patterns depends on client diversity, team structure, a
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
+
+**See also:** [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
+
+**See also:** [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/health-check-patterns.png",
       "datePublished": "2026-04-27",
       "dateModified": "2026-05-14",
-      "wordCount": "1088",
+      "wordCount": "1097",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,22 +96,7 @@
       <h1 class="article-title">Health Check Patterns</h1>
       <div class="article-meta">Published 2026-04-27 · Last active 2026-05-14 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/health-check-patterns.png" alt="Health Check Patterns" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Health Check Patterns</h2>
-<h3>Health Check Patterns</h3>
-<h4>Health Check Patterns</h4>
-<h4>Health Check Patterns</h4>
-<h4>Health Check Patterns</h4>
-<h4>Health Check Patterns</h4>
-<h4>Health Check Patterns</h4>
-<h4>Health Check Patterns</h4>
-<h4>Health Check Patterns</h4>
-<h4>Health Check Patterns</h4>
-<h4>Health Check Patterns</h4>
-<h4>Health Check Patterns</h4>
-<h4>Health Check Patterns</h4>
-<h4>Health Check Patterns</h4>
-<h4>Health Check Patterns</h4>
-<p>Health checks are the mechanism by which orchestration platforms and load balancers determine whether an application instance is capable of serving requests. Two distinct check types serve different purposes: liveness and readiness. Understanding the difference and implementing them correctly is essential for reliable deployments, self-healing infrastructure, and graceful degradation. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/health-check-patterns.png" alt="Health Check Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Health checks are the mechanism by which orchestration platforms and load balancers determine whether an application instance is capable of serving requests. Two distinct check types serve different purposes: liveness and readiness. Understanding the difference and implementing them correctly is essential for reliable deployments, self-healing infrastructure, and graceful degradation. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/health-check-patterns.png" alt="Health Check Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Liveness probes determine whether the application process is alive. If a liveness probe fails, the application is stuck or deadlocked — unable to recover without restart. The orchestrator will terminate and restart the container or process. Liveness probes should check only whether the process can operate at all. Common checks include: reading a health file written by the application, checking that the main event loop is running, or verifying that internal goroutine counts are within bounds. </p>
 <p>The danger of aggressive liveness probes is the "restart loop of death." If the application becomes slow due to a dependency outage, and the liveness probe times out, the orchestrator restarts the process. The new process immediately encounters the same dependency outage, fails again, and gets restarted in a loop. This not only fails to solve the problem but compounds it by adding startup overhead. Liveness probes should be conservative — use a longer interval (30 seconds) with high failure thresholds. </p>
 <p>Readiness probes determine whether the application is ready to accept traffic. If a readiness probe fails, the instance is removed from service but not restarted. Readiness probes should check that dependencies — databases, message brokers, upstream services — are accessible and that the application has sufficient capacity. A failing readiness probe means the instance should stop accepting new traffic but can recover once dependencies become available. </p>
@@ -125,7 +110,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -137,7 +125,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/graceful-shutdown.html" class="related-card">Graceful Shutdown Patterns</a><a href="/en/architecture/alerting-strategies.html" class="related-card">Alerting Strategies for Production Systems</a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card">Zero-Downtime Database Migrations</a><a href="/en/architecture/timeout-retry-patterns.html" class="related-card">Timeout and Retry Patterns</a></div>
+      <div class="related-grid"><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="related-card-title">Graceful Shutdown Patterns</span><span class="related-card-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful</span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card"><span class="related-card-title">Zero-Downtime Database Migrations</span><span class="related-card-desc">Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and producti</span></a><a href="/en/architecture/timeout-retry-patterns.html" class="related-card"><span class="related-card-title">Timeout and Retry Patterns</span><span class="related-card-desc">Deadline propagation, exponential backoff, jitter, circuit breaker integration, and retry best pract</span></a><a href="/en/architecture/event-driven-arch.html" class="related-card"><span class="related-card-title">Event-Driven Architecture</span><span class="related-card-desc">Explore event-driven architecture: event bus, event schema management, versioning, and production pa</span></a><a href="/en/architecture/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Building Resilient Systems</span><span class="related-card-desc">Introduction to chaos engineering: principles, practices, and tools for testing system resilience in</span></a></div>
     </section>
     
   </div>

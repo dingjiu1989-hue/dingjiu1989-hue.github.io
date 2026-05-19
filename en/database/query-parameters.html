@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/query-parameters.png",
       "datePublished": "2026-04-08",
       "dateModified": "2026-05-01",
-      "wordCount": "2221",
+      "wordCount": "2103",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,32 +99,17 @@
       <h1 class="article-title">Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h1>
       <div class="article-meta">Published 2026-04-08 · Last active 2026-05-01 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/query-parameters.png" alt="Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h2>
-<h3>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h3>
-<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
-<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
-<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
-<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
-<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
-<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
-<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
-<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
-<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
-<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
-<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
-<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
-<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
-<p>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/query-parameters.png" alt="Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/query-parameters.png" alt="Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Parameterized queries are simultaneously the most important security practice and a significant performance optimization. This article explains how bind parameters work, how PostgreSQL caches query plans, and why parameterization is non-negotiable. </p>
 <p>SQL Injection: The Problem </p>
 <p>Without parameterization, user input is concatenated into SQL strings: </p>
-<h4>DANGEROUS: Never do this</h4>
+<h2>DANGEROUS: Never do this</h2>
 <p>user_id = request.args.get("id")</p>
 <p>cursor.execute(f"SELECT * FROM users WHERE id = {user_id}")</p>
 <p>An attacker provides <code>1; DROP TABLE users;</code> as the <code>id</code> parameter, and the query becomes: </p>
 <p>SELECT * FROM users WHERE id = 1; DROP TABLE users;</p>
 <p>Parameterization prevents this by separating SQL code from data: </p>
-<h4>SAFE: Use parameterized query</h4>
+<h2>SAFE: Use parameterized query</h2>
 <p>cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))</p>
 <p>The database receives the SQL structure and the parameter values separately. The parameter value <code>1; DROP TABLE users;</code> is treated as a literal string, not executable SQL. </p>
 <p>Bind Parameters </p>
@@ -163,12 +148,12 @@
 <p>Most PostgreSQL drivers implement automatic prepared statement caching: </p>
 <p>import psycopg2</p>
 <p>from psycopg2 import pool</p>
-<h4>psycopg2 automatically caches prepared statements per connection</h4>
+<h2>psycopg2 automatically caches prepared statements per connection</h2>
 <p>conn = psycopg2.connect("dbname=mydb")</p>
 <p>cursor = conn.cursor()</p>
-<h4>First call: prepares and executes</h4>
+<h2>First call: prepares and executes</h2>
 <p>cursor.execute("SELECT * FROM users WHERE id = %s", (42,))</p>
-<h4>Second call: reuses cached prepared statement</h4>
+<h2>Second call: reuses cached prepared statement</h2>
 <p>cursor.execute("SELECT * FROM users WHERE id = %s", (99,))</p>
 <p>Generic Query Plans </p>
 <p>For prepared statements with bind parameters, PostgreSQL generates a <strong>generic plan</strong> after the fifth execution. The generic plan assumes average parameter values rather than specific ones: </p>
@@ -203,16 +188,16 @@
 <p>High <code>stddev_exec_time</code> on parameterized queries suggests plan instability: the same query performs very differently depending on parameter values. </p>
 <p>Parameterization Beyond SQL Injection </p>
 <p>Parameterization also handles type conversion automatically: </p>
-<h4>Without parameterization: type conversion issues</h4>
-<h4>f-string produces: ... WHERE created_at = 2026-05-12 (subtraction!)</h4>
+<h2>Without parameterization: type conversion issues</h2>
+<h2>f-string produces: ... WHERE created_at = 2026-05-12 (subtraction!)</h2>
 <p>cursor.execute(f"SELECT * FROM orders WHERE created_at = '{date_string}'")</p>
-<h4>With parameterization: driver handles quoting</h4>
+<h2>With parameterization: driver handles quoting</h2>
 <p>cursor.execute("SELECT * FROM orders WHERE created_at = %s", (date_obj,))</p>
 <p>Best Practices </p>
 <p>Always Parameterize </p>
-<h4>Good</h4>
+<h2>Good</h2>
 <p>cursor.execute("UPDATE users SET email = %s WHERE id = %s", (new_email, uid))</p>
-<h4>Bad: f-string or string concatenation</h4>
+<h2>Bad: f-string or string concatenation</h2>
 <p>cursor.execute(f"UPDATE users SET email = '{new_email}' WHERE id = {uid}")</p>
 <p>Dynamic IN Clauses </p>
 <p>For variable-length IN clauses, use <code>ANY(ARRAY[...])</code>: </p>
@@ -233,7 +218,7 @@
 <p>("bob@example.com", "Bob"),</p>
 <p>("carol@example.com", "Carol"),</p>
 <p>]</p>
-<h4>Uses server-side prepared statement for all rows</h4>
+<h2>Uses server-side prepared statement for all rows</h2>
 <p>psycopg2.extras.execute_values(</p>
 <p>cursor,</p>
 <p>"INSERT INTO users (email, name) VALUES %s",</p>
@@ -257,7 +242,10 @@
 <p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
+<p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -269,7 +257,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/stored-procedures.html" class="related-card">Stored Procedures vs Functions: When to Use, Languages, Security</a><a href="/en/database/time-series-postgresql.html" class="related-card">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a><a href="/en/database/change-data-capture.html" class="related-card">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a><a href="/en/database/composite-indexes.html" class="related-card">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a></div>
+      <div class="related-grid"><a href="/en/database/stored-procedures.html" class="related-card"><span class="related-card-title">Stored Procedures vs Functions: When to Use, Languages, Security</span><span class="related-card-desc">An in-depth guide to stored procedures and functions in PostgreSQL and SQL Server. Learn language op</span></a><a href="/en/database/time-series-postgresql.html" class="related-card"><span class="related-card-title">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</span><span class="related-card-desc">Learn time-series data management with PostgreSQL and TimescaleDB. Hypertables, continuous aggregate</span></a><a href="/en/database/change-data-capture.html" class="related-card"><span class="related-card-title">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</span><span class="related-card-desc">Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream process</span></a><a href="/en/database/composite-indexes.html" class="related-card"><span class="related-card-title">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</span><span class="related-card-desc">Master composite indexes in PostgreSQL: column order optimization, covering indexes, partial indexes</span></a><a href="/en/database/couchbase-guide.html" class="related-card"><span class="related-card-title">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</span><span class="related-card-desc">Comprehensive guide to Couchbase: N1QL query language, document data model, clustering architecture,</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="related-card-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="related-card-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monit</span></a></div>
     </section>
     
   </div>

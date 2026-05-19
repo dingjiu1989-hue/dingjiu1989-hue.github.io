@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/local-llm-setup.png",
       "datePublished": "2025-12-12",
       "dateModified": "2026-05-04",
-      "wordCount": "1480",
+      "wordCount": "1468",
       "keywords": "Artificial Intelligence, Machine Learning",
       "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
       "inLanguage": "en",
@@ -98,42 +98,26 @@
       <h1 class="article-title">Running LLMs Locally</h1>
       <div class="article-meta">Published 2025-12-12 · Last active 2026-05-04 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/local-llm-setup.png" alt="Running LLMs Locally" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Running LLMs Locally</h2>
-<h3>Running LLMs Locally</h3>
-<h4>Running LLMs Locally</h4>
-<h4>Running LLMs Locally</h4>
-<h4>Running LLMs Locally</h4>
-<h4>Running LLMs Locally</h4>
-<h4>Running LLMs Locally</h4>
-<h4>Running LLMs Locally</h4>
-<h4>Running LLMs Locally</h4>
-<h4>Running LLMs Locally</h4>
-<h4>Running LLMs Locally</h4>
-<h4>Running LLMs Locally</h4>
-<h4>Running LLMs Locally</h4>
-<h4>Running LLMs Locally</h4>
-<h4>Running LLMs Locally</h4>
-<h4>Running LLMs Locally</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Running large language models locally has become practical thanks to quantization techniques, efficient inference engines, and a thriving open-source ecosystem. Whether for privacy, cost savings, or offline availability, local LLMs offer a compelling alternative to cloud APIs for many workloads. This guide covers the two most popular local LLM platforms — Ollama and LM Studio.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/local-llm-setup.png" alt="Running LLMs Locally" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Ollama</h4>
+<h2>Ollama</h2>
 <p><a href="https://ollama.ai">Ollama</a> is the most popular tool for running LLMs locally, known for its simplicity and command-line focus.</p>
-<h4>Installation</h4>
-<h4>macOS</h4>
+<h2>Installation</h2>
+<h2>macOS</h2>
 <p>brew install ollama</p>
-<h4>Linux</h4>
+<h2>Linux</h2>
 <p>curl -fsSL https://ollama.ai/install.sh | sh</p>
-<h4>Windows</h4>
-<h4>Download from https://ollama.ai/download</h4>
-<h4>Getting Started</h4>
+<h2>Windows</h2>
+<h2>Download from https://ollama.ai/download</h2>
+<h2>Getting Started</h2>
 <p>Ollama makes running a model a single command:</p>
-<h4>Pull and run a model</h4>
+<h2>Pull and run a model</h2>
 <p>ollama run llama3.2:3b</p>
-<h4>List available models</h4>
+<h2>List available models</h2>
 <p>ollama list</p>
-<h4>Pull a specific model without running</h4>
+<h2>Pull a specific model without running</h2>
 <p>ollama pull mistral:7b</p>
-<h4>Popular Models for Ollama</h4>
+<h2>Popular Models for Ollama</h2>
 <p>| Model | Size | RAM Required | Best For |</p>
 <p>|-------|------|-------------|----------|</p>
 <p>| Llama 3.2 3B | 2.0 GB | 4 GB | Fast responses, simple tasks |</p>
@@ -142,7 +126,7 @@
 <p>| Qwen2.5 7B | 4.8 GB | 8 GB | Strong multilingual, coding |</p>
 <p>| Mixtral 8x7B | 26 GB | 48 GB | High quality, close to GPT-3.5 |</p>
 <p>| DeepSeek-R1 7B | 4.5 GB | 8 GB | Strong reasoning, step-by-step |</p>
-<h4>Using Ollama Programmatically</h4>
+<h2>Using Ollama Programmatically</h2>
 <p>Ollama provides a REST API at <code>http://localhost:11434</code>:</p>
 <p>import requests</p>
 <p>response = requests.post("http://localhost:11434/api/generate", json={</p>
@@ -157,20 +141,20 @@
 <p>{"role": "user", "content": "What is the capital of France?"}</p>
 <p>])</p>
 <p>print(response["message"]["content"])</p>
-<h4>Custom Modelfiles</h4>
+<h2>Custom Modelfiles</h2>
 <p>Create custom models with system prompts and parameters:</p>
 <p>FROM llama3.1:8b</p>
-<h4>Set system prompt</h4>
+<h2>Set system prompt</h2>
 <p>SYSTEM "You are a helpful coding assistant. Provide concise code examples."</p>
-<h4>Configure parameters</h4>
+<h2>Configure parameters</h2>
 <p>PARAMETER temperature 0.3</p>
 <p>PARAMETER top_p 0.9</p>
 <p>Build and run:</p>
 <p>ollama create my-coding-assistant -f Modelfile</p>
 <p>ollama run my-coding-assistant</p>
-<h4>LM Studio</h4>
+<h2>LM Studio</h2>
 <p><a href="https://lmstudio.ai">LM Studio</a> is a GUI-focused alternative that excels for users who prefer visual interfaces and easy model browsing.</p>
-<h4>Key Features</h4>
+<h2>Key Features</h2>
 <ul>
 <li>
 <p><strong>Built-in model browser</strong> : Search and download models from Hugging Face</p>
@@ -188,14 +172,14 @@
 <p><strong>Multi-model support</strong> : Load multiple models and switch between them</p>
 </li>
 </ul>
-<h4>Setup</h4>
+<h2>Setup</h2>
 <ul>
 <li>Download from <a href="https://lmstudio.ai">lmstudio.ai</a></li>
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Open the app and browse the model catalog</p>
 <p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Download a model (start with Llama 3.2 3B or Mistral 7B)</p>
 <p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Load the model and start chatting</p>
-<h4>API Server</h4>
+<h2>API Server</h2>
 <p>LM Studio can serve models via an OpenAI-compatible API:</p>
 <p>http://localhost:1234/v1/chat/completions</p>
 <p>This means any tool that works with OpenAI's API can use your local model by changing the base URL:</p>
@@ -208,8 +192,8 @@
 <p>model="local-model",</p>
 <p>messages=[{"role": "user", "content": "Hello!"}]</p>
 <p>)</p>
-<h4>Performance Optimization</h4>
-<h4>Quantization Levels</h4>
+<h2>Performance Optimization</h2>
+<h2>Quantization Levels</h2>
 <p>Quantization reduces model size at the cost of some accuracy:</p>
 <ul>
 <li>
@@ -226,13 +210,13 @@
 </li>
 </ul>
 <p>Rule of thumb: each quantization step roughly doubles model size but improves quality marginally. Q4_K_M is the sweet spot.</p>
-<h4>GPU Acceleration</h4>
+<h2>GPU Acceleration</h2>
 <p>Both Ollama and LM Studio support GPU acceleration via CUDA (NVIDIA), Metal (Apple Silicon), or Vulkan (AMD):</p>
-<h4>Ollama uses Metal automatically on Apple Silicon</h4>
-<h4>For NVIDIA, install CUDA and Ollama detects it</h4>
-<h4>Check which device is being used</h4>
+<h2>Ollama uses Metal automatically on Apple Silicon</h2>
+<h2>For NVIDIA, install CUDA and Ollama detects it</h2>
+<h2>Check which device is being used</h2>
 <p>ollama run llama3.2:3b --verbose</p>
-<h4>Context Window</h4>
+<h2>Context Window</h2>
 <p>Larger context windows consume more memory. A 128K context with Q4_K_M requires approximately:</p>
 <ul>
 <li>
@@ -245,7 +229,7 @@
 <p>70B model: ~48 GB total</p>
 </li>
 </ul>
-<h4>Use Cases for Local LLMs</h4>
+<h2>Use Cases for Local LLMs</h2>
 <ul>
 <li>
 <p><strong>Privacy-sensitive data</strong> : Medical records, legal documents, personal information</p>
@@ -263,13 +247,16 @@
 <p><strong>Latency-critical applications</strong> : No network calls for inference</p>
 </li>
 </ul>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>Running LLMs locally is easier than ever with Ollama and LM Studio. Ollama offers command-line simplicity and a rich set of pre-built models. LM Studio provides a polished GUI and OpenAI-compatible API. Start with a 7B model at Q4_K_M quantization on a machine with 8-16 GB of RAM, and scale up as your needs grow. Local LLMs won't replace cloud APIs for every use case, but they are an essential tool in the AI practitioner's toolkit.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-embeddings-explained.html">AI Embeddings Explained</a>, <a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a>, <a href="/en/ai/rag-architecture-guide.html">RAG Architecture Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-embeddings-explained.html">AI Embeddings Explained</a>, <a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a>, <a href="/en/ai/rag-architecture-guide.html">RAG Architecture Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-embeddings-explained.html">AI Embeddings Explained</a>, <a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a>, <a href="/en/ai/rag-architecture-guide.html">RAG Architecture Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -281,7 +268,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/llm-fine-tuning.html" class="related-card">LLM Fine-Tuning Guide</a><a href="/en/ai/ai-database-query.html" class="related-card">Natural Language to SQL with LLMs</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a><a href="/en/ai/ai-api-cost-optimization.html" class="related-card">AI API Cost Optimization</a></div>
+      <div class="related-grid"><a href="/en/ai/llm-fine-tuning.html" class="related-card"><span class="related-card-title">LLM Fine-Tuning Guide</span><span class="related-card-desc">Learn how to fine-tune LLMs effectively using LoRA, QLoRA, and full fine-tuning techniques with prac</span></a><a href="/en/ai/ai-database-query.html" class="related-card"><span class="related-card-title">Natural Language to SQL with LLMs</span><span class="related-card-desc">Build systems that convert natural language questions into SQL queries using LLMs, with schema conte</span></a><a href="/en/ai/ai-testing-strategies.html" class="related-card"><span class="related-card-title">Testing Strategies for AI Applications</span><span class="related-card-desc">Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucinat</span></a><a href="/en/ai/ai-api-cost-optimization.html" class="related-card"><span class="related-card-title">AI API Cost Optimization</span><span class="related-card-desc">Strategies for reducing LLM API costs including prompt compression, caching, model selection, batchi</span></a><a href="/en/ai/responsible-ai.html" class="related-card"><span class="related-card-title">Responsible AI Development Practices</span><span class="related-card-desc">Implement bias detection, fairness metrics, explainability with SHAP and LIME, transparency document</span></a><a href="/en/ai/ai-content-generation.html" class="related-card"><span class="related-card-title">AI Content Generation Workflows</span><span class="related-card-desc">Build production-ready AI content generation workflows with quality control, multi-stage pipelines, </span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

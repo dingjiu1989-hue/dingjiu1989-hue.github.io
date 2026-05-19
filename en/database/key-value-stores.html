@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/key-value-stores.png",
       "datePublished": "2026-04-17",
       "dateModified": "2026-04-17",
-      "wordCount": "889",
+      "wordCount": "806",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,41 +99,29 @@
       <h1 class="article-title">Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h1>
       <div class="article-meta">Published 2026-04-17 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/key-value-stores.png" alt="Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h2>
-<h3>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h3>
-<h4>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h4>
-<h4>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h4>
-<h4>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h4>
-<h4>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h4>
-<h4>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h4>
-<h4>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h4>
-<h4>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h4>
-<h4>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h4>
-<h4>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h4>
-<h4>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h4>
-<h4>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h4>
-<h4>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h4>
-<h4>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h4>
-<p>Key-value stores are the simplest NoSQL databases—data is stored as values identified by unique keys. They offer the highest performance and scalability because of their simple data model. Key-value stores are ideal for caching, session management, and high-throughput lookups.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/key-value-stores.png" alt="Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Redis</h4>
+      <div class="article-body"><p>Key-value stores are the simplest NoSQL databases—data is stored as values identified by unique keys. They offer the highest performance and scalability because of their simple data model. Key-value stores are ideal for caching, session management, and high-throughput lookups.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/key-value-stores.png" alt="Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Redis</h2>
 <p>Redis is an in-memory key-value store with optional persistence. It supports rich data structures: strings, hashes, lists, sets, sorted sets, streams, and geospatial indexes. Redis is the dominant choice for caching, real-time analytics, and session management.</p>
 <p>Redis performance is exceptional—sub-millisecond latency for most operations. Redis Cluster provides automatic sharding across multiple nodes. Redis Sentinel provides high availability with automatic failover.</p>
-<h4>DynamoDB</h4>
+<h2>DynamoDB</h2>
 <p>DynamoDB is AWS's managed key-value and document database. It offers single-digit millisecond performance at any scale, automatic multi-region replication, and fully managed infrastructure. DynamoDB uses a partition key for data distribution and an optional sort key for ordering within partitions.</p>
 <p>DynamoDB's pricing model charges for read and write capacity units. Auto-scaling adjusts capacity based on traffic. On-demand mode eliminates capacity planning but costs more per operation. DynamoDB Accelerator (DAX) provides in-memory caching for read-heavy workloads.</p>
-<h4>LevelDB and RocksDB</h4>
+<h2>LevelDB and RocksDB</h2>
 <p>LevelDB is an embedded key-value store by Google, optimized for fast writes. It stores data on local disk with log-structured merge (LSM) tree structure. It offers excellent write throughput with moderate read performance.</p>
 <p>RocksDB is a fork of LevelDB by Facebook, optimized for flash storage. It provides better performance on SSDs through compaction optimizations and bloom filter enhancements. RocksDB is commonly used as a storage engine for other databases (MySQL MyRocks, Kafka Streams).</p>
-<h4>Choosing a Key-Value Store</h4>
+<h2>Choosing a Key-Value Store</h2>
 <p>Use Redis for in-memory caching, session state, real-time analytics, and pub-sub messaging. Use DynamoDB for managed serverless workloads that need single-digit millisecond latency at any scale. Use RocksDB or LevelDB for embedded storage, local caching, and database storage engines.</p>
 <p>Consider total cost of ownership. Redis requires managing memory and cluster topology. DynamoDB eliminates management but costs more at high throughput. Embedded stores have no operational cost but limited capacity.</p>
-<h4>Key-Value Store Best Practices</h4>
+<h2>Key-Value Store Best Practices</h2>
 <p>Design keys carefully to avoid hot partitions. Prefix keys with a namespace for organizational clarity. Set TTL (time-to-live) for temporary data. Use connection pooling for client efficiency. Monitor latency and throughput to detect capacity issues early.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/database-caching.html">Database Caching</a>, <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/wide-column-databases.html">Wide-Column Databases: Cassandra, HBase, ScyllaDB</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/wide-column-databases.html">Wide-Column Databases: Cassandra, HBase, ScyllaDB</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/wide-column-databases.html">Wide-Column Databases: Cassandra, HBase, ScyllaDB</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/wide-column-databases.html">Wide-Column Databases: Cassandra, HBase, ScyllaDB</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/wide-column-databases.html">Wide-Column Databases: Cassandra, HBase, ScyllaDB</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/wide-column-databases.html">Wide-Column Databases: Cassandra, HBase, ScyllaDB</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/wide-column-databases.html">Wide-Column Databases: Cassandra, HBase, ScyllaDB</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-caching.html">Database Caching</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-caching.html">Database Caching</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-caching.html">Database Caching</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -145,7 +133,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-types-overview.html" class="related-card">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a><a href="/en/database/time-series-postgresql.html" class="related-card">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a><a href="/en/database/wide-column-databases.html" class="related-card">Wide-Column Databases: Cassandra, HBase, ScyllaDB</a><a href="/en/database/database-capacity-planning.html" class="related-card">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></div>
+      <div class="related-grid"><a href="/en/database/database-types-overview.html" class="related-card"><span class="related-card-title">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</span><span class="related-card-desc">Comprehensive overview of database types: relational, document, key-value, graph, time-series, and v</span></a><a href="/en/database/time-series-postgresql.html" class="related-card"><span class="related-card-title">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</span><span class="related-card-desc">Learn time-series data management with PostgreSQL and TimescaleDB. Hypertables, continuous aggregate</span></a><a href="/en/database/wide-column-databases.html" class="related-card"><span class="related-card-title">Wide-Column Databases: Cassandra, HBase, ScyllaDB</span><span class="related-card-desc">Explore wide-column databases: Cassandra for high-throughput writes, HBase for Hadoop ecosystems, an</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="related-card-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="related-card-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monit</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="related-card-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="related-card-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategi</span></a><a href="/en/database/query-optimization-explain.html" class="related-card"><span class="related-card-title">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</span><span class="related-card-desc">Master PostgreSQL EXPLAIN ANALYZE: read query plans, understand cost estimation, compare scan types,</span></a></div>
     </section>
     
   </div>

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/cors-security.png",
       "datePublished": "2026-03-09",
       "dateModified": "2026-04-20",
-      "wordCount": "1717",
+      "wordCount": "1713",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,24 +99,7 @@
       <h1 class="article-title">CORS Security</h1>
       <div class="article-meta">Published 2026-03-09 · Last active 2026-04-20 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/cors-security.png" alt="CORS Security" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>CORS Security</h2>
-<h3>CORS Security</h3>
-<h4>CORS Security</h4>
-<h4>CORS Security</h4>
-<h4>CORS Security</h4>
-<h4>CORS Security</h4>
-<h4>CORS Security</h4>
-<h4>CORS Security</h4>
-<h4>CORS Security</h4>
-<h4>CORS Security</h4>
-<h4>CORS Security</h4>
-<h4>CORS Security</h4>
-<h4>CORS Security</h4>
-<h4>CORS Security</h4>
-<h4>CORS Security</h4>
-<h4>CORS Security</h4>
-<h4>CORS Security</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/cors-security.png" alt="CORS Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/cors-security.png" alt="CORS Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Cross-Origin Resource Sharing (CORS) is a browser mechanism that controls which origins can access resources on a different origin. While CORS enables legitimate cross-origin requests, misconfigurations are among the most common security vulnerabilities discovered in modern web applications. </p>
 <p>How CORS Works </p>
 <p>CORS works through HTTP headers that the server sends to tell the browser which origins are permitted. The browser enforces these restrictions on the client side. </p>
@@ -143,12 +126,12 @@
 <p>Access-Control-Max-Age: 3600</p>
 <p>Proper Origin Validation </p>
 <p>Never reflect the <code>Origin</code> header back unconditionally. This is the most common dangerous CORS misconfiguration. </p>
-<h4>UNSAFE: Reflective origin (vulnerable to attack)</h4>
+<h2>UNSAFE: Reflective origin (vulnerable to attack)</h2>
 <p>def cors_unsafe(request):</p>
 <p>origin = request.headers.get('Origin')</p>
 <p>response.headers['Access-Control-Allow-Origin'] = origin # NEVER do this</p>
 <p>response.headers['Access-Control-Allow-Credentials'] = 'true'</p>
-<h4>SAFE: Whitelist-based origin validation</h4>
+<h2>SAFE: Whitelist-based origin validation</h2>
 <p>ALLOWED_ORIGINS = {</p>
 <p>'https://app.example.com',</p>
 <p>'https://admin.example.com',</p>
@@ -165,30 +148,30 @@
 <p>def is_origin_allowed(origin):</p>
 <p>from urllib.parse import urlparse</p>
 <p>parsed = urlparse(origin)</p>
-<h4>Must be HTTPS</h4>
+<h2>Must be HTTPS</h2>
 <p>if parsed.scheme != 'https':</p>
 <p>return False</p>
-<h4>Exact match only, no wildcards for credentialed requests</h4>
+<h2>Exact match only, no wildcards for credentialed requests</h2>
 <p>return parsed.geturl() in ALLOWED_ORIGINS</p>
 <p>Common Misconfigurations </p>
 <p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Wildcard with Credentials </p>
-<h4>VULNERABLE: Wildcard origin with credentials</h4>
+<h2>VULNERABLE: Wildcard origin with credentials</h2>
 <p>response.headers['Access-Control-Allow-Origin'] = '*'</p>
 <p>response.headers['Access-Control-Allow-Credentials'] = 'true'</p>
-<h4>Browsers will reject this combination, but attackers can still exploit</h4>
-<h4>applications that don't rely on browser enforcement (e.g., server-side CORS)</h4>
+<h2>Browsers will reject this combination, but attackers can still exploit</h2>
+<h2>applications that don't rely on browser enforcement (e.g., server-side CORS)</h2>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Overly Permissive Origin Match </p>
-<h4>VULNERABLE: Subdomain matching that is too permissive</h4>
+<h2>VULNERABLE: Subdomain matching that is too permissive</h2>
 <p>def unsafe_origin_check(origin):</p>
-<h4>Accepts evil.example.com as matching example.com</h4>
+<h2>Accepts evil.example.com as matching example.com</h2>
 <p>return origin.endswith('.example.com') or origin == 'example.com'</p>
-<h4>Also vulnerable: origin contains 'example.com' would match evil-example.com</h4>
+<h2>Also vulnerable: origin contains 'example.com' would match evil-example.com</h2>
 <p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Null Origin </p>
-<h4>VULNERABLE: Allow null origin</h4>
+<h2>VULNERABLE: Allow null origin</h2>
 <p>if origin == 'null':</p>
 <p>response.headers['Access-Control-Allow-Origin'] = 'null'</p>
-<h4>null origin is used by file://, sandboxed iframes, and some</h4>
-<h4>automated scanners. Attackers can exploit this.</h4>
+<h2>null origin is used by file://, sandboxed iframes, and some</h2>
+<h2>automated scanners. Attackers can exploit this.</h2>
 <p>Exploit Scenarios </p>
 <p>Internal Network API Attack </p>
 <p>An attacker hosts a malicious site that performs cross-origin requests to internal APIs. If the internal API reflects origins, the attacker can exfiltrate sensitive data. </p>
@@ -226,7 +209,10 @@
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -238,7 +224,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/input-validation.html" class="related-card">Input Validation Deep Dive</a><a href="/en/security/secure-api-design.html" class="related-card">Secure API Design Principles</a><a href="/en/security/serverless-security.html" class="related-card">Serverless Security</a><a href="/en/security/cloud-iam.html" class="related-card">Cloud IAM Deep Dive</a></div>
+      <div class="related-grid"><a href="/en/security/input-validation.html" class="related-card"><span class="related-card-title">Input Validation Deep Dive</span><span class="related-card-desc">In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniqu</span></a><a href="/en/security/secure-api-design.html" class="related-card"><span class="related-card-title">Secure API Design Principles</span><span class="related-card-desc">Guide to secure API design covering input validation, rate limiting, idempotency, error handling, an</span></a><a href="/en/security/serverless-security.html" class="related-card"><span class="related-card-title">Serverless Security</span><span class="related-card-desc">Guide to serverless security covering function permissions, event validation, cold start risks, depe</span></a><a href="/en/security/cloud-iam.html" class="related-card"><span class="related-card-title">Cloud IAM Deep Dive</span><span class="related-card-desc">In-depth guide to cloud IAM covering AWS IAM policies, GCP IAM roles, least privilege principles, an</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="related-card-title">Container Image Security</span><span class="related-card-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability sc</span></a></div>
     </section>
     
   </div>

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/chaos-engineering.png",
       "datePublished": "2026-05-06",
       "dateModified": "2026-05-19",
-      "wordCount": "695",
+      "wordCount": "614",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -99,39 +99,27 @@
       <h1 class="article-title">Chaos Engineering: Building Resilient Systems</h1>
       <div class="article-meta">Published 2026-05-06 · Last active 2026-05-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/chaos-engineering.png" alt="Chaos Engineering: Building Resilient Systems" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Chaos Engineering: Building Resilient Systems</h2>
-<h3>Chaos Engineering: Building Resilient Systems</h3>
-<h4>Chaos Engineering: Building Resilient Systems</h4>
-<h4>Chaos Engineering: Building Resilient Systems</h4>
-<h4>Chaos Engineering: Building Resilient Systems</h4>
-<h4>Chaos Engineering: Building Resilient Systems</h4>
-<h4>Chaos Engineering: Building Resilient Systems</h4>
-<h4>Chaos Engineering: Building Resilient Systems</h4>
-<h4>Chaos Engineering: Building Resilient Systems</h4>
-<h4>Chaos Engineering: Building Resilient Systems</h4>
-<h4>Chaos Engineering: Building Resilient Systems</h4>
-<h4>Chaos Engineering: Building Resilient Systems</h4>
-<h4>Chaos Engineering: Building Resilient Systems</h4>
-<h4>Chaos Engineering: Building Resilient Systems</h4>
-<h4>Chaos Engineering: Building Resilient Systems</h4>
-<p>Chaos engineering is the discipline of experimenting on a system to build confidence in its capacity to withstand turbulent conditions. By intentionally injecting failures, teams discover weaknesses before they cause user-facing incidents.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/chaos-engineering.png" alt="Chaos Engineering: Building Resilient Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Core Principles</h4>
+      <div class="article-body"><p>Chaos engineering is the discipline of experimenting on a system to build confidence in its capacity to withstand turbulent conditions. By intentionally injecting failures, teams discover weaknesses before they cause user-facing incidents.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/chaos-engineering.png" alt="Chaos Engineering: Building Resilient Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Core Principles</h2>
 <p>Chaos engineering follows four principles: define a steady state (what normal operation looks like), hypothesize that the steady state will persist, introduce realistic variables (server failures, network delays, resource exhaustion), and measure the difference between the hypothesized state and the actual state.</p>
 <p>The goal is not to break things randomly. Each experiment has a clear hypothesis and measurable outcomes. This scientific approach distinguishes chaos engineering from simple testing.</p>
-<h4>Types of Experiments</h4>
+<h2>Types of Experiments</h2>
 <p>Common chaos experiments include killing random pods in a Kubernetes cluster, introducing network latency between services, exhausting CPU or memory on a node, terminating database connections, and failing an entire availability zone.</p>
 <p>Advanced experiments simulate dependent service degradation, certificate expiration, DNS failures, and traffic spikes. Each experiment should target a specific failure mode and have a defined blast radius.</p>
-<h4>Tools</h4>
+<h2>Tools</h2>
 <p>Chaos Monkey (by Netflix) pioneered the field by randomly terminating production instances. Chaos Mesh runs on Kubernetes and supports pod, network, and stress experiments. Gremlin provides a commercial platform with a GUI and scheduling. LitmusChaos is an open-source CNCF project with a wide range of experiments.</p>
-<h4>Getting Started</h4>
+<h2>Getting Started</h2>
 <p>Begin with small, low-risk experiments in staging environments. Run experiments during business hours when engineers are available to respond. Start with infrastructure failures (kill a pod) before moving to complex scenarios (simulate a region outage). Document every experiment and its results. Gradually move to production experiments with careful blast radius controls.</p>
-<h4>Blast Radius</h4>
+<h2>Blast Radius</h2>
 <p>Always define the blast radius before an experiment. Tools like Chaos Mesh allow you to target specific namespaces, deployments, or pods. Use an automated rollback mechanism that stops the experiment if error rates exceed thresholds. Production experiments should start at 1% traffic or less.</p>
 <p><strong>See also:</strong> <a href="/en/tech/git-workflows-2026.html">Git Workflows for Teams</a>, <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/throttling-pattern.html">Throttling Pattern for System Protection</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/throttling-pattern.html">Throttling Pattern for System Protection</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/throttling-pattern.html">Throttling Pattern for System Protection</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/throttling-pattern.html">Throttling Pattern for System Protection</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/throttling-pattern.html">Throttling Pattern for System Protection</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/throttling-pattern.html">Throttling Pattern for System Protection</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/throttling-pattern.html">Throttling Pattern for System Protection</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -143,7 +131,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/alerting-strategies.html" class="related-card">Alerting Strategies for Production Systems</a><a href="/en/architecture/retry-patterns.html" class="related-card">Retry Patterns</a><a href="/en/architecture/throttling-pattern.html" class="related-card">Throttling Pattern for System Protection</a><a href="/en/architecture/a-b-testing-infrastructure.html" class="related-card">A/B Testing Infrastructure</a></div>
+      <div class="related-grid"><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/retry-patterns.html" class="related-card"><span class="related-card-title">Retry Patterns</span><span class="related-card-desc">Learn retry strategies: exponential backoff, jitter, retry budgets, and circuit breaker integration </span></a><a href="/en/architecture/throttling-pattern.html" class="related-card"><span class="related-card-title">Throttling Pattern for System Protection</span><span class="related-card-desc">Implement throttling to protect backend systems from overload and ensure fair resource allocation.</span></a><a href="/en/architecture/a-b-testing-infrastructure.html" class="related-card"><span class="related-card-title">A/B Testing Infrastructure</span><span class="related-card-desc">Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing </span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="related-card-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="related-card-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card"><span class="related-card-title">Zero-Downtime Database Migrations</span><span class="related-card-desc">Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and producti</span></a></div>
     </section>
     
   </div>

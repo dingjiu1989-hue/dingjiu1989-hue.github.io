@@ -8,43 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/compare/nextjs-vs-remix.html
 
 # Next.js vs Remix vs Astro
 
-## Next.js vs Remix vs Astro
-
-### Next.js vs Remix vs Astro
-
-#### Next.js vs Remix vs Astro
-
-#### Next.js vs Remix vs Astro
-
-#### Next.js vs Remix vs Astro
-
-#### Next.js vs Remix vs Astro
-
-#### Next.js vs Remix vs Astro
-
-#### Next.js vs Remix vs Astro
-
-#### Next.js vs Remix vs Astro
-
-#### Next.js vs Remix vs Astro
-
-#### Next.js vs Remix vs Astro
-
-#### Next.js vs Remix vs Astro
-
-#### Next.js vs Remix vs Astro
-
-#### Next.js vs Remix vs Astro
-
-#### Next.js vs Remix vs Astro
-
-#### Next.js vs Remix vs Astro
-
-#### Introduction
+## Introduction
 
 The modern web framework landscape offers three compelling options built on React (and increasingly other UI libraries): Next.js, Remix, and Astro. Each takes a fundamentally different approach to rendering, data loading, and the server-client boundary. This comparison helps you choose the right foundation for your next project.
 
-#### Next.js
+## Next.js
 
 Next.js, developed by Vercel, is the most popular React framework and has evolved significantly with the introduction of the App Router and React Server Components.
 
@@ -79,7 +47,7 @@ include: { reviews: true }
 
 return (
 
-#### {product.name}
+## {product.name}
 
 {product.description}
 
@@ -113,7 +81,7 @@ return (
 
 
 
-#### Remix
+## Remix
 
 Remix (now maintained by Shopify) focuses on web fundamentals — using the platform's request/response model rather than abstracting it away.
 
@@ -170,7 +138,7 @@ const { product, reviews, analytics } = useLoaderData();
 
 return (
 
-#### {product.name}
+## {product.name}
 
 {product.description}
 
@@ -210,7 +178,7 @@ Loading analytics...
 
 
 
-#### Astro
+## Astro
 
 Astro takes a content-first approach — it's a "multi-page application" framework that minimizes JavaScript by default.
 
@@ -251,7 +219,7 @@ const pageTitle = "Our Products";
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
 
-#### {pageTitle}
+## {pageTitle}
 
 {products.map(product => (
 
@@ -283,7 +251,7 @@ const pageTitle = "Our Products";
 
 
 
-#### Comparison Table
+## Comparison Table
 
 | Aspect | Next.js | Remix | Astro |
 
@@ -303,7 +271,7 @@ const pageTitle = "Our Products";
 
 | Best for | Full-stack apps | Web apps, e-commerce | Content sites, blogs |
 
-#### When to Choose What
+## When to Choose What
 
 **Choose Next.js when:**
 
@@ -344,7 +312,7 @@ const pageTitle = "Our Products";
 
 
 
-#### Conclusion
+## Conclusion
 
 All three frameworks are excellent choices that prioritize performance and developer experience. Next.js offers the most features and the largest ecosystem. Remix provides the most web-standards-aligned approach with excellent form handling. Astro delivers the best performance for content-driven sites. The right choice depends on whether you're building an application, a content site, or something in between.
 
@@ -359,3 +327,9 @@ All three frameworks are excellent choices that prioritize performance and devel
 **See also:** [Solid.js vs Qwik](</en/compare/solid-vs-qwik.html>), [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>), [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>)
 
 **See also:** [Solid.js vs Qwik](</en/compare/solid-vs-qwik.html>), [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>), [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>)
+
+**See also:** [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>)
+
+**See also:** [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>)
+
+**See also:** [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>)

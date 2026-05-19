@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/data-warehousing.html
 
 # Data Warehousing Concepts and Modern Tools
 
-## Data Warehousing Concepts and Modern Tools
-
-### Data Warehousing Concepts and Modern Tools
-
-#### Data Warehousing Concepts and Modern Tools
-
-#### Data Warehousing Concepts and Modern Tools
-
-#### Data Warehousing Concepts and Modern Tools
-
-#### Data Warehousing Concepts and Modern Tools
-
-#### Data Warehousing Concepts and Modern Tools
-
-#### Data Warehousing Concepts and Modern Tools
-
-#### Data Warehousing Concepts and Modern Tools
-
-#### Data Warehousing Concepts and Modern Tools
-
-#### Data Warehousing Concepts and Modern Tools
-
-#### Data Warehousing Concepts and Modern Tools
-
-#### Data Warehousing Concepts and Modern Tools
-
-#### Data Warehousing Concepts and Modern Tools
-
-#### Data Warehousing Concepts and Modern Tools
-
 Data Warehousing Concepts 
 
 A data warehouse centralizes data from multiple sources for analysis and reporting. It is optimized for read-heavy analytical queries. 
@@ -121,3 +91,9 @@ Design with star schema for performance. Build resilient ETL pipelines. Leverage
 **See also:** [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
 
 **See also:** [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
+
+**See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)
+
+**See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)
+
+**See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)

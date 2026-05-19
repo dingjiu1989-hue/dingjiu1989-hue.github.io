@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.png",
       "datePublished": "2026-02-19",
       "dateModified": "2026-04-28",
-      "wordCount": "1383",
+      "wordCount": "1270",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -99,25 +99,9 @@
       <h1 class="article-title">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h1>
       <div class="article-meta">Published 2026-02-19 · Last active 2026-04-28 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.png" alt="Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h2>
-<h3>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h3>
-<h4>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h4>
-<h4>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h4>
-<h4>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h4>
-<h4>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h4>
-<h4>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h4>
-<h4>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h4>
-<h4>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h4>
-<h4>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h4>
-<h4>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h4>
-<h4>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h4>
-<h4>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h4>
-<h4>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h4>
-<h4>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h4>
-<h4>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Tool use, or function calling, enables LLMs to interact with external systems: query databases, call APIs, execute code, and retrieve information. This capability transforms LLMs from text generators into autonomous agents. This article covers the essential patterns for defining, invoking, and chaining tool calls in production systems.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.png" alt="Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Defining Tools</h4>
+<h2>Defining Tools</h2>
 <p>Every tool needs a clear schema that the LLM can understand and the application can execute:</p>
 <p>from openai import OpenAI</p>
 <p>from pydantic import BaseModel</p>
@@ -155,7 +139,7 @@
 <p>}</p>
 <p>]</p>
 <p>Key principles: use descriptive parameter names with clear descriptions, set proper type constraints, and provide defaults for optional parameters. The LLM uses these descriptions to decide which tool to call and with what arguments.</p>
-<h4>Function Calling Loop</h4>
+<h2>Function Calling Loop</h2>
 <p>The standard pattern is a loop: generate, check for tool calls, execute, and feed results back:</p>
 <p>def tool_use_loop(messages: list, tools: list, max_turns=10):</p>
 <p>for turn in range(max_turns):</p>
@@ -185,20 +169,20 @@
 <p>return calculate(**args)</p>
 <p>raise ValueError(f"Unknown tool: {name}")</p>
 <p>The LLM sees the tool result as new context and decides whether to call another tool or produce a final answer.</p>
-<h4>Multi-Step Reasoning with Tools</h4>
+<h2>Multi-Step Reasoning with Tools</h2>
 <p>Complex tasks require multiple tool calls where later calls depend on earlier results:</p>
 <p>def research_workflow(topic: str):</p>
 <p>messages = [{"role": "user", "content": f"Research {topic} and write a comprehensive summary."}]</p>
-<h4>Step 1: Search for information</h4>
+<h2>Step 1: Search for information</h2>
 <p>response = client.chat.completions.create(</p>
 <p>model="gpt-4o", messages=messages, tools=research_tools, tool_choice="auto"</p>
 <p>)</p>
-<h4>Execute search, get results</h4>
-<h4>Step 2: Verify facts using a different source</h4>
-<h4>Step 3: Structure the findings</h4>
-<h4>Step 4: Generate the summary</h4>
+<h2>Execute search, get results</h2>
+<h2>Step 2: Verify facts using a different source</h2>
+<h2>Step 3: Structure the findings</h2>
+<h2>Step 4: Generate the summary</h2>
 <p>return final_summary</p>
-<h4>Structured Tools with Validation</h4>
+<h2>Structured Tools with Validation</h2>
 <p>Anthropic's tool use API supports structured tool definitions with JSON Schema and strict mode:</p>
 <p>import anthropic</p>
 <p>client = anthropic.Anthropic()</p>
@@ -224,7 +208,7 @@
 <p>for block in response.content:</p>
 <p>if block.type == "tool_use":</p>
 <p>print(f"Calling {block.name} with {block.input}")</p>
-<h4>Error Handling in Tool Calls</h4>
+<h2>Error Handling in Tool Calls</h2>
 <p>Tools fail. Plan for timeouts, invalid arguments, and unexpected responses:</p>
 <p>def safe_tool_execution(tool_call, timeout=10):</p>
 <p>try:</p>
@@ -238,13 +222,16 @@
 <p>except Exception as e:</p>
 <p>return {"success": False, "error": f"Unexpected error: {e}"}</p>
 <p>When a tool fails, pass the error message back to the LLM so it can retry with corrected arguments or choose a different approach.</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>Tool use transforms LLMs from passive text generators into active problem-solvers. Define tools with clear schemas, implement a robust function-calling loop, chain tool calls for multi-step tasks, and always handle errors gracefully by feeding failures back into the conversation context.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -256,7 +243,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/llm-api-design.html" class="related-card">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a><a href="/en/ai/multi-agent-systems.html" class="related-card">Multi-Agent Systems: Coordination, Communication, Consensus</a><a href="/en/ai/rag-agent-patterns.html" class="related-card">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a><a href="/en/ai/ai-prompt-chaining.html" class="related-card">Prompt Chaining: Building Multi-Step LLM Workflows</a></div>
+      <div class="related-grid"><a href="/en/ai/llm-api-design.html" class="related-card"><span class="related-card-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="related-card-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handli</span></a><a href="/en/ai/multi-agent-systems.html" class="related-card"><span class="related-card-title">Multi-Agent Systems: Coordination, Communication, Consensus</span><span class="related-card-desc">Design multi-agent systems with LLM-powered agents: coordination patterns, inter-agent communication</span></a><a href="/en/ai/rag-agent-patterns.html" class="related-card"><span class="related-card-title">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</span><span class="related-card-desc">Explore RAG agent patterns that go beyond simple retrieval: self-querying agents, corrective RAG wit</span></a><a href="/en/ai/ai-prompt-chaining.html" class="related-card"><span class="related-card-title">Prompt Chaining: Building Multi-Step LLM Workflows</span><span class="related-card-desc">Design prompt chains for complex LLM tasks: chain types, state management, error handling, and perfo</span></a><a href="/en/ai/ai-caching-strategies.html" class="related-card"><span class="related-card-title">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</span><span class="related-card-desc">Reduce LLM API costs and latency with AI caching strategies: semantic caching, intelligent invalidat</span></a><a href="/en/ai/ai-monitoring-alerting.html" class="related-card"><span class="related-card-title">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</span><span class="related-card-desc">Monitor LLM applications in production: track latency percentiles, token consumption, error rates by</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

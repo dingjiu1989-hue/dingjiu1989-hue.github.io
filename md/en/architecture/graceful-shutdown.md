@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/graceful-shutdown.html
 
 # Graceful Shutdown Patterns
 
-## Graceful Shutdown Patterns
-
-### Graceful Shutdown Patterns
-
-#### Graceful Shutdown Patterns
-
-#### Graceful Shutdown Patterns
-
-#### Graceful Shutdown Patterns
-
-#### Graceful Shutdown Patterns
-
-#### Graceful Shutdown Patterns
-
-#### Graceful Shutdown Patterns
-
-#### Graceful Shutdown Patterns
-
-#### Graceful Shutdown Patterns
-
-#### Graceful Shutdown Patterns
-
-#### Graceful Shutdown Patterns
-
-#### Graceful Shutdown Patterns
-
-#### Graceful Shutdown Patterns
-
-#### Graceful Shutdown Patterns
-
 Graceful shutdown ensures that when a service instance stops, it completes its in-flight work, closes connections cleanly, and leaves data in a consistent state. In distributed systems, where multiple instances provide resilience, graceful shutdown is essential for zero-downtime operations. Hard-killing processes leaves requests incomplete, connections half-open, and data potentially corrupted. 
 
 Signal handling is the foundation. The service should register handlers for SIGTERM (the standard termination signal from orchestration platforms) and SIGINT (interactive termination). When received, the signal handler initiates the shutdown sequence. The handler should not block indefinitely — it should set a deadline for graceful shutdown and force-terminate if exceeded. Kubernetes sends SIGTERM to pods and waits for the terminationGracePeriodSeconds before sending SIGKILL. 
@@ -71,3 +41,9 @@ Stateful services require additional consideration. Services that own data or ma
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/ambassador-pattern.png",
       "datePublished": "2026-05-05",
       "dateModified": "2026-05-16",
-      "wordCount": "715",
+      "wordCount": "661",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,38 +96,26 @@
       <h1 class="article-title">Ambassador Pattern for Service Communication</h1>
       <div class="article-meta">Published 2026-05-05 · Last active 2026-05-16 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/ambassador-pattern.png" alt="Ambassador Pattern for Service Communication" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Ambassador Pattern for Service Communication</h2>
-<h3>Ambassador Pattern for Service Communication</h3>
-<h4>Ambassador Pattern for Service Communication</h4>
-<h4>Ambassador Pattern for Service Communication</h4>
-<h4>Ambassador Pattern for Service Communication</h4>
-<h4>Ambassador Pattern for Service Communication</h4>
-<h4>Ambassador Pattern for Service Communication</h4>
-<h4>Ambassador Pattern for Service Communication</h4>
-<h4>Ambassador Pattern for Service Communication</h4>
-<h4>Ambassador Pattern for Service Communication</h4>
-<h4>Ambassador Pattern for Service Communication</h4>
-<h4>Ambassador Pattern for Service Communication</h4>
-<h4>Ambassador Pattern for Service Communication</h4>
-<h4>Ambassador Pattern for Service Communication</h4>
-<h4>Ambassador Pattern for Service Communication</h4>
-<p>The ambassador pattern places a helper service between a client and a remote service to handle cross-cutting communication concerns. Unlike the sidecar pattern which runs as a local helper, the ambassador acts as a smart proxy that manages retries, circuit breaking, authentication, and protocol translation on behalf of the client.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/ambassador-pattern.png" alt="Ambassador Pattern for Service Communication" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Architecture Overview</h4>
+      <div class="article-body"><p>The ambassador pattern places a helper service between a client and a remote service to handle cross-cutting communication concerns. Unlike the sidecar pattern which runs as a local helper, the ambassador acts as a smart proxy that manages retries, circuit breaking, authentication, and protocol translation on behalf of the client.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/ambassador-pattern.png" alt="Ambassador Pattern for Service Communication" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Architecture Overview</h2>
 <p>The ambassador sits at the edge of a service boundary, intercepting all outbound communication. The client service connects to a local ambassador instance, which forwards requests to the target service. This indirection allows the ambassador to add capabilities that the client does not natively support.</p>
 <p>In Kubernetes environments, the ambassador is often deployed as a container in the same pod as the client. However, it can also run as a standalone service for multi-cluster or multi-network scenarios.</p>
-<h4>When to Use the Ambassador Pattern</h4>
+<h2>When to Use the Ambassador Pattern</h2>
 <p>Use the ambassador pattern when you need to integrate with legacy systems that speak different protocols, when you need consistent retry and timeout policies across multiple clients, or when you want to implement centralized authentication for service-to-service calls.</p>
 <p>The pattern is particularly valuable in migration scenarios. When moving from a monolith to microservices, an ambassador can route traffic to both old and new systems, enabling incremental migration without client changes.</p>
-<h4>Ambassador vs Sidecar</h4>
+<h2>Ambassador vs Sidecar</h2>
 <p>While both patterns deploy helper components alongside services, they serve different purposes. The sidecar focuses on inbound traffic and local concerns (logging, monitoring). The ambassador focuses on outbound traffic and remote concerns (routing, retries, protocol translation).</p>
 <p>In practice, many implementations combine both patterns. A service mesh uses sidecars for inbound and outbound traffic management, essentially acting as both a sidecar for inbound and an ambassador for outbound calls.</p>
-<h4>Implementation Considerations</h4>
+<h2>Implementation Considerations</h2>
 <p>Ambassadors add network hop latency. Measure the performance impact before deploying in production. Use connection pooling to reduce overhead. Ensure the ambassador can scale independently of its clients. Implement health checking so clients can detect ambassador failures and route around them.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -139,7 +127,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/sidecar-pattern.html" class="related-card">Sidecar Pattern in Microservices Architecture</a><a href="/en/architecture/event-carried-state-transfer.html" class="related-card">Event-Carried State Transfer Pattern</a><a href="/en/architecture/fanout-pattern.html" class="related-card">Fanout Pattern for Event Distribution</a><a href="/en/architecture/request-reply-pattern.html" class="related-card">Request-Reply Pattern for Asynchronous Communication</a></div>
+      <div class="related-grid"><a href="/en/architecture/sidecar-pattern.html" class="related-card"><span class="related-card-title">Sidecar Pattern in Microservices Architecture</span><span class="related-card-desc">Learn the sidecar pattern for microservices: how to deploy helper components alongside your main ser</span></a><a href="/en/architecture/event-carried-state-transfer.html" class="related-card"><span class="related-card-title">Event-Carried State Transfer Pattern</span><span class="related-card-desc">Learn the event-carried state transfer pattern for reducing service dependencies in event-driven arc</span></a><a href="/en/architecture/fanout-pattern.html" class="related-card"><span class="related-card-title">Fanout Pattern for Event Distribution</span><span class="related-card-desc">The fanout pattern explained: distributing events to multiple consumers for parallel processing in e</span></a><a href="/en/architecture/request-reply-pattern.html" class="related-card"><span class="related-card-title">Request-Reply Pattern for Asynchronous Communication</span><span class="related-card-desc">Implement the request-reply pattern with message queues for asynchronous request-response messaging.</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a></div>
     </section>
     
   </div>

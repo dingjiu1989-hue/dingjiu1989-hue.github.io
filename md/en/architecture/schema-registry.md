@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html
 
 # Schema Registry
 
-## Schema Registry
-
-### Schema Registry
-
-#### Schema Registry
-
-#### Schema Registry
-
-#### Schema Registry
-
-#### Schema Registry
-
-#### Schema Registry
-
-#### Schema Registry
-
-#### Schema Registry
-
-#### Schema Registry
-
-#### Schema Registry
-
-#### Schema Registry
-
-#### Schema Registry
-
-#### Schema Registry
-
-#### Schema Registry
-
 A schema registry is a centralized service that stores, validates, and manages schemas for data in event-driven and message-based systems. As organizations adopt event-driven architectures with asynchronous communication, managing data formats across producers and consumers becomes critical. The schema registry solves the problem of data contract evolution by enforcing compatibility rules and providing a single source of truth for schema definitions. 
 
 The Problem Schema Registries Solve 
@@ -93,3 +63,9 @@ A well-managed schema registry prevents the most common data contract failures i
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)

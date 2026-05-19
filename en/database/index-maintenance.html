@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/index-maintenance.png",
       "datePublished": "2026-04-07",
       "dateModified": "2026-05-15",
-      "wordCount": "2323",
+      "wordCount": "2256",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h1>
       <div class="article-meta">Published 2026-04-07 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/index-maintenance.png" alt="Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h2>
-<h3>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h3>
-<h4>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h4>
-<h4>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h4>
-<h4>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h4>
-<h4>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h4>
-<h4>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h4>
-<h4>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h4>
-<h4>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h4>
-<h4>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h4>
-<h4>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h4>
-<h4>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h4>
-<h4>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h4>
-<h4>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h4>
-<h4>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h4>
-<p>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/index-maintenance.png" alt="Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/index-maintenance.png" alt="Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Indexes degrade over time. PostgreSQL's MVCC architecture creates dead index entries that waste space and slow down scans. Regular maintenance keeps indexes healthy and query performance predictable. </p>
 <p>Index Bloat </p>
 <p>Index bloat occurs when dead tuples leave empty space in index pages. Unlike tables, PostgreSQL does not automatically reuse index page space aggressively. </p>
@@ -149,7 +134,7 @@
 </ul>
 <p>External Tools </p>
 <p><code>pg_repack</code> rebuilds indexes without locks: </p>
-<h4>Rebuild all indexes on a table without blocking writes</h4>
+<h2>Rebuild all indexes on a table without blocking writes</h2>
 <p>pg_repack -h localhost -d mydb --table orders -o idx_orders_user_id</p>
 <p>REINDEX </p>
 <p><code>REINDEX</code> rebuilds an index from scratch, eliminating bloat and restoring optimal structure: </p>
@@ -199,7 +184,7 @@
 <p>Automated Maintenance </p>
 <p>Autovacuum Configuration </p>
 <p>Autovacuum manages both table and index cleanup: </p>
-<h4>postgresql.conf</h4>
+<h2>postgresql.conf</h2>
 <p>autovacuum = on</p>
 <p>autovacuum_naptime = 1min</p>
 <p>autovacuum_vacuum_scale_factor = 0.01</p>
@@ -254,7 +239,10 @@
 <p><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p>
 <p><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p>
 <p><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p>
-<p><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p>
+<p><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p>
+<p><strong>See also:</strong> <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a></p>
+<p><strong>See also:</strong> <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -266,7 +254,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/index-types.html" class="related-card">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a><a href="/en/database/composite-indexes.html" class="related-card">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a><a href="/en/database/full-text-search-postgresql.html" class="related-card">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a><a href="/en/database/read-replicas.html" class="related-card">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></div>
+      <div class="related-grid"><a href="/en/database/index-types.html" class="related-card"><span class="related-card-title">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</span><span class="related-card-desc">Comprehensive guide to PostgreSQL index types: B-tree, Hash, GiST, GIN, SP-GiST, and BRIN. Learn whe</span></a><a href="/en/database/composite-indexes.html" class="related-card"><span class="related-card-title">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</span><span class="related-card-desc">Master composite indexes in PostgreSQL: column order optimization, covering indexes, partial indexes</span></a><a href="/en/database/full-text-search-postgresql.html" class="related-card"><span class="related-card-title">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</span><span class="related-card-desc">Learn full-text search in PostgreSQL using tsvector, tsquery, and GIN indexes. Understand ranking, s</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="related-card-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="related-card-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing str</span></a><a href="/en/database/time-series-postgresql.html" class="related-card"><span class="related-card-title">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</span><span class="related-card-desc">Learn time-series data management with PostgreSQL and TimescaleDB. Hypertables, continuous aggregate</span></a><a href="/en/database/database-vacuuming-maintenance.html" class="related-card"><span class="related-card-title">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</span><span class="related-card-desc">Master PostgreSQL VACUUM: autovacuum tuning, bloat prevention, and maintenance best practices.</span></a></div>
     </section>
     
   </div>

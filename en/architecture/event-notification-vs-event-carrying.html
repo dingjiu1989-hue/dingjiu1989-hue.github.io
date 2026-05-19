@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-notification-vs-event-carrying.png",
       "datePublished": "2026-05-07",
       "dateModified": "2026-05-13",
-      "wordCount": "563",
+      "wordCount": "474",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -107,35 +107,23 @@
       <h1 class="article-title">Event Notification vs Event-Carried State Transfer</h1>
       <div class="article-meta">Published 2026-05-07 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-notification-vs-event-carrying.png" alt="Event Notification vs Event-Carried State Transfer" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Event Notification vs Event-Carried State Transfer</h2>
-<h3>Event Notification vs Event-Carried State Transfer</h3>
-<h4>Event Notification vs Event-Carried State Transfer</h4>
-<h4>Event Notification vs Event-Carried State Transfer</h4>
-<h4>Event Notification vs Event-Carried State Transfer</h4>
-<h4>Event Notification vs Event-Carried State Transfer</h4>
-<h4>Event Notification vs Event-Carried State Transfer</h4>
-<h4>Event Notification vs Event-Carried State Transfer</h4>
-<h4>Event Notification vs Event-Carried State Transfer</h4>
-<h4>Event Notification vs Event-Carried State Transfer</h4>
-<h4>Event Notification vs Event-Carried State Transfer</h4>
-<h4>Event Notification vs Event-Carried State Transfer</h4>
-<h4>Event Notification vs Event-Carried State Transfer</h4>
-<h4>Event Notification vs Event-Carried State Transfer</h4>
-<h4>Event Notification vs Event-Carried State Transfer</h4>
-<p>Event notification and event-carried state transfer are two patterns for communicating state changes between microservices. The choice affects coupling, data consistency, and service autonomy.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-notification-vs-event-carrying.png" alt="Event Notification vs Event-Carried State Transfer" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Event Notification</h4>
+      <div class="article-body"><p>Event notification and event-carried state transfer are two patterns for communicating state changes between microservices. The choice affects coupling, data consistency, and service autonomy.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-notification-vs-event-carrying.png" alt="Event Notification vs Event-Carried State Transfer" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Event Notification</h2>
 <p>The publisher sends only a reference to the changed entity. Consumers must query the publisher's API for details. This minimizes coupling—consumers know only that something changed. The publisher's API remains the source of truth.</p>
 <p>Drawbacks: each consumer must make additional API calls. This increases latency and reduces availability. If the publisher is down during event processing, consumers cannot get the full picture.</p>
-<h4>Event-Carried State Transfer</h4>
+<h2>Event-Carried State Transfer</h2>
 <p>The publisher includes all relevant data in the event. Consumers can process events without querying the publisher. This reduces latency and increases resilience—consumers have the data they need even if the publisher is unavailable.</p>
 <p>Trade-offs: data duplication increases storage requirements. Consumers may have stale data if the publisher changes its data model. The event schema becomes a public contract between publisher and consumers.</p>
-<h4>Choosing</h4>
+<h2>Choosing</h2>
 <p>Use event notification when the consumer always needs fresh data or the event's context is minimal. Use event-carried state transfer when consumers need data immediately or the publisher's API availability cannot be guaranteed.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -147,7 +135,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/event-carried-state-transfer.html" class="related-card">Event-Carried State Transfer Pattern</a><a href="/en/architecture/asynchronous-communication.html" class="related-card">Asynchronous Communication in Distributed Systems</a><a href="/en/architecture/polling-consumer.html" class="related-card">Polling Consumer vs Event-Driven Consumer</a><a href="/en/architecture/pub-sub-patterns.html" class="related-card">Pub-Sub Patterns: Event-Driven Communication</a></div>
+      <div class="related-grid"><a href="/en/architecture/event-carried-state-transfer.html" class="related-card"><span class="related-card-title">Event-Carried State Transfer Pattern</span><span class="related-card-desc">Learn the event-carried state transfer pattern for reducing service dependencies in event-driven arc</span></a><a href="/en/architecture/asynchronous-communication.html" class="related-card"><span class="related-card-title">Asynchronous Communication in Distributed Systems</span><span class="related-card-desc">Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and pattern</span></a><a href="/en/architecture/polling-consumer.html" class="related-card"><span class="related-card-title">Polling Consumer vs Event-Driven Consumer</span><span class="related-card-desc">Compare polling and event-driven consumer patterns: when to poll, when to push, and hybrid approache</span></a><a href="/en/architecture/pub-sub-patterns.html" class="related-card"><span class="related-card-title">Pub-Sub Patterns: Event-Driven Communication</span><span class="related-card-desc">A deep dive into publish-subscribe patterns for decoupled service communication in distributed syste</span></a><a href="/en/architecture/stateful-vs-stateless.html" class="related-card"><span class="related-card-title">Stateful vs Stateless Architecture Patterns</span><span class="related-card-desc">Compare stateful and stateless architecture patterns: trade-offs for scalability, resilience, and im</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a></div>
     </section>
     
   </div>

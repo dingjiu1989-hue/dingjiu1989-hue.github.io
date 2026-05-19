@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-security-hardening.h
 
 # Database Security Hardening
 
-## Database Security Hardening
-
-### Database Security Hardening
-
-#### Database Security Hardening
-
-#### Database Security Hardening
-
-#### Database Security Hardening
-
-#### Database Security Hardening
-
-#### Database Security Hardening
-
-#### Database Security Hardening
-
-#### Database Security Hardening
-
-#### Database Security Hardening
-
-#### Database Security Hardening
-
-#### Database Security Hardening
-
-#### Database Security Hardening
-
-#### Database Security Hardening
-
-#### Database Security Hardening
-
 Defense in Depth 
 
 Database security requires multiple layers: network isolation, encryption, access control, and auditing. 
@@ -56,7 +26,7 @@ SELECT pg_tde_set_principal_key('production-db-key', 'file-vault');
 
 Encryption in Transit 
 
-#### postgresql.conf
+## postgresql.conf
 
 ssl = on
 
@@ -111,3 +81,9 @@ Layer encryption, access control, RLS, audit logging, and network isolation. Rot
 **See also:** [Database Audit Triggers: Automatic Change Tracking](</en/database/database-audit-triggers.html>), [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>)
 
 **See also:** [Database Audit Triggers: Automatic Change Tracking](</en/database/database-audit-triggers.html>), [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>)
+
+**See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)

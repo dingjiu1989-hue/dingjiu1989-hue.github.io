@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/soc-operations.html
 
 # SOC Operations
 
-## SOC Operations
-
-### SOC Operations
-
-#### SOC Operations
-
-#### SOC Operations
-
-#### SOC Operations
-
-#### SOC Operations
-
-#### SOC Operations
-
-#### SOC Operations
-
-#### SOC Operations
-
-#### SOC Operations
-
-#### SOC Operations
-
-#### SOC Operations
-
-#### SOC Operations
-
-#### SOC Operations
-
-#### SOC Operations
-
 Introduction 
 
 A Security Operations Center (SOC) is a centralized team responsible for monitoring, detecting, analyzing, and responding to security incidents. Building an effective SOC requires structured processes, skilled personnel, appropriate tools, and continuous improvement. 
@@ -65,11 +35,11 @@ Responsibilities:
 
 
 
-#### Tier 1 triage automation example
+## Tier 1 triage automation example
 
 def triage_alert(alert):
 
-#### Check against known false positive patterns
+## Check against known false positive patterns
 
 for fp_pattern in false_positive_patterns:
 
@@ -79,11 +49,11 @@ alert.auto_close()
 
 return
 
-#### Enrich with threat intelligence
+## Enrich with threat intelligence
 
 alert.iocs = enrich_iocs(alert.extract_iocs())
 
-#### Escalate if critical
+## Escalate if critical
 
 if alert.severity == 'critical':
 
@@ -137,7 +107,7 @@ SIEM Tuning
 
 SIEM tuning reduces noise while maintaining detection coverage. A well-tuned SIEM generates alerts that analysts can actually investigate. 
 
-#### Example: correlation rule tuning cycle
+## Example: correlation rule tuning cycle
 
 SIEM_ALERTS=10000
 
@@ -157,7 +127,7 @@ Playbooks
 
 Playbooks provide step-by-step instructions for handling specific scenarios. They reduce mean time to respond (MTTR) and ensure consistency. 
 
-#### Incident response playbook example
+## Incident response playbook example
 
 playbook:
 
@@ -258,3 +228,9 @@ A well-structured SOC combines skilled personnel, documented processes, and appr
 **See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [DNS Security](</en/security/dns-security.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
 
 **See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [DNS Security](</en/security/dns-security.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)

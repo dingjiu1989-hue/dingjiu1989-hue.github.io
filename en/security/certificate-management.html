@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/certificate-management.png",
       "datePublished": "2026-03-08",
       "dateModified": "2026-05-10",
-      "wordCount": "1770",
+      "wordCount": "1747",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,37 +99,20 @@
       <h1 class="article-title">Certificate Management</h1>
       <div class="article-meta">Published 2026-03-08 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/certificate-management.png" alt="Certificate Management" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Certificate Management</h2>
-<h3>Certificate Management</h3>
-<h4>Certificate Management</h4>
-<h4>Certificate Management</h4>
-<h4>Certificate Management</h4>
-<h4>Certificate Management</h4>
-<h4>Certificate Management</h4>
-<h4>Certificate Management</h4>
-<h4>Certificate Management</h4>
-<h4>Certificate Management</h4>
-<h4>Certificate Management</h4>
-<h4>Certificate Management</h4>
-<h4>Certificate Management</h4>
-<h4>Certificate Management</h4>
-<h4>Certificate Management</h4>
-<h4>Certificate Management</h4>
-<h4>Certificate Management</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/certificate-management.png" alt="Certificate Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/certificate-management.png" alt="Certificate Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>TLS certificate management is a critical operational responsibility. Expired certificates cause service outages, security warnings, and loss of user trust. Modern certificate management leverages the ACME protocol and Let's Encrypt to automate issuance and renewal at scale. </p>
 <p>Let's Encrypt </p>
 <p>Let's Encrypt is a free, automated, and open certificate authority (CA) that provides DV certificates trusted by all major browsers. </p>
-<h4>Install Certbot (Let's Encrypt client)</h4>
+<h2>Install Certbot (Let's Encrypt client)</h2>
 <p>sudo apt install certbot python3-certbot-nginx</p>
-<h4>Obtain certificate with webroot authentication</h4>
+<h2>Obtain certificate with webroot authentication</h2>
 <p>sudo certbot certonly --webroot \</p>
 <p>-w /var/www/example.com -d example.com \</p>
 <p>-w /var/www/api.example.com -d api.example.com \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--email admin@example.com \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--agree-tos \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--non-interactive</p>
-<h4>Obtain certificate with DNS challenge (for wildcards)</h4>
+<h2>Obtain certificate with DNS challenge (for wildcards)</h2>
 <p>sudo certbot certonly --manual \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--preferred-challenges dns \</p>
 <p>-d example.com -d *.example.com</p>
@@ -164,27 +147,27 @@
 <p>return registration</p>
 <p>def request_certificate(self, domain, csr_pem):</p>
 <p>"""Request certificate issuance."""</p>
-<h4>Create authorization</h4>
+<h2>Create authorization</h2>
 <p>order = self.acme.new_order(csr_pem)</p>
-<h4>Complete challenges for each identifier</h4>
+<h2>Complete challenges for each identifier</h2>
 <p>for auth in order.authorizations:</p>
-<h4>HTTP-01 or DNS-01 challenge</h4>
+<h2>HTTP-01 or DNS-01 challenge</h2>
 <p>challenge = auth.body.challenges[0]</p>
 <p>self.respond_challenge(challenge)</p>
-<h4>Finalize order</h4>
+<h2>Finalize order</h2>
 <p>order = self.acme.finalize_order(order, csr_pem)</p>
 <p>return order.fullchain_pem</p>
 <p>Automated Renewal </p>
 <p>Certificate renewal should be fully automated with monitoring and alerting. </p>
-<h4>Certbot systemd timer for automatic renewal</h4>
-<h4>/etc/systemd/system/certbot-renewal.service</h4>
+<h2>Certbot systemd timer for automatic renewal</h2>
+<h2>/etc/systemd/system/certbot-renewal.service</h2>
 <p>[Unit]</p>
 <p>Description=Certbot Renewal</p>
 <p>[Service]</p>
 <p>Type=oneshot</p>
 <p>ExecStart=/usr/bin/certbot renew --quiet --pre-hook "systemctl reload nginx"</p>
 <p>ExecStartPost=/usr/bin/systemctl reload nginx</p>
-<h4>/etc/systemd/system/certbot-renewal.timer</h4>
+<h2>/etc/systemd/system/certbot-renewal.timer</h2>
 <p>[Unit]</p>
 <p>Description=Run certbot renewal twice daily</p>
 <p>[Timer]</p>
@@ -193,10 +176,10 @@
 <p>Persistent=true</p>
 <p>[Install]</p>
 <p>WantedBy=timers.target</p>
-<h4>Enable timer</h4>
+<h2>Enable timer</h2>
 <p>sudo systemctl enable certbot-renewal.timer</p>
 <p>sudo systemctl start certbot-renewal.timer</p>
-<h4>Test renewal process</h4>
+<h2>Test renewal process</h2>
 <p>sudo certbot renew --dry-run</p>
 <p>Certificate Monitoring </p>
 <p>Monitor certificate expiration to catch renewal failures before they cause outages. </p>
@@ -214,14 +197,14 @@
 <p>with socket.create_connection((hostname, port), timeout=10) as sock:</p>
 <p>with context.wrap_socket(sock, server_hostname=hostname) as ssock:</p>
 <p>cert = ssock.getpeercert()</p>
-<h4>Parse expiration</h4>
+<h2>Parse expiration</h2>
 <p>expires = datetime.datetime.strptime(</p>
 <p>cert['notAfter'], '%b %d %H:%M:%S %Y %Z'</p>
 <p>)</p>
 <p>remaining = (expires - datetime.datetime.utcnow()).days</p>
-<h4>Check issuer</h4>
+<h2>Check issuer</h2>
 <p>issuer = dict(x[0] for x in cert['issuer'])</p>
-<h4>Check SANs</h4>
+<h2>Check SANs</h2>
 <p>sans = [san[1] for san in cert.get('subjectAltName', [])]</p>
 <p>return {</p>
 <p>'hostname': hostname,</p>
@@ -256,10 +239,10 @@
 <p>'error': str(e)</p>
 <p>})</p>
 <p>return results</p>
-<h4>OpenSSL-based certificate check</h4>
+<h2>OpenSSL-based certificate check</h2>
 <p>echo | openssl s_client -connect example.com:443 -servername example.com 2&gt;/dev/null | \</p>
 <p>openssl x509 -noout -enddate -subject -issuer</p>
-<h4>Mass certificate check</h4>
+<h2>Mass certificate check</h2>
 <p>for domain in $(cat domains.txt); do</p>
 <p>expires=$(echo | openssl s_client -connect $domain:443 -servername $domain 2&gt;/dev/null | \</p>
 <p>openssl x509 -noout -enddate | cut -d= -f2)</p>
@@ -267,12 +250,12 @@
 <p>echo "$domain: expires in $remaining days ($expires)"</p>
 <p>done</p>
 <p>Certificate Revocation </p>
-<h4>Check OCSP status</h4>
+<h2>Check OCSP status</h2>
 <p>openssl ocsp -issuer chain.pem -cert cert.pem \</p>
 <p>-url $(openssl x509 -in cert.pem -noout -ocsp_uri) \</p>
 <p>-header "Host" $(openssl x509 -in cert.pem -noout -ocsp_uri | cut -d/ -f3) \</p>
 <p>-CAfile root.pem</p>
-<h4>CRL check</h4>
+<h2>CRL check</h2>
 <p>curl -O http://crl.example.com/intermediate.crl</p>
 <p>openssl crl -in intermediate.crl -noout -text | grep -A1 "Serial Number"</p>
 <p>Conclusion </p>
@@ -281,7 +264,10 @@
 <p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/serverless-security.html">Serverless Security</a>, <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p>
+<p><strong>See also:</strong> <a href="/en/security/serverless-security.html">Serverless Security</a>, <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/serverless-security.html">Serverless Security</a>, <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -293,7 +279,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/cloud-security-posture.html" class="related-card">Cloud Security Posture Management</a><a href="/en/security/tls-configuration.html" class="related-card">TLS Configuration Guide</a><a href="/en/security/iac-security.html" class="related-card">Infrastructure as Code Security</a><a href="/en/security/patching-strategy.html" class="related-card">Patching Strategy</a></div>
+      <div class="related-grid"><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a><a href="/en/security/tls-configuration.html" class="related-card"><span class="related-card-title">TLS Configuration Guide</span><span class="related-card-desc">Practical TLS configuration guide covering cipher suites, HSTS, certificate pinning, TLS 1.3, and te</span></a><a href="/en/security/iac-security.html" class="related-card"><span class="related-card-title">Infrastructure as Code Security</span><span class="related-card-desc">Guide to Infrastructure as Code security covering Terraform security scanning, policy as code, drift</span></a><a href="/en/security/patching-strategy.html" class="related-card"><span class="related-card-title">Patching Strategy</span><span class="related-card-desc">Guide to vulnerability patching strategy covering prioritization, patch testing, emergency patches, </span></a><a href="/en/security/privacy-engineering.html" class="related-card"><span class="related-card-title">Privacy Engineering</span><span class="related-card-desc">Guide to privacy engineering covering privacy by design principles, data mapping, Privacy Impact Ass</span></a><a href="/en/security/secure-configuration.html" class="related-card"><span class="related-card-title">Secure Configuration Management</span><span class="related-card-desc">Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detectio</span></a></div>
     </section>
     
   </div>

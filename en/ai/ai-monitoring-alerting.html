@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.png",
       "datePublished": "2026-02-14",
       "dateModified": "2026-04-10",
-      "wordCount": "1884",
+      "wordCount": "1778",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -99,25 +99,9 @@
       <h1 class="article-title">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h1>
       <div class="article-meta">Published 2026-02-14 · Last active 2026-04-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.png" alt="AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h2>
-<h3>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h3>
-<h4>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h4>
-<h4>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h4>
-<h4>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h4>
-<h4>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h4>
-<h4>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h4>
-<h4>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h4>
-<h4>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h4>
-<h4>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h4>
-<h4>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h4>
-<h4>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h4>
-<h4>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h4>
-<h4>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h4>
-<h4>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h4>
-<h4>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>AI applications introduce new monitoring dimensions beyond traditional infrastructure metrics. LLM responses can be slow, expensive, incorrect, or suddenly change behavior when providers update models. This article covers the metrics, tools, and alerting strategies for production AI monitoring, including drift detection that catches quality degradation before users complain.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.png" alt="AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Core Metrics</h4>
+<h2>Core Metrics</h2>
 <p>Every AI application should track these foundational metrics:</p>
 <p>from prometheus_client import Counter, Histogram, Gauge</p>
 <p>import time</p>
@@ -151,7 +135,7 @@
 <p>self.token_usage.labels(provider=provider, model=model, token_type="input").inc(input_tokens)</p>
 <p>self.token_usage.labels(provider=provider, model=model, token_type="output").inc(output_tokens)</p>
 <p>self.cost_total.labels(provider=provider, model=model).inc(cost)</p>
-<h4>Token Usage Tracking</h4>
+<h2>Token Usage Tracking</h2>
 <p>Monitor token consumption per user, feature, and time period:</p>
 <p>class TokenUsageTracker:</p>
 <p>def <strong>init</strong>(self, db):</p>
@@ -179,7 +163,7 @@
 <p>WHERE user_id = $1 AND DATE(timestamp) = CURRENT_DATE</p>
 <p>""", user_id)</p>
 <p>return (row["today_cost"] or 0) &lt; daily_budget</p>
-<h4>Error Rate Monitoring</h4>
+<h2>Error Rate Monitoring</h2>
 <p>LLM applications experience distinctive error types:</p>
 <p>from enum import Enum</p>
 <p>class LLMErrorType(Enum):</p>
@@ -205,7 +189,7 @@
 <p>if rate &gt; self.alert_threshold:</p>
 <p>alerts.append(f"Error rate {rate:.1%} for {key} exceeds threshold {self.alert_threshold:.1%}")</p>
 <p>return alerts</p>
-<h4>Drift Detection</h4>
+<h2>Drift Detection</h2>
 <p>The most critical AI-specific monitoring: detect when model behavior changes:</p>
 <p>import numpy as np</p>
 <p>from scipy import stats</p>
@@ -235,37 +219,40 @@
 <p>) / len(recent_responses)</p>
 <p>change = abs(current_rate - baseline_rate)</p>
 <p>return {"changed": change &gt; 0.05, "baseline": baseline_rate, "current": current_rate, "change": change}</p>
-<h4>Alerting Configuration</h4>
+<h2>Alerting Configuration</h2>
 <p>class AIAlertManager:</p>
 <p>def <strong>init</strong>(self, pagerduty_key: str, slack_webhook: str):</p>
 <p>self.pagerduty = pagerduty_key</p>
 <p>self.slack = slack_webhook</p>
 <p>def check_and_alert(self, metrics: dict):</p>
 <p>alerts = []</p>
-<h4>Latency alerts</h4>
+<h2>Latency alerts</h2>
 <p>if metrics.get("p99_latency_ms", 0) &gt; 10000:</p>
 <p>alerts.append(Alert(severity="critical", title="High P99 latency",</p>
 <p>message=f"P99 latency is {metrics['p99_latency_ms']}ms"))</p>
-<h4>Error rate alerts</h4>
+<h2>Error rate alerts</h2>
 <p>if metrics.get("error_rate", 0) &gt; 0.05:</p>
 <p>alerts.append(Alert(severity="critical", title="Elevated error rate",</p>
 <p>message=f"Error rate is {metrics['error_rate']:.1%}"))</p>
-<h4>Cost anomaly alerts</h4>
+<h2>Cost anomaly alerts</h2>
 <p>if metrics.get("daily_cost", 0) &gt; metrics.get("daily_budget", float("inf")) * 1.2:</p>
 <p>alerts.append(Alert(severity="warning", title="Cost anomaly detected",</p>
 <p>message=f"Cost ${metrics['daily_cost']:.2f} exceeds 120% of budget"))</p>
-<h4>Drift alerts</h4>
+<h2>Drift alerts</h2>
 <p>if metrics.get("drift_detected", False):</p>
 <p>alerts.append(Alert(severity="warning", title="Response drift detected",</p>
 <p>message=f"Drift score: {metrics.get('drift_score', 0):.3f}"))</p>
 <p>return alerts</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>AI monitoring extends traditional observability with LLM-specific metrics. Track latency percentiles (P50, P95, P99) to detect slowdowns. Monitor token usage and cost per user and feature to control spending. Categorize errors by type (rate limit, context window, content filter) to identify provider issues. Most importantly, implement drift detection to catch subtle quality changes when models are updated or system prompts are modified. Alert on all four dimensions and investigate any metric that deviates more than 20% from its baseline.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -277,7 +264,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/llm-observability.html" class="related-card">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a><a href="/en/ai/llm-api-design.html" class="related-card">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a><a href="/en/ai/llm-version-management.html" class="related-card">LLM Version Management: Model Registry, A/B Testing, Rollback</a><a href="/en/ai/ai-caching-strategies.html" class="related-card">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a></div>
+      <div class="related-grid"><a href="/en/ai/llm-observability.html" class="related-card"><span class="related-card-title">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</span><span class="related-card-desc">Implement LLM observability for production AI applications: distributed tracing, token usage trackin</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="related-card-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="related-card-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handli</span></a><a href="/en/ai/llm-version-management.html" class="related-card"><span class="related-card-title">LLM Version Management: Model Registry, A/B Testing, Rollback</span><span class="related-card-desc">Manage LLM versions in production with model registries, A/B testing frameworks, gradual rollouts, a</span></a><a href="/en/ai/ai-caching-strategies.html" class="related-card"><span class="related-card-title">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</span><span class="related-card-desc">Reduce LLM API costs and latency with AI caching strategies: semantic caching, intelligent invalidat</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="related-card-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="related-card-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fa</span></a><a href="/en/ai/ai-data-privacy.html" class="related-card"><span class="related-card-title">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</span><span class="related-card-desc">Protect user privacy in AI applications with PII detection and redaction, data anonymization techniq</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

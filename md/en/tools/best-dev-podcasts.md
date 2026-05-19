@@ -51,4 +51,4 @@ Podcast| Hosts| Best Episodes
   
 **How to actually listen:** Pick 3 podcasts max. Subscribe to one technical (Syntax/Changelog), one career (Soft Skills), and one niche relevant to your work. Listen at 1.5x speed. Skip episodes that don't grab you in the first 5 minutes. See also: [Developer YouTube Channels](</en/tools/best-dev-youtube-channels.html>) and [Programming Books](</en/tools/best-programming-books.html>).
 
-**See also:** [Best Developer YouTube Channels 2026: 20 Channels That Actually Teach You Something](</en/tools/best-dev-youtube-channels.html>), [Best Programming Books 2026: 15 Books Every Developer Should Read](</en/tools/best-programming-books.html>), [Best Developer Communities 2026: Where to Learn, Share, and Grow](</en/tools/best-dev-communities.html>)
+**See also:** [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>), [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>), [Best Static Site Generators 2026: Astro vs Hugo vs 11ty vs Jekyll](</en/tools/best-static-site-generators-2026.html>)

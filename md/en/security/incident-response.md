@@ -8,45 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/security/incident-response.html
 
 # Incident Response Playbook for Developers
 
-## Incident Response Playbook for Developers
-
-### Incident Response Playbook for Developers
-
-#### Incident Response Playbook for Developers
-
-#### Incident Response Playbook for Developers
-
-#### Incident Response Playbook for Developers
-
-#### Incident Response Playbook for Developers
-
-#### Incident Response Playbook for Developers
-
-#### Incident Response Playbook for Developers
-
-#### Incident Response Playbook for Developers
-
-#### Incident Response Playbook for Developers
-
-#### Incident Response Playbook for Developers
-
-#### Incident Response Playbook for Developers
-
-#### Incident Response Playbook for Developers
-
-#### Incident Response Playbook for Developers
-
-#### Incident Response Playbook for Developers
-
-#### Incident Response Playbook for Developers
-
 Incident response is the structured process of handling security breaches and cyber attacks. Every development team needs a plan, because it is not a matter of if an incident will happen, but when. This article presents a practical incident response playbook based on the NIST SP 800-61 framework.
 
-#### The NIST Incident Response Framework
+## The NIST Incident Response Framework
 
 The NIST framework defines four phases: Preparation, Detection and Analysis, Containment Eradication and Recovery, and Post-Incident Activity. We add a fifth phase, Triage, between Detection and Containment.
 
-#### Phase 1: Preparation
+## Phase 1: Preparation
 
 Preparation is the most important phase. Without preparation, every incident becomes a chaotic scramble.
 
@@ -71,7 +39,7 @@ Preparation is the most important phase. Without preparation, every incident bec
 
 **Practice regularly** : Run tabletop exercises every quarter. Simulate a ransomware attack, a data exposure, or a compromised credential. Practice builds muscle memory.
 
-#### Phase 2: Detection and Analysis
+## Phase 2: Detection and Analysis
 
 Detection relies on monitoring and alerting. Every alert is a potential incident candidate.
 
@@ -118,7 +86,7 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
 
 
 
-#### Phase 3: Containment, Eradication, and Recovery
+## Phase 3: Containment, Eradication, and Recovery
 
 Containment stops the attack from spreading. Eradication removes the attacker's presence. Recovery returns systems to normal operation.
 
@@ -135,11 +103,11 @@ Containment stops the attack from spreading. Eradication removes the attacker's 
 
 
 
-#### Example: Block an IP at the firewall
+## Example: Block an IP at the firewall
 
 iptables -A INPUT -s 203.0.113.50 -j DROP
 
-#### Example: Disable a compromised AWS IAM user
+## Example: Disable a compromised AWS IAM user
 
 aws iam update-access-key \
 
@@ -186,7 +154,7 @@ aws iam update-access-key \
 
 
 
-#### Phase 4: Post-Incident Activity
+## Phase 4: Post-Incident Activity
 
 The post-mortem is where the team learns from the incident and improves processes.
 
@@ -209,13 +177,13 @@ The post-mortem is where the team learns from the incident and improves processe
 
 
 
-#### Post-Mortem: Service Credential Leak
+## Post-Mortem: Service Credential Leak
 
 **Date** : 2026-04-15
 
 **Severity** : SEV-2
 
-#### Timeline
+## Timeline
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 2026-04-15 09:23 UTC — GuardDuty alert for anomalous API calls
 
@@ -227,11 +195,11 @@ The post-mortem is where the team learns from the incident and improves processe
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 14:00 — All affected resources rotated
 
-#### Root Cause
+## Root Cause
 
 GitHub Actions workflow accidentally logged AWS_SECRET_ACCESS_KEY to debug output. Logs were publicly accessible.
 
-#### Action Items
+## Action Items
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Remove debug logging from CI/CD workflows (owner: DevOps, due: 04-22)
 
@@ -239,7 +207,7 @@ GitHub Actions workflow accidentally logged AWS_SECRET_ACCESS_KEY to debug outpu
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Add alert for API keys used outside expected regions (owner: Platform, due: 04-30)
 
-#### Forensic Evidence Collection
+## Forensic Evidence Collection
 
 Proper evidence collection preserves data for legal action and root cause analysis.
 
@@ -254,15 +222,15 @@ Proper evidence collection preserves data for legal action and root cause analys
 
 
 
-#### Capture memory dump with LiME
+## Capture memory dump with LiME
 
 insmod lime.ko "path=/evidence/memory.dump format=lime"
 
-#### Capture disk image
+## Capture disk image
 
 dd if=/dev/sda of=/evidence/disk.img bs=4M conv=noerror,sync
 
-#### Conclusion
+## Conclusion
 
 A well-practiced incident response process turns a potential disaster into a manageable event. Preparation separates professional teams from those that panic. Detection without response is just noise. And every incident, no matter how small, is an opportunity to improve.
 
@@ -277,3 +245,9 @@ A well-practiced incident response process turns a potential disaster into a man
 **See also:** [Incident Response Plan](</en/security/incident-response-plan.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>)
 
 **See also:** [Incident Response Plan](</en/security/incident-response-plan.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)

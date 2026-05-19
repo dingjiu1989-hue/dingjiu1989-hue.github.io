@@ -8,41 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/product-led-growth.html
 
 # Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
 
-## Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-#### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-#### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-#### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-#### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-#### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-#### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-#### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-#### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-#### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-#### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-#### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-#### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-#### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
-#### Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
-
 Product-led growth is not just a buzzword. It is a go-to-market strategy where the product itself drives acquisition, retention, and expansion. Instead of sales teams and marketing campaigns, users discover, try, and buy your product without human intervention.
 
-#### When PLG Works
+## When PLG Works
 
 PLG works when your product delivers value quickly. A user should be able to sign up and experience the core value in under five minutes. If your product requires training, configuration, or data migration, PLG will struggle.
 
@@ -50,7 +18,7 @@ Products that benefit from network effects are ideal for PLG. Collaboration tool
 
 PLG works best when the free experience is genuinely useful but limited enough that power users hit the ceiling. Calendly is a textbook example: the free tier handles basic scheduling, but teams need the paid plan for workflows and integrations.
 
-#### Freemium vs. Free Trial
+## Freemium vs. Free Trial
 
 Freemium offers a free version indefinitely with limited features. Free trial offers full features for a limited time. Choose based on your product's value delivery timeline.
 
@@ -60,7 +28,7 @@ Free trials work when users need the full product to evaluate it. Enterprise sof
 
 A hybrid approach works well: freemium for the core experience with a time-limited trial of premium features. This lets users experience basic value immediately while creating urgency around advanced features.
 
-#### Self-Serve Onboarding
+## Self-Serve Onboarding
 
 Self-serve onboarding is the backbone of PLG. Every step from signup to first value must happen without user confusion or frustration. Map the ideal onboarding path and measure drop-off at each step.
 
@@ -70,7 +38,7 @@ In-app guidance accelerates time-to-value. Tooltips, checklists, and sample data
 
 Send users to the most valuable screen after signup, not a generic dashboard. If your product creates reports, send users directly to report creation. If it analyzes data, prompt them to connect their first data source immediately.
 
-#### Usage-Based Pricing
+## Usage-Based Pricing
 
 Usage-based pricing aligns cost with value. Customers pay for what they use, which removes the risk of paying for unused capacity. APIs, cloud services, and communication platforms commonly use this model.
 
@@ -78,7 +46,7 @@ The challenge is predictability. Customers dislike variable bills. Mitigate this
 
 Communicate usage clearly in the product. A dashboard showing current usage, projected end-of-period usage, and comparison to previous periods prevents bill shock. Send alerts at 50%, 80%, and 100% of included usage.
 
-#### Conversion Optimization
+## Conversion Optimization
 
 PLG conversion rates are typically 2-5% from free to paid. Improving this by one percentage point doubles your revenue growth. Focus on three levers.
 
@@ -97,3 +65,9 @@ PLG is not passive. You still need content marketing, SEO, and community to driv
 **See also:** [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>)
 
 **See also:** [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>)
+
+**See also:** [Bootstrapping Essentials: Building a Startup Without VC Funding](</en/sidehustle/bootstrapping-essentials.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
+
+**See also:** [Bootstrapping Essentials: Building a Startup Without VC Funding](</en/sidehustle/bootstrapping-essentials.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
+
+**See also:** [Bootstrapping Essentials: Building a Startup Without VC Funding](</en/sidehustle/bootstrapping-essentials.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)

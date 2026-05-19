@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/backend-for-frontend.html
 
 # Backend for Frontend (BFF) Pattern
 
-## Backend for Frontend (BFF) Pattern
-
-### Backend for Frontend (BFF) Pattern
-
-#### Backend for Frontend (BFF) Pattern
-
-#### Backend for Frontend (BFF) Pattern
-
-#### Backend for Frontend (BFF) Pattern
-
-#### Backend for Frontend (BFF) Pattern
-
-#### Backend for Frontend (BFF) Pattern
-
-#### Backend for Frontend (BFF) Pattern
-
-#### Backend for Frontend (BFF) Pattern
-
-#### Backend for Frontend (BFF) Pattern
-
-#### Backend for Frontend (BFF) Pattern
-
-#### Backend for Frontend (BFF) Pattern
-
-#### Backend for Frontend (BFF) Pattern
-
-#### Backend for Frontend (BFF) Pattern
-
-#### Backend for Frontend (BFF) Pattern
-
 The Backend for Frontend (BFF) pattern, popularized by Phil Calçado from SoundCloud, addresses a fundamental tension in API design: a single backend cannot optimally serve multiple, diverse clients. Mobile applications have different data requirements, bandwidth constraints, and interaction patterns than web browsers or IoT devices. The BFF pattern creates a dedicated backend layer for each client type. 
 
 Core Concept 
@@ -79,3 +49,9 @@ In practice, the BFF pattern has become a standard recommendation for microservi
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)
 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)
+
+**See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
+
+**See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
+
+**See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)

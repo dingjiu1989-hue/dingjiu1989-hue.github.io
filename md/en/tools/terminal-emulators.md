@@ -8,41 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/tools/terminal-emulators.html
 
 # Best Terminal Emulators 2026
 
-## Best Terminal Emulators 2026
-
-### Best Terminal Emulators 2026
-
-#### Best Terminal Emulators 2026
-
-#### Best Terminal Emulators 2026
-
-#### Best Terminal Emulators 2026
-
-#### Best Terminal Emulators 2026
-
-#### Best Terminal Emulators 2026
-
-#### Best Terminal Emulators 2026
-
-#### Best Terminal Emulators 2026
-
-#### Best Terminal Emulators 2026
-
-#### Best Terminal Emulators 2026
-
-#### Best Terminal Emulators 2026
-
-#### Best Terminal Emulators 2026
-
-#### Best Terminal Emulators 2026
-
-#### Best Terminal Emulators 2026
-
-#### Best Terminal Emulators 2026
-
 The terminal emulator is one of the most frequently used tools in a developer's workflow. Modern terminal emulators offer GPU acceleration, split panes, session management, and even AI integration. This guide compares the best options in 2026.
 
-#### What Makes a Good Terminal Emulator
+## What Makes a Good Terminal Emulator
 
   * **Performance** : Smooth scrolling, fast rendering, low latency.
 
@@ -57,7 +25,7 @@ The terminal emulator is one of the most frequently used tools in a developer's 
 
 
 
-#### iTerm2
+## iTerm2
 
 iTerm2 is the default choice for macOS developers. It has been the gold standard for years with extensive feature coverage.
 
@@ -82,25 +50,25 @@ iTerm2 is the default choice for macOS developers. It has been the gold standard
 
 
 
-#### iTerm2 shell integration
+## iTerm2 shell integration
 
-#### Install
+## Install
 
 curl -L https://iterm2.com/misc/install_shell_integration.sh | bash
 
-#### Then use features like:
+## Then use features like:
 
-#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Mark directories: Cmd+Shift+M
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Mark directories: Cmd+Shift+M
 
-#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Jump to marks: Cmd+Shift+Up/Down
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Jump to marks: Cmd+Shift+Up/Down
 
-#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Search with regex: Cmd+F (then enable Regex)
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Search with regex: Cmd+F (then enable Regex)
 
 **Pros** : Feature-rich, stable, excellent macOS integration, large community.
 
 **Cons** : macOS only, can feel cluttered, resource usage is moderate.
 
-#### Warp
+## Warp
 
 Warp is a modern, Rust-based terminal with built-in AI features and a block-based command editor.
 
@@ -123,17 +91,17 @@ Warp is a modern, Rust-based terminal with built-in AI features and a block-base
 
 
 
-#### Warp AI features
+## Warp AI features
 
-#### Type: "find all node processes and kill them"
+## Type: "find all node processes and kill them"
 
-#### Warp suggests: pkill -f "node" | or | kill $(pgrep -f "node")
+## Warp suggests: pkill -f "node" | or | kill $(pgrep -f "node")
 
 **Pros** : Beautiful UI, AI features, modern architecture, smart autocomplete.
 
 **Cons** : Newer (fewer power-user features), cloud account required, limited Linux support initially.
 
-#### Alacritty
+## Alacritty
 
 Alacritty is a minimalist, GPU-accelerated terminal emulator focused on performance and simplicity.
 
@@ -152,7 +120,7 @@ Alacritty is a minimalist, GPU-accelerated terminal emulator focused on performa
 
 
 
-#### alacritty.toml
+## alacritty.toml
 
 [window]
 
@@ -182,7 +150,7 @@ shell = { program = "/bin/zsh" }
 
 **Cons** : No tabs, no split panes (relies on tmux), minimal features.
 
-#### Kitty
+## Kitty
 
 Kitty is a GPU-accelerated terminal focused on performance and features. It supports image display and multi-window layouts.
 
@@ -203,7 +171,7 @@ Kitty is a GPU-accelerated terminal focused on performance and features. It supp
 
 
 
-#### Kitty kittens (built-in tools)
+## Kitty kittens (built-in tools)
 
 kitty +kitten icat image.png # Display image in terminal
 
@@ -211,7 +179,7 @@ kitty +kitten hyperlinked_grep # Search with hyperlinks
 
 kitty +kitten diff file1 file2 # Diff viewer
 
-#### kitty.conf
+## kitty.conf
 
 font_family JetBrains Mono
 
@@ -229,7 +197,7 @@ shell_integration enabled
 
 **Cons** : Linux-focused, macOS support less polished, unique keybinding system.
 
-#### Windows Terminal
+## Windows Terminal
 
 Windows Terminal is Microsoft's modern terminal application, highly recommended for Windows developers.
 
@@ -290,7 +258,7 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
 
 **Cons** : Windows only, PowerShell defaults can be slower.
 
-#### Hyper
+## Hyper
 
 Hyper is an Electron-based terminal built with web technologies. It uses HTML/CSS for rendering, making it highly customizable.
 
@@ -298,7 +266,7 @@ Hyper is an Electron-based terminal built with web technologies. It uses HTML/CS
 
 **Cons** : Significant overhead (Electron), slower than native terminals.
 
-#### Comparison Table
+## Comparison Table
 
 | Terminal | Platform | GPU Accel | Tabs | Splits | Config Format | Resource Usage |
 
@@ -316,17 +284,17 @@ Hyper is an Electron-based terminal built with web technologies. It uses HTML/CS
 
 | Hyper | Win/Mac/Linux | No | Yes | Yes | JS/HTML | High |
 
-#### Ecosystem Integration
+## Ecosystem Integration
 
 **Using tmux for session management:**
 
-#### Works with any terminal
+## Works with any terminal
 
 tmux new -s myproject
 
 tmux attach -t myproject # Reattach later
 
-#### Split panes in tmux (works in Alacritty/kitty)
+## Split panes in tmux (works in Alacritty/kitty)
 
 Ctrl-b % # Vertical split
 
@@ -346,7 +314,7 @@ Ctrl-b " # Horizontal split
 
 | NuShell | Structured data pipelines | Newer, smaller ecosystem |
 
-#### Recommendations
+## Recommendations
 
   * **macOS users** : iTerm2 for feature completeness, Warp for modern UX, Alacritty for performance.
 
@@ -361,7 +329,7 @@ Ctrl-b " # Horizontal split
 
 
 
-#### Summary
+## Summary
 
 The terminal emulator landscape in 2026 offers options for every preference. iTerm2 remains the most feature-complete for macOS. Warp brings modern AI-powered features. Alacritty and Kitty deliver GPU-accelerated performance. Windows Terminal is essential for Windows developers. No matter which terminal you choose, complement it with tmux for session management and a modern shell like Zsh or Fish for the best experience.
 
@@ -376,3 +344,9 @@ The terminal emulator landscape in 2026 offers options for every preference. iTe
 **See also:** [Warp vs iTerm2 vs Kitty: Best Terminal Emulator for Developers (2026)](</en/compare/warp-vs-iterm2-vs-kitty.html>), [Best Database GUI Clients](</en/tools/database-clients.html>), [Best Terminal Emulators for Developers 2026: Warp vs iTerm2 vs Kitty vs WezTerm](</en/tools/best-terminal-emulators.html>)
 
 **See also:** [Warp vs iTerm2 vs Kitty: Best Terminal Emulator for Developers (2026)](</en/compare/warp-vs-iterm2-vs-kitty.html>), [Best Database GUI Clients](</en/tools/database-clients.html>), [Best Terminal Emulators for Developers 2026: Warp vs iTerm2 vs Kitty vs WezTerm](</en/tools/best-terminal-emulators.html>)
+
+**See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
+
+**See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
+
+**See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)

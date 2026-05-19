@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/timeout-retry-patterns.png",
       "datePublished": "2026-04-30",
       "dateModified": "2026-05-12",
-      "wordCount": "1198",
+      "wordCount": "1172",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,22 +96,7 @@
       <h1 class="article-title">Timeout and Retry Patterns</h1>
       <div class="article-meta">Published 2026-04-30 · Last active 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/timeout-retry-patterns.png" alt="Timeout and Retry Patterns" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Timeout and Retry Patterns</h2>
-<h3>Timeout and Retry Patterns</h3>
-<h4>Timeout and Retry Patterns</h4>
-<h4>Timeout and Retry Patterns</h4>
-<h4>Timeout and Retry Patterns</h4>
-<h4>Timeout and Retry Patterns</h4>
-<h4>Timeout and Retry Patterns</h4>
-<h4>Timeout and Retry Patterns</h4>
-<h4>Timeout and Retry Patterns</h4>
-<h4>Timeout and Retry Patterns</h4>
-<h4>Timeout and Retry Patterns</h4>
-<h4>Timeout and Retry Patterns</h4>
-<h4>Timeout and Retry Patterns</h4>
-<h4>Timeout and Retry Patterns</h4>
-<h4>Timeout and Retry Patterns</h4>
-<p>Timeouts and retries are the most basic building blocks of resilient distributed systems, yet they are among the most commonly misconfigured. A timeout that is too short causes unnecessary failures under normal load spikes. A timeout that is too long causes cascading resource exhaustion. Retries without backpressure amplify failure. Getting these patterns right requires understanding the tradeoffs and the interactions between them. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/timeout-retry-patterns.png" alt="Timeout and Retry Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Timeouts and retries are the most basic building blocks of resilient distributed systems, yet they are among the most commonly misconfigured. A timeout that is too short causes unnecessary failures under normal load spikes. A timeout that is too long causes cascading resource exhaustion. Retries without backpressure amplify failure. Getting these patterns right requires understanding the tradeoffs and the interactions between them. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/timeout-retry-patterns.png" alt="Timeout and Retry Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Timeouts define the maximum time a caller waits for a response. Every remote call must have a timeout — without one, a hung dependency can hold open resources indefinitely, eventually exhausting connection pools and thread pools. The timeout should be set per operation type: a simple key-value lookup may have a 100ms timeout, while a complex report generation may have 30 seconds. The timeout should be based on the operation's p99.9 latency plus a safety margin. </p>
 <p>Deadline propagation extends timeout semantics across the call graph. Instead of each service independently timing out, the remaining deadline is propagated from caller to callee. If Service A has 2 seconds to respond and spends 1 second processing, it passes a 1-second deadline to Service B. This prevents the thundering herd problem where all downstream services receive requests that are already expired from the caller's perspective. gRPC supports deadline propagation natively through the context. </p>
 <p>Exponential backoff spaces retries with progressively longer delays. After the first failure, wait 100ms. After the second, 200ms. After the third, 400ms, and so on. The exponential growth prevents synchronized retries from overwhelming the recovering service. The base delay should be long enough to allow transient failures to resolve — typically 50-200ms for network-level retries, 1-10 seconds for service-level retries. </p>
@@ -126,7 +111,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -138,7 +126,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/retry-patterns.html" class="related-card">Retry Patterns</a><a href="/en/architecture/retry-backoff.html" class="related-card">Retry and Backoff Strategies</a><a href="/en/architecture/circuit-breaker-vs-bulkhead.html" class="related-card">Circuit Breaker vs Bulkhead Pattern</a><a href="/en/architecture/graceful-shutdown.html" class="related-card">Graceful Shutdown Patterns</a></div>
+      <div class="related-grid"><a href="/en/architecture/retry-patterns.html" class="related-card"><span class="related-card-title">Retry Patterns</span><span class="related-card-desc">Learn retry strategies: exponential backoff, jitter, retry budgets, and circuit breaker integration </span></a><a href="/en/architecture/retry-backoff.html" class="related-card"><span class="related-card-title">Retry and Backoff Strategies</span><span class="related-card-desc">Learn retry and backoff strategies for building resilient distributed systems — exponential backoff,</span></a><a href="/en/architecture/circuit-breaker-vs-bulkhead.html" class="related-card"><span class="related-card-title">Circuit Breaker vs Bulkhead Pattern</span><span class="related-card-desc">Differences, when to use each, resilience patterns, and combined application of circuit breaker and </span></a><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="related-card-title">Graceful Shutdown Patterns</span><span class="related-card-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful</span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/feature-flags-architecture.html" class="related-card"><span class="related-card-title">Feature Flags Architecture</span><span class="related-card-desc">Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feat</span></a></div>
     </section>
     
   </div>

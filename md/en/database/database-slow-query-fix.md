@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-slow-query-fix.html
 
 # Slow Query Troubleshooting: Identification, Profiling, and Optimization
 
-## Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
-### Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
-#### Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
-#### Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
-#### Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
-#### Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
-#### Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
-#### Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
-#### Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
-#### Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
-#### Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
-#### Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
-#### Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
-#### Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
-#### Slow Query Troubleshooting: Identification, Profiling, and Optimization
-
 Slow Query Troubleshooting: Identification, Profiling, and Optimization 
 
 Slow queries are the most common database performance problem. This article presents a systematic workflow: from identifying the slowest queries through profiling to implementing and verifying optimizations. 
@@ -115,13 +85,13 @@ ORDER BY duration DESC;
 
 External Tools 
 
-#### pgBadger: parse PostgreSQL logs for slow queries
+## pgBadger: parse PostgreSQL logs for slow queries
 
 pgbadger /var/log/postgresql/postgresql.log -o report.html
 
-#### pgFincore: analyze cache hit rates
+## pgFincore: analyze cache hit rates
 
-#### pgbouncer logs for pool-level insights
+## pgbouncer logs for pool-level insights
 
 Step 2: Profile the Problem Query 
 
@@ -357,3 +327,9 @@ Most slow queries are fixed by adding the right index. When that is not enough, 
 **See also:** [Database Query Profiling: Finding and Fixing Performance Bottlenecks](</en/database/database-query-profiling.html>), [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
 
 **See also:** [Database Query Profiling: Finding and Fixing Performance Bottlenecks](</en/database/database-query-profiling.html>), [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
+
+**See also:** [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>), [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>)
+
+**See also:** [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>), [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>)
+
+**See also:** [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>), [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>)

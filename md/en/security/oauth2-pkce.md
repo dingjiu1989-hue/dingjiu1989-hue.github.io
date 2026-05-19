@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/oauth2-pkce.html
 
 # OAuth 2.0 and PKCE Explained
 
-## OAuth 2.0 and PKCE Explained
-
-### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
-#### OAuth 2.0 and PKCE Explained
-
 OAuth 2.0 Overview 
 
 OAuth 2.0 is an authorization framework that enables third-party applications to obtain limited access to a user's resources without exposing credentials. It has become the industry standard for API authorization, used by Google, GitHub, Facebook, and virtually every major platform. 
@@ -231,3 +197,9 @@ PKCE transforms the authorization code flow into a secure protocol for public cl
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>)
 
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>)
+
+**See also:** [Security Log Management](</en/security/log-management-security.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>)
+
+**See also:** [Security Log Management](</en/security/log-management-security.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>)
+
+**See also:** [Security Log Management](</en/security/log-management-security.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>)

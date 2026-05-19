@@ -67,4 +67,4 @@ Internal tool or admin panel (TS stack)| **tRPC**
   
 **Bottom line:** tRPC for TypeScript monoliths where development speed matters. GraphQL for complex data models with multiple clients. REST for public APIs and when you need universal compatibility. See our [REST API Best Practices](</en/tech/rest-api-best-practices.html>) guide for implementation details.
 
-**See also:** [API Architecture Comparison 2026: REST vs GraphQL vs tRPC vs gRPC vs WebSocket vs SSE](</en/compare/api-architecture-comparison.html>), [Best API Clients 2026: Postman vs Bruno vs Insomnia vs HTTPie vs Thunder Client](</en/tools/best-api-clients-2026.html>), [GraphQL API Design: Schema Best Practices, Federation, and Performance](</en/tech/graphql-api-design.html>)
+**See also:** [TypeScript vs JavaScript in 2026: Is JavaScript Still Worth Using?](</en/compare/typescript-vs-javascript.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>)

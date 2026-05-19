@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/retry-patterns.png",
       "datePublished": "2026-05-04",
       "dateModified": "2026-05-05",
-      "wordCount": "1015",
+      "wordCount": "1047",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,22 +96,7 @@
       <h1 class="article-title">Retry Patterns</h1>
       <div class="article-meta">Published 2026-05-04 · Last active 2026-05-05 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/retry-patterns.png" alt="Retry Patterns" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Retry Patterns</h2>
-<h3>Retry Patterns</h3>
-<h4>Retry Patterns</h4>
-<h4>Retry Patterns</h4>
-<h4>Retry Patterns</h4>
-<h4>Retry Patterns</h4>
-<h4>Retry Patterns</h4>
-<h4>Retry Patterns</h4>
-<h4>Retry Patterns</h4>
-<h4>Retry Patterns</h4>
-<h4>Retry Patterns</h4>
-<h4>Retry Patterns</h4>
-<h4>Retry Patterns</h4>
-<h4>Retry Patterns</h4>
-<h4>Retry Patterns</h4>
-<p>Retry patterns are fundamental to building resilient distributed systems. Network failures, transient service unavailability, and resource contention are inevitable in any distributed architecture. A well-designed retry mechanism can gracefully handle these failures without overwhelming downstream services or degrading user experience. This article covers exponential backoff, jitter, retry budgets, and integration with circuit breakers. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/retry-patterns.png" alt="Retry Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Retry patterns are fundamental to building resilient distributed systems. Network failures, transient service unavailability, and resource contention are inevitable in any distributed architecture. A well-designed retry mechanism can gracefully handle these failures without overwhelming downstream services or degrading user experience. This article covers exponential backoff, jitter, retry budgets, and integration with circuit breakers. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/retry-patterns.png" alt="Retry Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Exponential Backoff </p>
 <p>Exponential backoff is the most basic retry strategy. After a failure, the system waits an increasing amount of time before each subsequent retry. The wait time typically doubles with each attempt: 100ms, 200ms, 400ms, 800ms, and so on, up to a maximum delay. This prevents the retry storm problem, where many clients retry simultaneously and overwhelm an already-stressed service. </p>
 <p>The formula is straightforward: <code>delay = base_delay * (2 ^ attempt)</code>. Most implementations also cap the maximum delay to prevent excessively long waits. Common base delays range from 50ms to 500ms, with maximum delays typically between 10 and 60 seconds. </p>
@@ -134,7 +119,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -146,7 +134,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/retry-backoff.html" class="related-card">Retry and Backoff Strategies</a><a href="/en/architecture/timeout-retry-patterns.html" class="related-card">Timeout and Retry Patterns</a><a href="/en/architecture/bulkhead-pattern.html" class="related-card">Bulkhead Pattern for Resilience</a><a href="/en/architecture/alerting-strategies.html" class="related-card">Alerting Strategies for Production Systems</a></div>
+      <div class="related-grid"><a href="/en/architecture/retry-backoff.html" class="related-card"><span class="related-card-title">Retry and Backoff Strategies</span><span class="related-card-desc">Learn retry and backoff strategies for building resilient distributed systems — exponential backoff,</span></a><a href="/en/architecture/timeout-retry-patterns.html" class="related-card"><span class="related-card-title">Timeout and Retry Patterns</span><span class="related-card-desc">Deadline propagation, exponential backoff, jitter, circuit breaker integration, and retry best pract</span></a><a href="/en/architecture/bulkhead-pattern.html" class="related-card"><span class="related-card-title">Bulkhead Pattern for Resilience</span><span class="related-card-desc">Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, ci</span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/circuit-breaker-vs-bulkhead.html" class="related-card"><span class="related-card-title">Circuit Breaker vs Bulkhead Pattern</span><span class="related-card-desc">Differences, when to use each, resilience patterns, and combined application of circuit breaker and </span></a><a href="/en/architecture/cache-strategies.html" class="related-card"><span class="related-card-title">Caching Strategies</span><span class="related-card-desc">Compare write-through, write-around, write-back caching and invalidation strategies for distributed </span></a></div>
     </section>
     
   </div>

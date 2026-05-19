@@ -61,4 +61,4 @@ Multiple tech stacks required| **Microservices**
   
 **Bottom line:** Start with a modular monolith. Extract microservices only when you have a clear reason: independent scaling, team autonomy, or polyglot persistence. Premature microservices are the #1 cause of unnecessary complexity in software projects. See also: [API architecture comparison](</en/compare/trpc-vs-graphql-vs-rest.html>) and [API design patterns](</en/tech/api-design-patterns.html>).
 
-**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)
+**See also:** [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)

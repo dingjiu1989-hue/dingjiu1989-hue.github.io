@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/two-phase-commit.png",
       "datePublished": "2026-04-21",
       "dateModified": "2026-05-16",
-      "wordCount": "1101",
+      "wordCount": "1020",
       "keywords": "Architecture, System Design",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
       "inLanguage": "en",
@@ -98,22 +98,7 @@
       <h1 class="article-title">Two-Phase Commit (2PC) for Distributed Transactions</h1>
       <div class="article-meta">Published 2026-04-21 · Last active 2026-05-16 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/two-phase-commit.png" alt="Two-Phase Commit (2PC) for Distributed Transactions" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Two-Phase Commit (2PC) for Distributed Transactions</h2>
-<h3>Two-Phase Commit (2PC) for Distributed Transactions</h3>
-<h4>Two-Phase Commit (2PC) for Distributed Transactions</h4>
-<h4>Two-Phase Commit (2PC) for Distributed Transactions</h4>
-<h4>Two-Phase Commit (2PC) for Distributed Transactions</h4>
-<h4>Two-Phase Commit (2PC) for Distributed Transactions</h4>
-<h4>Two-Phase Commit (2PC) for Distributed Transactions</h4>
-<h4>Two-Phase Commit (2PC) for Distributed Transactions</h4>
-<h4>Two-Phase Commit (2PC) for Distributed Transactions</h4>
-<h4>Two-Phase Commit (2PC) for Distributed Transactions</h4>
-<h4>Two-Phase Commit (2PC) for Distributed Transactions</h4>
-<h4>Two-Phase Commit (2PC) for Distributed Transactions</h4>
-<h4>Two-Phase Commit (2PC) for Distributed Transactions</h4>
-<h4>Two-Phase Commit (2PC) for Distributed Transactions</h4>
-<h4>Two-Phase Commit (2PC) for Distributed Transactions</h4>
-<p>Two-phase commit (2PC) is a distributed transaction protocol that ensures atomic commitment across multiple databases or services. While it provides strong consistency guarantees, 2PC introduces significant complexity, blocking behavior, and failure modes that require careful consideration. This article examines the protocol mechanics, XA standard, coordinator failure scenarios, and modern alternatives. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/two-phase-commit.png" alt="Two-Phase Commit (2PC) for Distributed Transactions" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Two-phase commit (2PC) is a distributed transaction protocol that ensures atomic commitment across multiple databases or services. While it provides strong consistency guarantees, 2PC introduces significant complexity, blocking behavior, and failure modes that require careful consideration. This article examines the protocol mechanics, XA standard, coordinator failure scenarios, and modern alternatives. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/two-phase-commit.png" alt="Two-Phase Commit (2PC) for Distributed Transactions" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Protocol Overview </p>
 <p>The 2PC protocol involves a coordinator and multiple participants. The protocol proceeds in two phases. In phase one, the prepare phase, the coordinator sends a prepare request to all participants. Each participant checks whether it can commit the transaction, writes enough information to durable storage to guarantee commitability, and responds with either a "ready" or "abort" vote. </p>
 <p>In phase two, the commit phase, if all participants voted "ready", the coordinator sends a commit message to all participants. If any participant voted "abort", the coordinator sends an abort message. The critical guarantee is that once a participant votes "ready" in phase one, it must be able to commit until it receives a commit or abort instruction from the coordinator. </p>
@@ -134,7 +119,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/tech/distributed-transactions-guide.html">Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/tech/distributed-transactions-guide.html">Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/tech/distributed-transactions-guide.html">Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/tech/distributed-transactions-guide.html">Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/tech/distributed-transactions-guide.html">Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/tech/distributed-transactions-guide.html">Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/tech/distributed-transactions-guide.html">Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a>, <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a>, <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a>, <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -146,7 +134,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/backend-for-frontend.html" class="related-card">Backend for Frontend (BFF) Pattern</a><a href="/en/architecture/saga-orchestration.html" class="related-card">Saga Orchestration Pattern</a><a href="/en/tech/distributed-transactions-guide.html" class="related-card">Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a></div>
+      <div class="related-grid"><a href="/en/architecture/backend-for-frontend.html" class="related-card"><span class="related-card-title">Backend for Frontend (BFF) Pattern</span><span class="related-card-desc">Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data agg</span></a><a href="/en/architecture/saga-orchestration.html" class="related-card"><span class="related-card-title">Saga Orchestration Pattern</span><span class="related-card-desc">Coordinator pattern for distributed transactions, compensation strategies, state machines, and Tempo</span></a><a href="/en/tech/distributed-transactions-guide.html" class="related-card"><span class="related-card-title">Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency</span><span class="related-card-desc">Master distributed transaction patterns for microservices — choreographed sagas, orchestrated sagas,</span></a><a href="/en/architecture/cqrs-pattern.html" class="related-card"><span class="related-card-title">CQRS Pattern: Command Query Responsibility Segregation</span><span class="related-card-desc">Learn CQRS pattern with read/write separation, event sourcing integration, materialized views, and g</span></a><a href="/en/architecture/service-mesh.html" class="related-card"><span class="related-card-title">Service Mesh Patterns: Istio and Linkerd</span><span class="related-card-desc">Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and wh</span></a><a href="/en/architecture/bulkhead-pattern.html" class="related-card"><span class="related-card-title">Bulkhead Pattern for Resilience</span><span class="related-card-desc">Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, ci</span></a></div>
     </section>
     
   </div>

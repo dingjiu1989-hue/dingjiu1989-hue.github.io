@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/data-masking.png",
       "datePublished": "2026-03-09",
       "dateModified": "2026-04-19",
-      "wordCount": "1935",
+      "wordCount": "1892",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,24 +99,7 @@
       <h1 class="article-title">Data Masking and Redaction</h1>
       <div class="article-meta">Published 2026-03-09 · Last active 2026-04-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/data-masking.png" alt="Data Masking and Redaction" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Data Masking and Redaction</h2>
-<h3>Data Masking and Redaction</h3>
-<h4>Data Masking and Redaction</h4>
-<h4>Data Masking and Redaction</h4>
-<h4>Data Masking and Redaction</h4>
-<h4>Data Masking and Redaction</h4>
-<h4>Data Masking and Redaction</h4>
-<h4>Data Masking and Redaction</h4>
-<h4>Data Masking and Redaction</h4>
-<h4>Data Masking and Redaction</h4>
-<h4>Data Masking and Redaction</h4>
-<h4>Data Masking and Redaction</h4>
-<h4>Data Masking and Redaction</h4>
-<h4>Data Masking and Redaction</h4>
-<h4>Data Masking and Redaction</h4>
-<h4>Data Masking and Redaction</h4>
-<h4>Data Masking and Redaction</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/data-masking.png" alt="Data Masking and Redaction" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/data-masking.png" alt="Data Masking and Redaction" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Data masking protects sensitive information by replacing it with realistic but fictional data. Unlike encryption, masked data is permanently de-identified — it cannot be reversed to recover the original value. Organizations use masking for development, testing, analytics, and compliance with privacy regulations like GDPR and CCPA. </p>
 <p>Static Data Masking </p>
 <p>Static masking creates a sanitized copy of a production database for non-production use. </p>
@@ -226,7 +209,7 @@
 <p>return decorator</p>
 <p>@mask_sensitive_fields(['email', 'phone', 'credit_card'])</p>
 <p>def get_user_profile(user_id):</p>
-<h4>Returns full data; masking applied by decorator</h4>
+<h2>Returns full data; masking applied by decorator</h2>
 <p>return {</p>
 <p>'user_id': user_id,</p>
 <p>'email': 'john.doe@example.com',</p>
@@ -241,10 +224,10 @@
 <p>self.token_prefix = "tok_"</p>
 <p>def tokenize(self, sensitive_value, context):</p>
 <p>"""Replace sensitive value with a token."""</p>
-<h4>Generate unique token</h4>
+<h2>Generate unique token</h2>
 <p>token_id = secrets.token_hex(16)</p>
 <p>token = f"{self.token_prefix}{token_id}"</p>
-<h4>Store mapping in secure vault</h4>
+<h2>Store mapping in secure vault</h2>
 <p>self.vault.store(</p>
 <p>f"tokens/{token}",</p>
 <p>{</p>
@@ -262,11 +245,11 @@
 <p>if requester_role not in ['admin', 'auditor', 'compliance']:</p>
 <p>raise PermissionError("Not authorized to detokenize")</p>
 <p>record = self.vault.retrieve(f"tokens/{token}")</p>
-<h4>Increment access counter</h4>
+<h2>Increment access counter</h2>
 <p>record['access_count'] += 1</p>
 <p>record['last_accessed'] = datetime.utcnow().isoformat()</p>
 <p>self.vault.store(f"tokens/{token}", record)</p>
-<h4>Log access</h4>
+<h2>Log access</h2>
 <p>self._audit_log('detokenize', token, requester_role)</p>
 <p>return record['value']</p>
 <p>GDPR Compliance </p>
@@ -327,7 +310,10 @@
 <p><strong>See also:</strong> <a href="/en/security/malware-analysis.html">Malware Analysis Fundamentals</a>, <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/security/malware-analysis.html">Malware Analysis Fundamentals</a>, <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/security/malware-analysis.html">Malware Analysis Fundamentals</a>, <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
-<p><strong>See also:</strong> <a href="/en/security/malware-analysis.html">Malware Analysis Fundamentals</a>, <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/malware-analysis.html">Malware Analysis Fundamentals</a>, <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/malware-analysis.html">Malware Analysis Fundamentals</a>, <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/security/malware-analysis.html">Malware Analysis Fundamentals</a>, <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p>
+<p><strong>See also:</strong> <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -339,7 +325,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/malware-analysis.html" class="related-card">Malware Analysis Fundamentals</a><a href="/en/security/privacy-engineering.html" class="related-card">Privacy Engineering</a><a href="/en/security/audit-logging.html" class="related-card">Audit Logging Best Practices</a><a href="/en/security/cloud-security-posture.html" class="related-card">Cloud Security Posture Management</a></div>
+      <div class="related-grid"><a href="/en/security/malware-analysis.html" class="related-card"><span class="related-card-title">Malware Analysis Fundamentals</span><span class="related-card-desc">Foundational guide to malware analysis covering static and dynamic analysis techniques, sandboxing, </span></a><a href="/en/security/privacy-engineering.html" class="related-card"><span class="related-card-title">Privacy Engineering</span><span class="related-card-desc">Guide to privacy engineering covering privacy by design principles, data mapping, Privacy Impact Ass</span></a><a href="/en/security/audit-logging.html" class="related-card"><span class="related-card-title">Audit Logging Best Practices</span><span class="related-card-desc">Guide to audit logging covering immutable logs, log integrity verification, centralized logging arch</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="related-card-title">Container Image Security</span><span class="related-card-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability sc</span></a><a href="/en/security/iac-security.html" class="related-card"><span class="related-card-title">Infrastructure as Code Security</span><span class="related-card-desc">Guide to Infrastructure as Code security covering Terraform security scanning, policy as code, drift</span></a></div>
     </section>
     
   </div>

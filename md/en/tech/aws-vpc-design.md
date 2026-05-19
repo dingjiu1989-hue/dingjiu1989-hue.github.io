@@ -8,47 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/tech/aws-vpc-design.html
 
 # AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
 
-## AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
-
-#### Introduction
+## Introduction
 
 Amazon Virtual Private Cloud (VPC) is the foundational networking layer for AWS infrastructure. Every AWS resource — EC2 instances, RDS databases, Lambda functions, ECS tasks — exists within a VPC. Proper VPC design directly impacts security, performance, scalability, and cost. A poorly designed VPC can cause connectivity issues, security vulnerabilities, and expensive data transfer bills.
 
 This article covers subnet design, NAT strategies, VPC peering, Transit Gateway, security groups, and network ACLs.
 
-#### VPC and Subnet Design
+## VPC and Subnet Design
 
 A VPC spans all Availability Zones (AZs) in a region. The CIDR block must be large enough to accommodate current and future workloads. The standard RFC 1918 ranges are used: 10.0.0.0/8, 172.16.0.0/12, or 192.168.0.0/16. A /16 CIDR (65,536 addresses) provides sufficient capacity for most organizations.
 
@@ -72,19 +38,19 @@ Private: 10.0.12.0/24
 
 Data: 10.0.22.0/24
 
-#### NAT Gateways and Internet Connectivity
+## NAT Gateways and Internet Connectivity
 
 NAT Gateways enable private subnet resources to access the internet for updates, downloads, and external API calls while preventing unsolicited inbound connections. They are highly available within an AZ and managed by AWS, eliminating the maintenance burden of NAT Instances.
 
 Each NAT Gateway costs approximately $0.045/hour plus data processing charges. For high availability, deploy a NAT Gateway in each AZ used for production workloads. This increases cost but provides resiliency against AZ failures. Alternatively, a single shared NAT Gateway can serve all private subnets via transit gateway attachments.
 
-#### VPC Peering
+## VPC Peering
 
 VPC Peering connects two VPCs using AWS's internal network, providing low-latency, high-bandwidth connectivity with no bandwidth limits or single point of failure. Peered VPCs can be in the same or different accounts and regions.
 
 Key limitations: transitive peering is not supported (A to B and B to C does not imply A to C), overlapping CIDR blocks cannot be peered, and route tables must be manually configured on both sides. For more than a few VPCs, Transit Gateway is a better solution.
 
-#### AWS Transit Gateway
+## AWS Transit Gateway
 
 Transit Gateway (TGW) is a network transit hub connecting VPCs, VPN connections, and AWS Direct Connect. It supports transitive routing, eliminating the mesh complexity of VPC peering at scale.
 
@@ -104,7 +70,7 @@ Transit Gateway
 
 TGW supports route tables per attachment, enabling network segmentation. The default behavior is full mesh, but route table associations limit traffic flow between specific VPCs. TGW Peering connects transit gateways across regions, providing inter-region connectivity at premium data transfer rates.
 
-#### Security Groups vs. Network ACLs
+## Security Groups vs. Network ACLs
 
 Security groups act as virtual stateful firewalls at the instance level. They support allow rules only (no explicit deny), evaluate all rules before returning a decision, and track connection state automatically. Security groups are the primary security mechanism for AWS resources.
 
@@ -112,7 +78,7 @@ Network ACLs (NACLs) are stateless firewalls at the subnet level. They support b
 
 Defense in depth combines both: security groups for traffic control between logical application tiers, and NACLs for broad traffic filtering such as blocking known malicious IP ranges at the subnet boundary.
 
-#### Conclusion
+## Conclusion
 
 AWS VPC design requires careful planning of CIDR allocation, subnet layout, and connectivity strategies. Transit Gateway simplifies multi-VPC networking at scale, while security groups and NACLs provide layered defense. The most successful VPC designs are those that plan for growth, maintain isolation between environments, and implement connectivity in alignment with organizational security requirements.
 
@@ -127,3 +93,9 @@ AWS VPC design requires careful planning of CIDR allocation, subnet layout, and 
 **See also:** [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>)
 
 **See also:** [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>)
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Performance Testing](</en/tech/performance-testing.html>)
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Performance Testing](</en/tech/performance-testing.html>)
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Performance Testing](</en/tech/performance-testing.html>)

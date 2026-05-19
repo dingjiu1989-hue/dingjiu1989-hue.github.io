@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-locking-mechanisms.png",
       "datePublished": "2026-04-15",
       "dateModified": "2026-05-07",
-      "wordCount": "1042",
+      "wordCount": "968",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,45 +99,33 @@
       <h1 class="article-title">Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h1>
       <div class="article-meta">Published 2026-04-15 · Last active 2026-05-07 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-locking-mechanisms.png" alt="Database Locking: Row Locks, Table Locks, and Deadlock Prevention" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h2>
-<h3>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h3>
-<h4>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h4>
-<h4>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h4>
-<h4>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h4>
-<h4>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h4>
-<h4>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h4>
-<h4>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h4>
-<h4>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h4>
-<h4>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h4>
-<h4>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h4>
-<h4>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h4>
-<h4>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h4>
-<h4>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h4>
-<h4>Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h4>
-<p>Locking is how databases maintain data consistency under concurrent access. Without locks, concurrent transactions could read partially-written data or overwrite each other's changes. Different databases implement locking differently, but the core concepts are universal.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-locking-mechanisms.png" alt="Database Locking: Row Locks, Table Locks, and Deadlock Prevention" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Lock Modes</h4>
+      <div class="article-body"><p>Locking is how databases maintain data consistency under concurrent access. Without locks, concurrent transactions could read partially-written data or overwrite each other's changes. Different databases implement locking differently, but the core concepts are universal.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-locking-mechanisms.png" alt="Database Locking: Row Locks, Table Locks, and Deadlock Prevention" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Lock Modes</h2>
 <p>Shared locks (read locks) allow multiple transactions to read the same data simultaneously. Multiple shared locks can coexist on the same resource. Shared locks prevent exclusive locks from being acquired.</p>
 <p>Exclusive locks (write locks) prevent any other transaction from reading or writing the locked resource. Only one transaction can hold an exclusive lock. Exclusive locks block both shared and other exclusive lock requests.</p>
 <p>Update locks are a hybrid used to prevent deadlocks during read-then-write operations. An update lock starts as shared but can be promoted to exclusive. Only one transaction can hold an update lock on a resource.</p>
-<h4>Lock Granularity</h4>
+<h2>Lock Granularity</h2>
 <p>Row locks lock individual rows. They provide maximum concurrency but require more locks for the same operation. Row-level locking is the default in modern databases like PostgreSQL and MySQL (InnoDB).</p>
 <p>Page locks lock a group of rows on a database page. They balance concurrency and lock management overhead. Page-level locking is used by SQL Server and older MySQL storage engines. Page locks increase contention compared to row locks.</p>
 <p>Table locks lock the entire table. They provide maximum protection but minimum concurrency. Use table locks for DDL operations, bulk data loads, and when row-level locking overhead is unacceptable.</p>
 <p>Lock escalation: some databases automatically escalate row locks to table locks when a transaction holds many row locks on the same table. This prevents excessive lock memory usage but reduces concurrency.</p>
-<h4>Deadlocks</h4>
+<h2>Deadlocks</h2>
 <p>A deadlock occurs when two transactions each hold locks the other needs: Transaction A locks row 1, Transaction B locks row 2, then A waits for row 2 while B waits for row 1. Neither can proceed.</p>
 <p>Databases detect deadlocks through wait-for graph analysis. When detected, one transaction is chosen as the victim and rolled back. The victim is typically the transaction that accumulated the least work.</p>
 <p>Prevent deadlocks: access resources in a consistent order across all transactions. Keep transactions short to minimize lock duration. Use lock timeouts to fail fast rather than waiting indefinitely. Consider snapshot isolation to eliminate many locking conflicts.</p>
-<h4>Two-Phase Locking</h4>
+<h2>Two-Phase Locking</h2>
 <p>Two-Phase Locking (2PL) is the protocol databases use to ensure serializability. Phase 1 (growing phase): transactions acquire locks but cannot release them. Phase 2 (shrinking phase): transactions release locks but cannot acquire new ones.</p>
 <p>Strict 2PL releases all locks at transaction commit time. This is the most common implementation and prevents cascading aborts. If a transaction aborts, other transactions did not read its uncommitted writes.</p>
-<h4>Monitoring Locks</h4>
+<h2>Monitoring Locks</h2>
 <p>Query pg_locks in PostgreSQL or performance_schema.data_locks in MySQL to see current locks. Look for transactions holding locks for extended periods. Long lock waits indicate contention. Long-running transactions are the most common cause of blocking.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/schema-design.html">Schema Design Patterns: Normalization, Denormalization, Naming Conventions</a>, <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -149,7 +137,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-concurrency.html" class="related-card">Database Concurrency Control: MVCC, Locking, and Deadlocks</a><a href="/en/database/database-design-patterns.html" class="related-card">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a><a href="/en/database/database-partitioning.html" class="related-card">Database Table Partitioning: Range, List, Hash</a><a href="/en/database/read-replicas.html" class="related-card">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></div>
+      <div class="related-grid"><a href="/en/database/database-concurrency.html" class="related-card"><span class="related-card-title">Database Concurrency Control: MVCC, Locking, and Deadlocks</span><span class="related-card-desc">Deep dive into database concurrency control mechanisms: optimistic vs pessimistic locking, MVCC inte</span></a><a href="/en/database/database-design-patterns.html" class="related-card"><span class="related-card-title">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</span><span class="related-card-desc">Explore database design patterns for application development: Repository pattern, Unit of Work, Quer</span></a><a href="/en/database/database-partitioning.html" class="related-card"><span class="related-card-title">Database Table Partitioning: Range, List, Hash</span><span class="related-card-desc">Explore PostgreSQL table partitioning methods including range, list, and hash. Learn partition pruni</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="related-card-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="related-card-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing str</span></a><a href="/en/database/schema-design.html" class="related-card"><span class="related-card-title">Schema Design Patterns: Normalization, Denormalization, Naming Conventions</span><span class="related-card-desc">Explore database schema design patterns: normalization vs denormalization, naming conventions, times</span></a><a href="/en/database/triggers-patterns.html" class="related-card"><span class="related-card-title">Database Triggers: Use Cases, Performance Costs, and Alternatives</span><span class="related-card-desc">Explore database triggers for audit logging, validation, and synchronization. Understand performance</span></a></div>
     </section>
     
   </div>

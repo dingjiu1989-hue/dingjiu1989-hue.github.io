@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/output-encoding.png",
       "datePublished": "2026-03-12",
       "dateModified": "2026-05-03",
-      "wordCount": "561",
+      "wordCount": "566",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,33 +99,18 @@
       <h1 class="article-title">Output Encoding</h1>
       <div class="article-meta">Published 2026-03-12 · Last active 2026-05-03 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/output-encoding.png" alt="Output Encoding" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Output Encoding</h2>
-<h3>Output Encoding</h3>
-<h4>Output Encoding</h4>
-<h4>Output Encoding</h4>
-<h4>Output Encoding</h4>
-<h4>Output Encoding</h4>
-<h4>Output Encoding</h4>
-<h4>Output Encoding</h4>
-<h4>Output Encoding</h4>
-<h4>Output Encoding</h4>
-<h4>Output Encoding</h4>
-<h4>Output Encoding</h4>
-<h4>Output Encoding</h4>
-<h4>Output Encoding</h4>
-<h4>Output Encoding</h4>
-<h4>Output Encoding: Cross-Site Scripting (XSS) Prevention Guide</h4>
+      <div class="article-body"><h2>Output Encoding: Cross-Site Scripting (XSS) Prevention Guide</h2>
 <p>Output encoding is the strongest defense against Cross-Site Scripting (XSS). It transforms untrusted data into a safe representation before inserting it into an HTML page. When done correctly for each output context, it neutralizes even sophisticated injection attacks.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/output-encoding.png" alt="Output Encoding" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Why Encoding Matters</h4>
+<h2>Why Encoding Matters</h2>
 <p>XSS happens when user-controlled data is inserted into a web page without proper encoding. An attacker who submits <code>` as their username expects the browser to execute that script. Output encoding converts</code>&lt;<code>to</code>&lt;<code>and</code>&gt;<code>to</code>&gt;`, rendering the attack inert — the browser displays the text literally instead of executing it.</p>
 <p>Encoding must be context-aware. The same data needs different encoding depending on where it appears: HTML body, HTML attribute, JavaScript string, URL parameter, or CSS. Using the wrong encoder for the context leaves an opening for attackers.</p>
-<h4>HTML Body Context</h4>
+<h2>HTML Body Context</h2>
 <p>Data inserted between HTML tags needs HTML entity encoding. The critical characters are <code>&lt;</code>, <code>&gt;</code>, <code>&amp;</code>, <code>"</code>, and <code>'</code>. Most frameworks handle this automatically through template engines.</p>
 <p>import html</p>
 <p>safe_output = html.escape(user_input)</p>
-<h4>"" becomes ""</h4>
+<h2>"" becomes ""</h2>
 <p>Template engines like Jinja2, ERB, and Thymeleaf auto-escape by default. This handles 80% of encoding needs. Verify that auto-escaping is enabled and never disable it without a documented reason.</p>
-<h4>HTML Attribute Context</h4>
+<h2>HTML Attribute Context</h2>
 <p>Attribute encoding is stricter than body encoding. In addition to the standard entities, you must encode spaces, equals signs, and backticks. Unquoted attributes are particularly dangerous — avoid them entirely.</p>
 <p>def encode_html_attribute(value):</p>
 <p>value = value.replace('&amp;', '&amp;')</p>
@@ -137,13 +122,16 @@
 <p>value = value.replace('<code>', '</code>')</p>
 <p>return value</p>
 <p>Always quote HTML attributes. Never construct HTML by concatenating strings — use the DOM API or a template engine.</p>
-<h4>JavaScript Context</h4>
+<h2>JavaScript Context</h2>
 <p>Data inserted into JavaScript requires JSON encoding or hex entity encoding. Never insert untrusted data directly into a `</p>
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/cors-security.html">CORS Security</a>.</p>
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/session-management.html">Session Management Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/session-management.html">Session Management Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/session-management.html">Session Management Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/session-management.html">Session Management Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/session-management.html">Session Management Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/session-management.html">Session Management Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/session-management.html">Session Management Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -155,7 +143,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/input-validation.html" class="related-card">Input Validation Deep Dive</a><a href="/en/security/cors-security.html" class="related-card">CORS Security</a><a href="/en/security/session-management.html" class="related-card">Session Management Security</a><a href="/en/security/api-authentication.html" class="related-card">API Authentication Methods</a></div>
+      <div class="related-grid"><a href="/en/security/input-validation.html" class="related-card"><span class="related-card-title">Input Validation Deep Dive</span><span class="related-card-desc">In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniqu</span></a><a href="/en/security/cors-security.html" class="related-card"><span class="related-card-title">CORS Security</span><span class="related-card-desc">In-depth guide to CORS security covering proper origin validation, preflight handling, common miscon</span></a><a href="/en/security/session-management.html" class="related-card"><span class="related-card-title">Session Management Security</span><span class="related-card-desc">Guide to secure session management covering JWT vs opaque tokens, rotation strategies, secure cookie</span></a><a href="/en/security/api-authentication.html" class="related-card"><span class="related-card-title">API Authentication Methods</span><span class="related-card-desc">Comprehensive guide to API authentication covering API keys, OAuth2 client credentials, mTLS, HMAC s</span></a><a href="/en/security/audit-logging.html" class="related-card"><span class="related-card-title">Audit Logging Best Practices</span><span class="related-card-desc">Guide to audit logging covering immutable logs, log integrity verification, centralized logging arch</span></a><a href="/en/security/certificate-management.html" class="related-card"><span class="related-card-title">Certificate Management</span><span class="related-card-desc">Practical guide to TLS certificate management covering Let's Encrypt, ACME protocol, automated renew</span></a></div>
     </section>
     
   </div>

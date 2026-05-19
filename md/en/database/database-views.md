@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-views.html
 
 # Database Views: Simple, Materialized, and Updateable Views
 
-## Database Views: Simple, Materialized, and Updateable Views
-
-### Database Views: Simple, Materialized, and Updateable Views
-
-#### Database Views: Simple, Materialized, and Updateable Views
-
-#### Database Views: Simple, Materialized, and Updateable Views
-
-#### Database Views: Simple, Materialized, and Updateable Views
-
-#### Database Views: Simple, Materialized, and Updateable Views
-
-#### Database Views: Simple, Materialized, and Updateable Views
-
-#### Database Views: Simple, Materialized, and Updateable Views
-
-#### Database Views: Simple, Materialized, and Updateable Views
-
-#### Database Views: Simple, Materialized, and Updateable Views
-
-#### Database Views: Simple, Materialized, and Updateable Views
-
-#### Database Views: Simple, Materialized, and Updateable Views
-
-#### Database Views: Simple, Materialized, and Updateable Views
-
-#### Database Views: Simple, Materialized, and Updateable Views
-
-#### Database Views: Simple, Materialized, and Updateable Views
-
 Database Views: Simple, Materialized, and Updateable Views 
 
 A database view is a stored query that behaves like a virtual table. Views abstract complexity, enforce security, and provide a stable API over changing schemas. PostgreSQL supports three categories: simple views, materialized views, and updateable views. 
@@ -211,3 +181,9 @@ Choose wisely between simple and materialized views. Simple views suit OLTP work
 **See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
 
 **See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>)

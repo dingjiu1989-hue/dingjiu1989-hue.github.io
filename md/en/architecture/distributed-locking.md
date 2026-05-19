@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/distributed-locking.html
 
 # Distributed Locking Mechanisms
 
-## Distributed Locking Mechanisms
-
-### Distributed Locking Mechanisms
-
-#### Distributed Locking Mechanisms
-
-#### Distributed Locking Mechanisms
-
-#### Distributed Locking Mechanisms
-
-#### Distributed Locking Mechanisms
-
-#### Distributed Locking Mechanisms
-
-#### Distributed Locking Mechanisms
-
-#### Distributed Locking Mechanisms
-
-#### Distributed Locking Mechanisms
-
-#### Distributed Locking Mechanisms
-
-#### Distributed Locking Mechanisms
-
-#### Distributed Locking Mechanisms
-
-#### Distributed Locking Mechanisms
-
-#### Distributed Locking Mechanisms
-
 Distributed locking coordinates access to shared resources across multiple processes or machines. While single-node locking is well-understood, distributed environments introduce unique challenges: network partitions, process pauses, clock drift, and partial failures. Different locking approaches offer distinct tradeoffs between consistency, availability, and performance. 
 
 Lease-based locking is the most common pattern. The lock has a time-to-live (TTL). The holder must periodically renew the lease before it expires. If the holder crashes or is partitioned, the lease expires and another process can acquire the lock. This prevents permanent lock holder failures. The critical implementation detail is choosing an appropriate lease duration — too short causes unnecessary lock releases, too long extends recovery time after holder failure. 
@@ -69,3 +39,9 @@ Optimistic concurrency is an alternative worth considering. Rather than acquirin
 **See also:** [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)
 
 **See also:** [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)

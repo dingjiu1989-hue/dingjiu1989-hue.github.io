@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/api-composition-pattern.h
 
 # API Composition Pattern
 
-## API Composition Pattern
-
-### API Composition Pattern
-
-#### API Composition Pattern
-
-#### API Composition Pattern
-
-#### API Composition Pattern
-
-#### API Composition Pattern
-
-#### API Composition Pattern
-
-#### API Composition Pattern
-
-#### API Composition Pattern
-
-#### API Composition Pattern
-
-#### API Composition Pattern
-
-#### API Composition Pattern
-
-#### API Composition Pattern
-
-#### API Composition Pattern
-
-#### API Composition Pattern
-
 The API composition pattern is a technique for retrieving data that spans multiple services in a microservice architecture. A composer (which could be an API gateway, a dedicated service, or the client itself) calls multiple services and combines their responses into a single, aggregated result. This pattern is the simplest approach to cross-service queries, but it requires careful handling of performance, error, and consistency concerns. 
 
 How API Composition Works 
@@ -93,3 +63,9 @@ API composition is a fundamental pattern in microservice architectures. It provi
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)

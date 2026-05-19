@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/message-queue-patterns.ht
 
 # Message Queue Patterns
 
-## Message Queue Patterns
-
-### Message Queue Patterns
-
-#### Message Queue Patterns
-
-#### Message Queue Patterns
-
-#### Message Queue Patterns
-
-#### Message Queue Patterns
-
-#### Message Queue Patterns
-
-#### Message Queue Patterns
-
-#### Message Queue Patterns
-
-#### Message Queue Patterns
-
-#### Message Queue Patterns
-
-#### Message Queue Patterns
-
-#### Message Queue Patterns
-
-#### Message Queue Patterns
-
-#### Message Queue Patterns
-
 Message queues enable asynchronous communication between distributed system components. They decouple producers from consumers, buffer traffic spikes, and provide reliability guarantees that direct communication cannot. This article examines the fundamental message queue patterns: competing consumers, publish-subscribe, dead letter queues, and the delivery semantics that govern reliable message processing. 
 
 Point-to-Point: Competing Consumers 
@@ -93,3 +63,9 @@ Message queue patterns form the backbone of reliable asynchronous communication 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
+
+**See also:** [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
+
+**See also:** [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
+
+**See also:** [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)

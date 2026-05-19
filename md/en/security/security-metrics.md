@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/security-metrics.html
 
 # Security Metrics and Reporting
 
-## Security Metrics and Reporting
-
-### Security Metrics and Reporting
-
-#### Security Metrics and Reporting
-
-#### Security Metrics and Reporting
-
-#### Security Metrics and Reporting
-
-#### Security Metrics and Reporting
-
-#### Security Metrics and Reporting
-
-#### Security Metrics and Reporting
-
-#### Security Metrics and Reporting
-
-#### Security Metrics and Reporting
-
-#### Security Metrics and Reporting
-
-#### Security Metrics and Reporting
-
-#### Security Metrics and Reporting
-
-#### Security Metrics and Reporting
-
-#### Security Metrics and Reporting
-
 Introduction 
 
 Security metrics translate technical security operations into business-relevant information that drives decision-making. Without metrics, security programs cannot demonstrate value, identify weaknesses, or justify resource allocation. Effective security reporting addresses multiple audiences — from technical teams to the board of directors — each with different information needs. 
@@ -110,11 +80,11 @@ total_risk = 0
 
 for vuln in vulnerabilities:
 
-#### CVSS score * asset criticality multiplier
+## CVSS score * asset criticality multiplier
 
 risk = vuln['cvss'] * (vuln['asset_criticality'] / 5)
 
-#### Exploit availability multiplier
+## Exploit availability multiplier
 
 if vuln.get('exploit_available'):
 
@@ -463,3 +433,9 @@ Security metrics must be meaningful, measurable, and actionable. Distinguish bet
 **See also:** [Content Security Policy](</en/security/content-security-policy.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Container Image Security](</en/security/container-image-security.html>)
 
 **See also:** [Content Security Policy](</en/security/content-security-policy.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Container Image Security](</en/security/container-image-security.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)

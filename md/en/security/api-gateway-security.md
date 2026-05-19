@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/api-gateway-security.html
 
 # API Gateway Security Patterns
 
-## API Gateway Security Patterns
-
-### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
-#### API Gateway Security Patterns
-
 The API Gateway as Security Perimeter 
 
 An API gateway acts as the single entry point for all client-to-service communication in a microservices architecture. It is uniquely positioned to enforce security policies centrally, reducing complexity in individual services and providing a consistent security layer. 
@@ -52,7 +18,7 @@ Authentication and Authorization
 
 The gateway validates tokens before requests reach backend services, offloading this responsibility from individual services. 
 
-#### Kong Gateway authentication configuration
+## Kong Gateway authentication configuration
 
 services:
 
@@ -226,7 +192,7 @@ minimum: 1
 
 Request Size Limiting 
 
-#### Nginx as API gateway
+## Nginx as API gateway
 
 http {
 
@@ -244,7 +210,7 @@ server_name api.example.com;
 
 location /api/ {
 
-#### Limit request size per endpoint
+## Limit request size per endpoint
 
 location /api/upload {
 
@@ -288,7 +254,7 @@ ssl_session_cache shared:SSL:10m;
 
 ssl_session_timeout 10m;
 
-#### Backend communication (re-encrypt)
+## Backend communication (re-encrypt)
 
 location /api/internal/ {
 
@@ -348,7 +314,7 @@ Threat Detection and WAF
 
 ModSecurity with OWASP CRS 
 
-#### Enable WAF on the gateway
+## Enable WAF on the gateway
 
 location /api/ {
 
@@ -356,23 +322,23 @@ modsecurity on;
 
 modsecurity_rules_file /etc/nginx/modsecurity/owasp-crs/crs-setup.conf;
 
-#### Custom rules
+## Custom rules
 
 modsecurity_rules '
 
-#### Block SQL injection patterns
+## Block SQL injection patterns
 
 SecRule REQUEST_URI "@rx (?i:(?:union[\s]+select|select[\s]+from))" \
 
 "id:1000,deny,status:403,msg:\'SQL Injection blocked\'"
 
-#### Block common XSS attempts
+## Block common XSS attempts
 
 SecRule ARGS "@rx ]*>" \
 
 "id:1001,deny,status:403,msg:\'XSS blocked\'"
 
-#### Rate limit login attempts
+## Rate limit login attempts
 
 SecRule IP:LOGIN_ATTEMPT "@gt 5" \
 
@@ -465,3 +431,9 @@ The API gateway is the ideal location to centralize security controls: authentic
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Security Log Management](</en/security/log-management-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>)
 
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Security Log Management](</en/security/log-management-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>)
+
+**See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)
+
+**See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)
+
+**See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)

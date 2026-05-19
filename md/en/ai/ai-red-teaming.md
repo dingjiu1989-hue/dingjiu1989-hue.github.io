@@ -8,47 +8,15 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-red-teaming.html
 
 # AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
 
-## AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-#### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-#### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-#### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-#### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-#### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-#### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-#### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-#### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-#### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-#### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-#### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-#### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-#### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
-#### AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
-
 Red teaming is essential for shipping trustworthy AI applications. You must understand how your system can be attacked before malicious actors find the vulnerabilities. Here is the practical guide to AI red teaming.
 
-#### What AI Red Teaming Covers
+## What AI Red Teaming Covers
 
 AI red teaming tests your application against adversarial inputs designed to bypass safety measures, extract sensitive information, or cause harmful outputs. It is not a one-time audit. It is an ongoing practice that evolves as attack techniques evolve.
 
 The main categories of attacks are prompt injection, jailbreaking, data extraction, and misuse. Each requires different testing approaches. Prompt injection tries to override system instructions. Jailbreaking tries to bypass content filters. Data extraction tries to access information the model should not reveal.
 
-#### Adversarial Testing Methodologies
+## Adversarial Testing Methodologies
 
 Manual red teaming starts with domain experts trying to break the system. Have a team of testers spend dedicated time probing your AI application with adversarial inputs.
 
@@ -58,7 +26,7 @@ For each attack category, develop specific test cases. A role-playing attack mig
 
 Document every successful attack in detail. Record the exact input, the model response, and the vulnerability it exposed. This documentation drives your defense improvements.
 
-#### Jailbreak Detection
+## Jailbreak Detection
 
 Jailbreak attempts follow recognizable patterns. Most involve reframing the request to bypass safety classifiers. Common patterns include character roleplay, academic research framing, and hypothetical scenarios.
 
@@ -66,7 +34,7 @@ Build a jailbreak classifier that flags suspicious inputs before they reach the 
 
 Monitor for jailbreak success. If responses deviate from expected patterns like suddenly agreeing to produce harmful content after refusing similar requests, investigate immediately. A successful jailbreak is a security incident.
 
-#### Safety Evaluation
+## Safety Evaluation
 
 Safety evaluation tests whether the model produces harmful content when it should refuse. This is distinct from jailbreak testing, which tests whether safety measures can be bypassed.
 
@@ -76,7 +44,7 @@ Build safety test datasets for each category. Include clear violation requests, 
 
 Set safety thresholds based on your risk tolerance. A medical application needs zero tolerance for harmful medical advice. A creative writing tool might have broader tolerance. Document your thresholds and the rationale.
 
-#### Automated Red Teaming
+## Automated Red Teaming
 
 Manual red teaming does not scale. Automated red teaming uses LLMs to generate adversarial test cases and evaluate responses at high volume.
 
@@ -86,7 +54,7 @@ The advantage of automation is breadth. A manual team might test 100 attack vari
 
 The disadvantage is depth. Automated attacks lack the creativity of determined human attackers. The best approach combines automated breadth with manual depth.
 
-#### Integrating Red Teaming into Development
+## Integrating Red Teaming into Development
 
 Red teaming should not be an afterthought. Integrate it into your development lifecycle from the start.
 
@@ -96,7 +64,7 @@ Schedule regular manual red teaming sessions. Monthly sessions with focused atta
 
 Track vulnerability discovery and remediation. How many vulnerabilities were found? How fast were they fixed? What categories have the most vulnerabilities? This data drives your improvement roadmap.
 
-#### Incident Response Planning
+## Incident Response Planning
 
 Despite your best efforts, some attacks will succeed. Prepare for that reality.
 
@@ -119,3 +87,9 @@ AI red teaming is a practice, not a project. Attack techniques evolve continuous
 **See also:** [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>)
 
 **See also:** [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>)
+
+**See also:** [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [AI Data Privacy: PII Detection, Data Anonymization, Local Processing](</en/ai/ai-data-privacy.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>)
+
+**See also:** [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [AI Data Privacy: PII Detection, Data Anonymization, Local Processing](</en/ai/ai-data-privacy.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>)
+
+**See also:** [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [AI Data Privacy: PII Detection, Data Anonymization, Local Processing](</en/ai/ai-data-privacy.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>)

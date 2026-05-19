@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-caching.html
 
 # Database Caching
 
-## Database Caching
-
-### Database Caching
-
-#### Database Caching
-
-#### Database Caching
-
-#### Database Caching
-
-#### Database Caching
-
-#### Database Caching
-
-#### Database Caching
-
-#### Database Caching
-
-#### Database Caching
-
-#### Database Caching
-
-#### Database Caching
-
-#### Database Caching
-
-#### Database Caching
-
-#### Database Caching
-
 Why Cache? 
 
 Caching reduces database load and improves response times. A good caching strategy can reduce database queries by 90% or more. 
@@ -118,7 +88,7 @@ if value:
 
 return json.loads(value)
 
-#### Try to acquire lock
+## Try to acquire lock
 
 lock_key = f"lock:{key}"
 
@@ -134,7 +104,7 @@ redis.delete(lock_key)
 
 return value
 
-#### Wait for the other thread
+## Wait for the other thread
 
 import time
 
@@ -157,3 +127,9 @@ Use cache-aside as the default pattern. Set appropriate TTLs. Implement mutex lo
 **See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>)
 
 **See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>)
+
+**See also:** [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)

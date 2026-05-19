@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/waf-deployment.html
 
 # WAF Deployment Patterns
 
-## WAF Deployment Patterns
-
-### WAF Deployment Patterns
-
-#### WAF Deployment Patterns
-
-#### WAF Deployment Patterns
-
-#### WAF Deployment Patterns
-
-#### WAF Deployment Patterns
-
-#### WAF Deployment Patterns
-
-#### WAF Deployment Patterns
-
-#### WAF Deployment Patterns
-
-#### WAF Deployment Patterns
-
-#### WAF Deployment Patterns
-
-#### WAF Deployment Patterns
-
-#### WAF Deployment Patterns
-
-#### WAF Deployment Patterns
-
-#### WAF Deployment Patterns
-
 WAF Overview 
 
 A Web Application Firewall (WAF) filters and monitors HTTP traffic between web applications and the internet. It protects against common attacks like SQL injection, XSS, and CSRF. 
@@ -46,7 +16,7 @@ Inline WAF Deployment
 
 The WAF sits directly in the request path: 
 
-#### ModSecurity configuration
+## ModSecurity configuration
 
 SecRuleEngine On
 
@@ -54,7 +24,7 @@ SecRequestBodyAccess On
 
 SecResponseBodyAccess On
 
-#### SQL Injection prevention
+## SQL Injection prevention
 
 SecRule REQUEST_COOKIES|REQUEST_COOKIES_NAMES|ARGS_NAMES|ARGS|XML:/* \
 
@@ -70,7 +40,7 @@ status:403,\
 
 msg:'SQL Injection Attack'"
 
-#### XSS prevention
+## XSS prevention
 
 SecRule ARGS "@detectXSS" \
 
@@ -88,7 +58,7 @@ Reverse Proxy WAF
 
 Deploy WAF as a reverse proxy for centralized protection: 
 
-#### Nginx with ModSecurity
+## Nginx with ModSecurity
 
 server {
 
@@ -96,7 +66,7 @@ listen 443 ssl;
 
 server_name app.example.com;
 
-#### ModSecurity enabled
+## ModSecurity enabled
 
 modsecurity on;
 
@@ -118,7 +88,7 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
 Cloud WAF (AWS WAF) 
 
-#### AWS WAF with rate limiting and SQL injection protection
+## AWS WAF with rate limiting and SQL injection protection
 
 resource "aws_wafv2_web_acl" "main" {
 
@@ -222,7 +192,7 @@ API Protection
 
 APIs require different WAF rules than web applications: 
 
-#### Custom WAF rule for API protection
+## Custom WAF rule for API protection
 
 API_WAF_RULES = {
 
@@ -319,3 +289,9 @@ Choose the WAF deployment pattern that fits your architecture. Inline WAF offers
 **See also:** [DNS Security](</en/security/dns-security.html>), [Email Security](</en/security/email-security.html>), [Key Management Systems](</en/security/key-management.html>)
 
 **See also:** [DNS Security](</en/security/dns-security.html>), [Email Security](</en/security/email-security.html>), [Key Management Systems](</en/security/key-management.html>)
+
+**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
+
+**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
+
+**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)

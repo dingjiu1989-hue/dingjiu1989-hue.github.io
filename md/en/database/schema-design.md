@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/schema-design.html
 
 # Schema Design Patterns: Normalization, Denormalization, Naming Conventions
 
-## Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
-### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
-#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
-#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
-#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
-#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
-#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
-#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
-#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
-#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
-#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
-#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
-#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
-#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
-#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
-
 Schema Design Patterns: Normalization, Denormalization, Naming Conventions 
 
 Schema design is the foundation of application performance and maintainability. Good schemas are intuitive, performant, and resilient to change. This article covers normalization trade-offs, denormalization strategies, and practical naming conventions. 
@@ -362,3 +332,9 @@ Schema design is a long-term investment. A well-designed schema reduces bugs, ma
 **See also:** [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>)
 
 **See also:** [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>)
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>)
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>)
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>)

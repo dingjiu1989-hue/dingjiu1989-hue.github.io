@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-disaster-recovery.ht
 
 # Database Disaster Recovery: RPO, RTO, Cross-Region Replication
 
-## Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
-### Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
-#### Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
-#### Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
-#### Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
-#### Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
-#### Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
-#### Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
-#### Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
-#### Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
-#### Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
-#### Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
-#### Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
-#### Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
-#### Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-
 Database Disaster Recovery: RPO, RTO, Cross-Region Replication 
 
 Disaster recovery (DR) ensures your database can survive catastrophic events: region outages, data corruption, accidental deletions, or ransomware attacks. Unlike high availability, which handles component failures, DR addresses large-scale disasters. 
@@ -90,7 +60,7 @@ WHERE application_name = 'dr_sub';
 
 AWS RDS Cross-Region Read Replicas 
 
-#### Create cross-region read replica
+## Create cross-region read replica
 
 aws rds create-db-instance-read-replica \
 
@@ -102,7 +72,7 @@ aws rds create-db-instance-read-replica \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-class db.r6g.large
 
-#### Promote to standalone for DR
+## Promote to standalone for DR
 
 aws rds promote-read-replica \
 
@@ -114,7 +84,7 @@ Multi-Region with Patroni
 
 Patroni can manage clusters across regions with careful configuration: 
 
-#### DR site configuration
+## DR site configuration
 
 scope: myapp
 
@@ -126,7 +96,7 @@ consul:
 
 host: dr-consul.service.consul:8500
 
-#### Separate DCS for DR isolation
+## Separate DCS for DR isolation
 
 tags:
 
@@ -136,11 +106,11 @@ Backup-Based DR
 
 For cost-sensitive environments, backups plus WAL archiving to S3 provide DR: 
 
-#### Continuous WAL archiving to cross-region S3 bucket
+## Continuous WAL archiving to cross-region S3 bucket
 
 archive_command = 'aws s3 cp %p s3://myapp-wal-dr/region/us-east-1/%f'
 
-#### DR restore procedure
+## DR restore procedure
 
 pg_restore --dbname=proddb /backups/dr/latest_full.dump
 
@@ -148,15 +118,15 @@ pg_receivewal --directory /backups/dr/wal
 
 Recovery Workflow 
 
-#### !/bin/bash
+## !/bin/bash
 
-#### Dr: restore to us-west-2
+## Dr: restore to us-west-2
 
-#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore latest full backup
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore latest full backup
 
 pgbackrest --stanza=prod --db-path=/var/lib/postgresql/dr restore
 
-#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set recovery target
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set recovery target
 
 cat >> /var/lib/postgresql/dr/postgresql.conf << EOF
 
@@ -168,11 +138,11 @@ recovery_target_action = promote
 
 EOF
 
-#### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Start and recover
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Start and recover
 
 pg_ctl start -D /var/lib/postgresql/dr
 
-#### 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify data integrity
+## 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify data integrity
 
 psql -c "SELECT count(*) FROM critical_table;"
 
@@ -184,9 +154,9 @@ Backups are worthless until proven restorable. Regular testing is mandatory.
 
 Automated Restore Test 
 
-#### !/bin/bash
+## !/bin/bash
 
-#### Weekly restore test
+## Weekly restore test
 
 set -euo pipefail
 
@@ -198,17 +168,17 @@ mkdir -p $TEST_DIR
 
 echo "=== DR Restore Test $(date) ===" >> $LOG_FILE
 
-#### Full restore
+## Full restore
 
 pgbackrest --stanza=prod --db-path=$TEST_DIR/data restore >> $LOG_FILE 2>&1
 
-#### Start database
+## Start database
 
 pg_ctl -D $TEST_DIR/data -l $TEST_DIR/pg.log start >> $LOG_FILE 2>&1
 
 sleep 5
 
-#### Verify
+## Verify
 
 echo "Database size:"
 
@@ -242,7 +212,7 @@ SELECT 'orders', max(created_at) FROM orders;
 
 "
 
-#### Cleanup
+## Cleanup
 
 pg_ctl -D $TEST_DIR/data stop >> $LOG_FILE 2>&1
 
@@ -270,23 +240,23 @@ Disaster Scenarios and Mitigations
 
 Testing DR with Chaos Engineering 
 
-#### Simulate region failure: block traffic to primary
+## Simulate region failure: block traffic to primary
 
 iptables -A INPUT -s dr-test-region -j DROP
 
-#### Trigger DR failover script
+## Trigger DR failover script
 
 ./dr_failover.sh --target us-west-2
 
-#### Verify applications work from DR region
+## Verify applications work from DR region
 
 curl -f https://dr-api.myapp.com/health
 
-#### Fail back
+## Fail back
 
 ./dr_failback.sh --target us-east-1
 
-#### Clean up
+## Clean up
 
 iptables -D INPUT -s dr-test-region -j DROP
 
@@ -303,3 +273,9 @@ Run DR drills quarterly at minimum. Document every drill outcome and update the 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
+
+**See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)

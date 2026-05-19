@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/api-gateway-patterns.html
 
 # API Gateway Patterns
 
-## API Gateway Patterns
-
-### API Gateway Patterns
-
-#### API Gateway Patterns
-
-#### API Gateway Patterns
-
-#### API Gateway Patterns
-
-#### API Gateway Patterns
-
-#### API Gateway Patterns
-
-#### API Gateway Patterns
-
-#### API Gateway Patterns
-
-#### API Gateway Patterns
-
-#### API Gateway Patterns
-
-#### API Gateway Patterns
-
-#### API Gateway Patterns
-
-#### API Gateway Patterns
-
-#### API Gateway Patterns
-
 An API gateway is a server that acts as the single entry point for client requests in a microservice architecture. It receives client requests, routes them to appropriate backend services, aggregates responses, and enforces cross-cutting concerns like authentication, rate limiting, and logging. This article examines the core API gateway patterns and their implementation considerations. 
 
 Routing 
@@ -97,3 +67,9 @@ API gateway patterns are essential for microservice architectures, providing cen
 **See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 
 **See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
+
+**See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
+
+**See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)

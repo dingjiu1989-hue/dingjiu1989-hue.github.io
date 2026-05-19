@@ -8,49 +8,15 @@ url: https://dingjiu1989-hue.github.io/en/tech/serverless-framework.html
 
 # Serverless Framework: From Zero to Production
 
-## Serverless Framework: From Zero to Production
-
-### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Serverless Framework: From Zero to Production
-
-#### Introduction
+## Introduction
 
 The Serverless Framework provides a unified experience for deploying functions, APIs, and event-driven architectures across major cloud providers. While serverless eliminates infrastructure management, it introduces challenges around cold starts, observability, and cost control. This guide walks through taking a serverless application from development to production using the Serverless Framework on AWS Lambda.
 
-#### Project Setup and Structure
+## Project Setup and Structure
 
 A well-structured serverless project separates concerns across functions, layers, and configuration:
 
-#### serverless.yml
+## serverless.yml
 
 service: order-processor
 
@@ -122,7 +88,7 @@ Action: dynamodb:PutItem
 
 Resource: !GetAtt OrdersTable.Arn
 
-#### Infrastructure as Code
+## Infrastructure as Code
 
 Define resources alongside functions for self-documenting infrastructure:
 
@@ -194,7 +160,7 @@ Properties:
 
 QueueName: orders-dlq-${self:provider.stage}
 
-#### Lambda Handler Implementation
+## Lambda Handler Implementation
 
 Write handlers with proper error handling and observability:
 
@@ -286,21 +252,21 @@ body: JSON.stringify({ message: "Internal server error" }),
 
 };
 
-#### Local Development
+## Local Development
 
 The `serverless-offline` plugin provides a local Lambda emulator:
 
-#### Start local API Gateway emulator
+## Start local API Gateway emulator
 
 serverless offline --stage dev --httpPort 4000
 
-#### Invoke a function directly
+## Invoke a function directly
 
 serverless invoke local --function createOrder \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--path test/fixtures/create-order.json
 
-#### Run with warm container simulation
+## Run with warm container simulation
 
 serverless offline --stage dev \
 
@@ -308,21 +274,21 @@ serverless offline --stage dev \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--reloadHandler
 
-#### Cold Start Optimization
+## Cold Start Optimization
 
 Cold starts add latency when Lambda scales up a new execution environment:
 
-#### Optimize for cold starts
+## Optimize for cold starts
 
 provider:
 
-#### Use AWS Graviton for better price/performance
+## Use AWS Graviton for better price/performance
 
 architecture: arm64
 
-#### Increase memory speeds up CPU allocation
+## Increase memory speeds up CPU allocation
 
-#### (and proportionally reduces cold start time)
+## (and proportionally reduces cold start time)
 
 memorySize: 1024
 
@@ -332,11 +298,11 @@ latencyCritical:
 
 handler: src/handlers/critical.handler
 
-#### Provisioned concurrency for critical paths
+## Provisioned concurrency for critical paths
 
 provisionedConcurrency: 5
 
-#### Reserve concurrency to prevent throttling
+## Reserve concurrency to prevent throttling
 
 reservedConcurrency: 20
 
@@ -376,7 +342,7 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 
 // Instead of: import { DynamoDB } from "aws-sdk";
 
-#### Monitoring and Observability
+## Monitoring and Observability
 
 CloudWatch is the default, but Powertools enhances observability significantly:
 
@@ -438,23 +404,23 @@ Threshold: 5
 
 ComparisonOperator: GreaterThanThreshold
 
-#### Cost Analysis
+## Cost Analysis
 
 Serverless costs are driven by invocation count, duration, and memory allocation:
 
-#### Calculate monthly cost estimate
+## Calculate monthly cost estimate
 
-#### Invocations: 10M/month
+## Invocations: 10M/month
 
-#### Avg duration: 200ms
+## Avg duration: 200ms
 
-#### Memory: 1024MB
+## Memory: 1024MB
 
-#### Cost = 10M * (0.2s / 1000ms) * 1GB * $0.00001667/GB-second
+## Cost = 10M * (0.2s / 1000ms) * 1GB * $0.00001667/GB-second
 
-#### = 10M * 0.2 * 0.00001667
+## = 10M * 0.2 * 0.00001667
 
-#### = ~$33.34/month
+## = ~$33.34/month
 
 Optimize cost with `serverless-prune-plugin` to remove old versions:
 
@@ -479,3 +445,9 @@ For high-throughput workloads, compare Lambda cost against ECS Fargate at sustai
 **See also:** [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
 
 **See also:** [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
+
+**See also:** [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
+
+**See also:** [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
+
+**See also:** [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)

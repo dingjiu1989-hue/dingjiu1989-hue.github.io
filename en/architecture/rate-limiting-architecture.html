@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-architecture.png",
       "datePublished": "2026-04-29",
       "dateModified": "2026-05-19",
-      "wordCount": "1179",
+      "wordCount": "1175",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,22 +96,7 @@
       <h1 class="article-title">Rate Limiting Architecture</h1>
       <div class="article-meta">Published 2026-04-29 · Last active 2026-05-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-architecture.png" alt="Rate Limiting Architecture" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Rate Limiting Architecture</h2>
-<h3>Rate Limiting Architecture</h3>
-<h4>Rate Limiting Architecture</h4>
-<h4>Rate Limiting Architecture</h4>
-<h4>Rate Limiting Architecture</h4>
-<h4>Rate Limiting Architecture</h4>
-<h4>Rate Limiting Architecture</h4>
-<h4>Rate Limiting Architecture</h4>
-<h4>Rate Limiting Architecture</h4>
-<h4>Rate Limiting Architecture</h4>
-<h4>Rate Limiting Architecture</h4>
-<h4>Rate Limiting Architecture</h4>
-<h4>Rate Limiting Architecture</h4>
-<h4>Rate Limiting Architecture</h4>
-<h4>Rate Limiting Architecture</h4>
-<p>Rate limiting protects system resources by controlling the rate at which clients can make requests. It prevents abuse, ensures fair resource allocation, and maintains system stability under load. The choice of rate limiting algorithm — how limits are tracked and enforced — determines the system's accuracy, memory usage, and ability to handle burst traffic. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-architecture.png" alt="Rate Limiting Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Rate limiting protects system resources by controlling the rate at which clients can make requests. It prevents abuse, ensures fair resource allocation, and maintains system stability under load. The choice of rate limiting algorithm — how limits are tracked and enforced — determines the system's accuracy, memory usage, and ability to handle burst traffic. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-architecture.png" alt="Rate Limiting Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The token bucket algorithm is the most widely used rate limiting approach. A bucket holds tokens that replenish at a fixed rate. Each request consumes one token. If the bucket is empty, the request is rejected. The bucket capacity allows bursts — if the bucket is full, a client can send a burst of requests equal to the bucket size. Token bucket has two parameters: the fill rate (steady-state requests per second) and the bucket size (maximum burst). This combination provides both sustained throughput limits and burst tolerance. </p>
 <p>The sliding window algorithm provides precise rate enforcement over time windows. A sliding window log stores timestamps for each request. When a new request arrives, timestamps outside the window are removed, and the count is checked against the limit. The sliding window counter variant improves memory efficiency by tracking two counters: the current window count and the previous window count, with a weighted estimate for the current position. This provides good accuracy with bounded memory. </p>
 <p>Fixed window counting is simpler but suffers from boundary effects. The window resets at fixed intervals (every minute, every hour). A client can send the full limit at the end of one window and the full limit at the beginning of the next, achieving double the intended rate. Fixed window is acceptable for coarse rate limiting where occasional bursts are tolerable but is inadequate for strict rate enforcement. </p>
@@ -126,7 +111,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -138,7 +126,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/rate-limiting-patterns.html" class="related-card">Rate Limiting Patterns</a><a href="/en/architecture/distributed-locking.html" class="related-card">Distributed Locking Mechanisms</a><a href="/en/architecture/api-gateway-patterns.html" class="related-card">API Gateway Patterns</a><a href="/en/architecture/consensus-algorithms.html" class="related-card">Consensus Algorithms: Paxos, Raft, Zab</a></div>
+      <div class="related-grid"><a href="/en/architecture/rate-limiting-patterns.html" class="related-card"><span class="related-card-title">Rate Limiting Patterns</span><span class="related-card-desc">Explore rate limiting patterns for protecting APIs and services from abuse — token bucket, sliding w</span></a><a href="/en/architecture/distributed-locking.html" class="related-card"><span class="related-card-title">Distributed Locking Mechanisms</span><span class="related-card-desc">Redis Redlock, ZooKeeper locks, lease mechanisms, fencing tokens, and consensus-based distributed lo</span></a><a href="/en/architecture/api-gateway-patterns.html" class="related-card"><span class="related-card-title">API Gateway Patterns</span><span class="related-card-desc">Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementatio</span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="related-card-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="related-card-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices</span></a><a href="/en/architecture/distributed-id.html" class="related-card"><span class="related-card-title">Distributed ID Generation</span><span class="related-card-desc">UUID v7, Snowflake, ULID, database sequences, k-ordered IDs and their tradeoffs in distributed syste</span></a><a href="/en/architecture/distributed-tracing-deep.html" class="related-card"><span class="related-card-title">Distributed Tracing: Deep Dive</span><span class="related-card-desc">Trace context propagation, sampling strategies, visualization, and implementation of distributed tra</span></a></div>
     </section>
     
   </div>

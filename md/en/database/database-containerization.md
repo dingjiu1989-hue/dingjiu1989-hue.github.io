@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-containerization.htm
 
 # Databases in Containers: StatefulSets, Persistent Volumes, and Backup
 
-## Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
-### Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
-#### Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
-#### Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
-#### Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
-#### Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
-#### Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
-#### Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
-#### Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
-#### Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
-#### Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
-#### Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
-#### Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
-#### Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
-#### Databases in Containers: StatefulSets, Persistent Volumes, and Backup
-
 Databases in Containers: StatefulSets, Persistent Volumes, and Backup 
 
 Running databases in containers was once considered an anti-pattern, but modern orchestration and storage primitives have made it viable for many production workloads. This article covers Kubernetes patterns for stateful databases, storage management, and operational considerations. 
@@ -231,19 +201,19 @@ cpu: "4"
 
 Automated Failover 
 
-#### Simulate pod failure to test failover
+## Simulate pod failure to test failover
 
 kubectl delete pod myapp-db-0
 
-#### Operator automatically:
+## Operator automatically:
 
-#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Detects primary is gone
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Detects primary is gone
 
-#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Promotes the most advanced replica
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Promotes the most advanced replica
 
-#### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Updates the service to point to new primary
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Updates the service to point to new primary
 
-#### Typical failover time: 15-30 seconds
+## Typical failover time: 15-30 seconds
 
 Backup in Containers 
 
@@ -291,7 +261,7 @@ Network Overhead
 
 Container networking adds latency vs bare metal: 
 
-#### Use hostNetwork for lowest latency
+## Use hostNetwork for lowest latency
 
 spec:
 
@@ -323,7 +293,7 @@ memory: "24Gi" # Allocate extra for OS cache (effective_cache_size)
 
 Tuning for Kubernetes 
 
-#### postgresql.conf tuned for container environments
+## postgresql.conf tuned for container environments
 
 shared_buffers = '4GB' # 25% of container memory limit
 
@@ -341,7 +311,7 @@ Anti-Patterns to Avoid
 
 EmptyDir for Data 
 
-#### WRONG: data lost on pod restart
+## WRONG: data lost on pod restart
 
 volumes:
 
@@ -357,7 +327,7 @@ Without proper clustering (Patroni, Stolon, CNPG), multiple replicas with the sa
 
 Using Deployments 
 
-#### WRONG: Deployments do not guarantee stable identity or storage
+## WRONG: Deployments do not guarantee stable identity or storage
 
 apiVersion: apps/v1
 
@@ -367,19 +337,19 @@ Always use StatefulSets for databases.
 
 Monitoring 
 
-#### Check pod status
+## Check pod status
 
 kubectl get pods -l app=postgres
 
-#### Check PVC status
+## Check PVC status
 
 kubectl get pvc -l app=postgres
 
-#### Check WAL archiving status
+## Check WAL archiving status
 
 kubectl exec myapp-db-1 -- psql -c "SELECT * FROM pg_stat_archiver;"
 
-#### View operator logs
+## View operator logs
 
 kubectl logs -n postgres-operator deployment/postgres-operator
 
@@ -424,3 +394,9 @@ Databases in containers are production-viable with the right operator, storage c
 **See also:** [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 
 **See also:** [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>)
+
+**See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>)
+
+**See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>)

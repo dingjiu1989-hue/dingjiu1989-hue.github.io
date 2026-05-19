@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-management.png",
       "datePublished": "2026-02-18",
       "dateModified": "2026-04-17",
-      "wordCount": "2373",
+      "wordCount": "2295",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -99,27 +99,11 @@
       <h1 class="article-title">Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
       <div class="article-meta">Published 2026-02-18 · Last active 2026-04-17 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-management.png" alt="Prompt Management: Versioning, Testing, Collaboration, Deployment" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Prompt Management: Versioning, Testing, Collaboration, Deployment</h2>
-<h3>Prompt Management: Versioning, Testing, Collaboration, Deployment</h3>
-<h4>Prompt Management: Versioning, Testing, Collaboration, Deployment</h4>
-<h4>Prompt Management: Versioning, Testing, Collaboration, Deployment</h4>
-<h4>Prompt Management: Versioning, Testing, Collaboration, Deployment</h4>
-<h4>Prompt Management: Versioning, Testing, Collaboration, Deployment</h4>
-<h4>Prompt Management: Versioning, Testing, Collaboration, Deployment</h4>
-<h4>Prompt Management: Versioning, Testing, Collaboration, Deployment</h4>
-<h4>Prompt Management: Versioning, Testing, Collaboration, Deployment</h4>
-<h4>Prompt Management: Versioning, Testing, Collaboration, Deployment</h4>
-<h4>Prompt Management: Versioning, Testing, Collaboration, Deployment</h4>
-<h4>Prompt Management: Versioning, Testing, Collaboration, Deployment</h4>
-<h4>Prompt Management: Versioning, Testing, Collaboration, Deployment</h4>
-<h4>Prompt Management: Versioning, Testing, Collaboration, Deployment</h4>
-<h4>Prompt Management: Versioning, Testing, Collaboration, Deployment</h4>
-<h4>Prompt Management: Versioning, Testing, Collaboration, Deployment</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Prompts are the primary interface for controlling LLM behavior, yet most teams manage them as copy-pasted text files or hardcoded strings in source code. As AI applications grow, prompts need the same rigor as application code: versioning, testing, review, staging, and deployment pipelines. This article covers the tools and workflows for professional prompt management.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-management.png" alt="Prompt Management: Versioning, Testing, Collaboration, Deployment" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Prompt as Code</h4>
+<h2>Prompt as Code</h2>
 <p>Store prompts in a structured, version-controlled format:</p>
-<h4>prompts/summarization.yaml</h4>
+<h2>prompts/summarization.yaml</h2>
 <p>name: document_summarizer</p>
 <p>version: 2.3.0</p>
 <p>model: claude-sonnet-4-20260512</p>
@@ -146,7 +130,7 @@
 <p>expected_output_contains: ["container orchestration", "pods"]</p>
 <p>min_length: 50</p>
 <p>max_length: 150</p>
-<h4>Prompt Registry</h4>
+<h2>Prompt Registry</h2>
 <p>A central registry stores all prompt versions with metadata:</p>
 <p>import hashlib</p>
 <p>import yaml</p>
@@ -181,7 +165,7 @@
 <p>prompt_a = self.get_prompt(name, version_a)["prompt"]</p>
 <p>prompt_b = self.get_prompt(name, version_b)["prompt"]</p>
 <p>return self._compute_diff(prompt_a, prompt_b)</p>
-<h4>Automated Prompt Testing</h4>
+<h2>Automated Prompt Testing</h2>
 <p>Test prompts against a suite of evaluation cases:</p>
 <p>class PromptTester:</p>
 <p>def <strong>init</strong>(self, llm_fn):</p>
@@ -208,14 +192,14 @@
 <p>results["pass_rate"] = results["passed"] / len(tests) if tests else 1.0</p>
 <p>return results</p>
 <p>def _run_single_test(self, prompt_data: dict, test: dict) -&gt; dict:</p>
-<h4>Build the prompt</h4>
+<h2>Build the prompt</h2>
 <p>system = prompt_data.get("system_prompt", "")</p>
 <p>template = prompt_data.get("user_template", "")</p>
 <p>inputs = test.get("input", {})</p>
 <p>full_prompt = template.format(**inputs) if inputs else template</p>
-<h4>Run the model</h4>
+<h2>Run the model</h2>
 <p>response = self.llm(system, full_prompt, prompt_data.get("parameters", {}))</p>
-<h4>Check assertions</h4>
+<h2>Check assertions</h2>
 <p>failures = []</p>
 <p>if "expected_output_contains" in test:</p>
 <p>for expected in test["expected_output_contains"]:</p>
@@ -226,9 +210,9 @@
 <p>if "max_length" in test and len(response) &gt; test["max_length"]:</p>
 <p>failures.append(f"Response too long: {len(response)} &gt; {test['max_length']}")</p>
 <p>return {"test": test, "passed": len(failures) == 0, "failures": failures, "response_preview": response[:200]}</p>
-<h4>CI/CD for Prompts</h4>
+<h2>CI/CD for Prompts</h2>
 <p>Integrate prompt changes into your deployment pipeline:</p>
-<h4>.github/workflows/prompt-deploy.yml</h4>
+<h2>.github/workflows/prompt-deploy.yml</h2>
 <p>name: Prompt Deployment</p>
 <p>on:</p>
 <p>push:</p>
@@ -255,7 +239,7 @@
 <p>runs-on: ubuntu-latest</p>
 <p>steps:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: python scripts/deploy_prompts.py --env production</p>
-<h4>Collaboration Workflow</h4>
+<h2>Collaboration Workflow</h2>
 <p>class PromptReviewWorkflow:</p>
 <p>def <strong>init</strong>(self, registry: PromptRegistry):</p>
 <p>self.registry = registry</p>
@@ -282,13 +266,16 @@
 <p>pr["status"] = "approved"</p>
 <p>pr["reviewers"].append({"name": reviewer, "action": "approve", "comment": comment})</p>
 <p>self.storage.save(f"reviews/{pr_id}", pr)</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>Manage prompts with the same rigor as code. Store them in YAML with version numbers, test cases, and metadata. Use a registry to track all versions and promote them through staging environments. Write automated tests that validate prompt outputs against assertions. Integrate prompt changes into CI/CD pipelines with review gates. This systematic approach prevents the common problems of prompt drift, broken deployments, and untracked changes that plague ad-hoc prompt management.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/prompt-chaining.html">Prompt Chaining: Decomposition, Parallel Execution, State Management</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -300,7 +287,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/llm-version-management.html" class="related-card">LLM Version Management: Model Registry, A/B Testing, Rollback</a><a href="/en/ai/ai-prompt-chaining.html" class="related-card">Prompt Chaining: Building Multi-Step LLM Workflows</a><a href="/en/ai/ai-testing-frameworks.html" class="related-card">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a><a href="/en/ai/prompt-chaining.html" class="related-card">Prompt Chaining: Decomposition, Parallel Execution, State Management</a></div>
+      <div class="related-grid"><a href="/en/ai/llm-version-management.html" class="related-card"><span class="related-card-title">LLM Version Management: Model Registry, A/B Testing, Rollback</span><span class="related-card-desc">Manage LLM versions in production with model registries, A/B testing frameworks, gradual rollouts, a</span></a><a href="/en/ai/ai-prompt-chaining.html" class="related-card"><span class="related-card-title">Prompt Chaining: Building Multi-Step LLM Workflows</span><span class="related-card-desc">Design prompt chains for complex LLM tasks: chain types, state management, error handling, and perfo</span></a><a href="/en/ai/ai-testing-frameworks.html" class="related-card"><span class="related-card-title">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</span><span class="related-card-desc">Comprehensive guide to AI testing frameworks including DeepEval, Ragas, and LangSmith. Implement aut</span></a><a href="/en/ai/prompt-chaining.html" class="related-card"><span class="related-card-title">Prompt Chaining: Decomposition, Parallel Execution, State Management</span><span class="related-card-desc">Master prompt chaining techniques: decompose complex tasks into steps, execute chains in parallel, m</span></a><a href="/en/ai/ai-code-generation-tools.html" class="related-card"><span class="related-card-title">AI Code Generation: Tools, Workflows, and Best Practices</span><span class="related-card-desc">Compare AI code generation tools: GitHub Copilot, Cursor, Claude Code. Best practices for AI-assiste</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="related-card-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="related-card-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fa</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

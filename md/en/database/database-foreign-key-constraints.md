@@ -8,39 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/database/database-foreign-key-constrai
 
 # Foreign Key Constraints: Referential Integrity in Practice
 
-## Foreign Key Constraints: Referential Integrity in Practice
-
-### Foreign Key Constraints: Referential Integrity in Practice
-
-#### Foreign Key Constraints: Referential Integrity in Practice
-
-#### Foreign Key Constraints: Referential Integrity in Practice
-
-#### Foreign Key Constraints: Referential Integrity in Practice
-
-#### Foreign Key Constraints: Referential Integrity in Practice
-
-#### Foreign Key Constraints: Referential Integrity in Practice
-
-#### Foreign Key Constraints: Referential Integrity in Practice
-
-#### Foreign Key Constraints: Referential Integrity in Practice
-
-#### Foreign Key Constraints: Referential Integrity in Practice
-
-#### Foreign Key Constraints: Referential Integrity in Practice
-
-#### Foreign Key Constraints: Referential Integrity in Practice
-
-#### Foreign Key Constraints: Referential Integrity in Practice
-
-#### Foreign Key Constraints: Referential Integrity in Practice
-
-#### Foreign Key Constraints: Referential Integrity in Practice
-
 Foreign key constraints enforce referential integrity between related tables. They guarantee that a value in one table has a corresponding value in another. Without foreign keys, applications must enforce relationships, which is error-prone.
 
-#### Referential Actions
+## Referential Actions
 
 ON DELETE CASCADE automatically deletes related rows when the parent row is deleted. Use when child rows have no meaning without the parent. Be careful with cascading deletes in deep relationship chains.
 
@@ -48,13 +18,13 @@ ON DELETE SET NULL sets the foreign key column to NULL when the parent is delete
 
 ON DELETE RESTRICT prevents deletion of the parent if child rows exist. This is the safest default—it prevents accidental data loss.
 
-#### Performance
+## Performance
 
 Foreign keys add overhead to INSERT, UPDATE, and DELETE operations. Each write validates that referenced rows exist. The overhead is typically small but matters for bulk operations.
 
 Indexes on foreign key columns are essential. Without indexes, each write to the parent table triggers a full table scan on the child table. PostgreSQL does not automatically index foreign keys; MySQL InnoDB does.
 
-#### Practical Guidelines
+## Practical Guidelines
 
 Use foreign keys to enforce relationships that are business rules. Skip them for high-volume logging tables where referential integrity is not critical. Always index foreign key columns. Consider deferrable constraints for bulk load operations.
 
@@ -69,3 +39,9 @@ Use foreign keys to enforce relationships that are business rules. Skip them for
 **See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
 
 **See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
+
+**See also:** [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
+
+**See also:** [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
+
+**See also:** [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)

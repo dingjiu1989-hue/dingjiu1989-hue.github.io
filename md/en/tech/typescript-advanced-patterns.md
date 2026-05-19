@@ -133,4 +133,4 @@ Discriminated Unions| Exhaustive state modeling (async, forms)
   
 **Bottom line:** Advanced TypeScript patterns let you catch bugs at compile time instead of runtime. Discriminated unions and branded types alone will eliminate entire categories of bugs. See also: [TypeScript ORM comparison](</en/compare/prisma-vs-drizzle-vs-typeorm.html>) and [tRPC for end-to-end types](</en/compare/trpc-vs-graphql-vs-rest.html>).
 
-**See also:** [Advanced TypeScript Types for Better Code](</en/tech/typescript-advanced-types.html>), [Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes](</en/tech/monorepo-setup-guide.html>), [WebSocket vs SSE vs Polling: Real-Time Data Patterns for Web Apps](</en/tech/websocket-vs-sse-vs-polling.html>)
+**See also:** [Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each](</en/tech/testing-strategies-web-apps.html>), [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>)

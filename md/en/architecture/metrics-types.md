@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/metrics-types.html
 
 # Metrics Types and Monitoring Methodologies
 
-## Metrics Types and Monitoring Methodologies
-
-### Metrics Types and Monitoring Methodologies
-
-#### Metrics Types and Monitoring Methodologies
-
-#### Metrics Types and Monitoring Methodologies
-
-#### Metrics Types and Monitoring Methodologies
-
-#### Metrics Types and Monitoring Methodologies
-
-#### Metrics Types and Monitoring Methodologies
-
-#### Metrics Types and Monitoring Methodologies
-
-#### Metrics Types and Monitoring Methodologies
-
-#### Metrics Types and Monitoring Methodologies
-
-#### Metrics Types and Monitoring Methodologies
-
-#### Metrics Types and Monitoring Methodologies
-
-#### Metrics Types and Monitoring Methodologies
-
-#### Metrics Types and Monitoring Methodologies
-
-#### Metrics Types and Monitoring Methodologies
-
 Metrics provide the quantitative foundation for understanding system health, detecting anomalies, and driving alerts. The four primary metric types — counters, gauges, histograms, and summaries — each serve distinct purposes. Combined with monitoring methodologies like RED, USE, and the Four Golden Signals, they form a complete picture of system behavior and are essential for effective operations. 
 
 Counters are monotonically increasing values that only go up (or reset to zero on restart). They measure cumulative events: total requests served, total errors, total bytes sent. Counters are useful for computing rates over time — requests per second, error rate — which are the most common observability signals. A counter alone is rarely useful; it is the rate of change that matters. Rate computation requires tracking the counter value over a time window and dividing the delta by the window duration. 
@@ -69,3 +39,9 @@ Metric retention and aggregation tiers optimize storage. Raw high-resolution met
 **See also:** [Observability: Logs, Metrics, and Traces](</en/architecture/observability-three-pillars.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 
 **See also:** [Observability: Logs, Metrics, and Traces](</en/architecture/observability-three-pillars.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>)

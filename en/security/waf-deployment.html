@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/waf-deployment.png",
       "datePublished": "2026-03-20",
       "dateModified": "2026-05-19",
-      "wordCount": "916",
+      "wordCount": "886",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,30 +99,15 @@
       <h1 class="article-title">WAF Deployment Patterns</h1>
       <div class="article-meta">Published 2026-03-20 · Last active 2026-05-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/waf-deployment.png" alt="WAF Deployment Patterns" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>WAF Deployment Patterns</h2>
-<h3>WAF Deployment Patterns</h3>
-<h4>WAF Deployment Patterns</h4>
-<h4>WAF Deployment Patterns</h4>
-<h4>WAF Deployment Patterns</h4>
-<h4>WAF Deployment Patterns</h4>
-<h4>WAF Deployment Patterns</h4>
-<h4>WAF Deployment Patterns</h4>
-<h4>WAF Deployment Patterns</h4>
-<h4>WAF Deployment Patterns</h4>
-<h4>WAF Deployment Patterns</h4>
-<h4>WAF Deployment Patterns</h4>
-<h4>WAF Deployment Patterns</h4>
-<h4>WAF Deployment Patterns</h4>
-<h4>WAF Deployment Patterns</h4>
-<p>WAF Overview </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/waf-deployment.png" alt="WAF Deployment Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>WAF Overview </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/waf-deployment.png" alt="WAF Deployment Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>A Web Application Firewall (WAF) filters and monitors HTTP traffic between web applications and the internet. It protects against common attacks like SQL injection, XSS, and CSRF. </p>
 <p>Inline WAF Deployment </p>
 <p>The WAF sits directly in the request path: </p>
-<h4>ModSecurity configuration</h4>
+<h2>ModSecurity configuration</h2>
 <p>SecRuleEngine On</p>
 <p>SecRequestBodyAccess On</p>
 <p>SecResponseBodyAccess On</p>
-<h4>SQL Injection prevention</h4>
+<h2>SQL Injection prevention</h2>
 <p>SecRule REQUEST_COOKIES|REQUEST_COOKIES_NAMES|ARGS_NAMES|ARGS|XML:/* \</p>
 <p>"/((\%27)|(\'))\s*((\%6F)|o|(\%4F))((\%72)|r|(\%52))/ix" \</p>
 <p>"id:'981173',\</p>
@@ -130,7 +115,7 @@
 <p>deny,\</p>
 <p>status:403,\</p>
 <p>msg:'SQL Injection Attack'"</p>
-<h4>XSS prevention</h4>
+<h2>XSS prevention</h2>
 <p>SecRule ARGS "@detectXSS" \</p>
 <p>"id:'958056',\</p>
 <p>phase:2,\</p>
@@ -139,11 +124,11 @@
 <p>msg:'XSS Attack Detected'"</p>
 <p>Reverse Proxy WAF </p>
 <p>Deploy WAF as a reverse proxy for centralized protection: </p>
-<h4>Nginx with ModSecurity</h4>
+<h2>Nginx with ModSecurity</h2>
 <p>server {</p>
 <p>listen 443 ssl;</p>
 <p>server_name app.example.com;</p>
-<h4>ModSecurity enabled</h4>
+<h2>ModSecurity enabled</h2>
 <p>modsecurity on;</p>
 <p>modsecurity_rules_file /etc/nginx/modsec/main.conf;</p>
 <p>location / {</p>
@@ -154,7 +139,7 @@
 <p>}</p>
 <p>}</p>
 <p>Cloud WAF (AWS WAF) </p>
-<h4>AWS WAF with rate limiting and SQL injection protection</h4>
+<h2>AWS WAF with rate limiting and SQL injection protection</h2>
 <p>resource "aws_wafv2_web_acl" "main" {</p>
 <p>name = "main-waf"</p>
 <p>description = "Main WAF ACL"</p>
@@ -206,7 +191,7 @@
 <p>}</p>
 <p>API Protection </p>
 <p>APIs require different WAF rules than web applications: </p>
-<h4>Custom WAF rule for API protection</h4>
+<h2>Custom WAF rule for API protection</h2>
 <p>API_WAF_RULES = {</p>
 <p>"missing_auth_header": {</p>
 <p>"priority": 1,</p>
@@ -253,7 +238,10 @@
 <p><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p>
-<p><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></p>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -265,7 +253,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/dns-security.html" class="related-card">DNS Security</a><a href="/en/security/email-security.html" class="related-card">Email Security</a><a href="/en/security/key-management.html" class="related-card">Key Management Systems</a><a href="/en/security/secure-api-design.html" class="related-card">Secure API Design Principles</a></div>
+      <div class="related-grid"><a href="/en/security/dns-security.html" class="related-card"><span class="related-card-title">DNS Security</span><span class="related-card-desc">Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filteri</span></a><a href="/en/security/email-security.html" class="related-card"><span class="related-card-title">Email Security</span><span class="related-card-desc">Complete guide to email security covering SPF, DKIM, DMARC configuration, email gateway deployment, </span></a><a href="/en/security/key-management.html" class="related-card"><span class="related-card-title">Key Management Systems</span><span class="related-card-desc">Deep dive into key management systems covering KMS, HSM, key rotation strategies, envelope encryptio</span></a><a href="/en/security/secure-api-design.html" class="related-card"><span class="related-card-title">Secure API Design Principles</span><span class="related-card-desc">Guide to secure API design covering input validation, rate limiting, idempotency, error handling, an</span></a><a href="/en/security/dlp-strategies.html" class="related-card"><span class="related-card-title">Data Loss Prevention Strategies</span><span class="related-card-desc">Implementing DLP across network, endpoint, and cloud with effective policy design and incident respo</span></a><a href="/en/security/api-authentication.html" class="related-card"><span class="related-card-title">API Authentication Methods</span><span class="related-card-desc">Comprehensive guide to API authentication covering API keys, OAuth2 client credentials, mTLS, HMAC s</span></a></div>
     </section>
     
   </div>

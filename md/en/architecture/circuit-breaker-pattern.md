@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/circuit-breaker-pattern.h
 
 # Circuit Breaker Pattern: Building Resilient Systems
 
-## Circuit Breaker Pattern: Building Resilient Systems
-
-### Circuit Breaker Pattern: Building Resilient Systems
-
-#### Circuit Breaker Pattern: Building Resilient Systems
-
-#### Circuit Breaker Pattern: Building Resilient Systems
-
-#### Circuit Breaker Pattern: Building Resilient Systems
-
-#### Circuit Breaker Pattern: Building Resilient Systems
-
-#### Circuit Breaker Pattern: Building Resilient Systems
-
-#### Circuit Breaker Pattern: Building Resilient Systems
-
-#### Circuit Breaker Pattern: Building Resilient Systems
-
-#### Circuit Breaker Pattern: Building Resilient Systems
-
-#### Circuit Breaker Pattern: Building Resilient Systems
-
-#### Circuit Breaker Pattern: Building Resilient Systems
-
-#### Circuit Breaker Pattern: Building Resilient Systems
-
-#### Circuit Breaker Pattern: Building Resilient Systems
-
-#### Circuit Breaker Pattern: Building Resilient Systems
-
 The circuit breaker pattern prevents cascading failures in distributed systems. When a service depends on another service that is failing, the circuit breaker detects the failures and stops sending requests to the failing service, allowing it time to recover. This article covers the circuit breaker state machine, implementation with Resilience4j, monitoring, and recovery strategies. 
 
 The Circuit Breaker State Machine 
@@ -217,7 +187,7 @@ return PaymentResponse.failed("Payment temporarily unavailable, please retry");
 
 }
 
-#### application.yml
+## application.yml
 
 resilience4j.circuitbreaker:
 
@@ -406,7 +376,7 @@ Key Metrics to Monitor
 
 
 
-#### Prometheus metric format (from Resilience4j exporter)
+## Prometheus metric format (from Resilience4j exporter)
 
 resilience4j_circuitbreaker_state{name="paymentService",state="closed"} 1
 
@@ -551,3 +521,9 @@ The circuit breaker pattern prevents cascading failures by detecting when a remo
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)

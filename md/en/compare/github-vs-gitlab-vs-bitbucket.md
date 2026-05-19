@@ -65,4 +65,4 @@ Maximum AI assistance| **GitHub + Copilot**
   
 **Bottom line:** GitHub for community and collaboration, GitLab for integrated DevOps, Bitbucket only if you live in Jira. Most developers should start with GitHub and only switch if they need something GitHub doesn't offer. See also: [Git Cheatsheet](</en/tech/git-cheatsheet.html>) and [Advanced Git Guide](</en/tech/git-advanced.html>).
 
-**See also:** [Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development](</en/tech/git-workflows-team-guide.html>), [Best CI/CD Tools 2026: GitHub Actions vs GitLab CI vs CircleCI vs ArgoCD](</en/tools/best-cicd-tools-2026.html>), [Fly.io vs Railway vs Render (2026): Best Modern PaaS for Developers?](</en/compare/fly-io-vs-railway-vs-render.html>)
+**See also:** [Self-Hosted PaaS Comparison 2026: Coolify vs Dokploy vs CapRover vs Kamal vs Dokku](</en/compare/self-hosted-paas-comparison.html>), [Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?](</en/compare/cursor-vs-copilot-vs-claude-code.html>), [Bun vs Node.js vs Deno (2026): Best JavaScript Runtime?](</en/compare/bun-vs-node-vs-deno.html>)

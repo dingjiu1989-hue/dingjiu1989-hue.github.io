@@ -46,7 +46,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/bulkhead-pattern.png",
       "datePublished": "2025-12-25",
       "dateModified": "2026-05-01",
-      "wordCount": "1026",
+      "wordCount": "1018",
       "keywords": "Architecture, System Design",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
       "inLanguage": "en",
@@ -97,22 +97,7 @@
       <h1 class="article-title">Bulkhead Pattern for Resilience</h1>
       <div class="article-meta">Published 2025-12-25 · Last active 2026-05-01 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/bulkhead-pattern.png" alt="Bulkhead Pattern for Resilience" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Bulkhead Pattern for Resilience</h2>
-<h3>Bulkhead Pattern for Resilience</h3>
-<h4>Bulkhead Pattern for Resilience</h4>
-<h4>Bulkhead Pattern for Resilience</h4>
-<h4>Bulkhead Pattern for Resilience</h4>
-<h4>Bulkhead Pattern for Resilience</h4>
-<h4>Bulkhead Pattern for Resilience</h4>
-<h4>Bulkhead Pattern for Resilience</h4>
-<h4>Bulkhead Pattern for Resilience</h4>
-<h4>Bulkhead Pattern for Resilience</h4>
-<h4>Bulkhead Pattern for Resilience</h4>
-<h4>Bulkhead Pattern for Resilience</h4>
-<h4>Bulkhead Pattern for Resilience</h4>
-<h4>Bulkhead Pattern for Resilience</h4>
-<h4>Bulkhead Pattern for Resilience</h4>
-<p>The Bulkhead pattern is a resilience strategy inspired by ship design: just as a ship's watertight compartments prevent a single hull breach from sinking the entire vessel, the Bulkhead pattern isolates components of a software system so that a failure in one part does not cascade to others. By partitioning resources into isolated pools, the Bulkhead pattern ensures that a misbehaving component cannot exhaust shared resources and bring down the entire system. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/bulkhead-pattern.png" alt="Bulkhead Pattern for Resilience" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>The Bulkhead pattern is a resilience strategy inspired by ship design: just as a ship's watertight compartments prevent a single hull breach from sinking the entire vessel, the Bulkhead pattern isolates components of a software system so that a failure in one part does not cascade to others. By partitioning resources into isolated pools, the Bulkhead pattern ensures that a misbehaving component cannot exhaust shared resources and bring down the entire system. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/bulkhead-pattern.png" alt="Bulkhead Pattern for Resilience" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Core Concept </p>
 <p>In a system without bulkheads, all requests compete for the same thread pool, database connection pool, or memory space. If one service becomes slow or unresponsive, its threads are held for extended periods. Eventually, the shared thread pool is exhausted, and all other services become unavailable—a catastrophic failure cascade. </p>
 <p>Bulkheads prevent this by allocating dedicated resource pools to different components or service clients. If component A's bulkhead is exhausted, only requests to component A are affected. Requests to component B continue to use their own dedicated pool. This isolation is critical in distributed systems where dependencies can fail in unpredictable ways. </p>
@@ -133,7 +118,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a>, <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a>, <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a>, <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -145,7 +133,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/retry-patterns.html" class="related-card">Retry Patterns</a><a href="/en/architecture/database-per-service.html" class="related-card">Database per Service Pattern</a><a href="/en/architecture/retry-backoff.html" class="related-card">Retry and Backoff Strategies</a></div>
+      <div class="related-grid"><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card"><span class="related-card-title">Circuit Breaker Pattern: Building Resilient Systems</span><span class="related-card-desc">Circuit breaker state machine (closed/open/half-open), implementation with Resilience4j, monitoring,</span></a><a href="/en/architecture/retry-patterns.html" class="related-card"><span class="related-card-title">Retry Patterns</span><span class="related-card-desc">Learn retry strategies: exponential backoff, jitter, retry budgets, and circuit breaker integration </span></a><a href="/en/architecture/database-per-service.html" class="related-card"><span class="related-card-title">Database per Service Pattern</span><span class="related-card-desc">Learn the database per service pattern for microservices data management — data isolation, eventual </span></a><a href="/en/architecture/retry-backoff.html" class="related-card"><span class="related-card-title">Retry and Backoff Strategies</span><span class="related-card-desc">Learn retry and backoff strategies for building resilient distributed systems — exponential backoff,</span></a><a href="/en/architecture/circuit-breaker-vs-bulkhead.html" class="related-card"><span class="related-card-title">Circuit Breaker vs Bulkhead Pattern</span><span class="related-card-desc">Differences, when to use each, resilience patterns, and combined application of circuit breaker and </span></a><a href="/en/architecture/rate-limiting-patterns.html" class="related-card"><span class="related-card-title">Rate Limiting Patterns</span><span class="related-card-desc">Explore rate limiting patterns for protecting APIs and services from abuse — token bucket, sliding w</span></a></div>
     </section>
     
   </div>

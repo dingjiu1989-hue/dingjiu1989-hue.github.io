@@ -8,43 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/tech/webpack-vs-vite-bundlers.html
 
 # Webpack vs Vite Comparison
 
-## Webpack vs Vite Comparison
-
-### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
-#### Webpack vs Vite Comparison
-
 Webpack has been the dominant JavaScript bundler for nearly a decade. Vite emerged in 2021 as a faster alternative leveraging native ES modules and esbuild. Choosing between them depends on your project requirements, team expertise, and performance needs.
 
-#### Architecture Differences
+## Architecture Differences
 
 The fundamental difference is development-time approach:
 
@@ -54,7 +20,7 @@ The fundamental difference is development-time approach:
 
 In production, both produce optimized bundles. Webpack uses its own (Terser-based) minification, while Vite uses Rollup for production builds.
 
-#### Development Server Performance
+## Development Server Performance
 
 Vite's HMR (Hot Module Replacement) is the clear winner:
 
@@ -72,7 +38,7 @@ Vite's HMR (Hot Module Replacement) is the clear winner:
 
 Vite's HMR works at the module level. When you edit a file, only that module is invalidated and re-served. Webpack must rebuild a module chunk, which scales with project size.
 
-#### Configuration Complexity
+## Configuration Complexity
 
 Webpack configuration has a reputation for verbosity:
 
@@ -162,13 +128,13 @@ server: { port: 3000 }
 
 Vite uses convention over configuration. TypeScript, JSX, CSS imports, and asset handling work out of the box without loaders or plugins for common cases.
 
-#### Plugin Ecosystem
+## Plugin Ecosystem
 
 Webpack's plugin and loader ecosystem is vast. Any transformation you can imagine has a Webpack loader. However, this also means more configuration and potential compatibility issues.
 
 Vite plugins are Rollup-compatible, and the Vite-specific plugin ecosystem has matured significantly. Most tools (React, Vue, Svelte, Solid) have first-party Vite plugins. For less common needs, Webpack still has broader coverage.
 
-#### Production Build Output
+## Production Build Output
 
 Webpack's production optimization is battle-tested and highly configurable. You control every aspect of code splitting, chunk naming, and asset processing.
 
@@ -186,7 +152,7 @@ Build speed comparison for a medium React project (50k lines):
 
 | HMR (single edit) | 400ms | 30ms |
 
-#### When to Choose Webpack
+## When to Choose Webpack
 
 Webpack remains the better choice when:
 
@@ -201,7 +167,7 @@ Webpack remains the better choice when:
 
 
 
-#### When to Choose Vite
+## When to Choose Vite
 
 Vite is the better choice for:
 
@@ -218,7 +184,7 @@ Vite is the better choice for:
 
 
 
-#### Migration Path
+## Migration Path
 
 Migrating from Webpack to Vite is usually straightforward:
 
@@ -236,7 +202,7 @@ Migrating from Webpack to Vite is usually straightforward:
 
 For large projects, consider a gradual migration using Vite's build and dev server alongside the existing Webpack setup.
 
-#### Summary
+## Summary
 
 Vite has won the "new project" battle with dramatically faster development feedback. Webpack remains indispensable for complex existing projects and micro-frontend architectures. Both produce excellent production builds. For new projects, start with Vite. For existing Webpack projects, invest in Vite migration only if development speed is a bottleneck. The industry trend clearly favors Vite, but Webpack's maturity and ecosystem ensure it will remain relevant for years.
 
@@ -251,3 +217,9 @@ Vite has won the "new project" battle with dramatically faster development feedb
 **See also:** [Git Workflows for Teams](</en/tech/git-workflows-2026.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
 
 **See also:** [Git Workflows for Teams](</en/tech/git-workflows-2026.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
+
+**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>)
+
+**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>)
+
+**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/cloud-cli-tools.png",
       "datePublished": "2026-01-30",
       "dateModified": "2026-05-02",
-      "wordCount": "1604",
+      "wordCount": "1513",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
@@ -110,135 +110,119 @@
       <h1 class="article-title">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h1>
       <div class="article-meta">Published 2026-01-30 · Last active 2026-05-02 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/cloud-cli-tools.png" alt="Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h2>
-<h3>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h3>
-<h4>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h4>
-<h4>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h4>
-<h4>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h4>
-<h4>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h4>
-<h4>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h4>
-<h4>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h4>
-<h4>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h4>
-<h4>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h4>
-<h4>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h4>
-<h4>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h4>
-<h4>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h4>
-<h4>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h4>
-<h4>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h4>
-<h4>Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Cloud provider CLIs are essential for infrastructure management, automation, and day-to-day operations. Each major cloud provider has its own CLI with unique features and syntax. This article covers the primary CLIs (aws-cli, gcloud, az) plus s5cmd for high-performance S3 operations, with practical examples and productivity patterns.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/cloud-cli-tools.png" alt="Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>AWS CLI</h4>
+<h2>AWS CLI</h2>
 <p>The most mature cloud CLI, now at version 2:</p>
-<h4>Installation</h4>
+<h2>Installation</h2>
 <p>curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"</p>
 <p>sudo installer -pkg AWSCLIV2.pkg -target /</p>
-<h4>Or via brew</h4>
+<h2>Or via brew</h2>
 <p>brew install awscli</p>
-<h4>Configuration</h4>
+<h2>Configuration</h2>
 <p>aws configure</p>
 <p>aws configure set region us-west-2</p>
 <p>aws configure set cli_pager ""</p>
-<h4>Profile management</h4>
+<h2>Profile management</h2>
 <p>aws configure --profile production</p>
 <p>aws s3 ls --profile production</p>
 <p>export AWS_PROFILE=production</p>
-<h4>Common operations</h4>
+<h2>Common operations</h2>
 <p>aws s3 ls s3://my-bucket/ --recursive --human-readable</p>
 <p>aws ec2 describe-instances --query "Reservations[<em>].Instances[</em>].[InstanceId,InstanceType,State.Name]" --output table</p>
 <p>aws s3 sync ./dist s3://my-website/ --delete --exact-timestamps</p>
 <p>aws logs tail /aws/lambda/my-function --follow</p>
 <p>aws ecs update-service --cluster prod --service api --force-new-deployment</p>
-<h4>With JMESPath filtering</h4>
+<h2>With JMESPath filtering</h2>
 <p>aws ec2 describe-instances \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--filters "Name=instance-state-name,Values=running" \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--query "Reservations[*].Instances[?Tags[?Key=='Environment' &amp;&amp; Value=='production']].[InstanceId,PrivateIpAddress,InstanceType]" \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--output json</p>
 <p><strong>Productivity aliases</strong> :</p>
-<h4>~/.zshrc</h4>
+<h2>~/.zshrc</h2>
 <p>alias awsp="export AWS_PROFILE=$(aws configure list-profiles | fzf)"</p>
 <p>alias aws-whoami="aws sts get-caller-identity"</p>
 <p>alias s3ls="aws s3 ls"</p>
 <p>alias s3sync="aws s3 sync"</p>
 <p>alias ec2ls="aws ec2 describe-instances --query 'Reservations[<em>].Instances[</em>].[InstanceId,InstanceType,State.Name,LaunchTime]' --output table"</p>
 <p>alias logs-tail="aws logs tail --follow"</p>
-<h4>gcloud (Google Cloud CLI)</h4>
-<h4>Installation</h4>
+<h2>gcloud (Google Cloud CLI)</h2>
+<h2>Installation</h2>
 <p>brew install --cask google-cloud-sdk</p>
-<h4>Or via curl</h4>
+<h2>Or via curl</h2>
 <p>curl https://sdk.cloud.google.com | bash</p>
 <p>exec -l $SHELL</p>
-<h4>Authentication</h4>
+<h2>Authentication</h2>
 <p>gcloud auth login</p>
 <p>gcloud auth application-default login</p>
 <p>gcloud config set project my-project</p>
 <p>gcloud config set compute/region us-central1</p>
-<h4>Common operations</h4>
+<h2>Common operations</h2>
 <p>gcloud compute instances list</p>
 <p>gcloud container clusters get-credentials prod-cluster --region us-central1</p>
 <p>gcloud builds submit --tag gcr.io/my-project/my-service</p>
 <p>gcloud run deploy my-service --image gcr.io/my-project/my-service --platform managed</p>
 <p>gcloud logging read "resource.type=cloud_run_revision AND severity&gt;=ERROR" --limit 50</p>
 <p>gcloud sql instances describe my-db</p>
-<h4>Configuration management</h4>
+<h2>Configuration management</h2>
 <p>gcloud config configurations create dev</p>
 <p>gcloud config configurations activate prod</p>
 <p>gcloud config list</p>
-<h4>Azure CLI (az)</h4>
-<h4>Installation</h4>
+<h2>Azure CLI (az)</h2>
+<h2>Installation</h2>
 <p>brew install azure-cli</p>
-<h4>Authentication</h4>
+<h2>Authentication</h2>
 <p>az login</p>
 <p>az account set --subscription "my-subscription"</p>
-<h4>Common operations</h4>
+<h2>Common operations</h2>
 <p>az vm list --output table</p>
 <p>az aks get-credentials --resource-group my-rg --name my-cluster</p>
 <p>az acr build --registry myregistry --image myapp:latest .</p>
 <p>az webapp log tail --name my-app --resource-group my-rg</p>
 <p>az sql db show --resource-group my-rg --server my-server --name my-db</p>
 <p>az group list --query "[].{Name:name, Location:location}" --output table</p>
-<h4>JMESPath queries</h4>
+<h2>JMESPath queries</h2>
 <p>az vm list --query "[?tags.Environment=='production'].{Name:name, Size:hardwareProfile.vmSize}" --output table</p>
-<h4>s5cmd</h4>
+<h2>s5cmd</h2>
 <p>A high-performance S3 CLI written in Go:</p>
-<h4>Installation</h4>
+<h2>Installation</h2>
 <p>brew install s5cmd</p>
-<h4>Configuration (reuses AWS CLI credentials)</h4>
-<h4>Just set AWS_PROFILE or AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY</h4>
-<h4>Speed comparison</h4>
-<h4>Copy 10,000 files:</h4>
+<h2>Configuration (reuses AWS CLI credentials)</h2>
+<h2>Just set AWS_PROFILE or AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY</h2>
+<h2>Speed comparison</h2>
+<h2>Copy 10,000 files:</h2>
 <p>time aws s3 cp --recursive s3://bucket/prefix/ ./local/ # ~60 seconds</p>
 <p>time s5cmd cp "s3://bucket/prefix/*" ./local/ # ~8 seconds</p>
-<h4>Operations</h4>
+<h2>Operations</h2>
 <p>s5cmd ls s3://my-bucket/</p>
 <p>s5cmd cp s3://bucket/key.gz ./</p>
 <p>s5cmd mv s3://bucket/old-key s3://bucket/new-key</p>
 <p>s5cmd rm s3://bucket/old-prefix/*</p>
-<h4>Batch operations from file</h4>
+<h2>Batch operations from file</h2>
 <p>echo "s3://bucket/logs/2026-01-01.log" &gt; files.txt</p>
 <p>echo "s3://bucket/logs/2026-01-02.log" &gt;&gt; files.txt</p>
 <p>s5cmd cp files.txt ./logs/</p>
-<h4>Run commands in parallel</h4>
+<h2>Run commands in parallel</h2>
 <p>s5cmd --numworkers 64 cp s3://large-bucket/* ./downloads/</p>
-<h4>Dry run</h4>
+<h2>Dry run</h2>
 <p>s5cmd --dry-run cp s3://bucket/* ./local/</p>
-<h4>Multi-Cloud Tools</h4>
-<h4>Cloud-specific environment management</h4>
-<h4>aws-vault — secure AWS credential management</h4>
+<h2>Multi-Cloud Tools</h2>
+<h2>Cloud-specific environment management</h2>
+<h2>aws-vault — secure AWS credential management</h2>
 <p>brew install aws-vault</p>
 <p>aws-vault add prod</p>
 <p>aws-vault exec prod -- aws s3 ls</p>
-<h4>AWS SSO helper</h4>
+<h2>AWS SSO helper</h2>
 <p>aws sso login --profile prod</p>
 <p>export AWS_PROFILE=prod</p>
-<h4>Cloud comparison commands</h4>
+<h2>Cloud comparison commands</h2>
 <p>echo "=== AWS ==="</p>
 <p>aws sts get-caller-identity</p>
 <p>echo "=== GCP ==="</p>
 <p>gcloud auth list</p>
 <p>echo "=== Azure ==="</p>
 <p>az account show</p>
-<h4>Comparison</h4>
+<h2>Comparison</h2>
 <p>| Feature | aws-cli v2 | gcloud | az | s5cmd |</p>
 <p>|---------|-----------|--------|-----|-------|</p>
 <p>| Language | Python | Python | Python | Go |</p>
@@ -248,7 +232,7 @@
 <p>| JMESPath | Built-in | Built-in | Built-in | No |</p>
 <p>| SSO support | Yes | Yes | Yes | No |</p>
 <p>| File transfer | Sequential | Sequential | Sequential | Parallel |</p>
-<h4>Recommendations</h4>
+<h2>Recommendations</h2>
 <ul>
 <li>
 <p><strong>AWS-focused</strong> : aws-cli v2 for full API coverage with s5cmd for large S3 transfers.</p>
@@ -273,7 +257,10 @@
 <p><strong>See also:</strong> <a href="/en/tools/cloud-cost-tools.html">Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP</a>, <a href="/en/tools/productivity-tracking.html">Developer Productivity Tracking Tools</a>, <a href="/en/tools/redis-tools.html">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/cloud-cost-tools.html">Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP</a>, <a href="/en/tools/productivity-tracking.html">Developer Productivity Tracking Tools</a>, <a href="/en/tools/redis-tools.html">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/cloud-cost-tools.html">Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP</a>, <a href="/en/tools/productivity-tracking.html">Developer Productivity Tracking Tools</a>, <a href="/en/tools/redis-tools.html">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a></p>
-<p><strong>See also:</strong> <a href="/en/tools/cloud-cost-tools.html">Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP</a>, <a href="/en/tools/productivity-tracking.html">Developer Productivity Tracking Tools</a>, <a href="/en/tools/redis-tools.html">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/cloud-cost-tools.html">Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP</a>, <a href="/en/tools/productivity-tracking.html">Developer Productivity Tracking Tools</a>, <a href="/en/tools/redis-tools.html">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tools/cloud-cost-tools.html">Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP</a>, <a href="/en/tools/productivity-tracking.html">Developer Productivity Tracking Tools</a>, <a href="/en/tools/redis-tools.html">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/cloud-cost-tools.html">Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP</a>, <a href="/en/tools/productivity-tracking.html">Developer Productivity Tracking Tools</a>, <a href="/en/tools/redis-tools.html">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a>, <a href="/en/tools/database-gui.html">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a>, <a href="/en/tools/database-gui.html">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a>, <a href="/en/tools/database-gui.html">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -285,7 +272,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/cloud-cost-tools.html" class="related-card">Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP</a><a href="/en/tools/productivity-tracking.html" class="related-card">Developer Productivity Tracking Tools</a><a href="/en/tools/redis-tools.html" class="related-card">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a><a href="/en/tools/shell-frameworks.html" class="related-card">Shell Frameworks: zsh, fish, bash Customization</a></div>
+      <div class="related-grid"><a href="/en/tools/cloud-cost-tools.html" class="related-card"><span class="related-card-title">Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP</span><span class="related-card-desc">Compare cloud cost management tools: native tools, third-party platforms, and cost optimization stra</span></a><a href="/en/tools/productivity-tracking.html" class="related-card"><span class="related-card-title">Developer Productivity Tracking Tools</span><span class="related-card-desc">Compare WakaTime, CodeTime, ActivityWatch and other tools for tracking developer productivity and co</span></a><a href="/en/tools/redis-tools.html" class="related-card"><span class="related-card-title">Redis Tools: RedisInsight, Redis CLI, Redis Commander</span><span class="related-card-desc">Essential tools for Redis management: RedisInsight for GUI-based visualization and analysis, Redis C</span></a><a href="/en/tools/shell-frameworks.html" class="related-card"><span class="related-card-title">Shell Frameworks: zsh, fish, bash Customization</span><span class="related-card-desc">Compare shell frameworks and prompt tools: Oh My Zsh, Starship, fish shell, and Powerlevel10k for pr</span></a><a href="/en/tools/command-line-productivity.html" class="related-card"><span class="related-card-title">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</span><span class="related-card-desc">Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code </span></a><a href="/en/tools/api-testing-2026.html" class="related-card"><span class="related-card-title">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</span><span class="related-card-desc">Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, </span></a></div>
     </section>
     
   </div>

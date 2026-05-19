@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/microservice-security.png",
       "datePublished": "2026-03-11",
       "dateModified": "2026-04-14",
-      "wordCount": "3252",
+      "wordCount": "3227",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,28 +99,12 @@
       <h1 class="article-title">Microservice Security</h1>
       <div class="article-meta">Published 2026-03-11 · Last active 2026-04-14 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/microservice-security.png" alt="Microservice Security" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Microservice Security</h2>
-<h3>Microservice Security</h3>
-<h4>Microservice Security</h4>
-<h4>Microservice Security</h4>
-<h4>Microservice Security</h4>
-<h4>Microservice Security</h4>
-<h4>Microservice Security</h4>
-<h4>Microservice Security</h4>
-<h4>Microservice Security</h4>
-<h4>Microservice Security</h4>
-<h4>Microservice Security</h4>
-<h4>Microservice Security</h4>
-<h4>Microservice Security</h4>
-<h4>Microservice Security</h4>
-<h4>Microservice Security</h4>
-<h4>Microservice Security</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/microservice-security.png" alt="Microservice Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/microservice-security.png" alt="Microservice Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Microservice architectures distribute application functionality across multiple independent services, each with its own data store, API, and deployment lifecycle. This distribution increases the attack surface — intra-service communication must be secured, secrets must be distributed without exposure, and visibility must span service boundaries. </p>
 <p>Service Mesh mTLS </p>
 <p>A service mesh provides a dedicated infrastructure layer for handling service-to-service communication. It transparently encrypts traffic between services using mutual TLS (mTLS). </p>
 <p>Istio mTLS Configuration </p>
-<h4>Enable mTLS across the mesh</h4>
+<h2>Enable mTLS across the mesh</h2>
 <p>apiVersion: security.istio.io/v1beta1</p>
 <p>kind: PeerAuthentication</p>
 <p>metadata:</p>
@@ -129,7 +113,7 @@
 <p>spec:</p>
 <p>mtls:</p>
 <p>mode: STRICT # Reject plain-text traffic</p>
-<h4>Per-namespace mTLS policy</h4>
+<h2>Per-namespace mTLS policy</h2>
 <p>apiVersion: security.istio.io/v1beta1</p>
 <p>kind: PeerAuthentication</p>
 <p>metadata:</p>
@@ -144,7 +128,7 @@
 <p>portLevelMtls:</p>
 <p>8080:</p>
 <p>mode: DISABLE # Allow plaintext for health checks only</p>
-<h4>Authorization policy for service-to-service access</h4>
+<h2>Authorization policy for service-to-service access</h2>
 <p>apiVersion: security.istio.io/v1beta1</p>
 <p>kind: AuthorizationPolicy</p>
 <p>metadata:</p>
@@ -164,7 +148,7 @@
 <p>methods: ["POST", "GET"]</p>
 <p>paths: ["/api/v1/charges"]</p>
 <p>Envoy Sidecar Configuration </p>
-<h4>Envoy TLS configuration (used under the hood by Istio)</h4>
+<h2>Envoy TLS configuration (used under the hood by Istio)</h2>
 <p>static_resources:</p>
 <p>listeners:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: service_listener</p>
@@ -198,7 +182,7 @@
 <p>trusted_ca: { filename: "/etc/certs/ca.pem" }</p>
 <p>API Gateway Security </p>
 <p>The API gateway is the ingress point for external traffic and performs authentication, rate limiting, and request validation. </p>
-<h4>Kong API Gateway security configuration</h4>
+<h2>Kong API Gateway security configuration</h2>
 <p>_format_version: "3.0"</p>
 <p>services:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: order-service</p>
@@ -232,7 +216,7 @@
 <p>headers: ["Authorization", "Content-Type"]</p>
 <p>Secret Distribution </p>
 <p>Never store secrets in code or configuration files. Use a dedicated secret management system. </p>
-<h4>Kubernetes External Secrets Operator</h4>
+<h2>Kubernetes External Secrets Operator</h2>
 <p>apiVersion: external-secrets.io/v1beta1</p>
 <p>kind: ExternalSecret</p>
 <p>metadata:</p>
@@ -254,7 +238,7 @@
 <p>remoteRef:</p>
 <p>key: production/database/credentials</p>
 <p>property: password</p>
-<h4>HashiCorp Vault integration</h4>
+<h2>HashiCorp Vault integration</h2>
 <p>import hvac</p>
 <p>class VaultSecretManager:</p>
 <p>def <strong>init</strong>(self):</p>
@@ -284,7 +268,7 @@
 <p>from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter</p>
 <p>from opentelemetry.sdk.trace import TracerProvider</p>
 <p>from opentelemetry.sdk.trace.export import BatchSpanProcessor</p>
-<h4>Initialize distributed tracing</h4>
+<h2>Initialize distributed tracing</h2>
 <p>provider = TracerProvider()</p>
 <p>processor = BatchSpanProcessor(OTLPSpanExporter())</p>
 <p>provider.add_span_processor(processor)</p>
@@ -294,10 +278,10 @@
 <p>with tracer.start_as_current_span("process_order") as span:</p>
 <p>span.set_attribute("order_id", request.order_id)</p>
 <p>span.set_attribute("user_id", request.user_id)</p>
-<h4>Add security-relevant attributes</h4>
+<h2>Add security-relevant attributes</h2>
 <p>span.set_attribute("auth.method", "oauth2")</p>
 <p>span.set_attribute("ip_address", request.client_ip)</p>
-<h4>Call downstream service</h4>
+<h2>Call downstream service</h2>
 <p>with tracer.start_as_current_span("validate_payment") as child_span:</p>
 <p>child_span.set_attribute("payment_provider", "stripe")</p>
 <p>result = payment_service.validate(request)</p>
@@ -329,7 +313,10 @@
 <p><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
-<p><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -341,7 +328,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/api-authentication.html" class="related-card">API Authentication Methods</a><a href="/en/security/supply-chain-security.html" class="related-card">Supply Chain Security</a><a href="/en/security/cloud-security-posture.html" class="related-card">Cloud Security Posture Management</a><a href="/en/security/container-image-security.html" class="related-card">Container Image Security</a></div>
+      <div class="related-grid"><a href="/en/security/api-authentication.html" class="related-card"><span class="related-card-title">API Authentication Methods</span><span class="related-card-desc">Comprehensive guide to API authentication covering API keys, OAuth2 client credentials, mTLS, HMAC s</span></a><a href="/en/security/supply-chain-security.html" class="related-card"><span class="related-card-title">Supply Chain Security</span><span class="related-card-desc">Comprehensive guide to software supply chain security covering SBOM, Sigstore, in-toto, dependency c</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="related-card-title">Container Image Security</span><span class="related-card-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability sc</span></a><a href="/en/security/content-security-policy.html" class="related-card"><span class="related-card-title">Content Security Policy</span><span class="related-card-desc">Complete guide to Content Security Policy covering directives, nonce/hash strategies, reporting mech</span></a><a href="/en/security/cors-security.html" class="related-card"><span class="related-card-title">CORS Security</span><span class="related-card-desc">In-depth guide to CORS security covering proper origin validation, preflight handling, common miscon</span></a></div>
     </section>
     
   </div>

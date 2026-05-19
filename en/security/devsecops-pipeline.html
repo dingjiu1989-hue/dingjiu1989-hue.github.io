@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/devsecops-pipeline.png",
       "datePublished": "2026-03-04",
       "dateModified": "2026-05-13",
-      "wordCount": "2779",
+      "wordCount": "2706",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
@@ -98,33 +98,17 @@
       <h1 class="article-title">DevSecOps: Integrating Security into CI/CD</h1>
       <div class="article-meta">Published 2026-03-04 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/devsecops-pipeline.png" alt="DevSecOps: Integrating Security into CI/CD" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>DevSecOps: Integrating Security into CI/CD</h2>
-<h3>DevSecOps: Integrating Security into CI/CD</h3>
-<h4>DevSecOps: Integrating Security into CI/CD</h4>
-<h4>DevSecOps: Integrating Security into CI/CD</h4>
-<h4>DevSecOps: Integrating Security into CI/CD</h4>
-<h4>DevSecOps: Integrating Security into CI/CD</h4>
-<h4>DevSecOps: Integrating Security into CI/CD</h4>
-<h4>DevSecOps: Integrating Security into CI/CD</h4>
-<h4>DevSecOps: Integrating Security into CI/CD</h4>
-<h4>DevSecOps: Integrating Security into CI/CD</h4>
-<h4>DevSecOps: Integrating Security into CI/CD</h4>
-<h4>DevSecOps: Integrating Security into CI/CD</h4>
-<h4>DevSecOps: Integrating Security into CI/CD</h4>
-<h4>DevSecOps: Integrating Security into CI/CD</h4>
-<h4>DevSecOps: Integrating Security into CI/CD</h4>
-<h4>DevSecOps: Integrating Security into CI/CD</h4>
-<p>DevSecOps embeds security into every stage of the software development lifecycle. Rather than running security assessments at the end of a release cycle, DevSecOps shifts security left into development and CI/CD pipelines. This article covers how to integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your pipelines.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/devsecops-pipeline.png" alt="DevSecOps: Integrating Security into CI/CD" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Shift-Left Security</h4>
+      <div class="article-body"><p>DevSecOps embeds security into every stage of the software development lifecycle. Rather than running security assessments at the end of a release cycle, DevSecOps shifts security left into development and CI/CD pipelines. This article covers how to integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your pipelines.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/devsecops-pipeline.png" alt="DevSecOps: Integrating Security into CI/CD" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Shift-Left Security</h2>
 <p>The shift-left principle moves security testing earlier in the development process. Finding and fixing a vulnerability during development costs 10 times less than fixing it in production, and 100 times less than fixing it after a breach.</p>
-<h4>Security Gates in the Pipeline</h4>
+<h2>Security Gates in the Pipeline</h2>
 <p>A mature DevSecOps pipeline has security gates at every stage:</p>
 <p>Code Commit -&gt; SAST -&gt; Dependency Scan -&gt; Build -&gt; Container Scan -&gt;</p>
 <p>Integration Test -&gt; DAST -&gt; Staging -&gt; Policy Check -&gt; Production</p>
 <p>Each gate can pass, fail with a warning, or fail and block the pipeline. The severity determines the action: critical and high findings block the pipeline, while medium and low findings create tickets for the development team.</p>
-<h4>Static Application Security Testing (SAST)</h4>
+<h2>Static Application Security Testing (SAST)</h2>
 <p>SAST analyzes source code without executing it. It identifies vulnerabilities like SQL injection, cross-site scripting (XSS), buffer overflows, and insecure cryptographic usage.</p>
-<h4>Popular SAST Tools</h4>
+<h2>Popular SAST Tools</h2>
 <ul>
 <li>
 <p><strong>Semgrep</strong> : Open-source, fast, and supports custom rules. Works with most programming languages.</p>
@@ -139,8 +123,8 @@
 <p><strong>Checkmarx / Fortify</strong> : Commercial SAST tools with extensive rule sets.</p>
 </li>
 </ul>
-<h4>Pipeline Integration</h4>
-<h4>GitHub Actions: SAST with Semgrep</h4>
+<h2>Pipeline Integration</h2>
+<h2>GitHub Actions: SAST with Semgrep</h2>
 <p>name: SAST Scan</p>
 <p>on:</p>
 <p>pull_request:</p>
@@ -160,7 +144,7 @@
 <p>echo "SAST found vulnerabilities. Fix before merging."</p>
 <p>exit 1</p>
 <p>fi</p>
-<h4>SAST Best Practices</h4>
+<h2>SAST Best Practices</h2>
 <ul>
 <li>
 <p>Run SAST on every pull request, not just on push to main.</p>
@@ -175,15 +159,15 @@
 <p>Create custom rules for your application's specific security patterns.</p>
 </li>
 </ul>
-<h4>Dependency Scanning</h4>
+<h2>Dependency Scanning</h2>
 <p>Modern applications use dozens of open-source libraries. Each library introduces transitive dependencies with potential vulnerabilities.</p>
-<h4>Software Bill of Materials (SBOM)</h4>
+<h2>Software Bill of Materials (SBOM)</h2>
 <p>An SBOM is a formal inventory of all software components in an application. Generate SBOMs in CycloneDX or SPDX format.</p>
-<h4>Generate SBOM with Syft</h4>
+<h2>Generate SBOM with Syft</h2>
 <p>syft packages . -o cyclonedx-json &gt; sbom.json</p>
-<h4>Scan SBOM for vulnerabilities with Grype</h4>
+<h2>Scan SBOM for vulnerabilities with Grype</h2>
 <p>grype sbom:./sbom.json</p>
-<h4>Dependency Scanning Tools</h4>
+<h2>Dependency Scanning Tools</h2>
 <ul>
 <li>
 <p><strong>Dependabot</strong> : GitHub's built-in dependency scanning and automated pull requests for patches.</p>
@@ -198,7 +182,7 @@
 <p><strong>OWASP Dependency-Check</strong> : Open-source scanner that identifies CVEs in dependencies.</p>
 </li>
 </ul>
-<h4>Dependabot configuration</h4>
+<h2>Dependabot configuration</h2>
 <p>version: 2</p>
 <p>updates:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- package-ecosystem: "npm"</p>
@@ -209,7 +193,7 @@
 <p>labels:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "dependencies"</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "security"</p>
-<h4>Dependency Scanning Policy</h4>
+<h2>Dependency Scanning Policy</h2>
 <ul>
 <li>
 <p>Block the pipeline on critical or high severity vulnerabilities in direct dependencies.</p>
@@ -224,9 +208,9 @@
 <p>Monitor for license compliance alongside vulnerability scanning.</p>
 </li>
 </ul>
-<h4>Dynamic Application Security Testing (DAST)</h4>
+<h2>Dynamic Application Security Testing (DAST)</h2>
 <p>DAST tests the running application from the outside, simulating real-world attack patterns. It discovers vulnerabilities that SAST misses, such as authentication bypass, session management flaws, and business logic errors.</p>
-<h4>DAST Tools</h4>
+<h2>DAST Tools</h2>
 <ul>
 <li>
 <p><strong>OWASP ZAP</strong> : Open-source web application scanner with automated and manual modes.</p>
@@ -238,8 +222,8 @@
 <p><strong>Arachni</strong> : Open-source web application security scanner framework.</p>
 </li>
 </ul>
-<h4>Pipeline Integration</h4>
-<h4>DAST with OWASP ZAP in CI/CD</h4>
+<h2>Pipeline Integration</h2>
+<h2>DAST with OWASP ZAP in CI/CD</h2>
 <p>services:</p>
 <p>zap:</p>
 <p>image: ghcr.io/zaproxy/zaproxy:stable</p>
@@ -259,7 +243,7 @@
 <p>echo "DAST found High severity issues"</p>
 <p>exit 1</p>
 <p>fi</p>
-<h4>DAST Best Practices</h4>
+<h2>DAST Best Practices</h2>
 <ul>
 <li>
 <p>Run DAST against staging or review environments, not production.</p>
@@ -274,10 +258,10 @@
 <p>Integrate with Jira or ticketing for automatic issue creation.</p>
 </li>
 </ul>
-<h4>Container Scanning</h4>
+<h2>Container Scanning</h2>
 <p>Container images bundle applications with their runtime dependencies. Vulnerabilities in base images or installed packages become part of the container.</p>
-<h4>Scanning Pipeline Integration</h4>
-<h4>Dockerfile with security best practices</h4>
+<h2>Scanning Pipeline Integration</h2>
+<h2>Dockerfile with security best practices</h2>
 <p>FROM alpine:3.19 AS builder</p>
 <p>RUN apk add --no-cache build-base</p>
 <p>FROM alpine:3.19</p>
@@ -286,7 +270,7 @@
 <p>COPY --from=builder /app/bin/server /app/server</p>
 <p>USER app</p>
 <p>EXPOSE 8080</p>
-<h4>Container scanning with Trivy in CI/CD</h4>
+<h2>Container scanning with Trivy in CI/CD</h2>
 <p>jobs:</p>
 <p>scan:</p>
 <p>runs-on: ubuntu-latest</p>
@@ -305,7 +289,7 @@
 <p>uses: github/codeql-action/upload-sarif@v3</p>
 <p>with:</p>
 <p>sarif_file: trivy-results.sarif</p>
-<h4>Container Security Practices</h4>
+<h2>Container Security Practices</h2>
 <ul>
 <li>
 <p>Use minimal base images (Alpine, distroless) to reduce attack surface.</p>
@@ -320,11 +304,11 @@
 <p>Enable granular runtime security with seccomp, AppArmor, or SELinux policies.</p>
 </li>
 </ul>
-<h4>Policy-as-Code</h4>
+<h2>Policy-as-Code</h2>
 <p>Policy-as-code defines security and compliance rules as executable code. Policies are versioned, reviewed, and enforced automatically in the pipeline.</p>
-<h4>Open Policy Agent (OPA) and Rego</h4>
+<h2>Open Policy Agent (OPA) and Rego</h2>
 <p>OPA enforces policies across the software lifecycle. Rego is OPA's policy language.</p>
-<h4>Rego policy: Require encryption at rest</h4>
+<h2>Rego policy: Require encryption at rest</h2>
 <p>package kubernetes.storage</p>
 <p>deny[msg] {</p>
 <p>volume := input.volumes[_]</p>
@@ -332,8 +316,8 @@
 <p>not volume.encrypted</p>
 <p>msg := sprintf("Volume %v must have encryption enabled", [volume.name])</p>
 <p>}</p>
-<h4>Policy Gates in the Pipeline</h4>
-<h4>Conftest: Policy enforcement for Kubernetes manifests</h4>
+<h2>Policy Gates in the Pipeline</h2>
+<h2>Conftest: Policy enforcement for Kubernetes manifests</h2>
 <p>steps:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Check Kubernetes policies</p>
 <p>run: |</p>
@@ -344,7 +328,7 @@
 <p>run: |</p>
 <p>conftest test main.tf \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--policy policies/terraform/</p>
-<h4>Common Policy Rules</h4>
+<h2>Common Policy Rules</h2>
 <ul>
 <li>
 <p>Containers must not run as root.</p>
@@ -362,7 +346,7 @@
 <p>IAM roles must have resource-level constraints.</p>
 </li>
 </ul>
-<h4>Building a DevSecOps Culture</h4>
+<h2>Building a DevSecOps Culture</h2>
 <p>Tools alone do not make DevSecOps successful. The human elements matter more.</p>
 <ul>
 <li>
@@ -378,13 +362,16 @@
 <p><strong>Blameless culture</strong> : When security scans find issues, the process worked correctly. Celebrate catching issues early rather than blaming developers.</p>
 </li>
 </ul>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>DevSecOps shifts security from a final gate to an integrated part of the development process. SAST catches code-level vulnerabilities, dependency scanning manages supply chain risk, DAST validates runtime behavior, container scanning secures artifacts, and policy-as-code enforces standards. Together, these practices make security a natural part of delivering software, not an obstacle to it.</p>
 <p><strong>See also:</strong> <a href="/en/security/secure-sdlc.html">Secure Software Development Lifecycle</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a>.</p>
 <p><strong>See also:</strong> <a href="/en/security/secure-sdlc.html">Secure Software Development Lifecycle</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/secure-sdlc.html">Secure Software Development Lifecycle</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/secure-sdlc.html">Secure Software Development Lifecycle</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/security/secure-sdlc.html">Secure Software Development Lifecycle</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/secure-sdlc.html">Secure Software Development Lifecycle</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/secure-sdlc.html">Secure Software Development Lifecycle</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/secure-sdlc.html">Secure Software Development Lifecycle</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/oauth2-pkce.html">OAuth 2.0 and PKCE Explained</a>, <a href="/en/security/password-hashing.html">Password Hashing Algorithms Compared</a></p>
+<p><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/oauth2-pkce.html">OAuth 2.0 and PKCE Explained</a>, <a href="/en/security/password-hashing.html">Password Hashing Algorithms Compared</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/oauth2-pkce.html">OAuth 2.0 and PKCE Explained</a>, <a href="/en/security/password-hashing.html">Password Hashing Algorithms Compared</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -396,7 +383,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/secure-sdlc.html" class="related-card">Secure Software Development Lifecycle</a><a href="/en/security/container-security.html" class="related-card">Container Security Best Practices</a><a href="/en/security/mobile-security.html" class="related-card">Mobile Application Security Guide</a><a href="/en/security/security-auditing.html" class="related-card">Security Auditing and Compliance Frameworks</a></div>
+      <div class="related-grid"><a href="/en/security/secure-sdlc.html" class="related-card"><span class="related-card-title">Secure Software Development Lifecycle</span><span class="related-card-desc">Integrating security into every phase of the SDLC: threat modeling, secure coding, SAST, DAST, depen</span></a><a href="/en/security/container-security.html" class="related-card"><span class="related-card-title">Container Security Best Practices</span><span class="related-card-desc">Essential container security practices including image scanning, minimal base images, runtime securi</span></a><a href="/en/security/mobile-security.html" class="related-card"><span class="related-card-title">Mobile Application Security Guide</span><span class="related-card-desc">Mobile app security covering OWASP Mobile Top 10, code obfuscation, certificate pinning, secure stor</span></a><a href="/en/security/security-auditing.html" class="related-card"><span class="related-card-title">Security Auditing and Compliance Frameworks</span><span class="related-card-desc">Overview of SOC 2, ISO 27001, PCI DSS, HIPAA compliance frameworks and how to collect audit evidence</span></a><a href="/en/security/api-gateway-security.html" class="related-card"><span class="related-card-title">API Gateway Security Patterns</span><span class="related-card-desc">Security patterns for API gateways including authentication, rate limiting, IP blocking, request val</span></a><a href="/en/security/http-security-headers.html" class="related-card"><span class="related-card-title">HTTP Security Headers Checklist</span><span class="related-card-desc">A complete checklist of HTTP security headers to protect your web application from XSS, clickjacking</span></a></div>
     </section>
     
   </div>

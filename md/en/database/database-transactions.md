@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-transactions.html
 
 # Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
 
-## Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
-### Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
-#### Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
-#### Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
-#### Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
-#### Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
-#### Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
-#### Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
-#### Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
-#### Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
-#### Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
-#### Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
-#### Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
-#### Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
-#### Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
-
 Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints 
 
 A transaction is a unit of work that the database executes atomically. Transactions are the bedrock of data integrity in relational databases. Understanding them deeply separates competent engineers from great ones. 
@@ -234,3 +204,9 @@ Transactions are not just a SQL feature; they are a correctness contract between
 **See also:** [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
 
 **See also:** [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
+
+**See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
+
+**See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
+
+**See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)

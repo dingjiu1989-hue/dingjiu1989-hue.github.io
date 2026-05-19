@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/rbac-authorization.html
 
 # RBAC Authorization Implementation
 
-## RBAC Authorization Implementation
-
-### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
-#### RBAC Authorization Implementation
-
 What Is RBAC? 
 
 Role-Based Access Control (RBAC) is an authorization model where permissions are assigned to roles, and users are assigned to those roles. Instead of managing permissions for each user individually, you manage roles and their associated permissions, then assign users to appropriate roles. 
@@ -330,7 +296,7 @@ return wrapper
 
 return decorator
 
-#### Usage
+## Usage
 
 @app.delete("/articles/{article_id}")
 
@@ -338,7 +304,7 @@ return decorator
 
 async def delete_article(article_id: int, current_user = Depends(get_current_user)):
 
-#### Delete logic
+## Delete logic
 
 pass
 
@@ -350,25 +316,25 @@ def can_access_resource(user, resource, action):
 
 """Check RBAC first, then ABAC policies."""
 
-#### RBAC check
+## RBAC check
 
 if not has_role_permission(user.role, action):
 
 return False
 
-#### ABAC policies
+## ABAC policies
 
 policies = {
 
-#### Users can edit their own articles
+## Users can edit their own articles
 
 ('article:update', 'article'): lambda u, r: r.author_id == u.id,
 
-#### Admins can edit any article
+## Admins can edit any article
 
 ('article:update', 'article'): lambda u, r: 'admin' in u.roles,
 
-#### Only article authors can delete
+## Only article authors can delete
 
 ('article:delete', 'article'): lambda u, r: r.author_id == u.id,
 
@@ -462,3 +428,9 @@ RBAC simplifies authorization by grouping permissions into roles and assigning r
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>)
 
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>)
+
+**See also:** [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>)
+
+**See also:** [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>)
+
+**See also:** [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>)

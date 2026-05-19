@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/rbac-authorization.png",
       "datePublished": "2025-12-19",
       "dateModified": "2026-04-26",
-      "wordCount": "1777",
+      "wordCount": "1726",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
@@ -98,24 +98,7 @@
       <h1 class="article-title">RBAC Authorization Implementation</h1>
       <div class="article-meta">Published 2025-12-19 · Last active 2026-04-26 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/rbac-authorization.png" alt="RBAC Authorization Implementation" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>RBAC Authorization Implementation</h2>
-<h3>RBAC Authorization Implementation</h3>
-<h4>RBAC Authorization Implementation</h4>
-<h4>RBAC Authorization Implementation</h4>
-<h4>RBAC Authorization Implementation</h4>
-<h4>RBAC Authorization Implementation</h4>
-<h4>RBAC Authorization Implementation</h4>
-<h4>RBAC Authorization Implementation</h4>
-<h4>RBAC Authorization Implementation</h4>
-<h4>RBAC Authorization Implementation</h4>
-<h4>RBAC Authorization Implementation</h4>
-<h4>RBAC Authorization Implementation</h4>
-<h4>RBAC Authorization Implementation</h4>
-<h4>RBAC Authorization Implementation</h4>
-<h4>RBAC Authorization Implementation</h4>
-<h4>RBAC Authorization Implementation</h4>
-<h4>RBAC Authorization Implementation</h4>
-<p>What Is RBAC? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/rbac-authorization.png" alt="RBAC Authorization Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>What Is RBAC? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/rbac-authorization.png" alt="RBAC Authorization Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Role-Based Access Control (RBAC) is an authorization model where permissions are assigned to roles, and users are assigned to those roles. Instead of managing permissions for each user individually, you manage roles and their associated permissions, then assign users to appropriate roles. </p>
 <p>Core RBAC Concepts </p>
 <p>| Concept | Definition | Example | |---------|------------|---------| | User | An individual account | alice@example.com | | Role | A collection of permissions | Editor, Admin, Viewer | | Permission | An action on a resource | article:create, article:delete | | Resource | The object being accessed | Article, User, Comment | | Session | A user's active role mapping | Alice as Editor | </p>
@@ -259,26 +242,26 @@
 <p>return await func(<em>args,</em> *kwargs)</p>
 <p>return wrapper</p>
 <p>return decorator</p>
-<h4>Usage</h4>
+<h2>Usage</h2>
 <p>@app.delete("/articles/{article_id}")</p>
 <p>@require_permission(Permission.ARTICLE_DELETE)</p>
 <p>async def delete_article(article_id: int, current_user = Depends(get_current_user)):</p>
-<h4>Delete logic</h4>
+<h2>Delete logic</h2>
 <p>pass</p>
 <p>Attribute-Based Access Control (ABAC) </p>
 <p>For more granular control, extend RBAC with ABAC policies that consider resource attributes and context: </p>
 <p>def can_access_resource(user, resource, action):</p>
 <p>"""Check RBAC first, then ABAC policies."""</p>
-<h4>RBAC check</h4>
+<h2>RBAC check</h2>
 <p>if not has_role_permission(user.role, action):</p>
 <p>return False</p>
-<h4>ABAC policies</h4>
+<h2>ABAC policies</h2>
 <p>policies = {</p>
-<h4>Users can edit their own articles</h4>
+<h2>Users can edit their own articles</h2>
 <p>('article:update', 'article'): lambda u, r: r.author_id == u.id,</p>
-<h4>Admins can edit any article</h4>
+<h2>Admins can edit any article</h2>
 <p>('article:update', 'article'): lambda u, r: 'admin' in u.roles,</p>
-<h4>Only article authors can delete</h4>
+<h2>Only article authors can delete</h2>
 <p>('article:delete', 'article'): lambda u, r: r.author_id == u.id,</p>
 <p>}</p>
 <p>policy = policies.get((action, resource.type))</p>
@@ -332,7 +315,10 @@
 <p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/sql-injection-prevention.html">SQL Injection Prevention Guide</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a>, <a href="/en/security/zero-trust-architecture.html">Zero Trust Architecture for Startups</a></p>
+<p><strong>See also:</strong> <a href="/en/security/sql-injection-prevention.html">SQL Injection Prevention Guide</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a>, <a href="/en/security/zero-trust-architecture.html">Zero Trust Architecture for Startups</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/sql-injection-prevention.html">SQL Injection Prevention Guide</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a>, <a href="/en/security/zero-trust-architecture.html">Zero Trust Architecture for Startups</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -344,7 +330,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/api-rate-limiting.html" class="related-card">API Rate Limiting Implementation</a><a href="/en/security/secure-file-upload.html" class="related-card">Secure File Upload Implementation</a><a href="/en/security/two-factor-authentication.html" class="related-card">Two-Factor Authentication Guide</a><a href="/en/security/identity-management.html" class="related-card">Identity and Access Management (IAM) Guide</a></div>
+      <div class="related-grid"><a href="/en/security/api-rate-limiting.html" class="related-card"><span class="related-card-title">API Rate Limiting Implementation</span><span class="related-card-desc">A comprehensive guide to implementing API rate limiting with token bucket, leaky bucket, and sliding</span></a><a href="/en/security/secure-file-upload.html" class="related-card"><span class="related-card-title">Secure File Upload Implementation</span><span class="related-card-desc">Best practices for implementing secure file upload functionality including validation, storage, scan</span></a><a href="/en/security/two-factor-authentication.html" class="related-card"><span class="related-card-title">Two-Factor Authentication Guide</span><span class="related-card-desc">A comprehensive guide to implementing two-factor authentication with TOTP, SMS, backup codes, and We</span></a><a href="/en/security/identity-management.html" class="related-card"><span class="related-card-title">Identity and Access Management (IAM) Guide</span><span class="related-card-desc">Comprehensive guide to IAM covering SSO, SAML, OIDC, SCIM provisioning, just-in-time access, and acc</span></a><a href="/en/security/threat-intelligence.html" class="related-card"><span class="related-card-title">Threat Intelligence: Gathering and Applying Intel</span><span class="related-card-desc">Practical guide to threat intelligence including OSINT, threat feeds, MITRE ATT&CK, IoC sharing, and</span></a><a href="/en/security/encryption-at-rest.html" class="related-card"><span class="related-card-title">Encryption at Rest Guide</span><span class="related-card-desc">A comprehensive guide to encryption at rest covering disk encryption, database encryption, key manag</span></a></div>
     </section>
     
   </div>

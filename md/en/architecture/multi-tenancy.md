@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/multi-tenancy.html
 
 # Multi-Tenancy Architecture
 
-## Multi-Tenancy Architecture
-
-### Multi-Tenancy Architecture
-
-#### Multi-Tenancy Architecture
-
-#### Multi-Tenancy Architecture
-
-#### Multi-Tenancy Architecture
-
-#### Multi-Tenancy Architecture
-
-#### Multi-Tenancy Architecture
-
-#### Multi-Tenancy Architecture
-
-#### Multi-Tenancy Architecture
-
-#### Multi-Tenancy Architecture
-
-#### Multi-Tenancy Architecture
-
-#### Multi-Tenancy Architecture
-
-#### Multi-Tenancy Architecture
-
-#### Multi-Tenancy Architecture
-
-#### Multi-Tenancy Architecture
-
 Multi-tenancy is the architectural pattern where a single instance of software serves multiple customer organizations (tenants). The design choices around tenant isolation — how much tenants share and how much is dedicated — determine the system's security, scalability, operational complexity, and cost structure. Three primary isolation levels form a spectrum with distinct tradeoffs. 
 
 Database per tenant provides the strongest isolation. Each tenant gets its own database instance. This simplifies backup and restore (one tenant's data can be manipulated independently), provides natural resource limits (noisy neighbor containment), and makes data migration straightforward. The trade-off is operational cost: provisioning databases, managing connections, and running migration scripts for each tenant. At hundreds or thousands of tenants, the operational overhead becomes significant unless automated through infrastructure-as-code. 
@@ -69,3 +39,9 @@ Migrating between isolation levels is a common lifecycle pattern. Startups often
 **See also:** [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)
 
 **See also:** [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)

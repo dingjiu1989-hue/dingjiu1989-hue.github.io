@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png",
       "datePublished": "2026-03-31",
       "dateModified": "2026-04-21",
-      "wordCount": "2336",
+      "wordCount": "2224",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h1>
       <div class="article-meta">Published 2026-03-31 · Last active 2026-04-21 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h2>
-<h3>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h3>
-<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
-<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
-<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
-<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
-<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
-<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
-<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
-<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
-<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
-<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
-<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
-<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
-<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
-<p>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Every database connection consumes memory, file descriptors, and CPU. Connection management directly impacts database performance and application scalability. This article covers pooling strategies, popular poolers, and tuning guidelines. </p>
 <p>Why Connection Pooling Matters </p>
 <p>Each PostgreSQL backend process consumes approximately 5-10 MB of RAM, even when idle. A server with 500 connections uses 2.5-5 GB just for connection overhead. Beyond memory, connection creation is expensive: a new connection requires a TCP handshake, SSL negotiation, authentication, and backend forking. </p>
@@ -129,7 +114,7 @@
 <p>PgBouncer (Server-Side Pooling) </p>
 <p>PgBouncer is a lightweight connection pooler for PostgreSQL. It runs as a separate process and proxies connections to the database. </p>
 <p>Installation and Configuration </p>
-<h4>pgbouncer.ini</h4>
+<h2>pgbouncer.ini</h2>
 <p>[databases]</p>
 <p>mydb = host=127.0.0.1 port=5432 dbname=mydb</p>
 <p>[pgbouncer]</p>
@@ -150,7 +135,7 @@
 <p>echo '"app_user"' '"secure_password_hash"' &gt; /etc/pgbouncer/userlist.txt</p>
 <p>Connecting Through PgBouncer </p>
 <p>import psycopg2</p>
-<h4>Connect to PgBouncer port, not PostgreSQL directly</h4>
+<h2>Connect to PgBouncer port, not PostgreSQL directly</h2>
 <p>conn = psycopg2.connect(</p>
 <p>host="localhost",</p>
 <p>port=6432,</p>
@@ -170,7 +155,7 @@
 <p>HikariCP (Client-Side Pooling) </p>
 <p>HikariCP is the most popular connection pool for Java applications. It manages connections from within the application process. </p>
 <p>Spring Boot Configuration </p>
-<h4>application.yml</h4>
+<h2>application.yml</h2>
 <p>spring:</p>
 <p>datasource:</p>
 <p>url: jdbc:postgresql://localhost:5432/mydb</p>
@@ -207,7 +192,7 @@
 <p>connections = 2 * CPU_cores + effective_spindle_count</p>
 <p>A 4-core machine with SSDs: <code>2 * 4 + 1 = 9</code> concurrent connections for optimal throughput. Beyond this, context switching and lock contention degrade performance. </p>
 <p>Max Connections Tuning </p>
-<h4>postgresql.conf</h4>
+<h2>postgresql.conf</h2>
 <p>max_connections = 200</p>
 <p>superuser_reserved_connections = 5</p>
 <p>Application Statement Timeout </p>
@@ -216,15 +201,15 @@
 <p>ALTER DATABASE mydb SET idle_in_transaction_session_timeout = '5min';</p>
 <p>Common Pitfalls </p>
 <p>Connection Leaks </p>
-<h4>Bad: connection not returned to pool</h4>
+<h2>Bad: connection not returned to pool</h2>
 <p>def get_user(user_id):</p>
 <p>conn = pool.getconn()</p>
 <p>cursor = conn.cursor()</p>
 <p>cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))</p>
 <p>result = cursor.fetchone()</p>
-<h4>Missing: pool.putconn(conn)</h4>
+<h2>Missing: pool.putconn(conn)</h2>
 <p>return result</p>
-<h4>Good: always use try/finally or context manager</h4>
+<h2>Good: always use try/finally or context manager</h2>
 <p>def get_user(user_id):</p>
 <p>conn = pool.getconn()</p>
 <p>try:</p>
@@ -246,7 +231,7 @@
 <p>spring.datasource.hikari:</p>
 <p>maximum-pool-size: 20</p>
 <p>connection-timeout: 5000 # 5 seconds max wait</p>
-<h4>After 5 seconds, throw SQLException instead of hanging forever</h4>
+<h2>After 5 seconds, throw SQLException instead of hanging forever</h2>
 <p>Monitoring Connection Health </p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Connection utilization</p>
 <p>SELECT</p>
@@ -274,7 +259,10 @@
 <p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
+<p><strong>See also:</strong> <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -286,7 +274,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-connection-pooling.html" class="related-card">Connection Pooling: Tuning, Best Practices, and Pitfalls</a><a href="/en/database/read-replicas.html" class="related-card">Read Replicas: Scaling Reads, Replication Lag, and Failover</a><a href="/en/database/database-migration-tools.html" class="related-card">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a><a href="/en/database/index-types.html" class="related-card">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a></div>
+      <div class="related-grid"><a href="/en/database/database-connection-pooling.html" class="related-card"><span class="related-card-title">Connection Pooling: Tuning, Best Practices, and Pitfalls</span><span class="related-card-desc">Master database connection pooling: pool sizing, timeout tuning, and common pitfalls in production.</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="related-card-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="related-card-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing str</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="related-card-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="related-card-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategi</span></a><a href="/en/database/index-types.html" class="related-card"><span class="related-card-title">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</span><span class="related-card-desc">Comprehensive guide to PostgreSQL index types: B-tree, Hash, GiST, GIN, SP-GiST, and BRIN. Learn whe</span></a><a href="/en/database/stored-procedures.html" class="related-card"><span class="related-card-title">Stored Procedures vs Functions: When to Use, Languages, Security</span><span class="related-card-desc">An in-depth guide to stored procedures and functions in PostgreSQL and SQL Server. Learn language op</span></a><a href="/en/database/geospatial-data.html" class="related-card"><span class="related-card-title">Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries</span><span class="related-card-desc">Comprehensive guide to geospatial data with PostGIS. Understand geometry vs geography types, spatial</span></a></div>
     </section>
     
   </div>

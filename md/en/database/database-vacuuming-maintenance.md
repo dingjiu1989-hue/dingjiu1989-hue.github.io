@@ -8,45 +8,15 @@ url: https://dingjiu1989-hue.github.io/en/database/database-vacuuming-maintenanc
 
 # PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
 
-## PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
-### PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
-#### PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
-#### PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
-#### PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
-#### PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
-#### PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
-#### PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
-#### PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
-#### PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
-#### PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
-#### PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
-#### PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
-#### PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
-#### PostgreSQL Vacuuming: Maintenance, Tuning, and Automation
-
 PostgreSQL uses Multi-Version Concurrency Control (MVCC) to handle concurrent transactions. Every UPDATE and DELETE creates a new row version while keeping the old one. Dead rows accumulate over time, consuming storage and degrading query performance. VACUUM reclaims this space and updates statistics.
 
-#### Understanding Bloat
+## Understanding Bloat
 
 Table bloat occurs when dead row versions accumulate faster than VACUUM reclaims them. Causes include long-running transactions that prevent dead row removal, high update frequency tables, and insufficient VACUUM frequency.
 
 Measure bloat using the pg_stat_user_tables view. High n_dead_tup relative to n_live_tup indicates bloat. A ratio over 20% needs investigation. The pgstattuple extension provides accurate bloat measurement per table.
 
-#### Autovacuum Tuning
+## Autovacuum Tuning
 
 Autovacuum runs automatically based on thresholds. The default settings work for small databases but need tuning for large ones. Key parameters: autovacuum_vacuum_threshold (50) plus autovacuum_vacuum_scale_factor (0.2) means VACUUM triggers when 20% of rows plus 50 are dead. For large tables, reduce scale_factor or use per-table settings.
 
@@ -56,13 +26,13 @@ Set per-table autovacuum settings for busy tables:
 
 ALTER TABLE orders SET (autovacuum_vacuum_scale_factor = 0.05, autovacuum_vacuum_threshold = 1000);
 
-#### Manual Vacuum Operations
+## Manual Vacuum Operations
 
 Standard VACUUM reclaims space but does not return it to the operating system. It makes space available for reuse within the table. Run standard VACUUM during low-traffic periods for tables with heavy updates.
 
 VACUUM FULL reclaims space to the OS but requires an ACCESS EXCLUSIVE lock. It rewrites the entire table, blocking all operations. Use during maintenance windows only. Consider pg_repack instead—it rebuilds tables without blocking reads or writes.
 
-#### Monitoring
+## Monitoring
 
 Track vacuum activity through pg_stat_progress_vacuum. Monitor last_autovacuum and last_analyze timestamps. Tables not vacuumed in 24 hours need attention. Set up alerts for tables approaching the autovacuum threshold without being vacuumed.
 
@@ -77,3 +47,9 @@ Track vacuum activity through pg_stat_progress_vacuum. Monitor last_autovacuum a
 **See also:** [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Connection Pooling: Tuning, Best Practices, and Pitfalls](</en/database/database-connection-pooling.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>)
 
 **See also:** [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Connection Pooling: Tuning, Best Practices, and Pitfalls](</en/database/database-connection-pooling.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>)
+
+**See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)

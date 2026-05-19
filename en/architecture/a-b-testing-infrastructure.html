@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/a-b-testing-infrastructure.png",
       "datePublished": "2026-04-21",
       "dateModified": "2026-05-18",
-      "wordCount": "1152",
+      "wordCount": "1141",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">A/B Testing Infrastructure</h1>
       <div class="article-meta">Published 2026-04-21 · Last active 2026-05-18 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/a-b-testing-infrastructure.png" alt="A/B Testing Infrastructure" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>A/B Testing Infrastructure</h2>
-<h3>A/B Testing Infrastructure</h3>
-<h4>A/B Testing Infrastructure</h4>
-<h4>A/B Testing Infrastructure</h4>
-<h4>A/B Testing Infrastructure</h4>
-<h4>A/B Testing Infrastructure</h4>
-<h4>A/B Testing Infrastructure</h4>
-<h4>A/B Testing Infrastructure</h4>
-<h4>A/B Testing Infrastructure</h4>
-<h4>A/B Testing Infrastructure</h4>
-<h4>A/B Testing Infrastructure</h4>
-<h4>A/B Testing Infrastructure</h4>
-<h4>A/B Testing Infrastructure</h4>
-<h4>A/B Testing Infrastructure</h4>
-<h4>A/B Testing Infrastructure</h4>
-<p>A/B testing infrastructure enables organizations to make data-driven decisions by comparing user experiences against a control group. At its core, an A/B testing system must: consistently assign users to experiment groups, reliably track metrics for each group, perform statistical analysis to determine significance, and manage the lifecycle of experiments from creation to analysis. The infrastructure requirements scale with experiment volume, traffic, and statistical rigor. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/a-b-testing-infrastructure.png" alt="A/B Testing Infrastructure" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>A/B testing infrastructure enables organizations to make data-driven decisions by comparing user experiences against a control group. At its core, an A/B testing system must: consistently assign users to experiment groups, reliably track metrics for each group, perform statistical analysis to determine significance, and manage the lifecycle of experiments from creation to analysis. The infrastructure requirements scale with experiment volume, traffic, and statistical rigor. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/a-b-testing-infrastructure.png" alt="A/B Testing Infrastructure" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Experiment assignment uses deterministic bucketing. A consistent hash of the user identifier and experiment key determines which variant the user sees. This ensures the user remains in the same variant across sessions. The hash function must distribute users uniformly across variants. Common approaches include MD5 or SHA-256 hashed to a modulus, or using the MurmurHash for better distribution characteristics. The assignment function should produce the same result regardless of the order experiments are evaluated. </p>
 <p>The assignment infrastructure must handle overlapping experiments. Users may participate in multiple experiments simultaneously. Each experiment uses a unique salt or namespace in the hash computation, ensuring that participation in one experiment does not correlate with participation in another. This prevents interaction effects where users in variant A of experiment 1 are disproportionately likely to be in variant B of experiment 2. </p>
 <p>Metrics collection is a two-phase process. The first phase captures exposure events — recording which users were assigned to which variant at the moment of assignment. The second phase captures outcome events — purchases, clicks, signups — with their associated experiment context. Both events must carry the experiment ID, variant, and a consistent user identifier. The event pipeline must handle late-arriving events, out-of-order events, and event deduplication. </p>
@@ -128,7 +113,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -140,7 +128,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/blue-green-deployment.html" class="related-card">Blue-Green Deployment Strategy</a><a href="/en/architecture/chaos-engineering.html" class="related-card">Chaos Engineering: Building Resilient Systems</a><a href="/en/architecture/alerting-strategies.html" class="related-card">Alerting Strategies for Production Systems</a><a href="/en/architecture/api-composition.html" class="related-card">API Composition and Aggregation</a></div>
+      <div class="related-grid"><a href="/en/architecture/blue-green-deployment.html" class="related-card"><span class="related-card-title">Blue-Green Deployment Strategy</span><span class="related-card-desc">Master blue-green deployments for zero-downtime releases, rollback safety, and production traffic sw</span></a><a href="/en/architecture/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Building Resilient Systems</span><span class="related-card-desc">Introduction to chaos engineering: principles, practices, and tools for testing system resilience in</span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a><a href="/en/architecture/cdn-architecture.html" class="related-card"><span class="related-card-title">CDN Architecture</span><span class="related-card-desc">Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content deliv</span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="related-card-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="related-card-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices</span></a></div>
     </section>
     
   </div>

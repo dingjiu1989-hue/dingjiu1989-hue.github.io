@@ -11,16 +11,13 @@ TODAY = date.today().isoformat()
 BASE = 'https://dingjiu1989-hue.github.io'
 
 def md_to_html(md_text):
-    """Convert markdown to HTML with heading levels offset by 1.
-    Page H1 is the article title; body headings start at H2.
-    """
+    """Convert markdown to HTML. Strips the first H1 (article title)
+    since the page template provides it. Other headings stay at natural levels."""
     try:
         import markdown as md_lib
         html = md_lib.markdown(md_text, extensions=['fenced_code', 'codehilite', 'tables'])
-        # Offset heading levels: h1→h2, h2→h3, h3→h4 etc.
-        for level in ('3', '2', '1'):
-            html = html.replace(f'<h{level}>', f'<h{int(level)+1}>')
-            html = html.replace(f'</h{level}>', f'</h{int(level)+1}>')
+        # Strip the first H1 — page template already has the article title
+        html = re.sub(r'<h1>.*?</h1>\s*', '', html, count=1)
         return html
     except ImportError:
         lines = md_text.split('\n')
@@ -55,7 +52,7 @@ def md_to_html(md_text):
         return '\n'.join(html_parts)
 
 
-def get_body(slug, board_id):
+def get_body(slug, board_id, title=None):
     """Get article body. Prefers hardcoded BODIES dict, falls back to md file."""
     if slug in BODIES:
         return BODIES[slug].strip()
@@ -67,10 +64,34 @@ def get_body(slug, board_id):
             end = content.find('---', 3)
             if end > 0:
                 content = content[end + 3:].strip()
+        # Safeguard: strip headings that duplicate the article title
+        if title:
+            content = _strip_title_headings(content, title)
         html = md_to_html(content)
         if html.strip():
             return html
     return f'<p>Content coming soon.</p>'
+
+def _strip_title_headings(md_text, title):
+    """Remove markdown headings whose text exactly matches the article title.
+    The page template provides the H1; body headings should be section titles."""
+    import re
+    lines = md_text.split('\n')
+    result = []
+    in_code = False
+    for line in lines:
+        if line.strip().startswith('```'):
+            in_code = not in_code
+            result.append(line)
+            continue
+        if in_code:
+            result.append(line)
+            continue
+        m = re.match(r'^(#{1,6})\s+(.+)$', line)
+        if m and m.group(2).strip() == title:
+            continue
+        result.append(line)
+    return '\n'.join(result)
 
 BOARD_NAMES = {
     'tech': 'Tech Tutorials',
@@ -13401,7 +13422,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     </script>'''
 
     # HowTo schema for articles with step-by-step instructions
-    body_html = get_body(slug, board_id)
+    body_html = get_body(slug, board_id, art['title'])
     howto_schema = ''
     # Find numbered h3/h4 headings (offset from original h2/h3): "1. Title", "Step 1: Title", etc.
     step_headings = re.findall(r'<h[34][^>]*>\s*(\d+)[\.\:\)]\s*([^<]+)</h[34]>', body_html)
@@ -13478,6 +13499,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     art_tags = set(t.lower() for t in art.get('tags', []))
     art_kw = set(re.findall(r'[a-z]{3,}', f"{art['title']} {art['description']}".lower()))
     scored = []
+    same_board_pool = []
     for p in all_posts:
         if p['slug'] == slug:
             continue
@@ -13488,20 +13510,38 @@ def make_article_html(art, board_id, board_name, all_posts):
         score = tag_overlap * 3 + kw_overlap
         if p['board_id'] == board_id:
             score += 2  # same-board bonus
+            if score > 0:
+                same_board_pool.append((score, p))
         if score > 0:
             scored.append((score, p))
     scored.sort(key=lambda x: x[0], reverse=True)
-    related = [s[1] for s in scored[:4]]
+    same_board_pool.sort(key=lambda x: x[0], reverse=True)
+
+    # Top 6 related (cross-board OK)
+    related = [s[1] for s in scored[:6]]
+    # Inline see-also: 3 same-board articles not in top 6
+    top_slugs = {r['slug'] for r in related}
+    see_also_pool = [s[1] for s in same_board_pool if s[1]['slug'] not in top_slugs][:3]
+    # Fallback to cross-board if not enough same-board
+    if len(see_also_pool) < 3:
+        for s in scored:
+            if s[1]['slug'] not in top_slugs and s[1] not in see_also_pool:
+                see_also_pool.append(s[1])
+                if len(see_also_pool) >= 3:
+                    break
+
+    # Related cards with snippet text
     related_html = ''
     for r in related:
         r_url = f"/en/{r['board_id']}/{r['slug']}.html"
-        related_html += f'<a href="{r_url}" class="related-card">{r["title"]}</a>'
+        r_desc = r.get('description', '')[:100]
+        related_html += f'<a href="{r_url}" class="related-card"><span class="related-card-title">{r["title"]}</span><span class="related-card-desc">{r_desc}</span></a>'
 
-    # Inline "See also" links for top 3 related (inside article body)
+    # Inline "See also" with diverse anchor text
     see_also = ''
-    if related:
+    if see_also_pool:
         links = []
-        for r in related[:3]:
+        for r in see_also_pool:
             r_url = f"/en/{r['board_id']}/{r['slug']}.html"
             links.append(f'<a href="{r_url}">{r["title"]}</a>')
         see_also = f'<p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> {", ".join(links)}</p>'

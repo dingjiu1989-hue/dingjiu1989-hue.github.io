@@ -113,4 +113,4 @@ Parameter| What It Does| Recommendation
 
 
 
-**See also:** [AI Image Generation Guide: DALL-E 3 vs Midjourney vs Stable Diffusion vs Firefly](</en/ai/ai-image-generation-guide.html>), [Prompt Engineering Guide for LLMs](</en/ai/prompt-engineering-guide.html>), [AI Document Processing](</en/ai/ai-document-processing.html>)
+**See also:** [Advanced Prompt Engineering: Techniques That Actually Work for Developers](</en/ai/prompt-engineering-advanced.html>), [LLM Cost Optimization: Cut Your AI API Bills by 50-80% (2026 Guide)](</en/ai/llm-cost-optimization.html>), [Prompt Engineering: From Beginner to Expert](</en/ai/prompt-engineering.html>)

@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-patterns.ht
 
 # Rate Limiting Patterns
 
-## Rate Limiting Patterns
-
-### Rate Limiting Patterns
-
-#### Rate Limiting Patterns
-
-#### Rate Limiting Patterns
-
-#### Rate Limiting Patterns
-
-#### Rate Limiting Patterns
-
-#### Rate Limiting Patterns
-
-#### Rate Limiting Patterns
-
-#### Rate Limiting Patterns
-
-#### Rate Limiting Patterns
-
-#### Rate Limiting Patterns
-
-#### Rate Limiting Patterns
-
-#### Rate Limiting Patterns
-
-#### Rate Limiting Patterns
-
-#### Rate Limiting Patterns
-
 Rate limiting is a critical component of any production API or service. It protects your system from abuse, ensures fair usage among consumers, and maintains service quality under load. This article explores the most common rate limiting algorithms and how to choose the right one for your use case. 
 
 Why Rate Limiting Matters 
@@ -187,3 +157,9 @@ Rate limiting is essential for production APIs. Start with the token bucket algo
 **See also:** [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 
 **See also:** [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)
+
+**See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)
+
+**See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)

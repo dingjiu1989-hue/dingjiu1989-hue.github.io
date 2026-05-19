@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/event-collaboration.html
 
 # Event Collaboration: Choreography vs Orchestration
 
-## Event Collaboration: Choreography vs Orchestration
-
-### Event Collaboration: Choreography vs Orchestration
-
-#### Event Collaboration: Choreography vs Orchestration
-
-#### Event Collaboration: Choreography vs Orchestration
-
-#### Event Collaboration: Choreography vs Orchestration
-
-#### Event Collaboration: Choreography vs Orchestration
-
-#### Event Collaboration: Choreography vs Orchestration
-
-#### Event Collaboration: Choreography vs Orchestration
-
-#### Event Collaboration: Choreography vs Orchestration
-
-#### Event Collaboration: Choreography vs Orchestration
-
-#### Event Collaboration: Choreography vs Orchestration
-
-#### Event Collaboration: Choreography vs Orchestration
-
-#### Event Collaboration: Choreography vs Orchestration
-
-#### Event Collaboration: Choreography vs Orchestration
-
-#### Event Collaboration: Choreography vs Orchestration
-
 Event collaboration is the architectural pattern where services communicate through events rather than direct requests. This shifts the coordination model from asking (request-response) to telling (event notification). Two fundamental patterns govern how these collaborations are structured: choreography, where each service independently responds to events, and orchestration, where a central coordinator directs the workflow. 
 
 In choreography, services are loosely coupled through events. When a service completes an operation, it publishes an event. Other services subscribe to relevant events and react accordingly. There is no central controller — the workflow emerges from the collective behavior of participating services. For example, when the Order Service creates an order, it publishes an OrderCreated event. The Inventory Service subtracts stock, the Payment Service charges the customer, and the Shipping Service schedules delivery — each acting independently. 
@@ -67,3 +37,9 @@ Many production systems combine both patterns. Orchestration manages core busine
 **See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
 
 **See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
+
+**See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
+
+**See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
+
+**See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)

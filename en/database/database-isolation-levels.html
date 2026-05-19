@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-isolation-levels.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-19",
-      "wordCount": "859",
+      "wordCount": "868",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -96,43 +96,31 @@
       <h1 class="article-title">Database Isolation Levels and Anomalies</h1>
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-isolation-levels.png" alt="Database Isolation Levels and Anomalies" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Database Isolation Levels and Anomalies</h2>
-<h3>Database Isolation Levels and Anomalies</h3>
-<h4>Database Isolation Levels and Anomalies</h4>
-<h4>Database Isolation Levels and Anomalies</h4>
-<h4>Database Isolation Levels and Anomalies</h4>
-<h4>Database Isolation Levels and Anomalies</h4>
-<h4>Database Isolation Levels and Anomalies</h4>
-<h4>Database Isolation Levels and Anomalies</h4>
-<h4>Database Isolation Levels and Anomalies</h4>
-<h4>Database Isolation Levels and Anomalies</h4>
-<h4>Database Isolation Levels and Anomalies</h4>
-<h4>Database Isolation Levels and Anomalies</h4>
-<h4>Database Isolation Levels and Anomalies</h4>
-<h4>Database Isolation Levels and Anomalies</h4>
-<h4>Database Isolation Levels and Anomalies</h4>
-<p>Isolation levels define how transaction concurrency is managed in a database. Higher isolation levels prevent more anomalies but reduce concurrency. Lower isolation levels increase performance at the cost of data consistency.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-isolation-levels.png" alt="Database Isolation Levels and Anomalies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Read Uncommitted</h4>
+      <div class="article-body"><p>Isolation levels define how transaction concurrency is managed in a database. Higher isolation levels prevent more anomalies but reduce concurrency. Lower isolation levels increase performance at the cost of data consistency.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-isolation-levels.png" alt="Database Isolation Levels and Anomalies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Read Uncommitted</h2>
 <p>Read uncommitted is the lowest isolation level. A transaction can read data written by another uncommitted transaction. This exposes dirty reads—reading data that may be rolled back.</p>
 <p>This level is rarely used in production. It is appropriate only when reading approximate data where precision does not matter, such as rough count queries.</p>
-<h4>Read Committed</h4>
+<h2>Read Committed</h2>
 <p>Read committed prevents dirty reads. A transaction only sees data that was committed before the statement began. This is the default isolation level in PostgreSQL, SQL Server, and Oracle.</p>
 <p>Read committed does not prevent non-repeatable reads. If a transaction reads the same row twice, it may see different values if another transaction committed an update between the reads. This level also does not prevent phantom reads.</p>
-<h4>Repeatable Read</h4>
+<h2>Repeatable Read</h2>
 <p>Repeatable read ensures that if a transaction reads a row multiple times, it sees the same data. The database locks read rows or uses multi-version concurrency control to provide consistent snapshots.</p>
 <p>Repeatable read is the default in MySQL/InnoDB. It prevents dirty reads and non-repeatable reads but may allow phantom reads—new rows inserted by other transactions appearing in subsequent range queries.</p>
-<h4>Serializable</h4>
+<h2>Serializable</h2>
 <p>Serializable is the highest isolation level. Transactions execute as if they ran sequentially, one after another. No anomalies are possible. Serializable is the default isolation level in CockroachDB and YugabyteDB.</p>
 <p>Serializable achieves this through either pessimistic locking (transactions block) or optimistic concurrency control (transactions abort and retry on conflicts). The trade-off is throughput—serializable isolation reduces concurrent transaction throughput.</p>
-<h4>Common Anomalies</h4>
+<h2>Common Anomalies</h2>
 <p>Dirty read: reading uncommitted data that may be rolled back. Non-repeatable read: reading the same row twice and getting different values. Phantom read: a range query returns different rows when re-executed. Lost update: two transactions read the same value, modify it independently, and the second overwrites the first. Write skew: two transactions read overlapping data and make conflicting writes based on stale reads.</p>
-<h4>Choosing an Isolation Level</h4>
+<h2>Choosing an Isolation Level</h2>
 <p>Use read committed for most applications—good balance of correctness and performance. Use repeatable read when reports or calculations require consistent snapshots. Use serializable for financial transactions and inventory management where correctness is critical. Use read uncommitted only for approximate aggregate queries.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -144,7 +132,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-transactions.html" class="related-card">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a><a href="/en/database/database-views.html" class="related-card">Database Views: Simple, Materialized, and Updateable Views</a><a href="/en/database/read-replicas.html" class="related-card">Read Replicas: Scaling Reads, Replication Lag, and Failover</a><a href="/en/database/database-horizontal-scaling.html" class="related-card">Database Horizontal Scaling Strategies</a></div>
+      <div class="related-grid"><a href="/en/database/database-transactions.html" class="related-card"><span class="related-card-title">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</span><span class="related-card-desc">Master database transactions with a deep dive into ACID properties, isolation levels, nested transac</span></a><a href="/en/database/database-views.html" class="related-card"><span class="related-card-title">Database Views: Simple, Materialized, and Updateable Views</span><span class="related-card-desc">Learn about database views including simple views, materialized views, updateable views, and the per</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="related-card-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="related-card-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing str</span></a><a href="/en/database/database-horizontal-scaling.html" class="related-card"><span class="related-card-title">Database Horizontal Scaling Strategies</span><span class="related-card-desc">Learn horizontal scaling strategies for databases: sharding, replication, read replicas, and distrib</span></a><a href="/en/database/connection-management.html" class="related-card"><span class="related-card-title">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</span><span class="related-card-desc">Comprehensive guide to database connection management. Learn connection pooling with PgBouncer and H</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="related-card-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="related-card-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monit</span></a></div>
     </section>
     
   </div>

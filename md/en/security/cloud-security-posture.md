@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/cloud-security-posture.html
 
 # Cloud Security Posture Management
 
-## Cloud Security Posture Management
-
-### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
-#### Cloud Security Posture Management
-
 Introduction 
 
 Cloud Security Posture Management (CSPM) continuously monitors cloud environments for misconfigurations, compliance violations, and security risks. As cloud infrastructure grows in complexity, manual security reviews become impossible. CSPM automates the detection and remediation of configuration issues that lead to most cloud data breaches. 
@@ -72,7 +38,7 @@ def scan_aws(self, account_id):
 
 """Evaluate AWS account against security benchmarks."""
 
-#### Check S3 public access
+## Check S3 public access
 
 s3 = boto3.client('s3')
 
@@ -204,7 +170,7 @@ def map_finding(self, finding):
 
 mapped_to = []
 
-#### Example mapping
+## Example mapping
 
 if finding['issue'] == 'S3 bucket publicly accessible':
 
@@ -298,7 +264,7 @@ def remediate_open_security_group(self, group_id, region):
 
 ec2 = boto3.client('ec2', region_name=region)
 
-#### Get current rules
+## Get current rules
 
 sg = ec2.describe_security_groups(GroupIds=[group_id])['SecurityGroups'][0]
 
@@ -310,7 +276,7 @@ if ip_range['CidrIp'] == '0.0.0.0/0':
 
 if permission.get('FromPort') in (22, 3389, 3306, 5432):
 
-#### Remove overly permissive rule
+## Remove overly permissive rule
 
 ec2.revoke_security_group_ingress(
 
@@ -405,3 +371,9 @@ CSPM is essential for maintaining secure cloud configurations at scale. Deploy C
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Certificate Management](</en/security/certificate-management.html>), [Secure Configuration Management](</en/security/secure-configuration.html>)
 
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Certificate Management](</en/security/certificate-management.html>), [Secure Configuration Management](</en/security/secure-configuration.html>)
+
+**See also:** [Audit Logging Best Practices](</en/security/audit-logging.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Container Image Security](</en/security/container-image-security.html>)
+
+**See also:** [Audit Logging Best Practices](</en/security/audit-logging.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Container Image Security](</en/security/container-image-security.html>)
+
+**See also:** [Audit Logging Best Practices](</en/security/audit-logging.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Container Image Security](</en/security/container-image-security.html>)

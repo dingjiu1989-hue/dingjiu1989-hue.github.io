@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/soc2-technical.html
 
 # SOC 2 Technical Controls
 
-## SOC 2 Technical Controls
-
-### SOC 2 Technical Controls
-
-#### SOC 2 Technical Controls
-
-#### SOC 2 Technical Controls
-
-#### SOC 2 Technical Controls
-
-#### SOC 2 Technical Controls
-
-#### SOC 2 Technical Controls
-
-#### SOC 2 Technical Controls
-
-#### SOC 2 Technical Controls
-
-#### SOC 2 Technical Controls
-
-#### SOC 2 Technical Controls
-
-#### SOC 2 Technical Controls
-
-#### SOC 2 Technical Controls
-
-#### SOC 2 Technical Controls
-
-#### SOC 2 Technical Controls
-
 SOC 2 Overview 
 
 SOC 2 audits trust service criteria: Security, Availability, Processing Integrity, Confidentiality, and Privacy. Technical controls are essential for meeting these criteria. 
@@ -100,13 +70,13 @@ def store_immutable(self, log_entry):
 
 """Store logs in immutable storage for audit"""
 
-#### Write to append-only log
+## Write to append-only log
 
 with open("/var/log/soc2/access.log", "a") as f:
 
 f.write(json.dumps(log_entry) + "\n")
 
-#### Also send to SIEM
+## Also send to SIEM
 
 self.send_to_siem(log_entry)
 
@@ -190,7 +160,7 @@ Change Management
 
 Track and approve all infrastructure changes: 
 
-#### change-management-pipeline.yaml
+## change-management-pipeline.yaml
 
 change_management:
 
@@ -252,7 +222,7 @@ require_change_window: high_risk
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_security_events
 
-#### Change management API
+## Change management API
 
 class ChangeManager:
 
@@ -337,3 +307,9 @@ SOC 2 technical controls require systematic implementation across logging, acces
 **See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)
 
 **See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>)
+
+**See also:** [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>)
+
+**See also:** [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>)

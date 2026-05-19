@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-streams.png",
       "datePublished": "2026-01-09",
       "dateModified": "2026-04-21",
-      "wordCount": "1100",
+      "wordCount": "1098",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,40 +99,23 @@
       <h1 class="article-title">Node.js Streams</h1>
       <div class="article-meta">Published 2026-01-09 · Last active 2026-04-21 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-streams.png" alt="Node.js Streams" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Node.js Streams</h2>
-<h3>Node.js Streams</h3>
-<h4>Node.js Streams</h4>
-<h4>Node.js Streams</h4>
-<h4>Node.js Streams</h4>
-<h4>Node.js Streams</h4>
-<h4>Node.js Streams</h4>
-<h4>Node.js Streams</h4>
-<h4>Node.js Streams</h4>
-<h4>Node.js Streams</h4>
-<h4>Node.js Streams</h4>
-<h4>Node.js Streams</h4>
-<h4>Node.js Streams</h4>
-<h4>Node.js Streams</h4>
-<h4>Node.js Streams</h4>
-<h4>Node.js Streams</h4>
-<h4>Node.js Streams</h4>
-<p>Node.js streams are one of the most powerful yet misunderstood features of the platform. Streams enable processing of data piece by piece rather than loading entire datasets into memory. This makes them essential for handling large files, network communication, and data processing pipelines. This article covers the four stream types, backpressure, and the pipeline API.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-streams.png" alt="Node.js Streams" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Stream Types</h4>
+      <div class="article-body"><p>Node.js streams are one of the most powerful yet misunderstood features of the platform. Streams enable processing of data piece by piece rather than loading entire datasets into memory. This makes them essential for handling large files, network communication, and data processing pipelines. This article covers the four stream types, backpressure, and the pipeline API.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-streams.png" alt="Node.js Streams" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Stream Types</h2>
 <p>Node.js has four fundamental stream types. Readable streams produce data that can be consumed. Writable streams consume data. Transform streams read data, transform it, and write the transformed data. Duplex streams implement both readable and writable interfaces independently.</p>
 <p>Readable streams include <code>fs.createReadStream</code> for files, HTTP request objects, and <code>process.stdin</code>. Writable streams include <code>fs.createWriteStream</code>, HTTP response objects, and <code>process.stdout</code>. Transform streams like <code>zlib.createGzip</code> and <code>crypto.createCipher</code> sit between readable and writable streams.</p>
-<h4>Reading from Streams</h4>
+<h2>Reading from Streams</h2>
 <p>Readable streams operate in two modes: flowing and paused. In flowing mode, data is read automatically and emitted via the <code>'data'</code> event. In paused mode, <code>read()</code> must be called explicitly to pull data from the stream. Modern code prefers async iteration with <code>for await...of</code>.</p>
 <p>For example, reading a file line by line uses <code>readline</code> with a file stream: <code>const rl = readline.createInterface({ input: fs.createReadStream('file.txt') })</code>. This processes the file one line at a time without loading the entire file into memory.</p>
-<h4>Writing to Streams</h4>
+<h2>Writing to Streams</h2>
 <p>Writing to a writable stream uses the <code>write()</code> method, which returns a boolean indicating whether the internal buffer is full. A <code>false</code> return signals that the consumer cannot keep up—this is backpressure. The <code>'drain'</code> event fires when the buffer is ready for more data.</p>
 <p>The <code>end()</code> method signals that no more data will be written. After <code>end()</code>, the stream finishes processing buffered data and emits <code>'finish'</code>. Proper stream cleanup handles errors and ensures streams are closed, especially in long-running processes.</p>
-<h4>Transform Streams</h4>
+<h2>Transform Streams</h2>
 <p>Transform streams implement both readable and writable interfaces. They receive chunks of data, transform them, and push the transformed chunks downstream. Common use cases include compression, encryption, format conversion, and data validation.</p>
 <p>Implementing a custom transform stream requires implementing the <code>_transform()</code> method. Each chunk arrives via <code>_transform</code>, and you push the transformed result. The <code>_flush()</code> method handles remaining data when the input stream ends. This pattern is used by <code>zlib</code>, <code>crypto</code>, and user-defined stream processors.</p>
-<h4>Backpressure</h4>
+<h2>Backpressure</h2>
 <p>Backpressure is the mechanism that regulates data flow between fast producers and slow consumers. When a writable stream's internal buffer exceeds <code>highWaterMark</code>, <code>write()</code> returns <code>false</code>. The readable stream should pause until <code>'drain'</code> fires, preventing memory exhaustion.</p>
 <p>Improper backpressure handling is a common source of memory issues in Node.js applications. Without backpressure awareness, a fast readable stream can fill memory with buffered data that a slow consumer cannot process. The <code>pipeline()</code> API handles backpressure automatically.</p>
-<h4>The Pipeline API</h4>
+<h2>The Pipeline API</h2>
 <p>The <code>stream.pipeline()</code> function chains multiple streams together, handling backpressure, error propagation, and cleanup automatically. It propagates errors from any stream in the pipeline and cleans up all streams when done. A <code>stream.finished()</code> utility detects when a stream is no longer usable.</p>
 <p>The pipeline API is the recommended way to compose streams:</p>
 <p>const { pipeline } = require('stream/promises');</p>
@@ -142,7 +125,7 @@
 <p>fs.createWriteStream('output.txt')</p>
 <p>);</p>
 <p>This decompresses a gzipped file with proper backpressure and error handling—something that is surprisingly difficult to implement correctly with manual stream events.</p>
-<h4>Error Handling</h4>
+<h2>Error Handling</h2>
 <p>Stream errors must be handled explicitly. An unhandled <code>'error'</code> event on a stream crashes the process. The pipeline API handles errors from all chained streams, but when using streams directly, every stream needs an error handler.</p>
 <p>Streams also emit <code>'close'</code> when the stream and its underlying resources are closed. The <code>'close'</code> event is guaranteed to fire even if an error occurred, making it suitable for cleanup logic. The <code>destroyed</code> property indicates whether the stream has been destroyed.</p>
 <p>Node.js streams are fundamental to building efficient, memory-conscious applications. Whether processing large files, handling HTTP requests, or building data transformation pipelines, understanding streams enables scalable data processing with predictable memory usage.</p>
@@ -150,7 +133,10 @@
 <p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/error-handling-patterns.html">Error Handling Patterns</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/error-handling-patterns.html">Error Handling Patterns</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/error-handling-patterns.html">Error Handling Patterns</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/error-handling-patterns.html">Error Handling Patterns</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/error-handling-patterns.html">Error Handling Patterns</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/error-handling-patterns.html">Error Handling Patterns</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/error-handling-patterns.html">Error Handling Patterns</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/developer-portal.html">Developer Portal</a>, <a href="/en/tech/event-processing.html">Event Processing</a>, <a href="/en/tech/metric-collection.html">Metric Collection</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/developer-portal.html">Developer Portal</a>, <a href="/en/tech/event-processing.html">Event Processing</a>, <a href="/en/tech/metric-collection.html">Metric Collection</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/developer-portal.html">Developer Portal</a>, <a href="/en/tech/event-processing.html">Event Processing</a>, <a href="/en/tech/metric-collection.html">Metric Collection</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -162,7 +148,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/ci-cd-best-practices.html" class="related-card">CI/CD Best Practices</a><a href="/en/tech/error-handling-patterns.html" class="related-card">Error Handling Patterns</a><a href="/en/tech/elk-stack-setup.html" class="related-card">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a><a href="/en/tech/api-documentation.html" class="related-card">API Documentation</a></div>
+      <div class="related-grid"><a href="/en/tech/ci-cd-best-practices.html" class="related-card"><span class="related-card-title">CI/CD Best Practices</span><span class="related-card-desc">Master CI/CD best practices: pipeline design, artifact management, environment promotion, and deploy</span></a><a href="/en/tech/error-handling-patterns.html" class="related-card"><span class="related-card-title">Error Handling Patterns</span><span class="related-card-desc">Master error handling patterns: Result types, exceptions, error boundaries, resilience strategies, a</span></a><a href="/en/tech/elk-stack-setup.html" class="related-card"><span class="related-card-title">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</span><span class="related-card-desc">Comprehensive guide to ELK Stack covering Elasticsearch cluster setup, Logstash pipeline configurati</span></a><a href="/en/tech/api-documentation.html" class="related-card"><span class="related-card-title">API Documentation</span><span class="related-card-desc">Learn API documentation: OpenAPI, Swagger UI, Redoc, developer portal integration, and documentation</span></a><a href="/en/tech/configuration-management.html" class="related-card"><span class="related-card-title">Configuration Management</span><span class="related-card-desc">Master configuration management: environment variables, config files, feature flags, and best practi</span></a><a href="/en/tech/contract-testing.html" class="related-card"><span class="related-card-title">Contract Testing</span><span class="related-card-desc">Master contract testing: Pact, consumer-driven contracts, provider verification, and CI/CD integrati</span></a></div>
     </section>
     
   </div>

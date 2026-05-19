@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/iam-audit.png",
       "datePublished": "2026-03-18",
       "dateModified": "2026-05-01",
-      "wordCount": "1118",
+      "wordCount": "1140",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">IAM Audit</h1>
       <div class="article-meta">Published 2026-03-18 · Last active 2026-05-01 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/iam-audit.png" alt="IAM Audit" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>IAM Audit</h2>
-<h3>IAM Audit</h3>
-<h4>IAM Audit</h4>
-<h4>IAM Audit</h4>
-<h4>IAM Audit</h4>
-<h4>IAM Audit</h4>
-<h4>IAM Audit</h4>
-<h4>IAM Audit</h4>
-<h4>IAM Audit</h4>
-<h4>IAM Audit</h4>
-<h4>IAM Audit</h4>
-<h4>IAM Audit</h4>
-<h4>IAM Audit</h4>
-<h4>IAM Audit</h4>
-<h4>IAM Audit</h4>
-<p>IAM Audit Fundamentals </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/iam-audit.png" alt="IAM Audit" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>IAM Audit Fundamentals </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/iam-audit.png" alt="IAM Audit" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Identity and Access Management (IAM) audits verify that users have appropriate permissions. Regular audits prevent privilege creep, detect unused roles, and identify security gaps. </p>
 <p>Permission Review </p>
 <p>Automate permission reviews across cloud providers: </p>
@@ -135,16 +120,16 @@
 <p>"groups": [],</p>
 <p>"last_used": None</p>
 <p>}</p>
-<h4>Inline policies</h4>
+<h2>Inline policies</h2>
 <p>policies = self.iam.list_user_policies(UserName=user["UserName"])</p>
 <p>user_info["policies"] = policies["PolicyNames"]</p>
-<h4>Attached managed policies</h4>
+<h2>Attached managed policies</h2>
 <p>attached = self.iam.list_attached_user_policies(UserName=user["UserName"])</p>
 <p>user_info["managed_policies"] = [p["PolicyName"] for p in attached["AttachedPolicies"]]</p>
-<h4>Groups</h4>
+<h2>Groups</h2>
 <p>groups = self.iam.list_groups_for_user(UserName=user["UserName"])</p>
 <p>user_info["groups"] = [g["GroupName"] for g in groups["Groups"]]</p>
-<h4>Last activity</h4>
+<h2>Last activity</h2>
 <p>last_used = self.iam.get_user(UserName=user["UserName"])</p>
 <p>if "PasswordLastUsed" in last_used["User"]:</p>
 <p>user_info["last_used"] = last_used["User"]["PasswordLastUsed"]</p>
@@ -183,7 +168,7 @@
 <p>if isinstance(actions, str):</p>
 <p>actions = [actions]</p>
 <p>resource = stmt.get("Resource", "*")</p>
-<h4>Check for IAM modify permissions</h4>
+<h2>Check for IAM modify permissions</h2>
 <p>escalation_actions = [</p>
 <p>"iam:CreatePolicy",</p>
 <p>"iam:AttachUserPolicy",</p>
@@ -212,7 +197,7 @@
 <p>},</p>
 <p>"findings": findings</p>
 <p>}</p>
-<h4>Flag users with admin access who don't need it</h4>
+<h2>Flag users with admin access who don't need it</h2>
 <p>for user in findings["users"]:</p>
 <p>if "AdministratorAccess" in user.get("managed_policies", []):</p>
 <p>if user.get("last_used") and \</p>
@@ -239,7 +224,10 @@
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/security-awareness.html">Security Awareness Training</a>, <a href="/en/security/vulnerability-management.html">Vulnerability Management</a>, <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/security/security-awareness.html">Security Awareness Training</a>, <a href="/en/security/vulnerability-management.html">Vulnerability Management</a>, <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/security-awareness.html">Security Awareness Training</a>, <a href="/en/security/vulnerability-management.html">Vulnerability Management</a>, <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -251,7 +239,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/cloud-iam.html" class="related-card">Cloud IAM Deep Dive</a><a href="/en/security/threat-hunting.html" class="related-card">Threat Hunting</a><a href="/en/security/container-runtime-security.html" class="related-card">Container Runtime Security</a><a href="/en/security/ddos-mitigation.html" class="related-card">DDoS Mitigation</a></div>
+      <div class="related-grid"><a href="/en/security/cloud-iam.html" class="related-card"><span class="related-card-title">Cloud IAM Deep Dive</span><span class="related-card-desc">In-depth guide to cloud IAM covering AWS IAM policies, GCP IAM roles, least privilege principles, an</span></a><a href="/en/security/threat-hunting.html" class="related-card"><span class="related-card-title">Threat Hunting</span><span class="related-card-desc">Comprehensive guide to hypothesis-driven threat hunting with MITRE ATT&CK mapping, tooling strategie</span></a><a href="/en/security/container-runtime-security.html" class="related-card"><span class="related-card-title">Container Runtime Security</span><span class="related-card-desc">Securing container runtime with seccomp, AppArmor, SELinux, Falco, and runtime threat detection.</span></a><a href="/en/security/ddos-mitigation.html" class="related-card"><span class="related-card-title">DDoS Mitigation</span><span class="related-card-desc">Implementing DDoS mitigation with detection, traffic scrubbing, rate limiting, and CDN-based protect</span></a><a href="/en/security/dlp-strategies.html" class="related-card"><span class="related-card-title">Data Loss Prevention Strategies</span><span class="related-card-desc">Implementing DLP across network, endpoint, and cloud with effective policy design and incident respo</span></a><a href="/en/security/kubernetes-security.html" class="related-card"><span class="related-card-title">Kubernetes Security</span><span class="related-card-desc">Securing Kubernetes with RBAC, Pod Security Standards, network policies, and audit logging.</span></a></div>
     </section>
     
   </div>

@@ -8,45 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/compare/planetscale-vs-neon.html
 
 # PlanetScale vs Neon
 
-## PlanetScale vs Neon
-
-### PlanetScale vs Neon
-
-#### PlanetScale vs Neon
-
-#### PlanetScale vs Neon
-
-#### PlanetScale vs Neon
-
-#### PlanetScale vs Neon
-
-#### PlanetScale vs Neon
-
-#### PlanetScale vs Neon
-
-#### PlanetScale vs Neon
-
-#### PlanetScale vs Neon
-
-#### PlanetScale vs Neon
-
-#### PlanetScale vs Neon
-
-#### PlanetScale vs Neon
-
-#### PlanetScale vs Neon
-
-#### PlanetScale vs Neon
-
-#### PlanetScale vs Neon
-
-#### Introduction
+## Introduction
 
 PlanetScale and Neon represent a new generation of database platforms built for modern development workflows. Both offer serverless MySQL (PlanetScale) and PostgreSQL (Neon) with features like branching, instant cloning, and scale-to-zero. They eliminate traditional database management while providing developer-friendly features that integrate with modern CI/CD and version control practices.
 
-#### Database Technology
+## Database Technology
 
-#### PlanetScale: Serverless MySQL
+## PlanetScale: Serverless MySQL
 
 PlanetScale is built on MySQL-compatible Vitess, the same technology that powers YouTube's database infrastructure.
 
@@ -85,7 +53,7 @@ UNIQUE KEY idx_email (email)
 
 **Limitation:** No foreign key constraints (Vitess limitation). Joins work within the same shard but are limited across shards.
 
-#### Neon: Serverless PostgreSQL
+## Neon: Serverless PostgreSQL
 
 Neon is built on PostgreSQL with a custom storage engine that separates compute from storage.
 
@@ -136,19 +104,19 @@ CREATE INDEX idx_posts_search ON posts USING GIN(to_tsvector('english', title ||
 
 **Strengths:** Full PostgreSQL compatibility including foreign keys, JSONB, full-text search, PostGIS, and all PostgreSQL extensions.
 
-#### Database Branching
+## Database Branching
 
 Branching is the killer feature of both platforms, modeled after Git.
 
-#### How It Works
+## How It Works
 
-#### PlanetScale CLI
+## PlanetScale CLI
 
 pscale branch create myapp add-billing-feature
 
 pscale branch promote myapp add-billing-feature
 
-#### Neon CLI (neonctl)
+## Neon CLI (neonctl)
 
 neonctl branches create --parent myapp --name add-billing-feature
 
@@ -174,7 +142,7 @@ neonctl branches create --parent myapp --name add-billing-feature
 
 
 
-#### Serverless Capabilities
+## Serverless Capabilities
 
 | Feature | PlanetScale | Neon |
 
@@ -192,7 +160,7 @@ neonctl branches create --parent myapp --name add-billing-feature
 
 | Regions | 50+ regions | 10+ regions |
 
-#### Pricing
+## Pricing
 
 | Plan | PlanetScale | Neon |
 
@@ -208,7 +176,7 @@ neonctl branches create --parent myapp --name add-billing-feature
 
 Neon is generally more affordable at lower tiers. PlanetScale's pricing scales with row reads, which can be unpredictable for high-traffic applications.
 
-#### Developer Experience
+## Developer Experience
 
 **PlanetScale** offers:
 
@@ -240,7 +208,7 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
 
 
 
-#### Ecosystem Compatibility
+## Ecosystem Compatibility
 
 **PlanetScale** works with MySQL-compatible ORMs:
 
@@ -274,7 +242,7 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
 
 
 
-#### When to Choose What
+## When to Choose What
 
 **Choose PlanetScale when:**
 
@@ -304,7 +272,7 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
 
 
 
-#### Conclusion
+## Conclusion
 
 PlanetScale and Neon both solve the same fundamental problem — making databases as developer-friendly as the rest of the modern toolchain — but they serve different database ecosystems. If MySQL is your database of choice, PlanetScale's Vitess-based architecture provides scalability with a familiar workflow. If PostgreSQL is your preference, Neon offers full PG compatibility with innovative branching and autoscaling features. In 2026, Neon's PostgreSQL-based approach has broader ecosystem support and more affordable pricing, making it the default choice for new projects.
 
@@ -319,3 +287,9 @@ PlanetScale and Neon both solve the same fundamental problem — making database
 **See also:** [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>)
 
 **See also:** [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>)
+
+**See also:** [Supabase vs Firebase](</en/compare/supabase-vs-firebase.html>), [Tailwind CSS vs Bootstrap](</en/compare/tailwind-vs-bootstrap.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>)
+
+**See also:** [Supabase vs Firebase](</en/compare/supabase-vs-firebase.html>), [Tailwind CSS vs Bootstrap](</en/compare/tailwind-vs-bootstrap.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>)
+
+**See also:** [Supabase vs Firebase](</en/compare/supabase-vs-firebase.html>), [Tailwind CSS vs Bootstrap](</en/compare/tailwind-vs-bootstrap.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>)

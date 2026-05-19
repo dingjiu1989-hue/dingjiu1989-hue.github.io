@@ -72,4 +72,4 @@ tRPC stack (automatic integration)| **Zod**
   
 **Bottom line:** Zod is the default — the ecosystem support alone is worth the bundle size for most projects. Valibot for edge/serverless where every KB counts. Yup only if it's already in your codebase. See also: [TypeScript Patterns](</en/tech/typescript-advanced-patterns.html>) and [API Architecture Comparison](</en/compare/trpc-vs-graphql-vs-rest.html>).
 
-**See also:** [TypeScript vs JavaScript in 2026: Is JavaScript Still Worth Using?](</en/compare/typescript-vs-javascript.html>), [Prisma vs Drizzle vs TypeORM (2026): Best TypeScript ORM?](</en/compare/prisma-vs-drizzle-vs-typeorm.html>), [Tailwind CSS vs Bootstrap vs Material UI (2026): Best Styling Approach?](</en/compare/tailwind-vs-bootstrap-vs-mui.html>)
+**See also:** [Vite vs Webpack vs Turbopack (2026): Best Frontend Build Tool?](</en/compare/vite-vs-webpack-vs-turbopack.html>), [Hono vs Express vs Fastify (2026): Best Node.js Backend Framework?](</en/compare/hono-vs-express-vs-fastify.html>), [Prettier vs Biome (2026): Best Code Formatter for Modern JavaScript?](</en/compare/prettier-vs-biome.html>)

@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/dlp-strategies.html
 
 # Data Loss Prevention Strategies
 
-## Data Loss Prevention Strategies
-
-### Data Loss Prevention Strategies
-
-#### Data Loss Prevention Strategies
-
-#### Data Loss Prevention Strategies
-
-#### Data Loss Prevention Strategies
-
-#### Data Loss Prevention Strategies
-
-#### Data Loss Prevention Strategies
-
-#### Data Loss Prevention Strategies
-
-#### Data Loss Prevention Strategies
-
-#### Data Loss Prevention Strategies
-
-#### Data Loss Prevention Strategies
-
-#### Data Loss Prevention Strategies
-
-#### Data Loss Prevention Strategies
-
-#### Data Loss Prevention Strategies
-
-#### Data Loss Prevention Strategies
-
 DLP Overview 
 
 Data Loss Prevention (DLP) monitors and controls data in use, in motion, and at rest. A comprehensive DLP strategy covers three domains. 
@@ -56,17 +26,17 @@ if packet.haslayer(Raw):
 
 payload = str(packet[Raw].load)
 
-#### Check for credit card patterns
+## Check for credit card patterns
 
 if re.search(r"\b(?:\d[ -]*?){13,16}\b", payload):
 
 print(f"[ALERT] Potential CC leak from {packet[IP].src}")
 
-#### Trigger block or alert
+## Trigger block or alert
 
 return False
 
-#### Check for API keys (length > 20, high entropy)
+## Check for API keys (length > 20, high entropy)
 
 if len(payload) > 20 and has_high_entropy(payload):
 
@@ -90,7 +60,7 @@ Endpoint DLP
 
 Control data movement on endpoints: 
 
-#### endpoint-dlp-rules.yaml
+## endpoint-dlp-rules.yaml
 
 rules:
 
@@ -128,7 +98,7 @@ Cloud DLP
 
 Protect data in SaaS and IaaS environments: 
 
-#### Google Cloud DLP inspection job
+## Google Cloud DLP inspection job
 
 resource "google_data_loss_prevention_job_trigger" "bigquery_scan" {
 
@@ -259,3 +229,9 @@ Effective DLP requires coverage across network, endpoint, and cloud domains. Des
 **See also:** [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Incident Response Plan](</en/security/incident-response-plan.html>), [Endpoint Security](</en/security/endpoint-security.html>)
 
 **See also:** [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Incident Response Plan](</en/security/incident-response-plan.html>), [Endpoint Security](</en/security/endpoint-security.html>)
+
+**See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
+
+**See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
+
+**See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)

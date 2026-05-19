@@ -8,47 +8,15 @@ url: https://dingjiu1989-hue.github.io/en/ai/prompt-management.html
 
 # Prompt Management: Versioning, Testing, Collaboration, Deployment
 
-## Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Prompt Management: Versioning, Testing, Collaboration, Deployment
-
-#### Introduction
+## Introduction
 
 Prompts are the primary interface for controlling LLM behavior, yet most teams manage them as copy-pasted text files or hardcoded strings in source code. As AI applications grow, prompts need the same rigor as application code: versioning, testing, review, staging, and deployment pipelines. This article covers the tools and workflows for professional prompt management.
 
-#### Prompt as Code
+## Prompt as Code
 
 Store prompts in a structured, version-controlled format:
 
-#### prompts/summarization.yaml
+## prompts/summarization.yaml
 
 name: document_summarizer
 
@@ -102,7 +70,7 @@ min_length: 50
 
 max_length: 150
 
-#### Prompt Registry
+## Prompt Registry
 
 A central registry stores all prompt versions with metadata:
 
@@ -172,7 +140,7 @@ prompt_b = self.get_prompt(name, version_b)["prompt"]
 
 return self._compute_diff(prompt_a, prompt_b)
 
-#### Automated Prompt Testing
+## Automated Prompt Testing
 
 Test prompts against a suite of evaluation cases:
 
@@ -226,7 +194,7 @@ return results
 
 def _run_single_test(self, prompt_data: dict, test: dict) -> dict:
 
-#### Build the prompt
+## Build the prompt
 
 system = prompt_data.get("system_prompt", "")
 
@@ -236,11 +204,11 @@ inputs = test.get("input", {})
 
 full_prompt = template.format(**inputs) if inputs else template
 
-#### Run the model
+## Run the model
 
 response = self.llm(system, full_prompt, prompt_data.get("parameters", {}))
 
-#### Check assertions
+## Check assertions
 
 failures = []
 
@@ -262,11 +230,11 @@ failures.append(f"Response too long: {len(response)} > {test['max_length']}")
 
 return {"test": test, "passed": len(failures) == 0, "failures": failures, "response_preview": response[:200]}
 
-#### CI/CD for Prompts
+## CI/CD for Prompts
 
 Integrate prompt changes into your deployment pipeline:
 
-#### .github/workflows/prompt-deploy.yml
+## .github/workflows/prompt-deploy.yml
 
 name: Prompt Deployment
 
@@ -320,7 +288,7 @@ steps:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: python scripts/deploy_prompts.py --env production
 
-#### Collaboration Workflow
+## Collaboration Workflow
 
 class PromptReviewWorkflow:
 
@@ -374,7 +342,7 @@ pr["reviewers"].append({"name": reviewer, "action": "approve", "comment": commen
 
 self.storage.save(f"reviews/{pr_id}", pr)
 
-#### Conclusion
+## Conclusion
 
 Manage prompts with the same rigor as code. Store them in YAML with version numbers, test cases, and metadata. Use a registry to track all versions and promote them through staging environments. Write automated tests that validate prompt outputs against assertions. Integrate prompt changes into CI/CD pipelines with review gates. This systematic approach prevents the common problems of prompt drift, broken deployments, and untracked changes that plague ad-hoc prompt management.
 
@@ -389,3 +357,9 @@ Manage prompts with the same rigor as code. Store them in YAML with version numb
 **See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>)
 
 **See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>)
+
+**See also:** [AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing](</en/ai/ai-red-teaming.html>), [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>)
+
+**See also:** [AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing](</en/ai/ai-red-teaming.html>), [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>)
+
+**See also:** [AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing](</en/ai/ai-red-teaming.html>), [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/mcp-complete-guide.png",
       "datePublished": "2025-12-10",
       "dateModified": "2026-04-16",
-      "wordCount": "5379",
+      "wordCount": "5219",
       "keywords": "MCP, Model Context Protocol, AI, LLM, Tool Use, Function Calling, Anthropic, AI Integration",
       "about": [{"@type": "Thing", "name": "MCP"}, {"@type": "Thing", "name": "Model Context Protocol"}, {"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "LLM"}, {"@type": "Thing", "name": "Tool Use"}],
       "inLanguage": "en",
@@ -105,26 +105,9 @@
       <h1 class="article-title">MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h1>
       <div class="article-meta">Published 2025-12-10 · Last active 2026-04-16 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/mcp-complete-guide.png" alt="MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h2>
-<h3>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h3>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<h4>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h4>
-<p>Every AI application needs to talk to external systems — databases, APIs, file systems, search engines. Before 2025, every integration was custom: write a LangChain tool, build a custom function call, hack together a plugin. It was like the pre-USB era where every device had its own cable.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/mcp-complete-guide.png" alt="MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Every AI application needs to talk to external systems — databases, APIs, file systems, search engines. Before 2025, every integration was custom: write a LangChain tool, build a custom function call, hack together a plugin. It was like the pre-USB era where every device had its own cable.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/mcp-complete-guide.png" alt="MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>MCP (Model Context Protocol) changes that. It's an open protocol that standardizes how AI models connect to external tools and data sources — one protocol, any LLM, any tool.</p>
-<h4>What Is MCP?</h4>
+<h2>What Is MCP?</h2>
 <p>MCP is an open standard (originally developed by Anthropic) that defines how AI applications discover and call external tools. Think of it as <strong>USB-C for AI integrations</strong> — a universal connector that any MCP-compatible client can use to talk to any MCP-compatible server.</p>
 <p>┌─────────────────┐ ┌────────────────┐ ┌─────────────────┐</p>
 <p>│ MCP Client │◄───►│ MCP Protocol │◄───►│ MCP Server │</p>
@@ -133,15 +116,15 @@
 <p>│ │ │ or SSE) │ │ search, API) │</p>
 <p>└─────────────────┘ └────────────────┘ └─────────────────┘</p>
 <p><strong>The key insight</strong> : MCP decouples tool implementation from the AI client. A single MCP server written once works with Claude Desktop, VS Code extensions, Cursor, and any other MCP-compatible client. No more "write this tool for LangChain, rewrite it for OpenAI, rewrite it for Claude."</p>
-<h4>Architecture</h4>
+<h2>Architecture</h2>
 <p>MCP has four core concepts:</p>
-<h4>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Host (Client Application)</h4>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Host (Client Application)</h2>
 <p>The AI-powered application the user interacts with: Claude Desktop, VS Code, Cursor, a custom chat app.</p>
-<h4>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Client (MCP Client)</h4>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Client (MCP Client)</h2>
 <p>A lightweight transport layer inside the host that manages connections to MCP servers. It speaks the MCP protocol over the wire.</p>
-<h4>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Server (MCP Server)</h4>
+<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Server (MCP Server)</h2>
 <p>A lightweight service that exposes resources and tools through MCP. Each server is focused on one domain: filesystem access, database queries, API integrations.</p>
-<h4>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Protocol</h4>
+<h2>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Protocol</h2>
 <p>The standard JSON-RPC message format that clients and servers use to communicate. Two transport modes:</p>
 <ul>
 <li>
@@ -151,7 +134,7 @@
 <p><strong>SSE</strong> (Server-Sent Events): Network-based, for remote servers</p>
 </li>
 </ul>
-<h4>Communication Flow</h4>
+<h2>Communication Flow</h2>
 <p>User: "Find all bugs assigned to me"</p>
 <p>│</p>
 <p>▼</p>
@@ -171,7 +154,7 @@
 <p>│</p>
 <p>▼</p>
 <p>Host shows: "Found 3 bugs assigned to you:..."</p>
-<h4>MCP vs Alternatives</h4>
+<h2>MCP vs Alternatives</h2>
 <p>| Feature | MCP | OpenAI Function Calling | LangChain Tools | Custom API |</p>
 <p>|---------|-----|------------------------|-----------------|------------|</p>
 <p>| <strong>Standardized</strong> | ✅ Open standard | ❌ OpenAI-only | ❌ LangChain-only | ❌ Custom |</p>
@@ -182,7 +165,7 @@
 <p>| <strong>Async/long-running</strong> | ✅ Notifications, progress | ❌ Request-response only | ❌ Request-response only | ⚠️ Depends |</p>
 <p>| <strong>Ecosystem</strong> | Growing fast | Mature but narrow | Good | None |</p>
 <p>| <strong>Setup complexity</strong> | Low | Low | Medium | High |</p>
-<h4>Why MCP Wins</h4>
+<h2>Why MCP Wins</h2>
 <p><strong>Before MCP</strong> : Every AI tool integration was bespoke</p>
 <ul>
 <li>
@@ -210,10 +193,10 @@
 <p>One filesystem MCP server works everywhere</p>
 </li>
 </ul>
-<h4>How to Build an MCP Server</h4>
+<h2>How to Build an MCP Server</h2>
 <p>The MCP SDK (available for Python, TypeScript, Java, and Go) makes building a server trivial. Here's a complete example in Python:</p>
-<h4>Python MCP Server</h4>
-<h4>server.py</h4>
+<h2>Python MCP Server</h2>
+<h2>server.py</h2>
 <p>from mcp.server import Server</p>
 <p>from mcp.types import Tool, TextContent</p>
 <p>import httpx</p>
@@ -250,7 +233,7 @@
 <p>raise ValueError(f"Unknown tool: {name}")</p>
 <p>if <strong>name</strong> == "<strong>main</strong> ":</p>
 <p>app.run(transport="stdio")</p>
-<h4>Running the Server</h4>
+<h2>Running the Server</h2>
 <p>// claude_desktop_config.json</p>
 <p>{</p>
 <p>"mcpServers": {</p>
@@ -261,7 +244,7 @@
 <p>}</p>
 <p>}</p>
 <p>Now your weather tool works in Claude Desktop, VS Code (with Cline or Continue extension), Cursor, and any other MCP host — with zero changes.</p>
-<h4>TypeScript MCP Server</h4>
+<h2>TypeScript MCP Server</h2>
 <p>import { Server } from "@modelcontextprotocol/sdk/server/index.js";</p>
 <p>import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";</p>
 <p>const server = new Server(</p>
@@ -293,7 +276,7 @@
 <p>});</p>
 <p>const transport = new StdioServerTransport();</p>
 <p>await server.connect(transport);</p>
-<h4>MCP Resources: Beyond Tools</h4>
+<h2>MCP Resources: Beyond Tools</h2>
 <p>MCP isn't just about calling tools — it also defines <strong>resources</strong> (data sources the server exposes). This is where MCP surpasses simple function calling.</p>
 <p>@app.list_resources()</p>
 <p>async def list_resources() -&gt; list[Resource]:</p>
@@ -316,11 +299,11 @@
 <p>if uri == "file:///logs/app.log":</p>
 <p>return open("/var/log/app.log").read()[-10000:]</p>
 <p>if uri.startswith("postgres://"):</p>
-<h4>Query schema dynamically</h4>
+<h2>Query schema dynamically</h2>
 <p>return json.dumps(query_table_schema(uri))</p>
 <p>raise ValueError(f"Unknown resource: {uri}")</p>
 <p>Resources give the AI client dynamic access to your data — it can read log files, query database schemas, browse file systems — all through the same protocol.</p>
-<h4>MCP Prompts (Templates)</h4>
+<h2>MCP Prompts (Templates)</h2>
 <p>MCP servers can also expose <strong>prompt templates</strong> — reusable instructions that guide how the LLM should behave when using your tools:</p>
 <p>@app.list_prompts()</p>
 <p>async def list_prompts() -&gt; list[Prompt]:</p>
@@ -350,14 +333,14 @@
 <p>Use the log resource and tools to investigate."""</p>
 <p>}</p>
 <p>)</p>
-<h4>Production MCP Server Patterns</h4>
-<h4>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Authentication and Credentials</h4>
+<h2>Production MCP Server Patterns</h2>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Authentication and Credentials</h2>
 <p>MCP servers should never hard-code credentials. Use environment variables or a config file:</p>
 <p>import os</p>
 <p>DB_URL = os.environ.get("MCP_DB_URL", "postgresql://localhost:5432")</p>
 <p>API_KEY = os.environ.get("MCP_API_KEY")</p>
 <p>app = Server("production-server")</p>
-<h4>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Rate Limiting</h4>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Rate Limiting</h2>
 <p>Protect external APIs from aggressive tool calls:</p>
 <p>import time</p>
 <p>from collections import defaultdict</p>
@@ -373,7 +356,7 @@
 <p>return False</p>
 <p>self.calls[key].append(now)</p>
 <p>return True</p>
-<h4>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tool Result Caching</h4>
+<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tool Result Caching</h2>
 <p>Avoid repeating expensive operations:</p>
 <p>from functools import lru_cache</p>
 <p>from datetime import datetime, timedelta</p>
@@ -391,15 +374,15 @@
 <p>return result</p>
 <p>return wrapper</p>
 <p>return decorator</p>
-<h4>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Structured Logging</h4>
+<h2>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Structured Logging</h2>
 <p>Every tool call should be traceable:</p>
 <p>import structlog</p>
 <p>logger = structlog.get_logger()</p>
-<h4>In the call_tool handler</h4>
+<h2>In the call_tool handler</h2>
 <p>logger.info("tool_call", tool=name, arguments=arguments,</p>
 <p>duration_ms=elapsed_ms, success=True)</p>
-<h4>MCP Ecosystem (2026)</h4>
-<h4>Popular MCP Servers</h4>
+<h2>MCP Ecosystem (2026)</h2>
+<h2>Popular MCP Servers</h2>
 <p>| Server | Purpose | Official? |</p>
 <p>|--------|---------|-----------|</p>
 <p>| <strong>Filesystem</strong> | Read/write files, directory listing | ✅ Anthropic |</p>
@@ -414,7 +397,7 @@
 <p>| <strong>Sentry</strong> | Error monitoring | ✅ Community |</p>
 <p>| <strong>PagerDuty</strong> | Incident management | ✅ Community |</p>
 <p>| <strong>Elasticsearch</strong> | Search operations | ✅ Community |</p>
-<h4>MCP Client Hosts</h4>
+<h2>MCP Client Hosts</h2>
 <p>| Host | Type | MCP Support |</p>
 <p>|------|------|-------------|</p>
 <p>| <strong>Claude Desktop</strong> | Desktop app | ✅ Full support |</p>
@@ -427,8 +410,8 @@
 <p>| <strong>JetBrains</strong> | IDE | ✅ Via plugins |</p>
 <p>| <strong>OpenAI</strong> | API | ❌ (proprietary tools only) |</p>
 <p>| <strong>Google Gemini</strong> | API | ❌ (proprietary tools only) |</p>
-<h4>When to Build vs Use Existing</h4>
-<h4>Build an MCP Server When:</h4>
+<h2>When to Build vs Use Existing</h2>
+<h2>Build an MCP Server When:</h2>
 <ul>
 <li>
 <p>You have a proprietary/internal tool or API</p>
@@ -443,7 +426,7 @@
 <p>You want to combine multiple services into one server</p>
 </li>
 </ul>
-<h4>Use an Existing Server When:</h4>
+<h2>Use an Existing Server When:</h2>
 <ul>
 <li>
 <p>Standard integrations (GitHub, PostgreSQL, Slack)</p>
@@ -455,7 +438,7 @@
 <p>File system or database access patterns</p>
 </li>
 </ul>
-<h4>Security Considerations</h4>
+<h2>Security Considerations</h2>
 <p>MCP's stdio transport is surprisingly secure — the server runs as a local subprocess with your permissions. But there are risks:</p>
 <ul>
 <li><strong>Tool abuse</strong> : A malicious prompt could make dangerous tool calls (DELETE FROM users). Mitigate by:</li>
@@ -479,7 +462,7 @@
 <p>}</p>
 <p>}</p>
 <p>}</p>
-<h4>Real-World Architecture: AI-Powered Dev Environment</h4>
+<h2>Real-World Architecture: AI-Powered Dev Environment</h2>
 <p>Here's how a real production setup looks:</p>
 <p>┌─────────────────────────────────────────────────┐</p>
 <p>│ VS Code (Host) │</p>
@@ -504,7 +487,7 @@
 <p>│ └──────────┘ └──────────┘ └───────────────┘ │</p>
 <p>└─────────────────────────────────────────────────┘</p>
 <p>Each server is independently runnable, testable, and replaceable. Add or remove capabilities by adding or removing MCP servers — no code changes needed.</p>
-<h4>Getting Started</h4>
+<h2>Getting Started</h2>
 <ul>
 <li><strong>Install Claude Desktop</strong> → Add your first MCP server via config</li>
 </ul>
@@ -513,7 +496,7 @@
 <p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Add to VS Code</strong> → Install Cline or Continue extension</p>
 <p>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Go multi-host</strong> → Same MCP server works across all clients</p>
 <p>The MCP ecosystem doubles roughly every quarter. What takes 50 lines today will be a one-line npm install by next quarter. The best time to build on top of it was last year — the second best time is now.</p>
-<h4>Summary</h4>
+<h2>Summary</h2>
 <p>| Concept | What It Means |</p>
 <p>|---------|---------------|</p>
 <p>| <strong>MCP</strong> | Open protocol for AI-to-tool communication |</p>
@@ -528,7 +511,10 @@
 <p><strong>See also:</strong> <a href="/en/tools/ai-cli-tools-guide.html">Building AI-Powered CLI Tools: A Complete Guide for Developers</a>, <a href="/en/ai/function-calling-guide.html">LLM Function Calling: Complete Developer Guide with Code Examples</a>, <a href="/en/ai/run-local-ai-models.html">How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/ai-cli-tools-guide.html">Building AI-Powered CLI Tools: A Complete Guide for Developers</a>, <a href="/en/ai/function-calling-guide.html">LLM Function Calling: Complete Developer Guide with Code Examples</a>, <a href="/en/ai/run-local-ai-models.html">How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/ai-cli-tools-guide.html">Building AI-Powered CLI Tools: A Complete Guide for Developers</a>, <a href="/en/ai/function-calling-guide.html">LLM Function Calling: Complete Developer Guide with Code Examples</a>, <a href="/en/ai/run-local-ai-models.html">How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/tools/ai-cli-tools-guide.html">Building AI-Powered CLI Tools: A Complete Guide for Developers</a>, <a href="/en/ai/function-calling-guide.html">LLM Function Calling: Complete Developer Guide with Code Examples</a>, <a href="/en/ai/run-local-ai-models.html">How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/ai-cli-tools-guide.html">Building AI-Powered CLI Tools: A Complete Guide for Developers</a>, <a href="/en/ai/function-calling-guide.html">LLM Function Calling: Complete Developer Guide with Code Examples</a>, <a href="/en/ai/run-local-ai-models.html">How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tools/ai-cli-tools-guide.html">Building AI-Powered CLI Tools: A Complete Guide for Developers</a>, <a href="/en/ai/function-calling-guide.html">LLM Function Calling: Complete Developer Guide with Code Examples</a>, <a href="/en/ai/run-local-ai-models.html">How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/ai-cli-tools-guide.html">Building AI-Powered CLI Tools: A Complete Guide for Developers</a>, <a href="/en/ai/function-calling-guide.html">LLM Function Calling: Complete Developer Guide with Code Examples</a>, <a href="/en/ai/run-local-ai-models.html">How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/rag-best-practices.html">RAG Best Practices 2026: Building Production-Ready Retrieval Systems</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/rag-best-practices.html">RAG Best Practices 2026: Building Production-Ready Retrieval Systems</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/rag-best-practices.html">RAG Best Practices 2026: Building Production-Ready Retrieval Systems</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -540,7 +526,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/ai-cli-tools-guide.html" class="related-card">Building AI-Powered CLI Tools: A Complete Guide for Developers</a><a href="/en/ai/function-calling-guide.html" class="related-card">LLM Function Calling: Complete Developer Guide with Code Examples</a><a href="/en/ai/run-local-ai-models.html" class="related-card">How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide</a><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a></div>
+      <div class="related-grid"><a href="/en/tools/ai-cli-tools-guide.html" class="related-card"><span class="related-card-title">Building AI-Powered CLI Tools: A Complete Guide for Developers</span><span class="related-card-desc">How to build command-line tools that leverage LLMs — from simple wrappers to intelligent agents that</span></a><a href="/en/ai/function-calling-guide.html" class="related-card"><span class="related-card-title">LLM Function Calling: Complete Developer Guide with Code Examples</span><span class="related-card-desc">How to implement function calling / tool use with OpenAI, Anthropic, and Gemini APIs. Schema design,</span></a><a href="/en/ai/run-local-ai-models.html" class="related-card"><span class="related-card-title">How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide</span><span class="related-card-desc">Run powerful AI models on your own machine — private, free, and offline. Complete setup guide for Ol</span></a><a href="/en/ai/ai-data-analysis.html" class="related-card"><span class="related-card-title">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</span><span class="related-card-desc">Learn how to use LLMs for data analysis: data cleaning, exploratory analysis, statistical testing, a</span></a><a href="/en/ai/best-llms-for-coding-2026.html" class="related-card"><span class="related-card-title">Best LLMs for Coding in 2026: Claude vs GPT-4o vs Gemini vs DeepSeek vs CodeLlama</span><span class="related-card-desc">Compare the top LLMs specifically for coding tasks — code generation, debugging, refactoring, and co</span></a><a href="/en/ai/fine-tune-open-source-llm.html" class="related-card"><span class="related-card-title">Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)</span><span class="related-card-desc">How to fine-tune Llama, Mistral, and other open models: data preparation with JSONL, LoRA vs full fi</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

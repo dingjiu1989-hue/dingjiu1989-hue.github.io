@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/index-maintenance.html
 
 # Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
 
-## Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
-### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
-#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
-#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
-#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
-#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
-#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
-#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
-#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
-#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
-#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
-#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
-#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
-#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
-#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
-
 Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning 
 
 Indexes degrade over time. PostgreSQL's MVCC architecture creates dead index entries that waste space and slow down scans. Regular maintenance keeps indexes healthy and query performance predictable. 
@@ -95,7 +65,7 @@ External Tools
 
 `pg_repack` rebuilds indexes without locks: 
 
-#### Rebuild all indexes on a table without blocking writes
+## Rebuild all indexes on a table without blocking writes
 
 pg_repack -h localhost -d mydb --table orders -o idx_orders_user_id
 
@@ -195,7 +165,7 @@ Autovacuum Configuration
 
 Autovacuum manages both table and index cleanup: 
 
-#### postgresql.conf
+## postgresql.conf
 
 autovacuum = on
 
@@ -306,3 +276,9 @@ Index maintenance is not a one-time activity. Build monitoring and automation in
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
+
+**See also:** [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)
+
+**See also:** [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)
+
+**See also:** [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)

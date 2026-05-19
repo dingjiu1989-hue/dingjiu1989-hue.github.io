@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/content-security-policy.png",
       "datePublished": "2026-03-09",
       "dateModified": "2026-04-01",
-      "wordCount": "1159",
+      "wordCount": "1128",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,24 +99,7 @@
       <h1 class="article-title">Content Security Policy</h1>
       <div class="article-meta">Published 2026-03-09 · Last active 2026-04-01 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/content-security-policy.png" alt="Content Security Policy" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Content Security Policy</h2>
-<h3>Content Security Policy</h3>
-<h4>Content Security Policy</h4>
-<h4>Content Security Policy</h4>
-<h4>Content Security Policy</h4>
-<h4>Content Security Policy</h4>
-<h4>Content Security Policy</h4>
-<h4>Content Security Policy</h4>
-<h4>Content Security Policy</h4>
-<h4>Content Security Policy</h4>
-<h4>Content Security Policy</h4>
-<h4>Content Security Policy</h4>
-<h4>Content Security Policy</h4>
-<h4>Content Security Policy</h4>
-<h4>Content Security Policy</h4>
-<h4>Content Security Policy</h4>
-<h4>Content Security Policy</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/content-security-policy.png" alt="Content Security Policy" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/content-security-policy.png" alt="Content Security Policy" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Content Security Policy (CSP) is a browser security mechanism that mitigates Cross-Site Scripting (XSS), data injection, and clickjacking attacks. By defining a whitelist of trusted content sources, CSP prevents the browser from executing malicious scripts or loading unauthorized resources. </p>
 <p>CSP Directives </p>
 <p>CSP uses HTTP headers with directives that control specific resource types. </p>
@@ -155,12 +138,12 @@
 <p>hash_bytes = hashlib.sha256(script_content.encode()).digest()</p>
 <p>hash_b64 = base64.b64encode(hash_bytes).decode()</p>
 <p>return f"'sha256-{hash_b64}'"</p>
-<h4>Generate once, add to CSP</h4>
+<h2>Generate once, add to CSP</h2>
 <p>script = "document.getElementById('app').innerHTML = '</p>
 <p>Hello</p>
 <p>';"</p>
 <p>script_hash = generate_script_hash(script)</p>
-<h4>CSP: script-src 'sha256-abc123...'</h4>
+<h2>CSP: script-src 'sha256-abc123...'</h2>
 <p>Content-Security-Policy: </p>
 <p>script-src 'sha256-abc123def456...';</p>
 <p>object-src 'none';</p>
@@ -184,53 +167,56 @@
 <p>"column-number": 10</p>
 <p>}</p>
 <p>}</p>
-<h4>Flask CSP report collector</h4>
+<h2>Flask CSP report collector</h2>
 <p>@app.route('/csp-violation-report', methods=['POST'])</p>
 <p>def csp_report():</p>
 <p>report = request.get_json(force=True)</p>
 <p>blocked = report['csp-report']['blocked-uri']</p>
 <p>directive = report['csp-report']['violated-directive']</p>
 <p>page = report['csp-report']['document-uri']</p>
-<h4>Log to security monitoring</h4>
+<h2>Log to security monitoring</h2>
 <p>security_logger.warning(</p>
 <p>f"CSP violation on {page}: {directive} blocked {blocked}"</p>
 <p>)</p>
-<h4>Alert if critical pattern</h4>
+<h2>Alert if critical pattern</h2>
 <p>if 'exfiltration' in blocked.lower():</p>
 <p>security_logger.critical(f"Potential data exfiltration: {blocked}")</p>
 <p>return '', 204</p>
 <p>Strict CSP Migration </p>
 <p>Migrating from allowlist CSP to strict CSP provides better security. </p>
-<h4>Allowlist CSP (vulnerable to CDN-based bypass)</h4>
+<h2>Allowlist CSP (vulnerable to CDN-based bypass)</h2>
 <p>Content-Security-Policy: </p>
 <p>script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com;</p>
-<h4>Strict CSP (nonce-based, resistant to bypass)</h4>
+<h2>Strict CSP (nonce-based, resistant to bypass)</h2>
 <p>Content-Security-Policy: </p>
 <p>script-src 'nonce-random123' 'strict-dynamic' https: 'unsafe-inline';</p>
 <p>object-src 'none';</p>
 <p>base-uri 'none';</p>
 <p>The <code>'strict-dynamic'</code> keyword propagates trust from nonced scripts to their dynamically loaded children, enabling modern SPA frameworks while maintaining security. </p>
 <p>Deployment Strategy </p>
-<h4>Step 1: Deploy in report-only mode</h4>
+<h2>Step 1: Deploy in report-only mode</h2>
 <p>Content-Security-Policy-Report-Only: </p>
 <p>default-src 'self';</p>
 <p>script-src 'nonce-abc123';</p>
 <p>report-uri /csp-reports;</p>
-<h4>Step 2: Monitor reports for 2-4 weeks</h4>
-<h4>Step 3: Fix violations identified in reports</h4>
-<h4>Step 4: Switch to enforcement mode</h4>
+<h2>Step 2: Monitor reports for 2-4 weeks</h2>
+<h2>Step 3: Fix violations identified in reports</h2>
+<h2>Step 4: Switch to enforcement mode</h2>
 <p>Content-Security-Policy:</p>
 <p>default-src 'self';</p>
 <p>script-src 'nonce-abc123';</p>
 <p>report-uri /csp-reports;</p>
-<h4>Step 5: Gradually remove report-uri when confident</h4>
+<h2>Step 5: Gradually remove report-uri when confident</h2>
 <p>Conclusion </p>
 <p>CSP is one of the most powerful defense-in-depth mechanisms against XSS. Use nonce-based strict CSP rather than allowlist-based policies, deploy in report-only mode initially to identify violations, always set <code>object-src 'none'</code> and <code>base-uri 'self'</code> as hardening measures, and monitor reports continuously for policy violations and potential attacks.</p>
 <p><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/session-management.html">Session Management Security</a>.</p>
 <p><strong>See also:</strong> <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/cors-security.html">CORS Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/cors-security.html">CORS Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/cors-security.html">CORS Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -242,7 +228,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/clickjacking-protection.html" class="related-card">Clickjacking Protection</a><a href="/en/security/email-security.html" class="related-card">Email Security</a><a href="/en/security/iac-security.html" class="related-card">Infrastructure as Code Security</a><a href="/en/security/security-metrics.html" class="related-card">Security Metrics and Reporting</a></div>
+      <div class="related-grid"><a href="/en/security/clickjacking-protection.html" class="related-card"><span class="related-card-title">Clickjacking Protection</span><span class="related-card-desc">Complete guide to clickjacking defense covering X-Frame-Options, CSP frame-ancestors, framebusting t</span></a><a href="/en/security/email-security.html" class="related-card"><span class="related-card-title">Email Security</span><span class="related-card-desc">Complete guide to email security covering SPF, DKIM, DMARC configuration, email gateway deployment, </span></a><a href="/en/security/iac-security.html" class="related-card"><span class="related-card-title">Infrastructure as Code Security</span><span class="related-card-desc">Guide to Infrastructure as Code security covering Terraform security scanning, policy as code, drift</span></a><a href="/en/security/security-metrics.html" class="related-card"><span class="related-card-title">Security Metrics and Reporting</span><span class="related-card-desc">Guide to security metrics covering KPIs and KRIs, dashboard design, board-level reporting, benchmark</span></a><a href="/en/security/session-management.html" class="related-card"><span class="related-card-title">Session Management Security</span><span class="related-card-desc">Guide to secure session management covering JWT vs opaque tokens, rotation strategies, secure cookie</span></a><a href="/en/security/cloud-iam.html" class="related-card"><span class="related-card-title">Cloud IAM Deep Dive</span><span class="related-card-desc">In-depth guide to cloud IAM covering AWS IAM policies, GCP IAM roles, least privilege principles, an</span></a></div>
     </section>
     
   </div>

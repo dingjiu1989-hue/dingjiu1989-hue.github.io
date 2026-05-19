@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/gdpr-technical.png",
       "datePublished": "2026-03-17",
       "dateModified": "2026-04-03",
-      "wordCount": "1083",
+      "wordCount": "1069",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">GDPR Technical Controls</h1>
       <div class="article-meta">Published 2026-03-17 · Last active 2026-04-03 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/gdpr-technical.png" alt="GDPR Technical Controls" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>GDPR Technical Controls</h2>
-<h3>GDPR Technical Controls</h3>
-<h4>GDPR Technical Controls</h4>
-<h4>GDPR Technical Controls</h4>
-<h4>GDPR Technical Controls</h4>
-<h4>GDPR Technical Controls</h4>
-<h4>GDPR Technical Controls</h4>
-<h4>GDPR Technical Controls</h4>
-<h4>GDPR Technical Controls</h4>
-<h4>GDPR Technical Controls</h4>
-<h4>GDPR Technical Controls</h4>
-<h4>GDPR Technical Controls</h4>
-<h4>GDPR Technical Controls</h4>
-<h4>GDPR Technical Controls</h4>
-<h4>GDPR Technical Controls</h4>
-<p>GDPR Technical Requirements </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/gdpr-technical.png" alt="GDPR Technical Controls" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>GDPR Technical Requirements </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/gdpr-technical.png" alt="GDPR Technical Controls" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>GDPR requires technical controls for data protection by design and by default. Key areas include data mapping, consent, deletion, and privacy impact assessments. </p>
 <p>Data Mapping </p>
 <p>Maintain a comprehensive data inventory: </p>
@@ -216,7 +201,7 @@
 <p>errors = []</p>
 <p>for source in self.data_sources:</p>
 <p>try:</p>
-<h4>Soft delete first</h4>
+<h2>Soft delete first</h2>
 <p>source<a href="user_id, soft=True">"delete"</a></p>
 <p>results.append({</p>
 <p>"source": source["name"],</p>
@@ -230,7 +215,7 @@
 <p>"source": source["name"],</p>
 <p>"error": str(e)</p>
 <p>})</p>
-<h4>Hard delete after retention period</h4>
+<h2>Hard delete after retention period</h2>
 <p>schedule_hard_delete(user_id, self.data_sources)</p>
 <p>return {</p>
 <p>"user_id": user_id,</p>
@@ -239,7 +224,7 @@
 <p>"deletion_request_id": str(uuid.uuid4())</p>
 <p>}</p>
 <p>Privacy Impact Assessment </p>
-<h4>Automated PIA template</h4>
+<h2>Automated PIA template</h2>
 <p>PIA_TEMPLATE = {</p>
 <p>"project_name": "",</p>
 <p>"data_flows": [],</p>
@@ -268,7 +253,7 @@
 <p>pia = copy.deepcopy(PIA_TEMPLATE)</p>
 <p>pia["project_name"] = project_name</p>
 <p>pia["data_flows"] = data_flows</p>
-<h4>Auto-detect high risk indicators</h4>
+<h2>Auto-detect high risk indicators</h2>
 <p>for flow in data_flows:</p>
 <p>if flow.get("sensitive_data"):</p>
 <p>pia["risk_assessment"]["identified_risks"].append({</p>
@@ -284,7 +269,10 @@
 <p><strong>See also:</strong> <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/soc2-technical.html">SOC 2 Technical Controls</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p>
 <p><strong>See also:</strong> <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/soc2-technical.html">SOC 2 Technical Controls</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p>
 <p><strong>See also:</strong> <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/soc2-technical.html">SOC 2 Technical Controls</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p>
-<p><strong>See also:</strong> <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/soc2-technical.html">SOC 2 Technical Controls</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/soc2-technical.html">SOC 2 Technical Controls</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/soc2-technical.html">SOC 2 Technical Controls</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p>
+<p><strong>See also:</strong> <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/soc2-technical.html">SOC 2 Technical Controls</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p>
+<p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/encryption-key-management.html">Encryption Key Management Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/encryption-key-management.html">Encryption Key Management Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/encryption-key-management.html">Encryption Key Management Best Practices</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -296,7 +284,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/privacy-engineering.html" class="related-card">Privacy Engineering</a><a href="/en/security/soc2-technical.html" class="related-card">SOC 2 Technical Controls</a><a href="/en/security/data-masking.html" class="related-card">Data Masking and Redaction</a><a href="/en/security/threat-hunting.html" class="related-card">Threat Hunting</a></div>
+      <div class="related-grid"><a href="/en/security/privacy-engineering.html" class="related-card"><span class="related-card-title">Privacy Engineering</span><span class="related-card-desc">Guide to privacy engineering covering privacy by design principles, data mapping, Privacy Impact Ass</span></a><a href="/en/security/soc2-technical.html" class="related-card"><span class="related-card-title">SOC 2 Technical Controls</span><span class="related-card-desc">Implementing SOC 2 technical controls for logging, monitoring, access review, and change management.</span></a><a href="/en/security/data-masking.html" class="related-card"><span class="related-card-title">Data Masking and Redaction</span><span class="related-card-desc">Guide to data masking and redaction covering dynamic masking, static masking, tokenization, and comp</span></a><a href="/en/security/threat-hunting.html" class="related-card"><span class="related-card-title">Threat Hunting</span><span class="related-card-desc">Comprehensive guide to hypothesis-driven threat hunting with MITRE ATT&CK mapping, tooling strategie</span></a><a href="/en/security/data-classification.html" class="related-card"><span class="related-card-title">Data Classification</span><span class="related-card-desc">Implementing data classification with labeling, handling procedures, and automated classification to</span></a><a href="/en/security/database-encryption.html" class="related-card"><span class="related-card-title">Database Encryption</span><span class="related-card-desc">Implementing database encryption with TDE, column-level encryption, application-level encryption, an</span></a></div>
     </section>
     
   </div>

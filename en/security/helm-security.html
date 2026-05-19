@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png",
       "datePublished": "2026-03-17",
       "dateModified": "2026-04-16",
-      "wordCount": "1130",
+      "wordCount": "1154",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,39 +99,24 @@
       <h1 class="article-title">Helm Security</h1>
       <div class="article-meta">Published 2026-03-17 · Last active 2026-04-16 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png" alt="Helm Security" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Helm Security</h2>
-<h3>Helm Security</h3>
-<h4>Helm Security</h4>
-<h4>Helm Security</h4>
-<h4>Helm Security</h4>
-<h4>Helm Security</h4>
-<h4>Helm Security</h4>
-<h4>Helm Security</h4>
-<h4>Helm Security</h4>
-<h4>Helm Security</h4>
-<h4>Helm Security</h4>
-<h4>Helm Security</h4>
-<h4>Helm Security</h4>
-<h4>Helm Security</h4>
-<h4>Helm Security</h4>
-<p>Helm Security Challenges </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png" alt="Helm Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Helm Security Challenges </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png" alt="Helm Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Helm simplifies Kubernetes deployments but introduces security concerns: untrusted charts, unprotected secrets, and supply chain risks. </p>
 <p>Chart Signing </p>
 <p>Sign charts with GPG to verify authenticity: </p>
-<h4>Generate signing key</h4>
+<h2>Generate signing key</h2>
 <p>gpg --full-generate-key</p>
 <p>gpg --list-secret-keys</p>
-<h4>Sign a chart</h4>
+<h2>Sign a chart</h2>
 <p>helm package mychart/</p>
 <p>helm sign mychart-1.0.0.tgz --key "developer@example.com"</p>
-<h4>Verify a chart</h4>
+<h2>Verify a chart</h2>
 <p>helm verify mychart-1.0.0.tgz</p>
-<h4>With custom public key</h4>
+<h2>With custom public key</h2>
 <p>gpg --export developer@example.com &gt; pubkey.asc</p>
 <p>helm verify mychart-1.0.0.tgz --keyring pubkey.asc</p>
 <p>Provenance Files </p>
 <p>Provenance files contain the chart hash and signature: </p>
-<h4>mychart-1.0.0.tgz.prov</h4>
+<h2>mychart-1.0.0.tgz.prov</h2>
 <p>apiVersion: v1</p>
 <p>files:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- mychart-1.0.0.tgz</p>
@@ -142,28 +127,28 @@
 <p>iQEzBAABCAAdFiEE...</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-----END PGP SIGNATURE-----</p>
 <p>Automated Verification in CI </p>
-<h4>CI pipeline chart verification</h4>
+<h2>CI pipeline chart verification</h2>
 <p>pipeline:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: verify-charts</p>
 <p>commands:</p>
-<h4>Import trusted keys</h4>
+<h2>Import trusted keys</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- gpg --import trusted-keys.asc</p>
-<h4>Verify all charts</h4>
+<h2>Verify all charts</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- for chart in charts/*.tgz; do</p>
 <p>helm verify "$chart" --keyring trusted-keys.asc || exit 1</p>
 <p>done</p>
-<h4>Scan for vulnerabilities</h4>
+<h2>Scan for vulnerabilities</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- trivy fs charts/</p>
-<h4>Lint charts</h4>
+<h2>Lint charts</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- helm lint charts/*</p>
-<h4>Check for deprecated APIs</h4>
+<h2>Check for deprecated APIs</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pluto detect-files -d charts/</p>
 <p>Secrets Management </p>
 <p>Never store secrets in values files: </p>
-<h4>BAD: Secrets in values</h4>
+<h2>BAD: Secrets in values</h2>
 <p>apiKey: "sk-1234567890"</p>
 <p>dbPassword: "password123"</p>
-<h4>GOOD: Reference external secret</h4>
+<h2>GOOD: Reference external secret</h2>
 <p>apiKey: "{{ .Values.externalSecrets.apiKey }}"</p>
 <p>dbPassword: "{{ .Values.externalSecrets.dbPassword }}"</p>
 <p>Use external secrets operator: </p>
@@ -236,7 +221,10 @@
 <p><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/api-security-guide.html">API Security: Protecting Your REST and GraphQL APIs</a>, <a href="/en/security/encryption-key-management.html">Encryption Key Management Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/api-security-guide.html">API Security: Protecting Your REST and GraphQL APIs</a>, <a href="/en/security/encryption-key-management.html">Encryption Key Management Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/api-security-guide.html">API Security: Protecting Your REST and GraphQL APIs</a>, <a href="/en/security/encryption-key-management.html">Encryption Key Management Best Practices</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -248,7 +236,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/oauth2-implementation.html" class="related-card">OAuth2 Implementation</a><a href="/en/security/audit-logging.html" class="related-card">Audit Logging Best Practices</a><a href="/en/security/container-image-security.html" class="related-card">Container Image Security</a><a href="/en/security/container-runtime-security.html" class="related-card">Container Runtime Security</a></div>
+      <div class="related-grid"><a href="/en/security/oauth2-implementation.html" class="related-card"><span class="related-card-title">OAuth2 Implementation</span><span class="related-card-desc">Implementing OAuth2 with grant types, token handling, PKCE, and security best practices.</span></a><a href="/en/security/audit-logging.html" class="related-card"><span class="related-card-title">Audit Logging Best Practices</span><span class="related-card-desc">Guide to audit logging covering immutable logs, log integrity verification, centralized logging arch</span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="related-card-title">Container Image Security</span><span class="related-card-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability sc</span></a><a href="/en/security/container-runtime-security.html" class="related-card"><span class="related-card-title">Container Runtime Security</span><span class="related-card-desc">Securing container runtime with seccomp, AppArmor, SELinux, Falco, and runtime threat detection.</span></a><a href="/en/security/kubernetes-security.html" class="related-card"><span class="related-card-title">Kubernetes Security</span><span class="related-card-desc">Securing Kubernetes with RBAC, Pod Security Standards, network policies, and audit logging.</span></a><a href="/en/security/sbom-management.html" class="related-card"><span class="related-card-title">SBOM Management</span><span class="related-card-desc">Managing Software Bill of Materials with generation, verification, vulnerability correlation, and co</span></a></div>
     </section>
     
   </div>

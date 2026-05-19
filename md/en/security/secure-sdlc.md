@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/secure-sdlc.html
 
 # Secure Software Development Lifecycle
 
-## Secure Software Development Lifecycle
-
-### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
-#### Secure Software Development Lifecycle
-
 What Is Secure SDLC? 
 
 Secure Software Development Lifecycle (Secure SDLC) is the practice of integrating security activities into every phase of the software development process, rather than treating security as a separate phase or an afterthought. The goal is to identify and fix vulnerabilities as early as possible when they are cheapest to remediate. 
@@ -56,7 +22,7 @@ Phase 1: Requirements and Planning
 
 Security Requirements Gathering 
 
-#### Security Requirements Template
+## Security Requirements Template
 
 **Feature:** User Authentication
 
@@ -86,7 +52,7 @@ Threat Modeling with STRIDE
 
 Creating a Threat Model 
 
-#### Structured threat model entry
+## Structured threat model entry
 
 threat_model = {
 
@@ -170,7 +136,7 @@ maxAge: 900000
 
 Pre-Commit Hooks 
 
-#### .pre-commit-config.yaml
+## .pre-commit-config.yaml
 
 repos:
 
@@ -208,7 +174,7 @@ Phase 4: Testing
 
 SAST (Static Application Security Testing) 
 
-#### GitHub CodeQL configuration
+## GitHub CodeQL configuration
 
 name: "CodeQL"
 
@@ -282,7 +248,7 @@ npx snyk monitor
 
 DAST (Dynamic Application Security Testing) 
 
-#### Run OWASP ZAP against staging environment
+## Run OWASP ZAP against staging environment
 
 docker run -v $(pwd):/zap/wrk:rw \
 
@@ -300,7 +266,7 @@ Phase 5: Deployment
 
 Security Gates 
 
-#### Deployment approval gates
+## Deployment approval gates
 
 environment:
 
@@ -365,3 +331,9 @@ A mature Secure SDLC integrates security activities into every phase of developm
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
+
+**See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
+
+**See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)

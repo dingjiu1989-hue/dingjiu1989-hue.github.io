@@ -8,47 +8,15 @@ url: https://dingjiu1989-hue.github.io/en/tools/helm-tools.html
 
 # Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
 
-## Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
-
-#### Introduction
+## Introduction
 
 Helm is the standard package manager for Kubernetes, but managing Helm charts at scale requires additional tooling. Helmfile provides declarative chart management across environments. helm-docs generates README documentation from chart metadata. helm-secrets securely manages sensitive values. Chart-testing validates charts in CI pipelines. This article covers each tool with practical examples.
 
-#### Helmfile
+## Helmfile
 
 Declarative management of Helm releases across environments:
 
-#### helmfile.yaml
+## helmfile.yaml
 
 repositories:
 
@@ -78,7 +46,7 @@ values:
 
 releases:
 
-#### Core infrastructure
+## Core infrastructure
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: prometheus-stack
 
@@ -116,7 +84,7 @@ installed: true
 
 wait: true
 
-#### Application charts
+## Application charts
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: my-app
 
@@ -142,71 +110,71 @@ hooks:
 
 command: "helm test {{ .Release.Name }}"
 
-#### Apply environment
+## Apply environment
 
 helmfile -e production apply
 
-#### Diff changes before applying
+## Diff changes before applying
 
 helmfile -e development diff
 
-#### Sync specific releases
+## Sync specific releases
 
 helmfile -e staging -l app=my-app sync
 
-#### Destroy releases
+## Destroy releases
 
 helmfile -e development destroy
 
-#### helm-docs
+## helm-docs
 
 Automatically generate README documentation from chart metadata:
 
-#### Install
+## Install
 
 go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
 
 brew install helm-docs
 
-#### Generate README for all charts in repo
+## Generate README for all charts in repo
 
 helm-docs
 
-#### Or for a specific chart
+## Or for a specific chart
 
 helm-docs --chart-search-root ./charts/my-app
 
-#### charts/my-app/values.yaml
+## charts/my-app/values.yaml
 
-#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Number of replicas to run
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Number of replicas to run
 
 replicaCount: 3
 
 image:
 
-#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Container image repository
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Container image repository
 
 repository: my-app
 
-#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Image tag
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Image tag
 
 tag: "latest"
 
-#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Image pull policy
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Image pull policy
 
 pullPolicy: Always
 
-#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Resource limits and requests
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Resource limits and requests
 
 resources:
 
 limits:
 
-#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- CPU limit
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- CPU limit
 
 cpu: "1"
 
-#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Memory limit
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Memory limit
 
 memory: 512Mi
 
@@ -216,17 +184,17 @@ cpu: 250m
 
 memory: 256Mi
 
-#### {{ .Name }}
+## {{ .Name }}
 
 {{ .Description }}
 
-#### Installation
+## Installation
 
 helm repo add myrepo https://charts.example.com
 
 helm install myrepo/{{ .Name }}
 
-#### Parameters
+## Parameters
 
 | Name | Description | Default |
 
@@ -238,29 +206,29 @@ helm install myrepo/{{ .Name }}
 
 {{- end }}
 
-#### helm-secrets
+## helm-secrets
 
 Encrypt sensitive values using SOPS with various backends:
 
-#### Install
+## Install
 
 helm plugin install https://github.com/jkroepke/helm-secrets
 
-#### Encrypt values file
+## Encrypt values file
 
 helm secrets encrypt secrets.yaml > secrets.enc.yaml
 
-#### Decrypt and use with Helm
+## Decrypt and use with Helm
 
 helm secrets install my-app ./chart -f secrets.enc.yaml
 
-#### With helmfile
+## With helmfile
 
-#### helmfile.yaml references secrets.enc.yaml
+## helmfile.yaml references secrets.enc.yaml
 
 helmfile -e production apply
 
-#### .sops.yaml — SOPS configuration
+## .sops.yaml — SOPS configuration
 
 creation_rules:
 
@@ -274,11 +242,11 @@ pgp: "FINGERPRINT"
 
 encrypted_regex: "^(password|token|key|secret)$"
 
-#### Chart Testing (ct)
+## Chart Testing (ct)
 
 Validate charts in CI pipelines:
 
-#### ct.yaml — chart testing configuration
+## ct.yaml — chart testing configuration
 
 chart-dirs:
 
@@ -292,7 +260,7 @@ helm-extra-args: --timeout 600s
 
 validate-maintainers: true
 
-#### Linting options
+## Linting options
 
 lint-conf: |
 
@@ -300,11 +268,11 @@ lint-conf: |
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--namespace default
 
-#### Test installation
+## Test installation
 
-#### ct install --charts charts/my-app
+## ct install --charts charts/my-app
 
-#### .github/workflows/helm-ci.yml
+## .github/workflows/helm-ci.yml
 
 name: Helm Chart CI
 
@@ -340,29 +308,29 @@ uses: helm/kind-action@v1
 
 run: ct install --all
 
-#### Essential Helm CLI Tips
+## Essential Helm CLI Tips
 
-#### Template rendering (debugging)
+## Template rendering (debugging)
 
 helm template my-app ./chart --values values.yaml
 
-#### Dry-run install
+## Dry-run install
 
 helm install my-app ./chart --dry-run --debug
 
-#### Rollback
+## Rollback
 
 helm rollback my-app 2
 
-#### Get notes
+## Get notes
 
 helm get notes my-app
 
-#### View release history
+## View release history
 
 helm history my-app
 
-#### Plugin management
+## Plugin management
 
 helm plugin list
 
@@ -370,7 +338,7 @@ helm plugin install https://github.com/databus23/helm-diff
 
 helm diff release my-app ./chart
 
-#### Comparison
+## Comparison
 
 | Tool | Purpose | Essential For |
 
@@ -386,7 +354,7 @@ helm diff release my-app ./chart
 
 | helm-diff | Change preview | Reviewing changes before apply |
 
-#### Recommendations
+## Recommendations
 
   * **Multi-environment deployments** : Helmfile is essential for managing differences across dev, staging, and production.
 
@@ -414,3 +382,9 @@ The most complete Helm workflow combines all these tools: Helmfile for release m
 **See also:** [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>)
 
 **See also:** [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>)
+
+**See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
+
+**See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
+
+**See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)

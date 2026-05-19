@@ -46,7 +46,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/container-security.png",
       "datePublished": "2025-12-17",
       "dateModified": "2026-05-17",
-      "wordCount": "2252",
+      "wordCount": "2202",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
@@ -108,39 +108,22 @@
       <h1 class="article-title">Container Security Best Practices</h1>
       <div class="article-meta">Published 2025-12-17 · Last active 2026-05-17 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/container-security.png" alt="Container Security Best Practices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Container Security Best Practices</h2>
-<h3>Container Security Best Practices</h3>
-<h4>Container Security Best Practices</h4>
-<h4>Container Security Best Practices</h4>
-<h4>Container Security Best Practices</h4>
-<h4>Container Security Best Practices</h4>
-<h4>Container Security Best Practices</h4>
-<h4>Container Security Best Practices</h4>
-<h4>Container Security Best Practices</h4>
-<h4>Container Security Best Practices</h4>
-<h4>Container Security Best Practices</h4>
-<h4>Container Security Best Practices</h4>
-<h4>Container Security Best Practices</h4>
-<h4>Container Security Best Practices</h4>
-<h4>Container Security Best Practices</h4>
-<h4>Container Security Best Practices</h4>
-<h4>Container Security Best Practices</h4>
-<p>The Container Attack Surface </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/container-security.png" alt="Container Security Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>The Container Attack Surface </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/container-security.png" alt="Container Security Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Containers share the host kernel, which introduces unique security considerations. While containers provide process isolation through namespaces and cgroups, a misconfigured container can expose the host system to significant risk. Container security spans the entire lifecycle: build, ship, and run. </p>
 <p>Build Phase Security </p>
 <p>Use Minimal Base Images </p>
 <p>Smaller base images reduce the attack surface by eliminating unnecessary tools and libraries. </p>
-<h4>UNSAFE: Large attack surface</h4>
+<h2>UNSAFE: Large attack surface</h2>
 <p>FROM ubuntu:22.04</p>
 <p>RUN apt-get update &amp;&amp; apt-get install -y python3</p>
-<h4>BETTER: Minimal distribution</h4>
+<h2>BETTER: Minimal distribution</h2>
 <p>FROM python:3.12-slim</p>
-<h4>BEST: Distroless (no shell, no package manager)</h4>
+<h2>BEST: Distroless (no shell, no package manager)</h2>
 <p>FROM gcr.io/distroless/python3</p>
 <p>| Image | Size | Packages | Attack Surface | |-------|------|----------|----------------| | ubuntu:22.04 | 77 MB | 600+ | Large | | python:3.12-slim | 120 MB | 100+ | Moderate | | gcr.io/distroless/python3 | 60 MB | ~10 | Minimal | | alpine:3.19 | 7 MB | ~5 | Small (uses musl libc) | </p>
 <p>Scan for Vulnerabilities </p>
 <p>Integrate image scanning into your CI/CD pipeline: </p>
-<h4>.github/workflows/security.yml</h4>
+<h2>.github/workflows/security.yml</h2>
 <p>name: Container Security Scan</p>
 <p>on: [push]</p>
 <p>jobs:</p>
@@ -163,14 +146,14 @@
 <p>sarif_file: 'trivy-results.sarif'</p>
 <p>Multi-Stage Builds </p>
 <p>Use multi-stage builds to keep the final image clean: </p>
-<h4>Build stage</h4>
+<h2>Build stage</h2>
 <p>FROM golang:1.22 AS builder</p>
 <p>WORKDIR /app</p>
 <p>COPY go.mod go.sum ./</p>
 <p>RUN go mod download</p>
 <p>COPY . .</p>
 <p>RUN CGO_ENABLED=0 go build -o /app/server</p>
-<h4>Runtime stage</h4>
+<h2>Runtime stage</h2>
 <p>FROM gcr.io/distroless/static:nonroot</p>
 <p>COPY --from=builder /app/server /server</p>
 <p>USER nonroot:nonroot</p>
@@ -179,15 +162,15 @@
 <p>Ship Phase Security </p>
 <p>Sign and Verify Images </p>
 <p>Use Docker Content Trust or cosign to sign images and verify integrity: </p>
-<h4>Generate a signing key pair</h4>
+<h2>Generate a signing key pair</h2>
 <p>cosign generate-key-pair</p>
-<h4>Sign the image</h4>
+<h2>Sign the image</h2>
 <p>cosign sign --key cosign.key ghcr.io/myorg/myapp:latest</p>
-<h4>Verify before deployment</h4>
+<h2>Verify before deployment</h2>
 <p>cosign verify --key cosign.pub ghcr.io/myorg/myapp:latest</p>
 <p>Use a Private Registry </p>
 <p>Push images to a private registry with access controls and vulnerability scanning: </p>
-<h4>Push to private ECR</h4>
+<h2>Push to private ECR</h2>
 <p>aws ecr get-login-password --region us-east-1 | \</p>
 <p>docker login --username AWS --password-stdin $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com</p>
 <p>docker tag app:latest $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/app:latest</p>
@@ -203,7 +186,7 @@
 <p>CMD ["node", "server.js"]</p>
 <p>Read-Only Root Filesystem </p>
 <p>Mount the root filesystem as read-only to prevent file-system-based attacks: </p>
-<h4>Kubernetes pod security context</h4>
+<h2>Kubernetes pod security context</h2>
 <p>apiVersion: v1</p>
 <p>kind: Pod</p>
 <p>metadata:</p>
@@ -245,7 +228,7 @@
 <p>Kubernetes Pod Security Standards </p>
 <p>Kubernetes defines three Pod Security Standards: </p>
 <p>| Standard | Description | When to Use | |----------|-------------|-------------| | Privileged | Unrestricted policy | System-level pods | | Baseline | Minimally restrictive, prevents known escalations | Most workloads | | Restricted | Heavily restricted, follows pod hardening best practices | Security-critical workloads | </p>
-<h4>Apply Restricted standard via namespace labels</h4>
+<h2>Apply Restricted standard via namespace labels</h2>
 <p>apiVersion: v1</p>
 <p>kind: Namespace</p>
 <p>metadata:</p>
@@ -255,21 +238,24 @@
 <p>pod-security.kubernetes.io/enforce-version: latest</p>
 <p>Runtime Monitoring </p>
 <p>Use tools like Falco for runtime threat detection: </p>
-<h4>Install Falco</h4>
+<h2>Install Falco</h2>
 <p>helm install falco falcosecurity/falco \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--set falco.driver.kind=modern-bpf</p>
-<h4>Falco detects:</h4>
-<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Shell spawned in container</h4>
-<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sensitive file reads</h4>
-<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Unexpected network connections</h4>
-<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Privilege escalation attempts</h4>
+<h2>Falco detects:</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Shell spawned in container</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sensitive file reads</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Unexpected network connections</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Privilege escalation attempts</h2>
 <p>Summary </p>
 <p>Container security requires attention at every stage of the lifecycle. Build minimal images based on distroless or scratch, scan for vulnerabilities before deployment, sign images to verify integrity, run containers as non-root with read-only filesystems, drop all unnecessary capabilities, set resource limits, and enforce Pod Security Standards in Kubernetes. Combine these preventive measures with runtime monitoring for defense in depth.</p>
 <p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>.</p>
 <p><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/blockchain-security.html">Blockchain and Smart Contract Security</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/security/blockchain-security.html">Blockchain and Smart Contract Security</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/blockchain-security.html">Blockchain and Smart Contract Security</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -281,7 +267,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/log-management-security.html" class="related-card">Security Log Management</a><a href="/en/security/secure-file-upload.html" class="related-card">Secure File Upload Implementation</a><a href="/en/security/container-image-security.html" class="related-card">Container Image Security</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
+      <div class="related-grid"><a href="/en/security/log-management-security.html" class="related-card"><span class="related-card-title">Security Log Management</span><span class="related-card-desc">Best practices for security log management including centralized logging, SIEM integration, log rete</span></a><a href="/en/security/secure-file-upload.html" class="related-card"><span class="related-card-title">Secure File Upload Implementation</span><span class="related-card-desc">Best practices for implementing secure file upload functionality including validation, storage, scan</span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="related-card-title">Container Image Security</span><span class="related-card-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability sc</span></a><a href="/en/security/devsecops-pipeline.html" class="related-card"><span class="related-card-title">DevSecOps: Integrating Security into CI/CD</span><span class="related-card-desc">Integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your CI/CD pi</span></a><a href="/en/security/jwt-authentication-guide.html" class="related-card"><span class="related-card-title">JWT Authentication Best Practices</span><span class="related-card-desc">Learn JWT authentication best practices including secure token storage, signature algorithms, expira</span></a><a href="/en/security/webhook-security.html" class="related-card"><span class="related-card-title">Webhook Security Best Practices</span><span class="related-card-desc">Secure your webhook endpoints with signature verification, replay protection, IP allowlisting, idemp</span></a></div>
     </section>
     
   </div>

@@ -8,45 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/security/web-security-fundamentals-202
 
 # Web Security Fundamentals 2026: A Developer Complete Guide
 
-## Web Security Fundamentals 2026: A Developer Complete Guide
-
-### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Web Security Fundamentals 2026: A Developer Complete Guide
-
-#### Stored XSS
+## Stored XSS
 
 The payload is persisted on the server (e.g., in a comment, user bio) and served to every visitor.
 
 Example: A comment containing 
 
-#### DOM-Based XSS
+## DOM-Based XSS
 
 The vulnerability lives entirely in client-side JavaScript. The server response is clean, but the browser executes attacker-controlled input via `innerHTML`, `document.write`, or `eval`.
 
@@ -60,7 +28,7 @@ document.getElementById('greeting').innerHTML = `Hello, ${name}`;
 
 document.getElementById('greeting').textContent = `Hello, ${name}`;
 
-#### XSS Prevention Table
+## XSS Prevention Table
 
 | Context | Safe Approach | Dangerous Approach |
 
@@ -119,7 +87,7 @@ next();
 
 TLS Configuration Check (2026 Minimum) 
 
-#### nginx TLS config — modern profile
+## nginx TLS config — modern profile
 
 ssl_protocols TLSv1.2 TLSv1.3;
 
@@ -151,7 +119,7 @@ Dependency Scanning Tools
 
 Running a Scan in CI 
 
-#### .github/workflows/security-scan.yml
+## .github/workflows/security-scan.yml
 
 name: Security Scan
 
@@ -265,7 +233,7 @@ next();
 
 });
 
-#### FastAPI with SecureHeaders middleware
+## FastAPI with SecureHeaders middleware
 
 from secure import SecureHeaders
 
@@ -351,7 +319,7 @@ Proper Error Handling
 
 Never leak stack traces, database schemas, or internal paths to API consumers. 
 
-#### BAD — leaks internals
+## BAD — leaks internals
 
 @app.exception_handler(Exception)
 
@@ -365,7 +333,7 @@ content={"error": str(exc), "traceback": traceback.format_exc()}
 
 )
 
-#### GOOD — sanitized errors with logging
+## GOOD — sanitized errors with logging
 
 import logging
 
@@ -510,3 +478,9 @@ _Last updated: May 2026_
 **See also:** [AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026](</en/ai/ai-security-complete-guide.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys](</en/tech/authentication-best-practices-2026.html>)
 
 **See also:** [AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026](</en/ai/ai-security-complete-guide.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys](</en/tech/authentication-best-practices-2026.html>)
+
+**See also:** [Content Security Policy](</en/security/content-security-policy.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Content Security Policy](</en/security/content-security-policy.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Content Security Policy](</en/security/content-security-policy.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)

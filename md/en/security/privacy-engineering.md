@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/privacy-engineering.html
 
 # Privacy Engineering
 
-## Privacy Engineering
-
-### Privacy Engineering
-
-#### Privacy Engineering
-
-#### Privacy Engineering
-
-#### Privacy Engineering
-
-#### Privacy Engineering
-
-#### Privacy Engineering
-
-#### Privacy Engineering
-
-#### Privacy Engineering
-
-#### Privacy Engineering
-
-#### Privacy Engineering
-
-#### Privacy Engineering
-
-#### Privacy Engineering
-
-#### Privacy Engineering
-
-#### Privacy Engineering
-
 Introduction 
 
 Privacy engineering integrates data protection principles into system architecture from the earliest design stages. Rather than treating privacy as an afterthought or compliance checkbox, privacy engineering embeds controls into the fabric of software systems. This approach aligns with the "privacy by design" framework and regulatory requirements like GDPR and CCPA. 
@@ -54,7 +24,7 @@ The Seven Principles
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Privacy as Default** : Personal data is automatically protected without user action 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Privacy Embedded into Design** : Privacy is integral to the system, not bolted on 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Full Functionality** : Privacy does not sacrifice functionality — positive-sum, not zero-sum 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **End-to-End Security** : Full lifecycle protection from collection to destruction 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Visibility and Transparency** : Processes are open, accountable, and auditable 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Respect for User Privacy** : User-centric design with strong defaults and clear notices 
 
-#### Privacy by design: data minimization example
+## Privacy by design: data minimization example
 
 class UserRegistrationService:
 
@@ -68,7 +38,7 @@ email=email,
 
 password_hash=self.hash_password(password),
 
-#### Don't collect: phone, address, birthday, etc.
+## Don't collect: phone, address, birthday, etc.
 
 created_at=datetime.utcnow()
 
@@ -224,7 +194,7 @@ def assess_data_collection(self, data_flow: DataFlow):
 
 findings = []
 
-#### Necessity check
+## Necessity check
 
 if DataCategory.LOCATION in data_flow.categories:
 
@@ -252,7 +222,7 @@ findings.append({
 
 })
 
-#### Minimization check
+## Minimization check
 
 if len(data_flow.data_elements) > 10:
 
@@ -423,3 +393,9 @@ Privacy engineering requires embedding privacy controls into the design and arch
 **See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [Data Masking and Redaction](</en/security/data-masking.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
 
 **See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [Data Masking and Redaction](</en/security/data-masking.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
+
+**See also:** [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Patching Strategy](</en/security/patching-strategy.html>), [Secure Configuration Management](</en/security/secure-configuration.html>)
+
+**See also:** [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Patching Strategy](</en/security/patching-strategy.html>), [Secure Configuration Management](</en/security/secure-configuration.html>)
+
+**See also:** [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Patching Strategy](</en/security/patching-strategy.html>), [Secure Configuration Management](</en/security/secure-configuration.html>)

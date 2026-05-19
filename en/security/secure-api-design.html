@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/secure-api-design.png",
       "datePublished": "2026-03-12",
       "dateModified": "2026-05-13",
-      "wordCount": "1994",
+      "wordCount": "1961",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">Secure API Design Principles</h1>
       <div class="article-meta">Published 2026-03-12 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-api-design.png" alt="Secure API Design Principles" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Secure API Design Principles</h2>
-<h3>Secure API Design Principles</h3>
-<h4>Secure API Design Principles</h4>
-<h4>Secure API Design Principles</h4>
-<h4>Secure API Design Principles</h4>
-<h4>Secure API Design Principles</h4>
-<h4>Secure API Design Principles</h4>
-<h4>Secure API Design Principles</h4>
-<h4>Secure API Design Principles</h4>
-<h4>Secure API Design Principles</h4>
-<h4>Secure API Design Principles</h4>
-<h4>Secure API Design Principles</h4>
-<h4>Secure API Design Principles</h4>
-<h4>Secure API Design Principles</h4>
-<h4>Secure API Design Principles</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-api-design.png" alt="Secure API Design Principles" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-api-design.png" alt="Secure API Design Principles" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>APIs are the backbone of modern application architecture. A well-designed API considers security at every layer, from request validation to response handling. Security must be built into the API contract — it cannot be bolted on afterward. </p>
 <p>Input Validation </p>
 <p>Validate all input at the API boundary before processing. Never trust client-provided data. </p>
@@ -131,7 +116,7 @@
 <p>def validate_username(cls, v):</p>
 <p>if not re.match(r'^[a-zA-Z0-9_-]+$', v):</p>
 <p>raise ValueError('Username must be alphanumeric')</p>
-<h4>Blocklist certain patterns</h4>
+<h2>Blocklist certain patterns</h2>
 <p>blocklist = ['admin', 'root', 'null', 'undefined']</p>
 <p>if v.lower() in blocklist:</p>
 <p>raise ValueError('Username not allowed')</p>
@@ -155,16 +140,16 @@
 <p>def check(self, key: str, max_requests: int, window_seconds: int) -&gt; bool:</p>
 <p>now = time.time()</p>
 <p>window_start = now - window_seconds</p>
-<h4>Clean old entries</h4>
+<h2>Clean old entries</h2>
 <p>self.requests[key] = [</p>
 <p>t for t in self.requests[key] if t &gt; window_start</p>
 <p>]</p>
-<h4>Check limit</h4>
+<h2>Check limit</h2>
 <p>if len(self.requests[key]) &gt;= max_requests:</p>
 <p>return False</p>
 <p>self.requests[key].append(now)</p>
 <p>return True</p>
-<h4>Token bucket algorithm</h4>
+<h2>Token bucket algorithm</h2>
 <p>class TokenBucket:</p>
 <p>def <strong>init</strong>(self, capacity: int, refill_rate: float):</p>
 <p>self.capacity = capacity</p>
@@ -183,7 +168,7 @@
 <p>self.tokens = min(self.capacity, </p>
 <p>self.tokens + elapsed * self.refill_rate)</p>
 <p>self.last_refill = now</p>
-<h4>Apply rate limiting via middleware</h4>
+<h2>Apply rate limiting via middleware</h2>
 <p>from fastapi import Request, HTTPException</p>
 <p>RATE_LIMITER = TokenBucket(capacity=100, refill_rate=10)</p>
 <p>@app.middleware("http")</p>
@@ -201,7 +186,7 @@
 <p>self.redis = redis_client</p>
 <p>self.ttl = timedelta(hours=ttl_hours)</p>
 <p>async def process_request(self, request):</p>
-<h4>Check for idempotency key on mutating requests</h4>
+<h2>Check for idempotency key on mutating requests</h2>
 <p>if request.method in ('POST', 'PATCH', 'PUT', 'DELETE'):</p>
 <p>idempotency_key = request.headers.get('Idempotency-Key')</p>
 <p>if not idempotency_key:</p>
@@ -209,13 +194,13 @@
 <p>status_code=400,</p>
 <p>detail="Idempotency-Key header required for mutating requests"</p>
 <p>)</p>
-<h4>Check for existing result</h4>
+<h2>Check for existing result</h2>
 <p>cache_key = f"idempotency:{idempotency_key}"</p>
 <p>existing = await self.redis.get(cache_key)</p>
 <p>if existing:</p>
-<h4>Return cached response (idempotent replay)</h4>
+<h2>Return cached response (idempotent replay)</h2>
 <p>return json.loads(existing)</p>
-<h4>Process request and cache result</h4>
+<h2>Process request and cache result</h2>
 <p>response = await self.process_request_internal(request)</p>
 <p>await self.redis.setex(</p>
 <p>cache_key,</p>
@@ -230,7 +215,7 @@
 <p>class SecureExceptionHandler:</p>
 <p>@staticmethod</p>
 <p>def handle_validation_error(request: Request, exc: Exception):</p>
-<h4>Generic message, don't reveal internal details</h4>
+<h2>Generic message, don't reveal internal details</h2>
 <p>return JSONResponse(</p>
 <p>status_code=422,</p>
 <p>content={</p>
@@ -240,7 +225,7 @@
 <p>)</p>
 <p>@staticmethod</p>
 <p>def handle_auth_error(request: Request, exc: Exception):</p>
-<h4>Don't distinguish between "user not found" and "wrong password"</h4>
+<h2>Don't distinguish between "user not found" and "wrong password"</h2>
 <p>return JSONResponse(</p>
 <p>status_code=401,</p>
 <p>content={</p>
@@ -250,11 +235,11 @@
 <p>)</p>
 <p>@staticmethod</p>
 <p>def handle_internal_error(request: Request, exc: Exception):</p>
-<h4>Log full details internally</h4>
+<h2>Log full details internally</h2>
 <p>import logging</p>
 <p>logger = logging.getLogger(<strong>name</strong>)</p>
 <p>logger.error(f"Internal error: {exc}", exc_info=True)</p>
-<h4>Return minimal info to client</h4>
+<h2>Return minimal info to client</h2>
 <p>error_id = str(uuid.uuid4())</p>
 <p>return JSONResponse(</p>
 <p>status_code=500,</p>
@@ -298,7 +283,10 @@
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p>
+<p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -310,7 +298,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/input-validation.html" class="related-card">Input Validation Deep Dive</a><a href="/en/security/cors-security.html" class="related-card">CORS Security</a><a href="/en/security/serverless-security.html" class="related-card">Serverless Security</a><a href="/en/security/api-security-guide.html" class="related-card">API Security: Protecting Your REST and GraphQL APIs</a></div>
+      <div class="related-grid"><a href="/en/security/input-validation.html" class="related-card"><span class="related-card-title">Input Validation Deep Dive</span><span class="related-card-desc">In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniqu</span></a><a href="/en/security/cors-security.html" class="related-card"><span class="related-card-title">CORS Security</span><span class="related-card-desc">In-depth guide to CORS security covering proper origin validation, preflight handling, common miscon</span></a><a href="/en/security/serverless-security.html" class="related-card"><span class="related-card-title">Serverless Security</span><span class="related-card-desc">Guide to serverless security covering function permissions, event validation, cold start risks, depe</span></a><a href="/en/security/api-security-guide.html" class="related-card"><span class="related-card-title">API Security: Protecting Your REST and GraphQL APIs</span><span class="related-card-desc">API security best practices: authentication, authorization, rate limiting, input validation, and OWA</span></a><a href="/en/security/cloud-iam.html" class="related-card"><span class="related-card-title">Cloud IAM Deep Dive</span><span class="related-card-desc">In-depth guide to cloud IAM covering AWS IAM policies, GCP IAM roles, least privilege principles, an</span></a><a href="/en/security/privacy-engineering.html" class="related-card"><span class="related-card-title">Privacy Engineering</span><span class="related-card-desc">Guide to privacy engineering covering privacy by design principles, data mapping, Privacy Impact Ass</span></a></div>
     </section>
     
   </div>

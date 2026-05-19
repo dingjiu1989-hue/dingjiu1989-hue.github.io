@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/materialized-views.html
 
 # Materialized Views
 
-## Materialized Views
-
-### Materialized Views
-
-#### Materialized Views
-
-#### Materialized Views
-
-#### Materialized Views
-
-#### Materialized Views
-
-#### Materialized Views
-
-#### Materialized Views
-
-#### Materialized Views
-
-#### Materialized Views
-
-#### Materialized Views
-
-#### Materialized Views
-
-#### Materialized Views
-
-#### Materialized Views
-
-#### Materialized Views
-
 What are Materialized Views? 
 
 Materialized views pre-compute and store query results. Unlike regular views, they persist data on disk, trading storage for query speed. 
@@ -145,3 +115,9 @@ Materialized views are essential for dashboard and reporting performance. Use co
 **See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
 
 **See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
+
+**See also:** [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
+
+**See also:** [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
+
+**See also:** [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)

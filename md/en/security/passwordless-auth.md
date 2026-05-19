@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/passwordless-auth.html
 
 # Passwordless Authentication
 
-## Passwordless Authentication
-
-### Passwordless Authentication
-
-#### Passwordless Authentication
-
-#### Passwordless Authentication
-
-#### Passwordless Authentication
-
-#### Passwordless Authentication
-
-#### Passwordless Authentication
-
-#### Passwordless Authentication
-
-#### Passwordless Authentication
-
-#### Passwordless Authentication
-
-#### Passwordless Authentication
-
-#### Passwordless Authentication
-
-#### Passwordless Authentication
-
-#### Passwordless Authentication
-
-#### Passwordless Authentication
-
 The Passwordless Vision 
 
 Passwords are the weakest link in authentication. Passwordless authentication eliminates them entirely, replacing secrets with cryptographic keys. 
@@ -146,7 +116,7 @@ user_display_name=user.name
 
 )
 
-#### Store challenge temporarily
+## Store challenge temporarily
 
 cache.set(f"webauthn:challenge:{user.id}", options.challenge, time=300)
 
@@ -184,7 +154,7 @@ expected_origin="https://example.com"
 
 )
 
-#### Store credential for future logins
+## Store credential for future logins
 
 store_credential(user.id, verification.credential_id, verification.public_key)
 
@@ -258,11 +228,11 @@ token = secrets.token_urlsafe(32)
 
 expiry = datetime.utcnow() + timedelta(minutes=15)
 
-#### Store token
+## Store token
 
 cache.set(f"magic_link:{token}", email, time=900)
 
-#### Send email
+## Send email
 
 link = f"https://example.com/auth/magic?token={token}"
 
@@ -295,3 +265,9 @@ Passwordless authentication improves both security and UX. Use WebAuthn with pla
 **See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Data Classification](</en/security/data-classification.html>)
 
 **See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Data Classification](</en/security/data-classification.html>)
+
+**See also:** [Kubernetes Security](</en/security/kubernetes-security.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
+
+**See also:** [Kubernetes Security](</en/security/kubernetes-security.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
+
+**See also:** [Kubernetes Security](</en/security/kubernetes-security.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)

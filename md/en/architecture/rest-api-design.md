@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/rest-api-design.html
 
 # REST API Design Best Practices
 
-## REST API Design Best Practices
-
-### REST API Design Best Practices
-
-#### REST API Design Best Practices
-
-#### REST API Design Best Practices
-
-#### REST API Design Best Practices
-
-#### REST API Design Best Practices
-
-#### REST API Design Best Practices
-
-#### REST API Design Best Practices
-
-#### REST API Design Best Practices
-
-#### REST API Design Best Practices
-
-#### REST API Design Best Practices
-
-#### REST API Design Best Practices
-
-#### REST API Design Best Practices
-
-#### REST API Design Best Practices
-
-#### REST API Design Best Practices
-
 REST (Representational State Transfer) remains the dominant architectural style for web APIs. A well-designed REST API is intuitive, consistent, and easy to maintain. This article covers the core principles and practical guidelines for designing REST APIs that developers love to use. 
 
 Use Consistent Resource Naming 
@@ -215,3 +185,9 @@ Great REST API design comes down to consistency and following conventions. Use p
 **See also:** [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 
 **See also:** [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
+
+**See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
+
+**See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
+
+**See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/new-sql-databases.png",
       "datePublished": "2026-04-17",
       "dateModified": "2026-04-25",
-      "wordCount": "877",
+      "wordCount": "835",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,42 +99,30 @@
       <h1 class="article-title">NewSQL Databases: Combining SQL with Horizontal Scaling</h1>
       <div class="article-meta">Published 2026-04-17 · Last active 2026-04-25 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/new-sql-databases.png" alt="NewSQL Databases: Combining SQL with Horizontal Scaling" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>NewSQL Databases: Combining SQL with Horizontal Scaling</h2>
-<h3>NewSQL Databases: Combining SQL with Horizontal Scaling</h3>
-<h4>NewSQL Databases: Combining SQL with Horizontal Scaling</h4>
-<h4>NewSQL Databases: Combining SQL with Horizontal Scaling</h4>
-<h4>NewSQL Databases: Combining SQL with Horizontal Scaling</h4>
-<h4>NewSQL Databases: Combining SQL with Horizontal Scaling</h4>
-<h4>NewSQL Databases: Combining SQL with Horizontal Scaling</h4>
-<h4>NewSQL Databases: Combining SQL with Horizontal Scaling</h4>
-<h4>NewSQL Databases: Combining SQL with Horizontal Scaling</h4>
-<h4>NewSQL Databases: Combining SQL with Horizontal Scaling</h4>
-<h4>NewSQL Databases: Combining SQL with Horizontal Scaling</h4>
-<h4>NewSQL Databases: Combining SQL with Horizontal Scaling</h4>
-<h4>NewSQL Databases: Combining SQL with Horizontal Scaling</h4>
-<h4>NewSQL Databases: Combining SQL with Horizontal Scaling</h4>
-<h4>NewSQL Databases: Combining SQL with Horizontal Scaling</h4>
-<p>NewSQL databases combine the ACID guarantees and SQL query capabilities of traditional relational databases with the horizontal scalability of NoSQL systems. They address a fundamental limitation of traditional databases: scaling beyond a single node without sacrificing consistency.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/new-sql-databases.png" alt="NewSQL Databases: Combining SQL with Horizontal Scaling" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>CockroachDB</h4>
+      <div class="article-body"><p>NewSQL databases combine the ACID guarantees and SQL query capabilities of traditional relational databases with the horizontal scalability of NoSQL systems. They address a fundamental limitation of traditional databases: scaling beyond a single node without sacrificing consistency.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/new-sql-databases.png" alt="NewSQL Databases: Combining SQL with Horizontal Scaling" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>CockroachDB</h2>
 <p>CockroachDB is a distributed SQL database designed for cloud-native applications. It automatically replicates and distributes data across nodes, handles node failures transparently, and supports standard PostgreSQL-compatible SQL.</p>
 <p>CockroachDB uses a consensus protocol (Raft) to maintain consistency across replicas. Each range of data is replicated to at least 3 nodes. Reads and writes go through the leaseholder node for that range, providing linearizable consistency.</p>
 <p>Its geo-partitioning feature allows data to be stored in specific geographic locations for latency optimization and data residency compliance. A table can specify that EU customer data is stored only on EU nodes.</p>
-<h4>YugabyteDB</h4>
+<h2>YugabyteDB</h2>
 <p>YugabyteDB is an open-source distributed SQL database that supports both PostgreSQL and Cassandra-compatible APIs. It uses a document store at its core with a distributed transaction layer on top.</p>
 <p>YugabyteDB's architecture separates compute from storage. The query layer handles SQL parsing and optimization. The storage layer handles replication and persistence. This separation allows independent scaling of compute and storage resources.</p>
-<h4>Google Spanner</h4>
+<h2>Google Spanner</h2>
 <p>Google Spanner is the original NewSQL database, running on Google's global infrastructure. It provides external consistency (global serializability) across data centers through TrueTime, a globally synchronized clock service.</p>
 <p>Spanner combines automatic sharding, synchronous replication, and atomic clocks for consistency. It handles automatic failover, data rebalancing, and geo-distribution transparently. The trade-off is vendor lock-in and higher cost.</p>
-<h4>When to Use NewSQL</h4>
+<h2>When to Use NewSQL</h2>
 <p>Use NewSQL when you need ACID transactions across multiple nodes, when your application requires standard SQL, and when you anticipate scaling beyond a single database node. NewSQL is ideal for financial systems, multi-tenant SaaS platforms, and globally distributed applications.</p>
 <p>Avoid NewSQL for simple key-value workloads (Redis is simpler), write-heavy time series (Cassandra is more cost-effective), or when eventual consistency is acceptable. NewSQL's distributed transaction overhead adds latency compared to NoSQL alternatives.</p>
-<h4>Operational Considerations</h4>
+<h2>Operational Considerations</h2>
 <p>NewSQL databases require more operational expertise than traditional databases. Plan for cluster management, node replacement, and version upgrades. Most NewSQL databases offer managed cloud services that reduce operational burden.</p>
 <p><strong>See also:</strong> <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>.</p>
 <p><strong>See also:</strong> <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
 <p><strong>See also:</strong> <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
 <p><strong>See also:</strong> <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
+<p><strong>See also:</strong> <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/geospatial-data.html">Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/geospatial-data.html">Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/geospatial-data.html">Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -146,7 +134,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/graph-queries.html" class="related-card">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a><a href="/en/database/sql-vs-nosql-2026.html" class="related-card">SQL vs NoSQL in 2026</a><a href="/en/database/database-transactions.html" class="related-card">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a><a href="/en/database/database-scalability.html" class="related-card">Database Scalability</a></div>
+      <div class="related-grid"><a href="/en/database/graph-queries.html" class="related-card"><span class="related-card-title">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</span><span class="related-card-desc">Master graph queries in SQL using recursive CTEs, adjacency lists, and the WITH RECURSIVE clause. Co</span></a><a href="/en/database/sql-vs-nosql-2026.html" class="related-card"><span class="related-card-title">SQL vs NoSQL in 2026</span><span class="related-card-desc">Comparing SQL and NoSQL databases in 2026 with NewSQL revival, document DB maturity, and use cases.</span></a><a href="/en/database/database-transactions.html" class="related-card"><span class="related-card-title">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</span><span class="related-card-desc">Master database transactions with a deep dive into ACID properties, isolation levels, nested transac</span></a><a href="/en/database/database-scalability.html" class="related-card"><span class="related-card-title">Database Scalability</span><span class="related-card-desc">Strategies for database scalability: vertical scaling, horizontal scaling, read replicas, and cachin</span></a><a href="/en/database/database-horizontal-scaling.html" class="related-card"><span class="related-card-title">Database Horizontal Scaling Strategies</span><span class="related-card-desc">Learn horizontal scaling strategies for databases: sharding, replication, read replicas, and distrib</span></a><a href="/en/database/database-slow-query-fix.html" class="related-card"><span class="related-card-title">Slow Query Troubleshooting: Identification, Profiling, and Optimization</span><span class="related-card-desc">Learn systematic slow query troubleshooting: identifying problematic queries, profiling with EXPLAIN</span></a></div>
     </section>
     
   </div>

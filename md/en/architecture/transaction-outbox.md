@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/transaction-outbox.html
 
 # Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
-
-### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
 The transactional outbox pattern solves one of the most pervasive problems in event-driven architectures: the dual-write problem. When a service must both update its database and publish an event (or send a message), these two operations cannot be atomic across different systems. The outbox pattern ensures that the database write and message publication are eventually consistent without requiring distributed transactions or two-phase commit. 
 
 The core mechanism is elegant. Instead of publishing the event directly to the message broker at the time of the state change, the application writes both the aggregate data and the event record to the same database within a single local transaction. The event table serves as a buffer. A separate process — the outbox publisher — reads unpublished events, publishes them to the message broker, and marks them as published. This guarantees that every committed state change produces at least one event publication. 
@@ -69,3 +39,9 @@ The transactional outbox pattern is production-proven across organizations handl
 **See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
 
 **See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)

@@ -8,45 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/security/identity-management.html
 
 # Identity and Access Management (IAM) Guide
 
-## Identity and Access Management (IAM) Guide
-
-### Identity and Access Management (IAM) Guide
-
-#### Identity and Access Management (IAM) Guide
-
-#### Identity and Access Management (IAM) Guide
-
-#### Identity and Access Management (IAM) Guide
-
-#### Identity and Access Management (IAM) Guide
-
-#### Identity and Access Management (IAM) Guide
-
-#### Identity and Access Management (IAM) Guide
-
-#### Identity and Access Management (IAM) Guide
-
-#### Identity and Access Management (IAM) Guide
-
-#### Identity and Access Management (IAM) Guide
-
-#### Identity and Access Management (IAM) Guide
-
-#### Identity and Access Management (IAM) Guide
-
-#### Identity and Access Management (IAM) Guide
-
-#### Identity and Access Management (IAM) Guide
-
-#### Identity and Access Management (IAM) Guide
-
 Identity and Access Management (IAM) is the discipline of ensuring the right people have access to the right resources at the right time for the right reasons. Poor IAM is the leading cause of data breaches. This guide covers modern IAM concepts including SSO, SAML, OIDC, SCIM, just-in-time access, and access reviews.
 
-#### Single Sign-On (SSO)
+## Single Sign-On (SSO)
 
 SSO allows users to authenticate once and gain access to multiple applications without re-entering credentials. It improves both security and user experience.
 
-#### How SSO Works
+## How SSO Works
 
 An SSO system has three components:
 
@@ -60,7 +28,7 @@ An SSO system has three components:
 
 When a user accesses an SP, the SP redirects them to the IdP for authentication. The IdP authenticates the user and issues a token. The SP validates the token and grants access.
 
-#### Benefits of SSO
+## Benefits of SSO
 
   * Users manage one password instead of dozens.
 
@@ -73,11 +41,11 @@ When a user accesses an SP, the SP redirects them to the IdP for authentication.
 
 
 
-#### SAML 2.0
+## SAML 2.0
 
 Security Assertion Markup Language (SAML) 2.0 is an XML-based protocol for exchanging authentication and authorization data between IdPs and SPs.
 
-#### SAML Flow
+## SAML Flow
 
   * User attempts to access an SP resource.
 
@@ -107,11 +75,11 @@ engineering
 
 SAML is widely used in enterprise environments for web application SSO. Its XML-based nature makes it verbose, but it remains the standard for many SaaS applications and federated identity scenarios.
 
-#### OpenID Connect (OIDC)
+## OpenID Connect (OIDC)
 
 OIDC is a modern authentication protocol built on top of OAuth 2.0. It is the preferred protocol for newer applications, particularly in cloud-native environments.
 
-#### OIDC vs SAML
+## OIDC vs SAML
 
   * OIDC uses JSON (JWT tokens) rather than XML. Tokens are smaller and easier to parse.
 
@@ -124,13 +92,13 @@ OIDC is a modern authentication protocol built on top of OAuth 2.0. It is the pr
 
 
 
-#### OIDC Flow
+## OIDC Flow
 
-#### Python example: OIDC authentication request
+## Python example: OIDC authentication request
 
 import requests
 
-#### Step 1: Redirect user to IdP authorization endpoint
+## Step 1: Redirect user to IdP authorization endpoint
 
 auth_url = "https://idp.example.com/authorize"
 
@@ -148,9 +116,9 @@ params = {
 
 }
 
-#### User is redirected to: auth_url?response_type=code&client;_id=...
+## User is redirected to: auth_url?response_type=code&client;_id=...
 
-#### Step 2: Exchange authorization code for tokens
+## Step 2: Exchange authorization code for tokens
 
 token_url = "https://idp.example.com/token"
 
@@ -170,13 +138,13 @@ response = requests.post(token_url, data={
 
 tokens = response.json()
 
-#### tokens contains: access_token, id_token, refresh_token
+## tokens contains: access_token, id_token, refresh_token
 
-#### OIDC in Cloud Infrastructure
+## OIDC in Cloud Infrastructure
 
 Cloud providers use OIDC for workload identity. A service running in AWS can get an OIDC token from the AWS metadata endpoint and use it to authenticate to external services.
 
-#### GitHub Actions OIDC with AWS
+## GitHub Actions OIDC with AWS
 
 name: Deploy
 
@@ -206,11 +174,11 @@ aws-region: us-east-1
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: aws s3 sync ./dist s3://my-bucket
 
-#### SCIM Provisioning
+## SCIM Provisioning
 
 System for Cross-domain Identity Management (SCIM) is a standard for automating user provisioning and deprovisioning between identity domains.
 
-#### How SCIM Works
+## How SCIM Works
 
 SCIM exposes RESTful endpoints for creating, reading, updating, and deleting user accounts and groups. An IdP like Okta or Azure AD connects to an SCIM endpoint to synchronize users automatically.
 
@@ -254,11 +222,11 @@ Content-Type: application/scim+json
 
 SCIM ensures that when an employee leaves the company, their access is automatically revoked across all SCIM-integrated applications within minutes.
 
-#### Just-in-Time (JIT) Access
+## Just-in-Time (JIT) Access
 
 JIT access grants elevated permissions only when needed, for a limited duration. It replaces standing privileges that attackers can exploit.
 
-#### Implementation
+## Implementation
 
 JIT access typically requires:
 
@@ -272,7 +240,7 @@ JIT access typically requires:
 
 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Full audit logging of the elevation.
 
-#### Example: PagerDuty JIT access request
+## Example: PagerDuty JIT access request
 
 def request_jit_access(resource, duration_minutes=60, reason=""):
 
@@ -306,11 +274,11 @@ raise PermissionError("Access request denied")
 
 JIT access is critical for protecting sensitive systems like production databases, cloud admin consoles, and CI/CD deployment pipelines.
 
-#### Access Reviews
+## Access Reviews
 
 Access reviews are periodic audits of who has access to what. They are required by compliance frameworks (SOC 2, SOX) and are essential for preventing privilege creep.
 
-#### Best Practices
+## Best Practices
 
   * Conduct access reviews every quarter for critical systems, annually for low-risk systems.
 
@@ -327,7 +295,7 @@ Access reviews are periodic audits of who has access to what. They are required 
 
 
 
-#### Automated access review report
+## Automated access review report
 
 def generate_access_review():
 
@@ -353,7 +321,7 @@ report.append({
 
 return report
 
-#### Conclusion
+## Conclusion
 
 Modern IAM requires SSO for user convenience, SAML or OIDC for protocol support, SCIM for automated provisioning, JIT access for privilege management, and regular access reviews to prevent creep. The goal is simple: every access decision should be intentional, verifiable, and timely.
 
@@ -368,3 +336,9 @@ Modern IAM requires SSO for user convenience, SAML or OIDC for protocol support,
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
 
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
+
+**See also:** [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [SSO Architecture](</en/security/sso-architecture.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>)
+
+**See also:** [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [SSO Architecture](</en/security/sso-architecture.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>)
+
+**See also:** [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [SSO Architecture](</en/security/sso-architecture.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>)

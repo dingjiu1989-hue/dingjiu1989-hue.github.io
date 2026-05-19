@@ -8,47 +8,15 @@ url: https://dingjiu1989-hue.github.io/en/tools/debugging-tools.html
 
 # Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
 
-## Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
-
-#### Introduction
+## Introduction
 
 Debugging is a core developer skill. Beyond print statements and basic breakpoints, advanced debugging tools provide deep insight into program behavior. This article covers lldb and gdb for native code debugging, strace for system call tracing, ltrace for library call analysis, and rr for the revolutionary capability of reverse execution.
 
-#### lldb (LLVM Debugger)
+## lldb (LLVM Debugger)
 
 The modern debugger from the LLVM project, preferred for Clang-compiled code:
 
-#### Start debugging
+## Start debugging
 
 lldb ./myapp
 
@@ -56,7 +24,7 @@ lldb -p 12345 # Attach to process
 
 lldb -c core.dump ./myapp # Analyze core dump
 
-#### Breakpoints
+## Breakpoints
 
 (lldb) breakpoint set --name main
 
@@ -74,7 +42,7 @@ lldb -c core.dump ./myapp # Analyze core dump
 > 
 > DONE
 
-#### Execution control
+## Execution control
 
 (lldb) run
 
@@ -86,7 +54,7 @@ lldb -c core.dump ./myapp # Analyze core dump
 
 (lldb) finish # Step out
 
-#### Variable inspection
+## Variable inspection
 
 (lldb) frame variable
 
@@ -98,7 +66,7 @@ lldb -c core.dump ./myapp # Analyze core dump
 
 (lldb) expression --objc -- print [NSString stringWithFormat:@"%@", myString]
 
-#### Thread and backtrace
+## Thread and backtrace
 
 (lldb) thread backtrace
 
@@ -106,21 +74,21 @@ lldb -c core.dump ./myapp # Analyze core dump
 
 (lldb) thread select 2
 
-#### Watchpoints (break on data access)
+## Watchpoints (break on data access)
 
 (lldb) watchpoint set variable myVar
 
 (lldb) watchpoint set expression -- myPointer[5]
 
-#### gdb (GNU Debugger)
+## gdb (GNU Debugger)
 
 The traditional Unix debugger:
 
-#### Compile with debug symbols
+## Compile with debug symbols
 
 gcc -g -O0 myapp.c -o myapp
 
-#### Start debugging
+## Start debugging
 
 gdb ./myapp
 
@@ -128,7 +96,7 @@ gdb -p 12345
 
 gdb ./myapp core
 
-#### Common commands
+## Common commands
 
 (gdb) break main
 
@@ -150,7 +118,7 @@ gdb ./myapp core
 
 (gdb) disassemble # Show assembly
 
-#### Scripted debugging
+## Scripted debugging
 
 (gdb) set pagination off
 
@@ -164,21 +132,21 @@ gdb ./myapp core
 > 
 > end
 
-#### TUI mode (split view)
+## TUI mode (split view)
 
 gdb -tui ./myapp
 
-#### strace (System Call Trace)
+## strace (System Call Trace)
 
 Trace all system calls a program makes:
 
-#### Trace a command
+## Trace a command
 
 strace -o trace.log ./myapp
 
 strace -f ./myapp # Follow forks
 
-#### Common filters
+## Common filters
 
 strace -e open,read,write ./myapp # Specific syscalls
 
@@ -190,7 +158,7 @@ strace -e trace=process ./myapp # Process management
 
 strace -e trace=signal ./myapp # Signal handling
 
-#### Performance analysis
+## Performance analysis
 
 strace -c ./myapp # Syscall count and time summary
 
@@ -198,7 +166,7 @@ strace -T ./myapp # Time spent in each syscall
 
 strace -r ./myapp # Relative timestamps
 
-#### Useful patterns
+## Useful patterns
 
 strace -p 12345 -e write -s 1000 # See what a process writes
 
@@ -206,23 +174,23 @@ strace -f -e openat -p $(pgrep nginx) # File opens by nginx workers
 
 strace -e read -s 10000 python3 app.py # Show read content
 
-#### PID tracking and timing
+## PID tracking and timing
 
 strace -fy -t -T -o trace.log -p 12345
 
 **What to look for** : `ENOENT` (file not found), `EACCES` (permission denied), `ECONNREFUSED` (connection refused), slow syscalls (high `-T` values), unexpected file opens, excessive context switching.
 
-#### ltrace (Library Call Trace)
+## ltrace (Library Call Trace)
 
 Trace library function calls:
 
-#### Basic usage
+## Basic usage
 
 ltrace ./myapp
 
 ltrace -o libcalls.log ./myapp
 
-#### Filter specific libraries
+## Filter specific libraries
 
 ltrace -e malloc+free ./myapp # Memory allocation calls
 
@@ -230,37 +198,37 @@ ltrace -e str* ./myapp # String functions
 
 ltrace -e 'libc.*' ./myapp # All libc functions
 
-#### Count library calls
+## Count library calls
 
 ltrace -c ./myapp
 
-#### With timing
+## With timing
 
 ltrace -T ./myapp # Time per call
 
 ltrace -S ./myapp # Show syscalls too
 
-#### Suppress repetitive calls
+## Suppress repetitive calls
 
 ltrace -n 2 ./myapp # Indent by call depth
 
-#### rr (Reverse Debugger)
+## rr (Reverse Debugger)
 
 Record and replay debugging with reverse execution:
 
-#### Record execution
+## Record execution
 
 rr record ./myapp
 
 rr record -- ./myapp arg1 arg2
 
-#### Replay (deterministic)
+## Replay (deterministic)
 
 rr replay
 
 rr replay -p 12345
 
-#### Reverse debugging commands
+## Reverse debugging commands
 
 (gdb) reverse-continue # Go back to most recent event
 
@@ -270,25 +238,25 @@ rr replay -p 12345
 
 (gdb) reverse-finish # Go back to function entry
 
-#### Find when a variable changed
+## Find when a variable changed
 
 (gdb) watch -l myVar
 
 (gdb) reverse-continue # Stops when myVar last changed
 
-#### Go to specific event
+## Go to specific event
 
 rr replay -M 12345 # Replay to event number 12345
 
-#### Chaos mode (test concurrency)
+## Chaos mode (test concurrency)
 
 rr record --chaos ./myapp # Randomize thread scheduling
 
 **Key strength** : Debug intermittent bugs by recording once, then replaying infinitely. When you miss the bug, just restart replay and be more prepared. Chaos mode helps find concurrency bugs.
 
-#### Debugging Workflow
+## Debugging Workflow
 
-#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Program crashes — get a core dump
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Program crashes — get a core dump
 
 ulimit -c unlimited
 
@@ -296,25 +264,25 @@ ulimit -c unlimited
 
 gdb ./myapp core
 
-#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use strace to see what the program is doing
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use strace to see what the program is doing
 
 strace -f -o trace.log ./myapp
 
 less trace.log # Look for error syscalls
 
-#### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. For tricky bugs, use rr
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. For tricky bugs, use rr
 
 rr record ./myapp
 
 rr replay
 
-#### Now you can step forward AND backward
+## Now you can step forward AND backward
 
-#### 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Library call issues
+## 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Library call issues
 
 ltrace -c ./myapp # Which library calls are most frequent?
 
-#### Comparison
+## Comparison
 
 | Tool | Best For | Overhead | Learning Curve |
 
@@ -330,7 +298,7 @@ ltrace -c ./myapp # Which library calls are most frequent?
 
 | rr | Reverse debugging | High (record) | Medium |
 
-#### Recommendations
+## Recommendations
 
   * **General debugging** : lldb for new projects, gdb for legacy code. Both support the same core debugging workflow.
 
@@ -358,3 +326,9 @@ Start with strace for quick diagnostics. Use lldb/gdb for step-through debugging
 **See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>)
 
 **See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>)
+
+**See also:** [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>), [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)
+
+**See also:** [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>), [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)
+
+**See also:** [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>), [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)

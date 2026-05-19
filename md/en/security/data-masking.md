@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/data-masking.html
 
 # Data Masking and Redaction
 
-## Data Masking and Redaction
-
-### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
-#### Data Masking and Redaction
-
 Introduction 
 
 Data masking protects sensitive information by replacing it with realistic but fictional data. Unlike encryption, masked data is permanently de-identified — it cannot be reversed to recover the original value. Organizations use masking for development, testing, analytics, and compliance with privacy regulations like GDPR and CCPA. 
@@ -262,7 +228,7 @@ return decorator
 
 def get_user_profile(user_id):
 
-#### Returns full data; masking applied by decorator
+## Returns full data; masking applied by decorator
 
 return {
 
@@ -292,13 +258,13 @@ def tokenize(self, sensitive_value, context):
 
 """Replace sensitive value with a token."""
 
-#### Generate unique token
+## Generate unique token
 
 token_id = secrets.token_hex(16)
 
 token = f"{self.token_prefix}{token_id}"
 
-#### Store mapping in secure vault
+## Store mapping in secure vault
 
 self.vault.store(
 
@@ -334,7 +300,7 @@ raise PermissionError("Not authorized to detokenize")
 
 record = self.vault.retrieve(f"tokens/{token}")
 
-#### Increment access counter
+## Increment access counter
 
 record['access_count'] += 1
 
@@ -342,7 +308,7 @@ record['last_accessed'] = datetime.utcnow().isoformat()
 
 self.vault.store(f"tokens/{token}", record)
 
-#### Log access
+## Log access
 
 self._audit_log('detokenize', token, requester_role)
 
@@ -467,3 +433,9 @@ Data masking is essential for privacy compliance and reducing the risk of data e
 **See also:** [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 
 **See also:** [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [Threat Hunting](</en/security/threat-hunting.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>), [API Authentication Methods](</en/security/api-authentication.html>)
+
+**See also:** [Threat Hunting](</en/security/threat-hunting.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>), [API Authentication Methods](</en/security/api-authentication.html>)
+
+**See also:** [Threat Hunting](</en/security/threat-hunting.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>), [API Authentication Methods](</en/security/api-authentication.html>)

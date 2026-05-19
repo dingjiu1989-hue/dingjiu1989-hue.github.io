@@ -106,4 +106,4 @@ Always return errors in a consistent structure:
 
 Use OpenAPI 3.1 (Swagger). It's the industry standard and generates interactive docs automatically. Tools like Stoplight, Redoc, and Swagger UI render beautiful docs from a single spec file. If your API doesn't have an OpenAPI spec, it's not ready for production.
 
-**See also:** [GraphQL API Design: Schema Best Practices, Federation, and Performance](</en/tech/graphql-api-design.html>), [API Design Patterns: Rate Limiting, Pagination, Idempotency, and More](</en/tech/api-design-patterns.html>), [Error Handling Best Practices: From Try/Catch to Structured Errors](</en/tech/error-handling-best-practices.html>)
+**See also:** [Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops](</en/tech/python-asyncio-guide.html>), [Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each](</en/tech/testing-strategies-web-apps.html>), [Node.js Streams: Complete Guide to Efficient Data Processing](</en/tech/nodejs-streams-guide.html>)

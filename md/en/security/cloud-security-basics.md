@@ -8,41 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/security/cloud-security-basics.html
 
 # Cloud Security Basics: Shared Responsibility Model Explained
 
-## Cloud Security Basics: Shared Responsibility Model Explained
-
-### Cloud Security Basics: Shared Responsibility Model Explained
-
-#### Cloud Security Basics: Shared Responsibility Model Explained
-
-#### Cloud Security Basics: Shared Responsibility Model Explained
-
-#### Cloud Security Basics: Shared Responsibility Model Explained
-
-#### Cloud Security Basics: Shared Responsibility Model Explained
-
-#### Cloud Security Basics: Shared Responsibility Model Explained
-
-#### Cloud Security Basics: Shared Responsibility Model Explained
-
-#### Cloud Security Basics: Shared Responsibility Model Explained
-
-#### Cloud Security Basics: Shared Responsibility Model Explained
-
-#### Cloud Security Basics: Shared Responsibility Model Explained
-
-#### Cloud Security Basics: Shared Responsibility Model Explained
-
-#### Cloud Security Basics: Shared Responsibility Model Explained
-
-#### Cloud Security Basics: Shared Responsibility Model Explained
-
-#### Cloud Security Basics: Shared Responsibility Model Explained
-
-#### Cloud Security Basics: Shared Responsibility Model Explained
-
 The shared responsibility model is the foundational concept in cloud security. It defines what the cloud provider secures versus what the customer must secure. Misunderstanding this boundary is the root cause of most cloud data breaches.
 
-#### The Shared Responsibility Model
+## The Shared Responsibility Model
 
 Every major cloud provider — AWS, Google Cloud, and Azure — operates under a shared responsibility model. The provider secures the infrastructure that runs the services. The customer secures everything they deploy on top of that infrastructure.
 
@@ -52,11 +20,11 @@ Every major cloud provider — AWS, Google Cloud, and Azure — operates under a
 
 **Azure shared responsibility** : Microsoft secures physical hosts, networks, and datacenters. The customer secures their data, identities, applications, and account management. For platform-as-a-service (PaaS) services, Microsoft takes on more responsibility for the runtime.
 
-#### Identity and Access Management (IAM)
+## Identity and Access Management (IAM)
 
 IAM is the gatekeeper of your cloud environment. Every API call to a cloud provider passes through IAM authorization.
 
-#### AWS IAM
+## AWS IAM
 
 AWS IAM uses policies written in JSON to grant or deny permissions. Policies attach to users, groups, or roles.
 
@@ -99,11 +67,11 @@ Best practices for IAM:
 
 
 
-#### GCP IAM
+## GCP IAM
 
 GCP IAM uses roles that are collections of permissions. Primitive roles (Owner, Editor, Viewer) are broad. Predefined roles are service-specific and more granular.
 
-#### Assign a predefined role to a service account
+## Assign a predefined role to a service account
 
 gcloud projects add-iam-policy-binding my-project \
 
@@ -111,7 +79,7 @@ gcloud projects add-iam-policy-binding my-project \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--role="roles/storage.objectViewer"
 
-#### Azure RBAC
+## Azure RBAC
 
 Azure uses Role-Based Access Control with built-in or custom roles. Roles are assigned at management group, subscription, resource group, or resource scope.
 
@@ -123,7 +91,7 @@ az role assignment create \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--scope "/subscriptions/SUB_ID/resourceGroups/RG"
 
-#### Network Security Groups
+## Network Security Groups
 
 Cloud virtual networks need traffic filtering at multiple layers.
 
@@ -133,25 +101,25 @@ Cloud virtual networks need traffic filtering at multiple layers.
 
 **Azure Network Security Groups (NSGs)** : Filter traffic at the subnet or NIC level. NSGs contain security rules with priority, source, destination, protocol, direction, and action (allow or deny).
 
-#### Cloud Security Services
+## Cloud Security Services
 
-#### AWS CloudTrail
+## AWS CloudTrail
 
 CloudTrail records every API call made in your AWS account. It logs the caller identity, time, source IP, request parameters, and response elements. Enable CloudTrail in all regions and use a single trail for all accounts in AWS Organizations.
 
-#### AWS GuardDuty
+## AWS GuardDuty
 
 GuardDuty is a threat detection service that analyzes CloudTrail events, VPC flow logs, and DNS logs. It uses machine learning to detect unusual behavior such as crypto mining activity, anomalous API calls, or compromised credentials.
 
-#### GCP Security Command Center
+## GCP Security Command Center
 
 Security Command Center provides threat detection, vulnerability scanning, and asset inventory for GCP. It surfaces misconfigurations like public buckets, open firewall ports, and IAM policy violations.
 
-#### Azure Defender
+## Azure Defender
 
 Azure Defender (formerly Azure Security Center) provides unified security management and advanced threat protection across hybrid cloud workloads. It includes just-in-time VM access, file integrity monitoring, and vulnerability assessments.
 
-#### Key Management
+## Key Management
 
 Encryption key management differs across providers:
 
@@ -166,7 +134,7 @@ Encryption key management differs across providers:
 
 Never store secrets in code, configuration files, or environment variables exposed through debugging endpoints. Use a proper secrets manager with automatic rotation.
 
-#### Conclusion
+## Conclusion
 
 Cloud security starts with understanding the shared responsibility model. From there, it requires disciplined IAM management, proper network segmentation, and full utilization of your provider's security tooling. The shift to cloud does not eliminate security responsibilities — it transforms them.
 
@@ -181,3 +149,9 @@ Cloud security starts with understanding the shared responsibility model. From t
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Network Security Fundamentals](</en/security/network-security.html>)
 
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Network Security Fundamentals](</en/security/network-security.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)

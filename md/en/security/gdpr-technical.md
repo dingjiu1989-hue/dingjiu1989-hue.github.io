@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/gdpr-technical.html
 
 # GDPR Technical Controls
 
-## GDPR Technical Controls
-
-### GDPR Technical Controls
-
-#### GDPR Technical Controls
-
-#### GDPR Technical Controls
-
-#### GDPR Technical Controls
-
-#### GDPR Technical Controls
-
-#### GDPR Technical Controls
-
-#### GDPR Technical Controls
-
-#### GDPR Technical Controls
-
-#### GDPR Technical Controls
-
-#### GDPR Technical Controls
-
-#### GDPR Technical Controls
-
-#### GDPR Technical Controls
-
-#### GDPR Technical Controls
-
-#### GDPR Technical Controls
-
 GDPR Technical Requirements 
 
 GDPR requires technical controls for data protection by design and by default. Key areas include data mapping, consent, deletion, and privacy impact assessments. 
@@ -242,7 +212,7 @@ for source in self.data_sources:
 
 try:
 
-#### Soft delete first
+## Soft delete first
 
 source["delete"](<user_id, soft=True>)
 
@@ -270,7 +240,7 @@ errors.append({
 
 })
 
-#### Hard delete after retention period
+## Hard delete after retention period
 
 schedule_hard_delete(user_id, self.data_sources)
 
@@ -288,7 +258,7 @@ return {
 
 Privacy Impact Assessment 
 
-#### Automated PIA template
+## Automated PIA template
 
 PIA_TEMPLATE = {
 
@@ -346,7 +316,7 @@ pia["project_name"] = project_name
 
 pia["data_flows"] = data_flows
 
-#### Auto-detect high risk indicators
+## Auto-detect high risk indicators
 
 for flow in data_flows:
 
@@ -381,3 +351,9 @@ GDPR technical controls require systematic implementation. Maintain detailed dat
 **See also:** [Privacy Engineering](</en/security/privacy-engineering.html>), [SOC 2 Technical Controls](</en/security/soc2-technical.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
 
 **See also:** [Privacy Engineering](</en/security/privacy-engineering.html>), [SOC 2 Technical Controls](</en/security/soc2-technical.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Software Signing](</en/security/software-signing.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Software Signing](</en/security/software-signing.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Software Signing](</en/security/software-signing.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)

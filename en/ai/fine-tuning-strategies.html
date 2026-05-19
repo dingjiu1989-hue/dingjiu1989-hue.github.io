@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/fine-tuning-strategies.png",
       "datePublished": "2026-02-19",
       "dateModified": "2026-04-11",
-      "wordCount": "864",
+      "wordCount": "878",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -99,42 +99,29 @@
       <h1 class="article-title">LLM Fine-Tuning Strategies and Techniques</h1>
       <div class="article-meta">Published 2026-02-19 · Last active 2026-04-11 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/fine-tuning-strategies.png" alt="LLM Fine-Tuning Strategies and Techniques" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>LLM Fine-Tuning Strategies and Techniques</h2>
-<h3>LLM Fine-Tuning Strategies and Techniques</h3>
-<h4>LLM Fine-Tuning Strategies and Techniques</h4>
-<h4>LLM Fine-Tuning Strategies and Techniques</h4>
-<h4>LLM Fine-Tuning Strategies and Techniques</h4>
-<h4>LLM Fine-Tuning Strategies and Techniques</h4>
-<h4>LLM Fine-Tuning Strategies and Techniques</h4>
-<h4>LLM Fine-Tuning Strategies and Techniques</h4>
-<h4>LLM Fine-Tuning Strategies and Techniques</h4>
-<h4>LLM Fine-Tuning Strategies and Techniques</h4>
-<h4>LLM Fine-Tuning Strategies and Techniques</h4>
-<h4>LLM Fine-Tuning Strategies and Techniques</h4>
-<h4>LLM Fine-Tuning Strategies and Techniques</h4>
-<h4>LLM Fine-Tuning Strategies and Techniques</h4>
-<h4>LLM Fine-Tuning Strategies and Techniques</h4>
-<h4>LLM Fine-Tuning Strategies and Techniques</h4>
-<p>Fine-tuning adapts a pre-trained language model to specific tasks or domains. Different fine-tuning approaches offer trade-offs between customization, cost, and performance.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/fine-tuning-strategies.png" alt="LLM Fine-Tuning Strategies and Techniques" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Full Fine-Tuning</h4>
+      <div class="article-body"><p>Fine-tuning adapts a pre-trained language model to specific tasks or domains. Different fine-tuning approaches offer trade-offs between customization, cost, and performance.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/fine-tuning-strategies.png" alt="LLM Fine-Tuning Strategies and Techniques" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Full Fine-Tuning</h2>
 <p>Full fine-tuning updates all model parameters on domain-specific data. This achieves the highest task performance but requires significant computational resources. Full fine-tuning of a 7B parameter model requires 4-8 GPUs with 80GB memory each.</p>
 <p>Full fine-tuning is appropriate for domain adaptation (legal, medical, code) where broad knowledge transfer is needed. Training data should be 10,000-100,000 high-quality examples. The resulting model weights are 2x the original size (for AdamW optimizer states during training).</p>
-<h4>LoRA</h4>
+<h2>LoRA</h2>
 <p>Low-Rank Adaptation (LoRA) freezes the original model weights and inserts trainable rank decomposition matrices. This reduces trainable parameters by 10,000x and memory requirements by 4x. LoRA adapters are small (10-100MB) and swappable at runtime.</p>
 <p>Key hyperparameters: rank (r=8-64 for most tasks, higher for complex adaptation), alpha (scaling factor, typically 2x the rank), target modules (attention projections for most tasks, MLP layers for deeper adaptation). Train multiple LoRA adapters for different tasks from the same base model.</p>
-<h4>QLoRA</h4>
+<h2>QLoRA</h2>
 <p>QLoRA combines 4-bit quantization with LoRA. It quantizes the base model to 4 bits (NF4 format) and trains LoRA adapters at full precision. This enables fine-tuning 65B models on a single 48GB GPU. QLoRA achieves performance within 1% of full fine-tuning on most benchmarks.</p>
 <p>Double quantization reduces memory further by quantizing the quantization constants. Paged optimizers use CPU memory for optimizer states during memory spikes. QLoRA makes fine-tuning accessible without expensive GPU clusters.</p>
-<h4>RLHF</h4>
+<h2>RLHF</h2>
 <p>Reinforcement Learning from Human Feedback aligns models with human preferences. The three-stage process: supervised fine-tuning on demonstrations, reward model training on human comparisons, and PPO training using the reward model.</p>
 <p>RLHF improves helpfulness, reduces harmful outputs, and follows instructions more accurately. The quality of preference data matters more than quantity. DPO (Direct Preference Optimization) simplifies RLHF by treating alignment as a classification problem.</p>
-<h4>Data Preparation</h4>
+<h2>Data Preparation</h2>
 <p>High-quality training data is the most important factor. Use 1000+ examples for noticeable improvement. Deduplicate, filter low-quality examples, and balance label distribution. Include adversarial examples for robustness. Test on held-out validation sets.</p>
 <p><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-data-privacy.html">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-data-privacy.html">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-data-privacy.html">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-data-privacy.html">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-data-privacy.html">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-data-privacy.html">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-data-privacy.html">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-data-privacy.html">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -146,7 +133,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/fine-tuning-vs-rag.html" class="related-card">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a><a href="/en/ai/llm-safety.html" class="related-card">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a><a href="/en/ai/ai-data-privacy.html" class="related-card">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</a><a href="/en/ai/llm-api-design.html" class="related-card">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></div>
+      <div class="related-grid"><a href="/en/ai/fine-tuning-vs-rag.html" class="related-card"><span class="related-card-title">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</span><span class="related-card-desc">Compare fine-tuning and RAG for LLM applications: when to use each approach, hybrid fine-tuned RAG p</span></a><a href="/en/ai/llm-safety.html" class="related-card"><span class="related-card-title">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</span><span class="related-card-desc">Comprehensive guide to LLM safety: RLHF training, Constitutional AI principles, automated content fi</span></a><a href="/en/ai/ai-data-privacy.html" class="related-card"><span class="related-card-title">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</span><span class="related-card-desc">Protect user privacy in AI applications with PII detection and redaction, data anonymization techniq</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="related-card-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="related-card-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handli</span></a><a href="/en/ai/llm-caching-deep.html" class="related-card"><span class="related-card-title">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</span><span class="related-card-desc">Deep dive into LLM caching strategies: semantic similarity caching, exact match caching, TTL-based e</span></a><a href="/en/ai/multi-modal-rag.html" class="related-card"><span class="related-card-title">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</span><span class="related-card-desc">Build multi-modal RAG systems that handle images, tables, and documents. Learn chunking strategies, </span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

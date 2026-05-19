@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/code-generation.png",
       "datePublished": "2026-01-06",
       "dateModified": "2026-05-17",
-      "wordCount": "1075",
+      "wordCount": "1119",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,41 +99,24 @@
       <h1 class="article-title">Code Generation</h1>
       <div class="article-meta">Published 2026-01-06 · Last active 2026-05-17 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/code-generation.png" alt="Code Generation" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Code Generation</h2>
-<h3>Code Generation</h3>
-<h4>Code Generation</h4>
-<h4>Code Generation</h4>
-<h4>Code Generation</h4>
-<h4>Code Generation</h4>
-<h4>Code Generation</h4>
-<h4>Code Generation</h4>
-<h4>Code Generation</h4>
-<h4>Code Generation</h4>
-<h4>Code Generation</h4>
-<h4>Code Generation</h4>
-<h4>Code Generation</h4>
-<h4>Code Generation</h4>
-<h4>Code Generation</h4>
-<h4>Code Generation</h4>
-<h4>Code Generation</h4>
-<p>Code generation automates the creation of repetitive, boilerplate code. It enforces consistency, reduces human error, and accelerates development. This article explores the major code generation approaches: scaffolding tools, API client generation, GraphQL code generation, and custom template engines.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/code-generation.png" alt="Code Generation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Scaffolding Tools</h4>
+      <div class="article-body"><p>Code generation automates the creation of repetitive, boilerplate code. It enforces consistency, reduces human error, and accelerates development. This article explores the major code generation approaches: scaffolding tools, API client generation, GraphQL code generation, and custom template engines.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/code-generation.png" alt="Code Generation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Scaffolding Tools</h2>
 <p>Scaffolding tools generate initial project structures with pre-configured build systems, directory layouts, and common dependencies. They eliminate the repetitive setup that every project requires and ensure consistent project structures across the organization.</p>
 <p>Popular scaffolding tools include Yeoman (JavaScript), Cookiecutter (Python), and <code>create-react-app</code>/<code>create-next-app</code> (React/Next.js). These tools ask a few questions and generate a complete project foundation. The generated code follows best practices and is production-ready from day one.</p>
 <p>Organizations should invest in custom scaffolding templates that encode their specific conventions, preferred libraries, security policies, and CI/CD configurations. A standardized scaffold reduces onboarding time and ensures every project follows the same patterns.</p>
-<h4>OpenAPI Code Generation</h4>
+<h2>OpenAPI Code Generation</h2>
 <p>OpenAPI specifications enable automatic generation of both server and client code. Tools like OpenAPI Generator and Swagger Codegen read an OpenAPI spec and generate type definitions, API client libraries, server stubs, and documentation.</p>
 <p>Server-side code generation produces controllers and service interfaces. The developer implements the business logic within the generated structure. This ensures the implementation matches the specification exactly—any deviation is immediately visible.</p>
 <p>Client-side code generation produces type-safe API clients. Generated clients include request/response types, endpoint methods, and serialization logic. This eliminates manual HTTP client code that is error-prone and tedious to maintain. When the API changes, regenerating the client highlights all affected code.</p>
-<h4>GraphQL Code Generation</h4>
+<h2>GraphQL Code Generation</h2>
 <p>GraphQL's typed schema makes it an ideal candidate for code generation. Tools like GraphQL Code Generator read a GraphQL schema and generate TypeScript types, React hooks, and resolver types.</p>
 <p>Generated TypeScript types provide compile-time safety for GraphQL operations. When a field is removed from the schema, the generated types update, and the TypeScript compiler reports every usage that needs attention. This catches breaking changes at compile time rather than runtime.</p>
 <p>For React applications, GraphQL Code Generator generates typed hooks for each query and mutation. The generated hooks include response types, variable types, and loading state types. This eliminates manual type annotation and ensures the frontend types always match the schema.</p>
-<h4>Template Engines</h4>
+<h2>Template Engines</h2>
 <p>Custom code generation uses template engines to generate files from templates and data. A template is a text file with placeholders that the engine fills with generated content. Mustache, Handlebars, and EJS are popular template engines.</p>
 <p>Templates can generate any text-based file: source code, configuration files, documentation, SQL migrations, or test fixtures. The template approach is flexible and can be adapted to any codebase's specific patterns.</p>
 <p>Custom templates are most valuable for generating repetitive code within a project. Common examples include creating new components following a consistent pattern, generating CRUD endpoints for each database table, and creating test files that mirror source file structure.</p>
-<h4>Best Practices</h4>
+<h2>Best Practices</h2>
 <p>Generated code should be clearly marked as generated. Include a comment at the top of generated files indicating they are auto-generated and the source command used. This prevents developers from manually editing generated files—changes would be lost on regeneration.</p>
 <p>Version control for generated code depends on the context. API client libraries that are consumed across services should be versioned as packages. Scaffolding-generated projects should start with the generated structure and evolve independently. Template-generated code within a project should be regenerated when the source changes.</p>
 <p>Regeneration should be automated and part of the build process. When an API specification changes, a CI pipeline regenerates the client code and runs tests. Any compilation errors from the regeneration are caught immediately.</p>
@@ -142,7 +125,10 @@
 <p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/task-queues.html">Task Queues</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/task-queues.html">Task Queues</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/task-queues.html">Task Queues</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/task-queues.html">Task Queues</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/task-queues.html">Task Queues</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/task-queues.html">Task Queues</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/task-queues.html">Task Queues</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/artifact-management.html">Artifact Management</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/artifact-management.html">Artifact Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/artifact-management.html">Artifact Management</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -154,7 +140,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/grafana-dashboards.html" class="related-card">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a><a href="/en/tech/api-documentation.html" class="related-card">API Documentation</a><a href="/en/tech/task-queues.html" class="related-card">Task Queues</a><a href="/en/tech/testing-strategies.html" class="related-card">Testing Strategies</a></div>
+      <div class="related-grid"><a href="/en/tech/grafana-dashboards.html" class="related-card"><span class="related-card-title">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</span><span class="related-card-desc">Technical exploration of Grafana dashboard design covering panel types, template variables, annotati</span></a><a href="/en/tech/api-documentation.html" class="related-card"><span class="related-card-title">API Documentation</span><span class="related-card-desc">Learn API documentation: OpenAPI, Swagger UI, Redoc, developer portal integration, and documentation</span></a><a href="/en/tech/task-queues.html" class="related-card"><span class="related-card-title">Task Queues</span><span class="related-card-desc">Learn task queues: Celery, Bull, Sidekiq, delayed jobs, prioritization, and background processing pa</span></a><a href="/en/tech/testing-strategies.html" class="related-card"><span class="related-card-title">Testing Strategies</span><span class="related-card-desc">Learn comprehensive testing strategies: unit, integration, e2e tests, test pyramid principles, and t</span></a><a href="/en/tech/typescript-advanced-types.html" class="related-card"><span class="related-card-title">Advanced TypeScript Types for Better Code</span><span class="related-card-desc">Master advanced TypeScript types: generics, conditional types, mapped types, template literals, and </span></a><a href="/en/tech/ansible-automation.html" class="related-card"><span class="related-card-title">Ansible Automation: Playbooks, Roles, Inventory, and Vault</span><span class="related-card-desc">Deep dive into Ansible automation covering playbooks, roles, inventory management, Ansible Vault, id</span></a></div>
     </section>
     
   </div>

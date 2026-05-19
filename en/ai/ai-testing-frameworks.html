@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-frameworks.png",
       "datePublished": "2026-02-14",
       "dateModified": "2026-04-18",
-      "wordCount": "1730",
+      "wordCount": "1669",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -99,25 +99,9 @@
       <h1 class="article-title">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h1>
       <div class="article-meta">Published 2026-02-14 · Last active 2026-04-18 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-frameworks.png" alt="AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h2>
-<h3>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h3>
-<h4>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h4>
-<h4>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h4>
-<h4>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h4>
-<h4>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h4>
-<h4>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h4>
-<h4>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h4>
-<h4>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h4>
-<h4>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h4>
-<h4>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h4>
-<h4>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h4>
-<h4>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h4>
-<h4>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h4>
-<h4>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h4>
-<h4>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Testing AI applications is fundamentally different from testing traditional software. LLM outputs are non-deterministic, there is no single correct answer, and failures manifest as subtle quality degradations rather than crashes. Dedicated AI testing frameworks address these challenges with automated evaluation metrics, test case generation, and regression detection.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-frameworks.png" alt="AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>DeepEval</h4>
+<h2>DeepEval</h2>
 <p>DeepEval is an open-source testing framework designed for LLM applications:</p>
 <p>from deepeval import assert_test</p>
 <p>from deepeval.metrics import (</p>
@@ -148,9 +132,9 @@
 <p>)</p>
 <p>relevancy_metric = AnswerRelevancyMetric(threshold=0.7)</p>
 <p>assert_test(test_case, [relevancy_metric])</p>
-<h4>Run tests: deepeval test run test_ai.py</h4>
+<h2>Run tests: deepeval test run test_ai.py</h2>
 <p>DeepEval supports 15+ evaluation metrics including hallucination detection, answer relevancy, faithfulness, contextual precision, bias detection, and toxicity scoring. Each metric returns a score (0-1) that can be compared against a configurable threshold.</p>
-<h4>Ragas</h4>
+<h2>Ragas</h2>
 <p>Ragas is specialized for evaluating RAG pipelines end-to-end:</p>
 <p>from ragas import evaluate</p>
 <p>from ragas.metrics import (</p>
@@ -160,7 +144,7 @@
 <p>context_recall,</p>
 <p>)</p>
 <p>from datasets import Dataset</p>
-<h4>Prepare evaluation dataset</h4>
+<h2>Prepare evaluation dataset</h2>
 <p>test_data = Dataset.from_dict({</p>
 <p>"question": [</p>
 <p>"What is a Kubernetes pod?",</p>
@@ -179,7 +163,7 @@
 <p>"Load balancing distributes network traffic across servers.",</p>
 <p>],</p>
 <p>})</p>
-<h4>Compute RAG metrics</h4>
+<h2>Compute RAG metrics</h2>
 <p>result = evaluate(</p>
 <p>test_data,</p>
 <p>metrics=[</p>
@@ -190,39 +174,39 @@
 <p>],</p>
 <p>)</p>
 <p>print(result)</p>
-<h4>{</h4>
-<h4>"faithfulness": 0.92,</h4>
-<h4>"answer_relevancy": 0.88,</h4>
-<h4>"context_precision": 0.95,</h4>
-<h4>"context_recall": 0.85</h4>
-<h4>}</h4>
+<h2>{</h2>
+<h2>"faithfulness": 0.92,</h2>
+<h2>"answer_relevancy": 0.88,</h2>
+<h2>"context_precision": 0.95,</h2>
+<h2>"context_recall": 0.85</h2>
+<h2>}</h2>
 <p>Ragas decomposes RAG quality into four independent metrics: faithfulness (is the answer grounded in context?), answer relevancy (does the answer address the question?), context precision (are retrieved documents relevant?), and context recall (are all relevant documents retrieved?).</p>
-<h4>LangSmith</h4>
+<h2>LangSmith</h2>
 <p>LangSmith provides a hosted evaluation platform with tracing and annotation:</p>
 <p>from langsmith import Client, evaluate</p>
 <p>from langsmith.schemas import Example, Run</p>
 <p>client = Client()</p>
-<h4>Define a custom evaluator</h4>
+<h2>Define a custom evaluator</h2>
 <p>def answer_correctness(run: Run, example: Example) -&gt; dict:</p>
-<h4>Compare model output against expected output</h4>
+<h2>Compare model output against expected output</h2>
 <p>predicted = run.outputs.get("output", "")</p>
 <p>expected = example.outputs.get("answer", "")</p>
-<h4>Use LLM-as-judge for evaluation</h4>
+<h2>Use LLM-as-judge for evaluation</h2>
 <p>from langsmith.evaluation import evaluate as langsmith_eval</p>
 <p>return {"score": compute_similarity(predicted, expected)}</p>
-<h4>Run evaluation on a dataset</h4>
+<h2>Run evaluation on a dataset</h2>
 <p>results = evaluate(</p>
 <p>lambda inputs: my_llm_chain(inputs["question"]),</p>
 <p>data="my-test-dataset",</p>
 <p>evaluators=[answer_correctness],</p>
 <p>experiment_prefix="rag-v2-eval",</p>
 <p>)</p>
-<h4>View results in LangSmith dashboard</h4>
+<h2>View results in LangSmith dashboard</h2>
 <p>print(results)</p>
 <p>LangSmith excels at trace-level evaluation. Every LLM call, retrieval step, and prompt template is recorded and can be compared across experiments.</p>
-<h4>CI Integration</h4>
+<h2>CI Integration</h2>
 <p>Integrate AI tests into your CI pipeline to catch regressions automatically:</p>
-<h4>.github/workflows/ai-tests.yml</h4>
+<h2>.github/workflows/ai-tests.yml</h2>
 <p>name: AI Evaluation Tests</p>
 <p>on:</p>
 <p>push:</p>
@@ -248,13 +232,16 @@
 <p>run: |</p>
 <p>deepeval metrics --min-threshold 0.7</p>
 <p>Set a quality gate that blocks merges when metrics fall below thresholds. This prevents gradual quality degradation that is invisible in traditional tests.</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>AI testing requires specialized frameworks that understand non-deterministic outputs. Use DeepEval for unit-test-style evaluation with configurable metrics. Use Ragas for end-to-end RAG pipeline evaluation. Use LangSmith for trace-level debugging and comparison across experiments. Integrate all three into CI pipelines with automated quality gates to maintain production AI quality over time.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/model-evaluation-harness.html">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</a>, <a href="/en/ai/rag-evaluation.html">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -266,7 +253,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/llm-safety.html" class="related-card">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a><a href="/en/ai/llm-version-management.html" class="related-card">LLM Version Management: Model Registry, A/B Testing, Rollback</a><a href="/en/ai/llm-observability.html" class="related-card">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a><a href="/en/ai/model-evaluation-harness.html" class="related-card">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</a></div>
+      <div class="related-grid"><a href="/en/ai/llm-safety.html" class="related-card"><span class="related-card-title">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</span><span class="related-card-desc">Comprehensive guide to LLM safety: RLHF training, Constitutional AI principles, automated content fi</span></a><a href="/en/ai/llm-version-management.html" class="related-card"><span class="related-card-title">LLM Version Management: Model Registry, A/B Testing, Rollback</span><span class="related-card-desc">Manage LLM versions in production with model registries, A/B testing frameworks, gradual rollouts, a</span></a><a href="/en/ai/llm-observability.html" class="related-card"><span class="related-card-title">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</span><span class="related-card-desc">Implement LLM observability for production AI applications: distributed tracing, token usage trackin</span></a><a href="/en/ai/model-evaluation-harness.html" class="related-card"><span class="related-card-title">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</span><span class="related-card-desc">Evaluate LLM models systematically using benchmarks, human evaluation, LLM-as-judge frameworks, and </span></a><a href="/en/ai/rag-evaluation.html" class="related-card"><span class="related-card-title">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</span><span class="related-card-desc">A practical guide to evaluating RAG systems: retrieval metrics, generation quality assessment, end-t</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="related-card-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="related-card-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fa</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

@@ -69,4 +69,4 @@ Smallest bundle, edge-first| **Hono**
   
 **Bottom line:** Hono for edge/serverless. Fastify for production Node.js servers. Express for quick prototypes and when you need the largest middleware ecosystem. New projects should default to Hono or Fastify. See also: [Edge Functions Comparison](</en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html>) and [REST API Best Practices](</en/tech/rest-api-best-practices.html>).
 
-**See also:** [PHP vs Python vs Node.js: Best Backend Language for Web Development (2026)](</en/compare/php-vs-python-vs-node.html>), [Bun vs Node.js vs Deno (2026): Best JavaScript Runtime?](</en/compare/bun-vs-node-vs-deno.html>), [PlanetScale vs Turso vs Neon (2026): Best Serverless Database?](</en/compare/planetscale-vs-turso-vs-neon.html>)
+**See also:** [Prisma vs Drizzle ORM](</en/compare/prisma-vs-drizzle.html>), [React vs Vue vs Angular vs Svelte (2026): Best Frontend Framework?](</en/compare/react-vs-vue-vs-angular-vs-svelte.html>), [Next.js vs Nuxt vs SvelteKit (2026): Best Full-Stack Meta-Framework?](</en/compare/nextjs-vs-nuxt-vs-sveltekit.html>)

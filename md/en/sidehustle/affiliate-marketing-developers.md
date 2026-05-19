@@ -89,4 +89,4 @@ Direct SaaS programs| 20-50%| Check footer links on SaaS sites for "Affiliates"
 
 
 
-**See also:** [How to Build and Sell APIs: A Developer's Guide to API-as-a-Service](</en/sidehustle/build-and-sell-api.html>), [Content Monetization Strategies for Developers](</en/sidehustle/content-monetization.html>), [How to Create and Sell an Online Coding Course That Makes $10K+](</en/sidehustle/create-online-course.html>)
+**See also:** [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-security-posture.png",
       "datePublished": "2026-03-08",
       "dateModified": "2026-04-26",
-      "wordCount": "3181",
+      "wordCount": "3120",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,24 +99,7 @@
       <h1 class="article-title">Cloud Security Posture Management</h1>
       <div class="article-meta">Published 2026-03-08 · Last active 2026-04-26 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-security-posture.png" alt="Cloud Security Posture Management" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Cloud Security Posture Management</h2>
-<h3>Cloud Security Posture Management</h3>
-<h4>Cloud Security Posture Management</h4>
-<h4>Cloud Security Posture Management</h4>
-<h4>Cloud Security Posture Management</h4>
-<h4>Cloud Security Posture Management</h4>
-<h4>Cloud Security Posture Management</h4>
-<h4>Cloud Security Posture Management</h4>
-<h4>Cloud Security Posture Management</h4>
-<h4>Cloud Security Posture Management</h4>
-<h4>Cloud Security Posture Management</h4>
-<h4>Cloud Security Posture Management</h4>
-<h4>Cloud Security Posture Management</h4>
-<h4>Cloud Security Posture Management</h4>
-<h4>Cloud Security Posture Management</h4>
-<h4>Cloud Security Posture Management</h4>
-<h4>Cloud Security Posture Management</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-security-posture.png" alt="Cloud Security Posture Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-security-posture.png" alt="Cloud Security Posture Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Cloud Security Posture Management (CSPM) continuously monitors cloud environments for misconfigurations, compliance violations, and security risks. As cloud infrastructure grows in complexity, manual security reviews become impossible. CSPM automates the detection and remediation of configuration issues that lead to most cloud data breaches. </p>
 <p>Core CSPM Capabilities </p>
 <p>CSPM tools provide automated discovery, assessment, and remediation across cloud services. </p>
@@ -131,7 +114,7 @@
 <p>self.findings = []</p>
 <p>def scan_aws(self, account_id):</p>
 <p>"""Evaluate AWS account against security benchmarks."""</p>
-<h4>Check S3 public access</h4>
+<h2>Check S3 public access</h2>
 <p>s3 = boto3.client('s3')</p>
 <p>buckets = s3.list_buckets()['Buckets']</p>
 <p>for bucket in buckets:</p>
@@ -197,7 +180,7 @@
 <p>def map_finding(self, finding):</p>
 <p>"""Map a security finding to applicable compliance frameworks."""</p>
 <p>mapped_to = []</p>
-<h4>Example mapping</h4>
+<h2>Example mapping</h2>
 <p>if finding['issue'] == 'S3 bucket publicly accessible':</p>
 <p>mapped_to.extend([</p>
 <p>('CIS', '2.1'),</p>
@@ -244,13 +227,13 @@
 <p>class AutoRemediator:</p>
 <p>def remediate_open_security_group(self, group_id, region):</p>
 <p>ec2 = boto3.client('ec2', region_name=region)</p>
-<h4>Get current rules</h4>
+<h2>Get current rules</h2>
 <p>sg = ec2.describe_security_groups(GroupIds=[group_id])['SecurityGroups'][0]</p>
 <p>for permission in sg['IpPermissions']:</p>
 <p>for ip_range in permission.get('IpRanges', []):</p>
 <p>if ip_range['CidrIp'] == '0.0.0.0/0':</p>
 <p>if permission.get('FromPort') in (22, 3389, 3306, 5432):</p>
-<h4>Remove overly permissive rule</h4>
+<h2>Remove overly permissive rule</h2>
 <p>ec2.revoke_security_group_ingress(</p>
 <p>GroupId=group_id,</p>
 <p>IpPermissions=[{</p>
@@ -296,7 +279,10 @@
 <p><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/secure-configuration.html">Secure Configuration Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/secure-configuration.html">Secure Configuration Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/secure-configuration.html">Secure Configuration Management</a></p>
-<p><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/secure-configuration.html">Secure Configuration Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/secure-configuration.html">Secure Configuration Management</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/secure-configuration.html">Secure Configuration Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/secure-configuration.html">Secure Configuration Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -308,7 +294,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/iac-security.html" class="related-card">Infrastructure as Code Security</a><a href="/en/security/certificate-management.html" class="related-card">Certificate Management</a><a href="/en/security/secure-configuration.html" class="related-card">Secure Configuration Management</a><a href="/en/security/serverless-security.html" class="related-card">Serverless Security</a></div>
+      <div class="related-grid"><a href="/en/security/iac-security.html" class="related-card"><span class="related-card-title">Infrastructure as Code Security</span><span class="related-card-desc">Guide to Infrastructure as Code security covering Terraform security scanning, policy as code, drift</span></a><a href="/en/security/certificate-management.html" class="related-card"><span class="related-card-title">Certificate Management</span><span class="related-card-desc">Practical guide to TLS certificate management covering Let's Encrypt, ACME protocol, automated renew</span></a><a href="/en/security/secure-configuration.html" class="related-card"><span class="related-card-title">Secure Configuration Management</span><span class="related-card-desc">Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detectio</span></a><a href="/en/security/serverless-security.html" class="related-card"><span class="related-card-title">Serverless Security</span><span class="related-card-desc">Guide to serverless security covering function permissions, event validation, cold start risks, depe</span></a><a href="/en/security/session-management.html" class="related-card"><span class="related-card-title">Session Management Security</span><span class="related-card-desc">Guide to secure session management covering JWT vs opaque tokens, rotation strategies, secure cookie</span></a><a href="/en/security/security-information-event-management.html" class="related-card"><span class="related-card-title">SIEM: Security Information and Event Management</span><span class="related-card-desc">SIEM systems for security monitoring: log collection, correlation rules, threat detection, and incid</span></a></div>
     </section>
     
   </div>

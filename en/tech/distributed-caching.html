@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-caching.png",
       "datePublished": "2026-01-07",
       "dateModified": "2026-05-11",
-      "wordCount": "1324",
+      "wordCount": "1362",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,48 +99,31 @@
       <h1 class="article-title">Distributed Caching</h1>
       <div class="article-meta">Published 2026-01-07 · Last active 2026-05-11 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-caching.png" alt="Distributed Caching" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Distributed Caching</h2>
-<h3>Distributed Caching</h3>
-<h4>Distributed Caching</h4>
-<h4>Distributed Caching</h4>
-<h4>Distributed Caching</h4>
-<h4>Distributed Caching</h4>
-<h4>Distributed Caching</h4>
-<h4>Distributed Caching</h4>
-<h4>Distributed Caching</h4>
-<h4>Distributed Caching</h4>
-<h4>Distributed Caching</h4>
-<h4>Distributed Caching</h4>
-<h4>Distributed Caching</h4>
-<h4>Distributed Caching</h4>
-<h4>Distributed Caching</h4>
-<h4>Distributed Caching</h4>
-<h4>Distributed Caching</h4>
-<p>Distributed caching improves application performance by storing frequently accessed data across multiple nodes. Unlike a local cache, a distributed cache is shared across all application instances, providing consistent data access and higher effective capacity. This article covers Redis Cluster, Memcached, CDN caching, and invalidation strategies.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-caching.png" alt="Distributed Caching" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Why Distributed Caching</h4>
+      <div class="article-body"><p>Distributed caching improves application performance by storing frequently accessed data across multiple nodes. Unlike a local cache, a distributed cache is shared across all application instances, providing consistent data access and higher effective capacity. This article covers Redis Cluster, Memcached, CDN caching, and invalidation strategies.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-caching.png" alt="Distributed Caching" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Why Distributed Caching</h2>
 <p>A local cache on each application instance is fast but limited. Each instance has its own copy of cached data, leading to duplication and inconsistency. When data changes, each instance must be notified independently. The cache capacity is limited to a single instance's memory.</p>
 <p>A distributed cache pools memory across multiple nodes. All application instances share the same cache, eliminating duplication and providing a consistent view. The cache scales horizontally—adding more nodes increases capacity and throughput. Data survives individual node failures through replication.</p>
-<h4>Redis Cluster</h4>
+<h2>Redis Cluster</h2>
 <p>Redis Cluster provides a distributed Redis implementation with automatic sharding and replication. Data is partitioned across multiple Redis nodes using hash slots. Each node handles a subset of the hash slots. The cluster automatically rebalances when nodes are added or removed.</p>
 <p>Redis Cluster supports replication with a primary-replica configuration. Each primary has one or more replicas. If the primary fails, a replica is promoted automatically. This provides high availability without manual intervention.</p>
 <p>Redis supports multiple data structures: strings, hashes, lists, sets, sorted sets, bitmaps, and streams. These structures enable sophisticated caching beyond simple key-value storage. Redis also supports Lua scripting for atomic operations, pub/sub for event notification, and TTL-based expiration for automatic cache cleanup.</p>
-<h4>Memcached</h4>
+<h2>Memcached</h2>
 <p>Memcached is a simpler, more focused distributed cache. It provides a straightforward key-value store with minimal overhead. Memcached is designed for simplicity and speed, making it ideal for caching database query results, session data, and rendered page fragments.</p>
 <p>Unlike Redis, Memcached does not support persistence, replication, or advanced data structures. Items are automatically evicted when memory is full using an LRU (Least Recently Used) algorithm. The simplicity of Memcached makes it extremely fast—it is often faster than Redis for basic key-value operations.</p>
 <p>Memcached is typically deployed as a pool of servers. Clients use consistent hashing to distribute keys across servers, minimizing redistribution when servers are added or removed. The thin architecture makes Memcached easy to operate at scale.</p>
-<h4>CDN Caching</h4>
+<h2>CDN Caching</h2>
 <p>Content Delivery Networks (CDNs) cache content at edge locations close to users. CDN caching improves response times for users regardless of geographic location. Static assets (images, CSS, JavaScript) are the primary CDN caching targets, but CDNs also cache API responses and dynamic content.</p>
 <p>CDN caching uses HTTP cache headers (Cache-Control, ETag, Expires) to control caching behavior. Short TTLs (minutes) for dynamic content. Long TTLs (days or weeks) for static assets with content hashing in URLs.</p>
 <p>Cache invalidation in CDNs is challenging. Most CDNs support purge requests that remove cached content. However, purges are eventually consistent—users may receive stale content until the purge propagates. Cache-busting through versioned URLs avoids invalidation entirely.</p>
-<h4>Cache Invalidation Strategies</h4>
+<h2>Cache Invalidation Strategies</h2>
 <p>Invalidation is one of the hardest problems in caching. TTL-based invalidation sets a time limit on cached entries. It is simple and effective for data that tolerates staleness. The TTL should be short enough that stale data is quickly replaced.</p>
 <p>Event-driven invalidation removes cached entries when the underlying data changes. When a database record is updated, the service publishes an invalidation event. Cache listeners remove the affected entries. This provides near-instantaneous invalidation but requires event infrastructure.</p>
 <p>Write-through caching updates the cache synchronously when data is written. Read-through caching populates the cache on read misses. A combination provides strong consistency for frequently written data while handling cache misses transparently.</p>
-<h4>Consistency Considerations</h4>
+<h2>Consistency Considerations</h2>
 <p>Distributed caches are eventually consistent by nature. After a write, there is a window where cache reads return stale data. The acceptable staleness depends on the use case. Session data requires minimal staleness. Analytics aggregations tolerate significant staleness.</p>
 <p>Cache-aside (lazy loading) is the most common pattern. The application checks the cache first. On a miss, it reads from the database and populates the cache. This pattern is simple and works well for most use cases. The risk is stale data between cache updates.</p>
 <p>Cache stampede occurs when many requests miss the cache simultaneously, all hitting the database. Locking (only one request populates the cache) and early recomputation (refresh the cache before TTL expiration) prevent stampedes.</p>
-<h4>Best Practices</h4>
+<h2>Best Practices</h2>
 <p>Cache data that is expensive to compute and frequently accessed. Identify caching opportunities through profiling. Set appropriate TTLs based on data freshness requirements. Monitor cache hit rates—low hit rates indicate ineffective caching. Handle cache failures gracefully—the application should work without the cache, just more slowly.</p>
 <p>Use consistent serialization across all cache consumers. Version cached data to handle serialization format changes. Monitor cache memory usage and eviction rates. High eviction rates indicate insufficient cache capacity.</p>
 <p>Distributed caching is a powerful performance optimization when applied judiciously. The key is understanding your access patterns, choosing the right cache technology and topology, and implementing appropriate invalidation and consistency strategies.</p>
@@ -148,7 +131,10 @@
 <p><strong>See also:</strong> <a href="/en/tech/build-optimization.html">Build Optimization</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/build-optimization.html">Build Optimization</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/build-optimization.html">Build Optimization</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/build-optimization.html">Build Optimization</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/build-optimization.html">Build Optimization</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/build-optimization.html">Build Optimization</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/build-optimization.html">Build Optimization</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -160,7 +146,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/build-optimization.html" class="related-card">Build Optimization</a><a href="/en/tech/infrastructure-composability.html" class="related-card">Infrastructure Composability</a><a href="/en/tech/load-testing-strategies.html" class="related-card">Load Testing Strategies</a><a href="/en/tech/testing-strategies.html" class="related-card">Testing Strategies</a></div>
+      <div class="related-grid"><a href="/en/tech/build-optimization.html" class="related-card"><span class="related-card-title">Build Optimization</span><span class="related-card-desc">Explore build optimization: caching, parallelism, incremental builds, distcc, and strategies for fas</span></a><a href="/en/tech/infrastructure-composability.html" class="related-card"><span class="related-card-title">Infrastructure Composability</span><span class="related-card-desc">Explore infrastructure composability: reusable modules, Terraform patterns, component design, and en</span></a><a href="/en/tech/load-testing-strategies.html" class="related-card"><span class="related-card-title">Load Testing Strategies</span><span class="related-card-desc">Explore load testing strategies: ramp-up patterns, steady state, spike testing, soak testing, and to</span></a><a href="/en/tech/testing-strategies.html" class="related-card"><span class="related-card-title">Testing Strategies</span><span class="related-card-desc">Learn comprehensive testing strategies: unit, integration, e2e tests, test pyramid principles, and t</span></a><a href="/en/tech/github-actions-workflows.html" class="related-card"><span class="related-card-title">GitHub Actions Workflows: Advanced Patterns</span><span class="related-card-desc">Advanced GitHub Actions patterns: matrix builds, reusable workflows, caching, environment protection</span></a><a href="/en/tech/web-performance-optimization.html" class="related-card"><span class="related-card-title">Web Performance Optimization Techniques 2026</span><span class="related-card-desc">Optimize web performance: Core Web Vitals, lazy loading, code splitting, CDN optimization, and cachi</span></a></div>
     </section>
     
   </div>

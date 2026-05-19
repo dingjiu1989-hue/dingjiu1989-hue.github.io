@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/api-rate-limiting.html
 
 # API Rate Limiting Implementation
 
-## API Rate Limiting Implementation
-
-### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
-#### API Rate Limiting Implementation
-
 Why Rate Limiting Matters 
 
 Rate limiting protects APIs from abuse, DoS attacks, and unintentional overload. It ensures fair usage and maintains service quality for all consumers. 
@@ -96,7 +62,7 @@ self.tokens + elapsed * self.rate)
 
 self.last_refill = now
 
-#### Usage
+## Usage
 
 bucket = TokenBucket(rate=10, capacity=20) # 10 req/s, burst 20
 
@@ -130,7 +96,7 @@ def allow_request(self):
 
 now = time.time()
 
-#### Remove expired entries
+## Remove expired entries
 
 while self.log and self.log[0] <= now - self.window_size:
 
@@ -247,3 +213,9 @@ Choose the right rate limiting algorithm for your use case. Token bucket works w
 **See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 
 **See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>)
+
+**See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>)
+
+**See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>)

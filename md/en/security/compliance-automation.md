@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/compliance-automation.html
 
 # Compliance Automation
 
-## Compliance Automation
-
-### Compliance Automation
-
-#### Compliance Automation
-
-#### Compliance Automation
-
-#### Compliance Automation
-
-#### Compliance Automation
-
-#### Compliance Automation
-
-#### Compliance Automation
-
-#### Compliance Automation
-
-#### Compliance Automation
-
-#### Compliance Automation
-
-#### Compliance Automation
-
-#### Compliance Automation
-
-#### Compliance Automation
-
-#### Compliance Automation
-
 Why Automate Compliance? 
 
 Manual compliance is slow, error-prone, and unsustainable. Automation provides continuous verification, instant reporting, and faster audit cycles. 
@@ -46,7 +16,7 @@ CIS Benchmark Scanning
 
 Automate CIS benchmark checks across infrastructure: 
 
-#### cis-benchmark-config.yaml
+## cis-benchmark-config.yaml
 
 benchmarks:
 
@@ -86,7 +56,7 @@ expected: "[true]"
 
 severity: "high"
 
-#### CIS compliance checker
+## CIS compliance checker
 
 import subprocess
 
@@ -246,13 +216,13 @@ summary = {
 
 report_md = f"""
 
-#### Compliance Report: {framework}
+## Compliance Report: {framework}
 
 **Date:** {summary['timestamp']}
 
 **Score:** {summary['compliance_score']:.1f}%
 
-#### Summary
+## Summary
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Total Checks: {summary['total_checks']}
 
@@ -260,7 +230,7 @@ report_md = f"""
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Failed: {summary['failed']}
 
-#### Failed Controls
+## Failed Controls
 
 """
 
@@ -270,7 +240,7 @@ if not result["passed"]:
 
 report_md += f"""
 
-#### {result['id']}: {result['title']}
+## {result['id']}: {result['title']}
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- **Severity:** {result['severity']}
 
@@ -325,3 +295,9 @@ Automate compliance with CIS benchmark scanning, remediation, reporting, and mon
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>)
 
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>)
+
+**See also:** [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Data Classification](</en/security/data-classification.html>), [SBOM Management](</en/security/sbom-management.html>)
+
+**See also:** [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Data Classification](</en/security/data-classification.html>), [SBOM Management](</en/security/sbom-management.html>)
+
+**See also:** [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Data Classification](</en/security/data-classification.html>), [SBOM Management](</en/security/sbom-management.html>)

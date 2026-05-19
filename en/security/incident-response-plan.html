@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/incident-response-plan.png",
       "datePublished": "2026-03-18",
       "dateModified": "2026-05-10",
-      "wordCount": "1063",
+      "wordCount": "1054",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,26 +99,11 @@
       <h1 class="article-title">Incident Response Plan</h1>
       <div class="article-meta">Published 2026-03-18 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/incident-response-plan.png" alt="Incident Response Plan" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Incident Response Plan</h2>
-<h3>Incident Response Plan</h3>
-<h4>Incident Response Plan</h4>
-<h4>Incident Response Plan</h4>
-<h4>Incident Response Plan</h4>
-<h4>Incident Response Plan</h4>
-<h4>Incident Response Plan</h4>
-<h4>Incident Response Plan</h4>
-<h4>Incident Response Plan</h4>
-<h4>Incident Response Plan</h4>
-<h4>Incident Response Plan</h4>
-<h4>Incident Response Plan</h4>
-<h4>Incident Response Plan</h4>
-<h4>Incident Response Plan</h4>
-<h4>Incident Response Plan</h4>
-<p>The NIST Framework </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/incident-response-plan.png" alt="Incident Response Plan" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>The NIST Framework </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/incident-response-plan.png" alt="Incident Response Plan" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The NIST SP 800-61 framework defines four phases of incident response: Preparation, Detection &amp; Analysis, Containment Eradication &amp; Recovery, and Post-Incident Activity. </p>
 <p>Phase 1: Preparation </p>
 <p>Preparation determines response success. Key elements include: </p>
-<h4>incident-response-tools.yaml</h4>
+<h2>incident-response-tools.yaml</h2>
 <p>tools:</p>
 <p>siem: elastic-security</p>
 <p>edr: crowdstrike-falcon</p>
@@ -155,7 +140,7 @@
 <p>"timestamp": datetime.utcnow().isoformat()</p>
 <p>})</p>
 <p>return alerts</p>
-<h4>Example: Correlate failed logins across accounts</h4>
+<h2>Example: Correlate failed logins across accounts</h2>
 <p>detector = IncidentDetector()</p>
 <p>detector.add_rule({</p>
 <p>"name": "Brute Force Detection",</p>
@@ -165,20 +150,20 @@
 <p>"window": timedelta(minutes=5)</p>
 <p>})</p>
 <p>Phase 3: Containment, Eradication, Recovery </p>
-<h4>!/bin/bash</h4>
-<h4>Incident containment script</h4>
+<h2>!/bin/bash</h2>
+<h2>Incident containment script</h2>
 <p>isolate_host() {</p>
 <p>local host=$1</p>
-<h4>Block at network level</h4>
+<h2>Block at network level</h2>
 <p>ansible-playbook isolate_host.yml -e "target=$host"</p>
-<h4>Capture forensic data</h4>
+<h2>Capture forensic data</h2>
 <p>ssh "user@$host" "tar czf /tmp/forensics.tar.gz /var/log /tmp /home"</p>
 <p>scp "user@$host:/tmp/forensics.tar.gz" ./evidence/</p>
-<h4>Snapshot for analysis</h4>
+<h2>Snapshot for analysis</h2>
 <p>aws ec2 create-snapshot --volume-id $(get_volume_id $host)</p>
 <p>echo "Host $host isolated. Forensic data captured."</p>
 <p>}</p>
-<h4>Eradicate malware</h4>
+<h2>Eradicate malware</h2>
 <p>eradicate() {</p>
 <p>local host=$1</p>
 <p>ansible-playbook malware_removal.yml -e "target=$host"</p>
@@ -227,7 +212,10 @@
 <p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a>, <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a></p>
 <p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a>, <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a></p>
 <p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a>, <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a></p>
-<p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a>, <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a>, <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a>, <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a></p>
+<p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a>, <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a></p>
+<p><strong>See also:</strong> <a href="/en/security/secrets-rotation.html">Secrets Rotation</a>, <a href="/en/security/security-awareness.html">Security Awareness Training</a>, <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a></p>
+<p><strong>See also:</strong> <a href="/en/security/secrets-rotation.html">Secrets Rotation</a>, <a href="/en/security/security-awareness.html">Security Awareness Training</a>, <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/secrets-rotation.html">Secrets Rotation</a>, <a href="/en/security/security-awareness.html">Security Awareness Training</a>, <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -239,7 +227,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/dlp-strategies.html" class="related-card">Data Loss Prevention Strategies</a><a href="/en/security/endpoint-security.html" class="related-card">Endpoint Security</a><a href="/en/security/penetration-testing.html" class="related-card">Penetration Testing Methodology</a><a href="/en/security/supply-chain-security.html" class="related-card">Supply Chain Security</a></div>
+      <div class="related-grid"><a href="/en/security/dlp-strategies.html" class="related-card"><span class="related-card-title">Data Loss Prevention Strategies</span><span class="related-card-desc">Implementing DLP across network, endpoint, and cloud with effective policy design and incident respo</span></a><a href="/en/security/endpoint-security.html" class="related-card"><span class="related-card-title">Endpoint Security</span><span class="related-card-desc">Deep dive into endpoint security comparing EDR, XDR, and antivirus solutions, detection techniques, </span></a><a href="/en/security/penetration-testing.html" class="related-card"><span class="related-card-title">Penetration Testing Methodology</span><span class="related-card-desc">Complete penetration testing methodology covering reconnaissance, scanning, exploitation, reporting,</span></a><a href="/en/security/supply-chain-security.html" class="related-card"><span class="related-card-title">Supply Chain Security</span><span class="related-card-desc">Comprehensive guide to software supply chain security covering SBOM, Sigstore, in-toto, dependency c</span></a><a href="/en/security/threat-hunting.html" class="related-card"><span class="related-card-title">Threat Hunting</span><span class="related-card-desc">Comprehensive guide to hypothesis-driven threat hunting with MITRE ATT&CK mapping, tooling strategie</span></a><a href="/en/security/owasp-top-10-2026.html" class="related-card"><span class="related-card-title">OWASP Top 10 2026</span><span class="related-card-desc">Analyzing the OWASP Top 10 2026 with new entries, mitigations, and modern testing approaches.</span></a></div>
     </section>
     
   </div>

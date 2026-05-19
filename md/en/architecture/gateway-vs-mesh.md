@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/gateway-vs-mesh.html
 
 # API Gateway vs Service Mesh
 
-## API Gateway vs Service Mesh
-
-### API Gateway vs Service Mesh
-
-#### API Gateway vs Service Mesh
-
-#### API Gateway vs Service Mesh
-
-#### API Gateway vs Service Mesh
-
-#### API Gateway vs Service Mesh
-
-#### API Gateway vs Service Mesh
-
-#### API Gateway vs Service Mesh
-
-#### API Gateway vs Service Mesh
-
-#### API Gateway vs Service Mesh
-
-#### API Gateway vs Service Mesh
-
-#### API Gateway vs Service Mesh
-
-#### API Gateway vs Service Mesh
-
-#### API Gateway vs Service Mesh
-
-#### API Gateway vs Service Mesh
-
 API Gateway and Service Mesh solve different problems but operate in overlapping territory, creating confusion about where each belongs. The API Gateway manages north-south traffic (client to service), while the Service Mesh manages east-west traffic (service to service). Understanding their distinct responsibilities, overlap, and coexistence patterns is essential for a well-architected system. 
 
 The API Gateway is the single entry point for external clients. It handles cross-cutting concerns that belong at the edge of the system: authentication, TLS termination, rate limiting, request validation, response transformation, and API versioning. Kong, Apigee, and AWS API Gateway are common implementations. The gateway may also implement routing, load balancing, and caching for external traffic. It is explicitly part of your application architecture — it knows about your services, routes, and business-level concerns like rate limits per customer plan. 
@@ -65,3 +35,9 @@ Operational complexity is the primary cost. Operating both systems requires expe
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>)

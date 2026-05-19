@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/dlp-strategies.png",
       "datePublished": "2026-03-17",
       "dateModified": "2026-04-02",
-      "wordCount": "1196",
+      "wordCount": "1157",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">Data Loss Prevention Strategies</h1>
       <div class="article-meta">Published 2026-03-17 · Last active 2026-04-02 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/dlp-strategies.png" alt="Data Loss Prevention Strategies" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Data Loss Prevention Strategies</h2>
-<h3>Data Loss Prevention Strategies</h3>
-<h4>Data Loss Prevention Strategies</h4>
-<h4>Data Loss Prevention Strategies</h4>
-<h4>Data Loss Prevention Strategies</h4>
-<h4>Data Loss Prevention Strategies</h4>
-<h4>Data Loss Prevention Strategies</h4>
-<h4>Data Loss Prevention Strategies</h4>
-<h4>Data Loss Prevention Strategies</h4>
-<h4>Data Loss Prevention Strategies</h4>
-<h4>Data Loss Prevention Strategies</h4>
-<h4>Data Loss Prevention Strategies</h4>
-<h4>Data Loss Prevention Strategies</h4>
-<h4>Data Loss Prevention Strategies</h4>
-<h4>Data Loss Prevention Strategies</h4>
-<p>DLP Overview </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/dlp-strategies.png" alt="Data Loss Prevention Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>DLP Overview </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/dlp-strategies.png" alt="Data Loss Prevention Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Data Loss Prevention (DLP) monitors and controls data in use, in motion, and at rest. A comprehensive DLP strategy covers three domains. </p>
 <p>Network DLP </p>
 <p>Inspect traffic for sensitive data leaving the network: </p>
@@ -123,12 +108,12 @@
 <p>def packet_inspector(packet):</p>
 <p>if packet.haslayer(Raw):</p>
 <p>payload = str(packet[Raw].load)</p>
-<h4>Check for credit card patterns</h4>
+<h2>Check for credit card patterns</h2>
 <p>if re.search(r"\b(?:\d[ -]*?){13,16}\b", payload):</p>
 <p>print(f"[ALERT] Potential CC leak from {packet[IP].src}")</p>
-<h4>Trigger block or alert</h4>
+<h2>Trigger block or alert</h2>
 <p>return False</p>
-<h4>Check for API keys (length &gt; 20, high entropy)</h4>
+<h2>Check for API keys (length &gt; 20, high entropy)</h2>
 <p>if len(payload) &gt; 20 and has_high_entropy(payload):</p>
 <p>print(f"[ALERT] High-entropy data from {packet[IP].src}")</p>
 <p>return False</p>
@@ -140,7 +125,7 @@
 <p>return entropy &gt; threshold</p>
 <p>Endpoint DLP </p>
 <p>Control data movement on endpoints: </p>
-<h4>endpoint-dlp-rules.yaml</h4>
+<h2>endpoint-dlp-rules.yaml</h2>
 <p>rules:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Block USB transfer</p>
 <p>trigger: usb_device_connect</p>
@@ -159,7 +144,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- manager</p>
 <p>Cloud DLP </p>
 <p>Protect data in SaaS and IaaS environments: </p>
-<h4>Google Cloud DLP inspection job</h4>
+<h2>Google Cloud DLP inspection job</h2>
 <p>resource "google_data_loss_prevention_job_trigger" "bigquery_scan" {</p>
 <p>parent = "projects/my-project/locations/us"</p>
 <p>triggers {</p>
@@ -224,7 +209,10 @@
 <p><strong>See also:</strong> <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/incident-response-plan.html">Incident Response Plan</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/incident-response-plan.html">Incident Response Plan</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/incident-response-plan.html">Incident Response Plan</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/incident-response-plan.html">Incident Response Plan</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/incident-response-plan.html">Incident Response Plan</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/incident-response-plan.html">Incident Response Plan</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/incident-response-plan.html">Incident Response Plan</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/secrets-rotation.html">Secrets Rotation</a>, <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></p>
+<p><strong>See also:</strong> <a href="/en/security/secrets-rotation.html">Secrets Rotation</a>, <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/secrets-rotation.html">Secrets Rotation</a>, <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -236,7 +224,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/incident-response-plan.html" class="related-card">Incident Response Plan</a><a href="/en/security/endpoint-security.html" class="related-card">Endpoint Security</a><a href="/en/security/threat-hunting.html" class="related-card">Threat Hunting</a></div>
+      <div class="related-grid"><a href="/en/security/data-loss-prevention.html" class="related-card"><span class="related-card-title">Data Loss Prevention (DLP) Strategies</span><span class="related-card-desc">Implement DLP strategies across endpoint, network, and cloud environments with data classification, </span></a><a href="/en/security/incident-response-plan.html" class="related-card"><span class="related-card-title">Incident Response Plan</span><span class="related-card-desc">Building an incident response plan using the NIST framework with tabletop exercises and communicatio</span></a><a href="/en/security/endpoint-security.html" class="related-card"><span class="related-card-title">Endpoint Security</span><span class="related-card-desc">Deep dive into endpoint security comparing EDR, XDR, and antivirus solutions, detection techniques, </span></a><a href="/en/security/threat-hunting.html" class="related-card"><span class="related-card-title">Threat Hunting</span><span class="related-card-desc">Comprehensive guide to hypothesis-driven threat hunting with MITRE ATT&CK mapping, tooling strategie</span></a><a href="/en/security/cloud-network-security.html" class="related-card"><span class="related-card-title">Cloud Network Security</span><span class="related-card-desc">Designing cloud network security with security groups, NACLs, firewall rules, and traffic inspection</span></a><a href="/en/security/data-classification.html" class="related-card"><span class="related-card-title">Data Classification</span><span class="related-card-desc">Implementing data classification with labeling, handling procedures, and automated classification to</span></a></div>
     </section>
     
   </div>

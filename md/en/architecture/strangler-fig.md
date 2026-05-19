@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/strangler-fig.html
 
 # Strangler Fig Pattern for Legacy Migration
 
-## Strangler Fig Pattern for Legacy Migration
-
-### Strangler Fig Pattern for Legacy Migration
-
-#### Strangler Fig Pattern for Legacy Migration
-
-#### Strangler Fig Pattern for Legacy Migration
-
-#### Strangler Fig Pattern for Legacy Migration
-
-#### Strangler Fig Pattern for Legacy Migration
-
-#### Strangler Fig Pattern for Legacy Migration
-
-#### Strangler Fig Pattern for Legacy Migration
-
-#### Strangler Fig Pattern for Legacy Migration
-
-#### Strangler Fig Pattern for Legacy Migration
-
-#### Strangler Fig Pattern for Legacy Migration
-
-#### Strangler Fig Pattern for Legacy Migration
-
-#### Strangler Fig Pattern for Legacy Migration
-
-#### Strangler Fig Pattern for Legacy Migration
-
-#### Strangler Fig Pattern for Legacy Migration
-
 The Strangler Fig pattern, named after the tropical plant that gradually envelops its host tree, is a strategy for incrementally replacing a legacy system with a new one. Rather than undertaking a high-risk big-bang rewrite, the Strangler Fig pattern allows teams to replace functionality piece by piece, routing traffic to the new system while the legacy system remains operational. This approach dramatically reduces risk and allows continuous delivery of value. 
 
 Core Mechanism 
@@ -81,3 +51,9 @@ Ultimately, the Strangler Fig pattern is the safest path to modernizing critical
 **See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 
 **See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>)
+
+**See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>)
+
+**See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>)

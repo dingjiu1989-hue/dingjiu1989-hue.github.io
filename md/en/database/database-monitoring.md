@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-monitoring.html
 
 # Database Monitoring and Performance Alerting
 
-## Database Monitoring and Performance Alerting
-
-### Database Monitoring and Performance Alerting
-
-#### Database Monitoring and Performance Alerting
-
-#### Database Monitoring and Performance Alerting
-
-#### Database Monitoring and Performance Alerting
-
-#### Database Monitoring and Performance Alerting
-
-#### Database Monitoring and Performance Alerting
-
-#### Database Monitoring and Performance Alerting
-
-#### Database Monitoring and Performance Alerting
-
-#### Database Monitoring and Performance Alerting
-
-#### Database Monitoring and Performance Alerting
-
-#### Database Monitoring and Performance Alerting
-
-#### Database Monitoring and Performance Alerting
-
-#### Database Monitoring and Performance Alerting
-
-#### Database Monitoring and Performance Alerting
-
 Why Monitor Databases? 
 
 Database monitoring catches problems before they become incidents. Track key metrics and alert on anomalies. 
@@ -82,7 +52,7 @@ FROM pg_stat_replication;
 
 Prometheus Setup 
 
-#### prometheus.yml
+## prometheus.yml
 
 scrape_configs:
 
@@ -111,3 +81,9 @@ Track QPS, latency, connections, cache hit ratio, and replication lag. Use Prome
 **See also:** [Connection Pooling Guide](</en/database/connection-pooling.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
 
 **See also:** [Connection Pooling Guide](</en/database/connection-pooling.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
+
+**See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
+
+**See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
+
+**See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)

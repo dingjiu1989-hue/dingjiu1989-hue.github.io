@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/bulkhead-pattern.html
 
 # Bulkhead Pattern for Resilience
 
-## Bulkhead Pattern for Resilience
-
-### Bulkhead Pattern for Resilience
-
-#### Bulkhead Pattern for Resilience
-
-#### Bulkhead Pattern for Resilience
-
-#### Bulkhead Pattern for Resilience
-
-#### Bulkhead Pattern for Resilience
-
-#### Bulkhead Pattern for Resilience
-
-#### Bulkhead Pattern for Resilience
-
-#### Bulkhead Pattern for Resilience
-
-#### Bulkhead Pattern for Resilience
-
-#### Bulkhead Pattern for Resilience
-
-#### Bulkhead Pattern for Resilience
-
-#### Bulkhead Pattern for Resilience
-
-#### Bulkhead Pattern for Resilience
-
-#### Bulkhead Pattern for Resilience
-
 The Bulkhead pattern is a resilience strategy inspired by ship design: just as a ship's watertight compartments prevent a single hull breach from sinking the entire vessel, the Bulkhead pattern isolates components of a software system so that a failure in one part does not cascade to others. By partitioning resources into isolated pools, the Bulkhead pattern ensures that a misbehaving component cannot exhaust shared resources and bring down the entire system. 
 
 Core Concept 
@@ -83,3 +53,9 @@ In production, bulkheads are one of the most effective patterns for preventing c
 **See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>)
 
 **See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>)
+
+**See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)

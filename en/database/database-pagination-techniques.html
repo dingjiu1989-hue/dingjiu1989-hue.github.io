@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-pagination-techniques.png",
       "datePublished": "2026-04-15",
       "dateModified": "2026-04-18",
-      "wordCount": "952",
+      "wordCount": "856",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,44 +99,32 @@
       <h1 class="article-title">Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h1>
       <div class="article-meta">Published 2026-04-15 · Last active 2026-04-18 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-pagination-techniques.png" alt="Database Pagination: Offset, Cursor, Keyset, and Seek Methods" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h2>
-<h3>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h3>
-<h4>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h4>
-<h4>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h4>
-<h4>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h4>
-<h4>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h4>
-<h4>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h4>
-<h4>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h4>
-<h4>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h4>
-<h4>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h4>
-<h4>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h4>
-<h4>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h4>
-<h4>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h4>
-<h4>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h4>
-<h4>Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h4>
-<p>Pagination divides large result sets into manageable pages. The choice of pagination method affects query performance, data consistency, and user experience. Different approaches suit different use cases.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-pagination-techniques.png" alt="Database Pagination: Offset, Cursor, Keyset, and Seek Methods" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Offset Pagination</h4>
+      <div class="article-body"><p>Pagination divides large result sets into manageable pages. The choice of pagination method affects query performance, data consistency, and user experience. Different approaches suit different use cases.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-pagination-techniques.png" alt="Database Pagination: Offset, Cursor, Keyset, and Seek Methods" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Offset Pagination</h2>
 <p>OFFSET/LIMIT pagination is the simplest approach. SELECT * FROM orders ORDER BY id LIMIT 20 OFFSET 40 returns page 3 with 20 items per page. It is intuitive and easy to implement.</p>
 <p>Problems: OFFSET scans and discards skipped rows—OFFSET 100000 on a query scanning 100k rows still reads all of them. Performance degrades as page number increases. New rows inserted before the current page cause row shifts, and users may see duplicate or missing items.</p>
 <p>Offset pagination is acceptable for small datasets (under 10,000 rows) and admin interfaces where exact consistency does not matter. It is not suitable for infinite scroll or real-time feeds.</p>
-<h4>Keyset Pagination</h4>
+<h2>Keyset Pagination</h2>
 <p>Keyset pagination (also called seek method) uses WHERE clauses on the last item's values. SELECT * FROM orders WHERE (created_at, id) &gt; ('2026-01-15T10:30:00', 5000) ORDER BY created_at, id LIMIT 20. It uses a regular index seek.</p>
 <p>Advantages: consistent performance regardless of page number. Index scan reads exactly the requested rows. New insertions do not affect previous pages. Fast and stable.</p>
 <p>Requirements: the WHERE clause must use a unique combination of columns for unambiguous ordering. Composite index must exist on the pagination columns. Clients must track the last item's sort values.</p>
 <p>Keyset pagination is ideal for infinite scroll, real-time feeds, and APIs with stable ordering. Facebook, Twitter, and most modern APIs use cursor-based (keyset) pagination.</p>
-<h4>Cursor-Based Pagination</h4>
+<h2>Cursor-Based Pagination</h2>
 <p>Cursor-based pagination encodes the sort position as an opaque token. The API returns a cursor with each response. Clients pass the cursor for the next request. The server decodes the cursor into WHERE clause values.</p>
 <p>Implementation: encode the last row's sort values (base64 JSON or binary). ORM libraries often support cursor pagination natively. GraphQL connections use cursor-based pagination as standard.</p>
 <p>Cursor pagination hides pagination details from clients. The cursor can contain not just sort values but also filters, ordering, and version information. Cursor values are opaque—clients cannot manipulate them to access arbitrary pages.</p>
-<h4>Comparison</h4>
+<h2>Comparison</h2>
 <p>Offset is easiest but breaks at scale. Keyset is fast but requires exposing sort columns to client logic. Cursor offers the best API experience but requires more server-side encoding. Offset suits admin UIs and page-number navigation. Keyset and cursor suit API endpoints and infinite scroll.</p>
-<h4>Hybrid Approach</h4>
+<h2>Hybrid Approach</h2>
 <p>Some applications combine methods: cursor for forward pagination (infinite scroll), offset for backward pagination (page number jumps). The API returns both next_cursor and page_number in responses, letting the client choose.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-migration-strategies.html">Database Migration Strategies</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
+<p><strong>See also:</strong> <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/materialized-views.html">Materialized Views</a></p>
+<p><strong>See also:</strong> <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/materialized-views.html">Materialized Views</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/materialized-views.html">Materialized Views</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -148,7 +136,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-partitioning.html" class="related-card">Database Table Partitioning: Range, List, Hash</a><a href="/en/database/database-capacity-planning.html" class="related-card">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a><a href="/en/database/database-design-patterns.html" class="related-card">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a><a href="/en/database/database-migration-tools.html" class="related-card">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></div>
+      <div class="related-grid"><a href="/en/database/database-partitioning.html" class="related-card"><span class="related-card-title">Database Table Partitioning: Range, List, Hash</span><span class="related-card-desc">Explore PostgreSQL table partitioning methods including range, list, and hash. Learn partition pruni</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="related-card-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="related-card-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monit</span></a><a href="/en/database/database-design-patterns.html" class="related-card"><span class="related-card-title">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</span><span class="related-card-desc">Explore database design patterns for application development: Repository pattern, Unit of Work, Quer</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="related-card-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="related-card-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategi</span></a><a href="/en/database/index-types.html" class="related-card"><span class="related-card-title">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</span><span class="related-card-desc">Comprehensive guide to PostgreSQL index types: B-tree, Hash, GiST, GIN, SP-GiST, and BRIN. Learn whe</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="related-card-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="related-card-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing str</span></a></div>
     </section>
     
   </div>

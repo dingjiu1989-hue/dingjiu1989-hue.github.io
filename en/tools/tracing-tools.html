@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/tracing-tools.png",
       "datePublished": "2026-02-07",
       "dateModified": "2026-05-18",
-      "wordCount": "1956",
+      "wordCount": "1869",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
@@ -110,27 +110,11 @@
       <h1 class="article-title">Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h1>
       <div class="article-meta">Published 2026-02-07 · Last active 2026-05-18 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/tracing-tools.png" alt="Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h2>
-<h3>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h3>
-<h4>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h4>
-<h4>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h4>
-<h4>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h4>
-<h4>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h4>
-<h4>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h4>
-<h4>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h4>
-<h4>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h4>
-<h4>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h4>
-<h4>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h4>
-<h4>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h4>
-<h4>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h4>
-<h4>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h4>
-<h4>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h4>
-<h4>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Distributed tracing is essential for understanding request flows across microservices. When a single user request hits 10-50 services, traditional logging cannot show you the full picture. Tracing captures the causality chain: which service called which, how long each call took, and where failures occurred. This article covers Jaeger, Zipkin, Grafana Tempo, and the OpenTelemetry Collector.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/tracing-tools.png" alt="Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>OpenTelemetry Collector</h4>
+<h2>OpenTelemetry Collector</h2>
 <p>The foundation for modern observability — receives, processes, and exports telemetry data:</p>
-<h4>otel-collector-config.yaml</h4>
+<h2>otel-collector-config.yaml</h2>
 <p>receivers:</p>
 <p>otlp:</p>
 <p>protocols:</p>
@@ -155,7 +139,7 @@
 <p>traces:</p>
 <p>span:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 'attributes["http.method"] == "OPTIONS"'</p>
-<h4>Sampling for cost control</h4>
+<h2>Sampling for cost control</h2>
 <p>probabilistic_sampler:</p>
 <p>sampling_percentage: 10 # Only send 10% of traces</p>
 <p>exporters:</p>
@@ -177,14 +161,14 @@
 <p>receivers: [otlp]</p>
 <p>processors: [batch]</p>
 <p>exporters: [prometheus]</p>
-<h4>Run the collector</h4>
+<h2>Run the collector</h2>
 <p>otelcol --config otel-collector-config.yaml</p>
-<h4>Run as Docker</h4>
+<h2>Run as Docker</h2>
 <p>docker run -v $(pwd)/otel-collector-config.yaml:/etc/otel/config.yaml otel/opentelemetry-collector-contrib</p>
 <p><strong>Key features</strong> : Vendor-agnostic data collection, tail-based sampling, attribute enrichment, batch processing, multi-destination export, service graph computation.</p>
-<h4>Jaeger</h4>
+<h2>Jaeger</h2>
 <p>Uber's distributed tracing system, now a CNCF graduated project:</p>
-<h4>docker-compose.yml</h4>
+<h2>docker-compose.yml</h2>
 <p>services:</p>
 <p>jaeger:</p>
 <p>image: jaegertracing/all-in-one:latest</p>
@@ -194,14 +178,14 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "16686:16686" # UI</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "4317:4317" # OTLP gRPC</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "4318:4318" # OTLP HTTP</p>
-<h4>Python instrumentation with OpenTelemetry</h4>
+<h2>Python instrumentation with OpenTelemetry</h2>
 <p>from opentelemetry import trace</p>
 <p>from opentelemetry.sdk.trace import TracerProvider</p>
 <p>from opentelemetry.sdk.trace.export import BatchSpanProcessor</p>
 <p>from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter</p>
 <p>from opentelemetry.instrumentation.flask import FlaskInstrumentor</p>
 <p>from opentelemetry.instrumentation.requests import RequestsInstrumentor</p>
-<h4>Set up tracing</h4>
+<h2>Set up tracing</h2>
 <p>provider = TracerProvider()</p>
 <p>processor = BatchSpanProcessor(OTLPSpanExporter(</p>
 <p>endpoint="http://jaeger:4317",</p>
@@ -209,10 +193,10 @@
 <p>))</p>
 <p>provider.add_span_processor(processor)</p>
 <p>trace.set_tracer_provider(provider)</p>
-<h4>Auto-instrument libraries</h4>
+<h2>Auto-instrument libraries</h2>
 <p>FlaskInstrumentor().instrument()</p>
 <p>RequestsInstrumentor().instrument()</p>
-<h4>Manual instrumentation</h4>
+<h2>Manual instrumentation</h2>
 <p>from opentelemetry import trace</p>
 <p>tracer = trace.get_tracer(<strong>name</strong>)</p>
 <p>@app.route("/api/orders/")</p>
@@ -228,9 +212,9 @@
 <p>db_span.set_attribute("db.rows", 1)</p>
 <p>return order</p>
 <p><strong>Key features</strong> : Rich UI with trace search and filtering, service dependency graph, deep span detail view, comparison view for similar traces, OTLP native support.</p>
-<h4>Tempo (Grafana Tempo)</h4>
+<h2>Tempo (Grafana Tempo)</h2>
 <p>Grafana's tracing backend with object storage for cost-effective retention:</p>
-<h4>tempo-config.yaml</h4>
+<h2>tempo-config.yaml</h2>
 <p>server:</p>
 <p>http_listen_port: 3200</p>
 <p>distributor:</p>
@@ -259,22 +243,22 @@
 <p>querier:</p>
 <p>search:</p>
 <p>max_duration: 168h # 7 days of searchable data</p>
-<h4>Run Tempo</h4>
+<h2>Run Tempo</h2>
 <p>docker run -v $(pwd)/tempo-config.yaml:/etc/tempo.yaml grafana/tempo:latest</p>
-<h4>Query via Grafana</h4>
-<h4>Grafana datasource: Tempo</h4>
-<h4>TraceQL query:</h4>
-<h4>{ resource.service.name = "payment-service" &amp;&amp; span.http.status_code &gt;= 500 }</h4>
+<h2>Query via Grafana</h2>
+<h2>Grafana datasource: Tempo</h2>
+<h2>TraceQL query:</h2>
+<h2>{ resource.service.name = "payment-service" &amp;&amp; span.http.status_code &gt;= 500 }</h2>
 <p><strong>Key features</strong> : Object storage backend (S3, GCS, Azure) for low-cost long retention, TraceQL query language, seamless Grafana integration, high scalability.</p>
-<h4>Zipkin</h4>
+<h2>Zipkin</h2>
 <p>Twitter's distributed tracing system (original inspiration for OpenTracing):</p>
-<h4>docker-compose.yml</h4>
+<h2>docker-compose.yml</h2>
 <p>services:</p>
 <p>zipkin:</p>
 <p>image: openzipkin/zipkin:latest</p>
 <p>ports:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "9411:9411"</p>
-<h4>Zipkin with OpenTelemetry</h4>
+<h2>Zipkin with OpenTelemetry</h2>
 <p>from opentelemetry.exporter.zipkin.json import ZipkinExporter</p>
 <p>zipkin_exporter = ZipkinExporter(</p>
 <p>endpoint="http://zipkin:9411/api/v2/spans",</p>
@@ -282,7 +266,7 @@
 <p>provider = TracerProvider()</p>
 <p>provider.add_span_processor(BatchSpanProcessor(zipkin_exporter))</p>
 <p>trace.set_tracer_provider(provider)</p>
-<h4>Comparison</h4>
+<h2>Comparison</h2>
 <p>| Feature | Jaeger | Zipkin | Tempo | OTel Collector |</p>
 <p>|---------|--------|--------|-------|----------------|</p>
 <p>| Storage | Cassandra, ES, Badger | Cassandra, ES, in-memory | S3, GCS, Azure | N/A (pass-through) |</p>
@@ -291,7 +275,7 @@
 <p>| Scalability | High | Medium | Very high | High |</p>
 <p>| Sampling | Head, tail | Head | Head | Head, tail |</p>
 <p>| Cost at scale | Medium | Medium | Low (S3) | N/A |</p>
-<h4>Recommendations</h4>
+<h2>Recommendations</h2>
 <ul>
 <li>
 <p><strong>Best all-around</strong> : Jaeger with OTLP ingestion. Rich UI, good scalability, active community.</p>
@@ -311,7 +295,10 @@
 <p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p>
-<p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a>, <a href="/en/tools/mock-tools.html">Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</a>, <a href="/en/tools/monorepo-tools.html">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a>, <a href="/en/tools/mock-tools.html">Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</a>, <a href="/en/tools/monorepo-tools.html">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a>, <a href="/en/tools/mock-tools.html">Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</a>, <a href="/en/tools/monorepo-tools.html">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -323,7 +310,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/api-testing-2026.html" class="related-card">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a><a href="/en/tools/load-testing-tools.html" class="related-card">Load Testing Tools: k6, Locust, Gatling, Artillery</a><a href="/en/tools/cloud-cli-tools.html" class="related-card">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a><a href="/en/tools/database-gui.html" class="related-card">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</a></div>
+      <div class="related-grid"><a href="/en/tools/api-testing-2026.html" class="related-card"><span class="related-card-title">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</span><span class="related-card-desc">Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, </span></a><a href="/en/tools/load-testing-tools.html" class="related-card"><span class="related-card-title">Load Testing Tools: k6, Locust, Gatling, Artillery</span><span class="related-card-desc">Compare load testing frameworks: k6 for JavaScript-based testing, Locust for Python, Gatling for Sca</span></a><a href="/en/tools/cloud-cli-tools.html" class="related-card"><span class="related-card-title">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</span><span class="related-card-desc">Compare cloud CLI tools: aws-cli for AWS, gcloud for GCP, az for Azure, and s5cmd for high-speed S3 </span></a><a href="/en/tools/database-gui.html" class="related-card"><span class="related-card-title">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</span><span class="related-card-desc">Compare database GUI tools: TablePlus for macOS-native experience, DBeaver for cross-platform versat</span></a><a href="/en/tools/debugging-tools.html" class="related-card"><span class="related-card-title">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</span><span class="related-card-desc">Essential debugging tools for developers: lldb and gdb for native debugging, strace for system call </span></a><a href="/en/tools/documentation-tools.html" class="related-card"><span class="related-card-title">Documentation Tools for Developers 2026</span><span class="related-card-desc">Compare Docusaurus, Nextra, MkDocs, and Storybook for technical documentation and component librarie</span></a></div>
     </section>
     
   </div>

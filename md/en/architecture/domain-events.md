@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/domain-events.html
 
 # Domain Events: Design and Implementation
 
-## Domain Events: Design and Implementation
-
-### Domain Events: Design and Implementation
-
-#### Domain Events: Design and Implementation
-
-#### Domain Events: Design and Implementation
-
-#### Domain Events: Design and Implementation
-
-#### Domain Events: Design and Implementation
-
-#### Domain Events: Design and Implementation
-
-#### Domain Events: Design and Implementation
-
-#### Domain Events: Design and Implementation
-
-#### Domain Events: Design and Implementation
-
-#### Domain Events: Design and Implementation
-
-#### Domain Events: Design and Implementation
-
-#### Domain Events: Design and Implementation
-
-#### Domain Events: Design and Implementation
-
-#### Domain Events: Design and Implementation
-
 Domain events capture significant state changes within a bounded context. They are a tactical pattern from Domain-Driven Design that enables loose coupling between domain aggregates while maintaining consistency boundaries. A domain event represents something that happened in the past and is meaningful to domain experts: OrderSubmitted, PaymentReceived, InventoryDepleted. 
 
 Designing domain events requires careful consideration of what information to include. Each event should contain the aggregate identifier, a timestamp of when the event occurred, the event type, and the data relevant to the change. Crucially, domain events should not contain internal implementation details of the aggregate. The specific fields should represent what happened from the domain perspective, not what data structures changed internally. Event naming follows past-tense convention: OrderShipped rather than ShipOrder, which would be a command. 
@@ -67,3 +37,9 @@ Testing domain events requires verifying that the correct events are raised for 
 **See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
 
 **See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)

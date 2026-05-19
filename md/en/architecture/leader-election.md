@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/leader-election.html
 
 # Leader Election in Distributed Systems
 
-## Leader Election in Distributed Systems
-
-### Leader Election in Distributed Systems
-
-#### Leader Election in Distributed Systems
-
-#### Leader Election in Distributed Systems
-
-#### Leader Election in Distributed Systems
-
-#### Leader Election in Distributed Systems
-
-#### Leader Election in Distributed Systems
-
-#### Leader Election in Distributed Systems
-
-#### Leader Election in Distributed Systems
-
-#### Leader Election in Distributed Systems
-
-#### Leader Election in Distributed Systems
-
-#### Leader Election in Distributed Systems
-
-#### Leader Election in Distributed Systems
-
-#### Leader Election in Distributed Systems
-
-#### Leader Election in Distributed Systems
-
 Leader election is the mechanism by which distributed systems select a single node to coordinate work or make decisions on behalf of the group. It is essential for systems where exactly one node must perform certain operations — assigning monotonically increasing sequence numbers, performing periodic maintenance, or managing group membership changes. The leader must be unique at any time, and the system must remain available despite leader failures. 
 
 Leader election algorithms are broadly categorized into two types: consensus-based and lease-based. Consensus-based elections use Paxos, Raft, or Zab to guarantee that exactly one leader exists at any epoch. These provide strong safety guarantees but require a quorum of nodes for election decisions. Lease-based elections use a distributed lock with a TTL — the holder is the leader until its lease expires. These are simpler but vulnerable to split-brain if clock skew exceeds the lease duration. 
@@ -69,3 +39,9 @@ Observability of leadership state is essential. Expose leadership status as a me
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
+
+**See also:** [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
+
+**See also:** [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
+
+**See also:** [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)

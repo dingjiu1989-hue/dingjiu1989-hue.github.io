@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/orchestration-patterns.ht
 
 # Orchestration Patterns
 
-## Orchestration Patterns
-
-### Orchestration Patterns
-
-#### Orchestration Patterns
-
-#### Orchestration Patterns
-
-#### Orchestration Patterns
-
-#### Orchestration Patterns
-
-#### Orchestration Patterns
-
-#### Orchestration Patterns
-
-#### Orchestration Patterns
-
-#### Orchestration Patterns
-
-#### Orchestration Patterns
-
-#### Orchestration Patterns
-
-#### Orchestration Patterns
-
-#### Orchestration Patterns
-
-#### Orchestration Patterns
-
 Orchestration is an architectural pattern for coordinating distributed workflows using a central controller. Unlike choreography, where services coordinate through events, orchestration uses an explicit workflow engine or orchestrator service that tells each participant what to do and when. This centralized approach provides visibility, control, and error handling that are difficult to achieve with decentralized coordination. 
 
 Centralized Coordination 
@@ -89,3 +59,9 @@ In practice, many organizations use a hybrid approach: orchestration for complex
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)

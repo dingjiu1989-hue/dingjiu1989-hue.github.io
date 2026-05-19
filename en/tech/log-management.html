@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/log-management.png",
       "datePublished": "2026-01-08",
       "dateModified": "2026-04-04",
-      "wordCount": "1331",
+      "wordCount": "1362",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,49 +99,32 @@
       <h1 class="article-title">Log Management</h1>
       <div class="article-meta">Published 2026-01-08 · Last active 2026-04-04 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/log-management.png" alt="Log Management" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Log Management</h2>
-<h3>Log Management</h3>
-<h4>Log Management</h4>
-<h4>Log Management</h4>
-<h4>Log Management</h4>
-<h4>Log Management</h4>
-<h4>Log Management</h4>
-<h4>Log Management</h4>
-<h4>Log Management</h4>
-<h4>Log Management</h4>
-<h4>Log Management</h4>
-<h4>Log Management</h4>
-<h4>Log Management</h4>
-<h4>Log Management</h4>
-<h4>Log Management</h4>
-<h4>Log Management</h4>
-<h4>Log Management</h4>
-<p>Log management is the practice of collecting, aggregating, storing, and analyzing log data from applications and infrastructure. Good log management provides visibility into system behavior, enables debugging, supports security analysis, and helps meet compliance requirements. This article covers the log lifecycle from collection through analysis.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/log-management.png" alt="Log Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Structured Logging</h4>
+      <div class="article-body"><p>Log management is the practice of collecting, aggregating, storing, and analyzing log data from applications and infrastructure. Good log management provides visibility into system behavior, enables debugging, supports security analysis, and helps meet compliance requirements. This article covers the log lifecycle from collection through analysis.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/log-management.png" alt="Log Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Structured Logging</h2>
 <p>The foundation of log management is structured logging. Instead of writing free-form text messages, structured logging outputs logs as structured data—typically JSON. Each log entry has a consistent format with typed fields that can be queried and filtered.</p>
 <p>A structured log entry includes a timestamp, severity level, service name, request ID, and relevant context fields. The request ID correlates logs from multiple services for the same user request. Context fields capture business-specific data like user ID, order ID, or error details.</p>
 <p>Structured logs enable automated analysis. Monitoring systems can extract metrics from log fields. Alerting rules can trigger on specific field values. Dashboards can visualize log volume by severity or service. None of this is possible with unstructured text logs.</p>
-<h4>Log Collection</h4>
+<h2>Log Collection</h2>
 <p>Log collection gathers log entries from all services and infrastructure components. A log agent (Fluentd, Logstash, Filebeat) runs on each node, reads log files or listens for log events, and forwards them to the aggregation layer.</p>
 <p>The collection agent should handle log rotation gracefully—it should track file rotation events and avoid losing entries during rotation. It should buffer logs when the aggregation layer is unavailable, preventing data loss during network interruptions.</p>
 <p>Container environments add complexity. Logs should go to stdout/stderr, where the container runtime captures them. Kubernetes collects container logs from all pods. Sidecar log agents or daemon sets forward logs from each node.</p>
-<h4>Log Aggregation</h4>
+<h2>Log Aggregation</h2>
 <p>Log aggregation centralizes logs from all sources into a searchable store. The ELK stack (Elasticsearch, Logstash, Kibana) is the most popular open-source solution. Loki (Grafana's log aggregation system) provides a cost-effective alternative optimized for Kubernetes.</p>
 <p>The aggregation layer parses and indexes incoming logs. Structured JSON logs provide fields for indexing. Unstructured logs require parsing rules to extract meaningful fields. Indexing makes log searches fast, but excessive indexing increases storage costs.</p>
 <p>Aggregation systems should handle high throughput. A production system generating gigabytes of logs per day requires a cluster of aggregation nodes. Sharding distributes the storage and query load. Replication provides fault tolerance.</p>
-<h4>Storage and Retention</h4>
+<h2>Storage and Retention</h2>
 <p>Log storage balances accessibility against cost. Hot storage (SSD-based Elasticsearch, fast Loki) stores recent logs for fast queries. Cold storage (object storage like S3) stores older logs at lower cost. Warm storage provides a middle tier.</p>
 <p>Retention policies define how long logs are kept at each tier. Recent logs (7-30 days) in hot storage for debugging. Older logs (3-12 months) in cold storage for compliance. Archive storage for logs that must be retained for regulatory reasons.</p>
 <p>Retention should be based on business requirements, not technical convenience. Compliance requirements often mandate minimum retention periods. Cost optimization should not override compliance needs. Automated tiering moves logs between storage tiers based on age.</p>
-<h4>Query and Analysis</h4>
+<h2>Query and Analysis</h2>
 <p>The value of log management is realized through query and analysis. Tools like Kibana, Grafana (with Loki), and commercial solutions provide search interfaces, filtering, and visualization.</p>
 <p>Effective log queries use structured fields. <code>service:orders AND severity:error AND @timestamp &gt; now-1h</code> finds errors in the order service from the last hour. Saved queries support common debugging workflows. Dashboards provide at-a-glance visibility into system health.</p>
 <p>Log analysis workflows follow patterns. Debugging: find logs for a specific request ID, trace the request through all services, identify the failure. Monitoring: track error rates by service, alert on anomaly thresholds. Auditing: search for specific actions by specific users within a time range.</p>
-<h4>Best Practices</h4>
+<h2>Best Practices</h2>
 <p>Log at appropriate levels. DEBUG for detailed diagnostic info (high volume, not collected in production). INFO for normal operations. WARN for unexpected but handled situations. ERROR for failures requiring attention.</p>
 <p>Include correlation IDs in every log entry. A correlation ID traces a request across service boundaries. It should be generated at the system entry point and propagated through all downstream calls. Without correlation IDs, debugging a request that spans multiple services is nearly impossible.</p>
 <p>Avoid logging sensitive information. Passwords, tokens, PII, and financial data should never appear in logs. Log sanitization filters known sensitive patterns. Regular log audits verify that sensitive data is not being inadvertently collected.</p>
-<h4>Tool Selection</h4>
+<h2>Tool Selection</h2>
 <p>The ELK stack is the most established log management solution, offering comprehensive features but significant operational overhead. Loki+Grafana is lighter weight and cost-effective for Kubernetes environments. Commercial solutions (Datadog, Splunk, Sumo Logic) provide managed log management with reduced operational burden.</p>
 <p>The choice depends on your scale, budget, and operational capabilities. ELK provides maximum control but requires dedicated operations expertise. Loki offers a good balance for container environments. Commercial solutions are easiest to operate but most expensive at scale.</p>
 <p>Log management is a critical investment for any production system. Well-managed logs reduce debugging time, improve system understanding, and support security and compliance requirements.</p>
@@ -149,7 +132,10 @@
 <p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/configuration-management.html">Configuration Management</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/configuration-management.html">Configuration Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/configuration-management.html">Configuration Management</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -161,7 +147,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/terraform-state-management.html" class="related-card">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a><a href="/en/tech/artifact-management.html" class="related-card">Artifact Management</a><a href="/en/tech/build-optimization.html" class="related-card">Build Optimization</a><a href="/en/tech/webpack-vs-vite.html" class="related-card">Webpack vs Vite</a></div>
+      <div class="related-grid"><a href="/en/tech/terraform-state-management.html" class="related-card"><span class="related-card-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</span><span class="related-card-desc">Deep dive into Terraform state management covering remote backends, state locking, migration strateg</span></a><a href="/en/tech/artifact-management.html" class="related-card"><span class="related-card-title">Artifact Management</span><span class="related-card-desc">Learn artifact management: Docker registries, package registries, versioning strategies, and lifecyc</span></a><a href="/en/tech/build-optimization.html" class="related-card"><span class="related-card-title">Build Optimization</span><span class="related-card-desc">Explore build optimization: caching, parallelism, incremental builds, distcc, and strategies for fas</span></a><a href="/en/tech/webpack-vs-vite.html" class="related-card"><span class="related-card-title">Webpack vs Vite</span><span class="related-card-desc">Compare Webpack and Vite: HMR speed, configuration, production builds, and migration strategies for </span></a><a href="/en/tech/capacity-planning-cloud.html" class="related-card"><span class="related-card-title">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</span><span class="related-card-desc">Technical exploration of cloud capacity planning covering auto-scaling strategies, reserved and spot</span></a><a href="/en/tech/docker-networking.html" class="related-card"><span class="related-card-title">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</span><span class="related-card-desc">In-depth guide to Docker networking covering bridge networks, overlay networking for Swarm, host mod</span></a></div>
     </section>
     
   </div>

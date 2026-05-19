@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/redis-caching-patterns.html
 
 # Redis Caching Patterns
 
-## Redis Caching Patterns
-
-### Redis Caching Patterns
-
-#### Redis Caching Patterns
-
-#### Redis Caching Patterns
-
-#### Redis Caching Patterns
-
-#### Redis Caching Patterns
-
-#### Redis Caching Patterns
-
-#### Redis Caching Patterns
-
-#### Redis Caching Patterns
-
-#### Redis Caching Patterns
-
-#### Redis Caching Patterns
-
-#### Redis Caching Patterns
-
-#### Redis Caching Patterns
-
-#### Redis Caching Patterns
-
-#### Redis Caching Patterns
-
 Redis as Cache 
 
 Redis is an in-memory data store that excels as a cache due to sub-millisecond latency and rich data types. 
@@ -123,3 +93,9 @@ Use cache-aside as the default pattern. Always set TTLs to prevent memory exhaus
 **See also:** [Database Caching](</en/database/database-caching.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Scalability](</en/database/database-scalability.html>)
 
 **See also:** [Database Caching](</en/database/database-caching.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Scalability](</en/database/database-scalability.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>)

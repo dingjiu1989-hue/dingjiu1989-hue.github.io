@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/api-versioning.html
 
 # API Versioning Strategies
 
-## API Versioning Strategies
-
-### API Versioning Strategies
-
-#### API Versioning Strategies
-
-#### API Versioning Strategies
-
-#### API Versioning Strategies
-
-#### API Versioning Strategies
-
-#### API Versioning Strategies
-
-#### API Versioning Strategies
-
-#### API Versioning Strategies
-
-#### API Versioning Strategies
-
-#### API Versioning Strategies
-
-#### API Versioning Strategies
-
-#### API Versioning Strategies
-
-#### API Versioning Strategies
-
-#### API Versioning Strategies
-
 APIs evolve. New features are added, existing endpoints change, and eventually, breaking changes are unavoidable. API versioning is the practice of managing these changes without breaking existing clients. This article covers the major versioning strategies and when to use each. 
 
 The Core Challenge 
@@ -258,3 +228,9 @@ API versioning is a practical necessity for evolving APIs. URL path versioning i
 **See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 
 **See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [REST API Design Best Practices](</en/architecture/rest-api-design.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>)
+
+**See also:** [REST API Design Best Practices](</en/architecture/rest-api-design.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>)
+
+**See also:** [REST API Design Best Practices](</en/architecture/rest-api-design.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/terraform-tools.png",
       "datePublished": "2026-02-06",
       "dateModified": "2026-04-04",
-      "wordCount": "1986",
+      "wordCount": "1927",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
@@ -110,27 +110,11 @@
       <h1 class="article-title">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h1>
       <div class="article-meta">Published 2026-02-06 · Last active 2026-04-04 · 480 views · 4 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/terraform-tools.png" alt="Terraform Tools: Terragrunt, terratest, tfsec, Infracost" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h2>
-<h3>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h3>
-<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
-<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
-<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
-<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
-<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
-<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
-<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
-<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
-<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
-<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
-<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
-<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
-<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
-<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Terraform has become the standard for infrastructure as code, but managing Terraform at scale requires additional tools. Terragrunt reduces configuration duplication. Terratest enables automated infrastructure testing. Tfsec scans configurations for security issues. Infracost provides cost estimates before deployment. This article covers each tool with practical examples.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/terraform-tools.png" alt="Terraform Tools: Terragrunt, terratest, tfsec, Infracost" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Terragrunt</h4>
+<h2>Terragrunt</h2>
 <p>A thin wrapper that keeps Terraform configurations DRY:</p>
-<h4>terragrunt.hcl (root configuration)</h4>
+<h2>terragrunt.hcl (root configuration)</h2>
 <p>remote_state {</p>
 <p>backend = "s3"</p>
 <p>config = {</p>
@@ -160,7 +144,7 @@
 <p>aws_region = "us-east-1"</p>
 <p>environment = reverse(split("/", get_terragrunt_dir()))[1]</p>
 <p>}</p>
-<h4>dev/vpc/terragrunt.hcl</h4>
+<h2>dev/vpc/terragrunt.hcl</h2>
 <p>terraform {</p>
 <p>source = "../../modules/vpc"</p>
 <p>}</p>
@@ -175,17 +159,17 @@
 <p>private_subnets = ["10.0.1.0/24", "10.0.2.0/24"]</p>
 <p>public_subnets = ["10.0.101.0/24", "10.0.102.0/24"]</p>
 <p>}</p>
-<h4>Apply all modules in dependency order</h4>
+<h2>Apply all modules in dependency order</h2>
 <p>terragrunt run-all apply</p>
-<h4>Plan only changed modules</h4>
+<h2>Plan only changed modules</h2>
 <p>terragrunt run-all plan</p>
-<h4>Output dependency graph</h4>
+<h2>Output dependency graph</h2>
 <p>terragrunt graph | dot -Tpng &gt; graph.png</p>
-<h4>Validate all configurations</h4>
+<h2>Validate all configurations</h2>
 <p>terragrunt run-all validate</p>
-<h4>Destroy with confirmation</h4>
+<h2>Destroy with confirmation</h2>
 <p>terragrunt run-all destroy</p>
-<h4>Terratest</h4>
+<h2>Terratest</h2>
 <p>Go library for writing automated infrastructure tests:</p>
 <p>package test</p>
 <p>import (</p>
@@ -221,21 +205,21 @@
 <p>sgRules := aws.GetSecurityGroupRules(t, sgID, "us-east-1")</p>
 <p>assert.GreaterOrEqual(t, len(sgRules), 2)</p>
 <p>}</p>
-<h4>tfsec (now Trivy)</h4>
+<h2>tfsec (now Trivy)</h2>
 <p>Security scanning for Terraform configurations:</p>
-<h4>Install tfsec</h4>
+<h2>Install tfsec</h2>
 <p>brew install tfsec</p>
-<h4>Or use Trivy which includes tfsec rules</h4>
+<h2>Or use Trivy which includes tfsec rules</h2>
 <p>brew install trivy</p>
-<h4>Scan Terraform files</h4>
+<h2>Scan Terraform files</h2>
 <p>tfsec .</p>
 <p>tfsec ./environments/production</p>
 <p>tfsec --no-color --format json &gt; scan-results.json</p>
-<h4>In CI</h4>
+<h2>In CI</h2>
 <p>tfsec --soft-fail # Don't fail CI, just report</p>
-<h4>Trivy equivalent</h4>
+<h2>Trivy equivalent</h2>
 <p>trivy config --severity HIGH,CRITICAL .</p>
-<h4>Bad configuration that tfsec catches</h4>
+<h2>Bad configuration that tfsec catches</h2>
 <p>resource "aws_s3_bucket" "data" {</p>
 <p>bucket = "my-data-bucket"</p>
 <p>acl = "public-read" # tfsec: aws-s3-no-public-read-acl</p>
@@ -248,7 +232,7 @@
 <p>cidr_blocks = ["0.0.0.0/0"] # tfsec: aws-vpc-no-public-ingress-sgr</p>
 <p>}</p>
 <p>}</p>
-<h4>Fixed configuration</h4>
+<h2>Fixed configuration</h2>
 <p>resource "aws_s3_bucket" "data" {</p>
 <p>bucket = "my-data-bucket"</p>
 <p>acl = "private"</p>
@@ -261,21 +245,21 @@
 <p>cidr_blocks = ["10.0.0.0/8"] # Restricted to internal network</p>
 <p>}</p>
 <p>}</p>
-<h4>Infracost</h4>
+<h2>Infracost</h2>
 <p>Cost estimation for Terraform projects:</p>
-<h4>Install</h4>
+<h2>Install</h2>
 <p>brew install infracost</p>
 <p>infracost auth login</p>
-<h4>Generate cost estimate for current state</h4>
+<h2>Generate cost estimate for current state</h2>
 <p>infracost breakdown --path .</p>
-<h4>Compare with previous state</h4>
+<h2>Compare with previous state</h2>
 <p>infracost diff --path . --compare-to previous-cost.json</p>
-<h4>Output in different formats</h4>
+<h2>Output in different formats</h2>
 <p>infracost breakdown --path . --format json</p>
 <p>infracost breakdown --path . --format html --out-file cost-report.html</p>
-<h4>In CI</h4>
+<h2>In CI</h2>
 <p>infracost diff --path . --show-skipped</p>
-<h4>.infracost.yml — usage estimates</h4>
+<h2>.infracost.yml — usage estimates</h2>
 <p>version: 0.1</p>
 <p>projects:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- path: ./environments/production</p>
@@ -289,9 +273,9 @@
 <p>aws_s3_bucket.data:</p>
 <p>storage_gb: 500</p>
 <p>monthly_tier_1_requests: 10000</p>
-<h4>Other Essential Tools</h4>
+<h2>Other Essential Tools</h2>
 <p><strong>pre-commit hooks</strong> for Terraform:</p>
-<h4>.pre-commit-config.yaml</h4>
+<h2>.pre-commit-config.yaml</h2>
 <p>repos:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/antonbabenko/pre-commit-terraform</p>
 <p>rev: v1.96.0</p>
@@ -302,7 +286,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_trivy</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_docs</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: checkov</p>
-<h4>Comparison</h4>
+<h2>Comparison</h2>
 <p>| Tool | Purpose | Essential For |</p>
 <p>|------|---------|---------------|</p>
 <p>| Terragrunt | DRY configuration | Multi-environment, multi-module projects |</p>
@@ -310,7 +294,7 @@
 <p>| tfsec/Trivy | Security scanning | Catching misconfigurations before deploy |</p>
 <p>| Infracost | Cost estimation | Budget planning and cost awareness |</p>
 <p>| pre-commit | Code quality | Consistent formatting and validation |</p>
-<h4>Recommendations</h4>
+<h2>Recommendations</h2>
 <ul>
 <li>
 <p><strong>Multi-environment IaC</strong> : Use Terragrunt to eliminate configuration duplication across environments.</p>
@@ -333,7 +317,10 @@
 <p><strong>See also:</strong> <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></p>
-<p><strong>See also:</strong> <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a>, <a href="/en/tools/infrastructure-scanners-2026.html">Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench</a>, <a href="/en/tools/kubernetes-tools.html">Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a>, <a href="/en/tools/infrastructure-scanners-2026.html">Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench</a>, <a href="/en/tools/kubernetes-tools.html">Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a>, <a href="/en/tools/infrastructure-scanners-2026.html">Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench</a>, <a href="/en/tools/kubernetes-tools.html">Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -345,7 +332,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/helm-tools.html" class="related-card">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a><a href="/en/tools/networking-tools.html" class="related-card">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a><a href="/en/tools/iac-tools-compared.html" class="related-card">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a><a href="/en/tools/code-editor-plugins.html" class="related-card">Code Editor Plugins: Must-Have Extensions for Productivity</a></div>
+      <div class="related-grid"><a href="/en/tools/helm-tools.html" class="related-card"><span class="related-card-title">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</span><span class="related-card-desc">Essential Helm ecosystem tools: Helmfile for declarative chart management, helm-docs for documentati</span></a><a href="/en/tools/networking-tools.html" class="related-card"><span class="related-card-title">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</span><span class="related-card-desc">Practical guide to essential networking tools: mtr for path analysis, iperf for bandwidth testing, d</span></a><a href="/en/tools/iac-tools-compared.html" class="related-card"><span class="related-card-title">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</span><span class="related-card-desc">In-depth comparison of infrastructure-as-code tools covering Terraform, Pulumi, AWS CDK, OpenTofu, a</span></a><a href="/en/tools/code-editor-plugins.html" class="related-card"><span class="related-card-title">Code Editor Plugins: Must-Have Extensions for Productivity</span><span class="related-card-desc">Essential code editor plugins for 2026: language support, AI assistants, theme plugins, git integrat</span></a><a href="/en/tools/command-line-productivity.html" class="related-card"><span class="related-card-title">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</span><span class="related-card-desc">Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code </span></a><a href="/en/tools/api-testing-2026.html" class="related-card"><span class="related-card-title">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</span><span class="related-card-desc">Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, </span></a></div>
     </section>
     
   </div>

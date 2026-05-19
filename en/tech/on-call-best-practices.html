@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/on-call-best-practices.png",
       "datePublished": "2026-01-02",
       "dateModified": "2026-05-15",
-      "wordCount": "1666",
+      "wordCount": "1477",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -110,39 +110,22 @@
       <h1 class="article-title">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h1>
       <div class="article-meta">Published 2026-01-02 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/on-call-best-practices.png" alt="On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h2>
-<h3>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h3>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Being on-call is one of the most stressful responsibilities in engineering operations. Poor on-call practices lead to burned-out engineers, high turnover, slow incident response, and reduced system reliability. Conversely, well-designed on-call programs improve incident response times, build shared operational knowledge, and create a culture of reliability ownership.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/on-call-best-practices.png" alt="On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>This article covers on-call rotation models, escalation policies, runbook creation, alert fatigue prevention, and tooling.</p>
-<h4>Rotation Models</h4>
+<h2>Rotation Models</h2>
 <p>The primary rotation models balance coverage, fairness, and expertise distribution.</p>
 <p>The weekly rotation is the most common: one engineer handles alerts for a full week. This provides continuity during incidents but causes significant context-switching and burnout. Weekly rotations work best for mature services with low alert volumes.</p>
 <p>The daily rotation shifts responsibility every 24 hours, reducing individual burden. A primary handles daytime alerts, while a secondary covers overnight with the primary only called for SEV1 escalations. This works well for global teams in different time zones.</p>
 <p>The follow-the-sun rotation passes responsibility across geographic regions. The APAC team carries the pager during APAC business hours, EMEA during EMEA hours, and AMER during AMER hours. This provides 24-hour coverage without overnight paging. It requires teams in at least three regions.</p>
 <p>Pool sizing matters. The recommended minimum is four engineers per rotation. Fewer leads to burnout from frequent rotations. More than eight dilutes operational knowledge and increases time between rotations, reducing familiarity with current system state.</p>
-<h4>Escalation Policies</h4>
+<h2>Escalation Policies</h2>
 <p>Escalation policies ensure incidents are handled even when primary responders are unavailable. A typical policy has three levels:</p>
 <p>Level 1 (Primary): The first responder for incoming alerts. Must acknowledge within the defined SLA (typically 5-15 minutes depending on severity). If unacknowledged, the alert escalates.</p>
 <p>Level 2 (Secondary): Receives alerts if the primary does not acknowledge within the timeout. The secondary also handles overflow during multiple simultaneous incidents.</p>
 <p>Level 3 (Engineering Manager): Escalated if both primary and secondary are unavailable. The manager coordinates broader team involvement or makes decisions about extended response.</p>
 <p>Escalation policies should be automatic, not manual. Incident management tools like PagerDuty, Opsgenie, or Grafana OnCall automatically escalate based on acknowledgment timeouts.</p>
-<h4>Runbooks: The Essential On-Call Tool</h4>
+<h2>Runbooks: The Essential On-Call Tool</h2>
 <p>Runbooks are step-by-step guides for handling common incidents. Every documented runbook reduces time-to-mitigation and lowers the cognitive load on the on-call engineer. A good runbook includes:</p>
 <ul>
 <li>
@@ -168,7 +151,7 @@
 </li>
 </ul>
 <p>Runbooks should be version-controlled alongside application code in a <code>runbooks/</code> directory at the repository root. They should be tested periodically during game days or chaos engineering exercises.</p>
-<h4>Alert Fatigue Prevention</h4>
+<h2>Alert Fatigue Prevention</h2>
 <p>Alert fatigue occurs when engineers receive too many alerts, causing them to ignore or dismiss notifications. The result is missed critical alerts and delayed incident response.</p>
 <p>The key metric is the alert-to-incident conversion rate. If fewer than 10% of alerts lead to actionable incidents, alerts are too noisy. Each alert should be evaluated against these criteria:</p>
 <ul>
@@ -186,7 +169,7 @@
 </li>
 </ul>
 <p>Tiered alerting routes different severity levels through different notification channels. Critical alerts page via phone call. Warning alerts send push notifications. Informational alerts go to Slack or email — during business hours only.</p>
-<h4>Tools for On-Call Management</h4>
+<h2>Tools for On-Call Management</h2>
 <p>PagerDuty and Opsgenie are the established leaders for on-call scheduling, escalation, and notification. Grafana OnCall (now included with Grafana Cloud) provides integrated alerting and on-call management for organizations already using Grafana.</p>
 <p>Key features to evaluate include:</p>
 <ul>
@@ -206,16 +189,19 @@
 <p>Vacation and swap management.</p>
 </li>
 </ul>
-<h4>On-Call Culture and Quality of Life</h4>
+<h2>On-Call Culture and Quality of Life</h2>
 <p>Technical processes mean nothing without cultural support. Compensation for on-call responsibility acknowledges its impact. Time-off after incidents prevents burnout. Regular retrospection on on-call quality identifies improvement areas.</p>
 <p>The best measure of on-call health is the team's willingness to participate. When engineers dread on-call weeks, it is a signal that rotation is too frequent, alerts are too noisy, or runbooks are insufficient.</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>Effective on-call practices combine thoughtful rotation design, clear escalation policies, comprehensive runbooks, and aggressive alert noise reduction. The goal is making on-coll sustainable and predictable rather than chaotic. Organizations that invest in on-call quality see faster incident response, lower engineer burnout, and increased system reliability.</p>
 <p><strong>See also:</strong> <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a>, <a href="/en/tech/secret-management.html">Secret Management</a>.</p>
 <p><strong>See also:</strong> <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/rust-vs-go-practical.html">Rust vs Go: A Practical Comparison</a>, <a href="/en/tech/dockerfile-best-practices.html">Dockerfile Best Practices for Production</a>, <a href="/en/tech/kubernetes-pod-design.html">Kubernetes Pod Design: Patterns and Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/rust-vs-go-practical.html">Rust vs Go: A Practical Comparison</a>, <a href="/en/tech/dockerfile-best-practices.html">Dockerfile Best Practices for Production</a>, <a href="/en/tech/kubernetes-pod-design.html">Kubernetes Pod Design: Patterns and Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/rust-vs-go-practical.html">Rust vs Go: A Practical Comparison</a>, <a href="/en/tech/dockerfile-best-practices.html">Dockerfile Best Practices for Production</a>, <a href="/en/tech/kubernetes-pod-design.html">Kubernetes Pod Design: Patterns and Best Practices</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -227,7 +213,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/sli-slo-error-budget.html" class="related-card">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a><a href="/en/tech/azure-networking.html" class="related-card">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a><a href="/en/tech/docker-networking.html" class="related-card">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a><a href="/en/tech/incident-management.html" class="related-card">Incident Management: Severity Levels, Response Process, and Postmortems</a></div>
+      <div class="related-grid"><a href="/en/tech/sli-slo-error-budget.html" class="related-card"><span class="related-card-title">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</span><span class="related-card-desc">Technical guide to service level indicators and objectives covering SLI definition, SLO setting meth</span></a><a href="/en/tech/azure-networking.html" class="related-card"><span class="related-card-title">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</span><span class="related-card-desc">Comprehensive guide to Azure networking covering Virtual Networks, VNet peering, Azure Firewall, Loa</span></a><a href="/en/tech/docker-networking.html" class="related-card"><span class="related-card-title">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</span><span class="related-card-desc">In-depth guide to Docker networking covering bridge networks, overlay networking for Swarm, host mod</span></a><a href="/en/tech/incident-management.html" class="related-card"><span class="related-card-title">Incident Management: Severity Levels, Response Process, and Postmortems</span><span class="related-card-desc">Practical guide to incident management covering severity classification, response processes, communi</span></a><a href="/en/tech/secret-management.html" class="related-card"><span class="related-card-title">Secret Management</span><span class="related-card-desc">Learn secret management: Vault, AWS Secrets Manager, SOPS, encryption approaches, rotation policies,</span></a><a href="/en/tech/configuration-management.html" class="related-card"><span class="related-card-title">Configuration Management</span><span class="related-card-desc">Master configuration management: environment variables, config files, feature flags, and best practi</span></a></div>
     </section>
     
   </div>

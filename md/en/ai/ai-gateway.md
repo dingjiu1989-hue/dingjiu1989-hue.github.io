@@ -8,41 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-gateway.html
 
 # AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
 
-## AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-#### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-#### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-#### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-#### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-#### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-#### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-#### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-#### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-#### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-#### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-#### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-#### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-#### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
-#### AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
-
 As your AI application grows, you will use multiple models from multiple providers. Managing API keys, rate limits, costs, and failover across providers becomes a nightmare without a gateway. Here is how to build an AI gateway that centralizes LLM API management.
 
-#### Why You Need an AI Gateway
+## Why You Need an AI Gateway
 
 Direct LLM API integration works for prototypes but fails in production. Each provider has different authentication, rate limits, error formats, and pricing. Your code becomes a mess of conditional logic for handling different providers.
 
@@ -50,7 +18,7 @@ An AI gateway sits between your application and LLM providers. It routes request
 
 The gateway also provides centralized visibility. Every LLM call passes through it, so you get complete logs, cost tracking, and performance monitoring without instrumenting each application service.
 
-#### API Routing
+## API Routing
 
 The gateway routes requests based on model availability, cost, latency requirements, and user tier. Define routing rules that map request characteristics to target models.
 
@@ -60,7 +28,7 @@ Latency-based routing sends time-sensitive requests to faster models. User-facin
 
 Feature-based routing sends requests from different product features to different models. Your chatbot feature uses one model configuration while your summarization feature uses another. The gateway handles this transparently.
 
-#### Rate Limiting
+## Rate Limiting
 
 LLM APIs have strict rate limits. Exceeding them causes 429 errors and degraded user experience. The gateway enforces rate limits across your entire application, so one aggressive feature does not starve others.
 
@@ -70,7 +38,7 @@ Set per-user and per-feature rate limits. A power user should not be able to con
 
 Queue requests that exceed rate limits instead of rejecting them. For user-facing features, a brief queue with good UX is better than an error message. For background jobs, batch requests and process them when capacity is available.
 
-#### Fallback Models
+## Fallback Models
 
 No LLM provider is perfectly reliable. Providers experience outages, latency spikes, and degraded quality. The gateway should automatically fail over to alternative models or providers.
 
@@ -80,7 +48,7 @@ Test fallback behavior regularly. A fallback chain that is never tested may fail
 
 Cache successful responses at the gateway level. If a model fails and the fallback succeeds, cache the response. Subsequent identical queries can skip the LLM entirely and serve cached responses.
 
-#### Cost Management
+## Cost Management
 
 The gateway provides centralized cost control. Without it, every developer adds LLM calls without understanding the cost implications. With it, you have visibility and control.
 
@@ -90,7 +58,7 @@ Set spending limits per feature or per user. When a limit is approached, apply c
 
 Log every cost event. When you need to reconcile invoices or investigate cost anomalies, the gateway provides the data. Cost logging is also essential for building usage-based pricing for your own AI product.
 
-#### Logging and Observability
+## Logging and Observability
 
 Centralized logging through the gateway provides complete visibility into LLM usage. Log every request with input, output, model used, tokens consumed, latency, and cost.
 
@@ -113,3 +81,9 @@ Several open-source and commercial AI gateways exist: Portkey, Helicone, and Lit
 **See also:** [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>)
 
 **See also:** [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>)
+
+**See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
+
+**See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
+
+**See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)

@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/cache-strategies.html
 
 # Caching Strategies
 
-## Caching Strategies
-
-### Caching Strategies
-
-#### Caching Strategies
-
-#### Caching Strategies
-
-#### Caching Strategies
-
-#### Caching Strategies
-
-#### Caching Strategies
-
-#### Caching Strategies
-
-#### Caching Strategies
-
-#### Caching Strategies
-
-#### Caching Strategies
-
-#### Caching Strategies
-
-#### Caching Strategies
-
-#### Caching Strategies
-
-#### Caching Strategies
-
 Caching is one of the most effective techniques for improving application performance, but choosing the right caching strategy is critical. Incorrect cache usage can lead to stale data, increased latency under certain conditions, or even system instability. This article examines the three fundamental caching strategies—write-through, write-around, and write-back—along with cache invalidation approaches essential for maintaining data consistency. 
 
 Write-Through Cache 
@@ -85,3 +55,9 @@ Modern caching systems like Redis, Memcached, and CDN platforms provide configur
 **See also:** [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>)
 
 **See also:** [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>)
+
+**See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
+
+**See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
+
+**See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)

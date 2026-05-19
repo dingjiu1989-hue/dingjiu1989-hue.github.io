@@ -8,43 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/ai/multimodal-ai.html
 
 # Multimodal AI Applications in 2026
 
-## Multimodal AI Applications in 2026
-
-### Multimodal AI Applications in 2026
-
-#### Multimodal AI Applications in 2026
-
-#### Multimodal AI Applications in 2026
-
-#### Multimodal AI Applications in 2026
-
-#### Multimodal AI Applications in 2026
-
-#### Multimodal AI Applications in 2026
-
-#### Multimodal AI Applications in 2026
-
-#### Multimodal AI Applications in 2026
-
-#### Multimodal AI Applications in 2026
-
-#### Multimodal AI Applications in 2026
-
-#### Multimodal AI Applications in 2026
-
-#### Multimodal AI Applications in 2026
-
-#### Multimodal AI Applications in 2026
-
-#### Multimodal AI Applications in 2026
-
-#### Multimodal AI Applications in 2026
-
-#### Introduction
+## Introduction
 
 Multimodal AI models that understand and generate across text, images, audio, and video have moved from research papers to production APIs. By 2026, models like GPT-4o, Claude 3.5 Sonnet, Gemini 2.0, and open-source alternatives support native multimodal inputs, enabling applications that were impractical with separate unimodal pipelines. This article covers current capabilities, architectures, and production patterns for multimodal AI applications.
 
-#### Vision-Language Models
+## Vision-Language Models
 
 Modern vision-language models (VLMs) accept images and text together in a single context window:
 
@@ -52,7 +20,7 @@ from anthropic import Anthropic
 
 client = Anthropic(api_key="sk-...")
 
-#### Analyze an image with text instructions
+## Analyze an image with text instructions
 
 response = client.messages.create(
 
@@ -108,11 +76,11 @@ messages=[{
 
 )
 
-#### The model "sees" the image and processes it jointly with text
+## The model "sees" the image and processes it jointly with text
 
 analysis = response.content[0].text
 
-#### Document AI and OCR
+## Document AI and OCR
 
 Extract structured data from complex documents:
 
@@ -184,7 +152,7 @@ response_format={"type": "json_object"},
 
 return json.loads(response.content[0].text)
 
-#### Speech-to-Text and Audio Understanding
+## Speech-to-Text and Audio Understanding
 
 Multimodal models now handle audio directly without separate ASR pipelines:
 
@@ -260,7 +228,7 @@ Analyze this customer support call:
 
 return parse_analysis(response.content[0].text)
 
-#### Multimodal RAG
+## Multimodal RAG
 
 Traditional RAG is text-only. Multimodal RAG retrieves and reasons across images, diagrams, and tables:
 
@@ -304,7 +272,7 @@ tables: List[dict],
 
 embeddings = []
 
-#### Index text chunks
+## Index text chunks
 
 text_chunks = self._chunk_text(text)
 
@@ -312,7 +280,7 @@ text_embeddings = self.text_encoder.encode(text_chunks)
 
 embeddings.extend(text_embeddings)
 
-#### Index images
+## Index images
 
 for img in images:
 
@@ -320,7 +288,7 @@ img_embedding = self.image_encoder.encode(img)
 
 embeddings.append(img_embedding)
 
-#### Index with metadata about modality
+## Index with metadata about modality
 
 self.collection.add(
 
@@ -342,11 +310,11 @@ for _ in images],
 
 def query(self, question: str, top_k: int = 5) -> List[dict]:
 
-#### Encode query
+## Encode query
 
 query_embedding = self.text_encoder.encode(question)
 
-#### Retrieve across all modalities
+## Retrieve across all modalities
 
 results = self.collection.query(
 
@@ -358,7 +326,7 @@ n_results=top_k,
 
 return results
 
-#### Audio Transcription and Analysis Pipeline
+## Audio Transcription and Analysis Pipeline
 
 For production audio processing, combine streaming with multimodal analysis:
 
@@ -384,15 +352,15 @@ buffer_duration += self._chunk_duration(chunk)
 
 if buffer_duration >= self.buffer_duration:
 
-#### Process buffer
+## Process buffer
 
 segment = b"".join(buffer)
 
-#### Real-time transcription + analysis
+## Real-time transcription + analysis
 
 result = await self._analyze_segment(segment)
 
-#### Extract action items, sentiment, entities
+## Extract action items, sentiment, entities
 
 actions = self._extract_actions(result)
 
@@ -400,7 +368,7 @@ if actions:
 
 await self._route_actions(actions)
 
-#### Keep overlap for continuity
+## Keep overlap for continuity
 
 overlap_bytes = int(
 
@@ -458,7 +426,7 @@ Transcribe and analyze this audio segment:
 
 return response
 
-#### Use Cases and Limitations
+## Use Cases and Limitations
 
 | Use Case | Capability | Current Limitations |
 
@@ -476,9 +444,9 @@ return response
 
 | Video understanding | Summarize meetings, detect events | Long video context limits |
 
-#### Production Considerations
+## Production Considerations
 
-#### Multimodal model selection criteria
+## Multimodal model selection criteria
 
 selection:
 
@@ -531,3 +499,9 @@ Multimodal AI is rapidly maturing but still requires careful evaluation for each
 **See also:** [Multimodal AI Models: Vision, Audio, and Text](</en/ai/multimodal-models.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>)
 
 **See also:** [Multimodal AI Models: Vision, Audio, and Text](</en/ai/multimodal-models.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>)
+
+**See also:** [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)
+
+**See also:** [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)
+
+**See also:** [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)

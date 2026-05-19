@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/consumer-driven-contracts.png",
       "datePublished": "2026-05-06",
       "dateModified": "2026-05-19",
-      "wordCount": "713",
+      "wordCount": "658",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,39 +96,27 @@
       <h1 class="article-title">Consumer-Driven Contracts in Microservices</h1>
       <div class="article-meta">Published 2026-05-06 · Last active 2026-05-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consumer-driven-contracts.png" alt="Consumer-Driven Contracts in Microservices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Consumer-Driven Contracts in Microservices</h2>
-<h3>Consumer-Driven Contracts in Microservices</h3>
-<h4>Consumer-Driven Contracts in Microservices</h4>
-<h4>Consumer-Driven Contracts in Microservices</h4>
-<h4>Consumer-Driven Contracts in Microservices</h4>
-<h4>Consumer-Driven Contracts in Microservices</h4>
-<h4>Consumer-Driven Contracts in Microservices</h4>
-<h4>Consumer-Driven Contracts in Microservices</h4>
-<h4>Consumer-Driven Contracts in Microservices</h4>
-<h4>Consumer-Driven Contracts in Microservices</h4>
-<h4>Consumer-Driven Contracts in Microservices</h4>
-<h4>Consumer-Driven Contracts in Microservices</h4>
-<h4>Consumer-Driven Contracts in Microservices</h4>
-<h4>Consumer-Driven Contracts in Microservices</h4>
-<h4>Consumer-Driven Contracts in Microservices</h4>
-<p>Consumer-driven contracts (CDC) is a pattern where service consumers define the expectations for the API they consume. The provider tests against these contracts to ensure changes do not break consumers. This approach enables independent service evolution while maintaining compatibility.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consumer-driven-contracts.png" alt="Consumer-Driven Contracts in Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>How CDC Works</h4>
+      <div class="article-body"><p>Consumer-driven contracts (CDC) is a pattern where service consumers define the expectations for the API they consume. The provider tests against these contracts to ensure changes do not break consumers. This approach enables independent service evolution while maintaining compatibility.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consumer-driven-contracts.png" alt="Consumer-Driven Contracts in Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>How CDC Works</h2>
 <p>Each consumer creates a contract file specifying exactly how it uses the provider's API—which endpoints, request parameters, and response fields. These contracts are shared with the provider. The provider runs a contract verification suite that tests its API against all consumer contracts before deployment.</p>
 <p>If a provider change would break any consumer, the contract test fails. The provider must either revert the change or coordinate with the consumer to update the contract. This feedback loop catches breaking changes before they reach production.</p>
-<h4>Pact Framework</h4>
+<h2>Pact Framework</h2>
 <p>Pact is the most widely used CDC framework. It supports multiple languages including Java, Python, JavaScript, and Go. Consumers use Pact to write tests that generate contract files. Providers use Pact to verify these contracts.</p>
 <p>Pact supports message-based interactions for asynchronous communication. Consumer tests specify expected messages; provider tests verify actual message format and content.</p>
-<h4>Benefits Over Integration Tests</h4>
+<h2>Benefits Over Integration Tests</h2>
 <p>Integration tests require both provider and consumer to be running simultaneously. They are slow, brittle, and require complex test infrastructure. CDC tests run independently on each side. Consumer tests mock the provider; provider tests run against the real API. This separation enables faster feedback and simpler test setup.</p>
-<h4>Adoption Strategy</h4>
+<h2>Adoption Strategy</h2>
 <p>Start with one provider-consumer pair. Choose a critical service with multiple consumers. Write consumer contracts for the most-used endpoints. Add provider verification to the CI pipeline. Expand to additional services as the team gains experience. Maintain a contract repository that all teams can access.</p>
-<h4>Common Pitfalls</h4>
+<h2>Common Pitfalls</h2>
 <p>Contracts can become large and brittle if consumers test too many scenarios. Focus on testing realistic consumer usage, not exhaustive provider behavior. Version contracts and coordinate changes. Treat contract changes as API changes—they require communication and agreement between teams.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/contract-testing.html">Contract Testing for Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/contract-testing.html">Contract Testing for Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/contract-testing.html">Contract Testing for Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/contract-testing.html">Contract Testing for Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/contract-testing.html">Contract Testing for Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/contract-testing.html">Contract Testing for Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/contract-testing.html">Contract Testing for Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/contract-testing.html">Contract Testing for Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -140,7 +128,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/contract-testing.html" class="related-card">Contract Testing for Microservices</a><a href="/en/architecture/sidecar-pattern.html" class="related-card">Sidecar Pattern in Microservices Architecture</a><a href="/en/architecture/microservices-vs-monolith.html" class="related-card">Microservices vs Monolith: Decision Guide</a><a href="/en/architecture/choreography-patterns.html" class="related-card">Choreography Patterns</a></div>
+      <div class="related-grid"><a href="/en/architecture/contract-testing.html" class="related-card"><span class="related-card-title">Contract Testing for Microservices</span><span class="related-card-desc">A practical guide to contract testing: ensuring service compatibility without slow end-to-end integr</span></a><a href="/en/architecture/sidecar-pattern.html" class="related-card"><span class="related-card-title">Sidecar Pattern in Microservices Architecture</span><span class="related-card-desc">Learn the sidecar pattern for microservices: how to deploy helper components alongside your main ser</span></a><a href="/en/architecture/microservices-vs-monolith.html" class="related-card"><span class="related-card-title">Microservices vs Monolith: Decision Guide</span><span class="related-card-desc">Guide to choosing between microservices and monoliths, including when to start with a monolith, Conw</span></a><a href="/en/architecture/choreography-patterns.html" class="related-card"><span class="related-card-title">Choreography Patterns</span><span class="related-card-desc">Learn choreography patterns: event contracts, monitoring, saga coordination, and decentralized workf</span></a><a href="/en/architecture/retry-patterns.html" class="related-card"><span class="related-card-title">Retry Patterns</span><span class="related-card-desc">Learn retry strategies: exponential backoff, jitter, retry budgets, and circuit breaker integration </span></a><a href="/en/architecture/schema-registry.html" class="related-card"><span class="related-card-title">Schema Registry</span><span class="related-card-desc">Learn schema registry principles: Avro, Protobuf, JSON Schema, compatibility checks, and evolution s</span></a></div>
     </section>
     
   </div>

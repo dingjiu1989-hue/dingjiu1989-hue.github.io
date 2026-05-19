@@ -8,53 +8,21 @@ url: https://dingjiu1989-hue.github.io/en/ai/multi-modal-rag.html
 
 # Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
 
-## Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-
-#### Introduction
+## Introduction
 
 Real-world documents contain more than text: images, charts, tables, and diagrams carry critical information that text-only RAG systems cannot access. Multi-modal RAG extends retrieval to include visual content, enabling questions like "What does the Q3 revenue chart show?" or "What values are in the configuration table?" This article covers the architectures and techniques for building multi-modal RAG.
 
-#### Strategies for Multi-Modal RAG
+## Strategies for Multi-Modal RAG
 
 There are three main approaches to handling non-text content:
 
-#### Strategy 1: Convert everything to text (simplest)
+## Strategy 1: Convert everything to text (simplest)
 
-#### Strategy 2: Embed images alongside text (moderate)
+## Strategy 2: Embed images alongside text (moderate)
 
-#### Strategy 3: Multi-modal retrieval with specialized models (most powerful)
+## Strategy 3: Multi-modal retrieval with specialized models (most powerful)
 
-#### Strategy 1: Text Conversion
+## Strategy 1: Text Conversion
 
 Convert images and tables to text using vision models or OCR:
 
@@ -116,7 +84,7 @@ text_parts.append(row_desc)
 
 return "\n".join(text_parts)
 
-#### Strategy 2: Multi-Vector Retriever
+## Strategy 2: Multi-Vector Retriever
 
 Store both text representations and visual embeddings:
 
@@ -130,7 +98,7 @@ from langchain.embeddings import OpenAIEmbeddings
 
 from langchain.schema.document import Document
 
-#### Store text summaries alongside raw elements
+## Store text summaries alongside raw elements
 
 vectorstore = Chroma(
 
@@ -152,15 +120,15 @@ id_key="doc_id",
 
 )
 
-#### For each document element (text, image, table):
+## For each document element (text, image, table):
 
-#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate a text summary
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate a text summary
 
-#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the summary in the vector store
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the summary in the vector store
 
-#### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the original element in the doc store
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the original element in the doc store
 
-#### 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Link them with a shared doc_id
+## 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Link them with a shared doc_id
 
 doc_id = "doc_001_image_03"
 
@@ -178,7 +146,7 @@ retriever.vectorstore.add_documents([Document(page_content=summary, metadata={"d
 
 retriever.docstore.mset([(doc_id, original)])
 
-#### Strategy 3: Multi-Modal Embeddings
+## Strategy 3: Multi-Modal Embeddings
 
 Use embedding models that handle both text and images in a shared space:
 
@@ -220,7 +188,7 @@ top_indices = scores.topk(top_k).indices.tolist()
 
 return top_indices, scores[top_indices].tolist()
 
-#### Chunking Strategies for Multi-Modal Data
+## Chunking Strategies for Multi-Modal Data
 
 Each content type needs a different chunking approach:
 
@@ -238,7 +206,7 @@ chunks = []
 
 for page_num, page in enumerate(doc):
 
-#### Extract text blocks
+## Extract text blocks
 
 blocks = page.get_text("dict")["blocks"]
 
@@ -300,7 +268,7 @@ return {
 
 }
 
-#### Retrieval and Fusion
+## Retrieval and Fusion
 
 Query across all content types and fuse the results:
 
@@ -312,7 +280,7 @@ image_results = search_images(query, image_index, top_k)
 
 table_results = search_tables(query, table_index, top_k)
 
-#### Fuse results with type-aware scoring
+## Fuse results with type-aware scoring
 
 all_results = []
 
@@ -332,7 +300,7 @@ all_results.sort(key=lambda x: x["score"], reverse=True)
 
 return all_results[:top_k * 2]
 
-#### Conclusion
+## Conclusion
 
 Multi-modal RAG extends retrieval to images, tables, and other visual content. The simplest approach converts non-text content to text descriptions using vision models. More sophisticated approaches use multi-vector retrievers or shared embedding spaces like CLIP. Choose your strategy based on the complexity of your visual content and the precision required for retrieval. Always evaluate retrieval quality separately for each modality.
 
@@ -347,3 +315,9 @@ Multi-modal RAG extends retrieval to images, tables, and other visual content. T
 **See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>), [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>)
 
 **See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>), [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>)
+
+**See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)
+
+**See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)
+
+**See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)

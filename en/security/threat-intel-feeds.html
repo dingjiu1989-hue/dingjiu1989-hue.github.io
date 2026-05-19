@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intel-feeds.png",
       "datePublished": "2026-03-19",
       "dateModified": "2026-05-12",
-      "wordCount": "952",
+      "wordCount": "927",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,28 +99,13 @@
       <h1 class="article-title">Threat Intelligence Feeds</h1>
       <div class="article-meta">Published 2026-03-19 · Last active 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intel-feeds.png" alt="Threat Intelligence Feeds" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Threat Intelligence Feeds</h2>
-<h3>Threat Intelligence Feeds</h3>
-<h4>Threat Intelligence Feeds</h4>
-<h4>Threat Intelligence Feeds</h4>
-<h4>Threat Intelligence Feeds</h4>
-<h4>Threat Intelligence Feeds</h4>
-<h4>Threat Intelligence Feeds</h4>
-<h4>Threat Intelligence Feeds</h4>
-<h4>Threat Intelligence Feeds</h4>
-<h4>Threat Intelligence Feeds</h4>
-<h4>Threat Intelligence Feeds</h4>
-<h4>Threat Intelligence Feeds</h4>
-<h4>Threat Intelligence Feeds</h4>
-<h4>Threat Intelligence Feeds</h4>
-<h4>Threat Intelligence Feeds</h4>
-<p>Threat Intelligence Fundamentals </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intel-feeds.png" alt="Threat Intelligence Feeds" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Threat Intelligence Fundamentals </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intel-feeds.png" alt="Threat Intelligence Feeds" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Threat intelligence transforms raw data into actionable security insights. Feeds provide indicators of compromise (IOCs), tactics techniques and procedures (TTPs), and adversary profiles. </p>
 <p>STIX and TAXII Standards </p>
 <p>STIX (Structured Threat Information Expression) and TAXII (Trusted Automated Exchange of Intelligence Indicators) are the industry standards for threat intelligence exchange. </p>
 <p>from stix2 import Indicator, Bundle, TAXIICollectionSource</p>
 <p>from taxii2client import Collection</p>
-<h4>Create a STIX indicator</h4>
+<h2>Create a STIX indicator</h2>
 <p>indicator = Indicator(</p>
 <p>name="Malicious IP",</p>
 <p>indicator_types=["malicious-activity"],</p>
@@ -128,10 +113,10 @@
 <p>pattern_type="stix",</p>
 <p>valid_from="2026-01-01T00:00:00Z"</p>
 <p>)</p>
-<h4>Bundle indicators</h4>
+<h2>Bundle indicators</h2>
 <p>bundle = Bundle(indicator)</p>
 <p>print(bundle.serialize(pretty=True))</p>
-<h4>Consume from TAXII feed</h4>
+<h2>Consume from TAXII feed</h2>
 <p>collection = Collection("https://taxii.example.com/collections/123")</p>
 <p>source = TAXIICollectionSource(collection)</p>
 <p>for indicator in source.query():</p>
@@ -161,13 +146,13 @@
 <p>Not all indicators are equally reliable. Implement scoring: </p>
 <p>def score_indicator(ioc, context):</p>
 <p>score = 50 # Base score</p>
-<h4>Age decay: newer indicators are more valuable</h4>
+<h2>Age decay: newer indicators are more valuable</h2>
 <p>age_days = (datetime.utcnow() - ioc.valid_from).days</p>
 <p>score -= min(age_days * 2, 30)</p>
-<h4>Multiple feeds increase confidence</h4>
+<h2>Multiple feeds increase confidence</h2>
 <p>feed_count = len(ioc.get("sources", []))</p>
 <p>score += feed_count * 10</p>
-<h4>Context matching increases relevance</h4>
+<h2>Context matching increases relevance</h2>
 <p>if context.get("industry") in ioc.get("target_industries", []):</p>
 <p>score += 20</p>
 <p>return min(max(score, 0), 100)</p>
@@ -176,7 +161,7 @@
 <p>| Metric | Description | Target | |--------|-------------|--------| | False positive rate | Incorrect alerts | &lt; 5% | | Time to detection | Speed of indicator publication | &lt; 1 hour | | Coverage | Breadth of TTPs covered | &gt; 80% | | Freshness | Update frequency | Continuous | </p>
 <p>Automated Blocking </p>
 <p>High-confidence indicators can trigger automated blocking: </p>
-<h4>threat-intel-automation.yaml</h4>
+<h2>threat-intel-automation.yaml</h2>
 <p>automation_rules:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: block_malicious_ips</p>
 <p>trigger: new_indicator</p>
@@ -196,7 +181,10 @@
 <p><strong>See also:</strong> <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -208,7 +196,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/security-information-event-management.html" class="related-card">SIEM: Security Information and Event Management</a><a href="/en/security/threat-hunting.html" class="related-card">Threat Hunting</a><a href="/en/security/container-runtime-security.html" class="related-card">Container Runtime Security</a><a href="/en/security/sbom-management.html" class="related-card">SBOM Management</a></div>
+      <div class="related-grid"><a href="/en/security/security-information-event-management.html" class="related-card"><span class="related-card-title">SIEM: Security Information and Event Management</span><span class="related-card-desc">SIEM systems for security monitoring: log collection, correlation rules, threat detection, and incid</span></a><a href="/en/security/threat-hunting.html" class="related-card"><span class="related-card-title">Threat Hunting</span><span class="related-card-desc">Comprehensive guide to hypothesis-driven threat hunting with MITRE ATT&CK mapping, tooling strategie</span></a><a href="/en/security/container-runtime-security.html" class="related-card"><span class="related-card-title">Container Runtime Security</span><span class="related-card-desc">Securing container runtime with seccomp, AppArmor, SELinux, Falco, and runtime threat detection.</span></a><a href="/en/security/sbom-management.html" class="related-card"><span class="related-card-title">SBOM Management</span><span class="related-card-desc">Managing Software Bill of Materials with generation, verification, vulnerability correlation, and co</span></a><a href="/en/security/software-signing.html" class="related-card"><span class="related-card-title">Software Signing</span><span class="related-card-desc">Implementing software signing with GPG, Sigstore, cosign, and in-toto attestations for supply chain </span></a><a href="/en/security/endpoint-detection-response.html" class="related-card"><span class="related-card-title">EDR: Endpoint Detection and Response Solutions</span><span class="related-card-desc">EDR systems for endpoint security: threat detection, behavioral analysis, automated response, and in</span></a></div>
     </section>
     
   </div>

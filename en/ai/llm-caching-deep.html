@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-caching-deep.png",
       "datePublished": "2026-02-16",
       "dateModified": "2026-04-22",
-      "wordCount": "1682",
+      "wordCount": "1590",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -99,25 +99,9 @@
       <h1 class="article-title">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h1>
       <div class="article-meta">Published 2026-02-16 · Last active 2026-04-22 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-caching-deep.png" alt="LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h2>
-<h3>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h3>
-<h4>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h4>
-<h4>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h4>
-<h4>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h4>
-<h4>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h4>
-<h4>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h4>
-<h4>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h4>
-<h4>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h4>
-<h4>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h4>
-<h4>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h4>
-<h4>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h4>
-<h4>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h4>
-<h4>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h4>
-<h4>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h4>
-<h4>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>LLM API calls are expensive, both in cost and latency. Caching previously generated responses can reduce costs by 20-80% depending on the application. Unlike traditional HTTP caching where exact URL matching suffices, LLM caching must handle semantically equivalent but textually different queries. This article covers caching strategies from simple exact match to sophisticated semantic caching.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-caching-deep.png" alt="LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Exact Match Cache</h4>
+<h2>Exact Match Cache</h2>
 <p>The simplest cache: identical inputs produce identical outputs:</p>
 <p>import hashlib</p>
 <p>import json</p>
@@ -147,7 +131,7 @@
 <p>key = self._make_key(messages, model, params)</p>
 <p>self.cache[key] = {"response": response, "timestamp": time.time()}</p>
 <p>Exact match works well when identical questions recur: FAQs, repeated classification tasks, or template-based prompts where only parameters change.</p>
-<h4>Semantic Cache</h4>
+<h2>Semantic Cache</h2>
 <p>Semantic caching returns cached responses for semantically equivalent questions:</p>
 <p>import numpy as np</p>
 <p>from sklearn.metrics.pairwise import cosine_similarity</p>
@@ -180,18 +164,18 @@
 <p>self.cache_entries.sort(key=lambda e: e["last_accessed"])</p>
 <p>self.cache_entries = self.cache_entries[-max_entries:]</p>
 <p>The similarity threshold controls the precision-recall tradeoff. A threshold of 0.95 is safe but rarely matches. A threshold of 0.85 catches more queries but risks returning irrelevant cached responses. Test on your specific query distribution.</p>
-<h4>Two-Level Cache</h4>
+<h2>Two-Level Cache</h2>
 <p>Combine both strategies for maximum coverage:</p>
 <p>class TwoLevelLLMCache:</p>
 <p>def <strong>init</strong>(self, embedding_fn):</p>
 <p>self.exact = ExactMatchCache(ttl_seconds=7200)</p>
 <p>self.semantic = SemanticCache(embedding_fn, similarity_threshold=0.92)</p>
 <p>def get(self, messages: list[dict], model: str, params: dict) -&gt; str | None:</p>
-<h4>Try exact match first (fast, no embedding computation)</h4>
+<h2>Try exact match first (fast, no embedding computation)</h2>
 <p>exact_result = self.exact.get(messages, model, params)</p>
 <p>if exact_result:</p>
 <p>return exact_result</p>
-<h4>Try semantic match for the last user message</h4>
+<h2>Try semantic match for the last user message</h2>
 <p>last_user_msg = self._get_last_user_message(messages)</p>
 <p>if last_user_msg:</p>
 <p>semantic_result = self.semantic.get(last_user_msg)</p>
@@ -203,11 +187,11 @@
 <p>last_user_msg = self._get_last_user_message(messages)</p>
 <p>if last_user_msg:</p>
 <p>self.semantic.set(last_user_msg, response)</p>
-<h4>TTL and Invalidation</h4>
+<h2>TTL and Invalidation</h2>
 <p>Different cache entries need different expiration policies:</p>
 <p>class TTLManager:</p>
 <p>def <strong>init</strong>(self):</p>
-<h4>Different TTLs for different content types</h4>
+<h2>Different TTLs for different content types</h2>
 <p>self.ttl_config = {</p>
 <p>"classification": 86400 * 30, # 30 days (stable task)</p>
 <p>"extraction": 86400 * 7, # 7 days</p>
@@ -219,28 +203,28 @@
 <p>return self.ttl_config.get(task_type, 3600)</p>
 <p>def invalidate_by_prefix(self, prefix: str):</p>
 <p>"""Invalidate cache entries matching a prefix pattern."""</p>
-<h4>Used when source documents are updated</h4>
+<h2>Used when source documents are updated</h2>
 <p>pass</p>
 <p>def invalidate_all(self):</p>
 <p>"""Emergency invalidation."""</p>
 <p>pass</p>
-<h4>Cache-Aware Application Design</h4>
+<h2>Cache-Aware Application Design</h2>
 <p>Structure your application to maximize cache hits:</p>
 <p>class CacheAwareLLMClient:</p>
 <p>def <strong>init</strong>(self, cache: TwoLevelLLMCache, llm_fn):</p>
 <p>self.cache = cache</p>
 <p>self.llm = llm_fn</p>
 <p>async def generate(self, task_type: str, messages: list[dict], model: str, params: dict) -&gt; str:</p>
-<h4>Check cache</h4>
+<h2>Check cache</h2>
 <p>cached = self.cache.get(messages, model, params)</p>
 <p>if cached:</p>
 <p>return cached</p>
-<h4>Generate fresh response</h4>
+<h2>Generate fresh response</h2>
 <p>response = await self.llm(messages, model, params)</p>
-<h4>Cache with appropriate TTL</h4>
+<h2>Cache with appropriate TTL</h2>
 <p>self.cache.set(messages, model, params, response)</p>
 <p>return response</p>
-<h4>Cache Hit Rate Optimization</h4>
+<h2>Cache Hit Rate Optimization</h2>
 <p>class CacheAnalytics:</p>
 <p>def track_hit_rate(self):</p>
 <p>"""Monitor and report cache effectiveness."""</p>
@@ -249,16 +233,19 @@
 <p>"semantic_hits": 0,</p>
 <p>"misses": 0,</p>
 <p>}</p>
-<h4>Adjust semantic threshold based on hit quality</h4>
+<h2>Adjust semantic threshold based on hit quality</h2>
 <p>if metrics["semantic_hits"] &gt; 0 and user_feedback_score &lt; 0.8:</p>
 <p>self.semantic.threshold += 0.02 # Be more conservative</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>LLM caching significantly reduces costs and latency. Use exact-match caching for deterministic tasks with identical inputs. Add semantic caching with embedding similarity for paraphrased questions. Implement two-level caching with exact match first (fast) then semantic match (broader). Configure TTLs based on content stability: long TTLs for classification tasks, short TTLs for generation. Monitor cache hit rates and user satisfaction to tune similarity thresholds. A well-tuned cache typically achieves 30-60% hit rates in production.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -270,7 +257,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-caching-strategies.html" class="related-card">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a><a href="/en/ai/ai-model-deployment-strategies.html" class="related-card">AI Model Deployment: Strategies for Production LLM Serving</a><a href="/en/ai/fine-tuning-vs-rag.html" class="related-card">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a><a href="/en/ai/llm-api-design.html" class="related-card">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></div>
+      <div class="related-grid"><a href="/en/ai/ai-caching-strategies.html" class="related-card"><span class="related-card-title">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</span><span class="related-card-desc">Reduce LLM API costs and latency with AI caching strategies: semantic caching, intelligent invalidat</span></a><a href="/en/ai/ai-model-deployment-strategies.html" class="related-card"><span class="related-card-title">AI Model Deployment: Strategies for Production LLM Serving</span><span class="related-card-desc">Deploy LLMs to production: serving infrastructure, batching, caching, load balancing, and cost optim</span></a><a href="/en/ai/fine-tuning-vs-rag.html" class="related-card"><span class="related-card-title">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</span><span class="related-card-desc">Compare fine-tuning and RAG for LLM applications: when to use each approach, hybrid fine-tuned RAG p</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="related-card-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="related-card-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handli</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="related-card-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="related-card-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fa</span></a><a href="/en/ai/llm-observability.html" class="related-card"><span class="related-card-title">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</span><span class="related-card-desc">Implement LLM observability for production AI applications: distributed tracing, token usage trackin</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

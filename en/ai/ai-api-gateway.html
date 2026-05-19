@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-api-gateway.png",
       "datePublished": "2026-02-13",
       "dateModified": "2026-05-18",
-      "wordCount": "1762",
+      "wordCount": "1669",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -99,25 +99,9 @@
       <h1 class="article-title">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h1>
       <div class="article-meta">Published 2026-02-13 · Last active 2026-05-18 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-api-gateway.png" alt="AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h2>
-<h3>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h3>
-<h4>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h4>
-<h4>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h4>
-<h4>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h4>
-<h4>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h4>
-<h4>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h4>
-<h4>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h4>
-<h4>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h4>
-<h4>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h4>
-<h4>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h4>
-<h4>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h4>
-<h4>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h4>
-<h4>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h4>
-<h4>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h4>
-<h4>AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>As organizations adopt multiple LLM providers (Anthropic, OpenAI, Google, open-source self-hosted), managing each directly from application code becomes unsustainable. An AI API gateway provides a unified interface for routing requests across providers, handling failures, tracking costs, and monitoring usage. This article covers the design of a production-grade AI gateway.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-api-gateway.png" alt="AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Unified API Layer</h4>
+<h2>Unified API Layer</h2>
 <p>The gateway presents a single API that abstracts provider differences:</p>
 <p>from abc import ABC, abstractmethod</p>
 <p>from dataclasses import dataclass</p>
@@ -188,7 +172,7 @@
 <p>tokens_out=response.usage.completion_tokens,</p>
 <p>cost=self._calculate_cost(response.usage),</p>
 <p>)</p>
-<h4>Load Balancing</h4>
+<h2>Load Balancing</h2>
 <p>Distribute requests across providers based on strategy:</p>
 <p>class LoadBalancer:</p>
 <p>def <strong>init</strong>(self, providers: dict[str, LLMProvider]):</p>
@@ -204,7 +188,7 @@
 <p>else:</p>
 <p>return await self._route_priority(request)</p>
 <p>async def _route_priority(self, request: LLMRequest) -&gt; LLMResponse:</p>
-<h4>Try primary provider first, fall back to secondary</h4>
+<h2>Try primary provider first, fall back to secondary</h2>
 <p>for name in ["primary", "secondary", "fallback"]:</p>
 <p>if name in self.providers:</p>
 <p>try:</p>
@@ -213,7 +197,7 @@
 <p>continue</p>
 <p>raise AllProvidersExhausted("All providers failed")</p>
 <p>async def _route_cheapest(self, request: LLMRequest) -&gt; LLMResponse:</p>
-<h4>Route to the provider with lowest cost for comparable quality</h4>
+<h2>Route to the provider with lowest cost for comparable quality</h2>
 <p>cheap_providers = sorted(</p>
 <p>self.providers.items(),</p>
 <p>key=lambda p: p[1].get_cost_per_token(request.model)[0],</p>
@@ -224,7 +208,7 @@
 <p>except Exception:</p>
 <p>continue</p>
 <p>raise AllProvidersExhausted("All providers failed")</p>
-<h4>Fallback and Retry</h4>
+<h2>Fallback and Retry</h2>
 <p>When a provider fails, automatically switch to alternatives:</p>
 <p>class FallbackHandler:</p>
 <p>def <strong>init</strong>(self, load_balancer: LoadBalancer):</p>
@@ -236,7 +220,7 @@
 <p>return await self.balancer.route(request)</p>
 <p>except RateLimitError:</p>
 <p>await asyncio.sleep(2 ** attempt * 2)</p>
-<h4>Fallback to different provider</h4>
+<h2>Fallback to different provider</h2>
 <p>request.model = self._map_to_alternative(request.model)</p>
 <p>except ProviderTimeoutError:</p>
 <p>await asyncio.sleep(1)</p>
@@ -252,7 +236,7 @@
 <p>"claude-haiku-20260512": "gpt-4o-mini",</p>
 <p>}</p>
 <p>return mapping.get(model, model)</p>
-<h4>Cost Tracking</h4>
+<h2>Cost Tracking</h2>
 <p>Track costs per user, per feature, and per request:</p>
 <p>class CostTracker:</p>
 <p>def <strong>init</strong>(self, db):</p>
@@ -278,7 +262,7 @@
 <p>user_id, time.time() - period_days * 86400,</p>
 <p>)</p>
 <p>return costs[0] if costs else {"total": 0, "in_tokens": 0, "out_tokens": 0}</p>
-<h4>Observability</h4>
+<h2>Observability</h2>
 <p>Every request should produce structured telemetry:</p>
 <p>class GatewayObservability:</p>
 <p>def <strong>init</strong>(self):</p>
@@ -301,13 +285,16 @@
 <p>self.metrics["errors_total"] += 1</p>
 <p>raise</p>
 <p>return wrapped</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>An AI API gateway provides provider abstraction, load balancing, automatic fallback, cost tracking, and observability in a single layer. Route requests based on cost, latency, or priority. Fail over between providers transparently. Track costs per user and feature to prevent budget surprises. Expose latency, error rate, and cost metrics for dashboards. A gateway is essential for any organization using multiple LLM providers in production.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -319,7 +306,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-gateway.html" class="related-card">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a><a href="/en/ai/llm-observability.html" class="related-card">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a><a href="/en/ai/ai-model-deployment-strategies.html" class="related-card">AI Model Deployment: Strategies for Production LLM Serving</a><a href="/en/ai/llm-api-design.html" class="related-card">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></div>
+      <div class="related-grid"><a href="/en/ai/ai-gateway.html" class="related-card"><span class="related-card-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="related-card-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fa</span></a><a href="/en/ai/llm-observability.html" class="related-card"><span class="related-card-title">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</span><span class="related-card-desc">Implement LLM observability for production AI applications: distributed tracing, token usage trackin</span></a><a href="/en/ai/ai-model-deployment-strategies.html" class="related-card"><span class="related-card-title">AI Model Deployment: Strategies for Production LLM Serving</span><span class="related-card-desc">Deploy LLMs to production: serving infrastructure, batching, caching, load balancing, and cost optim</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="related-card-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="related-card-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handli</span></a><a href="/en/ai/ai-prompt-chaining.html" class="related-card"><span class="related-card-title">Prompt Chaining: Building Multi-Step LLM Workflows</span><span class="related-card-desc">Design prompt chains for complex LLM tasks: chain types, state management, error handling, and perfo</span></a><a href="/en/ai/ai-caching-strategies.html" class="related-card"><span class="related-card-title">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</span><span class="related-card-desc">Reduce LLM API costs and latency with AI caching strategies: semantic caching, intelligent invalidat</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

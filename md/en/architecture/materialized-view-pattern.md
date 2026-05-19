@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/materialized-view-pattern
 
 # Materialized View Pattern
 
-## Materialized View Pattern
-
-### Materialized View Pattern
-
-#### Materialized View Pattern
-
-#### Materialized View Pattern
-
-#### Materialized View Pattern
-
-#### Materialized View Pattern
-
-#### Materialized View Pattern
-
-#### Materialized View Pattern
-
-#### Materialized View Pattern
-
-#### Materialized View Pattern
-
-#### Materialized View Pattern
-
-#### Materialized View Pattern
-
-#### Materialized View Pattern
-
-#### Materialized View Pattern
-
-#### Materialized View Pattern
-
 The materialized view pattern creates pre-computed, denormalized read models that are optimized for specific query patterns. Instead of querying multiple services or performing expensive joins at query time, the system maintains a dedicated data store containing exactly the data needed for each query. This pattern is essential for read-heavy workloads and complex cross-service queries in microservice architectures. 
 
 The Problem 
@@ -95,3 +65,9 @@ A pragmatic approach is to use materialized views for the most important queries
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)

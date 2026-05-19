@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png",
       "datePublished": "2026-04-20",
       "dateModified": "2026-04-21",
-      "wordCount": "2513",
+      "wordCount": "2426",
       "keywords": "Architecture, System Design",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
       "inLanguage": "en",
@@ -98,22 +98,7 @@
       <h1 class="article-title">Circuit Breaker Pattern: Building Resilient Systems</h1>
       <div class="article-meta">Published 2026-04-20 · Last active 2026-04-21 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png" alt="Circuit Breaker Pattern: Building Resilient Systems" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Circuit Breaker Pattern: Building Resilient Systems</h2>
-<h3>Circuit Breaker Pattern: Building Resilient Systems</h3>
-<h4>Circuit Breaker Pattern: Building Resilient Systems</h4>
-<h4>Circuit Breaker Pattern: Building Resilient Systems</h4>
-<h4>Circuit Breaker Pattern: Building Resilient Systems</h4>
-<h4>Circuit Breaker Pattern: Building Resilient Systems</h4>
-<h4>Circuit Breaker Pattern: Building Resilient Systems</h4>
-<h4>Circuit Breaker Pattern: Building Resilient Systems</h4>
-<h4>Circuit Breaker Pattern: Building Resilient Systems</h4>
-<h4>Circuit Breaker Pattern: Building Resilient Systems</h4>
-<h4>Circuit Breaker Pattern: Building Resilient Systems</h4>
-<h4>Circuit Breaker Pattern: Building Resilient Systems</h4>
-<h4>Circuit Breaker Pattern: Building Resilient Systems</h4>
-<h4>Circuit Breaker Pattern: Building Resilient Systems</h4>
-<h4>Circuit Breaker Pattern: Building Resilient Systems</h4>
-<p>The circuit breaker pattern prevents cascading failures in distributed systems. When a service depends on another service that is failing, the circuit breaker detects the failures and stops sending requests to the failing service, allowing it time to recover. This article covers the circuit breaker state machine, implementation with Resilience4j, monitoring, and recovery strategies. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png" alt="Circuit Breaker Pattern: Building Resilient Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>The circuit breaker pattern prevents cascading failures in distributed systems. When a service depends on another service that is failing, the circuit breaker detects the failures and stops sending requests to the failing service, allowing it time to recover. This article covers the circuit breaker state machine, implementation with Resilience4j, monitoring, and recovery strategies. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png" alt="Circuit Breaker Pattern: Building Resilient Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The Circuit Breaker State Machine </p>
 <p>A circuit breaker has three states: Closed, Open, and Half-Open. </p>
 <p>+-----------+</p>
@@ -222,7 +207,7 @@
 <p>return PaymentResponse.failed("Payment temporarily unavailable, please retry");</p>
 <p>}</p>
 <p>}</p>
-<h4>application.yml</h4>
+<h2>application.yml</h2>
 <p>resilience4j.circuitbreaker:</p>
 <p>configs:</p>
 <p>default:</p>
@@ -327,7 +312,7 @@
 <p><strong>Buffered calls</strong> : Number of buffered calls in the current sliding window.</p>
 </li>
 </ul>
-<h4>Prometheus metric format (from Resilience4j exporter)</h4>
+<h2>Prometheus metric format (from Resilience4j exporter)</h2>
 <p>resilience4j_circuitbreaker_state{name="paymentService",state="closed"} 1</p>
 <p>resilience4j_circuitbreaker_calls{name="paymentService",kind="successful"} 142</p>
 <p>resilience4j_circuitbreaker_calls{name="paymentService",kind="failed"} 8</p>
@@ -417,7 +402,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -429,7 +417,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/bulkhead-pattern.html" class="related-card">Bulkhead Pattern for Resilience</a><a href="/en/architecture/retry-backoff.html" class="related-card">Retry and Backoff Strategies</a><a href="/en/architecture/retry-patterns.html" class="related-card">Retry Patterns</a><a href="/en/architecture/circuit-breaker-vs-bulkhead.html" class="related-card">Circuit Breaker vs Bulkhead Pattern</a></div>
+      <div class="related-grid"><a href="/en/architecture/bulkhead-pattern.html" class="related-card"><span class="related-card-title">Bulkhead Pattern for Resilience</span><span class="related-card-desc">Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, ci</span></a><a href="/en/architecture/retry-backoff.html" class="related-card"><span class="related-card-title">Retry and Backoff Strategies</span><span class="related-card-desc">Learn retry and backoff strategies for building resilient distributed systems — exponential backoff,</span></a><a href="/en/architecture/retry-patterns.html" class="related-card"><span class="related-card-title">Retry Patterns</span><span class="related-card-desc">Learn retry strategies: exponential backoff, jitter, retry budgets, and circuit breaker integration </span></a><a href="/en/architecture/circuit-breaker-vs-bulkhead.html" class="related-card"><span class="related-card-title">Circuit Breaker vs Bulkhead Pattern</span><span class="related-card-desc">Differences, when to use each, resilience patterns, and combined application of circuit breaker and </span></a><a href="/en/architecture/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Building Resilient Systems</span><span class="related-card-desc">Introduction to chaos engineering: principles, practices, and tools for testing system resilience in</span></a><a href="/en/architecture/caching-strategies.html" class="related-card"><span class="related-card-title">Caching Strategies and Patterns in Distributed Systems</span><span class="related-card-desc">Caching patterns: cache-aside, write-through, write-behind, eviction policies, distributed caching w</span></a></div>
     </section>
     
   </div>

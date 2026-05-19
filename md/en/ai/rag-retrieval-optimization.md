@@ -8,43 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/ai/rag-retrieval-optimization.html
 
 # RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
 
-## RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
-
-#### Introduction
+## Introduction
 
 Retrieval quality is the single biggest factor in RAG system performance. Even the best LLM cannot produce accurate answers from irrelevant context. This article covers three optimization layers: hybrid search that combines embedding similarity with keyword matching, re-ranking that refines initial results, and query transformation that bridges the gap between user questions and searchable terms.
 
-#### Hybrid Search
+## Hybrid Search
 
 Pure vector search excels at semantic similarity but misses exact keyword matches. Pure keyword search finds exact terms but misses conceptually related content. Hybrid search combines both:
 
@@ -60,11 +28,11 @@ query: str, collection: str = "documents", limit: int = 10
 
 ) -> list[dict]:
 
-#### Generate dense vector
+## Generate dense vector
 
 dense_vector = embedding_model.encode(query).tolist()
 
-#### Sparse vector (BM25-style)
+## Sparse vector (BM25-style)
 
 sparse_vector = sparse_encoder.encode(query)
 
@@ -74,7 +42,7 @@ collection_name=collection,
 
 requests=[
 
-#### Dense search
+## Dense search
 
 {
 
@@ -86,7 +54,7 @@ requests=[
 
 },
 
-#### Sparse search
+## Sparse search
 
 {
 
@@ -102,11 +70,11 @@ requests=[
 
 )
 
-#### Fusion: Reciprocal Rank Fusion
+## Fusion: Reciprocal Rank Fusion
 
 return rrf_fusion(results[0], results[1], k=60)
 
-#### Reciprocal Rank Fusion
+## Reciprocal Rank Fusion
 
 RRF combines ranked lists from multiple retrieval methods:
 
@@ -128,7 +96,7 @@ return [{"id": id_, "score": score} for id_, score in reranked[:limit]]
 
 RRF is simple, effective, and requires no training. The constant `k` (typically 60) prevents a single high rank from dominating.
 
-#### Cross-Encoder Re-Ranking
+## Cross-Encoder Re-Ranking
 
 After initial retrieval, a cross-encoder model re-scores candidates with higher accuracy:
 
@@ -138,11 +106,11 @@ reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
 
 def retrieve_and_rerank(query: str, top_k: int = 50, rerank_top: int = 5) -> list[dict]:
 
-#### First stage: fast bi-encoder retrieval
+## First stage: fast bi-encoder retrieval
 
 candidates = hybrid_search(query, limit=top_k)
 
-#### Second stage: cross-encoder re-ranking
+## Second stage: cross-encoder re-ranking
 
 pairs = [(query, cand["text"]) for cand in candidates]
 
@@ -158,7 +126,7 @@ return candidates[:rerank_top]
 
 Cross-encoders are 10-100x slower than bi-encoders but significantly more accurate. The two-stage pattern (wide bi-encoder retrieval, narrow cross-encoder re-ranking) balances speed and quality.
 
-#### Query Transformation
+## Query Transformation
 
 User queries are rarely optimal for retrieval. Transform them before searching:
 
@@ -202,7 +170,7 @@ hypothetical = call_llm(f"Write a short passage that perfectly answers: {query}"
 
 return hypothetical
 
-#### Query Decomposition
+## Query Decomposition
 
 Complex questions should be split into sub-queries, each searched independently:
 
@@ -226,7 +194,7 @@ results = hybrid_search(sq, limit=5)
 
 all_results.extend(results)
 
-#### Deduplicate by ID
+## Deduplicate by ID
 
 seen = set()
 
@@ -242,7 +210,7 @@ unique_results.append(r)
 
 return unique_results[:10]
 
-#### Measuring Retrieval Quality
+## Measuring Retrieval Quality
 
 Track these metrics to validate improvements:
 
@@ -272,7 +240,7 @@ metrics["recall@k"] = np.mean(recalls)
 
 return metrics
 
-#### Conclusion
+## Conclusion
 
 Optimize RAG retrieval in three layers. First, implement hybrid search combining dense and sparse vectors with RRF fusion. Second, add cross-encoder re-ranking for precision on early-stage results. Third, transform user queries through expansion, decomposition, or HyDE techniques. Measure recall@k after each change to validate improvements before deploying.
 
@@ -287,3 +255,9 @@ Optimize RAG retrieval in three layers. First, implement hybrid search combining
 **See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search](</en/ai/vector-database-tuning.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>)
 
 **See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search](</en/ai/vector-database-tuning.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>)
+
+**See also:** [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)
+
+**See also:** [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)
+
+**See also:** [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)

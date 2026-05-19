@@ -100,4 +100,4 @@ Stripe's webhook system is the implementation to study — signatures, retries, 
 
 **Bottom line:** These five patterns separate a prototype API from a production API. Implement them before you need them — retrofitting idempotency is much harder than building it in from day one. See also: [REST API Best Practices](</en/tech/rest-api-best-practices.html>) and [API architecture comparison](</en/compare/trpc-vs-graphql-vs-rest.html>).
 
-**See also:** [API Versioning Strategies: URL, Header, and Query Parameter Approaches Compared](</en/tech/api-versioning-strategies.html>), [GraphQL API Design: Schema Best Practices, Federation, and Performance](</en/tech/graphql-api-design.html>), [Webhook Implementation: Design, Security, and Best Practices (2026)](</en/tech/webhook-implementation-guide.html>)
+**See also:** [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Database Design Fundamentals: Normalization, Indexing, and Schema Design](</en/tech/database-design-fundamentals.html>), [Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching](</en/tech/caching-strategies-web-apps.html>)

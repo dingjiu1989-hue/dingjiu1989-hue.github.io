@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-evaluation-metrics.png",
       "datePublished": "2025-12-12",
       "dateModified": "2026-05-08",
-      "wordCount": "1378",
+      "wordCount": "1375",
       "keywords": "Artificial Intelligence, Machine Learning",
       "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
       "inLanguage": "en",
@@ -98,25 +98,9 @@
       <h1 class="article-title">LLM Evaluation Metrics</h1>
       <div class="article-meta">Published 2025-12-12 · Last active 2026-05-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-evaluation-metrics.png" alt="LLM Evaluation Metrics" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>LLM Evaluation Metrics</h2>
-<h3>LLM Evaluation Metrics</h3>
-<h4>LLM Evaluation Metrics</h4>
-<h4>LLM Evaluation Metrics</h4>
-<h4>LLM Evaluation Metrics</h4>
-<h4>LLM Evaluation Metrics</h4>
-<h4>LLM Evaluation Metrics</h4>
-<h4>LLM Evaluation Metrics</h4>
-<h4>LLM Evaluation Metrics</h4>
-<h4>LLM Evaluation Metrics</h4>
-<h4>LLM Evaluation Metrics</h4>
-<h4>LLM Evaluation Metrics</h4>
-<h4>LLM Evaluation Metrics</h4>
-<h4>LLM Evaluation Metrics</h4>
-<h4>LLM Evaluation Metrics</h4>
-<h4>LLM Evaluation Metrics</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Evaluating large language models is fundamentally different from evaluating traditional machine learning models. LLMs produce open-ended outputs, have no single ground truth measure, and can fail in ways that accuracy cannot capture. This guide covers the evaluation metrics and frameworks used to measure LLM performance across different tasks.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-evaluation-metrics.png" alt="LLM Evaluation Metrics" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Classification Metrics</h4>
+<h2>Classification Metrics</h2>
 <p>For classification tasks — sentiment analysis, intent detection, topic classification — standard ML metrics apply:</p>
 <ul>
 <li>
@@ -141,8 +125,8 @@
 <p>Precision = 850/(850+50) = 0.944</p>
 <p>Recall = 850/(850+100) = 0.895</p>
 <p>F1 = 2 * (0.944*0.895)/(0.944+0.895) = 0.919</p>
-<h4>Generation Metrics</h4>
-<h4>ROUGE (Recall-Oriented Understudy for Gisting Evaluation)</h4>
+<h2>Generation Metrics</h2>
+<h2>ROUGE (Recall-Oriented Understudy for Gisting Evaluation)</h2>
 <p>ROUGE measures the overlap between generated text and reference text, primarily used for summarization:</p>
 <ul>
 <li>
@@ -156,7 +140,7 @@
 </li>
 </ul>
 <p>ROUGE correlates reasonably with human judgment for extractive summarization but performs poorly for abstractive summaries where wording differs.</p>
-<h4>BLEU (Bilingual Evaluation Understudy)</h4>
+<h2>BLEU (Bilingual Evaluation Understudy)</h2>
 <p>BLEU measures precision of n-gram overlap, primarily for translation:</p>
 <ul>
 <li>
@@ -170,11 +154,11 @@
 </li>
 </ul>
 <p>BLEU has known limitations: it favors literal translations over fluent ones and correlates poorly with human judgment for creative text.</p>
-<h4>Perplexity</h4>
+<h2>Perplexity</h2>
 <p>Perplexity measures how well the model predicts a sequence — lower is better. It is calculated as the exponential of the average negative log-likelihood:</p>
 <p>Perplexity = exp(-1/N * Σ log P(token_i | context))</p>
 <p>Perplexity is useful for comparing models on the same dataset but cannot compare across datasets. A general model will have higher perplexity than a domain-specific one on the same domain text.</p>
-<h4>Task-Specific Benchmarks</h4>
+<h2>Task-Specific Benchmarks</h2>
 <p>Standardized benchmarks enable model-to-model comparison:</p>
 <ul>
 <li>
@@ -197,7 +181,7 @@
 </li>
 </ul>
 <p>When reporting benchmark scores, always include the exact evaluation setup (few-shot count, prompt template, decoding parameters) since these significantly affect results.</p>
-<h4>LLM-as-Judge Evaluation</h4>
+<h2>LLM-as-Judge Evaluation</h2>
 <p>Using an LLM to evaluate another LLM's outputs has become the standard approach for open-ended tasks:</p>
 <p>judge_prompt = """</p>
 <p>You are evaluating a response for quality. Rate the response on:</p>
@@ -210,7 +194,7 @@
 <p>Output a JSON object with scores and brief reasoning.</p>
 <p>"""</p>
 <p><strong>GPT-4 and Claude-3.5 Opus</strong> are the most commonly used judge models. Agreement between LLM judges and human raters ranges from 70-85% for most tasks, making this approach cost-effective and scalable.</p>
-<h4>Human Evaluation</h4>
+<h2>Human Evaluation</h2>
 <p>Despite automation advances, human evaluation remains the gold standard:</p>
 <ul>
 <li>
@@ -227,7 +211,7 @@
 </li>
 </ul>
 <p>A good annotation rubric defines each score level with concrete examples. For a 5-point helpfulness scale, each point should have anchor examples.</p>
-<h4>Evaluation in Production</h4>
+<h2>Evaluation in Production</h2>
 <p>Production evaluation goes beyond benchmarks:</p>
 <ul>
 <li>
@@ -243,13 +227,16 @@
 <p><strong>Monitoring dashboards</strong> : Track response length, latency, refusal rates, and toxicity scores over time</p>
 </li>
 </ul>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>No single metric captures LLM quality. Effective evaluation combines automated metrics for regression testing, LLM-as-judge for scalable quality assessment, task-specific benchmarks for capability tracking, and human evaluation for final quality assurance. Build an evaluation pipeline that includes all these levels and update it as your use case evolves.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a>, <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -261,7 +248,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-agents-frameworks.html" class="related-card">AI Agent Frameworks Compared</a><a href="/en/ai/ai-api-cost-optimization.html" class="related-card">AI API Cost Optimization</a><a href="/en/ai/ai-prompt-engineering.html" class="related-card">Advanced Prompt Engineering Techniques</a><a href="/en/ai/llm-chaining-patterns.html" class="related-card">LLM Chaining and Pipeline Patterns</a></div>
+      <div class="related-grid"><a href="/en/ai/ai-agents-frameworks.html" class="related-card"><span class="related-card-title">AI Agent Frameworks Compared</span><span class="related-card-desc">Compare leading AI agent frameworks including LangGraph, CrewAI, AutoGen, and OpenAI Assistants API </span></a><a href="/en/ai/ai-api-cost-optimization.html" class="related-card"><span class="related-card-title">AI API Cost Optimization</span><span class="related-card-desc">Strategies for reducing LLM API costs including prompt compression, caching, model selection, batchi</span></a><a href="/en/ai/ai-prompt-engineering.html" class="related-card"><span class="related-card-title">Advanced Prompt Engineering Techniques</span><span class="related-card-desc">Master advanced prompt engineering techniques including chain-of-thought, few-shot, and structured p</span></a><a href="/en/ai/llm-chaining-patterns.html" class="related-card"><span class="related-card-title">LLM Chaining and Pipeline Patterns</span><span class="related-card-desc">Explore LLM chaining patterns including sequential chains, parallel processing, map-reduce, routing,</span></a><a href="/en/ai/llm-context-window.html" class="related-card"><span class="related-card-title">LLM Context Window Management</span><span class="related-card-desc">Best practices for managing LLM context windows effectively including sliding windows, summarization</span></a><a href="/en/ai/ai-testing-frameworks.html" class="related-card"><span class="related-card-title">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</span><span class="related-card-desc">Comprehensive guide to AI testing frameworks including DeepEval, Ragas, and LangSmith. Implement aut</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

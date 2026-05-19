@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-migration.html
 
 # Database Migration Tools and Strategies
 
-## Database Migration Tools and Strategies
-
-### Database Migration Tools and Strategies
-
-#### Database Migration Tools and Strategies
-
-#### Database Migration Tools and Strategies
-
-#### Database Migration Tools and Strategies
-
-#### Database Migration Tools and Strategies
-
-#### Database Migration Tools and Strategies
-
-#### Database Migration Tools and Strategies
-
-#### Database Migration Tools and Strategies
-
-#### Database Migration Tools and Strategies
-
-#### Database Migration Tools and Strategies
-
-#### Database Migration Tools and Strategies
-
-#### Database Migration Tools and Strategies
-
-#### Database Migration Tools and Strategies
-
-#### Database Migration Tools and Strategies
-
 Why Database Migrations Matter 
 
 Database migrations are how you version-control your schema changes. Without a migration system, schema changes are applied manually, untracked, and unrepeatable. Migrations ensure that every environment (dev, staging, production) has the same schema, changes are auditable, and rollbacks are possible. 
@@ -54,7 +24,7 @@ pip install alembic
 
 alembic init alembic
 
-#### alembic/env.py
+## alembic/env.py
 
 from myapp.models import Base
 
@@ -62,15 +32,15 @@ target_metadata = Base.metadata
 
 Creating Migrations 
 
-#### Auto-generate migration
+## Auto-generate migration
 
 alembic revision --autogenerate -m "add user roles table"
 
-#### Apply migrations
+## Apply migrations
 
 alembic upgrade head
 
-#### Rollback
+## Rollback
 
 alembic downgrade -1
 
@@ -118,23 +88,23 @@ op.drop_table('user_roles')
 
 Flyway (Java) 
 
-#### Migration naming convention:
+## Migration naming convention:
 
-#### V1__create_users.sql
+## V1__create_users.sql
 
-#### V2__add_email_column.sql
+## V2__add_email_column.sql
 
-#### V3__create_orders_table.sql
+## V3__create_orders_table.sql
 
-#### Apply migrations
+## Apply migrations
 
 flyway migrate
 
-#### Check status
+## Check status
 
 flyway info
 
-#### Repair checksums
+## Repair checksums
 
 flyway repair
 
@@ -180,9 +150,9 @@ UPDATE users SET email_new = email WHERE email_new IS NULL;
 
 **Phase 2: Migrate**
 
-#### Application reads from new column, still writes to both
+## Application reads from new column, still writes to both
 
-#### Deploy application update
+## Deploy application update
 
 **Phase 3: Contract**
 
@@ -246,7 +216,7 @@ print(f"Updated {offset} rows...")
 
 Online Schema Change (pt-online-schema-change) 
 
-#### For MySQL without downtime
+## For MySQL without downtime
 
 pt-online-schema-change \
 
@@ -272,7 +242,7 @@ op.drop_column('users', 'email')
 
 Test Migrations 
 
-#### Test upgrade and downgrade
+## Test upgrade and downgrade
 
 alembic upgrade head
 
@@ -282,7 +252,7 @@ alembic upgrade head
 
 CI/CD Integration 
 
-#### .github/workflows/migrate.yml
+## .github/workflows/migrate.yml
 
 jobs:
 
@@ -329,3 +299,9 @@ Database migrations bring the same version control discipline to schema changes 
 **See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>)
 
 **See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>)
+
+**See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Normalization Explained](</en/database/database-normalization.html>)
+
+**See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Normalization Explained](</en/database/database-normalization.html>)
+
+**See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Normalization Explained](</en/database/database-normalization.html>)

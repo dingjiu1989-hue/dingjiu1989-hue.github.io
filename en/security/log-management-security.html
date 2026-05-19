@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/log-management-security.png",
       "datePublished": "2025-12-18",
       "dateModified": "2026-05-13",
-      "wordCount": "1659",
+      "wordCount": "1647",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
@@ -98,24 +98,7 @@
       <h1 class="article-title">Security Log Management</h1>
       <div class="article-meta">Published 2025-12-18 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/log-management-security.png" alt="Security Log Management" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Security Log Management</h2>
-<h3>Security Log Management</h3>
-<h4>Security Log Management</h4>
-<h4>Security Log Management</h4>
-<h4>Security Log Management</h4>
-<h4>Security Log Management</h4>
-<h4>Security Log Management</h4>
-<h4>Security Log Management</h4>
-<h4>Security Log Management</h4>
-<h4>Security Log Management</h4>
-<h4>Security Log Management</h4>
-<h4>Security Log Management</h4>
-<h4>Security Log Management</h4>
-<h4>Security Log Management</h4>
-<h4>Security Log Management</h4>
-<h4>Security Log Management</h4>
-<h4>Security Log Management</h4>
-<p>Why Log Management Matters for Security </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/log-management-security.png" alt="Security Log Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Why Log Management Matters for Security </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/log-management-security.png" alt="Security Log Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Logs are the definitive record of what happened in your system. When a security incident occurs, logs provide the evidence needed to determine the attack vector, scope of compromise, and affected data. Without proper log management, incident response becomes guesswork, and forensic analysis is impossible. </p>
 <p>What to Log </p>
 <p>Authentication Events </p>
@@ -175,7 +158,7 @@
 <p>}</p>
 <p>Centralized Log Aggregation </p>
 <p>Distribute log collection agents and centralize storage: </p>
-<h4>Filebeat configuration</h4>
+<h2>Filebeat configuration</h2>
 <p>filebeat.inputs:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: filestream</p>
 <p>id: app-logs</p>
@@ -193,7 +176,7 @@
 <p>ssl.verification_mode: certificate</p>
 <p>SIEM Integration </p>
 <p>A Security Information and Event Management (SIEM) system correlates logs from multiple sources to detect attacks: </p>
-<h4>Example: Custom SIEM rule for brute force detection</h4>
+<h2>Example: Custom SIEM rule for brute force detection</h2>
 <p>from datetime import datetime, timedelta</p>
 <p>class BruteForceDetector:</p>
 <p>def <strong>init</strong>(self, redis_client):</p>
@@ -227,10 +210,10 @@
 <p>self.secret_key = secret_key</p>
 <p>self.previous_hash = self.load_last_hash()</p>
 <p>def secure_log(self, event):</p>
-<h4>Add chained hash for tamper detection</h4>
+<h2>Add chained hash for tamper detection</h2>
 <p>event['_prev_hash'] = self.previous_hash</p>
 <p>event['_timestamp'] = datetime.utcnow().isoformat()</p>
-<h4>Create HMAC signature</h4>
+<h2>Create HMAC signature</h2>
 <p>payload = json.dumps(event, sort_keys=True)</p>
 <p>signature = hmac.new(</p>
 <p>self.secret_key.encode(),</p>
@@ -239,7 +222,7 @@
 <p>).hexdigest()</p>
 <p>event['_signature'] = signature</p>
 <p>self.previous_hash = signature</p>
-<h4>Write to append-only log</h4>
+<h2>Write to append-only log</h2>
 <p>with open('/var/log/secure/audit.log', 'a') as f:</p>
 <p>f.write(json.dumps(event) + '\n')</p>
 <p>def verify_chain(self):</p>
@@ -284,7 +267,10 @@
 <p><strong>See also:</strong> <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/secrets-management.html">Secrets Management for Developers</a></p>
 <p><strong>See also:</strong> <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/secrets-management.html">Secrets Management for Developers</a></p>
 <p><strong>See also:</strong> <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/secrets-management.html">Secrets Management for Developers</a></p>
-<p><strong>See also:</strong> <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/secrets-management.html">Secrets Management for Developers</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/secrets-management.html">Secrets Management for Developers</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/secrets-management.html">Secrets Management for Developers</a></p>
+<p><strong>See also:</strong> <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/secrets-management.html">Secrets Management for Developers</a></p>
+<p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/password-hashing.html">Password Hashing Algorithms Compared</a>, <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/password-hashing.html">Password Hashing Algorithms Compared</a>, <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/password-hashing.html">Password Hashing Algorithms Compared</a>, <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -296,7 +282,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/secure-file-upload.html" class="related-card">Secure File Upload Implementation</a><a href="/en/security/container-security.html" class="related-card">Container Security Best Practices</a><a href="/en/security/secrets-management.html" class="related-card">Secrets Management for Developers</a><a href="/en/security/audit-logging.html" class="related-card">Audit Logging Best Practices</a></div>
+      <div class="related-grid"><a href="/en/security/secure-file-upload.html" class="related-card"><span class="related-card-title">Secure File Upload Implementation</span><span class="related-card-desc">Best practices for implementing secure file upload functionality including validation, storage, scan</span></a><a href="/en/security/container-security.html" class="related-card"><span class="related-card-title">Container Security Best Practices</span><span class="related-card-desc">Essential container security practices including image scanning, minimal base images, runtime securi</span></a><a href="/en/security/secrets-management.html" class="related-card"><span class="related-card-title">Secrets Management for Developers</span><span class="related-card-desc">Best practices for managing API keys, database credentials, and other secrets across development, CI</span></a><a href="/en/security/audit-logging.html" class="related-card"><span class="related-card-title">Audit Logging Best Practices</span><span class="related-card-desc">Guide to audit logging covering immutable logs, log integrity verification, centralized logging arch</span></a><a href="/en/security/security-auditing.html" class="related-card"><span class="related-card-title">Security Auditing and Compliance Frameworks</span><span class="related-card-desc">Overview of SOC 2, ISO 27001, PCI DSS, HIPAA compliance frameworks and how to collect audit evidence</span></a><a href="/en/security/api-gateway-security.html" class="related-card"><span class="related-card-title">API Gateway Security Patterns</span><span class="related-card-desc">Security patterns for API gateways including authentication, rate limiting, IP blocking, request val</span></a></div>
     </section>
     
   </div>

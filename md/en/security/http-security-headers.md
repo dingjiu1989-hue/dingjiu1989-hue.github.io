@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/http-security-headers.html
 
 # HTTP Security Headers Checklist
 
-## HTTP Security Headers Checklist
-
-### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
-#### HTTP Security Headers Checklist
-
 Why Security Headers Matter 
 
 HTTP security headers are the first line of defense for any web application. They tell the browser how to behave when rendering your content, preventing a wide range of attacks including cross-site scripting (XSS), clickjacking, MIME-type sniffing, and protocol downgrade attacks. Many of these headers are easy to implement yet remain missing on the majority of production websites. 
@@ -183,3 +149,9 @@ Implementing HTTP security headers is one of the highest-ROI security improvemen
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
 
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
+
+**See also:** [Network Security Fundamentals](</en/security/network-security.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Network Security Fundamentals](</en/security/network-security.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Network Security Fundamentals](</en/security/network-security.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)

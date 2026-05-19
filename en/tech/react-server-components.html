@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/react-server-components.png",
       "datePublished": "2026-01-12",
       "dateModified": "2026-04-14",
-      "wordCount": "1130",
+      "wordCount": "1108",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,41 +99,24 @@
       <h1 class="article-title">React Server Components</h1>
       <div class="article-meta">Published 2026-01-12 · Last active 2026-04-14 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/react-server-components.png" alt="React Server Components" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>React Server Components</h2>
-<h3>React Server Components</h3>
-<h4>React Server Components</h4>
-<h4>React Server Components</h4>
-<h4>React Server Components</h4>
-<h4>React Server Components</h4>
-<h4>React Server Components</h4>
-<h4>React Server Components</h4>
-<h4>React Server Components</h4>
-<h4>React Server Components</h4>
-<h4>React Server Components</h4>
-<h4>React Server Components</h4>
-<h4>React Server Components</h4>
-<h4>React Server Components</h4>
-<h4>React Server Components</h4>
-<h4>React Server Components</h4>
-<h4>React Server Components</h4>
-<p>React Server Components (RSC) represent a paradigm shift in React's execution model. Unlike traditional React components that always run in the browser, Server Components execute exclusively on the server. They can access data sources directly, reduce client-side JavaScript, and enable streaming responses. This article explores the architecture, patterns, and practical implications of RSC.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/react-server-components.png" alt="React Server Components" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>How Server Components Work</h4>
+      <div class="article-body"><p>React Server Components (RSC) represent a paradigm shift in React's execution model. Unlike traditional React components that always run in the browser, Server Components execute exclusively on the server. They can access data sources directly, reduce client-side JavaScript, and enable streaming responses. This article explores the architecture, patterns, and practical implications of RSC.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/react-server-components.png" alt="React Server Components" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>How Server Components Work</h2>
 <p>Server Components run once on the server during rendering. They can be async functions that directly await data from databases, file systems, or APIs. The server executes the component, produces a serializable description of the output, and sends it to the client. The client never receives the Server Component's code.</p>
 <p>This is fundamentally different from Server-Side Rendering (SSR). SSR renders components to HTML on the server but still sends all the JavaScript to the client for hydration. Server Components send no JavaScript to the client—only the rendered output. The client-side JavaScript is significantly smaller.</p>
-<h4>Streaming</h4>
+<h2>Streaming</h2>
 <p>Server Components support streaming. The server can send parts of the page as they become available, rather than waiting for the entire page to render. The client progressively displays content, showing faster-loading sections while waiting for slower data sources.</p>
 <p>Streaming is achieved through React's Suspense boundaries. A component wrapped in <code>}&gt;</code> allows the server to stream the fallback immediately and replace it with the component's output when ready. This creates a progressive rendering experience without complex client-side loading states.</p>
-<h4>Data Fetching</h4>
+<h2>Data Fetching</h2>
 <p>Server Components can fetch data directly without building API endpoints. A component can connect to a database, read from the file system, or call external APIs. The data fetching code runs only on the server, eliminating the need to expose data access services to the client.</p>
 <p>Data fetching in Server Components is natural and direct. You write <code>const data = await db.query(...)</code> inside the component. No <code>useEffect</code>, no state management for loading states, no custom hooks. The component fetches data and renders it in the same function.</p>
-<h4>Client Boundaries</h4>
+<h2>Client Boundaries</h2>
 <p>The boundary between Server and Client Components is marked by <code>'use client'</code>. Everything is a Server Component by default. When a component needs interactivity—event handlers, state, effects, browser APIs—you add <code>'use client'</code> to make it a Client Component.</p>
 <p>Client Components are still rendered on the server for the initial HTML (like SSR) but are hydrated on the client. They can import other Client Components but cannot import Server Components. Server Components can import and render Client Components, passing serializable props.</p>
 <p>The placement of client boundaries is a key architectural decision. Pushing boundaries deep into the component tree maximizes the benefits of Server Components. Only the interactive leaf components need to be Client Components, while their parents and siblings remain as Server Components.</p>
-<h4>Bundle Size Impact</h4>
+<h2>Bundle Size Impact</h2>
 <p>The most significant practical benefit of Server Components is reduced bundle size. Libraries used for date formatting, markdown parsing, syntax highlighting, or data fetching run only on the server. Their code is never included in the client bundle.</p>
 <p>For example, a blog post rendered with a markdown library on the server sends only the HTML to the client. The markdown library, which could be hundreds of kilobytes, is never downloaded by the browser. The cumulative impact across an application can reduce bundle sizes by 30-50%.</p>
-<h4>Architectural Considerations</h4>
+<h2>Architectural Considerations</h2>
 <p>Server Components change how you think about component architecture. Components are no longer always interactive—they are primarily data transformers that produce UI. The mental model shifts from "components as interactive widgets" to "components as UI functions" that can optionally add interactivity.</p>
 <p>This model encourages a more data-oriented architecture. Components fetch and render data in the same place. The data flow is clear and predictable. There is less ceremony around data fetching, state management, and prop drilling.</p>
 <p>Server Components are not appropriate for all scenarios. Components with real-time updates, extensive client-side state, or complex interactivity are better as Client Components. The art of RSC architecture is choosing the right boundary for each component based on its interactivity needs.</p>
@@ -141,7 +124,10 @@
 <p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/nextjs-app-router.html">Next.js App Router</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/nextjs-app-router.html">Next.js App Router</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/nextjs-app-router.html">Next.js App Router</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/nextjs-app-router.html">Next.js App Router</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/nextjs-app-router.html">Next.js App Router</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/nextjs-app-router.html">Next.js App Router</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/nextjs-app-router.html">Next.js App Router</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/code-generation.html">Code Generation</a>, <a href="/en/tech/distributed-caching.html">Distributed Caching</a>, <a href="/en/tech/event-processing.html">Event Processing</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/code-generation.html">Code Generation</a>, <a href="/en/tech/distributed-caching.html">Distributed Caching</a>, <a href="/en/tech/event-processing.html">Event Processing</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/code-generation.html">Code Generation</a>, <a href="/en/tech/distributed-caching.html">Distributed Caching</a>, <a href="/en/tech/event-processing.html">Event Processing</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -153,7 +139,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/ansible-automation.html" class="related-card">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a><a href="/en/tech/terraform-state-management.html" class="related-card">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a><a href="/en/tech/nextjs-app-router.html" class="related-card">Next.js App Router</a><a href="/en/tech/prometheus-deep-dive.html" class="related-card">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a></div>
+      <div class="related-grid"><a href="/en/tech/ansible-automation.html" class="related-card"><span class="related-card-title">Ansible Automation: Playbooks, Roles, Inventory, and Vault</span><span class="related-card-desc">Deep dive into Ansible automation covering playbooks, roles, inventory management, Ansible Vault, id</span></a><a href="/en/tech/terraform-state-management.html" class="related-card"><span class="related-card-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</span><span class="related-card-desc">Deep dive into Terraform state management covering remote backends, state locking, migration strateg</span></a><a href="/en/tech/nextjs-app-router.html" class="related-card"><span class="related-card-title">Next.js App Router</span><span class="related-card-desc">Explore Next.js App Router: server components, layouts, loading states, error boundaries, and routin</span></a><a href="/en/tech/prometheus-deep-dive.html" class="related-card"><span class="related-card-title">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</span><span class="related-card-desc">A comprehensive look at Prometheus monitoring covering metrics collection, PromQL queries, recording</span></a><a href="/en/tech/error-handling-patterns.html" class="related-card"><span class="related-card-title">Error Handling Patterns</span><span class="related-card-desc">Master error handling patterns: Result types, exceptions, error boundaries, resilience strategies, a</span></a><a href="/en/tech/multi-cloud-strategy.html" class="related-card"><span class="related-card-title">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</span><span class="related-card-desc">In-depth analysis of multi-cloud architecture covering decision frameworks, abstraction layers, data</span></a></div>
     </section>
     
   </div>

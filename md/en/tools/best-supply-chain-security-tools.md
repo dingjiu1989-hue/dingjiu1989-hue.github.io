@@ -84,4 +84,4 @@ Sigstore/Cosign| Artifact signing| Keyless OIDC| Yes| Free
 
 **When you're enterprise scale:** Anchor Enterprise for policy-as-code across 100+ teams. Chainguard for SLSA Level 3 provenance across your entire container fleet.
 
-**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Container Registry and Artifact Management Tools 2026: Docker Hub vs GHCR vs ECR vs Harbor vs Artifactory](</en/tools/best-container-registry-tools.html>), [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>)
+**See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>), [Best Terminal Emulators 2026](</en/tools/terminal-emulators.html>)

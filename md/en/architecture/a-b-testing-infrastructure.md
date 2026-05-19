@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/a-b-testing-infrastructur
 
 # A/B Testing Infrastructure
 
-## A/B Testing Infrastructure
-
-### A/B Testing Infrastructure
-
-#### A/B Testing Infrastructure
-
-#### A/B Testing Infrastructure
-
-#### A/B Testing Infrastructure
-
-#### A/B Testing Infrastructure
-
-#### A/B Testing Infrastructure
-
-#### A/B Testing Infrastructure
-
-#### A/B Testing Infrastructure
-
-#### A/B Testing Infrastructure
-
-#### A/B Testing Infrastructure
-
-#### A/B Testing Infrastructure
-
-#### A/B Testing Infrastructure
-
-#### A/B Testing Infrastructure
-
-#### A/B Testing Infrastructure
-
 A/B testing infrastructure enables organizations to make data-driven decisions by comparing user experiences against a control group. At its core, an A/B testing system must: consistently assign users to experiment groups, reliably track metrics for each group, perform statistical analysis to determine significance, and manage the lifecycle of experiments from creation to analysis. The infrastructure requirements scale with experiment volume, traffic, and statistical rigor. 
 
 Experiment assignment uses deterministic bucketing. A consistent hash of the user identifier and experiment key determines which variant the user sees. This ensures the user remains in the same variant across sessions. The hash function must distribute users uniformly across variants. Common approaches include MD5 or SHA-256 hashed to a modulus, or using the MurmurHash for better distribution characteristics. The assignment function should produce the same result regardless of the order experiments are evaluated. 
@@ -69,3 +39,9 @@ The experiment platform should provide self-service capabilities for product man
 **See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 
 **See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/terraform-infrastructure-code.png",
       "datePublished": "2025-12-03",
       "dateModified": "2026-05-03",
-      "wordCount": "1435",
+      "wordCount": "1406",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
@@ -99,27 +99,10 @@
       <h1 class="article-title">Terraform Infrastructure as Code</h1>
       <div class="article-meta">Published 2025-12-03 · Last active 2026-05-03 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/terraform-infrastructure-code.png" alt="Terraform Infrastructure as Code" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Terraform Infrastructure as Code</h2>
-<h3>Terraform Infrastructure as Code</h3>
-<h4>Terraform Infrastructure as Code</h4>
-<h4>Terraform Infrastructure as Code</h4>
-<h4>Terraform Infrastructure as Code</h4>
-<h4>Terraform Infrastructure as Code</h4>
-<h4>Terraform Infrastructure as Code</h4>
-<h4>Terraform Infrastructure as Code</h4>
-<h4>Terraform Infrastructure as Code</h4>
-<h4>Terraform Infrastructure as Code</h4>
-<h4>Terraform Infrastructure as Code</h4>
-<h4>Terraform Infrastructure as Code</h4>
-<h4>Terraform Infrastructure as Code</h4>
-<h4>Terraform Infrastructure as Code</h4>
-<h4>Terraform Infrastructure as Code</h4>
-<h4>Terraform Infrastructure as Code</h4>
-<h4>Terraform Infrastructure as Code</h4>
-<p>Terraform has become the standard tool for Infrastructure as Code (IaC). It allows you to define, provision, and manage cloud resources across providers using declarative configuration. This guide covers practical Terraform patterns for production use.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/terraform-infrastructure-code.png" alt="Terraform Infrastructure as Code" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Core Concepts</h4>
+      <div class="article-body"><p>Terraform has become the standard tool for Infrastructure as Code (IaC). It allows you to define, provision, and manage cloud resources across providers using declarative configuration. This guide covers practical Terraform patterns for production use.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/terraform-infrastructure-code.png" alt="Terraform Infrastructure as Code" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Core Concepts</h2>
 <p>Terraform uses a declarative approach -- you describe the desired state, and Terraform figures out how to reach it:</p>
-<h4>main.tf</h4>
+<h2>main.tf</h2>
 <p>terraform {</p>
 <p>required_version = "&gt;= 1.8"</p>
 <p>required_providers {</p>
@@ -145,18 +128,18 @@
 <p>}</p>
 <p>}</p>
 <p>Key components: providers connect to cloud APIs, resources define infrastructure components, and the backend stores state.</p>
-<h4>State Management</h4>
+<h2>State Management</h2>
 <p>State is the most critical part of Terraform. It maps configuration to real-world resources.</p>
-<h4>Remote State Backend</h4>
+<h2>Remote State Backend</h2>
 <p>Always use remote state storage with locking:</p>
-<h4>backend configuration during init: terraform init -backend-config=backend.hcl</h4>
+<h2>backend configuration during init: terraform init -backend-config=backend.hcl</h2>
 <p>bucket = "company-terraform-state"</p>
 <p>key = "env:/${environment}/networking/terraform.tfstate"</p>
 <p>region = "us-east-1"</p>
 <p>dynamodb_table = "terraform-state-lock"</p>
 <p>encrypt = true</p>
 <p>DynamoDB provides state locking to prevent concurrent modifications. S3 versioning provides state history for rollback.</p>
-<h4>State Access for Other Configurations</h4>
+<h2>State Access for Other Configurations</h2>
 <p>Share outputs across configurations:</p>
 <p>data "terraform_remote_state" "vpc" {</p>
 <p>backend = "s3"</p>
@@ -169,9 +152,9 @@
 <p>resource "aws_instance" "app" {</p>
 <p>subnet_id = data.terraform_remote_state.vpc.outputs.private_subnet_ids[0]</p>
 <p>}</p>
-<h4>Module Design</h4>
+<h2>Module Design</h2>
 <p>Modules are reusable Terraform configurations. Design them for composability:</p>
-<h4>modules/vpc/main.tf</h4>
+<h2>modules/vpc/main.tf</h2>
 <p>variable "vpc_cidr" {</p>
 <p>description = "CIDR block for the VPC"</p>
 <p>type = string</p>
@@ -200,9 +183,9 @@
 <p>value = aws_vpc.this.cidr_block</p>
 <p>}</p>
 <p>Use input validation to catch errors early. Document all variables and outputs with descriptions.</p>
-<h4>Workspace and Environment Management</h4>
+<h2>Workspace and Environment Management</h2>
 <p>Use workspaces or directory structure for environment isolation:</p>
-<h4>Directory structure:</h4>
+<h2>Directory structure:</h2>
 <p>terraform/</p>
 <p>env/</p>
 <p>production/</p>
@@ -217,19 +200,19 @@
 <p>terraform workspace select staging</p>
 <p>terraform plan -var-file=staging.tfvars</p>
 <p>Workspaces are simpler but can become confusing with many environments. Directory-based separation is clearer for complex setups.</p>
-<h4>Terraform Plan and Apply Workflow</h4>
+<h2>Terraform Plan and Apply Workflow</h2>
 <p>The standard workflow in CI/CD:</p>
-<h4>Initialize with backend</h4>
+<h2>Initialize with backend</h2>
 <p>terraform init -backend-config=backend-$ENV.hcl</p>
-<h4>Format and validate</h4>
+<h2>Format and validate</h2>
 <p>terraform fmt -check</p>
 <p>terraform validate</p>
-<h4>Plan</h4>
+<h2>Plan</h2>
 <p>terraform plan -out=tfplan -var-file=$ENV.tfvars</p>
-<h4>Apply (typically in CI with approval gate)</h4>
+<h2>Apply (typically in CI with approval gate)</h2>
 <p>terraform apply tfplan</p>
 <p>Never run <code>terraform apply</code> without a plan file in CI. Always review the plan output before applying.</p>
-<h4>Managing Secrets</h4>
+<h2>Managing Secrets</h2>
 <p>Never hardcode secrets. Use variables with sensitive flag:</p>
 <p>variable "db_password" {</p>
 <p>description = "Database administrator password"</p>
@@ -244,14 +227,14 @@
 <p>data "aws_secretsmanager_secret_version" "db_password" {</p>
 <p>secret_id = "production/db/password"</p>
 <p>}</p>
-<h4>Testing Terraform Code</h4>
-<h4><code>terraform plan</code> as a Test</h4>
+<h2>Testing Terraform Code</h2>
+<h2><code>terraform plan</code> as a Test</h2>
 <p>Run <code>terraform plan</code> in CI to detect drift and validate changes without applying:</p>
 <p>terraform plan -detailed-exitcode</p>
-<h4>Exit code 0: no changes</h4>
-<h4>Exit code 1: error</h4>
-<h4>Exit code 2: changes needed</h4>
-<h4>Terratest for Integration Tests</h4>
+<h2>Exit code 0: no changes</h2>
+<h2>Exit code 1: error</h2>
+<h2>Exit code 2: changes needed</h2>
+<h2>Terratest for Integration Tests</h2>
 <p>// test/vpc_test.go</p>
 <p>func TestVPC(t *testing.T) {</p>
 <p>terraformOptions := &amp;terraform.Options;{</p>
@@ -266,7 +249,7 @@
 <p>output := terraform.Output(t, terraformOptions, "vpc_id")</p>
 <p>assert.NotEmpty(t, output)</p>
 <p>}</p>
-<h4>Common Pitfalls</h4>
+<h2>Common Pitfalls</h2>
 <ul>
 <li>
 <p><strong>State file leaks</strong> : Never commit state files to Git. Use <code>.gitignore</code> and remote backends.</p>
@@ -286,22 +269,25 @@
 <ul>
 <li><strong>Large state files</strong> : Split infrastructure into manageable chunks by service layer (networking, compute, data).</li>
 </ul>
-<h4>Sentinel and Policy as Code</h4>
+<h2>Sentinel and Policy as Code</h2>
 <p>For teams, enforce policies with Sentinel (HashiCorp Enterprise) or Open Policy Agent:</p>
-<h4>Deny public S3 buckets</h4>
+<h2>Deny public S3 buckets</h2>
 <p>deny[msg] {</p>
 <p>resource := input.resource_changes[_]</p>
 <p>resource.type == "aws_s3_bucket"</p>
 <p>resource.change.after.acl == "public-read"</p>
 <p>msg := "S3 buckets must not be publicly readable"</p>
 <p>}</p>
-<h4>Summary</h4>
+<h2>Summary</h2>
 <p>Terraform brings software engineering practices to infrastructure. Use remote state with locking, compose resources into modules, separate environments, and integrate planning into CI/CD. Never hardcode secrets, always validate configurations, and protect critical resources from accidental destruction. With these practices, Terraform enables infrastructure that is versioned, reviewable, reproducible, and auditable.</p>
 <p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>.</p>
 <p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -313,7 +299,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/infrastructure-testing.html" class="related-card">Infrastructure Testing with Terratest and Other Tools</a><a href="/en/tech/serverless-framework.html" class="related-card">Serverless Framework: From Zero to Production</a><a href="/en/tech/kubernetes-services-security.html" class="related-card">Kubernetes Security Best Practices</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <div class="related-grid"><a href="/en/tech/infrastructure-testing.html" class="related-card"><span class="related-card-title">Infrastructure Testing with Terratest and Other Tools</span><span class="related-card-desc">Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources</span></a><a href="/en/tech/serverless-framework.html" class="related-card"><span class="related-card-title">Serverless Framework: From Zero to Production</span><span class="related-card-desc">Deploy AWS Lambda functions with infrastructure as code, local development workflows, monitoring, co</span></a><a href="/en/tech/kubernetes-services-security.html" class="related-card"><span class="related-card-title">Kubernetes Security Best Practices</span><span class="related-card-desc">Essential Kubernetes security practices for pod security, network policies, RBAC, and secrets manage</span></a><a href="/en/tech/github-actions-advanced.html" class="related-card"><span class="related-card-title">Advanced GitHub Actions Workflows</span><span class="related-card-desc">Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching </span></a><a href="/en/tech/bash-scripting-guide.html" class="related-card"><span class="related-card-title">Bash Scripting Best Practices</span><span class="related-card-desc">Essential patterns for writing reliable, maintainable shell scripts in production environments.</span></a><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="related-card-title">Nginx Configuration Guide</span><span class="related-card-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting</span></a></div>
     </section>
     
   </div>

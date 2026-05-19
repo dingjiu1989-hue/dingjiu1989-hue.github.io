@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/alerting-strategies.html
 
 # Alerting Strategies for Production Systems
 
-## Alerting Strategies for Production Systems
-
-### Alerting Strategies for Production Systems
-
-#### Alerting Strategies for Production Systems
-
-#### Alerting Strategies for Production Systems
-
-#### Alerting Strategies for Production Systems
-
-#### Alerting Strategies for Production Systems
-
-#### Alerting Strategies for Production Systems
-
-#### Alerting Strategies for Production Systems
-
-#### Alerting Strategies for Production Systems
-
-#### Alerting Strategies for Production Systems
-
-#### Alerting Strategies for Production Systems
-
-#### Alerting Strategies for Production Systems
-
-#### Alerting Strategies for Production Systems
-
-#### Alerting Strategies for Production Systems
-
-#### Alerting Strategies for Production Systems
-
 Alerting is the mechanism that converts observability data into human action. A well-designed alerting strategy ensures that the right people are notified at the right time with sufficient context to take effective action. Poor alerting — too many, too few, or poorly targeted — degrades operational effectiveness and drives engineer burnout. The goal is not to minimize alerts but to make every alert actionable. 
 
 Alert fatigue is the primary symptom of alerting dysfunction. When engineers receive alerts that require no action (stale alerts, self-resolving conditions, duplicate notifications), they learn to ignore them. Eventually, critical alerts get buried in noise. The cure is ruthless alert hygiene: every alert that pages someone must require human judgment or action. If an alert fires and the engineer consistently finds nothing to do, the alert should be deleted or downgraded to a warning. 
@@ -71,3 +41,9 @@ Silencing rules provide controlled noise reduction. Scheduled maintenance window
 **See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
 
 **See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
+
+**See also:** [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)

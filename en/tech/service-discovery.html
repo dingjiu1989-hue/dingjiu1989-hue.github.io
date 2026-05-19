@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.png",
       "datePublished": "2025-12-31",
       "dateModified": "2026-05-18",
-      "wordCount": "1225",
+      "wordCount": "1185",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
@@ -99,53 +99,39 @@
       <h1 class="article-title">Service Discovery in Microservices</h1>
       <div class="article-meta">Published 2025-12-31 · Last active 2026-05-18 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.png" alt="Service Discovery in Microservices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Service Discovery in Microservices</h2>
-<h3>Service Discovery in Microservices</h3>
-<h4>Service Discovery in Microservices</h4>
-<h4>Service Discovery in Microservices</h4>
-<h4>Service Discovery in Microservices</h4>
-<h4>Service Discovery in Microservices</h4>
-<h4>Service Discovery in Microservices</h4>
-<h4>Service Discovery in Microservices</h4>
-<h4>Service Discovery in Microservices</h4>
-<h4>Service Discovery in Microservices</h4>
-<h4>Service Discovery in Microservices</h4>
-<h4>Service Discovery in Microservices</h4>
-<h4>Service Discovery in Microservices</h4>
-<h4>Service Discovery in Microservices</h4>
-<h4>Service Discovery in Microservices</h4>
-<h4>Service Discovery in Microservices</h4>
-<h4>Service Discovery in Microservices</h4>
-<p>Service discovery enables services to find and communicate with each other in a distributed system. In static environments, service locations could be hardcoded. In dynamic environments like Kubernetes, service instances are ephemeral—they come and go, scale up and down, and move between hosts. Service discovery provides a mechanism for locating available service instances.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.png" alt="Service Discovery in Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>The Service Discovery Problem</h4>
+      <div class="article-body"><p>Service discovery enables services to find and communicate with each other in a distributed system. In static environments, service locations could be hardcoded. In dynamic environments like Kubernetes, service instances are ephemeral—they come and go, scale up and down, and move between hosts. Service discovery provides a mechanism for locating available service instances.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.png" alt="Service Discovery in Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>The Service Discovery Problem</h2>
 <p>Service discovery solves two problems. Registration: when a service instance starts, it must register its location and capabilities so other services can find it. Lookup: when a service needs to call another service, it must discover the location of available instances.</p>
 <p>Effective service discovery handles dynamic environments. It reacts to instance registration immediately—new instances become available as soon as they register. It handles instance failures—when an instance crashes or becomes unhealthy, it is removed from the available pool. It distributes load across available instances.</p>
-<h4>DNS-Based Discovery</h4>
+<h2>DNS-Based Discovery</h2>
 <p>DNS-based service discovery uses DNS records to resolve service names to IP addresses. A service named <code>orders-service</code> resolves to one or more IP addresses of healthy instances. The DNS server is updated as instances come and go.</p>
 <p>The simplest approach uses round-robin DNS. Multiple A records return IP addresses in rotating order, distributing requests across instances. More sophisticated approaches use DNS with health checking—only healthy instances are included in DNS responses.</p>
 <p>DNS-based discovery is simple and ubiquitous. Every system has a DNS resolver. However, DNS caching can cause delays in propagating changes. TTL settings must balance responsiveness against DNS query load. DNS also has limited support for advanced load balancing and port-based routing.</p>
-<h4>Consul</h4>
+<h2>Consul</h2>
 <p>HashiCorp Consul provides service discovery with health checking, key-value storage, and multi-datacenter support. Services register with Consul agents running on each node. Consul performs health checks and removes unhealthy instances.</p>
 <p>Consul uses DNS for backward compatibility: <code>orders.service.consul</code> resolves to available instance IPs. It also provides an HTTP API for richer discovery: querying by service name, tags, and health status. Consul's gossip protocol provides distributed health checking without a central server.</p>
 <p>Consul supports service mesh integration through Consul Connect, providing mTLS and intentions alongside service discovery. This makes Consul a comprehensive service networking platform for organizations not using Kubernetes.</p>
-<h4>Kubernetes Service Discovery</h4>
+<h2>Kubernetes Service Discovery</h2>
 <p>Kubernetes provides built-in service discovery through Services and DNS. Each Service gets a DNS name (e.g., <code>my-service.namespace.svc.cluster.local</code>) that resolves to the Pod IPs backing that Service. The kube-proxy component implements load balancing across Pods.</p>
 <p>Kubernetes Services support several types: ClusterIP (internal only), NodePort (accessible on each node's IP), LoadBalancer (cloud load balancer), and ExternalName (DNS alias). ClusterIP Services are the default for internal service-to-service communication.</p>
 <p>Kubernetes endpoints track Pod health and readiness. Only ready Pods are included in the Service's endpoint list. Liveness probes determine if a Pod is healthy. Readiness probes determine if a Pod should receive traffic.</p>
-<h4>Client-Side vs Server-Side Discovery</h4>
+<h2>Client-Side vs Server-Side Discovery</h2>
 <p>In client-side discovery, the client directly queries the service registry and selects an instance. The client implements load balancing logic—typically using a library like Netflix Eureka with Ribbon, or Kubernetes client-go's round-robin.</p>
 <p>In server-side discovery, the client sends requests to a load balancer or API gateway, which queries the service registry and forwards the request to an available instance. The client does not know about individual instances—it only knows the load balancer address.</p>
-<h4>Health Checking</h4>
+<h2>Health Checking</h2>
 <p>Health checking is integral to service discovery. Services must differentiate between "running" and "ready." A service may be running but not ready to receive traffic. Readiness checks determine traffic eligibility.</p>
 <p>Health checks should test meaningful service functionality. A health endpoint that returns 200 immediately upon startup is less useful than one that verifies database connectivity and internal state. Externally accessible health check endpoints enable monitoring systems and load balancers to validate service health.</p>
-<h4>When to Use Each Approach</h4>
+<h2>When to Use Each Approach</h2>
 <p>Kubernetes environments should use Kubernetes-native discovery through Services. Non-Kubernetes environments can use Consul for comprehensive discovery with health checking. Simple environments with few services can use DNS-based discovery with health-checked records.</p>
 <p>Service discovery is foundational to distributed system reliability. Combined with health checking and load balancing, it enables resilient, self-healing systems that adapt to changing conditions automatically.</p>
 <p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>.</p>
 <p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -157,7 +143,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/microservices-communication.html" class="related-card">Microservices Communication Patterns</a><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/serverless-framework.html" class="related-card">Serverless Framework: From Zero to Production</a></div>
+      <div class="related-grid"><a href="/en/tech/microservices-communication.html" class="related-card"><span class="related-card-title">Microservices Communication Patterns</span><span class="related-card-desc">Compare synchronous and asynchronous communication patterns for microservices, with practical implem</span></a><a href="/en/tech/api-gateway-implementation.html" class="related-card"><span class="related-card-title">API Gateway Implementation Guide</span><span class="related-card-desc">Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformati</span></a><a href="/en/tech/distributed-tracing.html" class="related-card"><span class="related-card-title">Distributed Tracing with OpenTelemetry</span><span class="related-card-desc">Implement distributed tracing with OpenTelemetry covering spans, context propagation, sampling strat</span></a><a href="/en/tech/serverless-framework.html" class="related-card"><span class="related-card-title">Serverless Framework: From Zero to Production</span><span class="related-card-desc">Deploy AWS Lambda functions with infrastructure as code, local development workflows, monitoring, co</span></a><a href="/en/tech/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Principles and Practical Tools</span><span class="related-card-desc">Learn chaos engineering principles with Chaos Monkey, LitmusChaos, and Gremlin, covering steady-stat</span></a><a href="/en/tech/github-actions-advanced.html" class="related-card"><span class="related-card-title">Advanced GitHub Actions Workflows</span><span class="related-card-desc">Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching </span></a></div>
     </section>
     
   </div>

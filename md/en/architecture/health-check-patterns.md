@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/health-check-patterns.htm
 
 # Health Check Patterns
 
-## Health Check Patterns
-
-### Health Check Patterns
-
-#### Health Check Patterns
-
-#### Health Check Patterns
-
-#### Health Check Patterns
-
-#### Health Check Patterns
-
-#### Health Check Patterns
-
-#### Health Check Patterns
-
-#### Health Check Patterns
-
-#### Health Check Patterns
-
-#### Health Check Patterns
-
-#### Health Check Patterns
-
-#### Health Check Patterns
-
-#### Health Check Patterns
-
-#### Health Check Patterns
-
 Health checks are the mechanism by which orchestration platforms and load balancers determine whether an application instance is capable of serving requests. Two distinct check types serve different purposes: liveness and readiness. Understanding the difference and implementing them correctly is essential for reliable deployments, self-healing infrastructure, and graceful degradation. 
 
 Liveness probes determine whether the application process is alive. If a liveness probe fails, the application is stuck or deadlocked — unable to recover without restart. The orchestrator will terminate and restart the container or process. Liveness probes should check only whether the process can operate at all. Common checks include: reading a health file written by the application, checking that the main event loop is running, or verifying that internal goroutine counts are within bounds. 
@@ -69,3 +39,9 @@ Platform-specific implementations vary. Kubernetes supports HTTP, TCP, and comma
 **See also:** [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
 
 **See also:** [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)

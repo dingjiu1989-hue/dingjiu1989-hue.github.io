@@ -65,4 +65,4 @@ Professional UI with developer handoff| **Figma**
   
 **Bottom line for developers:** Use Figma for UI design, Canva for marketing graphics. Both have excellent free tiers. See our [full design tools guide](</en/tools/design-tools-for-developers.html>) for color palettes, icons, and illustration resources.
 
-**See also:** [Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers](</en/compare/supabase-vs-firebase-vs-neon.html>), [Notion vs Obsidian vs Linear (2026): Best Dev Knowledge & Project Tool?](</en/compare/notion-vs-obsidian-vs-linear.html>), [Clerk vs Auth0 vs Lucia Auth (2026): Authentication for Modern Apps](</en/compare/clerk-vs-auth0-vs-lucia.html>)
+**See also:** [GitHub vs GitLab vs Bitbucket (2026): Which Git Platform Is Best?](</en/compare/github-vs-gitlab-vs-bitbucket.html>), [Zustand vs Redux vs Jotai: Best React State Management in 2026?](</en/compare/zustand-vs-redux-vs-jotai.html>), [Best Mobile Frameworks 2026: React Native vs Flutter vs SwiftUI vs Expo vs Tauri Mobile](</en/compare/mobile-frameworks-comparison.html>)

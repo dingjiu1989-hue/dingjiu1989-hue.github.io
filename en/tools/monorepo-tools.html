@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/monorepo-tools.png",
       "datePublished": "2026-02-05",
       "dateModified": "2026-05-13",
-      "wordCount": "1414",
+      "wordCount": "1354",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
@@ -110,25 +110,9 @@
       <h1 class="article-title">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h1>
       <div class="article-meta">Published 2026-02-05 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/monorepo-tools.png" alt="Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h2>
-<h3>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h3>
-<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
-<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
-<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
-<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
-<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
-<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
-<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
-<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
-<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
-<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
-<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
-<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
-<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
-<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Monorepos — storing multiple projects in a single repository — offer simplified dependency management, atomic commits, and shared tooling. But without the right build tool, monorepos become slow as they grow. This article compares four leading monorepo orchestration tools: Turborepo, Nx, Bazel, and Lage.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/monorepo-tools.png" alt="Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Turborepo</h4>
+<h2>Turborepo</h2>
 <p>Vercel's build orchestrator focuses on caching and task scheduling:</p>
 <p>// turbo.json</p>
 <p>{</p>
@@ -156,31 +140,31 @@
 <p>}</p>
 <p>}</p>
 <p>}</p>
-<h4>Run builds across all workspaces in dependency order</h4>
+<h2>Run builds across all workspaces in dependency order</h2>
 <p>turbo run build</p>
-<h4>Run with parallel execution (default: CPU count)</h4>
+<h2>Run with parallel execution (default: CPU count)</h2>
 <p>turbo run build --parallel</p>
-<h4>Dry run to see execution plan</h4>
+<h2>Dry run to see execution plan</h2>
 <p>turbo run build --dry</p>
-<h4>Filter specific packages</h4>
+<h2>Filter specific packages</h2>
 <p>turbo run build --filter=packages/core...</p>
-<h4>Remote caching (Vercel)</h4>
+<h2>Remote caching (Vercel)</h2>
 <p>turbo run build --remote-only</p>
 <p><strong>Strengths</strong> : Fastest setup, excellent documentation, incremental adoption, parallel execution, remote caching with Vercel integration. The caching granularity (file-level inputs) is well-designed.</p>
 <p><strong>Weaknesses</strong> : Limited to JavaScript/TypeScript ecosystem, less sophisticated dependency graph analysis than Nx, remote caching requires Vercel.</p>
-<h4>Nx</h4>
+<h2>Nx</h2>
 <p>Nx provides build orchestration with powerful code generation and dependency analysis:</p>
-<h4>Create an Nx workspace</h4>
+<h2>Create an Nx workspace</h2>
 <p>npx create-nx-workspace@latest myorg</p>
-<h4>Add capabilities</h4>
+<h2>Add capabilities</h2>
 <p>nx g @nx/next:app my-app</p>
 <p>nx g @nx/react:lib shared-ui</p>
 <p>nx g @nx/node:lib api-interfaces</p>
-<h4>Run tasks</h4>
+<h2>Run tasks</h2>
 <p>nx run-many -t build test lint</p>
-<h4>Visualize dependencies</h4>
+<h2>Visualize dependencies</h2>
 <p>nx graph</p>
-<h4>Affected commands (only run what changed)</h4>
+<h2>Affected commands (only run what changed)</h2>
 <p>nx affected:test --base=main</p>
 <p>// nx.json</p>
 <p>{</p>
@@ -203,9 +187,9 @@
 <p>}</p>
 <p><strong>Strengths</strong> : Language-agnostic, powerful dependency graph analysis, code generation reduces boilerplate, affected commands save CI time, plugin ecosystem extends to any tool.</p>
 <p><strong>Weaknesses</strong> : Steeper learning curve, configuration overhead for simple projects, opinionated directory structure, Nx Cloud costs for advanced features.</p>
-<h4>Bazel</h4>
+<h2>Bazel</h2>
 <p>Google's build system prioritizes correctness and hermetic builds:</p>
-<h4>BUILD.bazel</h4>
+<h2>BUILD.bazel</h2>
 <p>load("@npm//:defs.bzl", "npm_link_all_packages")</p>
 <p>npm_link_all_packages(name = "node_modules")</p>
 <p>load("@aspect_rules_ts//ts:defs.bzl", "ts_project")</p>
@@ -220,24 +204,24 @@
 <p>tsconfig = "//:tsconfig",</p>
 <p>out_dir = "dist",</p>
 <p>)</p>
-<h4>python_binary for a data science component</h4>
+<h2>python_binary for a data science component</h2>
 <p>load("@rules_python//python:defs.bzl", "py_binary")</p>
 <p>py_binary(</p>
 <p>name = "data_pipeline",</p>
 <p>srcs = ["pipeline.py"],</p>
 <p>deps = ["@pypi//pandas"],</p>
 <p>)</p>
-<h4>Build with caching and parallelism</h4>
+<h2>Build with caching and parallelism</h2>
 <p>bazel build //packages/core:all</p>
-<h4>Run tests</h4>
+<h2>Run tests</h2>
 <p>bazel test //packages/...</p>
-<h4>Query dependency graph</h4>
+<h2>Query dependency graph</h2>
 <p>bazel query "deps(//packages/core)"</p>
-<h4>Remote execution</h4>
+<h2>Remote execution</h2>
 <p>bazel build --config=remote //...</p>
 <p><strong>Strengths</strong> : Correct by design (hermetic builds), polyglot (JS, Python, Go, Java in one repo), remote build execution, fine-grained caching, handles largest monorepos.</p>
 <p><strong>Weaknesses</strong> : Very steep learning curve, verbose configuration, not JavaScript-native, slower cold builds, requires significant infrastructure.</p>
-<h4>Lage</h4>
+<h2>Lage</h2>
 <p>Microsoft's task runner focused on simplicity:</p>
 <p>// lage.config.js</p>
 <p>module.exports = {</p>
@@ -251,17 +235,17 @@
 <p>cache: true,</p>
 <p>concurrency: 8,</p>
 <p>};</p>
-<h4>Run the build pipeline</h4>
+<h2>Run the build pipeline</h2>
 <p>lage build</p>
-<h4>Run tests</h4>
+<h2>Run tests</h2>
 <p>lage test</p>
-<h4>Show execution plan</h4>
+<h2>Show execution plan</h2>
 <p>lage build --dry</p>
-<h4>Filter by scope</h4>
+<h2>Filter by scope</h2>
 <p>lage build --scope packages/core</p>
 <p><strong>Strengths</strong> : Simple configuration, fast, good Microsoft-ecosystem integration, incremental builds, lightweight.</p>
 <p><strong>Weaknesses</strong> : Smaller community, fewer features than Turborepo/Nx, limited plugin ecosystem, primarily JS/TS.</p>
-<h4>Comparison</h4>
+<h2>Comparison</h2>
 <p>| Feature | Turborepo | Nx | Bazel | Lage |</p>
 <p>|---------|-----------|-----|-------|------|</p>
 <p>| Setup time | Minutes | Minutes | Hours | Minutes |</p>
@@ -271,7 +255,7 @@
 <p>| Code generation | No | Yes | No | No |</p>
 <p>| Learning curve | Low | Medium | High | Low |</p>
 <p>| Ideal repo size | Small-large | Small-large | Large | Small-medium |</p>
-<h4>Recommendations</h4>
+<h2>Recommendations</h2>
 <ul>
 <li>
 <p><strong>Start simple</strong> : Use Turborepo for most JavaScript/TypeScript monorepos — best setup experience.</p>
@@ -293,7 +277,10 @@
 <p><strong>See also:</strong> <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a>, <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/ide-comparison-2026.html">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a>, <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/ide-comparison-2026.html">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a>, <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/ide-comparison-2026.html">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</a></p>
-<p><strong>See also:</strong> <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a>, <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/ide-comparison-2026.html">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a>, <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/ide-comparison-2026.html">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a>, <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/ide-comparison-2026.html">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a>, <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/ide-comparison-2026.html">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/documentation-tools.html">Documentation Tools for Developers 2026</a>, <a href="/en/tools/dotfile-management.html">Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</a>, <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/documentation-tools.html">Documentation Tools for Developers 2026</a>, <a href="/en/tools/dotfile-management.html">Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</a>, <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/documentation-tools.html">Documentation Tools for Developers 2026</a>, <a href="/en/tools/dotfile-management.html">Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</a>, <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -305,7 +292,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/iac-tools-compared.html" class="related-card">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a><a href="/en/tools/build-tools.html" class="related-card">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a><a href="/en/tools/ide-comparison-2026.html" class="related-card">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</a><a href="/en/tools/api-testing-2026.html" class="related-card">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a></div>
+      <div class="related-grid"><a href="/en/tools/iac-tools-compared.html" class="related-card"><span class="related-card-title">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</span><span class="related-card-desc">In-depth comparison of infrastructure-as-code tools covering Terraform, Pulumi, AWS CDK, OpenTofu, a</span></a><a href="/en/tools/build-tools.html" class="related-card"><span class="related-card-title">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</span><span class="related-card-desc">Compare modern JavaScript build tools: esbuild, swc, turbopack, and vite. Benchmark bundling speed, </span></a><a href="/en/tools/ide-comparison-2026.html" class="related-card"><span class="related-card-title">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</span><span class="related-card-desc">Compare VS Code, JetBrains IDEs, Zed, and Cursor for development performance, language support, AI f</span></a><a href="/en/tools/api-testing-2026.html" class="related-card"><span class="related-card-title">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</span><span class="related-card-desc">Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, </span></a><a href="/en/tools/cloud-cli-tools.html" class="related-card"><span class="related-card-title">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</span><span class="related-card-desc">Compare cloud CLI tools: aws-cli for AWS, gcloud for GCP, az for Azure, and s5cmd for high-speed S3 </span></a><a href="/en/tools/database-gui.html" class="related-card"><span class="related-card-title">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</span><span class="related-card-desc">Compare database GUI tools: TablePlus for macOS-native experience, DBeaver for cross-platform versat</span></a></div>
     </section>
     
   </div>

@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/certificate-management.html
 
 # Certificate Management
 
-## Certificate Management
-
-### Certificate Management
-
-#### Certificate Management
-
-#### Certificate Management
-
-#### Certificate Management
-
-#### Certificate Management
-
-#### Certificate Management
-
-#### Certificate Management
-
-#### Certificate Management
-
-#### Certificate Management
-
-#### Certificate Management
-
-#### Certificate Management
-
-#### Certificate Management
-
-#### Certificate Management
-
-#### Certificate Management
-
-#### Certificate Management
-
-#### Certificate Management
-
 Introduction 
 
 TLS certificate management is a critical operational responsibility. Expired certificates cause service outages, security warnings, and loss of user trust. Modern certificate management leverages the ACME protocol and Let's Encrypt to automate issuance and renewal at scale. 
@@ -50,11 +16,11 @@ Let's Encrypt
 
 Let's Encrypt is a free, automated, and open certificate authority (CA) that provides DV certificates trusted by all major browsers. 
 
-#### Install Certbot (Let's Encrypt client)
+## Install Certbot (Let's Encrypt client)
 
 sudo apt install certbot python3-certbot-nginx
 
-#### Obtain certificate with webroot authentication
+## Obtain certificate with webroot authentication
 
 sudo certbot certonly --webroot \
 
@@ -68,7 +34,7 @@ sudo certbot certonly --webroot \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--non-interactive
 
-#### Obtain certificate with DNS challenge (for wildcards)
+## Obtain certificate with DNS challenge (for wildcards)
 
 sudo certbot certonly --manual \
 
@@ -138,21 +104,21 @@ def request_certificate(self, domain, csr_pem):
 
 """Request certificate issuance."""
 
-#### Create authorization
+## Create authorization
 
 order = self.acme.new_order(csr_pem)
 
-#### Complete challenges for each identifier
+## Complete challenges for each identifier
 
 for auth in order.authorizations:
 
-#### HTTP-01 or DNS-01 challenge
+## HTTP-01 or DNS-01 challenge
 
 challenge = auth.body.challenges[0]
 
 self.respond_challenge(challenge)
 
-#### Finalize order
+## Finalize order
 
 order = self.acme.finalize_order(order, csr_pem)
 
@@ -162,9 +128,9 @@ Automated Renewal
 
 Certificate renewal should be fully automated with monitoring and alerting. 
 
-#### Certbot systemd timer for automatic renewal
+## Certbot systemd timer for automatic renewal
 
-#### /etc/systemd/system/certbot-renewal.service
+## /etc/systemd/system/certbot-renewal.service
 
 [Unit]
 
@@ -178,7 +144,7 @@ ExecStart=/usr/bin/certbot renew --quiet --pre-hook "systemctl reload nginx"
 
 ExecStartPost=/usr/bin/systemctl reload nginx
 
-#### /etc/systemd/system/certbot-renewal.timer
+## /etc/systemd/system/certbot-renewal.timer
 
 [Unit]
 
@@ -196,13 +162,13 @@ Persistent=true
 
 WantedBy=timers.target
 
-#### Enable timer
+## Enable timer
 
 sudo systemctl enable certbot-renewal.timer
 
 sudo systemctl start certbot-renewal.timer
 
-#### Test renewal process
+## Test renewal process
 
 sudo certbot renew --dry-run
 
@@ -238,7 +204,7 @@ with context.wrap_socket(sock, server_hostname=hostname) as ssock:
 
 cert = ssock.getpeercert()
 
-#### Parse expiration
+## Parse expiration
 
 expires = datetime.datetime.strptime(
 
@@ -248,11 +214,11 @@ cert['notAfter'], '%b %d %H:%M:%S %Y %Z'
 
 remaining = (expires - datetime.datetime.utcnow()).days
 
-#### Check issuer
+## Check issuer
 
 issuer = dict(x[0] for x in cert['issuer'])
 
-#### Check SANs
+## Check SANs
 
 sans = [san[1] for san in cert.get('subjectAltName', [])]
 
@@ -322,13 +288,13 @@ results.append({
 
 return results
 
-#### OpenSSL-based certificate check
+## OpenSSL-based certificate check
 
 echo | openssl s_client -connect example.com:443 -servername example.com 2>/dev/null | \
 
 openssl x509 -noout -enddate -subject -issuer
 
-#### Mass certificate check
+## Mass certificate check
 
 for domain in $(cat domains.txt); do
 
@@ -344,7 +310,7 @@ done
 
 Certificate Revocation 
 
-#### Check OCSP status
+## Check OCSP status
 
 openssl ocsp -issuer chain.pem -cert cert.pem \
 
@@ -354,7 +320,7 @@ openssl ocsp -issuer chain.pem -cert cert.pem \
 
 -CAfile root.pem
 
-#### CRL check
+## CRL check
 
 curl -O http://crl.example.com/intermediate.crl
 
@@ -375,3 +341,9 @@ Modern certificate management means automation. Use Let's Encrypt with Certbot f
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
 
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
+
+**See also:** [Serverless Security](</en/security/serverless-security.html>), [Session Management Security](</en/security/session-management.html>), [API Authentication Methods](</en/security/api-authentication.html>)
+
+**See also:** [Serverless Security](</en/security/serverless-security.html>), [Session Management Security](</en/security/session-management.html>), [API Authentication Methods](</en/security/api-authentication.html>)
+
+**See also:** [Serverless Security](</en/security/serverless-security.html>), [Session Management Security](</en/security/session-management.html>), [API Authentication Methods](</en/security/api-authentication.html>)

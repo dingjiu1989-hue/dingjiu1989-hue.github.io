@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/blue-green-deployment.png",
       "datePublished": "2026-05-06",
       "dateModified": "2026-05-15",
-      "wordCount": "633",
+      "wordCount": "606",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,37 +96,25 @@
       <h1 class="article-title">Blue-Green Deployment Strategy</h1>
       <div class="article-meta">Published 2026-05-06 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/blue-green-deployment.png" alt="Blue-Green Deployment Strategy" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Blue-Green Deployment Strategy</h2>
-<h3>Blue-Green Deployment Strategy</h3>
-<h4>Blue-Green Deployment Strategy</h4>
-<h4>Blue-Green Deployment Strategy</h4>
-<h4>Blue-Green Deployment Strategy</h4>
-<h4>Blue-Green Deployment Strategy</h4>
-<h4>Blue-Green Deployment Strategy</h4>
-<h4>Blue-Green Deployment Strategy</h4>
-<h4>Blue-Green Deployment Strategy</h4>
-<h4>Blue-Green Deployment Strategy</h4>
-<h4>Blue-Green Deployment Strategy</h4>
-<h4>Blue-Green Deployment Strategy</h4>
-<h4>Blue-Green Deployment Strategy</h4>
-<h4>Blue-Green Deployment Strategy</h4>
-<h4>Blue-Green Deployment Strategy</h4>
-<p>Blue-green deployment is a release strategy that maintains two identical production environments—blue (current) and green (new)—and switches traffic between them. This approach eliminates downtime during deployments and provides instant rollback capability.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/blue-green-deployment.png" alt="Blue-Green Deployment Strategy" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>How Blue-Green Works</h4>
+      <div class="article-body"><p>Blue-green deployment is a release strategy that maintains two identical production environments—blue (current) and green (new)—and switches traffic between them. This approach eliminates downtime during deployments and provides instant rollback capability.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/blue-green-deployment.png" alt="Blue-Green Deployment Strategy" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>How Blue-Green Works</h2>
 <p>The blue environment runs the current production version. The green environment is provisioned with the new version and is fully tested. Once green passes all validation, a router or load balancer switches traffic from blue to green. If issues are detected, traffic can be instantly switched back to blue.</p>
 <p>This design requires the infrastructure to run both environments simultaneously. For cloud deployments, this means double the infrastructure cost during the transition period. Container orchestration platforms like Kubernetes can reduce this overhead by running both versions within the same cluster and switching service selectors.</p>
-<h4>Advantages</h4>
+<h2>Advantages</h2>
 <p>Zero-downtime deployments are the primary benefit. Users never experience service interruption because the switch is instantaneous at the load balancer level. Rollback is trivial—switch traffic back to the previous environment. The strategy also supports pre-deployment validation in a production-like environment.</p>
-<h4>Challenges</h4>
+<h2>Challenges</h2>
 <p>Database schema changes require careful handling. If the green deployment includes database migrations, both environments must be compatible with the schema during the transition. Techniques like backward-compatible migrations and phased rollouts address this issue.</p>
 <p>The doubled infrastructure cost can be significant for large deployments. Cloud auto-scaling and shorter overlap periods help manage costs. Some organizations use a single environment with blue-green deployment slots (like Azure Deployment Slots) to reduce infrastructure requirements.</p>
-<h4>Best Practices</h4>
+<h2>Best Practices</h2>
 <p>Automate the entire process from environment provisioning to traffic switching. Use canary analysis during the switch—gradually shift traffic percentage and monitor error rates. Keep the overlap period short to minimize costs. Document the rollback procedure and test it regularly.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -138,7 +126,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/zero-downtime-deployment.html" class="related-card">Zero-Downtime Deployment Strategies</a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card">Zero-Downtime Database Migrations</a><a href="/en/architecture/canary-deployment.html" class="related-card">Canary Deployments for Safe Releases</a><a href="/en/architecture/a-b-testing-infrastructure.html" class="related-card">A/B Testing Infrastructure</a></div>
+      <div class="related-grid"><a href="/en/architecture/zero-downtime-deployment.html" class="related-card"><span class="related-card-title">Zero-Downtime Deployment Strategies</span><span class="related-card-desc">Rolling, blue-green, canary deployments, feature flags, database migrations for zero-downtime releas</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card"><span class="related-card-title">Zero-Downtime Database Migrations</span><span class="related-card-desc">Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and producti</span></a><a href="/en/architecture/canary-deployment.html" class="related-card"><span class="related-card-title">Canary Deployments for Safe Releases</span><span class="related-card-desc">Learn canary deployment: rolling out changes to a subset of users first to reduce deployment risk.</span></a><a href="/en/architecture/a-b-testing-infrastructure.html" class="related-card"><span class="related-card-title">A/B Testing Infrastructure</span><span class="related-card-desc">Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing </span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card"><span class="related-card-title">API Gateway vs Service Mesh</span><span class="related-card-desc">Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and K</span></a></div>
     </section>
     
   </div>

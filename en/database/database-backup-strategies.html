@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-strategies.png",
       "datePublished": "2025-12-22",
       "dateModified": "2026-04-29",
-      "wordCount": "728",
+      "wordCount": "686",
       "keywords": "Database, SQL",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "SQL"}],
       "inLanguage": "en",
@@ -98,45 +98,30 @@
       <h1 class="article-title">Database Backup and Recovery Strategies</h1>
       <div class="article-meta">Published 2025-12-22 · Last active 2026-04-29 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-strategies.png" alt="Database Backup and Recovery Strategies" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Database Backup and Recovery Strategies</h2>
-<h3>Database Backup and Recovery Strategies</h3>
-<h4>Database Backup and Recovery Strategies</h4>
-<h4>Database Backup and Recovery Strategies</h4>
-<h4>Database Backup and Recovery Strategies</h4>
-<h4>Database Backup and Recovery Strategies</h4>
-<h4>Database Backup and Recovery Strategies</h4>
-<h4>Database Backup and Recovery Strategies</h4>
-<h4>Database Backup and Recovery Strategies</h4>
-<h4>Database Backup and Recovery Strategies</h4>
-<h4>Database Backup and Recovery Strategies</h4>
-<h4>Database Backup and Recovery Strategies</h4>
-<h4>Database Backup and Recovery Strategies</h4>
-<h4>Database Backup and Recovery Strategies</h4>
-<h4>Database Backup and Recovery Strategies</h4>
-<p>RPO and RTO </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-strategies.png" alt="Database Backup and Recovery Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>RPO and RTO </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-strategies.png" alt="Database Backup and Recovery Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>RPO (Recovery Point Objective): Maximum acceptable data loss. RTO (Recovery Time Objective): Maximum acceptable downtime. </p>
 <p>| System | RPO | RTO | |--------|-----|-----| | Banking | &lt; 1 min | &lt; 5 min | | E-commerce | &lt; 5 min | &lt; 1 hour | | Analytics | &lt; 24 hours | &lt; 24 hours | </p>
 <p>Backup Types </p>
 <p>| Type | Size | Speed | Restore | |------|------|-------|---------| | Full | Largest | Slowest | Fastest | | Incremental | Smallest | Fastest | Slowest | | Differential | Medium | Medium | Medium | </p>
 <p>Point-in-Time Recovery (WAL Archiving) </p>
-<h4>postgresql.conf</h4>
+<h2>postgresql.conf</h2>
 <p>wal_level = replica</p>
 <p>archive_mode = on</p>
 <p>archive_command = 'cp %p /backups/wal/%f'</p>
 <p>archive_timeout = 60</p>
-<h4>Full base backup</h4>
+<h2>Full base backup</h2>
 <p>pg_basebackup -h localhost -D /backups/base/$(date +%Y%m%d) -X stream -P</p>
-<h4>Restore to point in time</h4>
-<h4>recovery.conf</h4>
+<h2>Restore to point in time</h2>
+<h2>recovery.conf</h2>
 <p>restore_command = 'cp /backups/wal/%f %p'</p>
 <p>recovery_target_time = '2026-05-11 14:23:45'</p>
 <p>Cloud Backups </p>
-<h4>AWS RDS</h4>
+<h2>AWS RDS</h2>
 <p>aws rds create-db-snapshot --db-instance-identifier mydb</p>
 <p>aws rds restore-db-instance-from-db-snapshot \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-restored \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-snapshot-identifier mydb-snapshot</p>
-<h4>Point-in-time restore</h4>
+<h2>Point-in-time restore</h2>
 <p>aws rds restore-db-instance-to-point-in-time \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-db-instance-identifier mydb \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--target-db-instance-identifier mydb-restored \</p>
@@ -149,7 +134,10 @@
 <p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/database-migration.html">Database Migration Tools and Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/database-migration.html">Database Migration Tools and Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/database-migration.html">Database Migration Tools and Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/database-migration.html">Database Migration Tools and Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/database-migration.html">Database Migration Tools and Strategies</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/database-migration.html">Database Migration Tools and Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/database-migration.html">Database Migration Tools and Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a>, <a href="/en/database/database-indexing.html">Database Indexing Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a>, <a href="/en/database/database-indexing.html">Database Indexing Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a>, <a href="/en/database/database-indexing.html">Database Indexing Strategies</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -161,7 +149,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/backup-types.html" class="related-card">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a><a href="/en/database/database-backup-to-s3.html" class="related-card">Database Backup Strategies to Object Storage</a><a href="/en/database/database-migration.html" class="related-card">Database Migration Tools and Strategies</a><a href="/en/database/database-disaster-recovery.html" class="related-card">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a></div>
+      <div class="related-grid"><a href="/en/database/backup-types.html" class="related-card"><span class="related-card-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</span><span class="related-card-desc">Explore database backup strategies including full, incremental, differential backups, WAL archiving,</span></a><a href="/en/database/database-backup-to-s3.html" class="related-card"><span class="related-card-title">Database Backup Strategies to Object Storage</span><span class="related-card-desc">Automate database backups to S3/GCS: incremental backups, point-in-time recovery, and retention poli</span></a><a href="/en/database/database-migration.html" class="related-card"><span class="related-card-title">Database Migration Tools and Strategies</span><span class="related-card-desc">Learn database migration tools and strategies including schema evolution, zero-downtime migrations, </span></a><a href="/en/database/database-disaster-recovery.html" class="related-card"><span class="related-card-title">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</span><span class="related-card-desc">Learn database disaster recovery planning: RPO and RPO definitions, cross-region replication strateg</span></a><a href="/en/database/database-replication.html" class="related-card"><span class="related-card-title">Database Replication Patterns</span><span class="related-card-desc">Explore database replication patterns including leader-follower, multi-leader, peer-to-peer, and str</span></a><a href="/en/database/database-sharding.html" class="related-card"><span class="related-card-title">Database Sharding: Strategies and Trade-offs</span><span class="related-card-desc">Explore key-based, range-based, and directory-based sharding strategies with rebalancing challenges </span></a></div>
     </section>
     
   </div>

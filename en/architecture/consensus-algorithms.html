@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/consensus-algorithms.png",
       "datePublished": "2026-04-22",
       "dateModified": "2026-05-15",
-      "wordCount": "1102",
+      "wordCount": "1052",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">Consensus Algorithms: Paxos, Raft, Zab</h1>
       <div class="article-meta">Published 2026-04-22 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consensus-algorithms.png" alt="Consensus Algorithms: Paxos, Raft, Zab" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Consensus Algorithms: Paxos, Raft, Zab</h2>
-<h3>Consensus Algorithms: Paxos, Raft, Zab</h3>
-<h4>Consensus Algorithms: Paxos, Raft, Zab</h4>
-<h4>Consensus Algorithms: Paxos, Raft, Zab</h4>
-<h4>Consensus Algorithms: Paxos, Raft, Zab</h4>
-<h4>Consensus Algorithms: Paxos, Raft, Zab</h4>
-<h4>Consensus Algorithms: Paxos, Raft, Zab</h4>
-<h4>Consensus Algorithms: Paxos, Raft, Zab</h4>
-<h4>Consensus Algorithms: Paxos, Raft, Zab</h4>
-<h4>Consensus Algorithms: Paxos, Raft, Zab</h4>
-<h4>Consensus Algorithms: Paxos, Raft, Zab</h4>
-<h4>Consensus Algorithms: Paxos, Raft, Zab</h4>
-<h4>Consensus Algorithms: Paxos, Raft, Zab</h4>
-<h4>Consensus Algorithms: Paxos, Raft, Zab</h4>
-<h4>Consensus Algorithms: Paxos, Raft, Zab</h4>
-<p>Consensus algorithms enable a group of distributed nodes to agree on a value despite failures. They are the foundation of replicated state machines, which underpin distributed databases, configuration stores, and coordination services. Three algorithms dominate production systems: Paxos, Raft, and Zab. Understanding their mechanics and tradeoffs is essential for architects designing fault-tolerant infrastructure. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consensus-algorithms.png" alt="Consensus Algorithms: Paxos, Raft, Zab" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Consensus algorithms enable a group of distributed nodes to agree on a value despite failures. They are the foundation of replicated state machines, which underpin distributed databases, configuration stores, and coordination services. Three algorithms dominate production systems: Paxos, Raft, and Zab. Understanding their mechanics and tradeoffs is essential for architects designing fault-tolerant infrastructure. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consensus-algorithms.png" alt="Consensus Algorithms: Paxos, Raft, Zab" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Paxos, published by Leslie Lamport in 1989, was the first practical consensus algorithm. It operates in phases: prepare, promise, accept, and learned. A proposer selects a proposal number and sends prepare requests to acceptors. If a majority of acceptors promise to accept the highest-numbered proposal they have seen, the proposer sends an accept request with its value. Once a majority accepts, the value is chosen. Multi-Paxos extends this to a sequence of values with a distinguished leader for efficiency. </p>
 <p>Paxos is notoriously difficult to understand and implement correctly. The algorithm is correct and proven, but subtle implementation details — handling of persistent state, leader election, log compaction — create many opportunities for bugs. The number of production-grade Paxos implementations is small, and most real systems use Paxos variants (Mencius, Fast Paxos, EPaxos) rather than classic Paxos. </p>
 <p>Raft, published by Diego Ongaro in 2013, was designed specifically to be understandable. It decomposes consensus into three subproblems: leader election, log replication, and safety. Leaders are elected through a randomized timeout mechanism. The leader accepts client requests, appends them to its log, and replicates them to followers. A majority of followers must acknowledge each entry before it is committed. Safety guarantees are clearly described through the leader completeness property and the election safety property. </p>
@@ -128,7 +113,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -140,7 +128,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/domain-events.html" class="related-card">Domain Events: Design and Implementation</a><a href="/en/architecture/idempotency-patterns.html" class="related-card">Idempotency Patterns in Distributed Systems</a><a href="/en/architecture/leader-election.html" class="related-card">Leader Election in Distributed Systems</a><a href="/en/architecture/cache-strategies.html" class="related-card">Caching Strategies</a></div>
+      <div class="related-grid"><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/idempotency-patterns.html" class="related-card"><span class="related-card-title">Idempotency Patterns in Distributed Systems</span><span class="related-card-desc">Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation </span></a><a href="/en/architecture/leader-election.html" class="related-card"><span class="related-card-title">Leader Election in Distributed Systems</span><span class="related-card-desc">Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best </span></a><a href="/en/architecture/cache-strategies.html" class="related-card"><span class="related-card-title">Caching Strategies</span><span class="related-card-desc">Compare write-through, write-around, write-back caching and invalidation strategies for distributed </span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/asynchronous-communication.html" class="related-card"><span class="related-card-title">Asynchronous Communication in Distributed Systems</span><span class="related-card-desc">Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and pattern</span></a></div>
     </section>
     
   </div>

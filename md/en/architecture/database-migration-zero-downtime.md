@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/database-migration-zero-d
 
 # Zero-Downtime Database Migrations
 
-## Zero-Downtime Database Migrations
-
-### Zero-Downtime Database Migrations
-
-#### Zero-Downtime Database Migrations
-
-#### Zero-Downtime Database Migrations
-
-#### Zero-Downtime Database Migrations
-
-#### Zero-Downtime Database Migrations
-
-#### Zero-Downtime Database Migrations
-
-#### Zero-Downtime Database Migrations
-
-#### Zero-Downtime Database Migrations
-
-#### Zero-Downtime Database Migrations
-
-#### Zero-Downtime Database Migrations
-
-#### Zero-Downtime Database Migrations
-
-#### Zero-Downtime Database Migrations
-
-#### Zero-Downtime Database Migrations
-
-#### Zero-Downtime Database Migrations
-
 Database migrations are the highest-risk operation in zero-downtime deployments. Schema changes can lock tables, break queries, or silently corrupt data. In a distributed system where multiple service instances run different versions simultaneously, every migration must be backward compatible with both old and new code. The expand-contract pattern is the canonical approach to achieving this. 
 
 The expand phase adds new schema elements without modifying or removing existing ones. New columns are added as nullable (or with default values), new tables are created alongside existing ones, and new indexes are built in the background. During this phase, old code continues to work unchanged — it reads and writes the old schema elements. New code can begin writing to both old and new elements to populate them for the eventual switchover. 
@@ -73,3 +43,9 @@ Testing migrations against production data volume is essential. Synthetic migrat
 **See also:** [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>)
 
 **See also:** [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search.png",
       "datePublished": "2025-12-23",
       "dateModified": "2026-04-18",
-      "wordCount": "1720",
+      "wordCount": "1624",
       "keywords": "Database, SQL",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "SQL"}],
       "inLanguage": "en",
@@ -98,22 +98,7 @@
       <h1 class="article-title">Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h1>
       <div class="article-meta">Published 2025-12-23 · Last active 2026-04-18 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search.png" alt="Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h2>
-<h3>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h3>
-<h4>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h4>
-<h4>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h4>
-<h4>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h4>
-<h4>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h4>
-<h4>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h4>
-<h4>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h4>
-<h4>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h4>
-<h4>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h4>
-<h4>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h4>
-<h4>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h4>
-<h4>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h4>
-<h4>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h4>
-<h4>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h4>
-<p>The Need for Full-Text Search </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search.png" alt="Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>The Need for Full-Text Search </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search.png" alt="Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Standard database <code>LIKE</code> queries do not scale. They require full table scans, do not understand relevance ranking, and cannot handle typo tolerance, stemming, or faceted search. Dedicated search engines solve these problems with inverted indexes, relevance scoring, and specialized query parsing. </p>
 <p>How Search Engines Work </p>
 <p>An inverted index maps terms to the documents containing them: </p>
@@ -219,7 +204,7 @@
 <p>)</p>
 <p>for hit in results['hits']['hits']:</p>
 <p>print(f"{hit['_score']:.2f}: {hit['_source']['title']}")</p>
-<h4>Facet results</h4>
+<h2>Facet results</h2>
 <p>for bucket in results['aggregations']['by_tag']['buckets']:</p>
 <p>print(f"{bucket['key']}: {bucket['doc_count']} articles")</p>
 <p>Meilisearch </p>
@@ -260,7 +245,7 @@
 <p>Typesense </p>
 <p>Typesense is a fast, typo-tolerant search engine written in C++. </p>
 <p>Setup </p>
-<h4>docker-compose.yml</h4>
+<h2>docker-compose.yml</h2>
 <p>version: '3'</p>
 <p>services:</p>
 <p>typesense:</p>
@@ -278,7 +263,7 @@
 <p>'nodes': [{'host': 'localhost', 'port': '8108', 'protocol': 'http'}],</p>
 <p>'api_key': 'xyz',</p>
 <p>})</p>
-<h4>Create collection (schema)</h4>
+<h2>Create collection (schema)</h2>
 <p>client.collections.create({</p>
 <p>'name': 'articles',</p>
 <p>'fields': [</p>
@@ -290,7 +275,7 @@
 <p>],</p>
 <p>'default_sorting_field': 'views'</p>
 <p>})</p>
-<h4>Index documents</h4>
+<h2>Index documents</h2>
 <p>client.collections['articles'].documents.create({</p>
 <p>'id': '1',</p>
 <p>'title': 'Database Indexing Strategies',</p>
@@ -299,7 +284,7 @@
 <p>'views': 1200,</p>
 <p>'published_at': 1715385600</p>
 <p>})</p>
-<h4>Search</h4>
+<h2>Search</h2>
 <p>results = client.collections['articles'].documents.search({</p>
 <p>'q': 'database indexing',</p>
 <p>'query_by': 'title,content',</p>
@@ -316,7 +301,10 @@
 <p><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/acid-vs-base.html">ACID vs BASE Transactions</a>, <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a></p>
 <p><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/acid-vs-base.html">ACID vs BASE Transactions</a>, <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a></p>
 <p><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/acid-vs-base.html">ACID vs BASE Transactions</a>, <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a></p>
-<p><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/acid-vs-base.html">ACID vs BASE Transactions</a>, <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/acid-vs-base.html">ACID vs BASE Transactions</a>, <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/acid-vs-base.html">ACID vs BASE Transactions</a>, <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a></p>
+<p><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/acid-vs-base.html">ACID vs BASE Transactions</a>, <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a></p>
+<p><strong>See also:</strong> <a href="/en/database/time-series-databases.html">Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a>, <a href="/en/database/data-consistency-models.html">Data Consistency Models Explained</a></p>
+<p><strong>See also:</strong> <a href="/en/database/time-series-databases.html">Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a>, <a href="/en/database/data-consistency-models.html">Data Consistency Models Explained</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/time-series-databases.html">Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a>, <a href="/en/database/data-consistency-models.html">Data Consistency Models Explained</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -328,7 +316,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/postgresql-vs-mysql-2026.html" class="related-card">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a><a href="/en/database/acid-vs-base.html" class="related-card">ACID vs BASE Transactions</a><a href="/en/database/graph-databases.html" class="related-card">Graph Databases (Neo4j, Dgraph, ArangoDB)</a><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a></div>
+      <div class="related-grid"><a href="/en/database/postgresql-vs-mysql-2026.html" class="related-card"><span class="related-card-title">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</span><span class="related-card-desc">Head-to-head comparison of PostgreSQL, MySQL, and SQLite for different use cases — performance bench</span></a><a href="/en/database/acid-vs-base.html" class="related-card"><span class="related-card-title">ACID vs BASE Transactions</span><span class="related-card-desc">Compare ACID and BASE transaction models, when to use each, and how modern databases balance consist</span></a><a href="/en/database/graph-databases.html" class="related-card"><span class="related-card-title">Graph Databases (Neo4j, Dgraph, ArangoDB)</span><span class="related-card-desc">Compare Neo4j, Dgraph, and ArangoDB graph databases for connected data, recommendation engines, soci</span></a><a href="/en/database/columnar-databases.html" class="related-card"><span class="related-card-title">Columnar Databases: When and How to Use Them</span><span class="related-card-desc">Columnar databases like ClickHouse, Redshift, and BigQuery, their compression techniques, query perf</span></a><a href="/en/database/vector-search-optimization.html" class="related-card"><span class="related-card-title">Vector Search Optimization Techniques</span><span class="related-card-desc">Optimize vector search with HNSW tuning, quantization (PQ, scalar), IVF parameters, filtered search </span></a><a href="/en/database/mongodb-vs-postgresql.html" class="related-card"><span class="related-card-title">MongoDB vs PostgreSQL</span><span class="related-card-desc">An in-depth comparison of MongoDB and PostgreSQL covering performance, features, use cases, and migr</span></a></div>
     </section>
     
   </div>

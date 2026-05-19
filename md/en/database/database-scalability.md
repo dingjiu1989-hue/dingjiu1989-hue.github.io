@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-scalability.html
 
 # Database Scalability
 
-## Database Scalability
-
-### Database Scalability
-
-#### Database Scalability
-
-#### Database Scalability
-
-#### Database Scalability
-
-#### Database Scalability
-
-#### Database Scalability
-
-#### Database Scalability
-
-#### Database Scalability
-
-#### Database Scalability
-
-#### Database Scalability
-
-#### Database Scalability
-
-#### Database Scalability
-
-#### Database Scalability
-
-#### Database Scalability
-
 Scalability Options 
 
 Database scalability options range from simple to complex. Start with the simplest approach and evolve. 
@@ -46,7 +16,7 @@ Vertical Scaling
 
 Upgrade to a larger server with more CPU, RAM, and storage. 
 
-#### AWS RDS instance upgrade
+## AWS RDS instance upgrade
 
 resource "aws_db_instance" "main" {
 
@@ -78,7 +48,7 @@ return self.primary
 
 return random.choice(self.replicas)
 
-#### Route reads to replicas, writes to primary
+## Route reads to replicas, writes to primary
 
 db_router.get_conn(write=True).execute("INSERT INTO ...")
 
@@ -147,3 +117,9 @@ Scale vertically first (simple). Add read replicas for read loads. Add caching f
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Pagination: Offset, Cursor, Keyset, and Seek Methods](</en/database/database-pagination-techniques.html>)
+
+**See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Pagination: Offset, Cursor, Keyset, and Seek Methods](</en/database/database-pagination-techniques.html>)
+
+**See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Pagination: Offset, Cursor, Keyset, and Seek Methods](</en/database/database-pagination-techniques.html>)

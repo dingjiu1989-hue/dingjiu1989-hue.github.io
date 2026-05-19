@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/stored-procedures.html
 
 # Stored Procedures vs Functions: When to Use, Languages, Security
 
-## Stored Procedures vs Functions: When to Use, Languages, Security
-
-### Stored Procedures vs Functions: When to Use, Languages, Security
-
-#### Stored Procedures vs Functions: When to Use, Languages, Security
-
-#### Stored Procedures vs Functions: When to Use, Languages, Security
-
-#### Stored Procedures vs Functions: When to Use, Languages, Security
-
-#### Stored Procedures vs Functions: When to Use, Languages, Security
-
-#### Stored Procedures vs Functions: When to Use, Languages, Security
-
-#### Stored Procedures vs Functions: When to Use, Languages, Security
-
-#### Stored Procedures vs Functions: When to Use, Languages, Security
-
-#### Stored Procedures vs Functions: When to Use, Languages, Security
-
-#### Stored Procedures vs Functions: When to Use, Languages, Security
-
-#### Stored Procedures vs Functions: When to Use, Languages, Security
-
-#### Stored Procedures vs Functions: When to Use, Languages, Security
-
-#### Stored Procedures vs Functions: When to Use, Languages, Security
-
-#### Stored Procedures vs Functions: When to Use, Languages, Security
-
 Stored Procedures vs Functions: When to Use, Languages, Security 
 
 Stored procedures and user-defined functions (UDFs) let you execute application logic inside the database engine. While they share similarities, their differences determine the right use case for each. 
@@ -281,3 +251,9 @@ A balanced architecture puts data-integrity rules in the database and complex or
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
+
+**See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>)
+
+**See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>)
+
+**See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>)

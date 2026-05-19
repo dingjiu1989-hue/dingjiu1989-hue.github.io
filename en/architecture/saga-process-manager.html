@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-process-manager.png",
       "datePublished": "2026-05-09",
       "dateModified": "2026-05-19",
-      "wordCount": "618",
+      "wordCount": "533",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -107,36 +107,24 @@
       <h1 class="article-title">Saga vs Process Manager: Orchestration Patterns Compared</h1>
       <div class="article-meta">Published 2026-05-09 · Last active 2026-05-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-process-manager.png" alt="Saga vs Process Manager: Orchestration Patterns Compared" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Saga vs Process Manager: Orchestration Patterns Compared</h2>
-<h3>Saga vs Process Manager: Orchestration Patterns Compared</h3>
-<h4>Saga vs Process Manager: Orchestration Patterns Compared</h4>
-<h4>Saga vs Process Manager: Orchestration Patterns Compared</h4>
-<h4>Saga vs Process Manager: Orchestration Patterns Compared</h4>
-<h4>Saga vs Process Manager: Orchestration Patterns Compared</h4>
-<h4>Saga vs Process Manager: Orchestration Patterns Compared</h4>
-<h4>Saga vs Process Manager: Orchestration Patterns Compared</h4>
-<h4>Saga vs Process Manager: Orchestration Patterns Compared</h4>
-<h4>Saga vs Process Manager: Orchestration Patterns Compared</h4>
-<h4>Saga vs Process Manager: Orchestration Patterns Compared</h4>
-<h4>Saga vs Process Manager: Orchestration Patterns Compared</h4>
-<h4>Saga vs Process Manager: Orchestration Patterns Compared</h4>
-<h4>Saga vs Process Manager: Orchestration Patterns Compared</h4>
-<h4>Saga vs Process Manager: Orchestration Patterns Compared</h4>
-<p>Both sagas and process managers coordinate multi-step workflows in distributed systems. The key difference: sagas handle failure through compensating actions, while process managers maintain explicit workflow state.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-process-manager.png" alt="Saga vs Process Manager: Orchestration Patterns Compared" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Saga Pattern</h4>
+      <div class="article-body"><p>Both sagas and process managers coordinate multi-step workflows in distributed systems. The key difference: sagas handle failure through compensating actions, while process managers maintain explicit workflow state.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-process-manager.png" alt="Saga vs Process Manager: Orchestration Patterns Compared" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Saga Pattern</h2>
 <p>Sagas break long-running transactions into a sequence of local transactions with compensating actions. If a step fails, the saga executes compensating transactions for previous steps. Each service participating in the saga provides both a forward action and a compensating action.</p>
 <p>Saga choreography uses events for coordination. Services listen for events and respond with their actions. Compensations are triggered by failure events. Choreography works well for simple workflows with few participants.</p>
 <p>Saga orchestration uses a central coordinator. The orchestrator tells each service what to do and handles compensation logic. Orchestration provides better visibility and error handling for complex workflows.</p>
-<h4>Process Manager</h4>
+<h2>Process Manager</h2>
 <p>A process manager maintains explicit workflow state, including what has happened and what should happen next. It sends commands to services and waits for responses. The process manager persists state and survives failures.</p>
 <p>Process managers are state machines. Each event transitions the workflow to a new state. Timeout handling triggers retries and escalations. Process managers handle both happy path and error states explicitly.</p>
-<h4>Choosing</h4>
+<h2>Choosing</h2>
 <p>Use sagas for compensating transactions where eventual consistency is acceptable. Use process managers for workflows requiring explicit state tracking, human-in-the-loop approvals, or complex timeout handling.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-notification-vs-event-carrying.html">Event Notification vs Event-Carried State Transfer</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-notification-vs-event-carrying.html">Event Notification vs Event-Carried State Transfer</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-notification-vs-event-carrying.html">Event Notification vs Event-Carried State Transfer</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -148,7 +136,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/event-collaboration.html" class="related-card">Event Collaboration: Choreography vs Orchestration</a><a href="/en/architecture/saga-orchestration.html" class="related-card">Saga Orchestration Pattern</a><a href="/en/architecture/consensus-algorithms.html" class="related-card">Consensus Algorithms: Paxos, Raft, Zab</a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card">API Gateway vs Service Mesh</a></div>
+      <div class="related-grid"><a href="/en/architecture/event-collaboration.html" class="related-card"><span class="related-card-title">Event Collaboration: Choreography vs Orchestration</span><span class="related-card-desc">Event-driven collaboration patterns, saga execution, choreography vs orchestration, error handling i</span></a><a href="/en/architecture/saga-orchestration.html" class="related-card"><span class="related-card-title">Saga Orchestration Pattern</span><span class="related-card-desc">Coordinator pattern for distributed transactions, compensation strategies, state machines, and Tempo</span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="related-card-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="related-card-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices</span></a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card"><span class="related-card-title">API Gateway vs Service Mesh</span><span class="related-card-desc">Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and K</span></a><a href="/en/architecture/cache-strategies.html" class="related-card"><span class="related-card-title">Caching Strategies</span><span class="related-card-desc">Compare write-through, write-around, write-back caching and invalidation strategies for distributed </span></a><a href="/en/architecture/choreography-patterns.html" class="related-card"><span class="related-card-title">Choreography Patterns</span><span class="related-card-desc">Learn choreography patterns: event contracts, monitoring, saga coordination, and decentralized workf</span></a></div>
     </section>
     
   </div>

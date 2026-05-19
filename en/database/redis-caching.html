@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/redis-caching.png",
       "datePublished": "2025-12-24",
       "dateModified": "2026-04-18",
-      "wordCount": "1380",
+      "wordCount": "1389",
       "keywords": "Database, SQL",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "SQL"}],
       "inLanguage": "en",
@@ -98,22 +98,7 @@
       <h1 class="article-title">Redis Caching Patterns</h1>
       <div class="article-meta">Published 2025-12-24 · Last active 2026-04-18 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/redis-caching.png" alt="Redis Caching Patterns" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Redis Caching Patterns</h2>
-<h3>Redis Caching Patterns</h3>
-<h4>Redis Caching Patterns</h4>
-<h4>Redis Caching Patterns</h4>
-<h4>Redis Caching Patterns</h4>
-<h4>Redis Caching Patterns</h4>
-<h4>Redis Caching Patterns</h4>
-<h4>Redis Caching Patterns</h4>
-<h4>Redis Caching Patterns</h4>
-<h4>Redis Caching Patterns</h4>
-<h4>Redis Caching Patterns</h4>
-<h4>Redis Caching Patterns</h4>
-<h4>Redis Caching Patterns</h4>
-<h4>Redis Caching Patterns</h4>
-<h4>Redis Caching Patterns</h4>
-<p>Redis as a Cache </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/redis-caching.png" alt="Redis Caching Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Redis as a Cache </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/redis-caching.png" alt="Redis Caching Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Redis is an in-memory data structure store that excels as a cache due to its sub-millisecond latency, rich data types, and built-in expiration. When used correctly, Redis can reduce database load by 90% or more while dramatically improving application response times. </p>
 <p>Data Structures Overview </p>
 <p>| Structure | Use Case | Example | |-----------|----------|---------| | String | Simple values, counters | User session, page views | | Hash | Object fields | User profile fields | | List | Ordered collection | Message queue, timeline | | Set | Unique values | Tags, followers | | Sorted Set | Ranked data | Leaderboard, rate limiting | | HyperLogLog | Cardinality estimation | Unique visitors | | Bitmap | Boolean flags | Daily active users | </p>
@@ -125,14 +110,14 @@
 <p>r = redis.Redis(host='localhost', port=6379, decode_responses=True)</p>
 <p>def get_user(user_id):</p>
 <p>cache_key = f"user:{user_id}"</p>
-<h4>Try cache first</h4>
+<h2>Try cache first</h2>
 <p>cached = r.get(cache_key)</p>
 <p>if cached:</p>
 <p>return json.loads(cached)</p>
-<h4>Cache miss: load from database</h4>
+<h2>Cache miss: load from database</h2>
 <p>user = db.query("SELECT * FROM users WHERE id = %s", [user_id])</p>
 <p>if user:</p>
-<h4>Populate cache with TTL</h4>
+<h2>Populate cache with TTL</h2>
 <p>r.setex(cache_key, 3600, json.dumps(user))</p>
 <p>return user</p>
 <p><strong>Pros</strong> : Only caches data that is requested, resilient to cache failures. <strong>Cons</strong> : Cache miss penalty (three round trips), stale data until TTL expires. </p>
@@ -140,9 +125,9 @@
 <p>Data is written to the cache first, then to the database. Reads always hit the cache. </p>
 <p>def update_user(user_id, data):</p>
 <p>cache_key = f"user:{user_id}"</p>
-<h4>Write to cache first</h4>
+<h2>Write to cache first</h2>
 <p>r.setex(cache_key, 3600, json.dumps(data))</p>
-<h4>Then write to database</h4>
+<h2>Then write to database</h2>
 <p>db.execute(</p>
 <p>"UPDATE users SET name = %s, email = %s WHERE id = %s",</p>
 <p>[data['name'], data['email'], user_id]</p>
@@ -152,9 +137,9 @@
 <p>Data is written to cache and asynchronously written to the database later. </p>
 <p>def write_behind(user_id, data):</p>
 <p>cache_key = f"user:{user_id}"</p>
-<h4>Write to cache immediately</h4>
+<h2>Write to cache immediately</h2>
 <p>r.setex(cache_key, 3600, json.dumps(data))</p>
-<h4>Queue database write for batch processing</h4>
+<h2>Queue database write for batch processing</h2>
 <p>r.lpush("db:write:queue", json.dumps({</p>
 <p>"table": "users",</p>
 <p>"id": user_id,</p>
@@ -175,7 +160,7 @@
 <p>time.sleep(0.001)</p>
 <p>return None</p>
 <p>def release_lock(lock_name, identifier):</p>
-<h4>Use Lua script for atomic release</h4>
+<h2>Use Lua script for atomic release</h2>
 <p>script = """</p>
 <p>if redis.call("get", KEYS[1]) == ARGV[1] then</p>
 <p>return redis.call("del", KEYS[1])</p>
@@ -188,17 +173,17 @@
 <p>def is_rate_limited(user_id, max_requests=100, window_seconds=60):</p>
 <p>key = f"ratelimit:{user_id}"</p>
 <p>now = time.time()</p>
-<h4>Remove old entries</h4>
+<h2>Remove old entries</h2>
 <p>r.zremrangebyscore(key, 0, now - window_seconds)</p>
-<h4>Count current requests</h4>
+<h2>Count current requests</h2>
 <p>if r.zcard(key) &gt;= max_requests:</p>
 <p>return True</p>
-<h4>Add current request</h4>
+<h2>Add current request</h2>
 <p>r.zadd(key, {now: now})</p>
 <p>r.expire(key, window_seconds)</p>
 <p>return False</p>
 <p>Session Storage </p>
-<h4>Store session with hash</h4>
+<h2>Store session with hash</h2>
 <p>def create_session(session_id, user_data, ttl=86400):</p>
 <p>key = f"session:{session_id}"</p>
 <p>r.hset(key, mapping={</p>
@@ -218,7 +203,7 @@
 <p>Performance Optimization </p>
 <p>Connection Pooling </p>
 <p>from redis.connection import ConnectionPool</p>
-<h4>Reuse connections across requests</h4>
+<h2>Reuse connections across requests</h2>
 <p>pool = ConnectionPool(</p>
 <p>host='localhost',</p>
 <p>port=6379,</p>
@@ -227,19 +212,19 @@
 <p>)</p>
 <p>r = redis.Redis(connection_pool=pool)</p>
 <p>Pipeline / Batching </p>
-<h4>Batch operations to reduce round trips</h4>
+<h2>Batch operations to reduce round trips</h2>
 <p>pipe = r.pipeline()</p>
 <p>for user_id in user_ids:</p>
 <p>pipe.get(f"user:{user_id}")</p>
 <p>results = pipe.execute()</p>
 <p>Monitoring </p>
-<h4>Redis CLI monitoring</h4>
+<h2>Redis CLI monitoring</h2>
 <p>redis-cli info stats</p>
-<h4>Key metrics to watch</h4>
-<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- hit_rate: keyspace_hits / (keyspace_hits + keyspace_misses)</h4>
-<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- evicted_keys: keys evicted due to maxmemory</h4>
-<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- maxmemory: configured memory limit</h4>
-<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- connected_clients: active connections</h4>
+<h2>Key metrics to watch</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- hit_rate: keyspace_hits / (keyspace_hits + keyspace_misses)</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- evicted_keys: keys evicted due to maxmemory</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- maxmemory: configured memory limit</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- connected_clients: active connections</h2>
 <p>Common Pitfalls </p>
 <p>| Pitfall | Consequence | Fix | |---------|-------------|-----| | No TTL | Memory exhaustion | Always set TTL | | Cache stampede | Overload database on miss | Use mutex locking | | Too-large values | Memory waste, slow serialization | Compress or split | | Hot keys | Single key becomes bottleneck | Shard or replicate | | Cache-aside without TTL | Stale data lives forever | Always set TTL | </p>
 <p>Summary </p>
@@ -248,7 +233,10 @@
 <p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/database-replication.html">Database Replication Patterns</a>, <a href="/en/database/distributed-databases.html">Distributed Databases: Concepts and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/database-replication.html">Database Replication Patterns</a>, <a href="/en/database/distributed-databases.html">Distributed Databases: Concepts and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/database-replication.html">Database Replication Patterns</a>, <a href="/en/database/distributed-databases.html">Distributed Databases: Concepts and Implementation</a></p>
-<p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/database-replication.html">Database Replication Patterns</a>, <a href="/en/database/distributed-databases.html">Distributed Databases: Concepts and Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/database-replication.html">Database Replication Patterns</a>, <a href="/en/database/distributed-databases.html">Distributed Databases: Concepts and Implementation</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/database-replication.html">Database Replication Patterns</a>, <a href="/en/database/distributed-databases.html">Distributed Databases: Concepts and Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/database-replication.html">Database Replication Patterns</a>, <a href="/en/database/distributed-databases.html">Distributed Databases: Concepts and Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-monitoring.html">Database Monitoring and Performance Alerting</a>, <a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-monitoring.html">Database Monitoring and Performance Alerting</a>, <a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-monitoring.html">Database Monitoring and Performance Alerting</a>, <a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -260,7 +248,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/redis-caching-patterns.html" class="related-card">Redis Caching Patterns</a><a href="/en/database/database-replication.html" class="related-card">Database Replication Patterns</a><a href="/en/database/distributed-databases.html" class="related-card">Distributed Databases: Concepts and Implementation</a><a href="/en/database/data-modeling.html" class="related-card">Data Modeling Best Practices</a></div>
+      <div class="related-grid"><a href="/en/database/redis-caching-patterns.html" class="related-card"><span class="related-card-title">Redis Caching Patterns</span><span class="related-card-desc">Redis caching patterns including cache-aside, read-through, write-through, and cache invalidation st</span></a><a href="/en/database/database-replication.html" class="related-card"><span class="related-card-title">Database Replication Patterns</span><span class="related-card-desc">Explore database replication patterns including leader-follower, multi-leader, peer-to-peer, and str</span></a><a href="/en/database/distributed-databases.html" class="related-card"><span class="related-card-title">Distributed Databases: Concepts and Implementation</span><span class="related-card-desc">Explore Raft/Paxos consensus, gossip protocols, CRDTs, and the architectures behind Amazon Dynamo an</span></a><a href="/en/database/data-modeling.html" class="related-card"><span class="related-card-title">Data Modeling Best Practices</span><span class="related-card-desc">Learn data modeling best practices including entity-relationship diagrams, normalization, patterns f</span></a><a href="/en/database/nosql-databases-guide.html" class="related-card"><span class="related-card-title">NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</span><span class="related-card-desc">A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage</span></a><a href="/en/database/data-warehousing.html" class="related-card"><span class="related-card-title">Data Warehousing Concepts and Modern Tools</span><span class="related-card-desc">Understand star schema vs snowflake, ETL/ELT, and modern data warehouses including Snowflake, BigQue</span></a></div>
     </section>
     
   </div>

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.png",
       "datePublished": "2026-04-14",
       "dateModified": "2026-05-17",
-      "wordCount": "912",
+      "wordCount": "867",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -110,33 +110,18 @@
       <h1 class="article-title">Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
       <div class="article-meta">Published 2026-04-14 · Last active 2026-05-17 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.png" alt="Connection Pooling: Tuning, Best Practices, and Pitfalls" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Connection Pooling: Tuning, Best Practices, and Pitfalls</h2>
-<h3>Connection Pooling: Tuning, Best Practices, and Pitfalls</h3>
-<h4>Connection Pooling: Tuning, Best Practices, and Pitfalls</h4>
-<h4>Connection Pooling: Tuning, Best Practices, and Pitfalls</h4>
-<h4>Connection Pooling: Tuning, Best Practices, and Pitfalls</h4>
-<h4>Connection Pooling: Tuning, Best Practices, and Pitfalls</h4>
-<h4>Connection Pooling: Tuning, Best Practices, and Pitfalls</h4>
-<h4>Connection Pooling: Tuning, Best Practices, and Pitfalls</h4>
-<h4>Connection Pooling: Tuning, Best Practices, and Pitfalls</h4>
-<h4>Connection Pooling: Tuning, Best Practices, and Pitfalls</h4>
-<h4>Connection Pooling: Tuning, Best Practices, and Pitfalls</h4>
-<h4>Connection Pooling: Tuning, Best Practices, and Pitfalls</h4>
-<h4>Connection Pooling: Tuning, Best Practices, and Pitfalls</h4>
-<h4>Connection Pooling: Tuning, Best Practices, and Pitfalls</h4>
-<h4>Connection Pooling: Tuning, Best Practices, and Pitfalls</h4>
-<p>Connection pooling reuses database connections to avoid the overhead of establishing new connections for every request. Opening a database connection involves TCP handshake, SSL negotiation, and authentication—typically 10-50ms of overhead. Pooling eliminates this latency by maintaining a cache of established connections.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.png" alt="Connection Pooling: Tuning, Best Practices, and Pitfalls" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Pool Size Tuning</h4>
+      <div class="article-body"><p>Connection pooling reuses database connections to avoid the overhead of establishing new connections for every request. Opening a database connection involves TCP handshake, SSL negotiation, and authentication—typically 10-50ms of overhead. Pooling eliminates this latency by maintaining a cache of established connections.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.png" alt="Connection Pooling: Tuning, Best Practices, and Pitfalls" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Pool Size Tuning</h2>
 <p>The optimal pool size depends on your database's capability. PostgreSQL handles connections with one process per connection. Each idle connection consumes roughly 5-10 MB of memory. A pool of 100 connections uses 500 MB to 1 GB of memory even when idle.</p>
 <p>The HikariCP formula provides guidance: pool_size = (core_count * 2) + effective_spindle_count. For a typical 8-core server with SSDs, this gives about 20 connections. More connections do not mean more throughput—they increase context switching and contention.</p>
 <p>Measure your database's connection handling capacity. Monitor active connections, wait events, and query throughput. Increase the pool size only when the database has capacity and the application needs more concurrent queries.</p>
-<h4>Connection Validation</h4>
+<h2>Connection Validation</h2>
 <p>Always validate connections before use. Idle connections may be closed by firewalls, the database server, or network intermediaries. Set a validation query or use connection test functionality.</p>
 <p>PostgreSQL offers several validation methods: setConnectionTestQuery("SELECT 1") verifies connection health. TCP keepalive with validationQueryTimeout detects dead connections quickly. Validation interval should be shorter than the firewall's idle timeout—typically 30-60 seconds.</p>
-<h4>Timeout Configuration</h4>
+<h2>Timeout Configuration</h2>
 <p>Connection timeout controls how long to wait when all connections are busy. Set it based on application tolerance—2-5 seconds for interactive applications, longer for batch jobs. Connection timeout that is too short causes unnecessary failures during traffic spikes.</p>
 <p>Idle timeout closes connections after they remain unused. Set it based on database resource constraints—5-30 minutes typically. Maximum lifetime prevents connections from living forever; set to 30-60 minutes to avoid memory leaks and stale state.</p>
-<h4>Common Pitfalls</h4>
+<h2>Common Pitfalls</h2>
 <p>Connection leaks are the most common pooling issue. Every connection obtained from the pool must be returned. Use try-with-resources (Java) or context managers (Python) to guarantee release.</p>
 <p>Stale connections cause mysterious failures. A connection opened before a database restart becomes invalid. Always validate connections before use, not just when creating them.</p>
 <p>Pool starvation occurs when connections are held longer than necessary. Long-running queries, slow transactions, and connection-holding during external API calls all consume pool capacity. Keep transactions short and avoid holding connections during I/O waits.</p>
@@ -144,7 +129,10 @@
 <p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a></p>
 <p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a></p>
 <p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a></p>
-<p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a></p>
+<p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a></p>
+<p><strong>See also:</strong> <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a></p>
+<p><strong>See also:</strong> <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -156,7 +144,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/connection-management.html" class="related-card">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a><a href="/en/database/database-migration-version-control.html" class="related-card">Database Migration Version Control Strategies</a><a href="/en/database/database-vacuuming-maintenance.html" class="related-card">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a><a href="/en/database/database-containerization.html" class="related-card">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</a></div>
+      <div class="related-grid"><a href="/en/database/connection-management.html" class="related-card"><span class="related-card-title">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</span><span class="related-card-desc">Comprehensive guide to database connection management. Learn connection pooling with PgBouncer and H</span></a><a href="/en/database/database-migration-version-control.html" class="related-card"><span class="related-card-title">Database Migration Version Control Strategies</span><span class="related-card-desc">Best practices for version-controlling database schema migrations across development, staging, and p</span></a><a href="/en/database/database-vacuuming-maintenance.html" class="related-card"><span class="related-card-title">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</span><span class="related-card-desc">Master PostgreSQL VACUUM: autovacuum tuning, bloat prevention, and maintenance best practices.</span></a><a href="/en/database/database-containerization.html" class="related-card"><span class="related-card-title">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</span><span class="related-card-desc">Running databases in containers: Kubernetes StatefulSets, PersistentVolumes, backup strategies, perf</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="related-card-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="related-card-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategi</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="related-card-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="related-card-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing str</span></a></div>
     </section>
     
   </div>

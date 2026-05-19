@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-caching.png",
       "datePublished": "2026-04-09",
       "dateModified": "2026-05-05",
-      "wordCount": "661",
+      "wordCount": "732",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">Database Caching</h1>
       <div class="article-meta">Published 2026-04-09 · Last active 2026-05-05 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-caching.png" alt="Database Caching" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Database Caching</h2>
-<h3>Database Caching</h3>
-<h4>Database Caching</h4>
-<h4>Database Caching</h4>
-<h4>Database Caching</h4>
-<h4>Database Caching</h4>
-<h4>Database Caching</h4>
-<h4>Database Caching</h4>
-<h4>Database Caching</h4>
-<h4>Database Caching</h4>
-<h4>Database Caching</h4>
-<h4>Database Caching</h4>
-<h4>Database Caching</h4>
-<h4>Database Caching</h4>
-<h4>Database Caching</h4>
-<p>Why Cache? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-caching.png" alt="Database Caching" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Why Cache? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-caching.png" alt="Database Caching" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Caching reduces database load and improves response times. A good caching strategy can reduce database queries by 90% or more. </p>
 <p>Caching Strategies </p>
 <p>Cache-Aside </p>
@@ -154,7 +139,7 @@
 <p>value = redis.get(key)</p>
 <p>if value:</p>
 <p>return json.loads(value)</p>
-<h4>Try to acquire lock</h4>
+<h2>Try to acquire lock</h2>
 <p>lock_key = f"lock:{key}"</p>
 <p>if redis.setnx(lock_key, "1"):</p>
 <p>redis.expire(lock_key, 10)</p>
@@ -162,7 +147,7 @@
 <p>redis.setex(key, ttl, json.dumps(value))</p>
 <p>redis.delete(lock_key)</p>
 <p>return value</p>
-<h4>Wait for the other thread</h4>
+<h2>Wait for the other thread</h2>
 <p>import time</p>
 <p>time.sleep(0.1)</p>
 <p>return json.loads(redis.get(key))</p>
@@ -172,7 +157,10 @@
 <p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
-<p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
+<p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
+<p><strong>See also:</strong> <a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
+<p><strong>See also:</strong> <a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -184,7 +172,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/redis-caching-patterns.html" class="related-card">Redis Caching Patterns</a><a href="/en/database/change-data-capture.html" class="related-card">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a><a href="/en/database/database-design-patterns.html" class="related-card">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a><a href="/en/database/database-migration-strategies.html" class="related-card">Database Migration Strategies</a></div>
+      <div class="related-grid"><a href="/en/database/redis-caching-patterns.html" class="related-card"><span class="related-card-title">Redis Caching Patterns</span><span class="related-card-desc">Redis caching patterns including cache-aside, read-through, write-through, and cache invalidation st</span></a><a href="/en/database/change-data-capture.html" class="related-card"><span class="related-card-title">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</span><span class="related-card-desc">Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream process</span></a><a href="/en/database/database-design-patterns.html" class="related-card"><span class="related-card-title">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</span><span class="related-card-desc">Explore database design patterns for application development: Repository pattern, Unit of Work, Quer</span></a><a href="/en/database/database-migration-strategies.html" class="related-card"><span class="related-card-title">Database Migration Strategies</span><span class="related-card-desc">Zero-downtime database migration strategies with rollback planning, testing, and CI/CD integration.</span></a><a href="/en/database/backup-types.html" class="related-card"><span class="related-card-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</span><span class="related-card-desc">Explore database backup strategies including full, incremental, differential backups, WAL archiving,</span></a><a href="/en/database/connection-management.html" class="related-card"><span class="related-card-title">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</span><span class="related-card-desc">Comprehensive guide to database connection management. Learn connection pooling with PgBouncer and H</span></a></div>
     </section>
     
   </div>

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-chaining-patterns.png",
       "datePublished": "2025-12-12",
       "dateModified": "2026-04-27",
-      "wordCount": "1645",
+      "wordCount": "1597",
       "keywords": "Artificial Intelligence, Machine Learning",
       "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
       "inLanguage": "en",
@@ -98,25 +98,9 @@
       <h1 class="article-title">LLM Chaining and Pipeline Patterns</h1>
       <div class="article-meta">Published 2025-12-12 · Last active 2026-04-27 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-chaining-patterns.png" alt="LLM Chaining and Pipeline Patterns" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>LLM Chaining and Pipeline Patterns</h2>
-<h3>LLM Chaining and Pipeline Patterns</h3>
-<h4>LLM Chaining and Pipeline Patterns</h4>
-<h4>LLM Chaining and Pipeline Patterns</h4>
-<h4>LLM Chaining and Pipeline Patterns</h4>
-<h4>LLM Chaining and Pipeline Patterns</h4>
-<h4>LLM Chaining and Pipeline Patterns</h4>
-<h4>LLM Chaining and Pipeline Patterns</h4>
-<h4>LLM Chaining and Pipeline Patterns</h4>
-<h4>LLM Chaining and Pipeline Patterns</h4>
-<h4>LLM Chaining and Pipeline Patterns</h4>
-<h4>LLM Chaining and Pipeline Patterns</h4>
-<h4>LLM Chaining and Pipeline Patterns</h4>
-<h4>LLM Chaining and Pipeline Patterns</h4>
-<h4>LLM Chaining and Pipeline Patterns</h4>
-<h4>LLM Chaining and Pipeline Patterns</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Single LLM calls are rarely sufficient for complex tasks. Chaining — connecting multiple LLM calls in a pipeline — enables sophisticated workflows where each step builds on or refines the output of the previous one. This guide covers the essential chaining patterns used in production AI systems.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-chaining-patterns.png" alt="LLM Chaining and Pipeline Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Why Chain?</h4>
+<h2>Why Chain?</h2>
 <p>A single LLM call has limitations:</p>
 <ul>
 <li>
@@ -133,8 +117,8 @@
 </li>
 </ul>
 <p>Chaining addresses these by decomposing complex tasks into focused steps, each with a clear objective and validation criteria.</p>
-<h4>Core Patterns</h4>
-<h4>Sequential Chain</h4>
+<h2>Core Patterns</h2>
+<h2>Sequential Chain</h2>
 <p>The simplest pattern: output of step N becomes input to step N+1.</p>
 <p><strong>Use case</strong> : Multi-stage content processing</p>
 <p>Raw text → Extract key facts → Verify facts → Format output</p>
@@ -149,25 +133,25 @@
 <p>return call_llm("Verify each claim. Mark as VERIFIED, QUESTIONABLE, or FALSE:", claims)</p>
 <p>def format_output(verified):</p>
 <p>return call_llm("Format the verified claims as a clean bullet list:", verified)</p>
-<h4>Map-Reduce Chain</h4>
+<h2>Map-Reduce Chain</h2>
 <p>Process multiple items independently, then combine results.</p>
 <p><strong>Use case</strong> : Summarizing many documents, analyzing multiple customer reviews</p>
 <p>def map_reduce(items, map_prompt, reduce_prompt):</p>
-<h4>Map: process each item independently</h4>
+<h2>Map: process each item independently</h2>
 <p>intermediate = []</p>
 <p>for item in items:</p>
 <p>result = call_llm(map_prompt, item)</p>
 <p>intermediate.append(result)</p>
-<h4>Reduce: combine all intermediate results</h4>
+<h2>Reduce: combine all intermediate results</h2>
 <p>combined = "\n---\n".join(intermediate)</p>
 <p>final = call_llm(reduce_prompt, combined)</p>
 <p>return final</p>
-<h4>Example: summarize 50 customer reviews</h4>
+<h2>Example: summarize 50 customer reviews</h2>
 <p>reviews = load_reviews()</p>
 <p>map_prompt = "Summarize this customer review in one sentence, focusing on sentiment and key points:"</p>
 <p>reduce_prompt = "Combine these review summaries into an overall analysis with common themes:"</p>
 <p>analysis = map_reduce(reviews, map_prompt, reduce_prompt)</p>
-<h4>Parallel Processing</h4>
+<h2>Parallel Processing</h2>
 <p>Run multiple independent chains simultaneously, then merge results.</p>
 <p><strong>Use case</strong> : Generating different sections of a document simultaneously</p>
 <p>import asyncio</p>
@@ -180,13 +164,13 @@
 <p>)</p>
 <p>return assemble_document(intro, specs, pricing, conclusion)</p>
 <p>Parallel processing reduces wall-clock time significantly when chains are independent.</p>
-<h4>Routing Chain</h4>
+<h2>Routing Chain</h2>
 <p>Route input to different sub-chains based on classification.</p>
 <p><strong>Use case</strong> : Customer support ticket routing</p>
 <p>def routing_chain(query):</p>
-<h4>First, classify the query type</h4>
+<h2>First, classify the query type</h2>
 <p>category = classify_query(query)</p>
-<h4>Route to specialized handler</h4>
+<h2>Route to specialized handler</h2>
 <p>if category == "billing":</p>
 <p>return billing_chain(query)</p>
 <p>elif category == "technical":</p>
@@ -201,7 +185,7 @@
 <p>Respond with only the category name.</p>
 <p>""", query)</p>
 <p>return categories.strip().lower()</p>
-<h4>Branching Chain</h4>
+<h2>Branching Chain</h2>
 <p>Pursue multiple investigation paths from a single input, then synthesize.</p>
 <p><strong>Use case</strong> : Research and analysis</p>
 <p>Query</p>
@@ -210,19 +194,19 @@
 <p>├→ Stakeholder chain (who is affected?)</p>
 <p>└→ Timeline chain (when did events occur?)</p>
 <p>└→ Synthesis: combine all branches into comprehensive report</p>
-<h4>Validation Chain</h4>
+<h2>Validation Chain</h2>
 <p>Add verification steps between generation steps to catch errors early.</p>
 <p>def generate_with_validation(topic):</p>
 <p>draft = generate_draft(topic)</p>
-<h4>Validation gate</h4>
+<h2>Validation gate</h2>
 <p>issues = validate_draft(draft)</p>
 <p>if issues:</p>
 <p>draft = revise_draft(draft, issues)</p>
-<h4>Re-validate</h4>
+<h2>Re-validate</h2>
 <p>issues = validate_draft(draft)</p>
 <p>if not issues:</p>
 <p>return draft</p>
-<h4>If still has issues after revision, flag for human review</h4>
+<h2>If still has issues after revision, flag for human review</h2>
 <p>return {"draft": draft, "issues": issues, "needs_review": True}</p>
 <p>def validate_draft(draft):</p>
 <p>return call_llm("""</p>
@@ -233,8 +217,8 @@
 <p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Completeness</p>
 <p>List any issues found. If none, respond with "NO ISSUES".</p>
 <p>""", draft)</p>
-<h4>Advanced Patterns</h4>
-<h4>Recursive Chain</h4>
+<h2>Advanced Patterns</h2>
+<h2>Recursive Chain</h2>
 <p>Apply the same chain repeatedly until a condition is met:</p>
 <p>def recursive_refine(text, max_iterations=5):</p>
 <p>for i in range(max_iterations):</p>
@@ -244,7 +228,7 @@
 <p>return improved</p>
 <p>text = improved</p>
 <p>return text</p>
-<h4>Feedback Loop Chain</h4>
+<h2>Feedback Loop Chain</h2>
 <p>Use the model's own output to identify and correct its mistakes:</p>
 <p>def self_correcting_generation(task):</p>
 <p>output = generate(task)</p>
@@ -253,18 +237,21 @@
 <p>return output</p>
 <p>revision = call_llm(f"Revise this output based on this feedback: {critique}", output)</p>
 <p>return revision</p>
-<h4>Production Considerations</h4>
+<h2>Production Considerations</h2>
 <p><strong>Error handling</strong> : Each chain step should have a timeout, retry logic, and fallback behavior.</p>
 <p><strong>Observability</strong> : Log inputs, outputs, latency, and token usage at each chain step. This is essential for debugging and cost optimization.</p>
 <p><strong>Caching</strong> : Cache results of deterministic chain steps (classification, extraction) to avoid redundant LLM calls.</p>
 <p><strong>Human escalation</strong> : Design chains so that when confidence is low or validation fails, the task escalates to a human operator.</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>LLM chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Start with sequential chains for simple transformations, add map-reduce for batch processing, and incorporate routing and branching for complex workflows. The key principle: each step should do one thing well, with clear inputs, outputs, and validation criteria.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-evaluation-metrics.html">LLM Evaluation Metrics</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-evaluation-metrics.html">LLM Evaluation Metrics</a>, <a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-evaluation-metrics.html">LLM Evaluation Metrics</a>, <a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-evaluation-metrics.html">LLM Evaluation Metrics</a>, <a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -276,7 +263,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-api-cost-optimization.html" class="related-card">AI API Cost Optimization</a><a href="/en/ai/ai-prompt-engineering.html" class="related-card">Advanced Prompt Engineering Techniques</a><a href="/en/ai/llm-context-window.html" class="related-card">LLM Context Window Management</a><a href="/en/ai/ai-prompt-chaining.html" class="related-card">Prompt Chaining: Building Multi-Step LLM Workflows</a></div>
+      <div class="related-grid"><a href="/en/ai/ai-api-cost-optimization.html" class="related-card"><span class="related-card-title">AI API Cost Optimization</span><span class="related-card-desc">Strategies for reducing LLM API costs including prompt compression, caching, model selection, batchi</span></a><a href="/en/ai/ai-prompt-engineering.html" class="related-card"><span class="related-card-title">Advanced Prompt Engineering Techniques</span><span class="related-card-desc">Master advanced prompt engineering techniques including chain-of-thought, few-shot, and structured p</span></a><a href="/en/ai/llm-context-window.html" class="related-card"><span class="related-card-title">LLM Context Window Management</span><span class="related-card-desc">Best practices for managing LLM context windows effectively including sliding windows, summarization</span></a><a href="/en/ai/ai-prompt-chaining.html" class="related-card"><span class="related-card-title">Prompt Chaining: Building Multi-Step LLM Workflows</span><span class="related-card-desc">Design prompt chains for complex LLM tasks: chain types, state management, error handling, and perfo</span></a><a href="/en/ai/ai-agents-frameworks.html" class="related-card"><span class="related-card-title">AI Agent Frameworks Compared</span><span class="related-card-desc">Compare leading AI agent frameworks including LangGraph, CrewAI, AutoGen, and OpenAI Assistants API </span></a><a href="/en/ai/ai-document-processing.html" class="related-card"><span class="related-card-title">AI Document Processing</span><span class="related-card-desc">Build AI-powered document processing pipelines for extraction, classification, summarization, and da</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

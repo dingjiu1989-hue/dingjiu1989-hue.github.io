@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.png",
       "datePublished": "2026-04-22",
       "dateModified": "2026-05-17",
-      "wordCount": "1139",
+      "wordCount": "1122",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">Cost Per Request Modeling</h1>
       <div class="article-meta">Published 2026-04-22 · Last active 2026-05-17 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.png" alt="Cost Per Request Modeling" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Cost Per Request Modeling</h2>
-<h3>Cost Per Request Modeling</h3>
-<h4>Cost Per Request Modeling</h4>
-<h4>Cost Per Request Modeling</h4>
-<h4>Cost Per Request Modeling</h4>
-<h4>Cost Per Request Modeling</h4>
-<h4>Cost Per Request Modeling</h4>
-<h4>Cost Per Request Modeling</h4>
-<h4>Cost Per Request Modeling</h4>
-<h4>Cost Per Request Modeling</h4>
-<h4>Cost Per Request Modeling</h4>
-<h4>Cost Per Request Modeling</h4>
-<h4>Cost Per Request Modeling</h4>
-<h4>Cost Per Request Modeling</h4>
-<h4>Cost Per Request Modeling</h4>
-<p>Cost per request modeling decomposes infrastructure costs into the cost of serving a single request. This metric enables data-driven optimization: if a request costs \$0.001 and you serve 100 million requests per month, a 20% reduction saves \$20,000 monthly. More importantly, understanding per-request costs reveals which features, endpoints, or user segments are profitable and which may need rethinking. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.png" alt="Cost Per Request Modeling" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Cost per request modeling decomposes infrastructure costs into the cost of serving a single request. This metric enables data-driven optimization: if a request costs \$0.001 and you serve 100 million requests per month, a 20% reduction saves \$20,000 monthly. More importantly, understanding per-request costs reveals which features, endpoints, or user segments are profitable and which may need rethinking. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.png" alt="Cost Per Request Modeling" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Compute cost is calculated from the resources consumed during request processing. For a containerized service with 500 millicores of CPU and 512 MB of memory allocation, running on instances costing \$50/month with 100 requests per second capacity, the per-request compute cost is approximately \$0.0000058 (50 / 30 / 86400 / 100 * 500/1000). This minimal per-request cost compounds through the chain of services involved — the API gateway, multiple backend services, and background job processors all contribute. </p>
 <p>Storage cost includes database capacity, object storage, and caching layers. A request that reads 10 KB of product data, writes 2 KB of order data, and caches the result for 60 seconds has a direct storage cost plus the amortized cost of the storage infrastructure. Database IOPS and provisioned throughput costs are usually larger than raw storage costs. For relational databases, each request's storage cost must account for the total database cost divided across all served requests, not just the marginal cost. </p>
 <p>Network cost is often the easiest to quantify. Cloud providers charge for inter-zone, inter-region, and egress traffic. A request that enters through the load balancer, hits three services across two availability zones, and returns a 50 KB response incurs network costs at each hop. Network costs scale linearly with response size and service depth. Optimizing network cost involves reducing response sizes (compression, partial responses), collocating services in the same availability zone, and using internal load balancers. </p>
@@ -128,7 +113,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -140,7 +128,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card">Zero-Downtime Database Migrations</a><a href="/en/architecture/multi-tenancy.html" class="related-card">Multi-Tenancy Architecture</a><a href="/en/architecture/alerting-strategies.html" class="related-card">Alerting Strategies for Production Systems</a><a href="/en/architecture/api-composition.html" class="related-card">API Composition and Aggregation</a></div>
+      <div class="related-grid"><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card"><span class="related-card-title">Zero-Downtime Database Migrations</span><span class="related-card-desc">Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and producti</span></a><a href="/en/architecture/multi-tenancy.html" class="related-card"><span class="related-card-title">Multi-Tenancy Architecture</span><span class="related-card-desc">Isolation levels, database per tenant, schema per tenant, shared database, routing, and pricing mode</span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a><a href="/en/architecture/caching-http.html" class="related-card"><span class="related-card-title">HTTP Caching Architecture</span><span class="related-card-desc">Cache-Control, ETags, CDN caching, stale-while-revalidate, and cache invalidation strategies</span></a><a href="/en/architecture/cdn-architecture.html" class="related-card"><span class="related-card-title">CDN Architecture</span><span class="related-card-desc">Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content deliv</span></a></div>
     </section>
     
   </div>

@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-architectur
 
 # Rate Limiting Architecture
 
-## Rate Limiting Architecture
-
-### Rate Limiting Architecture
-
-#### Rate Limiting Architecture
-
-#### Rate Limiting Architecture
-
-#### Rate Limiting Architecture
-
-#### Rate Limiting Architecture
-
-#### Rate Limiting Architecture
-
-#### Rate Limiting Architecture
-
-#### Rate Limiting Architecture
-
-#### Rate Limiting Architecture
-
-#### Rate Limiting Architecture
-
-#### Rate Limiting Architecture
-
-#### Rate Limiting Architecture
-
-#### Rate Limiting Architecture
-
-#### Rate Limiting Architecture
-
 Rate limiting protects system resources by controlling the rate at which clients can make requests. It prevents abuse, ensures fair resource allocation, and maintains system stability under load. The choice of rate limiting algorithm — how limits are tracked and enforced — determines the system's accuracy, memory usage, and ability to handle burst traffic. 
 
 The token bucket algorithm is the most widely used rate limiting approach. A bucket holds tokens that replenish at a fixed rate. Each request consumes one token. If the bucket is empty, the request is rejected. The bucket capacity allows bursts — if the bucket is full, a client can send a burst of requests equal to the bucket size. Token bucket has two parameters: the fill rate (steady-state requests per second) and the bucket size (maximum burst). This combination provides both sustained throughput limits and burst tolerance. 
@@ -71,3 +41,9 @@ Client identification is the prerequisite for rate limiting. Simple identificati
 **See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 
 **See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
+
+**See also:** [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
+
+**See also:** [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)

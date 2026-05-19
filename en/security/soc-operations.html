@@ -99,22 +99,7 @@
       <h1 class="article-title">SOC Operations</h1>
       <div class="article-meta">Published 2026-03-13 · Last active 2026-05-11 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/soc-operations.png" alt="SOC Operations" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>SOC Operations</h2>
-<h3>SOC Operations</h3>
-<h4>SOC Operations</h4>
-<h4>SOC Operations</h4>
-<h4>SOC Operations</h4>
-<h4>SOC Operations</h4>
-<h4>SOC Operations</h4>
-<h4>SOC Operations</h4>
-<h4>SOC Operations</h4>
-<h4>SOC Operations</h4>
-<h4>SOC Operations</h4>
-<h4>SOC Operations</h4>
-<h4>SOC Operations</h4>
-<h4>SOC Operations</h4>
-<h4>SOC Operations</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/soc-operations.png" alt="SOC Operations" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/soc-operations.png" alt="SOC Operations" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>A Security Operations Center (SOC) is a centralized team responsible for monitoring, detecting, analyzing, and responding to security incidents. Building an effective SOC requires structured processes, skilled personnel, appropriate tools, and continuous improvement. </p>
 <p>SOC Tier Model </p>
 <p>The SOC team structure typically follows a three-tier model that provides clear career progression and escalation paths. </p>
@@ -138,16 +123,16 @@
 <p>Maintain shift logs</p>
 </li>
 </ul>
-<h4>Tier 1 triage automation example</h4>
+<h2>Tier 1 triage automation example</h2>
 <p>def triage_alert(alert):</p>
-<h4>Check against known false positive patterns</h4>
+<h2>Check against known false positive patterns</h2>
 <p>for fp_pattern in false_positive_patterns:</p>
 <p>if fp_pattern.matches(alert):</p>
 <p>alert.auto_close()</p>
 <p>return</p>
-<h4>Enrich with threat intelligence</h4>
+<h2>Enrich with threat intelligence</h2>
 <p>alert.iocs = enrich_iocs(alert.extract_iocs())</p>
-<h4>Escalate if critical</h4>
+<h2>Escalate if critical</h2>
 <p>if alert.severity == 'critical':</p>
 <p>alert.assign_tier(2)</p>
 <p>alert.notify('pagerduty')</p>
@@ -195,7 +180,7 @@
 </ul>
 <p>SIEM Tuning </p>
 <p>SIEM tuning reduces noise while maintaining detection coverage. A well-tuned SIEM generates alerts that analysts can actually investigate. </p>
-<h4>Example: correlation rule tuning cycle</h4>
+<h2>Example: correlation rule tuning cycle</h2>
 <p>SIEM_ALERTS=10000</p>
 <p>FALSE_POSITIVES=8500</p>
 <p>TRUE_POSITIVES=1000</p>
@@ -205,7 +190,7 @@
 <p>echo "Escalation rate: $((ESCALATIONS * 100 / SIEM_ALERTS))%"</p>
 <p>Playbooks </p>
 <p>Playbooks provide step-by-step instructions for handling specific scenarios. They reduce mean time to respond (MTTR) and ensure consistency. </p>
-<h4>Incident response playbook example</h4>
+<h2>Incident response playbook example</h2>
 <p>playbook:</p>
 <p>id: IR-001</p>
 <p>name: "Ransomware Detection and Response"</p>
@@ -254,7 +239,10 @@
 <p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p>
 <p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p>
 <p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p>
-<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p>
+<p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cors-security.html">CORS Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cors-security.html">CORS Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cors-security.html">CORS Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -266,7 +254,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/bug-bounty.html" class="related-card">Bug Bounty Guide</a><a href="/en/security/dns-security.html" class="related-card">DNS Security</a><a href="/en/security/security-metrics.html" class="related-card">Security Metrics and Reporting</a><a href="/en/security/waf-implementation.html" class="related-card">Web Application Firewall Implementation</a></div>
+      <div class="related-grid"><a href="/en/security/bug-bounty.html" class="related-card"><span class="related-card-title">Bug Bounty Guide</span><span class="related-card-desc">Practical guide to bug bounty hunting including vulnerability discovery techniques, report writing, </span></a><a href="/en/security/dns-security.html" class="related-card"><span class="related-card-title">DNS Security</span><span class="related-card-desc">Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filteri</span></a><a href="/en/security/security-metrics.html" class="related-card"><span class="related-card-title">Security Metrics and Reporting</span><span class="related-card-desc">Guide to security metrics covering KPIs and KRIs, dashboard design, board-level reporting, benchmark</span></a><a href="/en/security/waf-implementation.html" class="related-card"><span class="related-card-title">Web Application Firewall Implementation</span><span class="related-card-desc">Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuni</span></a><a href="/en/security/certificate-management.html" class="related-card"><span class="related-card-title">Certificate Management</span><span class="related-card-desc">Practical guide to TLS certificate management covering Let's Encrypt, ACME protocol, automated renew</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a></div>
     </section>
     
   </div>

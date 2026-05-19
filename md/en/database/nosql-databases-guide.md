@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/nosql-databases-guide.html
 
 # NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
 
-## NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
-### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
-#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
-#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
-#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
-#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
-#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
-#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
-#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
-#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
-#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
-#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
-#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
-#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
-#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
-
 What Are NoSQL Databases? 
 
 NoSQL databases are non-relational data stores designed for specific data models and access patterns that do not fit well in the relational paradigm. They trade strict ACID guarantees for scalability, flexibility, and performance at scale. 
@@ -228,7 +198,7 @@ from firebase_admin import firestore
 
 db = firestore.client()
 
-#### Document reference
+## Document reference
 
 user_ref = db.collection('users').document('alice')
 
@@ -244,7 +214,7 @@ user_ref.set({
 
 })
 
-#### Subcollection for hierarchical data
+## Subcollection for hierarchical data
 
 orders_ref = user_ref.collection('orders')
 
@@ -258,7 +228,7 @@ orders_ref.add({
 
 })
 
-#### Real-time listener
+## Real-time listener
 
 def on_snapshot(doc_snapshot, changes, read_time):
 
@@ -298,3 +268,9 @@ NoSQL databases excel at scale and flexibility but require different design thin
 **See also:** [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
 
 **See also:** [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
+
+**See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)
+
+**See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)
+
+**See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)

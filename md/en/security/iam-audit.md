@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/iam-audit.html
 
 # IAM Audit
 
-## IAM Audit
-
-### IAM Audit
-
-#### IAM Audit
-
-#### IAM Audit
-
-#### IAM Audit
-
-#### IAM Audit
-
-#### IAM Audit
-
-#### IAM Audit
-
-#### IAM Audit
-
-#### IAM Audit
-
-#### IAM Audit
-
-#### IAM Audit
-
-#### IAM Audit
-
-#### IAM Audit
-
-#### IAM Audit
-
 IAM Audit Fundamentals 
 
 Identity and Access Management (IAM) audits verify that users have appropriate permissions. Regular audits prevent privilege creep, detect unused roles, and identify security gaps. 
@@ -80,25 +50,25 @@ user_info = {
 
 }
 
-#### Inline policies
+## Inline policies
 
 policies = self.iam.list_user_policies(UserName=user["UserName"])
 
 user_info["policies"] = policies["PolicyNames"]
 
-#### Attached managed policies
+## Attached managed policies
 
 attached = self.iam.list_attached_user_policies(UserName=user["UserName"])
 
 user_info["managed_policies"] = [p["PolicyName"] for p in attached["AttachedPolicies"]]
 
-#### Groups
+## Groups
 
 groups = self.iam.list_groups_for_user(UserName=user["UserName"])
 
 user_info["groups"] = [g["GroupName"] for g in groups["Groups"]]
 
-#### Last activity
+## Last activity
 
 last_used = self.iam.get_user(UserName=user["UserName"])
 
@@ -176,7 +146,7 @@ actions = [actions]
 
 resource = stmt.get("Resource", "*")
 
-#### Check for IAM modify permissions
+## Check for IAM modify permissions
 
 escalation_actions = [
 
@@ -234,7 +204,7 @@ report = {
 
 }
 
-#### Flag users with admin access who don't need it
+## Flag users with admin access who don't need it
 
 for user in findings["users"]:
 
@@ -291,3 +261,9 @@ Regular IAM audits are essential for maintaining least privilege. Automate permi
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Threat Hunting](</en/security/threat-hunting.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)
 
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Threat Hunting](</en/security/threat-hunting.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)
+
+**See also:** [Security Awareness Training](</en/security/security-awareness.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
+
+**See also:** [Security Awareness Training](</en/security/security-awareness.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
+
+**See also:** [Security Awareness Training](</en/security/security-awareness.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)

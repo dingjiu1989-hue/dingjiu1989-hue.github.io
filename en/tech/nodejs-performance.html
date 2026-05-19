@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-performance.png",
       "datePublished": "2026-01-14",
       "dateModified": "2026-05-06",
-      "wordCount": "758",
+      "wordCount": "729",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,43 +99,30 @@
       <h1 class="article-title">Node.js Performance Optimization Guide</h1>
       <div class="article-meta">Published 2026-01-14 · Last active 2026-05-06 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-performance.png" alt="Node.js Performance Optimization Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Node.js Performance Optimization Guide</h2>
-<h3>Node.js Performance Optimization Guide</h3>
-<h4>Node.js Performance Optimization Guide</h4>
-<h4>Node.js Performance Optimization Guide</h4>
-<h4>Node.js Performance Optimization Guide</h4>
-<h4>Node.js Performance Optimization Guide</h4>
-<h4>Node.js Performance Optimization Guide</h4>
-<h4>Node.js Performance Optimization Guide</h4>
-<h4>Node.js Performance Optimization Guide</h4>
-<h4>Node.js Performance Optimization Guide</h4>
-<h4>Node.js Performance Optimization Guide</h4>
-<h4>Node.js Performance Optimization Guide</h4>
-<h4>Node.js Performance Optimization Guide</h4>
-<h4>Node.js Performance Optimization Guide</h4>
-<h4>Node.js Performance Optimization Guide</h4>
-<h4>Node.js Performance Optimization Guide</h4>
-<p>Node.js powers high-throughput web applications, but performance requires understanding its single-threaded event loop and non-blocking I/O model.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-performance.png" alt="Node.js Performance Optimization Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Event Loop Fundamentals</h4>
+      <div class="article-body"><p>Node.js powers high-throughput web applications, but performance requires understanding its single-threaded event loop and non-blocking I/O model.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-performance.png" alt="Node.js Performance Optimization Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Event Loop Fundamentals</h2>
 <p>The event loop processes callbacks in phases: timers, I/O callbacks, idle/prepare, poll, check (setImmediate), and close callbacks. Each phase has a FIFO queue of callbacks. Blocking any phase delays all subsequent callbacks.</p>
 <p>Avoid blocking the event loop. CPU-intensive operations (JSON parsing, cryptography, template rendering) block all other requests. Offload CPU work to Worker Threads, child processes, or dedicated microservices.</p>
-<h4>Profiling</h4>
+<h2>Profiling</h2>
 <p>Use the built-in --prof flag for V8 CPU profiling. Generate flame graphs with --prof-process. Node.js --inspect enables Chrome DevTools profiling with heap snapshots and CPU profiles.</p>
 <p>Clinic.js provides visualization for event loop lag, garbage collection, and heap growth. Use autocannon or wrk for load testing. Profile in production-like environments—performance characteristics differ between development and production.</p>
-<h4>Memory Management</h4>
+<h2>Memory Management</h2>
 <p>Monitor memory with process.memoryUsage(). Watch for heap growth between garbage collection cycles. Use heap snapshots (node --inspect, then Memory tab) to identify memory leaks.</p>
 <p>Common leak sources: global variables, event listeners not removed, closures retaining references, and cache without size limits. Use the --max-old-space-size flag to limit heap size and detect leaks earlier via OOM crashes.</p>
-<h4>Async Performance</h4>
+<h2>Async Performance</h2>
 <p>Use native Promises instead of callback patterns. Native Promises are optimized in V8 and outperform bluebird in modern Node.js versions. Use async/await for readability without performance cost.</p>
 <p>Avoid mixing promise styles. Use util.promisify for callback-based APIs. Limit concurrent async operations with p-limit or similar. Unhandled promise rejections crash Node.js in recent versions—handle all promise rejections.</p>
-<h4>Production Tuning</h4>
+<h2>Production Tuning</h2>
 <p>Set NODE_ENV=production for framework optimizations. Configure max-old-space-size to 75% of available memory. Use clustering (cluster module) or PM2 for multi-core utilization. Implement graceful shutdown with SIGTERM handling.</p>
 <p>Monitor event loop lag (&gt;40ms indicates overload). Use the proses monitoring module for Node.js-specific metrics. Set up GC metrics monitoring—frequent GC cycles indicate memory pressure.</p>
 <p><strong>See also:</strong> <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a>.</p>
 <p><strong>See also:</strong> <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/dockerfile-best-practices.html">Dockerfile Best Practices for Production</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/dockerfile-best-practices.html">Dockerfile Best Practices for Production</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/dockerfile-best-practices.html">Dockerfile Best Practices for Production</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -147,7 +134,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/elk-stack-setup.html" class="related-card">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a><a href="/en/tech/python-performance.html" class="related-card">Python Performance Optimization</a><a href="/en/tech/web-performance-optimization.html" class="related-card">Web Performance Optimization Techniques 2026</a><a href="/en/tech/capacity-planning-cloud.html" class="related-card">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a></div>
+      <div class="related-grid"><a href="/en/tech/elk-stack-setup.html" class="related-card"><span class="related-card-title">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</span><span class="related-card-desc">Comprehensive guide to ELK Stack covering Elasticsearch cluster setup, Logstash pipeline configurati</span></a><a href="/en/tech/python-performance.html" class="related-card"><span class="related-card-title">Python Performance Optimization</span><span class="related-card-desc">Explore Python performance: PyPy, Cython, Numba, async programming, profiling tools, and optimizatio</span></a><a href="/en/tech/web-performance-optimization.html" class="related-card"><span class="related-card-title">Web Performance Optimization Techniques 2026</span><span class="related-card-desc">Optimize web performance: Core Web Vitals, lazy loading, code splitting, CDN optimization, and cachi</span></a><a href="/en/tech/capacity-planning-cloud.html" class="related-card"><span class="related-card-title">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</span><span class="related-card-desc">Technical exploration of cloud capacity planning covering auto-scaling strategies, reserved and spot</span></a><a href="/en/tech/incident-management.html" class="related-card"><span class="related-card-title">Incident Management: Severity Levels, Response Process, and Postmortems</span><span class="related-card-desc">Practical guide to incident management covering severity classification, response processes, communi</span></a><a href="/en/tech/log-management.html" class="related-card"><span class="related-card-title">Log Management</span><span class="related-card-desc">Explore log management: collection, aggregation, storage, query strategies, and retention policies f</span></a></div>
     </section>
     
   </div>

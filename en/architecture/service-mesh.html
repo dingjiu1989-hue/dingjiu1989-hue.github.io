@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/service-mesh.png",
       "datePublished": "2026-04-20",
       "dateModified": "2026-04-25",
-      "wordCount": "3652",
+      "wordCount": "3620",
       "keywords": "Architecture, System Design",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
       "inLanguage": "en",
@@ -98,22 +98,7 @@
       <h1 class="article-title">Service Mesh Patterns: Istio and Linkerd</h1>
       <div class="article-meta">Published 2026-04-20 · Last active 2026-04-25 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/service-mesh.png" alt="Service Mesh Patterns: Istio and Linkerd" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Service Mesh Patterns: Istio and Linkerd</h2>
-<h3>Service Mesh Patterns: Istio and Linkerd</h3>
-<h4>Service Mesh Patterns: Istio and Linkerd</h4>
-<h4>Service Mesh Patterns: Istio and Linkerd</h4>
-<h4>Service Mesh Patterns: Istio and Linkerd</h4>
-<h4>Service Mesh Patterns: Istio and Linkerd</h4>
-<h4>Service Mesh Patterns: Istio and Linkerd</h4>
-<h4>Service Mesh Patterns: Istio and Linkerd</h4>
-<h4>Service Mesh Patterns: Istio and Linkerd</h4>
-<h4>Service Mesh Patterns: Istio and Linkerd</h4>
-<h4>Service Mesh Patterns: Istio and Linkerd</h4>
-<h4>Service Mesh Patterns: Istio and Linkerd</h4>
-<h4>Service Mesh Patterns: Istio and Linkerd</h4>
-<h4>Service Mesh Patterns: Istio and Linkerd</h4>
-<h4>Service Mesh Patterns: Istio and Linkerd</h4>
-<p>A service mesh is a dedicated infrastructure layer for handling service-to-service communication. It manages traffic routing, security, observability, and resilience without requiring changes to application code. This article covers the core patterns of service meshes, how Istio and Linkerd implement them, and guidance on when a service mesh adds value. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/service-mesh.png" alt="Service Mesh Patterns: Istio and Linkerd" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>A service mesh is a dedicated infrastructure layer for handling service-to-service communication. It manages traffic routing, security, observability, and resilience without requiring changes to application code. This article covers the core patterns of service meshes, how Istio and Linkerd implement them, and guidance on when a service mesh adds value. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/service-mesh.png" alt="Service Mesh Patterns: Istio and Linkerd" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>What is a Service Mesh? </p>
 <p>In a traditional architecture, each service handles network communication directly. This leads to duplicated logic for retries, timeouts, load balancing, TLS, and tracing across every service. </p>
 <p>A service mesh extracts these concerns into a separate infrastructure layer. Each service gets a sidecar proxy that intercepts all network traffic. The proxies form a mesh that manages all service-to-service communication. </p>
@@ -133,7 +118,7 @@
 </ul>
 <p>Sidecar Proxy Pattern </p>
 <p>The sidecar proxy is the foundation of service mesh. It runs as a separate container in the same pod as the application. </p>
-<h4>Kubernetes pod with Istio sidecar</h4>
+<h2>Kubernetes pod with Istio sidecar</h2>
 <p>apiVersion: v1</p>
 <p>kind: Pod</p>
 <p>metadata:</p>
@@ -160,7 +145,7 @@
 <p>Traffic Management </p>
 <p>Service meshes provide fine-grained traffic control beyond simple round-robin load balancing. </p>
 <p>Virtual Services and Destination Rules (Istio) </p>
-<h4>Istio VirtualService: Route traffic based on headers</h4>
+<h2>Istio VirtualService: Route traffic based on headers</h2>
 <p>apiVersion: networking.istio.io/v1beta1</p>
 <p>kind: VirtualService</p>
 <p>metadata:</p>
@@ -182,7 +167,7 @@
 <p>host: reviews</p>
 <p>subset: v1 # Everyone else goes to v1</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---</p>
-<h4>Istio DestinationRule: Load balancing and connection pool</h4>
+<h2>Istio DestinationRule: Load balancing and connection pool</h2>
 <p>apiVersion: networking.istio.io/v1beta1</p>
 <p>kind: DestinationRule</p>
 <p>metadata:</p>
@@ -206,7 +191,7 @@
 <p>http1MaxPendingRequests: 10</p>
 <p>maxRequestsPerConnection: 10</p>
 <p>Traffic Splitting (Canary Deployments) </p>
-<h4>Canary deployment: 10% traffic to new version</h4>
+<h2>Canary deployment: 10% traffic to new version</h2>
 <p>apiVersion: networking.istio.io/v1beta1</p>
 <p>kind: VirtualService</p>
 <p>metadata:</p>
@@ -225,7 +210,7 @@
 <p>subset: v1</p>
 <p>weight: 90</p>
 <p>Linkerd uses a similar approach with TrafficSplit: </p>
-<h4>Linkerd TrafficSplit for canary</h4>
+<h2>Linkerd TrafficSplit for canary</h2>
 <p>apiVersion: split.smi-spec.io/v1alpha2</p>
 <p>kind: TrafficSplit</p>
 <p>metadata:</p>
@@ -238,7 +223,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- service: productpage-v2</p>
 <p>weight: 100m</p>
 <p>Timeouts and Retries </p>
-<h4>Istio: Request timeouts and retries</h4>
+<h2>Istio: Request timeouts and retries</h2>
 <p>apiVersion: networking.istio.io/v1beta1</p>
 <p>kind: VirtualService</p>
 <p>metadata:</p>
@@ -258,7 +243,7 @@
 <p>Mutual TLS (mTLS) </p>
 <p>Service meshes provide automatic mutual TLS between services without application changes. Each sidecar proxy has a certificate issued by the mesh's certificate authority. </p>
 <p>Istio mTLS modes </p>
-<h4>STRICT mTLS: All traffic must use mTLS</h4>
+<h2>STRICT mTLS: All traffic must use mTLS</h2>
 <p>apiVersion: security.istio.io/v1beta1</p>
 <p>kind: PeerAuthentication</p>
 <p>metadata:</p>
@@ -267,7 +252,7 @@
 <p>spec:</p>
 <p>mtls:</p>
 <p>mode: STRICT</p>
-<h4>PERMISSIVE: Accept both mTLS and plaintext (migration mode)</h4>
+<h2>PERMISSIVE: Accept both mTLS and plaintext (migration mode)</h2>
 <p>apiVersion: security.istio.io/v1beta1</p>
 <p>kind: PeerAuthentication</p>
 <p>metadata:</p>
@@ -276,7 +261,7 @@
 <p>spec:</p>
 <p>mtls:</p>
 <p>mode: PERMISSIVE</p>
-<h4>DISABLE: Disable mTLS for specific workloads</h4>
+<h2>DISABLE: Disable mTLS for specific workloads</h2>
 <p>apiVersion: security.istio.io/v1beta1</p>
 <p>kind: PeerAuthentication</p>
 <p>metadata:</p>
@@ -290,9 +275,9 @@
 <p>mode: DISABLE</p>
 <p>Linkerd mTLS </p>
 <p>Linkerd automatically enables mTLS between meshed pods. It uses a 24-hour certificate rotation with automatic renewal. </p>
-<h4>Check mTLS status in Linkerd</h4>
+<h2>Check mTLS status in Linkerd</h2>
 <p>linkerd viz stat deploy --from deploy</p>
-<h4>Look for TLS columns showing encrypted traffic</h4>
+<h2>Look for TLS columns showing encrypted traffic</h2>
 <p>mTLS benefits:</p>
 <ul>
 <li>
@@ -308,7 +293,7 @@
 <p>Observability </p>
 <p>Service meshes provide rich observability without code instrumentation. </p>
 <p>Metrics </p>
-<h4>Istio: Enable Prometheus metrics</h4>
+<h2>Istio: Enable Prometheus metrics</h2>
 <p>apiVersion: telemetry.istio.io/v1alpha1</p>
 <p>kind: Telemetry</p>
 <p>metadata:</p>
@@ -339,7 +324,7 @@
 </li>
 </ul>
 <p>Distributed Tracing </p>
-<h4>Istio: Enable tracing with Zipkin, Jaeger, or OpenTelemetry</h4>
+<h2>Istio: Enable tracing with Zipkin, Jaeger, or OpenTelemetry</h2>
 <p>apiVersion: telemetry.istio.io/v1alpha1</p>
 <p>kind: Telemetry</p>
 <p>metadata:</p>
@@ -352,7 +337,7 @@
 <p>Tracing headers (b3, x-request-id) are propagated automatically by the sidecar. Services that forward the tracing headers receive full distributed trace visibility without adding any tracing SDK. </p>
 <p>Authorization Policies </p>
 <p>Service meshes enforce authorization at the network level. Policies specify which services can communicate. </p>
-<h4>Istio: Authorization policy</h4>
+<h2>Istio: Authorization policy</h2>
 <p>apiVersion: security.istio.io/v1beta1</p>
 <p>kind: AuthorizationPolicy</p>
 <p>metadata:</p>
@@ -450,7 +435,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/event-driven-architecture.html">Event-Driven Architecture: Patterns and Practice</a>, <a href="/en/architecture/two-phase-commit.html">Two-Phase Commit (2PC) for Distributed Transactions</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/event-driven-architecture.html">Event-Driven Architecture: Patterns and Practice</a>, <a href="/en/architecture/two-phase-commit.html">Two-Phase Commit (2PC) for Distributed Transactions</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/event-driven-architecture.html">Event-Driven Architecture: Patterns and Practice</a>, <a href="/en/architecture/two-phase-commit.html">Two-Phase Commit (2PC) for Distributed Transactions</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -462,7 +450,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/service-mesh-deep.html" class="related-card">Service Mesh Deep Dive</a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card">API Gateway vs Service Mesh</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/database-per-service.html" class="related-card">Database per Service Pattern</a></div>
+      <div class="related-grid"><a href="/en/architecture/service-mesh-deep.html" class="related-card"><span class="related-card-title">Service Mesh Deep Dive</span><span class="related-card-desc">Deep dive into service mesh: Istio vs Linkerd vs Consul, mTLS, traffic splitting, and operational co</span></a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card"><span class="related-card-title">API Gateway vs Service Mesh</span><span class="related-card-desc">Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and K</span></a><a href="/en/architecture/cqrs-pattern.html" class="related-card"><span class="related-card-title">CQRS Pattern: Command Query Responsibility Segregation</span><span class="related-card-desc">Learn CQRS pattern with read/write separation, event sourcing integration, materialized views, and g</span></a><a href="/en/architecture/database-per-service.html" class="related-card"><span class="related-card-title">Database per Service Pattern</span><span class="related-card-desc">Learn the database per service pattern for microservices data management — data isolation, eventual </span></a><a href="/en/architecture/circuit-breaker-vs-bulkhead.html" class="related-card"><span class="related-card-title">Circuit Breaker vs Bulkhead Pattern</span><span class="related-card-desc">Differences, when to use each, resilience patterns, and combined application of circuit breaker and </span></a><a href="/en/architecture/monolith-first-strategy.html" class="related-card"><span class="related-card-title">Monolith-First Strategy</span><span class="related-card-desc">When to start monolithic, extraction patterns, and migration strategies to microservices with proven</span></a></div>
     </section>
     
   </div>

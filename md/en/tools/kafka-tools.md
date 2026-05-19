@@ -8,47 +8,15 @@ url: https://dingjiu1989-hue.github.io/en/tools/kafka-tools.html
 
 # Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
 
-## Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-
-#### Introduction
+## Introduction
 
 Apache Kafka's distributed architecture makes it powerful but complex to manage. The right tooling is essential for monitoring consumer lag, inspecting messages, managing topics, and debugging production issues. This article covers four Kafka management tools: AKHQ, Kafka UI, Kowl, and Offset Explorer.
 
-#### AKHQ (formerly KafkaHQ)
+## AKHQ (formerly KafkaHQ)
 
 A comprehensive Kafka web UI with topic management, consumer group monitoring, and schema registry support:
 
-#### docker-compose.yml
+## docker-compose.yml
 
 version: "3.8"
 
@@ -109,7 +77,7 @@ depends_on:
 
 
 
-#### AKHQ advanced configuration
+## AKHQ advanced configuration
 
 akhq:
 
@@ -135,11 +103,11 @@ basic-auth-username: admin
 
 basic-auth-password: "${SECRET_SCHEMA_REGISTRY_PASSWORD}"
 
-#### Kafka UI (by Provectus)
+## Kafka UI (by Provectus)
 
 A lightweight, open-source Kafka web UI:
 
-#### docker-compose.yml
+## docker-compose.yml
 
 services:
 
@@ -184,7 +152,7 @@ SERVER_PORT: 8080
 
 
 
-#### Multi-cluster configuration
+## Multi-cluster configuration
 
 KAFKA_CLUSTERS_0_NAME: staging
 
@@ -200,11 +168,11 @@ KAFKA_CLUSTERS_1_NAME: production
 
 KAFKA_CLUSTERS_1_BOOTSTRAPSERVERS: prod-kafka:9092
 
-#### Kowl (now Redpanda Console)
+## Kowl (now Redpanda Console)
 
 Developer-friendly Kafka browser with a focus on data exploration:
 
-#### docker-compose.yml
+## docker-compose.yml
 
 services:
 
@@ -243,7 +211,7 @@ SCHEMA_REGISTRY_URLS: "http://schema-registry:8081"
 
 
 
-#### Data masking configuration
+## Data masking configuration
 
 server:
 
@@ -261,17 +229,17 @@ maskingStrategy: "hash"
 
 maskingStrategy: "hash_last_four"
 
-#### Message search predicate examples
+## Message search predicate examples
 
-#### Find messages with specific JSON field:
+## Find messages with specific JSON field:
 
-#### $.user.email == "test@example.com"
+## $.user.email == "test@example.com"
 
-#### $.order.total > 100.0
+## $.order.total > 100.0
 
-#### $.status in ["pending", "processing"]
+## $.status in ["pending", "processing"]
 
-#### Offset Explorer (formerly Kafka Tool)
+## Offset Explorer (formerly Kafka Tool)
 
 A desktop GUI application for Kafka (Windows/macOS/Linux):
 
@@ -294,11 +262,11 @@ A desktop GUI application for Kafka (Windows/macOS/Linux):
 
 
 
-#### CLI Tools
+## CLI Tools
 
 The Kafka distribution includes essential CLI tools:
 
-#### Topic management
+## Topic management
 
 kafka-topics.sh --bootstrap-server localhost:9092 --list
 
@@ -306,23 +274,23 @@ kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic orders
 
 kafka-topics.sh --bootstrap-server localhost:9092 --create --topic events --partitions 6 --replication-factor 3 --config retention.ms=604800000
 
-#### Consumer group monitoring
+## Consumer group monitoring
 
 kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
 
 kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group order-processor
 
-#### Message inspection
+## Message inspection
 
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic orders --from-beginning --max-messages 10
 
-#### Performance testing
+## Performance testing
 
 kafka-producer-perf-test.sh --topic test --num-records 100000 --record-size 1024 --throughput 10000 --producer-props bootstrap.servers=localhost:9092
 
 kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages 50000
 
-#### Comparison
+## Comparison
 
 | Feature | AKHQ | Kafka UI | Kowl (Console) | Offset Explorer |
 
@@ -342,7 +310,7 @@ kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages
 
 | Multi-cluster | Yes | Yes | Yes | Yes |
 
-#### Recommendations
+## Recommendations
 
   * **Full-featured management** : AKHQ for comprehensive cluster administration.
 
@@ -370,3 +338,9 @@ For development and staging environments, Kafka UI or Kowl provide excellent web
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>)
 
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>)
+
+**See also:** [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
+
+**See also:** [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
+
+**See also:** [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)

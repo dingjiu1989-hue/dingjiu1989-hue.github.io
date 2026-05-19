@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/columnar-databases.html
 
 # Columnar Databases: When and How to Use Them
 
-## Columnar Databases: When and How to Use Them
-
-### Columnar Databases: When and How to Use Them
-
-#### Columnar Databases: When and How to Use Them
-
-#### Columnar Databases: When and How to Use Them
-
-#### Columnar Databases: When and How to Use Them
-
-#### Columnar Databases: When and How to Use Them
-
-#### Columnar Databases: When and How to Use Them
-
-#### Columnar Databases: When and How to Use Them
-
-#### Columnar Databases: When and How to Use Them
-
-#### Columnar Databases: When and How to Use Them
-
-#### Columnar Databases: When and How to Use Them
-
-#### Columnar Databases: When and How to Use Them
-
-#### Columnar Databases: When and How to Use Them
-
-#### Columnar Databases: When and How to Use Them
-
-#### Columnar Databases: When and How to Use Them
-
 Columnar Storage 
 
 Columnar databases store data by column rather than by row. This enables aggressive compression and fast analytical queries. 
@@ -95,3 +65,9 @@ Use columnar databases for analytical workloads scanning many rows but few colum
 **See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [MongoDB vs PostgreSQL](</en/database/mongodb-vs-postgresql.html>)
 
 **See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [MongoDB vs PostgreSQL](</en/database/mongodb-vs-postgresql.html>)
+
+**See also:** [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
+
+**See also:** [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
+
+**See also:** [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)

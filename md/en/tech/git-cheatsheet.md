@@ -100,4 +100,4 @@ Sync with remote| `git pull --rebase`
   
 Bookmark this page. You'll be back.
 
-**See also:** [Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know](</en/tech/linux-commands.html>), [Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development](</en/tech/git-workflows-team-guide.html>), [Git Advanced: Interactive Rebase, Cherry-Pick, Bisect, and More](</en/tech/git-advanced.html>)
+**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Edge Computing in 2026: A Complete Guide for Developers](</en/tech/edge-computing-2026-guide.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>)

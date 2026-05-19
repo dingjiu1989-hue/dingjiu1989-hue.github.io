@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/git-advanced-tools.png",
       "datePublished": "2026-01-29",
       "dateModified": "2026-04-01",
-      "wordCount": "1927",
+      "wordCount": "1797",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
@@ -110,26 +110,10 @@
       <h1 class="article-title">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h1>
       <div class="article-meta">Published 2026-01-29 · Last active 2026-04-01 · 360 views · 3 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/git-advanced-tools.png" alt="Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h2>
-<h3>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h3>
-<h4>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h4>
-<h4>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h4>
-<h4>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h4>
-<h4>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h4>
-<h4>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h4>
-<h4>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h4>
-<h4>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h4>
-<h4>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h4>
-<h4>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h4>
-<h4>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h4>
-<h4>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h4>
-<h4>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h4>
-<h4>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h4>
-<h4>Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Most developers use Git at a surface level: add, commit, push, pull, merge. Git's advanced features, however, provide powerful capabilities for history manipulation, debugging, parallel development, dependency management, and automation. These tools separate proficient Git users from experts and significantly impact code quality and development workflow efficiency.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/git-advanced-tools.png" alt="Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>This article covers interactive rebase, git bisect, worktree, submodules, and hooks.</p>
-<h4>Interactive Rebase</h4>
+<h2>Interactive Rebase</h2>
 <p>Interactive rebase rewrites commit history by reordering, squashing, editing, dropping, or splitting commits. It is the primary tool for maintaining a clean, readable commit history before merging feature branches.</p>
 <p>git rebase -i HEAD~5</p>
 <p>The interactive rebase editor presents a list of commits with actions:</p>
@@ -156,23 +140,23 @@
 <p>Best practices include squashing fixup commits, splitting large commits into logical units, and rewriting messages for clarity. Interactive rebase should only be used on branches not shared with other developers — rewriting public history causes painful merge conflicts for collaborators.</p>
 <p>Conflict resolution during rebase requires solving conflicts per commit, not per merge. Each commit in the rebase sequence is applied and paused on conflict. The <code>git rerere</code> (reuse recorded resolution) feature automatically applies previously resolved conflict resolutions.</p>
 <p>git config --global rerere.enabled true</p>
-<h4>Git Bisect: Binary Search for Bugs</h4>
+<h2>Git Bisect: Binary Search for Bugs</h2>
 <p>git bisect performs binary search through commit history to find the exact commit that introduced a bug. It automates what would otherwise be a manual, tedious process.</p>
 <p>git bisect start</p>
 <p>git bisect bad HEAD # Current commit is broken</p>
 <p>git bisect good v2.3.0 # This tag is known good</p>
-<h4>Git checks out a commit halfway between good and bad</h4>
-<h4>Test the commit and mark:</h4>
+<h2>Git checks out a commit halfway between good and bad</h2>
+<h2>Test the commit and mark:</h2>
 <p>git bisect good # This commit is still good</p>
-<h4>or</h4>
+<h2>or</h2>
 <p>git bisect bad # This commit is already broken</p>
-<h4>Repeat until the first bad commit is identified</h4>
+<h2>Repeat until the first bad commit is identified</h2>
 <p>git bisect reset # Return to original HEAD</p>
 <p>Automating bisect with a test script speeds the process significantly:</p>
 <p>git bisect run npm test</p>
 <p>The script should exit 0 for good commits and non-zero for bad commits. For best results, the test should be fast and focused on the bug's symptom.</p>
 <p>Bisect is most effective when commits are small, atomic, and well-described. Large commits touching multiple files make bisect identification harder.</p>
-<h4>Git Worktree</h4>
+<h2>Git Worktree</h2>
 <p>git worktree allows checking out multiple branches simultaneously in separate directories, sharing a single Git repository. This eliminates the need for multiple clones or stashing changes when switching contexts.</p>
 <p>git worktree add ../feature-branch feature-branch</p>
 <p>git worktree add ../hotfix hotfix --detach</p>
@@ -195,7 +179,7 @@
 <p>git worktree list</p>
 <p>git worktree remove ../feature-branch</p>
 <p>git worktree prune # Clean up references to removed worktrees</p>
-<h4>Git Submodules</h4>
+<h2>Git Submodules</h2>
 <p>Submodules embed one Git repository inside another at a specific commit. They are Git's native mechanism for managing external dependencies.</p>
 <p>git submodule add https://github.com/org/library.git lib/library</p>
 <p>git submodule update --init --recursive</p>
@@ -206,7 +190,7 @@
 <p>git add lib/library</p>
 <p>git commit -m "Update library to v2.1.0"</p>
 <p>Subtree merging is an alternative to submodules that merges external repositories directly into the parent repository's directory tree. Unlike submodules, subtrees have no separate configuration and do not require developers to learn submodule commands. The trade-off is less clear separation of concerns.</p>
-<h4>Git Hooks</h4>
+<h2>Git Hooks</h2>
 <p>Git hooks are scripts that execute at specific points in the Git workflow. They automate validation, enforcement, and integration tasks.</p>
 <p>Client-side hooks include:</p>
 <ul>
@@ -236,7 +220,7 @@
 </li>
 </ul>
 <p>The pre-commit framework manages hooks declaratively:</p>
-<h4>.pre-commit-config.yaml</h4>
+<h2>.pre-commit-config.yaml</h2>
 <p>repos:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/pre-commit/pre-commit-hooks</p>
 <p>rev: v4.5.0</p>
@@ -248,13 +232,16 @@
 <p>rev: 24.2.0</p>
 <p>hooks:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: black</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>Advanced Git tools significantly improve development workflows. Interactive rebase maintains clean history. git bisect accelerates debugging through automated binary search. git worktree enables parallel branch work without context switching. Submodules manage dependencies with precise version tracking. Git hooks automate quality enforcement at every workflow stage. Mastering these tools distinguishes proficient Git users and directly improves code quality and team productivity.</p>
 <p><strong>See also:</strong> <a href="/en/tools/database-management-tools.html">Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass</a>, <a href="/en/tools/productivity-tools.html">Developer Productivity Tools: Essential Toolkit for 2026</a>, <a href="/en/tools/api-development-tools.html">API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI</a>.</p>
 <p><strong>See also:</strong> <a href="/en/tools/database-management-tools.html">Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass</a>, <a href="/en/tools/productivity-tools.html">Developer Productivity Tools: Essential Toolkit for 2026</a>, <a href="/en/tools/api-development-tools.html">API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/database-management-tools.html">Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass</a>, <a href="/en/tools/productivity-tools.html">Developer Productivity Tools: Essential Toolkit for 2026</a>, <a href="/en/tools/api-development-tools.html">API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/database-management-tools.html">Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass</a>, <a href="/en/tools/productivity-tools.html">Developer Productivity Tools: Essential Toolkit for 2026</a>, <a href="/en/tools/api-development-tools.html">API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI</a></p>
-<p><strong>See also:</strong> <a href="/en/tools/database-management-tools.html">Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass</a>, <a href="/en/tools/productivity-tools.html">Developer Productivity Tools: Essential Toolkit for 2026</a>, <a href="/en/tools/api-development-tools.html">API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/database-management-tools.html">Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass</a>, <a href="/en/tools/productivity-tools.html">Developer Productivity Tools: Essential Toolkit for 2026</a>, <a href="/en/tools/api-development-tools.html">API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tools/database-management-tools.html">Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass</a>, <a href="/en/tools/productivity-tools.html">Developer Productivity Tools: Essential Toolkit for 2026</a>, <a href="/en/tools/api-development-tools.html">API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/database-management-tools.html">Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass</a>, <a href="/en/tools/productivity-tools.html">Developer Productivity Tools: Essential Toolkit for 2026</a>, <a href="/en/tools/api-development-tools.html">API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a>, <a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a>, <a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a>, <a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -266,7 +253,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/database-management-tools.html" class="related-card">Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass</a><a href="/en/tools/productivity-tools.html" class="related-card">Developer Productivity Tools: Essential Toolkit for 2026</a><a href="/en/tools/api-development-tools.html" class="related-card">API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI</a><a href="/en/tools/command-line-productivity.html" class="related-card">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a></div>
+      <div class="related-grid"><a href="/en/tools/database-management-tools.html" class="related-card"><span class="related-card-title">Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass</span><span class="related-card-desc">Comparative analysis of database management tools covering DBeaver, TablePlus, DataGrip, pgAdmin, an</span></a><a href="/en/tools/productivity-tools.html" class="related-card"><span class="related-card-title">Developer Productivity Tools: Essential Toolkit for 2026</span><span class="related-card-desc">Essential developer productivity tools: time tracking, knowledge management, focus tools, and workfl</span></a><a href="/en/tools/api-development-tools.html" class="related-card"><span class="related-card-title">API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI</span><span class="related-card-desc">Comparative analysis of API development tools covering Postman, Insomnia, Bruno, Hoppscotch, and Swa</span></a><a href="/en/tools/command-line-productivity.html" class="related-card"><span class="related-card-title">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</span><span class="related-card-desc">Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code </span></a><a href="/en/tools/devcontainer-setup.html" class="related-card"><span class="related-card-title">Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</span><span class="related-card-desc">Technical guide to development containers covering devcontainer.json configuration, features, dotfil</span></a><a href="/en/tools/iac-tools-compared.html" class="related-card"><span class="related-card-title">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</span><span class="related-card-desc">In-depth comparison of infrastructure-as-code tools covering Terraform, Pulumi, AWS CDK, OpenTofu, a</span></a></div>
     </section>
     
   </div>

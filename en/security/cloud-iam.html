@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-iam.png",
       "datePublished": "2026-03-08",
       "dateModified": "2026-04-20",
-      "wordCount": "3294",
+      "wordCount": "3278",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,24 +99,7 @@
       <h1 class="article-title">Cloud IAM Deep Dive</h1>
       <div class="article-meta">Published 2026-03-08 · Last active 2026-04-20 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-iam.png" alt="Cloud IAM Deep Dive" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Cloud IAM Deep Dive</h2>
-<h3>Cloud IAM Deep Dive</h3>
-<h4>Cloud IAM Deep Dive</h4>
-<h4>Cloud IAM Deep Dive</h4>
-<h4>Cloud IAM Deep Dive</h4>
-<h4>Cloud IAM Deep Dive</h4>
-<h4>Cloud IAM Deep Dive</h4>
-<h4>Cloud IAM Deep Dive</h4>
-<h4>Cloud IAM Deep Dive</h4>
-<h4>Cloud IAM Deep Dive</h4>
-<h4>Cloud IAM Deep Dive</h4>
-<h4>Cloud IAM Deep Dive</h4>
-<h4>Cloud IAM Deep Dive</h4>
-<h4>Cloud IAM Deep Dive</h4>
-<h4>Cloud IAM Deep Dive</h4>
-<h4>Cloud IAM Deep Dive</h4>
-<h4>Cloud IAM Deep Dive</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-iam.png" alt="Cloud IAM Deep Dive" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-iam.png" alt="Cloud IAM Deep Dive" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Cloud Identity and Access Management (IAM) is the foundation of cloud security. Misconfigured IAM policies remain the leading cause of cloud data breaches. Understanding how to properly scope permissions across AWS, GCP, and Azure is essential for any cloud security practitioner. </p>
 <p>AWS IAM Policies </p>
 <p>AWS IAM uses JSON policy documents to define permissions. Policies can be attached to users, groups, or roles. AWS evaluates all policies attached to a principal, combining them with resource-based policies, and applies an explicit deny override. </p>
@@ -161,7 +144,7 @@
 </ul>
 <p>Least Privilege with AWS </p>
 <p>AWS Access Advisor shows service last-accessed information, helping identify unused permissions. IAM Access Analyzer generates policies based on CloudTrail access patterns. </p>
-<h4>Generate policy from CloudTrail activity</h4>
+<h2>Generate policy from CloudTrail activity</h2>
 <p>aws accessanalyzer create-analyzer --analyzer-name my-analyzer --type ACCOUNT</p>
 <p>aws accessanalyzer start-policy-generation \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--policy-generation-details \</p>
@@ -177,7 +160,7 @@
 <p>folders/987654321/roles/customInstanceAdmin</p>
 <p>// Project level</p>
 <p>projects/my-project/roles/customComputeAdmin</p>
-<h4>Create a custom GCP IAM role</h4>
+<h2>Create a custom GCP IAM role</h2>
 <p>gcloud iam roles create customComputeAdmin \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--project=my-project \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--title="Custom Compute Admin" \</p>
@@ -185,18 +168,18 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--permissions=compute.instances.create,compute.instances.start,\</p>
 <p>compute.instances.stop,compute.instances.list \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--stage=GA</p>
-<h4>Bind role to a service account at the project level</h4>
+<h2>Bind role to a service account at the project level</h2>
 <p>gcloud projects add-iam-policy-binding my-project \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--member="serviceAccount:deploy-sa@my-project.iam.gserviceaccount.com" \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--role="projects/my-project/roles/customComputeAdmin"</p>
 <p>Policy Simulation </p>
 <p>Both AWS and GCP provide policy simulation tools to verify permissions before deployment. </p>
-<h4>AWS IAM policy simulation</h4>
+<h2>AWS IAM policy simulation</h2>
 <p>aws iam simulate-principal-policy \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--policy-source-arn arn:aws:iam::123456789012:user/testuser \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--action-names s3:GetObject s3:DeleteObject ec2:TerminateInstances \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--resource-arns arn:aws:s3:::my-bucket</p>
-<h4>GCP policy troubleshooter</h4>
+<h2>GCP policy troubleshooter</h2>
 <p>gcloud policy-intelligence query-activity \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--project=my-project \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--identity="user:admin@example.com" \</p>
@@ -212,7 +195,10 @@
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/key-management.html">Key Management Systems</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a></p>
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/key-management.html">Key Management Systems</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a></p>
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/key-management.html">Key Management Systems</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a></p>
-<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/key-management.html">Key Management Systems</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/key-management.html">Key Management Systems</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/key-management.html">Key Management Systems</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a></p>
+<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/key-management.html">Key Management Systems</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cors-security.html">CORS Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cors-security.html">CORS Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cors-security.html">CORS Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -224,7 +210,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/input-validation.html" class="related-card">Input Validation Deep Dive</a><a href="/en/security/key-management.html" class="related-card">Key Management Systems</a><a href="/en/security/kubernetes-network-policies.html" class="related-card">Kubernetes Network Policies</a><a href="/en/security/secure-api-design.html" class="related-card">Secure API Design Principles</a></div>
+      <div class="related-grid"><a href="/en/security/input-validation.html" class="related-card"><span class="related-card-title">Input Validation Deep Dive</span><span class="related-card-desc">In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniqu</span></a><a href="/en/security/key-management.html" class="related-card"><span class="related-card-title">Key Management Systems</span><span class="related-card-desc">Deep dive into key management systems covering KMS, HSM, key rotation strategies, envelope encryptio</span></a><a href="/en/security/kubernetes-network-policies.html" class="related-card"><span class="related-card-title">Kubernetes Network Policies</span><span class="related-card-desc">In-depth guide to Kubernetes network policies covering ingress/egress rules, Cilium, Calico, and zer</span></a><a href="/en/security/secure-api-design.html" class="related-card"><span class="related-card-title">Secure API Design Principles</span><span class="related-card-desc">Guide to secure API design covering input validation, rate limiting, idempotency, error handling, an</span></a><a href="/en/security/audit-logging.html" class="related-card"><span class="related-card-title">Audit Logging Best Practices</span><span class="related-card-desc">Guide to audit logging covering immutable logs, log integrity verification, centralized logging arch</span></a><a href="/en/security/clickjacking-protection.html" class="related-card"><span class="related-card-title">Clickjacking Protection</span><span class="related-card-desc">Complete guide to clickjacking defense covering X-Frame-Options, CSP frame-ancestors, framebusting t</span></a></div>
     </section>
     
   </div>

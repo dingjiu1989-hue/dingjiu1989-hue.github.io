@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/webhook-security.png",
       "datePublished": "2025-12-19",
       "dateModified": "2026-04-27",
-      "wordCount": "1589",
+      "wordCount": "1549",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
@@ -109,24 +109,7 @@
       <h1 class="article-title">Webhook Security Best Practices</h1>
       <div class="article-meta">Published 2025-12-19 · Last active 2026-04-27 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/webhook-security.png" alt="Webhook Security Best Practices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Webhook Security Best Practices</h2>
-<h3>Webhook Security Best Practices</h3>
-<h4>Webhook Security Best Practices</h4>
-<h4>Webhook Security Best Practices</h4>
-<h4>Webhook Security Best Practices</h4>
-<h4>Webhook Security Best Practices</h4>
-<h4>Webhook Security Best Practices</h4>
-<h4>Webhook Security Best Practices</h4>
-<h4>Webhook Security Best Practices</h4>
-<h4>Webhook Security Best Practices</h4>
-<h4>Webhook Security Best Practices</h4>
-<h4>Webhook Security Best Practices</h4>
-<h4>Webhook Security Best Practices</h4>
-<h4>Webhook Security Best Practices</h4>
-<h4>Webhook Security Best Practices</h4>
-<h4>Webhook Security Best Practices</h4>
-<h4>Webhook Security Best Practices</h4>
-<p>Why Webhook Security Matters </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/webhook-security.png" alt="Webhook Security Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Why Webhook Security Matters </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/webhook-security.png" alt="Webhook Security Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Webhooks are HTTP callbacks that allow services to push real-time events to your application. Unlike APIs where you initiate the request, webhooks are delivered to a public endpoint that anyone with the URL can call. Without proper security, an attacker can replay webhook events, send fake event data, or probe your internal infrastructure. </p>
 <p>Threat Model </p>
 <p>| Threat | Impact | Likelihood | |--------|--------|------------| | Fake webhook events | Application processes false data | High | | Replay attacks | Duplicate processing of legitimate events | Medium | | Payload tampering | Corrupted data processed as valid | Medium | | Reconnaissance | Attacker probes internal network | Low | | DDoS via webhooks | Service overload from fake events | Medium | </p>
@@ -137,23 +120,23 @@
 <p>import hashlib</p>
 <p>def verify_stripe_signature(payload, sig_header, secret):</p>
 <p>"""Verify Stripe webhook signature."""</p>
-<h4>Signature format: t=timestamp,v1=signature</h4>
+<h2>Signature format: t=timestamp,v1=signature</h2>
 <p>parts = dict(item.split('=', 1) for item in sig_header.split(','))</p>
 <p>if 'v1' not in parts or 't' not in parts:</p>
 <p>return False</p>
 <p>timestamp = parts['t']</p>
 <p>expected_sig = parts['v1']</p>
-<h4>Prevent replay: signature must be within 5 minutes</h4>
+<h2>Prevent replay: signature must be within 5 minutes</h2>
 <p>if abs(int(timestamp) - time.time()) &gt; 300:</p>
 <p>return False</p>
-<h4>Compute expected signature</h4>
+<h2>Compute expected signature</h2>
 <p>signed_payload = f"{timestamp}.{payload}".encode()</p>
 <p>computed_sig = hmac.new(</p>
 <p>secret.encode(),</p>
 <p>signed_payload,</p>
 <p>hashlib.sha256</p>
 <p>).hexdigest()</p>
-<h4>Constant-time comparison</h4>
+<h2>Constant-time comparison</h2>
 <p>return hmac.compare_digest(computed_sig, expected_sig)</p>
 <p>GitHub-Style Signatures </p>
 <p>const crypto = require('crypto');</p>
@@ -207,7 +190,7 @@
 <p>@verify_webhook(WEBHOOK_SECRET)</p>
 <p>def handle_webhook():</p>
 <p>event = request.json</p>
-<h4>Process the verified event</h4>
+<h2>Process the verified event</h2>
 <p>return 'OK', 200</p>
 <p>Defense 2: Replay Protection </p>
 <p>Timestamp-Based Prevention </p>
@@ -300,7 +283,10 @@
 <p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a>, <a href="/en/security/http-security-headers.html">HTTP Security Headers Checklist</a></p>
+<p><strong>See also:</strong> <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a>, <a href="/en/security/http-security-headers.html">HTTP Security Headers Checklist</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a>, <a href="/en/security/http-security-headers.html">HTTP Security Headers Checklist</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -312,7 +298,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/jwt-authentication-guide.html" class="related-card">JWT Authentication Best Practices</a><a href="/en/security/secure-file-upload.html" class="related-card">Secure File Upload Implementation</a><a href="/en/security/mobile-security.html" class="related-card">Mobile Application Security Guide</a><a href="/en/security/container-security.html" class="related-card">Container Security Best Practices</a></div>
+      <div class="related-grid"><a href="/en/security/jwt-authentication-guide.html" class="related-card"><span class="related-card-title">JWT Authentication Best Practices</span><span class="related-card-desc">Learn JWT authentication best practices including secure token storage, signature algorithms, expira</span></a><a href="/en/security/secure-file-upload.html" class="related-card"><span class="related-card-title">Secure File Upload Implementation</span><span class="related-card-desc">Best practices for implementing secure file upload functionality including validation, storage, scan</span></a><a href="/en/security/mobile-security.html" class="related-card"><span class="related-card-title">Mobile Application Security Guide</span><span class="related-card-desc">Mobile app security covering OWASP Mobile Top 10, code obfuscation, certificate pinning, secure stor</span></a><a href="/en/security/container-security.html" class="related-card"><span class="related-card-title">Container Security Best Practices</span><span class="related-card-desc">Essential container security practices including image scanning, minimal base images, runtime securi</span></a><a href="/en/security/log-management-security.html" class="related-card"><span class="related-card-title">Security Log Management</span><span class="related-card-desc">Best practices for security log management including centralized logging, SIEM integration, log rete</span></a><a href="/en/security/blockchain-security.html" class="related-card"><span class="related-card-title">Blockchain and Smart Contract Security</span><span class="related-card-desc">Smart contract vulnerabilities including reentrancy and oracle manipulation, plus auditing tools, fo</span></a></div>
     </section>
     
   </div>

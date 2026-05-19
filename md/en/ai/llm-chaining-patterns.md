@@ -8,43 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-chaining-patterns.html
 
 # LLM Chaining and Pipeline Patterns
 
-## LLM Chaining and Pipeline Patterns
-
-### LLM Chaining and Pipeline Patterns
-
-#### LLM Chaining and Pipeline Patterns
-
-#### LLM Chaining and Pipeline Patterns
-
-#### LLM Chaining and Pipeline Patterns
-
-#### LLM Chaining and Pipeline Patterns
-
-#### LLM Chaining and Pipeline Patterns
-
-#### LLM Chaining and Pipeline Patterns
-
-#### LLM Chaining and Pipeline Patterns
-
-#### LLM Chaining and Pipeline Patterns
-
-#### LLM Chaining and Pipeline Patterns
-
-#### LLM Chaining and Pipeline Patterns
-
-#### LLM Chaining and Pipeline Patterns
-
-#### LLM Chaining and Pipeline Patterns
-
-#### LLM Chaining and Pipeline Patterns
-
-#### LLM Chaining and Pipeline Patterns
-
-#### Introduction
+## Introduction
 
 Single LLM calls are rarely sufficient for complex tasks. Chaining — connecting multiple LLM calls in a pipeline — enables sophisticated workflows where each step builds on or refines the output of the previous one. This guide covers the essential chaining patterns used in production AI systems.
 
-#### Why Chain?
+## Why Chain?
 
 A single LLM call has limitations:
 
@@ -61,9 +29,9 @@ A single LLM call has limitations:
 
 Chaining addresses these by decomposing complex tasks into focused steps, each with a clear objective and validation criteria.
 
-#### Core Patterns
+## Core Patterns
 
-#### Sequential Chain
+## Sequential Chain
 
 The simplest pattern: output of step N becomes input to step N+1.
 
@@ -93,7 +61,7 @@ def format_output(verified):
 
 return call_llm("Format the verified claims as a clean bullet list:", verified)
 
-#### Map-Reduce Chain
+## Map-Reduce Chain
 
 Process multiple items independently, then combine results.
 
@@ -101,7 +69,7 @@ Process multiple items independently, then combine results.
 
 def map_reduce(items, map_prompt, reduce_prompt):
 
-#### Map: process each item independently
+## Map: process each item independently
 
 intermediate = []
 
@@ -111,7 +79,7 @@ result = call_llm(map_prompt, item)
 
 intermediate.append(result)
 
-#### Reduce: combine all intermediate results
+## Reduce: combine all intermediate results
 
 combined = "\n---\n".join(intermediate)
 
@@ -119,7 +87,7 @@ final = call_llm(reduce_prompt, combined)
 
 return final
 
-#### Example: summarize 50 customer reviews
+## Example: summarize 50 customer reviews
 
 reviews = load_reviews()
 
@@ -129,7 +97,7 @@ reduce_prompt = "Combine these review summaries into an overall analysis with co
 
 analysis = map_reduce(reviews, map_prompt, reduce_prompt)
 
-#### Parallel Processing
+## Parallel Processing
 
 Run multiple independent chains simultaneously, then merge results.
 
@@ -155,7 +123,7 @@ return assemble_document(intro, specs, pricing, conclusion)
 
 Parallel processing reduces wall-clock time significantly when chains are independent.
 
-#### Routing Chain
+## Routing Chain
 
 Route input to different sub-chains based on classification.
 
@@ -163,11 +131,11 @@ Route input to different sub-chains based on classification.
 
 def routing_chain(query):
 
-#### First, classify the query type
+## First, classify the query type
 
 category = classify_query(query)
 
-#### Route to specialized handler
+## Route to specialized handler
 
 if category == "billing":
 
@@ -197,7 +165,7 @@ Respond with only the category name.
 
 return categories.strip().lower()
 
-#### Branching Chain
+## Branching Chain
 
 Pursue multiple investigation paths from a single input, then synthesize.
 
@@ -215,7 +183,7 @@ Query
 
 └→ Synthesis: combine all branches into comprehensive report
 
-#### Validation Chain
+## Validation Chain
 
 Add verification steps between generation steps to catch errors early.
 
@@ -223,7 +191,7 @@ def generate_with_validation(topic):
 
 draft = generate_draft(topic)
 
-#### Validation gate
+## Validation gate
 
 issues = validate_draft(draft)
 
@@ -231,7 +199,7 @@ if issues:
 
 draft = revise_draft(draft, issues)
 
-#### Re-validate
+## Re-validate
 
 issues = validate_draft(draft)
 
@@ -239,7 +207,7 @@ if not issues:
 
 return draft
 
-#### If still has issues after revision, flag for human review
+## If still has issues after revision, flag for human review
 
 return {"draft": draft, "issues": issues, "needs_review": True}
 
@@ -261,9 +229,9 @@ List any issues found. If none, respond with "NO ISSUES".
 
 """, draft)
 
-#### Advanced Patterns
+## Advanced Patterns
 
-#### Recursive Chain
+## Recursive Chain
 
 Apply the same chain repeatedly until a condition is met:
 
@@ -283,7 +251,7 @@ text = improved
 
 return text
 
-#### Feedback Loop Chain
+## Feedback Loop Chain
 
 Use the model's own output to identify and correct its mistakes:
 
@@ -301,7 +269,7 @@ revision = call_llm(f"Revise this output based on this feedback: {critique}", ou
 
 return revision
 
-#### Production Considerations
+## Production Considerations
 
 **Error handling** : Each chain step should have a timeout, retry logic, and fallback behavior.
 
@@ -311,7 +279,7 @@ return revision
 
 **Human escalation** : Design chains so that when confidence is low or validation fails, the task escalates to a human operator.
 
-#### Conclusion
+## Conclusion
 
 LLM chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Start with sequential chains for simple transformations, add map-reduce for batch processing, and incorporate routing and branching for complex workflows. The key principle: each step should do one thing well, with clear inputs, outputs, and validation criteria.
 
@@ -326,3 +294,9 @@ LLM chaining transforms unreliable single-shot generation into reliable multi-st
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)
 
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)
+
+**See also:** [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>)
+
+**See also:** [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>)
+
+**See also:** [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>)

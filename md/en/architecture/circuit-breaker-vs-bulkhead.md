@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/circuit-breaker-vs-bulkhe
 
 # Circuit Breaker vs Bulkhead Pattern
 
-## Circuit Breaker vs Bulkhead Pattern
-
-### Circuit Breaker vs Bulkhead Pattern
-
-#### Circuit Breaker vs Bulkhead Pattern
-
-#### Circuit Breaker vs Bulkhead Pattern
-
-#### Circuit Breaker vs Bulkhead Pattern
-
-#### Circuit Breaker vs Bulkhead Pattern
-
-#### Circuit Breaker vs Bulkhead Pattern
-
-#### Circuit Breaker vs Bulkhead Pattern
-
-#### Circuit Breaker vs Bulkhead Pattern
-
-#### Circuit Breaker vs Bulkhead Pattern
-
-#### Circuit Breaker vs Bulkhead Pattern
-
-#### Circuit Breaker vs Bulkhead Pattern
-
-#### Circuit Breaker vs Bulkhead Pattern
-
-#### Circuit Breaker vs Bulkhead Pattern
-
-#### Circuit Breaker vs Bulkhead Pattern
-
 Circuit breaker and bulkhead are two fundamental resilience patterns from the stability arsenal, but they solve different problems and are most effective when used together. The circuit breaker protects downstream services from cascading failures by failing fast when a dependency is unhealthy. The bulkhead isolates failure by limiting the resources a failing component can consume. Understanding when and how to apply each is essential for building resilient distributed systems. 
 
 The circuit breaker pattern monitors calls to a dependency. When failures exceed a threshold, the circuit breaker trips to the OPEN state, and subsequent calls return immediately with an error without actually invoking the failing dependency. After a timeout, the circuit enters HALF-OPEN state and allows a probe request. If the probe succeeds, the circuit resets to CLOSED. If it fails, it returns to OPEN. This prevents the calling service from wasting resources on a failing dependency and allows the dependency time to recover. 
@@ -69,3 +39,9 @@ Configuration should be dynamic where possible. Circuit breaker thresholds and t
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)

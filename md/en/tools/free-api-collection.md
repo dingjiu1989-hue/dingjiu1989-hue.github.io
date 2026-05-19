@@ -81,4 +81,4 @@ API| Free Tier| What You Get
 
 
 
-**See also:** [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>), [Best Free Tier Platforms for Developer Projects 2026: The Ultimate List](</en/tools/best-free-tier-platforms.html>), [How to Build and Sell APIs: A Developer's Guide to API-as-a-Service](</en/sidehustle/build-and-sell-api.html>)
+**See also:** [Best Programming Books 2026: 15 Books Every Developer Should Read](</en/tools/best-programming-books.html>), [Best Headless CMS Platforms 2026: Strapi vs Sanity vs Contentful vs Payload](</en/tools/best-headless-cms-platforms.html>), [Best API Testing Tools 2026: Postman vs Insomnia vs Bruno vs Hurl](</en/tools/best-api-testing-tools.html>)

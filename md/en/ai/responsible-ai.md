@@ -8,43 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/ai/responsible-ai.html
 
 # Responsible AI Development Practices
 
-## Responsible AI Development Practices
-
-### Responsible AI Development Practices
-
-#### Responsible AI Development Practices
-
-#### Responsible AI Development Practices
-
-#### Responsible AI Development Practices
-
-#### Responsible AI Development Practices
-
-#### Responsible AI Development Practices
-
-#### Responsible AI Development Practices
-
-#### Responsible AI Development Practices
-
-#### Responsible AI Development Practices
-
-#### Responsible AI Development Practices
-
-#### Responsible AI Development Practices
-
-#### Responsible AI Development Practices
-
-#### Responsible AI Development Practices
-
-#### Responsible AI Development Practices
-
-#### Responsible AI Development Practices
-
-#### Introduction
+## Introduction
 
 As AI systems make increasingly consequential decisions--from loan approvals to medical diagnoses--responsible AI development is no longer optional. Regulations like the EU AI Act, emerging AI liability frameworks, and growing public scrutiny demand that developers implement systematic fairness, transparency, and safety practices. This article covers practical techniques for building responsible AI applications.
 
-#### Bias Detection and Fairness Metrics
+## Bias Detection and Fairness Metrics
 
 Quantify bias across demographic groups using standard fairness metrics:
 
@@ -144,7 +112,7 @@ self, reports: Dict[str, FairnessReport]
 
 violations = []
 
-#### Demographic parity: max difference < 0.1
+## Demographic parity: max difference < 0.1
 
 max_parity = max(r.demographic_parity for r in reports.values())
 
@@ -156,7 +124,7 @@ f"Demographic parity violation: {max_parity:.3f} > 0.1"
 
 )
 
-#### Equal opportunity: TPR difference < 0.1
+## Equal opportunity: TPR difference < 0.1
 
 tpr_values = [r.true_positive_rate for r in reports.values()]
 
@@ -164,7 +132,7 @@ if max(tpr_values) - min(tpr_values) > 0.1:
 
 violations.append("Equal opportunity violation: TPR gap > 0.1")
 
-#### Equalized odds: FPR difference < 0.1
+## Equalized odds: FPR difference < 0.1
 
 fpr_values = [r.false_positive_rate for r in reports.values()]
 
@@ -174,9 +142,9 @@ violations.append("Equalized odds violation: FPR gap > 0.1")
 
 return violations
 
-#### Model Explainability
+## Model Explainability
 
-#### SHAP (SHapley Additive exPlanations)
+## SHAP (SHapley Additive exPlanations)
 
 SHAP explains individual predictions by computing feature contributions:
 
@@ -212,7 +180,7 @@ explanation = {
 
 }
 
-#### Sort features by absolute contribution
+## Sort features by absolute contribution
 
 for i, (name, value) in enumerate(
 
@@ -248,7 +216,7 @@ def generate_report(self, X: np.ndarray) -> dict:
 
 shap_values = self.explainer.shap_values(X)
 
-#### Mean absolute SHAP values
+## Mean absolute SHAP values
 
 mean_shap = np.abs(shap_values).mean(axis=0)
 
@@ -280,7 +248,7 @@ name for name, _ in feature_importance[:5]
 
 }
 
-#### LIME (Local Interpretable Model-agnostic Explanations)
+## LIME (Local Interpretable Model-agnostic Explanations)
 
 LIME provides model-agnostic local explanations:
 
@@ -330,7 +298,7 @@ top_labels=1,
 
 )
 
-#### Format as structured output
+## Format as structured output
 
 label, contributions = explanation.as_list(label=1)
 
@@ -360,11 +328,11 @@ for feature, weight in contributions
 
 }
 
-#### Transparency Documentation
+## Transparency Documentation
 
 Maintain model documentation using standardized frameworks:
 
-#### Model Card: Credit Scoring Model v2.1
+## Model Card: Credit Scoring Model v2.1
 
 model_card:
 
@@ -470,7 +438,7 @@ regulatory_compliance:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "EU AI Act (proposed, risk category: limited)"
 
-#### Safety Guardrails
+## Safety Guardrails
 
 Implement runtime safety checks for LLM applications:
 
@@ -508,7 +476,7 @@ schema=config.get("output_schema")
 
 async def process_request(self, user_input: str) -> dict:
 
-#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Input check: detect prompt injection
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Input check: detect prompt injection
 
 injection_risk = self.prompt_injection_detector.analyze(user_input)
 
@@ -516,7 +484,7 @@ if injection_risk.score > 0.85:
 
 return {"blocked": True, "reason": "prompt_injection"}
 
-#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Content filter
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Content filter
 
 filtered_input = self.pii_redactor.redact(user_input)
 
@@ -524,11 +492,11 @@ if self.content_filter.is_blocked(filtered_input):
 
 return {"blocked": True, "reason": "blocked_content"}
 
-#### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Process through model
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Process through model
 
 output = await self._invoke_model(filtered_input)
 
-#### 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Output validation
+## 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Output validation
 
 validated = self.output_validator.validate(output)
 
@@ -551,3 +519,9 @@ Building responsible AI requires ongoing commitment, not a one-time checklist. I
 **See also:** [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>)
 
 **See also:** [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>)
+
+**See also:** [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>)
+
+**See also:** [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>)
+
+**See also:** [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>)

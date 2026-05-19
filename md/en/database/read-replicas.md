@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/read-replicas.html
 
 # Read Replicas: Scaling Reads, Replication Lag, and Failover
 
-## Read Replicas: Scaling Reads, Replication Lag, and Failover
-
-### Read Replicas: Scaling Reads, Replication Lag, and Failover
-
-#### Read Replicas: Scaling Reads, Replication Lag, and Failover
-
-#### Read Replicas: Scaling Reads, Replication Lag, and Failover
-
-#### Read Replicas: Scaling Reads, Replication Lag, and Failover
-
-#### Read Replicas: Scaling Reads, Replication Lag, and Failover
-
-#### Read Replicas: Scaling Reads, Replication Lag, and Failover
-
-#### Read Replicas: Scaling Reads, Replication Lag, and Failover
-
-#### Read Replicas: Scaling Reads, Replication Lag, and Failover
-
-#### Read Replicas: Scaling Reads, Replication Lag, and Failover
-
-#### Read Replicas: Scaling Reads, Replication Lag, and Failover
-
-#### Read Replicas: Scaling Reads, Replication Lag, and Failover
-
-#### Read Replicas: Scaling Reads, Replication Lag, and Failover
-
-#### Read Replicas: Scaling Reads, Replication Lag, and Failover
-
-#### Read Replicas: Scaling Reads, Replication Lag, and Failover
-
 Read Replicas: Scaling Reads, Replication Lag, and Failover 
 
 Read replicas are copies of your primary database that serve read queries. They are the most common and cost-effective way to scale database read throughput. This article covers setup, load balancing, lag monitoring, and failover strategies. 
@@ -50,7 +20,7 @@ PostgreSQL Streaming Replication Setup
 
 On the primary: 
 
-#### postgresql.conf
+## postgresql.conf
 
 wal_level = replica
 
@@ -76,7 +46,7 @@ Create a `standby.signal` file and start PostgreSQL. The replica streams continu
 
 MySQL Replica Setup 
 
-#### my.cnf on primary
+## my.cnf on primary
 
 server_id = 1
 
@@ -156,7 +126,7 @@ conn.commit()
 
 A **proxy layer** like PgBouncer, ProxySQL, or HAProxy handles routing transparently: 
 
-#### ProxySQL query rules
+## ProxySQL query rules
 
 mysql_query_rules:
 
@@ -219,7 +189,7 @@ Applications that route reads of recently written data back to the primary avoid
 
 def get_order(order_id):
 
-#### Orders updated within the last 30 seconds route to primary
+## Orders updated within the last 30 seconds route to primary
 
 order = router.execute_read(
 
@@ -231,7 +201,7 @@ if order and (datetime.utcnow() - order[0]) < timedelta(seconds=30):
 
 conn = router.get_connection(read_only=False)
 
-#### Query primary
+## Query primary
 
 else:
 
@@ -243,13 +213,13 @@ When the primary fails, one replica must become the new primary:
 
 PostgreSQL 
 
-#### Promote a replica to primary
+## Promote a replica to primary
 
 pg_ctl promote -D /var/lib/postgresql/data
 
 Or via `pg_rewind` for a clean re-sync: 
 
-#### After promotion, rewind old primary to follow new primary
+## After promotion, rewind old primary to follow new primary
 
 pg_rewind --target-pgdata=/var/lib/postgresql/data \
 
@@ -259,7 +229,7 @@ Managed Failover
 
 Tools like Patroni automate failover: 
 
-#### patroni.yml
+## patroni.yml
 
 scope: myapp
 
@@ -309,3 +279,9 @@ Read replicas are a proven, low-risk approach to scaling reads. Combined with pr
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
 
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>)

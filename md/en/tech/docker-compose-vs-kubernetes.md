@@ -8,47 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/tech/docker-compose-vs-kubernetes.html
 
 # Docker Compose vs Kubernetes: When to Use Each and Migration Path
 
-## Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Docker Compose vs Kubernetes: When to Use Each and Migration Path
-
-#### Introduction
+## Introduction
 
 One of the most debated questions in container orchestration is when to use Docker Compose versus Kubernetes. While both tools manage containerized applications, they serve fundamentally different purposes. Compose provides simple single-host container orchestration, while Kubernetes offers a full-featured multi-cluster platform. Choosing incorrectly leads to unnecessary complexity or scaling limitations.
 
 This article compares Docker Compose and Kubernetes, explaining when Compose is sufficient, when to migrate to Kubernetes, and practical migration paths.
 
-#### Docker Compose: Simplicity for Single-Host Deployments
+## Docker Compose: Simplicity for Single-Host Deployments
 
 Docker Compose defines multi-container applications in a `docker-compose.yml` file. It handles container creation, networking, volume mounting, environment variables, and service dependencies. Compose is ideal for development environments, CI/CD pipelines, small-scale production deployments, and edge computing scenarios.
 
@@ -86,7 +52,7 @@ volumes:
 
 Compose excels in simplicity. Learning Compose takes hours; learning Kubernetes takes weeks. Compose files are concise and readable. Deployment requires only `docker compose up -d`, with no cluster setup, no YAML sprawl, and no control plane to manage.
 
-#### Kubernetes: Power for Distributed Systems
+## Kubernetes: Power for Distributed Systems
 
 Kubernetes provides pod scheduling, service discovery, load balancing, rolling updates, auto-scaling, self-healing, secret management, and storage orchestration across a cluster of nodes. Its declarative API and controller pattern make it the industry standard for production microservices.
 
@@ -126,7 +92,7 @@ image: my-api:latest
 
 Kubernetes requires significant operational investment: a control plane (etcd, API server, scheduler, controller manager), worker nodes (kubelet, kube-proxy), state management for persistent volumes, network overlay (CNI plugin), ingress controller, monitoring, and logging.
 
-#### When Compose Is Enough
+## When Compose Is Enough
 
 Compose is sufficient when:
 
@@ -145,13 +111,13 @@ Compose is sufficient when:
 
 Many organizations successfully run Compose in production for internal tools, CI runners, staging environments, and small SaaS products.
 
-#### Lightweight Alternatives: K3s and MicroK8s
+## Lightweight Alternatives: K3s and MicroK8s
 
 For teams wanting Kubernetes without full operational overhead, lightweight distributions provide an intermediate option. K3s is a CNCF-certified Kubernetes distribution packaged as a single binary under 100 MB. It replaces etcd with SQLite (or optionally an external database) and removes cloud provider plugins.
 
 Rancher's K3s is ideal for edge computing, IoT, ARM devices, and development clusters. Canonical's MicroK8s offers similar capabilities with snap-based installation. Both provide a Kubernetes API with minimal operational complexity, making them natural stepping stones from Compose.
 
-#### Migration Path from Compose to Kubernetes
+## Migration Path from Compose to Kubernetes
 
 Migration should be incremental. The Kompose tool translates `docker-compose.yml` to Kubernetes manifests, providing a starting point. However, generated manifests rarely match production requirements and should be treated as drafts.
 
@@ -175,7 +141,7 @@ A recommended migration approach:
 
 8\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Deploy to a staging cluster before production cutover.
 
-#### Conclusion
+## Conclusion
 
 Docker Compose and Kubernetes are not competitors but tools suited to different scales of operation. Compose excels in simplicity for single-host deployments, while Kubernetes provides resilience for distributed systems. Teams should start with Compose or a lightweight distribution like K3s and migrate to full Kubernetes only when operational requirements demand it. The right choice depends on team expertise, application complexity, and reliability requirements.
 
@@ -190,3 +156,9 @@ Docker Compose and Kubernetes are not competitors but tools suited to different 
 **See also:** [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>)
 
 **See also:** [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>)
+
+**See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>)
+
+**See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>)
+
+**See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>)

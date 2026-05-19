@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-databases-guide.png",
       "datePublished": "2025-12-23",
       "dateModified": "2026-05-11",
-      "wordCount": "1299",
+      "wordCount": "1227",
       "keywords": "Database, SQL",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "SQL"}],
       "inLanguage": "en",
@@ -98,22 +98,7 @@
       <h1 class="article-title">NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
       <div class="article-meta">Published 2025-12-23 · Last active 2026-05-11 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-databases-guide.png" alt="NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h2>
-<h3>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h3>
-<h4>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h4>
-<h4>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h4>
-<h4>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h4>
-<h4>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h4>
-<h4>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h4>
-<h4>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h4>
-<h4>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h4>
-<h4>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h4>
-<h4>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h4>
-<h4>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h4>
-<h4>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h4>
-<h4>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h4>
-<h4>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h4>
-<p>What Are NoSQL Databases? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-databases-guide.png" alt="NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>What Are NoSQL Databases? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-databases-guide.png" alt="NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>NoSQL databases are non-relational data stores designed for specific data models and access patterns that do not fit well in the relational paradigm. They trade strict ACID guarantees for scalability, flexibility, and performance at scale. </p>
 <p>NoSQL Database Types </p>
 <p>| Type | Examples | Best For | Avoid For | |------|----------|----------|-----------| | Document | MongoDB, Firestore | JSON-like data, flexible schemas | Complex joins | | Key-Value | Redis, DynamoDB | Simple lookups, caching | Multi-key queries | | Wide-Column | Cassandra, Bigtable | Time-series, write-heavy | Ad-hoc queries | | Graph | Neo4j, Dgraph | Relationships, recommendations | Simple CRUD | </p>
@@ -225,7 +210,7 @@
 <p>import firebase_admin</p>
 <p>from firebase_admin import firestore</p>
 <p>db = firestore.client()</p>
-<h4>Document reference</h4>
+<h2>Document reference</h2>
 <p>user_ref = db.collection('users').document('alice')</p>
 <p>user_ref.set({</p>
 <p>'email': 'alice@example.com',</p>
@@ -233,14 +218,14 @@
 <p>'roles': ['admin', 'editor'],</p>
 <p>'created_at': firestore.SERVER_TIMESTAMP</p>
 <p>})</p>
-<h4>Subcollection for hierarchical data</h4>
+<h2>Subcollection for hierarchical data</h2>
 <p>orders_ref = user_ref.collection('orders')</p>
 <p>orders_ref.add({</p>
 <p>'product': 'Laptop',</p>
 <p>'amount': 1200,</p>
 <p>'status': 'completed'</p>
 <p>})</p>
-<h4>Real-time listener</h4>
+<h2>Real-time listener</h2>
 <p>def on_snapshot(doc_snapshot, changes, read_time):</p>
 <p>for change in changes:</p>
 <p>print(f"Order changed: {change.document.id}")</p>
@@ -265,7 +250,10 @@
 <p><strong>See also:</strong> <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a></p>
-<p><strong>See also:</strong> <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/database/etl-pipelines.html">Building ETL Pipelines: A Practical Guide</a>, <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/database-indexing.html">Database Indexing Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/database/etl-pipelines.html">Building ETL Pipelines: A Practical Guide</a>, <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/database-indexing.html">Database Indexing Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/etl-pipelines.html">Building ETL Pipelines: A Practical Guide</a>, <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/database-indexing.html">Database Indexing Strategies</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -277,7 +265,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/sql-vs-nosql.html" class="related-card">SQL vs NoSQL Decision Guide</a><a href="/en/database/oltp-vs-olap.html" class="related-card">OLTP vs OLAP: Workload Optimization</a><a href="/en/database/data-modeling.html" class="related-card">Data Modeling Best Practices</a><a href="/en/database/document-databases.html" class="related-card">Document Databases: MongoDB, CouchDB, Firestore</a></div>
+      <div class="related-grid"><a href="/en/database/sql-vs-nosql.html" class="related-card"><span class="related-card-title">SQL vs NoSQL Decision Guide</span><span class="related-card-desc">Compare SQL and NoSQL databases across consistency, scalability, query flexibility, and development </span></a><a href="/en/database/oltp-vs-olap.html" class="related-card"><span class="related-card-title">OLTP vs OLAP: Workload Optimization</span><span class="related-card-desc">Compare OLTP and OLAP workloads: row vs column store, indexing strategies, query patterns, hybrid ap</span></a><a href="/en/database/data-modeling.html" class="related-card"><span class="related-card-title">Data Modeling Best Practices</span><span class="related-card-desc">Learn data modeling best practices including entity-relationship diagrams, normalization, patterns f</span></a><a href="/en/database/document-databases.html" class="related-card"><span class="related-card-title">Document Databases: MongoDB, CouchDB, Firestore</span><span class="related-card-desc">Compare document databases: MongoDB, CouchDB, and Firestore for flexible schema and JSON document st</span></a><a href="/en/tech/postgresql-query-optimization.html" class="related-card"><span class="related-card-title">PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds</span><span class="related-card-desc">Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, B</span></a><a href="/en/database/columnar-databases.html" class="related-card"><span class="related-card-title">Columnar Databases: When and How to Use Them</span><span class="related-card-desc">Columnar databases like ClickHouse, Redshift, and BigQuery, their compression techniques, query perf</span></a></div>
     </section>
     
   </div>

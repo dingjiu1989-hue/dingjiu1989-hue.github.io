@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/linter-formatter.png",
       "datePublished": "2026-02-04",
       "dateModified": "2026-04-28",
-      "wordCount": "1367",
+      "wordCount": "1304",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
@@ -110,25 +110,9 @@
       <h1 class="article-title">Linter and Formatter: ESLint, Prettier, Biome, Ruff</h1>
       <div class="article-meta">Published 2026-02-04 · Last active 2026-04-28 · 240 views · 2 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/linter-formatter.png" alt="Linter and Formatter: ESLint, Prettier, Biome, Ruff" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h2>
-<h3>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h3>
-<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
-<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
-<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
-<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
-<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
-<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
-<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
-<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
-<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
-<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
-<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
-<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
-<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
-<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Code quality tools have converged into two categories: linters (find bugs and enforce style rules) and formatters (automatically format code). The traditional approach uses separate tools for each. Newer all-in-one tools combine both in a single binary. This article compares ESLint + Prettier, Biome, and Ruff.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/linter-formatter.png" alt="Linter and Formatter: ESLint, Prettier, Biome, Ruff" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>ESLint + Prettier</h4>
+<h2>ESLint + Prettier</h2>
 <p>The established standard for JavaScript/TypeScript:</p>
 <p>// eslint.config.js (flat config — v9+)</p>
 <p>import js from "@eslint/js";</p>
@@ -159,14 +143,14 @@
 <p>"arrowParens": "always",</p>
 <p>"endOfLine": "lf"</p>
 <p>}</p>
-<h4>Check and fix</h4>
+<h2>Check and fix</h2>
 <p>npx eslint src/</p>
 <p>npx eslint src/ --fix</p>
 <p>npx prettier --check src/</p>
 <p>npx prettier --write src/</p>
 <p><strong>Strengths</strong> : Largest ecosystem with 1000s of plugins, extensive customization, well-documented rules, strong community.</p>
 <p><strong>Weaknesses</strong> : Two separate tools require coordination. ESLint configuration can be verbose. Performance can be slow on large codebases. Running both adds build time.</p>
-<h4>Biome</h4>
+<h2>Biome</h2>
 <p>A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:</p>
 <p>// biome.json</p>
 <p>{</p>
@@ -207,21 +191,21 @@
 <p>}</p>
 <p>}</p>
 <p>}</p>
-<h4>Check and format</h4>
+<h2>Check and format</h2>
 <p>biome check src/</p>
 <p>biome check src/ --apply</p>
 <p>biome format src/</p>
 <p>biome ci src/ # CI mode (strict)</p>
-<h4>Lint only</h4>
+<h2>Lint only</h2>
 <p>biome lint src/</p>
-<h4>Organize imports</h4>
+<h2>Organize imports</h2>
 <p>biome check --formatter-enabled=true --linter-enabled=true</p>
 <p><strong>Speed</strong> : 10-50x faster than ESLint + Prettier. A 10,000-file TypeScript project checks in ~2 seconds vs ~60 seconds for ESLint.</p>
 <p><strong>Strengths</strong> : Single binary (Rust), unified configuration, dramatically faster, organizes imports automatically, fewer dependencies (no separate tools).</p>
 <p><strong>Weaknesses</strong> : Smaller ecosystem (fewer community rules), newer (some edge cases not covered), migration effort from ESLint.</p>
-<h4>Ruff</h4>
+<h2>Ruff</h2>
 <p>A Rust-based linter and formatter for Python:</p>
-<h4>pyproject.toml</h4>
+<h2>pyproject.toml</h2>
 <p>[tool.ruff]</p>
 <p>target-version = "py311"</p>
 <p>line-length = 100</p>
@@ -248,7 +232,7 @@
 <p>[tool.ruff.lint.per-file-ignores]</p>
 <p>"<strong>init</strong>.py" = ["F401", "I001"]</p>
 <p>"tests/**" = ["S101"] # Allow assert in tests</p>
-<h4>Check and fix</h4>
+<h2>Check and fix</h2>
 <p>ruff check src/</p>
 <p>ruff check src/ --fix</p>
 <p>ruff format src/ # Format only</p>
@@ -256,7 +240,7 @@
 <p><strong>Speed</strong> : 10-100x faster than Flake8 + Black + isort combination. Ruff replaces dozens of linting plugins in a single binary.</p>
 <p><strong>Strengths</strong> : Drop-in replacement for Flake8, isort, pyupgrade, and many more. Extremely fast. Single configuration file. Active development with frequent releases.</p>
 <p><strong>Weaknesses</strong> : Some rules not yet implemented (Pylint plugin parity). Python only.</p>
-<h4>Comparison</h4>
+<h2>Comparison</h2>
 <p>| Feature | ESLint + Prettier | Biome | Ruff |</p>
 <p>|---------|------------------|-------|------|</p>
 <p>| Language | JS/TS | JS/TS/CSS/JSON | Python |</p>
@@ -267,7 +251,7 @@
 <p>| Plugin ecosystem | 1000s | Growing | Comprehensive |</p>
 <p>| Configuration | Complex | Simple | Simple |</p>
 <p>| Migrate from | N/A | <code>biome migrate eslint</code> | <code>ruff migrate</code> |</p>
-<h4>Recommendations</h4>
+<h2>Recommendations</h2>
 <ul>
 <li>
 <p><strong>New JS/TS projects</strong> : Start with Biome for the best developer experience and speed.</p>
@@ -290,7 +274,10 @@
 <p><strong>See also:</strong> <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a>, <a href="/en/tools/issue-tracking-tools.html">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a>, <a href="/en/tools/issue-tracking-tools.html">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a>, <a href="/en/tools/issue-tracking-tools.html">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</a></p>
-<p><strong>See also:</strong> <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a>, <a href="/en/tools/issue-tracking-tools.html">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a>, <a href="/en/tools/issue-tracking-tools.html">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a>, <a href="/en/tools/issue-tracking-tools.html">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a>, <a href="/en/tools/issue-tracking-tools.html">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/database-gui.html">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</a>, <a href="/en/tools/documentation-tools.html">Documentation Tools for Developers 2026</a>, <a href="/en/tools/dotfile-management.html">Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/database-gui.html">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</a>, <a href="/en/tools/documentation-tools.html">Documentation Tools for Developers 2026</a>, <a href="/en/tools/dotfile-management.html">Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/database-gui.html">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</a>, <a href="/en/tools/documentation-tools.html">Documentation Tools for Developers 2026</a>, <a href="/en/tools/dotfile-management.html">Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -302,7 +289,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/load-testing-tools.html" class="related-card">Load Testing Tools: k6, Locust, Gatling, Artillery</a><a href="/en/tools/testing-frameworks.html" class="related-card">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a><a href="/en/tools/issue-tracking-tools.html" class="related-card">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</a><a href="/en/tools/api-testing-2026.html" class="related-card">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a></div>
+      <div class="related-grid"><a href="/en/tools/load-testing-tools.html" class="related-card"><span class="related-card-title">Load Testing Tools: k6, Locust, Gatling, Artillery</span><span class="related-card-desc">Compare load testing frameworks: k6 for JavaScript-based testing, Locust for Python, Gatling for Sca</span></a><a href="/en/tools/testing-frameworks.html" class="related-card"><span class="related-card-title">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</span><span class="related-card-desc">Compare testing frameworks in 2026: Vitest for modern JS testing, Jest for stability, Playwright and</span></a><a href="/en/tools/issue-tracking-tools.html" class="related-card"><span class="related-card-title">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</span><span class="related-card-desc">Compare issue tracking and project management tools for software teams of all sizes.</span></a><a href="/en/tools/api-testing-2026.html" class="related-card"><span class="related-card-title">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</span><span class="related-card-desc">Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, </span></a><a href="/en/tools/build-tools.html" class="related-card"><span class="related-card-title">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</span><span class="related-card-desc">Compare modern JavaScript build tools: esbuild, swc, turbopack, and vite. Benchmark bundling speed, </span></a><a href="/en/tools/cloud-cli-tools.html" class="related-card"><span class="related-card-title">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</span><span class="related-card-desc">Compare cloud CLI tools: aws-cli for AWS, gcloud for GCP, az for Azure, and s5cmd for high-speed S3 </span></a></div>
     </section>
     
   </div>

@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/retry-patterns.html
 
 # Retry Patterns
 
-## Retry Patterns
-
-### Retry Patterns
-
-#### Retry Patterns
-
-#### Retry Patterns
-
-#### Retry Patterns
-
-#### Retry Patterns
-
-#### Retry Patterns
-
-#### Retry Patterns
-
-#### Retry Patterns
-
-#### Retry Patterns
-
-#### Retry Patterns
-
-#### Retry Patterns
-
-#### Retry Patterns
-
-#### Retry Patterns
-
-#### Retry Patterns
-
 Retry patterns are fundamental to building resilient distributed systems. Network failures, transient service unavailability, and resource contention are inevitable in any distributed architecture. A well-designed retry mechanism can gracefully handle these failures without overwhelming downstream services or degrading user experience. This article covers exponential backoff, jitter, retry budgets, and integration with circuit breakers. 
 
 Exponential Backoff 
@@ -87,3 +57,9 @@ Retries are a powerful tool, but they are not a substitute for addressing underl
 **See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 
 **See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)

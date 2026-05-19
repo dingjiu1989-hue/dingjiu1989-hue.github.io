@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/networking-tools.png",
       "datePublished": "2026-02-05",
       "dateModified": "2026-05-16",
-      "wordCount": "1605",
+      "wordCount": "1509",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
@@ -110,65 +110,49 @@
       <h1 class="article-title">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h1>
       <div class="article-meta">Published 2026-02-05 · Last active 2026-05-16 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/networking-tools.png" alt="Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h2>
-<h3>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h3>
-<h4>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h4>
-<h4>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h4>
-<h4>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h4>
-<h4>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h4>
-<h4>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h4>
-<h4>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h4>
-<h4>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h4>
-<h4>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h4>
-<h4>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h4>
-<h4>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h4>
-<h4>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h4>
-<h4>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h4>
-<h4>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h4>
-<h4>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Network troubleshooting is a fundamental skill for developers and operations engineers. Whether diagnosing slow connections, DNS resolution failures, or firewall issues, the right tools make the difference between hours of frustration and minutes of focused debugging. This practical guide covers five essential networking tools: mtr, iperf, dig, nmap, and Wireshark.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/networking-tools.png" alt="Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>mtr (My Traceroute)</h4>
+<h2>mtr (My Traceroute)</h2>
 <p>Combines traceroute and ping in a single tool for continuous network path analysis:</p>
-<h4>Basic usage</h4>
+<h2>Basic usage</h2>
 <p>mtr google.com</p>
 <p>mtr --report google.com # Run once and generate report</p>
 <p>mtr --report-cycles=10 google.com # 10 cycles for report</p>
-<h4>Useful flags</h4>
+<h2>Useful flags</h2>
 <p>mtr --icmp google.com # Use ICMP instead of UDP</p>
 <p>mtr --tcp --port 443 api.example.com # TCP on specific port</p>
 <p>mtr --udp google.com # UDP probes</p>
 <p>mtr --no-dns 10.0.0.1 # Skip DNS resolution (faster)</p>
 <p>mtr --report-wide google.com # Wide output format</p>
-<h4>For continuous monitoring</h4>
+<h2>For continuous monitoring</h2>
 <p>mtr --interval 5 google.com # Update every 5 seconds</p>
 <p><strong>Interpreting output</strong> : Look for hops with high loss% or latency spikes. The last hop before consistent loss is usually the problem. 100% loss at intermediate hops may be a firewall dropping probes, not an actual failure.</p>
-<h4>iperf3</h4>
+<h2>iperf3</h2>
 <p>Network bandwidth measurement tool:</p>
-<h4>Start server (on receiving end)</h4>
+<h2>Start server (on receiving end)</h2>
 <p>iperf3 -s</p>
 <p>iperf3 -s -p 5201</p>
-<h4>Start client (on sending end)</h4>
+<h2>Start client (on sending end)</h2>
 <p>iperf3 -c server-address</p>
 <p>iperf3 -c server-address -p 5201</p>
-<h4>Advanced tests</h4>
+<h2>Advanced tests</h2>
 <p>iperf3 -c server-address -t 30 # 30-second test</p>
 <p>iperf3 -c server-address -P 4 # 4 parallel streams</p>
 <p>iperf3 -c server-address -R # Reverse mode (server to client)</p>
 <p>iperf3 -c server-address -u -b 100M # UDP test at 100 Mbps</p>
-<h4>Bidirectional test</h4>
+<h2>Bidirectional test</h2>
 <p>iperf3 -c server-address --bidir</p>
-<h4>JSON output for automation</h4>
+<h2>JSON output for automation</h2>
 <p>iperf3 -c server-address -J &gt; results.json</p>
-<h4>Test specific TCP window size</h4>
+<h2>Test specific TCP window size</h2>
 <p>iperf3 -c server-address -w 64K</p>
 <p><strong>When to use</strong> : Benchmark network throughput between instances, verify bandwidth limits, test VPN performance, identify congestion. Typical patterns: run iperf3 in server mode on one host, client mode on another.</p>
-<h4>dig (DNS Lookup)</h4>
+<h2>dig (DNS Lookup)</h2>
 <p>The most powerful DNS troubleshooting tool:</p>
-<h4>Basic lookup</h4>
+<h2>Basic lookup</h2>
 <p>dig google.com</p>
 <p>dig @8.8.8.8 google.com # Query specific DNS server</p>
-<h4>Query specific record types</h4>
+<h2>Query specific record types</h2>
 <p>dig google.com A # IPv4 address</p>
 <p>dig google.com AAAA # IPv6 address</p>
 <p>dig google.com MX # Mail exchange</p>
@@ -176,70 +160,70 @@
 <p>dig google.com TXT # Text records (SPF, DKIM)</p>
 <p>dig google.com CNAME # Canonical name</p>
 <p>dig example.com SOA # Start of authority</p>
-<h4>Advanced queries</h4>
+<h2>Advanced queries</h2>
 <p>dig +short google.com # Short output</p>
 <p>dig +trace google.com # Trace delegation path</p>
 <p>dig +tcp google.com # Use TCP instead of UDP</p>
 <p>dig -x 8.8.8.8 # Reverse DNS lookup</p>
 <p>dig google.com ANY +noall +answer # Show only answer section</p>
 <p>dig +dnssec google.com # DNSSEC validation</p>
-<h4>Batch queries from file</h4>
+<h2>Batch queries from file</h2>
 <p>dig -f domains.txt +short</p>
-<h4>Check propagation</h4>
+<h2>Check propagation</h2>
 <p>dig @ns1.google.com google.com # Query authoritative server</p>
 <p>dig @8.8.8.8 google.com +stats # Show query statistics</p>
 <p><strong>Common debugging workflow</strong> : Start with <code>dig +trace</code> to see the full resolution path, then query specific servers to isolate where resolution fails.</p>
-<h4>nmap (Network Mapper)</h4>
+<h2>nmap (Network Mapper)</h2>
 <p>Port scanning and service discovery:</p>
-<h4>Basic scans</h4>
+<h2>Basic scans</h2>
 <p>nmap scanme.nmap.org # Default scan (1000 ports)</p>
 <p>nmap -sS scanme.nmap.org # SYN stealth scan (needs root)</p>
 <p>nmap -sT scanme.nmap.org # TCP connect scan</p>
 <p>nmap -sU scanme.nmap.org # UDP scan</p>
-<h4>Port specification</h4>
+<h2>Port specification</h2>
 <p>nmap -p 80,443 example.com # Specific ports</p>
 <p>nmap -p- example.com # All 65535 ports (slow)</p>
 <p>nmap -p 1-1000 example.com # Port range</p>
 <p>nmap --top-ports 100 example.com # Most common ports</p>
-<h4>Service detection</h4>
+<h2>Service detection</h2>
 <p>nmap -sV example.com # Version detection</p>
 <p>nmap -O example.com # OS detection</p>
 <p>nmap -A example.com # Aggressive (OS, version, script, traceroute)</p>
-<h4>Network discovery</h4>
+<h2>Network discovery</h2>
 <p>nmap -sn 192.168.1.0/24 # Ping sweep (find live hosts)</p>
 <p>nmap -sL 192.168.1.0/24 # List scan (DNS resolution only)</p>
-<h4>Scripts</h4>
+<h2>Scripts</h2>
 <p>nmap --script=http-title example.com</p>
 <p>nmap --script=ssl-enum-ciphers example.com</p>
 <p>nmap --script=vuln example.com --script-args=unsafe=1</p>
-<h4>Output formats</h4>
+<h2>Output formats</h2>
 <p>nmap -oN scan.txt example.com # Normal</p>
 <p>nmap -oX scan.xml example.com # XML</p>
 <p>nmap -oG scan.grep example.com # Grepable</p>
-<h4>Wireshark / tshark</h4>
+<h2>Wireshark / tshark</h2>
 <p>Deep packet inspection and analysis:</p>
-<h4>tshark (CLI version of Wireshark)</h4>
-<h4>Capture on interface</h4>
+<h2>tshark (CLI version of Wireshark)</h2>
+<h2>Capture on interface</h2>
 <p>tshark -i eth0</p>
 <p>tshark -i eth0 -c 100 # Capture 100 packets</p>
-<h4>Capture filters (BPF syntax)</h4>
+<h2>Capture filters (BPF syntax)</h2>
 <p>tshark -i eth0 "port 443"</p>
 <p>tshark -i eth0 "host 10.0.0.1"</p>
 <p>tshark -i eth0 "tcp port 80 or tcp port 443"</p>
-<h4>Display filters (more powerful)</h4>
+<h2>Display filters (more powerful)</h2>
 <p>tshark -Y "http.request.method == GET"</p>
 <p>tshark -Y "dns.qry.name contains example.com"</p>
 <p>tshark -Y "tcp.analysis.flags" # TCP issues</p>
 <p>tshark -Y "http.response.code &gt;= 500"</p>
-<h4>Follow streams</h4>
+<h2>Follow streams</h2>
 <p>tshark -r capture.pcap -Y "http" -z follow,tcp,ascii,0</p>
-<h4>Statistics</h4>
+<h2>Statistics</h2>
 <p>tshark -r capture.pcap -z io,stat,1 # IO graph</p>
 <p>tshark -r capture.pcap -z conv,tcp # TCP conversations</p>
-<h4>Save filtered output</h4>
+<h2>Save filtered output</h2>
 <p>tshark -r capture.pcap -Y "dns" -w dns-only.pcap</p>
 <p><strong>Wireshark filters</strong> : <code>ip.src == 10.0.0.1 &amp;&amp; tcp.port == 443</code>, <code>http.response.code &gt;= 400</code>, <code>tls.handshake.type == 1</code></p>
-<h4>Quick Reference</h4>
+<h2>Quick Reference</h2>
 <p>| Tool | Best For | Example Problem |</p>
 <p>|------|----------|----------------|</p>
 <p>| mtr | Path analysis, packet loss | "Connection intermittent to API" |</p>
@@ -247,7 +231,7 @@
 <p>| dig | DNS troubleshooting | "Website not loading, DNS error" |</p>
 <p>| nmap | Port scanning, discovery | "Cannot connect to service, firewall?" |</p>
 <p>| Wireshark | Deep packet inspection | "API returns corrupted data" |</p>
-<h4>Recommendations</h4>
+<h2>Recommendations</h2>
 <ul>
 <li>
 <p><strong>First, check connectivity</strong> : <code>ping</code> and <code>mtr</code> to verify basic reachability.</p>
@@ -270,7 +254,10 @@
 <p><strong>See also:</strong> <a href="/en/tools/terraform-tools.html">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</a>, <a href="/en/tools/command-line-productivity.html">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a>, <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/terraform-tools.html">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</a>, <a href="/en/tools/command-line-productivity.html">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a>, <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/terraform-tools.html">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</a>, <a href="/en/tools/command-line-productivity.html">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a>, <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a></p>
-<p><strong>See also:</strong> <a href="/en/tools/terraform-tools.html">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</a>, <a href="/en/tools/command-line-productivity.html">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a>, <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/terraform-tools.html">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</a>, <a href="/en/tools/command-line-productivity.html">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a>, <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tools/terraform-tools.html">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</a>, <a href="/en/tools/command-line-productivity.html">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a>, <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/terraform-tools.html">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</a>, <a href="/en/tools/command-line-productivity.html">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a>, <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/redis-tools.html">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a>, <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/redis-tools.html">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a>, <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/redis-tools.html">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a>, <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -282,7 +269,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/terraform-tools.html" class="related-card">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</a><a href="/en/tools/command-line-productivity.html" class="related-card">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a><a href="/en/tools/code-editor-plugins.html" class="related-card">Code Editor Plugins: Must-Have Extensions for Productivity</a><a href="/en/tools/helm-tools.html" class="related-card">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a></div>
+      <div class="related-grid"><a href="/en/tools/terraform-tools.html" class="related-card"><span class="related-card-title">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</span><span class="related-card-desc">Essential Terraform ecosystem tools: Terragrunt for DRY configurations, terratest for infrastructure</span></a><a href="/en/tools/command-line-productivity.html" class="related-card"><span class="related-card-title">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</span><span class="related-card-desc">Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code </span></a><a href="/en/tools/code-editor-plugins.html" class="related-card"><span class="related-card-title">Code Editor Plugins: Must-Have Extensions for Productivity</span><span class="related-card-desc">Essential code editor plugins for 2026: language support, AI assistants, theme plugins, git integrat</span></a><a href="/en/tools/helm-tools.html" class="related-card"><span class="related-card-title">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</span><span class="related-card-desc">Essential Helm ecosystem tools: Helmfile for declarative chart management, helm-docs for documentati</span></a><a href="/en/tools/memory-analysis.html" class="related-card"><span class="related-card-title">Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling</span><span class="related-card-desc">Comprehensive guide to memory analysis tools: Valgrind for memory error detection, heaptrack for Lin</span></a><a href="/en/tools/performance-profiling.html" class="related-card"><span class="related-card-title">Performance Profiling: perf, Flamegraphs, py-spy, pprof</span><span class="related-card-desc">Practical guide to performance profiling tools: perf for Linux kernel profiling, flamegraphs for vis</span></a></div>
     </section>
     
   </div>

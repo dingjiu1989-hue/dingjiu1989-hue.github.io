@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/ansible-automation.png",
       "datePublished": "2025-12-31",
       "dateModified": "2026-04-25",
-      "wordCount": "1664",
+      "wordCount": "1590",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,27 +99,10 @@
       <h1 class="article-title">Ansible Automation: Playbooks, Roles, Inventory, and Vault</h1>
       <div class="article-meta">Published 2025-12-31 · Last active 2026-04-25 · 120 views · 1 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/ansible-automation.png" alt="Ansible Automation: Playbooks, Roles, Inventory, and Vault" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h2>
-<h3>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h3>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Ansible Automation: Playbooks, Roles, Inventory, and Vault</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Ansible has become one of the most widely adopted configuration management and automation tools in the DevOps ecosystem. Acquired by Red Hat in 2015, it stands out for its agentless architecture, YAML-based syntax, and push-based execution model. Unlike Puppet or Chef, which require agents installed on managed nodes, Ansible communicates over SSH or WinRM, making it trivial to get started with existing infrastructure.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/ansible-automation.png" alt="Ansible Automation: Playbooks, Roles, Inventory, and Vault" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>This article provides a technical deep dive into Ansible's core components: playbooks, roles, inventory management, Ansible Vault, idempotency, and a comparison with Terraform for infrastructure provisioning.</p>
-<h4>Playbooks: The Heart of Automation</h4>
+<h2>Playbooks: The Heart of Automation</h2>
 <p>Ansible Playbooks are YAML files that define automation workflows. A playbook contains one or more plays, each targeting a group of hosts and defining a set of tasks to execute. Tasks are executed sequentially, and each task calls an Ansible module.</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Configure web servers</p>
 <p>hosts: webservers</p>
@@ -135,7 +118,7 @@
 <p>state: started</p>
 <p>enabled: yes</p>
 <p>Playbooks support conditionals with <code>when</code>, loops with <code>loop</code>, and error handling with <code>block</code>, <code>rescue</code>, and <code>always</code> — a pattern borrowed from programming languages. Handlers provide a mechanism to run tasks only when notified by changes, such as restarting a service after a configuration file change.</p>
-<h4>Roles: Organizing Reusable Automation</h4>
+<h2>Roles: Organizing Reusable Automation</h2>
 <p>Roles are the recommended way to structure Ansible content. A role encapsulates tasks, handlers, variables, templates, and files into a reusable directory structure:</p>
 <p>roles/</p>
 <p>nginx/</p>
@@ -146,7 +129,7 @@
 <p>defaults/main.yml</p>
 <p>meta/main.yml</p>
 <p>Roles can be shared via Ansible Galaxy, the community hub for pre-built roles. Using <code>ansible-galaxy role install</code> in conjunction with a <code>requirements.yml</code> file allows teams to pin role versions, similar to dependency management in other ecosystems.</p>
-<h4>Inventory Management</h4>
+<h2>Inventory Management</h2>
 <p>Ansible inventory defines the hosts and groups that playbooks target. Static inventories are simple INI or YAML files, but dynamic inventories are far more powerful in cloud environments.</p>
 <p>all:</p>
 <p>children:</p>
@@ -161,22 +144,25 @@
 <p>db1:</p>
 <p>ansible_host: 192.168.1.20</p>
 <p>Dynamic inventory scripts query cloud provider APIs (AWS EC2, GCP Compute, Azure VMs) or configuration management databases (CMDB) to generate inventory on the fly. AWS EC2 inventory supports filtering by tags, regions, and instance states. Ansible also supports inventory plugins, which are the modern replacement for legacy inventory scripts.</p>
-<h4>Ansible Vault: Secrets Management</h4>
+<h2>Ansible Vault: Secrets Management</h2>
 <p>Ansible Vault encrypts sensitive data such as passwords, API keys, and certificates. Vault supports encrypting individual variables within a playbook or entire files. The <code>ansible-vault</code> command-line tool provides encrypt, decrypt, rekey, and view operations.</p>
 <p>Vault IDs allow multiple passwords for different environments: <code>ansible-vault encrypt --vault-id prod@prompt secrets.yml</code>. This is crucial for teams managing separate development, staging, and production vault passwords.</p>
-<h4>Idempotency in Ansible</h4>
+<h2>Idempotency in Ansible</h2>
 <p>Idempotency means running the same playbook multiple times produces the same result without unintended side effects. Most Ansible modules are idempotent by design. The <code>apt</code> module, for example, only installs a package if it is not already present. The <code>copy</code> module only transfers a file if the source differs from the destination.</p>
 <p>Testing idempotency is a best practice. Tools like <code>molecule</code> allow running playbooks against Docker containers or VMs and verifying that the second run produces no changes.</p>
-<h4>Ansible vs. Terraform</h4>
+<h2>Ansible vs. Terraform</h2>
 <p>While both tools are essential in modern infrastructure, they serve different purposes. Terraform is declarative and focused on infrastructure provisioning — creating, modifying, and destroying cloud resources such as VPCs, load balancers, and databases. Ansible is procedural and focused on configuration management — installing software, configuring services, and deploying applications.</p>
 <p>Many teams use Terraform to provision infrastructure and Ansible to configure it. For example, Terraform creates EC2 instances and security groups, and the Terraform inventory plugin passes those instances to Ansible for configuration. When both tools cover the same use case, choose based on whether you need state management (choose Terraform) or agentless configuration (choose Ansible).</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>Ansible's simplicity and agentless architecture make it an excellent choice for configuration management and automation. Understanding playbooks, roles, dynamic inventory, and vault is essential for effective use. When combined with Terraform for provisioning, Ansible forms a complete infrastructure automation stack suitable for organizations of any size.</p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/react-server-components.html">React Server Components</a>.</p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/react-server-components.html">React Server Components</a>, <a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/react-server-components.html">React Server Components</a>, <a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/react-server-components.html">React Server Components</a>, <a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/react-server-components.html">React Server Components</a>, <a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/react-server-components.html">React Server Components</a>, <a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/react-server-components.html">React Server Components</a>, <a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/react-server-components.html">React Server Components</a>, <a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -188,7 +174,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/terraform-state-management.html" class="related-card">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a><a href="/en/tech/react-server-components.html" class="related-card">React Server Components</a><a href="/en/tech/prometheus-deep-dive.html" class="related-card">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a><a href="/en/tech/infrastructure-composability.html" class="related-card">Infrastructure Composability</a></div>
+      <div class="related-grid"><a href="/en/tech/terraform-state-management.html" class="related-card"><span class="related-card-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</span><span class="related-card-desc">Deep dive into Terraform state management covering remote backends, state locking, migration strateg</span></a><a href="/en/tech/react-server-components.html" class="related-card"><span class="related-card-title">React Server Components</span><span class="related-card-desc">Deep dive into React Server Components: streaming, data fetching patterns, client boundaries, and ar</span></a><a href="/en/tech/prometheus-deep-dive.html" class="related-card"><span class="related-card-title">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</span><span class="related-card-desc">A comprehensive look at Prometheus monitoring covering metrics collection, PromQL queries, recording</span></a><a href="/en/tech/infrastructure-composability.html" class="related-card"><span class="related-card-title">Infrastructure Composability</span><span class="related-card-desc">Explore infrastructure composability: reusable modules, Terraform patterns, component design, and en</span></a><a href="/en/tech/capacity-planning-cloud.html" class="related-card"><span class="related-card-title">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</span><span class="related-card-desc">Technical exploration of cloud capacity planning covering auto-scaling strategies, reserved and spot</span></a><a href="/en/tech/elk-stack-setup.html" class="related-card"><span class="related-card-title">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</span><span class="related-card-desc">Comprehensive guide to ELK Stack covering Elasticsearch cluster setup, Logstash pipeline configurati</span></a></div>
     </section>
     
   </div>

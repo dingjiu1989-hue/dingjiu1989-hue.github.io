@@ -8,43 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-version-management.html
 
 # LLM Version Management: Model Registry, A/B Testing, Rollback
 
-## LLM Version Management: Model Registry, A/B Testing, Rollback
-
-### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### LLM Version Management: Model Registry, A/B Testing, Rollback
-
-#### Introduction
+## Introduction
 
 LLMs change frequently: new model releases, fine-tuned versions, updated system prompts, and modified retrieval pipelines all constitute "versions" of your AI system. Unlike traditional software where you can pin a dependency version, LLM behavior shifts with each API update. This article covers the tools and practices for managing LLM versions in production.
 
-#### Model Registry
+## Model Registry
 
 A model registry tracks metadata for every deployed model version:
 
@@ -132,7 +100,7 @@ return model
 
 return None
 
-#### Usage
+## Usage
 
 registry = ModelRegistry(redis_client)
 
@@ -146,7 +114,7 @@ registry.register_model("claude-sonnet-v4-1", {
 
 })
 
-#### A/B Testing Framework
+## A/B Testing Framework
 
 Compare model versions on live traffic with statistical significance:
 
@@ -184,7 +152,7 @@ def select_model(self, experiment: str, user_id: str) -> str:
 
 exp = self.experiments[experiment]
 
-#### Deterministic assignment based on user_id hash
+## Deterministic assignment based on user_id hash
 
 hash_val = int(hashlib.md5(f"{experiment}:{user_id}".encode()).hexdigest(), 16)
 
@@ -220,7 +188,7 @@ error_rate_a = results["a"]["errors"] / results["a"]["calls"]
 
 error_rate_b = results["b"]["errors"] / results["b"]["calls"]
 
-#### Simple decision: lower error rate wins
+## Simple decision: lower error rate wins
 
 if error_rate_a < error_rate_b:
 
@@ -228,7 +196,7 @@ return exp["model_a"]
 
 return exp["model_b"]
 
-#### Gradual Rollout
+## Gradual Rollout
 
 Deploy new models incrementally with automatic rollback:
 
@@ -266,11 +234,11 @@ self.registry.promote(model_id, ModelStatus.CANARY)
 
 await self._route_traffic(model_id, stage["traffic"])
 
-#### Wait for evaluation period
+## Wait for evaluation period
 
 await asyncio.sleep(stage["duration_min"] * 60)
 
-#### Evaluate performance
+## Evaluate performance
 
 scores = await self.evaluate(model_id)
 
@@ -296,7 +264,7 @@ self.registry.promote(model_id, ModelStatus.ROLLED_BACK)
 
 print(f"Rolled back to {previous_model['model_id']}")
 
-#### Evaluation Gate
+## Evaluation Gate
 
 Automated evaluation runs before any model promotion:
 
@@ -338,7 +306,7 @@ return self._similarity(output, test["expected_output"])
 
 return 0.0
 
-#### Conclusion
+## Conclusion
 
 Treat LLM versions as managed artifacts, not API parameters. Use a model registry to track every version with its metadata, system prompt, and evaluation scores. Implement A/B testing to compare versions on live traffic. Deploy new models gradually through canary, small, medium, and full rollout stages with automated evaluation gates at each stage. Maintain the ability to roll back instantly when metrics degrade. This discipline makes LLM version management as reliable as traditional software deployment.
 
@@ -353,3 +321,9 @@ Treat LLM versions as managed artifacts, not API parameters. Use a model registr
 **See also:** [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>)
 
 **See also:** [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>)
+
+**See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
+
+**See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
+
+**See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)

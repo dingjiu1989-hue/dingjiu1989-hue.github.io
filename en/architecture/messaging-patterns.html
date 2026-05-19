@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/messaging-patterns.png",
       "datePublished": "2025-12-29",
       "dateModified": "2026-05-12",
-      "wordCount": "1698",
+      "wordCount": "1641",
       "keywords": "Architecture, System Design",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
       "inLanguage": "en",
@@ -98,22 +98,7 @@
       <h1 class="article-title">Messaging Patterns: Pub/Sub and Request/Reply</h1>
       <div class="article-meta">Published 2025-12-29 · Last active 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/messaging-patterns.png" alt="Messaging Patterns: Pub/Sub and Request/Reply" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Messaging Patterns: Pub/Sub and Request/Reply</h2>
-<h3>Messaging Patterns: Pub/Sub and Request/Reply</h3>
-<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
-<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
-<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
-<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
-<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
-<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
-<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
-<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
-<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
-<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
-<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
-<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
-<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
-<p>Messaging is the backbone of distributed systems. It enables services to communicate asynchronously, decouple dependencies, and build resilient architectures. This article covers the two most fundamental messaging patterns: publish-subscribe and request-reply. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/messaging-patterns.png" alt="Messaging Patterns: Pub/Sub and Request/Reply" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Messaging is the backbone of distributed systems. It enables services to communicate asynchronously, decouple dependencies, and build resilient architectures. This article covers the two most fundamental messaging patterns: publish-subscribe and request-reply. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/messaging-patterns.png" alt="Messaging Patterns: Pub/Sub and Request/Reply" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The Case for Messaging </p>
 <p>Direct HTTP calls between services create tight coupling. When Service A calls Service B directly: </p>
 <ul>
@@ -146,14 +131,14 @@
 <p><strong>Broadcasting.</strong> A live sports app publishes score updates. Thousands of clients receive updates in real-time. </p>
 <p><strong>Log aggregation.</strong> Multiple services publish log entries to a central topic. A log processing service stores and indexes them. </p>
 <p>Example with Kafka </p>
-<h4>Publisher</h4>
+<h2>Publisher</h2>
 <p>producer.send('order-events', {</p>
 <p>'type': 'OrderPlaced',</p>
 <p>'order_id': '123',</p>
 <p>'customer_id': '456',</p>
 <p>'total': 99.99</p>
 <p>})</p>
-<h4>Subscriber</h4>
+<h2>Subscriber</h2>
 <p>@kafka_listener('order-events')</p>
 <p>def handle_order_placed(event):</p>
 <p>if event['type'] == 'OrderPlaced':</p>
@@ -167,7 +152,7 @@
 <p>[Requestor] &lt;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [Reply Queue] &lt;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [Replier]</p>
 <p>Correlation ID </p>
 <p>The key mechanism is the correlation ID. The requestor includes a unique ID in the request message. The replier includes the same ID in the reply message. The requestor uses this ID to match replies to pending requests. </p>
-<h4>Requestor</h4>
+<h2>Requestor</h2>
 <p>correlation_id = str(uuid.uuid4())</p>
 <p>reply_queue = f"reply-{correlation_id}"</p>
 <p>message = {</p>
@@ -175,9 +160,9 @@
 <p>'payload': {'user_id': '123', 'amount': 100}</p>
 <p>}</p>
 <p>request_queue.send(message)</p>
-<h4>Wait for reply on the reply queue</h4>
+<h2>Wait for reply on the reply queue</h2>
 <p>reply = reply_queue.receive(timeout=30)</p>
-<h4>Replier</h4>
+<h2>Replier</h2>
 <p>def handle_request(message):</p>
 <p>result = process(message['payload'])</p>
 <p>reply = {</p>
@@ -209,7 +194,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/event-driven-architecture.html">Event-Driven Architecture: Patterns and Practice</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/event-driven-architecture.html">Event-Driven Architecture: Patterns and Practice</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -221,7 +209,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/pub-sub-patterns.html" class="related-card">Pub-Sub Patterns: Event-Driven Communication</a><a href="/en/architecture/bulkhead-pattern.html" class="related-card">Bulkhead Pattern for Resilience</a><a href="/en/architecture/rate-limiting-patterns.html" class="related-card">Rate Limiting Patterns</a><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a></div>
+      <div class="related-grid"><a href="/en/architecture/pub-sub-patterns.html" class="related-card"><span class="related-card-title">Pub-Sub Patterns: Event-Driven Communication</span><span class="related-card-desc">A deep dive into publish-subscribe patterns for decoupled service communication in distributed syste</span></a><a href="/en/architecture/bulkhead-pattern.html" class="related-card"><span class="related-card-title">Bulkhead Pattern for Resilience</span><span class="related-card-desc">Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, ci</span></a><a href="/en/architecture/rate-limiting-patterns.html" class="related-card"><span class="related-card-title">Rate Limiting Patterns</span><span class="related-card-desc">Explore rate limiting patterns for protecting APIs and services from abuse — token bucket, sliding w</span></a><a href="/en/architecture/caching-strategies.html" class="related-card"><span class="related-card-title">Caching Strategies and Patterns in Distributed Systems</span><span class="related-card-desc">Caching patterns: cache-aside, write-through, write-behind, eviction policies, distributed caching w</span></a><a href="/en/architecture/event-driven-architecture.html" class="related-card"><span class="related-card-title">Event-Driven Architecture: Patterns and Practice</span><span class="related-card-desc">Event-driven architecture with event sourcing, pub/sub, Kafka streaming, event schemas, idempotent c</span></a><a href="/en/architecture/retry-backoff.html" class="related-card"><span class="related-card-title">Retry and Backoff Strategies</span><span class="related-card-desc">Learn retry and backoff strategies for building resilient distributed systems — exponential backoff,</span></a></div>
     </section>
     
   </div>

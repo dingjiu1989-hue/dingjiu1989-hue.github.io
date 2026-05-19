@@ -8,43 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-agents-frameworks.html
 
 # AI Agent Frameworks Compared
 
-## AI Agent Frameworks Compared
-
-### AI Agent Frameworks Compared
-
-#### AI Agent Frameworks Compared
-
-#### AI Agent Frameworks Compared
-
-#### AI Agent Frameworks Compared
-
-#### AI Agent Frameworks Compared
-
-#### AI Agent Frameworks Compared
-
-#### AI Agent Frameworks Compared
-
-#### AI Agent Frameworks Compared
-
-#### AI Agent Frameworks Compared
-
-#### AI Agent Frameworks Compared
-
-#### AI Agent Frameworks Compared
-
-#### AI Agent Frameworks Compared
-
-#### AI Agent Frameworks Compared
-
-#### AI Agent Frameworks Compared
-
-#### AI Agent Frameworks Compared
-
-#### Introduction
+## Introduction
 
 AI agents — systems that can independently plan, use tools, and execute multi-step tasks — represent the frontier of LLM applications. Several frameworks have emerged to simplify agent development, each with different design philosophies. This guide compares the leading frameworks to help you choose the right one for your project.
 
-#### What Makes an AI Agent?
+## What Makes an AI Agent?
 
 Before comparing frameworks, it's important to define what we mean by "agent." An agentic system typically includes:
 
@@ -61,9 +29,9 @@ Before comparing frameworks, it's important to define what we mean by "agent." A
 
 
 
-#### Framework Comparison
+## Framework Comparison
 
-#### LangGraph
+## LangGraph
 
 LangGraph, part of the LangChain ecosystem, models agent workflows as directed graphs. Each node is a step (LLM call, tool call, human input), and edges define the control flow.
 
@@ -118,7 +86,7 @@ graph.set_entry_point("agent")
 
 **Best for:** Production systems requiring complex, stateful workflows with human oversight.
 
-#### CrewAI
+## CrewAI
 
 CrewAI focuses on multi-agent collaboration, where specialized agents work together on tasks.
 
@@ -183,7 +151,7 @@ result = crew.kickoff()
 
 **Best for:** Multi-agent systems where different roles handle different aspects of a task.
 
-#### AutoGen (Microsoft)
+## AutoGen (Microsoft)
 
 AutoGen, developed by Microsoft Research, enables multi-agent conversations with flexible conversation patterns.
 
@@ -202,7 +170,7 @@ AutoGen, developed by Microsoft Research, enables multi-agent conversations with
 
 **Best for:** Research and complex multi-agent scenarios requiring conversation-based problem solving.
 
-#### OpenAI Assistants API
+## OpenAI Assistants API
 
 OpenAI's managed agent platform handles infrastructure concerns like state management and retrieval out of the box.
 
@@ -221,7 +189,7 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
 
 **Best for:** Rapid prototyping and applications already in the OpenAI ecosystem.
 
-#### Comparison Table
+## Comparison Table
 
 | Feature | LangGraph | CrewAI | AutoGen | Assistants API |
 
@@ -241,7 +209,7 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
 
 | Learning curve | Steep | Moderate | Steep | Low |
 
-#### Choosing the Right Framework
+## Choosing the Right Framework
 
   * **LangGraph** : Choose when you need complex, production-grade workflows with human oversight
 
@@ -254,7 +222,7 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
 
 
 
-#### Emerging Patterns
+## Emerging Patterns
 
 The agent framework landscape is evolving rapidly. Key trends to watch:
 
@@ -269,7 +237,7 @@ The agent framework landscape is evolving rapidly. Key trends to watch:
 
 
 
-#### Conclusion
+## Conclusion
 
 The right agent framework depends on your application's complexity and deployment model. LangGraph offers the most control for production workflows, CrewAI excels at multi-agent collaboration, and the Assistants API provides the fastest path to a working prototype. As the field matures, expect convergence toward standardized patterns for agent communication, safety, and observability.
 
@@ -284,3 +252,9 @@ The right agent framework depends on your application's complexity and deploymen
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
 
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
+
+**See also:** [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [AI Document Processing](</en/ai/ai-document-processing.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>)
+
+**See also:** [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [AI Document Processing](</en/ai/ai-document-processing.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>)
+
+**See also:** [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [AI Document Processing](</en/ai/ai-document-processing.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>)

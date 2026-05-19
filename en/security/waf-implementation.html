@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/waf-implementation.png",
       "datePublished": "2026-03-15",
       "dateModified": "2026-05-19",
-      "wordCount": "1097",
+      "wordCount": "1042",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,46 +99,31 @@
       <h1 class="article-title">Web Application Firewall Implementation</h1>
       <div class="article-meta">Published 2026-03-15 · Last active 2026-05-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/waf-implementation.png" alt="Web Application Firewall Implementation" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Web Application Firewall Implementation</h2>
-<h3>Web Application Firewall Implementation</h3>
-<h4>Web Application Firewall Implementation</h4>
-<h4>Web Application Firewall Implementation</h4>
-<h4>Web Application Firewall Implementation</h4>
-<h4>Web Application Firewall Implementation</h4>
-<h4>Web Application Firewall Implementation</h4>
-<h4>Web Application Firewall Implementation</h4>
-<h4>Web Application Firewall Implementation</h4>
-<h4>Web Application Firewall Implementation</h4>
-<h4>Web Application Firewall Implementation</h4>
-<h4>Web Application Firewall Implementation</h4>
-<h4>Web Application Firewall Implementation</h4>
-<h4>Web Application Firewall Implementation</h4>
-<h4>Web Application Firewall Implementation</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/waf-implementation.png" alt="Web Application Firewall Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/waf-implementation.png" alt="Web Application Firewall Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>A Web Application Firewall (WAF) is a security layer that monitors, filters, and blocks HTTP traffic to and from a web application. Unlike network firewalls that operate at layers 3-4, WAFs inspect application-layer traffic (layer 7) and understand HTTP semantics, making them essential for defending against OWASP Top 10 attacks. </p>
 <p>ModSecurity and OWASP CRS </p>
 <p>ModSecurity is the most widely deployed open-source WAF engine. It operates as a module within web servers like Apache, Nginx, and IIS, or as a reverse proxy. The OWASP Core Rule Set (CRS) provides generic attack detection rules. </p>
-<h4>Basic ModSecurity configuration</h4>
+<h2>Basic ModSecurity configuration</h2>
 <p>SecRuleEngine On</p>
 <p>SecRequestBodyAccess On</p>
 <p>SecResponseBodyAccess On</p>
 <p>SecDataDir /tmp/modsecurity/data</p>
-<h4>Include OWASP CRS</h4>
+<h2>Include OWASP CRS</h2>
 <p>Include /etc/modsecurity/crs/crs-setup.conf</p>
 <p>Include /etc/modsecurity/crs/rules/*.conf</p>
-<h4>Custom rule: block requests with suspicious User-Agent</h4>
+<h2>Custom rule: block requests with suspicious User-Agent</h2>
 <p>SecRule REQUEST_HEADERS:User-Agent "@pmFromFile /etc/modsecurity/blocked-agents.txt" \</p>
 <p>"id:1000001,phase:1,deny,status:403,msg:'Blocked malicious User-Agent'"</p>
 <p>CRS includes rules for SQL injection (942xxx), XSS (941xxx), LFI (931xxx), RFI (932xxx), and more. Each rule set is categorized by phase and severity. </p>
 <p>Custom Rule Writing </p>
 <p>Custom rules extend the WAF to handle application-specific threats or business logic. ModSecurity rules consist of three components: variables, operators, and actions. </p>
-<h4>Custom rule: protect /api/checkout from parameter tampering</h4>
+<h2>Custom rule: protect /api/checkout from parameter tampering</h2>
 <p>SecRule REQUEST_URI "@beginsWith /api/checkout" \</p>
 <p>"id:1000002,phase:2,deny,status:403,\</p>
 <p>msg:'Checkout parameter tampering detected',\</p>
 <p>chain"</p>
 <p>SecRule ARGS:quantity "!@rx ^[0-9]+$"</p>
-<h4>Rate limiting per IP</h4>
+<h2>Rate limiting per IP</h2>
 <p>SecRule IP:COUNT "@gt 100" \</p>
 <p>"id:1000003,phase:5,deny,status:429,\</p>
 <p>msg:'Rate limit exceeded',\</p>
@@ -153,7 +138,7 @@
 <li><strong>Deploy in detection-only mode</strong> initially to identify false positives without impacting production.</li>
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Analyze audit logs</strong> for blocked requests that appear legitimate. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Disable specific rules</strong> or adjust paranoia levels. </p>
-<h4>Set CRS paranoia level (1-4, higher = stricter)</h4>
+<h2>Set CRS paranoia level (1-4, higher = stricter)</h2>
 <p>SecAction \</p>
 <p>"id:900000,\</p>
 <p>phase:1,\</p>
@@ -161,9 +146,9 @@
 <p>pass,\</p>
 <p>t:none,\</p>
 <p>setvar:tx.paranoia_level=2"</p>
-<h4>Remove a specific rule for a specific URI</h4>
+<h2>Remove a specific rule for a specific URI</h2>
 <p>SecRuleRemoveById 942100</p>
-<h4>This removes the rule globally; better to scope it:</h4>
+<h2>This removes the rule globally; better to scope it:</h2>
 <p>SecRule REQUEST_URI "@beginsWith /api/public" \</p>
 <p>"id:1000005,phase:1,nolog,pass,ctl:ruleRemoveById=942100"</p>
 <p>Performance Impact </p>
@@ -179,7 +164,7 @@
 <p><strong>Rule ordering</strong> : Place cheaper checks (URI matching) before expensive ones (regex).</p>
 </li>
 </ul>
-<h4>Skip WAF for static files</h4>
+<h2>Skip WAF for static files</h2>
 <p>SecRule REQUEST_URI "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(jpg|png|css|js|ico)$" \</p>
 <p>"id:1000006,phase:1,nolog,pass,ctl:ruleEngine=Off"</p>
 <p>Benchmarking shows ModSecurity with CRS at paranoia level 2 adds approximately 1-3ms per request on modern hardware. Full inspection at paranoia level 4 can add 10-20ms. </p>
@@ -189,7 +174,10 @@
 <p><strong>See also:</strong> <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a>, <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/soc-operations.html">SOC Operations</a></p>
 <p><strong>See also:</strong> <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a>, <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/soc-operations.html">SOC Operations</a></p>
 <p><strong>See also:</strong> <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a>, <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/soc-operations.html">SOC Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a>, <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/soc-operations.html">SOC Operations</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a>, <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/soc-operations.html">SOC Operations</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a>, <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/soc-operations.html">SOC Operations</a></p>
+<p><strong>See also:</strong> <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a>, <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/soc-operations.html">SOC Operations</a></p>
+<p><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/waf-comparison.html">WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p>
+<p><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/waf-comparison.html">WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/waf-comparison.html">WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -201,7 +189,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/zero-trust-implementation.html" class="related-card">Zero Trust Implementation</a><a href="/en/security/bug-bounty.html" class="related-card">Bug Bounty Guide</a><a href="/en/security/soc-operations.html" class="related-card">SOC Operations</a><a href="/en/security/tls-configuration.html" class="related-card">TLS Configuration Guide</a></div>
+      <div class="related-grid"><a href="/en/security/zero-trust-implementation.html" class="related-card"><span class="related-card-title">Zero Trust Implementation</span><span class="related-card-desc">A practical guide to implementing Zero Trust architecture with micro-segmentation, least privilege, </span></a><a href="/en/security/bug-bounty.html" class="related-card"><span class="related-card-title">Bug Bounty Guide</span><span class="related-card-desc">Practical guide to bug bounty hunting including vulnerability discovery techniques, report writing, </span></a><a href="/en/security/soc-operations.html" class="related-card"><span class="related-card-title">SOC Operations</span><span class="related-card-desc">Practical guide to Security Operations Center operations including tier model, SIEM tuning, playbook</span></a><a href="/en/security/tls-configuration.html" class="related-card"><span class="related-card-title">TLS Configuration Guide</span><span class="related-card-desc">Practical TLS configuration guide covering cipher suites, HSTS, certificate pinning, TLS 1.3, and te</span></a><a href="/en/security/database-encryption.html" class="related-card"><span class="related-card-title">Database Encryption</span><span class="related-card-desc">Implementing database encryption with TDE, column-level encryption, application-level encryption, an</span></a><a href="/en/security/mfa-implementation.html" class="related-card"><span class="related-card-title">MFA Implementation</span><span class="related-card-desc">Implementing multi-factor authentication with TOTP, SMS, push notifications, and backup codes.</span></a></div>
     </section>
     
   </div>

@@ -8,43 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/ai/prompt-chaining.html
 
 # Prompt Chaining: Decomposition, Parallel Execution, State Management
 
-## Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Prompt Chaining: Decomposition, Parallel Execution, State Management
-
-#### Introduction
+## Introduction
 
 Prompt chaining connects multiple LLM calls into pipelines where each step refines, validates, or transforms the output of the previous one. This pattern is essential for tasks too complex for a single prompt: multi-page document generation, multi-step analysis, and workflows requiring both creativity and precision. This article covers decomposition strategies, parallel execution, and state management across chain steps.
 
-#### Task Decomposition
+## Task Decomposition
 
 The first step in prompt chaining is breaking a complex task into discrete, independently verifiable steps:
 
@@ -68,7 +36,7 @@ Request: """ + complex_request)
 
 return parse_steps(plan)
 
-#### Example decomposition for "write a product page"
+## Example decomposition for "write a product page"
 
 steps = [
 
@@ -86,7 +54,7 @@ steps = [
 
 Each step has a narrow focus. Narrow prompts produce more reliable outputs than monolithic ones because the model can concentrate its attention on one objective at a time.
 
-#### Sequential Chain Execution
+## Sequential Chain Execution
 
 Once decomposed, execute steps in order, passing outputs as inputs:
 
@@ -132,7 +100,7 @@ if "FAIL" in validation:
 
 raise ChainValidationError(f"Step {step.name} failed validation: {validation}")
 
-#### Parallel Execution
+## Parallel Execution
 
 When steps are independent, execute them concurrently to reduce wall-clock time:
 
@@ -162,7 +130,7 @@ state[step.name] = result
 
 return state
 
-#### Example: generate three sections of a report simultaneously
+## Example: generate three sections of a report simultaneously
 
 parallel_groups = [
 
@@ -184,7 +152,7 @@ ChainStep("executive_summary", summary_template, ["market_analysis", "financial_
 
 ]
 
-#### State Management
+## State Management
 
 Chains accumulate state as they execute. A formal state machine approach prevents data loss and enables error recovery:
 
@@ -224,7 +192,7 @@ self.outputs.update(snapshot.get("outputs", {}))
 
 self.errors.update(snapshot.get("errors", {}))
 
-#### Error Recovery Chains
+## Error Recovery Chains
 
 When a step fails, the chain should attempt recovery rather than aborting entirely:
 
@@ -244,7 +212,7 @@ except ValidationError as e:
 
 if attempt == max_retries:
 
-#### Fallback: try a simpler version
+## Fallback: try a simpler version
 
 fallback = await execute_fallback(step, state)
 
@@ -256,7 +224,7 @@ return fallback
 
 state.metadata[f"{step.name}_retry_{attempt}"] = str(e)
 
-#### Conclusion
+## Conclusion
 
 Prompt chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Decompose complex tasks into narrow steps, execute independent steps in parallel, maintain state explicitly, and implement recovery logic for each failure mode. The result is LLM-powered workflows that match the reliability of traditional software pipelines.
 
@@ -271,3 +239,9 @@ Prompt chaining transforms unreliable single-shot generation into reliable multi
 **See also:** [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection](</en/ai/agent-planning.html>)
 
 **See also:** [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection](</en/ai/agent-planning.html>)
+
+**See also:** [AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples](</en/ai/ai-role-definition.html>), [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>)
+
+**See also:** [AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples](</en/ai/ai-role-definition.html>), [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>)
+
+**See also:** [AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples](</en/ai/ai-role-definition.html>), [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>)

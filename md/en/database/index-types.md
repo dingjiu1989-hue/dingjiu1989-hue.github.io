@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/index-types.html
 
 # Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
 
-## Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
-### Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
-#### Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
-#### Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
-#### Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
-#### Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
-#### Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
-#### Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
-#### Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
-#### Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
-#### Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
-#### Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
-#### Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
-#### Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
-#### Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
-
 Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN 
 
 PostgreSQL offers six index types, each designed for different data distributions and query patterns. Choosing the wrong index type wastes storage and degrades performance. This article explains each type, its strengths, and when to use it. 
@@ -218,3 +188,9 @@ The best index is the one that matches your query patterns exactly. A B-tree ind
 **See also:** [B-Tree, Hash, GiST, GIN: Index Type Selection Guide](</en/database/database-index-types.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
 
 **See also:** [B-Tree, Hash, GiST, GIN: Index Type Selection Guide](</en/database/database-index-types.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
+
+**See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)

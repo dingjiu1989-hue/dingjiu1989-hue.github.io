@@ -61,4 +61,4 @@ Build audience + income| Content Creation (#6)
   
 Pick one. Ship it in two weeks. The only failed side hustle is the one you never start.
 
-**See also:** [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Content Monetization Strategies for Developers](</en/sidehustle/content-monetization.html>), [Open Source Monetization](</en/sidehustle/open-source-monetization.html>)
+**See also:** [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>), [Monetizing APIs](</en/sidehustle/api-monetization.html>)

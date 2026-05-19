@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/caching-http.html
 
 # HTTP Caching Architecture
 
-## HTTP Caching Architecture
-
-### HTTP Caching Architecture
-
-#### HTTP Caching Architecture
-
-#### HTTP Caching Architecture
-
-#### HTTP Caching Architecture
-
-#### HTTP Caching Architecture
-
-#### HTTP Caching Architecture
-
-#### HTTP Caching Architecture
-
-#### HTTP Caching Architecture
-
-#### HTTP Caching Architecture
-
-#### HTTP Caching Architecture
-
-#### HTTP Caching Architecture
-
-#### HTTP Caching Architecture
-
-#### HTTP Caching Architecture
-
-#### HTTP Caching Architecture
-
 HTTP caching is the most cost-effective performance optimization available. A single cache hit eliminates an entire request path through the network, load balancers, application servers, and databases. The HTTP specification provides a comprehensive caching framework through headers, validation mechanisms, and extension directives. Understanding and applying these correctly is essential for building performant web systems. 
 
 Cache-Control headers are the primary mechanism for controlling HTTP caching behavior. The max-age directive specifies the maximum time in seconds that a response can be cached. The s-maxage directive overrides max-age for shared caches (CDNs, reverse proxies). The private directive limits caching to the browser (no shared caching). The public directive allows any cache, including shared ones. The no-cache directive requires revalidation with the origin server before serving from cache. The no-store directive prevents any caching. 
@@ -71,3 +41,9 @@ Cache hit ratio is the primary metric. Monitor cache hit ratio at each layer: br
 **See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>)
 
 **See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>)

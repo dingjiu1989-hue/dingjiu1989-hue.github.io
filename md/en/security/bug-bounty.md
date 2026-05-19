@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/bug-bounty.html
 
 # Bug Bounty Guide
 
-## Bug Bounty Guide
-
-### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
-#### Bug Bounty Guide
-
 Introduction 
 
 Bug bounty programs invite security researchers to find and report vulnerabilities in exchange for monetary rewards or acknowledgment. They represent a paradigm shift from traditional security testing — continuous, crowd-sourced, and performance-based. Success requires methodical technique, clear communication, and platform-specific knowledge. 
@@ -52,21 +18,21 @@ Reconnaissance-Driven Approach
 
 Successful bug bounty hunters invest heavily in reconnaissance. The more you know about a target, the more attack surface you can discover. 
 
-#### Subdomain enumeration pipeline
+## Subdomain enumeration pipeline
 
 subfinder -d target.com -silent | tee subs_raw.txt
 
 assetfinder --subs-only target.com | tee -a subs_raw.txt
 
-#### Deduplicate and validate
+## Deduplicate and validate
 
 cat subs_raw.txt | sort -u | httprobe -c 50 > live_subs.txt
 
-#### Technology fingerprinting on discovered subdomains
+## Technology fingerprinting on discovered subdomains
 
 cat live_subs.txt | httpx -sc -title -tech-detect -o tech_report.txt
 
-#### Directory brute-forcing
+## Directory brute-forcing
 
 ffuf -u https://admin.target.com/FUZZ -w /usr/share/wordlists/dirb/common.txt \
 
@@ -74,7 +40,7 @@ ffuf -u https://admin.target.com/FUZZ -w /usr/share/wordlists/dirb/common.txt \
 
 Attack-Specific Techniques 
 
-#### Automated XSS discovery
+## Automated XSS discovery
 
 import requests
 
@@ -96,11 +62,11 @@ payloads = [
 
 ]
 
-#### Extract all forms
+## Extract all forms
 
 response = requests.get(base_url)
 
-#### Parse and find all forms, inputs
+## Parse and find all forms, inputs
 
 for endpoint in discover_endpoints(base_url):
 
@@ -122,21 +88,21 @@ resp = requests.get(test_url)
 
 if payload in resp.text and not resp.text.count('"') > 3:
 
-#### Check if payload rendered unescaped
+## Check if payload rendered unescaped
 
 print(f"[+] XSS found: {test_url}")
 
-#### IDOR detection with autorize (Burp extension)
+## IDOR detection with autorize (Burp extension)
 
-#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Record authenticated session cookies
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Record authenticated session cookies
 
-#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Enable Autorize with victim cookie
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Enable Autorize with victim cookie
 
-#### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Browse application as victim user
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Browse application as victim user
 
-#### 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Monitor BApp output for unauthorized access
+## 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Monitor BApp output for unauthorized access
 
-#### GraphQL introspection for API discovery
+## GraphQL introspection for API discovery
 
 curl -X POST https://api.target.com/graphql \
 
@@ -263,3 +229,9 @@ Bug bounty hunting combines technical skill, persistence, and communication. Inv
 **See also:** [SOC Operations](</en/security/soc-operations.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Certificate Management](</en/security/certificate-management.html>)
 
 **See also:** [SOC Operations](</en/security/soc-operations.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [DNS Security](</en/security/dns-security.html>), [Input Validation Deep Dive](</en/security/input-validation.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>)
+
+**See also:** [DNS Security](</en/security/dns-security.html>), [Input Validation Deep Dive](</en/security/input-validation.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>)
+
+**See also:** [DNS Security](</en/security/dns-security.html>), [Input Validation Deep Dive](</en/security/input-validation.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>)

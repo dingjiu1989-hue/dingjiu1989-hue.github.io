@@ -8,38 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/kubernetes-network-policies.h
 
 # Kubernetes Network Policies
 
-## Kubernetes Network Policies
-
-### Kubernetes Network Policies
-
-#### Kubernetes Network Policies
-
-#### Kubernetes Network Policies
-
-#### Kubernetes Network Policies
-
-#### Kubernetes Network Policies
-
-#### Kubernetes Network Policies
-
-#### Kubernetes Network Policies
-
-#### Kubernetes Network Policies
-
-#### Kubernetes Network Policies
-
-#### Kubernetes Network Policies
-
-#### Kubernetes Network Policies
-
-#### Kubernetes Network Policies
-
-#### Kubernetes Network Policies
-
-#### Kubernetes Network Policies
-
-#### Kubernetes Network Policies
-
 Introduction 
 
 Kubernetes by default allows all pod-to-pod communication — a flat network model that is convenient but insecure. Network policies provide pod-level firewalling, enabling micro-segmentation and zero-trust networking within the cluster. 
@@ -136,7 +104,7 @@ Start with default deny policies and explicitly allow required traffic. This enf
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
 
-#### Default deny all ingress
+## Default deny all ingress
 
 apiVersion: networking.k8s.io/v1
 
@@ -156,7 +124,7 @@ policyTypes:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
 
-#### Default deny all egress
+## Default deny all egress
 
 apiVersion: networking.k8s.io/v1
 
@@ -178,7 +146,7 @@ Cilium: eBPF-Based Networking
 
 Cilium leverages eBPF to provide network policies with identity-based security, HTTP-aware rules, and cluster mesh capabilities. 
 
-#### CiliumNetworkPolicy with HTTP-aware filtering
+## CiliumNetworkPolicy with HTTP-aware filtering
 
 apiVersion: cilium.io/v2
 
@@ -228,7 +196,7 @@ headers:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "X-API-Version: 2"
 
-#### DNS-aware egress policy with Cilium
+## DNS-aware egress policy with Cilium
 
 apiVersion: cilium.io/v2
 
@@ -274,7 +242,7 @@ Calico: Policy-First Networking
 
 Calico provides a rich policy model with both Kubernetes-native and extended policy resources. 
 
-#### Calico network policy with advanced features
+## Calico network policy with advanced features
 
 apiVersion: projectcalico.org/v3
 
@@ -332,7 +300,7 @@ ports:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 443
 
-#### Calico policy enforcement and troubleshooting
+## Calico policy enforcement and troubleshooting
 
 calicoctl get networkpolicy -n production
 
@@ -340,7 +308,7 @@ calicoctl get workloadendpoint -n production
 
 calicoctl get profiles
 
-#### Test connectivity
+## Test connectivity
 
 calicoctl policy test --pod production/payment-pod-xyz \
 
@@ -350,7 +318,7 @@ Zero-Trust for Pods
 
 Zero-trust networking assumes no pod is inherently trusted. Every connection must be authenticated and authorized. 
 
-#### Zero-trust: identity-aware policy with SPIFFE
+## Zero-trust: identity-aware policy with SPIFFE
 
 apiVersion: spiffe.io/v1beta1
 
@@ -408,7 +376,7 @@ port: 8443
 
 Policy Testing and Validation 
 
-#### Test network policies before deployment
+## Test network policies before deployment
 
 netcheck \
 
@@ -420,11 +388,11 @@ netcheck \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--output detailed
 
-#### Monitor policy decisions
+## Monitor policy decisions
 
 cilium monitor -v --type drop | grep policy
 
-#### Policy audit mode (log without enforcing)
+## Policy audit mode (log without enforcing)
 
 kubectl annotate ns production "projectcalico.org/policy-audit-mode=enabled"
 
@@ -443,3 +411,9 @@ Kubernetes network policies are essential for cluster security. Start with defau
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Serverless Security](</en/security/serverless-security.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Serverless Security](</en/security/serverless-security.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Serverless Security](</en/security/serverless-security.html>)

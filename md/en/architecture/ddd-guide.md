@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/ddd-guide.html
 
 # Domain-Driven Design Fundamentals
 
-## Domain-Driven Design Fundamentals
-
-### Domain-Driven Design Fundamentals
-
-#### Domain-Driven Design Fundamentals
-
-#### Domain-Driven Design Fundamentals
-
-#### Domain-Driven Design Fundamentals
-
-#### Domain-Driven Design Fundamentals
-
-#### Domain-Driven Design Fundamentals
-
-#### Domain-Driven Design Fundamentals
-
-#### Domain-Driven Design Fundamentals
-
-#### Domain-Driven Design Fundamentals
-
-#### Domain-Driven Design Fundamentals
-
-#### Domain-Driven Design Fundamentals
-
-#### Domain-Driven Design Fundamentals
-
-#### Domain-Driven Design Fundamentals
-
-#### Domain-Driven Design Fundamentals
-
 Domain-Driven Design (DDD) is a software development approach introduced by Eric Evans in his seminal 2003 book. It emphasizes building software that reflects a deep understanding of the business domain, using a shared language between developers and domain experts. This article covers the fundamental concepts of DDD and how to apply them in practice. 
 
 Ubiquitous Language 
@@ -222,3 +192,9 @@ DDD provides a powerful toolkit for building software that deeply models the bus
 **See also:** [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
 
 **See also:** [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
+
+**See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)
+
+**See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)
+
+**See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)

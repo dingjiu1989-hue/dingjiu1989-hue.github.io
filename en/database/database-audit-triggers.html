@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-audit-triggers.png",
       "datePublished": "2026-04-13",
       "dateModified": "2026-04-26",
-      "wordCount": "577",
+      "wordCount": "551",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,35 +99,23 @@
       <h1 class="article-title">Database Audit Triggers: Automatic Change Tracking</h1>
       <div class="article-meta">Published 2026-04-13 · Last active 2026-04-26 · 240 views · 2 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-audit-triggers.png" alt="Database Audit Triggers: Automatic Change Tracking" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Database Audit Triggers: Automatic Change Tracking</h2>
-<h3>Database Audit Triggers: Automatic Change Tracking</h3>
-<h4>Database Audit Triggers: Automatic Change Tracking</h4>
-<h4>Database Audit Triggers: Automatic Change Tracking</h4>
-<h4>Database Audit Triggers: Automatic Change Tracking</h4>
-<h4>Database Audit Triggers: Automatic Change Tracking</h4>
-<h4>Database Audit Triggers: Automatic Change Tracking</h4>
-<h4>Database Audit Triggers: Automatic Change Tracking</h4>
-<h4>Database Audit Triggers: Automatic Change Tracking</h4>
-<h4>Database Audit Triggers: Automatic Change Tracking</h4>
-<h4>Database Audit Triggers: Automatic Change Tracking</h4>
-<h4>Database Audit Triggers: Automatic Change Tracking</h4>
-<h4>Database Audit Triggers: Automatic Change Tracking</h4>
-<h4>Database Audit Triggers: Automatic Change Tracking</h4>
-<h4>Database Audit Triggers: Automatic Change Tracking</h4>
-<p>Database triggers can automatically capture changes to sensitive data for audit purposes. An audit trigger logs who changed what, when, and the old and new values. This provides a reliable audit trail that cannot be bypassed.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-audit-triggers.png" alt="Database Audit Triggers: Automatic Change Tracking" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Audit Table Design</h4>
+      <div class="article-body"><p>Database triggers can automatically capture changes to sensitive data for audit purposes. An audit trigger logs who changed what, when, and the old and new values. This provides a reliable audit trail that cannot be bypassed.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-audit-triggers.png" alt="Database Audit Triggers: Automatic Change Tracking" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Audit Table Design</h2>
 <p>The audit table captures the table name, operation type (INSERT, UPDATE, DELETE), the old row values, the new row values, the user who made the change, and a timestamp. For compliance, include the application context—the session ID, IP address, and transaction ID.</p>
-<h4>Trigger Implementation</h4>
+<h2>Trigger Implementation</h2>
 <p>Each audited table gets a trigger that fires on INSERT, UPDATE, DELETE. The trigger function captures the OLD and NEW row values and inserts into the audit table. Row-level triggers capture individual row changes with full context.</p>
-<h4>Performance Considerations</h4>
+<h2>Performance Considerations</h2>
 <p>Audit triggers add overhead to every DML operation. Batch the audit writes when possible. Consider asynchronous audit logging for high-traffic tables. Archive audit data regularly. Index the audit table on timestamp and table name for efficient queries.</p>
-<h4>Compliance</h4>
+<h2>Compliance</h2>
 <p>Audit logs support SOX, HIPAA, PCI-DSS, and SOC 2 compliance. They provide evidence of data access and modification. Keep audit logs immutable—restrict write access and set retention policies. Test audit coverage regularly.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/database-auditing.html">Database Auditing: Tracking Data Changes</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-security-hardening.html">Database Security Hardening</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-security-hardening.html">Database Security Hardening</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-security-hardening.html">Database Security Hardening</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-security-hardening.html">Database Security Hardening</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-security-hardening.html">Database Security Hardening</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-security-hardening.html">Database Security Hardening</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-security-hardening.html">Database Security Hardening</a></p>
+<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
+<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -139,7 +127,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-change-tracking-cdc.html" class="related-card">Change Data Capture: Tracking Database Changes in Real-Time</a><a href="/en/database/triggers-patterns.html" class="related-card">Database Triggers: Use Cases, Performance Costs, and Alternatives</a><a href="/en/database/database-security-hardening.html" class="related-card">Database Security Hardening</a><a href="/en/database/database-auditing.html" class="related-card">Database Auditing: Tracking Data Changes</a></div>
+      <div class="related-grid"><a href="/en/database/database-change-tracking-cdc.html" class="related-card"><span class="related-card-title">Change Data Capture: Tracking Database Changes in Real-Time</span><span class="related-card-desc">Implement change data capture (CDC) for real-time data synchronization, event streaming, and audit l</span></a><a href="/en/database/triggers-patterns.html" class="related-card"><span class="related-card-title">Database Triggers: Use Cases, Performance Costs, and Alternatives</span><span class="related-card-desc">Explore database triggers for audit logging, validation, and synchronization. Understand performance</span></a><a href="/en/database/database-security-hardening.html" class="related-card"><span class="related-card-title">Database Security Hardening</span><span class="related-card-desc">Hardening database security with encryption, audit logging, access control, and network isolation.</span></a><a href="/en/database/database-auditing.html" class="related-card"><span class="related-card-title">Database Auditing: Tracking Data Changes</span><span class="related-card-desc">Implement database auditing to track who changed what and when for compliance, security, and debuggi</span></a><a href="/en/database/database-encryption.html" class="related-card"><span class="related-card-title">Database Encryption: Data at Rest and in Transit</span><span class="related-card-desc">Implement database encryption at rest and in transit to protect sensitive data and meet compliance r</span></a><a href="/en/database/backup-types.html" class="related-card"><span class="related-card-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</span><span class="related-card-desc">Explore database backup strategies including full, incremental, differential backups, WAL archiving,</span></a></div>
     </section>
     
   </div>

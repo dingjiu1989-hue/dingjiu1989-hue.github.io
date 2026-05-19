@@ -8,47 +8,15 @@ url: https://dingjiu1989-hue.github.io/en/tools/networking-tools.html
 
 # Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
 
-## Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-
-#### Introduction
+## Introduction
 
 Network troubleshooting is a fundamental skill for developers and operations engineers. Whether diagnosing slow connections, DNS resolution failures, or firewall issues, the right tools make the difference between hours of frustration and minutes of focused debugging. This practical guide covers five essential networking tools: mtr, iperf, dig, nmap, and Wireshark.
 
-#### mtr (My Traceroute)
+## mtr (My Traceroute)
 
 Combines traceroute and ping in a single tool for continuous network path analysis:
 
-#### Basic usage
+## Basic usage
 
 mtr google.com
 
@@ -56,7 +24,7 @@ mtr --report google.com # Run once and generate report
 
 mtr --report-cycles=10 google.com # 10 cycles for report
 
-#### Useful flags
+## Useful flags
 
 mtr --icmp google.com # Use ICMP instead of UDP
 
@@ -68,29 +36,29 @@ mtr --no-dns 10.0.0.1 # Skip DNS resolution (faster)
 
 mtr --report-wide google.com # Wide output format
 
-#### For continuous monitoring
+## For continuous monitoring
 
 mtr --interval 5 google.com # Update every 5 seconds
 
 **Interpreting output** : Look for hops with high loss% or latency spikes. The last hop before consistent loss is usually the problem. 100% loss at intermediate hops may be a firewall dropping probes, not an actual failure.
 
-#### iperf3
+## iperf3
 
 Network bandwidth measurement tool:
 
-#### Start server (on receiving end)
+## Start server (on receiving end)
 
 iperf3 -s
 
 iperf3 -s -p 5201
 
-#### Start client (on sending end)
+## Start client (on sending end)
 
 iperf3 -c server-address
 
 iperf3 -c server-address -p 5201
 
-#### Advanced tests
+## Advanced tests
 
 iperf3 -c server-address -t 30 # 30-second test
 
@@ -100,31 +68,31 @@ iperf3 -c server-address -R # Reverse mode (server to client)
 
 iperf3 -c server-address -u -b 100M # UDP test at 100 Mbps
 
-#### Bidirectional test
+## Bidirectional test
 
 iperf3 -c server-address --bidir
 
-#### JSON output for automation
+## JSON output for automation
 
 iperf3 -c server-address -J > results.json
 
-#### Test specific TCP window size
+## Test specific TCP window size
 
 iperf3 -c server-address -w 64K
 
 **When to use** : Benchmark network throughput between instances, verify bandwidth limits, test VPN performance, identify congestion. Typical patterns: run iperf3 in server mode on one host, client mode on another.
 
-#### dig (DNS Lookup)
+## dig (DNS Lookup)
 
 The most powerful DNS troubleshooting tool:
 
-#### Basic lookup
+## Basic lookup
 
 dig google.com
 
 dig @8.8.8.8 google.com # Query specific DNS server
 
-#### Query specific record types
+## Query specific record types
 
 dig google.com A # IPv4 address
 
@@ -140,7 +108,7 @@ dig google.com CNAME # Canonical name
 
 dig example.com SOA # Start of authority
 
-#### Advanced queries
+## Advanced queries
 
 dig +short google.com # Short output
 
@@ -154,11 +122,11 @@ dig google.com ANY +noall +answer # Show only answer section
 
 dig +dnssec google.com # DNSSEC validation
 
-#### Batch queries from file
+## Batch queries from file
 
 dig -f domains.txt +short
 
-#### Check propagation
+## Check propagation
 
 dig @ns1.google.com google.com # Query authoritative server
 
@@ -166,11 +134,11 @@ dig @8.8.8.8 google.com +stats # Show query statistics
 
 **Common debugging workflow** : Start with `dig +trace` to see the full resolution path, then query specific servers to isolate where resolution fails.
 
-#### nmap (Network Mapper)
+## nmap (Network Mapper)
 
 Port scanning and service discovery:
 
-#### Basic scans
+## Basic scans
 
 nmap scanme.nmap.org # Default scan (1000 ports)
 
@@ -180,7 +148,7 @@ nmap -sT scanme.nmap.org # TCP connect scan
 
 nmap -sU scanme.nmap.org # UDP scan
 
-#### Port specification
+## Port specification
 
 nmap -p 80,443 example.com # Specific ports
 
@@ -190,7 +158,7 @@ nmap -p 1-1000 example.com # Port range
 
 nmap --top-ports 100 example.com # Most common ports
 
-#### Service detection
+## Service detection
 
 nmap -sV example.com # Version detection
 
@@ -198,13 +166,13 @@ nmap -O example.com # OS detection
 
 nmap -A example.com # Aggressive (OS, version, script, traceroute)
 
-#### Network discovery
+## Network discovery
 
 nmap -sn 192.168.1.0/24 # Ping sweep (find live hosts)
 
 nmap -sL 192.168.1.0/24 # List scan (DNS resolution only)
 
-#### Scripts
+## Scripts
 
 nmap --script=http-title example.com
 
@@ -212,7 +180,7 @@ nmap --script=ssl-enum-ciphers example.com
 
 nmap --script=vuln example.com --script-args=unsafe=1
 
-#### Output formats
+## Output formats
 
 nmap -oN scan.txt example.com # Normal
 
@@ -220,19 +188,19 @@ nmap -oX scan.xml example.com # XML
 
 nmap -oG scan.grep example.com # Grepable
 
-#### Wireshark / tshark
+## Wireshark / tshark
 
 Deep packet inspection and analysis:
 
-#### tshark (CLI version of Wireshark)
+## tshark (CLI version of Wireshark)
 
-#### Capture on interface
+## Capture on interface
 
 tshark -i eth0
 
 tshark -i eth0 -c 100 # Capture 100 packets
 
-#### Capture filters (BPF syntax)
+## Capture filters (BPF syntax)
 
 tshark -i eth0 "port 443"
 
@@ -240,7 +208,7 @@ tshark -i eth0 "host 10.0.0.1"
 
 tshark -i eth0 "tcp port 80 or tcp port 443"
 
-#### Display filters (more powerful)
+## Display filters (more powerful)
 
 tshark -Y "http.request.method == GET"
 
@@ -250,23 +218,23 @@ tshark -Y "tcp.analysis.flags" # TCP issues
 
 tshark -Y "http.response.code >= 500"
 
-#### Follow streams
+## Follow streams
 
 tshark -r capture.pcap -Y "http" -z follow,tcp,ascii,0
 
-#### Statistics
+## Statistics
 
 tshark -r capture.pcap -z io,stat,1 # IO graph
 
 tshark -r capture.pcap -z conv,tcp # TCP conversations
 
-#### Save filtered output
+## Save filtered output
 
 tshark -r capture.pcap -Y "dns" -w dns-only.pcap
 
 **Wireshark filters** : `ip.src == 10.0.0.1 && tcp.port == 443`, `http.response.code >= 400`, `tls.handshake.type == 1`
 
-#### Quick Reference
+## Quick Reference
 
 | Tool | Best For | Example Problem |
 
@@ -282,7 +250,7 @@ tshark -r capture.pcap -Y "dns" -w dns-only.pcap
 
 | Wireshark | Deep packet inspection | "API returns corrupted data" |
 
-#### Recommendations
+## Recommendations
 
   * **First, check connectivity** : `ping` and `mtr` to verify basic reachability.
 
@@ -310,3 +278,9 @@ Mastering these five tools covers 95% of network troubleshooting scenarios. Star
 **See also:** [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>)
 
 **See also:** [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>)
+
+**See also:** [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>)
+
+**See also:** [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>)
+
+**See also:** [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>)

@@ -8,45 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/compare/grpc-vs-websocket.html
 
 # gRPC vs WebSocket: Real-Time Communication
 
-## gRPC vs WebSocket: Real-Time Communication
-
-### gRPC vs WebSocket: Real-Time Communication
-
-#### gRPC vs WebSocket: Real-Time Communication
-
-#### gRPC vs WebSocket: Real-Time Communication
-
-#### gRPC vs WebSocket: Real-Time Communication
-
-#### gRPC vs WebSocket: Real-Time Communication
-
-#### gRPC vs WebSocket: Real-Time Communication
-
-#### gRPC vs WebSocket: Real-Time Communication
-
-#### gRPC vs WebSocket: Real-Time Communication
-
-#### gRPC vs WebSocket: Real-Time Communication
-
-#### gRPC vs WebSocket: Real-Time Communication
-
-#### gRPC vs WebSocket: Real-Time Communication
-
-#### gRPC vs WebSocket: Real-Time Communication
-
-#### gRPC vs WebSocket: Real-Time Communication
-
-#### gRPC vs WebSocket: Real-Time Communication
-
-#### gRPC vs WebSocket: Real-Time Communication
-
-#### Introduction
+## Introduction
 
 Real-time communication is essential for modern applications--from chat and live dashboards to multiplayer gaming and financial trading platforms. gRPC and WebSocket represent two fundamentally different approaches to bidirectional streaming. gRPC builds on HTTP/2 with Protocol Buffers for typed, efficient RPCs. WebSocket provides a message-oriented protocol over a single TCP connection. This article compares them across the dimensions that matter for real-time application design.
 
-#### Protocol Fundamentals
+## Protocol Fundamentals
 
-#### gRPC: HTTP/2 + Protocol Buffers
+## gRPC: HTTP/2 + Protocol Buffers
 
 gRPC leverages HTTP/2 multiplexing and Protocol Buffers for typed, efficient communication:
 
@@ -250,7 +218,7 @@ async for result in stub.ProcessOrders(generate_actions()):
 
 print(f"Order {result.order_id}: {result.status}")
 
-#### WebSocket: Message-Based Protocol
+## WebSocket: Message-Based Protocol
 
 WebSocket provides a simpler, message-oriented protocol over TCP:
 
@@ -414,7 +382,7 @@ channelManager.unsubscribe(clientId);
 
 });
 
-#### Streaming Patterns
+## Streaming Patterns
 
 | Pattern | gRPC | WebSocket |
 
@@ -432,9 +400,9 @@ channelManager.unsubscribe(clientId);
 
 | Request-reply patterns | Natural | Natural |
 
-#### Protocol Buffers vs Raw Messages
+## Protocol Buffers vs Raw Messages
 
-#### Size comparison: gRPC (Protobuf) vs WebSocket (JSON)
+## Size comparison: gRPC (Protobuf) vs WebSocket (JSON)
 
 example_message: |
 
@@ -458,19 +426,19 @@ Total: ~326 bytes
 
 Savings: gRPC is ~3.5x more efficient per message
 
-#### at 1000 messages/second:
+## at 1000 messages/second:
 
-#### gRPC: ~94 KB/s + ~30 KB/s header overhead
+## gRPC: ~94 KB/s + ~30 KB/s header overhead
 
-#### WebSocket (JSON): ~326 KB/s + ~30 KB/s header overhead
+## WebSocket (JSON): ~326 KB/s + ~30 KB/s header overhead
 
-#### Daily savings: ~20 GB
+## Daily savings: ~20 GB
 
 Type safety comparison:
 
-#### gRPC: Compile-time type checking
+## gRPC: Compile-time type checking
 
-#### Client gets typed stubs from proto definition
+## Client gets typed stubs from proto definition
 
 request = order_pb2.CreateOrderRequest(
 
@@ -486,19 +454,19 @@ order_pb2.LineItem(product_id="prod-1", quantity=2, price=29.99)
 
 response = stub.CreateOrder(request)
 
-#### WebSocket: Runtime parsing
+## WebSocket: Runtime parsing
 
-#### No compile-time type checking
+## No compile-time type checking
 
 message = json.loads(data)
 
-#### Must validate fields manually
+## Must validate fields manually
 
 if not isinstance(message.get('user_id'), str):
 
 raise ValueError("Invalid user_id")
 
-#### Browser Support
+## Browser Support
 
 | Factor | gRPC | WebSocket |
 
@@ -514,7 +482,7 @@ raise ValueError("Invalid user_id")
 
 | Fallback transport | WebSocket transport available | HTTP long-polling |
 
-#### Envoy configuration for gRPC-Web
+## Envoy configuration for gRPC-Web
 
 static_resources:
 
@@ -582,7 +550,7 @@ explicit_http_config:
 
 http2_protocol_options: {}
 
-#### Use Cases
+## Use Cases
 
 | Use Case | Preferred | Reason |
 
@@ -604,7 +572,7 @@ http2_protocol_options: {}
 
 | IoT device communication | gRPC | Small binary, resource efficient, bi-directional |
 
-#### Performance Comparison
+## Performance Comparison
 
 | Metric | gRPC | WebSocket |
 
@@ -624,7 +592,7 @@ http2_protocol_options: {}
 
 Both protocols are fast enough for most use cases. gRPC's advantages compound at high throughput due to binary encoding and HTTP/2 multiplexing.
 
-#### Decision Framework
+## Decision Framework
 
   * **Choose gRPC** for server-to-server communication, microservice APIs, IoT backends, or any system where strong typing, efficiency, and streaming matter more than browser compatibility.
 
@@ -648,3 +616,9 @@ For modern applications, gRPC is the better choice for service-to-service commun
 **See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>), [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>)
 
 **See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>), [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>)
+
+**See also:** [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>), [React vs Vue vs Svelte in 2026](</en/compare/react-vs-vue-2026.html>)
+
+**See also:** [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>), [React vs Vue vs Svelte in 2026](</en/compare/react-vs-vue-2026.html>)
+
+**See also:** [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>), [React vs Vue vs Svelte in 2026](</en/compare/react-vs-vue-2026.html>)

@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/incident-response-plan.html
 
 # Incident Response Plan
 
-## Incident Response Plan
-
-### Incident Response Plan
-
-#### Incident Response Plan
-
-#### Incident Response Plan
-
-#### Incident Response Plan
-
-#### Incident Response Plan
-
-#### Incident Response Plan
-
-#### Incident Response Plan
-
-#### Incident Response Plan
-
-#### Incident Response Plan
-
-#### Incident Response Plan
-
-#### Incident Response Plan
-
-#### Incident Response Plan
-
-#### Incident Response Plan
-
-#### Incident Response Plan
-
 The NIST Framework 
 
 The NIST SP 800-61 framework defines four phases of incident response: Preparation, Detection & Analysis, Containment Eradication & Recovery, and Post-Incident Activity. 
@@ -46,7 +16,7 @@ Phase 1: Preparation
 
 Preparation determines response success. Key elements include: 
 
-#### incident-response-tools.yaml
+## incident-response-tools.yaml
 
 tools:
 
@@ -120,7 +90,7 @@ alerts.append({
 
 return alerts
 
-#### Example: Correlate failed logins across accounts
+## Example: Correlate failed logins across accounts
 
 detector = IncidentDetector()
 
@@ -140,25 +110,25 @@ detector.add_rule({
 
 Phase 3: Containment, Eradication, Recovery 
 
-#### !/bin/bash
+## !/bin/bash
 
-#### Incident containment script
+## Incident containment script
 
 isolate_host() {
 
 local host=$1
 
-#### Block at network level
+## Block at network level
 
 ansible-playbook isolate_host.yml -e "target=$host"
 
-#### Capture forensic data
+## Capture forensic data
 
 ssh "user@$host" "tar czf /tmp/forensics.tar.gz /var/log /tmp /home"
 
 scp "user@$host:/tmp/forensics.tar.gz" ./evidence/
 
-#### Snapshot for analysis
+## Snapshot for analysis
 
 aws ec2 create-snapshot --volume-id $(get_volume_id $host)
 
@@ -166,7 +136,7 @@ echo "Host $host isolated. Forensic data captured."
 
 }
 
-#### Eradicate malware
+## Eradicate malware
 
 eradicate() {
 
@@ -267,3 +237,9 @@ A well-rehearsed incident response plan reduces breach impact by 50% or more. In
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Endpoint Security](</en/security/endpoint-security.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Endpoint Security](</en/security/endpoint-security.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>)
+
+**See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [Security Awareness Training](</en/security/security-awareness.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>)
+
+**See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [Security Awareness Training](</en/security/security-awareness.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>)
+
+**See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [Security Awareness Training](</en/security/security-awareness.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>)

@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/database-per-service.html
 
 # Database per Service Pattern
 
-## Database per Service Pattern
-
-### Database per Service Pattern
-
-#### Database per Service Pattern
-
-#### Database per Service Pattern
-
-#### Database per Service Pattern
-
-#### Database per Service Pattern
-
-#### Database per Service Pattern
-
-#### Database per Service Pattern
-
-#### Database per Service Pattern
-
-#### Database per Service Pattern
-
-#### Database per Service Pattern
-
-#### Database per Service Pattern
-
-#### Database per Service Pattern
-
-#### Database per Service Pattern
-
-#### Database per Service Pattern
-
 The database per service pattern is a fundamental principle of microservice architecture: each service owns its data exclusively and no other service can directly access its database. This pattern ensures loose coupling between services, allowing them to evolve independently, choose appropriate storage technologies, and scale autonomously. However, it introduces significant challenges for queries that span multiple services. 
 
 Data Ownership 
@@ -95,3 +65,9 @@ Database per service is a powerful pattern for achieving service autonomy and in
 **See also:** [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>)
 
 **See also:** [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>)
+
+**See also:** [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>)
+
+**See also:** [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>)
+
+**See also:** [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>)

@@ -37,7 +37,7 @@
     <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/domain-event-implementation.html">
     <link rel="prev" href="https://dingjiu1989-hue.github.io/en/architecture/priority-queue.html">
     <link rel="next" href="https://dingjiu1989-hue.github.io/en/architecture/blue-green-deployment.html">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="noindex, follow">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-event-implementation.png",
       "datePublished": "2026-05-07",
       "dateModified": "2026-05-18",
-      "wordCount": "487",
+      "wordCount": "371",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,32 +96,20 @@
       <h1 class="article-title">Domain Event Implementation: Publishing, Handling, and Testing</h1>
       <div class="article-meta">Published 2026-05-07 · Last active 2026-05-18 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-event-implementation.png" alt="Domain Event Implementation: Publishing, Handling, and Testing" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Domain Event Implementation: Publishing, Handling, and Testing</h2>
-<h3>Domain Event Implementation: Publishing, Handling, and Testing</h3>
-<h4>Domain Event Implementation: Publishing, Handling, and Testing</h4>
-<h4>Domain Event Implementation: Publishing, Handling, and Testing</h4>
-<h4>Domain Event Implementation: Publishing, Handling, and Testing</h4>
-<h4>Domain Event Implementation: Publishing, Handling, and Testing</h4>
-<h4>Domain Event Implementation: Publishing, Handling, and Testing</h4>
-<h4>Domain Event Implementation: Publishing, Handling, and Testing</h4>
-<h4>Domain Event Implementation: Publishing, Handling, and Testing</h4>
-<h4>Domain Event Implementation: Publishing, Handling, and Testing</h4>
-<h4>Domain Event Implementation: Publishing, Handling, and Testing</h4>
-<h4>Domain Event Implementation: Publishing, Handling, and Testing</h4>
-<h4>Domain Event Implementation: Publishing, Handling, and Testing</h4>
-<h4>Domain Event Implementation: Publishing, Handling, and Testing</h4>
-<h4>Domain Event Implementation: Publishing, Handling, and Testing</h4>
-<p>Domain events capture significant business occurrences within a domain-driven system. When a domain expert says "when the order is shipped, send an invoice," the "order shipped" is a domain event. Events are named in the past tense: OrderShipped, PaymentReceived, InvoiceGenerated.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-event-implementation.png" alt="Domain Event Implementation: Publishing, Handling, and Testing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Event Definition</h4>
+      <div class="article-body"><p>Domain events capture significant business occurrences within a domain-driven system. When a domain expert says "when the order is shipped, send an invoice," the "order shipped" is a domain event. Events are named in the past tense: OrderShipped, PaymentReceived, InvoiceGenerated.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-event-implementation.png" alt="Domain Event Implementation: Publishing, Handling, and Testing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Event Definition</h2>
 <p>Each event is an immutable object containing the data relevant to the occurrence. Events include a unique identifier, a timestamp, and the business data. Event names come from the ubiquitous language. The structure should be kept stable—consumers depend on it.</p>
-<h4>Publishing</h4>
+<h2>Publishing</h2>
 <p>Events are published from the domain layer when an aggregate changes state. The aggregate returns events after command execution. The application layer collects and publishes these events to a message bus or event store.</p>
 <p>Transactional outbox ensures events are published reliably. The outbox stores events in the same database transaction as the state change. A separate process reads the outbox and publishes events to the message broker.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -133,7 +121,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/domain-events.html" class="related-card">Domain Events: Design and Implementation</a><a href="/en/architecture/ddd-tactical.html" class="related-card">DDD Tactical Patterns</a><a href="/en/architecture/api-gateway-patterns.html" class="related-card">API Gateway Patterns</a><a href="/en/architecture/ddd-strategic.html" class="related-card">DDD Strategic Design</a></div>
+      <div class="related-grid"><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/ddd-tactical.html" class="related-card"><span class="related-card-title">DDD Tactical Patterns</span><span class="related-card-desc">Master DDD tactical patterns: aggregate, entity, value object, domain service, and repository implem</span></a><a href="/en/architecture/api-gateway-patterns.html" class="related-card"><span class="related-card-title">API Gateway Patterns</span><span class="related-card-desc">Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementatio</span></a><a href="/en/architecture/ddd-strategic.html" class="related-card"><span class="related-card-title">DDD Strategic Design</span><span class="related-card-desc">Explore DDD strategic design: bounded context, context map, ubiquitous language, and domain integrat</span></a><a href="/en/architecture/asynchronous-communication.html" class="related-card"><span class="related-card-title">Asynchronous Communication in Distributed Systems</span><span class="related-card-desc">Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and pattern</span></a><a href="/en/architecture/distributed-tracing-deep.html" class="related-card"><span class="related-card-title">Distributed Tracing: Deep Dive</span><span class="related-card-desc">Trace context propagation, sampling strategies, visualization, and implementation of distributed tra</span></a></div>
     </section>
     
   </div>

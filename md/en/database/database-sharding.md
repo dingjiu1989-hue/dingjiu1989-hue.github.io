@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-sharding.html
 
 # Database Sharding: Strategies and Trade-offs
 
-## Database Sharding: Strategies and Trade-offs
-
-### Database Sharding: Strategies and Trade-offs
-
-#### Database Sharding: Strategies and Trade-offs
-
-#### Database Sharding: Strategies and Trade-offs
-
-#### Database Sharding: Strategies and Trade-offs
-
-#### Database Sharding: Strategies and Trade-offs
-
-#### Database Sharding: Strategies and Trade-offs
-
-#### Database Sharding: Strategies and Trade-offs
-
-#### Database Sharding: Strategies and Trade-offs
-
-#### Database Sharding: Strategies and Trade-offs
-
-#### Database Sharding: Strategies and Trade-offs
-
-#### Database Sharding: Strategies and Trade-offs
-
-#### Database Sharding: Strategies and Trade-offs
-
-#### Database Sharding: Strategies and Trade-offs
-
-#### Database Sharding: Strategies and Trade-offs
-
 What is Sharding? 
 
 Sharding splits a database across multiple servers horizontally. Each shard holds a subset of data, allowing linear scalability. 
@@ -115,3 +85,9 @@ Choose key-based sharding for even distribution, range-based for time-series dat
 **See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Normalization Explained](</en/database/database-normalization.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
 
 **See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Normalization Explained](</en/database/database-normalization.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
+
+**See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>)
+
+**See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>)
+
+**See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>)

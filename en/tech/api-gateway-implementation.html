@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/api-gateway-implementation.png",
       "datePublished": "2026-05-14",
       "dateModified": "2026-05-18",
-      "wordCount": "3542",
+      "wordCount": "3498",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
@@ -99,29 +99,12 @@
       <h1 class="article-title">API Gateway Implementation Guide</h1>
       <div class="article-meta">Published 2026-05-14 · Last active 2026-05-18 · 360 views · 3 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/api-gateway-implementation.png" alt="API Gateway Implementation Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>API Gateway Implementation Guide</h2>
-<h3>API Gateway Implementation Guide</h3>
-<h4>API Gateway Implementation Guide</h4>
-<h4>API Gateway Implementation Guide</h4>
-<h4>API Gateway Implementation Guide</h4>
-<h4>API Gateway Implementation Guide</h4>
-<h4>API Gateway Implementation Guide</h4>
-<h4>API Gateway Implementation Guide</h4>
-<h4>API Gateway Implementation Guide</h4>
-<h4>API Gateway Implementation Guide</h4>
-<h4>API Gateway Implementation Guide</h4>
-<h4>API Gateway Implementation Guide</h4>
-<h4>API Gateway Implementation Guide</h4>
-<h4>API Gateway Implementation Guide</h4>
-<h4>API Gateway Implementation Guide</h4>
-<h4>API Gateway Implementation Guide</h4>
-<h4>API Gateway Implementation Guide</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>An API gateway sits at the boundary between clients and backend services, handling cross-cutting concerns like authentication, rate limiting, routing, and observability. Choosing the right gateway and deployment pattern is critical for microservice architectures. This guide compares Kong, Tyk, and Apache APISIX across the dimensions that matter in production.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/api-gateway-implementation.png" alt="API Gateway Implementation Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Gateway Comparison</h4>
-<h4>Kong Gateway</h4>
+<h2>Gateway Comparison</h2>
+<h2>Kong Gateway</h2>
 <p>Kong is built on OpenResty (NGINX + Lua) and offers enterprise features through a plugin ecosystem:</p>
-<h4>Kong declarative config (kong.yml)</h4>
+<h2>Kong declarative config (kong.yml)</h2>
 <p>_format_version: "3.0"</p>
 <p>services:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: user-service</p>
@@ -145,9 +128,9 @@
 <p>config:</p>
 <p>origins: ["*"]</p>
 <p>methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]</p>
-<h4>Apache APISIX</h4>
+<h2>Apache APISIX</h2>
 <p>APISIX provides sub-millisecond route matching via a radix tree and supports hot-reload of plugins:</p>
-<h4>APISIX Admin API</h4>
+<h2>APISIX Admin API</h2>
 <p>curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '</p>
 <p>{</p>
 <p>"uri": "/api/v1/orders/*",</p>
@@ -170,7 +153,7 @@
 <p>"prometheus": {}</p>
 <p>}</p>
 <p>}'</p>
-<h4>Tyk</h4>
+<h2>Tyk</h2>
 <p>Tyk offers a dashboard-centric approach with API definitions stored in Redis:</p>
 <p>{</p>
 <p>"name": "Payment API",</p>
@@ -193,7 +176,7 @@
 <p>},</p>
 <p>"enable_coprocess_auth": false</p>
 <p>}</p>
-<h4>Routing Strategies</h4>
+<h2>Routing Strategies</h2>
 <p>Gateways support multiple routing strategies critical for microservice decomposition:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Kong: complex route matching with regex</p>
 <p>{</p>
@@ -210,7 +193,7 @@
 <p>nodes:</p>
 <p>user-svc-v1:8080: 90</p>
 <p>user-svc-v2:8080: 10</p>
-<h4>Rate Limiting and Throttling</h4>
+<h2>Rate Limiting and Throttling</h2>
 <p>Implement multi-layered rate limiting to protect backend services:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Kong: combined rate limiting strategy</p>
 <p>{</p>
@@ -227,7 +210,7 @@
 <p>redis_timeout = 2000</p>
 <p>}</p>
 <p>}</p>
-<h4>Authentication Plugin Integration</h4>
+<h2>Authentication Plugin Integration</h2>
 <p>Layer multiple auth methods with priority-based execution:</p>
 <p>plugins:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: key-auth</p>
@@ -245,7 +228,7 @@
 <p>token_expiration: 3600</p>
 <p>enable_authorization_code: true</p>
 <p>enable_client_credentials: true</p>
-<h4>Request/Response Transformation</h4>
+<h2>Request/Response Transformation</h2>
 <p>Transform payloads between client and service boundaries:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Kong: response transformer plugin</p>
 <p>{</p>
@@ -275,9 +258,9 @@
 <p>end"]</p>
 <p>}</p>
 <p>}</p>
-<h4>Analytics and Observability</h4>
+<h2>Analytics and Observability</h2>
 <p>All three gateways export metrics for monitoring and billing:</p>
-<h4>APISIX: Prometheus and logging</h4>
+<h2>APISIX: Prometheus and logging</h2>
 <p>plugins:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: prometheus</p>
 <p>config:</p>
@@ -290,8 +273,8 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: skywalking</p>
 <p>config:</p>
 <p>sample_ratio: 0.1</p>
-<h4>Deployment Patterns</h4>
-<h4>Sidecar Pattern</h4>
+<h2>Deployment Patterns</h2>
+<h2>Sidecar Pattern</h2>
 <p>Deploy the gateway as a sidecar alongside each service, suitable for service mesh architectures:</p>
 <p>apiVersion: apps/v1</p>
 <p>kind: Deployment</p>
@@ -310,7 +293,7 @@
 <p>value: data_plane</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: KONG_CLUSTER_CONTROL_PLANE</p>
 <p>value: cp:8005</p>
-<h4>Centralized Pattern</h4>
+<h2>Centralized Pattern</h2>
 <p>A shared gateway cluster handles all ingress traffic:</p>
 <p>apiVersion: networking.k8s.io/v1</p>
 <p>kind: IngressClass</p>
@@ -337,7 +320,10 @@
 <p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>, <a href="/en/tech/webpack-vs-vite-bundlers.html">Webpack vs Vite Comparison</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>, <a href="/en/tech/webpack-vs-vite-bundlers.html">Webpack vs Vite Comparison</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>, <a href="/en/tech/webpack-vs-vite-bundlers.html">Webpack vs Vite Comparison</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -349,7 +335,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/microservices-communication.html" class="related-card">Microservices Communication Patterns</a><a href="/en/tech/nginx-configuration-guide.html" class="related-card">Nginx Configuration Guide</a><a href="/en/tech/service-discovery.html" class="related-card">Service Discovery in Microservices</a><a href="/en/tech/reverse-proxy-guide.html" class="related-card">Reverse Proxy Guide</a></div>
+      <div class="related-grid"><a href="/en/tech/microservices-communication.html" class="related-card"><span class="related-card-title">Microservices Communication Patterns</span><span class="related-card-desc">Compare synchronous and asynchronous communication patterns for microservices, with practical implem</span></a><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="related-card-title">Nginx Configuration Guide</span><span class="related-card-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting</span></a><a href="/en/tech/service-discovery.html" class="related-card"><span class="related-card-title">Service Discovery in Microservices</span><span class="related-card-desc">Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, includ</span></a><a href="/en/tech/reverse-proxy-guide.html" class="related-card"><span class="related-card-title">Reverse Proxy Guide</span><span class="related-card-desc">Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load </span></a><a href="/en/tech/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Principles and Practical Tools</span><span class="related-card-desc">Learn chaos engineering principles with Chaos Monkey, LitmusChaos, and Gremlin, covering steady-stat</span></a><a href="/en/tech/distributed-tracing.html" class="related-card"><span class="related-card-title">Distributed Tracing with OpenTelemetry</span><span class="related-card-desc">Implement distributed tracing with OpenTelemetry covering spans, context propagation, sampling strat</span></a></div>
     </section>
     
   </div>

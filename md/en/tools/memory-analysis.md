@@ -8,47 +8,15 @@ url: https://dingjiu1989-hue.github.io/en/tools/memory-analysis.html
 
 # Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
 
-## Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
-
-#### Introduction
+## Introduction
 
 Memory issues — leaks, fragmentation, excessive allocation, and buffer overflows — are among the hardest bugs to diagnose. Specialized memory analysis tools can pinpoint the exact line of code causing the problem. This article covers Valgrind for C/C++ memory errors, heaptrack for Linux heap profiling, memray for Python memory tracking, and general heap profiling techniques.
 
-#### Valgrind
+## Valgrind
 
 The gold standard for C/C++ memory error detection:
 
-#### Basic memory check
+## Basic memory check
 
 valgrind ./myapp
 
@@ -56,33 +24,33 @@ valgrind --leak-check=yes ./myapp
 
 valgrind --tool=memcheck --leak-check=full ./myapp
 
-#### Detailed output
+## Detailed output
 
 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./myapp
 
-#### Suppress known leaks
+## Suppress known leaks
 
 valgrind --suppressions=suppressions.txt ./myapp
 
-#### Generate suppression file
+## Generate suppression file
 
 valgrind --leak-check=full --gen-suppressions=all ./myapp 2> suppressions.txt
 
-#### Cache profiling
+## Cache profiling
 
 valgrind --tool=cachegrind ./myapp
 
-#### Call graph profiling
+## Call graph profiling
 
 valgrind --tool=callgrind ./myapp
 
-#### Massif (heap profiler)
+## Massif (heap profiler)
 
 valgrind --tool=massif ./myapp
 
 ms_print massif.out.12345 # View heap profile
 
-#### Profile specific duration
+## Profile specific duration
 
 valgrind --tool=callgrind --dump-instr=yes --simulate-cache=yes ./myapp
 
@@ -120,61 +88,61 @@ if (x == 5) {} // Error: conditional depends on uninit value
 
 **Key tools** : `memcheck` for memory errors and leaks, `cachegrind` for cache profiling, `callgrind` for call graph analysis, `massif` for heap profiling.
 
-#### heaptrack
+## heaptrack
 
 A modern Linux heap memory profiler with lower overhead than Valgrind:
 
-#### Installation
+## Installation
 
 sudo apt install heaptrack # Debian/Ubuntu
 
 brew install heaptrack # macOS (partial)
 
-#### Profile an application
+## Profile an application
 
 heaptrack ./myapp
 
 heaptrack ./myapp arg1 arg2
 
-#### Attach to running process
+## Attach to running process
 
 heaptrack -p 12345
 
-#### Analyze results
+## Analyze results
 
 heaptrack_print heaptrack.myapp.12345.gz
 
 heaptrack_gui heaptrack.myapp.12345.gz # GUI viewer
 
-#### Output analysis
+## Output analysis
 
 heaptrack_print --print-leak-types --print-total heaptrack.myapp.12345.gz
 
 **Key features** : Lower overhead than Valgrind (suitable for production-like loads), call-stack-based allocation tracking, detailed time-based allocation charts, peak memory analysis, leak detection.
 
-#### memray
+## memray
 
 Python memory profiler with high-resolution tracking:
 
-#### Installation
+## Installation
 
 pip install memray
 
-#### Profile a script
+## Profile a script
 
 memray run myapp.py
 
 memray run -o output.bin myapp.py
 
-#### Profile with live tracking
+## Profile with live tracking
 
 memray run --live myapp.py
 
-#### Attach to running process
+## Attach to running process
 
 memray attach --pid 12345 --output output.bin
 
-#### Generate reports
+## Generate reports
 
 memray flamegraph output.bin # Interactive flamegraph
 
@@ -186,25 +154,25 @@ memray stats output.bin # Summary statistics
 
 memray summary output.bin # High-level summary
 
-#### Compare allocations
+## Compare allocations
 
 memray diff before.bin after.bin
 
-#### Python native support
+## Python native support
 
-#### Programmatic memory tracking
+## Programmatic memory tracking
 
 import memray
 
 with memray.Tracker("profile.bin"):
 
-#### Code to profile
+## Code to profile
 
 data = [i for i in range(1000000)]
 
 processed = [x * 2 for x in data]
 
-#### Decorator for function profiling
+## Decorator for function profiling
 
 @memray.tracker("func_profile.bin")
 
@@ -212,7 +180,7 @@ def my_function():
 
 pass
 
-#### Context manager with specific recording
+## Context manager with specific recording
 
 with memray.Tracker("allocations.bin", native_traces=True):
 
@@ -220,61 +188,61 @@ large_list = [object() for _ in range(500000)]
 
 **Key features** : Python-native (no C extension needed in many cases), thread-safe, native stack traces, live tracking, multiple report formats including interactive flamegraphs.
 
-#### General Heap Profiling
+## General Heap Profiling
 
-#### jemalloc heap profiling
+## jemalloc heap profiling
 
-#### Enable jemalloc profiling
+## Enable jemalloc profiling
 
 export MALLOC_CONF="prof:true,prof_active:true,lg_prof_sample:17"
 
 ./myapp
 
-#### Trigger profile dump
+## Trigger profile dump
 
 kill -SIGUSR2 $PID # Dumps heap profile
 
 jeprof --show_bytes --pdf ./myapp heap.prof > heap.pdf
 
-#### Compare profiles
+## Compare profiles
 
 jeprof --show_bytes --pdf ./myapp --base=heap1.prof heap2.prof > diff.pdf
 
-#### GCC address sanitizer
+## GCC address sanitizer
 
-#### Compile with address sanitizer
+## Compile with address sanitizer
 
 gcc -fsanitize=address -g -O1 myapp.c -o myapp
 
 ./myapp # Will detect buffer overflows and use-after-free
 
-#### Leak sanitizer
+## Leak sanitizer
 
 gcc -fsanitize=leak -g myapp.c -o myapp
 
-#### Memory Analysis Workflow
+## Memory Analysis Workflow
 
-#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Detect the issue (OOM or high RSS growth)
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Detect the issue (OOM or high RSS growth)
 
-#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Run with memcheck for memory errors
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Run with memcheck for memory errors
 
 valgrind --leak-check=full ./myapp
 
-#### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Profile heap with massif or heaptrack
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Profile heap with massif or heaptrack
 
 heaptrack ./myapp
 
-#### 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Analyze the profile
+## 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Analyze the profile
 
 heaptrack_print heaptrack.*.gz
 
-#### 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. For Python: use memray
+## 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. For Python: use memray
 
 memray run myapp.py
 
 memray flamegraph memray-myapp.*.bin
 
-#### Comparison
+## Comparison
 
 | Tool | Language | Overhead | Best For |
 
@@ -290,7 +258,7 @@ memray flamegraph memray-myapp.*.bin
 
 | ASan | C/C++ | 2x | Buffer overflows, UAF |
 
-#### Recommendations
+## Recommendations
 
   * **C/C++ memory errors** : Valgrind memcheck is the definitive tool for finding use-after-free, buffer overflows, and uninitialized values.
 
@@ -318,3 +286,9 @@ Start with the lowest-overhead tool for your language. For C/C++, use ASan durin
 **See also:** [Performance Profiling: perf, Flamegraphs, py-spy, pprof](</en/tools/performance-profiling.html>), [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)
 
 **See also:** [Performance Profiling: perf, Flamegraphs, py-spy, pprof](</en/tools/performance-profiling.html>), [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)
+
+**See also:** [Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja](</en/tools/reverse-engineering.html>), [Browser DevTools: Advanced Debugging Techniques](</en/tools/browser-devtools.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>)
+
+**See also:** [Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja](</en/tools/reverse-engineering.html>), [Browser DevTools: Advanced Debugging Techniques](</en/tools/browser-devtools.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>)
+
+**See also:** [Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja](</en/tools/reverse-engineering.html>), [Browser DevTools: Advanced Debugging Techniques](</en/tools/browser-devtools.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>)

@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-types-overview.html
 
 # Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
 
-## Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
-### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
-#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
-#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
-#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
-#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
-#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
-#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
-#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
-#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
-#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
-#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
-#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
-#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
-#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-
 Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector 
 
 Choosing the right database type is one of the most consequential architectural decisions. Each type optimizes for different access patterns, consistency guarantees, and scalability requirements. This article surveys the major database types and their ideal use cases. 
@@ -345,3 +315,9 @@ The polyglot persistence approach uses multiple databases for different workload
 **See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
 
 **See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
+
+**See also:** [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>)
+
+**See also:** [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>)
+
+**See also:** [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>)

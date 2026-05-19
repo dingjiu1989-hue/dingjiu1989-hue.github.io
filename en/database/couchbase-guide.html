@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/couchbase-guide.png",
       "datePublished": "2026-03-31",
       "dateModified": "2026-05-05",
-      "wordCount": "2232",
+      "wordCount": "2151",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h1>
       <div class="article-meta">Published 2026-03-31 · Last active 2026-05-05 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/couchbase-guide.png" alt="Couchbase Guide: N1QL, Document Model, Clustering, and Caching" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h2>
-<h3>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h3>
-<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
-<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
-<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
-<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
-<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
-<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
-<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
-<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
-<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
-<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
-<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
-<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
-<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
-<p>Couchbase Guide: N1QL, Document Model, Clustering, and Caching </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/couchbase-guide.png" alt="Couchbase Guide: N1QL, Document Model, Clustering, and Caching" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Couchbase Guide: N1QL, Document Model, Clustering, and Caching </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/couchbase-guide.png" alt="Couchbase Guide: N1QL, Document Model, Clustering, and Caching" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Couchbase is a distributed NoSQL document database that combines the flexibility of JSON documents with the query power of SQL. Its key differentiator is the integrated caching layer that automatically keeps frequently accessed data in memory. </p>
 <p>Document Data Model </p>
 <p>Couchbase stores data as JSON documents, organized into buckets (analogous to databases). Each document has a unique key and can contain arbitrarily nested JSON: </p>
@@ -142,16 +127,16 @@
 <p>))</p>
 <p>bucket = cluster.bucket('myapp')</p>
 <p>collection = bucket.default_collection()</p>
-<h4>Create/Update</h4>
+<h2>Create/Update</h2>
 <p>collection.upsert('user_alice_42', {</p>
 <p>'type': 'user',</p>
 <p>'email': 'alice@example.com',</p>
 <p>'name': 'Alice Smith'</p>
 <p>})</p>
-<h4>Read</h4>
+<h2>Read</h2>
 <p>result = collection.get('user_alice_42')</p>
 <p>user = result.content_as[dict]</p>
-<h4>CAS (Compare-And-Swap) for optimistic locking</h4>
+<h2>CAS (Compare-And-Swap) for optimistic locking</h2>
 <p>result = collection.get('user_alice_42')</p>
 <p>cas = result.cas</p>
 <p>user = result.content_as[dict]</p>
@@ -206,20 +191,20 @@
 <p>Search Service </p>
 <p>Provides full-text search capabilities using FTS (based on Bleve). </p>
 <p>Cluster Management </p>
-<h4>Initialize cluster</h4>
+<h2>Initialize cluster</h2>
 <p>couchbase-cli cluster-init -c 127.0.0.1 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--cluster-username admin \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--cluster-password password \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--cluster-ramsize 2048 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--cluster-index-ramsize 512 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--services data,index,query</p>
-<h4>Add node</h4>
+<h2>Add node</h2>
 <p>couchbase-cli server-add -c 192.168.1.1 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--server-add 192.168.1.2 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--server-add-username admin \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--server-add-password password \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--services data,index,query</p>
-<h4>Rebalance</h4>
+<h2>Rebalance</h2>
 <p>couchbase-cli rebalance -c 192.168.1.1</p>
 <p>Integrated Caching Layer </p>
 <p>Couchbase's most distinctive feature is its integrated cache. Every data node includes an in-memory cache (managed by the "couchbase" engine) that stores frequently accessed documents. </p>
@@ -239,7 +224,7 @@
 </li>
 </ul>
 <p>Memory Quotas </p>
-<h4>Set bucket memory quota (important tuning parameter)</h4>
+<h2>Set bucket memory quota (important tuning parameter)</h2>
 <p>couchbase-cli bucket-create -c 127.0.0.1 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--bucket myapp \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--bucket-type couchbase \</p>
@@ -256,16 +241,16 @@
 </li>
 </ul>
 <p>Durability Settings </p>
-<h4>Wait for replication to N nodes before acknowledging</h4>
+<h2>Wait for replication to N nodes before acknowledging</h2>
 <p>collection.upsert('doc_id', doc,</p>
 <p>durability= Durability.MAJORITY_AND_PERSIST_TO_ACTIVE)</p>
-<h4>Or use observe-based durability</h4>
+<h2>Or use observe-based durability</h2>
 <p>collection.upsert('doc_id', doc,</p>
 <p>durability_level= DurabilityLevel.PERSIST_TO_MAJORITY)</p>
 <p>Use Cases </p>
 <p>Session Store </p>
 <p>Couchbase's sub-millisecond get/set operations and built-in TTL make it an excellent session store: </p>
-<h4>Set session with TTL (24 hours)</h4>
+<h2>Set session with TTL (24 hours)</h2>
 <p>collection.upsert('session_token_xyz', {</p>
 <p>'user_id': 'alice_42',</p>
 <p>'created_at': '2026-05-12T10:00:00Z'</p>
@@ -291,7 +276,10 @@
 <p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a></p>
+<p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
+<p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -303,7 +291,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-types-overview.html" class="related-card">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a><a href="/en/database/nosql-guide.html" class="related-card">NoSQL Databases Guide</a><a href="/en/database/dynamodb-vs-cassandra.html" class="related-card">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a><a href="/en/database/geospatial-data.html" class="related-card">Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries</a></div>
+      <div class="related-grid"><a href="/en/database/database-types-overview.html" class="related-card"><span class="related-card-title">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</span><span class="related-card-desc">Comprehensive overview of database types: relational, document, key-value, graph, time-series, and v</span></a><a href="/en/database/nosql-guide.html" class="related-card"><span class="related-card-title">NoSQL Databases Guide</span><span class="related-card-desc">A guide to NoSQL database types: document, key-value, wide-column, graph, and time-series with use c</span></a><a href="/en/database/dynamodb-vs-cassandra.html" class="related-card"><span class="related-card-title">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</span><span class="related-card-desc">In-depth comparison of DynamoDB vs Cassandra covering data model, consistency levels, scaling strate</span></a><a href="/en/database/geospatial-data.html" class="related-card"><span class="related-card-title">Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries</span><span class="related-card-desc">Comprehensive guide to geospatial data with PostGIS. Understand geometry vs geography types, spatial</span></a><a href="/en/database/index-types.html" class="related-card"><span class="related-card-title">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</span><span class="related-card-desc">Comprehensive guide to PostgreSQL index types: B-tree, Hash, GiST, GIN, SP-GiST, and BRIN. Learn whe</span></a><a href="/en/database/json-in-postgresql.html" class="related-card"><span class="related-card-title">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</span><span class="related-card-desc">Comprehensive guide to using JSON in PostgreSQL. Compare JSONB and JSON types, indexing strategies, </span></a></div>
     </section>
     
   </div>

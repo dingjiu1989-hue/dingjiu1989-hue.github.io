@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/input-validation.png",
       "datePublished": "2026-03-10",
       "dateModified": "2026-04-30",
-      "wordCount": "450",
+      "wordCount": "408",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,30 +99,13 @@
       <h1 class="article-title">Input Validation Deep Dive</h1>
       <div class="article-meta">Published 2026-03-10 · Last active 2026-04-30 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/input-validation.png" alt="Input Validation Deep Dive" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Input Validation Deep Dive</h2>
-<h3>Input Validation Deep Dive</h3>
-<h4>Input Validation Deep Dive</h4>
-<h4>Input Validation Deep Dive</h4>
-<h4>Input Validation Deep Dive</h4>
-<h4>Input Validation Deep Dive</h4>
-<h4>Input Validation Deep Dive</h4>
-<h4>Input Validation Deep Dive</h4>
-<h4>Input Validation Deep Dive</h4>
-<h4>Input Validation Deep Dive</h4>
-<h4>Input Validation Deep Dive</h4>
-<h4>Input Validation Deep Dive</h4>
-<h4>Input Validation Deep Dive</h4>
-<h4>Input Validation Deep Dive</h4>
-<h4>Input Validation Deep Dive</h4>
-<h4>Input Validation Deep Dive</h4>
-<h4>Input Validation Deep Dive</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/input-validation.png" alt="Input Validation Deep Dive" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/input-validation.png" alt="Input Validation Deep Dive" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Input validation is the first line of defense against injection attacks. Every piece of data entering an application — form fields, HTTP headers, URL parameters, file uploads, API payloads — must be validated before processing. The principle is simple: never trust user input. </p>
 <p>Whitelist vs Blacklist </p>
 <p>Whitelist (Allowlist) Validation </p>
 <p>Whitelist validation defines what is allowed and rejects everything else. It is far more secure than blacklisting. </p>
 <p>import re</p>
-<h4>Whitelist: only allow specific characters</h4>
+<h2>Whitelist: only allow specific characters</h2>
 <p>def validate_username_whitelist(username):</p>
 <p>"""Allow only alphanumeric, underscore, and hyphen."""</p>
 <p>pattern = r'^[a-zA-Z0-9_-]{3,32}$'</p>
@@ -132,7 +115,7 @@
 <p>"Only letters, numbers, underscores, and hyphens are allowed."</p>
 <p>)</p>
 <p>return username</p>
-<h4>Whitelist for country codes</h4>
+<h2>Whitelist for country codes</h2>
 <p>ALLOWED_COUNTRIES = {'US', 'CA', 'GB', 'DE', 'FR', 'JP'}</p>
 <p>def validate_country_code(code):</p>
 <p>if code.upper() not in ALLOWED_COUNTRIES:</p>
@@ -140,15 +123,18 @@
 <p>return code.upper()</p>
 <p>Blacklist (Blocklist) Validation </p>
 <p>Blacklist validation attempts to block known malicious patterns. It is inherently fragile because attackers constantly discover new bypass techniques. </p>
-<h4>WEAK: Blacklist approach (easily bypassed)</h4>
+<h2>WEAK: Blacklist approach (easily bypassed)</h2>
 <p>def validate_input_blacklist(input_string):</p>
-<h4>Easily bypassed — attacker uses alternative syntax</h4>
+<h2>Easily bypassed — attacker uses alternative syntax</h2>
 <p>blocklist = ['</p>
 <p><strong>See also:</strong> <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>.</p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cors-security.html">CORS Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cors-security.html">CORS Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cors-security.html">CORS Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cors-security.html">CORS Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cors-security.html">CORS Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cors-security.html">CORS Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cors-security.html">CORS Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a></p>
+<p><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -160,7 +146,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/cloud-iam.html" class="related-card">Cloud IAM Deep Dive</a><a href="/en/security/secure-api-design.html" class="related-card">Secure API Design Principles</a><a href="/en/security/cors-security.html" class="related-card">CORS Security</a><a href="/en/security/key-management.html" class="related-card">Key Management Systems</a></div>
+      <div class="related-grid"><a href="/en/security/cloud-iam.html" class="related-card"><span class="related-card-title">Cloud IAM Deep Dive</span><span class="related-card-desc">In-depth guide to cloud IAM covering AWS IAM policies, GCP IAM roles, least privilege principles, an</span></a><a href="/en/security/secure-api-design.html" class="related-card"><span class="related-card-title">Secure API Design Principles</span><span class="related-card-desc">Guide to secure API design covering input validation, rate limiting, idempotency, error handling, an</span></a><a href="/en/security/cors-security.html" class="related-card"><span class="related-card-title">CORS Security</span><span class="related-card-desc">In-depth guide to CORS security covering proper origin validation, preflight handling, common miscon</span></a><a href="/en/security/key-management.html" class="related-card"><span class="related-card-title">Key Management Systems</span><span class="related-card-desc">Deep dive into key management systems covering KMS, HSM, key rotation strategies, envelope encryptio</span></a><a href="/en/security/output-encoding.html" class="related-card"><span class="related-card-title">Output Encoding</span><span class="related-card-desc">Guide to output encoding covering context-sensitive encoding, XSS prevention, template engine auto-e</span></a><a href="/en/security/serverless-security.html" class="related-card"><span class="related-card-title">Serverless Security</span><span class="related-card-desc">Guide to serverless security covering function permissions, event validation, cold start risks, depe</span></a></div>
     </section>
     
   </div>

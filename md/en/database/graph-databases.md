@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/graph-databases.html
 
 # Graph Databases (Neo4j, Dgraph, ArangoDB)
 
-## Graph Databases (Neo4j, Dgraph, ArangoDB)
-
-### Graph Databases (Neo4j, Dgraph, ArangoDB)
-
-#### Graph Databases (Neo4j, Dgraph, ArangoDB)
-
-#### Graph Databases (Neo4j, Dgraph, ArangoDB)
-
-#### Graph Databases (Neo4j, Dgraph, ArangoDB)
-
-#### Graph Databases (Neo4j, Dgraph, ArangoDB)
-
-#### Graph Databases (Neo4j, Dgraph, ArangoDB)
-
-#### Graph Databases (Neo4j, Dgraph, ArangoDB)
-
-#### Graph Databases (Neo4j, Dgraph, ArangoDB)
-
-#### Graph Databases (Neo4j, Dgraph, ArangoDB)
-
-#### Graph Databases (Neo4j, Dgraph, ArangoDB)
-
-#### Graph Databases (Neo4j, Dgraph, ArangoDB)
-
-#### Graph Databases (Neo4j, Dgraph, ArangoDB)
-
-#### Graph Databases (Neo4j, Dgraph, ArangoDB)
-
-#### Graph Databases (Neo4j, Dgraph, ArangoDB)
-
 Graph Database Fundamentals 
 
 Graph databases store data as nodes (entities) and edges (relationships). They excel at traversing connected data. 
@@ -91,3 +61,9 @@ Choose Neo4j for mature graph capabilities and Cypher. Choose ArangoDB for multi
 **See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip](</en/tools/best-database-gui-tools.html>)
 
 **See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip](</en/tools/best-database-gui-tools.html>)
+
+**See also:** [Data Modeling Best Practices](</en/database/data-modeling.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>)
+
+**See also:** [Data Modeling Best Practices](</en/database/data-modeling.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>)
+
+**See also:** [Data Modeling Best Practices](</en/database/data-modeling.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>)

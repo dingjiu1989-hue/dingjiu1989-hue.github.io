@@ -48,4 +48,4 @@ Extension| What It Does
 
 If you only install one: **uBlock Origin**. It makes the web faster, cleaner, and safer. Everything else is optimization on top of that foundation.
 
-**See also:** [10 Must-Have VS Code Extensions to Double Your Productivity](</en/tech/vscode-extensions.html>), [Browser Extension Development 2026: From Idea to Chrome Web Store](</en/sidehustle/browser-extension-development.html>), [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>)
+**See also:** [Best Markdown Editors](</en/tools/markdown-editors.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)

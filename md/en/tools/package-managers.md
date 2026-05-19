@@ -8,47 +8,15 @@ url: https://dingjiu1989-hue.github.io/en/tools/package-managers.html
 
 # Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
 
-## Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
-
-#### Introduction
+## Introduction
 
 JavaScript package managers have evolved significantly. npm is the default, yarn improved reliability, pnpm addressed disk space with content-addressable storage, and bun brings native-speed performance with a built-in runtime. Choosing the right one affects install times, disk usage, CI pipeline speed, and monorepo workflow efficiency.
 
-#### npm
+## npm
 
 Node's built-in package manager, now at version 11:
 
-#### npm workspaces for monorepos
+## npm workspaces for monorepos
 
 npm init -w packages/core -w packages/utils
 
@@ -56,13 +24,13 @@ npm install lodash -w packages/core
 
 npm test -w packages/core
 
-#### Audit and fix vulnerabilities
+## Audit and fix vulnerabilities
 
 npm audit
 
 npm audit fix
 
-#### Package overview
+## Package overview
 
 npm ls --depth=0
 
@@ -70,27 +38,27 @@ npm ls --depth=0
 
 **Weaknesses** : Slower install times than alternatives, flat `node_modules` can cause dependency confusion, no built-in content deduplication across projects.
 
-#### Yarn
+## Yarn
 
 Yarn v4 (Berry) introduced Plug'n'Play (PnP) and strict dependency resolution:
 
-#### Enable Plug'n'Play (no node_modules!)
+## Enable Plug'n'Play (no node_modules!)
 
 yarn set version berry
 
 yarn config set nodeLinker pnp
 
-#### Zero-install: commit .yarn/cache to git
+## Zero-install: commit .yarn/cache to git
 
 yarn config set enableGlobalCache false
 
-#### Workspaces for monorepos
+## Workspaces for monorepos
 
 yarn workspace packages/core add lodash
 
 yarn workspaces foreach run test
 
-#### .yarnrc.yml
+## .yarnrc.yml
 
 nodeLinker: pnp
 
@@ -98,41 +66,41 @@ enableGlobalCache: true
 
 compressionLevel: 9
 
-#### PnP removes the need for node_modules entirely
+## PnP removes the need for node_modules entirely
 
-#### Dependencies are stored as zip files in .yarn/cache
+## Dependencies are stored as zip files in .yarn/cache
 
-#### This reduces install time to near-zero on clone
+## This reduces install time to near-zero on clone
 
 **Strengths** : PnP eliminates `node_modules`, zero-install dramatically speeds CI, workspace commands are powerful, strict mode prevents undeclared dependencies.
 
 **Weaknesses** : PnP compatibility with some tooling, learning curve for migration, zip-based cache can slow some tooling.
 
-#### pnpm
+## pnpm
 
 pnpm uses content-addressable storage to deduplicate across projects:
 
-#### Install pnpm
+## Install pnpm
 
 npm install -g pnpm
 
-#### Uses hard links to a global store
+## Uses hard links to a global store
 
-#### Multiple projects sharing the same version use the same files on disk
+## Multiple projects sharing the same version use the same files on disk
 
 pnpm install
 
-#### Strict mode: only declared dependencies are accessible
+## Strict mode: only declared dependencies are accessible
 
-#### Prevents importing undeclared packages
+## Prevents importing undeclared packages
 
-#### Monorepo support
+## Monorepo support
 
 pnpm -r run test
 
 pnpm --filter packages/core add lodash
 
-#### .npmrc
+## .npmrc
 
 shamefully-hoist=false
 
@@ -140,7 +108,7 @@ strict-peer-dependencies=true
 
 auto-install-peers=true
 
-#### Global store location
+## Global store location
 
 store-dir=~/.pnpm-store
 
@@ -158,49 +126,49 @@ store-dir=~/.pnpm-store
 
 | bun | 4.8 GB | 8s | 220KB |
 
-#### bun
+## bun
 
 Bun is a JavaScript runtime, bundler, and package manager in one binary:
 
-#### Install dependencies at native speed
+## Install dependencies at native speed
 
 bun install
 
-#### Add a package
+## Add a package
 
 bun add zod
 
-#### Run scripts
+## Run scripts
 
 bun run dev
 
-#### Remove
+## Remove
 
 bun remove lodash
 
-#### Workspaces
+## Workspaces
 
 bun install --workspaces
 
-#### bun.lock — binary lockfile (not human-readable)
+## bun.lock — binary lockfile (not human-readable)
 
-#### But bun also supports package.json workspaces
+## But bun also supports package.json workspaces
 
-#### Speed comparison (fresh install of 500 packages):
+## Speed comparison (fresh install of 500 packages):
 
-#### npm: 45s
+## npm: 45s
 
-#### yarn (classic): 38s
+## yarn (classic): 38s
 
-#### pnpm: 22s
+## pnpm: 22s
 
-#### bun: 6s
+## bun: 6s
 
 **Strengths** : Fastest install speeds, built-in test runner (`bun test`), built-in bundler, drop-in npm replacement for most projects, native TypeScript execution.
 
 **Weaknesses** : Newer ecosystem (fewer edge cases tested), lockfile format is not human-readable, some npm features not yet implemented.
 
-#### Comparison
+## Comparison
 
 | Feature | npm | Yarn (v4) | pnpm | bun |
 
@@ -220,7 +188,7 @@ bun install --workspaces
 
 | Node.js required | Yes | Yes | Yes | No (built-in) |
 
-#### Recommendations
+## Recommendations
 
   * **Solo/team standard project** : pnpm offers the best balance of speed, disk efficiency, and strictness.
 
@@ -248,3 +216,9 @@ The trend is clear: pnpm for production projects, bun for performance-critical o
 **See also:** [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>), [Build Tools: esbuild, swc, turbopack, vite — Speed Comparison](</en/tools/build-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
 
 **See also:** [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>), [Build Tools: esbuild, swc, turbopack, vite — Speed Comparison](</en/tools/build-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
+
+**See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>)
+
+**See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>)
+
+**See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>)

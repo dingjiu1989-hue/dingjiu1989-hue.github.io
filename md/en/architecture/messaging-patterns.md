@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/messaging-patterns.html
 
 # Messaging Patterns: Pub/Sub and Request/Reply
 
-## Messaging Patterns: Pub/Sub and Request/Reply
-
-### Messaging Patterns: Pub/Sub and Request/Reply
-
-#### Messaging Patterns: Pub/Sub and Request/Reply
-
-#### Messaging Patterns: Pub/Sub and Request/Reply
-
-#### Messaging Patterns: Pub/Sub and Request/Reply
-
-#### Messaging Patterns: Pub/Sub and Request/Reply
-
-#### Messaging Patterns: Pub/Sub and Request/Reply
-
-#### Messaging Patterns: Pub/Sub and Request/Reply
-
-#### Messaging Patterns: Pub/Sub and Request/Reply
-
-#### Messaging Patterns: Pub/Sub and Request/Reply
-
-#### Messaging Patterns: Pub/Sub and Request/Reply
-
-#### Messaging Patterns: Pub/Sub and Request/Reply
-
-#### Messaging Patterns: Pub/Sub and Request/Reply
-
-#### Messaging Patterns: Pub/Sub and Request/Reply
-
-#### Messaging Patterns: Pub/Sub and Request/Reply
-
 Messaging is the backbone of distributed systems. It enables services to communicate asynchronously, decouple dependencies, and build resilient architectures. This article covers the two most fundamental messaging patterns: publish-subscribe and request-reply. 
 
 The Case for Messaging 
@@ -85,7 +55,7 @@ Use Cases
 
 Example with Kafka 
 
-#### Publisher
+## Publisher
 
 producer.send('order-events', {
 
@@ -99,7 +69,7 @@ producer.send('order-events', {
 
 })
 
-#### Subscriber
+## Subscriber
 
 @kafka_listener('order-events')
 
@@ -127,7 +97,7 @@ Correlation ID
 
 The key mechanism is the correlation ID. The requestor includes a unique ID in the request message. The replier includes the same ID in the reply message. The requestor uses this ID to match replies to pending requests. 
 
-#### Requestor
+## Requestor
 
 correlation_id = str(uuid.uuid4())
 
@@ -143,11 +113,11 @@ message = {
 
 request_queue.send(message)
 
-#### Wait for reply on the reply queue
+## Wait for reply on the reply queue
 
 reply = reply_queue.receive(timeout=30)
 
-#### Replier
+## Replier
 
 def handle_request(message):
 
@@ -214,3 +184,9 @@ Pub/Sub and Request-Reply serve different purposes. Use Pub/Sub when you need to
 **See also:** [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>)
 
 **See also:** [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)

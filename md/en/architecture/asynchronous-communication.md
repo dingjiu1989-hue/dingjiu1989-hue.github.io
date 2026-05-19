@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/asynchronous-communicatio
 
 # Asynchronous Communication in Distributed Systems
 
-## Asynchronous Communication in Distributed Systems
-
-### Asynchronous Communication in Distributed Systems
-
-#### Asynchronous Communication in Distributed Systems
-
-#### Asynchronous Communication in Distributed Systems
-
-#### Asynchronous Communication in Distributed Systems
-
-#### Asynchronous Communication in Distributed Systems
-
-#### Asynchronous Communication in Distributed Systems
-
-#### Asynchronous Communication in Distributed Systems
-
-#### Asynchronous Communication in Distributed Systems
-
-#### Asynchronous Communication in Distributed Systems
-
-#### Asynchronous Communication in Distributed Systems
-
-#### Asynchronous Communication in Distributed Systems
-
-#### Asynchronous Communication in Distributed Systems
-
-#### Asynchronous Communication in Distributed Systems
-
-#### Asynchronous Communication in Distributed Systems
-
 Asynchronous communication is the backbone of resilient distributed systems. By decoupling services in time and space, it enables independent scaling, fault isolation, and event-driven workflows. The core infrastructure choices are message brokers, event buses, and brokerless messaging, each with distinct tradeoffs in reliability, latency, and operational complexity. 
 
 Message brokers like RabbitMQ, Amazon SQS, and ActiveMQ provide reliable point-to-point communication. Producers send messages to queues, and consumers pull or receive pushes. Brokers guarantee message delivery through persistent storage, acknowledgments, and dead-letter mechanisms. At-least-once delivery is the standard guarantee; exactly-once delivery requires idempotent consumers or additional infrastructure like transactional outbox patterns. Brokers excel when each message should be processed by exactly one consumer, making them ideal for task distribution and work queues. 
@@ -67,3 +37,9 @@ Choosing the right messaging infrastructure depends on consumption patterns, dur
 **See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
 
 **See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
+
+**See also:** [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>)
+
+**See also:** [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>)
+
+**See also:** [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>)

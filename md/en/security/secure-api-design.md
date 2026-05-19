@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/secure-api-design.html
 
 # Secure API Design Principles
 
-## Secure API Design Principles
-
-### Secure API Design Principles
-
-#### Secure API Design Principles
-
-#### Secure API Design Principles
-
-#### Secure API Design Principles
-
-#### Secure API Design Principles
-
-#### Secure API Design Principles
-
-#### Secure API Design Principles
-
-#### Secure API Design Principles
-
-#### Secure API Design Principles
-
-#### Secure API Design Principles
-
-#### Secure API Design Principles
-
-#### Secure API Design Principles
-
-#### Secure API Design Principles
-
-#### Secure API Design Principles
-
 Introduction 
 
 APIs are the backbone of modern application architecture. A well-designed API considers security at every layer, from request validation to response handling. Security must be built into the API contract — it cannot be bolted on afterward. 
@@ -72,7 +42,7 @@ if not re.match(r'^[a-zA-Z0-9_-]+$', v):
 
 raise ValueError('Username must be alphanumeric')
 
-#### Blocklist certain patterns
+## Blocklist certain patterns
 
 blocklist = ['admin', 'root', 'null', 'undefined']
 
@@ -120,7 +90,7 @@ now = time.time()
 
 window_start = now - window_seconds
 
-#### Clean old entries
+## Clean old entries
 
 self.requests[key] = [
 
@@ -128,7 +98,7 @@ t for t in self.requests[key] if t > window_start
 
 ]
 
-#### Check limit
+## Check limit
 
 if len(self.requests[key]) >= max_requests:
 
@@ -138,7 +108,7 @@ self.requests[key].append(now)
 
 return True
 
-#### Token bucket algorithm
+## Token bucket algorithm
 
 class TokenBucket:
 
@@ -176,7 +146,7 @@ self.tokens + elapsed * self.refill_rate)
 
 self.last_refill = now
 
-#### Apply rate limiting via middleware
+## Apply rate limiting via middleware
 
 from fastapi import Request, HTTPException
 
@@ -212,7 +182,7 @@ self.ttl = timedelta(hours=ttl_hours)
 
 async def process_request(self, request):
 
-#### Check for idempotency key on mutating requests
+## Check for idempotency key on mutating requests
 
 if request.method in ('POST', 'PATCH', 'PUT', 'DELETE'):
 
@@ -228,7 +198,7 @@ detail="Idempotency-Key header required for mutating requests"
 
 )
 
-#### Check for existing result
+## Check for existing result
 
 cache_key = f"idempotency:{idempotency_key}"
 
@@ -236,11 +206,11 @@ existing = await self.redis.get(cache_key)
 
 if existing:
 
-#### Return cached response (idempotent replay)
+## Return cached response (idempotent replay)
 
 return json.loads(existing)
 
-#### Process request and cache result
+## Process request and cache result
 
 response = await self.process_request_internal(request)
 
@@ -270,7 +240,7 @@ class SecureExceptionHandler:
 
 def handle_validation_error(request: Request, exc: Exception):
 
-#### Generic message, don't reveal internal details
+## Generic message, don't reveal internal details
 
 return JSONResponse(
 
@@ -290,7 +260,7 @@ content={
 
 def handle_auth_error(request: Request, exc: Exception):
 
-#### Don't distinguish between "user not found" and "wrong password"
+## Don't distinguish between "user not found" and "wrong password"
 
 return JSONResponse(
 
@@ -310,7 +280,7 @@ content={
 
 def handle_internal_error(request: Request, exc: Exception):
 
-#### Log full details internally
+## Log full details internally
 
 import logging
 
@@ -318,7 +288,7 @@ logger = logging.getLogger(**name**)
 
 logger.error(f"Internal error: {exc}", exc_info=True)
 
-#### Return minimal info to client
+## Return minimal info to client
 
 error_id = str(uuid.uuid4())
 
@@ -409,3 +379,9 @@ Secure API design integrates security into every layer: validate and sanitize al
 **See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [CORS Security](</en/security/cors-security.html>), [Serverless Security](</en/security/serverless-security.html>)
 
 **See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [CORS Security](</en/security/cors-security.html>), [Serverless Security](</en/security/serverless-security.html>)
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Session Management Security](</en/security/session-management.html>), [API Authentication Methods](</en/security/api-authentication.html>)
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Session Management Security](</en/security/session-management.html>), [API Authentication Methods](</en/security/api-authentication.html>)
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Session Management Security](</en/security/session-management.html>), [API Authentication Methods](</en/security/api-authentication.html>)

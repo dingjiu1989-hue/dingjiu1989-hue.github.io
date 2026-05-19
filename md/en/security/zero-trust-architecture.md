@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/zero-trust-architecture.html
 
 # Zero Trust Architecture for Startups
 
-## Zero Trust Architecture for Startups
-
-### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
-#### Zero Trust Architecture for Startups
-
 The Zero Trust Mindset 
 
 Zero Trust Architecture (ZTA) is a security model based on the principle "never trust, always verify." Unlike the traditional perimeter-based approach where everything inside the corporate network is trusted by default, Zero Trust assumes that no user, device, or network is trustworthy until proven otherwise. 
@@ -56,9 +22,9 @@ In Zero Trust, identity replaces the network perimeter as the primary security b
 
 Identity-Aware Proxy 
 
-#### Google Identity-Aware Proxy (IAP) configuration
+## Google Identity-Aware Proxy (IAP) configuration
 
-#### All access to GKE clusters goes through IAP
+## All access to GKE clusters goes through IAP
 
 resource:
 
@@ -72,7 +38,7 @@ required_permissions:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- compute.instances.get
 
-#### Access levels based on context
+## Access levels based on context
 
 accessLevels:
 
@@ -100,13 +66,13 @@ def check_access(user, resource, context):
 
 """Continuous verification for each request."""
 
-#### Check identity
+## Check identity
 
 if not user.authenticated:
 
 return DENY
 
-#### Check device posture
+## Check device posture
 
 if not context.device.is_trusted:
 
@@ -120,13 +86,13 @@ if not context.device.has_disk_encryption:
 
 return DENY
 
-#### Check authorization
+## Check authorization
 
 if not has_permission(user, resource):
 
 return DENY
 
-#### Check context
+## Check context
 
 if context.location not in ALLOWED_REGIONS:
 
@@ -136,7 +102,7 @@ if context.time not in ALLOWED_HOURS.get(user.role, ALL):
 
 return DENY
 
-#### Log the decision
+## Log the decision
 
 audit.log_access_granted(user, resource, context)
 
@@ -232,7 +198,7 @@ port: 4318
 
 Service-to-Service mTLS 
 
-#### Istio PeerAuthentication for mTLS
+## Istio PeerAuthentication for mTLS
 
 apiVersion: security.istio.io/v1beta1
 
@@ -252,7 +218,7 @@ mode: STRICT
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
 
-#### Authorization policy
+## Authorization policy
 
 apiVersion: security.istio.io/v1beta1
 
@@ -302,7 +268,7 @@ def request_elevated_access(user_id, reason, duration_minutes=60):
 
 """Request temporary privileged access."""
 
-#### Record the request
+## Record the request
 
 ticket = create_access_ticket(
 
@@ -316,7 +282,7 @@ approved_by=current_approver
 
 )
 
-#### Grant time-bound IAM role
+## Grant time-bound IAM role
 
 sts = boto3.client('sts')
 
@@ -330,7 +296,7 @@ DurationSeconds=duration_minutes * 60
 
 )
 
-#### Schedule automatic revocation
+## Schedule automatic revocation
 
 schedule_revocation(ticket.id, duration_minutes)
 
@@ -404,3 +370,9 @@ Zero Trust replaces implicit trust with explicit, continuous verification. For s
 **See also:** [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
 
 **See also:** [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
+
+**See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>)
+
+**See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>)
+
+**See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>)

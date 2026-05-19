@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/saga-orchestration.html
 
 # Saga Orchestration Pattern
 
-## Saga Orchestration Pattern
-
-### Saga Orchestration Pattern
-
-#### Saga Orchestration Pattern
-
-#### Saga Orchestration Pattern
-
-#### Saga Orchestration Pattern
-
-#### Saga Orchestration Pattern
-
-#### Saga Orchestration Pattern
-
-#### Saga Orchestration Pattern
-
-#### Saga Orchestration Pattern
-
-#### Saga Orchestration Pattern
-
-#### Saga Orchestration Pattern
-
-#### Saga Orchestration Pattern
-
-#### Saga Orchestration Pattern
-
-#### Saga Orchestration Pattern
-
-#### Saga Orchestration Pattern
-
 Saga orchestration manages distributed transactions through a central coordinator that directs participating services through a sequence of local transactions. Unlike two-phase commit, sagas embrace eventual consistency — each step commits independently, and failures trigger compensating transactions to undo completed steps. The orchestrator provides clear workflow visibility, centralized error handling, and explicit state management. 
 
 The orchestrator is a dedicated service responsible for executing the saga. It maintains the workflow state, sends commands to participants, receives results, and decides the next action. The state must be persisted durably — if the orchestrator crashes, it must resume precisely where it left off. This typically involves storing the saga instance state (current step, completed steps, accumulated data) in a database or workflow engine. 
@@ -69,3 +39,9 @@ Saga orchestration is the preferred pattern when workflows involve many particip
 **See also:** [Orchestration Patterns](</en/architecture/orchestration-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
 
 **See also:** [Orchestration Patterns](</en/architecture/orchestration-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)

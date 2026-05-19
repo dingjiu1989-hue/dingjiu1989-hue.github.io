@@ -8,43 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/tech/microservices-communication.html
 
 # Microservices Communication Patterns
 
-## Microservices Communication Patterns
-
-### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
-#### Microservices Communication Patterns
-
 Microservices must communicate with each other to fulfill user requests. Choosing the right communication pattern is one of the most consequential architectural decisions. This guide covers the major patterns with their trade-offs and implementation strategies.
 
-#### Synchronous vs Asynchronous Communication
+## Synchronous vs Asynchronous Communication
 
 The foundational decision is whether services communicate synchronously (blocking, request-response) or asynchronously (event-driven, fire-and-forget).
 
@@ -52,11 +18,11 @@ The foundational decision is whether services communicate synchronously (blockin
 
 **Asynchronous patterns** decouple services and improve resilience. A service emits an event without knowing or caring which other services consume it. These suit high-volume, loosely coupled systems.
 
-#### Pattern 1: HTTP/REST
+## Pattern 1: HTTP/REST
 
 The simplest approach -- services expose RESTful HTTP endpoints:
 
-#### Service A calls Service B via REST
+## Service A calls Service B via REST
 
 import requests
 
@@ -80,7 +46,7 @@ return response.json()
 
 **Use when** : The operation must return immediately, the services have a clear caller-callee relationship, throughput requirements are moderate.
 
-#### Pattern 2: gRPC
+## Pattern 2: gRPC
 
 gRPC uses Protocol Buffers for efficient binary serialization:
 
@@ -104,7 +70,7 @@ repeated Order orders = 1;
 
 }
 
-#### Client code
+## Client code
 
 async with grpc.aio.insecure_channel("order-service:50051") as channel:
 
@@ -118,11 +84,11 @@ response = await stub.GetUserOrders(user_id="123")
 
 **Use when** : High throughput is required, services are within the same cluster, you need streaming capabilities.
 
-#### Pattern 3: Message Queues
+## Pattern 3: Message Queues
 
 Use a message broker for asynchronous communication:
 
-#### Order Service publishes an event
+## Order Service publishes an event
 
 import pika
 
@@ -150,7 +116,7 @@ body=json.dumps(order)
 
 connection.close()
 
-#### Notification Service consumes the event
+## Notification Service consumes the event
 
 def on_order_created(ch, method, properties, body):
 
@@ -166,11 +132,11 @@ channel.basic_consume(queue='order_created', on_message_callback=on_order_create
 
 **Use when** : Services are fully independent, you need to handle traffic spikes, multiple services react to the same event.
 
-#### Pattern 4: Event Sourcing and CQRS
+## Pattern 4: Event Sourcing and CQRS
 
 Event sourcing stores state changes as an append-only event log. CQRS separates read and write models:
 
-#### Event sourced aggregate
+## Event sourced aggregate
 
 class OrderAggregate:
 
@@ -206,7 +172,7 @@ self.changes.append({
 
 **Use when** : Audit requirements are strict, you need full event history, complex workflows benefit from event replay.
 
-#### Pattern 5: Saga Pattern
+## Pattern 5: Saga Pattern
 
 Sagas manage distributed transactions across services. Two approaches:
 
@@ -242,7 +208,7 @@ await self.shipping_service.schedule(order.id)
 
 **Consistency model** : Sagas provide eventual consistency, not ACID transactions. Use idempotent operations and retries.
 
-#### Choosing the Right Pattern
+## Choosing the Right Pattern
 
 | Pattern | Latency | Coupling | Resilience | Complexity |
 
@@ -258,13 +224,13 @@ await self.shipping_service.schedule(order.id)
 
 | Saga | Medium | Medium | Medium | High |
 
-#### Practical Guidance
+## Practical Guidance
 
 Start with HTTP/REST for simple services and migrate to gRPC when performance matters. Add message queues for cross-cutting concerns (notifications, audit, analytics). Use event sourcing only when you need an audit trail. Implement sagas for multi-service transactions.
 
 Most systems use a mix: synchronous calls for reads and queries, asynchronous events for updates and side effects. The key is ensuring that synchronous dependencies don't create a fragile system -- use timeouts, circuit breakers, and fallbacks to contain failures.
 
-#### Summary
+## Summary
 
 There is no single best microservices communication pattern. REST provides simplicity, gRPC delivers performance, message queues offer resilience, and event sourcing gives auditability. The right mix depends on your throughput requirements, consistency needs, and team expertise. Pattern choices should evolve with your system -- start simple with synchronous calls for straightforward operations and introduce asynchronous patterns when the coupling becomes a bottleneck.
 
@@ -279,3 +245,9 @@ There is no single best microservices communication pattern. REST provides simpl
 **See also:** [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>)
 
 **See also:** [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>)
+
+**See also:** [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)
+
+**See also:** [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)
+
+**See also:** [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)

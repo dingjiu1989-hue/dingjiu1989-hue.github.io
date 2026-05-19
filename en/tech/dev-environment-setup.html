@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/dev-environment-setup.png",
       "datePublished": "2025-12-02",
       "dateModified": "2026-05-05",
-      "wordCount": "1481",
+      "wordCount": "1431",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
@@ -99,25 +99,8 @@
       <h1 class="article-title">Developer Environment Setup Guide</h1>
       <div class="article-meta">Published 2025-12-02 · Last active 2026-05-05 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/dev-environment-setup.png" alt="Developer Environment Setup Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Developer Environment Setup Guide</h2>
-<h3>Developer Environment Setup Guide</h3>
-<h4>Developer Environment Setup Guide</h4>
-<h4>Developer Environment Setup Guide</h4>
-<h4>Developer Environment Setup Guide</h4>
-<h4>Developer Environment Setup Guide</h4>
-<h4>Developer Environment Setup Guide</h4>
-<h4>Developer Environment Setup Guide</h4>
-<h4>Developer Environment Setup Guide</h4>
-<h4>Developer Environment Setup Guide</h4>
-<h4>Developer Environment Setup Guide</h4>
-<h4>Developer Environment Setup Guide</h4>
-<h4>Developer Environment Setup Guide</h4>
-<h4>Developer Environment Setup Guide</h4>
-<h4>Developer Environment Setup Guide</h4>
-<h4>Developer Environment Setup Guide</h4>
-<h4>Developer Environment Setup Guide</h4>
-<p>A well-configured developer environment is the foundation of productivity. Investing time in setting up your shell, editor, and tooling pays dividends every single day. This guide covers a complete development environment setup that works across platforms.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/dev-environment-setup.png" alt="Developer Environment Setup Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Operating System Choice</h4>
+      <div class="article-body"><p>A well-configured developer environment is the foundation of productivity. Investing time in setting up your shell, editor, and tooling pays dividends every single day. This guide covers a complete development environment setup that works across platforms.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/dev-environment-setup.png" alt="Developer Environment Setup Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Operating System Choice</h2>
 <p>Choose an operating system that supports the tools you need:</p>
 <ul>
 <li>
@@ -131,13 +114,13 @@
 </li>
 </ul>
 <p>For most developers, macOS or WSL2 on Windows provides the best balance of tooling and usability.</p>
-<h4>Shell Configuration</h4>
+<h2>Shell Configuration</h2>
 <p>Modern shells improve daily productivity. Zsh with Oh My Zsh is the standard:</p>
-<h4>Install Zsh and Oh My Zsh</h4>
+<h2>Install Zsh and Oh My Zsh</h2>
 <p>sudo apt install zsh -y</p>
 <p>sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</p>
 <p>Essential Zsh plugins:</p>
-<h4>~/.zshrc</h4>
+<h2>~/.zshrc</h2>
 <p>plugins=(</p>
 <p>git</p>
 <p>docker</p>
@@ -151,7 +134,7 @@
 <p>command-not-found</p>
 <p>)</p>
 <p>For power users, consider Fish shell for autosuggestions out of the box, or Nushell for structured data pipelines.</p>
-<h4>Git Configuration</h4>
+<h2>Git Configuration</h2>
 <p>Set up a robust Git configuration:</p>
 <p>git config --global user.name "Your Name"</p>
 <p>git config --global user.email "your@email.com"</p>
@@ -166,7 +149,7 @@
 <p>git config --global alias.lg "log --oneline --graph --decorate --all"</p>
 <p>git config --global core.excludesfile ~/.gitignore_global</p>
 <p>A global <code>.gitignore</code> prevents committing common OS and editor files:</p>
-<h4>~/.gitignore_global</h4>
+<h2>~/.gitignore_global</h2>
 <p>.DS_Store</p>
 <p>Thumbs.db</p>
 <p>*.swp</p>
@@ -176,23 +159,23 @@
 <p>.idea/</p>
 <p>*.log</p>
 <p>.env.local</p>
-<h4>Package Managers</h4>
+<h2>Package Managers</h2>
 <p>Install language-specific package managers:</p>
-<h4>Node.js (via nvm for version management)</h4>
+<h2>Node.js (via nvm for version management)</h2>
 <p>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash</p>
 <p>nvm install --lts</p>
 <p>nvm use --lts</p>
-<h4>Python</h4>
+<h2>Python</h2>
 <p>sudo apt install python3 python3-pip python3-venv</p>
-<h4>Rust</h4>
+<h2>Rust</h2>
 <p>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</p>
-<h4>Go</h4>
+<h2>Go</h2>
 <p>wget https://go.dev/dl/go1.22.linux-amd64.tar.gz</p>
 <p>sudo tar -C /usr/local -xzf go1.22.linux-amd64.tar.gz</p>
 <p>Use version managers (<code>nvm</code>, <code>pyenv</code>, <code>rbenv</code>, <code>sdkman</code>) to manage multiple language versions.</p>
-<h4>Editor Setup</h4>
+<h2>Editor Setup</h2>
 <p>VS Code is the most popular editor for good reason. Essential extensions:</p>
-<h4>Install via CLI</h4>
+<h2>Install via CLI</h2>
 <p>code --install-extension ms-python.python</p>
 <p>code --install-extension dbaeumer.vscode-eslint</p>
 <p>code --install-extension esbenp.prettier-vscode</p>
@@ -215,15 +198,15 @@
 <p>"terminal.integrated.fontFamily": "JetBrains Mono",</p>
 <p>"git.autofetch": true</p>
 <p>}</p>
-<h4>Docker Setup</h4>
+<h2>Docker Setup</h2>
 <p>Docker is essential for local development consistency:</p>
-<h4>Ubuntu</h4>
+<h2>Ubuntu</h2>
 <p>sudo apt install docker.io docker-compose-v2</p>
 <p>sudo usermod -aG docker $USER # Log out and back in</p>
-<h4>macOS</h4>
+<h2>macOS</h2>
 <p>brew install --cask docker</p>
 <p>Create a development Docker Compose file for your project's dependencies:</p>
-<h4>dev-dependencies.yml</h4>
+<h2>dev-dependencies.yml</h2>
 <p>services:</p>
 <p>postgres:</p>
 <p>image: postgres:16-alpine</p>
@@ -238,13 +221,13 @@
 <p>ports: ["6379:6379"]</p>
 <p>volumes:</p>
 <p>pgdata:</p>
-<h4>Local HTTPS with mkcert</h4>
+<h2>Local HTTPS with mkcert</h2>
 <p>Test HTTPS locally:</p>
 <p>brew install mkcert # or sudo apt install mkcert</p>
 <p>mkcert -install</p>
 <p>mkcert localhost 127.0.0.1 ::1</p>
 <p>This creates locally trusted TLS certificates for development.</p>
-<h4>Dotfiles Management</h4>
+<h2>Dotfiles Management</h2>
 <p>Store your configuration in a Git repository:</p>
 <p>git init --bare $HOME/.dotfiles</p>
 <p>alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'</p>
@@ -256,7 +239,7 @@
 <p>git clone --bare https://github.com/you/dotfiles.git $HOME/.dotfiles</p>
 <p>alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'</p>
 <p>config checkout</p>
-<h4>Containerized Development with Dev Containers</h4>
+<h2>Containerized Development with Dev Containers</h2>
 <p>VS Code Dev Containers package the entire development environment:</p>
 <p>// .devcontainer/devcontainer.json</p>
 <p>{</p>
@@ -274,13 +257,16 @@
 <p>}</p>
 <p>}</p>
 <p>Every developer gets identical tools regardless of their host OS.</p>
-<h4>Summary</h4>
+<h2>Summary</h2>
 <p>A productive developer environment is personal, but some investments benefit everyone: a modern shell with autosuggestions, a well-configured editor with formatting on save, Docker for reproducible dependencies, and dotfiles versioned in Git. The initial setup takes an afternoon, but the time saved over a career is immense. Start with the basics -- shell, Git, editor, and Docker -- then add specialized tools as your workflow requires them.</p>
 <p><strong>See also:</strong> <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/ssh-security-hardening.html">SSH Security Hardening</a>.</p>
 <p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/ssh-security-hardening.html">SSH Security Hardening</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/ssh-security-hardening.html">SSH Security Hardening</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/ssh-security-hardening.html">SSH Security Hardening</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -292,7 +278,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/infrastructure-testing.html" class="related-card">Infrastructure Testing with Terratest and Other Tools</a><a href="/en/tech/nginx-configuration-guide.html" class="related-card">Nginx Configuration Guide</a><a href="/en/tech/reverse-proxy-guide.html" class="related-card">Reverse Proxy Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a></div>
+      <div class="related-grid"><a href="/en/tech/infrastructure-testing.html" class="related-card"><span class="related-card-title">Infrastructure Testing with Terratest and Other Tools</span><span class="related-card-desc">Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources</span></a><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="related-card-title">Nginx Configuration Guide</span><span class="related-card-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting</span></a><a href="/en/tech/reverse-proxy-guide.html" class="related-card"><span class="related-card-title">Reverse Proxy Guide</span><span class="related-card-desc">Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load </span></a><a href="/en/tech/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Principles and Practical Tools</span><span class="related-card-desc">Learn chaos engineering principles with Chaos Monkey, LitmusChaos, and Gremlin, covering steady-stat</span></a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card"><span class="related-card-title">Helm Charts: Kubernetes Package Management</span><span class="related-card-desc">A comprehensive guide to Helm chart structure, templates, values management, dependency handling, an</span></a><a href="/en/tech/monitoring-alerting-setup.html" class="related-card"><span class="related-card-title">Monitoring and Alerting Setup</span><span class="related-card-desc">Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerti</span></a></div>
     </section>
     
   </div>

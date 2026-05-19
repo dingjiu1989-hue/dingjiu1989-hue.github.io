@@ -8,47 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/tech/grafana-dashboards.html
 
 # Grafana Dashboards: Panels, Variables, Annotations, and Alerting
 
-## Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-
-#### Introduction
+## Introduction
 
 Grafana has become the industry standard for observability dashboards, providing unified visualization across metrics, logs, traces, and other data sources. Its modular architecture supports Prometheus, Elasticsearch, InfluxDB, Loki, Tempo, and dozens of other backends. Beyond visualization, Grafana has evolved into a full observability platform with alerting, anomaly detection, and incident management capabilities.
 
 This article covers Grafana dashboard design in detail: panel types, template variables, annotations, alerting, and provisioning.
 
-#### Panel Types and Visualization Options
+## Panel Types and Visualization Options
 
 Grafana offers a rich set of visualization panels. The time series panel is the workhorse for metric data, supporting line charts, bar charts, and area graphs with multiple display options. The state timeline panel visualizes state changes over time, ideal for showing service health or deployment status.
 
@@ -58,7 +24,7 @@ The geomap panel renders geographic data on interactive maps, useful for visuali
 
 Field overrides allow per-field customization without duplicating queries. Transformations transform query results without modifying the data source: merging series, calculating percentages, grouping by field values, and applying mathematical operations.
 
-#### Template Variables: Dynamic Dashboards
+## Template Variables: Dynamic Dashboards
 
 Template variables make dashboards interactive and reusable. Instead of hardcoding values, queries use variables that users can change via dropdowns at the top of the dashboard.
 
@@ -81,7 +47,7 @@ Variable types include:
 
 Chained (dependent) variables filter subsequent variable options based on previous selections, enabling drill-down navigation from datacenter to cluster to pod.
 
-#### Annotations: Events on Timelines
+## Annotations: Events on Timelines
 
 Annotations overlay events on graph panels, correlating infrastructure changes with metric behavior. Common annotation sources include deployment events from CI/CD pipelines, configuration changes, and incident timestamps.
 
@@ -89,7 +55,7 @@ Grafana supports annotation queries from data sources. For example, annotations 
 
 Using annotations effectively transforms dashboards from metric viewers into forensic tools for understanding what caused metric anomalies.
 
-#### Alerting in Grafana
+## Alerting in Grafana
 
 Grafana Alerting (introduced in Grafana 8 and unified in Grafana 9) provides a centralized alert system. Alerts evaluate queries on a schedule and route notifications through contact points.
 
@@ -113,7 +79,7 @@ severity: critical
 
 Contact points support PagerDuty, Slack, email, webhooks, OpsGenie, VictorOps, Teams, and custom integrations. Notification policies route alerts based on labels and grouping rules.
 
-#### Provisioning Dashboards as Code
+## Provisioning Dashboards as Code
 
 Grafana supports provisioning dashboards, data sources, alert rules, and contact points through YAML configuration files. This enables infrastructure-as-code workflows for observability.
 
@@ -135,7 +101,7 @@ path: /etc/grafana/provisioning/dashboards
 
 Dashboards are exported as JSON and version-controlled alongside application code. CI/CD pipelines deploy dashboard changes through Git workflows, enabling peer review and rollback.
 
-#### Conclusion
+## Conclusion
 
 Grafana's composable architecture — panels, variables, annotations, and alerting — makes it the central hub for observability. Provisioning dashboards as code ensures consistency across environments and enables GitOps workflows. As Grafana continues to add capabilities like explore mode, correlate metrics with logs and traces, and incident management, it solidifies its position as the primary interface for understanding system behavior.
 
@@ -150,3 +116,9 @@ Grafana's composable architecture — panels, variables, annotations, and alerti
 **See also:** [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>)
 
 **See also:** [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>)
+
+**See also:** [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability](</en/tech/prometheus-deep-dive.html>)
+
+**See also:** [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability](</en/tech/prometheus-deep-dive.html>)
+
+**See also:** [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability](</en/tech/prometheus-deep-dive.html>)

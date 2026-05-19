@@ -8,45 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/tools/infrastructure-scanners.html
 
 # Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
 
-## Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
-
-#### Introduction
+## Introduction
 
 Vulnerability scanning has become a mandatory component of secure software development lifecycles. With supply chain attacks on the rise and regulatory requirements like SLSA and Executive Order 14028 mandating software provenance, infrastructure scanners are no longer optional. Modern scanners analyze container images, filesystem dependencies, IaC configurations, and Kubernetes manifests for known vulnerabilities and misconfigurations.
 
 This article compares four leading open-source and commercial scanners: Trivy, Grype, Snyk, and OWASP Dependency-Check.
 
-#### Trivy: The All-in-One Scanner
+## Trivy: The All-in-One Scanner
 
 Aqua Security's Trivy has rapidly become the most popular open-source vulnerability scanner. It scans container images, filesystems, Git repositories, Kubernetes manifests, IaC templates, and SBOMs. Trivy covers vulnerabilities (CVEs), misconfigurations, secrets, and licenses.
 
@@ -64,7 +32,7 @@ Trivy supports multiple output formats: table, JSON, SARIF (for IDE integration)
 
 A key advantage is Trivy's IaC scanning capability, detecting misconfigurations in Terraform, CloudFormation, Dockerfile, and Kubernetes YAML. This makes Trivy a single tool for both application security and cloud security scanning.
 
-#### Grype: Anchore's Vulnerability Scanner
+## Grype: Anchore's Vulnerability Scanner
 
 Grype is Anchore's open-source vulnerability scanner, focusing on container images and filesystems. It uses GrypeDB, which aggregates vulnerability data from multiple sources including NVD, Red Hat, Debian, Alpine, Ubuntu, Amazon, and GitHub Security Advisories.
 
@@ -78,7 +46,7 @@ Grype supports YAML and JSON output formats and integrates with CI/CD pipelines 
 
 Grype's strength is its focused scope — it does one thing (vulnerability scanning) and does it well. The downside is that IaC scanning and secret detection require additional tools.
 
-#### Snyk: Developer-First Security Platform
+## Snyk: Developer-First Security Platform
 
 Snyk is a commercial security platform (with a free tier) that scans containers, open-source dependencies, IaC, and Kubernetes configurations. Its developer-first experience includes IDE plugins, PR checks, and CLI integration.
 
@@ -88,7 +56,7 @@ Snyk's IaC scanning covers Terraform, CloudFormation, and Kubernetes manifests, 
 
 The primary trade-off is cost. While open-source project scanning is free, organizational use requires paid licensing. The developer experience and reachability analysis justify the cost for organizations prioritizing developer adoption.
 
-#### OWASP Dependency-Check
+## OWASP Dependency-Check
 
 Dependency-Check is the OWASP Foundation's software composition analysis tool. It identifies known vulnerabilities in project dependencies by checking against the NVD (National Vulnerability Database).
 
@@ -98,7 +66,7 @@ dependency-check --scan /path/to/project --format JSON --out /reports
 
 Dependency-Check is particularly common in government and regulated industries where OWASP guidance is mandated. Its primary limitation is NVD-only coverage, which means slower vulnerability updates compared to Trivy or Grype that aggregate multiple databases.
 
-#### Comparison Summary
+## Comparison Summary
 
 | Feature | Trivy | Grype | Snyk | Dependency-Check |
 
@@ -118,7 +86,7 @@ Dependency-Check is particularly common in government and regulated industries w
 
 | CI/CD integration | Excellent | Good | Excellent | Good |
 
-#### Conclusion
+## Conclusion
 
 For most teams, Trivy offers the best balance of coverage, speed, and cost. Its all-in-one approach covers containers, filesystems, IaC, and secrets with a single tool. Grype is an excellent choice for teams already using Syft or preferring focused tools. Snyk excels in developer experience and enterprise workflows. Dependency-Check remains relevant in regulated environments requiring OWASP tooling. A pragmatic approach combines Trivy for comprehensive scanning with Snyk for developer workflow integration.
 
@@ -133,3 +101,9 @@ For most teams, Trivy offers the best balance of coverage, speed, and cost. Its 
 **See also:** [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
 
 **See also:** [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
+
+**See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces](</en/tools/devcontainer-setup.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
+
+**See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces](</en/tools/devcontainer-setup.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
+
+**See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces](</en/tools/devcontainer-setup.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)

@@ -112,4 +112,4 @@ Strategy| How| When
   
 **Bottom line:** Cache at the CDN first (biggest win, simplest). Add Redis when you have specific slow queries. Use Next.js built-in caching for data fetching. Invalidate on write, not on a timer, for user-facing data. See also: [Web Performance Tools](</en/tools/best-web-performance-tools.html>) and [Database Comparison](</en/compare/postgresql-vs-mysql-vs-sqlite.html>).
 
-**See also:** [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each](</en/tech/testing-strategies-web-apps.html>), [Node.js Streams: Complete Guide to Efficient Data Processing](</en/tech/nodejs-streams-guide.html>)
+**See also:** [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops](</en/tech/python-asyncio-guide.html>), [Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained](</en/tech/database-indexing-guide.html>)

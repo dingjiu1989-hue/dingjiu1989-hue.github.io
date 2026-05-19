@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/distributed-tracing-deep.
 
 # Distributed Tracing: Deep Dive
 
-## Distributed Tracing: Deep Dive
-
-### Distributed Tracing: Deep Dive
-
-#### Distributed Tracing: Deep Dive
-
-#### Distributed Tracing: Deep Dive
-
-#### Distributed Tracing: Deep Dive
-
-#### Distributed Tracing: Deep Dive
-
-#### Distributed Tracing: Deep Dive
-
-#### Distributed Tracing: Deep Dive
-
-#### Distributed Tracing: Deep Dive
-
-#### Distributed Tracing: Deep Dive
-
-#### Distributed Tracing: Deep Dive
-
-#### Distributed Tracing: Deep Dive
-
-#### Distributed Tracing: Deep Dive
-
-#### Distributed Tracing: Deep Dive
-
-#### Distributed Tracing: Deep Dive
-
 Distributed tracing reconstructs the path of a single request as it traverses multiple services, databases, and queues. Without tracing, understanding the performance of a distributed system requires correlating logs and metrics manually — a process that breaks down under complexity. Tracing provides an end-to-end view: which services were called, in what order, for how long, and whether they succeeded. 
 
 Trace context propagation is the mechanism that connects spans across service boundaries. When Service A calls Service B, it must pass trace context — trace ID, parent span ID, and any sampling decision — through the request. For HTTP, this is typically done through W3C Trace-Context headers (traceparent and tracestate). For messaging, the context is embedded in the message headers. For gRPC, it rides on metadata. The library or framework should propagate context automatically; manual propagation is error-prone and leads to broken traces. 
@@ -69,3 +39,9 @@ Correlation with logs completes the observability picture. Span IDs embedded in 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)
 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)
+
+**See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
+
+**See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
+
+**See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)

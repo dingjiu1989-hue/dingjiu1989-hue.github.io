@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/encryption-at-rest.html
 
 # Encryption at Rest Guide
 
-## Encryption at Rest Guide
-
-### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
-#### Encryption at Rest Guide
-
 What Is Encryption at Rest? 
 
 Encryption at rest protects data stored on disk or in databases by making it unreadable without the correct decryption key. If an attacker gains physical access to storage media or bypasses access controls, encrypted data remains confidential. This is a fundamental security control required by compliance frameworks including PCI DSS, HIPAA, SOC 2, and GDPR. 
@@ -54,7 +20,7 @@ Disk-Level Encryption
 
 LUKS (Linux Unified Key Setup) 
 
-#### Encrypt a disk with LUKS
+## Encrypt a disk with LUKS
 
 sudo cryptsetup luksFormat /dev/sdb1
 
@@ -66,11 +32,11 @@ sudo mount /dev/mapper/encrypted_volume /mnt/secure
 
 AWS EBS Encryption 
 
-#### Enable default EBS encryption
+## Enable default EBS encryption
 
 aws ec2 enable-ebs-encryption-by-default --region us-east-1
 
-#### Create an encrypted volume with a custom KMS key
+## Create an encrypted volume with a custom KMS key
 
 aws ec2 create-volume \
 
@@ -86,9 +52,9 @@ aws ec2 create-volume \
 
 GCE Persistent Disk Encryption 
 
-#### Google Cloud uses AES-256 by default (CSEK for customer-managed)
+## Google Cloud uses AES-256 by default (CSEK for customer-managed)
 
-#### Create and apply a CSEK
+## Create and apply a CSEK
 
 gcloud compute disks create secure-disk \
 
@@ -258,7 +224,7 @@ def decrypt_field(self, ciphertext):
 
 return self.cipher.decrypt(ciphertext).decode()
 
-#### Usage
+## Usage
 
 key = Fernet.generate_key() # Store this securely in a vault
 
@@ -274,7 +240,7 @@ user_data = {
 
 }
 
-#### Store user_data in database
+## Store user_data in database
 
 db.users.insert_one(user_data)
 
@@ -355,3 +321,9 @@ Encryption at rest is a non-negotiable security control for any application hand
 **See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
 
 **See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Secrets Management for Developers](</en/security/secrets-management.html>), [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Secrets Management for Developers](</en/security/secrets-management.html>), [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Secrets Management for Developers](</en/security/secrets-management.html>), [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>)

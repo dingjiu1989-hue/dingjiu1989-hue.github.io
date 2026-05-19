@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-network-policies.png",
       "datePublished": "2026-03-10",
       "dateModified": "2026-04-29",
-      "wordCount": "3612",
+      "wordCount": "3580",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,23 +99,7 @@
       <h1 class="article-title">Kubernetes Network Policies</h1>
       <div class="article-meta">Published 2026-03-10 · Last active 2026-04-29 · 240 views · 2 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-network-policies.png" alt="Kubernetes Network Policies" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Kubernetes Network Policies</h2>
-<h3>Kubernetes Network Policies</h3>
-<h4>Kubernetes Network Policies</h4>
-<h4>Kubernetes Network Policies</h4>
-<h4>Kubernetes Network Policies</h4>
-<h4>Kubernetes Network Policies</h4>
-<h4>Kubernetes Network Policies</h4>
-<h4>Kubernetes Network Policies</h4>
-<h4>Kubernetes Network Policies</h4>
-<h4>Kubernetes Network Policies</h4>
-<h4>Kubernetes Network Policies</h4>
-<h4>Kubernetes Network Policies</h4>
-<h4>Kubernetes Network Policies</h4>
-<h4>Kubernetes Network Policies</h4>
-<h4>Kubernetes Network Policies</h4>
-<h4>Kubernetes Network Policies</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-network-policies.png" alt="Kubernetes Network Policies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-network-policies.png" alt="Kubernetes Network Policies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Kubernetes by default allows all pod-to-pod communication — a flat network model that is convenient but insecure. Network policies provide pod-level firewalling, enabling micro-segmentation and zero-trust networking within the cluster. </p>
 <p>Understanding Network Policies </p>
 <p>A NetworkPolicy is a Kubernetes resource that specifies how groups of pods communicate with each other and with external endpoints. Policies are selector-based, namespace-scoped, and implemented by a Container Network Interface (CNI) plugin. </p>
@@ -163,7 +147,7 @@
 <p>Default Deny Policies </p>
 <p>Start with default deny policies and explicitly allow required traffic. This enforces least-privilege networking. </p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---</p>
-<h4>Default deny all ingress</h4>
+<h2>Default deny all ingress</h2>
 <p>apiVersion: networking.k8s.io/v1</p>
 <p>kind: NetworkPolicy</p>
 <p>metadata:</p>
@@ -173,7 +157,7 @@
 <p>policyTypes:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Ingress</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---</p>
-<h4>Default deny all egress</h4>
+<h2>Default deny all egress</h2>
 <p>apiVersion: networking.k8s.io/v1</p>
 <p>kind: NetworkPolicy</p>
 <p>metadata:</p>
@@ -184,7 +168,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Egress</p>
 <p>Cilium: eBPF-Based Networking </p>
 <p>Cilium leverages eBPF to provide network policies with identity-based security, HTTP-aware rules, and cluster mesh capabilities. </p>
-<h4>CiliumNetworkPolicy with HTTP-aware filtering</h4>
+<h2>CiliumNetworkPolicy with HTTP-aware filtering</h2>
 <p>apiVersion: cilium.io/v2</p>
 <p>kind: CiliumNetworkPolicy</p>
 <p>metadata:</p>
@@ -209,7 +193,7 @@
 <p>path: "/api/v1/orders"</p>
 <p>headers:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "X-API-Version: 2"</p>
-<h4>DNS-aware egress policy with Cilium</h4>
+<h2>DNS-aware egress policy with Cilium</h2>
 <p>apiVersion: cilium.io/v2</p>
 <p>kind: CiliumNetworkPolicy</p>
 <p>metadata:</p>
@@ -232,7 +216,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- matchPattern: "*"</p>
 <p>Calico: Policy-First Networking </p>
 <p>Calico provides a rich policy model with both Kubernetes-native and extended policy resources. </p>
-<h4>Calico network policy with advanced features</h4>
+<h2>Calico network policy with advanced features</h2>
 <p>apiVersion: projectcalico.org/v3</p>
 <p>kind: NetworkPolicy</p>
 <p>metadata:</p>
@@ -261,16 +245,16 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "*.payment-gateway.com"</p>
 <p>ports:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 443</p>
-<h4>Calico policy enforcement and troubleshooting</h4>
+<h2>Calico policy enforcement and troubleshooting</h2>
 <p>calicoctl get networkpolicy -n production</p>
 <p>calicoctl get workloadendpoint -n production</p>
 <p>calicoctl get profiles</p>
-<h4>Test connectivity</h4>
+<h2>Test connectivity</h2>
 <p>calicoctl policy test --pod production/payment-pod-xyz \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--to-pod production/database-pod-abc --port 5432</p>
 <p>Zero-Trust for Pods </p>
 <p>Zero-trust networking assumes no pod is inherently trusted. Every connection must be authenticated and authorized. </p>
-<h4>Zero-trust: identity-aware policy with SPIFFE</h4>
+<h2>Zero-trust: identity-aware policy with SPIFFE</h2>
 <p>apiVersion: spiffe.io/v1beta1</p>
 <p>kind: SPIREIdentity</p>
 <p>metadata:</p>
@@ -299,15 +283,15 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- protocol: TCP</p>
 <p>port: 8443</p>
 <p>Policy Testing and Validation </p>
-<h4>Test network policies before deployment</h4>
+<h2>Test network policies before deployment</h2>
 <p>netcheck \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--kubeconfig ~/.kube/config \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--namespace production \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--test-policy policy.yaml \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--output detailed</p>
-<h4>Monitor policy decisions</h4>
+<h2>Monitor policy decisions</h2>
 <p>cilium monitor -v --type drop | grep policy</p>
-<h4>Policy audit mode (log without enforcing)</h4>
+<h2>Policy audit mode (log without enforcing)</h2>
 <p>kubectl annotate ns production "projectcalico.org/policy-audit-mode=enabled"</p>
 <p>Conclusion </p>
 <p>Kubernetes network policies are essential for cluster security. Start with default-deny, use namespace isolation, leverage CNI-specific features like HTTP-aware filtering with Cilium or service-account policies with Calico, and adopt zero-trust principles where every connection is explicitly authorized. Always test policies in audit mode before enforcement.</p>
@@ -315,7 +299,10 @@
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
-<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -327,7 +314,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/cloud-iam.html" class="related-card">Cloud IAM Deep Dive</a><a href="/en/security/zero-trust-networking.html" class="related-card">Zero Trust Networking: Architecture and Implementation Guide</a><a href="/en/security/audit-logging.html" class="related-card">Audit Logging Best Practices</a><a href="/en/security/cors-security.html" class="related-card">CORS Security</a></div>
+      <div class="related-grid"><a href="/en/security/cloud-iam.html" class="related-card"><span class="related-card-title">Cloud IAM Deep Dive</span><span class="related-card-desc">In-depth guide to cloud IAM covering AWS IAM policies, GCP IAM roles, least privilege principles, an</span></a><a href="/en/security/zero-trust-networking.html" class="related-card"><span class="related-card-title">Zero Trust Networking: Architecture and Implementation Guide</span><span class="related-card-desc">Implement zero trust networking: micro-segmentation, identity-based access, and encrypted communicat</span></a><a href="/en/security/audit-logging.html" class="related-card"><span class="related-card-title">Audit Logging Best Practices</span><span class="related-card-desc">Guide to audit logging covering immutable logs, log integrity verification, centralized logging arch</span></a><a href="/en/security/cors-security.html" class="related-card"><span class="related-card-title">CORS Security</span><span class="related-card-desc">In-depth guide to CORS security covering proper origin validation, preflight handling, common miscon</span></a><a href="/en/security/input-validation.html" class="related-card"><span class="related-card-title">Input Validation Deep Dive</span><span class="related-card-desc">In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniqu</span></a><a href="/en/security/malware-analysis.html" class="related-card"><span class="related-card-title">Malware Analysis Fundamentals</span><span class="related-card-desc">Foundational guide to malware analysis covering static and dynamic analysis techniques, sandboxing, </span></a></div>
     </section>
     
   </div>

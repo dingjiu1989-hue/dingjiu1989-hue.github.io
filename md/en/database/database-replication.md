@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-replication.html
 
 # Database Replication Patterns
 
-## Database Replication Patterns
-
-### Database Replication Patterns
-
-#### Database Replication Patterns
-
-#### Database Replication Patterns
-
-#### Database Replication Patterns
-
-#### Database Replication Patterns
-
-#### Database Replication Patterns
-
-#### Database Replication Patterns
-
-#### Database Replication Patterns
-
-#### Database Replication Patterns
-
-#### Database Replication Patterns
-
-#### Database Replication Patterns
-
-#### Database Replication Patterns
-
-#### Database Replication Patterns
-
-#### Database Replication Patterns
-
 Replication Fundamentals 
 
 Database replication copies data from one server to another for redundancy, read scaling, and disaster recovery. 
@@ -115,3 +85,9 @@ Choose synchronous for zero data loss, asynchronous for performance. Monitor rep
 **See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
 
 **See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)

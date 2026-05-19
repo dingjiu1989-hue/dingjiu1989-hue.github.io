@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration.png",
       "datePublished": "2025-12-22",
       "dateModified": "2026-05-19",
-      "wordCount": "1622",
+      "wordCount": "1582",
       "keywords": "Database, SQL",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "SQL"}],
       "inLanguage": "en",
@@ -98,22 +98,7 @@
       <h1 class="article-title">Database Migration Tools and Strategies</h1>
       <div class="article-meta">Published 2025-12-22 · Last active 2026-05-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration.png" alt="Database Migration Tools and Strategies" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Database Migration Tools and Strategies</h2>
-<h3>Database Migration Tools and Strategies</h3>
-<h4>Database Migration Tools and Strategies</h4>
-<h4>Database Migration Tools and Strategies</h4>
-<h4>Database Migration Tools and Strategies</h4>
-<h4>Database Migration Tools and Strategies</h4>
-<h4>Database Migration Tools and Strategies</h4>
-<h4>Database Migration Tools and Strategies</h4>
-<h4>Database Migration Tools and Strategies</h4>
-<h4>Database Migration Tools and Strategies</h4>
-<h4>Database Migration Tools and Strategies</h4>
-<h4>Database Migration Tools and Strategies</h4>
-<h4>Database Migration Tools and Strategies</h4>
-<h4>Database Migration Tools and Strategies</h4>
-<h4>Database Migration Tools and Strategies</h4>
-<p>Why Database Migrations Matter </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration.png" alt="Database Migration Tools and Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Why Database Migrations Matter </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration.png" alt="Database Migration Tools and Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Database migrations are how you version-control your schema changes. Without a migration system, schema changes are applied manually, untracked, and unrepeatable. Migrations ensure that every environment (dev, staging, production) has the same schema, changes are auditable, and rollbacks are possible. </p>
 <p>Migration Tools by Language </p>
 <p>| Language | Tool | Pros | |----------|------|------| | Python | Alembic (SQLAlchemy) | Auto-generation, async support | | Node.js | Knex.js | Transactional migrations, seed support | | Ruby | ActiveRecord Migrations | Simple DSL, mature ecosystem | | Java | Flyway, Liquibase | Repeatable migrations, CI/CD friendly | | Go | golang-migrate, Goose | No-dependency binaries | | Rust | Diesel | Type-safe, compile-time checking | </p>
@@ -121,15 +106,15 @@
 <p>Setup </p>
 <p>pip install alembic</p>
 <p>alembic init alembic</p>
-<h4>alembic/env.py</h4>
+<h2>alembic/env.py</h2>
 <p>from myapp.models import Base</p>
 <p>target_metadata = Base.metadata</p>
 <p>Creating Migrations </p>
-<h4>Auto-generate migration</h4>
+<h2>Auto-generate migration</h2>
 <p>alembic revision --autogenerate -m "add user roles table"</p>
-<h4>Apply migrations</h4>
+<h2>Apply migrations</h2>
 <p>alembic upgrade head</p>
-<h4>Rollback</h4>
+<h2>Rollback</h2>
 <p>alembic downgrade -1</p>
 <p>Migration File </p>
 <p>"""add user roles table</p>
@@ -153,15 +138,15 @@
 <p>op.drop_index('ix_user_roles_user_id')</p>
 <p>op.drop_table('user_roles')</p>
 <p>Flyway (Java) </p>
-<h4>Migration naming convention:</h4>
-<h4>V1__create_users.sql</h4>
-<h4>V2__add_email_column.sql</h4>
-<h4>V3__create_orders_table.sql</h4>
-<h4>Apply migrations</h4>
+<h2>Migration naming convention:</h2>
+<h2>V1__create_users.sql</h2>
+<h2>V2__add_email_column.sql</h2>
+<h2>V3__create_orders_table.sql</h2>
+<h2>Apply migrations</h2>
 <p>flyway migrate</p>
-<h4>Check status</h4>
+<h2>Check status</h2>
 <p>flyway info</p>
-<h4>Repair checksums</h4>
+<h2>Repair checksums</h2>
 <p>flyway repair</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- V2__add_email_column.sql</p>
 <p>ALTER TABLE users ADD COLUMN email VARCHAR(255) UNIQUE;</p>
@@ -184,8 +169,8 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Backfill existing rows</p>
 <p>UPDATE users SET email_new = email WHERE email_new IS NULL;</p>
 <p><strong>Phase 2: Migrate</strong></p>
-<h4>Application reads from new column, still writes to both</h4>
-<h4>Deploy application update</h4>
+<h2>Application reads from new column, still writes to both</h2>
+<h2>Deploy application update</h2>
 <p><strong>Phase 3: Contract</strong></p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Stop writing to old column</p>
 <p>ALTER TABLE users DROP COLUMN email;</p>
@@ -217,7 +202,7 @@
 <p>offset += batch_size</p>
 <p>print(f"Updated {offset} rows...")</p>
 <p>Online Schema Change (pt-online-schema-change) </p>
-<h4>For MySQL without downtime</h4>
+<h2>For MySQL without downtime</h2>
 <p>pt-online-schema-change \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--alter "ADD COLUMN email VARCHAR(255)" \</p>
 <p>D=database,t=users \</p>
@@ -230,12 +215,12 @@
 <p>def downgrade():</p>
 <p>op.drop_column('users', 'email')</p>
 <p>Test Migrations </p>
-<h4>Test upgrade and downgrade</h4>
+<h2>Test upgrade and downgrade</h2>
 <p>alembic upgrade head</p>
 <p>alembic downgrade base</p>
 <p>alembic upgrade head</p>
 <p>CI/CD Integration </p>
-<h4>.github/workflows/migrate.yml</h4>
+<h2>.github/workflows/migrate.yml</h2>
 <p>jobs:</p>
 <p>migrate:</p>
 <p>runs-on: ubuntu-latest</p>
@@ -257,7 +242,10 @@
 <p><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a>, <a href="/en/database/database-normalization.html">Database Normalization Explained</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a>, <a href="/en/database/database-normalization.html">Database Normalization Explained</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a>, <a href="/en/database/database-normalization.html">Database Normalization Explained</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -269,7 +257,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-migration-tools.html" class="related-card">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a><a href="/en/database/database-testing.html" class="related-card">Database Testing Strategies for Developers</a><a href="/en/database/database-backup-strategies.html" class="related-card">Database Backup and Recovery Strategies</a><a href="/en/database/database-migration-strategies.html" class="related-card">Database Migration Strategies</a></div>
+      <div class="related-grid"><a href="/en/database/database-migration-tools.html" class="related-card"><span class="related-card-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="related-card-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategi</span></a><a href="/en/database/database-testing.html" class="related-card"><span class="related-card-title">Database Testing Strategies for Developers</span><span class="related-card-desc">Database testing with in-memory DBs for unit tests, Testcontainers for integration tests, migration </span></a><a href="/en/database/database-backup-strategies.html" class="related-card"><span class="related-card-title">Database Backup and Recovery Strategies</span><span class="related-card-desc">Learn database backup strategies including full, incremental, and differential backups, point-in-tim</span></a><a href="/en/database/database-migration-strategies.html" class="related-card"><span class="related-card-title">Database Migration Strategies</span><span class="related-card-desc">Zero-downtime database migration strategies with rollback planning, testing, and CI/CD integration.</span></a><a href="/en/database/database-schema-migration-strategies.html" class="related-card"><span class="related-card-title">Database Schema Migration: Version Control, Rollback, and Zero-Downtime</span><span class="related-card-desc">Database migration strategies for production: version-controlled schemas, rollback planning, and zer</span></a><a href="/en/database/data-warehousing.html" class="related-card"><span class="related-card-title">Data Warehousing Concepts and Modern Tools</span><span class="related-card-desc">Understand star schema vs snowflake, ETL/ELT, and modern data warehouses including Snowflake, BigQue</span></a></div>
     </section>
     
   </div>

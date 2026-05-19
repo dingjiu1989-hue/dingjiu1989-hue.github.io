@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/data-classification.html
 
 # Data Classification
 
-## Data Classification
-
-### Data Classification
-
-#### Data Classification
-
-#### Data Classification
-
-#### Data Classification
-
-#### Data Classification
-
-#### Data Classification
-
-#### Data Classification
-
-#### Data Classification
-
-#### Data Classification
-
-#### Data Classification
-
-#### Data Classification
-
-#### Data Classification
-
-#### Data Classification
-
-#### Data Classification
-
 Why Classify Data? 
 
 Data classification ensures sensitive information receives appropriate protection. Without classification, you either over-protect everything (wasting resources) or under-protect critical data (inviting breaches). 
@@ -104,7 +74,7 @@ Handling Procedures
 
 Define procedures for each classification level: 
 
-#### handling-policies.yaml
+## handling-policies.yaml
 
 restricted:
 
@@ -195,3 +165,9 @@ Data classification is foundational to information security. Automate where poss
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
+
+**See also:** [Compliance Automation](</en/security/compliance-automation.html>), [Database Encryption](</en/security/database-encryption.html>), [DDoS Mitigation](</en/security/ddos-mitigation.html>)
+
+**See also:** [Compliance Automation](</en/security/compliance-automation.html>), [Database Encryption](</en/security/database-encryption.html>), [DDoS Mitigation](</en/security/ddos-mitigation.html>)
+
+**See also:** [Compliance Automation](</en/security/compliance-automation.html>), [Database Encryption](</en/security/database-encryption.html>), [DDoS Mitigation](</en/security/ddos-mitigation.html>)

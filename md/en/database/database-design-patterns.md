@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-design-patterns.html
 
 # Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
 
-## Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
-### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
-#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
-#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
-#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
-#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
-#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
-#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
-#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
-#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
-#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
-#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
-#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
-#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
-#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
-
 Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance 
 
 Design patterns provide reusable solutions to common database access problems. This article covers patterns that help decouple business logic from database access, manage transactions, and model inheritance. 
@@ -247,7 +217,7 @@ repo.delete(obj.id)
 
 def _get_repo(self, obj_type):
 
-#### Repository registry determines which repository maps to which type
+## Repository registry determines which repository maps to which type
 
 pass
 
@@ -537,3 +507,9 @@ These patterns are not prescriptive rules but tools. Use them when they simplify
 **See also:** [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
 
 **See also:** [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>), [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>), [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>), [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>)

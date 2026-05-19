@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/security-engineer-interview.h
 
 # Security Engineer Interview
 
-## Security Engineer Interview
-
-### Security Engineer Interview
-
-#### Security Engineer Interview
-
-#### Security Engineer Interview
-
-#### Security Engineer Interview
-
-#### Security Engineer Interview
-
-#### Security Engineer Interview
-
-#### Security Engineer Interview
-
-#### Security Engineer Interview
-
-#### Security Engineer Interview
-
-#### Security Engineer Interview
-
-#### Security Engineer Interview
-
-#### Security Engineer Interview
-
-#### Security Engineer Interview
-
-#### Security Engineer Interview
-
 Interview Structure 
 
 Security engineer interviews typically cover: security fundamentals, hands-on exercises, system design, and behavioral scenarios. 
@@ -48,7 +18,7 @@ Cryptography
 
 Understand encryption algorithms and their properties: 
 
-#### Interview question: Implement a secure password hasher
+## Interview question: Implement a secure password hasher
 
 import hashlib
 
@@ -64,19 +34,19 @@ salt = bcrypt.gensalt(rounds=12)
 
 return bcrypt.hashpw(password.encode(), salt)
 
-#### Follow-up: Why not SHA-256?
+## Follow-up: Why not SHA-256?
 
-#### Answer: SHA-256 is fast, making brute-force feasible.
+## Answer: SHA-256 is fast, making brute-force feasible.
 
-#### bcrypt/argon2 are deliberately slow and include salt.
+## bcrypt/argon2 are deliberately slow and include salt.
 
-#### Follow-up: What about MD5?
+## Follow-up: What about MD5?
 
-#### Answer: MD5 is broken for collision resistance. Never use.
+## Answer: MD5 is broken for collision resistance. Never use.
 
 Network Security 
 
-#### Interview question: Implement a simple port scanner
+## Interview question: Implement a simple port scanner
 
 import socket
 
@@ -92,17 +62,17 @@ sock.close()
 
 return result == 0
 
-#### Follow-up: How would you scan without being detected?
+## Follow-up: How would you scan without being detected?
 
-#### Answer: Use SYN scan (stealth scan), randomize port order,
+## Answer: Use SYN scan (stealth scan), randomize port order,
 
-#### and introduce delays between probes.
+## and introduce delays between probes.
 
 System Design Questions 
 
 Design a Secure Authentication System 
 
-#### High-level design
+## High-level design
 
 class SecureAuthSystem:
 
@@ -174,7 +144,7 @@ Key hierarchy:
 
 Practical Exercise 
 
-#### Exercise: Security incident investigation
+## Exercise: Security incident investigation
 
 incident_logs = [
 
@@ -196,25 +166,25 @@ incident_logs = [
 
 ]
 
-#### Questions:
+## Questions:
 
-#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What indicators of compromise do you see?
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What indicators of compromise do you see?
 
-#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What is the likely attack vector?
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What is the likely attack vector?
 
-#### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What immediate containment actions?
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What immediate containment actions?
 
-#### 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What forensic data would you collect?
+## 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What forensic data would you collect?
 
-#### Analysis:
+## Analysis:
 
-#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- IP change: 192.168.1.1 (corp) -> 10.0.0.5 (internal)
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- IP change: 192.168.1.1 (corp) -> 10.0.0.5 (internal)
 
-#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Brute force pattern: 4 failed logins
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Brute force pattern: 4 failed logins
 
-#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Suspicious actions after login: data export + log deletion
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Suspicious actions after login: data export + log deletion
 
-#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Likely: credential stuffing -> account takeover -> data exfiltration
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Likely: credential stuffing -> account takeover -> data exfiltration
 
 Behavioral Questions 
 
@@ -248,3 +218,9 @@ Study these areas in depth: OWASP Top 10, cloud security (AWS/GCP/Azure), networ
 **See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Microservice Security](</en/security/microservice-security.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
 
 **See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Microservice Security](</en/security/microservice-security.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
+
+**See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)

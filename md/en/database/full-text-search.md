@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/full-text-search.html
 
 # Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
 
-## Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
-### Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
-#### Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
-#### Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
-#### Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
-#### Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
-#### Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
-#### Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
-#### Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
-#### Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
-#### Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
-#### Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
-#### Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
-#### Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
-#### Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-
 The Need for Full-Text Search 
 
 Standard database `LIKE` queries do not scale. They require full table scans, do not understand relevance ranking, and cannot handle typo tolerance, stemming, or faceted search. Dedicated search engines solve these problems with inverted indexes, relevance scoring, and specialized query parsing. 
@@ -250,7 +220,7 @@ for hit in results['hits']['hits']:
 
 print(f"{hit['_score']:.2f}: {hit['_source']['title']}")
 
-#### Facet results
+## Facet results
 
 for bucket in results['aggregations']['by_tag']['buckets']:
 
@@ -332,7 +302,7 @@ Typesense is a fast, typo-tolerant search engine written in C++.
 
 Setup 
 
-#### docker-compose.yml
+## docker-compose.yml
 
 version: '3'
 
@@ -368,7 +338,7 @@ client = typesense.Client({
 
 })
 
-#### Create collection (schema)
+## Create collection (schema)
 
 client.collections.create({
 
@@ -392,7 +362,7 @@ client.collections.create({
 
 })
 
-#### Index documents
+## Index documents
 
 client.collections['articles'].documents.create({
 
@@ -410,7 +380,7 @@ client.collections['articles'].documents.create({
 
 })
 
-#### Search
+## Search
 
 results = client.collections['articles'].documents.search({
 
@@ -447,3 +417,9 @@ Full-text search engines are essential for applications that need more than simp
 **See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>)
 
 **See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>)
+
+**See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Data Consistency Models Explained](</en/database/data-consistency-models.html>)
+
+**See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Data Consistency Models Explained](</en/database/data-consistency-models.html>)
+
+**See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Data Consistency Models Explained](</en/database/data-consistency-models.html>)

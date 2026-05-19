@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-security.png",
       "datePublished": "2026-03-18",
       "dateModified": "2026-04-05",
-      "wordCount": "1310",
+      "wordCount": "1299",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">Kubernetes Security</h1>
       <div class="article-meta">Published 2026-03-18 · Last active 2026-04-05 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-security.png" alt="Kubernetes Security" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Kubernetes Security</h2>
-<h3>Kubernetes Security</h3>
-<h4>Kubernetes Security</h4>
-<h4>Kubernetes Security</h4>
-<h4>Kubernetes Security</h4>
-<h4>Kubernetes Security</h4>
-<h4>Kubernetes Security</h4>
-<h4>Kubernetes Security</h4>
-<h4>Kubernetes Security</h4>
-<h4>Kubernetes Security</h4>
-<h4>Kubernetes Security</h4>
-<h4>Kubernetes Security</h4>
-<h4>Kubernetes Security</h4>
-<h4>Kubernetes Security</h4>
-<h4>Kubernetes Security</h4>
-<p>Kubernetes Security Challenges </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-security.png" alt="Kubernetes Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Kubernetes Security Challenges </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-security.png" alt="Kubernetes Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Kubernetes introduces a large attack surface: the API server, etcd, kubelets, and container runtime all need protection. </p>
 <p>RBAC Configuration </p>
 <p>Implement least-privilege RBAC: </p>
@@ -151,7 +136,7 @@
 <p>verbs: ["get"]</p>
 <p>Pod Security Standards </p>
 <p>Enforce Pod Security Standards with admission controllers: </p>
-<h4>Pod Security Admission</h4>
+<h2>Pod Security Admission</h2>
 <p>apiVersion: pods-security.admission.config.k8s.io/v1</p>
 <p>kind: PodSecurityConfiguration</p>
 <p>defaults:</p>
@@ -163,7 +148,7 @@
 <p>warn-version: "latest"</p>
 <p>exemptions:</p>
 <p>namespaces: ["kube-system", "kube-public"]</p>
-<h4>Pod Security Standards - Restricted level</h4>
+<h2>Pod Security Standards - Restricted level</h2>
 <p>apiVersion: v1</p>
 <p>kind: Pod</p>
 <p>metadata:</p>
@@ -217,7 +202,7 @@
 <p>port: 5432</p>
 <p>Audit Logging </p>
 <p>Enable and monitor audit logs: </p>
-<h4>audit-policy.yaml</h4>
+<h2>audit-policy.yaml</h2>
 <p>apiVersion: audit.k8s.io/v1</p>
 <p>kind: Policy</p>
 <p>rules:</p>
@@ -233,14 +218,14 @@
 <p>verbs: ["watch"]</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: None</p>
 <p>requestSources: ["controller"]</p>
-<h4>Audit log analyzer</h4>
+<h2>Audit log analyzer</h2>
 <p>import json</p>
 <p>from collections import Counter</p>
 <p>def analyze_audit_logs(log_lines):</p>
 <p>suspicious_activities = []</p>
 <p>for line in log_lines:</p>
 <p>event = json.loads(line)</p>
-<h4>Detect secret access patterns</h4>
+<h2>Detect secret access patterns</h2>
 <p>if event.get("objectRef", {}).get("resource") == "secrets":</p>
 <p>if event.get("verb") in ["get", "list"]:</p>
 <p>suspicious_activities.append({</p>
@@ -248,7 +233,7 @@
 <p>"user": event.get("user", {}).get("username"),</p>
 <p>"count": 1</p>
 <p>})</p>
-<h4>Detect RBAC changes</h4>
+<h2>Detect RBAC changes</h2>
 <p>if event.get("objectRef", {}).get("apiGroup") == "rbac.authorization.k8s.io":</p>
 <p>suspicious_activities.append({</p>
 <p>"type": "rbac_change",</p>
@@ -262,7 +247,10 @@
 <p><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/iam-audit.html">IAM Audit</a>, <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/iam-audit.html">IAM Audit</a>, <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/iam-audit.html">IAM Audit</a>, <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -274,7 +262,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/audit-logging.html" class="related-card">Audit Logging Best Practices</a><a href="/en/security/kubernetes-network-policies.html" class="related-card">Kubernetes Network Policies</a><a href="/en/security/cloud-network-security.html" class="related-card">Cloud Network Security</a><a href="/en/security/container-runtime-security.html" class="related-card">Container Runtime Security</a></div>
+      <div class="related-grid"><a href="/en/security/audit-logging.html" class="related-card"><span class="related-card-title">Audit Logging Best Practices</span><span class="related-card-desc">Guide to audit logging covering immutable logs, log integrity verification, centralized logging arch</span></a><a href="/en/security/kubernetes-network-policies.html" class="related-card"><span class="related-card-title">Kubernetes Network Policies</span><span class="related-card-desc">In-depth guide to Kubernetes network policies covering ingress/egress rules, Cilium, Calico, and zer</span></a><a href="/en/security/cloud-network-security.html" class="related-card"><span class="related-card-title">Cloud Network Security</span><span class="related-card-desc">Designing cloud network security with security groups, NACLs, firewall rules, and traffic inspection</span></a><a href="/en/security/container-runtime-security.html" class="related-card"><span class="related-card-title">Container Runtime Security</span><span class="related-card-desc">Securing container runtime with seccomp, AppArmor, SELinux, Falco, and runtime threat detection.</span></a><a href="/en/security/helm-security.html" class="related-card"><span class="related-card-title">Helm Security</span><span class="related-card-desc">Securing Helm deployments with chart signing, provenance verification, secrets management, and best </span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="related-card-title">Container Image Security</span><span class="related-card-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability sc</span></a></div>
     </section>
     
   </div>

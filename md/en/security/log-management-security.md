@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/log-management-security.html
 
 # Security Log Management
 
-## Security Log Management
-
-### Security Log Management
-
-#### Security Log Management
-
-#### Security Log Management
-
-#### Security Log Management
-
-#### Security Log Management
-
-#### Security Log Management
-
-#### Security Log Management
-
-#### Security Log Management
-
-#### Security Log Management
-
-#### Security Log Management
-
-#### Security Log Management
-
-#### Security Log Management
-
-#### Security Log Management
-
-#### Security Log Management
-
-#### Security Log Management
-
-#### Security Log Management
-
 Why Log Management Matters for Security 
 
 Logs are the definitive record of what happened in your system. When a security incident occurs, logs provide the evidence needed to determine the attack vector, scope of compromise, and affected data. Without proper log management, incident response becomes guesswork, and forensic analysis is impossible. 
@@ -137,7 +103,7 @@ Centralized Log Aggregation
 
 Distribute log collection agents and centralize storage: 
 
-#### Filebeat configuration
+## Filebeat configuration
 
 filebeat.inputs:
 
@@ -173,7 +139,7 @@ SIEM Integration
 
 A Security Information and Event Management (SIEM) system correlates logs from multiple sources to detect attacks: 
 
-#### Example: Custom SIEM rule for brute force detection
+## Example: Custom SIEM rule for brute force detection
 
 from datetime import datetime, timedelta
 
@@ -241,13 +207,13 @@ self.previous_hash = self.load_last_hash()
 
 def secure_log(self, event):
 
-#### Add chained hash for tamper detection
+## Add chained hash for tamper detection
 
 event['_prev_hash'] = self.previous_hash
 
 event['_timestamp'] = datetime.utcnow().isoformat()
 
-#### Create HMAC signature
+## Create HMAC signature
 
 payload = json.dumps(event, sort_keys=True)
 
@@ -265,7 +231,7 @@ event['_signature'] = signature
 
 self.previous_hash = signature
 
-#### Write to append-only log
+## Write to append-only log
 
 with open('/var/log/secure/audit.log', 'a') as f:
 
@@ -358,3 +324,9 @@ Implement structured JSON logging for all security-relevant events, centralize l
 **See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Container Security Best Practices](</en/security/container-security.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
 
 **See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Container Security Best Practices](</en/security/container-security.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
+
+**See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
+
+**See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
+
+**See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)

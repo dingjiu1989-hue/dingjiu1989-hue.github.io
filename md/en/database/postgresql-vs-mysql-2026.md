@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/postgresql-vs-mysql-2026.html
 
 # PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
 
-## PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
-### PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
-#### PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
-#### PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
-#### PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
-#### PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
-#### PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
-#### PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
-#### PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
-#### PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
-#### PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
-#### PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
-#### PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
-#### PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
-#### PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
-
 Introduction 
 
 Choosing the right database is one of the most consequential decisions you will make as a developer. Pick wrong and you are looking at painful migrations, skyrocketing cloud bills, or nights spent debugging replication lag. Pick right and your database quietly scales for years without demanding attention. 
@@ -435,11 +405,11 @@ PostgreSQL to MySQL
 
 **Tool:** `pg2mysql` CLI converter handles 80% of schema conversion automatically. For data, dump CSV from PostgreSQL and load into MySQL. 
 
-#### Export from PostgreSQL
+## Export from PostgreSQL
 
 psql -c "\COPY (SELECT * FROM users) TO 'users.csv' CSV HEADER"
 
-#### Import to MySQL
+## Import to MySQL
 
 mysql -e "LOAD DATA INFILE 'users.csv' INTO TABLE users FIELDS TERMINATED BY ',' IGNORE 1 ROWS"
 
@@ -563,3 +533,9 @@ _Benchmarks conducted May 2026 on AWS c6i.2xlarge instances with gp3 volumes. Re
 **See also:** [PostgreSQL vs MySQL vs SQLite (2026): Which Database Should You Use?](</en/compare/postgresql-vs-mysql-vs-sqlite.html>), [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared](</en/compare/duckdb-vs-sqlite.html>)
 
 **See also:** [PostgreSQL vs MySQL vs SQLite (2026): Which Database Should You Use?](</en/compare/postgresql-vs-mysql-vs-sqlite.html>), [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared](</en/compare/duckdb-vs-sqlite.html>)
+
+**See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
+
+**See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
+
+**See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)

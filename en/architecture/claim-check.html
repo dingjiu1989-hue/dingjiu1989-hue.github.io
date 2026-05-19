@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png",
       "datePublished": "2026-05-02",
       "dateModified": "2026-05-02",
-      "wordCount": "1111",
+      "wordCount": "1133",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,22 +96,7 @@
       <h1 class="article-title">Claim Check Pattern</h1>
       <div class="article-meta">Published 2026-05-02 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Claim Check Pattern</h2>
-<h3>Claim Check Pattern</h3>
-<h4>Claim Check Pattern</h4>
-<h4>Claim Check Pattern</h4>
-<h4>Claim Check Pattern</h4>
-<h4>Claim Check Pattern</h4>
-<h4>Claim Check Pattern</h4>
-<h4>Claim Check Pattern</h4>
-<h4>Claim Check Pattern</h4>
-<h4>Claim Check Pattern</h4>
-<h4>Claim Check Pattern</h4>
-<h4>Claim Check Pattern</h4>
-<h4>Claim Check Pattern</h4>
-<h4>Claim Check Pattern</h4>
-<h4>Claim Check Pattern</h4>
-<p>The claim check pattern is a messaging pattern that addresses the challenge of passing large payloads through a message broker. Instead of including the payload in the message, the producer stores the payload in a shared data store and sends a reference (claim check) in the message. The consumer retrieves the payload using the reference. This pattern is essential for systems where message size limits are a concern. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>The claim check pattern is a messaging pattern that addresses the challenge of passing large payloads through a message broker. Instead of including the payload in the message, the producer stores the payload in a shared data store and sends a reference (claim check) in the message. The consumer retrieves the payload using the reference. This pattern is essential for systems where message size limits are a concern. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The Problem with Large Messages </p>
 <p>Message brokers impose size limits. Kafka has a default max message size of 1MB, though this can be increased. SQS has a 256KB limit. RabbitMQ can handle larger messages but performance degrades significantly. Even where limits can be increased, large messages cause problems: increased broker storage, slower serialization and deserialization, increased network transfer time, and memory pressure on consumers. </p>
 <p>A single high-resolution image, a large CSV file, or a JSON document with many nested objects can easily exceed these limits. The claim check pattern solves this problem without requiring changes to the message broker configuration. </p>
@@ -136,7 +121,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -148,7 +136,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/scheduler-supervisor.html" class="related-card">Scheduler Supervisor Pattern</a><a href="/en/architecture/scatter-gather.html" class="related-card">Scatter-Gather Pattern for Parallel Processing</a><a href="/en/architecture/domain-events.html" class="related-card">Domain Events: Design and Implementation</a><a href="/en/architecture/api-composition-pattern.html" class="related-card">API Composition Pattern</a></div>
+      <div class="related-grid"><a href="/en/architecture/scheduler-supervisor.html" class="related-card"><span class="related-card-title">Scheduler Supervisor Pattern</span><span class="related-card-desc">Learn the scheduler supervisor pattern: job scheduling, failure handling, retry policies, and distri</span></a><a href="/en/architecture/scatter-gather.html" class="related-card"><span class="related-card-title">Scatter-Gather Pattern for Parallel Processing</span><span class="related-card-desc">The scatter-gather pattern: broadcast requests to multiple recipients and aggregate responses for co</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/api-composition-pattern.html" class="related-card"><span class="related-card-title">API Composition Pattern</span><span class="related-card-desc">Learn API composition: aggregation, parallel calls, error handling strategies, and cross-service dat</span></a><a href="/en/architecture/materialized-view-pattern.html" class="related-card"><span class="related-card-title">Materialized View Pattern</span><span class="related-card-desc">Explore the materialized view pattern: read models, caching strategies, CQRS integration, and effici</span></a><a href="/en/architecture/transaction-outbox-reliable.html" class="related-card"><span class="related-card-title">Transactional Outbox Pattern</span><span class="related-card-desc">Master reliable message publishing with the transactional outbox: polling publisher, transaction log</span></a></div>
     </section>
     
   </div>

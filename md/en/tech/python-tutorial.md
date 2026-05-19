@@ -146,4 +146,4 @@ Save as `hello.py` and run with `python3 hello.py`. That's it — you're a progr
 
 The secret to learning Python: start building things immediately. Don't get stuck in tutorial hell.
 
-**See also:** [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops](</en/tech/python-asyncio-guide.html>), [Docker in 30 Minutes: From Install to First Container](</en/tech/docker-quickstart.html>)
+**See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)

@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/jwt-authentication-guide.html
 
 # JWT Authentication Best Practices
 
-## JWT Authentication Best Practices
-
-### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
-#### JWT Authentication Best Practices
-
 What Are JSON Web Tokens? 
 
 JSON Web Tokens (JWT) are a compact, URL-safe means of representing claims between two parties. A JWT consists of three Base64URL-encoded segments separated by dots: header, payload, and signature. 
@@ -171,3 +137,9 @@ JWTs are a powerful authentication mechanism when implemented correctly. Use asy
 **See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>), [Container Security Best Practices](</en/security/container-security.html>)
 
 **See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>), [Container Security Best Practices](</en/security/container-security.html>)
+
+**See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
+
+**See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
+
+**See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)

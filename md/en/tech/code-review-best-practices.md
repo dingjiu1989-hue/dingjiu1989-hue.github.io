@@ -84,4 +84,4 @@ Track these metrics (but never use them for performance reviews — they gamify 
 
 Great code review is a skill that compounds. Every thoughtful review makes the next one easier because the team converges on shared standards. Start with one habit from this guide — small PRs or blocking/non-blocking prefixes — and build from there.
 
-**See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs](</en/tech/api-security-best-practices.html>), [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>)
+**See also:** [Webhook Implementation: Design, Security, and Best Practices (2026)](</en/tech/webhook-implementation-guide.html>), [REST API Best Practices: The Complete Guide for 2026](</en/tech/rest-api-best-practices.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>)

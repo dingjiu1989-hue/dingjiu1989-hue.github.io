@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png",
       "datePublished": "2025-12-30",
       "dateModified": "2026-05-18",
-      "wordCount": "2324",
+      "wordCount": "2271",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
@@ -99,26 +99,9 @@
       <h1 class="article-title">Distributed Tracing with OpenTelemetry</h1>
       <div class="article-meta">Published 2025-12-30 · Last active 2026-05-18 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png" alt="Distributed Tracing with OpenTelemetry" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Distributed Tracing with OpenTelemetry</h2>
-<h3>Distributed Tracing with OpenTelemetry</h3>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Distributed Tracing with OpenTelemetry</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Distributed tracing provides end-to-end visibility into requests as they traverse multiple services. Unlike logs (which are service-local) and metrics (which are aggregate), traces capture the causal relationship between operations in a distributed system. OpenTelemetry has become the industry standard for instrumentation, offering a unified API for traces, metrics, and logs. This article covers implementing distributed tracing with OpenTelemetry in production.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png" alt="Distributed Tracing with OpenTelemetry" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Core Concepts: Traces, Spans, and Context</h4>
+<h2>Core Concepts: Traces, Spans, and Context</h2>
 <p>A trace represents a complete request flow. Each unit of work within a trace is a span, carrying metadata about timing, status, and parent-child relationships:</p>
 <p>import { trace, Span, SpanStatusCode } from "@opentelemetry/api";</p>
 <p>const tracer = trace.getTracer("payment-service");</p>
@@ -147,7 +130,7 @@
 <p>span.end();</p>
 <p>}</p>
 <p>}</p>
-<h4>Context Propagation</h4>
+<h2>Context Propagation</h2>
 <p>Propagation carries trace context across service boundaries. For HTTP services, the <code>W3C TraceContext</code> format is standard:</p>
 <p>// Instrument outgoing HTTP requests</p>
 <p>import { context, propagation } from "@opentelemetry/api";</p>
@@ -189,9 +172,9 @@
 <p>span.end();</p>
 <p>});</p>
 <p>});</p>
-<h4>Sampling Strategies</h4>
+<h2>Sampling Strategies</h2>
 <p>Sampling controls the volume of traces collected. Use head-based sampling for simplicity or tail-based for intelligent selection:</p>
-<h4>OpenTelemetry Collector: tail-based sampling</h4>
+<h2>OpenTelemetry Collector: tail-based sampling</h2>
 <p>processors:</p>
 <p>tail_sampling:</p>
 <p>decision_wait: 30s</p>
@@ -235,9 +218,9 @@
 <p>return { decision: SamplingDecision.RECORD_AND_SAMPLED };</p>
 <p>}</p>
 <p>}</p>
-<h4>Visualization with Jaeger and Zipkin</h4>
+<h2>Visualization with Jaeger and Zipkin</h2>
 <p>Jaeger provides rich trace visualization and analysis capabilities:</p>
-<h4>docker-compose.yml for Jaeger</h4>
+<h2>docker-compose.yml for Jaeger</h2>
 <p>services:</p>
 <p>jaeger:</p>
 <p>image: jaegertracing/all-in-one:latest</p>
@@ -262,7 +245,7 @@
 <p>traces:</p>
 <p>receivers: [otlp]</p>
 <p>exporters: [jaeger]</p>
-<h4>Baggage Propagation</h4>
+<h2>Baggage Propagation</h2>
 <p>Baggage carries non-sampling key-value pairs across service boundaries for contextual information:</p>
 <p>import { propagation } from "@opentelemetry/api";</p>
 <p>// Set baggage in the entry service</p>
@@ -279,7 +262,7 @@
 <p>const baggage = getBaggage(context.active());</p>
 <p>return baggage?.getEntry("user.id")?.value;</p>
 <p>}</p>
-<h4>Correlation with Logs and Metrics</h4>
+<h2>Correlation with Logs and Metrics</h2>
 <p>Link traces to logs using <code>trace_id</code> and <code>span_id</code>:</p>
 <p>import { trace } from "@opentelemetry/api";</p>
 <p>function enrichLogger(logger: Logger): Logger {</p>
@@ -303,7 +286,7 @@
 <p>trace_id: spanContext?.traceId,</p>
 <p>});</p>
 <p>}</p>
-<h4>Production Configuration</h4>
+<h2>Production Configuration</h2>
 <p>Deploy the OpenTelemetry Collector as a sidecar or DaemonSet for centralized configuration:</p>
 <p>apiVersion: apps/v1</p>
 <p>kind: DaemonSet</p>
@@ -323,7 +306,10 @@
 <p><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -335,7 +321,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/serverless-framework.html" class="related-card">Serverless Framework: From Zero to Production</a><a href="/en/tech/service-discovery.html" class="related-card">Service Discovery in Microservices</a><a href="/en/tech/monitoring-alerting-setup.html" class="related-card">Monitoring and Alerting Setup</a></div>
+      <div class="related-grid"><a href="/en/tech/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Principles and Practical Tools</span><span class="related-card-desc">Learn chaos engineering principles with Chaos Monkey, LitmusChaos, and Gremlin, covering steady-stat</span></a><a href="/en/tech/serverless-framework.html" class="related-card"><span class="related-card-title">Serverless Framework: From Zero to Production</span><span class="related-card-desc">Deploy AWS Lambda functions with infrastructure as code, local development workflows, monitoring, co</span></a><a href="/en/tech/service-discovery.html" class="related-card"><span class="related-card-title">Service Discovery in Microservices</span><span class="related-card-desc">Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, includ</span></a><a href="/en/tech/monitoring-alerting-setup.html" class="related-card"><span class="related-card-title">Monitoring and Alerting Setup</span><span class="related-card-desc">Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerti</span></a><a href="/en/tech/reverse-proxy-guide.html" class="related-card"><span class="related-card-title">Reverse Proxy Guide</span><span class="related-card-desc">Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load </span></a><a href="/en/tech/api-gateway-implementation.html" class="related-card"><span class="related-card-title">API Gateway Implementation Guide</span><span class="related-card-desc">Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformati</span></a></div>
     </section>
     
   </div>

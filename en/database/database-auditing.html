@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-auditing.png",
       "datePublished": "2026-04-13",
       "dateModified": "2026-04-22",
-      "wordCount": "754",
+      "wordCount": "760",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,40 +99,28 @@
       <h1 class="article-title">Database Auditing: Tracking Data Changes</h1>
       <div class="article-meta">Published 2026-04-13 · Last active 2026-04-22 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-auditing.png" alt="Database Auditing: Tracking Data Changes" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Database Auditing: Tracking Data Changes</h2>
-<h3>Database Auditing: Tracking Data Changes</h3>
-<h4>Database Auditing: Tracking Data Changes</h4>
-<h4>Database Auditing: Tracking Data Changes</h4>
-<h4>Database Auditing: Tracking Data Changes</h4>
-<h4>Database Auditing: Tracking Data Changes</h4>
-<h4>Database Auditing: Tracking Data Changes</h4>
-<h4>Database Auditing: Tracking Data Changes</h4>
-<h4>Database Auditing: Tracking Data Changes</h4>
-<h4>Database Auditing: Tracking Data Changes</h4>
-<h4>Database Auditing: Tracking Data Changes</h4>
-<h4>Database Auditing: Tracking Data Changes</h4>
-<h4>Database Auditing: Tracking Data Changes</h4>
-<h4>Database Auditing: Tracking Data Changes</h4>
-<h4>Database Auditing: Tracking Data Changes</h4>
-<p>Database auditing tracks data changes for compliance, security, and debugging. A comprehensive audit system records who changed what, when the change occurred, the old and new values, and the context of the change.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-auditing.png" alt="Database Auditing: Tracking Data Changes" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Audit Strategies</h4>
+      <div class="article-body"><p>Database auditing tracks data changes for compliance, security, and debugging. A comprehensive audit system records who changed what, when the change occurred, the old and new values, and the context of the change.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-auditing.png" alt="Database Auditing: Tracking Data Changes" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Audit Strategies</h2>
 <p>Trigger-based auditing uses database triggers to capture changes. An audit trigger fires on INSERT, UPDATE, or DELETE operations and writes change records to an audit table. This approach captures all changes regardless of how they reach the database—application code, admin tools, or direct SQL.</p>
 <p>Application-level auditing logs changes in the application layer. Each service explicitly writes audit records when it modifies data. This provides richer context (user ID, request ID, business reason) but only captures changes made through the application.</p>
 <p>Change Data Capture (CDC) streams database changes to a log (like Kafka) for external consumers. Debezium is the most popular CDC tool. It reads the database transaction log and publishes change events without modifying application code.</p>
-<h4>Audit Table Design</h4>
+<h2>Audit Table Design</h2>
 <p>A minimal audit table includes: audit_id (primary key), table_name, row_id, operation (INSERT, UPDATE, DELETE), old_values (JSON), new_values (JSON), changed_by, changed_at, transaction_id. Consider partitioning by date for query performance.</p>
 <p>Include a session context so you know not just who changed data but under what circumstances. Store API endpoint, IP address, and correlation ID if available.</p>
-<h4>Querying Audit Data</h4>
+<h2>Querying Audit Data</h2>
 <p>Audit tables grow quickly. Index by table_name + row_id for point queries, by changed_at for time-based queries, and by changed_by for user activity audits. Consider archiving old audit records to cost-effective storage. Set retention policies based on compliance requirements.</p>
-<h4>Performance Impact</h4>
+<h2>Performance Impact</h2>
 <p>Writing audit records adds latency to every data modification. Consider asynchronous auditing—write to a queue and process audit records in the background. Batch audit writes to reduce database transaction overhead. Monitor audit queue depth to detect processing bottlenecks.</p>
-<h4>Compliance</h4>
+<h2>Compliance</h2>
 <p>Many regulations require audit trails. GDPR requires tracking personal data access. SOX requires financial data change tracking. PCI-DSS requires audit trails for cardholder data. Design your audit system to meet the strictest relevant regulation.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/database-encryption.html">Database Encryption: Data at Rest and in Transit</a>, <a href="/en/database/database-audit-triggers.html">Database Audit Triggers: Automatic Change Tracking</a>.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/database-audit-triggers.html">Database Audit Triggers: Automatic Change Tracking</a>, <a href="/en/database/database-encryption.html">Database Encryption: Data at Rest and in Transit</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/database-audit-triggers.html">Database Audit Triggers: Automatic Change Tracking</a>, <a href="/en/database/database-encryption.html">Database Encryption: Data at Rest and in Transit</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/database-audit-triggers.html">Database Audit Triggers: Automatic Change Tracking</a>, <a href="/en/database/database-encryption.html">Database Encryption: Data at Rest and in Transit</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/database-audit-triggers.html">Database Audit Triggers: Automatic Change Tracking</a>, <a href="/en/database/database-encryption.html">Database Encryption: Data at Rest and in Transit</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/database-audit-triggers.html">Database Audit Triggers: Automatic Change Tracking</a>, <a href="/en/database/database-encryption.html">Database Encryption: Data at Rest and in Transit</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/database-audit-triggers.html">Database Audit Triggers: Automatic Change Tracking</a>, <a href="/en/database/database-encryption.html">Database Encryption: Data at Rest and in Transit</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/database-audit-triggers.html">Database Audit Triggers: Automatic Change Tracking</a>, <a href="/en/database/database-encryption.html">Database Encryption: Data at Rest and in Transit</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/geospatial-data.html">Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/geospatial-data.html">Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/geospatial-data.html">Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -144,7 +132,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-change-tracking-cdc.html" class="related-card">Change Data Capture: Tracking Database Changes in Real-Time</a><a href="/en/database/database-audit-triggers.html" class="related-card">Database Audit Triggers: Automatic Change Tracking</a><a href="/en/database/database-encryption.html" class="related-card">Database Encryption: Data at Rest and in Transit</a><a href="/en/database/database-migration-tools.html" class="related-card">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></div>
+      <div class="related-grid"><a href="/en/database/database-change-tracking-cdc.html" class="related-card"><span class="related-card-title">Change Data Capture: Tracking Database Changes in Real-Time</span><span class="related-card-desc">Implement change data capture (CDC) for real-time data synchronization, event streaming, and audit l</span></a><a href="/en/database/database-audit-triggers.html" class="related-card"><span class="related-card-title">Database Audit Triggers: Automatic Change Tracking</span><span class="related-card-desc">Implement database audit logging with triggers: audit tables, trigger functions, and compliance repo</span></a><a href="/en/database/database-encryption.html" class="related-card"><span class="related-card-title">Database Encryption: Data at Rest and in Transit</span><span class="related-card-desc">Implement database encryption at rest and in transit to protect sensitive data and meet compliance r</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="related-card-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="related-card-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategi</span></a><a href="/en/database/index-types.html" class="related-card"><span class="related-card-title">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</span><span class="related-card-desc">Comprehensive guide to PostgreSQL index types: B-tree, Hash, GiST, GIN, SP-GiST, and BRIN. Learn whe</span></a><a href="/en/database/triggers-patterns.html" class="related-card"><span class="related-card-title">Database Triggers: Use Cases, Performance Costs, and Alternatives</span><span class="related-card-desc">Explore database triggers for audit logging, validation, and synchronization. Understand performance</span></a></div>
     </section>
     
   </div>

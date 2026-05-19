@@ -76,4 +76,4 @@ Estimated savings vs SaaS equivalents: **$500-2,000/month** for a small team. Yo
 
 **Bottom line:** Not every tool needs to be replaced. But self-hosting even 5-10 of these saves $200-500/month with minimal maintenance. Start with the expensive ones. See also: [best free developer tools](</en/tools/best-free-dev-tools-2026.html>) and [hosting comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>).
 
-**See also:** [Self-Hosted PaaS Comparison 2026: Coolify vs Dokploy vs CapRover vs Kamal vs Dokku](</en/compare/self-hosted-paas-comparison.html>), [Open Core Business Model: From Open Source Project to Profitable Business](</en/sidehustle/open-core-business-model.html>), [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>)
+**See also:** [Best Privacy-First Analytics Tools 2026: PostHog vs Plausible vs Umami vs Mixpanel](</en/tools/best-website-analytics-tools.html>), [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>)

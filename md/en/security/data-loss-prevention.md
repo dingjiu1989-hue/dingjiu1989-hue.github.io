@@ -8,45 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/security/data-loss-prevention.html
 
 # Data Loss Prevention (DLP) Strategies
 
-## Data Loss Prevention (DLP) Strategies
-
-### Data Loss Prevention (DLP) Strategies
-
-#### Data Loss Prevention (DLP) Strategies
-
-#### Data Loss Prevention (DLP) Strategies
-
-#### Data Loss Prevention (DLP) Strategies
-
-#### Data Loss Prevention (DLP) Strategies
-
-#### Data Loss Prevention (DLP) Strategies
-
-#### Data Loss Prevention (DLP) Strategies
-
-#### Data Loss Prevention (DLP) Strategies
-
-#### Data Loss Prevention (DLP) Strategies
-
-#### Data Loss Prevention (DLP) Strategies
-
-#### Data Loss Prevention (DLP) Strategies
-
-#### Data Loss Prevention (DLP) Strategies
-
-#### Data Loss Prevention (DLP) Strategies
-
-#### Data Loss Prevention (DLP) Strategies
-
-#### Data Loss Prevention (DLP) Strategies
-
 Data Loss Prevention (DLP) encompasses strategies and tools that prevent sensitive data from being leaked, stolen, or improperly exposed. DLP monitors, detects, and blocks unauthorized data transfers. This article covers the key DLP strategies including data classification, content inspection, and deployment across endpoint, network, and cloud environments.
 
-#### Data Classification
+## Data Classification
 
 DLP starts with knowing what data you have and how sensitive it is. Data classification categorizes information based on its sensitivity and business impact.
 
-#### Classification Levels
+## Classification Levels
 
 A typical classification scheme includes four tiers:
 
@@ -61,7 +29,7 @@ A typical classification scheme includes four tiers:
 
 
 
-#### Automated Classification
+## Automated Classification
 
 Manual classification does not scale. Modern DLP solutions use automated methods:
 
@@ -74,7 +42,7 @@ Manual classification does not scale. Modern DLP solutions use automated methods
 
 
 
-#### Example: Automated data classification regex patterns
+## Example: Automated data classification regex patterns
 
 import re
 
@@ -124,31 +92,31 @@ return "INTERNAL", findings
 
 return "PUBLIC", []
 
-#### Content Inspection Methods
+## Content Inspection Methods
 
 DLP systems inspect content at rest, in motion, and in use.
 
-#### Exact Data Matching (EDM)
+## Exact Data Matching (EDM)
 
 EDM creates a fingerprint of exact sensitive data values from a structured database. For example, you can fingerprint the actual credit card numbers from a payment database. DLP systems then compare outgoing content against these fingerprints.
 
-#### Partial Document Matching (PDM)
+## Partial Document Matching (PDM)
 
 PDM detects documents that are substantially similar to sensitive templates. It uses fuzzy hashing or n-gram analysis to identify documents that share significant content with a classified template.
 
-#### Statistical Analysis
+## Statistical Analysis
 
 Statistical methods detect unusual data content based on machine learning models trained on normal data patterns. This catches data that follows the general shape of sensitive information even if it does not match specific patterns.
 
-#### Machine Learning Classification
+## Machine Learning Classification
 
 ML-based classifiers learn to identify sensitive content from labeled training data. They handle variations that regex patterns miss. For example, an ML classifier can identify a confidential business plan even if it does not contain specific keywords.
 
-#### Endpoint DLP
+## Endpoint DLP
 
 Endpoint DLP protects data on laptops, desktops, and mobile devices. It monitors data leaving the device through various channels.
 
-#### What Endpoint DLP Monitors
+## What Endpoint DLP Monitors
 
   * **USB devices** : Block or audit file transfers to removable media.
 
@@ -165,7 +133,7 @@ Endpoint DLP protects data on laptops, desktops, and mobile devices. It monitors
 
 
 
-#### Endpoint DLP policy example (pseudocode)
+## Endpoint DLP policy example (pseudocode)
 
 DLP_POLICIES = [
 
@@ -207,11 +175,11 @@ DLP_POLICIES = [
 
 ]
 
-#### Network DLP
+## Network DLP
 
 Network DLP inspects traffic at network chokepoints to detect data exfiltration.
 
-#### Inspection Points
+## Inspection Points
 
   * **Web gateways** : Monitor HTTPS traffic using TLS inspection.
 
@@ -224,7 +192,7 @@ Network DLP inspects traffic at network chokepoints to detect data exfiltration.
 
 
 
-#### TLS Inspection
+## TLS Inspection
 
 Network DLP requires decrypting TLS traffic to inspect the content. The DLP appliance acts as a man-in-the-middle, terminating TLS connections, inspecting traffic, and re-encrypting to forward.
 
@@ -232,11 +200,11 @@ Client -> DLP Proxy (decrypts, inspects, re-encrypts) -> Server
 
 TLS inspection requires deploying a trusted root CA certificate to all managed devices. Organizations must comply with data privacy regulations regarding decryption.
 
-#### Cloud DLP
+## Cloud DLP
 
 Cloud DLP protects data in SaaS applications (Google Workspace, Microsoft 365, Salesforce) and IaaS environments (AWS, GCP, Azure).
 
-#### Cloud DLP Services
+## Cloud DLP Services
 
   * **GCP DLP** : Built-in DLP service with 150+ built-in infoType detectors for PII, PHI, and credentials. Supports automated classification of Cloud Storage, BigQuery, and Datastore data.
 
@@ -247,7 +215,7 @@ Cloud DLP protects data in SaaS applications (Google Workspace, Microsoft 365, S
 
 
 
-#### GCP DLP inspection example
+## GCP DLP inspection example
 
 from google.cloud import dlp_v2
 
@@ -299,7 +267,7 @@ print(f"Type: {finding.info_type.name}, "
 
 f"Location: {finding.location.byte_range}")
 
-#### Cloud DLP Challenges
+## Cloud DLP Challenges
 
   * **Shadow data** : Data in unknown locations or unmanaged cloud services.
 
@@ -312,11 +280,11 @@ f"Location: {finding.location.byte_range}")
 
 
 
-#### DLP Policy Design
+## DLP Policy Design
 
 Effective DLP policies balance security with productivity.
 
-#### Policy Types
+## Policy Types
 
   * **Block** : Prevent the action entirely. Use for high-confidence violations involving restricted data.
 
@@ -329,11 +297,11 @@ Effective DLP policies balance security with productivity.
 
 
 
-#### Policy Tuning
+## Policy Tuning
 
 Start with monitoring-only policies. Review alerts, tune thresholds, and validate detection accuracy before enabling blocking actions. This prevents business disruption from false positives.
 
-#### Conclusion
+## Conclusion
 
 DLP is not a single product but a program that combines data classification, content inspection, and policy enforcement across endpoints, networks, and cloud environments. Start by classifying your data, deploy DLP in monitoring mode, tune your policies, and progressively tighten controls. The goal is to protect sensitive data without grinding productivity to a halt.
 
@@ -348,3 +316,9 @@ DLP is not a single product but a program that combines data classification, con
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
+
+**See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>)
+
+**See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>)
+
+**See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/graph-rag.png",
       "datePublished": "2026-02-16",
       "dateModified": "2026-04-14",
-      "wordCount": "1632",
+      "wordCount": "1564",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -99,25 +99,9 @@
       <h1 class="article-title">Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h1>
       <div class="article-meta">Published 2026-02-16 · Last active 2026-04-14 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/graph-rag.png" alt="Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h2>
-<h3>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h3>
-<h4>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h4>
-<h4>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h4>
-<h4>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h4>
-<h4>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h4>
-<h4>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h4>
-<h4>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h4>
-<h4>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h4>
-<h4>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h4>
-<h4>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h4>
-<h4>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h4>
-<h4>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h4>
-<h4>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h4>
-<h4>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h4>
-<h4>Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Traditional RAG retrieves documents based on semantic similarity. Graph RAG goes further by modeling the relationships between entities: people, companies, concepts, and their connections. This enables queries like "Which employees worked on projects managed by Alice?" that require traversing relationships rather than matching text. This article covers building knowledge graphs from documents and using them for retrieval.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/graph-rag.png" alt="Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Entity Extraction</h4>
+<h2>Entity Extraction</h2>
 <p>The first step is extracting entities and their relationships from documents:</p>
 <p>from pydantic import BaseModel</p>
 <p>class Entity(BaseModel):</p>
@@ -142,7 +126,7 @@
 <p>Text: {combined_text[:8000]}</p>
 <p>""", ExtractionResult)</p>
 <p>return response</p>
-<h4>Building the Knowledge Graph</h4>
+<h2>Building the Knowledge Graph</h2>
 <p>Use a graph database like Neo4j to store and query the extracted structure:</p>
 <p>from neo4j import GraphDatabase</p>
 <p>class KnowledgeGraph:</p>
@@ -150,7 +134,7 @@
 <p>self.driver = GraphDatabase.driver(uri, auth=(user, password))</p>
 <p>def insert_entities_and_relations(self, extraction: ExtractionResult):</p>
 <p>with self.driver.session() as session:</p>
-<h4>Create entities</h4>
+<h2>Create entities</h2>
 <p>for entity in extraction.entities:</p>
 <p>session.run(</p>
 <p>"MERGE (e:Entity {name: $name}) "</p>
@@ -159,7 +143,7 @@
 <p>type=entity.type,</p>
 <p>description=entity.description,</p>
 <p>)</p>
-<h4>Create relationships</h4>
+<h2>Create relationships</h2>
 <p>for rel in extraction.relationships:</p>
 <p>session.run(</p>
 <p>"MATCH (s:Entity {name: $source}) "</p>
@@ -184,18 +168,18 @@
 <p>max_depth=max_depth,</p>
 <p>)</p>
 <p>return [record.data() for record in result]</p>
-<h4>Graph + Vector Hybrid Retrieval</h4>
+<h2>Graph + Vector Hybrid Retrieval</h2>
 <p>The most powerful pattern combines graph traversal with vector similarity:</p>
 <p>class GraphVectorRetriever:</p>
 <p>def <strong>init</strong>(self, graph: KnowledgeGraph, vector_store):</p>
 <p>self.graph = graph</p>
 <p>self.vector_store = vector_store</p>
 <p>def retrieve(self, query: str, k: int = 5) -&gt; list[str]:</p>
-<h4>Step 1: Identify starting entities from the query</h4>
+<h2>Step 1: Identify starting entities from the query</h2>
 <p>query_entities = self.extract_query_entities(query)</p>
-<h4>Step 2: Vector search for broader context</h4>
+<h2>Step 2: Vector search for broader context</h2>
 <p>vector_results = self.vector_store.similarity_search(query, k=k)</p>
-<h4>Step 3: Graph traversal from identified entities</h4>
+<h2>Step 3: Graph traversal from identified entities</h2>
 <p>graph_context = []</p>
 <p>for entity in query_entities:</p>
 <p>paths = self.graph.traverse(entity, max_depth=2)</p>
@@ -207,7 +191,7 @@
 <p>for i in range(len(path['path_nodes']))</p>
 <p>)</p>
 <p>graph_context.append(context)</p>
-<h4>Step 4: Combine and rank results</h4>
+<h2>Step 4: Combine and rank results</h2>
 <p>combined = graph_context + [doc.page_content for doc in vector_results]</p>
 <p>return combined[:k]</p>
 <p>def extract_query_entities(self, query: str) -&gt; list[str]:</p>
@@ -217,19 +201,19 @@
 <p>Query: {query}</p>
 <p>""")</p>
 <p>return [line.strip() for line in response.strip().split("\n") if line.strip()]</p>
-<h4>Microsoft's GraphRAG Pattern</h4>
+<h2>Microsoft's GraphRAG Pattern</h2>
 <p>Microsoft's GraphRAG uses a global-to-local search approach:</p>
 <p>def graphrag_search(query: str, graph: KnowledgeGraph, vector_store, llm) -&gt; str:</p>
-<h4>Step 1: Local search - find directly relevant entities</h4>
+<h2>Step 1: Local search - find directly relevant entities</h2>
 <p>local_entities = extract_query_entities(query)</p>
-<h4>Step 2: Global search - find related communities</h4>
+<h2>Step 2: Global search - find related communities</h2>
 <p>community_context = []</p>
 <p>for entity in local_entities:</p>
 <p>community = graph.traverse(entity, max_depth=3)</p>
 <p>community_context.extend(community)</p>
-<h4>Step 3: Vector search for text chunks</h4>
+<h2>Step 3: Vector search for text chunks</h2>
 <p>text_chunks = vector_store.similarity_search(query, k=10)</p>
-<h4>Step 4: Synthesize answer</h4>
+<h2>Step 4: Synthesize answer</h2>
 <p>context_parts = []</p>
 <p>for ctx in community_context:</p>
 <p>context_parts.append(format_graph_path(ctx))</p>
@@ -242,7 +226,7 @@
 <p>Query: {query}</p>
 <p>""")</p>
 <p>return answer</p>
-<h4>When to Use Graph RAG</h4>
+<h2>When to Use Graph RAG</h2>
 <p>Graph RAG excels over vector-only RAG when:</p>
 <ul>
 <li>
@@ -258,13 +242,16 @@
 <p>Entities appear across many documents and you need to aggregate information about them</p>
 </li>
 </ul>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>Graph RAG extends vector-based retrieval with relationship traversal. Extract entities and relationships from documents to build a knowledge graph. Combine graph traversal with vector search for queries that require understanding connections. The hybrid approach handles both semantic similarity questions ("find documents about topic X") and relational questions ("how is entity A connected to entity B"). Start with vector-only RAG and add graph capabilities when your users ask questions that require understanding relationships.</p>
 <p><strong>See also:</strong> <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-evaluation.html">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/model-evaluation-harness.html">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/model-evaluation-harness.html">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/model-evaluation-harness.html">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -276,7 +263,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/multi-modal-rag.html" class="related-card">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a><a href="/en/ai/rag-agent-patterns.html" class="related-card">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a><a href="/en/ai/rag-retrieval-optimization.html" class="related-card">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a><a href="/en/ai/rag-evaluation.html" class="related-card">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</a></div>
+      <div class="related-grid"><a href="/en/ai/multi-modal-rag.html" class="related-card"><span class="related-card-title">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</span><span class="related-card-desc">Build multi-modal RAG systems that handle images, tables, and documents. Learn chunking strategies, </span></a><a href="/en/ai/rag-agent-patterns.html" class="related-card"><span class="related-card-title">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</span><span class="related-card-desc">Explore RAG agent patterns that go beyond simple retrieval: self-querying agents, corrective RAG wit</span></a><a href="/en/ai/rag-retrieval-optimization.html" class="related-card"><span class="related-card-title">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</span><span class="related-card-desc">Optimize RAG retrieval with hybrid search combining dense and sparse methods, cross-encoder re-ranki</span></a><a href="/en/ai/rag-evaluation.html" class="related-card"><span class="related-card-title">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</span><span class="related-card-desc">A practical guide to evaluating RAG systems: retrieval metrics, generation quality assessment, end-t</span></a><a href="/en/ai/rag-chunking-strategies.html" class="related-card"><span class="related-card-title">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</span><span class="related-card-desc">Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategie</span></a><a href="/en/ai/rag-pipeline-optimization.html" class="related-card"><span class="related-card-title">RAG Pipeline Optimization: Production Best Practices</span><span class="related-card-desc">Optimize Retrieval-Augmented Generation pipelines: chunking strategies, embedding selection, retriev</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

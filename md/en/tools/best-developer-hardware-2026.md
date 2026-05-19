@@ -57,4 +57,4 @@ Budget| Keyboard| Monitor| Chair
   
 **The most impactful upgrade under $100:** A good mechanical keyboard (Keychron V1, $84). Better than any monitor upgrade for daily comfort. **The most impactful upgrade period:** A used premium chair. Your 45-year-old back will thank your 25-year-old self.
 
-**See also:** [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>), [Best Code Formatters and Linters](</en/tools/code-formatters-linters.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>)
+**See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>)

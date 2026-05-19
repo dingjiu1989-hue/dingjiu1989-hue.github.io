@@ -58,4 +58,4 @@ Best for| General purpose| Enterprise/Java| AI-first workflow
 
 Truth is, many experienced developers use two: JetBrains for deep refactoring sessions, VS Code/Cursor for quick edits and frontend work. Don't be dogmatic — use the right tool for the task.
 
-**See also:** [Best Terminal Emulators for Developers 2026: Warp vs iTerm2 vs Kitty vs WezTerm](</en/tools/best-terminal-emulators.html>), [10 Must-Have VS Code Extensions to Double Your Productivity](</en/tech/vscode-extensions.html>), [Text Editors Compared](</en/tools/text-editors-compared.html>)
+**See also:** [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>), [Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip](</en/tools/best-database-gui-tools.html>), [Best Code Review Tools 2026: GitHub, GitLab, Graphite, Reviewable Compared](</en/tools/best-code-review-tools.html>)

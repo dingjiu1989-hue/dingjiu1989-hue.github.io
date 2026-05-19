@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/api-authentication.html
 
 # API Authentication Methods
 
-## API Authentication Methods
-
-### API Authentication Methods
-
-#### API Authentication Methods
-
-#### API Authentication Methods
-
-#### API Authentication Methods
-
-#### API Authentication Methods
-
-#### API Authentication Methods
-
-#### API Authentication Methods
-
-#### API Authentication Methods
-
-#### API Authentication Methods
-
-#### API Authentication Methods
-
-#### API Authentication Methods
-
-#### API Authentication Methods
-
-#### API Authentication Methods
-
-#### API Authentication Methods
-
-#### API Authentication Methods
-
-#### API Authentication Methods
-
 Introduction 
 
 API authentication verifies the identity of clients calling your API. Choosing the right authentication method depends on the threat model, client type, and operational requirements. This guide covers the four dominant approaches and their appropriate use cases. 
@@ -94,7 +60,7 @@ import requests
 
 from authlib.integrations.requests_client import OAuth2Session
 
-#### Client configuration
+## Client configuration
 
 client = OAuth2Session(
 
@@ -106,7 +72,7 @@ scope='read:orders write:orders'
 
 )
 
-#### Obtain access token
+## Obtain access token
 
 token = client.fetch_token(
 
@@ -116,7 +82,7 @@ grant_type='client_credentials'
 
 )
 
-#### Use token for API calls
+## Use token for API calls
 
 response = client.get(
 
@@ -156,7 +122,7 @@ options={"verify_exp": True}
 
 )
 
-#### Validate scopes
+## Validate scopes
 
 token_scopes = payload.get("scope", "").split()
 
@@ -172,7 +138,7 @@ Mutual TLS (mTLS)
 
 mTLS extends TLS so that both client and server present certificates, establishing mutual authentication at the transport layer. 
 
-#### Generate client certificate
+## Generate client certificate
 
 openssl req -newkey rsa:2048 -nodes \
 
@@ -182,7 +148,7 @@ openssl req -newkey rsa:2048 -nodes \
 
 -subj "/CN=payment-service.production.internal"
 
-#### Sign with internal CA
+## Sign with internal CA
 
 openssl x509 -req -in client-csr.pem \
 
@@ -192,7 +158,7 @@ openssl x509 -req -in client-csr.pem \
 
 -days 365 -sha256
 
-#### Configure server for mTLS (Nginx)
+## Configure server for mTLS (Nginx)
 
 server {
 
@@ -210,7 +176,7 @@ ssl_verify_depth 2;
 
 location /api/ {
 
-#### Extract client certificate info
+## Extract client certificate info
 
 proxy_set_header X-Client-CN $ssl_client_s_dn;
 
@@ -222,7 +188,7 @@ proxy_pass http://backend;
 
 }
 
-#### Flask app reading mTLS client info
+## Flask app reading mTLS client info
 
 from flask import Flask, request
 
@@ -240,7 +206,7 @@ if client_verify != 'SUCCESS':
 
 return {"error": "TLS verification failed"}, 403
 
-#### Authorize based on client certificate CN
+## Authorize based on client certificate CN
 
 allowed_clients = {
 
@@ -282,7 +248,7 @@ timestamp = str(int(time.time()))
 
 nonce = secrets.token_hex(8)
 
-#### Build message to sign
+## Build message to sign
 
 message = f"{method}\n{path}\n{timestamp}\n{nonce}\n".encode() + body
 
@@ -326,7 +292,7 @@ nonce = headers.get('X-Nonce')
 
 signature = headers.get('X-Signature')
 
-#### Replay protection
+## Replay protection
 
 if int(time.time()) - int(timestamp) > 300:
 
@@ -338,7 +304,7 @@ return False # Replay
 
 self.nonce_store.add(nonce)
 
-#### Verify signature
+## Verify signature
 
 secret = self.secrets.get(api_key)
 
@@ -371,3 +337,9 @@ No single API authentication method fits all use cases. Use API keys for low-ris
 **See also:** [Microservice Security](</en/security/microservice-security.html>), [Container Image Security](</en/security/container-image-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
 
 **See also:** [Microservice Security](</en/security/microservice-security.html>), [Container Image Security](</en/security/container-image-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
+
+**See also:** [Supply Chain Security](</en/security/supply-chain-security.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [Supply Chain Security](</en/security/supply-chain-security.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [Supply Chain Security](</en/security/supply-chain-security.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>), [Certificate Management](</en/security/certificate-management.html>)

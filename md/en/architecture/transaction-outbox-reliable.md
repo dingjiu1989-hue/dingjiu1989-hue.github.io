@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/transaction-outbox-reliab
 
 # Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
-
-### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
-#### Transactional Outbox Pattern
-
 The transactional outbox pattern solves a fundamental problem in event-driven microservices: how to reliably publish messages as part of a database transaction. When a service updates its database and publishes an event, these two operations must be atomic. If the database update succeeds but the message publish fails, the system is inconsistent. The outbox pattern uses a local database table as a temporary message store, ensuring reliable publication through the same transaction that updates business data. 
 
 The Dual-Write Problem 
@@ -95,3 +65,9 @@ The transactional outbox pattern is a reliable, battle-tested solution for atomi
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>)
+
+**See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>)
+
+**See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>)
+
+**See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>)

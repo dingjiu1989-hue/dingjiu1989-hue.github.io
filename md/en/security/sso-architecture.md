@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/sso-architecture.html
 
 # SSO Architecture
 
-## SSO Architecture
-
-### SSO Architecture
-
-#### SSO Architecture
-
-#### SSO Architecture
-
-#### SSO Architecture
-
-#### SSO Architecture
-
-#### SSO Architecture
-
-#### SSO Architecture
-
-#### SSO Architecture
-
-#### SSO Architecture
-
-#### SSO Architecture
-
-#### SSO Architecture
-
-#### SSO Architecture
-
-#### SSO Architecture
-
-#### SSO Architecture
-
 SSO Fundamentals 
 
 Single Sign-On (SSO) allows users to authenticate once and access multiple applications without re-entering credentials. It improves security by centralizing authentication and reducing password fatigue. 
@@ -56,7 +26,7 @@ https://app.example.com
 
 Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"/>
 
-#### SAML response parsing
+## SAML response parsing
 
 from signxml import XMLVerifier
 
@@ -64,11 +34,11 @@ import xml.etree.ElementTree as ET
 
 def parse_saml_response(response_xml):
 
-#### Verify the signature
+## Verify the signature
 
 verified_data = XMLVerifier().verify(response_xml).signed_xml
 
-#### Extract attributes
+## Extract attributes
 
 ns = {"saml2": "urn:oasis:names:tc:SAML:2.0:assertion"}
 
@@ -140,7 +110,7 @@ res.redirect(authUrl);
 
 Token Exchange 
 
-#### Token exchange handler
+## Token exchange handler
 
 async def handle_callback(request):
 
@@ -148,17 +118,17 @@ code = request.query_params["code"]
 
 state = request.query_params["state"]
 
-#### Verify state matches
+## Verify state matches
 
 if state != request.session["oidc_state"]:
 
 raise SecurityError("State mismatch - possible CSRF")
 
-#### Exchange code for tokens
+## Exchange code for tokens
 
 token_response = await oidc_client.authorize_token(code)
 
-#### Validate ID token
+## Validate ID token
 
 claims = await oidc_client.validate_id_token(
 
@@ -223,3 +193,9 @@ SSO centralizes authentication and improves both security and user experience. C
 **See also:** [Session Management Security](</en/security/session-management.html>), [Cloud Network Security](</en/security/cloud-network-security.html>), [Database Encryption](</en/security/database-encryption.html>)
 
 **See also:** [Session Management Security](</en/security/session-management.html>), [Cloud Network Security](</en/security/cloud-network-security.html>), [Database Encryption](</en/security/database-encryption.html>)
+
+**See also:** [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>)
+
+**See also:** [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>)
+
+**See also:** [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>)

@@ -8,41 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/tools/container-runtimes-compared.html
 
 # Container Runtimes Compared
 
-## Container Runtimes Compared
-
-### Container Runtimes Compared
-
-#### Container Runtimes Compared
-
-#### Container Runtimes Compared
-
-#### Container Runtimes Compared
-
-#### Container Runtimes Compared
-
-#### Container Runtimes Compared
-
-#### Container Runtimes Compared
-
-#### Container Runtimes Compared
-
-#### Container Runtimes Compared
-
-#### Container Runtimes Compared
-
-#### Container Runtimes Compared
-
-#### Container Runtimes Compared
-
-#### Container Runtimes Compared
-
-#### Container Runtimes Compared
-
-#### Container Runtimes Compared
-
 Container runtimes are the engines that actually run containers. While Docker is the most well-known, alternatives like Podman and containerd have gained significant traction. Understanding the differences helps you choose the right runtime for your use case.
 
-#### What is a Container Runtime?
+## What is a Container Runtime?
 
 A container runtime manages the lifecycle of containers -- pulling images, creating container filesystems, and running processes in isolated environments. Runtimes exist at two levels:
 
@@ -55,7 +23,7 @@ A container runtime manages the lifecycle of containers -- pulling images, creat
 
 Most developers interact with high-level runtimes. The low-level runtime handles the actual container execution.
 
-#### Docker
+## Docker
 
 Docker is the original developer-friendly container platform. It bundles build tools, image management, and runtime into one cohesive tool.
 
@@ -87,7 +55,7 @@ Docker is the original developer-friendly container platform. It bundles build t
 
 **Best for** : Development environments, CI/CD pipelines, and teams that need the largest ecosystem.
 
-#### Typical Docker workflow
+## Typical Docker workflow
 
 docker build -t myapp .
 
@@ -95,7 +63,7 @@ docker run -d -p 3000:3000 myapp
 
 docker compose up -d # Multi-service
 
-#### Podman
+## Podman
 
 Podman is a daemonless container engine developed by Red Hat. It is designed as a drop-in replacement for Docker.
 
@@ -127,19 +95,19 @@ Podman is a daemonless container engine developed by Red Hat. It is designed as 
 
 **Best for** : Security-conscious teams, production environments, and users who want rootless containers.
 
-#### Podman commands mirror Docker
+## Podman commands mirror Docker
 
 podman build -t myapp .
 
 podman run -d -p 3000:3000 myapp
 
-#### Podman-specific: run in a pod
+## Podman-specific: run in a pod
 
 podman pod create --name my-pod -p 3000:3000
 
 podman run --pod my-pod -d myapp
 
-#### containerd
+## containerd
 
 containerd is the industry-standard container runtime, used internally by Docker and Kubernetes. It focuses on the core runtime functionality.
 
@@ -169,17 +137,17 @@ containerd is the industry-standard container runtime, used internally by Docker
 
 **Best for** : Kubernetes nodes, embedded systems, and users who need a minimal runtime.
 
-#### interact with containerd directly using ctr or nerdctl
+## interact with containerd directly using ctr or nerdctl
 
 sudo ctr images pull docker.io/library/alpine:latest
 
 sudo ctr run --rm -t docker.io/library/alpine:latest alpine sh
 
-#### nerdctl provides a Docker-compatible CLI for containerd
+## nerdctl provides a Docker-compatible CLI for containerd
 
 nerdctl run -d -p 3000:3000 myapp
 
-#### CRI-O
+## CRI-O
 
 CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Interface) compliance.
 
@@ -207,7 +175,7 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
 
 **Best for** : Kubernetes clusters where security and compliance are priorities.
 
-#### Performance Comparison
+## Performance Comparison
 
 | Runtime | Image Pull | Container Start | Memory Overhead | CPU Overhead |
 
@@ -221,7 +189,7 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
 
 | CRI-O | Fast | ~200ms | ~20MB | Negligible |
 
-#### Security Comparison
+## Security Comparison
 
 | Runtime | Rootless by Default | Seccomp by Default | AppArmor/SELinux | User Namespace Support |
 
@@ -235,7 +203,7 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
 
 Podman's rootless-by-default model provides the strongest security posture for development. In production, all runtimes can be hardened with proper configuration.
 
-#### Docker vs Podman: Detailed Comparison
+## Docker vs Podman: Detailed Comparison
 
 | Feature | Docker | Podman |
 
@@ -255,17 +223,17 @@ Podman's rootless-by-default model provides the strongest security posture for d
 
 | Kubernetes YAML | Can use | Can use directly |
 
-#### Migration Guide
+## Migration Guide
 
 **Moving from Docker to Podman:**
 
-#### On Fedora/RHEL
+## On Fedora/RHEL
 
 sudo dnf install podman podman-docker
 
-#### The podman-docker package provides the /usr/bin/docker symlink
+## The podman-docker package provides the /usr/bin/docker symlink
 
-#### Test compatibility
+## Test compatibility
 
 podman info
 
@@ -275,17 +243,17 @@ docker run hello-world
 
 **Moving from Docker to containerd + nerdctl:**
 
-#### Install containerd
+## Install containerd
 
 sudo apt install containerd
 
-#### Install nerdctl (Docker-compatible CLI)
+## Install nerdctl (Docker-compatible CLI)
 
 wget https://github.com/containerd/nerdctl/releases/download/v1.7/nerdctl-1.7-linux-amd64.tar.gz
 
 sudo tar -C /usr/local/bin -xzf nerdctl-1.7-linux-amd64.tar.gz
 
-#### Summary
+## Summary
 
 Docker remains the best choice for development environments due to its ecosystem and tooling. Podman is the strongest alternative for production and security-conscious teams, offering daemonless and rootless operation. containerd is the runtime of choice for Kubernetes nodes and embedded systems. All three are mature and production-ready -- choose based on your security requirements, ecosystem needs, and team expertise.
 
@@ -300,3 +268,9 @@ Docker remains the best choice for development environments due to its ecosystem
 **See also:** [Text Editors Compared](</en/tools/text-editors-compared.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Package Managers Compared](</en/tools/package-managers-compared.html>)
 
 **See also:** [Text Editors Compared](</en/tools/text-editors-compared.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Package Managers Compared](</en/tools/package-managers-compared.html>)
+
+**See also:** [Developer Collaboration Tools: Slack vs Discord vs Linear](</en/tools/collaboration-tools.html>), [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>), [Logging Tools: ELK Stack vs Loki vs Splunk](</en/tools/logging-tools.html>)
+
+**See also:** [Developer Collaboration Tools: Slack vs Discord vs Linear](</en/tools/collaboration-tools.html>), [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>), [Logging Tools: ELK Stack vs Loki vs Splunk](</en/tools/logging-tools.html>)
+
+**See also:** [Developer Collaboration Tools: Slack vs Discord vs Linear](</en/tools/collaboration-tools.html>), [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>), [Logging Tools: ELK Stack vs Loki vs Splunk](</en/tools/logging-tools.html>)

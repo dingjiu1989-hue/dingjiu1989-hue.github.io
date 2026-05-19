@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/distributed-id.png",
       "datePublished": "2026-04-23",
       "dateModified": "2026-05-13",
-      "wordCount": "1032",
+      "wordCount": "1029",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">Distributed ID Generation</h1>
       <div class="article-meta">Published 2026-04-23 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/distributed-id.png" alt="Distributed ID Generation" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Distributed ID Generation</h2>
-<h3>Distributed ID Generation</h3>
-<h4>Distributed ID Generation</h4>
-<h4>Distributed ID Generation</h4>
-<h4>Distributed ID Generation</h4>
-<h4>Distributed ID Generation</h4>
-<h4>Distributed ID Generation</h4>
-<h4>Distributed ID Generation</h4>
-<h4>Distributed ID Generation</h4>
-<h4>Distributed ID Generation</h4>
-<h4>Distributed ID Generation</h4>
-<h4>Distributed ID Generation</h4>
-<h4>Distributed ID Generation</h4>
-<h4>Distributed ID Generation</h4>
-<h4>Distributed ID Generation</h4>
-<p>Distributed ID generation is a foundational infrastructure concern for any system that spans multiple databases or services. IDs must be unique across all nodes, generate quickly without coordination, and often carry useful properties like time-orderedness, compactness, or security. The choice of ID generation strategy affects database performance, sorting behavior, and system complexity. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/distributed-id.png" alt="Distributed ID Generation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Distributed ID generation is a foundational infrastructure concern for any system that spans multiple databases or services. IDs must be unique across all nodes, generate quickly without coordination, and often carry useful properties like time-orderedness, compactness, or security. The choice of ID generation strategy affects database performance, sorting behavior, and system complexity. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/distributed-id.png" alt="Distributed ID Generation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>UUID v7 is the newest contender, standardized in RFC 9562. It generates time-ordered, random-based UUIDs. The first 48 bits contain a Unix timestamp with millisecond precision. The remaining bits contain random data. UUID v7 combines the ordering benefit of time-based IDs with the distribution properties of random IDs. Database indexes benefit from the time-ordered prefix, which reduces B-tree index fragmentation compared to purely random UUIDs. </p>
 <p>Snowflake IDs, popularized by Twitter (now X), provide compact 64-bit integer IDs. The typical bit layout includes a timestamp (41 bits, giving ~69 years of unique timestamps), a worker ID (10 bits, supporting up to 1024 nodes), and a sequence number (12 bits, allowing 4096 IDs per millisecond per worker). Snowflake IDs are monotonically increasing, sortable, and compact for storage and indexing. The downsides are dependence on clock synchronization — clock skew can produce duplicate or out-of-order IDs. </p>
 <p>ULIDs offer another compact alternative: a 128-bit identifier encoded as a 26-character Crockford Base32 string. The first 10 characters encode a Unix timestamp with millisecond precision. The remaining 16 characters are random. ULIDs are case-insensitive, URL-safe, and lexicographically sortable. They are intended as a drop-in replacement for UUIDs with better sorting properties and more compact string representation. </p>
@@ -127,7 +112,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -139,7 +127,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/asynchronous-communication.html" class="related-card">Asynchronous Communication in Distributed Systems</a><a href="/en/architecture/consensus-algorithms.html" class="related-card">Consensus Algorithms: Paxos, Raft, Zab</a><a href="/en/architecture/idempotency-patterns.html" class="related-card">Idempotency Patterns in Distributed Systems</a><a href="/en/architecture/leader-election.html" class="related-card">Leader Election in Distributed Systems</a></div>
+      <div class="related-grid"><a href="/en/architecture/asynchronous-communication.html" class="related-card"><span class="related-card-title">Asynchronous Communication in Distributed Systems</span><span class="related-card-desc">Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and pattern</span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="related-card-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="related-card-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices</span></a><a href="/en/architecture/idempotency-patterns.html" class="related-card"><span class="related-card-title">Idempotency Patterns in Distributed Systems</span><span class="related-card-desc">Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation </span></a><a href="/en/architecture/leader-election.html" class="related-card"><span class="related-card-title">Leader Election in Distributed Systems</span><span class="related-card-desc">Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best </span></a><a href="/en/architecture/rate-limiting-architecture.html" class="related-card"><span class="related-card-title">Rate Limiting Architecture</span><span class="related-card-desc">Token bucket, sliding window, distributed rate limiting, Redis-based implementation, and algorithm t</span></a><a href="/en/architecture/cache-strategies.html" class="related-card"><span class="related-card-title">Caching Strategies</span><span class="related-card-desc">Compare write-through, write-around, write-back caching and invalidation strategies for distributed </span></a></div>
     </section>
     
   </div>

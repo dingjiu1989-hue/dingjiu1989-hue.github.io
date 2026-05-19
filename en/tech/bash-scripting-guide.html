@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/bash-scripting-guide.png",
       "datePublished": "2025-12-01",
       "dateModified": "2026-05-14",
-      "wordCount": "1181",
+      "wordCount": "1160",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
@@ -110,27 +110,10 @@
       <h1 class="article-title">Bash Scripting Best Practices</h1>
       <div class="article-meta">Published 2025-12-01 · Last active 2026-05-14 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/bash-scripting-guide.png" alt="Bash Scripting Best Practices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Bash Scripting Best Practices</h2>
-<h3>Bash Scripting Best Practices</h3>
-<h4>Bash Scripting Best Practices</h4>
-<h4>Bash Scripting Best Practices</h4>
-<h4>Bash Scripting Best Practices</h4>
-<h4>Bash Scripting Best Practices</h4>
-<h4>Bash Scripting Best Practices</h4>
-<h4>Bash Scripting Best Practices</h4>
-<h4>Bash Scripting Best Practices</h4>
-<h4>Bash Scripting Best Practices</h4>
-<h4>Bash Scripting Best Practices</h4>
-<h4>Bash Scripting Best Practices</h4>
-<h4>Bash Scripting Best Practices</h4>
-<h4>Bash Scripting Best Practices</h4>
-<h4>Bash Scripting Best Practices</h4>
-<h4>Bash Scripting Best Practices</h4>
-<h4>Bash Scripting Best Practices</h4>
-<p>Bash scripting remains one of the most critical skills for developers, DevOps engineers, and system administrators. Despite its age, Bash is everywhere -- from CI/CD pipelines to deployment scripts and system automation. Writing robust, maintainable shell scripts requires discipline and adherence to proven practices.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/bash-scripting-guide.png" alt="Bash Scripting Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Start with Strict Mode</h4>
+      <div class="article-body"><p>Bash scripting remains one of the most critical skills for developers, DevOps engineers, and system administrators. Despite its age, Bash is everywhere -- from CI/CD pipelines to deployment scripts and system automation. Writing robust, maintainable shell scripts requires discipline and adherence to proven practices.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/bash-scripting-guide.png" alt="Bash Scripting Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Start with Strict Mode</h2>
 <p>Every production Bash script should begin with strict mode settings that catch errors early:</p>
-<h4>!/usr/bin/env bash</h4>
+<h2>!/usr/bin/env bash</h2>
 <p>set -euo pipefail</p>
 <p>IFS=$'\n\t'</p>
 <ul>
@@ -154,26 +137,26 @@
 <p>exit 1</p>
 <p>}</p>
 <p>trap 'error_handler $LINENO' ERR</p>
-<h4>Use Functions for Modularity</h4>
+<h2>Use Functions for Modularity</h2>
 <p>Avoid writing long linear scripts. Break logic into functions with clear names:</p>
 <p>validate_input() { ... }</p>
 <p>process_file() { ... }</p>
 <p>send_notification() { ... }</p>
 <p>Declare all functions at the top of the script, followed by argument parsing, followed by the main execution flow. This makes the script readable and testable.</p>
-<h4>Prefer <code>[[ ]]</code> Over <code>[ ]</code></h4>
+<h2>Prefer <code>[[ ]]</code> Over <code>[ ]</code></h2>
 <p>The double-bracket <code>[[ ]]</code> construct is a Bash keyword with fewer surprises:</p>
 <p>if [[ -f "$file" &amp;&amp; "$name" == "prod" ]]; then</p>
 <p>echo "Matched"</p>
 <p>fi</p>
 <p>Unlike single brackets, double brackets handle empty variables safely, support pattern matching, and avoid word-splitting.</p>
-<h4>Quote Everything</h4>
+<h2>Quote Everything</h2>
 <p>Unquoted variables are one of the most common sources of bugs:</p>
-<h4>Wrong</h4>
+<h2>Wrong</h2>
 <p>if [ -f $file ]; then # breaks if file has spaces</p>
-<h4>Right</h4>
+<h2>Right</h2>
 <p>if [[ -f "$file" ]]; then</p>
 <p>Quote all variable expansions: <code>"$var"</code>, <code>"${array[@]}"</code>, and command substitutions <code>"$(command)"</code>.</p>
-<h4>Use <code>trap</code> for Cleanup</h4>
+<h2>Use <code>trap</code> for Cleanup</h2>
 <p>Always clean up temporary files and resources:</p>
 <p>cleanup() {</p>
 <p>rm -rf "$TEMP_DIR"</p>
@@ -181,7 +164,7 @@
 <p>}</p>
 <p>trap cleanup EXIT</p>
 <p>The <code>EXIT</code> trap fires regardless of why the script exits -- success, failure, or signal. For signal-specific handling, add separate traps for <code>INT</code> and <code>TERM</code>.</p>
-<h4>Argument Parsing with <code>getopts</code></h4>
+<h2>Argument Parsing with <code>getopts</code></h2>
 <p>Use <code>getopts</code> for reliable argument parsing instead of manual position checks:</p>
 <p>usage() { echo "Usage: $0 -f file -o output [-v]" &gt;&2; exit 1; }</p>
 <p>while getopts ":f:o:v" opt; do</p>
@@ -193,15 +176,15 @@
 <p>esac</p>
 <p>done</p>
 <p>This handles short flags robustly, including missing argument errors.</p>
-<h4>Use <code>readonly</code> and <code>declare -r</code></h4>
+<h2>Use <code>readonly</code> and <code>declare -r</code></h2>
 <p>Mark constants and configuration values as readonly:</p>
 <p>readonly MAX_RETRIES=3</p>
 <p>readonly CONFIG_PATH="/etc/myapp/config.yml"</p>
 <p>This prevents accidental overwrites and documents intent.</p>
-<h4>Prefer <code>printf</code> Over <code>echo</code></h4>
+<h2>Prefer <code>printf</code> Over <code>echo</code></h2>
 <p>The <code>echo</code> command behaves differently across shells and platforms. Use <code>printf</code> for portable, predictable output:</p>
 <p>printf "Processing file: %s\n" "$filename"</p>
-<h4>Logging with Timestamps</h4>
+<h2>Logging with Timestamps</h2>
 <p>Implement a simple logging function for better observability:</p>
 <p>log() {</p>
 <p>local level="$1"</p>
@@ -211,7 +194,7 @@
 <p>info() { log "INFO" "$@"; }</p>
 <p>error() { log "ERROR" "$@"; }</p>
 <p>Send logs to stderr so they don't interfere with stdout data output.</p>
-<h4>Validating Dependencies</h4>
+<h2>Validating Dependencies</h2>
 <p>Check required commands before proceeding:</p>
 <p>require() {</p>
 <p>for cmd in "$@"; do</p>
@@ -222,9 +205,9 @@
 <p>done</p>
 <p>}</p>
 <p>require jq curl openssl</p>
-<h4>Avoid <code>eval</code> and Backtick Substitution</h4>
+<h2>Avoid <code>eval</code> and Backtick Substitution</h2>
 <p>Never use <code>eval</code> unless absolutely necessary -- it is a security risk. Use <code>$()</code> instead of backticks for command substitution; <code>$()</code> nests cleanly and is visually distinct.</p>
-<h4>Use Arrays for Lists</h4>
+<h2>Use Arrays for Lists</h2>
 <p>Modern Bash supports arrays, which handle spaces correctly:</p>
 <p>files=()</p>
 <p>while IFS= read -r -d '' file; do</p>
@@ -234,22 +217,25 @@
 <p>process_file "$file"</p>
 <p>done</p>
 <p>The <code>-print0</code> / <code>read -d ''</code> pattern handles filenames with any special characters.</p>
-<h4>ShellCheck Integration</h4>
+<h2>ShellCheck Integration</h2>
 <p>Run <a href="https://www.shellcheck.net/">ShellCheck</a> as part of your CI pipeline. It catches hundreds of common pitfalls and enforces consistency. Integrate it with VS Code via the shellcheck extension for real-time feedback during editing.</p>
-<h4>Testing Bash Scripts</h4>
+<h2>Testing Bash Scripts</h2>
 <p>Use <code>bats</code> (Bash Automated Testing System) for unit testing:</p>
 <p>@test "validate_input rejects empty string" {</p>
 <p>run validate_input ""</p>
 <p>[[ "$status" -ne 0 ]]</p>
 <p>}</p>
 <p>Test your error handlers, edge cases with spaces, and exit codes.</p>
-<h4>Summary</h4>
+<h2>Summary</h2>
 <p>Bash scripting is not dead -- it is the glue that holds modern infrastructure together. By following these practices, you will write scripts that are robust, maintainable, and production-ready. Strict mode, proper quoting, function decomposition, traps, and ShellCheck validation will prevent the majority of common issues before they reach production.</p>
 <p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>.</p>
 <p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -261,7 +247,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/kubernetes-services-security.html" class="related-card">Kubernetes Security Best Practices</a><a href="/en/tech/terraform-infrastructure-code.html" class="related-card">Terraform Infrastructure as Code</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a><a href="/en/tech/microservices-communication.html" class="related-card">Microservices Communication Patterns</a></div>
+      <div class="related-grid"><a href="/en/tech/kubernetes-services-security.html" class="related-card"><span class="related-card-title">Kubernetes Security Best Practices</span><span class="related-card-desc">Essential Kubernetes security practices for pod security, network policies, RBAC, and secrets manage</span></a><a href="/en/tech/terraform-infrastructure-code.html" class="related-card"><span class="related-card-title">Terraform Infrastructure as Code</span><span class="related-card-desc">Master Terraform for managing cloud infrastructure with state management, modules, and production be</span></a><a href="/en/tech/github-actions-advanced.html" class="related-card"><span class="related-card-title">Advanced GitHub Actions Workflows</span><span class="related-card-desc">Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching </span></a><a href="/en/tech/microservices-communication.html" class="related-card"><span class="related-card-title">Microservices Communication Patterns</span><span class="related-card-desc">Compare synchronous and asynchronous communication patterns for microservices, with practical implem</span></a><a href="/en/tech/api-gateway-implementation.html" class="related-card"><span class="related-card-title">API Gateway Implementation Guide</span><span class="related-card-desc">Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformati</span></a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card"><span class="related-card-title">Helm Charts: Kubernetes Package Management</span><span class="related-card-desc">A comprehensive guide to Helm chart structure, templates, values management, dependency handling, an</span></a></div>
     </section>
     
   </div>

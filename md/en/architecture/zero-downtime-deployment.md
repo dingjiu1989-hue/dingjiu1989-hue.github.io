@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/zero-downtime-deployment.
 
 # Zero-Downtime Deployment Strategies
 
-## Zero-Downtime Deployment Strategies
-
-### Zero-Downtime Deployment Strategies
-
-#### Zero-Downtime Deployment Strategies
-
-#### Zero-Downtime Deployment Strategies
-
-#### Zero-Downtime Deployment Strategies
-
-#### Zero-Downtime Deployment Strategies
-
-#### Zero-Downtime Deployment Strategies
-
-#### Zero-Downtime Deployment Strategies
-
-#### Zero-Downtime Deployment Strategies
-
-#### Zero-Downtime Deployment Strategies
-
-#### Zero-Downtime Deployment Strategies
-
-#### Zero-Downtime Deployment Strategies
-
-#### Zero-Downtime Deployment Strategies
-
-#### Zero-Downtime Deployment Strategies
-
-#### Zero-Downtime Deployment Strategies
-
 Zero-downtime deployment ensures that application updates occur without interrupting user-facing service. As systems grow from hobby projects to business-critical platforms, deployment windows become unacceptable. Modern deployment strategies provide multiple approaches to achieving seamless updates, each with different tradeoffs in complexity, cost, and risk. 
 
 Rolling deployment replaces instances one at a time. The orchestrator spins up a new instance with the new version, health-checks it, and once healthy, terminates an old instance. This continues until all instances are updated. Rolling deployments require no additional infrastructure and work well with horizontal scaling. The disadvantage is backward compatibility issues during the update window — both old and new versions serve traffic simultaneously, so API changes must be backward compatible. 
@@ -69,3 +39,9 @@ The choice of deployment strategy depends on application architecture, team matu
 **See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Canary Deployments for Safe Releases](</en/architecture/canary-deployment.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
 
 **See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Canary Deployments for Safe Releases](</en/architecture/canary-deployment.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)

@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/etl-pipelines.html
 
 # Building ETL Pipelines: A Practical Guide
 
-## Building ETL Pipelines: A Practical Guide
-
-### Building ETL Pipelines: A Practical Guide
-
-#### Building ETL Pipelines: A Practical Guide
-
-#### Building ETL Pipelines: A Practical Guide
-
-#### Building ETL Pipelines: A Practical Guide
-
-#### Building ETL Pipelines: A Practical Guide
-
-#### Building ETL Pipelines: A Practical Guide
-
-#### Building ETL Pipelines: A Practical Guide
-
-#### Building ETL Pipelines: A Practical Guide
-
-#### Building ETL Pipelines: A Practical Guide
-
-#### Building ETL Pipelines: A Practical Guide
-
-#### Building ETL Pipelines: A Practical Guide
-
-#### Building ETL Pipelines: A Practical Guide
-
-#### Building ETL Pipelines: A Practical Guide
-
-#### Building ETL Pipelines: A Practical Guide
-
 ETL Pipeline Fundamentals 
 
 ETL (Extract, Transform, Load) pipelines move data from source systems to data warehouses. 
@@ -117,3 +87,9 @@ Choose batch for simplicity and streaming for real-time needs. Use Airflow for o
 **See also:** [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [Database Indexing Strategies](</en/database/database-indexing.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>)
 
 **See also:** [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [Database Indexing Strategies](</en/database/database-indexing.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>)
+
+**See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
+
+**See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
+
+**See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)

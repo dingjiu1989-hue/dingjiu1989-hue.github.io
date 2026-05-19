@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/soa-vs-microservices.html
 
 # SOA vs Microservices
 
-## SOA vs Microservices
-
-### SOA vs Microservices
-
-#### SOA vs Microservices
-
-#### SOA vs Microservices
-
-#### SOA vs Microservices
-
-#### SOA vs Microservices
-
-#### SOA vs Microservices
-
-#### SOA vs Microservices
-
-#### SOA vs Microservices
-
-#### SOA vs Microservices
-
-#### SOA vs Microservices
-
-#### SOA vs Microservices
-
-#### SOA vs Microservices
-
-#### SOA vs Microservices
-
-#### SOA vs Microservices
-
 Service-Oriented Architecture (SOA) and microservices share the fundamental principle of decomposing systems into independently deployable services, but they differ substantially in scope, granularity, governance, and infrastructure philosophy. Understanding these differences is critical for architects choosing between or integrating both approaches. 
 
 Granularity is the most visible distinction. SOA services tend to be coarse-grained, often representing entire business capabilities like "Customer Management" or "Order Processing." These services typically expose multiple operations and manage comprehensive data domains. Microservices aim for fine-grained decomposition, where a single service might handle only "Address Validation" or "Payment Authorization." The microservice philosophy favors services small enough to be rewritten in a sprint or two, owned by a single team. 
@@ -65,3 +35,9 @@ Neither approach is universally superior. SOA's mature governance and integratio
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
 
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [DDD Tactical Patterns](</en/architecture/ddd-tactical.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [DDD Tactical Patterns](</en/architecture/ddd-tactical.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [DDD Tactical Patterns](</en/architecture/ddd-tactical.html>)

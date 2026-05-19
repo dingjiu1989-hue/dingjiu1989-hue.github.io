@@ -8,47 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/tech/terraform-infrastructure-code.htm
 
 # Terraform Infrastructure as Code
 
-## Terraform Infrastructure as Code
-
-### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
-#### Terraform Infrastructure as Code
-
 Terraform has become the standard tool for Infrastructure as Code (IaC). It allows you to define, provision, and manage cloud resources across providers using declarative configuration. This guide covers practical Terraform patterns for production use.
 
-#### Core Concepts
+## Core Concepts
 
 Terraform uses a declarative approach -- you describe the desired state, and Terraform figures out how to reach it:
 
-#### main.tf
+## main.tf
 
 terraform {
 
@@ -100,15 +66,15 @@ Environment = "production"
 
 Key components: providers connect to cloud APIs, resources define infrastructure components, and the backend stores state.
 
-#### State Management
+## State Management
 
 State is the most critical part of Terraform. It maps configuration to real-world resources.
 
-#### Remote State Backend
+## Remote State Backend
 
 Always use remote state storage with locking:
 
-#### backend configuration during init: terraform init -backend-config=backend.hcl
+## backend configuration during init: terraform init -backend-config=backend.hcl
 
 bucket = "company-terraform-state"
 
@@ -122,7 +88,7 @@ encrypt = true
 
 DynamoDB provides state locking to prevent concurrent modifications. S3 versioning provides state history for rollback.
 
-#### State Access for Other Configurations
+## State Access for Other Configurations
 
 Share outputs across configurations:
 
@@ -148,11 +114,11 @@ subnet_id = data.terraform_remote_state.vpc.outputs.private_subnet_ids[0]
 
 }
 
-#### Module Design
+## Module Design
 
 Modules are reusable Terraform configurations. Design them for composability:
 
-#### modules/vpc/main.tf
+## modules/vpc/main.tf
 
 variable "vpc_cidr" {
 
@@ -210,11 +176,11 @@ value = aws_vpc.this.cidr_block
 
 Use input validation to catch errors early. Document all variables and outputs with descriptions.
 
-#### Workspace and Environment Management
+## Workspace and Environment Management
 
 Use workspaces or directory structure for environment isolation:
 
-#### Directory structure:
+## Directory structure:
 
 terraform/
 
@@ -244,31 +210,31 @@ terraform plan -var-file=staging.tfvars
 
 Workspaces are simpler but can become confusing with many environments. Directory-based separation is clearer for complex setups.
 
-#### Terraform Plan and Apply Workflow
+## Terraform Plan and Apply Workflow
 
 The standard workflow in CI/CD:
 
-#### Initialize with backend
+## Initialize with backend
 
 terraform init -backend-config=backend-$ENV.hcl
 
-#### Format and validate
+## Format and validate
 
 terraform fmt -check
 
 terraform validate
 
-#### Plan
+## Plan
 
 terraform plan -out=tfplan -var-file=$ENV.tfvars
 
-#### Apply (typically in CI with approval gate)
+## Apply (typically in CI with approval gate)
 
 terraform apply tfplan
 
 Never run `terraform apply` without a plan file in CI. Always review the plan output before applying.
 
-#### Managing Secrets
+## Managing Secrets
 
 Never hardcode secrets. Use variables with sensitive flag:
 
@@ -298,21 +264,21 @@ secret_id = "production/db/password"
 
 }
 
-#### Testing Terraform Code
+## Testing Terraform Code
 
-#### `terraform plan` as a Test
+## `terraform plan` as a Test
 
 Run `terraform plan` in CI to detect drift and validate changes without applying:
 
 terraform plan -detailed-exitcode
 
-#### Exit code 0: no changes
+## Exit code 0: no changes
 
-#### Exit code 1: error
+## Exit code 1: error
 
-#### Exit code 2: changes needed
+## Exit code 2: changes needed
 
-#### Terratest for Integration Tests
+## Terratest for Integration Tests
 
 // test/vpc_test.go
 
@@ -342,7 +308,7 @@ assert.NotEmpty(t, output)
 
 }
 
-#### Common Pitfalls
+## Common Pitfalls
 
   * **State file leaks** : Never commit state files to Git. Use `.gitignore` and remote backends.
 
@@ -367,11 +333,11 @@ prevent_destroy = true
 
 
 
-#### Sentinel and Policy as Code
+## Sentinel and Policy as Code
 
 For teams, enforce policies with Sentinel (HashiCorp Enterprise) or Open Policy Agent:
 
-#### Deny public S3 buckets
+## Deny public S3 buckets
 
 deny[msg] {
 
@@ -385,7 +351,7 @@ msg := "S3 buckets must not be publicly readable"
 
 }
 
-#### Summary
+## Summary
 
 Terraform brings software engineering practices to infrastructure. Use remote state with locking, compose resources into modules, separate environments, and integrate planning into CI/CD. Never hardcode secrets, always validate configurations, and protect critical resources from accidental destruction. With these practices, Terraform enables infrastructure that is versioned, reviewable, reproducible, and auditable.
 
@@ -400,3 +366,9 @@ Terraform brings software engineering practices to infrastructure. Use remote st
 **See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>)
 
 **See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>)
+
+**See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>)
+
+**See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>)
+
+**See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>)

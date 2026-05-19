@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/saga-choreography.html
 
 # Saga Choreography Pattern
 
-## Saga Choreography Pattern
-
-### Saga Choreography Pattern
-
-#### Saga Choreography Pattern
-
-#### Saga Choreography Pattern
-
-#### Saga Choreography Pattern
-
-#### Saga Choreography Pattern
-
-#### Saga Choreography Pattern
-
-#### Saga Choreography Pattern
-
-#### Saga Choreography Pattern
-
-#### Saga Choreography Pattern
-
-#### Saga Choreography Pattern
-
-#### Saga Choreography Pattern
-
-#### Saga Choreography Pattern
-
-#### Saga Choreography Pattern
-
-#### Saga Choreography Pattern
-
 Saga choreography distributes saga execution across participating services through event-driven coordination. There is no central coordinator — each service performs its local transaction, publishes an event, and subscribes to events that trigger its next action. This decentralized approach maximizes autonomy and minimizes coupling, making it attractive for systems where team independence and service evolution are paramount. 
 
 In a choreographed saga, each service owns its part of the workflow. When the Order Service creates an order, it publishes OrderCreated. The Payment Service subscribes to OrderCreated, processes payment, and publishes PaymentProcessed. The Inventory Service subscribes to PaymentProcessed, reserves stock, and publishes InventoryReserved. The Shipping Service subscribes to InventoryReserved and schedules shipment. The workflow emerges from these chains of reactions. 
@@ -69,3 +39,9 @@ Production experience suggests starting with orchestration for critical workflow
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
 
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/security-engineer-interview.png",
       "datePublished": "2026-03-19",
       "dateModified": "2026-05-02",
-      "wordCount": "1361",
+      "wordCount": "1345",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,27 +99,12 @@
       <h1 class="article-title">Security Engineer Interview</h1>
       <div class="article-meta">Published 2026-03-19 · Last active 2026-05-02 · 240 views · 2 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/security-engineer-interview.png" alt="Security Engineer Interview" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Security Engineer Interview</h2>
-<h3>Security Engineer Interview</h3>
-<h4>Security Engineer Interview</h4>
-<h4>Security Engineer Interview</h4>
-<h4>Security Engineer Interview</h4>
-<h4>Security Engineer Interview</h4>
-<h4>Security Engineer Interview</h4>
-<h4>Security Engineer Interview</h4>
-<h4>Security Engineer Interview</h4>
-<h4>Security Engineer Interview</h4>
-<h4>Security Engineer Interview</h4>
-<h4>Security Engineer Interview</h4>
-<h4>Security Engineer Interview</h4>
-<h4>Security Engineer Interview</h4>
-<h4>Security Engineer Interview</h4>
-<p>Interview Structure </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/security-engineer-interview.png" alt="Security Engineer Interview" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Interview Structure </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/security-engineer-interview.png" alt="Security Engineer Interview" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Security engineer interviews typically cover: security fundamentals, hands-on exercises, system design, and behavioral scenarios. </p>
 <p>Core Knowledge Topics </p>
 <p>Cryptography </p>
 <p>Understand encryption algorithms and their properties: </p>
-<h4>Interview question: Implement a secure password hasher</h4>
+<h2>Interview question: Implement a secure password hasher</h2>
 <p>import hashlib</p>
 <p>import os</p>
 <p>def hash_password(password):</p>
@@ -127,13 +112,13 @@
 <p>import bcrypt</p>
 <p>salt = bcrypt.gensalt(rounds=12)</p>
 <p>return bcrypt.hashpw(password.encode(), salt)</p>
-<h4>Follow-up: Why not SHA-256?</h4>
-<h4>Answer: SHA-256 is fast, making brute-force feasible.</h4>
-<h4>bcrypt/argon2 are deliberately slow and include salt.</h4>
-<h4>Follow-up: What about MD5?</h4>
-<h4>Answer: MD5 is broken for collision resistance. Never use.</h4>
+<h2>Follow-up: Why not SHA-256?</h2>
+<h2>Answer: SHA-256 is fast, making brute-force feasible.</h2>
+<h2>bcrypt/argon2 are deliberately slow and include salt.</h2>
+<h2>Follow-up: What about MD5?</h2>
+<h2>Answer: MD5 is broken for collision resistance. Never use.</h2>
 <p>Network Security </p>
-<h4>Interview question: Implement a simple port scanner</h4>
+<h2>Interview question: Implement a simple port scanner</h2>
 <p>import socket</p>
 <p>def scan_port(host, port, timeout=1):</p>
 <p>sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</p>
@@ -141,12 +126,12 @@
 <p>result = sock.connect_ex((host, port))</p>
 <p>sock.close()</p>
 <p>return result == 0</p>
-<h4>Follow-up: How would you scan without being detected?</h4>
-<h4>Answer: Use SYN scan (stealth scan), randomize port order,</h4>
-<h4>and introduce delays between probes.</h4>
+<h2>Follow-up: How would you scan without being detected?</h2>
+<h2>Answer: Use SYN scan (stealth scan), randomize port order,</h2>
+<h2>and introduce delays between probes.</h2>
 <p>System Design Questions </p>
 <p>Design a Secure Authentication System </p>
-<h4>High-level design</h4>
+<h2>High-level design</h2>
 <p>class SecureAuthSystem:</p>
 <p>components = [</p>
 <p>"Rate limiter (token bucket per IP)",</p>
@@ -182,7 +167,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Database encryption keys</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Secret encryption keys</p>
 <p>Practical Exercise </p>
-<h4>Exercise: Security incident investigation</h4>
+<h2>Exercise: Security incident investigation</h2>
 <p>incident_logs = [</p>
 <p>{"time": "10:00", "user": "alice", "event": "login", "ip": "192.168.1.1"},</p>
 <p>{"time": "10:01", "user": "alice", "event": "login_failed", "ip": "10.0.0.5"},</p>
@@ -193,16 +178,16 @@
 <p>{"time": "10:06", "user": "alice", "event": "export_data", "ip": "10.0.0.5"},</p>
 <p>{"time": "10:07", "user": "alice", "event": "delete_logs", "ip": "10.0.0.5"},</p>
 <p>]</p>
-<h4>Questions:</h4>
-<h4>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What indicators of compromise do you see?</h4>
-<h4>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What is the likely attack vector?</h4>
-<h4>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What immediate containment actions?</h4>
-<h4>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What forensic data would you collect?</h4>
-<h4>Analysis:</h4>
-<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- IP change: 192.168.1.1 (corp) -&gt; 10.0.0.5 (internal)</h4>
-<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Brute force pattern: 4 failed logins</h4>
-<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Suspicious actions after login: data export + log deletion</h4>
-<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Likely: credential stuffing -&gt; account takeover -&gt; data exfiltration</h4>
+<h2>Questions:</h2>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What indicators of compromise do you see?</h2>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What is the likely attack vector?</h2>
+<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What immediate containment actions?</h2>
+<h2>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What forensic data would you collect?</h2>
+<h2>Analysis:</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- IP change: 192.168.1.1 (corp) -&gt; 10.0.0.5 (internal)</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Brute force pattern: 4 failed logins</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Suspicious actions after login: data export + log deletion</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Likely: credential stuffing -&gt; account takeover -&gt; data exfiltration</h2>
 <p>Behavioral Questions </p>
 <p>Be prepared to discuss: </p>
 <ul>
@@ -228,7 +213,10 @@
 <p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p>
 <p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p>
 <p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p>
-<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p>
+<p><strong>See also:</strong> <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -240,7 +228,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/bug-bounty.html" class="related-card">Bug Bounty Guide</a><a href="/en/security/microservice-security.html" class="related-card">Microservice Security</a><a href="/en/security/security-metrics.html" class="related-card">Security Metrics and Reporting</a><a href="/en/security/soc-operations.html" class="related-card">SOC Operations</a></div>
+      <div class="related-grid"><a href="/en/security/bug-bounty.html" class="related-card"><span class="related-card-title">Bug Bounty Guide</span><span class="related-card-desc">Practical guide to bug bounty hunting including vulnerability discovery techniques, report writing, </span></a><a href="/en/security/microservice-security.html" class="related-card"><span class="related-card-title">Microservice Security</span><span class="related-card-desc">Comprehensive guide to microservice security covering service mesh mTLS, API gateways, secret distri</span></a><a href="/en/security/security-metrics.html" class="related-card"><span class="related-card-title">Security Metrics and Reporting</span><span class="related-card-desc">Guide to security metrics covering KPIs and KRIs, dashboard design, board-level reporting, benchmark</span></a><a href="/en/security/soc-operations.html" class="related-card"><span class="related-card-title">SOC Operations</span><span class="related-card-desc">Practical guide to Security Operations Center operations including tier model, SIEM tuning, playbook</span></a><a href="/en/security/software-signing.html" class="related-card"><span class="related-card-title">Software Signing</span><span class="related-card-desc">Implementing software signing with GPG, Sigstore, cosign, and in-toto attestations for supply chain </span></a><a href="/en/security/encryption-key-management.html" class="related-card"><span class="related-card-title">Encryption Key Management Best Practices</span><span class="related-card-desc">Encryption key management: key lifecycle, HSM, KMS, key rotation, and secure key storage for product</span></a></div>
     </section>
     
   </div>

@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-indexing.html
 
 # Database Indexing Strategies
 
-## Database Indexing Strategies
-
-### Database Indexing Strategies
-
-#### Database Indexing Strategies
-
-#### Database Indexing Strategies
-
-#### Database Indexing Strategies
-
-#### Database Indexing Strategies
-
-#### Database Indexing Strategies
-
-#### Database Indexing Strategies
-
-#### Database Indexing Strategies
-
-#### Database Indexing Strategies
-
-#### Database Indexing Strategies
-
-#### Database Indexing Strategies
-
-#### Database Indexing Strategies
-
-#### Database Indexing Strategies
-
-#### Database Indexing Strategies
-
 What Is Database Indexing? 
 
 A database index is a data structure that improves the speed of data retrieval operations on a table at the cost of additional writes and storage space. Think of it like a book's index: instead of flipping through every page to find a topic, you look up the topic in the index and go directly to the right page. 
@@ -223,3 +193,9 @@ Indexes are the most impactful performance optimization for database queries. Us
 **See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained](</en/tech/database-indexing-guide.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
 
 **See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained](</en/tech/database-indexing-guide.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
+
+**See also:** [B-Tree, Hash, GiST, GIN: Index Type Selection Guide](</en/database/database-index-types.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
+
+**See also:** [B-Tree, Hash, GiST, GIN: Index Type Selection Guide](</en/database/database-index-types.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
+
+**See also:** [B-Tree, Hash, GiST, GIN: Index Type Selection Guide](</en/database/database-index-types.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)

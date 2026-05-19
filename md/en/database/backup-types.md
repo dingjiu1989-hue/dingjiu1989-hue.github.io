@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/backup-types.html
 
 # Database Backup Types: Full, Incremental, Differential, WAL Archiving
 
-## Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
-### Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
-#### Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
-#### Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
-#### Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
-#### Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
-#### Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
-#### Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
-#### Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
-#### Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
-#### Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
-#### Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
-#### Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
-#### Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
-#### Database Backup Types: Full, Incremental, Differential, WAL Archiving
-
 Database Backup Types: Full, Incremental, Differential, WAL Archiving 
 
 No database backup strategy is complete until it has been tested with a real restoration. This article covers backup types, PostgreSQL-specific tools, and how to implement point-in-time recovery (PITR). 
@@ -48,15 +18,15 @@ Full Backup
 
 A full backup copies the entire database cluster. It is the foundation of any backup strategy. 
 
-#### PostgreSQL full backup with pg_dump (logical)
+## PostgreSQL full backup with pg_dump (logical)
 
 pg_dump -h localhost -U admin -Fc -f prod_backup.dump proddb
 
-#### Or directory format for parallel dumps
+## Or directory format for parallel dumps
 
 pg_dump -h localhost -U admin -Fd -j 4 -f /backups/proddb proddb
 
-#### Physical full backup with pg_basebackup
+## Physical full backup with pg_basebackup
 
 pg_basebackup -h localhost -U replicator \
 
@@ -70,9 +40,9 @@ Incremental Backup
 
 An incremental backup captures only changes since the last backup (of any type). PostgreSQL achieves this via WAL archiving: 
 
-#### Archive WAL segments continuously
+## Archive WAL segments continuously
 
-#### In postgresql.conf:
+## In postgresql.conf:
 
 archive_mode = on
 
@@ -94,7 +64,7 @@ WAL archiving is PostgreSQL's mechanism for continuous archiving. Combined with 
 
 Configuration 
 
-#### postgresql.conf
+## postgresql.conf
 
 wal_level = replica
 
@@ -108,7 +78,7 @@ Recovery
 
 To restore to a specific point in time: 
 
-#### recovery.signal (or standby.signal for replica)
+## recovery.signal (or standby.signal for replica)
 
 restore_command = 'aws s3 cp s3://my-backups/wal/%f %p'
 
@@ -120,13 +90,13 @@ Start PostgreSQL. It replays WAL segments until it reaches the target time and t
 
 Complete PITR Workflow 
 
-#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Take a base backup
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Take a base backup
 
 pg_basebackup -h prod-db -U replicator -D /backups/base_20260512 -X stream
 
-#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Archive WAL continuously (configured in postgresql.conf)
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Archive WAL continuously (configured in postgresql.conf)
 
-#### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore to a point in time
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore to a point in time
 
 mkdir /var/lib/postgresql/restored
 
@@ -180,23 +150,23 @@ pgBackRest
 
 pgBackRest is the most popular dedicated backup tool for PostgreSQL: 
 
-#### Configure stanza
+## Configure stanza
 
 pgbackrest --stanza=prod stanza-create
 
-#### Full backup
+## Full backup
 
 pgbackrest --stanza=prod --type=full backup
 
-#### Incremental backup (default)
+## Incremental backup (default)
 
 pgbackrest --stanza=prod --type=incr backup
 
-#### List backups
+## List backups
 
 pgbackrest --stanza=prod info
 
-#### Restore to specific point
+## Restore to specific point
 
 pgbackrest --stanza=prod --type=time \
 
@@ -206,9 +176,9 @@ Testing Backups
 
 A backup that cannot be restored is worthless. Regular restore testing is mandatory: 
 
-#### Automated restore test script
+## Automated restore test script
 
-#### !/bin/bash
+## !/bin/bash
 
 set -e
 
@@ -258,3 +228,9 @@ The 3-2-1 rule applies to databases: three copies of data, on two different medi
 **See also:** [Database Backup Strategies to Object Storage](</en/database/database-backup-to-s3.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
 
 **See also:** [Database Backup Strategies to Object Storage](</en/database/database-backup-to-s3.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)

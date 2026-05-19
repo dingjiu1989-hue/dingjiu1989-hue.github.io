@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/monolith-first-strategy.h
 
 # Monolith-First Strategy
 
-## Monolith-First Strategy
-
-### Monolith-First Strategy
-
-#### Monolith-First Strategy
-
-#### Monolith-First Strategy
-
-#### Monolith-First Strategy
-
-#### Monolith-First Strategy
-
-#### Monolith-First Strategy
-
-#### Monolith-First Strategy
-
-#### Monolith-First Strategy
-
-#### Monolith-First Strategy
-
-#### Monolith-First Strategy
-
-#### Monolith-First Strategy
-
-#### Monolith-First Strategy
-
-#### Monolith-First Strategy
-
-#### Monolith-First Strategy
-
 The monolith-first strategy advocates starting new systems as a well-structured monolith rather than diving directly into microservices. This approach recognizes that early in a product's lifecycle, the primary risk is product-market fit, not scaling. Premature microservice decomposition introduces accidental complexity — distributed transaction management, network latency, service discovery, and operational overhead — before the domain boundaries are understood. 
 
 The decision to start monolithic does not mean abandoning SOA principles. A modular monolith with clear internal boundaries, strict module dependencies, and well-defined APIs can be created from the outset. This allows teams to iterate rapidly while deferring the cost of distribution until concrete extraction patterns emerge from actual usage data rather than speculative design. 
@@ -65,3 +35,9 @@ When to avoid monolith-first: if the system is inherently distributed (IoT data 
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>)
 
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>)
+
+**See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)
+
+**See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)
+
+**See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)

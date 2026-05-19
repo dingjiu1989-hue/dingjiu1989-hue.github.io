@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/mfa-implementation.html
 
 # MFA Implementation
 
-## MFA Implementation
-
-### MFA Implementation
-
-#### MFA Implementation
-
-#### MFA Implementation
-
-#### MFA Implementation
-
-#### MFA Implementation
-
-#### MFA Implementation
-
-#### MFA Implementation
-
-#### MFA Implementation
-
-#### MFA Implementation
-
-#### MFA Implementation
-
-#### MFA Implementation
-
-#### MFA Implementation
-
-#### MFA Implementation
-
-#### MFA Implementation
-
 MFA Fundamentals 
 
 Multi-factor authentication requires two or more factors: something you know (password), something you have (phone), or something you are (biometric). 
@@ -86,7 +56,7 @@ def verify_code(self, secret, code):
 
 totp = pyotp.TOTP(secret)
 
-#### Allow 1 step before/after for clock drift
+## Allow 1 step before/after for clock drift
 
 return totp.verify(code, valid_window=1)
 
@@ -277,3 +247,9 @@ MFA is essential but must be implemented thoughtfully. TOTP offers the best bala
 **See also:** [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Passwordless Authentication](</en/security/passwordless-auth.html>)
 
 **See also:** [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Passwordless Authentication](</en/security/passwordless-auth.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Data Classification](</en/security/data-classification.html>), [Database Encryption](</en/security/database-encryption.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Data Classification](</en/security/data-classification.html>), [Database Encryption](</en/security/database-encryption.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Data Classification](</en/security/data-classification.html>), [Database Encryption](</en/security/database-encryption.html>)

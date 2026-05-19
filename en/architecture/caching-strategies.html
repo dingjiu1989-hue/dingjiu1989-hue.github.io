@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-strategies.png",
       "datePublished": "2026-04-20",
       "dateModified": "2026-05-05",
-      "wordCount": "2511",
+      "wordCount": "2407",
       "keywords": "Architecture, System Design",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
       "inLanguage": "en",
@@ -98,22 +98,7 @@
       <h1 class="article-title">Caching Strategies and Patterns in Distributed Systems</h1>
       <div class="article-meta">Published 2026-04-20 · Last active 2026-05-05 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-strategies.png" alt="Caching Strategies and Patterns in Distributed Systems" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Caching Strategies and Patterns in Distributed Systems</h2>
-<h3>Caching Strategies and Patterns in Distributed Systems</h3>
-<h4>Caching Strategies and Patterns in Distributed Systems</h4>
-<h4>Caching Strategies and Patterns in Distributed Systems</h4>
-<h4>Caching Strategies and Patterns in Distributed Systems</h4>
-<h4>Caching Strategies and Patterns in Distributed Systems</h4>
-<h4>Caching Strategies and Patterns in Distributed Systems</h4>
-<h4>Caching Strategies and Patterns in Distributed Systems</h4>
-<h4>Caching Strategies and Patterns in Distributed Systems</h4>
-<h4>Caching Strategies and Patterns in Distributed Systems</h4>
-<h4>Caching Strategies and Patterns in Distributed Systems</h4>
-<h4>Caching Strategies and Patterns in Distributed Systems</h4>
-<h4>Caching Strategies and Patterns in Distributed Systems</h4>
-<h4>Caching Strategies and Patterns in Distributed Systems</h4>
-<h4>Caching Strategies and Patterns in Distributed Systems</h4>
-<p>Caching is the single most effective performance optimization in distributed systems. A well-designed cache reduces database load, decreases response latency, and improves system throughput. This article covers the major caching patterns, eviction policies, distributed caching with Redis, CDN caching, and the hardest problem in computer science: cache invalidation. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-strategies.png" alt="Caching Strategies and Patterns in Distributed Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Caching is the single most effective performance optimization in distributed systems. A well-designed cache reduces database load, decreases response latency, and improves system throughput. This article covers the major caching patterns, eviction policies, distributed caching with Redis, CDN caching, and the hardest problem in computer science: cache invalidation. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-strategies.png" alt="Caching Strategies and Patterns in Distributed Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Caching Patterns </p>
 <p>Cache-Aside (Lazy Loading) </p>
 <p>Cache-aside is the most common caching pattern. The application checks the cache first. On a cache miss, it reads from the database and populates the cache. </p>
@@ -122,21 +107,21 @@
 <p>self.cache = cache</p>
 <p>self.database = database</p>
 <p>def get_user(self, user_id):</p>
-<h4>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache first</h4>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache first</h2>
 <p>cached = self.cache.get(f"user:{user_id}")</p>
 <p>if cached is not None:</p>
 <p>return cached</p>
-<h4>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss: read from database</h4>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss: read from database</h2>
 <p>user = self.database.query("SELECT * FROM users WHERE id = ?", user_id)</p>
 <p>if user:</p>
-<h4>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache for next time</h4>
+<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache for next time</h2>
 <p>self.cache.set(f"user:{user_id}", user, ttl=3600)</p>
 <p>return user</p>
 <p>def update_user(self, user_id, data):</p>
-<h4>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database</h4>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database</h2>
 <p>self.database.execute("UPDATE users SET name = ? WHERE id = ?",</p>
 <p>data['name'], user_id)</p>
-<h4>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Invalidate cache (not update!)</h4>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Invalidate cache (not update!)</h2>
 <p>self.cache.delete(f"user:{user_id}")</p>
 <p><strong>Advantages</strong> :</p>
 <ul>
@@ -169,10 +154,10 @@
 <p>self.cache = cache</p>
 <p>self.database = database</p>
 <p>def update_user(self, user_id, data):</p>
-<h4>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database</h4>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database</h2>
 <p>self.database.execute("UPDATE users SET name = ? WHERE id = ?",</p>
 <p>data['name'], user_id)</p>
-<h4>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache synchronously</h4>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache synchronously</h2>
 <p>user = self.database.query("SELECT * FROM users WHERE id = ?", user_id)</p>
 <p>self.cache.set(f"user:{user_id}", user, ttl=3600)</p>
 <p><strong>Advantages</strong> :</p>
@@ -212,7 +197,7 @@
 <p>"""Background task that flushes writes to database."""</p>
 <p>async def flusher():</p>
 <p>while True:</p>
-<h4>Batch writes and flush periodically</h4>
+<h2>Batch writes and flush periodically</h2>
 <p>batch = []</p>
 <p>for _ in range(100): # Batch size</p>
 <p>try:</p>
@@ -226,10 +211,10 @@
 <p>self._flush_to_database(batch)</p>
 <p>asyncio.create_task(flusher())</p>
 <p>def update_user(self, user_id, data):</p>
-<h4>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache immediately</h4>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache immediately</h2>
 <p>user = {<strong>self.cache.get(f"user:{user_id}", {}),</strong> data}</p>
 <p>self.cache.set(f"user:{user_id}", user)</p>
-<h4>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Queue database update</h4>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Queue database update</h2>
 <p>self.write_queue.put_nowait({</p>
 <p>"type": "update_user",</p>
 <p>"user_id": user_id,</p>
@@ -272,10 +257,10 @@
 <p>user = self.database.query("SELECT * FROM users WHERE id = ?", user_id)</p>
 <p>self.cache.set(f"user:{user_id}", user, ttl=3600)</p>
 <p>return user</p>
-<h4>Check if we should refresh</h4>
+<h2>Check if we should refresh</h2>
 <p>ttl = self.cache.ttl(f"user:{user_id}")</p>
 <p>if ttl &lt; 3600 * (1 - self.refresh_threshold):</p>
-<h4>Asynchronously refresh in background</h4>
+<h2>Asynchronously refresh in background</h2>
 <p>self._async_refresh(f"user:{user_id}", user_id)</p>
 <p>return cached</p>
 <p>def _async_refresh(self, cache_key, user_id):</p>
@@ -306,7 +291,7 @@
 <p>Distributed Caching with Redis </p>
 <p>Redis is the dominant distributed cache. It provides in-memory data structures, replication, persistence, and high availability. </p>
 <p>Redis Cluster Setup </p>
-<h4>docker-compose.yml for Redis Cluster</h4>
+<h2>docker-compose.yml for Redis Cluster</h2>
 <p>version: '3'</p>
 <p>services:</p>
 <p>redis-cluster:</p>
@@ -360,26 +345,26 @@
 <p>CDN Caching </p>
 <p>Content Delivery Networks (CDNs) cache static and dynamic content at edge locations close to users. </p>
 <p>Cache Control Headers </p>
-<h4>Nginx: Static asset caching headers</h4>
+<h2>Nginx: Static asset caching headers</h2>
 <p>location /static/ {</p>
 <p>expires 365d;</p>
 <p>add_header Cache-Control "public, immutable";</p>
 <p>}</p>
 <p>location /api/content/ {</p>
-<h4>Dynamic content: shorter cache</h4>
+<h2>Dynamic content: shorter cache</h2>
 <p>expires 5m;</p>
 <p>add_header Cache-Control "public, must-revalidate";</p>
 <p>}</p>
 <p>location /api/user/ {</p>
-<h4>Private content: no CDN caching</h4>
+<h2>Private content: no CDN caching</h2>
 <p>add_header Cache-Control "private, no-cache";</p>
 <p>}</p>
 <p>CDN Cache Invalidation </p>
-<h4>CloudFront: Invalidate specific paths</h4>
+<h2>CloudFront: Invalidate specific paths</h2>
 <p>aws cloudfront create-invalidation \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--distribution-id E123456 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--paths "/api/content/*" "/index.html"</p>
-<h4>Fastly: Purge by key</h4>
+<h2>Fastly: Purge by key</h2>
 <p>curl -X POST https://api.fastly.com/service/SERVICE/purge \</p>
 <p>-H "Fastly-Key: $API_KEY" \</p>
 <p>-H "Surrogate-Key: product:1234" \</p>
@@ -393,12 +378,12 @@
 <p>Limitation: data can be arbitrarily stale within the TTL window.</p>
 <p>Event-Driven Invalidation </p>
 <p>When data changes, publish an invalidation event. </p>
-<h4>Event-driven invalidation</h4>
+<h2>Event-driven invalidation</h2>
 <p>class EventDrivenCache:</p>
 <p>def <strong>init</strong>(self, cache, message_bus):</p>
 <p>self.cache = cache</p>
 <p>self.message_bus = message_bus</p>
-<h4>Subscribe to invalidation events</h4>
+<h2>Subscribe to invalidation events</h2>
 <p>self.message_bus.subscribe("cache.invalidate", self.handle_invalidation)</p>
 <p>def handle_invalidation(self, event):</p>
 <p>key = event.data['key']</p>
@@ -408,12 +393,12 @@
 <p>Invalidate (or update) the cache as part of the write transaction. </p>
 <p>def update_product(product_id, data):</p>
 <p>with transaction():</p>
-<h4>Update database</h4>
+<h2>Update database</h2>
 <p>db.execute("UPDATE products SET price = ? WHERE id = ?",</p>
 <p>data['price'], product_id)</p>
-<h4>Invalidate cache in same transaction if possible</h4>
+<h2>Invalidate cache in same transaction if possible</h2>
 <p>cache.delete(f"product:{product_id}")</p>
-<h4>Publish invalidation for other cache nodes</h4>
+<h2>Publish invalidation for other cache nodes</h2>
 <p>message_bus.publish("cache.invalidate", {"key": f"product:{product_id}"})</p>
 <p>Conclusion </p>
 <p>Choose cache-aside for most general-purpose caching. Use write-through when read consistency is critical. Use write-behind when write performance is paramount. Use refresh-ahead for predictable access patterns. Set appropriate TTLs as a safety net. Use Redis for distributed caching with proper cluster configuration. Use CDNs for content delivery to global users. Remember that cache invalidation is hard: prefer TTLs over complex invalidation logic, use event-driven invalidation when TTLs are insufficient, and always have a fallback to the original data source.</p>
@@ -421,7 +406,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -433,7 +421,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/cache-strategies.html" class="related-card">Caching Strategies</a><a href="/en/architecture/caching-http.html" class="related-card">HTTP Caching Architecture</a><a href="/en/architecture/bulkhead-pattern.html" class="related-card">Bulkhead Pattern for Resilience</a><a href="/en/architecture/rate-limiting-patterns.html" class="related-card">Rate Limiting Patterns</a></div>
+      <div class="related-grid"><a href="/en/architecture/cache-strategies.html" class="related-card"><span class="related-card-title">Caching Strategies</span><span class="related-card-desc">Compare write-through, write-around, write-back caching and invalidation strategies for distributed </span></a><a href="/en/architecture/caching-http.html" class="related-card"><span class="related-card-title">HTTP Caching Architecture</span><span class="related-card-desc">Cache-Control, ETags, CDN caching, stale-while-revalidate, and cache invalidation strategies</span></a><a href="/en/architecture/bulkhead-pattern.html" class="related-card"><span class="related-card-title">Bulkhead Pattern for Resilience</span><span class="related-card-desc">Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, ci</span></a><a href="/en/architecture/rate-limiting-patterns.html" class="related-card"><span class="related-card-title">Rate Limiting Patterns</span><span class="related-card-desc">Explore rate limiting patterns for protecting APIs and services from abuse — token bucket, sliding w</span></a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card"><span class="related-card-title">Circuit Breaker Pattern: Building Resilient Systems</span><span class="related-card-desc">Circuit breaker state machine (closed/open/half-open), implementation with Resilience4j, monitoring,</span></a><a href="/en/architecture/messaging-patterns.html" class="related-card"><span class="related-card-title">Messaging Patterns: Pub/Sub and Request/Reply</span><span class="related-card-desc">Explore messaging patterns including publish-subscribe and request-reply for distributed systems.</span></a></div>
     </section>
     
   </div>

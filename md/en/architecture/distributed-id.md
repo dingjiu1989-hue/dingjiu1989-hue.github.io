@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/distributed-id.html
 
 # Distributed ID Generation
 
-## Distributed ID Generation
-
-### Distributed ID Generation
-
-#### Distributed ID Generation
-
-#### Distributed ID Generation
-
-#### Distributed ID Generation
-
-#### Distributed ID Generation
-
-#### Distributed ID Generation
-
-#### Distributed ID Generation
-
-#### Distributed ID Generation
-
-#### Distributed ID Generation
-
-#### Distributed ID Generation
-
-#### Distributed ID Generation
-
-#### Distributed ID Generation
-
-#### Distributed ID Generation
-
-#### Distributed ID Generation
-
 Distributed ID generation is a foundational infrastructure concern for any system that spans multiple databases or services. IDs must be unique across all nodes, generate quickly without coordination, and often carry useful properties like time-orderedness, compactness, or security. The choice of ID generation strategy affects database performance, sorting behavior, and system complexity. 
 
 UUID v7 is the newest contender, standardized in RFC 9562. It generates time-ordered, random-based UUIDs. The first 48 bits contain a Unix timestamp with millisecond precision. The remaining bits contain random data. UUID v7 combines the ordering benefit of time-based IDs with the distribution properties of random IDs. Database indexes benefit from the time-ordered prefix, which reduces B-tree index fragmentation compared to purely random UUIDs. 
@@ -67,3 +37,9 @@ The choice depends on database technology, ID length constraints, ordering requi
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)

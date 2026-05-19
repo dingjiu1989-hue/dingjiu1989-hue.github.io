@@ -8,41 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/ai/model-evaluation-harness.html
 
 # Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
 
-## Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-#### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-#### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-#### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-#### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-#### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-#### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-#### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-#### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-#### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-#### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-#### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-#### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-#### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
-#### Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
-
 Choosing the right model for your application is not about picking the most powerful one. It is about picking the model that delivers sufficient quality at acceptable cost and latency. Here is how to build a model evaluation pipeline that gives you data-driven answers.
 
-#### Why Systematic Evaluation Matters
+## Why Systematic Evaluation Matters
 
 Model selection based on leaderboard scores or blog posts is unreliable. A model that scores highest on MMLU might perform poorly on your specific task. Your data distribution, prompt structure, and quality requirements are unique.
 
@@ -50,7 +18,7 @@ Systematic evaluation removes guesswork. You define what "good" means for your a
 
 Evaluation also catches regressions. New model versions from the same provider may have different behavior. Your evaluation suite tells you whether upgrading helps or hurts.
 
-#### Structured Benchmarks
+## Structured Benchmarks
 
 Public benchmarks like MMLU, HumanEval, and GSM8K measure general capabilities. They are useful for initial model screening but do not predict task-specific performance. A model strong on coding benchmarks may still fail at your customer support task.
 
@@ -60,7 +28,7 @@ Cover edge cases in your benchmarks. Include examples with ambiguous inputs, mul
 
 Automate benchmark execution. When evaluating a new model, your pipeline should run all benchmarks and generate a comparison report. Manual evaluation does not scale.
 
-#### Human Evaluation
+## Human Evaluation
 
 Human evaluation is the gold standard for quality assessment but is expensive and slow. Use it strategically for high-impact decisions.
 
@@ -70,7 +38,7 @@ Use at least three evaluators per example to average out individual bias. Inter-
 
 Focus human evaluation on the examples where automated metrics disagree. If LLM-as-judge and model-based scores consistently agree, human review adds little value. Reserve humans for the edge cases that automated systems cannot handle.
 
-#### LLM-as-Judge
+## LLM-as-Judge
 
 LLM-as-judge uses a strong model to evaluate other models' outputs. Provide the judge model with the task input, the candidate response, and a scoring rubric. The judge returns scores and sometimes explanations.
 
@@ -80,7 +48,7 @@ LLM-as-judge has known biases. It favors longer responses, responses from its ow
 
 Validate your LLM-as-judge setup against human evaluation. Run a pilot where humans and the judge evaluate the same examples. If agreement is below 80%, refine your rubric or judge instructions.
 
-#### A/B Testing in Production
+## A/B Testing in Production
 
 Benchmarks and offline evaluation measure controllable quality. They cannot measure user satisfaction, which is the metric that ultimately matters. Production A/B testing bridges this gap.
 
@@ -92,7 +60,7 @@ Run tests for sufficient duration. One week minimum, two weeks for statistically
 
 Monitor secondary metrics during the test. A model that increases conversion but doubles API cost might not be a net positive. Evaluate holistically.
 
-#### Building Your Evaluation Pipeline
+## Building Your Evaluation Pipeline
 
 Start simple. Create a benchmark of 50 task-specific examples. Run human evaluation on those 50 examples for your top two model candidates. Deploy the winner and A/B test in production.
 
@@ -111,3 +79,9 @@ The most expensive mistake is deploying a model based on vibes rather than evide
 **See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>)
 
 **See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>)
+
+**See also:** [AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing](</en/ai/ai-red-teaming.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>)
+
+**See also:** [AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing](</en/ai/ai-red-teaming.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>)
+
+**See also:** [AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing](</en/ai/ai-red-teaming.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>)

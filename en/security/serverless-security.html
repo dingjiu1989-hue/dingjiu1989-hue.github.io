@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/serverless-security.png",
       "datePublished": "2026-03-13",
       "dateModified": "2026-05-03",
-      "wordCount": "1403",
+      "wordCount": "1395",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">Serverless Security</h1>
       <div class="article-meta">Published 2026-03-13 · Last active 2026-05-03 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/serverless-security.png" alt="Serverless Security" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Serverless Security</h2>
-<h3>Serverless Security</h3>
-<h4>Serverless Security</h4>
-<h4>Serverless Security</h4>
-<h4>Serverless Security</h4>
-<h4>Serverless Security</h4>
-<h4>Serverless Security</h4>
-<h4>Serverless Security</h4>
-<h4>Serverless Security</h4>
-<h4>Serverless Security</h4>
-<h4>Serverless Security</h4>
-<h4>Serverless Security</h4>
-<h4>Serverless Security</h4>
-<h4>Serverless Security</h4>
-<h4>Serverless Security</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/serverless-security.png" alt="Serverless Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/serverless-security.png" alt="Serverless Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Serverless computing shifts operational responsibility to the cloud provider but introduces unique security challenges. Functions have expanded attack surfaces through event sources, third-party dependencies, and IAM roles. Understanding the serverless shared responsibility model is the first step toward securing these architectures. </p>
 <p>Function Permissions </p>
 <p>Serverless functions operate under IAM roles that should follow least privilege. Overly permissive roles are the most common serverless security issue. </p>
@@ -143,12 +128,12 @@
 <p>],</p>
 <p>"Resource": "arn:aws:dynamodb:us-east-1:123456789012:table/Orders"</p>
 <p>}</p>
-<h4>AWS Lambda function handler with minimal permissions</h4>
+<h2>AWS Lambda function handler with minimal permissions</h2>
 <p>import boto3</p>
 <p>import os</p>
 <p>TABLE_NAME = os.environ['TABLE_NAME']</p>
 <p>def handler(event, context):</p>
-<h4>The function IAM role only has access to this specific table</h4>
+<h2>The function IAM role only has access to this specific table</h2>
 <p>dynamodb = boto3.resource('dynamodb')</p>
 <p>table = dynamodb.Table(TABLE_NAME)</p>
 <p>order_id = event['order_id']</p>
@@ -164,33 +149,33 @@
 <p>if not all(key in event for key in required_keys):</p>
 <p>raise ValueError("Invalid S3 event structure")</p>
 <p>for record in event['Records']:</p>
-<h4>Validate S3 record structure</h4>
+<h2>Validate S3 record structure</h2>
 <p>s3 = record.get('s3', {})</p>
 <p>bucket = s3.get('bucket', {})</p>
 <p>obj = s3.get('object', {})</p>
 <p>if not bucket.get('name') or not obj.get('key'):</p>
 <p>raise ValueError("Invalid S3 record")</p>
-<h4>Validate object key to prevent path traversal</h4>
+<h2>Validate object key to prevent path traversal</h2>
 <p>key = obj['key']</p>
 <p>if '..' in key or key.startswith('/'):</p>
 <p>raise ValueError(f"Invalid object key: {key}")</p>
-<h4>Check file extension whitelist</h4>
+<h2>Check file extension whitelist</h2>
 <p>allowed_extensions = {'.csv', '.json', '.parquet'}</p>
 <p>if not any(key.endswith(ext) for ext in allowed_extensions):</p>
 <p>raise ValueError(f"Unsupported file type: {key}")</p>
 <p>return True</p>
 <p>def validate_api_gateway_event(event):</p>
 <p>"""Validate API Gateway proxy event."""</p>
-<h4>Validate HTTP method</h4>
+<h2>Validate HTTP method</h2>
 <p>allowed_methods = {'GET', 'POST', 'PUT', 'DELETE'}</p>
 <p>method = event.get('httpMethod')</p>
 <p>if method not in allowed_methods:</p>
 <p>raise ValueError(f"Invalid HTTP method: {method}")</p>
-<h4>Validate path parameters</h4>
+<h2>Validate path parameters</h2>
 <p>path = event.get('path', '')</p>
 <p>if not re.match(r'^/[a-zA-Z0-9/_-]+$', path):</p>
 <p>raise ValueError(f"Invalid path: {path}")</p>
-<h4>Validate query string parameters</h4>
+<h2>Validate query string parameters</h2>
 <p>params = event.get('queryStringParameters') or {}</p>
 <p>for key, value in params.items():</p>
 <p>if len(value) &gt; 1000:</p>
@@ -198,7 +183,7 @@
 <p>return True</p>
 <p>Cold Start Risks </p>
 <p>Cold starts occur when a function is invoked after being idle. They create windows where code is freshly loaded, which can be exploited. </p>
-<h4>Vulnerability scanner for cold start</h4>
+<h2>Vulnerability scanner for cold start</h2>
 <p>import importlib</p>
 <p>import sys</p>
 <p>class ColdStartScanner:</p>
@@ -221,12 +206,12 @@
 <p>'severity': vuln['severity']</p>
 <p>})</p>
 <p>return vulnerabilities</p>
-<h4>Dependencies: pin versions and scan regularly</h4>
-<h4>requirements.txt</h4>
+<h2>Dependencies: pin versions and scan regularly</h2>
+<h2>requirements.txt</h2>
 <p>requests==2.31.0</p>
 <p>pydantic==2.5.0</p>
 <p>cryptography==41.0.7</p>
-<h4>npm package.json</h4>
+<h2>npm package.json</h2>
 <p>{</p>
 <p>"dependencies": {</p>
 <p>"axios": "1.6.2",</p>
@@ -238,9 +223,9 @@
 <p>}</p>
 <p>Defense in Depth </p>
 <p>Serverless security requires multiple layers, as there is no host-based security (no antivirus, no host IDS). </p>
-<h4>Defense layer 1: Input validation at API Gateway</h4>
-<h4>Use request validation templates</h4>
-<h4>API Gateway JSON Schema validation</h4>
+<h2>Defense layer 1: Input validation at API Gateway</h2>
+<h2>Use request validation templates</h2>
+<h2>API Gateway JSON Schema validation</h2>
 <p>VALIDATION_SCHEMA = {</p>
 <p>"$schema": "http://json-schema.org/draft-04/schema#",</p>
 <p>"type": "object",</p>
@@ -250,20 +235,20 @@
 <p>},</p>
 <p>"required": ["email", "amount"]</p>
 <p>}</p>
-<h4>Defense layer 2: Function-level validation</h4>
+<h2>Defense layer 2: Function-level validation</h2>
 <p>def process_order(event, context):</p>
-<h4>Validate input structure</h4>
+<h2>Validate input structure</h2>
 <p>required_fields = ['user_id', 'product_id', 'quantity']</p>
 <p>for field in required_fields:</p>
 <p>if field not in event:</p>
 <p>return {'statusCode': 400, 'body': f'Missing field: {field}'}</p>
-<h4>Validate data types and ranges</h4>
+<h2>Validate data types and ranges</h2>
 <p>if not isinstance(event['quantity'], int) or event['quantity'] &lt; 1:</p>
 <p>return {'statusCode': 400, 'body': 'Invalid quantity'}</p>
-<h4>Defense layer 3: Principle of least function scope</h4>
-<h4>Each function should do ONE thing</h4>
+<h2>Defense layer 3: Principle of least function scope</h2>
+<h2>Each function should do ONE thing</h2>
 <p>return process_payment(event)</p>
-<h4>Defense layer 4: Encryption at rest and in transit</h4>
+<h2>Defense layer 4: Encryption at rest and in transit</h2>
 <p>from cryptography.fernet import Fernet</p>
 <p>def encrypt_sensitive_data(data, key):</p>
 <p>f = Fernet(key)</p>
@@ -283,7 +268,7 @@
 <p>'log_group': context.log_group_name,</p>
 <p>'timestamp': datetime.utcnow().isoformat()</p>
 <p>}</p>
-<h4>Don't log sensitive data</h4>
+<h2>Don't log sensitive data</h2>
 <p>self.logs.append(log_entry)</p>
 <p>print(json.dumps(log_entry))</p>
 <p>Conclusion </p>
@@ -292,7 +277,10 @@
 <p><strong>See also:</strong> <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
-<p><strong>See also:</strong> <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -304,7 +292,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/cors-security.html" class="related-card">CORS Security</a><a href="/en/security/secure-api-design.html" class="related-card">Secure API Design Principles</a><a href="/en/security/cloud-security-posture.html" class="related-card">Cloud Security Posture Management</a><a href="/en/security/email-security.html" class="related-card">Email Security</a></div>
+      <div class="related-grid"><a href="/en/security/cors-security.html" class="related-card"><span class="related-card-title">CORS Security</span><span class="related-card-desc">In-depth guide to CORS security covering proper origin validation, preflight handling, common miscon</span></a><a href="/en/security/secure-api-design.html" class="related-card"><span class="related-card-title">Secure API Design Principles</span><span class="related-card-desc">Guide to secure API design covering input validation, rate limiting, idempotency, error handling, an</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a><a href="/en/security/email-security.html" class="related-card"><span class="related-card-title">Email Security</span><span class="related-card-desc">Complete guide to email security covering SPF, DKIM, DMARC configuration, email gateway deployment, </span></a><a href="/en/security/input-validation.html" class="related-card"><span class="related-card-title">Input Validation Deep Dive</span><span class="related-card-desc">In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniqu</span></a><a href="/en/security/secure-configuration.html" class="related-card"><span class="related-card-title">Secure Configuration Management</span><span class="related-card-desc">Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detectio</span></a></div>
     </section>
     
   </div>

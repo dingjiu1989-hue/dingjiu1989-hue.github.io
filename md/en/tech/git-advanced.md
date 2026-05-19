@@ -125,4 +125,4 @@ commit-msg| After message is entered| Enforce message format
 pre-push| Before push to remote| Integration tests, security scans  
 post-checkout| After checkout/switching branches| Install dependencies if changed  
   
-**See also:** [Advanced Git Techniques for Developers](</en/tech/git-advanced-techniques.html>), [Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development](</en/tech/git-workflows-team-guide.html>), [GitHub vs GitLab vs Bitbucket (2026): Which Git Platform Is Best?](</en/compare/github-vs-gitlab-vs-bitbucket.html>)
+**See also:** [DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide](</en/tech/devops-for-developers.html>), [Environment Variables: The Complete Guide for Developers](</en/tech/environment-variables-guide.html>), [CI/CD Pipeline Complete Guide 2026: From Git Push to Production](</en/tech/ci-cd-pipeline-guide.html>)

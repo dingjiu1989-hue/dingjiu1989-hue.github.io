@@ -8,47 +8,15 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/dev-community-building.html
 
 # Developer Community Building: Discord, GitHub, Documentation, and Open Source
 
-## Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-#### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-#### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-#### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-#### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-#### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-#### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-#### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-#### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-#### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-#### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-#### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-#### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-#### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
-#### Developer Community Building: Discord, GitHub, Documentation, and Open Source
-
 If your customers are developers, traditional marketing is largely wasted. Developers do not respond to ads or email sequences. They respond to great documentation, active open-source repositories, and communities where they can get real help. Here is how to build a developer community around your product.
 
-#### Why Developer Communities Matter
+## Why Developer Communities Matter
 
 Developer tools sell differently than other SaaS products. Developers evaluate tools by reading docs, trying APIs, and asking peers. A strong community reduces your customer acquisition cost because members answer questions, create tutorials, and advocate for your product organically.
 
 Community-driven growth compounds. Each blog post, GitHub star, and Discord answer continues attracting developers months later. The community becomes a moat that competitors cannot easily replicate.
 
-#### Discord as the Hub
+## Discord as the Hub
 
 Discord has replaced Slack as the default community platform for developer tools. It is free, supports rich formatting, and developers already have it installed. Create channels for general discussion, help, feature requests, and show-and-tell.
 
@@ -58,7 +26,7 @@ Pin common questions and answers. Create a FAQ channel with solutions to frequen
 
 Encourage community members to help each other. When someone answers a question well, give them a helper role. Recognize top contributors in a weekly channel. A self-sustaining community where members answer each other's questions scales far beyond what you can handle alone.
 
-#### GitHub Presence
+## GitHub Presence
 
 Your GitHub profile is your storefront. Keep repositories well-organized with clear README files, contribution guidelines, and issue templates. Respond to issues within 24 hours. Thank contributors publicly.
 
@@ -66,7 +34,7 @@ Open-source your SDKs and libraries even if your core product is proprietary. De
 
 Use GitHub Discussions for longer-form conversations about roadmap, architecture, and best practices. Issues are for bugs and feature requests. Discussions are for community conversation.
 
-#### Documentation as Marketing
+## Documentation as Marketing
 
 Great documentation is the highest-ROI investment for developer tools. Developers will judge your entire product based on the quality of your docs. Bad docs mean users never reach the value.
 
@@ -74,7 +42,7 @@ Structure documentation with getting started guides, API references, tutorials, 
 
 Keep a public changelog. Developers want to know what changed and whether it affects their integration. A changelog page with dates, descriptions, and migration notes reduces support tickets and builds trust.
 
-#### Content for Developers
+## Content for Developers
 
 Developers consume technical content differently. They want depth, specificity, and honesty. Write tutorials that solve real problems rather than generic overviews. Compare your approach to alternatives and explain trade-offs honestly.
 
@@ -82,7 +50,7 @@ Publish architecture blog posts that share how you solved technical challenges. 
 
 Create video content for complex workflows. Screen recordings of setup processes, API integration, and debugging help visual learners. Keep videos under 10 minutes and include timestamps.
 
-#### Measuring Community Health
+## Measuring Community Health
 
 Track daily active members in Discord, response time to questions, and percentage of questions answered by community members (not your team). On GitHub, track issue closure time, pull request merge rate, and contributor count.
 
@@ -101,3 +69,9 @@ Building a developer community takes months, not weeks. Consistency matters more
 **See also:** [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring](</en/sidehustle/feature-prioritization.html>), [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>)
 
 **See also:** [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring](</en/sidehustle/feature-prioritization.html>), [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>)
+
+**See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>)
+
+**See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>)
+
+**See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>)

@@ -8,41 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/side-project-validation.htm
 
 # Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
 
-## Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-#### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-#### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-#### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-#### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-#### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-#### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-#### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-#### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-#### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-#### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-#### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-#### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-#### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
-#### Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
-
 Building a side project that nobody wants is the most common failure mode for indie hackers. Months of coding, zero users. The solution is validation before building. Here is a practical validation framework that takes two to four weeks.
 
-#### The Landing Page Test
+## The Landing Page Test
 
 Before writing a single line of code, create a landing page for your idea. This page should describe the problem, your solution, and include a call to action to join a waitlist or pre-order.
 
@@ -52,7 +20,7 @@ Tools like Carrd, Micro, or even a simple HTML page on Vercel work for landing p
 
 Drive traffic through communities where your target users hang out. Post in relevant subreddits, Hacker News, Indie Hackers, or niche Slack communities. If you cannot find communities where your target users gather, distribution will be a persistent challenge.
 
-#### Waitlist Management
+## Waitlist Management
 
 A waitlist serves two purposes. It validates demand, and it gives you a launch audience. Aim for at least 100 waitlist signups before committing to build. Fewer than that means you need to revisit your idea or your distribution.
 
@@ -60,7 +28,7 @@ Do not just collect emails. Ask waitlist members what problem they need solved. 
 
 Engage the waitlist weekly with updates. Share what you are building, ask questions, and build relationships. By launch time, these people should feel invested in your success.
 
-#### Customer Interviews
+## Customer Interviews
 
 Customer interviews are the highest-leverage validation activity. Talk to 10 to 20 potential users before building anything. These conversations will save you months of building the wrong thing.
 
@@ -68,7 +36,7 @@ Ask about their current workflow. How do they solve the problem today? What do t
 
 The most important question: "Would you pay for a solution to this problem?" Follow up with: "How much would you pay?" And: "Would you pay today if the solution existed?" Hypothetical willingness to pay is not reliable, but strong enthusiasm from multiple people is a positive signal.
 
-#### Competitor Analysis
+## Competitor Analysis
 
 If you have no competitors, that is usually a bad sign. It likely means there is no market. Healthy markets have multiple competitors, each with different approaches.
 
@@ -76,7 +44,7 @@ Analyze competitors thoroughly. What do users complain about in their reviews? W
 
 Be honest about your differentiation. "Better UX" is table stakes, not a competitive advantage. "Works offline when competitors require internet" is real differentiation.
 
-#### MVP Scoping
+## MVP Scoping
 
 Based on validation, scope your MVP ruthlessly. The MVP should solve one core problem well. Everything else is a distraction.
 
@@ -84,7 +52,7 @@ List every feature you think your product needs. Sort by "critical for solving t
 
 Set a build timeline. If the MVP takes more than four to six weeks of part-time work, scope is too large. Cut features until you can ship in four weeks. You can always add features after launch. You cannot un-build a six-month MVP that nobody uses.
 
-#### The Decision Point
+## The Decision Point
 
 After validation, you have enough information to decide. If you have 100 or more waitlist signups, positive interview signals, and a clearly differentiated MVP scope that you can build in four weeks, proceed. If any of those conditions are missing, iterate on your idea or move to the next one.
 
@@ -101,3 +69,9 @@ Validation does not guarantee success. But it dramatically improves your odds. T
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Bootstrapping a SaaS: From Idea to First Paying Customer](</en/sidehustle/saas-bootstrapping-guide.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>)
 
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Bootstrapping a SaaS: From Idea to First Paying Customer](</en/sidehustle/saas-bootstrapping-guide.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>)
+
+**See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
+
+**See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
+
+**See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)

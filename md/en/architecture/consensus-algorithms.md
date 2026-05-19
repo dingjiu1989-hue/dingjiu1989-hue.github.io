@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/consensus-algorithms.html
 
 # Consensus Algorithms: Paxos, Raft, Zab
 
-## Consensus Algorithms: Paxos, Raft, Zab
-
-### Consensus Algorithms: Paxos, Raft, Zab
-
-#### Consensus Algorithms: Paxos, Raft, Zab
-
-#### Consensus Algorithms: Paxos, Raft, Zab
-
-#### Consensus Algorithms: Paxos, Raft, Zab
-
-#### Consensus Algorithms: Paxos, Raft, Zab
-
-#### Consensus Algorithms: Paxos, Raft, Zab
-
-#### Consensus Algorithms: Paxos, Raft, Zab
-
-#### Consensus Algorithms: Paxos, Raft, Zab
-
-#### Consensus Algorithms: Paxos, Raft, Zab
-
-#### Consensus Algorithms: Paxos, Raft, Zab
-
-#### Consensus Algorithms: Paxos, Raft, Zab
-
-#### Consensus Algorithms: Paxos, Raft, Zab
-
-#### Consensus Algorithms: Paxos, Raft, Zab
-
-#### Consensus Algorithms: Paxos, Raft, Zab
-
 Consensus algorithms enable a group of distributed nodes to agree on a value despite failures. They are the foundation of replicated state machines, which underpin distributed databases, configuration stores, and coordination services. Three algorithms dominate production systems: Paxos, Raft, and Zab. Understanding their mechanics and tradeoffs is essential for architects designing fault-tolerant infrastructure. 
 
 Paxos, published by Leslie Lamport in 1989, was the first practical consensus algorithm. It operates in phases: prepare, promise, accept, and learned. A proposer selects a proposal number and sends prepare requests to acceptors. If a majority of acceptors promise to accept the highest-numbered proposal they have seen, the proposer sends an accept request with its value. Once a majority accepts, the value is chosen. Multi-Paxos extends this to a sequence of values with a distinguished leader for efficiency. 
@@ -69,3 +39,9 @@ Choosing between algorithms is less important than choosing a mature implementat
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/secure-code-review.png",
       "datePublished": "2026-03-19",
       "dateModified": "2026-05-15",
-      "wordCount": "1456",
+      "wordCount": "1449",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -110,26 +110,11 @@
       <h1 class="article-title">Secure Code Review</h1>
       <div class="article-meta">Published 2026-03-19 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-code-review.png" alt="Secure Code Review" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Secure Code Review</h2>
-<h3>Secure Code Review</h3>
-<h4>Secure Code Review</h4>
-<h4>Secure Code Review</h4>
-<h4>Secure Code Review</h4>
-<h4>Secure Code Review</h4>
-<h4>Secure Code Review</h4>
-<h4>Secure Code Review</h4>
-<h4>Secure Code Review</h4>
-<h4>Secure Code Review</h4>
-<h4>Secure Code Review</h4>
-<h4>Secure Code Review</h4>
-<h4>Secure Code Review</h4>
-<h4>Secure Code Review</h4>
-<h4>Secure Code Review</h4>
-<p>Why Secure Code Review? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-code-review.png" alt="Secure Code Review" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Why Secure Code Review? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-code-review.png" alt="Secure Code Review" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Secure code review catches vulnerabilities before they reach production. It complements automated scanning by finding logic flaws and business logic vulnerabilities that tools miss. </p>
 <p>The Security Review Checklist </p>
 <p>Every code review should check these categories: </p>
-<h4>secure-code-review-checklist.yaml</h4>
+<h2>secure-code-review-checklist.yaml</h2>
 <p>authentication:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are passwords hashed with bcrypt/argon2?</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Is session management secure?</p>
@@ -152,7 +137,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are exceptions handled gracefully?</p>
 <p>SAST Integration </p>
 <p>Static Application Security Testing (SAST) automates vulnerability detection: </p>
-<h4>SAST results triage</h4>
+<h2>SAST results triage</h2>
 <p>import json</p>
 <p>class SASTTriage:</p>
 <p>def <strong>init</strong>(self):</p>
@@ -168,7 +153,7 @@
 <p>if any(re.match(p, finding["file"]) for p in self.false_positive_patterns):</p>
 <p>false_positives.append(finding)</p>
 <p>continue</p>
-<h4>Critical findings in production code</h4>
+<h2>Critical findings in production code</h2>
 <p>if finding["severity"] == "critical" and finding["branch"] == "main":</p>
 <p>actionable.insert(0, finding) # Priority</p>
 <p>else:</p>
@@ -176,11 +161,11 @@
 <p>return actionable, false_positives</p>
 <p>Common Findings </p>
 <p>SQL Injection </p>
-<h4>VULNERABLE</h4>
+<h2>VULNERABLE</h2>
 <p>def get_user(username):</p>
 <p>query = f"SELECT * FROM users WHERE username = '{username}'"</p>
 <p>return db.execute(query)</p>
-<h4>SECURE</h4>
+<h2>SECURE</h2>
 <p>def get_user(username):</p>
 <p>query = "SELECT * FROM users WHERE username = ?"</p>
 <p>return db.execute(query, (username,))</p>
@@ -199,7 +184,7 @@
 <p>res.json(order);</p>
 <p>});</p>
 <p>Automated Enforcement in CI </p>
-<h4>.github/workflows/security-review.yml</h4>
+<h2>.github/workflows/security-review.yml</h2>
 <p>name: Security Review</p>
 <p>on: [pull_request]</p>
 <p>jobs:</p>
@@ -223,7 +208,10 @@
 <p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/compliance-automation.html">Compliance Automation</a>, <a href="/en/security/sso-architecture.html">SSO Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/compliance-automation.html">Compliance Automation</a>, <a href="/en/security/sso-architecture.html">SSO Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/compliance-automation.html">Compliance Automation</a>, <a href="/en/security/sso-architecture.html">SSO Architecture</a></p>
-<p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/compliance-automation.html">Compliance Automation</a>, <a href="/en/security/sso-architecture.html">SSO Architecture</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/compliance-automation.html">Compliance Automation</a>, <a href="/en/security/sso-architecture.html">SSO Architecture</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/compliance-automation.html">Compliance Automation</a>, <a href="/en/security/sso-architecture.html">SSO Architecture</a></p>
+<p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/compliance-automation.html">Compliance Automation</a>, <a href="/en/security/sso-architecture.html">SSO Architecture</a></p>
+<p><strong>See also:</strong> <a href="/en/security/data-masking.html">Data Masking and Redaction</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/data-masking.html">Data Masking and Redaction</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/data-masking.html">Data Masking and Redaction</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -235,7 +223,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/secure-configuration.html" class="related-card">Secure Configuration Management</a><a href="/en/security/compliance-automation.html" class="related-card">Compliance Automation</a><a href="/en/security/sso-architecture.html" class="related-card">SSO Architecture</a><a href="/en/security/security-testing-tools.html" class="related-card">Security Testing Tools: SAST, DAST, IAST, and RASP Compared</a></div>
+      <div class="related-grid"><a href="/en/security/secure-configuration.html" class="related-card"><span class="related-card-title">Secure Configuration Management</span><span class="related-card-desc">Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detectio</span></a><a href="/en/security/compliance-automation.html" class="related-card"><span class="related-card-title">Compliance Automation</span><span class="related-card-desc">Automating compliance with CIS benchmarks, automated scanning, reporting, and continuous monitoring.</span></a><a href="/en/security/sso-architecture.html" class="related-card"><span class="related-card-title">SSO Architecture</span><span class="related-card-desc">Designing SSO architecture with SAML, OIDC, session management, and identity provider integration.</span></a><a href="/en/security/security-testing-tools.html" class="related-card"><span class="related-card-title">Security Testing Tools: SAST, DAST, IAST, and RASP Compared</span><span class="related-card-desc">Compare application security testing approaches: SAST, DAST, IAST, RASP tools and integration strate</span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="related-card-title">Container Image Security</span><span class="related-card-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability sc</span></a><a href="/en/security/cors-security.html" class="related-card"><span class="related-card-title">CORS Security</span><span class="related-card-desc">In-depth guide to CORS security covering proper origin validation, preflight handling, common miscon</span></a></div>
     </section>
     
   </div>

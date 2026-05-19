@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-api-design.png",
       "datePublished": "2026-02-16",
       "dateModified": "2026-05-16",
-      "wordCount": "1553",
+      "wordCount": "1448",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -99,25 +99,9 @@
       <h1 class="article-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
       <div class="article-meta">Published 2026-02-16 · Last active 2026-05-16 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-api-design.png" alt="LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h2>
-<h3>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h3>
-<h4>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h4>
-<h4>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h4>
-<h4>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h4>
-<h4>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h4>
-<h4>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h4>
-<h4>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h4>
-<h4>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h4>
-<h4>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h4>
-<h4>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h4>
-<h4>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h4>
-<h4>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h4>
-<h4>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h4>
-<h4>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h4>
-<h4>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Designing APIs that wrap large language models requires handling concerns that traditional REST APIs do not face: streaming token-by-token responses, enforcing structured output schemas, managing unpredictable latency, and protecting against runaway costs. This guide covers the four critical pillars of LLM API design with production-ready patterns.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-api-design.png" alt="LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Streaming Responses</h4>
+<h2>Streaming Responses</h2>
 <p>Streaming is the standard way to return LLM outputs. Instead of waiting for the full response, the client receives tokens as they are generated:</p>
 <p>from fastapi import FastAPI, Request</p>
 <p>from fastapi.responses import StreamingResponse</p>
@@ -147,7 +131,7 @@
 <p>},</p>
 <p>)</p>
 <p>The Server-Sent Events protocol is the most compatible streaming format. Each <code>data:</code> line is a new token chunk. Clients use <code>EventSource</code> or fetch with <code>ReadableStream</code> to consume the stream progressively.</p>
-<h4>Structured Output</h4>
+<h2>Structured Output</h2>
 <p>Raw LLM text is unreliable for programmatic consumption. Use structured output modes to enforce JSON schemas:</p>
 <p>from pydantic import BaseModel</p>
 <p>from openai import OpenAI</p>
@@ -184,7 +168,7 @@
 <p>raise</p>
 <p>prompt += f"\n\nPrevious attempt failed: {e}. Please fix the JSON."</p>
 <p>return None</p>
-<h4>Error Handling</h4>
+<h2>Error Handling</h2>
 <p>LLM APIs fail in distinctive ways. Build a retry strategy around each failure mode:</p>
 <p>import time</p>
 <p>from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type</p>
@@ -211,7 +195,7 @@
 <p>raise ContentFilterError from e</p>
 <p>raise</p>
 <p>Each error type deserves a different handler: rate limits get exponential backoff, context windows trigger input truncation, and content filter errors should be logged and escalated.</p>
-<h4>Rate Limiting</h4>
+<h2>Rate Limiting</h2>
 <p>Protect your API from abuse and cost spikes with layered rate limiting:</p>
 <p>from fastapi import HTTPException</p>
 <p>import time</p>
@@ -238,13 +222,16 @@
 <p>estimated = len(body["prompt"].split()) * 2 + int(body.get("max_tokens", 1024))</p>
 <p>await rate_limiter.check(user_id, estimated)</p>
 <p>return await generate_response(body["prompt"])</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>Designing LLM APIs requires balancing responsiveness with cost control. Stream responses for user experience, enforce structured output for programmatic reliability, implement retry logic calibrated to each error type, and gate access with rate and budget limits. These four patterns form the foundation of any production LLM service.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -256,7 +243,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-gateway.html" class="related-card">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a><a href="/en/ai/tool-use-patterns.html" class="related-card">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a><a href="/en/ai/ai-prompt-chaining.html" class="related-card">Prompt Chaining: Building Multi-Step LLM Workflows</a><a href="/en/ai/ai-caching-strategies.html" class="related-card">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a></div>
+      <div class="related-grid"><a href="/en/ai/ai-gateway.html" class="related-card"><span class="related-card-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="related-card-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fa</span></a><a href="/en/ai/tool-use-patterns.html" class="related-card"><span class="related-card-title">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</span><span class="related-card-desc">Explore LLM tool use patterns including function calling, structured tool definitions, multi-step re</span></a><a href="/en/ai/ai-prompt-chaining.html" class="related-card"><span class="related-card-title">Prompt Chaining: Building Multi-Step LLM Workflows</span><span class="related-card-desc">Design prompt chains for complex LLM tasks: chain types, state management, error handling, and perfo</span></a><a href="/en/ai/ai-caching-strategies.html" class="related-card"><span class="related-card-title">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</span><span class="related-card-desc">Reduce LLM API costs and latency with AI caching strategies: semantic caching, intelligent invalidat</span></a><a href="/en/ai/ai-api-gateway.html" class="related-card"><span class="related-card-title">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</span><span class="related-card-desc">Design an AI API gateway for multi-provider LLM access: load balancing across models, automatic fall</span></a><a href="/en/ai/ai-monitoring-alerting.html" class="related-card"><span class="related-card-title">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</span><span class="related-card-desc">Monitor LLM applications in production: track latency percentiles, token consumption, error rates by</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

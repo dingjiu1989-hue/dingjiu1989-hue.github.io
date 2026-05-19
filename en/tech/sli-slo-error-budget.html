@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/sli-slo-error-budget.png",
       "datePublished": "2026-01-03",
       "dateModified": "2026-05-12",
-      "wordCount": "1678",
+      "wordCount": "1582",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,34 +99,17 @@
       <h1 class="article-title">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h1>
       <div class="article-meta">Published 2026-01-03 · Last active 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/sli-slo-error-budget.png" alt="SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h2>
-<h3>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h3>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Service Level Indicators (SLIs), Service Level Objectives (SLOs), and Error Budgets form the foundation of Site Reliability Engineering (SRE) practice. Originating from Google's SRE teams, these concepts provide a data-driven framework for balancing reliability with feature velocity. Rather than aiming for 100% uptime, SRE uses error budgets to make explicit trade-offs between reliability and innovation.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/sli-slo-error-budget.png" alt="SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>This article covers SLI definition, SLO setting methodology, error budget policies, and burn rate alert design.</p>
-<h4>Defining SLIs</h4>
+<h2>Defining SLIs</h2>
 <p>An SLI is a carefully chosen metric that measures a specific aspect of service reliability. Common SLI categories include availability (ratio of successful requests), latency (request duration), throughput (requests per second), and durability (data persistence).</p>
 <p>Good SLIs are measurable from the customer's perspective. For a web service, the availability SLI measures whether HTTP requests return successful responses (2xx or 3xx status codes), not whether the server process is running. This distinction is critical: the server could be operational while the application returns 500 errors.</p>
 <p>SLIs should be captured as a ratio of good events to total events:</p>
 <p>availability_sli = successful_requests / total_requests</p>
 <p>latency_sli = fast_requests / total_requests</p>
 <p>SLI definition requires choosing measurement windows and aggregation methods. A 30-second measurement window catches transient issues, while a 5-minute window smooths noise. Rolling windows (30 days for monthly SLOs) provide stability.</p>
-<h4>Setting SLOs</h4>
+<h2>Setting SLOs</h2>
 <p>An SLO sets a target value for an SLI over a defined period. Common targets are 99.9% (three nines), 99.99% (four nines), and 99.999% (five nines). Each additional nine approximately increases allowed downtime by an order of magnitude:</p>
 <ul>
 <li>
@@ -141,11 +124,11 @@
 </ul>
 <p>SLO targets should not be aspirational. A target that has never been met provides no useful signal. Start with a target slightly below current performance and tighten it over time as reliability improves.</p>
 <p>Not all services need the same SLO. Critical user journeys (authentication, checkout, data access) should have higher SLOs than secondary features. Multi-tier SLOs — target (internal goal) and minimum (customer commitment) — provide a buffer between aspirational goals and contractual obligations.</p>
-<h4>Error Budgets</h4>
+<h2>Error Budgets</h2>
 <p>The error budget is the allowed amount of unreliability within the SLO period. For a 99.9% SLO over 30 days, the error budget is 0.1% of total events — or approximately 43 minutes of downtime.</p>
 <p>The error budget defines how much risk the team can take. When the budget is full (the service is exceeding its SLO), the team can deploy new features. When the budget is depleted (the service is at risk of missing its SLO), releases are frozen until reliability improves.</p>
 <p>Error budget policies encode these decisions in automated processes. A CI/CD pipeline gate checks error budget consumption before allowing a production deployment. This creates a direct feedback loop between reliability and feature velocity.</p>
-<h4>Burn Rate Alerts</h4>
+<h2>Burn Rate Alerts</h2>
 <p>Burn rate alerts detect excessive error budget consumption before the budget is exhausted. The burn rate is how fast the error budget is being consumed relative to the SLO period.</p>
 <p>A burn rate of 1 means the budget will be fully consumed by the end of the period at the current rate. A burn rate of 2 means the budget will be exhausted in half the period. Multi-window, multi-burn-rate alerting uses fast-burn and slow-burn windows:</p>
 <ul>
@@ -157,7 +140,7 @@
 </li>
 </ul>
 <p>This approach ensures critical incidents are paged immediately while gradual issues are investigated before they exhaust the budget.</p>
-<h4>Implementation with Prometheus</h4>
+<h2>Implementation with Prometheus</h2>
 <p>Prometheus and the slo-exporter pattern implement SLO monitoring effectively:</p>
 <p>groups:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: slo-alerts</p>
@@ -171,13 +154,16 @@
 <p>labels:</p>
 <p>severity: critical</p>
 <p>The burn rate alert multiplies the SLO error rate (1 - SLO target) by the burn rate threshold. This approach normalizes alerts across different SLO targets.</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>SLIs, SLOs, and error budgets transform reliability from a subjective goal into an objective discipline. Well-defined SLIs measure what matters from the customer perspective. Realistic SLOs provide clear targets. Error budgets enable data-driven decisions about feature releases. Burn rate alerts catch problems before they exhaust reliability budgets. Together, these practices enable teams to make explicit, informed trade-offs between reliability and velocity.</p>
 <p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a>.</p>
 <p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/aws-vpc-design.html">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/aws-vpc-design.html">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/aws-vpc-design.html">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/aws-vpc-design.html">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/aws-vpc-design.html">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/aws-vpc-design.html">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/aws-vpc-design.html">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -189,7 +175,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/on-call-best-practices.html" class="related-card">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a><a href="/en/tech/aws-vpc-design.html" class="related-card">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</a><a href="/en/tech/docker-networking.html" class="related-card">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a><a href="/en/tech/gcp-networking.html" class="related-card">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a></div>
+      <div class="related-grid"><a href="/en/tech/on-call-best-practices.html" class="related-card"><span class="related-card-title">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</span><span class="related-card-desc">Technical guide to on-call practices covering rotation models, escalation policies, runbook creation</span></a><a href="/en/tech/aws-vpc-design.html" class="related-card"><span class="related-card-title">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</span><span class="related-card-desc">Technical guide to AWS VPC design including subnet strategies, NAT gateways, VPC peering, Transit Ga</span></a><a href="/en/tech/docker-networking.html" class="related-card"><span class="related-card-title">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</span><span class="related-card-desc">In-depth guide to Docker networking covering bridge networks, overlay networking for Swarm, host mod</span></a><a href="/en/tech/gcp-networking.html" class="related-card"><span class="related-card-title">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</span><span class="related-card-desc">Technical exploration of Google Cloud networking covering VPC design, Cloud NAT configuration, Priva</span></a><a href="/en/tech/grafana-dashboards.html" class="related-card"><span class="related-card-title">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</span><span class="related-card-desc">Technical exploration of Grafana dashboard design covering panel types, template variables, annotati</span></a><a href="/en/tech/azure-networking.html" class="related-card"><span class="related-card-title">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</span><span class="related-card-desc">Comprehensive guide to Azure networking covering Virtual Networks, VNet peering, Azure Firewall, Loa</span></a></div>
     </section>
     
   </div>

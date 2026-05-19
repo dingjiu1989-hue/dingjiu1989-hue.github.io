@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/database-encryption.html
 
 # Database Encryption
 
-## Database Encryption
-
-### Database Encryption
-
-#### Database Encryption
-
-#### Database Encryption
-
-#### Database Encryption
-
-#### Database Encryption
-
-#### Database Encryption
-
-#### Database Encryption
-
-#### Database Encryption
-
-#### Database Encryption
-
-#### Database Encryption
-
-#### Database Encryption
-
-#### Database Encryption
-
-#### Database Encryption
-
-#### Database Encryption
-
 Database Encryption Layers 
 
 Database encryption protects data at rest and in transit. Multiple layers provide defense in depth. 
@@ -126,11 +96,11 @@ digest.update(b"deterministic_salt")
 
 return digest.finalize().hex()[:32]
 
-#### Usage
+## Usage
 
 encryptor = ColumnEncryptor(os.environ["COLUMN_ENCRYPTION_KEY"])
 
-#### Encrypt PII before storage
+## Encrypt PII before storage
 
 cursor.execute("""
 
@@ -289,3 +259,9 @@ Layer your database encryption strategy. Use TDE for bulk encryption with minima
 **See also:** [Key Management Systems](</en/security/key-management.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
 
 **See also:** [Key Management Systems](</en/security/key-management.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
+
+**See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [Helm Security](</en/security/helm-security.html>), [MFA Implementation](</en/security/mfa-implementation.html>)
+
+**See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [Helm Security](</en/security/helm-security.html>), [MFA Implementation](</en/security/mfa-implementation.html>)
+
+**See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [Helm Security](</en/security/helm-security.html>), [MFA Implementation](</en/security/mfa-implementation.html>)

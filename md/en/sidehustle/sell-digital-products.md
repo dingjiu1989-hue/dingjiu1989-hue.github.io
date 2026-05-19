@@ -67,4 +67,4 @@ Your own site + Stripe| 2.9% + 30c| Maximum margin, requires driving your own tr
 
 
 
-**See also:** [Selling Code Templates and UI Kits: A Developer's Guide to Template Income](</en/sidehustle/selling-code-templates.html>), [How to Sell Notion Templates as a Developer — $5K/Month Passive Income](</en/sidehustle/sell-notion-templates.html>), [How to Sell Website Templates and UI Kits: Marketplaces, Pricing, and Marketing Strategy](</en/sidehustle/sell-website-templates.html>)
+**See also:** [How to Build and Sell VS Code Extensions: A Developer's Guide to Recurring Revenue](</en/sidehustle/sell-vscode-extensions.html>), [How to Create and Sell an Online Coding Course That Makes $10K+](</en/sidehustle/create-online-course.html>), [How to Start and Monetize a Developer Podcast in 2026](</en/sidehustle/developer-podcast-guide.html>)

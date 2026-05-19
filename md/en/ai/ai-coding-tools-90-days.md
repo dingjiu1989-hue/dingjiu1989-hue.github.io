@@ -166,4 +166,4 @@ For a more detailed feature-by-feature comparison of Cursor vs Copilot vs Claude
 
 _This article was originally published on[SourceHub](<https://dingjiu1989-hue.github.io/en/ai/ai-coding-tools-90-days.html>)._
 
-**See also:** [ChatGPT API vs Claude API vs Gemini API: Developer Comparison (2026)](</en/ai/chatgpt-vs-claude-vs-gemini-api.html>), [Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?](</en/compare/cursor-vs-copilot-vs-claude-code.html>), [Claude vs ChatGPT (2026): Which AI Assistant Is Right for You?](</en/ai/claude-vs-chatgpt.html>)
+**See also:** [Is ChatGPT Plus Worth It? Free vs Plus vs Pro Compared (2026)](</en/ai/chatgpt-plus-worth.html>), [Cursor Advanced Tips: 15 Power User Techniques to 10x Your AI Coding](</en/ai/cursor-advanced-tips.html>), [Prompt Engineering: From Beginner to Expert](</en/ai/prompt-engineering.html>)

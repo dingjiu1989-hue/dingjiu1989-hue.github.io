@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/oauth2-implementation.html
 
 # OAuth2 Implementation
 
-## OAuth2 Implementation
-
-### OAuth2 Implementation
-
-#### OAuth2 Implementation
-
-#### OAuth2 Implementation
-
-#### OAuth2 Implementation
-
-#### OAuth2 Implementation
-
-#### OAuth2 Implementation
-
-#### OAuth2 Implementation
-
-#### OAuth2 Implementation
-
-#### OAuth2 Implementation
-
-#### OAuth2 Implementation
-
-#### OAuth2 Implementation
-
-#### OAuth2 Implementation
-
-#### OAuth2 Implementation
-
-#### OAuth2 Implementation
-
 OAuth2 Fundamentals 
 
 OAuth2 is the industry-standard protocol for authorization. It enables third-party applications to obtain limited access to user resources without exposing credentials. 
@@ -206,15 +176,15 @@ Refresh Token Rotation
 
 def rotate_refresh_token(old_token):
 
-#### Verify the old refresh token
+## Verify the old refresh token
 
 token_data = verify_refresh_token(old_token)
 
-#### Revoke the old token
+## Revoke the old token
 
 revoke_token(old_token)
 
-#### Issue new tokens
+## Issue new tokens
 
 new_access = create_access_token(token_data["user_id"])
 
@@ -265,3 +235,9 @@ OAuth2 is complex but essential for modern authentication. PKCE makes authorizat
 **See also:** [Helm Security](</en/security/helm-security.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Data Classification](</en/security/data-classification.html>)
 
 **See also:** [Helm Security](</en/security/helm-security.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Data Classification](</en/security/data-classification.html>)
+
+**See also:** [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Authentication Methods](</en/security/api-authentication.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Authentication Methods](</en/security/api-authentication.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Authentication Methods](</en/security/api-authentication.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)

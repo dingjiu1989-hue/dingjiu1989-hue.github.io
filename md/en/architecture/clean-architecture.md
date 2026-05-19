@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/clean-architecture.html
 
 # Clean Architecture Explained
 
-## Clean Architecture Explained
-
-### Clean Architecture Explained
-
-#### Clean Architecture Explained
-
-#### Clean Architecture Explained
-
-#### Clean Architecture Explained
-
-#### Clean Architecture Explained
-
-#### Clean Architecture Explained
-
-#### Clean Architecture Explained
-
-#### Clean Architecture Explained
-
-#### Clean Architecture Explained
-
-#### Clean Architecture Explained
-
-#### Clean Architecture Explained
-
-#### Clean Architecture Explained
-
-#### Clean Architecture Explained
-
-#### Clean Architecture Explained
-
 Clean Architecture, introduced by Robert C. Martin, is an architectural philosophy that organizes code into concentric layers with strict dependency rules. The goal is to create systems that are independent of frameworks, testable, and independent of UI, database, and external agencies. 
 
 The Dependency Rule 
@@ -83,3 +53,9 @@ Clean Architecture is not appropriate for every project. Small applications with
 **See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
 
 **See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
+
+**See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)

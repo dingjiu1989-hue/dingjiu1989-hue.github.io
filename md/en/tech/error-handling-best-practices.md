@@ -140,4 +140,4 @@ Error Type| HTTP Status| Retry?| Show User?| Notify Dev?
 
 **Bottom line:** Structured errors + global handler + external service retries + proper logging = an error system that helps you fix bugs instead of hiding them. See also: [Testing Strategies](</en/tech/testing-strategies-web-apps.html>) and [CI/CD Tools](</en/tools/best-cicd-tools-2026.html>).
 
-**See also:** [REST API Best Practices: The Complete Guide for 2026](</en/tech/rest-api-best-practices.html>), [GraphQL API Design: Schema Best Practices, Federation, and Performance](</en/tech/graphql-api-design.html>), [API Design Patterns: Rate Limiting, Pagination, Idempotency, and More](</en/tech/api-design-patterns.html>)
+**See also:** [Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops](</en/tech/python-asyncio-guide.html>), [Rate Limiting Strategies for APIs: Token Bucket, Sliding Window, and Beyond](</en/tech/rate-limiting-strategies.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>)

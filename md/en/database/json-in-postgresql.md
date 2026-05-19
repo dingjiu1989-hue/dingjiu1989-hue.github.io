@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/json-in-postgresql.html
 
 # JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
 
-## JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
-### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
-#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
-#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
-#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
-#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
-#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
-#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
-#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
-#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
-#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
-#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
-#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
-#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
-#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
-
 JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations 
 
 PostgreSQL's JSON support has matured into a powerful feature set. The `jsonb` type combined with GIN indexes makes PostgreSQL a competitive document database while retaining all relational capabilities. This article covers the types, operators, indexes, and when JSON in PostgreSQL is the right choice. 
@@ -263,3 +233,9 @@ PostgreSQL's JSONB support bridges the gap between relational and document datab
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
+
+**See also:** [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)
+
+**See also:** [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)
+
+**See also:** [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)

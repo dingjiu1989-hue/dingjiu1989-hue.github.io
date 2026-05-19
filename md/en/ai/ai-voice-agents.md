@@ -71,4 +71,4 @@ TTS (Text-to-Speech)| ElevenLabs (most natural voices), OpenAI TTS (good + integ
 
 **Bottom line:** The OpenAI Realtime API is the fastest path to a working voice agent — it bundles STT + LLM + TTS into one low-latency WebSocket. For production, consider Deepgram (STT) + your preferred LLM + ElevenLabs (TTS) for more control over each component. Target under 1 second end-to-end latency for a natural conversation feel. See also: [AI Agents Guide](</en/ai/ai-agents-guide.html>) and [Function Calling Guide](</en/ai/function-calling-guide.html>).
 
-**See also:** [AI Code Review: Best Tools, Setup Guide, and ROI Analysis](</en/ai/ai-code-review-tools.html>), [Building an AI Customer Service Chatbot: Complete Technical Guide (2026)](</en/ai/ai-chatbot-build-guide.html>), [Building AI-Powered CLI Tools: A Complete Guide for Developers](</en/tools/ai-cli-tools-guide.html>)
+**See also:** [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>), [6 AI Coding Tools, 90 Days, 30 Tasks: My Honest Comparison](</en/ai/ai-coding-tools-90-days.html>)

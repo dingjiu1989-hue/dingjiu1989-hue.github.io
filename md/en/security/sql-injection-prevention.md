@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/sql-injection-prevention.html
 
 # SQL Injection Prevention Guide
 
-## SQL Injection Prevention Guide
-
-### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
-#### SQL Injection Prevention Guide
-
 Understanding SQL Injection 
 
 SQL injection is a code injection technique where an attacker inserts malicious SQL statements into application queries. It has been the top vulnerability in the OWASP Top 10 for years and remains one of the most damaging attack vectors despite being well-understood. 
@@ -116,11 +82,11 @@ Modern ORMs provide built-in protection against SQL injection when used correctl
 
 Django ORM 
 
-#### Safe: ORM parameterizes automatically
+## Safe: ORM parameterizes automatically
 
 users = User.objects.filter(email=user_input, is_active=True)
 
-#### Safe: Raw queries with parameters
+## Safe: Raw queries with parameters
 
 users = User.objects.raw(
 
@@ -128,13 +94,13 @@ users = User.objects.raw(
 
 )
 
-#### UNSAFE: String interpolation bypasses protections
+## UNSAFE: String interpolation bypasses protections
 
 users = User.objects.raw(f'SELECT * FROM auth_user WHERE email = "{user_input}"')
 
 SQLAlchemy 
 
-#### Safe
+## Safe
 
 result = session.execute(
 
@@ -144,7 +110,7 @@ text("SELECT * FROM users WHERE email = :email"),
 
 )
 
-#### UNSAFE
+## UNSAFE
 
 result = session.execute(
 
@@ -210,7 +176,7 @@ Detection Tools
 
 | Tool | Type | Coverage | |------|------|----------| | SQLMap | Automated exploitation testing | Dynamic analysis | | OWASP ZAP | DAST scanner | Runtime detection | | SonarQube | SAST | Static code analysis | | Semgrep | SAST | Custom rule patterns | 
 
-#### Scan Go code for string concatenation in SQL queries
+## Scan Go code for string concatenation in SQL queries
 
 semgrep --config "p/sql-injection" .
 
@@ -229,3 +195,9 @@ SQL injection is entirely preventable. Parameterized queries are the single most
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>)
 
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)

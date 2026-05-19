@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/langgraph-agent-workflows.png",
       "datePublished": "2026-05-13",
       "dateModified": "2026-05-19",
-      "wordCount": "1124",
+      "wordCount": "1157",
       "keywords": "AI, LangGraph, Agent",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "LangGraph"}, {"@type": "Thing", "name": "Agent"}],
       "inLanguage": "en",
@@ -99,21 +99,14 @@
       <h1 class="article-title">Building Custom AI Agents with LangGraph: A Practical Guide</h1>
       <div class="article-meta">Published 2026-05-13 · Last active 2026-05-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/langgraph-agent-workflows.png" alt="Building Custom AI Agents with LangGraph: A Practical Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Building Custom AI Agents with LangGraph: A Practical Guide</h2>
-<h3>Building Custom AI Agents with LangGraph: A Practical Guide</h3>
-<h4>Building Custom AI Agents with LangGraph: A Practical Guide</h4>
-<h4>Building Custom AI Agents with LangGraph: A Practical Guide</h4>
-<h4>Building Custom AI Agents with LangGraph: A Practical Guide</h4>
-<h4>Building Custom AI Agents with LangGraph: A Practical Guide</h4>
-<h4>Building Custom AI Agents with LangGraph: A Practical Guide</h4>
-<p>LangGraph extends LangChain with graph-based state machine orchestration for building reliable, multi-step AI agent workflows. Unlike traditional linear chains, LangGraph lets you define cyclic graphs with conditional routing, persistent state, and human-in-the-loop checkpoints. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/langgraph-agent-workflows.png" alt="Building Custom AI Agents with LangGraph: A Practical Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Why LangGraph?</h4>
+      <div class="article-body"><p>LangGraph extends LangChain with graph-based state machine orchestration for building reliable, multi-step AI agent workflows. Unlike traditional linear chains, LangGraph lets you define cyclic graphs with conditional routing, persistent state, and human-in-the-loop checkpoints. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/langgraph-agent-workflows.png" alt="Building Custom AI Agents with LangGraph: A Practical Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Why LangGraph?</h2>
 <p>Most agent frameworks chain LLM calls linearly: call LLM, parse output, call tool, repeat. This breaks for complex tasks requiring loops, branching, or manual approval. LangGraph models agents as <strong>state graphs</strong> where each node is a computation step and edges define control flow.</p>
 <p>The key innovations are <em>state persistence across steps</em> , <em>conditional edges</em> that route based on output content, and <em>built-in checkpointing</em> for pause-and-resume.</p>
-<h4>Installing and Setup</h4>
+<h2>Installing and Setup</h2>
 <p>pip install langgraph langchain langchain-openai</p>
 <p>Python 3.10+ is required. LangGraph runs entirely locally — no external server needed.</p>
-<h4>Defining Your State Graph</h4>
+<h2>Defining Your State Graph</h2>
 <p>Every LangGraph application starts with a state definition. The state is a typed dictionary that flows through all nodes:</p>
 <p>from typing import TypedDict, Literal</p>
 <p>from langgraph.graph import StateGraph, END</p>
@@ -123,7 +116,7 @@
 <p>output: str</p>
 <p>steps: int</p>
 <p>This state carries the user's input, the conversation history, the final output, and a step counter for loop control.</p>
-<h4>Building Nodes</h4>
+<h2>Building Nodes</h2>
 <p>Nodes are Python functions that receive the state and return updates. Each node focuses on one task:</p>
 <ul>
 <li>
@@ -136,7 +129,7 @@
 <p><code>should_continue</code> — a conditional edge function that routes to <code>continue</code> or <code>end</code></p>
 </li>
 </ul>
-<h4>Conditional Routing</h4>
+<h2>Conditional Routing</h2>
 <p>Conditional edges are what make LangGraph powerful. A routing function inspects the state and returns the next node name:</p>
 <p>def route(state):</p>
 <p>if 'SEARCH' in state['messages'][-1]:</p>
@@ -147,7 +140,7 @@
 <p>return END</p>
 <p>graph.add_conditional_edges('call_llm', route)</p>
 <p>The agent dynamically chooses paths based on LLM output.</p>
-<h4>Adding Memory and Checkpointing</h4>
+<h2>Adding Memory and Checkpointing</h2>
 <p>LangGraph supports persistent memory via checkpointing. This enables pause-and-resume, human-in-the-loop approvals, and debugging:</p>
 <p>from langgraph.checkpoint import MemorySaver</p>
 <p>memory = MemorySaver()</p>
@@ -156,7 +149,7 @@
 <p>for event in graph.stream({'input': 'Analyze this data'}, config):</p>
 <p>print(event)</p>
 <p>Each checkpoint saves the full state so you can replay or inspect any step.</p>
-<h4>Human-in-the-Loop Patterns</h4>
+<h2>Human-in-the-Loop Patterns</h2>
 <p>A common pattern is pausing execution for human approval before executing destructive tools:</p>
 <p>def human_approval(state):</p>
 <p>print(f'About to execute: {state["next_action"]}')</p>
@@ -165,14 +158,14 @@
 <p>return 'revise_prompt'</p>
 <p>return 'execute_tool'</p>
 <p>Wrap the node with <code>interrupt_before</code> to pause before sensitive steps. Essential for production agents that might issue API calls or modify databases.</p>
-<h4>Parallel Execution</h4>
+<h2>Parallel Execution</h2>
 <p>LangGraph supports fan-out patterns where multiple nodes run in parallel:</p>
 <p>graph.add_node('search_web')</p>
 <p>graph.add_node('search_docs')</p>
 <p>graph.add_node('search_vector_db')</p>
 <p>graph.add_edge('call_llm', 'parallel_search')</p>
 <p>Each search node runs concurrently. A merge function combines results into a unified state update.</p>
-<h4>Performance Tips</h4>
+<h2>Performance Tips</h2>
 <ul>
 <li>
 <p>Keep node functions pure — avoid side effects beyond the state update</p>
@@ -187,15 +180,18 @@
 <p>Limit graph depth to under 20 nodes for predictable latency</p>
 </li>
 </ul>
-<h4>Real-World Example</h4>
+<h2>Real-World Example</h2>
 <p>A customer support agent built with LangGraph processes incoming tickets through classification, knowledge base search, escalation decision, and response generation — all with manual override at each stage. A startup using this pattern reduced ticket resolution time by 60% while maintaining human oversight on sensitive issues.</p>
-<h4>Summary</h4>
+<h2>Summary</h2>
 <p>LangGraph transforms agent building from fragile linear chains into robust state machines. The graph model handles complex control flow naturally, and checkpointing makes production deployment safer.</p>
 <p><strong>See also:</strong> <a href="/en/ai/n8n-ai-automation.html">Building AI Automation Workflows with n8n: A Practical Guide</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/ai-chatbot-build-guide.html">Building an AI Customer Service Chatbot: Complete Technical Guide (2026)</a>.</p>
 <p><strong>See also:</strong> <a href="/en/ai/n8n-ai-automation.html">Building AI Automation Workflows with n8n: A Practical Guide</a>, <a href="/en/ai/ai-chatbot-build-guide.html">Building an AI Customer Service Chatbot: Complete Technical Guide (2026)</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/n8n-ai-automation.html">Building AI Automation Workflows with n8n: A Practical Guide</a>, <a href="/en/ai/ai-chatbot-build-guide.html">Building an AI Customer Service Chatbot: Complete Technical Guide (2026)</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/n8n-ai-automation.html">Building AI Automation Workflows with n8n: A Practical Guide</a>, <a href="/en/ai/ai-chatbot-build-guide.html">Building an AI Customer Service Chatbot: Complete Technical Guide (2026)</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/n8n-ai-automation.html">Building AI Automation Workflows with n8n: A Practical Guide</a>, <a href="/en/ai/ai-chatbot-build-guide.html">Building an AI Customer Service Chatbot: Complete Technical Guide (2026)</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/n8n-ai-automation.html">Building AI Automation Workflows with n8n: A Practical Guide</a>, <a href="/en/ai/ai-chatbot-build-guide.html">Building an AI Customer Service Chatbot: Complete Technical Guide (2026)</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/n8n-ai-automation.html">Building AI Automation Workflows with n8n: A Practical Guide</a>, <a href="/en/ai/ai-chatbot-build-guide.html">Building an AI Customer Service Chatbot: Complete Technical Guide (2026)</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/n8n-ai-automation.html">Building AI Automation Workflows with n8n: A Practical Guide</a>, <a href="/en/ai/ai-chatbot-build-guide.html">Building an AI Customer Service Chatbot: Complete Technical Guide (2026)</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/mcp-complete-guide.html">MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</a>, <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>, <a href="/en/ai/ai-voice-agents.html">Building AI Voice Agents: Complete Technical Guide (2026)</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/mcp-complete-guide.html">MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</a>, <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>, <a href="/en/ai/ai-voice-agents.html">Building AI Voice Agents: Complete Technical Guide (2026)</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/mcp-complete-guide.html">MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</a>, <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>, <a href="/en/ai/ai-voice-agents.html">Building AI Voice Agents: Complete Technical Guide (2026)</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -207,7 +203,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-chatbot-build-guide.html" class="related-card">Building an AI Customer Service Chatbot: Complete Technical Guide (2026)</a><a href="/en/ai/ai-workflow-automation.html" class="related-card">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a><a href="/en/ai/ai-agents-overview.html" class="related-card">AI Agents: Architecture and Implementation</a></div>
+      <div class="related-grid"><a href="/en/ai/n8n-ai-automation.html" class="related-card"><span class="related-card-title">Building AI Automation Workflows with n8n: A Practical Guide</span><span class="related-card-desc">Build intelligent automation workflows combining n8n with AI models for data processing, content gen</span></a><a href="/en/ai/ai-chatbot-build-guide.html" class="related-card"><span class="related-card-title">Building an AI Customer Service Chatbot: Complete Technical Guide (2026)</span><span class="related-card-desc">Step-by-step guide to building an AI chatbot with RAG, function calling, and multi-turn conversation</span></a><a href="/en/ai/ai-workflow-automation.html" class="related-card"><span class="related-card-title">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</span><span class="related-card-desc">Build robust AI workflow automation with LangChain for LLM orchestration, Temporal for durable execu</span></a><a href="/en/ai/ai-agents-overview.html" class="related-card"><span class="related-card-title">AI Agents: Architecture and Implementation</span><span class="related-card-desc">Design and build AI agents: tool use, planning, memory, and multi-agent coordination for autonomous </span></a><a href="/en/tools/ai-cli-tools-guide.html" class="related-card"><span class="related-card-title">Building AI-Powered CLI Tools: A Complete Guide for Developers</span><span class="related-card-desc">How to build command-line tools that leverage LLMs — from simple wrappers to intelligent agents that</span></a><a href="/en/ai/ai-agents-production.html" class="related-card"><span class="related-card-title">Deploying AI Agents to Production</span><span class="related-card-desc">Learn agent orchestration, error handling, human-in-the-loop patterns, monitoring agent behavior, co</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

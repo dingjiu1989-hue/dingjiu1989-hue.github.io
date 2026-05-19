@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/idempotency-patterns.png",
       "datePublished": "2026-04-27",
       "dateModified": "2026-05-10",
-      "wordCount": "1141",
+      "wordCount": "1077",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,22 +96,7 @@
       <h1 class="article-title">Idempotency Patterns in Distributed Systems</h1>
       <div class="article-meta">Published 2026-04-27 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/idempotency-patterns.png" alt="Idempotency Patterns in Distributed Systems" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Idempotency Patterns in Distributed Systems</h2>
-<h3>Idempotency Patterns in Distributed Systems</h3>
-<h4>Idempotency Patterns in Distributed Systems</h4>
-<h4>Idempotency Patterns in Distributed Systems</h4>
-<h4>Idempotency Patterns in Distributed Systems</h4>
-<h4>Idempotency Patterns in Distributed Systems</h4>
-<h4>Idempotency Patterns in Distributed Systems</h4>
-<h4>Idempotency Patterns in Distributed Systems</h4>
-<h4>Idempotency Patterns in Distributed Systems</h4>
-<h4>Idempotency Patterns in Distributed Systems</h4>
-<h4>Idempotency Patterns in Distributed Systems</h4>
-<h4>Idempotency Patterns in Distributed Systems</h4>
-<h4>Idempotency Patterns in Distributed Systems</h4>
-<h4>Idempotency Patterns in Distributed Systems</h4>
-<h4>Idempotency Patterns in Distributed Systems</h4>
-<p>Idempotency is the property that applying an operation multiple times produces the same result as applying it once. In distributed systems, networks are unreliable, services fail and restart, and clients naturally retry. Idempotency turns unreliable infrastructure into reliable semantics — it allows safe retries without data corruption or duplicate side effects. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/idempotency-patterns.png" alt="Idempotency Patterns in Distributed Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Idempotency is the property that applying an operation multiple times produces the same result as applying it once. In distributed systems, networks are unreliable, services fail and restart, and clients naturally retry. Idempotency turns unreliable infrastructure into reliable semantics — it allows safe retries without data corruption or duplicate side effects. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/idempotency-patterns.png" alt="Idempotency Patterns in Distributed Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The idempotency key pattern is the foundation. The client generates a unique key for each operation and includes it with the request. The server stores the key and its result. If the server receives a duplicate request with the same key, it returns the stored result without re-executing the operation. The idempotency key should be scoped to the client and operation type. UUIDs or ULIDs are typical key formats. </p>
 <p>Implementation requires an idempotency store. This is typically a database table or Redis cache with the key as the primary key. When a request arrives, the server checks the idempotency store. If the key exists and the operation completed, return the cached response. If the key exists and the operation is in progress, wait or return a conflict. If the key does not exist, execute the operation and store the result. The key must be created atomically — a unique constraint prevents two requests with the same key from executing simultaneously. </p>
 <p>The idempotency key lifecycle requires careful management. The key is created at the start of the request and, depending on the implementation, may have a TTL. After the TTL expires, the key is eligible for cleanup. The client should use a new key for each distinct operation. For example, each payment attempt should have a unique idempotency key, even if retrying the same order's payment. This prevents the case where the first attempt times out, the key expires, and a retry with the same key accidentally creates a duplicate payment. </p>
@@ -125,7 +110,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -137,7 +125,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/asynchronous-communication.html" class="related-card">Asynchronous Communication in Distributed Systems</a><a href="/en/architecture/consensus-algorithms.html" class="related-card">Consensus Algorithms: Paxos, Raft, Zab</a><a href="/en/architecture/domain-events.html" class="related-card">Domain Events: Design and Implementation</a><a href="/en/architecture/distributed-id.html" class="related-card">Distributed ID Generation</a></div>
+      <div class="related-grid"><a href="/en/architecture/asynchronous-communication.html" class="related-card"><span class="related-card-title">Asynchronous Communication in Distributed Systems</span><span class="related-card-desc">Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and pattern</span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="related-card-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="related-card-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/distributed-id.html" class="related-card"><span class="related-card-title">Distributed ID Generation</span><span class="related-card-desc">UUID v7, Snowflake, ULID, database sequences, k-ordered IDs and their tradeoffs in distributed syste</span></a><a href="/en/architecture/distributed-locking.html" class="related-card"><span class="related-card-title">Distributed Locking Mechanisms</span><span class="related-card-desc">Redis Redlock, ZooKeeper locks, lease mechanisms, fencing tokens, and consensus-based distributed lo</span></a><a href="/en/architecture/distributed-tracing-deep.html" class="related-card"><span class="related-card-title">Distributed Tracing: Deep Dive</span><span class="related-card-desc">Trace context propagation, sampling strategies, visualization, and implementation of distributed tra</span></a></div>
     </section>
     
   </div>

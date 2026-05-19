@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/triggers-patterns.html
 
 # Database Triggers: Use Cases, Performance Costs, and Alternatives
 
-## Database Triggers: Use Cases, Performance Costs, and Alternatives
-
-### Database Triggers: Use Cases, Performance Costs, and Alternatives
-
-#### Database Triggers: Use Cases, Performance Costs, and Alternatives
-
-#### Database Triggers: Use Cases, Performance Costs, and Alternatives
-
-#### Database Triggers: Use Cases, Performance Costs, and Alternatives
-
-#### Database Triggers: Use Cases, Performance Costs, and Alternatives
-
-#### Database Triggers: Use Cases, Performance Costs, and Alternatives
-
-#### Database Triggers: Use Cases, Performance Costs, and Alternatives
-
-#### Database Triggers: Use Cases, Performance Costs, and Alternatives
-
-#### Database Triggers: Use Cases, Performance Costs, and Alternatives
-
-#### Database Triggers: Use Cases, Performance Costs, and Alternatives
-
-#### Database Triggers: Use Cases, Performance Costs, and Alternatives
-
-#### Database Triggers: Use Cases, Performance Costs, and Alternatives
-
-#### Database Triggers: Use Cases, Performance Costs, and Alternatives
-
-#### Database Triggers: Use Cases, Performance Costs, and Alternatives
-
 Database Triggers: Use Cases, Performance Costs, and Alternatives 
 
 A trigger is a named database object that executes a function automatically in response to `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE` events on a table. Triggers run inside the same transaction and offer powerful guarantees, but they carry real costs. 
@@ -281,3 +251,9 @@ Triggers are a legitimate tool for data integrity, but they should be your last 
 **See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Materialized Views](</en/database/materialized-views.html>)
 
 **See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Materialized Views](</en/database/materialized-views.html>)
+
+**See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>)
+
+**See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>)
+
+**See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>)

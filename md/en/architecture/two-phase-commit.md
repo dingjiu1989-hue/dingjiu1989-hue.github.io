@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/two-phase-commit.html
 
 # Two-Phase Commit (2PC) for Distributed Transactions
 
-## Two-Phase Commit (2PC) for Distributed Transactions
-
-### Two-Phase Commit (2PC) for Distributed Transactions
-
-#### Two-Phase Commit (2PC) for Distributed Transactions
-
-#### Two-Phase Commit (2PC) for Distributed Transactions
-
-#### Two-Phase Commit (2PC) for Distributed Transactions
-
-#### Two-Phase Commit (2PC) for Distributed Transactions
-
-#### Two-Phase Commit (2PC) for Distributed Transactions
-
-#### Two-Phase Commit (2PC) for Distributed Transactions
-
-#### Two-Phase Commit (2PC) for Distributed Transactions
-
-#### Two-Phase Commit (2PC) for Distributed Transactions
-
-#### Two-Phase Commit (2PC) for Distributed Transactions
-
-#### Two-Phase Commit (2PC) for Distributed Transactions
-
-#### Two-Phase Commit (2PC) for Distributed Transactions
-
-#### Two-Phase Commit (2PC) for Distributed Transactions
-
-#### Two-Phase Commit (2PC) for Distributed Transactions
-
 Two-phase commit (2PC) is a distributed transaction protocol that ensures atomic commitment across multiple databases or services. While it provides strong consistency guarantees, 2PC introduces significant complexity, blocking behavior, and failure modes that require careful consideration. This article examines the protocol mechanics, XA standard, coordinator failure scenarios, and modern alternatives. 
 
 Protocol Overview 
@@ -83,3 +53,9 @@ Two-phase commit remains useful for specific scenarios, particularly within a si
 **See also:** [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency](</en/tech/distributed-transactions-guide.html>)
 
 **See also:** [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency](</en/tech/distributed-transactions-guide.html>)
+
+**See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>)
+
+**See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>)
+
+**See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>)

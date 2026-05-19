@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/input-validation.html
 
 # Input Validation Deep Dive
 
-## Input Validation Deep Dive
-
-### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
-#### Input Validation Deep Dive
-
 Introduction 
 
 Input validation is the first line of defense against injection attacks. Every piece of data entering an application — form fields, HTTP headers, URL parameters, file uploads, API payloads — must be validated before processing. The principle is simple: never trust user input. 
@@ -54,7 +20,7 @@ Whitelist validation defines what is allowed and rejects everything else. It is 
 
 import re
 
-#### Whitelist: only allow specific characters
+## Whitelist: only allow specific characters
 
 def validate_username_whitelist(username):
 
@@ -74,7 +40,7 @@ f"Username '{username}' contains invalid characters. "
 
 return username
 
-#### Whitelist for country codes
+## Whitelist for country codes
 
 ALLOWED_COUNTRIES = {'US', 'CA', 'GB', 'DE', 'FR', 'JP'}
 
@@ -90,11 +56,11 @@ Blacklist (Blocklist) Validation
 
 Blacklist validation attempts to block known malicious patterns. It is inherently fragile because attackers constantly discover new bypass techniques. 
 
-#### WEAK: Blacklist approach (easily bypassed)
+## WEAK: Blacklist approach (easily bypassed)
 
 def validate_input_blacklist(input_string):
 
-#### Easily bypassed — attacker uses alternative syntax
+## Easily bypassed — attacker uses alternative syntax
 
 blocklist = ['
 
@@ -109,3 +75,9 @@ blocklist = ['
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [CORS Security](</en/security/cors-security.html>)
 
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [CORS Security](</en/security/cors-security.html>)
+
+**See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>)
+
+**See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>)
+
+**See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>)

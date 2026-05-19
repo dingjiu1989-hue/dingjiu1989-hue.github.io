@@ -56,4 +56,4 @@ CI/CD, hosting platforms| **npm** (always available)
   
 **Bottom line:** Use pnpm for any new project — faster installs, less disk, stricter dependencies. npm for maximum compatibility. Yarn if you're already using it (the migration cost isn't compelling). Switching from npm to pnpm takes 5 minutes: `pnpm import` converts your lockfile. See also: [JS Runtime Comparison](</en/compare/bun-vs-node-vs-deno.html>) and [Build Tools Comparison](</en/compare/vite-vs-webpack-vs-turbopack.html>).
 
-**See also:** [Bun vs Node.js vs Deno (2026): Best JavaScript Runtime?](</en/compare/bun-vs-node-vs-deno.html>), [Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features](</en/tools/package-managers.html>), [Vite vs Webpack vs Turbopack (2026): Best Frontend Build Tool?](</en/compare/vite-vs-webpack-vs-turbopack.html>)
+**See also:** [Prettier vs Biome (2026): Best Code Formatter for Modern JavaScript?](</en/compare/prettier-vs-biome.html>), [Prisma vs Drizzle vs TypeORM (2026): Best TypeScript ORM?](</en/compare/prisma-vs-drizzle-vs-typeorm.html>), [Vitest vs Jest vs Bun Test (2026): JavaScript Test Runner Comparison](</en/compare/vitest-vs-jest-vs-bun-test.html>)

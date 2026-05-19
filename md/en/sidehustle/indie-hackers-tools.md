@@ -8,41 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/indie-hackers-tools.html
 
 # Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
 
-## Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-#### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-#### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-#### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-#### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-#### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-#### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-#### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-#### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-#### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-#### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-#### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-#### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-#### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
-#### Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
-
 Every indie hacker faces the same dilemma: which tools to use and which to skip. Paying for too many tools drains runway. Using free tiers everywhere creates a maintenance mess. Here is the pragmatic indie hacker stack optimized for solo founders.
 
-#### Hosting
+## Hosting
 
 Vercel is the default choice for Next.js applications. The free tier includes 100 GB bandwidth and 100 GB-hours of serverless execution per month. For most early-stage SaaS products, this is sufficient through the first thousand users.
 
@@ -52,7 +20,7 @@ Database hosting matters. Supabase offers a free tier with 500 MB database stora
 
 Do not waste money on dedicated servers or Kubernetes before you have paying customers. Serverless platforms handle scaling automatically and cost pennies at low volume.
 
-#### Analytics
+## Analytics
 
 Google Analytics is free but increasingly hostile to independent publishers. Switch to Plausible or Umami for privacy-focused, lightweight analytics. Plausible costs about $9 per month and provides all the data you need without slowing down your site.
 
@@ -60,7 +28,7 @@ For product analytics, PostHog is the best choice for indie hackers. Self-host t
 
 Console Ninja and Sentry provide error tracking. Sentry's free tier includes 5,000 events per month. Set it up on day one. You want to know about errors before users tell you about them.
 
-#### Email
+## Email
 
 Email is the most painful part of the indie stack. Self-hosting email is a recipe for deliverability nightmares. Use a dedicated email service from the start.
 
@@ -70,7 +38,7 @@ For marketing emails and newsletters, convert kit or Buttondown offer affordable
 
 Set up email authentication SPF, DKIM, and DMARC records regardless of which provider you use. Without these, your emails land in spam folders.
 
-#### Payments
+## Payments
 
 Stripe is the obvious choice for processing payments. The API is excellent, the documentation is thorough, and the developer experience is best in class. For subscription billing, use Stripe Billing or Stripe Checkout.
 
@@ -78,7 +46,7 @@ Lemon Squeezy is an alternative that handles tax compliance as a merchant of rec
 
 For invoicing, Stripe Invoices handles most needs. For accounting integration, consider Xero or QuickBooks once you have significant transaction volume.
 
-#### Monitoring
+## Monitoring
 
 Uptime monitoring matters even for side projects. HetrixTools offers free monitoring of five uptime monitors. Better Uptime starts at $12 per month with status pages and incident management.
 
@@ -86,7 +54,7 @@ For application performance monitoring, Sentry handles error tracking. For serve
 
 Set up a simple health check endpoint that tests database connectivity, API responsiveness, and background job completion. Monitor this endpoint from an external service.
 
-#### Communication and Productivity
+## Communication and Productivity
 
 Linear for issue tracking. It is fast, keyboard-driven, and designed for small teams. The free tier covers solo developers well.
 
@@ -94,7 +62,7 @@ Notion for documentation. Keep architecture decisions, runbooks, and customer no
 
 Arc or Chrome for development. Both have developer-friendly features. The tool matters less than consistent organization of bookmarks and tabs.
 
-#### Avoid Tool Sprawl
+## Avoid Tool Sprawl
 
 The enemy of the indie hacker is monthly subscription accumulation. Review your tool stack quarterly. Cancel anything you have not used in 30 days. Replace paid tools with free alternatives where possible.
 
@@ -113,3 +81,9 @@ Start with free tiers, upgrade when pain points emerge, and never pay for a tool
 **See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Indie Hacker Marketing on a Zero Budget](</en/sidehustle/indie-hacker-marketing.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>)
 
 **See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Indie Hacker Marketing on a Zero Budget](</en/sidehustle/indie-hacker-marketing.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>)
+
+**See also:** [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
+
+**See also:** [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
+
+**See also:** [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)

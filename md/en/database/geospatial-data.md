@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/geospatial-data.html
 
 # Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
 
-## Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
-### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
-#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
-#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
-#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
-#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
-#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
-#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
-#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
-#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
-#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
-#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
-#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
-#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
-#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
-
 Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries 
 
 PostGIS transforms PostgreSQL into a full-featured spatial database. It adds support for geographic objects, spatial indexing, and hundreds of spatial functions. This article covers fundamental concepts and practical query patterns. 
@@ -289,3 +259,9 @@ PostGIS is the most complete open-source spatial database. Use it as the system 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>)
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>)
+
+**See also:** [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
+
+**See also:** [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
+
+**See also:** [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)

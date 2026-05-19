@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/diagram-tools.png",
       "datePublished": "2025-12-09",
       "dateModified": "2026-05-08",
-      "wordCount": "1570",
+      "wordCount": "1572",
       "keywords": "Developer Tools, Productivity",
       "about": [{"@type": "Thing", "name": "Developer Tools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
@@ -109,24 +109,8 @@
       <h1 class="article-title">Best Diagram as Code Tools</h1>
       <div class="article-meta">Published 2025-12-09 · Last active 2026-05-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/diagram-tools.png" alt="Best Diagram as Code Tools" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Best Diagram as Code Tools</h2>
-<h3>Best Diagram as Code Tools</h3>
-<h4>Best Diagram as Code Tools</h4>
-<h4>Best Diagram as Code Tools</h4>
-<h4>Best Diagram as Code Tools</h4>
-<h4>Best Diagram as Code Tools</h4>
-<h4>Best Diagram as Code Tools</h4>
-<h4>Best Diagram as Code Tools</h4>
-<h4>Best Diagram as Code Tools</h4>
-<h4>Best Diagram as Code Tools</h4>
-<h4>Best Diagram as Code Tools</h4>
-<h4>Best Diagram as Code Tools</h4>
-<h4>Best Diagram as Code Tools</h4>
-<h4>Best Diagram as Code Tools</h4>
-<h4>Best Diagram as Code Tools</h4>
-<h4>Best Diagram as Code Tools</h4>
-<p>Diagram-as-code tools let you create architecture diagrams, flowcharts, and sequence diagrams using text-based specifications. This approach offers version control, reproducibility, and seamless integration with documentation workflows.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/diagram-tools.png" alt="Best Diagram as Code Tools" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Why Diagram as Code</h4>
+      <div class="article-body"><p>Diagram-as-code tools let you create architecture diagrams, flowcharts, and sequence diagrams using text-based specifications. This approach offers version control, reproducibility, and seamless integration with documentation workflows.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/diagram-tools.png" alt="Best Diagram as Code Tools" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Why Diagram as Code</h2>
 <p>Traditional diagram tools (draw.io, LucidChart) produce binary files that are difficult to version control and review. Diagram-as-code tools:</p>
 <ul>
 <li>
@@ -145,7 +129,7 @@
 <p>Work in any editor with syntax highlighting.</p>
 </li>
 </ul>
-<h4>Mermaid</h4>
+<h2>Mermaid</h2>
 <p>Mermaid is the most popular diagram-as-code tool, supported natively by GitHub, GitLab, and Notion. It renders diagrams from JavaScript-like syntax.</p>
 <p>graph TD</p>
 <p>A[Client] --&gt;|HTTP| B[Load Balancer]</p>
@@ -190,7 +174,7 @@
 <p><strong>Installation:</strong></p>
 <p>npm install -g @mermaid-js/mermaid-cli</p>
 <p>mmdc -i input.mmd -o output.png</p>
-<h4>PlantUML</h4>
+<h2>PlantUML</h2>
 <p>PlantUML is a mature diagram-as-code tool with Java-based rendering and extensive diagram type support.</p>
 <p>@startuml</p>
 <p>actor User</p>
@@ -222,17 +206,17 @@
 <p><strong>Pros</strong> : Most comprehensive diagram type support, mature and stable, powerful layout engine.</p>
 <p><strong>Cons</strong> : Java dependency, syntax can be verbose, slower rendering than Mermaid.</p>
 <p><strong>Installation:</strong></p>
-<h4>Using Docker</h4>
+<h2>Using Docker</h2>
 <p>docker run -it --rm -v $(pwd):/data plantuml/plantuml diagram.puml</p>
-<h4>Or using the plantuml CLI with Java</h4>
+<h2>Or using the plantuml CLI with Java</h2>
 <p>java -jar plantuml.jar diagram.puml</p>
-<h4>Excalidraw</h4>
+<h2>Excalidraw</h2>
 <p>Excalidraw is a whiteboard tool that produces hand-drawn style diagrams. It is not truly "diagram as code," but the .excalidraw format is JSON and can be version controlled.</p>
 <p><strong>Pros</strong> : Beautiful hand-drawn aesthetic, real-time collaboration, excellent for system design whiteboarding.</p>
 <p><strong>Cons</strong> : Not text-based, no code generation, manual placement.</p>
 <p>Excalidraw has a CLI tool for embedding in workflows:</p>
 <p>npx @excalidraw/cli export diagram.excalidraw --output diagram.png</p>
-<h4>Diagrams (Python)</h4>
+<h2>Diagrams (Python)</h2>
 <p>Diagrams is a Python library for creating cloud system architecture diagrams. It includes icons for AWS, GCP, Azure, Kubernetes, and more.</p>
 <p>from diagrams import Diagram, Cluster</p>
 <p>from diagrams.aws.compute import EC2</p>
@@ -249,7 +233,7 @@
 <p><strong>Installation:</strong></p>
 <p>pip install diagrams</p>
 <p>python diagram.py # Generates diagram.png</p>
-<h4>D2</h4>
+<h2>D2</h2>
 <p>D2 is a newer diagram-as-code language by Terrastruct, designed to address Mermaid's layout limitations.</p>
 <p>Client -&gt; Load Balancer: HTTP</p>
 <p>Load Balancer -&gt; Web Server 1</p>
@@ -259,7 +243,7 @@
 <p>Database -&gt; Redis Cache: Cache read/write</p>
 <p><strong>Pros</strong> : Better auto-layout than Mermaid, cleaner output, fast rendering, animated diagrams.</p>
 <p><strong>Cons</strong> : Newer = smaller community, fewer integrations, limited diagram types.</p>
-<h4>Comparison Table</h4>
+<h2>Comparison Table</h2>
 <p>| Feature | Mermaid | PlantUML | Excalidraw | Diagrams | D2 |</p>
 <p>|---------|---------|----------|------------|----------|-----|</p>
 <p>| Language | JS-like | Java-like | JSON | Python | D2 DSL |</p>
@@ -269,14 +253,14 @@
 <p>| Layout quality | Good | Good | Manual | Algorithmic | Excellent |</p>
 <p>| Speed | Fast | Medium | N/A | Fast | Fast |</p>
 <p>| License | MIT | GPL | MIT | MIT | MPL |</p>
-<h4>Integration with Documentation</h4>
+<h2>Integration with Documentation</h2>
 <p><strong>Mermaid in Markdown:</strong></p>
 <p>graph LR</p>
 <p>A --&gt; B</p>
 <p>B --&gt; C</p>
 <p>Rendered automatically on GitHub, GitLab, and with Markdown renderers that support Mermaid.</p>
 <p><strong>In MkDocs with Material Theme:</strong></p>
-<h4>mkdocs.yml</h4>
+<h2>mkdocs.yml</h2>
 <p>markdown_extensions:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pymdownx.superfences:</p>
 <p>custom_fences:</p>
@@ -285,7 +269,7 @@
 <p><strong>In VS Code:</strong></p>
 <p>// Preview Mermaid in VS Code</p>
 <p>"extensions": ["bierner.markdown-mermaid"]</p>
-<h4>Recommendations</h4>
+<h2>Recommendations</h2>
 <ul>
 <li>
 <p><strong>For GitHub documentation</strong> : Mermaid (native support, simplest syntax).</p>
@@ -303,13 +287,16 @@
 <p><strong>For polished output</strong> : D2 (best auto-layout, modern tool).</p>
 </li>
 </ul>
-<h4>Summary</h4>
+<h2>Summary</h2>
 <p>Diagram-as-code tools have made technical diagrams maintainable and version-controllable. Mermaid is the most accessible choice with native GitHub support. PlantUML offers the widest diagram type coverage. D2 provides the best layout quality for modern tools. The key principle is to choose a tool that integrates with your existing documentation workflow -- if you already use Markdown in GitHub, Mermaid is the natural choice.</p>
 <p><strong>See also:</strong> <a href="/en/tools/best-diagram-tools.html">Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser</a>, <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>, <a href="/en/tools/note-taking-tools.html">Developer Note Taking Tools</a>.</p>
 <p><strong>See also:</strong> <a href="/en/tools/best-diagram-tools.html">Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser</a>, <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>, <a href="/en/tools/code-review-tools.html">Code Review Tools and Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/best-diagram-tools.html">Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser</a>, <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>, <a href="/en/tools/code-review-tools.html">Code Review Tools and Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/best-diagram-tools.html">Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser</a>, <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>, <a href="/en/tools/code-review-tools.html">Code Review Tools and Best Practices</a></p>
-<p><strong>See also:</strong> <a href="/en/tools/best-diagram-tools.html">Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser</a>, <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>, <a href="/en/tools/code-review-tools.html">Code Review Tools and Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/best-diagram-tools.html">Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser</a>, <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>, <a href="/en/tools/code-review-tools.html">Code Review Tools and Best Practices</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tools/best-diagram-tools.html">Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser</a>, <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>, <a href="/en/tools/code-review-tools.html">Code Review Tools and Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/best-diagram-tools.html">Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser</a>, <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>, <a href="/en/tools/code-review-tools.html">Code Review Tools and Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/project-management-tools.html">Project Management Tools for Developers</a>, <a href="/en/tools/terminal-emulators.html">Best Terminal Emulators 2026</a>, <a href="/en/tools/collaboration-tools.html">Developer Collaboration Tools: Slack vs Discord vs Linear</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/project-management-tools.html">Project Management Tools for Developers</a>, <a href="/en/tools/terminal-emulators.html">Best Terminal Emulators 2026</a>, <a href="/en/tools/collaboration-tools.html">Developer Collaboration Tools: Slack vs Discord vs Linear</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/project-management-tools.html">Project Management Tools for Developers</a>, <a href="/en/tools/terminal-emulators.html">Best Terminal Emulators 2026</a>, <a href="/en/tools/collaboration-tools.html">Developer Collaboration Tools: Slack vs Discord vs Linear</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -321,7 +308,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/best-diagram-tools.html" class="related-card">Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser</a><a href="/en/tools/api-testing-tools.html" class="related-card">API Testing Tools Comparison</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/performance-testing-tools.html" class="related-card">Performance Testing Tools: k6 vs Locust vs JMeter</a></div>
+      <div class="related-grid"><a href="/en/tools/best-diagram-tools.html" class="related-card"><span class="related-card-title">Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser</span><span class="related-card-desc">Compare diagramming tools for system architecture, flowcharts, and technical documentation — handwri</span></a><a href="/en/tools/api-testing-tools.html" class="related-card"><span class="related-card-title">API Testing Tools Comparison</span><span class="related-card-desc">Compare the best API testing tools including Postman, Insomnia, Bruno, and HTTPie for development an</span></a><a href="/en/tools/code-review-tools.html" class="related-card"><span class="related-card-title">Code Review Tools and Best Practices</span><span class="related-card-desc">Explore code review tools and practices including GitHub pull requests, GitLab merge requests, autom</span></a><a href="/en/tools/performance-testing-tools.html" class="related-card"><span class="related-card-title">Performance Testing Tools: k6 vs Locust vs JMeter</span><span class="related-card-desc">Compare k6, Locust, and JMeter for performance testing including script types, distributed testing, </span></a><a href="/en/tools/database-clients.html" class="related-card"><span class="related-card-title">Best Database GUI Clients</span><span class="related-card-desc">Compare the best database GUI clients for developers including TablePlus, DBeaver, DataGrip, and Bee</span></a><a href="/en/tools/note-taking-tools.html" class="related-card"><span class="related-card-title">Developer Note Taking Tools</span><span class="related-card-desc">Compare note-taking tools for developers including Notion, Obsidian, Logseq, and Dendron for knowled</span></a></div>
     </section>
     
   </div>

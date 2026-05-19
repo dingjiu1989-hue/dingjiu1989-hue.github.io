@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/ddd-tactical.html
 
 # DDD Tactical Patterns
 
-## DDD Tactical Patterns
-
-### DDD Tactical Patterns
-
-#### DDD Tactical Patterns
-
-#### DDD Tactical Patterns
-
-#### DDD Tactical Patterns
-
-#### DDD Tactical Patterns
-
-#### DDD Tactical Patterns
-
-#### DDD Tactical Patterns
-
-#### DDD Tactical Patterns
-
-#### DDD Tactical Patterns
-
-#### DDD Tactical Patterns
-
-#### DDD Tactical Patterns
-
-#### DDD Tactical Patterns
-
-#### DDD Tactical Patterns
-
-#### DDD Tactical Patterns
-
 Domain-Driven Design (DDD) tactical patterns provide concrete building blocks for implementing domain models. While strategic DDD focuses on boundaries and relationships between domains, tactical patterns guide the implementation of individual domain elements. This article explores the core tactical patterns: entities, value objects, aggregates, domain services, repositories, and domain events. 
 
 Entities 
@@ -89,3 +59,9 @@ Tactical patterns provide a shared vocabulary for implementation. When a team us
 **See also:** [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 
 **See also:** [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
+
+**See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)

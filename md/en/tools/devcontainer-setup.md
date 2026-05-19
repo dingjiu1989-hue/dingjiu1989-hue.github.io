@@ -8,45 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/tools/devcontainer-setup.html
 
 # Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
 
-## Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
-
-#### Introduction
+## Introduction
 
 Development containers (dev containers) provide consistent, reproducible development environments defined as code. Instead of developers manually installing language runtimes, databases, and tools on their local machines, dev containers package the entire development environment into a Docker container. This eliminates "works on my machine" problems, reduces onboarding time from days to minutes, and ensures consistency across team environments.
 
 This article covers devcontainer.json configuration, features, dotfiles integration, remote development workflows, and GitHub Codespaces.
 
-#### Dev Container Specification
+## Dev Container Specification
 
 The dev container specification, maintained by the Community Specification Contributor Agreement, defines a standard format for configuring development containers. The primary configuration file is `.devcontainer/devcontainer.json` at the repository root.
 
@@ -88,7 +56,7 @@ The dev container specification, maintained by the Community Specification Contr
 
 The `image` property specifies the base container image. Alternatively, `build` references a Dockerfile for custom images. The Dockerfile approach provides complete control over the environment but requires more maintenance.
 
-#### Base Images and Features
+## Base Images and Features
 
 Microsoft maintains a library of pre-built dev container base images: `javascript-node`, `python`, `go`, `rust`, `java`, `dotnet`, and more. These images include the runtime, common development tools (git, curl, zsh, Oh My Zsh), and non-root user configuration.
 
@@ -116,7 +84,7 @@ Features are self-contained, shareable units of configuration that install addit
 
 Features are versioned and published as OCI artifacts. The community contributes features to the shared registry, providing a growing catalog of ready-to-use environment components.
 
-#### Dotfiles Integration
+## Dotfiles Integration
 
 Dotfiles — configuration files for shell, editors, and tools — can be automatically applied when creating a dev container. The devcontainer.json specifies a dotfiles repository:
 
@@ -134,7 +102,7 @@ The dotfiles repository typically contains shell configuration (.zshrc, .bashrc)
 
 This feature enables personalized development environments within the standardized container, balancing consistency with individual preferences.
 
-#### Remote Development Workflows
+## Remote Development Workflows
 
 Dev containers support four connection modes:
 
@@ -146,15 +114,15 @@ Dev Tunnel: VS Code tunnels through firewalls to connect to a dev container on a
 
 Codespaces: GitHub managed remote dev containers in the cloud.
 
-#### Build and open a dev container
+## Build and open a dev container
 
 devcontainer open .
 
-#### Rebuild from scratch
+## Rebuild from scratch
 
 devcontainer build --workspace-folder . --image-name my-devcontainer
 
-#### GitHub Codespaces
+## GitHub Codespaces
 
 GitHub Codespaces provides cloud-hosted dev containers integrated directly with GitHub repositories. When `devcontainer.json` exists in a repository, Codespaces automatically provisions a container with the specified configuration.
 
@@ -203,7 +171,7 @@ Codespaces supports:
 
 Prebuilds significantly improve the Codespaces experience. A GitHub Actions workflow builds the container on each push, caching layers for instant startup. Without prebuilds, Codespaces builds the container on first launch, which can take several minutes.
 
-#### Best Practices
+## Best Practices
 
 Keep devcontainer.json in the repository root for broadest tool compatibility. Pin feature versions for reproducibility. Use postCreateCommand for setup scripts, not for tools that should be permanently installed. Configure lifecycle hooks for different timing phases:
 
@@ -220,7 +188,7 @@ Keep devcontainer.json in the repository root for broadest tool compatibility. P
 
 Minimize image size by using specific base images rather than the universal image unless diverse tooling is needed. Test dev container configuration in CI to catch configuration drift.
 
-#### Conclusion
+## Conclusion
 
 Dev containers transform development environment management. devcontainer.json defines environments as code. Features provide composable tool installation. Dotfiles integration preserves personal preferences. Remote development workflows support diverse connectivity modes. GitHub Codespaces extends the model to cloud-hosted environments. Organizations adopting dev containers reduce onboarding friction, eliminate environment inconsistencies, and enable developers to contribute to any repository with zero local configuration.
 
@@ -235,3 +203,9 @@ Dev containers transform development environment management. devcontainer.json d
 **See also:** [Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared](</en/tools/kubernetes-dashboards.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics](</en/tools/ci-cd-observability.html>)
 
 **See also:** [Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared](</en/tools/kubernetes-dashboards.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics](</en/tools/ci-cd-observability.html>)
+
+**See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>), [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>)
+
+**See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>), [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>)
+
+**See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>), [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>)

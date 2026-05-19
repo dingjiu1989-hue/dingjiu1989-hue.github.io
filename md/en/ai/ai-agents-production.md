@@ -8,43 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-agents-production.html
 
 # Deploying AI Agents to Production
 
-## Deploying AI Agents to Production
-
-### Deploying AI Agents to Production
-
-#### Deploying AI Agents to Production
-
-#### Deploying AI Agents to Production
-
-#### Deploying AI Agents to Production
-
-#### Deploying AI Agents to Production
-
-#### Deploying AI Agents to Production
-
-#### Deploying AI Agents to Production
-
-#### Deploying AI Agents to Production
-
-#### Deploying AI Agents to Production
-
-#### Deploying AI Agents to Production
-
-#### Deploying AI Agents to Production
-
-#### Deploying AI Agents to Production
-
-#### Deploying AI Agents to Production
-
-#### Deploying AI Agents to Production
-
-#### Deploying AI Agents to Production
-
-#### Introduction
+## Introduction
 
 AI agents that autonomously execute multi-step tasks are transitioning from experimental prototypes to production systems. Unlike traditional API calls, agents make decisions, use tools, and interact with external systems--introducing new challenges around reliability, cost, safety, and observability. This article covers the patterns and practices needed to deploy AI agents safely and efficiently.
 
-#### Agent Orchestration
+## Agent Orchestration
 
 Production agents typically follow a structured execution loop:
 
@@ -90,11 +58,11 @@ ctx.current_step += 1
 
 try:
 
-#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Think: decide next action
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Think: decide next action
 
 action = await self.think(ctx)
 
-#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Act: execute tool or respond
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Act: execute tool or respond
 
 if action["type"] == "tool_call":
 
@@ -118,7 +86,7 @@ return {
 
 }
 
-#### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Observe: store result
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Observe: store result
 
 ctx.history.append({
 
@@ -130,25 +98,25 @@ ctx.history.append({
 
 })
 
-#### 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cost tracking
+## 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cost tracking
 
 ctx.total_cost += self._calculate_cost(action)
 
 except ToolError as e:
 
-#### Handle tool failures with retry
+## Handle tool failures with retry
 
 await self.handle_tool_error(ctx, e)
 
 except Exception as e:
 
-#### Catch-all for unexpected errors
+## Catch-all for unexpected errors
 
 await self.handle_unexpected_error(ctx, e)
 
 return {"status": "max_steps_exceeded", "steps": ctx.max_steps}
 
-#### Error Handling and Retry Logic
+## Error Handling and Retry Logic
 
 Agents must gracefully handle failures across multiple dimensions:
 
@@ -216,7 +184,7 @@ return {
 
 }
 
-#### Human-in-the-Loop
+## Human-in-the-Loop
 
 Critical agent actions require human approval before execution:
 
@@ -234,7 +202,7 @@ self, action: dict, context: AgentContext
 
 ) -> bool:
 
-#### Determine if approval is needed
+## Determine if approval is needed
 
 if not self._requires_approval(action):
 
@@ -254,7 +222,7 @@ self.pending_approvals[approval_id] = {
 
 }
 
-#### Notify human reviewer
+## Notify human reviewer
 
 await self._notify_reviewer(
 
@@ -268,7 +236,7 @@ current_state=context.history[-3:],
 
 )
 
-#### Wait for approval (with timeout)
+## Wait for approval (with timeout)
 
 try:
 
@@ -302,7 +270,7 @@ action.get("destructive", False),
 
 ])
 
-#### Monitoring Agent Behavior
+## Monitoring Agent Behavior
 
 Track agent decisions and outcomes with structured telemetry:
 
@@ -356,7 +324,7 @@ def detect_anomalies(self, ctx: AgentContext) -> List[str]:
 
 warnings = []
 
-#### Looping detection
+## Looping detection
 
 recent_actions = [h["action"]["tool"]["name"]
 
@@ -366,13 +334,13 @@ if len(set(recent_actions)) < 3 and len(recent_actions) >= 5:
 
 warnings.append("POSSIBLE_LOOP")
 
-#### Cost anomaly
+## Cost anomaly
 
 if ctx.total_cost > 0.50:
 
 warnings.append("HIGH_COST")
 
-#### Token usage
+## Token usage
 
 total_tokens = sum(
 
@@ -386,7 +354,7 @@ warnings.append("HIGH_TOKEN_USAGE")
 
 return warnings
 
-#### Cost Tracking and Rate Limiting
+## Cost Tracking and Rate Limiting
 
 class AgentCostManager:
 
@@ -400,7 +368,7 @@ self.token_buckets = {}
 
 async def check_budget(self, estimated_cost: float) -> bool:
 
-#### Reset daily counter
+## Reset daily counter
 
 if self._is_new_day():
 
@@ -428,7 +396,7 @@ refill_interval=60
 
 return bucket.consume()
 
-#### Observability
+## Observability
 
 Log agent decision traces for debugging and audit:
 
@@ -491,3 +459,9 @@ Deploy agents incrementally: start with read-only tools, add human-in-the-loop f
 **See also:** [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>)
 
 **See also:** [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>)
+
+**See also:** [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)
+
+**See also:** [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)
+
+**See also:** [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)

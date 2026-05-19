@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/choreography-patterns.htm
 
 # Choreography Patterns
 
-## Choreography Patterns
-
-### Choreography Patterns
-
-#### Choreography Patterns
-
-#### Choreography Patterns
-
-#### Choreography Patterns
-
-#### Choreography Patterns
-
-#### Choreography Patterns
-
-#### Choreography Patterns
-
-#### Choreography Patterns
-
-#### Choreography Patterns
-
-#### Choreography Patterns
-
-#### Choreography Patterns
-
-#### Choreography Patterns
-
-#### Choreography Patterns
-
-#### Choreography Patterns
-
 Choreography is an architectural pattern for coordinating distributed workflows without a central coordinator. Unlike orchestration, where a central service directs all participants, choreography uses events to achieve coordination—each service performs its task and emits events that trigger the next steps. This decentralized approach offers scalability and loose coupling but introduces challenges in observability and error handling. 
 
 How Choreography Works 
@@ -91,3 +61,9 @@ Many organizations use a hybrid approach: choreography for simple, stable workfl
 **See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>)
 
 **See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>)
+
+**See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)

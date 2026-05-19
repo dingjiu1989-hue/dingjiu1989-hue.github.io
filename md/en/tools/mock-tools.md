@@ -8,43 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/tools/mock-tools.html
 
 # Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
 
-## Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
-
-#### Introduction
+## Introduction
 
 Mocking is essential for isolated testing. The right mocking strategy depends on what you are testing: frontend components that make HTTP calls, backend services with external dependencies, or complex interactions between multiple services. This article covers four complementary mocking approaches.
 
-#### MSW (Mock Service Worker)
+## MSW (Mock Service Worker)
 
 MSW intercepts network requests at the service worker level, working in both browser and Node.js:
 
@@ -162,7 +130,7 @@ return HttpResponse.error();
 
 **Strengths** : Works at the network level (not module level), browser and Node.js support, realistic interception, first-class GraphQL support.
 
-#### nock
+## nock
 
 nock intercepts HTTP requests at the Node.js `http` module level:
 
@@ -236,7 +204,7 @@ nock.cleanAll();
 
 **Weaknesses** : Node.js only, module-level interception (not browser), can be slow with many mocks.
 
-#### Sinon
+## Sinon
 
 Sinon provides standalone test doubles (spies, stubs, mocks):
 
@@ -294,7 +262,7 @@ clock.restore();
 
 **Strengths** : Rich assertion API, fake timers, standalone (framework-agnostic), excellent for module-level mocking.
 
-#### WireMock
+## WireMock
 
 WireMock runs as a standalone HTTP server, perfect for integration tests:
 
@@ -338,15 +306,15 @@ verify(getRequestedFor(urlPathEqualTo("/api/users/1"))
 
 .withHeader("Authorization", containing("Bearer")));
 
-#### Start WireMock standalone
+## Start WireMock standalone
 
 java -jar wiremock-standalone.jar --port 8089 --verbose
 
-#### Configure via JSON files in mappings/ directory
+## Configure via JSON files in mappings/ directory
 
-#### __files/response.json contains the response body
+## __files/response.json contains the response body
 
-#### Comparison
+## Comparison
 
 | Feature | MSW | nock | Sinon | WireMock |
 
@@ -364,7 +332,7 @@ java -jar wiremock-standalone.jar --port 8089 --verbose
 
 | Best for | Frontend tests | Backend tests | Unit tests | Integration tests |
 
-#### Recommendations
+## Recommendations
 
   * **Frontend API mocking** : MSW is the best choice — it works in both test and development environments.
 
@@ -390,3 +358,9 @@ Use MSW + Sinon as your core mocking stack. Add nock or WireMock when testing se
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
 
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
+
+**See also:** [Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison](</en/tools/monorepo-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>)
+
+**See also:** [Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison](</en/tools/monorepo-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>)
+
+**See also:** [Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison](</en/tools/monorepo-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>)

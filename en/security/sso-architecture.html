@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/sso-architecture.png",
       "datePublished": "2026-03-19",
       "dateModified": "2026-04-10",
-      "wordCount": "888",
+      "wordCount": "898",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">SSO Architecture</h1>
       <div class="article-meta">Published 2026-03-19 · Last active 2026-04-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/sso-architecture.png" alt="SSO Architecture" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>SSO Architecture</h2>
-<h3>SSO Architecture</h3>
-<h4>SSO Architecture</h4>
-<h4>SSO Architecture</h4>
-<h4>SSO Architecture</h4>
-<h4>SSO Architecture</h4>
-<h4>SSO Architecture</h4>
-<h4>SSO Architecture</h4>
-<h4>SSO Architecture</h4>
-<h4>SSO Architecture</h4>
-<h4>SSO Architecture</h4>
-<h4>SSO Architecture</h4>
-<h4>SSO Architecture</h4>
-<h4>SSO Architecture</h4>
-<h4>SSO Architecture</h4>
-<p>SSO Fundamentals </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/sso-architecture.png" alt="SSO Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>SSO Fundamentals </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/sso-architecture.png" alt="SSO Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Single Sign-On (SSO) allows users to authenticate once and access multiple applications without re-entering credentials. It improves security by centralizing authentication and reducing password fatigue. </p>
 <p>SAML 2.0 </p>
 <p>Security Assertion Markup Language (SAML) is the mature standard for enterprise SSO: </p>
@@ -123,13 +108,13 @@
 <p>IssueInstant="2026-05-12T10:00:00Z"&gt;</p>
 <p>https://app.example.com</p>
 <p>Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"/&gt;</p>
-<h4>SAML response parsing</h4>
+<h2>SAML response parsing</h2>
 <p>from signxml import XMLVerifier</p>
 <p>import xml.etree.ElementTree as ET</p>
 <p>def parse_saml_response(response_xml):</p>
-<h4>Verify the signature</h4>
+<h2>Verify the signature</h2>
 <p>verified_data = XMLVerifier().verify(response_xml).signed_xml</p>
-<h4>Extract attributes</h4>
+<h2>Extract attributes</h2>
 <p>ns = {"saml2": "urn:oasis:names:tc:SAML:2.0:assertion"}</p>
 <p>root = ET.fromstring(verified_data)</p>
 <p>attributes = {}</p>
@@ -165,16 +150,16 @@
 <p>res.redirect(authUrl);</p>
 <p>}</p>
 <p>Token Exchange </p>
-<h4>Token exchange handler</h4>
+<h2>Token exchange handler</h2>
 <p>async def handle_callback(request):</p>
 <p>code = request.query_params["code"]</p>
 <p>state = request.query_params["state"]</p>
-<h4>Verify state matches</h4>
+<h2>Verify state matches</h2>
 <p>if state != request.session["oidc_state"]:</p>
 <p>raise SecurityError("State mismatch - possible CSRF")</p>
-<h4>Exchange code for tokens</h4>
+<h2>Exchange code for tokens</h2>
 <p>token_response = await oidc_client.authorize_token(code)</p>
-<h4>Validate ID token</h4>
+<h2>Validate ID token</h2>
 <p>claims = await oidc_client.validate_id_token(</p>
 <p>token_response["id_token"],</p>
 <p>nonce=request.session["oidc_nonce"]</p>
@@ -205,7 +190,10 @@
 <p><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/database-encryption.html">Database Encryption</a></p>
 <p><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/database-encryption.html">Database Encryption</a></p>
 <p><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/database-encryption.html">Database Encryption</a></p>
-<p><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/database-encryption.html">Database Encryption</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/database-encryption.html">Database Encryption</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/database-encryption.html">Database Encryption</a></p>
+<p><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/database-encryption.html">Database Encryption</a></p>
+<p><strong>See also:</strong> <a href="/en/security/vulnerability-management.html">Vulnerability Management</a>, <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a>, <a href="/en/security/identity-access-management.html">IAM: Identity and Access Management Fundamentals</a></p>
+<p><strong>See also:</strong> <a href="/en/security/vulnerability-management.html">Vulnerability Management</a>, <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a>, <a href="/en/security/identity-access-management.html">IAM: Identity and Access Management Fundamentals</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/vulnerability-management.html">Vulnerability Management</a>, <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a>, <a href="/en/security/identity-access-management.html">IAM: Identity and Access Management Fundamentals</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -217,7 +205,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/session-management.html" class="related-card">Session Management Security</a><a href="/en/security/cloud-network-security.html" class="related-card">Cloud Network Security</a><a href="/en/security/database-encryption.html" class="related-card">Database Encryption</a><a href="/en/security/helm-security.html" class="related-card">Helm Security</a></div>
+      <div class="related-grid"><a href="/en/security/session-management.html" class="related-card"><span class="related-card-title">Session Management Security</span><span class="related-card-desc">Guide to secure session management covering JWT vs opaque tokens, rotation strategies, secure cookie</span></a><a href="/en/security/cloud-network-security.html" class="related-card"><span class="related-card-title">Cloud Network Security</span><span class="related-card-desc">Designing cloud network security with security groups, NACLs, firewall rules, and traffic inspection</span></a><a href="/en/security/database-encryption.html" class="related-card"><span class="related-card-title">Database Encryption</span><span class="related-card-desc">Implementing database encryption with TDE, column-level encryption, application-level encryption, an</span></a><a href="/en/security/helm-security.html" class="related-card"><span class="related-card-title">Helm Security</span><span class="related-card-desc">Securing Helm deployments with chart signing, provenance verification, secrets management, and best </span></a><a href="/en/security/sbom-management.html" class="related-card"><span class="related-card-title">SBOM Management</span><span class="related-card-desc">Managing Software Bill of Materials with generation, verification, vulnerability correlation, and co</span></a><a href="/en/security/secure-code-review.html" class="related-card"><span class="related-card-title">Secure Code Review</span><span class="related-card-desc">A systematic approach to secure code review with checklists, automation, SAST integration, and commo</span></a></div>
     </section>
     
   </div>

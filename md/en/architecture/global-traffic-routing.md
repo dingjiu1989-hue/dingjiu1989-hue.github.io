@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/global-traffic-routing.ht
 
 # Global Traffic Routing
 
-## Global Traffic Routing
-
-### Global Traffic Routing
-
-#### Global Traffic Routing
-
-#### Global Traffic Routing
-
-#### Global Traffic Routing
-
-#### Global Traffic Routing
-
-#### Global Traffic Routing
-
-#### Global Traffic Routing
-
-#### Global Traffic Routing
-
-#### Global Traffic Routing
-
-#### Global Traffic Routing
-
-#### Global Traffic Routing
-
-#### Global Traffic Routing
-
-#### Global Traffic Routing
-
-#### Global Traffic Routing
-
 Global traffic routing directs user requests to the optimal backend location based on geography, latency, capacity, and availability. As applications scale to serve users worldwide, the routing infrastructure becomes a critical architectural component that determines latency, reliability, and operational flexibility. Multiple routing techniques — DNS-based, Anycast-based, and application-level — combine to provide comprehensive global traffic management. 
 
 DNS-based routing is the most common approach for directing traffic to the nearest data center. The authoritative DNS server for the domain returns different IP addresses based on the requesting resolver's geographic location or network latency. AWS Route 53, Google Cloud DNS, and Azure Traffic Manager implement latency-based routing by maintaining latency tables between DNS resolvers and application endpoints. When a user in Europe requests the domain, the DNS returns the IP of the European data center. 
@@ -71,3 +41,9 @@ Multi-cloud routing adds another dimension of complexity. Traffic must be routed
 **See also:** [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
 
 **See also:** [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
+
+**See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/kubernetes-tools.png",
       "datePublished": "2026-02-03",
       "dateModified": "2026-04-19",
-      "wordCount": "2626",
+      "wordCount": "2573",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
@@ -110,27 +110,11 @@
       <h1 class="article-title">Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h1>
       <div class="article-meta">Published 2026-02-03 · Last active 2026-04-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/kubernetes-tools.png" alt="Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h2>
-<h3>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h3>
-<h4>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h4>
-<h4>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h4>
-<h4>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h4>
-<h4>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h4>
-<h4>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h4>
-<h4>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h4>
-<h4>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h4>
-<h4>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h4>
-<h4>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h4>
-<h4>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h4>
-<h4>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h4>
-<h4>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h4>
-<h4>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h4>
-<h4>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Managing Kubernetes clusters requires more than just raw kubectl commands. The ecosystem of tools around Kubernetes transforms complex operations into efficient workflows. This article covers the essential tools every Kubernetes developer should know: kubectl plugins and aliases for daily operations, k9s for terminal-based cluster navigation, Lens for visual cluster management, and Kustomize for configuration management.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/kubernetes-tools.png" alt="Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>kubectl Plugins</h4>
+<h2>kubectl Plugins</h2>
 <p>Extend kubectl's functionality with plugin managers and essential plugins:</p>
-<h4>Install krew (plugin manager)</h4>
+<h2>Install krew (plugin manager)</h2>
 <p>(</p>
 <p>set -x; cd "$(mktemp -d)" &amp;&amp;</p>
 <p>OS="$(uname | tr '[:upper:]' '[:lower:]')" &amp;&amp;</p>
@@ -140,7 +124,7 @@
 <p>KREW=./krew-"${OS}_${ARCH}" &amp;&amp;</p>
 <p>"$KREW" install krew</p>
 <p>)</p>
-<h4>Essential plugins</h4>
+<h2>Essential plugins</h2>
 <p>kubectl krew install ctx # Switch between contexts</p>
 <p>kubectl krew install ns # Switch between namespaces</p>
 <p>kubectl krew install tree # Show resource hierarchy</p>
@@ -151,13 +135,13 @@
 <p>kubectl krew install images # Show container images</p>
 <p>kubectl krew install view-utilization # Resource utilization</p>
 <p>kubectl krew install inspect # Deep resource inspection</p>
-<h4>Usage examples</h4>
+<h2>Usage examples</h2>
 <p>kubectl ctx production # Switch to production context</p>
 <p>kubectl ns backend # Switch to backend namespace</p>
 <p>kubectl tree deployment my-app # Show deployment hierarchy</p>
 <p>kubectl sniff pod-web-1 # Start packet capture</p>
 <p><strong>Custom aliases</strong> for daily efficiency:</p>
-<h4>~/.zshrc</h4>
+<h2>~/.zshrc</h2>
 <p>alias k="kubectl"</p>
 <p>alias kg="kubectl get"</p>
 <p>alias kd="kubectl describe"</p>
@@ -170,24 +154,24 @@
 <p>alias kgd="kubectl get deployments"</p>
 <p>alias kgn="kubectl get nodes"</p>
 <p>alias kpf="kubectl port-forward"</p>
-<h4>Get pod with most CPU usage</h4>
+<h2>Get pod with most CPU usage</h2>
 <p>alias ktop="kubectl top pods --sort-by=cpu"</p>
-<h4>Watch resources</h4>
+<h2>Watch resources</h2>
 <p>alias kwp="kubectl get pods --watch"</p>
-<h4>Exec into pod</h4>
+<h2>Exec into pod</h2>
 <p>alias kex="kubectl exec -it"</p>
-<h4>Resource usage</h4>
+<h2>Resource usage</h2>
 <p>alias kutil="kubectl view-utilization"</p>
-<h4>k9s</h4>
+<h2>k9s</h2>
 <p>A terminal-based UI for Kubernetes cluster management:</p>
-<h4>Install k9s</h4>
+<h2>Install k9s</h2>
 <p>brew install k9s # macOS</p>
-<h4>Or download from GitHub releases</h4>
-<h4>Start k9s</h4>
+<h2>Or download from GitHub releases</h2>
+<h2>Start k9s</h2>
 <p>k9s</p>
 <p>k9s -c prod # Start with specific context</p>
 <p>k9s -n backend # Start in specific namespace</p>
-<h4>~/.k9s/config.yml</h4>
+<h2>~/.k9s/config.yml</h2>
 <p>k9s:</p>
 <p>cluster: prod</p>
 <p>namespace: default</p>
@@ -202,20 +186,20 @@
 <p>logRequestSize: 200</p>
 <p>logSince: 1h # Default log time range</p>
 <p>wide: false</p>
-<h4>Key bindings:</h4>
-<h4>0-9: Switch namespace</h4>
-<h4>/: Search/filter resources</h4>
-<h4>d: Describe resource</h4>
-<h4>l: View logs</h4>
-<h4>y: View YAML</h4>
-<h4>e: Edit resource</h4>
-<h4>s: Shell into pod</h4>
-<h4>ctrl-d: Delete resource</h4>
-<h4>?: Help</h4>
+<h2>Key bindings:</h2>
+<h2>0-9: Switch namespace</h2>
+<h2>/: Search/filter resources</h2>
+<h2>d: Describe resource</h2>
+<h2>l: View logs</h2>
+<h2>y: View YAML</h2>
+<h2>e: Edit resource</h2>
+<h2>s: Shell into pod</h2>
+<h2>ctrl-d: Delete resource</h2>
+<h2>?: Help</h2>
 <p><strong>k9s plugins</strong> for custom commands:</p>
-<h4>~/.k9s/plugin.yml</h4>
+<h2>~/.k9s/plugin.yml</h2>
 <p>plugins:</p>
-<h4>Restart deployment</h4>
+<h2>Restart deployment</h2>
 <p>restart:</p>
 <p>shortCut: Ctrl-R</p>
 <p>description: "Rollout restart"</p>
@@ -230,7 +214,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- --namespace</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- $NAMESPACE</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- $NAME</p>
-<h4>Open pod logs in less</h4>
+<h2>Open pod logs in less</h2>
 <p>logs-less:</p>
 <p>shortCut: Ctrl-L</p>
 <p>description: "View logs in less"</p>
@@ -241,10 +225,10 @@
 <p>args:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- -c</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "kubectl logs $NAME -n $NAMESPACE | less"</p>
-<h4>Lens</h4>
+<h2>Lens</h2>
 <p>A desktop IDE for Kubernetes with visual cluster management:</p>
-<h4>Install Lens (download from https://k8slens.dev)</h4>
-<h4>Or via package manager</h4>
+<h2>Install Lens (download from https://k8slens.dev)</h2>
+<h2>Or via package manager</h2>
 <p>brew install --cask lens</p>
 <p><strong>Key features</strong> :</p>
 <ul>
@@ -273,9 +257,9 @@
 <p>Multi-cluster management</p>
 </li>
 </ul>
-<h4>Kustomize</h4>
+<h2>Kustomize</h2>
 <p>Native Kubernetes configuration customization (built into kubectl v1.14+):</p>
-<h4>base/kustomization.yaml</h4>
+<h2>base/kustomization.yaml</h2>
 <p>apiVersion: kustomize.config.k8s.io/v1beta1</p>
 <p>kind: Kustomization</p>
 <p>resources:</p>
@@ -288,7 +272,7 @@
 <p>images:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: my-app</p>
 <p>newTag: v1.2.3</p>
-<h4>overlays/production/kustomization.yaml</h4>
+<h2>overlays/production/kustomization.yaml</h2>
 <p>apiVersion: kustomize.config.k8s.io/v1beta1</p>
 <p>kind: Kustomization</p>
 <p>bases:</p>
@@ -314,19 +298,19 @@
 <p>replicas:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: my-app</p>
 <p>count: 5</p>
-<h4>Build and apply</h4>
+<h2>Build and apply</h2>
 <p>kubectl kustomize overlays/production/</p>
 <p>kubectl apply -k overlays/production/</p>
-<h4>Diff between environments</h4>
+<h2>Diff between environments</h2>
 <p>diff &lt;(kubectl kustomize overlays/staging) &lt;(kubectl kustomize overlays/production)</p>
-<h4>Comparison</h4>
+<h2>Comparison</h2>
 <p>| Tool | Type | Best For | Learning Curve |</p>
 <p>|------|------|----------|----------------|</p>
 <p>| kubectl + plugins | CLI | Daily operations, scripting | Medium |</p>
 <p>| k9s | Terminal UI | Fast cluster navigation | Low |</p>
 <p>| Lens | Desktop UI | Visual management, monitoring | Low |</p>
 <p>| Kustomize | Config tool | Environment-specific configs | Medium |</p>
-<h4>Recommendations</h4>
+<h2>Recommendations</h2>
 <ul>
 <li>
 <p><strong>Daily operations</strong> : kubectl with krew plugins (especially ctx and ns) plus custom aliases.</p>
@@ -348,7 +332,10 @@
 <p><strong>See also:</strong> <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a>, <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a>, <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a>, <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a></p>
-<p><strong>See also:</strong> <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a>, <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a>, <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a>, <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a>, <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/git-advanced-tools.html">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</a>, <a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/git-advanced-tools.html">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</a>, <a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/git-advanced-tools.html">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</a>, <a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -360,7 +347,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/code-editor-plugins.html" class="related-card">Code Editor Plugins: Must-Have Extensions for Productivity</a><a href="/en/tools/helm-tools.html" class="related-card">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a><a href="/en/tools/kafka-tools.html" class="related-card">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a><a href="/en/tools/redis-tools.html" class="related-card">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a></div>
+      <div class="related-grid"><a href="/en/tools/code-editor-plugins.html" class="related-card"><span class="related-card-title">Code Editor Plugins: Must-Have Extensions for Productivity</span><span class="related-card-desc">Essential code editor plugins for 2026: language support, AI assistants, theme plugins, git integrat</span></a><a href="/en/tools/helm-tools.html" class="related-card"><span class="related-card-title">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</span><span class="related-card-desc">Essential Helm ecosystem tools: Helmfile for declarative chart management, helm-docs for documentati</span></a><a href="/en/tools/kafka-tools.html" class="related-card"><span class="related-card-title">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</span><span class="related-card-desc">Compare Apache Kafka management and monitoring tools: AKHQ for comprehensive cluster management, Kaf</span></a><a href="/en/tools/redis-tools.html" class="related-card"><span class="related-card-title">Redis Tools: RedisInsight, Redis CLI, Redis Commander</span><span class="related-card-desc">Essential tools for Redis management: RedisInsight for GUI-based visualization and analysis, Redis C</span></a><a href="/en/tools/productivity-tools.html" class="related-card"><span class="related-card-title">Developer Productivity Tools: Essential Toolkit for 2026</span><span class="related-card-desc">Essential developer productivity tools: time tracking, knowledge management, focus tools, and workfl</span></a><a href="/en/tools/command-line-productivity.html" class="related-card"><span class="related-card-title">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</span><span class="related-card-desc">Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code </span></a></div>
     </section>
     
   </div>

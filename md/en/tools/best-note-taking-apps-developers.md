@@ -46,4 +46,4 @@ Academic research, Zettelkasten method| Obsidian or Logseq| Both support Zettelk
   
 **Bottom line:** Obsidian wins for personal developer notes — local Markdown files, Git integration, and the plugin ecosystem are unmatched. Use Notion for team documentation and project management. Logseq is the dark horse: if the outlining + journaling paradigm clicks with you, it can be transformative. All three have free tiers, so try each for a week. See also: [Best PM Tools for Dev Teams](</en/tools/best-project-management-dev.html>) and [Best Free Dev Tools](</en/tools/best-free-dev-tools-2026.html>).
 
-**See also:** [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Best Project Management Tools for Dev Teams 2026: Linear vs Jira vs ClickUp vs Notion](</en/tools/best-project-management-dev.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>)
+**See also:** [Best Git GUI Clients](</en/tools/best-git-clients.html>), [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>), [Best Markdown Editors](</en/tools/markdown-editors.html>)

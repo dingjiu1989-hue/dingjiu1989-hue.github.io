@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/observability-three-pilla
 
 # Observability: Logs, Metrics, and Traces
 
-## Observability: Logs, Metrics, and Traces
-
-### Observability: Logs, Metrics, and Traces
-
-#### Observability: Logs, Metrics, and Traces
-
-#### Observability: Logs, Metrics, and Traces
-
-#### Observability: Logs, Metrics, and Traces
-
-#### Observability: Logs, Metrics, and Traces
-
-#### Observability: Logs, Metrics, and Traces
-
-#### Observability: Logs, Metrics, and Traces
-
-#### Observability: Logs, Metrics, and Traces
-
-#### Observability: Logs, Metrics, and Traces
-
-#### Observability: Logs, Metrics, and Traces
-
-#### Observability: Logs, Metrics, and Traces
-
-#### Observability: Logs, Metrics, and Traces
-
-#### Observability: Logs, Metrics, and Traces
-
-#### Observability: Logs, Metrics, and Traces
-
 Observability is the ability to understand a system's internal state from its external outputs. The three pillars — logs, metrics, and traces — each provide different perspectives. Logs describe discrete events. Metrics provide aggregate measurements. Traces follow requests across service boundaries. Effective observability requires combining all three and correlating them to answer questions about system behavior, especially during incidents. 
 
 Logs are timestamped records of discrete events. They are the most detailed pillar — a log line can contain any amount of structured or unstructured data about what happened, when, and with what context. The challenge is volume. Production systems generate millions of log lines per minute. Without structure and filtering, logs become noise. Structured logging (JSON format) is essential for machine parsing and querying. Log levels (DEBUG, INFO, WARN, ERROR) provide the primary filtering mechanism. 
@@ -69,3 +39,9 @@ Choosing an observability backend depends on scale and budget. Self-hosted optio
 **See also:** [Metrics Types and Monitoring Methodologies](</en/architecture/metrics-types.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
 
 **See also:** [Metrics Types and Monitoring Methodologies](</en/architecture/metrics-types.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>)

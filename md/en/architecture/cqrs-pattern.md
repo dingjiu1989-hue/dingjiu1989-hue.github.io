@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/cqrs-pattern.html
 
 # CQRS Pattern: Command Query Responsibility Segregation
 
-## CQRS Pattern: Command Query Responsibility Segregation
-
-### CQRS Pattern: Command Query Responsibility Segregation
-
-#### CQRS Pattern: Command Query Responsibility Segregation
-
-#### CQRS Pattern: Command Query Responsibility Segregation
-
-#### CQRS Pattern: Command Query Responsibility Segregation
-
-#### CQRS Pattern: Command Query Responsibility Segregation
-
-#### CQRS Pattern: Command Query Responsibility Segregation
-
-#### CQRS Pattern: Command Query Responsibility Segregation
-
-#### CQRS Pattern: Command Query Responsibility Segregation
-
-#### CQRS Pattern: Command Query Responsibility Segregation
-
-#### CQRS Pattern: Command Query Responsibility Segregation
-
-#### CQRS Pattern: Command Query Responsibility Segregation
-
-#### CQRS Pattern: Command Query Responsibility Segregation
-
-#### CQRS Pattern: Command Query Responsibility Segregation
-
-#### CQRS Pattern: Command Query Responsibility Segregation
-
 Command Query Responsibility Segregation (CQRS) is a pattern that separates read and write operations into distinct models. Rather than using a single model for both commands (writes) and queries (reads), CQRS introduces separate interfaces, data structures, and often separate data stores for each side. This separation unlocks significant scalability and flexibility advantages in complex domains. 
 
 The Fundamental Principle 
@@ -77,3 +47,9 @@ Testing CQRS systems requires verifying both the command behavior (do commands p
 **See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 
 **See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
+
+**See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
+
+**See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)

@@ -66,4 +66,4 @@ The optimal setup in 2026: **Cursor or Copilot for daily coding, Claude Code for
 
 See also: [AI-Assisted Programming Guide](</en/ai/ai-coding.html>) and [Claude vs ChatGPT comparison](</en/ai/claude-vs-chatgpt.html>).
 
-**See also:** [6 AI Coding Tools, 90 Days, 30 Tasks: My Honest Comparison](</en/ai/ai-coding-tools-90-days.html>), [AI-Assisted Programming: From Zero to 10x Productivity](</en/ai/ai-coding.html>), [Claude vs ChatGPT (2026): Which AI Assistant Is Right for You?](</en/ai/claude-vs-chatgpt.html>)
+**See also:** [Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers](</en/compare/vercel-vs-netlify-vs-cloudflare.html>), [Figma vs Canva vs Penpot (2026): Best Design Tool for Developers](</en/compare/figma-vs-canva-vs-penpot.html>), [Docker vs Podman (2026): Best Container Tool for Developers?](</en/compare/docker-vs-podman.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png",
       "datePublished": "2026-03-16",
       "dateModified": "2026-04-16",
-      "wordCount": "834",
+      "wordCount": "812",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,26 +99,11 @@
       <h1 class="article-title">Cloud Network Security</h1>
       <div class="article-meta">Published 2026-03-16 · Last active 2026-04-16 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png" alt="Cloud Network Security" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Cloud Network Security</h2>
-<h3>Cloud Network Security</h3>
-<h4>Cloud Network Security</h4>
-<h4>Cloud Network Security</h4>
-<h4>Cloud Network Security</h4>
-<h4>Cloud Network Security</h4>
-<h4>Cloud Network Security</h4>
-<h4>Cloud Network Security</h4>
-<h4>Cloud Network Security</h4>
-<h4>Cloud Network Security</h4>
-<h4>Cloud Network Security</h4>
-<h4>Cloud Network Security</h4>
-<h4>Cloud Network Security</h4>
-<h4>Cloud Network Security</h4>
-<h4>Cloud Network Security</h4>
-<p>Cloud Network Security Layers </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png" alt="Cloud Network Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Cloud Network Security Layers </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png" alt="Cloud Network Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Cloud networks require defense in depth: VPC isolation, subnet segmentation, security groups, network ACLs, and traffic inspection. </p>
 <p>Security Groups vs NACLs </p>
 <p>Security groups are stateful instance-level firewalls. NACLs are stateless subnet-level filters: </p>
-<h4>Security Group (stateful)</h4>
+<h2>Security Group (stateful)</h2>
 <p>resource "aws_security_group" "web_sg" {</p>
 <p>name = "web-tier"</p>
 <p>description = "Security group for web instances"</p>
@@ -144,7 +129,7 @@
 <p>cidr_blocks = ["0.0.0.0/0"]</p>
 <p>}</p>
 <p>}</p>
-<h4>NACL (stateless - must allow both directions)</h4>
+<h2>NACL (stateless - must allow both directions)</h2>
 <p>resource "aws_network_acl" "public_subnet_acl" {</p>
 <p>vpc_id = var.vpc_id</p>
 <p>ingress {</p>
@@ -165,7 +150,7 @@
 <p>}</p>
 <p>}</p>
 <p>VPC Design </p>
-<h4>Multi-tier VPC design</h4>
+<h2>Multi-tier VPC design</h2>
 <p>class VPCDesign:</p>
 <p>def <strong>init</strong>(self, cidr="10.0.0.0/16"):</p>
 <p>self.cidr = cidr</p>
@@ -178,25 +163,25 @@
 <p>}</p>
 <p>def generate_routing_rules(self):</p>
 <p>rules = []</p>
-<h4>Web tier: inbound from public, outbound to app</h4>
+<h2>Web tier: inbound from public, outbound to app</h2>
 <p>rules.append({</p>
 <p>"from": "web",</p>
 <p>"to": "app",</p>
 <p>"ports": [8080, 8443],</p>
 <p>"protocol": "tcp"</p>
 <p>})</p>
-<h4>App tier: outbound to db</h4>
+<h2>App tier: outbound to db</h2>
 <p>rules.append({</p>
 <p>"from": "app", </p>
 <p>"to": "db",</p>
 <p>"ports": [5432],</p>
 <p>"protocol": "tcp"</p>
 <p>})</p>
-<h4>No direct public access to app or db</h4>
+<h2>No direct public access to app or db</h2>
 <p>return rules</p>
 <p>Traffic Inspection </p>
 <p>Deploy inline inspection for east-west traffic: </p>
-<h4>Traffic inspection rules</h4>
+<h2>Traffic inspection rules</h2>
 <p>inspection_rules:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: inspect_web_app_traffic</p>
 <p>source: web-subnet</p>
@@ -209,18 +194,18 @@
 <p>inspection: metadata_only</p>
 <p>anomaly_detection: enabled</p>
 <p>Firewall Rule Management </p>
-<h4>Firewall rule analyzer</h4>
+<h2>Firewall rule analyzer</h2>
 <p>def analyze_firewall_rules(rules):</p>
 <p>issues = []</p>
 <p>for rule in rules:</p>
-<h4>Check for overly permissive rules</h4>
+<h2>Check for overly permissive rules</h2>
 <p>if rule.get("cidr") == "0.0.0.0/0" and rule.get("port") in [22, 3389]:</p>
 <p>issues.append(f"Overly permissive: {rule['name']} allows SSH/RDP from anywhere")</p>
-<h4>Check for rules with no hits</h4>
+<h2>Check for rules with no hits</h2>
 <p>if rule.get("hit_count", 0) == 0 and rule["age_days"] &gt; 30:</p>
 <p>issues.append(f"Unused rule: {rule['name']} has no hits in 30+ days")</p>
-<h4>Check for duplicate rules</h4>
-<h4>...</h4>
+<h2>Check for duplicate rules</h2>
+<h2>...</h2>
 <p>return issues</p>
 <p>Conclusion </p>
 <p>Cloud network security requires layered controls. Use security groups for instance-level filtering and NACLs for subnet-level guardrails. Design VPCs with multiple tiers and restrict traffic between them. Deploy traffic inspection for critical paths. Review firewall rules quarterly and remove unused rules. Automate everything with infrastructure as code.</p>
@@ -228,7 +213,10 @@
 <p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
-<p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/container-runtime-security.html">Container Runtime Security</a>, <a href="/en/security/ddos-mitigation.html">DDoS Mitigation</a>, <a href="/en/security/helm-security.html">Helm Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/container-runtime-security.html">Container Runtime Security</a>, <a href="/en/security/ddos-mitigation.html">DDoS Mitigation</a>, <a href="/en/security/helm-security.html">Helm Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/container-runtime-security.html">Container Runtime Security</a>, <a href="/en/security/ddos-mitigation.html">DDoS Mitigation</a>, <a href="/en/security/helm-security.html">Helm Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -240,7 +228,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/dlp-strategies.html" class="related-card">Data Loss Prevention Strategies</a><a href="/en/security/kubernetes-security.html" class="related-card">Kubernetes Security</a><a href="/en/security/cloud-security-posture.html" class="related-card">Cloud Security Posture Management</a><a href="/en/security/container-image-security.html" class="related-card">Container Image Security</a></div>
+      <div class="related-grid"><a href="/en/security/dlp-strategies.html" class="related-card"><span class="related-card-title">Data Loss Prevention Strategies</span><span class="related-card-desc">Implementing DLP across network, endpoint, and cloud with effective policy design and incident respo</span></a><a href="/en/security/kubernetes-security.html" class="related-card"><span class="related-card-title">Kubernetes Security</span><span class="related-card-desc">Securing Kubernetes with RBAC, Pod Security Standards, network policies, and audit logging.</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="related-card-title">Container Image Security</span><span class="related-card-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability sc</span></a><a href="/en/security/kubernetes-network-policies.html" class="related-card"><span class="related-card-title">Kubernetes Network Policies</span><span class="related-card-desc">In-depth guide to Kubernetes network policies covering ingress/egress rules, Cilium, Calico, and zer</span></a><a href="/en/security/waf-implementation.html" class="related-card"><span class="related-card-title">Web Application Firewall Implementation</span><span class="related-card-desc">Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuni</span></a></div>
     </section>
     
   </div>

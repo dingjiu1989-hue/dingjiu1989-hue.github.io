@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/change-data-capture.html
 
 # Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
 
-## Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
-### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
-#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
-#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
-#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
-#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
-#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
-#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
-#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
-#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
-#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
-#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
-#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
-#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
-#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
-
 Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing 
 
 Change Data Capture (CDC) is a pattern that captures row-level changes in a database and streams them to downstream consumers in real time. Unlike triggers or application-level dual-writes, CDC reads the database's transaction log, adding negligible overhead to production workloads. 
@@ -250,3 +220,9 @@ CDC is the most robust approach for keeping secondary systems synchronized with 
 **See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 
 **See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
+
+**See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
+
+**See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)

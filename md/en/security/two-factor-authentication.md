@@ -8,40 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/two-factor-authentication.htm
 
 # Two-Factor Authentication Guide
 
-## Two-Factor Authentication Guide
-
-### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
-#### Two-Factor Authentication Guide
-
 Why 2FA Matters 
 
 Passwords alone are insufficient. Data breaches expose billions of credentials annually, phishing campaigns trick users into revealing their passwords, and credential stuffing attacks automate login attempts across services. Two-factor authentication (2FA) adds a second layer of verification that renders stolen passwords useless. 
@@ -142,7 +108,7 @@ def send_sms_code(phone_number):
 
 code = ''.join(random.choices('0123456789', k=6))
 
-#### Store code with expiry in Redis
+## Store code with expiry in Redis
 
 redis.setex(f"2fa:{phone_number}", 300, code)
 
@@ -288,3 +254,9 @@ Implement TOTP as the primary 2FA method, supplement with backup codes for recov
 **See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>)
 
 **See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>)
+
+**See also:** [Passwordless Authentication](</en/security/passwordless-auth.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [Passwordless Authentication](</en/security/passwordless-auth.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [Passwordless Authentication](</en/security/passwordless-auth.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)

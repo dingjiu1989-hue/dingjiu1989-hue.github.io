@@ -8,49 +8,15 @@ url: https://dingjiu1989-hue.github.io/en/tech/github-actions-advanced.html
 
 # Advanced GitHub Actions Workflows
 
-## Advanced GitHub Actions Workflows
-
-### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Advanced GitHub Actions Workflows
-
-#### Introduction
+## Introduction
 
 GitHub Actions has evolved beyond simple CI/CD into a full-featured automation platform. Teams managing monorepos, multi-service architectures, or compliance-sensitive deployments need advanced workflows that are maintainable, fast, and secure. This article explores production-ready patterns for GitHub Actions at scale.
 
-#### Reusable Workflows
+## Reusable Workflows
 
 Reusable workflows eliminate duplication across repositories. Define a workflow in `.github/workflows/deploy-shared.yml` with `workflow_call`:
 
-#### .github/workflows/deploy-shared.yml
+## .github/workflows/deploy-shared.yml
 
 name: Shared Deployment Workflow
 
@@ -96,11 +62,11 @@ run: |
 
 echo "Deploying ${{ inputs.image-tag }} to ${{ inputs.environment }}"
 
-#### Actual deployment logic here
+## Actual deployment logic here
 
 Consume it from any repository:
 
-#### .github/workflows/release.yml
+## .github/workflows/release.yml
 
 name: Release
 
@@ -126,7 +92,7 @@ secrets:
 
 CLOUD_PROVIDER_KEY: ${{ secrets.CLOUD_PROVIDER_KEY }}
 
-#### Matrix Builds
+## Matrix Builds
 
 Matrix strategies test across multiple dimensions without duplicating workflow YAML:
 
@@ -178,11 +144,11 @@ uses: codecov/codecov-action@v3
 
 The `include` key adds jobs to the matrix, while `exclude` removes specific combinations. For large matrices, use `max-parallel: 3` to avoid saturating runner capacity.
 
-#### Composite Actions
+## Composite Actions
 
 Composite actions bundle multiple steps into a reusable unit, ideal for organization-wide standards:
 
-#### .github/actions/setup-node-env/action.yml
+## .github/actions/setup-node-env/action.yml
 
 name: "Setup Node.js Environment"
 
@@ -280,7 +246,7 @@ node-version: "22"
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: pnpm build
 
-#### OIDC and Cloud Authentication
+## OIDC and Cloud Authentication
 
 OpenID Connect eliminates static credentials by exchanging GitHub's JWT tokens for cloud provider credentials:
 
@@ -338,7 +304,7 @@ Configure the AWS IAM role with a trust policy scoped to specific repositories a
 
 }
 
-#### Environment Protection Rules
+## Environment Protection Rules
 
 Protect production deployments with required reviewers, wait gates, and custom deployment branch policies:
 
@@ -390,7 +356,7 @@ steps:
 
 Configure required reviewers in the repository's environment settings to enforce manual approval gates.
 
-#### Self-Hosted Runners
+## Self-Hosted Runners
 
 Self-hosted runners provide custom hardware, internal network access, and reduced costs:
 
@@ -410,7 +376,7 @@ steps:
 
 Scale self-hosted runners with the `actions-runner-controller` on Kubernetes, which auto-provisions and auto-scales runner pods based on workflow demand.
 
-#### Caching Strategies
+## Caching Strategies
 
 Effective caching reduces workflow runtime significantly:
 
@@ -453,3 +419,9 @@ These patterns form the foundation of scalable, secure GitHub Actions usage in e
 **See also:** [GitHub Actions Workflows: Advanced Patterns](</en/tech/github-actions-workflows.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>)
 
 **See also:** [GitHub Actions Workflows: Advanced Patterns](</en/tech/github-actions-workflows.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>)
+
+**See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)
+
+**See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)
+
+**See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)

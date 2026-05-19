@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/feature-flags-architectur
 
 # Feature Flags Architecture
 
-## Feature Flags Architecture
-
-### Feature Flags Architecture
-
-#### Feature Flags Architecture
-
-#### Feature Flags Architecture
-
-#### Feature Flags Architecture
-
-#### Feature Flags Architecture
-
-#### Feature Flags Architecture
-
-#### Feature Flags Architecture
-
-#### Feature Flags Architecture
-
-#### Feature Flags Architecture
-
-#### Feature Flags Architecture
-
-#### Feature Flags Architecture
-
-#### Feature Flags Architecture
-
-#### Feature Flags Architecture
-
-#### Feature Flags Architecture
-
 Feature flags (also called feature toggles) provide runtime control over application behavior without deploying new code. They decouple deployment from release, enabling patterns like canary releases, A/B testing, trunk-based development, and instant rollbacks. The architecture of a feature flag system — how flags are evaluated, stored, distributed, and managed — is critical to both developer experience and system reliability. 
 
 Flag evaluation must be fast and reliable. Every request potentially evaluates multiple flags, so evaluation latency directly impacts overall request latency. The two primary evaluation models are client-side SDK evaluation and server-side evaluation. In client-side evaluation, the SDK holds a copy of all flag configurations and evaluates locally — this provides sub-millisecond evaluation but requires flag configuration synchronization. In server-side evaluation, the client sends user context to a server that evaluates flags and returns results — this adds a network hop but provides centralized control and audit. 
@@ -69,3 +39,9 @@ Operational concerns include flag evaluation metrics. Track flag evaluation coun
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Structured Logging](</en/architecture/structured-logging.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Structured Logging](</en/architecture/structured-logging.html>)
+
+**See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>)
+
+**See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>)
+
+**See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>)

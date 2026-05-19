@@ -48,4 +48,4 @@ Maximum consistency| Prettier + Biome (linter)| Prettier for formatting, Biome f
   
 **Bottom line:** Biome is ready for production in 2026 — for most projects, the speed win alone justifies the switch. The main blocker is plugin dependencies. If your ESLint setup is "eslint:recommended + @typescript-eslint + prettier," Biome can replace all of it today. See also: [Prettier vs Biome](</en/compare/prettier-vs-biome.html>) and [TypeScript Advanced Patterns](</en/tech/typescript-advanced-patterns.html>).
 
-**See also:** [Prettier vs Biome (2026): Best Code Formatter for Modern JavaScript?](</en/compare/prettier-vs-biome.html>), [Playwright vs Cypress vs Selenium (2026): Which Testing Framework Wins?](</en/compare/playwright-vs-cypress-vs-selenium.html>), [Linter and Formatter: ESLint, Prettier, Biome, Ruff](</en/tools/linter-formatter.html>)
+**See also:** [Turbopack vs Vite](</en/compare/turbopack-vs-vite.html>), [GitHub vs GitLab vs Bitbucket (2026): Which Git Platform Is Best?](</en/compare/github-vs-gitlab-vs-bitbucket.html>), [npm vs Yarn vs pnpm: Package Manager Comparison](</en/compare/npm-vs-yarn-vs-pnpm.html>)

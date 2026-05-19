@@ -8,45 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/tools/ci-cd-tools-comparison.html
 
 # CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
 
-## CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
-
-#### Introduction
+## Introduction
 
 Continuous integration and delivery pipelines are the backbone of modern software development. Three tools dominate the CI/CD landscape: GitHub Actions, GitLab CI, and Jenkins. Each takes a fundamentally different approach to pipeline automation, and the right choice depends on your team size, infrastructure preferences, and workflow complexity.
 
-#### Pipeline Syntax Comparison
+## Pipeline Syntax Comparison
 
-#### GitHub Actions (YAML)
+## GitHub Actions (YAML)
 
 GitHub Actions uses event-driven YAML with a flat step structure:
 
@@ -98,7 +66,7 @@ name: test-results
 
 path: test-results.xml
 
-#### GitLab CI (YAML with Stages)
+## GitLab CI (YAML with Stages)
 
 GitLab CI uses a stage-based pipeline model:
 
@@ -174,7 +142,7 @@ environment:
 
 name: production
 
-#### Jenkins (Groovy DSL)
+## Jenkins (Groovy DSL)
 
 Jenkins uses a Groovy-based DSL in a Jenkinsfile:
 
@@ -268,7 +236,7 @@ sh 'aws s3 sync dist/ s3://my-bucket'
 
 }
 
-#### Plugin Ecosystem
+## Plugin Ecosystem
 
 | Capability | GitHub Actions | GitLab CI | Jenkins |
 
@@ -284,7 +252,7 @@ sh 'aws s3 sync dist/ s3://my-bucket'
 
 GitHub Actions benefits from tight GitHub integration but relies on a third-party action ecosystem for advanced use cases. GitLab CI includes most features natively. Jenkins offers unparalleled customization through plugins but requires significant maintenance effort.
 
-#### Hosted vs Self-Hosted
+## Hosted vs Self-Hosted
 
 | Factor | GitHub Actions | GitLab CI | Jenkins |
 
@@ -298,7 +266,7 @@ GitHub Actions benefits from tight GitHub integration but relies on a third-part
 
 GitHub Actions offers the most generous hosted runner minutes but restricts macOS to paid plans. GitLab CI's free tier is more limited, making it less suitable for large open-source projects. Jenkins has no hosted offering, requiring infrastructure investment.
 
-#### GitHub Actions: scale set configuration for self-hosted runners
+## GitHub Actions: scale set configuration for self-hosted runners
 
 apiVersion: actions.summerwind.dev/v1alpha1
 
@@ -328,7 +296,7 @@ cpu: "4"
 
 memory: 8Gi
 
-#### Scalability and Performance
+## Scalability and Performance
 
 | Factor | GitHub Actions | GitLab CI | Jenkins |
 
@@ -344,15 +312,15 @@ memory: 8Gi
 
 GitHub Actions enforces a 6-hour limit on individual job execution, which affects long-running integration tests. Jenkins offers the most flexibility for large-scale deployments, supporting distributed builds across hundreds of nodes with granular pipeline control.
 
-#### Migration Paths
+## Migration Paths
 
-#### GitHub Actions to GitLab CI
+## GitHub Actions to GitLab CI
 
-#### GitHub Actions equivalent in GitLab CI
+## GitHub Actions equivalent in GitLab CI
 
-#### GHA: on: [push]
+## GHA: on: [push]
 
-#### GitLab: trigger: push
+## GitLab: trigger: push
 
 build:
 
@@ -362,9 +330,9 @@ rules:
 
 script: npm run build
 
-#### GHA: matrix strategy
+## GHA: matrix strategy
 
-#### GitLab: parallel:matrix
+## GitLab: parallel:matrix
 
 test:
 
@@ -380,7 +348,7 @@ script:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- npm test
 
-#### Jenkins to GitHub Actions
+## Jenkins to GitHub Actions
 
 Use `actions/github-script` to replicate Jenkins Groovy patterns:
 
@@ -402,11 +370,11 @@ ref: context.sha,
 
 // Custom validation logic
 
-#### Market Share Trends
+## Market Share Trends
 
 Based on the 2025-2026 Stack Overflow and JetBrains surveys, GitHub Actions has surpassed Jenkins in adoption among new projects, driven by its zero-setup integration with GitHub repositories. GitLab CI maintains a strong position in organizations already using GitLab as their SCM. Jenkins remains dominant in enterprises with legacy investments in its plugin ecosystem and in air-gapped environments.
 
-#### Decision Guide
+## Decision Guide
 
   * **Choose GitHub Actions** if you are already on GitHub, value minimal setup, and your pipelines are under 6 hours.
 
@@ -430,3 +398,9 @@ No single CI/CD tool is perfect for every scenario. Evaluate based on your team'
 **See also:** [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>), [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
 
 **See also:** [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>), [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
+
+**See also:** [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>)
+
+**See also:** [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>)
+
+**See also:** [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>)

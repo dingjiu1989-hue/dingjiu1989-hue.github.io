@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/mobile-security.png",
       "datePublished": "2026-03-04",
       "dateModified": "2026-04-28",
-      "wordCount": "2853",
+      "wordCount": "2817",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
@@ -98,24 +98,8 @@
       <h1 class="article-title">Mobile Application Security Guide</h1>
       <div class="article-meta">Published 2026-03-04 · Last active 2026-04-28 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/mobile-security.png" alt="Mobile Application Security Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Mobile Application Security Guide</h2>
-<h3>Mobile Application Security Guide</h3>
-<h4>Mobile Application Security Guide</h4>
-<h4>Mobile Application Security Guide</h4>
-<h4>Mobile Application Security Guide</h4>
-<h4>Mobile Application Security Guide</h4>
-<h4>Mobile Application Security Guide</h4>
-<h4>Mobile Application Security Guide</h4>
-<h4>Mobile Application Security Guide</h4>
-<h4>Mobile Application Security Guide</h4>
-<h4>Mobile Application Security Guide</h4>
-<h4>Mobile Application Security Guide</h4>
-<h4>Mobile Application Security Guide</h4>
-<h4>Mobile Application Security Guide</h4>
-<h4>Mobile Application Security Guide</h4>
-<h4>Mobile Application Security Guide</h4>
-<p>Mobile applications handle sensitive data and run in untrusted environments. Users download apps from various sources, connect to public Wi-Fi, and often jailbreak or root their devices. This guide covers the key security practices for mobile application development, based on the OWASP Mobile Top 10 and industry best practices.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/mobile-security.png" alt="Mobile Application Security Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>OWASP Mobile Top 10</h4>
+      <div class="article-body"><p>Mobile applications handle sensitive data and run in untrusted environments. Users download apps from various sources, connect to public Wi-Fi, and often jailbreak or root their devices. This guide covers the key security practices for mobile application development, based on the OWASP Mobile Top 10 and industry best practices.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/mobile-security.png" alt="Mobile Application Security Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>OWASP Mobile Top 10</h2>
 <p>The OWASP Mobile Top 10 is the authoritative list of mobile security risks. Understanding these risks is the first step toward mitigating them.</p>
 <ul>
 <li><strong>Improper Platform Usage</strong> : Misuse of mobile platform features, such as intents, custom URL schemes, or fingerprint APIs.</li>
@@ -129,9 +113,9 @@
 <p>8\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Code Tampering</strong> : Binary patching, resource modification, and method swizzling.</p>
 <p>9\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Reverse Engineering</strong> : Decompilation and analysis of application code.</p>
 <p>10\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Extraneous Functionality</strong> : Hidden backdoors, debug endpoints, or test code left in production builds.</p>
-<h4>Code Obfuscation</h4>
+<h2>Code Obfuscation</h2>
 <p>Mobile apps are distributed as binaries that run on user devices. Without protection, attackers can decompile the app and analyze its logic.</p>
-<h4>Android Obfuscation with ProGuard / R8</h4>
+<h2>Android Obfuscation with ProGuard / R8</h2>
 <p>ProGuard and R8 shrink, optimize, and obfuscate Android bytecode. They rename classes, methods, and fields to meaningless names and remove unused code.</p>
 <p>// build.gradle (app level)</p>
 <p>android {</p>
@@ -144,16 +128,16 @@
 <p>}</p>
 <p>}</p>
 <p>}</p>
-<h4>proguard-rules.pro</h4>
-<h4>Keep model classes used by Gson serialization</h4>
+<h2>proguard-rules.pro</h2>
+<h2>Keep model classes used by Gson serialization</h2>
 <p>-keep class com.example.app.model.*<em>{</em> ; }</p>
-<h4>Keep logging in debug but strip in release</h4>
+<h2>Keep logging in debug but strip in release</h2>
 <p>-assumenosideeffects class android.util.Log {</p>
 <p>public static boolean isLoggable(java.lang.String, int);</p>
 <p>public static int v(...);</p>
 <p>public static int d(...);</p>
 <p>}</p>
-<h4>iOS Obfuscation</h4>
+<h2>iOS Obfuscation</h2>
 <p>iOS apps are harder to reverse engineer than Android APKs due to the compiled ARM binary, but they are not immune. Use these techniques:</p>
 <ul>
 <li>
@@ -182,11 +166,11 @@
 <p>encrypted: [0x34, 0x56, 0x78], // XOR-encoded</p>
 <p>key: 0xAB</p>
 <p>).decrypt()</p>
-<h4>Certificate Pinning</h4>
+<h2>Certificate Pinning</h2>
 <p>Mobile apps must protect against man-in-the-middle (MITM) attacks, even when the device trusts a rogue CA due to malware or user action.</p>
-<h4>What Certificate Pinning Does</h4>
+<h2>What Certificate Pinning Does</h2>
 <p>Certificate pinning hardcodes the expected server certificate or public key in the app. The app rejects any connection where the server presents a different certificate, even if it chains to a trusted root CA.</p>
-<h4>Implementation</h4>
+<h2>Implementation</h2>
 <p><strong>Android (OkHttp)</strong> :</p>
 <p>// Certificate pinning with OkHttp</p>
 <p>val certificatePinner = CertificatePinner.Builder()</p>
@@ -217,7 +201,7 @@
 <p>}</p>
 <p>}</p>
 <p>}</p>
-<h4>Pinning Update Strategy</h4>
+<h2>Pinning Update Strategy</h2>
 <p>Certificate pinning breaks when you rotate certificates. Plan for updates:</p>
 <ul>
 <li>
@@ -233,9 +217,9 @@
 <p>Consider using certificate transparency instead of pinning for some environments.</p>
 </li>
 </ul>
-<h4>Secure Storage</h4>
+<h2>Secure Storage</h2>
 <p>Mobile OS platforms provide secure storage mechanisms that encrypt data at rest.</p>
-<h4>Android Encrypted SharedPreferences</h4>
+<h2>Android Encrypted SharedPreferences</h2>
 <p>// Using EncryptedSharedPreferences</p>
 <p>val masterKey = MasterKey.Builder(context)</p>
 <p>.setKeyScheme(MasterKey.KeyScheme.AES256_GCM)</p>
@@ -250,7 +234,7 @@
 <p>sharedPreferences.edit()</p>
 <p>.putString("auth_token", token)</p>
 <p>.apply()</p>
-<h4>Android Keystore</h4>
+<h2>Android Keystore</h2>
 <p>The Android Keystore stores cryptographic keys in a hardware-backed environment (TEE or StrongBox). Extracting the key requires physical device access and specialized tools.</p>
 <p>// Generate a key in Android Keystore</p>
 <p>val keyGenerator = KeyGenerator.getInstance(</p>
@@ -267,7 +251,7 @@
 <p>.build()</p>
 <p>keyGenerator.init(spec)</p>
 <p>val secretKey = keyGenerator.generateKey()</p>
-<h4>iOS Keychain</h4>
+<h2>iOS Keychain</h2>
 <p>iOS Keychain is the secure storage mechanism on Apple devices. It encrypts data using device-specific keys that never leave the Secure Enclave.</p>
 <p>// Store data in Keychain</p>
 <p>let query: [String: Any] = [</p>
@@ -283,9 +267,9 @@
 <p>)</p>
 <p>]</p>
 <p>SecItemAdd(query as CFDictionary, nil)</p>
-<h4>Runtime Protection</h4>
+<h2>Runtime Protection</h2>
 <p>Runtime protection defends against tampering while the app is running.</p>
-<h4>Root/Jailbreak Detection</h4>
+<h2>Root/Jailbreak Detection</h2>
 <p>// Android root detection</p>
 <p>fun isDeviceRooted(): Boolean {</p>
 <p>val rootPaths = listOf(</p>
@@ -314,7 +298,7 @@
 <p>return jbPaths.contains { FileManager.default.fileExists(atPath: $0) }</p>
 <p>}</p>
 <p>Never terminate the app immediately on detecting a compromised device. This gives attackers a signal to bypass your detection. Instead, degrade functionality silently or report the event to your backend.</p>
-<h4>Debugger Detection</h4>
+<h2>Debugger Detection</h2>
 <p>// iOS debugger detection</p>
 <p>func isDebuggerAttached() -&gt; Bool {</p>
 <p>var name: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, getpid()]</p>
@@ -323,13 +307,16 @@
 <p>sysctl(&name;, 4, &info;, &infoSize;, nil, 0)</p>
 <p>return (info.kp_proc.p_flag &amp; P_TRACED) != 0</p>
 <p>}</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>Mobile security requires defense in depth. Obfuscate your code to slow down reverse engineering. Pin certificates to prevent MITM attacks. Use platform-provided secure storage for sensitive data. Add runtime protection against root/jailbreak and debugging. Most importantly, follow the OWASP Mobile Top 10 as your baseline and validate controls with regular penetration testing.</p>
 <p><strong>See also:</strong> <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a>, <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>.</p>
 <p><strong>See also:</strong> <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a>, <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/identity-management.html">Identity and Access Management (IAM) Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a>, <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/identity-management.html">Identity and Access Management (IAM) Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a>, <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/identity-management.html">Identity and Access Management (IAM) Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a>, <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/identity-management.html">Identity and Access Management (IAM) Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a>, <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/identity-management.html">Identity and Access Management (IAM) Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a>, <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/identity-management.html">Identity and Access Management (IAM) Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a>, <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/identity-management.html">Identity and Access Management (IAM) Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/secure-sdlc.html">Secure Software Development Lifecycle</a></p>
+<p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/secure-sdlc.html">Secure Software Development Lifecycle</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/secure-sdlc.html">Secure Software Development Lifecycle</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -341,7 +328,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/webhook-security.html" class="related-card">Webhook Security Best Practices</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a><a href="/en/security/identity-management.html" class="related-card">Identity and Access Management (IAM) Guide</a><a href="/en/security/container-security.html" class="related-card">Container Security Best Practices</a></div>
+      <div class="related-grid"><a href="/en/security/webhook-security.html" class="related-card"><span class="related-card-title">Webhook Security Best Practices</span><span class="related-card-desc">Secure your webhook endpoints with signature verification, replay protection, IP allowlisting, idemp</span></a><a href="/en/security/devsecops-pipeline.html" class="related-card"><span class="related-card-title">DevSecOps: Integrating Security into CI/CD</span><span class="related-card-desc">Integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your CI/CD pi</span></a><a href="/en/security/identity-management.html" class="related-card"><span class="related-card-title">Identity and Access Management (IAM) Guide</span><span class="related-card-desc">Comprehensive guide to IAM covering SSO, SAML, OIDC, SCIM provisioning, just-in-time access, and acc</span></a><a href="/en/security/container-security.html" class="related-card"><span class="related-card-title">Container Security Best Practices</span><span class="related-card-desc">Essential container security practices including image scanning, minimal base images, runtime securi</span></a><a href="/en/security/encryption-at-rest.html" class="related-card"><span class="related-card-title">Encryption at Rest Guide</span><span class="related-card-desc">A comprehensive guide to encryption at rest covering disk encryption, database encryption, key manag</span></a><a href="/en/security/http-security-headers.html" class="related-card"><span class="related-card-title">HTTP Security Headers Checklist</span><span class="related-card-desc">A complete checklist of HTTP security headers to protect your web application from XSS, clickjacking</span></a></div>
     </section>
     
   </div>

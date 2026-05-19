@@ -50,4 +50,4 @@ Open source library| **Migrate now.** Types are the #1 feature request for any J
   
 **Bottom line:** Start new projects in TypeScript. Period. JavaScript for quick scripts and learning. The question isn't "should I use TS?" — it's "is there a good reason NOT to?" See also: [Advanced TypeScript Patterns](</en/tech/typescript-advanced-patterns.html>) and [Frontend Framework Comparison](</en/compare/react-vs-vue-vs-angular-vs-svelte.html>).
 
-**See also:** [Prisma vs Drizzle ORM](</en/compare/prisma-vs-drizzle.html>), [Drizzle ORM vs Kysely vs Knex.js (2026): SQL Query Builder Showdown](</en/compare/drizzle-vs-kysely-vs-knex.html>), [Vitest vs Jest vs Bun Test (2026): JavaScript Test Runner Comparison](</en/compare/vitest-vs-jest-vs-bun-test.html>)
+**See also:** [Zod vs Yup vs Valibot (2026): Best TypeScript Schema Validation Library?](</en/compare/zod-vs-yup-vs-valibot.html>), [Kubernetes vs Docker Swarm vs Nomad (2026): Container Orchestration Compared](</en/compare/kubernetes-vs-docker-swarm-vs-nomad.html>), [Solid.js vs Qwik](</en/compare/solid-vs-qwik.html>)

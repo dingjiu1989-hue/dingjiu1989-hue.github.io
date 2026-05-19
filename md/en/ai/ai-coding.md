@@ -57,4 +57,4 @@ AI can explain trade-offs between approaches, but it shouldn't make the final ca
 
 
 
-**See also:** [Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?](</en/compare/cursor-vs-copilot-vs-claude-code.html>), [6 AI Coding Tools, 90 Days, 30 Tasks: My Honest Comparison](</en/ai/ai-coding-tools-90-days.html>), [AI Code Generation: Tools, Workflows, and Best Practices](</en/ai/ai-code-generation-tools.html>)
+**See also:** [Claude vs ChatGPT (2026): Which AI Assistant Is Right for You?](</en/ai/claude-vs-chatgpt.html>), [Best LLMs for Coding in 2026: Claude vs GPT-4o vs Gemini vs DeepSeek vs CodeLlama](</en/ai/best-llms-for-coding-2026.html>), [ChatGPT API vs Claude API vs Gemini API: Developer Comparison (2026)](</en/ai/chatgpt-vs-claude-vs-gemini-api.html>)

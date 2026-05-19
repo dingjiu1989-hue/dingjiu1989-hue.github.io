@@ -126,4 +126,4 @@ Create a simple Python app:
 
 Containers share the host OS kernel, so they start in milliseconds and use minimal RAM. VMs each need their own OS, taking gigabytes. For most web apps, Docker is the clear winner.
 
-**See also:** [DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide](</en/tech/devops-for-developers.html>), [Best Local Dev Tools 2026: OrbStack vs Colima vs Rancher Desktop vs Finch vs Docker Desktop](</en/tools/best-local-dev-tools.html>), [Docker vs Podman (2026): Best Container Tool for Developers?](</en/compare/docker-vs-podman.html>)
+**See also:** [Rust for JavaScript Developers: Complete Learning Path (2026)](</en/tech/rust-for-javascript-developers.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>)

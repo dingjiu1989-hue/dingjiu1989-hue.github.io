@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/compliance-automation.png",
       "datePublished": "2026-03-16",
       "dateModified": "2026-05-14",
-      "wordCount": "1340",
+      "wordCount": "1334",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,26 +99,11 @@
       <h1 class="article-title">Compliance Automation</h1>
       <div class="article-meta">Published 2026-03-16 · Last active 2026-05-14 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/compliance-automation.png" alt="Compliance Automation" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Compliance Automation</h2>
-<h3>Compliance Automation</h3>
-<h4>Compliance Automation</h4>
-<h4>Compliance Automation</h4>
-<h4>Compliance Automation</h4>
-<h4>Compliance Automation</h4>
-<h4>Compliance Automation</h4>
-<h4>Compliance Automation</h4>
-<h4>Compliance Automation</h4>
-<h4>Compliance Automation</h4>
-<h4>Compliance Automation</h4>
-<h4>Compliance Automation</h4>
-<h4>Compliance Automation</h4>
-<h4>Compliance Automation</h4>
-<h4>Compliance Automation</h4>
-<p>Why Automate Compliance? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/compliance-automation.png" alt="Compliance Automation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Why Automate Compliance? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/compliance-automation.png" alt="Compliance Automation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Manual compliance is slow, error-prone, and unsustainable. Automation provides continuous verification, instant reporting, and faster audit cycles. </p>
 <p>CIS Benchmark Scanning </p>
 <p>Automate CIS benchmark checks across infrastructure: </p>
-<h4>cis-benchmark-config.yaml</h4>
+<h2>cis-benchmark-config.yaml</h2>
 <p>benchmarks:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "CIS AWS Foundations Benchmark v3.0"</p>
 <p>scope: "account"</p>
@@ -138,7 +123,7 @@
 <p>command: "aws cloudtrail describe-trails --query 'trailList[*].IsMultiRegionTrail'"</p>
 <p>expected: "[true]"</p>
 <p>severity: "high"</p>
-<h4>CIS compliance checker</h4>
+<h2>CIS compliance checker</h2>
 <p>import subprocess</p>
 <p>import json</p>
 <p>class CISChecker:</p>
@@ -218,19 +203,19 @@
 <p>"compliance_score": sum(1 for r in results if r["passed"]) / len(results) * 100</p>
 <p>}</p>
 <p>report_md = f"""</p>
-<h4>Compliance Report: {framework}</h4>
+<h2>Compliance Report: {framework}</h2>
 <p><strong>Date:</strong> {summary['timestamp']}</p>
 <p><strong>Score:</strong> {summary['compliance_score']:.1f}%</p>
-<h4>Summary</h4>
+<h2>Summary</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Total Checks: {summary['total_checks']}</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Passed: {summary['passed']}</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Failed: {summary['failed']}</p>
-<h4>Failed Controls</h4>
+<h2>Failed Controls</h2>
 <p>"""</p>
 <p>for result in results:</p>
 <p>if not result["passed"]:</p>
 <p>report_md += f"""</p>
-<h4>{result['id']}: {result['title']}</h4>
+<h2>{result['id']}: {result['title']}</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- <strong>Severity:</strong> {result['severity']}</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- <strong>Expected:</strong> {result['expected']}</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- <strong>Actual:</strong> {result.get('actual', 'N/A')}</p>
@@ -256,7 +241,10 @@
 <p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/security-compliance-tools.html">Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/security-compliance-tools.html">Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/security-compliance-tools.html">Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools</a></p>
-<p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/security-compliance-tools.html">Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/security-compliance-tools.html">Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/security-compliance-tools.html">Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/security-compliance-tools.html">Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools</a></p>
+<p><strong>See also:</strong> <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a>, <a href="/en/security/data-classification.html">Data Classification</a>, <a href="/en/security/sbom-management.html">SBOM Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a>, <a href="/en/security/data-classification.html">Data Classification</a>, <a href="/en/security/sbom-management.html">SBOM Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a>, <a href="/en/security/data-classification.html">Data Classification</a>, <a href="/en/security/sbom-management.html">SBOM Management</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -268,7 +256,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/cloud-security-posture.html" class="related-card">Cloud Security Posture Management</a><a href="/en/security/iac-security.html" class="related-card">Infrastructure as Code Security</a><a href="/en/security/security-compliance-tools.html" class="related-card">Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools</a><a href="/en/security/certificate-management.html" class="related-card">Certificate Management</a></div>
+      <div class="related-grid"><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a><a href="/en/security/iac-security.html" class="related-card"><span class="related-card-title">Infrastructure as Code Security</span><span class="related-card-desc">Guide to Infrastructure as Code security covering Terraform security scanning, policy as code, drift</span></a><a href="/en/security/security-compliance-tools.html" class="related-card"><span class="related-card-title">Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools</span><span class="related-card-desc">Automate security compliance: compliance frameworks, evidence collection, monitoring, and audit prep</span></a><a href="/en/security/certificate-management.html" class="related-card"><span class="related-card-title">Certificate Management</span><span class="related-card-desc">Practical guide to TLS certificate management covering Let's Encrypt, ACME protocol, automated renew</span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="related-card-title">Container Image Security</span><span class="related-card-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability sc</span></a><a href="/en/security/data-masking.html" class="related-card"><span class="related-card-title">Data Masking and Redaction</span><span class="related-card-desc">Guide to data masking and redaction covering dynamic masking, static masking, tokenization, and comp</span></a></div>
     </section>
     
   </div>

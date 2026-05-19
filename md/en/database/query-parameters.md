@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/query-parameters.html
 
 # Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
 
-## Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
-### Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
-#### Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
-#### Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
-#### Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
-#### Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
-#### Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
-#### Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
-#### Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
-#### Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
-#### Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
-#### Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
-#### Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
-#### Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
-#### Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-
 Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection 
 
 Parameterized queries are simultaneously the most important security practice and a significant performance optimization. This article explains how bind parameters work, how PostgreSQL caches query plans, and why parameterization is non-negotiable. 
@@ -46,7 +16,7 @@ SQL Injection: The Problem
 
 Without parameterization, user input is concatenated into SQL strings: 
 
-#### DANGEROUS: Never do this
+## DANGEROUS: Never do this
 
 user_id = request.args.get("id")
 
@@ -58,7 +28,7 @@ SELECT * FROM users WHERE id = 1; DROP TABLE users;
 
 Parameterization prevents this by separating SQL code from data: 
 
-#### SAFE: Use parameterized query
+## SAFE: Use parameterized query
 
 cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
 
@@ -134,17 +104,17 @@ import psycopg2
 
 from psycopg2 import pool
 
-#### psycopg2 automatically caches prepared statements per connection
+## psycopg2 automatically caches prepared statements per connection
 
 conn = psycopg2.connect("dbname=mydb")
 
 cursor = conn.cursor()
 
-#### First call: prepares and executes
+## First call: prepares and executes
 
 cursor.execute("SELECT * FROM users WHERE id = %s", (42,))
 
-#### Second call: reuses cached prepared statement
+## Second call: reuses cached prepared statement
 
 cursor.execute("SELECT * FROM users WHERE id = %s", (99,))
 
@@ -212,13 +182,13 @@ Parameterization Beyond SQL Injection
 
 Parameterization also handles type conversion automatically: 
 
-#### Without parameterization: type conversion issues
+## Without parameterization: type conversion issues
 
-#### f-string produces: ... WHERE created_at = 2026-05-12 (subtraction!)
+## f-string produces: ... WHERE created_at = 2026-05-12 (subtraction!)
 
 cursor.execute(f"SELECT * FROM orders WHERE created_at = '{date_string}'")
 
-#### With parameterization: driver handles quoting
+## With parameterization: driver handles quoting
 
 cursor.execute("SELECT * FROM orders WHERE created_at = %s", (date_obj,))
 
@@ -226,11 +196,11 @@ Best Practices
 
 Always Parameterize 
 
-#### Good
+## Good
 
 cursor.execute("UPDATE users SET email = %s WHERE id = %s", (new_email, uid))
 
-#### Bad: f-string or string concatenation
+## Bad: f-string or string concatenation
 
 cursor.execute(f"UPDATE users SET email = '{new_email}' WHERE id = {uid}")
 
@@ -272,7 +242,7 @@ data = [
 
 ]
 
-#### Uses server-side prepared statement for all rows
+## Uses server-side prepared statement for all rows
 
 psycopg2.extras.execute_values(
 
@@ -321,3 +291,9 @@ Parameterization is the single most impactful practice for database security and
 **See also:** [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
 
 **See also:** [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
+
+**See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
+
+**See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
+
+**See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)

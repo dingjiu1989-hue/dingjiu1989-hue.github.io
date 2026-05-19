@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/tls-configuration.html
 
 # TLS Configuration Guide
 
-## TLS Configuration Guide
-
-### TLS Configuration Guide
-
-#### TLS Configuration Guide
-
-#### TLS Configuration Guide
-
-#### TLS Configuration Guide
-
-#### TLS Configuration Guide
-
-#### TLS Configuration Guide
-
-#### TLS Configuration Guide
-
-#### TLS Configuration Guide
-
-#### TLS Configuration Guide
-
-#### TLS Configuration Guide
-
-#### TLS Configuration Guide
-
-#### TLS Configuration Guide
-
-#### TLS Configuration Guide
-
-#### TLS Configuration Guide
-
 Introduction 
 
 Transport Layer Security (TLS) is the foundation of secure internet communication. However, TLS is only as strong as its configuration. Weak cipher suites, outdated protocol versions, and missing security headers leave connections vulnerable to downgrade attacks, protocol flaws, and traffic interception. 
@@ -46,7 +16,7 @@ Cipher Suites
 
 A cipher suite defines the cryptographic algorithms used for key exchange, authentication, encryption, and message authentication. 
 
-#### Modern Nginx TLS configuration
+## Modern Nginx TLS configuration
 
 server {
 
@@ -58,7 +28,7 @@ ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
 
 ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
 
-#### Modern cipher suite selection
+## Modern cipher suite selection
 
 ssl_protocols TLSv1.2 TLSv1.3;
 
@@ -66,11 +36,11 @@ ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDS
 
 ssl_prefer_server_ciphers off; # Let client negotiate for TLS 1.3
 
-#### Modern key exchange
+## Modern key exchange
 
 ssl_ecdh_curve X25519:prime256v1:secp384r1;
 
-#### OCSP stapling
+## OCSP stapling
 
 ssl_stapling on;
 
@@ -96,7 +66,7 @@ SHA256 - SHA-256 HMAC (integrity)
 
 Deprecated Ciphers 
 
-#### NEVER use these
+## NEVER use these
 
 ssl_protocols SSLv3 TLSv1 TLSv1.1; # All broken
 
@@ -106,19 +76,19 @@ HSTS (HTTP Strict Transport Security)
 
 HSTS instructs browsers to always connect via HTTPS, preventing SSL stripping attacks. 
 
-#### Strict HSTS for production
+## Strict HSTS for production
 
 add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
 
-#### Explanation:
+## Explanation:
 
-#### max-age=63072000 - 2 years in seconds
+## max-age=63072000 - 2 years in seconds
 
-#### includeSubDomains - Applies to all subdomains
+## includeSubDomains - Applies to all subdomains
 
-#### preload - Allow inclusion in browser preload lists
+## preload - Allow inclusion in browser preload lists
 
-#### Flask HSTS implementation
+## Flask HSTS implementation
 
 from flask import Flask, make_response
 
@@ -140,7 +110,7 @@ Certificate Pinning
 
 While HTTP Public Key Pinning (HPKP) is deprecated, certificate pinning techniques remain useful in controlled environments. 
 
-#### TLS fingerprint validation (alternative to deprecated HPKP)
+## TLS fingerprint validation (alternative to deprecated HPKP)
 
 import ssl
 
@@ -158,7 +128,7 @@ cert_pem = ssl.get_server_certificate((hostname, port))
 
 cert = x509.load_pem_x509_certificate(cert_pem.encode())
 
-#### Calculate SHA-256 fingerprint
+## Calculate SHA-256 fingerprint
 
 fingerprint = cert.fingerprint(hashes.SHA256())
 
@@ -176,7 +146,7 @@ f"expected {expected_hash}, got {fingerprint_hex}"
 
 return fingerprint_hex
 
-#### Usage: pin to expected fingerprint
+## Usage: pin to expected fingerprint
 
 PINNED_FINGERPRINTS = {
 
@@ -188,27 +158,27 @@ TLS 1.3 Benefits
 
 TLS 1.3 simplifies the handshake to one round trip (or zero with pre-shared keys), removes insecure features, and mandates forward secrecy. 
 
-#### Test TLS 1.3 support
+## Test TLS 1.3 support
 
 openssl s_client -connect example.com:443 -tls1_3
 
 Testing with SSL Labs 
 
-#### Using ssllabs-scan
+## Using ssllabs-scan
 
 docker run --rm -t jumanjiman/ssllabs-scan example.com
 
-#### Using testssl.sh
+## Using testssl.sh
 
 testssl.sh --quiet --htmlfile report.html example.com
 
-#### Quick curl-based check
+## Quick curl-based check
 
 curl -sI https://example.com | grep -i "strict-transport-security|x-frame-options|content-security-policy"
 
 Full Hardened Configuration 
 
-#### /etc/nginx/conf.d/ssl.conf - hardened TLS
+## /etc/nginx/conf.d/ssl.conf - hardened TLS
 
 ssl_protocols TLSv1.2 TLSv1.3;
 
@@ -224,7 +194,7 @@ ssl_session_timeout 1d;
 
 ssl_session_tickets off;
 
-#### OCSP Stapling
+## OCSP Stapling
 
 ssl_stapling on;
 
@@ -232,7 +202,7 @@ ssl_stapling_verify on;
 
 resolver 1.1.1.1 8.8.8.8 valid=300s;
 
-#### Security Headers
+## Security Headers
 
 add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
 
@@ -255,3 +225,9 @@ A proper TLS configuration requires modern protocol versions (TLS 1.2 and 1.3), 
 **See also:** [Certificate Management](</en/security/certificate-management.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Container Image Security](</en/security/container-image-security.html>)
 
 **See also:** [Certificate Management](</en/security/certificate-management.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Container Image Security](</en/security/container-image-security.html>)
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)

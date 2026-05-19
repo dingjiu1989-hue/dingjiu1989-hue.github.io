@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/cloud-cost-optimization.png",
       "datePublished": "2025-12-01",
       "dateModified": "2026-05-18",
-      "wordCount": "2573",
+      "wordCount": "2571",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
@@ -99,25 +99,8 @@
       <h1 class="article-title">Cloud Cost Optimization Tips</h1>
       <div class="article-meta">Published 2025-12-01 · Last active 2026-05-18 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/cloud-cost-optimization.png" alt="Cloud Cost Optimization Tips" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Cloud Cost Optimization Tips</h2>
-<h3>Cloud Cost Optimization Tips</h3>
-<h4>Cloud Cost Optimization Tips</h4>
-<h4>Cloud Cost Optimization Tips</h4>
-<h4>Cloud Cost Optimization Tips</h4>
-<h4>Cloud Cost Optimization Tips</h4>
-<h4>Cloud Cost Optimization Tips</h4>
-<h4>Cloud Cost Optimization Tips</h4>
-<h4>Cloud Cost Optimization Tips</h4>
-<h4>Cloud Cost Optimization Tips</h4>
-<h4>Cloud Cost Optimization Tips</h4>
-<h4>Cloud Cost Optimization Tips</h4>
-<h4>Cloud Cost Optimization Tips</h4>
-<h4>Cloud Cost Optimization Tips</h4>
-<h4>Cloud Cost Optimization Tips</h4>
-<h4>Cloud Cost Optimization Tips</h4>
-<h4>Cloud Cost Optimization Tips</h4>
-<p>Cloud costs are often the second-largest expense after payroll for SaaS companies. Without active management, spending grows faster than revenue. This guide covers practical cost optimization strategies that reduce bills by 30-50% without sacrificing performance.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/cloud-cost-optimization.png" alt="Cloud Cost Optimization Tips" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Right-Sizing Instances</h4>
+      <div class="article-body"><p>Cloud costs are often the second-largest expense after payroll for SaaS companies. Without active management, spending grows faster than revenue. This guide covers practical cost optimization strategies that reduce bills by 30-50% without sacrificing performance.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/cloud-cost-optimization.png" alt="Cloud Cost Optimization Tips" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Right-Sizing Instances</h2>
 <p>The most common waste is over-provisioned resources. Use cloud provider tools to analyze utilization:</p>
 <ul>
 <li>
@@ -137,7 +120,7 @@
 <p>| Memory | 60-80% average |</p>
 <p>| Disk IOPS | Below 80% of provisioned |</p>
 <p>Downsize instances that consistently run below 20% utilization. For variable workloads, consider scaling horizontally rather than vertically.</p>
-<h4>Reserved Instances and Savings Plans</h4>
+<h2>Reserved Instances and Savings Plans</h2>
 <p>Commit to usage in exchange for discounts:</p>
 <p>| Option | Discount | Commitment |</p>
 <p>|--------|----------|------------|</p>
@@ -146,17 +129,17 @@
 <p>| GCP Committed Use | 40-57% | 1 or 3 years |</p>
 <p>| Azure Reserved | 40-60% | 1 or 3 years |</p>
 <p>Start with 1-year commitments for baseline workloads (30-50% of your total compute). Use 3-year commitments for stable, predictable workloads. Combine Savings Plans with Spot Instances for maximum flexibility.</p>
-<h4>Spot and Preemptible Instances</h4>
+<h2>Spot and Preemptible Instances</h2>
 <p>Use spot instances (AWS), preemptible VMs (GCP), or low-priority VMs (Azure) for fault-tolerant workloads:</p>
-<h4>AWS: Request spot instances in Auto Scaling</h4>
+<h2>AWS: Request spot instances in Auto Scaling</h2>
 <p>aws autoscaling create-auto-scaling-group \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--mixed-instances-policy file://spot-policy.json</p>
-<h4>GCP: Create preemptible VM</h4>
+<h2>GCP: Create preemptible VM</h2>
 <p>gcloud compute instances create worker \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--preemptible</p>
 <p>Ideal workloads: batch processing, CI/CD runners, stateless web workers, data analytics, rendering.</p>
 <p>Savings: 60-90% compared to on-demand pricing. Combine with Spot Instance interruption handling (checkpointing, graceful shutdown).</p>
-<h4>Storage Optimization</h4>
+<h2>Storage Optimization</h2>
 <p>Storage costs accumulate silently. Audit your storage regularly:</p>
 <ul>
 <li>
@@ -190,7 +173,7 @@
 <p>}</p>
 <p>]</p>
 <p>}</p>
-<h4>Network Egress Costs</h4>
+<h2>Network Egress Costs</h2>
 <p>Data transfer out of cloud providers is expensive. Minimize egress:</p>
 <ul>
 <li>
@@ -206,19 +189,19 @@
 <p><strong>NAT Gateway costs</strong> : Use NAT instances instead of NAT Gateway for high-volume traffic (cost savings of 70-80%).</p>
 </li>
 </ul>
-<h4>Autoscaling</h4>
+<h2>Autoscaling</h2>
 <p>Scale resources to match demand:</p>
-<h4>AWS Auto Scaling with target tracking</h4>
+<h2>AWS Auto Scaling with target tracking</h2>
 <p>autoscaling:</p>
 <p>target_tracking:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- predefined_metric_specification:</p>
 <p>predefined_metric_type: ASGAverageCPUUtilization</p>
 <p>target_value: 60</p>
 <p>For containerized workloads, use Kubernetes Cluster Autoscaler:</p>
-<h4>Karpenter for AWS EKS</h4>
+<h2>Karpenter for AWS EKS</h2>
 <p>kubectl scale deployment api-server --replicas=0 # Automated idle scaling</p>
 <p>Karpenter and similar tools scale nodes based on actual pod resource requests, eliminating node-level waste.</p>
-<h4>Database Cost Optimization</h4>
+<h2>Database Cost Optimization</h2>
 <p>Databases are often the most expensive service:</p>
 <ul>
 <li>
@@ -234,9 +217,9 @@
 <p><strong>Delete old data</strong> : Archive historical data to object storage.</p>
 </li>
 </ul>
-<h4>Reserved Capacity with Spot</h4>
+<h2>Reserved Capacity with Spot</h2>
 <p>Combine reserved capacity for baseline with spot for spikes:</p>
-<h4>Terraform: Mix OD and Spot in ASG</h4>
+<h2>Terraform: Mix OD and Spot in ASG</h2>
 <p>resource "aws_autoscaling_group" "app" {</p>
 <p>mixed_instances_policy {</p>
 <p>launch_template {</p>
@@ -252,14 +235,14 @@
 <p>}</p>
 <p>}</p>
 <p>}</p>
-<h4>Monitoring and Budgets</h4>
+<h2>Monitoring and Budgets</h2>
 <p>Set up cost monitoring to catch anomalies early:</p>
-<h4>AWS Budget with action</h4>
+<h2>AWS Budget with action</h2>
 <p>aws budgets create-budget \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--budget-name "Monthly-Infra" \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--budget-file monthly-budget.json \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--notifications-with-subscribers file://alert-config.json</p>
-<h4>GCP budget alert</h4>
+<h2>GCP budget alert</h2>
 <p>gcloud billing budgets create \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--billing-account=XXXXXX \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--display-name="Monthly Budget" \</p>
@@ -267,13 +250,16 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--threshold-rules=percent=50,percent=90 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--notifications-pubsub-topic=budget-alerts</p>
 <p>Set up alerts at 50%, 80%, and 90% of budget. Tag resources by cost center and review spending weekly.</p>
-<h4>Summary</h4>
+<h2>Summary</h2>
 <p>Cloud cost optimization is an ongoing process, not a one-time cleanup. Start with right-sizing (the quickest wins), add reserved capacity for baseline workloads, use spot instances for fault-tolerant work, and configure autoscaling to match demand. Monitor storage lifecycle, minimize data egress, and optimize database tiering. The most effective approach is a 20% time investment per quarter: review spending, tag resources, and implement the top three savings opportunities. Most organizations can reduce their cloud bill by 30-50% within three months by following these practices.</p>
 <p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>.</p>
 <p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/webpack-vs-vite-bundlers.html">Webpack vs Vite Comparison</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/webpack-vs-vite-bundlers.html">Webpack vs Vite Comparison</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/webpack-vs-vite-bundlers.html">Webpack vs Vite Comparison</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -285,7 +271,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/serverless-framework.html" class="related-card">Serverless Framework: From Zero to Production</a><a href="/en/tech/infrastructure-testing.html" class="related-card">Infrastructure Testing with Terratest and Other Tools</a><a href="/en/tech/terraform-infrastructure-code.html" class="related-card">Terraform Infrastructure as Code</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a></div>
+      <div class="related-grid"><a href="/en/tech/serverless-framework.html" class="related-card"><span class="related-card-title">Serverless Framework: From Zero to Production</span><span class="related-card-desc">Deploy AWS Lambda functions with infrastructure as code, local development workflows, monitoring, co</span></a><a href="/en/tech/infrastructure-testing.html" class="related-card"><span class="related-card-title">Infrastructure Testing with Terratest and Other Tools</span><span class="related-card-desc">Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources</span></a><a href="/en/tech/terraform-infrastructure-code.html" class="related-card"><span class="related-card-title">Terraform Infrastructure as Code</span><span class="related-card-desc">Master Terraform for managing cloud infrastructure with state management, modules, and production be</span></a><a href="/en/tech/distributed-tracing.html" class="related-card"><span class="related-card-title">Distributed Tracing with OpenTelemetry</span><span class="related-card-desc">Implement distributed tracing with OpenTelemetry covering spans, context propagation, sampling strat</span></a><a href="/en/tech/github-actions-advanced.html" class="related-card"><span class="related-card-title">Advanced GitHub Actions Workflows</span><span class="related-card-desc">Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching </span></a><a href="/en/tech/service-discovery.html" class="related-card"><span class="related-card-title">Service Discovery in Microservices</span><span class="related-card-desc">Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, includ</span></a></div>
     </section>
     
   </div>

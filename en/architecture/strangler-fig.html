@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/strangler-fig.png",
       "datePublished": "2025-12-30",
       "dateModified": "2026-04-16",
-      "wordCount": "988",
+      "wordCount": "923",
       "keywords": "Architecture, System Design",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
       "inLanguage": "en",
@@ -98,22 +98,7 @@
       <h1 class="article-title">Strangler Fig Pattern for Legacy Migration</h1>
       <div class="article-meta">Published 2025-12-30 · Last active 2026-04-16 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/strangler-fig.png" alt="Strangler Fig Pattern for Legacy Migration" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Strangler Fig Pattern for Legacy Migration</h2>
-<h3>Strangler Fig Pattern for Legacy Migration</h3>
-<h4>Strangler Fig Pattern for Legacy Migration</h4>
-<h4>Strangler Fig Pattern for Legacy Migration</h4>
-<h4>Strangler Fig Pattern for Legacy Migration</h4>
-<h4>Strangler Fig Pattern for Legacy Migration</h4>
-<h4>Strangler Fig Pattern for Legacy Migration</h4>
-<h4>Strangler Fig Pattern for Legacy Migration</h4>
-<h4>Strangler Fig Pattern for Legacy Migration</h4>
-<h4>Strangler Fig Pattern for Legacy Migration</h4>
-<h4>Strangler Fig Pattern for Legacy Migration</h4>
-<h4>Strangler Fig Pattern for Legacy Migration</h4>
-<h4>Strangler Fig Pattern for Legacy Migration</h4>
-<h4>Strangler Fig Pattern for Legacy Migration</h4>
-<h4>Strangler Fig Pattern for Legacy Migration</h4>
-<p>The Strangler Fig pattern, named after the tropical plant that gradually envelops its host tree, is a strategy for incrementally replacing a legacy system with a new one. Rather than undertaking a high-risk big-bang rewrite, the Strangler Fig pattern allows teams to replace functionality piece by piece, routing traffic to the new system while the legacy system remains operational. This approach dramatically reduces risk and allows continuous delivery of value. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/strangler-fig.png" alt="Strangler Fig Pattern for Legacy Migration" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>The Strangler Fig pattern, named after the tropical plant that gradually envelops its host tree, is a strategy for incrementally replacing a legacy system with a new one. Rather than undertaking a high-risk big-bang rewrite, the Strangler Fig pattern allows teams to replace functionality piece by piece, routing traffic to the new system while the legacy system remains operational. This approach dramatically reduces risk and allows continuous delivery of value. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/strangler-fig.png" alt="Strangler Fig Pattern for Legacy Migration" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Core Mechanism </p>
 <p>The pattern works by intercepting calls to the legacy system and routing them to either the legacy implementation or the new implementation. A routing layer—typically an API gateway, reverse proxy, or application-level router—determines which version handles each request. Over time, more features are routed to the new system until the legacy system is entirely unused. </p>
 <p>The routing decision can be based on URL paths, HTTP headers, feature flags, user segments, or any other request attribute. This flexibility allows teams to test new implementations with internal users before expanding to broader audiences. </p>
@@ -133,7 +118,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-sourcing.html">Event Sourcing Pattern</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-sourcing.html">Event Sourcing Pattern</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-sourcing.html">Event Sourcing Pattern</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -145,7 +133,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/database-per-service.html" class="related-card">Database per Service Pattern</a><a href="/en/architecture/backend-for-frontend.html" class="related-card">Backend for Frontend (BFF) Pattern</a><a href="/en/architecture/bulkhead-pattern.html" class="related-card">Bulkhead Pattern for Resilience</a><a href="/en/architecture/hexagonal-architecture.html" class="related-card">Hexagonal Architecture (Ports and Adapters)</a></div>
+      <div class="related-grid"><a href="/en/architecture/database-per-service.html" class="related-card"><span class="related-card-title">Database per Service Pattern</span><span class="related-card-desc">Learn the database per service pattern for microservices data management — data isolation, eventual </span></a><a href="/en/architecture/backend-for-frontend.html" class="related-card"><span class="related-card-title">Backend for Frontend (BFF) Pattern</span><span class="related-card-desc">Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data agg</span></a><a href="/en/architecture/bulkhead-pattern.html" class="related-card"><span class="related-card-title">Bulkhead Pattern for Resilience</span><span class="related-card-desc">Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, ci</span></a><a href="/en/architecture/hexagonal-architecture.html" class="related-card"><span class="related-card-title">Hexagonal Architecture (Ports and Adapters)</span><span class="related-card-desc">Learn hexagonal architecture for building maintainable, testable applications — ports and adapters, </span></a><a href="/en/architecture/claim-check.html" class="related-card"><span class="related-card-title">Claim Check Pattern</span><span class="related-card-desc">Learn the claim check pattern: store large payloads, pass references, and enable asynchronous proces</span></a><a href="/en/architecture/scheduler-supervisor.html" class="related-card"><span class="related-card-title">Scheduler Supervisor Pattern</span><span class="related-card-desc">Learn the scheduler supervisor pattern: job scheduling, failure handling, retry policies, and distri</span></a></div>
     </section>
     
   </div>

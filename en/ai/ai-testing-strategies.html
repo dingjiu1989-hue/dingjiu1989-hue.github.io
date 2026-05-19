@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-strategies.png",
       "datePublished": "2026-02-10",
       "dateModified": "2026-04-05",
-      "wordCount": "1984",
+      "wordCount": "1940",
       "keywords": "Artificial Intelligence, Machine Learning",
       "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
       "inLanguage": "en",
@@ -98,25 +98,9 @@
       <h1 class="article-title">Testing Strategies for AI Applications</h1>
       <div class="article-meta">Published 2026-02-10 · Last active 2026-04-05 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-strategies.png" alt="Testing Strategies for AI Applications" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Testing Strategies for AI Applications</h2>
-<h3>Testing Strategies for AI Applications</h3>
-<h4>Testing Strategies for AI Applications</h4>
-<h4>Testing Strategies for AI Applications</h4>
-<h4>Testing Strategies for AI Applications</h4>
-<h4>Testing Strategies for AI Applications</h4>
-<h4>Testing Strategies for AI Applications</h4>
-<h4>Testing Strategies for AI Applications</h4>
-<h4>Testing Strategies for AI Applications</h4>
-<h4>Testing Strategies for AI Applications</h4>
-<h4>Testing Strategies for AI Applications</h4>
-<h4>Testing Strategies for AI Applications</h4>
-<h4>Testing Strategies for AI Applications</h4>
-<h4>Testing Strategies for AI Applications</h4>
-<h4>Testing Strategies for AI Applications</h4>
-<h4>Testing Strategies for AI Applications</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Testing AI applications differs fundamentally from testing deterministic software. Model outputs are probabilistic, edge cases are infinite, and a passing unit test does not guarantee correct behavior in production. A comprehensive AI testing strategy combines traditional software testing with AI-specific evaluation methodologies to catch regressions, hallucinations, and performance degradations before they reach users.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-strategies.png" alt="Testing Strategies for AI Applications" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Evaluation Datasets</h4>
+<h2>Evaluation Datasets</h2>
 <p>Curate high-quality evaluation datasets that reflect real-world usage:</p>
 <p>from dataclasses import dataclass</p>
 <p>from typing import List, Callable</p>
@@ -129,7 +113,7 @@
 <p>domain: str</p>
 <p>difficulty: str # "easy", "medium", "hard"</p>
 <p>tags: List[str]</p>
-<h4>For non-deterministic evaluation</h4>
+<h2>For non-deterministic evaluation</h2>
 <p>criteria: List[Callable[[str], bool]]</p>
 <p>class EvalDataset:</p>
 <p>def <strong>init</strong>(self, name: str):</p>
@@ -169,7 +153,7 @@
 <p>"I cannot" in output or "I'm unable" in output,</p>
 <p>],</p>
 <p>))</p>
-<h4>Regression Testing</h4>
+<h2>Regression Testing</h2>
 <p>Automated regression testing catches model behavior changes:</p>
 <p>class ModelRegressionTest:</p>
 <p>def <strong>init</strong>(self, eval_dataset: EvalDataset):</p>
@@ -192,7 +176,7 @@
 <p>for test_case in self.dataset.test_cases:</p>
 <p>try:</p>
 <p>output = await self._invoke_model(model_name, test_case.input)</p>
-<h4>Evaluate against all criteria</h4>
+<h2>Evaluate against all criteria</h2>
 <p>passed = all(</p>
 <p>criterion(output) for criterion in test_case.criteria</p>
 <p>)</p>
@@ -214,7 +198,7 @@
 <p>"error": str(e),</p>
 <p>})</p>
 <p>results["score"] = results["passed"] / results["total"]</p>
-<h4>Compare with previous run</h4>
+<h2>Compare with previous run</h2>
 <p>if previous_results:</p>
 <p>score_delta = results["score"] - previous_results["score"]</p>
 <p>results["regression"] = score_delta &lt; -0.02</p>
@@ -229,7 +213,7 @@
 <p>f"{results.get('previous_score', 1.0):.2%} to "</p>
 <p>f"{results['score']:.2%}"</p>
 <p>)</p>
-<h4>A/B Evaluation</h4>
+<h2>A/B Evaluation</h2>
 <p>Compare model versions side by side with structured evaluation:</p>
 <p>class ABEvaluation:</p>
 <p>def <strong>init</strong>(self, judge_model: str = "claude-opus-4-20260512"):</p>
@@ -271,27 +255,27 @@
 <p>evaluation = await self.evaluate_pair(</p>
 <p>prompt, output_a, output_b, criteria</p>
 <p>)</p>
-<h4>Aggregate across criteria</h4>
+<h2>Aggregate across criteria</h2>
 <p>winner = evaluation["winner"]</p>
 <p>results[f"{winner}_wins"] += 1</p>
 <p>results["total"] = len(prompts)</p>
 <p>results["a_win_rate"] = results["model_a_wins"] / results["total"]</p>
 <p>results["b_win_rate"] = results["model_b_wins"] / results["total"]</p>
 <p>return results</p>
-<h4>Hallucination Detection</h4>
+<h2>Hallucination Detection</h2>
 <p>Automated hallucination checks verify factual accuracy:</p>
 <p>class HallucinationDetector:</p>
 <p>def <strong>init</strong>(self, knowledge_base: Callable):</p>
 <p>self.kb = knowledge_base</p>
 <p>async def check_factual_claims(self, output: str) -&gt; List[dict]:</p>
 <p>"""Extract factual claims and verify them against a knowledge base."""</p>
-<h4>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract atomic claims</h4>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract atomic claims</h2>
 <p>claims = await self._extract_claims(output)</p>
 <p>verified_claims = []</p>
 <p>for claim in claims:</p>
-<h4>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Search knowledge base</h4>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Search knowledge base</h2>
 <p>evidence = await self.kb.search(claim["text"])</p>
-<h4>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify claim against evidence</h4>
+<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify claim against evidence</h2>
 <p>verification = await self._verify_claim(</p>
 <p>claim["text"],</p>
 <p>evidence,</p>
@@ -329,7 +313,7 @@
 <p>)</p>
 <p>total = len(verified_claims)</p>
 <p>return unsupported / total if total &gt; 0 else 0.0</p>
-<h4>Prompt Testing</h4>
+<h2>Prompt Testing</h2>
 <p>Version-control prompts with structured testing:</p>
 <p>class PromptRegistry:</p>
 <p>def <strong>init</strong>(self):</p>
@@ -353,10 +337,10 @@
 <p>prompt = self.prompts[name]</p>
 <p>results = []</p>
 <p>for case in test_cases:</p>
-<h4>Render template with test inputs</h4>
+<h2>Render template with test inputs</h2>
 <p>rendered = prompt["template"].format(**case["inputs"])</p>
 <p>output = await self._invoke(rendered)</p>
-<h4>Run tests</h4>
+<h2>Run tests</h2>
 <p>test_results = [</p>
 <p>test(output) for test in prompt["tests"]</p>
 <p>]</p>
@@ -372,7 +356,7 @@
 <p>"pass_rate": sum(r["tests_passed"] for r in results) / len(results),</p>
 <p>"results": results,</p>
 <p>}</p>
-<h4>Performance Testing</h4>
+<h2>Performance Testing</h2>
 <p>Benchmark latency, throughput, and cost across model versions:</p>
 <p>class AIPerformanceTest:</p>
 <p>async def benchmark(</p>
@@ -407,7 +391,10 @@
 <p><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a>, <a href="/en/ai/multimodal-ai.html">Multimodal AI Applications in 2026</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a>, <a href="/en/ai/multimodal-ai.html">Multimodal AI Applications in 2026</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a>, <a href="/en/ai/multimodal-ai.html">Multimodal AI Applications in 2026</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -419,7 +406,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/responsible-ai.html" class="related-card">Responsible AI Development Practices</a><a href="/en/ai/ai-api-cost-optimization.html" class="related-card">AI API Cost Optimization</a><a href="/en/ai/ai-prompt-engineering.html" class="related-card">Advanced Prompt Engineering Techniques</a><a href="/en/ai/llm-context-window.html" class="related-card">LLM Context Window Management</a></div>
+      <div class="related-grid"><a href="/en/ai/responsible-ai.html" class="related-card"><span class="related-card-title">Responsible AI Development Practices</span><span class="related-card-desc">Implement bias detection, fairness metrics, explainability with SHAP and LIME, transparency document</span></a><a href="/en/ai/ai-api-cost-optimization.html" class="related-card"><span class="related-card-title">AI API Cost Optimization</span><span class="related-card-desc">Strategies for reducing LLM API costs including prompt compression, caching, model selection, batchi</span></a><a href="/en/ai/ai-prompt-engineering.html" class="related-card"><span class="related-card-title">Advanced Prompt Engineering Techniques</span><span class="related-card-desc">Master advanced prompt engineering techniques including chain-of-thought, few-shot, and structured p</span></a><a href="/en/ai/llm-context-window.html" class="related-card"><span class="related-card-title">LLM Context Window Management</span><span class="related-card-desc">Best practices for managing LLM context windows effectively including sliding windows, summarization</span></a><a href="/en/ai/local-llm-setup.html" class="related-card"><span class="related-card-title">Running LLMs Locally</span><span class="related-card-desc">Step-by-step guide to running LLMs locally using Ollama and LM Studio with setup instructions, model</span></a><a href="/en/ai/ai-data-privacy.html" class="related-card"><span class="related-card-title">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</span><span class="related-card-desc">Protect user privacy in AI applications with PII detection and redaction, data anonymization techniq</span></a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

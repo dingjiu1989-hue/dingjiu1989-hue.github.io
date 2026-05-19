@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/audit-logging.png",
       "datePublished": "2026-03-06",
       "dateModified": "2026-05-18",
-      "wordCount": "3390",
+      "wordCount": "3344",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -110,24 +110,7 @@
       <h1 class="article-title">Audit Logging Best Practices</h1>
       <div class="article-meta">Published 2026-03-06 · Last active 2026-05-18 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/audit-logging.png" alt="Audit Logging Best Practices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Audit Logging Best Practices</h2>
-<h3>Audit Logging Best Practices</h3>
-<h4>Audit Logging Best Practices</h4>
-<h4>Audit Logging Best Practices</h4>
-<h4>Audit Logging Best Practices</h4>
-<h4>Audit Logging Best Practices</h4>
-<h4>Audit Logging Best Practices</h4>
-<h4>Audit Logging Best Practices</h4>
-<h4>Audit Logging Best Practices</h4>
-<h4>Audit Logging Best Practices</h4>
-<h4>Audit Logging Best Practices</h4>
-<h4>Audit Logging Best Practices</h4>
-<h4>Audit Logging Best Practices</h4>
-<h4>Audit Logging Best Practices</h4>
-<h4>Audit Logging Best Practices</h4>
-<h4>Audit Logging Best Practices</h4>
-<h4>Audit Logging Best Practices</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/audit-logging.png" alt="Audit Logging Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/audit-logging.png" alt="Audit Logging Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Audit logs are the authoritative record of who did what, when, and where in a system. They are essential for incident investigation, compliance reporting, and operational troubleshooting. A robust audit logging architecture ensures logs are complete, tamper-evident, and readily accessible when needed — often months or years after the event. </p>
 <p>Immutable Logs </p>
 <p>Log immutability prevents attackers or insiders from covering their tracks by modifying or deleting log entries. </p>
@@ -142,29 +125,29 @@
 <p>self.hmac_key = hmac_key.encode()</p>
 <p>def write_log(self, event):</p>
 <p>"""Write a tamper-evident log entry."""</p>
-<h4>Create log entry with metadata</h4>
+<h2>Create log entry with metadata</h2>
 <p>entry = {</p>
 <p>'timestamp': datetime.utcnow().isoformat(),</p>
 <p>'event': event,</p>
 <p>'sequence': self._next_sequence(),</p>
 <p>}</p>
-<h4>Add hash of previous entry (blockchain-style chain)</h4>
+<h2>Add hash of previous entry (blockchain-style chain)</h2>
 <p>prev_entry = self.storage.get_last()</p>
 <p>if prev_entry:</p>
 <p>entry['prev_hash'] = prev_entry['hash']</p>
 <p>else:</p>
 <p>entry['prev_hash'] = '0' * 64</p>
-<h4>Calculate hash of this entry</h4>
+<h2>Calculate hash of this entry</h2>
 <p>entry_json = json.dumps(entry, sort_keys=True)</p>
 <p>entry_hash = hashlib.sha256(entry_json.encode()).hexdigest()</p>
 <p>entry['hash'] = entry_hash</p>
-<h4>HMAC sign the hash</h4>
+<h2>HMAC sign the hash</h2>
 <p>entry['signature'] = hmac.new(</p>
 <p>self.hmac_key,</p>
 <p>entry_hash.encode(),</p>
 <p>hashlib.sha256</p>
 <p>).hexdigest()</p>
-<h4>Write to WORM storage</h4>
+<h2>Write to WORM storage</h2>
 <p>log_id = f"{entry['timestamp']}_{entry['sequence']}"</p>
 <p>self.storage.write(log_id, entry)</p>
 <p>return entry</p>
@@ -173,7 +156,7 @@
 <p>entries = self.storage.get_all()</p>
 <p>prev_hash = '0' * 64</p>
 <p>for entry in entries:</p>
-<h4>Verify hash</h4>
+<h2>Verify hash</h2>
 <p>entry_copy = {k: v for k, v in entry.items() </p>
 <p>if k not in ('hash', 'signature')}</p>
 <p>computed_hash = hashlib.sha256(</p>
@@ -181,10 +164,10 @@
 <p>).hexdigest()</p>
 <p>if computed_hash != entry['hash']:</p>
 <p>return False, f"Hash mismatch at sequence {entry['sequence']}"</p>
-<h4>Verify chain link</h4>
+<h2>Verify chain link</h2>
 <p>if entry['prev_hash'] != prev_hash:</p>
 <p>return False, f"Chain break at sequence {entry['sequence']}"</p>
-<h4>Verify HMAC</h4>
+<h2>Verify HMAC</h2>
 <p>expected_sig = hmac.new(</p>
 <p>self.hmac_key,</p>
 <p>entry['hash'].encode(),</p>
@@ -195,33 +178,33 @@
 <p>prev_hash = entry['hash']</p>
 <p>return True, "Log chain verified"</p>
 <p>Append-Only Logging </p>
-<h4>Linux auditd configuration for immutable logs</h4>
-<h4>/etc/audit/rules.d/audit.rules</h4>
-<h4>Make audit log immutable</h4>
+<h2>Linux auditd configuration for immutable logs</h2>
+<h2>/etc/audit/rules.d/audit.rules</h2>
+<h2>Make audit log immutable</h2>
 <p>-e 2</p>
-<h4>Log all administrative commands</h4>
+<h2>Log all administrative commands</h2>
 <p>-w /usr/bin/su -p x -k privilege_escalation</p>
 <p>-w /usr/bin/sudo -p x -k privilege_escalation</p>
-<h4>Log critical file access</h4>
+<h2>Log critical file access</h2>
 <p>-w /etc/passwd -p wa -k passwd_changes</p>
 <p>-w /etc/shadow -p wa -k shadow_changes</p>
 <p>-w /etc/ssh/sshd_config -p wa -k ssh_config</p>
-<h4>Log system calls for process creation</h4>
+<h2>Log system calls for process creation</h2>
 <p>-a always,exit -S execve -k process_creation</p>
-<h4>Log network configuration changes</h4>
+<h2>Log network configuration changes</h2>
 <p>-w /sbin/iptables -p x -k firewall_changes</p>
 <p>-w /sbin/ip6tables -p x -k firewall_changes</p>
-<h4>Set log file permissions</h4>
+<h2>Set log file permissions</h2>
 <p>-a exclude,never -F auid&gt;=1000</p>
 <p>Log Integrity Monitoring </p>
-<h4>Forward logs to remote syslog server (prevents local tampering)</h4>
-<h4>/etc/rsyslog.d/remote-logging.conf</h4>
+<h2>Forward logs to remote syslog server (prevents local tampering)</h2>
+<h2>/etc/rsyslog.d/remote-logging.conf</h2>
 <p><em>.</em> @@logs.example.com:514 # TCP with TLS</p>
 <p>$ActionSendStreamDriver gtls</p>
 <p>$ActionSendStreamDriverMode 1</p>
 <p>$ActionSendStreamDriverAuthMode x509/name</p>
 <p>$ActionSendStreamDriverPermittedPeer *.example.com</p>
-<h4>Use Logstash/Filebeat for shipping</h4>
+<h2>Use Logstash/Filebeat for shipping</h2>
 <p>filebeat.inputs:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: log</p>
 <p>paths:</p>
@@ -236,7 +219,7 @@
 <p>protocol: "https"</p>
 <p>ssl.verification_mode: certificate</p>
 <p>Centralized Logging Architecture </p>
-<h4>Loki/Promtail centralized logging configuration</h4>
+<h2>Loki/Promtail centralized logging configuration</h2>
 <p>scrape_configs:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- job_name: audit-logs</p>
 <p>static_configs:</p>
@@ -283,7 +266,7 @@
 <p>retention: 3_years</p>
 <p>storage: glacier</p>
 <p>compliance: legal_hold</p>
-<h4>Automated log rotation and archival</h4>
+<h2>Automated log rotation and archival</h2>
 <p>class LogRotationManager:</p>
 <p>def <strong>init</strong>(self, log_directory, archive_bucket):</p>
 <p>self.log_dir = Path(log_directory)</p>
@@ -293,17 +276,17 @@
 <p>for log_file in self.log_dir.glob("audit-*.log"):</p>
 <p>file_age = now - datetime.fromtimestamp(log_file.stat().st_mtime)</p>
 <p>if file_age.days &gt; retention_days:</p>
-<h4>Compress</h4>
+<h2>Compress</h2>
 <p>gzip_path = log_file.with_suffix('.log.gz')</p>
 <p>with open(log_file, 'rb') as f_in:</p>
 <p>with gzip.open(gzip_path, 'wb') as f_out:</p>
 <p>shutil.copyfileobj(f_in, f_out)</p>
-<h4>Upload to cold storage</h4>
+<h2>Upload to cold storage</h2>
 <p>self.archive_bucket.upload(</p>
 <p>str(gzip_path),</p>
 <p>f"audit_logs/{gzip_path.name}"</p>
 <p>)</p>
-<h4>Delete local copy</h4>
+<h2>Delete local copy</h2>
 <p>log_file.unlink()</p>
 <p>gzip_path.unlink()</p>
 <p>Compliance Requirements </p>
@@ -326,7 +309,10 @@
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p>
-<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p>
+<p><strong>See also:</strong> <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p>
+<p><strong>See also:</strong> <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a>, <a href="/en/security/api-authentication.html">API Authentication Methods</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -338,7 +324,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/cloud-iam.html" class="related-card">Cloud IAM Deep Dive</a><a href="/en/security/cloud-security-posture.html" class="related-card">Cloud Security Posture Management</a><a href="/en/security/data-masking.html" class="related-card">Data Masking and Redaction</a><a href="/en/security/iac-security.html" class="related-card">Infrastructure as Code Security</a></div>
+      <div class="related-grid"><a href="/en/security/cloud-iam.html" class="related-card"><span class="related-card-title">Cloud IAM Deep Dive</span><span class="related-card-desc">In-depth guide to cloud IAM covering AWS IAM policies, GCP IAM roles, least privilege principles, an</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a><a href="/en/security/data-masking.html" class="related-card"><span class="related-card-title">Data Masking and Redaction</span><span class="related-card-desc">Guide to data masking and redaction covering dynamic masking, static masking, tokenization, and comp</span></a><a href="/en/security/iac-security.html" class="related-card"><span class="related-card-title">Infrastructure as Code Security</span><span class="related-card-desc">Guide to Infrastructure as Code security covering Terraform security scanning, policy as code, drift</span></a><a href="/en/security/kubernetes-network-policies.html" class="related-card"><span class="related-card-title">Kubernetes Network Policies</span><span class="related-card-desc">In-depth guide to Kubernetes network policies covering ingress/egress rules, Cilium, Calico, and zer</span></a><a href="/en/security/helm-security.html" class="related-card"><span class="related-card-title">Helm Security</span><span class="related-card-desc">Securing Helm deployments with chart signing, provenance verification, secrets management, and best </span></a></div>
     </section>
     
   </div>

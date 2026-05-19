@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/zero-trust-implementation.htm
 
 # Zero Trust Implementation
 
-## Zero Trust Implementation
-
-### Zero Trust Implementation
-
-#### Zero Trust Implementation
-
-#### Zero Trust Implementation
-
-#### Zero Trust Implementation
-
-#### Zero Trust Implementation
-
-#### Zero Trust Implementation
-
-#### Zero Trust Implementation
-
-#### Zero Trust Implementation
-
-#### Zero Trust Implementation
-
-#### Zero Trust Implementation
-
-#### Zero Trust Implementation
-
-#### Zero Trust Implementation
-
-#### Zero Trust Implementation
-
-#### Zero Trust Implementation
-
 Zero Trust Principles 
 
 Zero Trust replaces the castle-and-moat model with "never trust, always verify." Every request is authenticated, authorized, and inspected regardless of origin. 
@@ -46,7 +16,7 @@ Micro-Segmentation
 
 Divide your network into small, isolated zones. Each zone requires separate authentication. 
 
-#### Terraform: AWS security group micro-segmentation
+## Terraform: AWS security group micro-segmentation
 
 resource "aws_security_group" "app_to_db" {
 
@@ -86,7 +56,7 @@ Least Privilege Access
 
 Implement just-in-time (JIT) access with ephemeral credentials. 
 
-#### JIT access broker
+## JIT access broker
 
 from datetime import datetime, timedelta
 
@@ -213,3 +183,9 @@ Zero Trust is an architectural shift, not a product. Start with a single applica
 **See also:** [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 
 **See also:** [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
+
+**See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
+
+**See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)

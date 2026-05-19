@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/serverless-security.html
 
 # Serverless Security
 
-## Serverless Security
-
-### Serverless Security
-
-#### Serverless Security
-
-#### Serverless Security
-
-#### Serverless Security
-
-#### Serverless Security
-
-#### Serverless Security
-
-#### Serverless Security
-
-#### Serverless Security
-
-#### Serverless Security
-
-#### Serverless Security
-
-#### Serverless Security
-
-#### Serverless Security
-
-#### Serverless Security
-
-#### Serverless Security
-
 Introduction 
 
 Serverless computing shifts operational responsibility to the cloud provider but introduces unique security challenges. Functions have expanded attack surfaces through event sources, third-party dependencies, and IAM roles. Understanding the serverless shared responsibility model is the first step toward securing these architectures. 
@@ -96,7 +66,7 @@ Serverless functions operate under IAM roles that should follow least privilege.
 
 }
 
-#### AWS Lambda function handler with minimal permissions
+## AWS Lambda function handler with minimal permissions
 
 import boto3
 
@@ -106,7 +76,7 @@ TABLE_NAME = os.environ['TABLE_NAME']
 
 def handler(event, context):
 
-#### The function IAM role only has access to this specific table
+## The function IAM role only has access to this specific table
 
 dynamodb = boto3.resource('dynamodb')
 
@@ -138,7 +108,7 @@ raise ValueError("Invalid S3 event structure")
 
 for record in event['Records']:
 
-#### Validate S3 record structure
+## Validate S3 record structure
 
 s3 = record.get('s3', {})
 
@@ -150,7 +120,7 @@ if not bucket.get('name') or not obj.get('key'):
 
 raise ValueError("Invalid S3 record")
 
-#### Validate object key to prevent path traversal
+## Validate object key to prevent path traversal
 
 key = obj['key']
 
@@ -158,7 +128,7 @@ if '..' in key or key.startswith('/'):
 
 raise ValueError(f"Invalid object key: {key}")
 
-#### Check file extension whitelist
+## Check file extension whitelist
 
 allowed_extensions = {'.csv', '.json', '.parquet'}
 
@@ -172,7 +142,7 @@ def validate_api_gateway_event(event):
 
 """Validate API Gateway proxy event."""
 
-#### Validate HTTP method
+## Validate HTTP method
 
 allowed_methods = {'GET', 'POST', 'PUT', 'DELETE'}
 
@@ -182,7 +152,7 @@ if method not in allowed_methods:
 
 raise ValueError(f"Invalid HTTP method: {method}")
 
-#### Validate path parameters
+## Validate path parameters
 
 path = event.get('path', '')
 
@@ -190,7 +160,7 @@ if not re.match(r'^/[a-zA-Z0-9/_-]+$', path):
 
 raise ValueError(f"Invalid path: {path}")
 
-#### Validate query string parameters
+## Validate query string parameters
 
 params = event.get('queryStringParameters') or {}
 
@@ -206,7 +176,7 @@ Cold Start Risks
 
 Cold starts occur when a function is invoked after being idle. They create windows where code is freshly loaded, which can be exploited. 
 
-#### Vulnerability scanner for cold start
+## Vulnerability scanner for cold start
 
 import importlib
 
@@ -252,9 +222,9 @@ vulnerabilities.append({
 
 return vulnerabilities
 
-#### Dependencies: pin versions and scan regularly
+## Dependencies: pin versions and scan regularly
 
-#### requirements.txt
+## requirements.txt
 
 requests==2.31.0
 
@@ -262,7 +232,7 @@ pydantic==2.5.0
 
 cryptography==41.0.7
 
-#### npm package.json
+## npm package.json
 
 {
 
@@ -286,11 +256,11 @@ Defense in Depth
 
 Serverless security requires multiple layers, as there is no host-based security (no antivirus, no host IDS). 
 
-#### Defense layer 1: Input validation at API Gateway
+## Defense layer 1: Input validation at API Gateway
 
-#### Use request validation templates
+## Use request validation templates
 
-#### API Gateway JSON Schema validation
+## API Gateway JSON Schema validation
 
 VALIDATION_SCHEMA = {
 
@@ -310,11 +280,11 @@ VALIDATION_SCHEMA = {
 
 }
 
-#### Defense layer 2: Function-level validation
+## Defense layer 2: Function-level validation
 
 def process_order(event, context):
 
-#### Validate input structure
+## Validate input structure
 
 required_fields = ['user_id', 'product_id', 'quantity']
 
@@ -324,19 +294,19 @@ if field not in event:
 
 return {'statusCode': 400, 'body': f'Missing field: {field}'}
 
-#### Validate data types and ranges
+## Validate data types and ranges
 
 if not isinstance(event['quantity'], int) or event['quantity'] < 1:
 
 return {'statusCode': 400, 'body': 'Invalid quantity'}
 
-#### Defense layer 3: Principle of least function scope
+## Defense layer 3: Principle of least function scope
 
-#### Each function should do ONE thing
+## Each function should do ONE thing
 
 return process_payment(event)
 
-#### Defense layer 4: Encryption at rest and in transit
+## Defense layer 4: Encryption at rest and in transit
 
 from cryptography.fernet import Fernet
 
@@ -376,7 +346,7 @@ log_entry = {
 
 }
 
-#### Don't log sensitive data
+## Don't log sensitive data
 
 self.logs.append(log_entry)
 
@@ -397,3 +367,9 @@ Serverless security requires adapting traditional security principles to a new e
 **See also:** [CORS Security](</en/security/cors-security.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
 
 **See also:** [CORS Security](</en/security/cors-security.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
+
+**See also:** [Session Management Security](</en/security/session-management.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [Session Management Security](</en/security/session-management.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [Session Management Security](</en/security/session-management.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Certificate Management](</en/security/certificate-management.html>)

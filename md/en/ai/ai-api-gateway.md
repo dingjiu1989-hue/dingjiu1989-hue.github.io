@@ -8,43 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-api-gateway.html
 
 # AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
 
-## AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability
-
-#### Introduction
+## Introduction
 
 As organizations adopt multiple LLM providers (Anthropic, OpenAI, Google, open-source self-hosted), managing each directly from application code becomes unsustainable. An AI API gateway provides a unified interface for routing requests across providers, handling failures, tracking costs, and monitoring usage. This article covers the design of a production-grade AI gateway.
 
-#### Unified API Layer
+## Unified API Layer
 
 The gateway presents a single API that abstracts provider differences:
 
@@ -186,7 +154,7 @@ cost=self._calculate_cost(response.usage),
 
 )
 
-#### Load Balancing
+## Load Balancing
 
 Distribute requests across providers based on strategy:
 
@@ -218,7 +186,7 @@ return await self._route_priority(request)
 
 async def _route_priority(self, request: LLMRequest) -> LLMResponse:
 
-#### Try primary provider first, fall back to secondary
+## Try primary provider first, fall back to secondary
 
 for name in ["primary", "secondary", "fallback"]:
 
@@ -236,7 +204,7 @@ raise AllProvidersExhausted("All providers failed")
 
 async def _route_cheapest(self, request: LLMRequest) -> LLMResponse:
 
-#### Route to the provider with lowest cost for comparable quality
+## Route to the provider with lowest cost for comparable quality
 
 cheap_providers = sorted(
 
@@ -258,7 +226,7 @@ continue
 
 raise AllProvidersExhausted("All providers failed")
 
-#### Fallback and Retry
+## Fallback and Retry
 
 When a provider fails, automatically switch to alternatives:
 
@@ -282,7 +250,7 @@ except RateLimitError:
 
 await asyncio.sleep(2 ** attempt * 2)
 
-#### Fallback to different provider
+## Fallback to different provider
 
 request.model = self._map_to_alternative(request.model)
 
@@ -314,7 +282,7 @@ mapping = {
 
 return mapping.get(model, model)
 
-#### Cost Tracking
+## Cost Tracking
 
 Track costs per user, per feature, and per request:
 
@@ -366,7 +334,7 @@ user_id, time.time() - period_days * 86400,
 
 return costs[0] if costs else {"total": 0, "in_tokens": 0, "out_tokens": 0}
 
-#### Observability
+## Observability
 
 Every request should produce structured telemetry:
 
@@ -412,7 +380,7 @@ raise
 
 return wrapped
 
-#### Conclusion
+## Conclusion
 
 An AI API gateway provides provider abstraction, load balancing, automatic fallback, cost tracking, and observability in a single layer. Route requests based on cost, latency, or priority. Fail over between providers transparently. Track costs per user and feature to prevent budget surprises. Expose latency, error rate, and cost metrics for dashboards. A gateway is essential for any organization using multiple LLM providers in production.
 
@@ -427,3 +395,9 @@ An AI API gateway provides provider abstraction, load balancing, automatic fallb
 **See also:** [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>)
 
 **See also:** [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>)
+
+**See also:** [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>)
+
+**See also:** [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>)
+
+**See also:** [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>)

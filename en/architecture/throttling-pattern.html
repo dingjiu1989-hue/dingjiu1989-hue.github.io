@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/throttling-pattern.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-19",
-      "wordCount": "705",
+      "wordCount": "638",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,40 +96,28 @@
       <h1 class="article-title">Throttling Pattern for System Protection</h1>
       <div class="article-meta">Published 2026-05-11 · Last active 2026-05-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/throttling-pattern.png" alt="Throttling Pattern for System Protection" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Throttling Pattern for System Protection</h2>
-<h3>Throttling Pattern for System Protection</h3>
-<h4>Throttling Pattern for System Protection</h4>
-<h4>Throttling Pattern for System Protection</h4>
-<h4>Throttling Pattern for System Protection</h4>
-<h4>Throttling Pattern for System Protection</h4>
-<h4>Throttling Pattern for System Protection</h4>
-<h4>Throttling Pattern for System Protection</h4>
-<h4>Throttling Pattern for System Protection</h4>
-<h4>Throttling Pattern for System Protection</h4>
-<h4>Throttling Pattern for System Protection</h4>
-<h4>Throttling Pattern for System Protection</h4>
-<h4>Throttling Pattern for System Protection</h4>
-<h4>Throttling Pattern for System Protection</h4>
-<h4>Throttling Pattern for System Protection</h4>
-<p>Throttling controls the rate at which requests are processed to protect backend systems from overload. When request volume exceeds capacity, throttling rejects or delays excess requests instead of allowing the system to fail under load.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/throttling-pattern.png" alt="Throttling Pattern for System Protection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Throttling vs Rate Limiting</h4>
+      <div class="article-body"><p>Throttling controls the rate at which requests are processed to protect backend systems from overload. When request volume exceeds capacity, throttling rejects or delays excess requests instead of allowing the system to fail under load.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/throttling-pattern.png" alt="Throttling Pattern for System Protection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Throttling vs Rate Limiting</h2>
 <p>Rate limiting controls how many requests a client can make within a time window. Throttling controls the overall processing rate of the system, regardless of client distribution. Rate limiting is typically client-specific. Throttling is system-wide.</p>
 <p>Both patterns protect systems, but they operate at different levels. Rate limiting prevents abusive clients from monopolizing resources. Throttling prevents the system from exceeding its processing capacity.</p>
-<h4>Implementation Approaches</h4>
+<h2>Implementation Approaches</h2>
 <p>Token bucket is the most common throttling algorithm. Tokens are added to a bucket at a fixed rate. Each request consumes a token. If the bucket is empty, the request is throttled. The bucket size allows burst handling.</p>
 <p>Leaky bucket queues requests at a fixed processing rate. Burst requests are buffered and processed at the controlled rate. Excess requests beyond the buffer capacity are rejected.</p>
 <p>Concurrency limiter controls the number of in-flight requests. New requests are queued or rejected when the concurrency limit is reached. This is effective for protecting thread pools and database connections.</p>
-<h4>Throttling Responses</h4>
+<h2>Throttling Responses</h2>
 <p>Throttled requests should return appropriate HTTP status codes. 429 Too Many Requests is standard with a Retry-After header indicating when the client should retry. Include rate limit headers (X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset) so clients can adjust their behavior.</p>
-<h4>Distributed Throttling</h4>
+<h2>Distributed Throttling</h2>
 <p>In distributed systems, throttling requires shared state. Redis is commonly used for distributed rate counters. Use atomic operations (INCR, EXPIRE) for correctness. Consider performance impact of cross-network throttling calls.</p>
-<h4>When to Throttle</h4>
+<h2>When to Throttle</h2>
 <p>Throttle when protecting external API dependencies with rate limits, when the system has hard capacity limits (database connections, thread pools), and during traffic spikes to maintain system stability. Monitor throttled request rates—sustained throttling indicates capacity issues.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -141,7 +129,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/priority-queue.html" class="related-card">Priority Queue Pattern for Message Processing</a><a href="/en/architecture/api-composition.html" class="related-card">API Composition and Aggregation</a><a href="/en/architecture/chaos-engineering.html" class="related-card">Chaos Engineering: Building Resilient Systems</a><a href="/en/architecture/alerting-strategies.html" class="related-card">Alerting Strategies for Production Systems</a></div>
+      <div class="related-grid"><a href="/en/architecture/priority-queue.html" class="related-card"><span class="related-card-title">Priority Queue Pattern for Message Processing</span><span class="related-card-desc">Implement priority queues to ensure critical messages are processed before lower-priority ones in di</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a><a href="/en/architecture/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Building Resilient Systems</span><span class="related-card-desc">Introduction to chaos engineering: principles, practices, and tools for testing system resilience in</span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="related-card-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="related-card-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a></div>
     </section>
     
   </div>

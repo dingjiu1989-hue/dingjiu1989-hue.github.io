@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/container-runtime-security.png",
       "datePublished": "2026-03-16",
       "dateModified": "2026-04-20",
-      "wordCount": "1364",
+      "wordCount": "1328",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,22 +99,7 @@
       <h1 class="article-title">Container Runtime Security</h1>
       <div class="article-meta">Published 2026-03-16 · Last active 2026-04-20 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/container-runtime-security.png" alt="Container Runtime Security" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Container Runtime Security</h2>
-<h3>Container Runtime Security</h3>
-<h4>Container Runtime Security</h4>
-<h4>Container Runtime Security</h4>
-<h4>Container Runtime Security</h4>
-<h4>Container Runtime Security</h4>
-<h4>Container Runtime Security</h4>
-<h4>Container Runtime Security</h4>
-<h4>Container Runtime Security</h4>
-<h4>Container Runtime Security</h4>
-<h4>Container Runtime Security</h4>
-<h4>Container Runtime Security</h4>
-<h4>Container Runtime Security</h4>
-<h4>Container Runtime Security</h4>
-<h4>Container Runtime Security</h4>
-<p>Runtime Security Fundamentals </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/container-runtime-security.png" alt="Container Runtime Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Runtime Security Fundamentals </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/container-runtime-security.png" alt="Container Runtime Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Container runtime security monitors and restricts container behavior during execution. It prevents attackers who gain container access from breaking out or causing damage. </p>
 <p>seccomp Profiles </p>
 <p>seccomp (Secure Computing Mode) restricts system calls: </p>
@@ -152,39 +137,39 @@
 <p>localhostProfile: profiles/strict.json</p>
 <p>AppArmor </p>
 <p>AppArmor uses path-based access control: </p>
-<h4>AppArmor profile for container</h4>
-<h4>include</h4>
+<h2>AppArmor profile for container</h2>
+<h2>include</h2>
 <p>profile container-strict flags=(attach_disconnected) {</p>
-<h4>include</h4>
-<h4>Network</h4>
+<h2>include</h2>
+<h2>Network</h2>
 <p>network inet tcp,</p>
 <p>network inet udp,</p>
-<h4>Filesystem</h4>
+<h2>Filesystem</h2>
 <p>/ r,</p>
 <p>/proc/*/status r,</p>
 <p>/etc/resolv.conf r,</p>
 <p>/app/** r,</p>
 <p>/app/bin ix,</p>
-<h4>Deny everything else</h4>
+<h2>Deny everything else</h2>
 <p>deny /etc/shadow r,</p>
 <p>deny /sys/** r,</p>
 <p>deny /proc/** w,</p>
 <p>}</p>
 <p>SELinux for Containers </p>
 <p>SELinux provides mandatory access control: </p>
-<h4>Enable SELinux for container runtime</h4>
+<h2>Enable SELinux for container runtime</h2>
 <p>sudo setenforce 1</p>
 <p>sudo semanage permissive -a container_t</p>
-<h4>Apply SELinux context to container</h4>
+<h2>Apply SELinux context to container</h2>
 <p>podman run \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--security-opt label=type:container_t \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--security-opt label=level:s0:c1,c2 \</p>
 <p>nginx</p>
-<h4>Check SELinux context</h4>
+<h2>Check SELinux context</h2>
 <p>ps -eZ | grep container</p>
 <p>Falco Runtime Detection </p>
 <p>Falco detects anomalous behavior: </p>
-<h4>falco-rules.yaml</h4>
+<h2>falco-rules.yaml</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rule: Terminal shell in container</p>
 <p>desc: Detect shell spawn in container</p>
 <p>condition: &gt;</p>
@@ -213,7 +198,7 @@
 <p>output: &gt;</p>
 <p>Write to sensitive host path from container</p>
 <p>priority: CRITICAL</p>
-<h4>Falco event consumer</h4>
+<h2>Falco event consumer</h2>
 <p>import json</p>
 <p>import requests</p>
 <p>def handle_falco_events():</p>
@@ -255,7 +240,10 @@
 <p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a></p>
-<p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/endpoint-security.html">Endpoint Security</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a></p>
+<p><strong>See also:</strong> <a href="/en/security/endpoint-security.html">Endpoint Security</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/endpoint-security.html">Endpoint Security</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -267,7 +255,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/container-image-security.html" class="related-card">Container Image Security</a><a href="/en/security/helm-security.html" class="related-card">Helm Security</a><a href="/en/security/kubernetes-security.html" class="related-card">Kubernetes Security</a><a href="/en/security/endpoint-detection-response.html" class="related-card">EDR: Endpoint Detection and Response Solutions</a></div>
+      <div class="related-grid"><a href="/en/security/container-image-security.html" class="related-card"><span class="related-card-title">Container Image Security</span><span class="related-card-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability sc</span></a><a href="/en/security/helm-security.html" class="related-card"><span class="related-card-title">Helm Security</span><span class="related-card-desc">Securing Helm deployments with chart signing, provenance verification, secrets management, and best </span></a><a href="/en/security/kubernetes-security.html" class="related-card"><span class="related-card-title">Kubernetes Security</span><span class="related-card-desc">Securing Kubernetes with RBAC, Pod Security Standards, network policies, and audit logging.</span></a><a href="/en/security/endpoint-detection-response.html" class="related-card"><span class="related-card-title">EDR: Endpoint Detection and Response Solutions</span><span class="related-card-desc">EDR systems for endpoint security: threat detection, behavioral analysis, automated response, and in</span></a><a href="/en/security/security-information-event-management.html" class="related-card"><span class="related-card-title">SIEM: Security Information and Event Management</span><span class="related-card-desc">SIEM systems for security monitoring: log collection, correlation rules, threat detection, and incid</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a></div>
     </section>
     
   </div>

@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/security/session-management.html
 
 # Session Management Security
 
-## Session Management Security
-
-### Session Management Security
-
-#### Session Management Security
-
-#### Session Management Security
-
-#### Session Management Security
-
-#### Session Management Security
-
-#### Session Management Security
-
-#### Session Management Security
-
-#### Session Management Security
-
-#### Session Management Security
-
-#### Session Management Security
-
-#### Session Management Security
-
-#### Session Management Security
-
-#### Session Management Security
-
-#### Session Management Security
-
 Introduction 
 
 Session management is the mechanism by which a web application maintains state across multiple requests from the same user. Flawed session management leads to session hijacking, fixation, and replay attacks. A robust session management strategy must address token generation, storage, transmission, rotation, and invalidation. 
@@ -52,7 +22,7 @@ import jwt
 
 from datetime import datetime, timedelta
 
-#### Generate a JWT access token
+## Generate a JWT access token
 
 def create_access_token(user_id, roles, secret_key):
 
@@ -74,7 +44,7 @@ payload = {
 
 return jwt.encode(payload, secret_key, algorithm='HS256')
 
-#### Generate a refresh token
+## Generate a refresh token
 
 def create_refresh_token(user_id, secret_key):
 
@@ -92,7 +62,7 @@ payload = {
 
 return jwt.encode(payload, secret_key, algorithm='HS256')
 
-#### Verify and decode
+## Verify and decode
 
 def verify_token(token, secret_key):
 
@@ -100,7 +70,7 @@ try:
 
 payload = jwt.decode(token, secret_key, algorithms=['HS256'])
 
-#### Check if token is revoked (check jti against blocklist)
+## Check if token is revoked (check jti against blocklist)
 
 if is_revoked(payload['jti']):
 
@@ -168,7 +138,7 @@ return None
 
 session = json.loads(data)
 
-#### Update last activity
+## Update last activity
 
 session['last_activity'] = datetime.utcnow().isoformat()
 
@@ -182,7 +152,7 @@ self.redis.delete(f"session:{token}")
 
 def revoke_all_user_sessions(self, user_id):
 
-#### Pattern-based revocation
+## Pattern-based revocation
 
 for key in self.redis.scan_iter(f"session:*"):
 
@@ -196,7 +166,7 @@ Token Rotation
 
 Rotating tokens limits the window of opportunity for stolen tokens. 
 
-#### Refresh token rotation
+## Refresh token rotation
 
 def refresh_access_token(refresh_token, secret_key):
 
@@ -206,11 +176,11 @@ if payload['type'] != 'refresh':
 
 raise InvalidTokenError('Not a refresh token')
 
-#### Revoke old refresh token
+## Revoke old refresh token
 
 revoke_token(payload['jti'])
 
-#### Issue new tokens
+## Issue new tokens
 
 new_access = create_access_token(payload['sub'], payload['roles'], secret_key)
 
@@ -244,7 +214,7 @@ path='/'
 
 )
 
-#### Modern recommended cookie configuration
+## Modern recommended cookie configuration
 
 session_cookie_config = {
 
@@ -260,7 +230,7 @@ session_cookie_config = {
 
 'path': '/',
 
-#### __Host- prefix for cookie name ensures path=/ and no domain attribute
+## __Host- prefix for cookie name ensures path=/ and no domain attribute
 
 'name': '__Host-session'
 
@@ -274,13 +244,13 @@ def login(request, username, password):
 
 if authenticate(username, password):
 
-#### Regenerate session ID after successful login
+## Regenerate session ID after successful login
 
 old_session = request.session
 
 request.session.regenerate() # New session ID, same data
 
-#### Copy relevant data and invalidate old session
+## Copy relevant data and invalidate old session
 
 request.session['user_id'] = get_user_id(username)
 
@@ -288,7 +258,7 @@ request.session['authenticated'] = True
 
 request.session['auth_time'] = datetime.utcnow().isoformat()
 
-#### Invalidate old session in store
+## Invalidate old session in store
 
 session_store.delete(old_session.session_key)
 
@@ -308,7 +278,7 @@ def check_session_timeout(session):
 
 now = datetime.utcnow()
 
-#### Idle timeout
+## Idle timeout
 
 last_activity = datetime.fromisoformat(session['last_activity'])
 
@@ -316,7 +286,7 @@ if now - last_activity > session_timeouts['idle_timeout']:
 
 return {'expired': True, 'reason': 'idle_timeout'}
 
-#### Absolute timeout
+## Absolute timeout
 
 auth_time = datetime.fromisoformat(session['auth_time'])
 
@@ -341,3 +311,9 @@ Secure session management requires defense in depth. Use JWTs for stateless dist
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Content Security Policy](</en/security/content-security-policy.html>), [Key Management Systems](</en/security/key-management.html>)
 
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Content Security Policy](</en/security/content-security-policy.html>), [Key Management Systems](</en/security/key-management.html>)
+
+**See also:** [Certificate Management](</en/security/certificate-management.html>), [Container Image Security](</en/security/container-image-security.html>), [CORS Security](</en/security/cors-security.html>)
+
+**See also:** [Certificate Management](</en/security/certificate-management.html>), [Container Image Security](</en/security/container-image-security.html>), [CORS Security](</en/security/cors-security.html>)
+
+**See also:** [Certificate Management](</en/security/certificate-management.html>), [Container Image Security](</en/security/container-image-security.html>), [CORS Security](</en/security/cors-security.html>)

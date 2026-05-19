@@ -59,4 +59,4 @@ Consulting Leads| Clients from your content| $1,000-5,000/month
   
 **Bottom line:** YouTube for developers is a 6-12 month investment before meaningful income. Focus on tutorial + authority content, treat sponsorships (not AdSense) as your primary revenue goal, and use the channel as a funnel for higher-value products. See also: [Selling Online Courses](</en/sidehustle/create-online-course.html>) and [Social Media Monetization](</en/sidehustle/developer-social-media-monetization.html>).
 
-**See also:** [How to Start and Monetize a Developer Podcast in 2026](</en/sidehustle/developer-podcast-guide.html>), [Developer Sponsorship Guide 2026: GitHub Sponsors, Content Deals, and Corporate Backing](</en/sidehustle/developer-sponsorship-guide.html>), [How to Make Money with Chrome Extensions in 2026: Complete Guide](</en/sidehustle/chrome-extension-monetization.html>)
+**See also:** [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Developer Newsletter Monetization: From Side Project to Full-Time Income](</en/sidehustle/newsletter-monetization-guide.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>)

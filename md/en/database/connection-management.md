@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/connection-management.html
 
 # Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
 
-## Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
-### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
-#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
-#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
-#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
-#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
-#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
-#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
-#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
-#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
-#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
-#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
-#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
-#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
-#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-
 Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning 
 
 Every database connection consumes memory, file descriptors, and CPU. Connection management directly impacts database performance and application scalability. This article covers pooling strategies, popular poolers, and tuning guidelines. 
@@ -68,7 +38,7 @@ PgBouncer is a lightweight connection pooler for PostgreSQL. It runs as a separa
 
 Installation and Configuration 
 
-#### pgbouncer.ini
+## pgbouncer.ini
 
 [databases]
 
@@ -110,7 +80,7 @@ Connecting Through PgBouncer
 
 import psycopg2
 
-#### Connect to PgBouncer port, not PostgreSQL directly
+## Connect to PgBouncer port, not PostgreSQL directly
 
 conn = psycopg2.connect(
 
@@ -150,7 +120,7 @@ HikariCP is the most popular connection pool for Java applications. It manages c
 
 Spring Boot Configuration 
 
-#### application.yml
+## application.yml
 
 spring:
 
@@ -224,7 +194,7 @@ A 4-core machine with SSDs: `2 * 4 + 1 = 9` concurrent connections for optimal t
 
 Max Connections Tuning 
 
-#### postgresql.conf
+## postgresql.conf
 
 max_connections = 200
 
@@ -242,7 +212,7 @@ Common Pitfalls
 
 Connection Leaks 
 
-#### Bad: connection not returned to pool
+## Bad: connection not returned to pool
 
 def get_user(user_id):
 
@@ -254,11 +224,11 @@ cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
 
 result = cursor.fetchone()
 
-#### Missing: pool.putconn(conn)
+## Missing: pool.putconn(conn)
 
 return result
 
-#### Good: always use try/finally or context manager
+## Good: always use try/finally or context manager
 
 def get_user(user_id):
 
@@ -302,7 +272,7 @@ maximum-pool-size: 20
 
 connection-timeout: 5000 # 5 seconds max wait
 
-#### After 5 seconds, throw SQLException instead of hanging forever
+## After 5 seconds, throw SQLException instead of hanging forever
 
 Monitoring Connection Health 
 
@@ -359,3 +329,9 @@ Connection management is invisible when done correctly and catastrophic when don
 **See also:** [Connection Pooling: Tuning, Best Practices, and Pitfalls](</en/database/database-connection-pooling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
 
 **See also:** [Connection Pooling: Tuning, Best Practices, and Pitfalls](</en/database/database-connection-pooling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
+
+**See also:** [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
+
+**See also:** [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)

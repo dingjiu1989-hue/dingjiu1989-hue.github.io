@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/webpack-vs-vite.png",
       "datePublished": "2026-01-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1021",
+      "wordCount": "1042",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -110,47 +110,33 @@
       <h1 class="article-title">Webpack vs Vite</h1>
       <div class="article-meta">Published 2026-01-12 · Last active 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/webpack-vs-vite.png" alt="Webpack vs Vite" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Webpack vs Vite</h2>
-<h3>Webpack vs Vite</h3>
-<h4>Webpack vs Vite</h4>
-<h4>Webpack vs Vite</h4>
-<h4>Webpack vs Vite</h4>
-<h4>Webpack vs Vite</h4>
-<h4>Webpack vs Vite</h4>
-<h4>Webpack vs Vite</h4>
-<h4>Webpack vs Vite</h4>
-<h4>Webpack vs Vite</h4>
-<h4>Webpack vs Vite</h4>
-<h4>Webpack vs Vite</h4>
-<h4>Webpack vs Vite</h4>
-<h4>Webpack vs Vite</h4>
-<h4>Webpack vs Vite</h4>
-<h4>Webpack vs Vite</h4>
-<h4>Webpack vs Vite</h4>
-<p>The choice between Webpack and Vite has become one of the most consequential decisions in modern frontend development. Webpack has been the dominant bundler for years, but Vite's emergence has fundamentally changed expectations for development experience and build performance. This article compares both tools across key dimensions.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/webpack-vs-vite.png" alt="Webpack vs Vite" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Development Server Performance</h4>
+      <div class="article-body"><p>The choice between Webpack and Vite has become one of the most consequential decisions in modern frontend development. Webpack has been the dominant bundler for years, but Vite's emergence has fundamentally changed expectations for development experience and build performance. This article compares both tools across key dimensions.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/webpack-vs-vite.png" alt="Webpack vs Vite" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Development Server Performance</h2>
 <p>The most dramatic difference between Webpack and Vite is development server performance. Webpack bundles your entire application before serving it. For large projects, the initial build can take tens of seconds or minutes. Every code change triggers a rebuild, and while Webpack's Hot Module Replacement (HMR) is efficient, it still processes the changed module and its dependencies.</p>
 <p>Vite takes a fundamentally different approach. During development, Vite serves modules directly as native ES modules. The browser imports modules on demand, so there is no bundling step. HMR replaces modules in milliseconds because Vite only needs to invalidate the changed module and its direct imports. The performance advantage grows with project size—Vite's dev server remains fast regardless of how large the project becomes.</p>
-<h4>Configuration</h4>
+<h2>Configuration</h2>
 <p>Webpack configuration is notoriously complex. A simple project requires loaders for JavaScript, CSS, images, and fonts. TypeScript, JSX, CSS modules, and code splitting each need specific configuration. The ecosystem provides abstractions like create-react-app and Next.js that hide this complexity, but custom configurations are challenging.</p>
 <p>Vite emphasizes zero-configuration out of the box. It supports TypeScript, JSX, CSS modules, and asset handling with no configuration required. For most projects, the default configuration works well. When customization is needed, Vite's configuration is simpler and more intuitive than Webpack's.</p>
-<h4>Production Builds</h4>
+<h2>Production Builds</h2>
 <p>Vite uses Rollup for production builds, leveraging its efficient tree-shaking and code splitting. The result is typically smaller bundle sizes than Webpack, especially for projects that use ES modules. Vite's pre-configured production optimizations include CSS code splitting, automatic CSS vendor prefixing, and async chunk loading.</p>
 <p>Webpack's production builds are also highly optimized, with aggressive minification, scope hoisting, and tree-shaking. For projects deeply invested in the Webpack plugin ecosystem, the production build quality remains excellent. However, Vite's production builds are often faster and produce smaller output.</p>
-<h4>Plugin Ecosystem</h4>
+<h2>Plugin Ecosystem</h2>
 <p>Webpack has a mature plugin ecosystem accumulated over a decade. Thousands of plugins handle virtually every use case: HTML generation, CSS extraction, environment variable injection, bundle analysis, and more. This ecosystem is Webpack's strongest advantage.</p>
 <p>Vite's plugin ecosystem is growing rapidly. Vite plugins are compatible with Rollup plugins, giving access to a large existing ecosystem. The Vite plugin API is cleaner and more powerful than Webpack's, but some Webpack-specific plugins have no direct Vite equivalent.</p>
-<h4>Migration</h4>
+<h2>Migration</h2>
 <p>Migrating from Webpack to Vite depends on the project's complexity. Simple projects with standard configurations can migrate in hours. Projects with extensive custom Webpack plugins may require significant effort to find alternatives or implement custom solutions.</p>
 <p>The key migration steps include converting webpack.config.js to vite.config.js, migrating environment variable handling (Vite uses <code>import.meta.env</code> instead of <code>process.env</code>), updating asset imports to use Vite's conventions, and testing production builds for differences in output.</p>
-<h4>When to Choose Each</h4>
+<h2>When to Choose Each</h2>
 <p>Choose Webpack when your project has extensive custom Webpack configuration or plugins, when you are maintaining a legacy project that works well with Webpack, or when your team has deep Webpack expertise. Choose Vite for new projects, when development experience and build speed are priorities, or when you want simpler configuration.</p>
 <p>The industry trend strongly favors Vite for new projects. The developer experience improvement—instant server start, fast HMR, simpler configuration—is transformative. As Vite's production build quality and ecosystem continue to mature, it is becoming the default choice for modern web development.</p>
 <p><strong>See also:</strong> <a href="/en/tech/git-workflows.html">Git Workflows</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a>, <a href="/en/tech/api-versioning-rest-graphql.html">API Versioning Strategies: REST vs GraphQL Approaches</a>.</p>
 <p><strong>See also:</strong> <a href="/en/tech/git-workflows.html">Git Workflows</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/git-workflows.html">Git Workflows</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/git-workflows.html">Git Workflows</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/git-workflows.html">Git Workflows</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/git-workflows.html">Git Workflows</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/git-workflows.html">Git Workflows</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/git-workflows.html">Git Workflows</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/dockerfile-best-practices.html">Dockerfile Best Practices for Production</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/webpack-vs-vite-bundlers.html">Webpack vs Vite Comparison</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/dockerfile-best-practices.html">Dockerfile Best Practices for Production</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/webpack-vs-vite-bundlers.html">Webpack vs Vite Comparison</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/dockerfile-best-practices.html">Dockerfile Best Practices for Production</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/webpack-vs-vite-bundlers.html">Webpack vs Vite Comparison</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -162,7 +148,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/git-workflows.html" class="related-card">Git Workflows</a><a href="/en/tech/terraform-state-management.html" class="related-card">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a><a href="/en/tech/build-optimization.html" class="related-card">Build Optimization</a><a href="/en/tech/log-management.html" class="related-card">Log Management</a></div>
+      <div class="related-grid"><a href="/en/tech/git-workflows.html" class="related-card"><span class="related-card-title">Git Workflows</span><span class="related-card-desc">Compare Git workflows: trunk-based development, GitHub Flow, GitFlow, and monorepo strategies for di</span></a><a href="/en/tech/terraform-state-management.html" class="related-card"><span class="related-card-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</span><span class="related-card-desc">Deep dive into Terraform state management covering remote backends, state locking, migration strateg</span></a><a href="/en/tech/build-optimization.html" class="related-card"><span class="related-card-title">Build Optimization</span><span class="related-card-desc">Explore build optimization: caching, parallelism, incremental builds, distcc, and strategies for fas</span></a><a href="/en/tech/log-management.html" class="related-card"><span class="related-card-title">Log Management</span><span class="related-card-desc">Explore log management: collection, aggregation, storage, query strategies, and retention policies f</span></a><a href="/en/tech/rust-vs-go-practical.html" class="related-card"><span class="related-card-title">Rust vs Go: A Practical Comparison</span><span class="related-card-desc">Compare Rust and Go for web services, CLI tools, concurrency models, and deployment in real-world sc</span></a><a href="/en/tech/api-versioning-rest-graphql.html" class="related-card"><span class="related-card-title">API Versioning Strategies: REST vs GraphQL Approaches</span><span class="related-card-desc">Compare API versioning strategies for REST and GraphQL: URL versioning, header versioning, schema ev</span></a></div>
     </section>
     
   </div>

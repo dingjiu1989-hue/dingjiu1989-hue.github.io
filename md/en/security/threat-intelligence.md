@@ -8,41 +8,9 @@ url: https://dingjiu1989-hue.github.io/en/security/threat-intelligence.html
 
 # Threat Intelligence: Gathering and Applying Intel
 
-## Threat Intelligence: Gathering and Applying Intel
-
-### Threat Intelligence: Gathering and Applying Intel
-
-#### Threat Intelligence: Gathering and Applying Intel
-
-#### Threat Intelligence: Gathering and Applying Intel
-
-#### Threat Intelligence: Gathering and Applying Intel
-
-#### Threat Intelligence: Gathering and Applying Intel
-
-#### Threat Intelligence: Gathering and Applying Intel
-
-#### Threat Intelligence: Gathering and Applying Intel
-
-#### Threat Intelligence: Gathering and Applying Intel
-
-#### Threat Intelligence: Gathering and Applying Intel
-
-#### Threat Intelligence: Gathering and Applying Intel
-
-#### Threat Intelligence: Gathering and Applying Intel
-
-#### Threat Intelligence: Gathering and Applying Intel
-
-#### Threat Intelligence: Gathering and Applying Intel
-
-#### Threat Intelligence: Gathering and Applying Intel
-
-#### Threat Intelligence: Gathering and Applying Intel
-
 Threat intelligence is evidence-based knowledge about existing or emerging threats to an organization. It transforms raw data into actionable insights that help security teams prevent attacks, detect intrusions faster, and respond more effectively. This article covers the sources, frameworks, and tools for operational threat intelligence.
 
-#### The Intelligence Lifecycle
+## The Intelligence Lifecycle
 
 Threat intelligence follows a structured lifecycle:
 
@@ -60,11 +28,11 @@ Threat intelligence follows a structured lifecycle:
 
 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Feedback** : Refine requirements and collection based on what was useful.
 
-#### Open Source Intelligence (OSINT)
+## Open Source Intelligence (OSINT)
 
 OSINT is intelligence derived from publicly available sources. It is free, accessible, and provides valuable context about threats.
 
-#### OSINT Sources
+## OSINT Sources
 
   * **Shodan** : Search engine for internet-connected devices. Find exposed databases, industrial control systems, and vulnerable services.
 
@@ -81,7 +49,7 @@ OSINT is intelligence derived from publicly available sources. It is free, acces
 
 
 
-#### OSINT example: Find exposed S3 buckets
+## OSINT example: Find exposed S3 buckets
 
 curl -s "https://censys.io/api/v1/search/ipv4" \
 
@@ -91,17 +59,17 @@ curl -s "https://censys.io/api/v1/search/ipv4" \
 
 -d '{"query": "services.service_name: S3"}'
 
-#### Check if a domain appears in breach data
+## Check if a domain appears in breach data
 
 curl -s "https://haveibeenpwned.com/api/v3/breacheddomain/example.com" \
 
 -H "hibp-api-key: $API_KEY"
 
-#### Threat Feeds
+## Threat Feeds
 
 Threat feeds provide structured data about known malicious indicators. Feeds range from free community lists to premium commercial services.
 
-#### Types of Feeds
+## Types of Feeds
 
   * **IP reputation feeds** : Lists of known malicious IP addresses (spam sources, C2 servers, scanners).
 
@@ -116,7 +84,7 @@ Threat feeds provide structured data about known malicious indicators. Feeds ran
 
 
 
-#### Popular Feeds
+## Popular Feeds
 
   * **AlienVault OTX** : Community-driven threat feed with thousands of pulses. Free API access.
 
@@ -129,7 +97,7 @@ Threat feeds provide structured data about known malicious indicators. Feeds ran
 
 
 
-#### Python: Consuming AlienVault OTX feed
+## Python: Consuming AlienVault OTX feed
 
 import requests
 
@@ -137,7 +105,7 @@ OTX_API_KEY = "your-api-key"
 
 headers = {"X-OTX-API-KEY": OTX_API_KEY}
 
-#### Get latest pulses
+## Get latest pulses
 
 response = requests.get(
 
@@ -155,11 +123,11 @@ for indicator in pulse["indicators"][:3]:
 
 print(f" {indicator['type']}: {indicator['indicator']}")
 
-#### MITRE ATT&CK; Framework
+## MITRE ATT&CK; Framework
 
 MITRE ATT&CK; is a globally accessible knowledge base of adversary tactics and techniques based on real-world observations. It provides a common language for describing attacker behavior.
 
-#### ATT&CK; Matrix
+## ATT&CK; Matrix
 
 The framework organizes attacks into tactics (the "why") and techniques (the "how"):
 
@@ -188,11 +156,11 @@ The framework organizes attacks into tactics (the "why") and techniques (the "ho
 
 
 
-#### Using ATT&CK; for Threat Intelligence
+## Using ATT&CK; for Threat Intelligence
 
 Map observed indicators and behaviors to ATT&CK; techniques to understand attacker objectives and capabilities.
 
-#### Threat actor profile using ATT&CK;
+## Threat actor profile using ATT&CK;
 
 threat_actor: "APT-Example"
 
@@ -214,11 +182,11 @@ techniques_observed:
 
 Mapping to ATT&CK; helps security teams prioritize defenses and detection rules against the techniques most likely to be used against them.
 
-#### Indicators of Compromise (IoC) Sharing
+## Indicators of Compromise (IoC) Sharing
 
 IoC sharing enables organizations to benefit from each other's detection experiences. Effective sharing requires standardized formats and secure distribution.
 
-#### IoC Types
+## IoC Types
 
   * **Atomic indicators** : Cannot be broken down (IP address, email address, domain name).
 
@@ -229,7 +197,7 @@ IoC sharing enables organizations to benefit from each other's detection experie
 
 
 
-#### Sharing Platforms
+## Sharing Platforms
 
   * **MISP** : Self-hosted platform for IoC management and sharing. Supports automatic correlation and feed generation.
 
@@ -238,11 +206,11 @@ IoC sharing enables organizations to benefit from each other's detection experie
 
 
 
-#### STIX and TAXII
+## STIX and TAXII
 
 Structured Threat Information Expression (STIX) is a language for describing threat information. Trusted Automated Exchange of Intelligence Information (TAXII) is a protocol for exchanging STIX data.
 
-#### STIX Objects
+## STIX Objects
 
 STIX 2.1 defines domain objects including:
 
@@ -287,7 +255,7 @@ STIX 2.1 defines domain objects including:
 
 }
 
-#### TAXII Endpoints
+## TAXII Endpoints
 
 TAXII defines two service types:
 
@@ -298,7 +266,7 @@ TAXII defines two service types:
 
 
 
-#### Fetch indicators from a TAXII collection
+## Fetch indicators from a TAXII collection
 
 curl -s -H "Accept: application/taxii+json" \
 
@@ -306,11 +274,11 @@ curl -s -H "Accept: application/taxii+json" \
 
 https://taxii.example.com/api/v2/collections/collection-id/objects/
 
-#### Applying Threat Intelligence
+## Applying Threat Intelligence
 
 Operationalizing threat intelligence is the hardest part. Raw intelligence without action is just noise.
 
-#### Detection Engineering
+## Detection Engineering
 
 Create detection rules based on intel. If a threat feed shows a new C2 IP range, add a firewall block rule. If a campaign uses a specific file hash, create a YARA rule.
 
@@ -338,7 +306,7 @@ condition:
 
 }
 
-#### Risk Prioritization
+## Risk Prioritization
 
 Not all intelligence is equally relevant. Prioritize based on:
 
@@ -353,7 +321,7 @@ Not all intelligence is equally relevant. Prioritize based on:
 
 
 
-#### Conclusion
+## Conclusion
 
 Threat intelligence turns raw data into defensive action. Invest in OSINT collection, subscribe to relevant threat feeds, map observations to the MITRE ATT&CK; framework, and share intelligence using STIX/TAXII standards. Most importantly, operationalize the intelligence — a feed that nobody acts on has zero security value.
 
@@ -368,3 +336,9 @@ Threat intelligence turns raw data into defensive action. Invest in OSINT collec
 **See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>)
 
 **See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>)
+
+**See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
+
+**See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
+
+**See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)

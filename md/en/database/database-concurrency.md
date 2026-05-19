@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/database-concurrency.html
 
 # Database Concurrency Control: MVCC, Locking, and Deadlocks
 
-## Database Concurrency Control: MVCC, Locking, and Deadlocks
-
-### Database Concurrency Control: MVCC, Locking, and Deadlocks
-
-#### Database Concurrency Control: MVCC, Locking, and Deadlocks
-
-#### Database Concurrency Control: MVCC, Locking, and Deadlocks
-
-#### Database Concurrency Control: MVCC, Locking, and Deadlocks
-
-#### Database Concurrency Control: MVCC, Locking, and Deadlocks
-
-#### Database Concurrency Control: MVCC, Locking, and Deadlocks
-
-#### Database Concurrency Control: MVCC, Locking, and Deadlocks
-
-#### Database Concurrency Control: MVCC, Locking, and Deadlocks
-
-#### Database Concurrency Control: MVCC, Locking, and Deadlocks
-
-#### Database Concurrency Control: MVCC, Locking, and Deadlocks
-
-#### Database Concurrency Control: MVCC, Locking, and Deadlocks
-
-#### Database Concurrency Control: MVCC, Locking, and Deadlocks
-
-#### Database Concurrency Control: MVCC, Locking, and Deadlocks
-
-#### Database Concurrency Control: MVCC, Locking, and Deadlocks
-
 Database Concurrency Control: MVCC, Locking, and Deadlocks 
 
 Modern databases must handle thousands of concurrent transactions reading and writing the same rows. Concurrency control mechanisms ensure correctness while maximizing throughput. PostgreSQL's approach is built on Multi-Version Concurrency Control (MVCC). 
@@ -224,3 +194,9 @@ PostgreSQL's MVCC provides the foundation: readers and writers coexist without b
 **See also:** [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Database Locking: Row Locks, Table Locks, and Deadlock Prevention](</en/database/database-locking-mechanisms.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
 
 **See also:** [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Database Locking: Row Locks, Table Locks, and Deadlock Prevention](</en/database/database-locking-mechanisms.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)

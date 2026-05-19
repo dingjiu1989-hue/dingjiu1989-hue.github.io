@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/vector-search-optimization.ht
 
 # Vector Search Optimization Techniques
 
-## Vector Search Optimization Techniques
-
-### Vector Search Optimization Techniques
-
-#### Vector Search Optimization Techniques
-
-#### Vector Search Optimization Techniques
-
-#### Vector Search Optimization Techniques
-
-#### Vector Search Optimization Techniques
-
-#### Vector Search Optimization Techniques
-
-#### Vector Search Optimization Techniques
-
-#### Vector Search Optimization Techniques
-
-#### Vector Search Optimization Techniques
-
-#### Vector Search Optimization Techniques
-
-#### Vector Search Optimization Techniques
-
-#### Vector Search Optimization Techniques
-
-#### Vector Search Optimization Techniques
-
-#### Vector Search Optimization Techniques
-
 Vector Search Fundamentals 
 
 Vector search finds similar items using embedding vectors. It powers semantic search, recommendation systems, and RAG applications. 
@@ -109,3 +79,9 @@ Tune HNSW parameters for your data distribution. Use quantization to reduce memo
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
 
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
+
+**See also:** [Database Indexing Strategies](</en/database/database-indexing.html>), [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>)
+
+**See also:** [Database Indexing Strategies](</en/database/database-indexing.html>), [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>)
+
+**See also:** [Database Indexing Strategies](</en/database/database-indexing.html>), [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>)

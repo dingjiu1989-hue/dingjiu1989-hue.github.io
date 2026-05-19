@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-query-profiling.png",
       "datePublished": "2026-04-15",
       "dateModified": "2026-05-12",
-      "wordCount": "604",
+      "wordCount": "525",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,34 +99,22 @@
       <h1 class="article-title">Database Query Profiling: Finding and Fixing Performance Bottlenecks</h1>
       <div class="article-meta">Published 2026-04-15 · Last active 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-query-profiling.png" alt="Database Query Profiling: Finding and Fixing Performance Bottlenecks" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h2>
-<h3>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h3>
-<h4>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h4>
-<h4>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h4>
-<h4>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h4>
-<h4>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h4>
-<h4>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h4>
-<h4>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h4>
-<h4>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h4>
-<h4>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h4>
-<h4>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h4>
-<h4>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h4>
-<h4>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h4>
-<h4>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h4>
-<h4>Database Query Profiling: Finding and Fixing Performance Bottlenecks</h4>
-<p>Query profiling identifies why a query is slow. Rather than guessing, profiling measures where time is spent: CPU, I/O, locks, or network. This data guides targeted optimization.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-query-profiling.png" alt="Database Query Profiling: Finding and Fixing Performance Bottlenecks" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Profiling Tools</h4>
+      <div class="article-body"><p>Query profiling identifies why a query is slow. Rather than guessing, profiling measures where time is spent: CPU, I/O, locks, or network. This data guides targeted optimization.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-query-profiling.png" alt="Database Query Profiling: Finding and Fixing Performance Bottlenecks" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Profiling Tools</h2>
 <p>PostgreSQL: EXPLAIN ANALYZE BUFFERS shows execution plan with actual timing and buffer access. pg_stat_statements tracks query statistics. auto_explain logs slow queries automatically. pgBadger analyzes PostgreSQL logs for query performance patterns.</p>
 <p>MySQL: EXPLAIN ANALYZE (MySQL 8.0.18+) shows execution plan. performance_schema tracks query execution statistics. sys schema provides query performance summaries. pt-query-digest analyzes slow query logs.</p>
-<h4>Key Metrics</h4>
+<h2>Key Metrics</h2>
 <p>Execution time: total time and time per execution. Buffer usage: shared hit reveals cache efficiency. Rows examined vs returned: high examined-to-returned ratio suggests missing indexes. Wait events: what the query is waiting for (I/O, locks, CPU).</p>
-<h4>Optimization Workflow</h4>
+<h2>Optimization Workflow</h2>
 <p>Identify slow queries via monitoring. Profile with EXPLAIN ANALYZE. Check for sequential scans on large tables. Verify index usage. Examine join strategies. Review sort operations. Test the fix. Profile again to confirm improvement. Monitor in production.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/orm-performance.html">ORM Performance</a>.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/orm-performance.html">ORM Performance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/orm-performance.html">ORM Performance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/orm-performance.html">ORM Performance</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/orm-performance.html">ORM Performance</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/orm-performance.html">ORM Performance</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/orm-performance.html">ORM Performance</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/orm-performance.html">ORM Performance</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -138,7 +126,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-slow-query-optimization.html" class="related-card">Slow Query Optimization: Analysis, Indexing, and Rewriting</a><a href="/en/database/database-slow-query-fix.html" class="related-card">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a><a href="/en/database/orm-performance.html" class="related-card">ORM Performance</a><a href="/en/database/composite-indexes.html" class="related-card">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a></div>
+      <div class="related-grid"><a href="/en/database/database-slow-query-optimization.html" class="related-card"><span class="related-card-title">Slow Query Optimization: Analysis, Indexing, and Rewriting</span><span class="related-card-desc">Systematic approach to finding and fixing slow database queries: EXPLAIN plans, index strategies, an</span></a><a href="/en/database/database-slow-query-fix.html" class="related-card"><span class="related-card-title">Slow Query Troubleshooting: Identification, Profiling, and Optimization</span><span class="related-card-desc">Learn systematic slow query troubleshooting: identifying problematic queries, profiling with EXPLAIN</span></a><a href="/en/database/orm-performance.html" class="related-card"><span class="related-card-title">ORM Performance</span><span class="related-card-desc">Optimizing ORM performance by fixing N+1 queries, managing lazy loading, and tuning query generation</span></a><a href="/en/database/composite-indexes.html" class="related-card"><span class="related-card-title">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</span><span class="related-card-desc">Master composite indexes in PostgreSQL: column order optimization, covering indexes, partial indexes</span></a><a href="/en/database/query-optimization-explain.html" class="related-card"><span class="related-card-title">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</span><span class="related-card-desc">Master PostgreSQL EXPLAIN ANALYZE: read query plans, understand cost estimation, compare scan types,</span></a><a href="/en/database/database-columnar-storage.html" class="related-card"><span class="related-card-title">Columnar Storage: Compression, Encoding, and Analytical Performance</span><span class="related-card-desc">Understand columnar storage formats: row vs column orientation, encoding techniques, and analytical </span></a></div>
     </section>
     
   </div>

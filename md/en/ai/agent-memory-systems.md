@@ -8,43 +8,11 @@ url: https://dingjiu1989-hue.github.io/en/ai/agent-memory-systems.html
 
 # Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
 
-## Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
-
-#### Introduction
+## Introduction
 
 Memory is what separates stateless LLM calls from true autonomous agents. Without memory, an agent cannot learn from past interactions, maintain context across sessions, or build a model of the world. Drawing from cognitive science, agent memory can be structured into four types: short-term (working memory), long-term (persistent storage), episodic (specific experiences), and semantic (general knowledge).
 
-#### Short-Term Memory (Working Memory)
+## Short-Term Memory (Working Memory)
 
 Short-term memory holds the current conversation context and immediate state:
 
@@ -68,7 +36,7 @@ message = {"role": role, "content": content}
 
 estimated_tokens = len(content.split()) * 1.3
 
-#### Evict oldest messages when over token limit
+## Evict oldest messages when over token limit
 
 while self.current_tokens + estimated_tokens > self.max_tokens:
 
@@ -100,7 +68,7 @@ return summary
 
 return ""
 
-#### Long-Term Memory
+## Long-Term Memory
 
 Long-term memory persists across sessions and is typically backed by a vector store:
 
@@ -200,11 +168,11 @@ def consolidate(self, llm_fn):
 
 all_memories = self.vector_store.get()
 
-#### Group similar memories and create consolidated summaries
+## Group similar memories and create consolidated summaries
 
-#### This runs as a background task
+## This runs as a background task
 
-#### Episodic Memory
+## Episodic Memory
 
 Episodic memory stores specific experiences: what happened, when, and what the outcome was:
 
@@ -284,7 +252,7 @@ emb_b = embedding_fn(task_b)
 
 return cosine_similarity(emb_a, emb_b)
 
-#### Semantic Memory
+## Semantic Memory
 
 Semantic memory stores factual knowledge extracted from experiences:
 
@@ -354,7 +322,7 @@ for fact in facts:
 
 self.add_fact(fact["subject"], fact["predicate"], fact["object"], confidence=0.5)
 
-#### Integrated Agent Memory
+## Integrated Agent Memory
 
 Bring all four types together in a unified memory system:
 
@@ -374,13 +342,13 @@ def build_prompt_context(self, query: str) -> str:
 
 context_parts = []
 
-#### Recent conversation
+## Recent conversation
 
 context_parts.append("=== Recent Context ===\n")
 
 context_parts.extend(self.short_term.get_context())
 
-#### Relevant long-term memories
+## Relevant long-term memories
 
 memories = self.long_term.recall(query, k=3)
 
@@ -390,7 +358,7 @@ context_parts.append("\n=== Related Memories ===\n")
 
 context_parts.extend([m["content"] for m in memories])
 
-#### Similar past episodes
+## Similar past episodes
 
 episodes = self.episodic.retrieve_similar_episodes(query, k=2)
 
@@ -402,7 +370,7 @@ for ep in episodes:
 
 context_parts.append(f"Task: {ep.task}, Outcome: {ep.outcome}")
 
-#### Relevant semantic facts
+## Relevant semantic facts
 
 entities = extract_entities(query)
 
@@ -418,7 +386,7 @@ context_parts.extend(facts)
 
 return "\n".join(context_parts)
 
-#### Conclusion
+## Conclusion
 
 Agent memory systems mirror human cognitive architecture. Short-term memory maintains immediate conversation context with token-aware eviction. Long-term memory persistently stores important information with vector-based retrieval. Episodic memory records specific experiences for future reference. Semantic memory extracts and stores general knowledge from experiences. An integrated memory system combines all four types, giving agents both the immediate context and the accumulated wisdom needed for complex, long-running tasks.
 
@@ -433,3 +401,9 @@ Agent memory systems mirror human cognitive architecture. Short-term memory main
 **See also:** [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>)
 
 **See also:** [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>)
+
+**See also:** [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)
+
+**See also:** [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)
+
+**See also:** [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)

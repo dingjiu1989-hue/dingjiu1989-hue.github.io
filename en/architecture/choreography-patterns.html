@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/choreography-patterns.png",
       "datePublished": "2026-05-02",
       "dateModified": "2026-05-19",
-      "wordCount": "1146",
+      "wordCount": "1135",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,22 +96,7 @@
       <h1 class="article-title">Choreography Patterns</h1>
       <div class="article-meta">Published 2026-05-02 · Last active 2026-05-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/choreography-patterns.png" alt="Choreography Patterns" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Choreography Patterns</h2>
-<h3>Choreography Patterns</h3>
-<h4>Choreography Patterns</h4>
-<h4>Choreography Patterns</h4>
-<h4>Choreography Patterns</h4>
-<h4>Choreography Patterns</h4>
-<h4>Choreography Patterns</h4>
-<h4>Choreography Patterns</h4>
-<h4>Choreography Patterns</h4>
-<h4>Choreography Patterns</h4>
-<h4>Choreography Patterns</h4>
-<h4>Choreography Patterns</h4>
-<h4>Choreography Patterns</h4>
-<h4>Choreography Patterns</h4>
-<h4>Choreography Patterns</h4>
-<p>Choreography is an architectural pattern for coordinating distributed workflows without a central coordinator. Unlike orchestration, where a central service directs all participants, choreography uses events to achieve coordination—each service performs its task and emits events that trigger the next steps. This decentralized approach offers scalability and loose coupling but introduces challenges in observability and error handling. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/choreography-patterns.png" alt="Choreography Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Choreography is an architectural pattern for coordinating distributed workflows without a central coordinator. Unlike orchestration, where a central service directs all participants, choreography uses events to achieve coordination—each service performs its task and emits events that trigger the next steps. This decentralized approach offers scalability and loose coupling but introduces challenges in observability and error handling. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/choreography-patterns.png" alt="Choreography Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>How Choreography Works </p>
 <p>In a choreographed workflow, there is no central controller. Each service knows its role and reacts to relevant events. When a service completes its work, it emits an event that other services consume to trigger their own work. The workflow emerges from the interaction of independent services. </p>
 <p>Consider an order fulfillment flow. The order service places an order and emits "Order Placed". The payment service receives this event, processes payment, and emits "Payment Received". The inventory service receives "Payment Received", reserves inventory, and emits "Inventory Reserved". The shipping service receives this and creates a shipment. Each service acts independently based on events. </p>
@@ -136,7 +121,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -148,7 +136,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/saga-choreography.html" class="related-card">Saga Choreography Pattern</a><a href="/en/architecture/event-collaboration.html" class="related-card">Event Collaboration: Choreography vs Orchestration</a><a href="/en/architecture/event-driven-arch.html" class="related-card">Event-Driven Architecture</a><a href="/en/architecture/orchestration-patterns.html" class="related-card">Orchestration Patterns</a></div>
+      <div class="related-grid"><a href="/en/architecture/saga-choreography.html" class="related-card"><span class="related-card-title">Saga Choreography Pattern</span><span class="related-card-desc">Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose c</span></a><a href="/en/architecture/event-collaboration.html" class="related-card"><span class="related-card-title">Event Collaboration: Choreography vs Orchestration</span><span class="related-card-desc">Event-driven collaboration patterns, saga execution, choreography vs orchestration, error handling i</span></a><a href="/en/architecture/event-driven-arch.html" class="related-card"><span class="related-card-title">Event-Driven Architecture</span><span class="related-card-desc">Explore event-driven architecture: event bus, event schema management, versioning, and production pa</span></a><a href="/en/architecture/orchestration-patterns.html" class="related-card"><span class="related-card-title">Orchestration Patterns</span><span class="related-card-desc">Explore orchestration patterns: workflow engines, Temporal, state machines, and centralized workflow</span></a><a href="/en/architecture/asynchronous-communication.html" class="related-card"><span class="related-card-title">Asynchronous Communication in Distributed Systems</span><span class="related-card-desc">Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and pattern</span></a><a href="/en/architecture/event-storming.html" class="related-card"><span class="related-card-title">Event Storming</span><span class="related-card-desc">Learn event storming: big picture, process modeling, and design workshop techniques for domain explo</span></a></div>
     </section>
     
   </div>

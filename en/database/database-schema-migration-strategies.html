@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-schema-migration-strategies.png",
       "datePublished": "2026-04-16",
       "dateModified": "2026-04-28",
-      "wordCount": "924",
+      "wordCount": "801",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,41 +99,29 @@
       <h1 class="article-title">Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h1>
       <div class="article-meta">Published 2026-04-16 · Last active 2026-04-28 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-schema-migration-strategies.png" alt="Database Schema Migration: Version Control, Rollback, and Zero-Downtime" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h2>
-<h3>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h3>
-<h4>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h4>
-<h4>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h4>
-<h4>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h4>
-<h4>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h4>
-<h4>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h4>
-<h4>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h4>
-<h4>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h4>
-<h4>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h4>
-<h4>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h4>
-<h4>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h4>
-<h4>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h4>
-<h4>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h4>
-<h4>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h4>
-<p>Database schema changes in production require careful planning. Unlike application code, database changes are stateful—they modify existing data and structures. A bad migration can cause downtime, data loss, or performance degradation.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-schema-migration-strategies.png" alt="Database Schema Migration: Version Control, Rollback, and Zero-Downtime" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h4>Version Control for Schema</h4>
+      <div class="article-body"><p>Database schema changes in production require careful planning. Unlike application code, database changes are stateful—they modify existing data and structures. A bad migration can cause downtime, data loss, or performance degradation.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-schema-migration-strategies.png" alt="Database Schema Migration: Version Control, Rollback, and Zero-Downtime" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Version Control for Schema</h2>
 <p>Treat database schemas as code. Every migration is a file in version control. Use a migration tool (Flyway, Liquibase, Alembic, Prisma Migrate) that tracks which migrations have been applied. The migration tool maintains a tracking table in the database.</p>
 <p>Migration naming convention: use timestamps or sequential numbers: 20260512_create_orders_table.sql. Each migration should be additive when possible—adding tables, columns, and indexes is easier to reverse than removing them.</p>
-<h4>Migration Patterns</h4>
+<h2>Migration Patterns</h2>
 <p>Expand-migrate-contract is the standard pattern for zero-downtime migrations. Phase 1 (expand): add new columns, tables, and indexes without removing old ones. Deploy application code that writes to both old and new structures. Phase 2 (migrate): backfill new columns with data from old columns. Run data validation. Phase 3 (contract): remove old columns and tables after verifying new structures work.</p>
 <p>Backward-compatible migrations are safe to deploy at any time. Adding a nullable column is backward-compatible. Adding a column with NOT NULL requires a default value. Renaming a column requires a multi-phase migration—add the new name, dual-write, backfill, then remove the old name.</p>
-<h4>Rollback Planning</h4>
+<h2>Rollback Planning</h2>
 <p>Every migration needs a rollback script. Test rollbacks before production deployment—they are harder to get right than forward migrations. Rollback of data migrations (backfilling, transformation) requires extra care because data may have changed since the forward migration.</p>
 <p>Flyway supports undo migrations with naming convention. Liquibase supports rollback commands. Alembic can generate downgrade scripts. Test the complete forward-and-rollback cycle in a staging environment.</p>
-<h4>Performance Considerations</h4>
+<h2>Performance Considerations</h2>
 <p>Large migrations lock tables. Adding a column with a default value locks the table in PostgreSQL—it rewrites the table. Adding a CHECK or NOT NULL constraint requires a full table scan. Use pg_repack or pt-online-schema-change for zero-downtime schema changes on large tables.</p>
 <p>Batch data migrations: backfill 1000-10000 rows per transaction. Monitor replication lag. Pause if lag exceeds threshold. Set statement_timeout to prevent runaway queries. Run during low-traffic periods.</p>
-<h4>Production Checklist</h4>
+<h2>Production Checklist</h2>
 <p>Review migration SQL for locking behavior. Check disk space—ALTER TABLE can double table size temporarily. Run migration on a replica first. Have a rollback plan documented. Test on a staging database with production-scale data. Monitor query performance after migration. Set up rollback alerting.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-migration-strategies.html">Database Migration Strategies</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-strategies.html">Database Migration Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-strategies.html">Database Migration Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-strategies.html">Database Migration Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-strategies.html">Database Migration Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-strategies.html">Database Migration Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-strategies.html">Database Migration Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-strategies.html">Database Migration Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-scalability.html">Database Scalability</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-scalability.html">Database Scalability</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-scalability.html">Database Scalability</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -145,7 +133,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-migration-version-control.html" class="related-card">Database Migration Version Control Strategies</a><a href="/en/database/database-migration-strategies.html" class="related-card">Database Migration Strategies</a><a href="/en/database/database-migration-tools.html" class="related-card">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a><a href="/en/database/database-capacity-planning.html" class="related-card">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></div>
+      <div class="related-grid"><a href="/en/database/database-migration-version-control.html" class="related-card"><span class="related-card-title">Database Migration Version Control Strategies</span><span class="related-card-desc">Best practices for version-controlling database schema migrations across development, staging, and p</span></a><a href="/en/database/database-migration-strategies.html" class="related-card"><span class="related-card-title">Database Migration Strategies</span><span class="related-card-desc">Zero-downtime database migration strategies with rollback planning, testing, and CI/CD integration.</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="related-card-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="related-card-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategi</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="related-card-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="related-card-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monit</span></a><a href="/en/database/schema-design.html" class="related-card"><span class="related-card-title">Schema Design Patterns: Normalization, Denormalization, Naming Conventions</span><span class="related-card-desc">Explore database schema design patterns: normalization vs denormalization, naming conventions, times</span></a><a href="/en/database/database-design-patterns.html" class="related-card"><span class="related-card-title">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</span><span class="related-card-desc">Explore database design patterns for application development: Repository pattern, Unit of Work, Quer</span></a></div>
     </section>
     
   </div>

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/incident-management.png",
       "datePublished": "2026-01-02",
       "dateModified": "2026-05-13",
-      "wordCount": "1518",
+      "wordCount": "1400",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -99,47 +99,30 @@
       <h1 class="article-title">Incident Management: Severity Levels, Response Process, and Postmortems</h1>
       <div class="article-meta">Published 2026-01-02 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/incident-management.png" alt="Incident Management: Severity Levels, Response Process, and Postmortems" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Incident Management: Severity Levels, Response Process, and Postmortems</h2>
-<h3>Incident Management: Severity Levels, Response Process, and Postmortems</h3>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Incident Management: Severity Levels, Response Process, and Postmortems</h4>
-<h4>Introduction</h4>
+      <div class="article-body"><h2>Introduction</h2>
 <p>Incident management is the practice of identifying, responding to, and learning from service disruptions. Effective incident management reduces downtime, protects customer trust, and prevents repeated failures. Despite its importance, many organizations have ad-hoc processes that lead to delayed responses, poor communication, and unresolved root causes.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/incident-management.png" alt="Incident Management: Severity Levels, Response Process, and Postmortems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>This article covers incident severity levels, response processes, communication templates, and blameless postmortems.</p>
-<h4>Severity Levels</h4>
+<h2>Severity Levels</h2>
 <p>Classifying incidents by severity standardizes response expectations. The common four-tier model maps to the level of customer impact:</p>
 <p>SEV1 (Critical): Complete service outage affecting all users. Response time under 5 minutes. Requires immediate escalation, executive notification, and all-hands-on-deck response. Examples: entire application unavailable, data loss, security breach.</p>
 <p>SEV2 (High): Partial outage or significant degradation affecting a subset of users. Response time under 15 minutes. Requires the on-call team plus engineering lead. Examples: one feature unavailable, elevated error rates above 5%, slow response times.</p>
 <p>SEV3 (Medium): Minor impact with workaround available. Response time within one hour. Standard issue handling with next-business-day resolution. Examples: cosmetic UI bug, non-critical feature not loading, minor performance degradation.</p>
 <p>SEV4 (Low): No customer impact but needs attention. Response time within one week. Normal ticket queue handling. Examples: outdated documentation, minor logging improvements, technical debt tracking.</p>
 <p>Clear severity definitions prevent ambiguity during stressful incidents. Teams should document examples specific to their service and review classifications during postmortems.</p>
-<h4>Incident Response Process</h4>
+<h2>Incident Response Process</h2>
 <p>The incident response process follows a predictable lifecycle: detection, declaration, response, mitigation, resolution, and follow-up.</p>
 <p>Detection comes from monitoring alerts, customer reports, or manual observation. Automated detection is strongly preferred. Alerts should include relevant context: affected service, metric threshold breached, time duration, and related recent changes.</p>
 <p>Declaration starts the incident timer. Anyone should be empowered to declare an incident without managerial approval. The incident commander role is assigned immediately — this person coordinates response, delegates tasks, and manages communication. They should not be debugging.</p>
 <p>Response involves triaging the incident to understand scope, impact, and potential causes. Roles rotate as needed: the incident commander remains fixed, while subject matter experts cycle in as needed to investigate specific areas.</p>
 <p>Mitigation takes priority over root cause diagnosis. Rolling back a recent deployment, redirecting traffic, or scaling up capacity often resolves incidents faster than identifying the specific bug. The goal is restoring service first.</p>
 <p>Resolution confirms the fix is working and monitoring shows recovery. The incident commander declares the incident resolved and initiates the follow-up phase.</p>
-<h4>Communication Templates</h4>
+<h2>Communication Templates</h2>
 <p>Pre-defined communication templates ensure consistent, timely updates during incidents.</p>
 <p>Initial notification: "We are investigating a potential issue affecting [service]. Users may experience [symptoms]. We will provide updates every [X] minutes."</p>
 <p>Update format: "Status: [Investigating/Identified/Mitigating/Resolved]. Affected: [scope]. Current action: [what teams are doing]. Next update: [time]."</p>
 <p>Resolution notice: "The issue affecting [service] has been resolved as of [time]. Root cause was [brief description]. A full postmortem will be published within [timeframe by policy]. We apologize for the impact."</p>
 <p>Status pages (hundreds of people may watch these), internal Slack channels, and executive summaries all need tailored versions of these templates.</p>
-<h4>Blameless Postmortems</h4>
+<h2>Blameless Postmortems</h2>
 <p>The postmortem is the most important incident management practice. A blameless postmortem focuses on what systemic failures allowed the incident to occur, not who made a mistake. The goal is improving systems, not assigning fault.</p>
 <p>A good postmortem includes:</p>
 <ul>
@@ -161,13 +144,16 @@
 </ul>
 <p>Blameless culture requires organizational commitment. Executives must model it by accepting systemic explanations. Teams must feel safe admitting mistakes without retribution.</p>
 <p>Action items should be prioritized based on risk reduction. Not every finding requires immediate fixes. Track action items and verify completion in subsequent postmortems to close the loop.</p>
-<h4>Conclusion</h4>
+<h2>Conclusion</h2>
 <p>Incident management is a discipline requiring preparation, practice, and continuous improvement. Severity classification standardizes response expectations. Clear processes ensure efficient mitigation. Communication templates maintain stakeholder confidence. Blameless postmortems transform failures into learning opportunities. Organizations that invest in these practices recover faster, reduce incident frequency, and build stronger engineering cultures.</p>
 <p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/nodejs-performance.html">Node.js Performance Optimization Guide</a>.</p>
 <p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/nodejs-performance.html">Node.js Performance Optimization Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/nodejs-performance.html">Node.js Performance Optimization Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/nodejs-performance.html">Node.js Performance Optimization Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -179,7 +165,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/on-call-best-practices.html" class="related-card">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a><a href="/en/tech/elk-stack-setup.html" class="related-card">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a><a href="/en/tech/ansible-automation.html" class="related-card">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a><a href="/en/tech/azure-networking.html" class="related-card">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a></div>
+      <div class="related-grid"><a href="/en/tech/on-call-best-practices.html" class="related-card"><span class="related-card-title">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</span><span class="related-card-desc">Technical guide to on-call practices covering rotation models, escalation policies, runbook creation</span></a><a href="/en/tech/elk-stack-setup.html" class="related-card"><span class="related-card-title">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</span><span class="related-card-desc">Comprehensive guide to ELK Stack covering Elasticsearch cluster setup, Logstash pipeline configurati</span></a><a href="/en/tech/ansible-automation.html" class="related-card"><span class="related-card-title">Ansible Automation: Playbooks, Roles, Inventory, and Vault</span><span class="related-card-desc">Deep dive into Ansible automation covering playbooks, roles, inventory management, Ansible Vault, id</span></a><a href="/en/tech/azure-networking.html" class="related-card"><span class="related-card-title">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</span><span class="related-card-desc">Comprehensive guide to Azure networking covering Virtual Networks, VNet peering, Azure Firewall, Loa</span></a><a href="/en/tech/capacity-planning-cloud.html" class="related-card"><span class="related-card-title">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</span><span class="related-card-desc">Technical exploration of cloud capacity planning covering auto-scaling strategies, reserved and spot</span></a><a href="/en/tech/docker-networking.html" class="related-card"><span class="related-card-title">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</span><span class="related-card-desc">In-depth guide to Docker networking covering bridge networks, overlay networking for Swarm, host mod</span></a></div>
     </section>
     
   </div>

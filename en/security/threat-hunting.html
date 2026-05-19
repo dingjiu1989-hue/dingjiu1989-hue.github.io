@@ -99,22 +99,7 @@
       <h1 class="article-title">Threat Hunting</h1>
       <div class="article-meta">Published 2026-03-14 · Last active 2026-04-22 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-hunting.png" alt="Threat Hunting" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Threat Hunting</h2>
-<h3>Threat Hunting</h3>
-<h4>Threat Hunting</h4>
-<h4>Threat Hunting</h4>
-<h4>Threat Hunting</h4>
-<h4>Threat Hunting</h4>
-<h4>Threat Hunting</h4>
-<h4>Threat Hunting</h4>
-<h4>Threat Hunting</h4>
-<h4>Threat Hunting</h4>
-<h4>Threat Hunting</h4>
-<h4>Threat Hunting</h4>
-<h4>Threat Hunting</h4>
-<h4>Threat Hunting</h4>
-<h4>Threat Hunting</h4>
-<p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-hunting.png" alt="Threat Hunting" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-hunting.png" alt="Threat Hunting" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Threat hunting is the proactive search for malicious activity that evades existing security controls. Unlike automated detection, hunting is hypothesis-driven and iterative. It assumes that adversaries are already inside the network and seeks to find them before they achieve their objectives. </p>
 <p>The Hunting Maturity Model </p>
 <p>The Hunting Maturity Model (HMM) describes an organization's hunting capability across five levels: </p>
@@ -137,8 +122,8 @@
 </ul>
 <p>Hypothesis-Driven Hunting </p>
 <p>The hypothesis is the foundation of every hunt. It should be testable, specific, and grounded in threat intelligence or risk assessment. </p>
-<h4>Hypothesis: An adversary is using PowerShell for C2 communication</h4>
-<h4>Test: Find PowerShell processes making outbound connections</h4>
+<h2>Hypothesis: An adversary is using PowerShell for C2 communication</h2>
+<h2>Test: Find PowerShell processes making outbound connections</h2>
 <p>def hunt_powershell_c2(time_window_hours=72):</p>
 <p>query = f"""</p>
 <p>SELECT p.pid, p.command_line, p.start_time, </p>
@@ -187,18 +172,18 @@
 <li><strong>Process creation logs</strong> (Event ID 4688 / Sysmon Event ID 1)</li>
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Network connections</strong> (Sysmon Event ID 3, NetFlow, Zeek logs) 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>DNS queries</strong> (Zeek DNS, Windows DNS client logs) 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>File system changes</strong> (Sysmon Event ID 11) 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Registry modifications</strong> (Sysmon Event ID 12-14) 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>PowerShell operational logs</strong> (Event ID 4103, 4104) </p>
-<p>C:\Windows\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_</p>
+<p>C:\Windows\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\<em>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</em></p>
 <p>Hunting Tools </p>
-<h4>Velociraptor: collect process listing across fleet</h4>
+<h2>Velociraptor: collect process listing across fleet</h2>
 <p>velociraptor --config client.config.yaml </p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--artifacts Windows.System.TaskScheduler </p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--format json &gt; scheduled_tasks.json</p>
-<h4>Zeek: analyze DNS logs for DGA patterns</h4>
+<h2>Zeek: analyze DNS logs for DGA patterns</h2>
 <p>zeek-cut dns.query &lt; dns.log | \</p>
 <p>grep -v '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.$' | \</p>
 <p>awk '{len=length($1)} len&gt;20 {print $1, len}' | \</p>
 <p>sort | uniq -c | sort -rn | head -20</p>
-<h4>KQL: hunting in Microsoft 365 Defender</h4>
+<h2>KQL: hunting in Microsoft 365 Defender</h2>
 <p>DeviceProcessEvents</p>
 <p>| where Timestamp &gt; ago(7d)</p>
 <p>| where ProcessVersionInfoProductName == "PsExec"</p>
@@ -206,7 +191,7 @@
 <p>| summarize LatestProcess=arg_max(Timestamp, *) by DeviceName</p>
 <p>| project DeviceName, AccountName, ProcessCommandLine, Timestamp</p>
 <p>Data Analysis Techniques </p>
-<h4>Stack counting for anomaly detection</h4>
+<h2>Stack counting for anomaly detection</h2>
 <p>def stack_count(events, field, top_n=10):</p>
 <p>"""Identify unusually frequent values."""</p>
 <p>counts = Counter(getattr(e, field) for e in events)</p>
@@ -222,7 +207,10 @@
 <p><strong>See also:</strong> <a href="/en/security/data-masking.html">Data Masking and Redaction</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/data-masking.html">Data Masking and Redaction</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/data-masking.html">Data Masking and Redaction</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/security/data-masking.html">Data Masking and Redaction</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/data-masking.html">Data Masking and Redaction</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/data-masking.html">Data Masking and Redaction</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/data-masking.html">Data Masking and Redaction</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a></p>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -234,7 +222,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/data-masking.html" class="related-card">Data Masking and Redaction</a><a href="/en/security/dns-security.html" class="related-card">DNS Security</a><a href="/en/security/forensics-guide.html" class="related-card">Digital Forensics Guide</a><a href="/en/security/privacy-engineering.html" class="related-card">Privacy Engineering</a></div>
+      <div class="related-grid"><a href="/en/security/data-masking.html" class="related-card"><span class="related-card-title">Data Masking and Redaction</span><span class="related-card-desc">Guide to data masking and redaction covering dynamic masking, static masking, tokenization, and comp</span></a><a href="/en/security/dns-security.html" class="related-card"><span class="related-card-title">DNS Security</span><span class="related-card-desc">Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filteri</span></a><a href="/en/security/forensics-guide.html" class="related-card"><span class="related-card-title">Digital Forensics Guide</span><span class="related-card-desc">Comprehensive guide to digital forensics covering evidence acquisition, analysis methodologies, chai</span></a><a href="/en/security/privacy-engineering.html" class="related-card"><span class="related-card-title">Privacy Engineering</span><span class="related-card-desc">Guide to privacy engineering covering privacy by design principles, data mapping, Privacy Impact Ass</span></a><a href="/en/security/dlp-strategies.html" class="related-card"><span class="related-card-title">Data Loss Prevention Strategies</span><span class="related-card-desc">Implementing DLP across network, endpoint, and cloud with effective policy design and incident respo</span></a><a href="/en/security/api-authentication.html" class="related-card"><span class="related-card-title">API Authentication Methods</span><span class="related-card-desc">Comprehensive guide to API authentication covering API keys, OAuth2 client credentials, mTLS, HMAC s</span></a></div>
     </section>
     
   </div>

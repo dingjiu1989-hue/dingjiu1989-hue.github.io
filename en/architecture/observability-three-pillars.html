@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/observability-three-pillars.png",
       "datePublished": "2026-04-29",
       "dateModified": "2026-05-15",
-      "wordCount": "1189",
+      "wordCount": "1127",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,22 +96,7 @@
       <h1 class="article-title">Observability: Logs, Metrics, and Traces</h1>
       <div class="article-meta">Published 2026-04-29 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/observability-three-pillars.png" alt="Observability: Logs, Metrics, and Traces" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Observability: Logs, Metrics, and Traces</h2>
-<h3>Observability: Logs, Metrics, and Traces</h3>
-<h4>Observability: Logs, Metrics, and Traces</h4>
-<h4>Observability: Logs, Metrics, and Traces</h4>
-<h4>Observability: Logs, Metrics, and Traces</h4>
-<h4>Observability: Logs, Metrics, and Traces</h4>
-<h4>Observability: Logs, Metrics, and Traces</h4>
-<h4>Observability: Logs, Metrics, and Traces</h4>
-<h4>Observability: Logs, Metrics, and Traces</h4>
-<h4>Observability: Logs, Metrics, and Traces</h4>
-<h4>Observability: Logs, Metrics, and Traces</h4>
-<h4>Observability: Logs, Metrics, and Traces</h4>
-<h4>Observability: Logs, Metrics, and Traces</h4>
-<h4>Observability: Logs, Metrics, and Traces</h4>
-<h4>Observability: Logs, Metrics, and Traces</h4>
-<p>Observability is the ability to understand a system's internal state from its external outputs. The three pillars — logs, metrics, and traces — each provide different perspectives. Logs describe discrete events. Metrics provide aggregate measurements. Traces follow requests across service boundaries. Effective observability requires combining all three and correlating them to answer questions about system behavior, especially during incidents. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/observability-three-pillars.png" alt="Observability: Logs, Metrics, and Traces" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Observability is the ability to understand a system's internal state from its external outputs. The three pillars — logs, metrics, and traces — each provide different perspectives. Logs describe discrete events. Metrics provide aggregate measurements. Traces follow requests across service boundaries. Effective observability requires combining all three and correlating them to answer questions about system behavior, especially during incidents. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/observability-three-pillars.png" alt="Observability: Logs, Metrics, and Traces" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Logs are timestamped records of discrete events. They are the most detailed pillar — a log line can contain any amount of structured or unstructured data about what happened, when, and with what context. The challenge is volume. Production systems generate millions of log lines per minute. Without structure and filtering, logs become noise. Structured logging (JSON format) is essential for machine parsing and querying. Log levels (DEBUG, INFO, WARN, ERROR) provide the primary filtering mechanism. </p>
 <p>Metrics are numeric aggregations over time. They are the most efficient storage representation — a single metric stream consumes bytes rather than kilobytes per event. Metrics are ideal for dashboards, alerting, and trend analysis. Common metric types include counters (total requests), gauges (current memory usage), histograms (request latency distribution), and summaries (quantile approximations). Metrics inherently lose individual event detail — you know the 99th percentile latency but not which specific request was slow. </p>
 <p>Traces follow a single request through the distributed system. A trace is composed of spans, where each span represents a unit of work (an HTTP request, a database query, a function call). Spans carry the parent span ID, creating a tree structure that shows the call hierarchy. Traces provide the most information for debugging specific issues but have the highest storage cost. A single trace for a complex request may include hundreds of spans. </p>
@@ -125,7 +110,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/metrics-types.html">Metrics Types and Monitoring Methodologies</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/metrics-types.html">Metrics Types and Monitoring Methodologies</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/metrics-types.html">Metrics Types and Monitoring Methodologies</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/metrics-types.html">Metrics Types and Monitoring Methodologies</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/metrics-types.html">Metrics Types and Monitoring Methodologies</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/metrics-types.html">Metrics Types and Monitoring Methodologies</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/metrics-types.html">Metrics Types and Monitoring Methodologies</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -137,7 +125,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/metrics-types.html" class="related-card">Metrics Types and Monitoring Methodologies</a><a href="/en/architecture/cost-per-request.html" class="related-card">Cost Per Request Modeling</a><a href="/en/architecture/distributed-tracing-deep.html" class="related-card">Distributed Tracing: Deep Dive</a><a href="/en/architecture/domain-events.html" class="related-card">Domain Events: Design and Implementation</a></div>
+      <div class="related-grid"><a href="/en/architecture/metrics-types.html" class="related-card"><span class="related-card-title">Metrics Types and Monitoring Methodologies</span><span class="related-card-desc">Counters, gauges, histograms, summaries, RED method, USE method, and the four golden signals</span></a><a href="/en/architecture/cost-per-request.html" class="related-card"><span class="related-card-title">Cost Per Request Modeling</span><span class="related-card-desc">Compute, storage, network, database per-request cost modeling, and optimization strategies</span></a><a href="/en/architecture/distributed-tracing-deep.html" class="related-card"><span class="related-card-title">Distributed Tracing: Deep Dive</span><span class="related-card-desc">Trace context propagation, sampling strategies, visualization, and implementation of distributed tra</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/structured-logging.html" class="related-card"><span class="related-card-title">Structured Logging</span><span class="related-card-desc">JSON log format, correlation IDs, log levels, logging libraries, and best practices for structured l</span></a><a href="/en/architecture/claim-check.html" class="related-card"><span class="related-card-title">Claim Check Pattern</span><span class="related-card-desc">Learn the claim check pattern: store large payloads, pass references, and enable asynchronous proces</span></a></div>
     </section>
     
   </div>

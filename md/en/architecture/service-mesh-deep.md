@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/service-mesh-deep.html
 
 # Service Mesh Deep Dive
 
-## Service Mesh Deep Dive
-
-### Service Mesh Deep Dive
-
-#### Service Mesh Deep Dive
-
-#### Service Mesh Deep Dive
-
-#### Service Mesh Deep Dive
-
-#### Service Mesh Deep Dive
-
-#### Service Mesh Deep Dive
-
-#### Service Mesh Deep Dive
-
-#### Service Mesh Deep Dive
-
-#### Service Mesh Deep Dive
-
-#### Service Mesh Deep Dive
-
-#### Service Mesh Deep Dive
-
-#### Service Mesh Deep Dive
-
-#### Service Mesh Deep Dive
-
-#### Service Mesh Deep Dive
-
 A service mesh is a dedicated infrastructure layer for handling service-to-service communication in a microservice architecture. It moves communication logic out of application code and into a proxy sidecar, providing observability, security, and reliability features without requiring changes to application code. This article compares the leading service mesh implementations and examines core capabilities. 
 
 How a Service Mesh Works 
@@ -89,3 +59,9 @@ The choice depends on your requirements. Istio for maximum features and traffic 
 **See also:** [Service Mesh Patterns: Istio and Linkerd](</en/architecture/service-mesh.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
 
 **See also:** [Service Mesh Patterns: Istio and Linkerd](</en/architecture/service-mesh.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)

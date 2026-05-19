@@ -8,45 +8,13 @@ url: https://dingjiu1989-hue.github.io/en/compare/turbopack-vs-vite.html
 
 # Turbopack vs Vite
 
-## Turbopack vs Vite
-
-### Turbopack vs Vite
-
-#### Turbopack vs Vite
-
-#### Turbopack vs Vite
-
-#### Turbopack vs Vite
-
-#### Turbopack vs Vite
-
-#### Turbopack vs Vite
-
-#### Turbopack vs Vite
-
-#### Turbopack vs Vite
-
-#### Turbopack vs Vite
-
-#### Turbopack vs Vite
-
-#### Turbopack vs Vite
-
-#### Turbopack vs Vite
-
-#### Turbopack vs Vite
-
-#### Turbopack vs Vite
-
-#### Turbopack vs Vite
-
-#### Introduction
+## Introduction
 
 Turbopack and Vite are the two leading next-generation JavaScript build tools. Both promise dramatically faster development servers and build times compared to webpack, but they take different approaches. Vite, built on esbuild and Rollup, has been production-ready since 2021. Turbopack, built in Rust and created by the Vercel team, is newer and tightly integrated with Next.js. This comparison covers their architectures, performance, and ecosystem compatibility.
 
-#### Architecture
+## Architecture
 
-#### Vite: esbuild + Rollup
+## Vite: esbuild + Rollup
 
 Vite uses a two-tier architecture:
 
@@ -111,7 +79,7 @@ vendor: ["react", "react-dom"],
 
 
 
-#### Turbopack: Rust-Based
+## Turbopack: Rust-Based
 
 Turbopack is built in Rust for maximum performance:
 
@@ -170,7 +138,7 @@ rules: {
 
 
 
-#### Performance Benchmarks
+## Performance Benchmarks
 
 In real-world projects, benchmarks show:
 
@@ -190,7 +158,7 @@ In real-world projects, benchmarks show:
 
 Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR speeds are comparable for most practical purposes.
 
-#### Plugin Ecosystem
+## Plugin Ecosystem
 
 **Vite** has the richest plugin ecosystem, with hundreds of plugins available. Many Rollup plugins are compatible with Vite's production build. Popular plugins include:
 
@@ -209,7 +177,7 @@ Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR
 
 **Turbopack** has a growing but limited plugin system. In 2026, Turbopack supports webpack loaders for compatibility, but the native plugin API is still evolving. Most plugins in the Next.js ecosystem work through webpack compatibility rather than native Turbopack plugins.
 
-#### Framework Support
+## Framework Support
 
 **Vite** is framework-agnostic. It works out of the box with:
 
@@ -228,7 +196,7 @@ Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR
 
 **Turbopack** is primarily a Next.js tool. While it technically works with any Node.js application, its optimizations and features are designed for Next.js. Third-party framework integration is not a priority.
 
-#### Development Server Features
+## Development Server Features
 
 Both tools offer excellent development experiences:
 
@@ -250,13 +218,13 @@ Both tools offer excellent development experiences:
 
 | HTTPS | Built-in | Built-in |
 
-#### Migration Path
+## Migration Path
 
 **Moving to Vite** from webpack: Use `vite-plugin-webpack` for gradual migration, or rewrite the config (most webpack configs translate directly). Community migration guides exist for CRA, Vue CLI, and Svelte.
 
 **Moving to Turbopack** : Enable in Next.js with `--turbo` flag. Most webpack loaders work via compatibility. Some webpack-specific plugins may need alternatives.
 
-#### When to Choose What
+## When to Choose What
 
 **Choose Vite when:**
 
@@ -286,7 +254,7 @@ Both tools offer excellent development experiences:
 
 
 
-#### Conclusion
+## Conclusion
 
 Vite and Turbopack serve different ecosystems. Vite is the mature, universal build tool that works with any framework. Turbopack is the cutting-edge, React-optimized bundler that excels within the Next.js ecosystem. For Next.js projects, Turbopack is the natural choice. For everything else — Vue, Svelte, Solid, libraries, or vanilla JS — Vite offers a richer ecosystem and more proven track record. Both are excellent tools that make webpack-era bundling seem archaic.
 
@@ -301,3 +269,9 @@ Vite and Turbopack serve different ecosystems. Vite is the mature, universal bui
 **See also:** [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Webpack vs Vite: Build Tool Comparison](</en/compare/webpack-vs-vite.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>)
 
 **See also:** [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Webpack vs Vite: Build Tool Comparison](</en/compare/webpack-vs-vite.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>)
+
+**See also:** [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [AWS vs Azure vs GCP 2026](</en/compare/aws-vs-azure-vs-gcp-2026.html>), [GraphQL vs REST API](</en/compare/graphql-vs-rest.html>)
+
+**See also:** [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [AWS vs Azure vs GCP 2026](</en/compare/aws-vs-azure-vs-gcp-2026.html>), [GraphQL vs REST API](</en/compare/graphql-vs-rest.html>)
+
+**See also:** [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [AWS vs Azure vs GCP 2026](</en/compare/aws-vs-azure-vs-gcp-2026.html>), [GraphQL vs REST API](</en/compare/graphql-vs-rest.html>)

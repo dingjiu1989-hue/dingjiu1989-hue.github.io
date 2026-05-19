@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/cqrs-pattern.png",
       "datePublished": "2026-04-20",
       "dateModified": "2026-04-22",
-      "wordCount": "996",
+      "wordCount": "892",
       "keywords": "Architecture, System Design",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
       "inLanguage": "en",
@@ -98,22 +98,7 @@
       <h1 class="article-title">CQRS Pattern: Command Query Responsibility Segregation</h1>
       <div class="article-meta">Published 2026-04-20 · Last active 2026-04-22 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cqrs-pattern.png" alt="CQRS Pattern: Command Query Responsibility Segregation" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>CQRS Pattern: Command Query Responsibility Segregation</h2>
-<h3>CQRS Pattern: Command Query Responsibility Segregation</h3>
-<h4>CQRS Pattern: Command Query Responsibility Segregation</h4>
-<h4>CQRS Pattern: Command Query Responsibility Segregation</h4>
-<h4>CQRS Pattern: Command Query Responsibility Segregation</h4>
-<h4>CQRS Pattern: Command Query Responsibility Segregation</h4>
-<h4>CQRS Pattern: Command Query Responsibility Segregation</h4>
-<h4>CQRS Pattern: Command Query Responsibility Segregation</h4>
-<h4>CQRS Pattern: Command Query Responsibility Segregation</h4>
-<h4>CQRS Pattern: Command Query Responsibility Segregation</h4>
-<h4>CQRS Pattern: Command Query Responsibility Segregation</h4>
-<h4>CQRS Pattern: Command Query Responsibility Segregation</h4>
-<h4>CQRS Pattern: Command Query Responsibility Segregation</h4>
-<h4>CQRS Pattern: Command Query Responsibility Segregation</h4>
-<h4>CQRS Pattern: Command Query Responsibility Segregation</h4>
-<p>Command Query Responsibility Segregation (CQRS) is a pattern that separates read and write operations into distinct models. Rather than using a single model for both commands (writes) and queries (reads), CQRS introduces separate interfaces, data structures, and often separate data stores for each side. This separation unlocks significant scalability and flexibility advantages in complex domains. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cqrs-pattern.png" alt="CQRS Pattern: Command Query Responsibility Segregation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Command Query Responsibility Segregation (CQRS) is a pattern that separates read and write operations into distinct models. Rather than using a single model for both commands (writes) and queries (reads), CQRS introduces separate interfaces, data structures, and often separate data stores for each side. This separation unlocks significant scalability and flexibility advantages in complex domains. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cqrs-pattern.png" alt="CQRS Pattern: Command Query Responsibility Segregation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The Fundamental Principle </p>
 <p>The core insight of CQRS is that the representation used for updating data is rarely optimal for reading it. A write model may enforce complex business rules, maintain invariants across aggregates, and validate input rigorously. A read model, by contrast, should be optimized for fast retrieval, projection, and rendering. By separating them, each model can evolve independently. </p>
 <p>In a CQRS system, commands express intent (e.g., <code>SubmitOrder</code>) and are handled by the command side. Queries request data (e.g., <code>GetOrderHistory</code>) and are handled by the read side. Commands should return minimal data—often just a success indicator—while queries return rich result sets. </p>
@@ -131,7 +116,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-driven-architecture.html">Event-Driven Architecture: Patterns and Practice</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-driven-architecture.html">Event-Driven Architecture: Patterns and Practice</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-sourcing.html">Event Sourcing Pattern</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-sourcing.html">Event Sourcing Pattern</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-sourcing.html">Event Sourcing Pattern</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -143,7 +131,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/materialized-view-pattern.html" class="related-card">Materialized View Pattern</a><a href="/en/architecture/backend-for-frontend.html" class="related-card">Backend for Frontend (BFF) Pattern</a><a href="/en/architecture/bulkhead-pattern.html" class="related-card">Bulkhead Pattern for Resilience</a><a href="/en/architecture/saga-choreography.html" class="related-card">Saga Choreography Pattern</a></div>
+      <div class="related-grid"><a href="/en/architecture/materialized-view-pattern.html" class="related-card"><span class="related-card-title">Materialized View Pattern</span><span class="related-card-desc">Explore the materialized view pattern: read models, caching strategies, CQRS integration, and effici</span></a><a href="/en/architecture/backend-for-frontend.html" class="related-card"><span class="related-card-title">Backend for Frontend (BFF) Pattern</span><span class="related-card-desc">Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data agg</span></a><a href="/en/architecture/bulkhead-pattern.html" class="related-card"><span class="related-card-title">Bulkhead Pattern for Resilience</span><span class="related-card-desc">Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, ci</span></a><a href="/en/architecture/saga-choreography.html" class="related-card"><span class="related-card-title">Saga Choreography Pattern</span><span class="related-card-desc">Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose c</span></a><a href="/en/architecture/event-driven-architecture.html" class="related-card"><span class="related-card-title">Event-Driven Architecture: Patterns and Practice</span><span class="related-card-desc">Event-driven architecture with event sourcing, pub/sub, Kafka streaming, event schemas, idempotent c</span></a><a href="/en/architecture/service-mesh.html" class="related-card"><span class="related-card-title">Service Mesh Patterns: Istio and Linkerd</span><span class="related-card-desc">Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and wh</span></a></div>
     </section>
     
   </div>

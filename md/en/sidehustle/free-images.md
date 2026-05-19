@@ -45,4 +45,4 @@ Site| What You Get
 
 
 
-**See also:** [Best Freelancing Platforms for Developers](</en/sidehustle/freelancing-platforms.html>), [50 Micro-SaaS Ideas for Solo Developers in 2026](</en/sidehustle/micro-saas-ideas-2026.html>), [Affiliate Marketing for Developers: The Technical Guide to Your First $1,000](</en/sidehustle/affiliate-marketing-developers.html>)
+**See also:** [Landing Page Conversion Optimization](</en/sidehustle/landing-page-conversion.html>), [SaaS Pricing Strategies](</en/sidehustle/saas-pricing.html>), [Freelance Pricing Guide for Developers: How to Charge What You're Worth](</en/sidehustle/freelance-pricing-guide.html>)

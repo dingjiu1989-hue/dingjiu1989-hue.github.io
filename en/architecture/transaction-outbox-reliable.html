@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox-reliable.png",
       "datePublished": "2026-05-05",
       "dateModified": "2026-05-08",
-      "wordCount": "1155",
+      "wordCount": "1150",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,22 +96,7 @@
       <h1 class="article-title">Transactional Outbox Pattern</h1>
       <div class="article-meta">Published 2026-05-05 · Last active 2026-05-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox-reliable.png" alt="Transactional Outbox Pattern" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Transactional Outbox Pattern</h2>
-<h3>Transactional Outbox Pattern</h3>
-<h4>Transactional Outbox Pattern</h4>
-<h4>Transactional Outbox Pattern</h4>
-<h4>Transactional Outbox Pattern</h4>
-<h4>Transactional Outbox Pattern</h4>
-<h4>Transactional Outbox Pattern</h4>
-<h4>Transactional Outbox Pattern</h4>
-<h4>Transactional Outbox Pattern</h4>
-<h4>Transactional Outbox Pattern</h4>
-<h4>Transactional Outbox Pattern</h4>
-<h4>Transactional Outbox Pattern</h4>
-<h4>Transactional Outbox Pattern</h4>
-<h4>Transactional Outbox Pattern</h4>
-<h4>Transactional Outbox Pattern</h4>
-<p>The transactional outbox pattern solves a fundamental problem in event-driven microservices: how to reliably publish messages as part of a database transaction. When a service updates its database and publishes an event, these two operations must be atomic. If the database update succeeds but the message publish fails, the system is inconsistent. The outbox pattern uses a local database table as a temporary message store, ensuring reliable publication through the same transaction that updates business data. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox-reliable.png" alt="Transactional Outbox Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>The transactional outbox pattern solves a fundamental problem in event-driven microservices: how to reliably publish messages as part of a database transaction. When a service updates its database and publishes an event, these two operations must be atomic. If the database update succeeds but the message publish fails, the system is inconsistent. The outbox pattern uses a local database table as a temporary message store, ensuring reliable publication through the same transaction that updates business data. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox-reliable.png" alt="Transactional Outbox Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The Dual-Write Problem </p>
 <p>The dual-write problem occurs when a service must atomically update a database and publish a message. In a typical order service, placing an order involves inserting into the orders table and publishing an "OrderPlaced" event. If the database insert succeeds but the message publish fails, the event is lost. If the database insert fails but the message publishes, a phantom event is emitted. </p>
 <p>Standard solutions like distributed transactions (2PC) are too heavyweight and not supported by most message brokers. The transactional outbox pattern solves this with only a local database transaction. </p>
@@ -138,7 +123,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -150,7 +138,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/domain-events.html" class="related-card">Domain Events: Design and Implementation</a><a href="/en/architecture/transaction-outbox.html" class="related-card">Transactional Outbox Pattern</a><a href="/en/architecture/transactional-inbox.html" class="related-card">Transactional Inbox Pattern for Reliable Messaging</a><a href="/en/architecture/request-reply-pattern.html" class="related-card">Request-Reply Pattern for Asynchronous Communication</a></div>
+      <div class="related-grid"><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/transaction-outbox.html" class="related-card"><span class="related-card-title">Transactional Outbox Pattern</span><span class="related-card-desc">Reliable event publishing with transactional outbox: implementations, idempotent consumers, dual-wri</span></a><a href="/en/architecture/transactional-inbox.html" class="related-card"><span class="related-card-title">Transactional Inbox Pattern for Reliable Messaging</span><span class="related-card-desc">The transactional inbox pattern ensures reliable message processing by storing incoming messages bef</span></a><a href="/en/architecture/request-reply-pattern.html" class="related-card"><span class="related-card-title">Request-Reply Pattern for Asynchronous Communication</span><span class="related-card-desc">Implement the request-reply pattern with message queues for asynchronous request-response messaging.</span></a><a href="/en/architecture/claim-check.html" class="related-card"><span class="related-card-title">Claim Check Pattern</span><span class="related-card-desc">Learn the claim check pattern: store large payloads, pass references, and enable asynchronous proces</span></a><a href="/en/architecture/materialized-view-pattern.html" class="related-card"><span class="related-card-title">Materialized View Pattern</span><span class="related-card-desc">Explore the materialized view pattern: read models, caching strategies, CQRS integration, and effici</span></a></div>
     </section>
     
   </div>

@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/graph-queries.html
 
 # Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
 
-## Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
-### Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
-#### Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
-#### Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
-#### Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
-#### Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
-#### Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
-#### Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
-#### Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
-#### Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
-#### Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
-#### Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
-#### Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
-#### Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
-#### Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
-
 Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE 
 
 Relational databases can model and query graph data effectively using recursive Common Table Expressions (CTEs). While not as optimized as dedicated graph databases, SQL-based graph queries handle many real-world use cases without adding infrastructure. 
@@ -323,3 +293,9 @@ Recursive CTEs prove that SQL can handle graph queries. For bounded-depth hierar
 **See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Materialized Views](</en/database/materialized-views.html>)
 
 **See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Materialized Views](</en/database/materialized-views.html>)
+
+**See also:** [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>)
+
+**See also:** [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>)
+
+**See also:** [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>)

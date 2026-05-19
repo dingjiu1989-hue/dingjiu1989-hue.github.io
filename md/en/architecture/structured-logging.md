@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/structured-logging.html
 
 # Structured Logging
 
-## Structured Logging
-
-### Structured Logging
-
-#### Structured Logging
-
-#### Structured Logging
-
-#### Structured Logging
-
-#### Structured Logging
-
-#### Structured Logging
-
-#### Structured Logging
-
-#### Structured Logging
-
-#### Structured Logging
-
-#### Structured Logging
-
-#### Structured Logging
-
-#### Structured Logging
-
-#### Structured Logging
-
-#### Structured Logging
-
 Structured logging is the practice of emitting logs as structured data — typically JSON — rather than free-form text strings. This transformation is foundational to observability. Structured logs can be parsed, filtered, and queried by machines without requiring fragile regular expressions. The initial investment in structured logging pays dividends in every incident investigation, deployment verification, and system analysis. 
 
 The JSON log format is the standard. Each log line is a JSON object with required fields: timestamp (ISO 8601 with timezone and microseconds), level, logger (source file or component), message (human-readable summary), and trace_id (correlation ID for request tracing). Optional fields include: service, version, environment, request details, error stack traces, and any business-specific context. Every field should be consistently named and typed across all services in the organization. 
@@ -69,3 +39,9 @@ Log retention policies balance debugging needs with storage costs. Typical reten
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)

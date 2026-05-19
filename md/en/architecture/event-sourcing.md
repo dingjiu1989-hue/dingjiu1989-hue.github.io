@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/architecture/event-sourcing.html
 
 # Event Sourcing Pattern
 
-## Event Sourcing Pattern
-
-### Event Sourcing Pattern
-
-#### Event Sourcing Pattern
-
-#### Event Sourcing Pattern
-
-#### Event Sourcing Pattern
-
-#### Event Sourcing Pattern
-
-#### Event Sourcing Pattern
-
-#### Event Sourcing Pattern
-
-#### Event Sourcing Pattern
-
-#### Event Sourcing Pattern
-
-#### Event Sourcing Pattern
-
-#### Event Sourcing Pattern
-
-#### Event Sourcing Pattern
-
-#### Event Sourcing Pattern
-
-#### Event Sourcing Pattern
-
 Event sourcing is an architectural pattern that stores the state of a system as a sequence of immutable events rather than as the current state. Instead of updating a database row to reflect a new state, the system appends an event describing what happened. The current state is derived by replaying all events for a given entity. This fundamental shift in data management provides powerful capabilities for audit, debugging, and system evolution. 
 
 The Event Store 
@@ -77,3 +47,9 @@ Event sourcing is a powerful pattern that provides unmatched auditability and te
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
 
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
+
+**See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>)
+
+**See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>)
+
+**See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>)

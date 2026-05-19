@@ -8,47 +8,15 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-analytics.html
 
 # SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
 
-## SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-#### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-#### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-#### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-#### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-#### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-#### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-#### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-#### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-#### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-#### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-#### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-#### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-#### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
-#### SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
-
 Page views and visitor counts tell you nothing about your SaaS product. You need event-based analytics that tracks what users actually do. Here is how to choose and implement product analytics for your SaaS.
 
-#### What Product Analytics Solves
+## What Product Analytics Solves
 
 Traditional web analytics shows you where users come from and what pages they visit. Product analytics shows you what users do inside your application. Which features do they use? Where do they get stuck? Which actions predict retention?
 
 Without product analytics, you make product decisions based on anecdotes from loud customers. With it, you can A/B test changes, measure feature adoption, and identify friction points in your onboarding flow.
 
-#### Mixpanel: Mature and Comprehensive
+## Mixpanel: Mature and Comprehensive
 
 Mixpanel has been the market leader in product analytics for years. It offers event tracking, funnel analysis, retention cohorts, and predictive analytics. Its query interface is powerful but has a learning curve.
 
@@ -56,7 +24,7 @@ Mixpanel pricing is based on the volume of tracked events. The free tier allows 
 
 Mixpanel excels at retention analysis. You can create cohort tables that show what percentage of users return in week two, month two, or month six. This is the single most important report for a SaaS product. If retention is flat or declining, nothing else matters.
 
-#### Amplitude: Behavioral Analytics Leader
+## Amplitude: Behavioral Analytics Leader
 
 Amplitude is similar to Mixpanel but emphasizes behavioral analytics and user segmentation. Its behavioral cohorts let you group users by actions, then analyze how those groups behave differently.
 
@@ -64,7 +32,7 @@ Amplitude's path analysis shows the sequences users follow through your product.
 
 Pricing is similar to Mixpanel, with a generous free tier and usage-based paid plans. Amplitude tends to be more expensive at scale, so evaluate costs carefully if you have millions of users.
 
-#### PostHog: Open-Source Alternative
+## PostHog: Open-Source Alternative
 
 PostHog is the open-source product analytics platform. You can self-host it, which means you own all your data and do not need to send user behavior to third parties. This matters for privacy-conscious products and B2B SaaS with data security requirements.
 
@@ -72,7 +40,7 @@ PostHog includes event tracking, session recording, feature flags, and A/B testi
 
 Self-hosting PostHog requires infrastructure management. The cloud-hosted version starts free and scales with usage. PostHog is generally cheaper than Mixpanel or Amplitude at scale.
 
-#### Event Tracking Best Practices
+## Event Tracking Best Practices
 
 Good analytics starts with good event tracking. Define a consistent naming convention before you write any code. Use `object_action` format: `project_created`, `invoice_paid`, `team_invited`. Avoid ambiguous names like `clicked_button`.
 
@@ -80,7 +48,7 @@ Track these events in every SaaS product: signup, onboarding step completion, fi
 
 Use properties to enrich events. A `project_created` event should include properties like template_used, team_size, and project_type. Properties make events analyzable across dimensions.
 
-#### Funnel Analysis
+## Funnel Analysis
 
 Funnels show conversion rates between sequential steps. The classic SaaS funnel is: visit landing page, sign up, complete onboarding, perform key action, invite team member, upgrade to paid.
 
@@ -101,3 +69,9 @@ Choose the tool that fits your budget and privacy requirements. Start with PostH
 **See also:** [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>)
 
 **See also:** [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>)
+
+**See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
+
+**See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
+
+**See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)

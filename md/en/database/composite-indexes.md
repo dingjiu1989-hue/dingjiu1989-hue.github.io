@@ -8,36 +8,6 @@ url: https://dingjiu1989-hue.github.io/en/database/composite-indexes.html
 
 # Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
 
-## Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
-### Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
-#### Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
-#### Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
-#### Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
-#### Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
-#### Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
-#### Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
-#### Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
-#### Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
-#### Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
-#### Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
-#### Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
-#### Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
-#### Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
-
 Composite Indexes: Column Order, Covering Indexes, and Partial Indexes 
 
 Composite indexes (indexes on multiple columns) are powerful but easy to misuse. The column order determines which queries benefit, and the right combination of covering and partial indexes can dramatically reduce query time. 
@@ -270,3 +240,9 @@ A well-designed composite index can eliminate the need for multiple single-colum
 **See also:** [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
 
 **See also:** [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
+
+**See also:** [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Materialized Views](</en/database/materialized-views.html>)
+
+**See also:** [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Materialized Views](</en/database/materialized-views.html>)
+
+**See also:** [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Materialized Views](</en/database/materialized-views.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/multi-tenancy.png",
       "datePublished": "2026-04-29",
       "dateModified": "2026-05-03",
-      "wordCount": "1139",
+      "wordCount": "1110",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -96,22 +96,7 @@
       <h1 class="article-title">Multi-Tenancy Architecture</h1>
       <div class="article-meta">Published 2026-04-29 · Last active 2026-05-03 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/multi-tenancy.png" alt="Multi-Tenancy Architecture" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h2>Multi-Tenancy Architecture</h2>
-<h3>Multi-Tenancy Architecture</h3>
-<h4>Multi-Tenancy Architecture</h4>
-<h4>Multi-Tenancy Architecture</h4>
-<h4>Multi-Tenancy Architecture</h4>
-<h4>Multi-Tenancy Architecture</h4>
-<h4>Multi-Tenancy Architecture</h4>
-<h4>Multi-Tenancy Architecture</h4>
-<h4>Multi-Tenancy Architecture</h4>
-<h4>Multi-Tenancy Architecture</h4>
-<h4>Multi-Tenancy Architecture</h4>
-<h4>Multi-Tenancy Architecture</h4>
-<h4>Multi-Tenancy Architecture</h4>
-<h4>Multi-Tenancy Architecture</h4>
-<h4>Multi-Tenancy Architecture</h4>
-<p>Multi-tenancy is the architectural pattern where a single instance of software serves multiple customer organizations (tenants). The design choices around tenant isolation — how much tenants share and how much is dedicated — determine the system's security, scalability, operational complexity, and cost structure. Three primary isolation levels form a spectrum with distinct tradeoffs. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/multi-tenancy.png" alt="Multi-Tenancy Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-body"><p>Multi-tenancy is the architectural pattern where a single instance of software serves multiple customer organizations (tenants). The design choices around tenant isolation — how much tenants share and how much is dedicated — determine the system's security, scalability, operational complexity, and cost structure. Three primary isolation levels form a spectrum with distinct tradeoffs. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/multi-tenancy.png" alt="Multi-Tenancy Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Database per tenant provides the strongest isolation. Each tenant gets its own database instance. This simplifies backup and restore (one tenant's data can be manipulated independently), provides natural resource limits (noisy neighbor containment), and makes data migration straightforward. The trade-off is operational cost: provisioning databases, managing connections, and running migration scripts for each tenant. At hundreds or thousands of tenants, the operational overhead becomes significant unless automated through infrastructure-as-code. </p>
 <p>Schema per tenant shares the database server but maintains separate schemas for each tenant. This provides moderate isolation — a schema is a namespace with its own tables and data. Connection pooling across schemas shares resources efficiently. Schema management becomes the challenge: each tenant's schema must be created and migrated independently. Tools can automate schema operations across all tenants, but schema divergence becomes a risk if tenants can have different schema versions. </p>
 <p>Shared database (all tenants in the same tables) is the most cost-efficient approach. All tenant data resides in the same tables, distinguished by a tenant_id column. This simplifies operations significantly — a single database, single schema, single set of migrations. The trade-offs are severe: any application bug can leak or corrupt data across tenants, resource contention (noisy neighbor) affects all tenants simultaneously, and backup/restore must handle all tenants at once. Strong security measures are essential: every query must include the tenant_id filter. </p>
@@ -125,7 +110,10 @@
 <p><strong>See also:</strong> <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/global-traffic-routing.html">Global Traffic Routing</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/global-traffic-routing.html">Global Traffic Routing</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/global-traffic-routing.html">Global Traffic Routing</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/global-traffic-routing.html">Global Traffic Routing</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/global-traffic-routing.html">Global Traffic Routing</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/global-traffic-routing.html">Global Traffic Routing</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/global-traffic-routing.html">Global Traffic Routing</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -137,7 +125,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/cost-per-request.html" class="related-card">Cost Per Request Modeling</a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card">Zero-Downtime Database Migrations</a><a href="/en/architecture/global-traffic-routing.html" class="related-card">Global Traffic Routing</a><a href="/en/architecture/event-driven-arch.html" class="related-card">Event-Driven Architecture</a></div>
+      <div class="related-grid"><a href="/en/architecture/cost-per-request.html" class="related-card"><span class="related-card-title">Cost Per Request Modeling</span><span class="related-card-desc">Compute, storage, network, database per-request cost modeling, and optimization strategies</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card"><span class="related-card-title">Zero-Downtime Database Migrations</span><span class="related-card-desc">Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and producti</span></a><a href="/en/architecture/global-traffic-routing.html" class="related-card"><span class="related-card-title">Global Traffic Routing</span><span class="related-card-desc">DNS-based routing, Anycast, global load balancers, latency-based routing, and multi-region traffic m</span></a><a href="/en/architecture/event-driven-arch.html" class="related-card"><span class="related-card-title">Event-Driven Architecture</span><span class="related-card-desc">Explore event-driven architecture: event bus, event schema management, versioning, and production pa</span></a><a href="/en/architecture/database-per-service.html" class="related-card"><span class="related-card-title">Database per Service Pattern</span><span class="related-card-desc">Learn the database per service pattern for microservices data management — data isolation, eventual </span></a><a href="/en/architecture/caching-http.html" class="related-card"><span class="related-card-title">HTTP Caching Architecture</span><span class="related-card-desc">Cache-Control, ETags, CDN caching, stale-while-revalidate, and cache invalidation strategies</span></a></div>
     </section>
     
   </div>

@@ -8,47 +8,15 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/subscription-business.html
 
 # Building a Subscription Business as a Developer
 
-## Building a Subscription Business as a Developer
-
-### Building a Subscription Business as a Developer
-
-#### Building a Subscription Business as a Developer
-
-#### Building a Subscription Business as a Developer
-
-#### Building a Subscription Business as a Developer
-
-#### Building a Subscription Business as a Developer
-
-#### Building a Subscription Business as a Developer
-
-#### Building a Subscription Business as a Developer
-
-#### Building a Subscription Business as a Developer
-
-#### Building a Subscription Business as a Developer
-
-#### Building a Subscription Business as a Developer
-
-#### Building a Subscription Business as a Developer
-
-#### Building a Subscription Business as a Developer
-
-#### Building a Subscription Business as a Developer
-
-#### Building a Subscription Business as a Developer
-
-#### Building a Subscription Business as a Developer
-
-#### Introduction
+## Introduction
 
 Subscription-based business models generate predictable recurring revenue and are the dominant monetization strategy for SaaS products. As a developer, your technical skills give you a significant advantage in building, measuring, and optimizing a subscription business. This guide covers the essential components from pricing strategy to billing implementation and metric tracking.
 
-#### Pricing Tier Design
+## Pricing Tier Design
 
 Effective pricing tiers balance value capture with customer acquisition:
 
-#### Pricing strategy framework
+## Pricing strategy framework
 
 tiers:
 
@@ -143,7 +111,7 @@ Pricing psychology tips:
 
 
 
-#### Stripe Billing Integration
+## Stripe Billing Integration
 
 // Stripe subscription management
 
@@ -281,7 +249,7 @@ await notifySlack(
 
 }
 
-#### Churn Reduction Strategies
+## Churn Reduction Strategies
 
 Track churn with event analytics and implement proactive retention:
 
@@ -357,7 +325,7 @@ await offerDowngradeTier(userId);
 
 }
 
-#### Customer Lifecycle
+## Customer Lifecycle
 
 Map the customer journey from acquisition to expansion:
 
@@ -429,7 +397,7 @@ break;
 
 }
 
-#### Key SaaS Metrics
+## Key SaaS Metrics
 
 | Metric | Formula | Target | Why It Matters |
 
@@ -506,3 +474,9 @@ Start with a simple pricing model (one paid tier), launch with Stripe's pre-buil
 **See also:** [Monetizing APIs](</en/sidehustle/api-monetization.html>), [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
 
 **See also:** [Monetizing APIs](</en/sidehustle/api-monetization.html>), [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
+
+**See also:** [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)
+
+**See also:** [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)
+
+**See also:** [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)

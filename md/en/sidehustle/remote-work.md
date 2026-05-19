@@ -53,4 +53,4 @@ Site| Focus| Frequency
 
 
 
-**See also:** [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Selling Digital Products as a Developer](</en/sidehustle/digital-products.html>)
+**See also:** [No-Code and Low-Code Business Opportunities](</en/sidehustle/no-code-business.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>)
