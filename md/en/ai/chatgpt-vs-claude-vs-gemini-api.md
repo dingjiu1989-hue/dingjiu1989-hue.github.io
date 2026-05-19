@@ -1,7 +1,7 @@
 ---
 title: "ChatGPT API vs Claude API vs Gemini API: Developer Comparison (2026)"
 description: "In-depth comparison of pricing, context windows, coding ability, multimodal features, and reliability. Which AI API is best for your project? Includes real benchmark results and cost calculator."
-date: 2026-05-08
+date: 2025-11-07
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/chatgpt-vs-claude-vs-gemini-api.html
 ---

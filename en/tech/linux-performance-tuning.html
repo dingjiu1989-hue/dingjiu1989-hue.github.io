@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/linux-performance-tuning.png",
       "datePublished": "2025-12-02",
       "dateModified": "2026-04-28",
-      "wordCount": "1127",
+      "wordCount": "1177",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/linux-performance-tuning.html"},
@@ -99,19 +101,21 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/linux-performance-tuning.png" alt="Linux Performance Tuning" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Linux Performance Tuning</h2>
 <h3>Linux Performance Tuning</h3>
-<h3>Linux Performance Tuning</h3>
-<h3>Linux Performance Tuning</h3>
-<h3>Linux Performance Tuning</h3>
-<h3>Linux Performance Tuning</h3>
-<h3>Linux Performance Tuning</h3>
-<h3>Linux Performance Tuning</h3>
-<h3>Linux Performance Tuning</h3>
-<h3>Linux Performance Tuning</h3>
-<h3>Linux Performance Tuning</h3>
-<h3>Linux Performance Tuning</h3>
-<h3>Linux Performance Tuning</h3>
-<h3>Linux Performance Tuning</h3>
-<h3>Linux Performance Tuning</h3>
+<h4>Linux Performance Tuning</h4>
+<h4>Linux Performance Tuning</h4>
+<h4>Linux Performance Tuning</h4>
+<h4>Linux Performance Tuning</h4>
+<h4>Linux Performance Tuning</h4>
+<h4>Linux Performance Tuning</h4>
+<h4>Linux Performance Tuning</h4>
+<h4>Linux Performance Tuning</h4>
+<h4>Linux Performance Tuning</h4>
+<h4>Linux Performance Tuning</h4>
+<h4>Linux Performance Tuning</h4>
+<h4>Linux Performance Tuning</h4>
+<h4>Linux Performance Tuning</h4>
+<h4>Linux Performance Tuning</h4>
+<h4>Linux Performance Tuning</h4>
 <p>Linux performance tuning is essential for running efficient production workloads. Understanding how the kernel manages CPU, memory, disk, and network resources allows you to identify bottlenecks and optimize accordingly.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/linux-performance-tuning.png" alt="Linux Performance Tuning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>The USE Method</h4>
 <p>Brendan Gregg's USE (Utilization, Saturation, Errors) method provides a systematic approach to performance analysis:</p>
@@ -129,17 +133,17 @@
 <p>Apply this to CPU, memory, storage, and network resources to quickly identify the bottleneck.</p>
 <h4>CPU Performance Tuning</h4>
 <h4>Monitoring Tools</h4>
-<h3>Real-time CPU monitoring</h3>
+<h4>Real-time CPU monitoring</h4>
 <p>htop</p>
-<h3>Per-process CPU usage</h3>
+<h4>Per-process CPU usage</h4>
 <p>top -o %CPU</p>
-<h3>CPU statistics and context switches</h3>
+<h4>CPU statistics and context switches</h4>
 <p>vmstat 1 5</p>
-<h3>Detailed per-CPU utilization</h3>
+<h4>Detailed per-CPU utilization</h4>
 <p>mpstat -P ALL 1</p>
 <p>High context switch rates (above 50,000 per second per core) may indicate inefficient application architecture. Use <code>pidstat -w</code> to identify processes causing excessive context switches.</p>
 <h4>Kernel Parameters</h4>
-<h3>cat /etc/sysctl.d/99-performance.conf</h3>
+<h4>cat /etc/sysctl.d/99-performance.conf</h4>
 <p>kernel.sched_min_granularity_ns = 3000000</p>
 <p>kernel.sched_wakeup_granularity_ns = 4000000</p>
 <p>kernel.sched_migration_cost_ns = 500000</p>
@@ -147,19 +151,19 @@
 <p>These scheduler parameters reduce latency for interactive workloads. Adjust carefully -- aggressive settings can hurt throughput.</p>
 <h4>Memory Tuning</h4>
 <h4>Monitoring Memory</h4>
-<h3>Memory usage overview</h3>
+<h4>Memory usage overview</h4>
 <p>free -h</p>
-<h3>Detailed memory breakdown</h3>
+<h4>Detailed memory breakdown</h4>
 <p>cat /proc/meminfo</p>
-<h3>Page fault statistics</h3>
+<h4>Page fault statistics</h4>
 <p>sar -B 1</p>
-<h3>Top memory consumers</h3>
+<h4>Top memory consumers</h4>
 <p>ps aux --sort=-%mem | head</p>
 <p>Check <code>sar -B</code> for page fault rates. High <code>pgmajfault</code> values indicate the system is swapping -- add more RAM or reduce memory pressure.</p>
 <h4>Swappiness</h4>
-<h3>Reduce swapping tendency (default is 60)</h3>
+<h4>Reduce swapping tendency (default is 60)</h4>
 <p>vm.swappiness = 10</p>
-<h3>Set temporarily</h3>
+<h4>Set temporarily</h4>
 <p>sysctl vm.swappiness=10</p>
 <p>For database servers, set swappiness to 1 to avoid swapping. For desktops and general-purpose servers, 10-20 balances responsiveness with memory efficiency.</p>
 <h4>Transparent Huge Pages</h4>
@@ -170,22 +174,22 @@
 <h4>Disk I/O Tuning</h4>
 <h4>I/O Scheduler</h4>
 <p>Choose the right I/O scheduler for your workload:</p>
-<h3>Check current scheduler</h3>
+<h4>Check current scheduler</h4>
 <p>cat /sys/block/nvme0n1/queue/scheduler</p>
-<h3>Set to none for NVMe, mq-deadline for spinning disks</h3>
+<h4>Set to none for NVMe, mq-deadline for spinning disks</h4>
 <p>echo none &gt; /sys/block/nvme0n1/queue/scheduler</p>
 <p>Modern NVMe drives perform best with the <code>none</code> (or <code>nvme</code>) scheduler. Spinning disks benefit from <code>mq-deadline</code> which minimizes seek times.</p>
 <h4>Monitoring Disk Performance</h4>
-<h3>I/O statistics per device</h3>
+<h4>I/O statistics per device</h4>
 <p>iostat -x 1</p>
-<h3>Process-level I/O</h3>
+<h4>Process-level I/O</h4>
 <p>iotop</p>
-<h3>File system latency</h3>
+<h4>File system latency</h4>
 <p>bcc-tools/biolatency</p>
 <p>High <code>await</code> times (above 20ms) indicate disk saturation. Check <code>iowait</code> in <code>top</code> and <code>svctm</code> in <code>iostat</code> for confirmation.</p>
 <h4>Network Tuning</h4>
 <h4>Kernel Network Parameters</h4>
-<h3>/etc/sysctl.d/99-network.conf</h3>
+<h4>/etc/sysctl.d/99-network.conf</h4>
 <p>net.core.somaxconn = 65535</p>
 <p>net.core.netdev_max_backlog = 50000</p>
 <p>net.ipv4.tcp_tw_reuse = 1</p>
@@ -199,32 +203,34 @@
 <p>net.ipv4.tcp_wmem = 4096 65536 134217728</p>
 <p>Increase socket buffer sizes for high-throughput applications. <code>tcp_tw_reuse</code> allows reuse of connections in TIME_WAIT state, important for high-connection-rate servers.</p>
 <h4>Network Monitoring</h4>
-<h3>Per-interface statistics</h3>
+<h4>Per-interface statistics</h4>
 <p>sar -n DEV 1</p>
-<h3>Socket statistics</h3>
+<h4>Socket statistics</h4>
 <p>ss -s</p>
-<h3>Connection tracking</h3>
+<h4>Connection tracking</h4>
 <p>netstat -s | grep -i "connections established"</p>
 <p>Monitor for dropped packets in <code>/proc/net/softnet_stat</code> and TCP retransmits with <code>netstat -s | grep retransmit</code>.</p>
 <h4>File System Tuning</h4>
 <h4>Mount Options</h4>
 <p>Optimize filesystem mount options for performance:</p>
-<h3>/etc/fstab</h3>
+<h4>/etc/fstab</h4>
 <p>/dev/sda1 / ext4 noatime,nodiratime,data=ordered 0 0</p>
 <p>The <code>noatime</code> option eliminates update timestamps on every file read, significantly reducing disk writes. Use <code>nodiratime</code> for directories.</p>
 <h4>I/O Limits with cgroups</h4>
 <p>Control per-process I/O with cgroups v2:</p>
-<h3>Limit read/write to 50 MB/s</h3>
+<h4>Limit read/write to 50 MB/s</h4>
 <p>echo "8:0 rbps=52428800 wbps=52428800" &gt; /sys/fs/cgroup//io.max</p>
 <h4>Application-Level Tuning</h4>
 <p>Profile before tuning. Use <code>perf</code> for CPU profiling, <code>flamegraphs</code> for visualization, and <code>strace</code> for system call analysis:</p>
-<h3>Sample CPU stacks at 99Hz</h3>
+<h4>Sample CPU stacks at 99Hz</h4>
 <p>perf record -F 99 -a -g -- sleep 30</p>
 <p>perf script | ./stackcollapse-perf.pl | ./flamegraph.pl &gt; profile.svg</p>
 <p>Always measure before and after changes. A single benchmark run is unreliable -- run multiple iterations and report the median.</p>
 <h4>Summary</h4>
 <p>Linux performance tuning is a systematic process of identifying bottlenecks, applying targeted optimizations, and measuring the impact. Start with the USE method to find the bottleneck, use the right monitoring tools, and tune one parameter at a time. Common wins include setting the correct I/O scheduler, reducing swappiness for databases, disabling THP, and increasing network buffer sizes. Profile first, tune second, and always validate with benchmarks.</p>
 <p><strong>See also:</strong> <a href="/en/tech/git-workflows-2026.html">Git Workflows for Teams</a>, <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/webpack-vs-vite-bundlers.html">Webpack vs Vite Comparison</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/git-workflows-2026.html">Git Workflows for Teams</a>, <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/git-workflows-2026.html">Git Workflows for Teams</a>, <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/git-workflows-2026.html">Git Workflows for Teams</a>, <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/git-workflows-2026.html">Git Workflows for Teams</a>, <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/git-workflows-2026.html">Git Workflows for Teams</a>, <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p></div>
     </article>

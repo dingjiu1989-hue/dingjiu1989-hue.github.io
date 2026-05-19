@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-advanced.png",
       "datePublished": "2025-12-30",
       "dateModified": "2026-04-18",
-      "wordCount": "4339",
+      "wordCount": "4404",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/github-actions-advanced.html"},
@@ -99,24 +101,26 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-advanced.png" alt="Advanced GitHub Actions Workflows" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Advanced GitHub Actions Workflows</h2>
 <h3>Advanced GitHub Actions Workflows</h3>
-<h3>Advanced GitHub Actions Workflows</h3>
-<h3>Advanced GitHub Actions Workflows</h3>
-<h3>Advanced GitHub Actions Workflows</h3>
-<h3>Advanced GitHub Actions Workflows</h3>
-<h3>Advanced GitHub Actions Workflows</h3>
-<h3>Advanced GitHub Actions Workflows</h3>
-<h3>Advanced GitHub Actions Workflows</h3>
-<h3>Advanced GitHub Actions Workflows</h3>
-<h3>Advanced GitHub Actions Workflows</h3>
-<h3>Advanced GitHub Actions Workflows</h3>
-<h3>Advanced GitHub Actions Workflows</h3>
-<h3>Advanced GitHub Actions Workflows</h3>
-<h3>Advanced GitHub Actions Workflows</h3>
+<h4>Advanced GitHub Actions Workflows</h4>
+<h4>Advanced GitHub Actions Workflows</h4>
+<h4>Advanced GitHub Actions Workflows</h4>
+<h4>Advanced GitHub Actions Workflows</h4>
+<h4>Advanced GitHub Actions Workflows</h4>
+<h4>Advanced GitHub Actions Workflows</h4>
+<h4>Advanced GitHub Actions Workflows</h4>
+<h4>Advanced GitHub Actions Workflows</h4>
+<h4>Advanced GitHub Actions Workflows</h4>
+<h4>Advanced GitHub Actions Workflows</h4>
+<h4>Advanced GitHub Actions Workflows</h4>
+<h4>Advanced GitHub Actions Workflows</h4>
+<h4>Advanced GitHub Actions Workflows</h4>
+<h4>Advanced GitHub Actions Workflows</h4>
+<h4>Advanced GitHub Actions Workflows</h4>
 <h4>Introduction</h4>
 <p>GitHub Actions has evolved beyond simple CI/CD into a full-featured automation platform. Teams managing monorepos, multi-service architectures, or compliance-sensitive deployments need advanced workflows that are maintainable, fast, and secure. This article explores production-ready patterns for GitHub Actions at scale.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-advanced.png" alt="Advanced GitHub Actions Workflows" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Reusable Workflows</h4>
 <p>Reusable workflows eliminate duplication across repositories. Define a workflow in <code>.github/workflows/deploy-shared.yml</code> with <code>workflow_call</code>:</p>
-<h3>.github/workflows/deploy-shared.yml</h3>
+<h4>.github/workflows/deploy-shared.yml</h4>
 <p>name: Shared Deployment Workflow</p>
 <p>on:</p>
 <p>workflow_call:</p>
@@ -139,9 +143,9 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Deploy to ${{ inputs.environment }}</p>
 <p>run: |</p>
 <p>echo "Deploying ${{ inputs.image-tag }} to ${{ inputs.environment }}"</p>
-<h3>Actual deployment logic here</h3>
+<h4>Actual deployment logic here</h4>
 <p>Consume it from any repository:</p>
-<h3>.github/workflows/release.yml</h3>
+<h4>.github/workflows/release.yml</h4>
 <p>name: Release</p>
 <p>on:</p>
 <p>push:</p>
@@ -182,7 +186,7 @@
 <p>The <code>include</code> key adds jobs to the matrix, while <code>exclude</code> removes specific combinations. For large matrices, use <code>max-parallel: 3</code> to avoid saturating runner capacity.</p>
 <h4>Composite Actions</h4>
 <p>Composite actions bundle multiple steps into a reusable unit, ideal for organization-wide standards:</p>
-<h3>.github/actions/setup-node-env/action.yml</h3>
+<h4>.github/actions/setup-node-env/action.yml</h4>
 <p>name: "Setup Node.js Environment"</p>
 <p>description: "Configures Node with pnpm, cache, and dependency audit"</p>
 <p>inputs:</p>
@@ -313,6 +317,8 @@
 <p>key: ${{ runner.os }}-${{ github.workflow }}-${{ hashFiles('packages/*/package-lock.json') }}</p>
 <p>These patterns form the foundation of scalable, secure GitHub Actions usage in enterprise environments. Start with reusable workflows and matrix builds, then layer on OIDC and self-hosted runners as your infrastructure grows.</p>
 <p><strong>See also:</strong> <a href="/en/tech/github-actions-workflows.html">GitHub Actions Workflows: Advanced Patterns</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/github-actions-workflows.html">GitHub Actions Workflows: Advanced Patterns</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/github-actions-workflows.html">GitHub Actions Workflows: Advanced Patterns</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/github-actions-workflows.html">GitHub Actions Workflows: Advanced Patterns</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/github-actions-workflows.html">GitHub Actions Workflows: Advanced Patterns</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/github-actions-workflows.html">GitHub Actions Workflows: Advanced Patterns</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p></div>
     </article>

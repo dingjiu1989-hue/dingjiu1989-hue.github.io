@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/soc2-technical.png",
       "datePublished": "2026-03-19",
       "dateModified": "2026-04-26",
-      "wordCount": "1558",
+      "wordCount": "1610",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/soc2-technical.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/soc2-technical.png" alt="SOC 2 Technical Controls" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>SOC 2 Technical Controls</h2>
 <h3>SOC 2 Technical Controls</h3>
-<h3>SOC 2 Technical Controls</h3>
-<h3>SOC 2 Technical Controls</h3>
-<h3>SOC 2 Technical Controls</h3>
-<h3>SOC 2 Technical Controls</h3>
-<h3>SOC 2 Technical Controls</h3>
-<h3>SOC 2 Technical Controls</h3>
-<h3>SOC 2 Technical Controls</h3>
-<h3>SOC 2 Technical Controls</h3>
-<h3>SOC 2 Technical Controls</h3>
-<h3>SOC 2 Technical Controls</h3>
-<h3>SOC 2 Technical Controls</h3>
+<h4>SOC 2 Technical Controls</h4>
+<h4>SOC 2 Technical Controls</h4>
+<h4>SOC 2 Technical Controls</h4>
+<h4>SOC 2 Technical Controls</h4>
+<h4>SOC 2 Technical Controls</h4>
+<h4>SOC 2 Technical Controls</h4>
+<h4>SOC 2 Technical Controls</h4>
+<h4>SOC 2 Technical Controls</h4>
+<h4>SOC 2 Technical Controls</h4>
+<h4>SOC 2 Technical Controls</h4>
+<h4>SOC 2 Technical Controls</h4>
+<h4>SOC 2 Technical Controls</h4>
+<h4>SOC 2 Technical Controls</h4>
 <p>SOC 2 Overview </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/soc2-technical.png" alt="SOC 2 Technical Controls" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>SOC 2 audits trust service criteria: Security, Availability, Processing Integrity, Confidentiality, and Privacy. Technical controls are essential for meeting these criteria. </p>
 <p>Logging and Monitoring </p>
@@ -141,10 +145,10 @@
 <p>return log_entry</p>
 <p>def store_immutable(self, log_entry):</p>
 <p>"""Store logs in immutable storage for audit"""</p>
-<h3>Write to append-only log</h3>
+<h4>Write to append-only log</h4>
 <p>with open("/var/log/soc2/access.log", "a") as f:</p>
 <p>f.write(json.dumps(log_entry) + "\n")</p>
-<h3>Also send to SIEM</h3>
+<h4>Also send to SIEM</h4>
 <p>self.send_to_siem(log_entry)</p>
 <p>Access Review Automation </p>
 <p>Automate periodic access reviews: </p>
@@ -186,7 +190,7 @@
 <p>return disabled</p>
 <p>Change Management </p>
 <p>Track and approve all infrastructure changes: </p>
-<h3>change-management-pipeline.yaml</h3>
+<h4>change-management-pipeline.yaml</h4>
 <p>change_management:</p>
 <p>required_for:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- infrastructure_changes</p>
@@ -217,7 +221,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- monitoring_metrics_normal</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- smoke_tests_passed</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_security_events</p>
-<h3>Change management API</h3>
+<h4>Change management API</h4>
 <p>class ChangeManager:</p>
 <p>def <strong>init</strong>(self):</p>
 <p>self.changes = []</p>
@@ -255,6 +259,8 @@
 <p>Conclusion </p>
 <p>SOC 2 technical controls require systematic implementation across logging, access review, and change management. Implement immutable audit logging, automate access recertification, and enforce change management workflows. Continuous monitoring provides evidence for auditors and early detection of control failures. Automate evidence collection to reduce audit burden.</p>
 <p><strong>See also:</strong> <a href="/en/security/gdpr-technical.html">GDPR Technical Controls</a>, <a href="/en/security/database-encryption.html">Database Encryption</a>, <a href="/en/security/identity-access-management.html">IAM: Identity and Access Management Fundamentals</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/gdpr-technical.html">GDPR Technical Controls</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/gdpr-technical.html">GDPR Technical Controls</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/gdpr-technical.html">GDPR Technical Controls</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/gdpr-technical.html">GDPR Technical Controls</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/gdpr-technical.html">GDPR Technical Controls</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p></div>
     </article>

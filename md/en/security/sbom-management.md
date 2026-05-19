@@ -1,7 +1,7 @@
 ---
 title: "SBOM Management"
 description: "Managing Software Bill of Materials with generation, verification, vulnerability correlation, and compliance."
-date: 2026-05-12
+date: 2026-03-18
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/sbom-management.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/security/sbom-management.html
 
 ## SBOM Management
 
-## SBOM Management
+### SBOM Management
 
-## SBOM Management
+#### SBOM Management
 
-## SBOM Management
+#### SBOM Management
 
-## SBOM Management
+#### SBOM Management
 
-## SBOM Management
+#### SBOM Management
 
-## SBOM Management
+#### SBOM Management
 
-## SBOM Management
+#### SBOM Management
 
-## SBOM Management
+#### SBOM Management
 
-## SBOM Management
+#### SBOM Management
 
-## SBOM Management
+#### SBOM Management
 
-## SBOM Management
+#### SBOM Management
+
+#### SBOM Management
+
+#### SBOM Management
+
+#### SBOM Management
 
 What is an SBOM? 
 
@@ -40,7 +46,7 @@ SBOM Generation
 
 Generate SBOMs using SPDX or CycloneDX formats: 
 
-## Generate SBOM with Syft
+#### Generate SBOM with Syft
 
 syft packages myapp:latest -o cyclonedx-json > sbom.cyclonedx.json
 
@@ -48,7 +54,7 @@ syft packages myapp:latest -o spdx-json > sbom.spdx.json
 
 syft dir:./src -o cyclonedx-json > src-sbom.json
 
-## Generate SBOM for multiple languages
+#### Generate SBOM for multiple languages
 
 syft packages package-lock.json -o cyclonedx-json
 
@@ -56,7 +62,7 @@ syft packages requirements.txt -o cyclonedx-json
 
 syft packages go.sum -o cyclonedx-json
 
-## Programmatic SBOM generation
+#### Programmatic SBOM generation
 
 import json
 
@@ -116,7 +122,7 @@ SBOM Verification
 
 Verify SBOM integrity and completeness: 
 
-## sbom-verification-pipeline.yaml
+#### sbom-verification-pipeline.yaml
 
 verification_steps:
 
@@ -168,7 +174,7 @@ if not purl:
 
 continue
 
-## Query OSV database
+#### Query OSV database
 
 response = requests.post(self.osv_api, json={
 
@@ -206,7 +212,7 @@ return vulnerabilities
 
 SBOM Storage and Management 
 
-## SBOM storage strategy
+#### SBOM storage strategy
 
 sbom_storage:
 
@@ -248,7 +254,7 @@ action: archive
 
 SBOM as Attestation 
 
-## Sign SBOM with cosign
+#### Sign SBOM with cosign
 
 cosign attest-blob sbom.cyclonedx.json \
 
@@ -258,7 +264,7 @@ cosign attest-blob sbom.cyclonedx.json \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--predicate sbom.cyclonedx.json
 
-## Verify attestation
+#### Verify attestation
 
 cosign verify-attestation --type cyclonedx sbom.cyclonedx.json
 
@@ -267,6 +273,12 @@ Conclusion
 SBOMs are essential for supply chain security. Generate them automatically in your CI pipeline, verify their integrity, and correlate components with vulnerability databases. Store SBOMs alongside your artifacts and sign them for tamper evidence. Use SBOMs for compliance, vulnerability management, and incident response.
 
 **See also:** [Vulnerability Management](</en/security/vulnerability-management.html>), [Helm Security](</en/security/helm-security.html>), [Patching Strategy](</en/security/patching-strategy.html>).
+
+**See also:** [Helm Security](</en/security/helm-security.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [Helm Security](</en/security/helm-security.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [Helm Security](</en/security/helm-security.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 
 **See also:** [Helm Security](</en/security/helm-security.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 

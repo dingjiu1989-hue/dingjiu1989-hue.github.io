@@ -1,7 +1,7 @@
 ---
 title: "SOA vs Microservices"
 description: "Enterprise service bus, service granularity, governance differences between SOA and microservices architectures"
-date: 2026-05-12
+date: 2026-04-30
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/soa-vs-microservices.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/soa-vs-microservices.html
 
 ## SOA vs Microservices
 
-## SOA vs Microservices
+### SOA vs Microservices
 
-## SOA vs Microservices
+#### SOA vs Microservices
 
-## SOA vs Microservices
+#### SOA vs Microservices
 
-## SOA vs Microservices
+#### SOA vs Microservices
 
-## SOA vs Microservices
+#### SOA vs Microservices
 
-## SOA vs Microservices
+#### SOA vs Microservices
 
-## SOA vs Microservices
+#### SOA vs Microservices
 
-## SOA vs Microservices
+#### SOA vs Microservices
 
-## SOA vs Microservices
+#### SOA vs Microservices
 
-## SOA vs Microservices
+#### SOA vs Microservices
 
-## SOA vs Microservices
+#### SOA vs Microservices
+
+#### SOA vs Microservices
+
+#### SOA vs Microservices
+
+#### SOA vs Microservices
 
 Service-Oriented Architecture (SOA) and microservices share the fundamental principle of decomposing systems into independently deployable services, but they differ substantially in scope, granularity, governance, and infrastructure philosophy. Understanding these differences is critical for architects choosing between or integrating both approaches. 
 
@@ -49,6 +55,12 @@ Deployment infrastructure also differs. SOA services often ran on enterprise app
 Neither approach is universally superior. SOA's mature governance and integration patterns suit large enterprises with heterogeneous systems and strict compliance requirements. Microservices agility benefits product-focused organizations with autonomous teams. Many modern architectures combine elements of both — using lightweight service mesh for inter-service communication (microservices) while maintaining centralized API management and monitoring (SOA governance), recognizing that absolute purity to either philosophy is less important than pragmatic outcomes.
 
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Contract Testing for Microservices](</en/architecture/contract-testing.html>), [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>).
+
+**See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
+
+**See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
+
+**See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
 
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
 

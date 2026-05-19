@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/messaging-patterns.png",
       "datePublished": "2025-12-29",
       "dateModified": "2026-05-12",
-      "wordCount": "1635",
+      "wordCount": "1698",
       "keywords": "Architecture, System Design",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/messaging-patterns.html"},
@@ -98,17 +100,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/messaging-patterns.png" alt="Messaging Patterns: Pub/Sub and Request/Reply" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Messaging Patterns: Pub/Sub and Request/Reply</h2>
 <h3>Messaging Patterns: Pub/Sub and Request/Reply</h3>
-<h3>Messaging Patterns: Pub/Sub and Request/Reply</h3>
-<h3>Messaging Patterns: Pub/Sub and Request/Reply</h3>
-<h3>Messaging Patterns: Pub/Sub and Request/Reply</h3>
-<h3>Messaging Patterns: Pub/Sub and Request/Reply</h3>
-<h3>Messaging Patterns: Pub/Sub and Request/Reply</h3>
-<h3>Messaging Patterns: Pub/Sub and Request/Reply</h3>
-<h3>Messaging Patterns: Pub/Sub and Request/Reply</h3>
-<h3>Messaging Patterns: Pub/Sub and Request/Reply</h3>
-<h3>Messaging Patterns: Pub/Sub and Request/Reply</h3>
-<h3>Messaging Patterns: Pub/Sub and Request/Reply</h3>
-<h3>Messaging Patterns: Pub/Sub and Request/Reply</h3>
+<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
+<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
+<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
+<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
+<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
+<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
+<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
+<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
+<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
+<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
+<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
+<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
+<h4>Messaging Patterns: Pub/Sub and Request/Reply</h4>
 <p>Messaging is the backbone of distributed systems. It enables services to communicate asynchronously, decouple dependencies, and build resilient architectures. This article covers the two most fundamental messaging patterns: publish-subscribe and request-reply. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/messaging-patterns.png" alt="Messaging Patterns: Pub/Sub and Request/Reply" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The Case for Messaging </p>
 <p>Direct HTTP calls between services create tight coupling. When Service A calls Service B directly: </p>
@@ -142,14 +146,14 @@
 <p><strong>Broadcasting.</strong> A live sports app publishes score updates. Thousands of clients receive updates in real-time. </p>
 <p><strong>Log aggregation.</strong> Multiple services publish log entries to a central topic. A log processing service stores and indexes them. </p>
 <p>Example with Kafka </p>
-<h3>Publisher</h3>
+<h4>Publisher</h4>
 <p>producer.send('order-events', {</p>
 <p>'type': 'OrderPlaced',</p>
 <p>'order_id': '123',</p>
 <p>'customer_id': '456',</p>
 <p>'total': 99.99</p>
 <p>})</p>
-<h3>Subscriber</h3>
+<h4>Subscriber</h4>
 <p>@kafka_listener('order-events')</p>
 <p>def handle_order_placed(event):</p>
 <p>if event['type'] == 'OrderPlaced':</p>
@@ -163,7 +167,7 @@
 <p>[Requestor] &lt;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [Reply Queue] &lt;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [Replier]</p>
 <p>Correlation ID </p>
 <p>The key mechanism is the correlation ID. The requestor includes a unique ID in the request message. The replier includes the same ID in the reply message. The requestor uses this ID to match replies to pending requests. </p>
-<h3>Requestor</h3>
+<h4>Requestor</h4>
 <p>correlation_id = str(uuid.uuid4())</p>
 <p>reply_queue = f"reply-{correlation_id}"</p>
 <p>message = {</p>
@@ -171,9 +175,9 @@
 <p>'payload': {'user_id': '123', 'amount': 100}</p>
 <p>}</p>
 <p>request_queue.send(message)</p>
-<h3>Wait for reply on the reply queue</h3>
+<h4>Wait for reply on the reply queue</h4>
 <p>reply = reply_queue.receive(timeout=30)</p>
-<h3>Replier</h3>
+<h4>Replier</h4>
 <p>def handle_request(message):</p>
 <p>result = process(message['payload'])</p>
 <p>reply = {</p>
@@ -203,7 +207,9 @@
 <p>Pub/Sub and Request-Reply serve different purposes. Use Pub/Sub when you need to notify multiple consumers of an event. Use Request-Reply when a service needs a response. Many systems use both patterns together. Choose your message broker based on throughput requirements, routing complexity, and operational preferences. Always design for idempotency and handle duplicate messages gracefully.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/event-driven-architecture.html">Event-Driven Architecture: Patterns and Practice</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/event-driven-architecture.html">Event-Driven Architecture: Patterns and Practice</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/event-driven-architecture.html">Event-Driven Architecture: Patterns and Practice</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/event-driven-architecture.html">Event-Driven Architecture: Patterns and Practice</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -215,7 +221,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/pub-sub-patterns.html" class="related-card">Pub-Sub Patterns: Event-Driven Communication</a><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a><a href="/en/architecture/rate-limiting-patterns.html" class="related-card">Rate Limiting Patterns</a></div>
+      <div class="related-grid"><a href="/en/architecture/pub-sub-patterns.html" class="related-card">Pub-Sub Patterns: Event-Driven Communication</a><a href="/en/architecture/bulkhead-pattern.html" class="related-card">Bulkhead Pattern for Resilience</a><a href="/en/architecture/rate-limiting-patterns.html" class="related-card">Rate Limiting Patterns</a><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a></div>
     </section>
     
   </div>

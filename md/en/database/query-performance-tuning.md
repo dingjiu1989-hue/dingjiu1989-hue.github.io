@@ -1,7 +1,7 @@
 ---
 title: "Query Performance Tuning Tools"
 description: "Master query performance tuning with EXPLAIN ANALYZE, pg_stat_statements, slow query logs, and database profiling tools."
-date: 2026-05-11
+date: 2025-12-23
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/query-performance-tuning.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/query-performance-tuning.html
 
 ## Query Performance Tuning Tools
 
-## Query Performance Tuning Tools
+### Query Performance Tuning Tools
 
-## Query Performance Tuning Tools
+#### Query Performance Tuning Tools
 
-## Query Performance Tuning Tools
+#### Query Performance Tuning Tools
 
-## Query Performance Tuning Tools
+#### Query Performance Tuning Tools
 
-## Query Performance Tuning Tools
+#### Query Performance Tuning Tools
 
-## Query Performance Tuning Tools
+#### Query Performance Tuning Tools
 
-## Query Performance Tuning Tools
+#### Query Performance Tuning Tools
 
-## Query Performance Tuning Tools
+#### Query Performance Tuning Tools
 
-## Query Performance Tuning Tools
+#### Query Performance Tuning Tools
 
-## Query Performance Tuning Tools
+#### Query Performance Tuning Tools
 
-## Query Performance Tuning Tools
+#### Query Performance Tuning Tools
+
+#### Query Performance Tuning Tools
+
+#### Query Performance Tuning Tools
+
+#### Query Performance Tuning Tools
 
 The Performance Tuning Process 
 
@@ -40,7 +46,7 @@ Step 1: Identify Slow Queries
 
 PostgreSQL Slow Query Log 
 
-## postgresql.conf
+#### postgresql.conf
 
 log_min_duration_statement = 1000 # Log queries slower than 1 second
 
@@ -78,7 +84,7 @@ LIMIT 20;
 
 MySQL Slow Query Log 
 
-## my.cnf
+#### my.cnf
 
 slow_query_log = 1
 
@@ -88,17 +94,17 @@ long_query_time = 1
 
 log_queries_not_using_indexes = 1
 
-## Analyze slow query log
+#### Analyze slow query log
 
 pt-query-digest /var/log/mysql/slow.log
 
-## Output includes:
+#### Output includes:
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Worst queries by execution time
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Worst queries by execution time
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Worst queries by frequency
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Worst queries by frequency
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Query patterns and response time distribution
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Query patterns and response time distribution
 
 Step 2: Analyze Query Plans 
 
@@ -384,19 +390,19 @@ Automated Tuning Tools
 
 | Tool | Database | Features | |------|----------|----------| | pgBadger | PostgreSQL | Log analysis with visual reports | | pgbadger | PostgreSQL | Query distribution, temp files, locks | | pg_stat_monitor | PostgreSQL | Enhanced pg_stat_statements with query groups | | MySQLTuner | MySQL | Configuration recommendations | | pt-query-digest | MySQL | Query analysis and pattern matching | | mongostat | MongoDB | Real-time MongoDB metrics | 
 
-## Generate a visual report with pgBadger
+#### Generate a visual report with pgBadger
 
 pgbadger /var/log/postgresql/postgresql.log -o report.html
 
-## Analyze the report for:
+#### Analyze the report for:
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Most time-consuming queries
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Most time-consuming queries
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Temporary file usage
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Temporary file usage
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Lock wait events
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Lock wait events
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Checkpoint frequency
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Checkpoint frequency
 
 Performance Tuning Workflow 
 
@@ -411,6 +417,12 @@ Summary
 Performance tuning is a data-driven process. Start with the slow query log or pg_stat_statements to identify problematic queries, use EXPLAIN ANALYZE to understand execution plans, monitor locks and contention, and track index usage. Focus on queries with the highest total execution time, not just the slowest individual queries. Always measure before and after making changes, and automate monitoring with tools like pgBadger for continuous visibility into query performance.
 
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>).
+
+**See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>)
+
+**See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>)
+
+**See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>)
 
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>)
 

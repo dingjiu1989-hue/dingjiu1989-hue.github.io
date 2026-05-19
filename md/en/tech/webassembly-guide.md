@@ -1,7 +1,7 @@
 ---
 title: "WebAssembly Guide 2026: Running Native Code in the Browser with Rust and WASI"
 description: "Practical guide to WebAssembly — when to use it, Rust to Wasm with wasm-pack, WASI for edge computing, and real-world performance benchmarks."
-date: 2026-05-08
+date: 2025-10-20
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/webassembly-guide.html
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Secure Code Review"
 description: "A systematic approach to secure code review with checklists, automation, SAST integration, and common findings."
-date: 2026-05-12
+date: 2026-03-19
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/secure-code-review.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/security/secure-code-review.html
 
 ## Secure Code Review
 
-## Secure Code Review
+### Secure Code Review
 
-## Secure Code Review
+#### Secure Code Review
 
-## Secure Code Review
+#### Secure Code Review
 
-## Secure Code Review
+#### Secure Code Review
 
-## Secure Code Review
+#### Secure Code Review
 
-## Secure Code Review
+#### Secure Code Review
 
-## Secure Code Review
+#### Secure Code Review
 
-## Secure Code Review
+#### Secure Code Review
 
-## Secure Code Review
+#### Secure Code Review
 
-## Secure Code Review
+#### Secure Code Review
 
-## Secure Code Review
+#### Secure Code Review
+
+#### Secure Code Review
+
+#### Secure Code Review
+
+#### Secure Code Review
 
 Why Secure Code Review? 
 
@@ -40,7 +46,7 @@ The Security Review Checklist
 
 Every code review should check these categories: 
 
-## secure-code-review-checklist.yaml
+#### secure-code-review-checklist.yaml
 
 authentication:
 
@@ -86,7 +92,7 @@ SAST Integration
 
 Static Application Security Testing (SAST) automates vulnerability detection: 
 
-## SAST results triage
+#### SAST results triage
 
 import json
 
@@ -118,7 +124,7 @@ false_positives.append(finding)
 
 continue
 
-## Critical findings in production code
+#### Critical findings in production code
 
 if finding["severity"] == "critical" and finding["branch"] == "main":
 
@@ -134,7 +140,7 @@ Common Findings
 
 SQL Injection 
 
-## VULNERABLE
+#### VULNERABLE
 
 def get_user(username):
 
@@ -142,7 +148,7 @@ query = f"SELECT * FROM users WHERE username = '{username}'"
 
 return db.execute(query)
 
-## SECURE
+#### SECURE
 
 def get_user(username):
 
@@ -180,7 +186,7 @@ res.json(order);
 
 Automated Enforcement in CI 
 
-## .github/workflows/security-review.yml
+#### .github/workflows/security-review.yml
 
 name: Security Review
 
@@ -219,6 +225,12 @@ Conclusion
 Effective secure code review combines automated SAST scanning with manual review of critical code paths. Build a review checklist, integrate security into your CI pipeline, and train developers on common vulnerability patterns. The best vulnerability is the one caught before it reaches production.
 
 **See also:** [Security Testing Tools: SAST, DAST, IAST, and RASP Compared](</en/security/security-testing-tools.html>), [Secure Configuration Management](</en/security/secure-configuration.html>), [Compliance Automation](</en/security/compliance-automation.html>).
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Compliance Automation](</en/security/compliance-automation.html>), [SSO Architecture](</en/security/sso-architecture.html>)
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Compliance Automation](</en/security/compliance-automation.html>), [SSO Architecture](</en/security/sso-architecture.html>)
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Compliance Automation](</en/security/compliance-automation.html>), [SSO Architecture](</en/security/sso-architecture.html>)
 
 **See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Compliance Automation](</en/security/compliance-automation.html>), [SSO Architecture](</en/security/sso-architecture.html>)
 

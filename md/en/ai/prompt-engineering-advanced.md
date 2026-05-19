@@ -1,7 +1,7 @@
 ---
 title: "Advanced Prompt Engineering: Techniques That Actually Work for Developers"
 description: "Beyond basic prompting: chain-of-thought, few-shot with examples, XML tagging, system prompt design, and multi-turn strategies. Includes before/after comparisons with code generation quality."
-date: 2026-05-08
+date: 2025-11-07
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/prompt-engineering-advanced.html
 ---

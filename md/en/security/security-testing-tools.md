@@ -1,7 +1,7 @@
 ---
 title: "Security Testing Tools: SAST, DAST, IAST, and RASP Compared"
 description: "Compare application security testing approaches: SAST, DAST, IAST, RASP tools and integration strategies."
-date: 2026-05-12
+date: 2026-03-24
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/security-testing-tools.html
 ---
@@ -10,55 +10,67 @@ url: https://dingjiu1989-hue.github.io/en/security/security-testing-tools.html
 
 ## Security Testing Tools: SAST, DAST, IAST, and RASP Compared
 
-## Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+### Security Testing Tools: SAST, DAST, IAST, and RASP Compared
 
-## Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+#### Security Testing Tools: SAST, DAST, IAST, and RASP Compared
 
-## Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+#### Security Testing Tools: SAST, DAST, IAST, and RASP Compared
 
-## Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+#### Security Testing Tools: SAST, DAST, IAST, and RASP Compared
 
-## Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+#### Security Testing Tools: SAST, DAST, IAST, and RASP Compared
 
-## Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+#### Security Testing Tools: SAST, DAST, IAST, and RASP Compared
 
-## Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+#### Security Testing Tools: SAST, DAST, IAST, and RASP Compared
 
-## Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+#### Security Testing Tools: SAST, DAST, IAST, and RASP Compared
 
-## Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+#### Security Testing Tools: SAST, DAST, IAST, and RASP Compared
 
-## Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+#### Security Testing Tools: SAST, DAST, IAST, and RASP Compared
 
-## Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+#### Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+
+#### Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+
+#### Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+
+#### Security Testing Tools: SAST, DAST, IAST, and RASP Compared
 
 Application security testing identifies vulnerabilities in software. Different testing approaches find different types of issues and operate at different stages of the SDLC. A comprehensive security testing program uses multiple approaches.
 
-### SAST (Static Analysis)
+#### SAST (Static Analysis)
 
 SAST analyzes source code without executing it. It finds vulnerabilities early in development. SAST tools scan for injection flaws, buffer overflows, insecure cryptographic practices, and other code-level issues.
 
 Tools: SonarQube, Checkmarx, Fortify, Semgrep. SonarQube is the most popular open-source option. Semgrep provides custom rule writing for team-specific patterns.
 
-### DAST (Dynamic Analysis)
+#### DAST (Dynamic Analysis)
 
 DAST tests running applications by sending malicious inputs and observing responses. It finds runtime vulnerabilities that SAST cannot detect: authentication bypass, session management flaws, and business logic errors.
 
 Tools: OWASP ZAP (open-source), Burp Suite (professional), Acunetix (commercial). OWASP ZAP provides automated scanning with CI/CD integration.
 
-### IAST (Interactive Analysis)
+#### IAST (Interactive Analysis)
 
 IAST instruments the application and analyzes code execution during testing. It combines SAST's code analysis with DAST's runtime context. IAST provides fewer false positives than SAST and deeper coverage than DAST.
 
-### RASP (Runtime Protection)
+#### RASP (Runtime Protection)
 
 RASP monitors application behavior at runtime and blocks attacks. It provides real-time protection without requiring code changes. RASP complements other testing approaches by protecting against unknown vulnerabilities.
 
-### Integration
+#### Integration
 
 Use SAST in the IDE for early feedback. Run SAST in CI/CD for every commit. Schedule DAST scans weekly or before releases. Use IAST during QA testing. Deploy RASP in production for defense-in-depth.
 
 **See also:** [WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai](</en/security/waf-comparison.html>), [OWASP Top 10 2026](</en/security/owasp-top-10-2026.html>), [Secure Code Review](</en/security/secure-code-review.html>).
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>), [DNS Security](</en/security/dns-security.html>)
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>), [DNS Security](</en/security/dns-security.html>)
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>), [DNS Security](</en/security/dns-security.html>)
 
 **See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>), [DNS Security](</en/security/dns-security.html>)
 

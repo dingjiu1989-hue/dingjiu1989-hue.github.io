@@ -1,7 +1,7 @@
 ---
 title: "Solid.js vs Qwik"
 description: "Compare Solid.js and Qwik for modern web development — fine-grained reactivity, resumability, performance, and use case suitability."
-date: 2026-05-11
+date: 2025-12-16
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/solid-vs-qwik.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/compare/solid-vs-qwik.html
 
 ## Solid.js vs Qwik
 
-## Solid.js vs Qwik
+### Solid.js vs Qwik
 
-## Solid.js vs Qwik
+#### Solid.js vs Qwik
 
-## Solid.js vs Qwik
+#### Solid.js vs Qwik
 
-## Solid.js vs Qwik
+#### Solid.js vs Qwik
 
-## Solid.js vs Qwik
+#### Solid.js vs Qwik
 
-## Solid.js vs Qwik
+#### Solid.js vs Qwik
 
-## Solid.js vs Qwik
+#### Solid.js vs Qwik
 
-## Solid.js vs Qwik
+#### Solid.js vs Qwik
 
-## Solid.js vs Qwik
+#### Solid.js vs Qwik
 
-## Solid.js vs Qwik
+#### Solid.js vs Qwik
 
-## Solid.js vs Qwik
+#### Solid.js vs Qwik
 
-## Solid.js vs Qwik
+#### Solid.js vs Qwik
 
-### Introduction
+#### Solid.js vs Qwik
+
+#### Solid.js vs Qwik
+
+#### Solid.js vs Qwik
+
+#### Introduction
 
 Solid.js and Qwik represent the cutting edge of web framework design. Both challenge the virtual DOM paradigm that has dominated frontend development for a decade, but they take radically different approaches. Solid.js offers fine-grained reactivity without a virtual DOM — updates are precise and surgical. Qwik introduces resumability, where applications can start on the server and resume on the client with almost no JavaScript. This comparison explores how these frameworks work and when to use each.
 
-### Solid.js
+#### Solid.js
 
 Solid.js was created by Ryan Carniato and pioneered the concept of fine-grained reactivity inspired by Knockout.js and MobX.
 
@@ -139,7 +145,7 @@ console.log(`Showing ${filteredTodos().length} todos`);
 
 
 
-### Qwik
+#### Qwik
 
 Qwik was created by Misko Hevery (creator of Angular) and introduces the concept of resumability.
 
@@ -238,7 +244,7 @@ Load Todos
 
 
 
-### Performance Comparison
+#### Performance Comparison
 
 | Metric | Solid.js | Qwik |
 
@@ -258,7 +264,7 @@ Load Todos
 
 Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load performance (JavaScript size).
 
-### Ecosystem and Meta-Frameworks
+#### Ecosystem and Meta-Frameworks
 
 | Aspect | Solid | Qwik |
 
@@ -278,7 +284,7 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
 
 | State management | Solid stores, signals | useStore, useContext |
 
-### When to Choose What
+#### When to Choose What
 
 **Choose Solid.js when:**
 
@@ -310,11 +316,17 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
 
 
 
-### Conclusion
+#### Conclusion
 
 Solid.js and Qwik represent two different paths beyond the virtual DOM. Solid.js optimizes runtime performance through fine-grained reactivity with a familiar React-like syntax. Qwik optimizes initial load performance through resumability, sending the absolute minimum JavaScript to the client. In 2026, Solid.js is the more practical choice for most developers — it offers dramatic performance improvements over React with a much gentler learning curve. Qwik is the choice when first-impression performance is critical and your team has the expertise to handle its unique mental model. Both represent the future of web development beyond virtual DOM frameworks.
 
 **See also:** [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>).
+
+**See also:** [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Tailwind CSS vs Bootstrap](</en/compare/tailwind-vs-bootstrap.html>)
+
+**See also:** [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Tailwind CSS vs Bootstrap](</en/compare/tailwind-vs-bootstrap.html>)
+
+**See also:** [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Tailwind CSS vs Bootstrap](</en/compare/tailwind-vs-bootstrap.html>)
 
 **See also:** [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Tailwind CSS vs Bootstrap](</en/compare/tailwind-vs-bootstrap.html>)
 

@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/iac-security.png",
       "datePublished": "2026-03-10",
       "dateModified": "2026-04-21",
-      "wordCount": "3654",
+      "wordCount": "3708",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/iac-security.html"},
@@ -99,33 +101,35 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/iac-security.png" alt="Infrastructure as Code Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Infrastructure as Code Security</h2>
 <h3>Infrastructure as Code Security</h3>
-<h3>Infrastructure as Code Security</h3>
-<h3>Infrastructure as Code Security</h3>
-<h3>Infrastructure as Code Security</h3>
-<h3>Infrastructure as Code Security</h3>
-<h3>Infrastructure as Code Security</h3>
-<h3>Infrastructure as Code Security</h3>
-<h3>Infrastructure as Code Security</h3>
-<h3>Infrastructure as Code Security</h3>
-<h3>Infrastructure as Code Security</h3>
-<h3>Infrastructure as Code Security</h3>
-<h3>Infrastructure as Code Security</h3>
-<h3>Infrastructure as Code Security</h3>
-<h3>Infrastructure as Code Security</h3>
+<h4>Infrastructure as Code Security</h4>
+<h4>Infrastructure as Code Security</h4>
+<h4>Infrastructure as Code Security</h4>
+<h4>Infrastructure as Code Security</h4>
+<h4>Infrastructure as Code Security</h4>
+<h4>Infrastructure as Code Security</h4>
+<h4>Infrastructure as Code Security</h4>
+<h4>Infrastructure as Code Security</h4>
+<h4>Infrastructure as Code Security</h4>
+<h4>Infrastructure as Code Security</h4>
+<h4>Infrastructure as Code Security</h4>
+<h4>Infrastructure as Code Security</h4>
+<h4>Infrastructure as Code Security</h4>
+<h4>Infrastructure as Code Security</h4>
+<h4>Infrastructure as Code Security</h4>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/iac-security.png" alt="Infrastructure as Code Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Infrastructure as Code (IaC) enables automated, repeatable infrastructure provisioning. However, IaC also codifies security misconfigurations — a mistake in a Terraform file can propagate to thousands of resources. Securing IaC means scanning for issues before deployment, enforcing policy as code, and preventing configuration drift. </p>
 <p>Terraform Security Scanning </p>
 <p>Scan Terraform configurations for security misconfigurations before applying them. </p>
 <p>checkov </p>
-<h3>Basic scan</h3>
+<h4>Basic scan</h4>
 <p>checkov -d terraform/environments/production/</p>
-<h3>Scan with specific framework</h3>
+<h4>Scan with specific framework</h4>
 <p>checkov -d . --framework terraform --skip-framework dockerfile</p>
-<h3>Output in multiple formats</h3>
+<h4>Output in multiple formats</h4>
 <p>checkov -d . -o json | jq '.results.failed_checks[] | {resource: .resource, check: .check_id, severity: .severity}'</p>
-<h3>Run in CI/CD with threshold</h3>
+<h4>Run in CI/CD with threshold</h4>
 <p>checkov -d . --soft-fail-on MEDIUM # Fail only on HIGH/CRITICAL</p>
-<h3>Custom Checkov policy for Terraform</h3>
+<h4>Custom Checkov policy for Terraform</h4>
 <p>from checkov.terraform.checks.resource.base_resource_check import BaseResourceCheck</p>
 <p>from checkov.common.models.enums import CheckResult</p>
 <p>class RDSEncryptionCheck(BaseResourceCheck):</p>
@@ -135,21 +139,21 @@
 <p>supported_resources = ['aws_db_instance']</p>
 <p>super().<strong>init</strong>(name=name, id=id, supported_resources=supported_resources)</p>
 <p>def scan_resource_conf(self, conf):</p>
-<h3>Check if storage_encrypted is set to true</h3>
+<h4>Check if storage_encrypted is set to true</h4>
 <p>if conf.get('storage_encrypted') == [True]:</p>
 <p>return CheckResult.PASSED</p>
 <p>return CheckResult.FAILED</p>
 <p>check = RDSEncryptionCheck()</p>
 <p>tfsec </p>
-<h3>Basic scan</h3>
+<h4>Basic scan</h4>
 <p>tfsec terraform/</p>
-<h3>Scan with custom configuration</h3>
+<h4>Scan with custom configuration</h4>
 <p>tfsec . --config-file tfsec.yaml</p>
-<h3>Generate SARIF output for GitHub Code Scanning</h3>
+<h4>Generate SARIF output for GitHub Code Scanning</h4>
 <p>tfsec . --format sarif --out tfsec-results.sarif</p>
-<h3>Ignore specific checks</h3>
+<h4>Ignore specific checks</h4>
 <p>tfsec . --exclude aws-s3-enable-bucket-logging,aws-s3-specify-public-access-block</p>
-<h3>tfsec.yaml</h3>
+<h4>tfsec.yaml</h4>
 <p>exclude:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- aws-s3-enable-bucket-logging</p>
 <p>include:</p>
@@ -170,21 +174,21 @@
 <p>)</p>
 <p>Policy as Code with Open Policy Agent </p>
 <p>OPA allows you to write policies that enforce infrastructure standards across your IaC. </p>
-<h3>OPA policy for Terraform</h3>
+<h4>OPA policy for Terraform</h4>
 <p>package terraform.analysis</p>
-<h3>All resources must have tags</h3>
+<h4>All resources must have tags</h4>
 <p>deny[msg] {</p>
 <p>resource := input.resource[name][_]</p>
 <p>not resource.tags</p>
 <p>msg = sprintf("%v %v must have tags", [name, resource.type])</p>
 <p>}</p>
-<h3>S3 buckets must be private</h3>
+<h4>S3 buckets must be private</h4>
 <p>deny[msg] {</p>
 <p>resource := input.resource.aws_s3_bucket[name]</p>
 <p>resource.acl == "public-read"</p>
 <p>msg = sprintf("S3 bucket %v must not be public", [name])</p>
 <p>}</p>
-<h3>Security groups must not have wide open ingress</h3>
+<h4>Security groups must not have wide open ingress</h4>
 <p>deny[msg] {</p>
 <p>sg := input.resource.aws_security_group[name]</p>
 <p>rule := sg.ingress[_]</p>
@@ -192,13 +196,13 @@
 <p>rule.from_port == 22</p>
 <p>msg = sprintf("Security group %v allows SSH from anywhere", [name])</p>
 <p>}</p>
-<h3>Evaluate OPA policy against Terraform plan</h3>
+<h4>Evaluate OPA policy against Terraform plan</h4>
 <p>terraform plan -out=plan.tfplan</p>
 <p>terraform show -json plan.tfplan &gt; plan.json</p>
 <p>opa eval --data policies/ --input plan.json "data.terraform.analysis.deny"</p>
 <p>Sentinel (HashiCorp) </p>
 <p>Sentinel is HashiCorp's policy-as-code framework for Terraform Enterprise/Cloud. </p>
-<h3>sentinel.hcl</h3>
+<h4>sentinel.hcl</h4>
 <p>policy "restrict-instance-type" {</p>
 <p>source = "./restrict-instance-type.sentinel"</p>
 <p>enforcement_level = "hard-mandatory"</p>
@@ -207,20 +211,20 @@
 <p>source = "./require-encryption.sentinel"</p>
 <p>enforcement_level = "soft-mandatory"</p>
 <p>}</p>
-<h3>restrict-instance-type.sentinel</h3>
+<h4>restrict-instance-type.sentinel</h4>
 <p>import "tfplan/v2" as tfplan</p>
 <p>allowed_instance_types = [</p>
 <p>"t3.medium",</p>
 <p>"t3.large",</p>
 <p>"m5.large",</p>
 <p>]</p>
-<h3>Get all EC2 instances</h3>
+<h4>Get all EC2 instances</h4>
 <p>instances = filter tfplan.resource_changes as _, rc {</p>
 <p>rc.mode is "managed" and </p>
 <p>rc.type is "aws_instance" and</p>
 <p>rc.change.actions contains "create"</p>
 <p>}</p>
-<h3>Check each instance</h3>
+<h4>Check each instance</h4>
 <p>for _, instance in instances {</p>
 <p>instance_type = instance.change.after.instance_type</p>
 <p>if instance_type not in allowed_instance_types {</p>
@@ -230,7 +234,7 @@
 <p>}</p>
 <p>return true</p>
 <p>CI/CD Integration </p>
-<h3>GitLab CI pipeline for IaC security</h3>
+<h4>GitLab CI pipeline for IaC security</h4>
 <p>stages:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- validate</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- security</p>
@@ -268,7 +272,7 @@
 <p>only:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- main</p>
 <p>Drift Detection </p>
-<h3>Terraform drift detection with AWS Config</h3>
+<h4>Terraform drift detection with AWS Config</h4>
 <p>resource "aws_config_config_rule" "required_tags" {</p>
 <p>name = "required-tags"</p>
 <p>source {</p>
@@ -280,8 +284,8 @@
 <p>tag2Key = "Owner"</p>
 <p>})</p>
 <p>}</p>
-<h3>Automated drift detection</h3>
-<h3>!/bin/bash</h3>
+<h4>Automated drift detection</h4>
+<h4>!/bin/bash</h4>
 <p>aws configservice get-compliance-details-by-config-rule \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--config-rule-name required-tags \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--compliance-types NON_COMPLIANT \</p>
@@ -290,6 +294,8 @@
 <p>Conclusion </p>
 <p>IaC security shifts security left by catching misconfigurations before infrastructure is provisioned. Use tools like Checkov and tfsec for automated scanning, OPA or Sentinel for policy enforcement, integrate scans into CI/CD pipelines, and continuously monitor for drift in deployed infrastructure. Remember that IaC security is an ongoing practice — new resources, providers, and attack patterns require continuous policy updates.</p>
 <p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p></div>
     </article>

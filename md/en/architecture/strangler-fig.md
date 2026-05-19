@@ -1,7 +1,7 @@
 ---
 title: "Strangler Fig Pattern for Legacy Migration"
-description: "Learn the strangler fig pattern for incrementally migrating legacy systems."
-date: 2026-05-11
+description: "Learn the strangler fig pattern for incrementally migrating legacy systems — proxy routing, feature parity, data synchronization, cutover strategy, and risk management during large-scale migrations."
+date: 2025-12-30
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/strangler-fig.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/strangler-fig.html
 
 ## Strangler Fig Pattern for Legacy Migration
 
-## Strangler Fig Pattern for Legacy Migration
+### Strangler Fig Pattern for Legacy Migration
 
-## Strangler Fig Pattern for Legacy Migration
+#### Strangler Fig Pattern for Legacy Migration
 
-## Strangler Fig Pattern for Legacy Migration
+#### Strangler Fig Pattern for Legacy Migration
 
-## Strangler Fig Pattern for Legacy Migration
+#### Strangler Fig Pattern for Legacy Migration
 
-## Strangler Fig Pattern for Legacy Migration
+#### Strangler Fig Pattern for Legacy Migration
 
-## Strangler Fig Pattern for Legacy Migration
+#### Strangler Fig Pattern for Legacy Migration
 
-## Strangler Fig Pattern for Legacy Migration
+#### Strangler Fig Pattern for Legacy Migration
 
-## Strangler Fig Pattern for Legacy Migration
+#### Strangler Fig Pattern for Legacy Migration
 
-## Strangler Fig Pattern for Legacy Migration
+#### Strangler Fig Pattern for Legacy Migration
 
-## Strangler Fig Pattern for Legacy Migration
+#### Strangler Fig Pattern for Legacy Migration
 
-## Strangler Fig Pattern for Legacy Migration
+#### Strangler Fig Pattern for Legacy Migration
+
+#### Strangler Fig Pattern for Legacy Migration
+
+#### Strangler Fig Pattern for Legacy Migration
+
+#### Strangler Fig Pattern for Legacy Migration
 
 The Strangler Fig pattern, named after the tropical plant that gradually envelops its host tree, is a strategy for incrementally replacing a legacy system with a new one. Rather than undertaking a high-risk big-bang rewrite, the Strangler Fig pattern allows teams to replace functionality piece by piece, routing traffic to the new system while the legacy system remains operational. This approach dramatically reduces risk and allows continuous delivery of value. 
 
@@ -69,3 +75,9 @@ Ultimately, the Strangler Fig pattern is the safest path to modernizing critical
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>)
 
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>)
+
+**See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)

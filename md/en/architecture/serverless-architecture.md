@@ -1,7 +1,7 @@
 ---
 title: "Serverless Architecture Patterns"
 description: "Explore serverless architecture patterns for building scalable, cost-effective applications."
-date: 2026-05-11
+date: 2025-12-30
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/serverless-architecture.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/serverless-architecture.h
 
 ## Serverless Architecture Patterns
 
-## Serverless Architecture Patterns
+### Serverless Architecture Patterns
 
-## Serverless Architecture Patterns
+#### Serverless Architecture Patterns
 
-## Serverless Architecture Patterns
+#### Serverless Architecture Patterns
 
-## Serverless Architecture Patterns
+#### Serverless Architecture Patterns
 
-## Serverless Architecture Patterns
+#### Serverless Architecture Patterns
 
-## Serverless Architecture Patterns
+#### Serverless Architecture Patterns
 
-## Serverless Architecture Patterns
+#### Serverless Architecture Patterns
 
-## Serverless Architecture Patterns
+#### Serverless Architecture Patterns
 
-## Serverless Architecture Patterns
+#### Serverless Architecture Patterns
 
-## Serverless Architecture Patterns
+#### Serverless Architecture Patterns
 
-## Serverless Architecture Patterns
+#### Serverless Architecture Patterns
+
+#### Serverless Architecture Patterns
+
+#### Serverless Architecture Patterns
+
+#### Serverless Architecture Patterns
 
 Serverless architecture represents a shift from managing servers to writing code. In a serverless model, cloud providers dynamically manage the allocation and provisioning of servers. Developers focus on individual functions or containers, and the provider handles scaling, availability, and infrastructure maintenance. This article examines the key serverless compute options, architectural patterns, and operational considerations. 
 
@@ -69,6 +75,12 @@ Cost management is also important. While serverless can be cost-effective at low
 Serverless architecture is not appropriate for every workload. Predictable, high-throughput workloads benefit from provisioned infrastructure. Workloads requiring GPU, specialized hardware, or ultra-low latency may not fit the serverless model. For variable, event-driven workloads, however, serverless provides unmatched scalability and operational simplicity.
 
 **See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>).
+
+**See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Clean Architecture Explained](</en/architecture/clean-architecture.html>)
+
+**See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Clean Architecture Explained](</en/architecture/clean-architecture.html>)
+
+**See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Clean Architecture Explained](</en/architecture/clean-architecture.html>)
 
 **See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Clean Architecture Explained](</en/architecture/clean-architecture.html>)
 

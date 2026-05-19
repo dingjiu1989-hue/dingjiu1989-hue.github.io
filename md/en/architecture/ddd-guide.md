@@ -1,7 +1,7 @@
 ---
 title: "Domain-Driven Design Fundamentals"
 description: "A practical guide to Domain-Driven Design concepts and implementation strategies."
-date: 2026-05-11
+date: 2025-12-26
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/ddd-guide.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/ddd-guide.html
 
 ## Domain-Driven Design Fundamentals
 
-## Domain-Driven Design Fundamentals
+### Domain-Driven Design Fundamentals
 
-## Domain-Driven Design Fundamentals
+#### Domain-Driven Design Fundamentals
 
-## Domain-Driven Design Fundamentals
+#### Domain-Driven Design Fundamentals
 
-## Domain-Driven Design Fundamentals
+#### Domain-Driven Design Fundamentals
 
-## Domain-Driven Design Fundamentals
+#### Domain-Driven Design Fundamentals
 
-## Domain-Driven Design Fundamentals
+#### Domain-Driven Design Fundamentals
 
-## Domain-Driven Design Fundamentals
+#### Domain-Driven Design Fundamentals
 
-## Domain-Driven Design Fundamentals
+#### Domain-Driven Design Fundamentals
 
-## Domain-Driven Design Fundamentals
+#### Domain-Driven Design Fundamentals
 
-## Domain-Driven Design Fundamentals
+#### Domain-Driven Design Fundamentals
 
-## Domain-Driven Design Fundamentals
+#### Domain-Driven Design Fundamentals
+
+#### Domain-Driven Design Fundamentals
+
+#### Domain-Driven Design Fundamentals
+
+#### Domain-Driven Design Fundamentals
 
 Domain-Driven Design (DDD) is a software development approach introduced by Eric Evans in his seminal 2003 book. It emphasizes building software that reflects a deep understanding of the business domain, using a shared language between developers and domain experts. This article covers the fundamental concepts of DDD and how to apply them in practice. 
 
@@ -206,6 +212,12 @@ Summary
 DDD provides a powerful toolkit for building software that deeply models the business domain. Use bounded contexts to manage complexity, entities and value objects to model domain concepts, and aggregates to enforce invariants. The ubiquitous language bridges the gap between business and technology, creating software that is easier to understand, maintain, and evolve.
 
 **See also:** [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>).
+
+**See also:** [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
+
+**See also:** [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
+
+**See also:** [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
 
 **See also:** [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
 

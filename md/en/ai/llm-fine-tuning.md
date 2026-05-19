@@ -1,7 +1,7 @@
 ---
 title: "LLM Fine-Tuning Guide"
 description: "Learn how to fine-tune LLMs effectively using LoRA, QLoRA, and full fine-tuning techniques with practical code examples."
-date: 2026-05-11
+date: 2025-12-12
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/llm-fine-tuning.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-fine-tuning.html
 
 ## LLM Fine-Tuning Guide
 
-## LLM Fine-Tuning Guide
+### LLM Fine-Tuning Guide
 
-## LLM Fine-Tuning Guide
+#### LLM Fine-Tuning Guide
 
-## LLM Fine-Tuning Guide
+#### LLM Fine-Tuning Guide
 
-## LLM Fine-Tuning Guide
+#### LLM Fine-Tuning Guide
 
-## LLM Fine-Tuning Guide
+#### LLM Fine-Tuning Guide
 
-## LLM Fine-Tuning Guide
+#### LLM Fine-Tuning Guide
 
-## LLM Fine-Tuning Guide
+#### LLM Fine-Tuning Guide
 
-## LLM Fine-Tuning Guide
+#### LLM Fine-Tuning Guide
 
-## LLM Fine-Tuning Guide
+#### LLM Fine-Tuning Guide
 
-## LLM Fine-Tuning Guide
+#### LLM Fine-Tuning Guide
 
-## LLM Fine-Tuning Guide
+#### LLM Fine-Tuning Guide
 
-## LLM Fine-Tuning Guide
+#### LLM Fine-Tuning Guide
 
-### Introduction
+#### LLM Fine-Tuning Guide
+
+#### LLM Fine-Tuning Guide
+
+#### LLM Fine-Tuning Guide
+
+#### Introduction
 
 Fine-tuning adapts a pre-trained language model to a specific task or domain. While prompt engineering and RAG handle many use cases out of the box, fine-tuning is essential when you need consistent formatting, domain-specific knowledge, or behavior that base models cannot achieve through prompting alone. This guide covers the full spectrum of fine-tuning approaches.
 
-### When to Fine-Tune
+#### When to Fine-Tune
 
 Before investing in fine-tuning, consider whether simpler approaches suffice:
 
@@ -53,7 +59,7 @@ Before investing in fine-tuning, consider whether simpler approaches suffice:
 
 Fine-tuning becomes cost-effective when you need to run many similar queries and can amortize the training cost over thousands or millions of inference calls.
 
-### Fine-Tuning Approaches
+#### Fine-Tuning Approaches
 
 #### Full Fine-Tuning
 
@@ -98,7 +104,7 @@ model = get_peft_model(base_model, lora_config)
 
 print(f"Trainable params: {model.num_parameters(only_trainable=True):,}")
 
-## Output for Llama 2 7B: ~4,194,304 params (0.06% of total)
+#### Output for Llama 2 7B: ~4,194,304 params (0.06% of total)
 
 **Key hyperparameters:**
 
@@ -141,7 +147,7 @@ device_map="auto"
 
 QLoRA achieves approximately 99% of full fine-tuning performance while reducing memory requirements by 4x.
 
-### Dataset Preparation
+#### Dataset Preparation
 
 Dataset quality matters more than quantity. A well-curated 1,000-example dataset outperforms a noisy 10,000-example one.
 
@@ -171,7 +177,7 @@ Dataset quality matters more than quantity. A well-curated 1,000-example dataset
 
 }
 
-### Training Process
+#### Training Process
 
 Modern fine-tuning uses the SFT (Supervised Fine-Tuning) trainer:
 
@@ -209,7 +215,7 @@ save_strategy="epoch",
 
 trainer.train()
 
-### Evaluation
+#### Evaluation
 
 Evaluate fine-tuned models on:
 
@@ -226,11 +232,17 @@ Evaluate fine-tuned models on:
 
 Use an automated evaluation harness comparing the fine-tuned model against the base model on a held-out test set.
 
-### Conclusion
+#### Conclusion
 
 Fine-tuning remains the most powerful tool for adapting LLMs to specific domains and tasks. Start with QLoRA for cost-effective experimentation, scale to full fine-tuning only when quality demands it. Focus on dataset quality over quantity, and always measure performance against a clear baseline.
 
 **See also:** [Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)](</en/ai/fine-tune-open-source-llm.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>).
+
+**See also:** [Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)](</en/ai/fine-tune-open-source-llm.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)
+
+**See also:** [Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)](</en/ai/fine-tune-open-source-llm.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)
+
+**See also:** [Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)](</en/ai/fine-tune-open-source-llm.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)
 
 **See also:** [Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)](</en/ai/fine-tune-open-source-llm.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)
 

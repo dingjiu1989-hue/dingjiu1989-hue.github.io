@@ -46,10 +46,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/api-gateway-security.png",
       "datePublished": "2025-12-17",
       "dateModified": "2026-05-13",
-      "wordCount": "4840",
+      "wordCount": "4893",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/api-gateway-security.html"},
@@ -97,25 +99,27 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/api-gateway-security.png" alt="API Gateway Security Patterns" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>API Gateway Security Patterns</h2>
 <h3>API Gateway Security Patterns</h3>
-<h3>API Gateway Security Patterns</h3>
-<h3>API Gateway Security Patterns</h3>
-<h3>API Gateway Security Patterns</h3>
-<h3>API Gateway Security Patterns</h3>
-<h3>API Gateway Security Patterns</h3>
-<h3>API Gateway Security Patterns</h3>
-<h3>API Gateway Security Patterns</h3>
-<h3>API Gateway Security Patterns</h3>
-<h3>API Gateway Security Patterns</h3>
-<h3>API Gateway Security Patterns</h3>
-<h3>API Gateway Security Patterns</h3>
-<h3>API Gateway Security Patterns</h3>
-<h3>API Gateway Security Patterns</h3>
+<h4>API Gateway Security Patterns</h4>
+<h4>API Gateway Security Patterns</h4>
+<h4>API Gateway Security Patterns</h4>
+<h4>API Gateway Security Patterns</h4>
+<h4>API Gateway Security Patterns</h4>
+<h4>API Gateway Security Patterns</h4>
+<h4>API Gateway Security Patterns</h4>
+<h4>API Gateway Security Patterns</h4>
+<h4>API Gateway Security Patterns</h4>
+<h4>API Gateway Security Patterns</h4>
+<h4>API Gateway Security Patterns</h4>
+<h4>API Gateway Security Patterns</h4>
+<h4>API Gateway Security Patterns</h4>
+<h4>API Gateway Security Patterns</h4>
+<h4>API Gateway Security Patterns</h4>
 <p>The API Gateway as Security Perimeter </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/api-gateway-security.png" alt="API Gateway Security Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>An API gateway acts as the single entry point for all client-to-service communication in a microservices architecture. It is uniquely positioned to enforce security policies centrally, reducing complexity in individual services and providing a consistent security layer. </p>
 <p>Core Security Functions </p>
 <p>Authentication and Authorization </p>
 <p>The gateway validates tokens before requests reach backend services, offloading this responsibility from individual services. </p>
-<h3>Kong Gateway authentication configuration</h3>
+<h4>Kong Gateway authentication configuration</h4>
 <p>services:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: user-service</p>
 <p>url: http://user-svc.internal:8080</p>
@@ -202,7 +206,7 @@
 <p>type: integer</p>
 <p>minimum: 1</p>
 <p>Request Size Limiting </p>
-<h3>Nginx as API gateway</h3>
+<h4>Nginx as API gateway</h4>
 <p>http {</p>
 <p>client_body_buffer_size 128k;</p>
 <p>client_max_body_size 10M;</p>
@@ -211,7 +215,7 @@
 <p>listen 443 ssl;</p>
 <p>server_name api.example.com;</p>
 <p>location /api/ {</p>
-<h3>Limit request size per endpoint</h3>
+<h4>Limit request size per endpoint</h4>
 <p>location /api/upload {</p>
 <p>client_max_body_size 100M;</p>
 <p>}</p>
@@ -233,7 +237,7 @@
 <p>ssl_prefer_server_ciphers on;</p>
 <p>ssl_session_cache shared:SSL:10m;</p>
 <p>ssl_session_timeout 10m;</p>
-<h3>Backend communication (re-encrypt)</h3>
+<h4>Backend communication (re-encrypt)</h4>
 <p>location /api/internal/ {</p>
 <p>proxy_pass https://internal-services;</p>
 <p>proxy_ssl_verify on;</p>
@@ -263,19 +267,19 @@
 <p>max_age: 3600</p>
 <p>Threat Detection and WAF </p>
 <p>ModSecurity with OWASP CRS </p>
-<h3>Enable WAF on the gateway</h3>
+<h4>Enable WAF on the gateway</h4>
 <p>location /api/ {</p>
 <p>modsecurity on;</p>
 <p>modsecurity_rules_file /etc/nginx/modsecurity/owasp-crs/crs-setup.conf;</p>
-<h3>Custom rules</h3>
+<h4>Custom rules</h4>
 <p>modsecurity_rules '</p>
-<h3>Block SQL injection patterns</h3>
+<h4>Block SQL injection patterns</h4>
 <p>SecRule REQUEST_URI "@rx (?i:(?:union[\s]+select|select[\s]+from))" \</p>
 <p>"id:1000,deny,status:403,msg:\'SQL Injection blocked\'"</p>
-<h3>Block common XSS attempts</h3>
+<h4>Block common XSS attempts</h4>
 <p>SecRule ARGS "@rx ]*&gt;" \</p>
 <p>"id:1001,deny,status:403,msg:\'XSS blocked\'"</p>
-<h3>Rate limit login attempts</h3>
+<h4>Rate limit login attempts</h4>
 <p>SecRule IP:LOGIN_ATTEMPT "@gt 5" \</p>
 <p>"id:1002,deny,status:429,msg:\'Brute force blocked\'"</p>
 <p>';</p>
@@ -317,6 +321,8 @@
 <p>Summary </p>
 <p>The API gateway is the ideal location to centralize security controls: authentication, rate limiting, request validation, IP restrictions, TLS termination, CORS management, and WAF rules. By enforcing these policies at the gateway, individual services remain simpler and can focus on business logic while maintaining a consistent security posture across your entire API surface.</p>
 <p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/api-security-guide.html">API Security: Protecting Your REST and GraphQL APIs</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a></p></div>
     </article>

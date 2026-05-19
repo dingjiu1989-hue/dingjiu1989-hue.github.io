@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-workflow-automation.png",
       "datePublished": "2026-02-15",
       "dateModified": "2026-04-19",
-      "wordCount": "1671",
+      "wordCount": "1781",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-workflow-automation.html"},
@@ -99,18 +101,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-workflow-automation.png" alt="AI Workflow Automation: LangChain, Temporal, Event-Driven Agents" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h2>
 <h3>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h3>
-<h3>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h3>
-<h3>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h3>
-<h3>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h3>
-<h3>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h3>
-<h3>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h3>
-<h3>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h3>
-<h3>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h3>
-<h3>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h3>
-<h3>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h3>
-<h3>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h3>
-<h3>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h3>
-<h3>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h3>
+<h4>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h4>
+<h4>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h4>
+<h4>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h4>
+<h4>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h4>
+<h4>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h4>
+<h4>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h4>
+<h4>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h4>
+<h4>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h4>
+<h4>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h4>
+<h4>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h4>
+<h4>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h4>
+<h4>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h4>
+<h4>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h4>
+<h4>AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</h4>
 <h4>Introduction</h4>
 <p>Production AI systems need more than a single LLM call or a simple chain. They require reliable, long-running workflows that handle failures, retries, human-in-the-loop interventions, and complex state management. This article covers three complementary approaches to AI workflow automation: LangChain for LLM orchestration, Temporal for durable execution, and event-driven architectures for scalable pipelines.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-workflow-automation.png" alt="AI Workflow Automation: LangChain, Temporal, Event-Driven Agents" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>LangChain Workflows</h4>
@@ -120,7 +124,7 @@
 <p>from langchain.chat_models import ChatAnthropic</p>
 <p>from langchain.memory import ConversationBufferMemory</p>
 <p>llm = ChatAnthropic(model="claude-sonnet-4-20260512")</p>
-<h3>Define individual chain steps</h3>
+<h4>Define individual chain steps</h4>
 <p>extract_prompt = PromptTemplate(</p>
 <p>input_variables=["text"],</p>
 <p>template="Extract key requirements from this text:\n{text}",</p>
@@ -136,7 +140,7 @@
 <p>template="Based on requirements and analysis, generate a solution:\nRequirements: {requirements}\nAnalysis: {analysis}",</p>
 <p>)</p>
 <p>generate_chain = LLMChain(llm=llm, prompt=generate_prompt, output_key="solution")</p>
-<h3>Compose into a sequential workflow</h3>
+<h4>Compose into a sequential workflow</h4>
 <p>workflow = SequentialChain(</p>
 <p>chains=[extract_chain, analyze_chain, generate_chain],</p>
 <p>input_variables=["text"],</p>
@@ -150,7 +154,7 @@
 <p>from temporalio.client import Client</p>
 <p>from temporalio.worker import Worker</p>
 <p>import asyncio</p>
-<h3>Define activities (individual steps)</h3>
+<h4>Define activities (individual steps)</h4>
 <p>@activity.defn</p>
 <p>async def retrieve_documents(query: str) -&gt; list[str]:</p>
 <p>return await vector_search(query)</p>
@@ -164,29 +168,29 @@
 <p>if review["approved"]:</p>
 <p>return answer</p>
 <p>return f"Needs revision: {review['feedback']}"</p>
-<h3>Define workflow</h3>
+<h4>Define workflow</h4>
 <p>@workflow.defn</p>
 <p>class DocumentQAWorkflow:</p>
 <p>@workflow.run</p>
 <p>async def run(self, question: str) -&gt; dict:</p>
-<h3>Step 1: Retrieve documents</h3>
+<h4>Step 1: Retrieve documents</h4>
 <p>docs = await workflow.execute_activity(</p>
 <p>retrieve_documents, question,</p>
 <p>start_to_close_timeout=timedelta(seconds=30),</p>
 <p>retry_policy={"maximum_attempts": 3},</p>
 <p>)</p>
-<h3>Step 2: Generate answer</h3>
+<h4>Step 2: Generate answer</h4>
 <p>answer = await workflow.execute_activity(</p>
 <p>generate_answer, [docs, question],</p>
 <p>start_to_close_timeout=timedelta(minutes=2),</p>
 <p>)</p>
-<h3>Step 3: Human review</h3>
+<h4>Step 3: Human review</h4>
 <p>final = await workflow.execute_activity(</p>
 <p>review_output, answer,</p>
 <p>start_to_close_timeout=timedelta(hours=2),</p>
 <p>)</p>
 <p>return {"question": question, "answer": final}</p>
-<h3>Run the workflow</h3>
+<h4>Run the workflow</h4>
 <p>async def start_workflow():</p>
 <p>client = await Client.connect("localhost:7233")</p>
 <p>handle = await client.start_workflow(</p>
@@ -230,7 +234,7 @@
 <p>return_exceptions=True,</p>
 <p>)</p>
 <p>return results</p>
-<h3>Event-driven document processing pipeline</h3>
+<h4>Event-driven document processing pipeline</h4>
 <p>class DocumentProcessingPipeline:</p>
 <p>def <strong>init</strong>(self, event_bus: EventBus):</p>
 <p>self.bus = event_bus</p>
@@ -241,7 +245,7 @@
 <p>self.bus.subscribe(EventType.QUERY_RECEIVED, self.handle_query)</p>
 <p>async def handle_document(self, event: Event):</p>
 <p>doc = event.data["document"]</p>
-<h3>Extract text, chunk, embed</h3>
+<h4>Extract text, chunk, embed</h4>
 <p>chunks = chunk_document(doc)</p>
 <p>embeddings = embed_chunks(chunks)</p>
 <p>store_embeddings(embeddings)</p>
@@ -275,16 +279,18 @@
 <p>raise # Let retry handle it</p>
 <p>raise</p>
 <p>except ContextWindowError:</p>
-<h3>Reduce context size and retry</h3>
+<h4>Reduce context size and retry</h4>
 <p>kwargs["max_context"] = kwargs.get("max_context", 4000) // 2</p>
 <p>return await self.execute_with_retry(workflow_fn, <em>args,</em> *kwargs)</p>
 <p>except Exception:</p>
-<h3>Log and escalate to human</h3>
+<h4>Log and escalate to human</h4>
 <p>await self.escalate_to_human(workflow_fn, args, kwargs)</p>
 <p>raise</p>
 <h4>Conclusion</h4>
 <p>AI workflow automation requires reliability guarantees beyond simple scripting. LangChain provides the LLM orchestration layer with composable chains. Temporal adds durability with automatic retries, state persistence, and human-in-the-loop capabilities. Event-driven architectures enable loosely coupled, scalable pipelines. For production systems, combine all three: use LangChain for LLM logic within Temporal activities, and wire everything together with an event bus for scalability.</p>
 <p><strong>See also:</strong> <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></p></div>
     </article>

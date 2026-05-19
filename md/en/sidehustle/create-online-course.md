@@ -1,7 +1,7 @@
 ---
 title: "How to Create and Sell an Online Coding Course That Makes $10K+"
 description: "End-to-end guide: topic selection, curriculum design, recording setup, editing, platform comparison (Udemy vs Teachable vs Podia), pricing, and launch strategy for developer courses."
-date: 2026-05-08
+date: 2025-10-21
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/create-online-course.html
 ---
@@ -45,4 +45,4 @@ Cohort-Based Course| 4-8 weeks live| $500-2,000| "AI Engineering Bootcamp"
   
 **Bottom line:** Start with a mini-course ($29-49) on a platform like Gumroad or Podia to validate your topic and teaching style. Use the feedback to create a premium full course. The money is not in the course itself — it is in the audience you build around it, which leads to consulting, speaking, and higher-ticket offers. See also: [YouTube Channel Guide](</en/sidehustle/youtube-channel-developers.html>) and [Selling Digital Products](</en/sidehustle/sell-digital-products.html>).
 
-**See also:** [Online Coding Tutoring and Mentoring: Complete Developer Guide (2026)](</en/sidehustle/online-coding-tutoring-guide.html>), [How to Create and Sell Digital Products: A Developer's Complete Guide](</en/sidehustle/sell-digital-products.html>), [How to Build and Sell APIs: A Developer's Guide to API-as-a-Service](</en/sidehustle/build-and-sell-api.html>)
+**See also:** [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Online Coding Tutoring and Mentoring: Complete Developer Guide (2026)](</en/sidehustle/online-coding-tutoring-guide.html>), [How to Create and Sell Digital Products: A Developer's Complete Guide](</en/sidehustle/sell-digital-products.html>)

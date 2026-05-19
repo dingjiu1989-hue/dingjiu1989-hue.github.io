@@ -1,7 +1,7 @@
 ---
 title: "SSO Architecture"
 description: "Designing SSO architecture with SAML, OIDC, session management, and identity provider integration."
-date: 2026-05-12
+date: 2026-03-19
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/sso-architecture.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/security/sso-architecture.html
 
 ## SSO Architecture
 
-## SSO Architecture
+### SSO Architecture
 
-## SSO Architecture
+#### SSO Architecture
 
-## SSO Architecture
+#### SSO Architecture
 
-## SSO Architecture
+#### SSO Architecture
 
-## SSO Architecture
+#### SSO Architecture
 
-## SSO Architecture
+#### SSO Architecture
 
-## SSO Architecture
+#### SSO Architecture
 
-## SSO Architecture
+#### SSO Architecture
 
-## SSO Architecture
+#### SSO Architecture
 
-## SSO Architecture
+#### SSO Architecture
 
-## SSO Architecture
+#### SSO Architecture
+
+#### SSO Architecture
+
+#### SSO Architecture
+
+#### SSO Architecture
 
 SSO Fundamentals 
 
@@ -50,7 +56,7 @@ https://app.example.com
 
 Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"/>
 
-## SAML response parsing
+#### SAML response parsing
 
 from signxml import XMLVerifier
 
@@ -58,11 +64,11 @@ import xml.etree.ElementTree as ET
 
 def parse_saml_response(response_xml):
 
-## Verify the signature
+#### Verify the signature
 
 verified_data = XMLVerifier().verify(response_xml).signed_xml
 
-## Extract attributes
+#### Extract attributes
 
 ns = {"saml2": "urn:oasis:names:tc:SAML:2.0:assertion"}
 
@@ -134,7 +140,7 @@ res.redirect(authUrl);
 
 Token Exchange 
 
-## Token exchange handler
+#### Token exchange handler
 
 async def handle_callback(request):
 
@@ -142,17 +148,17 @@ code = request.query_params["code"]
 
 state = request.query_params["state"]
 
-## Verify state matches
+#### Verify state matches
 
 if state != request.session["oidc_state"]:
 
 raise SecurityError("State mismatch - possible CSRF")
 
-## Exchange code for tokens
+#### Exchange code for tokens
 
 token_response = await oidc_client.authorize_token(code)
 
-## Validate ID token
+#### Validate ID token
 
 claims = await oidc_client.validate_id_token(
 
@@ -207,6 +213,12 @@ Conclusion
 SSO centralizes authentication and improves both security and user experience. Choose SAML for enterprise integrations and OIDC for modern applications. Implement proper session management with short-lived tokens and single logout. Always validate state parameters and ID token signatures.
 
 **See also:** [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>), [Session Management Security](</en/security/session-management.html>).
+
+**See also:** [Session Management Security](</en/security/session-management.html>), [Cloud Network Security](</en/security/cloud-network-security.html>), [Database Encryption](</en/security/database-encryption.html>)
+
+**See also:** [Session Management Security](</en/security/session-management.html>), [Cloud Network Security](</en/security/cloud-network-security.html>), [Database Encryption](</en/security/database-encryption.html>)
+
+**See also:** [Session Management Security](</en/security/session-management.html>), [Cloud Network Security](</en/security/cloud-network-security.html>), [Database Encryption](</en/security/database-encryption.html>)
 
 **See also:** [Session Management Security](</en/security/session-management.html>), [Cloud Network Security](</en/security/cloud-network-security.html>), [Database Encryption](</en/security/database-encryption.html>)
 

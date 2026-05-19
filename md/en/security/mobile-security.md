@@ -1,7 +1,7 @@
 ---
 title: "Mobile Application Security Guide"
 description: "Mobile app security covering OWASP Mobile Top 10, code obfuscation, certificate pinning, secure storage, and runtime protection."
-date: 2026-05-12
+date: 2026-03-04
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/mobile-security.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/security/mobile-security.html
 
 ## Mobile Application Security Guide
 
-## Mobile Application Security Guide
+### Mobile Application Security Guide
 
-## Mobile Application Security Guide
+#### Mobile Application Security Guide
 
-## Mobile Application Security Guide
+#### Mobile Application Security Guide
 
-## Mobile Application Security Guide
+#### Mobile Application Security Guide
 
-## Mobile Application Security Guide
+#### Mobile Application Security Guide
 
-## Mobile Application Security Guide
+#### Mobile Application Security Guide
 
-## Mobile Application Security Guide
+#### Mobile Application Security Guide
 
-## Mobile Application Security Guide
+#### Mobile Application Security Guide
 
-## Mobile Application Security Guide
+#### Mobile Application Security Guide
 
-## Mobile Application Security Guide
+#### Mobile Application Security Guide
 
-## Mobile Application Security Guide
+#### Mobile Application Security Guide
 
-## Mobile Application Security Guide
+#### Mobile Application Security Guide
+
+#### Mobile Application Security Guide
+
+#### Mobile Application Security Guide
+
+#### Mobile Application Security Guide
 
 Mobile applications handle sensitive data and run in untrusted environments. Users download apps from various sources, connect to public Wi-Fi, and often jailbreak or root their devices. This guide covers the key security practices for mobile application development, based on the OWASP Mobile Top 10 and industry best practices.
 
-### OWASP Mobile Top 10
+#### OWASP Mobile Top 10
 
 The OWASP Mobile Top 10 is the authoritative list of mobile security risks. Understanding these risks is the first step toward mitigating them.
 
@@ -62,7 +68,7 @@ The OWASP Mobile Top 10 is the authoritative list of mobile security risks. Unde
 
 10\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Extraneous Functionality** : Hidden backdoors, debug endpoints, or test code left in production builds.
 
-### Code Obfuscation
+#### Code Obfuscation
 
 Mobile apps are distributed as binaries that run on user devices. Without protection, attackers can decompile the app and analyze its logic.
 
@@ -92,13 +98,13 @@ proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
 
 }
 
-## proguard-rules.pro
+#### proguard-rules.pro
 
-## Keep model classes used by Gson serialization
+#### Keep model classes used by Gson serialization
 
 -keep class com.example.app.model.*_{_ ; }
 
-## Keep logging in debug but strip in release
+#### Keep logging in debug but strip in release
 
 -assumenosideeffects class android.util.Log {
 
@@ -151,7 +157,7 @@ key: 0xAB
 
 ).decrypt()
 
-### Certificate Pinning
+#### Certificate Pinning
 
 Mobile apps must protect against man-in-the-middle (MITM) attacks, even when the device trusts a rogue CA due to malware or user action.
 
@@ -236,7 +242,7 @@ Certificate pinning breaks when you rotate certificates. Plan for updates:
 
 
 
-### Secure Storage
+#### Secure Storage
 
 Mobile OS platforms provide secure storage mechanisms that encrypt data at rest.
 
@@ -336,7 +342,7 @@ nil
 
 SecItemAdd(query as CFDictionary, nil)
 
-### Runtime Protection
+#### Runtime Protection
 
 Runtime protection defends against tampering while the app is running.
 
@@ -416,11 +422,17 @@ return (info.kp_proc.p_flag & P_TRACED) != 0
 
 }
 
-### Conclusion
+#### Conclusion
 
 Mobile security requires defense in depth. Obfuscate your code to slow down reverse engineering. Pin certificates to prevent MITM attacks. Use platform-provided secure storage for sensitive data. Add runtime protection against root/jailbreak and debugging. Most importantly, follow the OWASP Mobile Top 10 as your baseline and validate controls with regular penetration testing.
 
 **See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Container Security Best Practices](</en/security/container-security.html>).
+
+**See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
+
+**See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
+
+**See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
 
 **See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
 

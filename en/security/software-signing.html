@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/software-signing.png",
       "datePublished": "2026-03-19",
       "dateModified": "2026-04-16",
-      "wordCount": "1381",
+      "wordCount": "1417",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/software-signing.html"},
@@ -99,32 +101,34 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/software-signing.png" alt="Software Signing" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Software Signing</h2>
 <h3>Software Signing</h3>
-<h3>Software Signing</h3>
-<h3>Software Signing</h3>
-<h3>Software Signing</h3>
-<h3>Software Signing</h3>
-<h3>Software Signing</h3>
-<h3>Software Signing</h3>
-<h3>Software Signing</h3>
-<h3>Software Signing</h3>
-<h3>Software Signing</h3>
-<h3>Software Signing</h3>
-<h3>Software Signing</h3>
+<h4>Software Signing</h4>
+<h4>Software Signing</h4>
+<h4>Software Signing</h4>
+<h4>Software Signing</h4>
+<h4>Software Signing</h4>
+<h4>Software Signing</h4>
+<h4>Software Signing</h4>
+<h4>Software Signing</h4>
+<h4>Software Signing</h4>
+<h4>Software Signing</h4>
+<h4>Software Signing</h4>
+<h4>Software Signing</h4>
+<h4>Software Signing</h4>
 <p>Why Sign Software? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/software-signing.png" alt="Software Signing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Software signing verifies the origin and integrity of code. It ensures that artifacts haven't been tampered with and come from a trusted source. </p>
 <p>GPG Signing </p>
 <p>Traditional signing with PGP/GPG: </p>
-<h3>Generate GPG key</h3>
+<h4>Generate GPG key</h4>
 <p>gpg --full-generate-key</p>
 <p>gpg --armor --export "developer@example.com" &gt; public.key</p>
-<h3>Sign artifacts</h3>
+<h4>Sign artifacts</h4>
 <p>gpg --armor --detach-sign myapp.tar.gz</p>
 <p>gpg --verify myapp.tar.gz.asc myapp.tar.gz</p>
-<h3>Sign git commits</h3>
+<h4>Sign git commits</h4>
 <p>git config commit.gpgsign true</p>
 <p>git config user.signingkey KEY_ID</p>
 <p>git commit -S -m "Signed commit"</p>
-<h3>Programmatic GPG verification</h3>
+<h4>Programmatic GPG verification</h4>
 <p>import gnupg</p>
 <p>def verify_signature(artifact, signature_file):</p>
 <p>gpg = gnupg.GPG()</p>
@@ -140,18 +144,18 @@
 <p>return {"valid": False}</p>
 <p>Sigstore and cosign </p>
 <p>Sigstore simplifies code signing with keyless options: </p>
-<h3>Keyless signing with cosign</h3>
+<h4>Keyless signing with cosign</h4>
 <p>cosign sign myregistry.io/myapp:latest</p>
-<h3>Sign with identity</h3>
+<h4>Sign with identity</h4>
 <p>cosign sign \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--identity-token $GITHUB_TOKEN \</p>
 <p>ghcr.io/myorg/myapp@sha256:abc123</p>
-<h3>Verify</h3>
+<h4>Verify</h4>
 <p>cosign verify \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--certificate-identity "developer@example.com" \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--certificate-oidc-issuer "https://github.com/login/oauth" \</p>
 <p>myregistry.io/myapp:latest</p>
-<h3>Cosign in CI pipeline</h3>
+<h4>Cosign in CI pipeline</h4>
 <p>jobs:</p>
 <p>sign:</p>
 <p>runs-on: ubuntu-latest</p>
@@ -174,7 +178,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--yes</p>
 <p>in-toto Attestations </p>
 <p>in-toto provides end-to-end supply chain integrity: </p>
-<h3>Create in-toto attestation</h3>
+<h4>Create in-toto attestation</h4>
 <p>from in_toto_attestation.v1 import Statement, Attestation</p>
 <p>def create_attestation(subject, predicate_type, predicate):</p>
 <p>statement = Statement(</p>
@@ -193,7 +197,7 @@
 <p>"keyid": get_key_id()</p>
 <p>}]</p>
 <p>)</p>
-<h3>SLSA provenance attestation</h3>
+<h4>SLSA provenance attestation</h4>
 <p>provenance = create_attestation(</p>
 <p>subject={"name": "myapp", "digest": {"sha256": "abc..."}},</p>
 <p>predicate_type="https://slsa.dev/provenance/v1",</p>
@@ -213,7 +217,7 @@
 <p>}</p>
 <p>)</p>
 <p>Verification Policies </p>
-<h3>signing-policy.yaml</h3>
+<h4>signing-policy.yaml</h4>
 <p>verification_policy:</p>
 <p>container_images:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- require_signature: true</p>
@@ -234,6 +238,8 @@
 <p>Conclusion </p>
 <p>Software signing is fundamental to supply chain security. GPG works well for traditional signing, but Sigstore and cosign offer easier keyless signing workflows. Use in-toto attestations for end-to-end provenance. Enforce signing policies in your CI/CD pipeline. Verify signatures at every consumption point: container registries, package managers, and deployment pipelines.</p>
 <p><strong>See also:</strong> <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a></p></div>
     </article>

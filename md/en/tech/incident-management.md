@@ -1,7 +1,7 @@
 ---
 title: "Incident Management: Severity Levels, Response Process, and Postmortems"
 description: "Practical guide to incident management covering severity classification, response processes, communication templates, and blameless postmortem culture."
-date: 2026-05-12
+date: 2026-01-02
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/incident-management.html
 ---
@@ -10,39 +10,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/incident-management.html
 
 ## Incident Management: Severity Levels, Response Process, and Postmortems
 
-## Incident Management: Severity Levels, Response Process, and Postmortems
+### Incident Management: Severity Levels, Response Process, and Postmortems
 
-## Incident Management: Severity Levels, Response Process, and Postmortems
+#### Incident Management: Severity Levels, Response Process, and Postmortems
 
-## Incident Management: Severity Levels, Response Process, and Postmortems
+#### Incident Management: Severity Levels, Response Process, and Postmortems
 
-## Incident Management: Severity Levels, Response Process, and Postmortems
+#### Incident Management: Severity Levels, Response Process, and Postmortems
 
-## Incident Management: Severity Levels, Response Process, and Postmortems
+#### Incident Management: Severity Levels, Response Process, and Postmortems
 
-## Incident Management: Severity Levels, Response Process, and Postmortems
+#### Incident Management: Severity Levels, Response Process, and Postmortems
 
-## Incident Management: Severity Levels, Response Process, and Postmortems
+#### Incident Management: Severity Levels, Response Process, and Postmortems
 
-## Incident Management: Severity Levels, Response Process, and Postmortems
+#### Incident Management: Severity Levels, Response Process, and Postmortems
 
-## Incident Management: Severity Levels, Response Process, and Postmortems
+#### Incident Management: Severity Levels, Response Process, and Postmortems
 
-## Incident Management: Severity Levels, Response Process, and Postmortems
+#### Incident Management: Severity Levels, Response Process, and Postmortems
 
-## Incident Management: Severity Levels, Response Process, and Postmortems
+#### Incident Management: Severity Levels, Response Process, and Postmortems
 
-## Incident Management: Severity Levels, Response Process, and Postmortems
+#### Incident Management: Severity Levels, Response Process, and Postmortems
 
-## Incident Management: Severity Levels, Response Process, and Postmortems
+#### Incident Management: Severity Levels, Response Process, and Postmortems
 
-### Introduction
+#### Incident Management: Severity Levels, Response Process, and Postmortems
+
+#### Incident Management: Severity Levels, Response Process, and Postmortems
+
+#### Incident Management: Severity Levels, Response Process, and Postmortems
+
+#### Introduction
 
 Incident management is the practice of identifying, responding to, and learning from service disruptions. Effective incident management reduces downtime, protects customer trust, and prevents repeated failures. Despite its importance, many organizations have ad-hoc processes that lead to delayed responses, poor communication, and unresolved root causes.
 
 This article covers incident severity levels, response processes, communication templates, and blameless postmortems.
 
-### Severity Levels
+#### Severity Levels
 
 Classifying incidents by severity standardizes response expectations. The common four-tier model maps to the level of customer impact:
 
@@ -56,7 +62,7 @@ SEV4 (Low): No customer impact but needs attention. Response time within one wee
 
 Clear severity definitions prevent ambiguity during stressful incidents. Teams should document examples specific to their service and review classifications during postmortems.
 
-### Incident Response Process
+#### Incident Response Process
 
 The incident response process follows a predictable lifecycle: detection, declaration, response, mitigation, resolution, and follow-up.
 
@@ -70,7 +76,7 @@ Mitigation takes priority over root cause diagnosis. Rolling back a recent deplo
 
 Resolution confirms the fix is working and monitoring shows recovery. The incident commander declares the incident resolved and initiates the follow-up phase.
 
-### Communication Templates
+#### Communication Templates
 
 Pre-defined communication templates ensure consistent, timely updates during incidents.
 
@@ -82,7 +88,7 @@ Resolution notice: "The issue affecting [service] has been resolved as of [time]
 
 Status pages (hundreds of people may watch these), internal Slack channels, and executive summaries all need tailored versions of these templates.
 
-### Blameless Postmortems
+#### Blameless Postmortems
 
 The postmortem is the most important incident management practice. A blameless postmortem focuses on what systemic failures allowed the incident to occur, not who made a mistake. The goal is improving systems, not assigning fault.
 
@@ -105,11 +111,17 @@ Blameless culture requires organizational commitment. Executives must model it b
 
 Action items should be prioritized based on risk reduction. Not every finding requires immediate fixes. Track action items and verify completion in subsequent postmortems to close the loop.
 
-### Conclusion
+#### Conclusion
 
 Incident management is a discipline requiring preparation, practice, and continuous improvement. Severity classification standardizes response expectations. Clear processes ensure efficient mitigation. Communication templates maintain stakeholder confidence. Blameless postmortems transform failures into learning opportunities. Organizations that invest in these practices recover faster, reduce incident frequency, and build stronger engineering cultures.
 
 **See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Node.js Performance Optimization Guide](</en/tech/nodejs-performance.html>).
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>)
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>)
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>)
 
 **See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>)
 

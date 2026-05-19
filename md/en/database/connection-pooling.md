@@ -1,7 +1,7 @@
 ---
 title: "Connection Pooling Guide"
 description: "Master database connection pooling with PgBouncer, HikariCP, and application-level pools to optimize performance and resource usage."
-date: 2026-05-11
+date: 2025-12-22
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/connection-pooling.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/connection-pooling.html
 
 ## Connection Pooling Guide
 
-## Connection Pooling Guide
+### Connection Pooling Guide
 
-## Connection Pooling Guide
+#### Connection Pooling Guide
 
-## Connection Pooling Guide
+#### Connection Pooling Guide
 
-## Connection Pooling Guide
+#### Connection Pooling Guide
 
-## Connection Pooling Guide
+#### Connection Pooling Guide
 
-## Connection Pooling Guide
+#### Connection Pooling Guide
 
-## Connection Pooling Guide
+#### Connection Pooling Guide
 
-## Connection Pooling Guide
+#### Connection Pooling Guide
 
-## Connection Pooling Guide
+#### Connection Pooling Guide
 
-## Connection Pooling Guide
+#### Connection Pooling Guide
 
-## Connection Pooling Guide
+#### Connection Pooling Guide
+
+#### Connection Pooling Guide
+
+#### Connection Pooling Guide
+
+#### Connection Pooling Guide
 
 Why Connection Pooling Matters 
 
@@ -87,6 +93,12 @@ Conclusion
 Size pools based on CPU cores, not concurrent users. Use PgBouncer for high-scale PostgreSQL deployments. Set timeouts and max lifetimes. Monitor pool usage and connection leaks.
 
 **See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>).
+
+**See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)
+
+**See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)
+
+**See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)
 
 **See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)
 

@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png",
       "datePublished": "2026-03-16",
       "dateModified": "2026-04-16",
-      "wordCount": "786",
+      "wordCount": "834",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/cloud-network-security.html"},
@@ -99,22 +101,24 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png" alt="Cloud Network Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Cloud Network Security</h2>
 <h3>Cloud Network Security</h3>
-<h3>Cloud Network Security</h3>
-<h3>Cloud Network Security</h3>
-<h3>Cloud Network Security</h3>
-<h3>Cloud Network Security</h3>
-<h3>Cloud Network Security</h3>
-<h3>Cloud Network Security</h3>
-<h3>Cloud Network Security</h3>
-<h3>Cloud Network Security</h3>
-<h3>Cloud Network Security</h3>
-<h3>Cloud Network Security</h3>
-<h3>Cloud Network Security</h3>
+<h4>Cloud Network Security</h4>
+<h4>Cloud Network Security</h4>
+<h4>Cloud Network Security</h4>
+<h4>Cloud Network Security</h4>
+<h4>Cloud Network Security</h4>
+<h4>Cloud Network Security</h4>
+<h4>Cloud Network Security</h4>
+<h4>Cloud Network Security</h4>
+<h4>Cloud Network Security</h4>
+<h4>Cloud Network Security</h4>
+<h4>Cloud Network Security</h4>
+<h4>Cloud Network Security</h4>
+<h4>Cloud Network Security</h4>
 <p>Cloud Network Security Layers </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png" alt="Cloud Network Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Cloud networks require defense in depth: VPC isolation, subnet segmentation, security groups, network ACLs, and traffic inspection. </p>
 <p>Security Groups vs NACLs </p>
 <p>Security groups are stateful instance-level firewalls. NACLs are stateless subnet-level filters: </p>
-<h3>Security Group (stateful)</h3>
+<h4>Security Group (stateful)</h4>
 <p>resource "aws_security_group" "web_sg" {</p>
 <p>name = "web-tier"</p>
 <p>description = "Security group for web instances"</p>
@@ -140,7 +144,7 @@
 <p>cidr_blocks = ["0.0.0.0/0"]</p>
 <p>}</p>
 <p>}</p>
-<h3>NACL (stateless - must allow both directions)</h3>
+<h4>NACL (stateless - must allow both directions)</h4>
 <p>resource "aws_network_acl" "public_subnet_acl" {</p>
 <p>vpc_id = var.vpc_id</p>
 <p>ingress {</p>
@@ -161,7 +165,7 @@
 <p>}</p>
 <p>}</p>
 <p>VPC Design </p>
-<h3>Multi-tier VPC design</h3>
+<h4>Multi-tier VPC design</h4>
 <p>class VPCDesign:</p>
 <p>def <strong>init</strong>(self, cidr="10.0.0.0/16"):</p>
 <p>self.cidr = cidr</p>
@@ -174,25 +178,25 @@
 <p>}</p>
 <p>def generate_routing_rules(self):</p>
 <p>rules = []</p>
-<h3>Web tier: inbound from public, outbound to app</h3>
+<h4>Web tier: inbound from public, outbound to app</h4>
 <p>rules.append({</p>
 <p>"from": "web",</p>
 <p>"to": "app",</p>
 <p>"ports": [8080, 8443],</p>
 <p>"protocol": "tcp"</p>
 <p>})</p>
-<h3>App tier: outbound to db</h3>
+<h4>App tier: outbound to db</h4>
 <p>rules.append({</p>
 <p>"from": "app", </p>
 <p>"to": "db",</p>
 <p>"ports": [5432],</p>
 <p>"protocol": "tcp"</p>
 <p>})</p>
-<h3>No direct public access to app or db</h3>
+<h4>No direct public access to app or db</h4>
 <p>return rules</p>
 <p>Traffic Inspection </p>
 <p>Deploy inline inspection for east-west traffic: </p>
-<h3>Traffic inspection rules</h3>
+<h4>Traffic inspection rules</h4>
 <p>inspection_rules:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: inspect_web_app_traffic</p>
 <p>source: web-subnet</p>
@@ -205,22 +209,24 @@
 <p>inspection: metadata_only</p>
 <p>anomaly_detection: enabled</p>
 <p>Firewall Rule Management </p>
-<h3>Firewall rule analyzer</h3>
+<h4>Firewall rule analyzer</h4>
 <p>def analyze_firewall_rules(rules):</p>
 <p>issues = []</p>
 <p>for rule in rules:</p>
-<h3>Check for overly permissive rules</h3>
+<h4>Check for overly permissive rules</h4>
 <p>if rule.get("cidr") == "0.0.0.0/0" and rule.get("port") in [22, 3389]:</p>
 <p>issues.append(f"Overly permissive: {rule['name']} allows SSH/RDP from anywhere")</p>
-<h3>Check for rules with no hits</h3>
+<h4>Check for rules with no hits</h4>
 <p>if rule.get("hit_count", 0) == 0 and rule["age_days"] &gt; 30:</p>
 <p>issues.append(f"Unused rule: {rule['name']} has no hits in 30+ days")</p>
-<h3>Check for duplicate rules</h3>
-<h3>...</h3>
+<h4>Check for duplicate rules</h4>
+<h4>...</h4>
 <p>return issues</p>
 <p>Conclusion </p>
 <p>Cloud network security requires layered controls. Use security groups for instance-level filtering and NACLs for subnet-level guardrails. Design VPCs with multiple tiers and restrict traffic between them. Deploy traffic inspection for critical paths. Review firewall rules quarterly and remove unused rules. Automate everything with infrastructure as code.</p>
 <p><strong>See also:</strong> <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p></div>
     </article>

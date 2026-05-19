@@ -1,7 +1,7 @@
 ---
 title: "Best React Component Libraries 2026: shadcn/ui vs Radix UI vs Headless UI vs Ark UI vs React Aria"
 description: "Compare headless and styled React component libraries — the shift from monolithic UI kits to accessible, unstyled primitives you style yourself."
-date: 2026-05-08
+date: 2025-11-27
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/component-library-comparison.html
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Remix vs Next.js vs TanStack Start (2026): React Framework Showdown"
 description: "Three React frameworks with different philosophies: Remix (web standards), Next.js (hybrid rendering), and TanStack Start (router-first). Benchmarks, DX comparison, and which fits your project."
-date: 2026-05-08
+date: 2025-11-24
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/remix-vs-nextjs-vs-tanstack.html
 ---

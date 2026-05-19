@@ -1,7 +1,7 @@
 ---
 title: "Best AI Code Documentation Tools 2026: Mintlify vs Swimm vs GitBook AI vs Docusaurus"
 description: "Compare AI-powered documentation tools that auto-generate docs, detect stale content, and sync with code changes — keep docs from rotting."
-date: 2026-05-08
+date: 2025-11-12
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-code-documentation-tools.html
 ---

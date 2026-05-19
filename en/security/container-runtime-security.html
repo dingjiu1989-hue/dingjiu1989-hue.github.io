@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/container-runtime-security.png",
       "datePublished": "2026-03-16",
       "dateModified": "2026-04-20",
-      "wordCount": "1325",
+      "wordCount": "1364",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/container-runtime-security.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/container-runtime-security.png" alt="Container Runtime Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Container Runtime Security</h2>
 <h3>Container Runtime Security</h3>
-<h3>Container Runtime Security</h3>
-<h3>Container Runtime Security</h3>
-<h3>Container Runtime Security</h3>
-<h3>Container Runtime Security</h3>
-<h3>Container Runtime Security</h3>
-<h3>Container Runtime Security</h3>
-<h3>Container Runtime Security</h3>
-<h3>Container Runtime Security</h3>
-<h3>Container Runtime Security</h3>
-<h3>Container Runtime Security</h3>
-<h3>Container Runtime Security</h3>
+<h4>Container Runtime Security</h4>
+<h4>Container Runtime Security</h4>
+<h4>Container Runtime Security</h4>
+<h4>Container Runtime Security</h4>
+<h4>Container Runtime Security</h4>
+<h4>Container Runtime Security</h4>
+<h4>Container Runtime Security</h4>
+<h4>Container Runtime Security</h4>
+<h4>Container Runtime Security</h4>
+<h4>Container Runtime Security</h4>
+<h4>Container Runtime Security</h4>
+<h4>Container Runtime Security</h4>
+<h4>Container Runtime Security</h4>
 <p>Runtime Security Fundamentals </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/container-runtime-security.png" alt="Container Runtime Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Container runtime security monitors and restricts container behavior during execution. It prevents attackers who gain container access from breaking out or causing damage. </p>
 <p>seccomp Profiles </p>
@@ -148,39 +152,39 @@
 <p>localhostProfile: profiles/strict.json</p>
 <p>AppArmor </p>
 <p>AppArmor uses path-based access control: </p>
-<h3>AppArmor profile for container</h3>
-<h3>include</h3>
+<h4>AppArmor profile for container</h4>
+<h4>include</h4>
 <p>profile container-strict flags=(attach_disconnected) {</p>
-<h3>include</h3>
-<h3>Network</h3>
+<h4>include</h4>
+<h4>Network</h4>
 <p>network inet tcp,</p>
 <p>network inet udp,</p>
-<h3>Filesystem</h3>
+<h4>Filesystem</h4>
 <p>/ r,</p>
 <p>/proc/*/status r,</p>
 <p>/etc/resolv.conf r,</p>
 <p>/app/** r,</p>
 <p>/app/bin ix,</p>
-<h3>Deny everything else</h3>
+<h4>Deny everything else</h4>
 <p>deny /etc/shadow r,</p>
 <p>deny /sys/** r,</p>
 <p>deny /proc/** w,</p>
 <p>}</p>
 <p>SELinux for Containers </p>
 <p>SELinux provides mandatory access control: </p>
-<h3>Enable SELinux for container runtime</h3>
+<h4>Enable SELinux for container runtime</h4>
 <p>sudo setenforce 1</p>
 <p>sudo semanage permissive -a container_t</p>
-<h3>Apply SELinux context to container</h3>
+<h4>Apply SELinux context to container</h4>
 <p>podman run \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--security-opt label=type:container_t \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--security-opt label=level:s0:c1,c2 \</p>
 <p>nginx</p>
-<h3>Check SELinux context</h3>
+<h4>Check SELinux context</h4>
 <p>ps -eZ | grep container</p>
 <p>Falco Runtime Detection </p>
 <p>Falco detects anomalous behavior: </p>
-<h3>falco-rules.yaml</h3>
+<h4>falco-rules.yaml</h4>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rule: Terminal shell in container</p>
 <p>desc: Detect shell spawn in container</p>
 <p>condition: &gt;</p>
@@ -209,7 +213,7 @@
 <p>output: &gt;</p>
 <p>Write to sensitive host path from container</p>
 <p>priority: CRITICAL</p>
-<h3>Falco event consumer</h3>
+<h4>Falco event consumer</h4>
 <p>import json</p>
 <p>import requests</p>
 <p>def handle_falco_events():</p>
@@ -248,6 +252,8 @@
 <p>Conclusion </p>
 <p>Container runtime security requires multiple layers. Use seccomp to restrict system calls, AppArmor for path-based controls, and SELinux for mandatory access. Deploy Falco for runtime threat detection. Run containers with the minimum capabilities required. Monitor and alert on suspicious behavior in real time.</p>
 <p><strong>See also:</strong> <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/container-scanning-tools.html">Container Scanning Tools: Securing Images in CI/CD</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a></p></div>
     </article>

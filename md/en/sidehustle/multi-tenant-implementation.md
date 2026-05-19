@@ -1,7 +1,7 @@
 ---
 title: "Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing"
 description: "Implement multi-tenant SaaS architecture: isolation strategies, tenant routing, and pricing models for B2B applications."
-date: 2026-05-12
+date: 2026-01-22
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/multi-tenant-implementation.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/multi-tenant-implementation
 
 ## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+#### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+#### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+#### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+#### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+#### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+#### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+#### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+#### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+#### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+#### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+#### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-### Multi-Tenant SaaS: Architecture and Implementation
+#### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+
+#### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+
+#### Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+
+#### Multi-Tenant SaaS: Architecture and Implementation
 
 Multi-tenancy is the foundation of SaaS architecture, allowing a single application instance to serve multiple customers (tenants) while maintaining data isolation. The choice of isolation strategy has profound implications for security, performance, operational complexity, and pricing flexibility.
 
@@ -83,6 +89,12 @@ Tenant monitoring tracks per-tenant resource usage, error rates, and performance
 Multi-tenant architecture choices have long-term implications for your SaaS. Start simple with shared schema and PostgreSQL RLS, graduating to increased isolation as your customer base grows. Implement robust tenant routing middleware early. Choose pricing models that align with your value proposition. The right isolation strategy balances operational complexity against customer requirements.
 
 **See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>).
+
+**See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
+
+**See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
+
+**See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
 
 **See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
 

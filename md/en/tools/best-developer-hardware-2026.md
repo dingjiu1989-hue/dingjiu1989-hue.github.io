@@ -1,7 +1,7 @@
 ---
 title: "Best Developer Hardware 2026: Keyboards, Monitors, Chairs, and Desk Setups"
 description: "A developer's guide to hardware that actually improves productivity — mechanical keyboards, high-DPI monitors, ergonomic chairs, and standing desks."
-date: 2026-05-08
+date: 2025-11-04
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-developer-hardware-2026.html
 ---

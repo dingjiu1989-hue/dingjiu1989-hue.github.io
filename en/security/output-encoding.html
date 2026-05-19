@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/output-encoding.png",
       "datePublished": "2026-03-12",
       "dateModified": "2026-05-03",
-      "wordCount": "523",
+      "wordCount": "561",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/output-encoding.html"},
@@ -99,18 +101,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/output-encoding.png" alt="Output Encoding" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Output Encoding</h2>
 <h3>Output Encoding</h3>
-<h3>Output Encoding</h3>
-<h3>Output Encoding</h3>
-<h3>Output Encoding</h3>
-<h3>Output Encoding</h3>
-<h3>Output Encoding</h3>
-<h3>Output Encoding</h3>
-<h3>Output Encoding</h3>
-<h3>Output Encoding</h3>
-<h3>Output Encoding</h3>
-<h3>Output Encoding</h3>
-<h3>Output Encoding</h3>
-<h3>Output Encoding: Cross-Site Scripting (XSS) Prevention Guide</h3>
+<h4>Output Encoding</h4>
+<h4>Output Encoding</h4>
+<h4>Output Encoding</h4>
+<h4>Output Encoding</h4>
+<h4>Output Encoding</h4>
+<h4>Output Encoding</h4>
+<h4>Output Encoding</h4>
+<h4>Output Encoding</h4>
+<h4>Output Encoding</h4>
+<h4>Output Encoding</h4>
+<h4>Output Encoding</h4>
+<h4>Output Encoding</h4>
+<h4>Output Encoding</h4>
+<h4>Output Encoding: Cross-Site Scripting (XSS) Prevention Guide</h4>
 <p>Output encoding is the strongest defense against Cross-Site Scripting (XSS). It transforms untrusted data into a safe representation before inserting it into an HTML page. When done correctly for each output context, it neutralizes even sophisticated injection attacks.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/output-encoding.png" alt="Output Encoding" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Why Encoding Matters</h4>
 <p>XSS happens when user-controlled data is inserted into a web page without proper encoding. An attacker who submits <code>` as their username expects the browser to execute that script. Output encoding converts</code>&lt;<code>to</code>&lt;<code>and</code>&gt;<code>to</code>&gt;`, rendering the attack inert — the browser displays the text literally instead of executing it.</p>
@@ -119,7 +123,7 @@
 <p>Data inserted between HTML tags needs HTML entity encoding. The critical characters are <code>&lt;</code>, <code>&gt;</code>, <code>&amp;</code>, <code>"</code>, and <code>'</code>. Most frameworks handle this automatically through template engines.</p>
 <p>import html</p>
 <p>safe_output = html.escape(user_input)</p>
-<h3>"" becomes ""</h3>
+<h4>"" becomes ""</h4>
 <p>Template engines like Jinja2, ERB, and Thymeleaf auto-escape by default. This handles 80% of encoding needs. Verify that auto-escaping is enabled and never disable it without a documented reason.</p>
 <h4>HTML Attribute Context</h4>
 <p>Attribute encoding is stricter than body encoding. In addition to the standard entities, you must encode spaces, equals signs, and backticks. Unquoted attributes are particularly dangerous — avoid them entirely.</p>
@@ -136,6 +140,8 @@
 <h4>JavaScript Context</h4>
 <p>Data inserted into JavaScript requires JSON encoding or hex entity encoding. Never insert untrusted data directly into a `</p>
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/cors-security.html">CORS Security</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/session-management.html">Session Management Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/session-management.html">Session Management Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/session-management.html">Session Management Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/session-management.html">Session Management Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/session-management.html">Session Management Security</a></p></div>
     </article>

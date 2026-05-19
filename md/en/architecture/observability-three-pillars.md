@@ -1,7 +1,7 @@
 ---
 title: "Observability: Logs, Metrics, and Traces"
 description: "Logs, metrics, traces correlation, cardinality, sampling, storage costs, and the three pillars of observability"
-date: 2026-05-12
+date: 2026-04-29
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/observability-three-pillars.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/observability-three-pilla
 
 ## Observability: Logs, Metrics, and Traces
 
-## Observability: Logs, Metrics, and Traces
+### Observability: Logs, Metrics, and Traces
 
-## Observability: Logs, Metrics, and Traces
+#### Observability: Logs, Metrics, and Traces
 
-## Observability: Logs, Metrics, and Traces
+#### Observability: Logs, Metrics, and Traces
 
-## Observability: Logs, Metrics, and Traces
+#### Observability: Logs, Metrics, and Traces
 
-## Observability: Logs, Metrics, and Traces
+#### Observability: Logs, Metrics, and Traces
 
-## Observability: Logs, Metrics, and Traces
+#### Observability: Logs, Metrics, and Traces
 
-## Observability: Logs, Metrics, and Traces
+#### Observability: Logs, Metrics, and Traces
 
-## Observability: Logs, Metrics, and Traces
+#### Observability: Logs, Metrics, and Traces
 
-## Observability: Logs, Metrics, and Traces
+#### Observability: Logs, Metrics, and Traces
 
-## Observability: Logs, Metrics, and Traces
+#### Observability: Logs, Metrics, and Traces
 
-## Observability: Logs, Metrics, and Traces
+#### Observability: Logs, Metrics, and Traces
+
+#### Observability: Logs, Metrics, and Traces
+
+#### Observability: Logs, Metrics, and Traces
+
+#### Observability: Logs, Metrics, and Traces
 
 Observability is the ability to understand a system's internal state from its external outputs. The three pillars — logs, metrics, and traces — each provide different perspectives. Logs describe discrete events. Metrics provide aggregate measurements. Traces follow requests across service boundaries. Effective observability requires combining all three and correlating them to answer questions about system behavior, especially during incidents. 
 
@@ -53,6 +59,12 @@ The OpenTelemetry project is converging the three pillars. OTel provides a unifi
 Choosing an observability backend depends on scale and budget. Self-hosted options (Grafana + Loki for logs, Prometheus for metrics, Tempo for traces) provide cost control but operational overhead. Managed options (Datadog, Honeycomb, New Relic) provide convenience at higher per-event cost. Hybrid approaches (self-hosted for high-volume data, managed for curated dashboards) balance cost and capability.
 
 **See also:** [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Structured Logging](</en/architecture/structured-logging.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>).
+
+**See also:** [Metrics Types and Monitoring Methodologies](</en/architecture/metrics-types.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
+
+**See also:** [Metrics Types and Monitoring Methodologies](</en/architecture/metrics-types.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
+
+**See also:** [Metrics Types and Monitoring Methodologies](</en/architecture/metrics-types.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
 
 **See also:** [Metrics Types and Monitoring Methodologies](</en/architecture/metrics-types.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
 

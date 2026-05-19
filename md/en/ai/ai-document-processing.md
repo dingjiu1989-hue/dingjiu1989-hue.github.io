@@ -1,7 +1,7 @@
 ---
 title: "AI Document Processing"
 description: "Build AI-powered document processing pipelines for extraction, classification, summarization, and data entry from PDFs, images, and scanned documents."
-date: 2026-05-11
+date: 2025-12-11
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-document-processing.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-document-processing.html
 
 ## AI Document Processing
 
-## AI Document Processing
+### AI Document Processing
 
-## AI Document Processing
+#### AI Document Processing
 
-## AI Document Processing
+#### AI Document Processing
 
-## AI Document Processing
+#### AI Document Processing
 
-## AI Document Processing
+#### AI Document Processing
 
-## AI Document Processing
+#### AI Document Processing
 
-## AI Document Processing
+#### AI Document Processing
 
-## AI Document Processing
+#### AI Document Processing
 
-## AI Document Processing
+#### AI Document Processing
 
-## AI Document Processing
+#### AI Document Processing
 
-## AI Document Processing
+#### AI Document Processing
 
-## AI Document Processing
+#### AI Document Processing
 
-### Introduction
+#### AI Document Processing
+
+#### AI Document Processing
+
+#### AI Document Processing
+
+#### Introduction
 
 Document processing is one of the highest-ROI applications of AI in business. Organizations spend countless hours manually extracting data from invoices, contracts, forms, and reports. AI-powered document processing can handle these tasks in seconds, with higher accuracy and lower cost than human operators.
 
-### The Document Processing Pipeline
+#### The Document Processing Pipeline
 
 A complete document processing system has five stages:
 
@@ -99,7 +105,7 @@ def ocr_document(image_path):
 
 image = Image.open(image_path)
 
-## Configure OCR for better accuracy
+#### Configure OCR for better accuracy
 
 custom_config = r'--oem 3 --psm 6 -l eng'
 
@@ -266,7 +272,7 @@ errors.append(f"Field {field} fails pattern validation")
 
 return errors
 
-### Production Architecture
+#### Production Architecture
 
 Documents → Queue → Worker Pool → Storage
 
@@ -305,7 +311,7 @@ Key components:
 
 
 
-### Handling Edge Cases
+#### Handling Edge Cases
 
   * **Poor quality scans** : Apply image enhancement (deskew, denoise, contrast adjustment)
 
@@ -320,7 +326,7 @@ Key components:
 
 
 
-### Measuring Accuracy
+#### Measuring Accuracy
 
 Track these metrics per document type:
 
@@ -335,11 +341,17 @@ Track these metrics per document type:
 
 
 
-### Conclusion
+#### Conclusion
 
 AI document processing transforms document-heavy workflows from hours of manual work to seconds of automated processing. The key to success is building a pipeline that handles format diversity, uses the right OCR/extraction approach for each document type, and includes robust validation with human review for edge cases. Start with a single document type (like invoices), perfect the pipeline, then expand to additional types.
 
 **See also:** [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>).
+
+**See also:** [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>)
+
+**See also:** [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>)
+
+**See also:** [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>)
 
 **See also:** [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>)
 

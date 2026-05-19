@@ -1,7 +1,7 @@
 ---
 title: "Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns"
 description: "Complete guide to database sharding — choosing a shard key, consistent hashing, resharding strategies, and common pitfalls."
-date: 2026-05-08
+date: 2025-10-17
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/database-sharding-strategies.html
 ---

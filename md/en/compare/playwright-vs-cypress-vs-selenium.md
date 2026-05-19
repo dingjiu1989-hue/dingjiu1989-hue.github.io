@@ -1,7 +1,7 @@
 ---
 title: "Playwright vs Cypress vs Selenium (2026): Which Testing Framework Wins?"
 description: "In-depth comparison of browser automation frameworks — speed, reliability, language support, CI integration, and debugging. Real test suite migration experiences."
-date: 2026-05-08
+date: 2025-11-20
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/playwright-vs-cypress-vs-selenium.html
 ---

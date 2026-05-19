@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/soc-operations.png",
       "datePublished": "2026-03-13",
       "dateModified": "2026-05-11",
-      "wordCount": "1555",
+      "wordCount": "1590",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/soc-operations.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/soc-operations.png" alt="SOC Operations" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>SOC Operations</h2>
 <h3>SOC Operations</h3>
-<h3>SOC Operations</h3>
-<h3>SOC Operations</h3>
-<h3>SOC Operations</h3>
-<h3>SOC Operations</h3>
-<h3>SOC Operations</h3>
-<h3>SOC Operations</h3>
-<h3>SOC Operations</h3>
-<h3>SOC Operations</h3>
-<h3>SOC Operations</h3>
-<h3>SOC Operations</h3>
-<h3>SOC Operations</h3>
+<h4>SOC Operations</h4>
+<h4>SOC Operations</h4>
+<h4>SOC Operations</h4>
+<h4>SOC Operations</h4>
+<h4>SOC Operations</h4>
+<h4>SOC Operations</h4>
+<h4>SOC Operations</h4>
+<h4>SOC Operations</h4>
+<h4>SOC Operations</h4>
+<h4>SOC Operations</h4>
+<h4>SOC Operations</h4>
+<h4>SOC Operations</h4>
+<h4>SOC Operations</h4>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/soc-operations.png" alt="SOC Operations" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>A Security Operations Center (SOC) is a centralized team responsible for monitoring, detecting, analyzing, and responding to security incidents. Building an effective SOC requires structured processes, skilled personnel, appropriate tools, and continuous improvement. </p>
 <p>SOC Tier Model </p>
@@ -134,16 +138,16 @@
 <p>Maintain shift logs</p>
 </li>
 </ul>
-<h3>Tier 1 triage automation example</h3>
+<h4>Tier 1 triage automation example</h4>
 <p>def triage_alert(alert):</p>
-<h3>Check against known false positive patterns</h3>
+<h4>Check against known false positive patterns</h4>
 <p>for fp_pattern in false_positive_patterns:</p>
 <p>if fp_pattern.matches(alert):</p>
 <p>alert.auto_close()</p>
 <p>return</p>
-<h3>Enrich with threat intelligence</h3>
+<h4>Enrich with threat intelligence</h4>
 <p>alert.iocs = enrich_iocs(alert.extract_iocs())</p>
-<h3>Escalate if critical</h3>
+<h4>Escalate if critical</h4>
 <p>if alert.severity == 'critical':</p>
 <p>alert.assign_tier(2)</p>
 <p>alert.notify('pagerduty')</p>
@@ -191,7 +195,7 @@
 </ul>
 <p>SIEM Tuning </p>
 <p>SIEM tuning reduces noise while maintaining detection coverage. A well-tuned SIEM generates alerts that analysts can actually investigate. </p>
-<h3>Example: correlation rule tuning cycle</h3>
+<h4>Example: correlation rule tuning cycle</h4>
 <p>SIEM_ALERTS=10000</p>
 <p>FALSE_POSITIVES=8500</p>
 <p>TRUE_POSITIVES=1000</p>
@@ -201,7 +205,7 @@
 <p>echo "Escalation rate: $((ESCALATIONS * 100 / SIEM_ALERTS))%"</p>
 <p>Playbooks </p>
 <p>Playbooks provide step-by-step instructions for handling specific scenarios. They reduce mean time to respond (MTTR) and ensure consistency. </p>
-<h3>Incident response playbook example</h3>
+<h4>Incident response playbook example</h4>
 <p>playbook:</p>
 <p>id: IR-001</p>
 <p>name: "Ransomware Detection and Response"</p>
@@ -247,6 +251,8 @@
 <p>Conclusion </p>
 <p>A well-structured SOC combines skilled personnel, documented processes, and appropriate technology. Focus on reducing alert fatigue through continuous tuning, maintaining comprehensive playbooks, measuring performance with meaningful KPIs, and ensuring smooth shift transitions.</p>
 <p><strong>See also:</strong> <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a>, <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p>
 <p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p>
 <p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p></div>
     </article>

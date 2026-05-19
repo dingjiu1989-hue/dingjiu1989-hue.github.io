@@ -1,7 +1,7 @@
 ---
 title: "Security Auditing and Compliance Frameworks"
 description: "Overview of SOC 2, ISO 27001, PCI DSS, HIPAA compliance frameworks and how to collect audit evidence for continuous compliance."
-date: 2026-05-12
+date: 2026-03-05
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/security-auditing.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/security/security-auditing.html
 
 ## Security Auditing and Compliance Frameworks
 
-## Security Auditing and Compliance Frameworks
+### Security Auditing and Compliance Frameworks
 
-## Security Auditing and Compliance Frameworks
+#### Security Auditing and Compliance Frameworks
 
-## Security Auditing and Compliance Frameworks
+#### Security Auditing and Compliance Frameworks
 
-## Security Auditing and Compliance Frameworks
+#### Security Auditing and Compliance Frameworks
 
-## Security Auditing and Compliance Frameworks
+#### Security Auditing and Compliance Frameworks
 
-## Security Auditing and Compliance Frameworks
+#### Security Auditing and Compliance Frameworks
 
-## Security Auditing and Compliance Frameworks
+#### Security Auditing and Compliance Frameworks
 
-## Security Auditing and Compliance Frameworks
+#### Security Auditing and Compliance Frameworks
 
-## Security Auditing and Compliance Frameworks
+#### Security Auditing and Compliance Frameworks
 
-## Security Auditing and Compliance Frameworks
+#### Security Auditing and Compliance Frameworks
 
-## Security Auditing and Compliance Frameworks
+#### Security Auditing and Compliance Frameworks
 
-## Security Auditing and Compliance Frameworks
+#### Security Auditing and Compliance Frameworks
+
+#### Security Auditing and Compliance Frameworks
+
+#### Security Auditing and Compliance Frameworks
+
+#### Security Auditing and Compliance Frameworks
 
 Security auditing is the systematic evaluation of an organization's security controls against established standards. Compliance with frameworks like SOC 2, ISO 27001, PCI DSS, and HIPAA demonstrates to customers and regulators that security is taken seriously. This article covers the major frameworks, audit evidence collection, and continuous compliance strategies.
 
-### Major Compliance Frameworks
+#### Major Compliance Frameworks
 
 #### SOC 2 (Service Organization Control 2)
 
@@ -132,7 +138,7 @@ HIPAA applies to healthcare providers, health plans, and healthcare clearinghous
 
 
 
-### Audit Evidence Collection
+#### Audit Evidence Collection
 
 Auditors require evidence that controls are operating effectively. Evidence must be objective, verifiable, and sufficient.
 
@@ -161,7 +167,7 @@ Auditors require evidence that controls are operating effectively. Evidence must
 
 Manual evidence collection is time-consuming and error-prone. Automation tools collect evidence continuously and respond to auditor requests instantly.
 
-## Automated evidence collection for SOC 2
+#### Automated evidence collection for SOC 2
 
 def collect_iam_evidence():
 
@@ -175,7 +181,7 @@ evidence = {
 
 }
 
-## Evidence: MFA is enabled for all console users
+#### Evidence: MFA is enabled for all console users
 
 evidence["controls"]["mfa_enabled"] = {
 
@@ -187,7 +193,7 @@ evidence["controls"]["mfa_enabled"] = {
 
 }
 
-## Evidence: Access keys are rotated within 90 days
+#### Evidence: Access keys are rotated within 90 days
 
 evidence["controls"]["key_rotation"] = {
 
@@ -197,7 +203,7 @@ evidence["controls"]["key_rotation"] = {
 
 }
 
-## Evidence: Inactive accounts are disabled
+#### Evidence: Inactive accounts are disabled
 
 evidence["controls"]["inactive_accounts"] = {
 
@@ -224,7 +230,7 @@ return evidence
 
 
 
-### Building a Compliance Program
+#### Building a Compliance Program
 
 #### Step 1: Scope Definition
 
@@ -268,7 +274,7 @@ Conduct a pre-audit assessment. Review evidence completeness, test control effec
 
 Auditors will request evidence, conduct interviews, and perform testing. Cooperate fully and respond promptly to requests. Preparation is the key to a smooth audit.
 
-### Managing Multiple Frameworks
+#### Managing Multiple Frameworks
 
 Organizations often need to comply with multiple frameworks. A unified compliance approach maps common controls across frameworks:
 
@@ -296,11 +302,17 @@ hipaa: "164.312(a)(2)(iv), 164.312(e)(2)(ii)"
 
 This common control mapping allows teams to implement one control that satisfies multiple frameworks, reducing duplication and audit fatigue.
 
-### Conclusion
+#### Conclusion
 
 Compliance is not security, but well-designed compliance programs significantly improve security posture. Choose the right framework for your business (SOC 2 for SaaS, PCI DSS for payments, HIPAA for healthcare, ISO 27001 for international credibility), automate evidence collection, and maintain continuous compliance rather than scrambling before annual audits.
 
 **See also:** [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>), [Security Log Management](</en/security/log-management-security.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>).
+
+**See also:** [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>), [Security Log Management](</en/security/log-management-security.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>)
+
+**See also:** [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>), [Security Log Management](</en/security/log-management-security.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>)
+
+**See also:** [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>), [Security Log Management](</en/security/log-management-security.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>)
 
 **See also:** [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>), [Security Log Management](</en/security/log-management-security.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>)
 

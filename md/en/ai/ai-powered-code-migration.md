@@ -1,7 +1,7 @@
 ---
 title: "AI-Powered Code Migration Guide: Framework Upgrades, Language Transitions, and Refactoring"
 description: "How to use AI for code migration — JS to TS, framework upgrades, library replacements, and legacy refactoring with incremental workflow and test safety nets."
-date: 2026-05-08
+date: 2025-11-14
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-powered-code-migration.html
 ---

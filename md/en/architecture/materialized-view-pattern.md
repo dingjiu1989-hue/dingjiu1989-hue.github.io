@@ -1,7 +1,7 @@
 ---
 title: "Materialized View Pattern"
 description: "Explore the materialized view pattern: read models, caching strategies, CQRS integration, and efficient cross-service queries"
-date: 2026-05-12
+date: 2026-05-04
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/materialized-view-pattern.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/materialized-view-pattern
 
 ## Materialized View Pattern
 
-## Materialized View Pattern
+### Materialized View Pattern
 
-## Materialized View Pattern
+#### Materialized View Pattern
 
-## Materialized View Pattern
+#### Materialized View Pattern
 
-## Materialized View Pattern
+#### Materialized View Pattern
 
-## Materialized View Pattern
+#### Materialized View Pattern
 
-## Materialized View Pattern
+#### Materialized View Pattern
 
-## Materialized View Pattern
+#### Materialized View Pattern
 
-## Materialized View Pattern
+#### Materialized View Pattern
 
-## Materialized View Pattern
+#### Materialized View Pattern
 
-## Materialized View Pattern
+#### Materialized View Pattern
 
-## Materialized View Pattern
+#### Materialized View Pattern
+
+#### Materialized View Pattern
+
+#### Materialized View Pattern
+
+#### Materialized View Pattern
 
 The materialized view pattern creates pre-computed, denormalized read models that are optimized for specific query patterns. Instead of querying multiple services or performing expensive joins at query time, the system maintains a dedicated data store containing exactly the data needed for each query. This pattern is essential for read-heavy workloads and complex cross-service queries in microservice architectures. 
 
@@ -79,6 +85,12 @@ Materialized views are appropriate when queries require data from multiple servi
 A pragmatic approach is to use materialized views for the most important queries and API composition for less critical ones. Start with the patterns that cause the most performance problems and add materialized views incrementally. Over time, the system develops a set of optimized read models that cover the most common and performance-critical queries.
 
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Caching Strategies](</en/architecture/cache-strategies.html>).
+
+**See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 

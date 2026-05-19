@@ -1,7 +1,7 @@
 ---
 title: "Monolith-First Strategy"
 description: "When to start monolithic, extraction patterns, and migration strategies to microservices with proven approaches"
-date: 2026-05-12
+date: 2026-04-28
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/monolith-first-strategy.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/monolith-first-strategy.h
 
 ## Monolith-First Strategy
 
-## Monolith-First Strategy
+### Monolith-First Strategy
 
-## Monolith-First Strategy
+#### Monolith-First Strategy
 
-## Monolith-First Strategy
+#### Monolith-First Strategy
 
-## Monolith-First Strategy
+#### Monolith-First Strategy
 
-## Monolith-First Strategy
+#### Monolith-First Strategy
 
-## Monolith-First Strategy
+#### Monolith-First Strategy
 
-## Monolith-First Strategy
+#### Monolith-First Strategy
 
-## Monolith-First Strategy
+#### Monolith-First Strategy
 
-## Monolith-First Strategy
+#### Monolith-First Strategy
 
-## Monolith-First Strategy
+#### Monolith-First Strategy
 
-## Monolith-First Strategy
+#### Monolith-First Strategy
+
+#### Monolith-First Strategy
+
+#### Monolith-First Strategy
+
+#### Monolith-First Strategy
 
 The monolith-first strategy advocates starting new systems as a well-structured monolith rather than diving directly into microservices. This approach recognizes that early in a product's lifecycle, the primary risk is product-market fit, not scaling. Premature microservice decomposition introduces accidental complexity — distributed transaction management, network latency, service discovery, and operational overhead — before the domain boundaries are understood. 
 
@@ -49,6 +55,12 @@ Organizational alignment is critical. Conway's Law dictates that system architec
 When to avoid monolith-first: if the system is inherently distributed (IoT data ingestion, real-time event processing) or if the organization already has mature platform infrastructure and experience operating microservices. For most products, however, the pragmatic starting point is a well-structured monolith with extraction-ready internal boundaries.
 
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>), [Event Notification vs Event-Carried State Transfer](</en/architecture/event-notification-vs-event-carrying.html>).
+
+**See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>)
+
+**See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>)
+
+**See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>)
 
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>)
 

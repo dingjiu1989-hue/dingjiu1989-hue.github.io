@@ -1,7 +1,7 @@
 ---
 title: "Metrics Types and Monitoring Methodologies"
 description: "Counters, gauges, histograms, summaries, RED method, USE method, and the four golden signals"
-date: 2026-05-12
+date: 2026-04-27
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/metrics-types.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/metrics-types.html
 
 ## Metrics Types and Monitoring Methodologies
 
-## Metrics Types and Monitoring Methodologies
+### Metrics Types and Monitoring Methodologies
 
-## Metrics Types and Monitoring Methodologies
+#### Metrics Types and Monitoring Methodologies
 
-## Metrics Types and Monitoring Methodologies
+#### Metrics Types and Monitoring Methodologies
 
-## Metrics Types and Monitoring Methodologies
+#### Metrics Types and Monitoring Methodologies
 
-## Metrics Types and Monitoring Methodologies
+#### Metrics Types and Monitoring Methodologies
 
-## Metrics Types and Monitoring Methodologies
+#### Metrics Types and Monitoring Methodologies
 
-## Metrics Types and Monitoring Methodologies
+#### Metrics Types and Monitoring Methodologies
 
-## Metrics Types and Monitoring Methodologies
+#### Metrics Types and Monitoring Methodologies
 
-## Metrics Types and Monitoring Methodologies
+#### Metrics Types and Monitoring Methodologies
 
-## Metrics Types and Monitoring Methodologies
+#### Metrics Types and Monitoring Methodologies
 
-## Metrics Types and Monitoring Methodologies
+#### Metrics Types and Monitoring Methodologies
+
+#### Metrics Types and Monitoring Methodologies
+
+#### Metrics Types and Monitoring Methodologies
+
+#### Metrics Types and Monitoring Methodologies
 
 Metrics provide the quantitative foundation for understanding system health, detecting anomalies, and driving alerts. The four primary metric types — counters, gauges, histograms, and summaries — each serve distinct purposes. Combined with monitoring methodologies like RED, USE, and the Four Golden Signals, they form a complete picture of system behavior and are essential for effective operations. 
 
@@ -53,6 +59,12 @@ Metric naming conventions maintain consistency across services. A hierarchical n
 Metric retention and aggregation tiers optimize storage. Raw high-resolution metrics (10-second intervals) are retained for short periods (7-30 days). Rolled-up aggregates (5-minute, 1-hour, 1-day resolutions) extend retention to years. Long-term trends use high-level aggregates; incident investigation uses raw metrics. The metrics system (Prometheus, VictoriaMetrics, M3) should transparently handle this downsampling.
 
 **See also:** [Observability: Logs, Metrics, and Traces](</en/architecture/observability-three-pillars.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>).
+
+**See also:** [Observability: Logs, Metrics, and Traces](</en/architecture/observability-three-pillars.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
+
+**See also:** [Observability: Logs, Metrics, and Traces](</en/architecture/observability-three-pillars.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
+
+**See also:** [Observability: Logs, Metrics, and Traces](</en/architecture/observability-three-pillars.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 
 **See also:** [Observability: Logs, Metrics, and Traces](</en/architecture/observability-three-pillars.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 

@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-database-query.png",
       "datePublished": "2025-12-11",
       "dateModified": "2026-05-08",
-      "wordCount": "1912",
+      "wordCount": "1963",
       "keywords": "Artificial Intelligence, Machine Learning",
       "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-database-query.html"},
@@ -98,18 +100,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-database-query.png" alt="Natural Language to SQL with LLMs" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Natural Language to SQL with LLMs</h2>
 <h3>Natural Language to SQL with LLMs</h3>
-<h3>Natural Language to SQL with LLMs</h3>
-<h3>Natural Language to SQL with LLMs</h3>
-<h3>Natural Language to SQL with LLMs</h3>
-<h3>Natural Language to SQL with LLMs</h3>
-<h3>Natural Language to SQL with LLMs</h3>
-<h3>Natural Language to SQL with LLMs</h3>
-<h3>Natural Language to SQL with LLMs</h3>
-<h3>Natural Language to SQL with LLMs</h3>
-<h3>Natural Language to SQL with LLMs</h3>
-<h3>Natural Language to SQL with LLMs</h3>
-<h3>Natural Language to SQL with LLMs</h3>
-<h3>Natural Language to SQL with LLMs</h3>
+<h4>Natural Language to SQL with LLMs</h4>
+<h4>Natural Language to SQL with LLMs</h4>
+<h4>Natural Language to SQL with LLMs</h4>
+<h4>Natural Language to SQL with LLMs</h4>
+<h4>Natural Language to SQL with LLMs</h4>
+<h4>Natural Language to SQL with LLMs</h4>
+<h4>Natural Language to SQL with LLMs</h4>
+<h4>Natural Language to SQL with LLMs</h4>
+<h4>Natural Language to SQL with LLMs</h4>
+<h4>Natural Language to SQL with LLMs</h4>
+<h4>Natural Language to SQL with LLMs</h4>
+<h4>Natural Language to SQL with LLMs</h4>
+<h4>Natural Language to SQL with LLMs</h4>
+<h4>Natural Language to SQL with LLMs</h4>
 <h4>Introduction</h4>
 <p>Natural language to SQL (NL2SQL) is one of the most impactful applications of LLMs in data analytics. It enables non-technical users to query databases using plain English, democratizing data access across organizations. While early NL2SQL systems were fragile, modern LLMs can generate accurate SQL for complex analytical queries — when properly configured with schema context, safety guards, and validation.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-database-query.png" alt="Natural Language to SQL with LLMs" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>How NL2SQL Works</h4>
@@ -164,7 +168,7 @@
 <p>ddl += f" {col.name} {col.type} -- {col.description}\n"</p>
 <p>ddl += ");"</p>
 <p>context_parts.append(ddl)</p>
-<h3>Add sample rows for context on data patterns</h3>
+<h4>Add sample rows for context on data patterns</h4>
 <p>if table.sample_rows:</p>
 <p>context_parts.append(f"-- Sample row: {table.sample_rows[0]}")</p>
 <p>return "\n\n".join(context_parts)</p>
@@ -226,18 +230,18 @@
 <p>Before executing generated SQL, validate it:</p>
 <p>def validate_sql(query, allowed_tables):</p>
 <p>errors = []</p>
-<h3>Safety check: no mutations</h3>
+<h4>Safety check: no mutations</h4>
 <p>forbidden_keywords = ["DELETE", "UPDATE", "INSERT", "DROP", "ALTER", "TRUNCATE", "CREATE"]</p>
 <p>for keyword in forbidden_keywords:</p>
 <p>if keyword in query.upper():</p>
 <p>errors.append(f"Forbidden operation: {keyword}")</p>
-<h3>Check table references</h3>
+<h4>Check table references</h4>
 <p>parsed = sqlparse.parse(query)[0]</p>
 <p>used_tables = extract_tables(parsed)</p>
 <p>for table in used_tables:</p>
 <p>if table not in allowed_tables:</p>
 <p>errors.append(f"Unauthorized table: {table}")</p>
-<h3>Syntax validation</h3>
+<h4>Syntax validation</h4>
 <p>try:</p>
 <p>conn = get_dummy_connection(dialect)</p>
 <p>conn.execute(f"EXPLAIN {query}")</p>
@@ -283,6 +287,8 @@
 <h4>Conclusion</h4>
 <p>Natural language to SQL with LLMs is production-ready for analytical queries. The key success factors are high-quality schema context, relevant few-shot examples, robust query validation, and a self-correction loop. Start with a limited set of tables, measure query accuracy, and expand as you gain confidence. This technology is transforming data access, making self-serve analytics a reality for non-technical team members.</p>
 <p><strong>See also:</strong> <a href="/en/ai/local-llm-setup.html">Running LLMs Locally</a>, <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/local-llm-setup.html">Running LLMs Locally</a>, <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/local-llm-setup.html">Running LLMs Locally</a>, <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/local-llm-setup.html">Running LLMs Locally</a>, <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/local-llm-setup.html">Running LLMs Locally</a>, <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/local-llm-setup.html">Running LLMs Locally</a>, <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a></p></div>
     </article>

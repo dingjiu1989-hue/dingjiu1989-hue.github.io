@@ -1,7 +1,7 @@
 ---
 title: "Advanced Prompt Optimization: DSPy, Prompt Tuning, and Automated Prompt Engineering (2026)"
 description: "Go beyond trial-and-error prompt engineering — use DSPy, prompt tuning, and systematic optimization to build reliable LLM pipelines."
-date: 2026-05-08
+date: 2025-11-11
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/prompt-optimization-techniques.html
 ---

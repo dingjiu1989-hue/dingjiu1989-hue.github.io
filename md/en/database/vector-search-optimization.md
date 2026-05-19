@@ -1,7 +1,7 @@
 ---
 title: "Vector Search Optimization Techniques"
 description: "Optimize vector search with HNSW tuning, quantization (PQ, scalar), IVF parameters, filtered search performance, and multi-vector indexing."
-date: 2026-05-12
+date: 2026-03-29
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/vector-search-optimization.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/vector-search-optimization.ht
 
 ## Vector Search Optimization Techniques
 
-## Vector Search Optimization Techniques
+### Vector Search Optimization Techniques
 
-## Vector Search Optimization Techniques
+#### Vector Search Optimization Techniques
 
-## Vector Search Optimization Techniques
+#### Vector Search Optimization Techniques
 
-## Vector Search Optimization Techniques
+#### Vector Search Optimization Techniques
 
-## Vector Search Optimization Techniques
+#### Vector Search Optimization Techniques
 
-## Vector Search Optimization Techniques
+#### Vector Search Optimization Techniques
 
-## Vector Search Optimization Techniques
+#### Vector Search Optimization Techniques
 
-## Vector Search Optimization Techniques
+#### Vector Search Optimization Techniques
 
-## Vector Search Optimization Techniques
+#### Vector Search Optimization Techniques
 
-## Vector Search Optimization Techniques
+#### Vector Search Optimization Techniques
 
-## Vector Search Optimization Techniques
+#### Vector Search Optimization Techniques
+
+#### Vector Search Optimization Techniques
+
+#### Vector Search Optimization Techniques
+
+#### Vector Search Optimization Techniques
 
 Vector Search Fundamentals 
 
@@ -93,6 +99,12 @@ Conclusion
 Tune HNSW parameters for your data distribution. Use quantization to reduce memory. Benchmark with your actual data. Monitor recall in production.
 
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>).
+
+**See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
+
+**See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
+
+**See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
 
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
 

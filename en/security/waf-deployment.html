@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/waf-deployment.png",
       "datePublished": "2026-03-20",
       "dateModified": "2026-05-19",
-      "wordCount": "881",
+      "wordCount": "916",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/waf-deployment.html"},
@@ -99,26 +101,28 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/waf-deployment.png" alt="WAF Deployment Patterns" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>WAF Deployment Patterns</h2>
 <h3>WAF Deployment Patterns</h3>
-<h3>WAF Deployment Patterns</h3>
-<h3>WAF Deployment Patterns</h3>
-<h3>WAF Deployment Patterns</h3>
-<h3>WAF Deployment Patterns</h3>
-<h3>WAF Deployment Patterns</h3>
-<h3>WAF Deployment Patterns</h3>
-<h3>WAF Deployment Patterns</h3>
-<h3>WAF Deployment Patterns</h3>
-<h3>WAF Deployment Patterns</h3>
-<h3>WAF Deployment Patterns</h3>
-<h3>WAF Deployment Patterns</h3>
+<h4>WAF Deployment Patterns</h4>
+<h4>WAF Deployment Patterns</h4>
+<h4>WAF Deployment Patterns</h4>
+<h4>WAF Deployment Patterns</h4>
+<h4>WAF Deployment Patterns</h4>
+<h4>WAF Deployment Patterns</h4>
+<h4>WAF Deployment Patterns</h4>
+<h4>WAF Deployment Patterns</h4>
+<h4>WAF Deployment Patterns</h4>
+<h4>WAF Deployment Patterns</h4>
+<h4>WAF Deployment Patterns</h4>
+<h4>WAF Deployment Patterns</h4>
+<h4>WAF Deployment Patterns</h4>
 <p>WAF Overview </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/waf-deployment.png" alt="WAF Deployment Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>A Web Application Firewall (WAF) filters and monitors HTTP traffic between web applications and the internet. It protects against common attacks like SQL injection, XSS, and CSRF. </p>
 <p>Inline WAF Deployment </p>
 <p>The WAF sits directly in the request path: </p>
-<h3>ModSecurity configuration</h3>
+<h4>ModSecurity configuration</h4>
 <p>SecRuleEngine On</p>
 <p>SecRequestBodyAccess On</p>
 <p>SecResponseBodyAccess On</p>
-<h3>SQL Injection prevention</h3>
+<h4>SQL Injection prevention</h4>
 <p>SecRule REQUEST_COOKIES|REQUEST_COOKIES_NAMES|ARGS_NAMES|ARGS|XML:/* \</p>
 <p>"/((\%27)|(\'))\s*((\%6F)|o|(\%4F))((\%72)|r|(\%52))/ix" \</p>
 <p>"id:'981173',\</p>
@@ -126,7 +130,7 @@
 <p>deny,\</p>
 <p>status:403,\</p>
 <p>msg:'SQL Injection Attack'"</p>
-<h3>XSS prevention</h3>
+<h4>XSS prevention</h4>
 <p>SecRule ARGS "@detectXSS" \</p>
 <p>"id:'958056',\</p>
 <p>phase:2,\</p>
@@ -135,11 +139,11 @@
 <p>msg:'XSS Attack Detected'"</p>
 <p>Reverse Proxy WAF </p>
 <p>Deploy WAF as a reverse proxy for centralized protection: </p>
-<h3>Nginx with ModSecurity</h3>
+<h4>Nginx with ModSecurity</h4>
 <p>server {</p>
 <p>listen 443 ssl;</p>
 <p>server_name app.example.com;</p>
-<h3>ModSecurity enabled</h3>
+<h4>ModSecurity enabled</h4>
 <p>modsecurity on;</p>
 <p>modsecurity_rules_file /etc/nginx/modsec/main.conf;</p>
 <p>location / {</p>
@@ -150,7 +154,7 @@
 <p>}</p>
 <p>}</p>
 <p>Cloud WAF (AWS WAF) </p>
-<h3>AWS WAF with rate limiting and SQL injection protection</h3>
+<h4>AWS WAF with rate limiting and SQL injection protection</h4>
 <p>resource "aws_wafv2_web_acl" "main" {</p>
 <p>name = "main-waf"</p>
 <p>description = "Main WAF ACL"</p>
@@ -202,7 +206,7 @@
 <p>}</p>
 <p>API Protection </p>
 <p>APIs require different WAF rules than web applications: </p>
-<h3>Custom WAF rule for API protection</h3>
+<h4>Custom WAF rule for API protection</h4>
 <p>API_WAF_RULES = {</p>
 <p>"missing_auth_header": {</p>
 <p>"priority": 1,</p>
@@ -246,6 +250,8 @@
 <p>Conclusion </p>
 <p>Choose the WAF deployment pattern that fits your architecture. Inline WAF offers the strongest protection but adds latency. Cloud WAF provides scalability with minimal maintenance. Reverse proxy WAF is ideal for centralized management. Tune your WAF rules carefully to minimize false positives and monitor blocked requests regularly.</p>
 <p><strong>See also:</strong> <a href="/en/security/waf-comparison.html">WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p></div>
     </article>

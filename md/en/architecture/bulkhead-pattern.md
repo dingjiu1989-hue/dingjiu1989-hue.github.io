@@ -1,7 +1,7 @@
 ---
 title: "Bulkhead Pattern for Resilience"
-description: "Learn the bulkhead pattern for isolating failures in distributed systems."
-date: 2026-05-11
+description: "Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, circuit breaker integration, resource partitioning, and real-world implementation with resilience patterns."
+date: 2025-12-25
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/bulkhead-pattern.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/bulkhead-pattern.html
 
 ## Bulkhead Pattern for Resilience
 
-## Bulkhead Pattern for Resilience
+### Bulkhead Pattern for Resilience
 
-## Bulkhead Pattern for Resilience
+#### Bulkhead Pattern for Resilience
 
-## Bulkhead Pattern for Resilience
+#### Bulkhead Pattern for Resilience
 
-## Bulkhead Pattern for Resilience
+#### Bulkhead Pattern for Resilience
 
-## Bulkhead Pattern for Resilience
+#### Bulkhead Pattern for Resilience
 
-## Bulkhead Pattern for Resilience
+#### Bulkhead Pattern for Resilience
 
-## Bulkhead Pattern for Resilience
+#### Bulkhead Pattern for Resilience
 
-## Bulkhead Pattern for Resilience
+#### Bulkhead Pattern for Resilience
 
-## Bulkhead Pattern for Resilience
+#### Bulkhead Pattern for Resilience
 
-## Bulkhead Pattern for Resilience
+#### Bulkhead Pattern for Resilience
 
-## Bulkhead Pattern for Resilience
+#### Bulkhead Pattern for Resilience
+
+#### Bulkhead Pattern for Resilience
+
+#### Bulkhead Pattern for Resilience
+
+#### Bulkhead Pattern for Resilience
 
 The Bulkhead pattern is a resilience strategy inspired by ship design: just as a ship's watertight compartments prevent a single hull breach from sinking the entire vessel, the Bulkhead pattern isolates components of a software system so that a failure in one part does not cascade to others. By partitioning resources into isolated pools, the Bulkhead pattern ensures that a misbehaving component cannot exhaust shared resources and bring down the entire system. 
 
@@ -71,3 +77,9 @@ In production, bulkheads are one of the most effective patterns for preventing c
 **See also:** [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
 
 **See also:** [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
+
+**See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>)
+
+**See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>)
+
+**See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>)

@@ -1,7 +1,7 @@
 ---
 title: "Best Container Registry and Artifact Management Tools 2026: Docker Hub vs GHCR vs ECR vs Harbor vs Artifactory"
 description: "Compare Docker Hub, GitHub Container Registry, AWS ECR, Google Artifact Registry, Harbor, and JFrog Artifactory to choose the best container image storage for your team."
-date: 2026-05-09
+date: 2025-11-30
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-container-registry-tools.html
 ---

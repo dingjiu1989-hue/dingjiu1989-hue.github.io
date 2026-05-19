@@ -1,7 +1,7 @@
 ---
 title: "AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers"
 description: "Practical guide to integrating AI APIs into your apps. Streaming responses, function calling, embeddings, rate limits, and cost optimization across the big 3 providers."
-date: 2026-05-08
+date: 2025-11-06
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-api-integration-guide.html
 ---

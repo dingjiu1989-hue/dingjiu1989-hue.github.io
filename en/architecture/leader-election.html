@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/leader-election.png",
       "datePublished": "2026-04-27",
       "dateModified": "2026-05-16",
-      "wordCount": "1088",
+      "wordCount": "1152",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/leader-election.html"},
@@ -96,17 +98,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/leader-election.png" alt="Leader Election in Distributed Systems" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Leader Election in Distributed Systems</h2>
 <h3>Leader Election in Distributed Systems</h3>
-<h3>Leader Election in Distributed Systems</h3>
-<h3>Leader Election in Distributed Systems</h3>
-<h3>Leader Election in Distributed Systems</h3>
-<h3>Leader Election in Distributed Systems</h3>
-<h3>Leader Election in Distributed Systems</h3>
-<h3>Leader Election in Distributed Systems</h3>
-<h3>Leader Election in Distributed Systems</h3>
-<h3>Leader Election in Distributed Systems</h3>
-<h3>Leader Election in Distributed Systems</h3>
-<h3>Leader Election in Distributed Systems</h3>
-<h3>Leader Election in Distributed Systems</h3>
+<h4>Leader Election in Distributed Systems</h4>
+<h4>Leader Election in Distributed Systems</h4>
+<h4>Leader Election in Distributed Systems</h4>
+<h4>Leader Election in Distributed Systems</h4>
+<h4>Leader Election in Distributed Systems</h4>
+<h4>Leader Election in Distributed Systems</h4>
+<h4>Leader Election in Distributed Systems</h4>
+<h4>Leader Election in Distributed Systems</h4>
+<h4>Leader Election in Distributed Systems</h4>
+<h4>Leader Election in Distributed Systems</h4>
+<h4>Leader Election in Distributed Systems</h4>
+<h4>Leader Election in Distributed Systems</h4>
+<h4>Leader Election in Distributed Systems</h4>
 <p>Leader election is the mechanism by which distributed systems select a single node to coordinate work or make decisions on behalf of the group. It is essential for systems where exactly one node must perform certain operations — assigning monotonically increasing sequence numbers, performing periodic maintenance, or managing group membership changes. The leader must be unique at any time, and the system must remain available despite leader failures. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/leader-election.png" alt="Leader Election in Distributed Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Leader election algorithms are broadly categorized into two types: consensus-based and lease-based. Consensus-based elections use Paxos, Raft, or Zab to guarantee that exactly one leader exists at any epoch. These provide strong safety guarantees but require a quorum of nodes for election decisions. Lease-based elections use a distributed lock with a TTL — the holder is the leader until its lease expires. These are simpler but vulnerable to split-brain if clock skew exceeds the lease duration. </p>
 <p>ZooKeeper implements leader election through ephemeral sequential znodes. Multiple candidates create an ephemeral sequential znode under an election path. The candidate with the smallest sequence number becomes the leader. Other candidates watch the preceding znode. When the leader's session expires (detected through ZooKeeper heartbeats), the ephemeral znode is deleted, and the next candidate in sequence becomes leader. Leader election commands are available directly through the ZooKeeper API, and libraries like Apache Curator provide production-ready implementations. </p>
@@ -118,6 +122,8 @@
 <p>The scope of leader responsibilities must be clearly defined. A single leader per cluster avoids conflicts but limits throughput. Partitioned leadership assigns different leaders for different shards or partitions. For example, Kafka uses one leader per partition, allowing parallel leadership across partitions within the same cluster. This pattern scales beyond what single-leader systems can achieve. </p>
 <p>Observability of leadership state is essential. Expose leadership status as a metric. Log leadership transitions with reasons (startup, lease expiry, voluntary stepdown, failure). Alert on frequent transitions or extended periods without a leader. Monitor the time between leader failure and new leader election — this recovery time is the window of unavailability for leader-dependent operations.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p></div>
     </article>

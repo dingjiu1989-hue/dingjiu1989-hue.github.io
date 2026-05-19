@@ -1,7 +1,7 @@
 ---
 title: "A/B Testing Infrastructure"
 description: "Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing at scale"
-date: 2026-05-12
+date: 2026-04-21
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/a-b-testing-infrastructure.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/a-b-testing-infrastructur
 
 ## A/B Testing Infrastructure
 
-## A/B Testing Infrastructure
+### A/B Testing Infrastructure
 
-## A/B Testing Infrastructure
+#### A/B Testing Infrastructure
 
-## A/B Testing Infrastructure
+#### A/B Testing Infrastructure
 
-## A/B Testing Infrastructure
+#### A/B Testing Infrastructure
 
-## A/B Testing Infrastructure
+#### A/B Testing Infrastructure
 
-## A/B Testing Infrastructure
+#### A/B Testing Infrastructure
 
-## A/B Testing Infrastructure
+#### A/B Testing Infrastructure
 
-## A/B Testing Infrastructure
+#### A/B Testing Infrastructure
 
-## A/B Testing Infrastructure
+#### A/B Testing Infrastructure
 
-## A/B Testing Infrastructure
+#### A/B Testing Infrastructure
 
-## A/B Testing Infrastructure
+#### A/B Testing Infrastructure
+
+#### A/B Testing Infrastructure
+
+#### A/B Testing Infrastructure
+
+#### A/B Testing Infrastructure
 
 A/B testing infrastructure enables organizations to make data-driven decisions by comparing user experiences against a control group. At its core, an A/B testing system must: consistently assign users to experiment groups, reliably track metrics for each group, perform statistical analysis to determine significance, and manage the lifecycle of experiments from creation to analysis. The infrastructure requirements scale with experiment volume, traffic, and statistical rigor. 
 
@@ -53,6 +59,12 @@ Client-side experimentation introduces additional challenges. The experiment dat
 The experiment platform should provide self-service capabilities for product managers and data scientists without requiring engineering involvement for every experiment. The self-service interface should support: experiment definition through a UI, automated statistical analysis with guardrail metrics, and rollback of underperforming experiments with a single click. This democratizes experimentation and increases the velocity of data-driven decision-making.
 
 **See also:** [Global Traffic Routing](</en/architecture/global-traffic-routing.html>), [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>).
+
+**See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
+
+**See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
+
+**See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 
 **See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 

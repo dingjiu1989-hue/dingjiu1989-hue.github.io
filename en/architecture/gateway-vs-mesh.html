@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/gateway-vs-mesh.png",
       "datePublished": "2026-04-24",
       "dateModified": "2026-05-13",
-      "wordCount": "856",
+      "wordCount": "904",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/gateway-vs-mesh.html"},
@@ -107,17 +109,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/gateway-vs-mesh.png" alt="API Gateway vs Service Mesh" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>API Gateway vs Service Mesh</h2>
 <h3>API Gateway vs Service Mesh</h3>
-<h3>API Gateway vs Service Mesh</h3>
-<h3>API Gateway vs Service Mesh</h3>
-<h3>API Gateway vs Service Mesh</h3>
-<h3>API Gateway vs Service Mesh</h3>
-<h3>API Gateway vs Service Mesh</h3>
-<h3>API Gateway vs Service Mesh</h3>
-<h3>API Gateway vs Service Mesh</h3>
-<h3>API Gateway vs Service Mesh</h3>
-<h3>API Gateway vs Service Mesh</h3>
-<h3>API Gateway vs Service Mesh</h3>
-<h3>API Gateway vs Service Mesh</h3>
+<h4>API Gateway vs Service Mesh</h4>
+<h4>API Gateway vs Service Mesh</h4>
+<h4>API Gateway vs Service Mesh</h4>
+<h4>API Gateway vs Service Mesh</h4>
+<h4>API Gateway vs Service Mesh</h4>
+<h4>API Gateway vs Service Mesh</h4>
+<h4>API Gateway vs Service Mesh</h4>
+<h4>API Gateway vs Service Mesh</h4>
+<h4>API Gateway vs Service Mesh</h4>
+<h4>API Gateway vs Service Mesh</h4>
+<h4>API Gateway vs Service Mesh</h4>
+<h4>API Gateway vs Service Mesh</h4>
+<h4>API Gateway vs Service Mesh</h4>
 <p>API Gateway and Service Mesh solve different problems but operate in overlapping territory, creating confusion about where each belongs. The API Gateway manages north-south traffic (client to service), while the Service Mesh manages east-west traffic (service to service). Understanding their distinct responsibilities, overlap, and coexistence patterns is essential for a well-architected system. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/gateway-vs-mesh.png" alt="API Gateway vs Service Mesh" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The API Gateway is the single entry point for external clients. It handles cross-cutting concerns that belong at the edge of the system: authentication, TLS termination, rate limiting, request validation, response transformation, and API versioning. Kong, Apigee, and AWS API Gateway are common implementations. The gateway may also implement routing, load balancing, and caching for external traffic. It is explicitly part of your application architecture — it knows about your services, routes, and business-level concerns like rate limits per customer plan. </p>
 <p>The Service Mesh operates transparently within the service mesh. It injects sidecar proxies (typically Envoy) alongside each service instance. The sidecar intercepts all network traffic and handles service-level concerns: mTLS between services, fine-grained traffic routing (canary, blue-green), circuit breaking, retries, telemetry collection, and access policies. Istio, Linkerd, and Consul Connect are leading implementations. The mesh is infrastructure-level — services are generally unaware of its existence. </p>
@@ -127,6 +131,8 @@
 <p>Observability benefits significantly from using both. The gateway provides client-facing metrics: request rates per endpoint, error rates per API key, latency percentiles by client type. The mesh provides service-level metrics: dependency call graphs, error rates per service pair, detailed latency breakdowns including time spent in the proxy. Combined, these give complete visibility from client to database. </p>
 <p>Operational complexity is the primary cost. Operating both systems requires expertise in each. Many teams start with just an API Gateway and add a Service Mesh only when they need advanced traffic management patterns or organization-wide security policies. The decision should be driven by concrete needs — canary deployments across services, zero-trust security requirements, or observability gaps — rather than architectural fashion.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p></div>
     </article>

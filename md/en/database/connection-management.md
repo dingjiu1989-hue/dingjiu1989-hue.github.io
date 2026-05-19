@@ -1,7 +1,7 @@
 ---
 title: "Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning"
 description: "Comprehensive guide to database connection management. Learn connection pooling with PgBouncer and HikariCP, max connections tuning, and best practices."
-date: 2026-05-12
+date: 2026-03-31
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/connection-management.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/connection-management.html
 
 ## Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
 
-## Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
+### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
 
-## Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
+#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
 
-## Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
+#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
 
-## Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
+#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
 
-## Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
+#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
 
-## Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
+#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
 
-## Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
+#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
 
-## Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
+#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
 
-## Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
+#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
 
-## Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
+#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
 
-## Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
+#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
+
+#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
+
+#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
+
+#### Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
 
 Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning 
 
@@ -62,7 +68,7 @@ PgBouncer is a lightweight connection pooler for PostgreSQL. It runs as a separa
 
 Installation and Configuration 
 
-## pgbouncer.ini
+#### pgbouncer.ini
 
 [databases]
 
@@ -104,7 +110,7 @@ Connecting Through PgBouncer
 
 import psycopg2
 
-## Connect to PgBouncer port, not PostgreSQL directly
+#### Connect to PgBouncer port, not PostgreSQL directly
 
 conn = psycopg2.connect(
 
@@ -144,7 +150,7 @@ HikariCP is the most popular connection pool for Java applications. It manages c
 
 Spring Boot Configuration 
 
-## application.yml
+#### application.yml
 
 spring:
 
@@ -218,7 +224,7 @@ A 4-core machine with SSDs: `2 * 4 + 1 = 9` concurrent connections for optimal t
 
 Max Connections Tuning 
 
-## postgresql.conf
+#### postgresql.conf
 
 max_connections = 200
 
@@ -236,7 +242,7 @@ Common Pitfalls
 
 Connection Leaks 
 
-## Bad: connection not returned to pool
+#### Bad: connection not returned to pool
 
 def get_user(user_id):
 
@@ -248,11 +254,11 @@ cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
 
 result = cursor.fetchone()
 
-## Missing: pool.putconn(conn)
+#### Missing: pool.putconn(conn)
 
 return result
 
-## Good: always use try/finally or context manager
+#### Good: always use try/finally or context manager
 
 def get_user(user_id):
 
@@ -296,7 +302,7 @@ maximum-pool-size: 20
 
 connection-timeout: 5000 # 5 seconds max wait
 
-## After 5 seconds, throw SQLException instead of hanging forever
+#### After 5 seconds, throw SQLException instead of hanging forever
 
 Monitoring Connection Health 
 
@@ -343,6 +349,12 @@ Best Practices
 Connection management is invisible when done correctly and catastrophic when done poorly. A well-tuned pool keeps your database responsive under load and your applications free from connection-related failures.
 
 **See also:** [Connection Pooling: Tuning, Best Practices, and Pitfalls](</en/database/database-connection-pooling.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>).
+
+**See also:** [Connection Pooling: Tuning, Best Practices, and Pitfalls](</en/database/database-connection-pooling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Connection Pooling: Tuning, Best Practices, and Pitfalls](</en/database/database-connection-pooling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Connection Pooling: Tuning, Best Practices, and Pitfalls](</en/database/database-connection-pooling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
 
 **See also:** [Connection Pooling: Tuning, Best Practices, and Pitfalls](</en/database/database-connection-pooling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
 

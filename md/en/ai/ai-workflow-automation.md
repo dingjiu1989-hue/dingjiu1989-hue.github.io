@@ -1,7 +1,7 @@
 ---
 title: "AI Workflow Automation: LangChain, Temporal, Event-Driven Agents"
 description: "Build robust AI workflow automation with LangChain for LLM orchestration, Temporal for durable execution, and event-driven patterns for resilient agent pipeline"
-date: 2026-05-12
+date: 2026-02-15
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-workflow-automation.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-workflow-automation.html
 
 ## AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
 
-## AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
 
-## AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+#### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
 
-## AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+#### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
 
-## AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+#### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
 
-## AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+#### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
 
-## AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+#### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
 
-## AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+#### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
 
-## AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+#### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
 
-## AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+#### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
 
-## AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+#### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
 
-## AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+#### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
 
-## AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+#### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
 
-### Introduction
+#### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+
+#### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+
+#### AI Workflow Automation: LangChain, Temporal, Event-Driven Agents
+
+#### Introduction
 
 Production AI systems need more than a single LLM call or a simple chain. They require reliable, long-running workflows that handle failures, retries, human-in-the-loop interventions, and complex state management. This article covers three complementary approaches to AI workflow automation: LangChain for LLM orchestration, Temporal for durable execution, and event-driven architectures for scalable pipelines.
 
-### LangChain Workflows
+#### LangChain Workflows
 
 LangChain provides abstractions for building LLM-powered workflows:
 
@@ -52,7 +58,7 @@ from langchain.memory import ConversationBufferMemory
 
 llm = ChatAnthropic(model="claude-sonnet-4-20260512")
 
-## Define individual chain steps
+#### Define individual chain steps
 
 extract_prompt = PromptTemplate(
 
@@ -84,7 +90,7 @@ template="Based on requirements and analysis, generate a solution:\nRequirements
 
 generate_chain = LLMChain(llm=llm, prompt=generate_prompt, output_key="solution")
 
-## Compose into a sequential workflow
+#### Compose into a sequential workflow
 
 workflow = SequentialChain(
 
@@ -100,7 +106,7 @@ verbose=True,
 
 result = workflow({"text": "Build a REST API for user management with authentication"})
 
-### Temporal for Durable Execution
+#### Temporal for Durable Execution
 
 Temporal provides reliability guarantees for long-running AI workflows:
 
@@ -112,7 +118,7 @@ from temporalio.worker import Worker
 
 import asyncio
 
-## Define activities (individual steps)
+#### Define activities (individual steps)
 
 @activity.defn
 
@@ -140,7 +146,7 @@ return answer
 
 return f"Needs revision: {review['feedback']}"
 
-## Define workflow
+#### Define workflow
 
 @workflow.defn
 
@@ -150,7 +156,7 @@ class DocumentQAWorkflow:
 
 async def run(self, question: str) -> dict:
 
-## Step 1: Retrieve documents
+#### Step 1: Retrieve documents
 
 docs = await workflow.execute_activity(
 
@@ -162,7 +168,7 @@ retry_policy={"maximum_attempts": 3},
 
 )
 
-## Step 2: Generate answer
+#### Step 2: Generate answer
 
 answer = await workflow.execute_activity(
 
@@ -172,7 +178,7 @@ start_to_close_timeout=timedelta(minutes=2),
 
 )
 
-## Step 3: Human review
+#### Step 3: Human review
 
 final = await workflow.execute_activity(
 
@@ -184,7 +190,7 @@ start_to_close_timeout=timedelta(hours=2),
 
 return {"question": question, "answer": final}
 
-## Run the workflow
+#### Run the workflow
 
 async def start_workflow():
 
@@ -208,7 +214,7 @@ print(result)
 
 Temporal automatically retries failed activities, persists workflow state, and enables human-in-the-loop pauses.
 
-### Event-Driven Architecture
+#### Event-Driven Architecture
 
 Event-driven workflows react to events with loosely coupled agents:
 
@@ -272,7 +278,7 @@ return_exceptions=True,
 
 return results
 
-## Event-driven document processing pipeline
+#### Event-driven document processing pipeline
 
 class DocumentProcessingPipeline:
 
@@ -294,7 +300,7 @@ async def handle_document(self, event: Event):
 
 doc = event.data["document"]
 
-## Extract text, chunk, embed
+#### Extract text, chunk, embed
 
 chunks = chunk_document(doc)
 
@@ -330,7 +336,7 @@ source="query_handler",
 
 ))
 
-### Error Recovery and Retry
+#### Error Recovery and Retry
 
 All workflows need robust error handling:
 
@@ -362,7 +368,7 @@ raise
 
 except ContextWindowError:
 
-## Reduce context size and retry
+#### Reduce context size and retry
 
 kwargs["max_context"] = kwargs.get("max_context", 4000) // 2
 
@@ -370,17 +376,23 @@ return await self.execute_with_retry(workflow_fn, _args,_ *kwargs)
 
 except Exception:
 
-## Log and escalate to human
+#### Log and escalate to human
 
 await self.escalate_to_human(workflow_fn, args, kwargs)
 
 raise
 
-### Conclusion
+#### Conclusion
 
 AI workflow automation requires reliability guarantees beyond simple scripting. LangChain provides the LLM orchestration layer with composable chains. Temporal adds durability with automatic retries, state persistence, and human-in-the-loop capabilities. Event-driven architectures enable loosely coupled, scalable pipelines. For production systems, combine all three: use LangChain for LLM logic within Temporal activities, and wire everything together with an event bus for scalability.
 
 **See also:** [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>).
+
+**See also:** [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>)
+
+**See also:** [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>)
+
+**See also:** [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>)
 
 **See also:** [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>)
 

@@ -1,7 +1,7 @@
 ---
 title: "NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)"
 description: "A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and query patterns."
-date: 2026-05-11
+date: 2025-12-23
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/nosql-databases-guide.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/nosql-databases-guide.html
 
 ## NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
 
-## NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
 
-## NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
 
-## NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
 
-## NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
 
-## NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
 
-## NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
 
-## NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
 
-## NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
 
-## NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
 
-## NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
 
-## NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+
+#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+
+#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+
+#### NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
 
 What Are NoSQL Databases? 
 
@@ -222,7 +228,7 @@ from firebase_admin import firestore
 
 db = firestore.client()
 
-## Document reference
+#### Document reference
 
 user_ref = db.collection('users').document('alice')
 
@@ -238,7 +244,7 @@ user_ref.set({
 
 })
 
-## Subcollection for hierarchical data
+#### Subcollection for hierarchical data
 
 orders_ref = user_ref.collection('orders')
 
@@ -252,7 +258,7 @@ orders_ref.add({
 
 })
 
-## Real-time listener
+#### Real-time listener
 
 def on_snapshot(doc_snapshot, changes, read_time):
 
@@ -282,6 +288,12 @@ Summary
 NoSQL databases excel at scale and flexibility but require different design thinking than relational databases. MongoDB offers the most flexible querying with embedded documents, DynamoDB provides unparalleled scalability with single-table design, and Firestore offers the best real-time and offline support. Choose based on your access patterns, scalability needs, and cloud ecosystem rather than treating NoSQL as a one-size-fits-all solution.
 
 **See also:** [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>), [Document Databases: MongoDB, CouchDB, Firestore](</en/database/document-databases.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>).
+
+**See also:** [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
+
+**See also:** [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
+
+**See also:** [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
 
 **See also:** [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
 

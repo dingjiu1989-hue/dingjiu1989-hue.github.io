@@ -1,7 +1,7 @@
 ---
 title: "MFA Implementation"
 description: "Implementing multi-factor authentication with TOTP, SMS, push notifications, and backup codes."
-date: 2026-05-12
+date: 2026-03-18
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/mfa-implementation.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/security/mfa-implementation.html
 
 ## MFA Implementation
 
-## MFA Implementation
+### MFA Implementation
 
-## MFA Implementation
+#### MFA Implementation
 
-## MFA Implementation
+#### MFA Implementation
 
-## MFA Implementation
+#### MFA Implementation
 
-## MFA Implementation
+#### MFA Implementation
 
-## MFA Implementation
+#### MFA Implementation
 
-## MFA Implementation
+#### MFA Implementation
 
-## MFA Implementation
+#### MFA Implementation
 
-## MFA Implementation
+#### MFA Implementation
 
-## MFA Implementation
+#### MFA Implementation
 
-## MFA Implementation
+#### MFA Implementation
+
+#### MFA Implementation
+
+#### MFA Implementation
+
+#### MFA Implementation
 
 MFA Fundamentals 
 
@@ -80,7 +86,7 @@ def verify_code(self, secret, code):
 
 totp = pyotp.TOTP(secret)
 
-## Allow 1 step before/after for clock drift
+#### Allow 1 step before/after for clock drift
 
 return totp.verify(code, valid_window=1)
 
@@ -261,6 +267,12 @@ Conclusion
 MFA is essential but must be implemented thoughtfully. TOTP offers the best balance of security and usability. Provide backup codes during enrollment. Consider risk-based prompting rather than requiring MFA on every request. Guide users toward authenticator apps over SMS when possible.
 
 **See also:** [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>), [Passwordless Authentication](</en/security/passwordless-auth.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>).
+
+**See also:** [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Passwordless Authentication](</en/security/passwordless-auth.html>)
+
+**See also:** [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Passwordless Authentication](</en/security/passwordless-auth.html>)
+
+**See also:** [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Passwordless Authentication](</en/security/passwordless-auth.html>)
 
 **See also:** [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Passwordless Authentication](</en/security/passwordless-auth.html>)
 

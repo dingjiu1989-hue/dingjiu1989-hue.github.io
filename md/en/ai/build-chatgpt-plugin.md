@@ -1,7 +1,7 @@
 ---
 title: "How to Build a Custom GPT Plugin: Complete Developer Guide"
 description: "Step-by-step tutorial: setting up the manifest, creating API endpoints, authentication, testing in ChatGPT, and publishing to the GPT Store. Includes working code examples in Python and Node.js."
-date: 2026-05-08
+date: 2025-11-07
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/build-chatgpt-plugin.html
 ---

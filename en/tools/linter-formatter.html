@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/linter-formatter.png",
       "datePublished": "2026-02-04",
       "dateModified": "2026-04-28",
-      "wordCount": "1272",
+      "wordCount": "1367",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/linter-formatter.html"},
@@ -110,18 +112,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/linter-formatter.png" alt="Linter and Formatter: ESLint, Prettier, Biome, Ruff" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h2>
 <h3>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h3>
-<h3>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h3>
-<h3>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h3>
-<h3>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h3>
-<h3>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h3>
-<h3>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h3>
-<h3>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h3>
-<h3>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h3>
-<h3>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h3>
-<h3>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h3>
-<h3>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h3>
-<h3>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h3>
-<h3>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h3>
+<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
+<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
+<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
+<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
+<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
+<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
+<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
+<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
+<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
+<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
+<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
+<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
+<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
+<h4>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h4>
 <h4>Introduction</h4>
 <p>Code quality tools have converged into two categories: linters (find bugs and enforce style rules) and formatters (automatically format code). The traditional approach uses separate tools for each. Newer all-in-one tools combine both in a single binary. This article compares ESLint + Prettier, Biome, and Ruff.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/linter-formatter.png" alt="Linter and Formatter: ESLint, Prettier, Biome, Ruff" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>ESLint + Prettier</h4>
@@ -155,7 +159,7 @@
 <p>"arrowParens": "always",</p>
 <p>"endOfLine": "lf"</p>
 <p>}</p>
-<h3>Check and fix</h3>
+<h4>Check and fix</h4>
 <p>npx eslint src/</p>
 <p>npx eslint src/ --fix</p>
 <p>npx prettier --check src/</p>
@@ -203,21 +207,21 @@
 <p>}</p>
 <p>}</p>
 <p>}</p>
-<h3>Check and format</h3>
+<h4>Check and format</h4>
 <p>biome check src/</p>
 <p>biome check src/ --apply</p>
 <p>biome format src/</p>
 <p>biome ci src/ # CI mode (strict)</p>
-<h3>Lint only</h3>
+<h4>Lint only</h4>
 <p>biome lint src/</p>
-<h3>Organize imports</h3>
+<h4>Organize imports</h4>
 <p>biome check --formatter-enabled=true --linter-enabled=true</p>
 <p><strong>Speed</strong> : 10-50x faster than ESLint + Prettier. A 10,000-file TypeScript project checks in ~2 seconds vs ~60 seconds for ESLint.</p>
 <p><strong>Strengths</strong> : Single binary (Rust), unified configuration, dramatically faster, organizes imports automatically, fewer dependencies (no separate tools).</p>
 <p><strong>Weaknesses</strong> : Smaller ecosystem (fewer community rules), newer (some edge cases not covered), migration effort from ESLint.</p>
 <h4>Ruff</h4>
 <p>A Rust-based linter and formatter for Python:</p>
-<h3>pyproject.toml</h3>
+<h4>pyproject.toml</h4>
 <p>[tool.ruff]</p>
 <p>target-version = "py311"</p>
 <p>line-length = 100</p>
@@ -244,7 +248,7 @@
 <p>[tool.ruff.lint.per-file-ignores]</p>
 <p>"<strong>init</strong>.py" = ["F401", "I001"]</p>
 <p>"tests/**" = ["S101"] # Allow assert in tests</p>
-<h3>Check and fix</h3>
+<h4>Check and fix</h4>
 <p>ruff check src/</p>
 <p>ruff check src/ --fix</p>
 <p>ruff format src/ # Format only</p>
@@ -283,6 +287,8 @@
 </ul>
 <p>The industry is clearly moving toward Rust-based all-in-one tools. Biome and Ruff represent the future of code quality tooling: fast, unified, and simple to configure.</p>
 <p><strong>See also:</strong> <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a>, <a href="/en/tools/package-managers.html">Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a>, <a href="/en/tools/issue-tracking-tools.html">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a>, <a href="/en/tools/issue-tracking-tools.html">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a>, <a href="/en/tools/issue-tracking-tools.html">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a>, <a href="/en/tools/issue-tracking-tools.html">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/testing-frameworks.html">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a>, <a href="/en/tools/issue-tracking-tools.html">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</a></p></div>
     </article>

@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/infrastructure-testing.png",
       "datePublished": "2025-12-31",
       "dateModified": "2026-04-15",
-      "wordCount": "2860",
+      "wordCount": "2931",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/infrastructure-testing.html"},
@@ -99,19 +101,21 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/infrastructure-testing.png" alt="Infrastructure Testing with Terratest and Other Tools" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Infrastructure Testing with Terratest and Other Tools</h2>
 <h3>Infrastructure Testing with Terratest and Other Tools</h3>
-<h3>Infrastructure Testing with Terratest and Other Tools</h3>
-<h3>Infrastructure Testing with Terratest and Other Tools</h3>
-<h3>Infrastructure Testing with Terratest and Other Tools</h3>
-<h3>Infrastructure Testing with Terratest and Other Tools</h3>
-<h3>Infrastructure Testing with Terratest and Other Tools</h3>
-<h3>Infrastructure Testing with Terratest and Other Tools</h3>
-<h3>Infrastructure Testing with Terratest and Other Tools</h3>
-<h3>Infrastructure Testing with Terratest and Other Tools</h3>
-<h3>Infrastructure Testing with Terratest and Other Tools</h3>
-<h3>Infrastructure Testing with Terratest and Other Tools</h3>
-<h3>Infrastructure Testing with Terratest and Other Tools</h3>
-<h3>Infrastructure Testing with Terratest and Other Tools</h3>
-<h3>Infrastructure Testing with Terratest and Other Tools</h3>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
+<h4>Infrastructure Testing with Terratest and Other Tools</h4>
 <h4>Introduction</h4>
 <p>Infrastructure as Code (IaC) brings software engineering practices to infrastructure management, but testing remains an afterthought in many teams. Without proper testing, misconfigured infrastructure causes outages, security vulnerabilities, and costly re-provisioning. This guide covers practical approaches to testing Terraform configurations, cloud resources, and compliance policies using tools like Terratest, OPA, and tflint.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/infrastructure-testing.png" alt="Infrastructure Testing with Terratest and Other Tools" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Unit Testing Terraform with Terratest</h4>
@@ -184,7 +188,7 @@
 <p>}</p>
 <h4>Compliance Testing with OPA and Sentinel</h4>
 <p>Open Policy Agent (OPA) enforces policies at plan time:</p>
-<h3>policies/terraform/restrict_public_s3.rego</h3>
+<h4>policies/terraform/restrict_public_s3.rego</h4>
 <p>package terraform</p>
 <p>import future.keywords.if</p>
 <p>import future.keywords.in</p>
@@ -205,14 +209,14 @@
 <p>startswith(block.address, address)</p>
 <p>}</p>
 <p>Run OPA in CI pipeline:</p>
-<h3>Generate a plan JSON</h3>
+<h4>Generate a plan JSON</h4>
 <p>terraform plan -out=plan.tfplan</p>
 <p>terraform show -json plan.tfplan &gt; plan.json</p>
-<h3>Evaluate policies</h3>
+<h4>Evaluate policies</h4>
 <p>opa eval --data policies/ --input plan.json "data.terraform.deny"</p>
 <h4>Static Analysis with tflint and tfsec</h4>
 <p>Integrate static analysis into your pre-commit hooks and CI:</p>
-<h3>.github/workflows/terraform-lint.yml</h3>
+<h4>.github/workflows/terraform-lint.yml</h4>
 <p>name: Terraform Lint</p>
 <p>on: [pull_request]</p>
 <p>jobs:</p>
@@ -238,7 +242,7 @@
 <p>working_directory: terraform/</p>
 <p>format: sarif</p>
 <p>Example <code>tflint</code> configuration:</p>
-<h3>.tflint.hcl</h3>
+<h4>.tflint.hcl</h4>
 <p>plugin "aws" {</p>
 <p>enabled = true</p>
 <p>version = "0.26.0"</p>
@@ -311,6 +315,8 @@
 </ul>
 <p>A comprehensive infrastructure testing strategy combines static analysis for fast feedback, unit tests for module validation, integration tests for real resource behavior, and policy-as-code for compliance. The upfront investment pays dividends when a test catches a misconfiguration before it reaches production.</p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p></div>
     </article>

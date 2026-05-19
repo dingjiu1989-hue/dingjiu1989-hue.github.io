@@ -1,7 +1,7 @@
 ---
 title: "Best Email API Services 2026: Resend vs SendGrid vs Postmark vs Amazon SES"
 description: "Compare email API services for transactional and marketing emails — deliverability, pricing, developer experience, and reliability."
-date: 2026-05-08
+date: 2025-10-31
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-email-api-services.html
 ---

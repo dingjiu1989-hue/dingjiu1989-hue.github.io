@@ -1,7 +1,7 @@
 ---
 title: "Claim Check Pattern"
 description: "Learn the claim check pattern: store large payloads, pass references, and enable asynchronous processing"
-date: 2026-05-12
+date: 2026-05-02
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/claim-check.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/claim-check.html
 
 ## Claim Check Pattern
 
-## Claim Check Pattern
+### Claim Check Pattern
 
-## Claim Check Pattern
+#### Claim Check Pattern
 
-## Claim Check Pattern
+#### Claim Check Pattern
 
-## Claim Check Pattern
+#### Claim Check Pattern
 
-## Claim Check Pattern
+#### Claim Check Pattern
 
-## Claim Check Pattern
+#### Claim Check Pattern
 
-## Claim Check Pattern
+#### Claim Check Pattern
 
-## Claim Check Pattern
+#### Claim Check Pattern
 
-## Claim Check Pattern
+#### Claim Check Pattern
 
-## Claim Check Pattern
+#### Claim Check Pattern
 
-## Claim Check Pattern
+#### Claim Check Pattern
+
+#### Claim Check Pattern
+
+#### Claim Check Pattern
+
+#### Claim Check Pattern
 
 The claim check pattern is a messaging pattern that addresses the challenge of passing large payloads through a message broker. Instead of including the payload in the message, the producer stores the payload in a shared data store and sends a reference (claim check) in the message. The consumer retrieves the payload using the reference. This pattern is essential for systems where message size limits are a concern. 
 
@@ -75,6 +81,12 @@ Use the claim check pattern when payloads regularly exceed 80% of the broker's m
 The claim check pattern is a simple, effective solution for handling large payloads in message-based systems. It preserves the benefits of asynchronous messaging while avoiding the performance and reliability problems of large messages.
 
 **See also:** [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>).
+
+**See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
+
+**See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
+
+**See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 
 **See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 

@@ -1,7 +1,7 @@
 ---
 title: "AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples"
 description: "Master AI role definition: craft effective system prompts, define personas, set tone guidelines, establish constraints, and provide examples."
-date: 2026-05-12
+date: 2026-02-11
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-role-definition.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-role-definition.html
 
 ## AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
 
-## AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
 
-## AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+#### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
 
-## AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+#### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
 
-## AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+#### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
 
-## AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+#### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
 
-## AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+#### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
 
-## AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+#### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
 
-## AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+#### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
 
-## AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+#### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
 
-## AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+#### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
 
-## AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+#### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
 
-## AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+#### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+
+#### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+
+#### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+
+#### AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
 
 The difference between a generic AI assistant and a high-performing one is the role definition. A well-defined role shapes every response the model produces. Here is how to define AI roles that consistently deliver the behavior you need.
 
-### Why Role Definition Matters
+#### Why Role Definition Matters
 
 Language models are generalists by default. Without a role, they default to neutral, cautious, and generic responses. A role definition constrains the model to behave consistently within your desired boundaries.
 
@@ -44,7 +50,7 @@ A good role definition improves response quality, consistency, and safety. It re
 
 Role definition is especially important for customer-facing AI. Users interacting with a "helpful assistant" have different expectations than users interacting with a "senior software engineer with 15 years of experience." The role sets expectations and shapes the interaction.
 
-### System Prompts
+#### System Prompts
 
 The system prompt is the primary vehicle for role definition. It sets the context, persona, rules, and constraints for the entire conversation.
 
@@ -54,7 +60,7 @@ Bad system prompts are vague. "You are a helpful assistant" does nothing useful.
 
 System prompts should be concise enough that the model can follow them consistently. Two to four paragraphs is ideal. Longer prompts dilute attention and may cause the model to ignore later instructions.
 
-### Persona Definition
+#### Persona Definition
 
 The persona defines the character the AI embodies. A well-defined persona makes interactions more engaging and predictable.
 
@@ -64,7 +70,7 @@ Persona details add color but should not conflict. "You are a friendly expert" c
 
 Avoid personas that impersonate real people or organizations. "You are a doctor" implies medical credentials the model does not have. Instead, say "You provide general health information in a knowledgeable way. You always include a disclaimer that users should consult a real doctor for medical advice."
 
-### Tone Guidelines
+#### Tone Guidelines
 
 Tone guidelines control the style of responses, not the content. They apply consistently across all interactions.
 
@@ -74,7 +80,7 @@ Tone guidelines should include what to avoid, not just what to aim for. "Avoid j
 
 Match tone to the application context. A billing support bot should be formal and precise. A creative writing assistant should be enthusiastic and encouraging. A code review tool should be direct and constructive.
 
-### Constraints
+#### Constraints
 
 Constraints define what the AI must not do. They are the safety boundaries of the role.
 
@@ -84,7 +90,7 @@ Constraints must be specific to be effective. "Do not be harmful" is too vague. 
 
 Prioritize constraints. A system prompt with 20 constraints will see the model ignore the least important ones. Place the most critical constraints first. Group related constraints together.
 
-### Examples
+#### Examples
 
 Examples are the most powerful tool for shaping model behavior. A well-chosen example communicates more than paragraphs of instructions.
 
@@ -94,7 +100,7 @@ Examples work best when they cover edge cases. Show how to handle ambiguous requ
 
 Use three to five examples in system prompts. More than five adds noise. Fewer than two leaves too much ambiguity.
 
-### Testing and Iteration
+#### Testing and Iteration
 
 Role definitions are not static. Testing validates that the role produces the desired behavior.
 
@@ -107,6 +113,12 @@ Iterate based on production observations. If users frequently rephrase questions
 A well-defined AI role is the foundation of a reliable AI application. Invest the time to define it precisely, test it thoroughly, and iterate based on real usage. The effort pays for itself in reduced moderation, fewer bad responses, and more consistent user experiences.
 
 **See also:** [Prompt Engineering Guide for LLMs](</en/ai/prompt-engineering-guide.html>), [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>).
+
+**See also:** [Prompt Chaining: Decomposition, Parallel Execution, State Management](</en/ai/prompt-chaining.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>)
+
+**See also:** [Prompt Chaining: Decomposition, Parallel Execution, State Management](</en/ai/prompt-chaining.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>)
+
+**See also:** [Prompt Chaining: Decomposition, Parallel Execution, State Management](</en/ai/prompt-chaining.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>)
 
 **See also:** [Prompt Chaining: Decomposition, Parallel Execution, State Management](</en/ai/prompt-chaining.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>)
 

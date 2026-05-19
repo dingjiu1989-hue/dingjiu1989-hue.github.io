@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes Security Best Practices"
 description: "Essential Kubernetes security practices for pod security, network policies, RBAC, and secrets management."
-date: 2026-05-11
+date: 2025-12-02
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/kubernetes-services-security.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/tech/kubernetes-services-security.html
 
 ## Kubernetes Security Best Practices
 
-## Kubernetes Security Best Practices
+### Kubernetes Security Best Practices
 
-## Kubernetes Security Best Practices
+#### Kubernetes Security Best Practices
 
-## Kubernetes Security Best Practices
+#### Kubernetes Security Best Practices
 
-## Kubernetes Security Best Practices
+#### Kubernetes Security Best Practices
 
-## Kubernetes Security Best Practices
+#### Kubernetes Security Best Practices
 
-## Kubernetes Security Best Practices
+#### Kubernetes Security Best Practices
 
-## Kubernetes Security Best Practices
+#### Kubernetes Security Best Practices
 
-## Kubernetes Security Best Practices
+#### Kubernetes Security Best Practices
 
-## Kubernetes Security Best Practices
+#### Kubernetes Security Best Practices
 
-## Kubernetes Security Best Practices
+#### Kubernetes Security Best Practices
 
-## Kubernetes Security Best Practices
+#### Kubernetes Security Best Practices
 
-## Kubernetes Security Best Practices
+#### Kubernetes Security Best Practices
 
-## Kubernetes Security Best Practices
+#### Kubernetes Security Best Practices
+
+#### Kubernetes Security Best Practices
+
+#### Kubernetes Security Best Practices
+
+#### Kubernetes Security Best Practices
 
 Kubernetes security is complex because the attack surface spans multiple layers: containers, clusters, networks, and cloud infrastructure. This guide covers the most impactful security practices for production Kubernetes deployments.
 
-### Pod Security Standards
+#### Pod Security Standards
 
 Kubernetes deprecated PodSecurityPolicies in favor of Pod Security Admission (PSA), which enforces three security levels:
 
@@ -71,7 +77,7 @@ pod-security.kubernetes.io/audit: restricted
 
 The `restricted` level enforces that containers cannot run as root, cannot use host networking, and cannot mount arbitrary host paths.
 
-### Running Containers as Non-Root
+#### Running Containers as Non-Root
 
 Never run containers as root in production:
 
@@ -117,7 +123,7 @@ readOnlyRootFilesystem: true
 
 Use `seccompProfile: RuntimeDefault` to apply the container runtime's default seccomp profile. Drop all capabilities and only add back what is absolutely necessary.
 
-### Network Policies
+#### Network Policies
 
 By default, all pods can communicate with each other. Network policies restrict this:
 
@@ -175,7 +181,7 @@ ports:
 
 Start with a deny-all policy and add allow rules incrementally. Use namespace isolation for multi-tenant clusters.
 
-### Role-Based Access Control (RBAC)
+#### Role-Based Access Control (RBAC)
 
 Apply the principle of least privilege to all service accounts:
 
@@ -245,11 +251,11 @@ apiGroup: rbac.authorization.k8s.io
 
 Service accounts should only have permissions required for their specific function. Use `Role` for namespace-scoped access and `ClusterRole` only for cluster-wide resources.
 
-### Secrets Management
+#### Secrets Management
 
 Kubernetes Secrets are base64-encoded, not encrypted by default. Enable encryption at rest:
 
-## Create encryption config
+#### Create encryption config
 
 cat > encryption-config.yaml <
 
@@ -313,7 +319,7 @@ key: production/db/password
 
 External Secrets Operator syncs secrets from AWS Secrets Manager, GCP Secret Manager, or HashiCorp Vault into Kubernetes Secrets.
 
-### Image Security
+#### Image Security
 
 Only run images from trusted registries:
 
@@ -333,13 +339,13 @@ imagePullPolicy: Always
 
 Use image scanning in CI/CD:
 
-## Scan container images before deployment
+#### Scan container images before deployment
 
 trivy image registry.example.com/myapp:1.0.0
 
 Configure admission controllers to reject images with critical vulnerabilities.
 
-### Resource Limits
+#### Resource Limits
 
 Set resource limits on every container to prevent resource starvation:
 
@@ -359,7 +365,7 @@ cpu: "500m"
 
 CPU limits throttle excessive usage, while memory limits terminate containers that exceed their allocation.
 
-### Runtime Security
+#### Runtime Security
 
 Use Falco for runtime threat detection:
 
@@ -369,11 +375,11 @@ helm install falco falcosecurity/falco \
 
 Falco detects anomalous behavior: shell in a container, unexpected file system access, suspicious network connections. It can trigger alerts or kill offending pods.
 
-### Audit Logging
+#### Audit Logging
 
 Enable Kubernetes audit logging:
 
-## kube-apiserver configuration
+#### kube-apiserver configuration
 
 apiServer:
 
@@ -405,11 +411,17 @@ resources: ["pods", "deployments"]
 
 Ship audit logs to a SIEM for analysis. Monitor for unauthorized API access attempts.
 
-### Summary
+#### Summary
 
 Kubernetes security requires defense in depth: Pod Security Admission for pod hardening, network policies for segmentation, RBAC for access control, external secrets for sensitive data, and runtime security for threat detection. Start with pod security -- run containers as non-root, drop capabilities, and enable seccomp. Add network policies for isolation. Finally, implement RBAC and secrets management. Most Kubernetes compromises exploit misconfigurations rather than software vulnerabilities -- hardening these configurations is the highest-impact security investment.
 
 **See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>), [SSH Security Hardening](</en/tech/ssh-security-hardening.html>).
+
+**See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)
+
+**See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)
+
+**See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)
 
 **See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)
 

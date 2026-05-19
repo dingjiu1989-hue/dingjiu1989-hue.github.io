@@ -1,7 +1,7 @@
 ---
 title: "Best Software Supply Chain Security Tools 2026: Snyk vs Socket vs Chainguard vs Anchore vs Sigstore"
 description: "Compare the best supply chain security tools including Snyk, Socket, Chainguard, Anchore (Syft/Grype), and Sigstore (Cosign). SBOM generation, vulnerability scanning, and artifact signing."
-date: 2026-05-09
+date: 2025-12-01
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-supply-chain-security-tools.html
 ---

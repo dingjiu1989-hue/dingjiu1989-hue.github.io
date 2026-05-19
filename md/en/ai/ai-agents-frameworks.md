@@ -1,7 +1,7 @@
 ---
 title: "AI Agent Frameworks Compared"
 description: "Compare leading AI agent frameworks including LangGraph, CrewAI, AutoGen, and OpenAI Assistants API for building autonomous agents."
-date: 2026-05-11
+date: 2025-12-11
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-agents-frameworks.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-agents-frameworks.html
 
 ## AI Agent Frameworks Compared
 
-## AI Agent Frameworks Compared
+### AI Agent Frameworks Compared
 
-## AI Agent Frameworks Compared
+#### AI Agent Frameworks Compared
 
-## AI Agent Frameworks Compared
+#### AI Agent Frameworks Compared
 
-## AI Agent Frameworks Compared
+#### AI Agent Frameworks Compared
 
-## AI Agent Frameworks Compared
+#### AI Agent Frameworks Compared
 
-## AI Agent Frameworks Compared
+#### AI Agent Frameworks Compared
 
-## AI Agent Frameworks Compared
+#### AI Agent Frameworks Compared
 
-## AI Agent Frameworks Compared
+#### AI Agent Frameworks Compared
 
-## AI Agent Frameworks Compared
+#### AI Agent Frameworks Compared
 
-## AI Agent Frameworks Compared
+#### AI Agent Frameworks Compared
 
-## AI Agent Frameworks Compared
+#### AI Agent Frameworks Compared
 
-## AI Agent Frameworks Compared
+#### AI Agent Frameworks Compared
 
-### Introduction
+#### AI Agent Frameworks Compared
+
+#### AI Agent Frameworks Compared
+
+#### AI Agent Frameworks Compared
+
+#### Introduction
 
 AI agents — systems that can independently plan, use tools, and execute multi-step tasks — represent the frontier of LLM applications. Several frameworks have emerged to simplify agent development, each with different design philosophies. This guide compares the leading frameworks to help you choose the right one for your project.
 
-### What Makes an AI Agent?
+#### What Makes an AI Agent?
 
 Before comparing frameworks, it's important to define what we mean by "agent." An agentic system typically includes:
 
@@ -55,7 +61,7 @@ Before comparing frameworks, it's important to define what we mean by "agent." A
 
 
 
-### Framework Comparison
+#### Framework Comparison
 
 #### LangGraph
 
@@ -215,7 +221,7 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
 
 **Best for:** Rapid prototyping and applications already in the OpenAI ecosystem.
 
-### Comparison Table
+#### Comparison Table
 
 | Feature | LangGraph | CrewAI | AutoGen | Assistants API |
 
@@ -235,7 +241,7 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
 
 | Learning curve | Steep | Moderate | Steep | Low |
 
-### Choosing the Right Framework
+#### Choosing the Right Framework
 
   * **LangGraph** : Choose when you need complex, production-grade workflows with human oversight
 
@@ -248,7 +254,7 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
 
 
 
-### Emerging Patterns
+#### Emerging Patterns
 
 The agent framework landscape is evolving rapidly. Key trends to watch:
 
@@ -263,11 +269,17 @@ The agent framework landscape is evolving rapidly. Key trends to watch:
 
 
 
-### Conclusion
+#### Conclusion
 
 The right agent framework depends on your application's complexity and deployment model. LangGraph offers the most control for production workflows, CrewAI excels at multi-agent collaboration, and the Assistants API provides the fastest path to a working prototype. As the field matures, expect convergence toward standardized patterns for agent communication, safety, and observability.
 
 **See also:** [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>).
+
+**See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
+
+**See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
+
+**See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
 
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
 

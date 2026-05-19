@@ -1,7 +1,7 @@
 ---
 title: "10 Developer Side Hustles That Actually Make Money in 2026"
 description: "From freelancing to SaaS to API monetization — 10 proven side hustles for software developers ranked by effort and earning potential."
-date: 2026-05-07
+date: 2025-10-04
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/developer-side-hustles-2026.html
 ---
@@ -61,4 +61,4 @@ Build audience + income| Content Creation (#6)
   
 Pick one. Ship it in two weeks. The only failed side hustle is the one you never start.
 
-**See also:** [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Content Monetization Strategies for Developers](</en/sidehustle/content-monetization.html>), [Build vs Buy: Strategic Decisions for Developer Side Projects and SaaS](</en/sidehustle/build-vs-buy-saas-decisions.html>)
+**See also:** [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Content Monetization Strategies for Developers](</en/sidehustle/content-monetization.html>), [Open Source Monetization](</en/sidehustle/open-source-monetization.html>)

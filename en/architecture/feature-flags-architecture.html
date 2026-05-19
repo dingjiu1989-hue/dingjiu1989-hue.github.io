@@ -47,13 +47,18 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/feature-flags-architecture.png",
       "datePublished": "2026-04-24",
       "dateModified": "2026-05-04",
-      "wordCount": "1051",
+      "wordCount": "1102",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/feature-flags-architecture.html"},
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/feature-flags-architecture-505k"
+      ],
       "articleBody": "Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feature flags"
     }
     </script>
@@ -96,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/feature-flags-architecture.png" alt="Feature Flags Architecture" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Feature Flags Architecture</h2>
 <h3>Feature Flags Architecture</h3>
-<h3>Feature Flags Architecture</h3>
-<h3>Feature Flags Architecture</h3>
-<h3>Feature Flags Architecture</h3>
-<h3>Feature Flags Architecture</h3>
-<h3>Feature Flags Architecture</h3>
-<h3>Feature Flags Architecture</h3>
-<h3>Feature Flags Architecture</h3>
-<h3>Feature Flags Architecture</h3>
-<h3>Feature Flags Architecture</h3>
-<h3>Feature Flags Architecture</h3>
-<h3>Feature Flags Architecture</h3>
+<h4>Feature Flags Architecture</h4>
+<h4>Feature Flags Architecture</h4>
+<h4>Feature Flags Architecture</h4>
+<h4>Feature Flags Architecture</h4>
+<h4>Feature Flags Architecture</h4>
+<h4>Feature Flags Architecture</h4>
+<h4>Feature Flags Architecture</h4>
+<h4>Feature Flags Architecture</h4>
+<h4>Feature Flags Architecture</h4>
+<h4>Feature Flags Architecture</h4>
+<h4>Feature Flags Architecture</h4>
+<h4>Feature Flags Architecture</h4>
+<h4>Feature Flags Architecture</h4>
 <p>Feature flags (also called feature toggles) provide runtime control over application behavior without deploying new code. They decouple deployment from release, enabling patterns like canary releases, A/B testing, trunk-based development, and instant rollbacks. The architecture of a feature flag system — how flags are evaluated, stored, distributed, and managed — is critical to both developer experience and system reliability. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/feature-flags-architecture.png" alt="Feature Flags Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Flag evaluation must be fast and reliable. Every request potentially evaluates multiple flags, so evaluation latency directly impacts overall request latency. The two primary evaluation models are client-side SDK evaluation and server-side evaluation. In client-side evaluation, the SDK holds a copy of all flag configurations and evaluates locally — this provides sub-millisecond evaluation but requires flag configuration synchronization. In server-side evaluation, the client sends user context to a server that evaluates flags and returns results — this adds a network hop but provides centralized control and audit. </p>
 <p>SDK design follows a consistent pattern. The SDK initializes with a connection to the flag management service, downloads flag configurations, and stores them in memory. When the application requests a flag value, the SDK evaluates the flag locally using the targeting rules. The SDK periodically polls or receives real-time updates (WebSocket, Server-Sent Events) for configuration changes. This ensures that flag changes take effect quickly without redeployment. </p>
@@ -118,6 +125,8 @@
 <p>Security implications of feature flags are significant. Flags that control security-sensitive behavior — authentication flows, authorization rules, payment processing — must be protected from unauthorized modification. Approval workflows, audit logs, and access controls on flag changes are essential. The flag management platform should enforce separation of duties: the developer who creates a flag should not be the one who approves its production rollout. </p>
 <p>Operational concerns include flag evaluation metrics. Track flag evaluation counts, cache hit rates, and evaluation latency. Monitor for unexpected flag evaluation errors — incorrectly cached or missing flag configurations can cause widespread failures. Implement a kill switch flag that disables all non-critical flags simultaneously in emergency scenarios, providing a circuit breaker for flag-induced issues.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p></div>
     </article>

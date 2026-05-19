@@ -1,7 +1,7 @@
 ---
 title: "Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq"
 description: "Developer-focused comparison covering markdown support, code blocks, Git integration, graph views, and local-first vs cloud. Includes decision matrix for different developer workflows."
-date: 2026-05-08
+date: 2025-10-30
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-note-taking-apps-developers.html
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Data Masking and Redaction"
 description: "Guide to data masking and redaction covering dynamic masking, static masking, tokenization, and compliance with GDPR and data privacy regulations."
-date: 2026-05-12
+date: 2026-03-09
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/data-masking.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/security/data-masking.html
 
 ## Data Masking and Redaction
 
-## Data Masking and Redaction
+### Data Masking and Redaction
 
-## Data Masking and Redaction
+#### Data Masking and Redaction
 
-## Data Masking and Redaction
+#### Data Masking and Redaction
 
-## Data Masking and Redaction
+#### Data Masking and Redaction
 
-## Data Masking and Redaction
+#### Data Masking and Redaction
 
-## Data Masking and Redaction
+#### Data Masking and Redaction
 
-## Data Masking and Redaction
+#### Data Masking and Redaction
 
-## Data Masking and Redaction
+#### Data Masking and Redaction
 
-## Data Masking and Redaction
+#### Data Masking and Redaction
 
-## Data Masking and Redaction
+#### Data Masking and Redaction
 
-## Data Masking and Redaction
+#### Data Masking and Redaction
 
-## Data Masking and Redaction
+#### Data Masking and Redaction
 
-## Data Masking and Redaction
+#### Data Masking and Redaction
+
+#### Data Masking and Redaction
+
+#### Data Masking and Redaction
+
+#### Data Masking and Redaction
 
 Introduction 
 
@@ -256,7 +262,7 @@ return decorator
 
 def get_user_profile(user_id):
 
-## Returns full data; masking applied by decorator
+#### Returns full data; masking applied by decorator
 
 return {
 
@@ -286,13 +292,13 @@ def tokenize(self, sensitive_value, context):
 
 """Replace sensitive value with a token."""
 
-## Generate unique token
+#### Generate unique token
 
 token_id = secrets.token_hex(16)
 
 token = f"{self.token_prefix}{token_id}"
 
-## Store mapping in secure vault
+#### Store mapping in secure vault
 
 self.vault.store(
 
@@ -328,7 +334,7 @@ raise PermissionError("Not authorized to detokenize")
 
 record = self.vault.retrieve(f"tokens/{token}")
 
-## Increment access counter
+#### Increment access counter
 
 record['access_count'] += 1
 
@@ -336,7 +342,7 @@ record['last_accessed'] = datetime.utcnow().isoformat()
 
 self.vault.store(f"tokens/{token}", record)
 
-## Log access
+#### Log access
 
 self._audit_log('detokenize', token, requester_role)
 
@@ -451,6 +457,12 @@ Conclusion
 Data masking is essential for privacy compliance and reducing the risk of data exposure. Use static masking for non-production environments, dynamic masking for real-time access control, and tokenization for scenarios requiring reversible de-identification. Always log access to sensitive data, enforce role-based masking policies, and ensure masking is consistent across all data stores and applications.
 
 **See also:** [Privacy Engineering](</en/security/privacy-engineering.html>), [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Infrastructure as Code Security](</en/security/iac-security.html>).
+
+**See also:** [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 
 **See also:** [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 

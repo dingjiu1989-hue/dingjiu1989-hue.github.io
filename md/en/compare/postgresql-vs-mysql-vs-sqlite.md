@@ -1,7 +1,7 @@
 ---
 title: "PostgreSQL vs MySQL vs SQLite (2026): Which Database Should You Use?"
 description: "The definitive database comparison for developers — features, performance, scalability, and use cases. Includes guidance for side projects, startups, and enterprise."
-date: 2026-05-14
+date: 2026-05-12
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/postgresql-vs-mysql-vs-sqlite.html
 ---

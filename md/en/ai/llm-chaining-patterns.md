@@ -1,7 +1,7 @@
 ---
 title: "LLM Chaining and Pipeline Patterns"
 description: "Explore LLM chaining patterns including sequential chains, parallel processing, map-reduce, routing, and branching for complex AI workflows."
-date: 2026-05-11
+date: 2025-12-12
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/llm-chaining-patterns.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-chaining-patterns.html
 
 ## LLM Chaining and Pipeline Patterns
 
-## LLM Chaining and Pipeline Patterns
+### LLM Chaining and Pipeline Patterns
 
-## LLM Chaining and Pipeline Patterns
+#### LLM Chaining and Pipeline Patterns
 
-## LLM Chaining and Pipeline Patterns
+#### LLM Chaining and Pipeline Patterns
 
-## LLM Chaining and Pipeline Patterns
+#### LLM Chaining and Pipeline Patterns
 
-## LLM Chaining and Pipeline Patterns
+#### LLM Chaining and Pipeline Patterns
 
-## LLM Chaining and Pipeline Patterns
+#### LLM Chaining and Pipeline Patterns
 
-## LLM Chaining and Pipeline Patterns
+#### LLM Chaining and Pipeline Patterns
 
-## LLM Chaining and Pipeline Patterns
+#### LLM Chaining and Pipeline Patterns
 
-## LLM Chaining and Pipeline Patterns
+#### LLM Chaining and Pipeline Patterns
 
-## LLM Chaining and Pipeline Patterns
+#### LLM Chaining and Pipeline Patterns
 
-## LLM Chaining and Pipeline Patterns
+#### LLM Chaining and Pipeline Patterns
 
-## LLM Chaining and Pipeline Patterns
+#### LLM Chaining and Pipeline Patterns
 
-### Introduction
+#### LLM Chaining and Pipeline Patterns
+
+#### LLM Chaining and Pipeline Patterns
+
+#### LLM Chaining and Pipeline Patterns
+
+#### Introduction
 
 Single LLM calls are rarely sufficient for complex tasks. Chaining — connecting multiple LLM calls in a pipeline — enables sophisticated workflows where each step builds on or refines the output of the previous one. This guide covers the essential chaining patterns used in production AI systems.
 
-### Why Chain?
+#### Why Chain?
 
 A single LLM call has limitations:
 
@@ -55,7 +61,7 @@ A single LLM call has limitations:
 
 Chaining addresses these by decomposing complex tasks into focused steps, each with a clear objective and validation criteria.
 
-### Core Patterns
+#### Core Patterns
 
 #### Sequential Chain
 
@@ -95,7 +101,7 @@ Process multiple items independently, then combine results.
 
 def map_reduce(items, map_prompt, reduce_prompt):
 
-## Map: process each item independently
+#### Map: process each item independently
 
 intermediate = []
 
@@ -105,7 +111,7 @@ result = call_llm(map_prompt, item)
 
 intermediate.append(result)
 
-## Reduce: combine all intermediate results
+#### Reduce: combine all intermediate results
 
 combined = "\n---\n".join(intermediate)
 
@@ -113,7 +119,7 @@ final = call_llm(reduce_prompt, combined)
 
 return final
 
-## Example: summarize 50 customer reviews
+#### Example: summarize 50 customer reviews
 
 reviews = load_reviews()
 
@@ -157,11 +163,11 @@ Route input to different sub-chains based on classification.
 
 def routing_chain(query):
 
-## First, classify the query type
+#### First, classify the query type
 
 category = classify_query(query)
 
-## Route to specialized handler
+#### Route to specialized handler
 
 if category == "billing":
 
@@ -217,7 +223,7 @@ def generate_with_validation(topic):
 
 draft = generate_draft(topic)
 
-## Validation gate
+#### Validation gate
 
 issues = validate_draft(draft)
 
@@ -225,7 +231,7 @@ if issues:
 
 draft = revise_draft(draft, issues)
 
-## Re-validate
+#### Re-validate
 
 issues = validate_draft(draft)
 
@@ -233,7 +239,7 @@ if not issues:
 
 return draft
 
-## If still has issues after revision, flag for human review
+#### If still has issues after revision, flag for human review
 
 return {"draft": draft, "issues": issues, "needs_review": True}
 
@@ -255,7 +261,7 @@ List any issues found. If none, respond with "NO ISSUES".
 
 """, draft)
 
-### Advanced Patterns
+#### Advanced Patterns
 
 #### Recursive Chain
 
@@ -295,7 +301,7 @@ revision = call_llm(f"Revise this output based on this feedback: {critique}", ou
 
 return revision
 
-### Production Considerations
+#### Production Considerations
 
 **Error handling** : Each chain step should have a timeout, retry logic, and fallback behavior.
 
@@ -305,11 +311,17 @@ return revision
 
 **Human escalation** : Design chains so that when confidence is low or validation fails, the task escalates to a human operator.
 
-### Conclusion
+#### Conclusion
 
 LLM chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Start with sequential chains for simple transformations, add map-reduce for batch processing, and incorporate routing and branching for complex workflows. The key principle: each step should do one thing well, with clear inputs, outputs, and validation criteria.
 
 **See also:** [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>).
+
+**See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)
+
+**See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)
+
+**See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)
 
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)
 

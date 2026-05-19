@@ -1,7 +1,7 @@
 ---
 title: "RBAC Authorization Implementation"
 description: "A practical guide to implementing Role-Based Access Control with roles, permissions, policies, and middleware in Node.js and Python."
-date: 2026-05-11
+date: 2025-12-19
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/rbac-authorization.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/security/rbac-authorization.html
 
 ## RBAC Authorization Implementation
 
-## RBAC Authorization Implementation
+### RBAC Authorization Implementation
 
-## RBAC Authorization Implementation
+#### RBAC Authorization Implementation
 
-## RBAC Authorization Implementation
+#### RBAC Authorization Implementation
 
-## RBAC Authorization Implementation
+#### RBAC Authorization Implementation
 
-## RBAC Authorization Implementation
+#### RBAC Authorization Implementation
 
-## RBAC Authorization Implementation
+#### RBAC Authorization Implementation
 
-## RBAC Authorization Implementation
+#### RBAC Authorization Implementation
 
-## RBAC Authorization Implementation
+#### RBAC Authorization Implementation
 
-## RBAC Authorization Implementation
+#### RBAC Authorization Implementation
 
-## RBAC Authorization Implementation
+#### RBAC Authorization Implementation
 
-## RBAC Authorization Implementation
+#### RBAC Authorization Implementation
 
-## RBAC Authorization Implementation
+#### RBAC Authorization Implementation
 
-## RBAC Authorization Implementation
+#### RBAC Authorization Implementation
+
+#### RBAC Authorization Implementation
+
+#### RBAC Authorization Implementation
+
+#### RBAC Authorization Implementation
 
 What Is RBAC? 
 
@@ -324,7 +330,7 @@ return wrapper
 
 return decorator
 
-## Usage
+#### Usage
 
 @app.delete("/articles/{article_id}")
 
@@ -332,7 +338,7 @@ return decorator
 
 async def delete_article(article_id: int, current_user = Depends(get_current_user)):
 
-## Delete logic
+#### Delete logic
 
 pass
 
@@ -344,25 +350,25 @@ def can_access_resource(user, resource, action):
 
 """Check RBAC first, then ABAC policies."""
 
-## RBAC check
+#### RBAC check
 
 if not has_role_permission(user.role, action):
 
 return False
 
-## ABAC policies
+#### ABAC policies
 
 policies = {
 
-## Users can edit their own articles
+#### Users can edit their own articles
 
 ('article:update', 'article'): lambda u, r: r.author_id == u.id,
 
-## Admins can edit any article
+#### Admins can edit any article
 
 ('article:update', 'article'): lambda u, r: 'admin' in u.roles,
 
-## Only article authors can delete
+#### Only article authors can delete
 
 ('article:delete', 'article'): lambda u, r: r.author_id == u.id,
 
@@ -446,6 +452,12 @@ Summary
 RBAC simplifies authorization by grouping permissions into roles and assigning roles to users. Start with flat RBAC and add hierarchy as needed. Always check permissions rather than role names, cache resolved permissions for performance, and layer on ABAC policies for fine-grained access control. Log all authorization decisions for auditability.
 
 **See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Encryption at Rest Guide](</en/security/encryption-at-rest.html>).
+
+**See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>)
+
+**See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>)
+
+**See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>)
 
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>)
 

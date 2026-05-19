@@ -1,7 +1,7 @@
 ---
 title: "SaaS Pricing Experiments: A/B Testing and Value Metrics"
 description: "Run SaaS pricing experiments with A/B testing, value metrics, and willingness-to-pay analysis to optimize revenue."
-date: 2026-05-12
+date: 2026-01-22
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/pricing-experiments.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/pricing-experiments.html
 
 ## SaaS Pricing Experiments: A/B Testing and Value Metrics
 
-## SaaS Pricing Experiments: A/B Testing and Value Metrics
+### SaaS Pricing Experiments: A/B Testing and Value Metrics
 
-## SaaS Pricing Experiments: A/B Testing and Value Metrics
+#### SaaS Pricing Experiments: A/B Testing and Value Metrics
 
-## SaaS Pricing Experiments: A/B Testing and Value Metrics
+#### SaaS Pricing Experiments: A/B Testing and Value Metrics
 
-## SaaS Pricing Experiments: A/B Testing and Value Metrics
+#### SaaS Pricing Experiments: A/B Testing and Value Metrics
 
-## SaaS Pricing Experiments: A/B Testing and Value Metrics
+#### SaaS Pricing Experiments: A/B Testing and Value Metrics
 
-## SaaS Pricing Experiments: A/B Testing and Value Metrics
+#### SaaS Pricing Experiments: A/B Testing and Value Metrics
 
-## SaaS Pricing Experiments: A/B Testing and Value Metrics
+#### SaaS Pricing Experiments: A/B Testing and Value Metrics
 
-## SaaS Pricing Experiments: A/B Testing and Value Metrics
+#### SaaS Pricing Experiments: A/B Testing and Value Metrics
 
-## SaaS Pricing Experiments: A/B Testing and Value Metrics
+#### SaaS Pricing Experiments: A/B Testing and Value Metrics
 
-## SaaS Pricing Experiments: A/B Testing and Value Metrics
+#### SaaS Pricing Experiments: A/B Testing and Value Metrics
 
-## SaaS Pricing Experiments: A/B Testing and Value Metrics
+#### SaaS Pricing Experiments: A/B Testing and Value Metrics
 
-## SaaS Pricing Experiments: A/B Testing and Value Metrics
+#### SaaS Pricing Experiments: A/B Testing and Value Metrics
 
-### SaaS Pricing Experiments: Data-Driven Optimization
+#### SaaS Pricing Experiments: A/B Testing and Value Metrics
+
+#### SaaS Pricing Experiments: A/B Testing and Value Metrics
+
+#### SaaS Pricing Experiments: A/B Testing and Value Metrics
+
+#### SaaS Pricing Experiments: Data-Driven Optimization
 
 Pricing is the highest-leverage lever in a SaaS business. A 1% price increase drops straight to profit if it doesn't significantly increase churn. Yet most founders set prices based on gut feeling and never revisit the decision. Running systematic pricing experiments reveals what customers are willing to pay.
 
@@ -73,6 +79,12 @@ Measure both conversion rate and long-term value. A pricing variant that increas
 SaaS pricing is never final. The best pricing strategies evolve with product maturity and market conditions. Run pricing experiments quarterly, combining qualitative research with A/B testing. The goal is not the perfect price but a pricing model that adapts as you learn more about customer willingness to pay.
 
 **See also:** [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Revenue Retention](</en/sidehustle/saas-metrics.html>), [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>).
+
+**See also:** [SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Revenue Retention](</en/sidehustle/saas-metrics.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>)
+
+**See also:** [SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Revenue Retention](</en/sidehustle/saas-metrics.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>)
+
+**See also:** [SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Revenue Retention](</en/sidehustle/saas-metrics.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>)
 
 **See also:** [SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Revenue Retention](</en/sidehustle/saas-metrics.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>)
 

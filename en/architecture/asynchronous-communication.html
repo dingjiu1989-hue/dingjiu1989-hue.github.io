@@ -47,13 +47,18 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/asynchronous-communication.png",
       "datePublished": "2026-04-21",
       "dateModified": "2026-05-07",
-      "wordCount": "1035",
+      "wordCount": "1105",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/asynchronous-communication.html"},
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/asynchronous-communication-in-distributed-systems-9po"
+      ],
       "articleBody": "Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and patterns"
     }
     </script>
@@ -96,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/asynchronous-communication.png" alt="Asynchronous Communication in Distributed Systems" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Asynchronous Communication in Distributed Systems</h2>
 <h3>Asynchronous Communication in Distributed Systems</h3>
-<h3>Asynchronous Communication in Distributed Systems</h3>
-<h3>Asynchronous Communication in Distributed Systems</h3>
-<h3>Asynchronous Communication in Distributed Systems</h3>
-<h3>Asynchronous Communication in Distributed Systems</h3>
-<h3>Asynchronous Communication in Distributed Systems</h3>
-<h3>Asynchronous Communication in Distributed Systems</h3>
-<h3>Asynchronous Communication in Distributed Systems</h3>
-<h3>Asynchronous Communication in Distributed Systems</h3>
-<h3>Asynchronous Communication in Distributed Systems</h3>
-<h3>Asynchronous Communication in Distributed Systems</h3>
-<h3>Asynchronous Communication in Distributed Systems</h3>
+<h4>Asynchronous Communication in Distributed Systems</h4>
+<h4>Asynchronous Communication in Distributed Systems</h4>
+<h4>Asynchronous Communication in Distributed Systems</h4>
+<h4>Asynchronous Communication in Distributed Systems</h4>
+<h4>Asynchronous Communication in Distributed Systems</h4>
+<h4>Asynchronous Communication in Distributed Systems</h4>
+<h4>Asynchronous Communication in Distributed Systems</h4>
+<h4>Asynchronous Communication in Distributed Systems</h4>
+<h4>Asynchronous Communication in Distributed Systems</h4>
+<h4>Asynchronous Communication in Distributed Systems</h4>
+<h4>Asynchronous Communication in Distributed Systems</h4>
+<h4>Asynchronous Communication in Distributed Systems</h4>
+<h4>Asynchronous Communication in Distributed Systems</h4>
 <p>Asynchronous communication is the backbone of resilient distributed systems. By decoupling services in time and space, it enables independent scaling, fault isolation, and event-driven workflows. The core infrastructure choices are message brokers, event buses, and brokerless messaging, each with distinct tradeoffs in reliability, latency, and operational complexity. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/asynchronous-communication.png" alt="Asynchronous Communication in Distributed Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Message brokers like RabbitMQ, Amazon SQS, and ActiveMQ provide reliable point-to-point communication. Producers send messages to queues, and consumers pull or receive pushes. Brokers guarantee message delivery through persistent storage, acknowledgments, and dead-letter mechanisms. At-least-once delivery is the standard guarantee; exactly-once delivery requires idempotent consumers or additional infrastructure like transactional outbox patterns. Brokers excel when each message should be processed by exactly one consumer, making them ideal for task distribution and work queues. </p>
 <p>Event buses (Kafka, Amazon Kinesis, Pulsar) follow a publish-subscribe model where messages are organized into topics or streams. Multiple consumer groups can independently read the same event stream at their own pace. Events persist for a configurable retention period, allowing new consumers to replay historical data. This makes event buses suitable for event sourcing, stream processing, and data integration patterns where multiple consumers derive different value from the same events. Kafka's partitioned log model provides ordering guarantees within a partition and horizontal scalability. </p>
@@ -117,6 +124,8 @@
 <p>Message schema evolution is a practical concern often overlooked. Messages outlive their producers and consumers. Schema registries (Confluent Schema Registry, Apicurio) enforce compatibility rules — backward, forward, or full — ensuring that producers and consumers can evolve independently. Protocol Buffers, Avro, and JSON Schema are common schema formats. </p>
 <p>Choosing the right messaging infrastructure depends on consumption patterns, durability requirements, and operational capability. A pragmatic architecture often uses multiple systems: a broker for command-style point-to-point communication, an event bus for event streaming and data integration, and brokerless messaging for real-time internal communication where some loss is acceptable.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/dead-letter-queue.html">Dead Letter Queues: Handling Message Failures</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/dead-letter-queue.html">Dead Letter Queues: Handling Message Failures</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/dead-letter-queue.html">Dead Letter Queues: Handling Message Failures</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/dead-letter-queue.html">Dead Letter Queues: Handling Message Failures</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/dead-letter-queue.html">Dead Letter Queues: Handling Message Failures</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p></div>
     </article>

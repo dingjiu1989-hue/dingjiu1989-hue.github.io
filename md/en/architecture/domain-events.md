@@ -1,7 +1,7 @@
 ---
 title: "Domain Events: Design and Implementation"
 description: "Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery"
-date: 2026-05-12
+date: 2026-04-24
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/domain-events.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/domain-events.html
 
 ## Domain Events: Design and Implementation
 
-## Domain Events: Design and Implementation
+### Domain Events: Design and Implementation
 
-## Domain Events: Design and Implementation
+#### Domain Events: Design and Implementation
 
-## Domain Events: Design and Implementation
+#### Domain Events: Design and Implementation
 
-## Domain Events: Design and Implementation
+#### Domain Events: Design and Implementation
 
-## Domain Events: Design and Implementation
+#### Domain Events: Design and Implementation
 
-## Domain Events: Design and Implementation
+#### Domain Events: Design and Implementation
 
-## Domain Events: Design and Implementation
+#### Domain Events: Design and Implementation
 
-## Domain Events: Design and Implementation
+#### Domain Events: Design and Implementation
 
-## Domain Events: Design and Implementation
+#### Domain Events: Design and Implementation
 
-## Domain Events: Design and Implementation
+#### Domain Events: Design and Implementation
 
-## Domain Events: Design and Implementation
+#### Domain Events: Design and Implementation
+
+#### Domain Events: Design and Implementation
+
+#### Domain Events: Design and Implementation
+
+#### Domain Events: Design and Implementation
 
 Domain events capture significant state changes within a bounded context. They are a tactical pattern from Domain-Driven Design that enables loose coupling between domain aggregates while maintaining consistency boundaries. A domain event represents something that happened in the past and is meaningful to domain experts: OrderSubmitted, PaymentReceived, InventoryDepleted. 
 
@@ -51,6 +57,12 @@ Event versioning addresses schema evolution. Domain events are persistent contra
 Testing domain events requires verifying that the correct events are raised for each command, that event data contains the expected information, and that handlers produce the correct side effects. Unit tests validate event raising within aggregates, while integration tests verify the full publish-and-handle pipeline including the outbox pattern.
 
 **See also:** [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>).
+
+**See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
+
+**See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
+
+**See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
 
 **See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
 

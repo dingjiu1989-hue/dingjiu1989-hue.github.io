@@ -1,7 +1,7 @@
 ---
 title: "6 AI Coding Tools, 90 Days, 30 Tasks: My Honest Comparison"
 description: "I tested Claude Opus, GPT-4o, Gemini 2.5 Pro, DeepSeek V4, Cursor, and Copilot on 30 real coding tasks over 90 days. Here's which one actually wins for each type of work."
-date: 2026-05-10
+date: 2025-12-01
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-coding-tools-90-days.html
 ---

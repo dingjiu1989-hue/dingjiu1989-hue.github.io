@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/sso-architecture.png",
       "datePublished": "2026-03-19",
       "dateModified": "2026-04-10",
-      "wordCount": "848",
+      "wordCount": "888",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/sso-architecture.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/sso-architecture.png" alt="SSO Architecture" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>SSO Architecture</h2>
 <h3>SSO Architecture</h3>
-<h3>SSO Architecture</h3>
-<h3>SSO Architecture</h3>
-<h3>SSO Architecture</h3>
-<h3>SSO Architecture</h3>
-<h3>SSO Architecture</h3>
-<h3>SSO Architecture</h3>
-<h3>SSO Architecture</h3>
-<h3>SSO Architecture</h3>
-<h3>SSO Architecture</h3>
-<h3>SSO Architecture</h3>
-<h3>SSO Architecture</h3>
+<h4>SSO Architecture</h4>
+<h4>SSO Architecture</h4>
+<h4>SSO Architecture</h4>
+<h4>SSO Architecture</h4>
+<h4>SSO Architecture</h4>
+<h4>SSO Architecture</h4>
+<h4>SSO Architecture</h4>
+<h4>SSO Architecture</h4>
+<h4>SSO Architecture</h4>
+<h4>SSO Architecture</h4>
+<h4>SSO Architecture</h4>
+<h4>SSO Architecture</h4>
+<h4>SSO Architecture</h4>
 <p>SSO Fundamentals </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/sso-architecture.png" alt="SSO Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Single Sign-On (SSO) allows users to authenticate once and access multiple applications without re-entering credentials. It improves security by centralizing authentication and reducing password fatigue. </p>
 <p>SAML 2.0 </p>
@@ -119,13 +123,13 @@
 <p>IssueInstant="2026-05-12T10:00:00Z"&gt;</p>
 <p>https://app.example.com</p>
 <p>Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"/&gt;</p>
-<h3>SAML response parsing</h3>
+<h4>SAML response parsing</h4>
 <p>from signxml import XMLVerifier</p>
 <p>import xml.etree.ElementTree as ET</p>
 <p>def parse_saml_response(response_xml):</p>
-<h3>Verify the signature</h3>
+<h4>Verify the signature</h4>
 <p>verified_data = XMLVerifier().verify(response_xml).signed_xml</p>
-<h3>Extract attributes</h3>
+<h4>Extract attributes</h4>
 <p>ns = {"saml2": "urn:oasis:names:tc:SAML:2.0:assertion"}</p>
 <p>root = ET.fromstring(verified_data)</p>
 <p>attributes = {}</p>
@@ -161,16 +165,16 @@
 <p>res.redirect(authUrl);</p>
 <p>}</p>
 <p>Token Exchange </p>
-<h3>Token exchange handler</h3>
+<h4>Token exchange handler</h4>
 <p>async def handle_callback(request):</p>
 <p>code = request.query_params["code"]</p>
 <p>state = request.query_params["state"]</p>
-<h3>Verify state matches</h3>
+<h4>Verify state matches</h4>
 <p>if state != request.session["oidc_state"]:</p>
 <p>raise SecurityError("State mismatch - possible CSRF")</p>
-<h3>Exchange code for tokens</h3>
+<h4>Exchange code for tokens</h4>
 <p>token_response = await oidc_client.authorize_token(code)</p>
-<h3>Validate ID token</h3>
+<h4>Validate ID token</h4>
 <p>claims = await oidc_client.validate_id_token(</p>
 <p>token_response["id_token"],</p>
 <p>nonce=request.session["oidc_nonce"]</p>
@@ -198,6 +202,8 @@
 <p>Conclusion </p>
 <p>SSO centralizes authentication and improves both security and user experience. Choose SAML for enterprise integrations and OIDC for modern applications. Implement proper session management with short-lived tokens and single logout. Always validate state parameters and ID token signatures.</p>
 <p><strong>See also:</strong> <a href="/en/security/identity-provider-comparison.html">Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth</a>, <a href="/en/security/identity-access-management.html">IAM: Identity and Access Management Fundamentals</a>, <a href="/en/security/session-management.html">Session Management Security</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/database-encryption.html">Database Encryption</a></p>
+<p><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/database-encryption.html">Database Encryption</a></p>
 <p><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/database-encryption.html">Database Encryption</a></p>
 <p><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/database-encryption.html">Database Encryption</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/database-encryption.html">Database Encryption</a></p></div>
     </article>

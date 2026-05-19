@@ -1,7 +1,7 @@
 ---
 title: "Blockchain and Smart Contract Security"
 description: "Smart contract vulnerabilities including reentrancy and oracle manipulation, plus auditing tools, formal verification, and wallet security."
-date: 2026-05-12
+date: 2026-03-03
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/blockchain-security.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/security/blockchain-security.html
 
 ## Blockchain and Smart Contract Security
 
-## Blockchain and Smart Contract Security
+### Blockchain and Smart Contract Security
 
-## Blockchain and Smart Contract Security
+#### Blockchain and Smart Contract Security
 
-## Blockchain and Smart Contract Security
+#### Blockchain and Smart Contract Security
 
-## Blockchain and Smart Contract Security
+#### Blockchain and Smart Contract Security
 
-## Blockchain and Smart Contract Security
+#### Blockchain and Smart Contract Security
 
-## Blockchain and Smart Contract Security
+#### Blockchain and Smart Contract Security
 
-## Blockchain and Smart Contract Security
+#### Blockchain and Smart Contract Security
 
-## Blockchain and Smart Contract Security
+#### Blockchain and Smart Contract Security
 
-## Blockchain and Smart Contract Security
+#### Blockchain and Smart Contract Security
 
-## Blockchain and Smart Contract Security
+#### Blockchain and Smart Contract Security
 
-## Blockchain and Smart Contract Security
+#### Blockchain and Smart Contract Security
 
-## Blockchain and Smart Contract Security
+#### Blockchain and Smart Contract Security
+
+#### Blockchain and Smart Contract Security
+
+#### Blockchain and Smart Contract Security
+
+#### Blockchain and Smart Contract Security
 
 Blockchain and smart contract security presents unique challenges. Once deployed, smart contracts are immutable. A vulnerability in a contract can result in millions of dollars in losses with no recourse. This article covers common smart contract vulnerabilities, auditing tools and techniques, formal verification, and wallet security.
 
-### Common Smart Contract Vulnerabilities
+#### Common Smart Contract Vulnerabilities
 
 #### Reentrancy
 
@@ -222,7 +228,7 @@ _pause();
 
 }
 
-### Smart Contract Auditing
+#### Smart Contract Auditing
 
 Auditing is the primary defense against smart contract vulnerabilities. A thorough audit combines automated scanning with manual review.
 
@@ -237,15 +243,15 @@ Auditing is the primary defense against smart contract vulnerabilities. A thorou
 
 
 
-## Slither analysis
+#### Slither analysis
 
 slither my_contract.sol --print human-summary
 
-## Run specific detectors
+#### Run specific detectors
 
 slither my_contract.sol --detect reentrancy-eth,reentrancy-no-eth
 
-## Mythril analysis
+#### Mythril analysis
 
 myth analyze my_contract.sol --solc-json solc.json
 
@@ -302,7 +308,7 @@ Automated tools catch common patterns but miss business logic flaws. Manual revi
 
 
 
-### Formal Verification
+#### Formal Verification
 
 Formal verification mathematically proves that a contract satisfies specified properties. It is the highest assurance level for smart contract security.
 
@@ -341,7 +347,7 @@ assert supply_after >= supply_before;
 
 Formal verification is most valuable for high-value contracts (DeFi protocols, bridges, stablecoins) where failure is catastrophic.
 
-### Wallet Security
+#### Wallet Security
 
 User wallets are a major attack vector. Protecting wallet infrastructure is critical for any blockchain application.
 
@@ -382,11 +388,17 @@ bytes32 constant PERMIT_TYPEHASH = keccak256(
 
 );
 
-### Conclusion
+#### Conclusion
 
 Smart contract security requires a multi-layered approach. Understand common vulnerabilities like reentrancy, oracle manipulation, and front-running. Use automated analysis tools like Slither and Mythril. Invest in formal verification for high-value contracts. Implement rigorous access control and follow patterns like checks-effects-interactions. Finally, secure the wallet infrastructure that interacts with your contracts. In the immutable world of blockchain, security is not optional.
 
 **See also:** [Container Security Best Practices](</en/security/container-security.html>), [Security Log Management](</en/security/log-management-security.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>).
+
+**See also:** [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Vulnerability Scanning: Tools and Workflows](</en/security/vulnerability-scanning.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Vulnerability Scanning: Tools and Workflows](</en/security/vulnerability-scanning.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Vulnerability Scanning: Tools and Workflows](</en/security/vulnerability-scanning.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 
 **See also:** [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Vulnerability Scanning: Tools and Workflows](</en/security/vulnerability-scanning.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 

@@ -1,7 +1,7 @@
 ---
 title: "FastAPI vs Flask vs Django"
 description: "Compare FastAPI, Flask, and Django for Python web development — performance, async support, type safety, and use case suitability."
-date: 2026-05-11
+date: 2025-12-15
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/fastapi-vs-flask.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/compare/fastapi-vs-flask.html
 
 ## FastAPI vs Flask vs Django
 
-## FastAPI vs Flask vs Django
+### FastAPI vs Flask vs Django
 
-## FastAPI vs Flask vs Django
+#### FastAPI vs Flask vs Django
 
-## FastAPI vs Flask vs Django
+#### FastAPI vs Flask vs Django
 
-## FastAPI vs Flask vs Django
+#### FastAPI vs Flask vs Django
 
-## FastAPI vs Flask vs Django
+#### FastAPI vs Flask vs Django
 
-## FastAPI vs Flask vs Django
+#### FastAPI vs Flask vs Django
 
-## FastAPI vs Flask vs Django
+#### FastAPI vs Flask vs Django
 
-## FastAPI vs Flask vs Django
+#### FastAPI vs Flask vs Django
 
-## FastAPI vs Flask vs Django
+#### FastAPI vs Flask vs Django
 
-## FastAPI vs Flask vs Django
+#### FastAPI vs Flask vs Django
 
-## FastAPI vs Flask vs Django
+#### FastAPI vs Flask vs Django
 
-## FastAPI vs Flask vs Django
+#### FastAPI vs Flask vs Django
 
-### Introduction
+#### FastAPI vs Flask vs Django
+
+#### FastAPI vs Flask vs Django
+
+#### FastAPI vs Flask vs Django
+
+#### Introduction
 
 Python offers three dominant web frameworks: Flask (the micro-framework), Django (the full-featured framework), and FastAPI (the modern, async-first framework). Each serves different needs, and understanding their strengths helps you choose the right one for your project.
 
-### Flask
+#### Flask
 
 Flask is the veteran micro-framework, known for its simplicity and flexibility.
 
@@ -86,13 +92,13 @@ return jsonify(user)
 
 
 
-### Django
+#### Django
 
 Django is the "batteries-included" framework, providing everything you need for a data-driven web application.
 
 **Core philosophy:** Provide a complete, opinionated framework that handles common web development tasks out of the box.
 
-## models.py
+#### models.py
 
 from django.db import models
 
@@ -104,7 +110,7 @@ name = models.CharField(max_length=100)
 
 created_at = models.DateTimeField(auto_now_add=True)
 
-## views.py
+#### views.py
 
 from rest_framework.decorators import api_view
 
@@ -150,7 +156,7 @@ return Response({"error": "Not found"}, status=404)
 
 
 
-### FastAPI
+#### FastAPI
 
 FastAPI is the modern contender, built around Python type hints and async/await.
 
@@ -210,7 +216,7 @@ return user
 
 
 
-### Comparison Table
+#### Comparison Table
 
 | Aspect | Flask | Django | FastAPI |
 
@@ -234,7 +240,7 @@ return user
 
 | Best for | Small apps, APIs | Full-stack apps | High-performance APIs |
 
-### Performance Benchmarks
+#### Performance Benchmarks
 
 FastAPI's async-native architecture gives it a significant performance advantage for I/O-bound workloads:
 
@@ -249,7 +255,7 @@ FastAPI's async-native architecture gives it a significant performance advantage
 
 For CPU-bound tasks, the difference narrows since Python's GIL still applies.
 
-### When to Choose What
+#### When to Choose What
 
 **Choose Flask when:**
 
@@ -296,11 +302,17 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
 
 
 
-### Conclusion
+#### Conclusion
 
 Flask offers simplicity and flexibility, Django provides a complete framework with everything included, and FastAPI delivers modern async performance with automatic documentation. In 2026, FastAPI is the default choice for new API projects, Django remains the best choice for full-stack applications, and Flask is still ideal for small projects and microservices where minimalism matters.
 
 **See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Solid.js vs Qwik](</en/compare/solid-vs-qwik.html>).
+
+**See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Solid.js vs Qwik](</en/compare/solid-vs-qwik.html>)
+
+**See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Solid.js vs Qwik](</en/compare/solid-vs-qwik.html>)
+
+**See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Solid.js vs Qwik](</en/compare/solid-vs-qwik.html>)
 
 **See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Solid.js vs Qwik](</en/compare/solid-vs-qwik.html>)
 

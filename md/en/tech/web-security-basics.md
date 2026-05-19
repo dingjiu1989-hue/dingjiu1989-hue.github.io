@@ -1,7 +1,7 @@
 ---
 title: "Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know"
 description: "Practical web security guide covering Cross-Site Scripting, CORS headers, Content Security Policy, SQL injection, and CSRF attacks. Includes code examples and prevention strategies."
-date: 2026-05-08
+date: 2025-10-08
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/web-security-basics.html
 ---

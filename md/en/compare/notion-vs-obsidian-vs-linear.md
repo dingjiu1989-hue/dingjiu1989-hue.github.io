@@ -1,7 +1,7 @@
 ---
 title: "Notion vs Obsidian vs Linear (2026): Best Dev Knowledge & Project Tool?"
 description: "Compare all-in-one workspace vs local-first notes vs purpose-built project tracking. Find the right knowledge management setup for your developer workflow."
-date: 2026-05-08
+date: 2025-11-19
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/notion-vs-obsidian-vs-linear.html
 ---

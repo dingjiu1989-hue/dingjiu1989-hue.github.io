@@ -1,7 +1,7 @@
 ---
 title: "Health Check Patterns"
 description: "Liveness vs readiness probes, custom health checks, dependency health, graceful degradation, and production practices"
-date: 2026-05-12
+date: 2026-04-27
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/health-check-patterns.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/health-check-patterns.htm
 
 ## Health Check Patterns
 
-## Health Check Patterns
+### Health Check Patterns
 
-## Health Check Patterns
+#### Health Check Patterns
 
-## Health Check Patterns
+#### Health Check Patterns
 
-## Health Check Patterns
+#### Health Check Patterns
 
-## Health Check Patterns
+#### Health Check Patterns
 
-## Health Check Patterns
+#### Health Check Patterns
 
-## Health Check Patterns
+#### Health Check Patterns
 
-## Health Check Patterns
+#### Health Check Patterns
 
-## Health Check Patterns
+#### Health Check Patterns
 
-## Health Check Patterns
+#### Health Check Patterns
 
-## Health Check Patterns
+#### Health Check Patterns
+
+#### Health Check Patterns
+
+#### Health Check Patterns
+
+#### Health Check Patterns
 
 Health checks are the mechanism by which orchestration platforms and load balancers determine whether an application instance is capable of serving requests. Two distinct check types serve different purposes: liveness and readiness. Understanding the difference and implementing them correctly is essential for reliable deployments, self-healing infrastructure, and graceful degradation. 
 
@@ -53,6 +59,12 @@ Observability integration enriches health checks. Log each health state transiti
 Platform-specific implementations vary. Kubernetes supports HTTP, TCP, and command-based probes with configurable initial delay, period, timeout, success threshold, and failure threshold. AWS ALB health checks are simpler but support custom paths and codes. The application should implement a consistent health check endpoint regardless of platform, allowing platform-agnostic health assessment and easier migration between orchestration systems.
 
 **See also:** [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>).
+
+**See also:** [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
+
+**See also:** [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
+
+**See also:** [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
 
 **See also:** [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
 

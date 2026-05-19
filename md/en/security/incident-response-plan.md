@@ -1,7 +1,7 @@
 ---
 title: "Incident Response Plan"
 description: "Building an incident response plan using the NIST framework with tabletop exercises and communication strategies."
-date: 2026-05-12
+date: 2026-03-18
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/incident-response-plan.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/security/incident-response-plan.html
 
 ## Incident Response Plan
 
-## Incident Response Plan
+### Incident Response Plan
 
-## Incident Response Plan
+#### Incident Response Plan
 
-## Incident Response Plan
+#### Incident Response Plan
 
-## Incident Response Plan
+#### Incident Response Plan
 
-## Incident Response Plan
+#### Incident Response Plan
 
-## Incident Response Plan
+#### Incident Response Plan
 
-## Incident Response Plan
+#### Incident Response Plan
 
-## Incident Response Plan
+#### Incident Response Plan
 
-## Incident Response Plan
+#### Incident Response Plan
 
-## Incident Response Plan
+#### Incident Response Plan
 
-## Incident Response Plan
+#### Incident Response Plan
+
+#### Incident Response Plan
+
+#### Incident Response Plan
+
+#### Incident Response Plan
 
 The NIST Framework 
 
@@ -40,7 +46,7 @@ Phase 1: Preparation
 
 Preparation determines response success. Key elements include: 
 
-## incident-response-tools.yaml
+#### incident-response-tools.yaml
 
 tools:
 
@@ -114,7 +120,7 @@ alerts.append({
 
 return alerts
 
-## Example: Correlate failed logins across accounts
+#### Example: Correlate failed logins across accounts
 
 detector = IncidentDetector()
 
@@ -134,25 +140,25 @@ detector.add_rule({
 
 Phase 3: Containment, Eradication, Recovery 
 
-## !/bin/bash
+#### !/bin/bash
 
-## Incident containment script
+#### Incident containment script
 
 isolate_host() {
 
 local host=$1
 
-## Block at network level
+#### Block at network level
 
 ansible-playbook isolate_host.yml -e "target=$host"
 
-## Capture forensic data
+#### Capture forensic data
 
 ssh "user@$host" "tar czf /tmp/forensics.tar.gz /var/log /tmp /home"
 
 scp "user@$host:/tmp/forensics.tar.gz" ./evidence/
 
-## Snapshot for analysis
+#### Snapshot for analysis
 
 aws ec2 create-snapshot --volume-id $(get_volume_id $host)
 
@@ -160,7 +166,7 @@ echo "Host $host isolated. Forensic data captured."
 
 }
 
-## Eradicate malware
+#### Eradicate malware
 
 eradicate() {
 
@@ -251,6 +257,12 @@ Conclusion
 A well-rehearsed incident response plan reduces breach impact by 50% or more. Invest in preparation, run regular tabletop exercises, automate containment where possible, and learn from every incident.
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Endpoint Security](</en/security/endpoint-security.html>).
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Endpoint Security](</en/security/endpoint-security.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Endpoint Security](</en/security/endpoint-security.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Endpoint Security](</en/security/endpoint-security.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Endpoint Security](</en/security/endpoint-security.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>)
 

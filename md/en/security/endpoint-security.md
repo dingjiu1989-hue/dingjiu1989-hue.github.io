@@ -1,7 +1,7 @@
 ---
 title: "Endpoint Security"
 description: "Deep dive into endpoint security comparing EDR, XDR, and antivirus solutions, detection techniques, and automated incident response."
-date: 2026-05-13
+date: 2026-05-11
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/endpoint-security.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/security/endpoint-security.html
 
 ## Endpoint Security
 
-## Endpoint Security
+### Endpoint Security
 
-## Endpoint Security
+#### Endpoint Security
 
-## Endpoint Security
+#### Endpoint Security
 
-## Endpoint Security
+#### Endpoint Security
 
-## Endpoint Security
+#### Endpoint Security
 
-## Endpoint Security
+#### Endpoint Security
 
-## Endpoint Security
+#### Endpoint Security
 
-## Endpoint Security
+#### Endpoint Security
 
-## Endpoint Security
+#### Endpoint Security
 
-## Endpoint Security
+#### Endpoint Security
 
-## Endpoint Security
+#### Endpoint Security
 
-## Endpoint Security
+#### Endpoint Security
 
-## Endpoint Security
+#### Endpoint Security
+
+#### Endpoint Security
+
+#### Endpoint Security
+
+#### Endpoint Security
 
 Introduction 
 
@@ -46,7 +52,7 @@ Traditional Antivirus (AV)
 
 Signature-based AV compares files against a database of known malware hashes. It is effective against commodity malware but fails against zero-day threats, fileless attacks, and polymorphic malware. 
 
-## ClamAV command-line scanning
+#### ClamAV command-line scanning
 
 clamscan --recursive --infected /home/user
 
@@ -69,7 +75,7 @@ Endpoint Detection and Response (EDR)
 
 EDR platforms continuously monitor endpoint activity, recording system calls, process creation, network connections, file system changes, and registry modifications. They provide visibility into attacker behavior across the kill chain. 
 
-## Hypothetical EDR telemetry query
+#### Hypothetical EDR telemetry query
 
 def query_process_tree(process_id, timespan_hours=24):
 
@@ -93,11 +99,11 @@ Extended Detection and Response (XDR)
 
 XDR extends EDR by correlating telemetry across endpoints, network traffic, email, cloud workloads, and identity systems. This cross-domain correlation reveals multi-stage attacks spanning different infrastructure layers. 
 
-## XDR cross-domain correlation example
+#### XDR cross-domain correlation example
 
 def correlate_alerts():
 
-## Correlate endpoint alert with network flow
+#### Correlate endpoint alert with network flow
 
 endpoint_alerts = xdr.get_alerts(sources=['endpoint'], severity='high')
 
@@ -129,7 +135,7 @@ Behavioral Detection
 
 Monitors sequences of actions rather than static indicators. Detects ransomware by observing mass file encryption patterns. 
 
-## Behavioral detection rule
+#### Behavioral detection rule
 
 detection_rules:
 
@@ -157,7 +163,7 @@ Response Automation
 
 SOAR (Security Orchestration, Automation, and Response) platforms automate response actions based on detection triggers. 
 
-## Automated response playbook
+#### Automated response playbook
 
 playbook:
 
@@ -200,6 +206,12 @@ Conclusion
 Modern endpoint protection demands more than antivirus. EDR provides deep visibility into endpoint activity, while XDR extends correlation across the entire security stack. Automated response reduces dwell time, but requires careful tuning to avoid disrupting legitimate operations.
 
 **See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Infrastructure as Code Security](</en/security/iac-security.html>).
+
+**See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
+
+**See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
+
+**See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
 
 **See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
 

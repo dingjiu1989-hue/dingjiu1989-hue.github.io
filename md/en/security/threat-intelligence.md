@@ -1,7 +1,7 @@
 ---
 title: "Threat Intelligence: Gathering and Applying Intel"
 description: "Practical guide to threat intelligence including OSINT, threat feeds, MITRE ATT&CK, IoC sharing, and STIX/TAXII standards."
-date: 2026-05-12
+date: 2026-03-05
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/threat-intelligence.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/security/threat-intelligence.html
 
 ## Threat Intelligence: Gathering and Applying Intel
 
-## Threat Intelligence: Gathering and Applying Intel
+### Threat Intelligence: Gathering and Applying Intel
 
-## Threat Intelligence: Gathering and Applying Intel
+#### Threat Intelligence: Gathering and Applying Intel
 
-## Threat Intelligence: Gathering and Applying Intel
+#### Threat Intelligence: Gathering and Applying Intel
 
-## Threat Intelligence: Gathering and Applying Intel
+#### Threat Intelligence: Gathering and Applying Intel
 
-## Threat Intelligence: Gathering and Applying Intel
+#### Threat Intelligence: Gathering and Applying Intel
 
-## Threat Intelligence: Gathering and Applying Intel
+#### Threat Intelligence: Gathering and Applying Intel
 
-## Threat Intelligence: Gathering and Applying Intel
+#### Threat Intelligence: Gathering and Applying Intel
 
-## Threat Intelligence: Gathering and Applying Intel
+#### Threat Intelligence: Gathering and Applying Intel
 
-## Threat Intelligence: Gathering and Applying Intel
+#### Threat Intelligence: Gathering and Applying Intel
 
-## Threat Intelligence: Gathering and Applying Intel
+#### Threat Intelligence: Gathering and Applying Intel
 
-## Threat Intelligence: Gathering and Applying Intel
+#### Threat Intelligence: Gathering and Applying Intel
 
-## Threat Intelligence: Gathering and Applying Intel
+#### Threat Intelligence: Gathering and Applying Intel
+
+#### Threat Intelligence: Gathering and Applying Intel
+
+#### Threat Intelligence: Gathering and Applying Intel
+
+#### Threat Intelligence: Gathering and Applying Intel
 
 Threat intelligence is evidence-based knowledge about existing or emerging threats to an organization. It transforms raw data into actionable insights that help security teams prevent attacks, detect intrusions faster, and respond more effectively. This article covers the sources, frameworks, and tools for operational threat intelligence.
 
-### The Intelligence Lifecycle
+#### The Intelligence Lifecycle
 
 Threat intelligence follows a structured lifecycle:
 
@@ -54,7 +60,7 @@ Threat intelligence follows a structured lifecycle:
 
 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Feedback** : Refine requirements and collection based on what was useful.
 
-### Open Source Intelligence (OSINT)
+#### Open Source Intelligence (OSINT)
 
 OSINT is intelligence derived from publicly available sources. It is free, accessible, and provides valuable context about threats.
 
@@ -75,7 +81,7 @@ OSINT is intelligence derived from publicly available sources. It is free, acces
 
 
 
-## OSINT example: Find exposed S3 buckets
+#### OSINT example: Find exposed S3 buckets
 
 curl -s "https://censys.io/api/v1/search/ipv4" \
 
@@ -85,13 +91,13 @@ curl -s "https://censys.io/api/v1/search/ipv4" \
 
 -d '{"query": "services.service_name: S3"}'
 
-## Check if a domain appears in breach data
+#### Check if a domain appears in breach data
 
 curl -s "https://haveibeenpwned.com/api/v3/breacheddomain/example.com" \
 
 -H "hibp-api-key: $API_KEY"
 
-### Threat Feeds
+#### Threat Feeds
 
 Threat feeds provide structured data about known malicious indicators. Feeds range from free community lists to premium commercial services.
 
@@ -123,7 +129,7 @@ Threat feeds provide structured data about known malicious indicators. Feeds ran
 
 
 
-## Python: Consuming AlienVault OTX feed
+#### Python: Consuming AlienVault OTX feed
 
 import requests
 
@@ -131,7 +137,7 @@ OTX_API_KEY = "your-api-key"
 
 headers = {"X-OTX-API-KEY": OTX_API_KEY}
 
-## Get latest pulses
+#### Get latest pulses
 
 response = requests.get(
 
@@ -149,7 +155,7 @@ for indicator in pulse["indicators"][:3]:
 
 print(f" {indicator['type']}: {indicator['indicator']}")
 
-### MITRE ATT&CK; Framework
+#### MITRE ATT&CK; Framework
 
 MITRE ATT&CK; is a globally accessible knowledge base of adversary tactics and techniques based on real-world observations. It provides a common language for describing attacker behavior.
 
@@ -186,7 +192,7 @@ The framework organizes attacks into tactics (the "why") and techniques (the "ho
 
 Map observed indicators and behaviors to ATT&CK; techniques to understand attacker objectives and capabilities.
 
-## Threat actor profile using ATT&CK;
+#### Threat actor profile using ATT&CK;
 
 threat_actor: "APT-Example"
 
@@ -208,7 +214,7 @@ techniques_observed:
 
 Mapping to ATT&CK; helps security teams prioritize defenses and detection rules against the techniques most likely to be used against them.
 
-### Indicators of Compromise (IoC) Sharing
+#### Indicators of Compromise (IoC) Sharing
 
 IoC sharing enables organizations to benefit from each other's detection experiences. Effective sharing requires standardized formats and secure distribution.
 
@@ -232,7 +238,7 @@ IoC sharing enables organizations to benefit from each other's detection experie
 
 
 
-### STIX and TAXII
+#### STIX and TAXII
 
 Structured Threat Information Expression (STIX) is a language for describing threat information. Trusted Automated Exchange of Intelligence Information (TAXII) is a protocol for exchanging STIX data.
 
@@ -292,7 +298,7 @@ TAXII defines two service types:
 
 
 
-## Fetch indicators from a TAXII collection
+#### Fetch indicators from a TAXII collection
 
 curl -s -H "Accept: application/taxii+json" \
 
@@ -300,7 +306,7 @@ curl -s -H "Accept: application/taxii+json" \
 
 https://taxii.example.com/api/v2/collections/collection-id/objects/
 
-### Applying Threat Intelligence
+#### Applying Threat Intelligence
 
 Operationalizing threat intelligence is the hardest part. Raw intelligence without action is just noise.
 
@@ -347,11 +353,17 @@ Not all intelligence is equally relevant. Prioritize based on:
 
 
 
-### Conclusion
+#### Conclusion
 
 Threat intelligence turns raw data into defensive action. Invest in OSINT collection, subscribe to relevant threat feeds, map observations to the MITRE ATT&CK; framework, and share intelligence using STIX/TAXII standards. Most importantly, operationalize the intelligence — a feed that nobody acts on has zero security value.
 
 **See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [Threat Intelligence Feeds](</en/security/threat-intel-feeds.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>).
+
+**See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>)
+
+**See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>)
+
+**See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>)
 
 **See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>)
 

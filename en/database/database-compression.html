@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-compression.png",
       "datePublished": "2026-03-31",
       "dateModified": "2026-04-10",
-      "wordCount": "1929",
+      "wordCount": "2031",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-compression.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-compression.png" alt="Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h2>
 <h3>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h3>
-<h3>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h3>
-<h3>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h3>
-<h3>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h3>
-<h3>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h3>
-<h3>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h3>
-<h3>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h3>
-<h3>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h3>
-<h3>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h3>
-<h3>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h3>
-<h3>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h3>
-<h3>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h3>
+<h4>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h4>
+<h4>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h4>
+<h4>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h4>
+<h4>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h4>
+<h4>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h4>
+<h4>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h4>
+<h4>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h4>
+<h4>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h4>
+<h4>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h4>
+<h4>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h4>
+<h4>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h4>
+<h4>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h4>
+<h4>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h4>
 <p>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-compression.png" alt="Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Database compression reduces storage footprint and, more importantly, improves query performance by reducing the amount of data read from disk. This article covers compression techniques across PostgreSQL, MySQL, and columnar databases. </p>
 <p>Why Compression Matters </p>
@@ -225,6 +229,8 @@
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Use EXTERNAL storage</strong> for columns that are already compressed (images, compressed archives). 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Benchmark your workload</strong> : Compression benefits vary. Run <code>pgstattuple</code> before and after. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Consider BRIN indexes</strong> on compressed, naturally ordered columns (timestamps, sequence IDs) for additional space savings. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Balance CPU and I/O</strong> : If your database is CPU-bound, avoid heavy compression. If I/O-bound, compress aggressively. </p>
 <p>Compression is a rare optimization that reduces cost and improves performance simultaneously. Measure your data's compressibility and choose the right algorithm for each column type.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p></div>
     </article>

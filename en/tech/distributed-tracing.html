@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png",
       "datePublished": "2025-12-30",
       "dateModified": "2026-05-18",
-      "wordCount": "2251",
+      "wordCount": "2324",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/distributed-tracing.html"},
@@ -99,19 +101,21 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png" alt="Distributed Tracing with OpenTelemetry" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Distributed Tracing with OpenTelemetry</h2>
 <h3>Distributed Tracing with OpenTelemetry</h3>
-<h3>Distributed Tracing with OpenTelemetry</h3>
-<h3>Distributed Tracing with OpenTelemetry</h3>
-<h3>Distributed Tracing with OpenTelemetry</h3>
-<h3>Distributed Tracing with OpenTelemetry</h3>
-<h3>Distributed Tracing with OpenTelemetry</h3>
-<h3>Distributed Tracing with OpenTelemetry</h3>
-<h3>Distributed Tracing with OpenTelemetry</h3>
-<h3>Distributed Tracing with OpenTelemetry</h3>
-<h3>Distributed Tracing with OpenTelemetry</h3>
-<h3>Distributed Tracing with OpenTelemetry</h3>
-<h3>Distributed Tracing with OpenTelemetry</h3>
-<h3>Distributed Tracing with OpenTelemetry</h3>
-<h3>Distributed Tracing with OpenTelemetry</h3>
+<h4>Distributed Tracing with OpenTelemetry</h4>
+<h4>Distributed Tracing with OpenTelemetry</h4>
+<h4>Distributed Tracing with OpenTelemetry</h4>
+<h4>Distributed Tracing with OpenTelemetry</h4>
+<h4>Distributed Tracing with OpenTelemetry</h4>
+<h4>Distributed Tracing with OpenTelemetry</h4>
+<h4>Distributed Tracing with OpenTelemetry</h4>
+<h4>Distributed Tracing with OpenTelemetry</h4>
+<h4>Distributed Tracing with OpenTelemetry</h4>
+<h4>Distributed Tracing with OpenTelemetry</h4>
+<h4>Distributed Tracing with OpenTelemetry</h4>
+<h4>Distributed Tracing with OpenTelemetry</h4>
+<h4>Distributed Tracing with OpenTelemetry</h4>
+<h4>Distributed Tracing with OpenTelemetry</h4>
+<h4>Distributed Tracing with OpenTelemetry</h4>
 <h4>Introduction</h4>
 <p>Distributed tracing provides end-to-end visibility into requests as they traverse multiple services. Unlike logs (which are service-local) and metrics (which are aggregate), traces capture the causal relationship between operations in a distributed system. OpenTelemetry has become the industry standard for instrumentation, offering a unified API for traces, metrics, and logs. This article covers implementing distributed tracing with OpenTelemetry in production.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png" alt="Distributed Tracing with OpenTelemetry" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Core Concepts: Traces, Spans, and Context</h4>
@@ -187,7 +191,7 @@
 <p>});</p>
 <h4>Sampling Strategies</h4>
 <p>Sampling controls the volume of traces collected. Use head-based sampling for simplicity or tail-based for intelligent selection:</p>
-<h3>OpenTelemetry Collector: tail-based sampling</h3>
+<h4>OpenTelemetry Collector: tail-based sampling</h4>
 <p>processors:</p>
 <p>tail_sampling:</p>
 <p>decision_wait: 30s</p>
@@ -233,7 +237,7 @@
 <p>}</p>
 <h4>Visualization with Jaeger and Zipkin</h4>
 <p>Jaeger provides rich trace visualization and analysis capabilities:</p>
-<h3>docker-compose.yml for Jaeger</h3>
+<h4>docker-compose.yml for Jaeger</h4>
 <p>services:</p>
 <p>jaeger:</p>
 <p>image: jaegertracing/all-in-one:latest</p>
@@ -316,6 +320,8 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- containerPort: 4318 # OTLP HTTP</p>
 <p>Instrumentation should be additive and never break business logic. Start with critical paths (payment, auth, order creation) and expand coverage iteratively. A well-instrumented system reduces mean time to diagnosis from hours to minutes.</p>
 <p><strong>See also:</strong> <a href="/en/tech/monitoring-alerting-setup.html">Monitoring and Alerting Setup</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a>, <a href="/en/tech/webpack-vs-vite-bundlers.html">Webpack vs Vite Comparison</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p></div>
     </article>

@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png",
       "datePublished": "2026-05-02",
       "dateModified": "2026-05-02",
-      "wordCount": "1051",
+      "wordCount": "1111",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/claim-check.html"},
@@ -96,17 +98,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Claim Check Pattern</h2>
 <h3>Claim Check Pattern</h3>
-<h3>Claim Check Pattern</h3>
-<h3>Claim Check Pattern</h3>
-<h3>Claim Check Pattern</h3>
-<h3>Claim Check Pattern</h3>
-<h3>Claim Check Pattern</h3>
-<h3>Claim Check Pattern</h3>
-<h3>Claim Check Pattern</h3>
-<h3>Claim Check Pattern</h3>
-<h3>Claim Check Pattern</h3>
-<h3>Claim Check Pattern</h3>
-<h3>Claim Check Pattern</h3>
+<h4>Claim Check Pattern</h4>
+<h4>Claim Check Pattern</h4>
+<h4>Claim Check Pattern</h4>
+<h4>Claim Check Pattern</h4>
+<h4>Claim Check Pattern</h4>
+<h4>Claim Check Pattern</h4>
+<h4>Claim Check Pattern</h4>
+<h4>Claim Check Pattern</h4>
+<h4>Claim Check Pattern</h4>
+<h4>Claim Check Pattern</h4>
+<h4>Claim Check Pattern</h4>
+<h4>Claim Check Pattern</h4>
+<h4>Claim Check Pattern</h4>
 <p>The claim check pattern is a messaging pattern that addresses the challenge of passing large payloads through a message broker. Instead of including the payload in the message, the producer stores the payload in a shared data store and sends a reference (claim check) in the message. The consumer retrieves the payload using the reference. This pattern is essential for systems where message size limits are a concern. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The Problem with Large Messages </p>
 <p>Message brokers impose size limits. Kafka has a default max message size of 1MB, though this can be increased. SQS has a 256KB limit. RabbitMQ can handle larger messages but performance degrades significantly. Even where limits can be increased, large messages cause problems: increased broker storage, slower serialization and deserialization, increased network transfer time, and memory pressure on consumers. </p>
@@ -129,6 +133,8 @@
 <p>Use the claim check pattern when payloads regularly exceed 80% of the broker's message size limit. Store payloads with a TTL or retention period to prevent orphaned data. Include a checksum in the reference to validate payload integrity. Log claim check retrieval failures separately from general message processing failures. Monitor the size of stored payloads and the number of unclaimed references to detect processing issues. </p>
 <p>The claim check pattern is a simple, effective solution for handling large payloads in message-based systems. It preserves the benefits of asynchronous messaging while avoiding the performance and reliability problems of large messages.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p></div>
     </article>

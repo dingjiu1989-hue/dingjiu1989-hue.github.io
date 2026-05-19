@@ -1,7 +1,7 @@
 ---
 title: "Best Uptime Monitoring Tools 2026: Better Uptime vs Pingdom vs UptimeRobot vs Checkly"
 description: "Compare website and API uptime monitoring services — alerting, status pages, SSL monitoring, and synthetic checks."
-date: 2026-05-08
+date: 2025-10-31
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-uptime-monitoring-tools.html
 ---

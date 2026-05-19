@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-vs-bulkhead.png",
       "datePublished": "2026-05-19",
       "dateModified": "2026-05-19",
-      "wordCount": "1133",
+      "wordCount": "1182",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/circuit-breaker-vs-bulkhead.html"},
@@ -107,17 +109,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-vs-bulkhead.png" alt="Circuit Breaker vs Bulkhead Pattern" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Circuit Breaker vs Bulkhead Pattern</h2>
 <h3>Circuit Breaker vs Bulkhead Pattern</h3>
-<h3>Circuit Breaker vs Bulkhead Pattern</h3>
-<h3>Circuit Breaker vs Bulkhead Pattern</h3>
-<h3>Circuit Breaker vs Bulkhead Pattern</h3>
-<h3>Circuit Breaker vs Bulkhead Pattern</h3>
-<h3>Circuit Breaker vs Bulkhead Pattern</h3>
-<h3>Circuit Breaker vs Bulkhead Pattern</h3>
-<h3>Circuit Breaker vs Bulkhead Pattern</h3>
-<h3>Circuit Breaker vs Bulkhead Pattern</h3>
-<h3>Circuit Breaker vs Bulkhead Pattern</h3>
-<h3>Circuit Breaker vs Bulkhead Pattern</h3>
-<h3>Circuit Breaker vs Bulkhead Pattern</h3>
+<h4>Circuit Breaker vs Bulkhead Pattern</h4>
+<h4>Circuit Breaker vs Bulkhead Pattern</h4>
+<h4>Circuit Breaker vs Bulkhead Pattern</h4>
+<h4>Circuit Breaker vs Bulkhead Pattern</h4>
+<h4>Circuit Breaker vs Bulkhead Pattern</h4>
+<h4>Circuit Breaker vs Bulkhead Pattern</h4>
+<h4>Circuit Breaker vs Bulkhead Pattern</h4>
+<h4>Circuit Breaker vs Bulkhead Pattern</h4>
+<h4>Circuit Breaker vs Bulkhead Pattern</h4>
+<h4>Circuit Breaker vs Bulkhead Pattern</h4>
+<h4>Circuit Breaker vs Bulkhead Pattern</h4>
+<h4>Circuit Breaker vs Bulkhead Pattern</h4>
+<h4>Circuit Breaker vs Bulkhead Pattern</h4>
 <p>Circuit breaker and bulkhead are two fundamental resilience patterns from the stability arsenal, but they solve different problems and are most effective when used together. The circuit breaker protects downstream services from cascading failures by failing fast when a dependency is unhealthy. The bulkhead isolates failure by limiting the resources a failing component can consume. Understanding when and how to apply each is essential for building resilient distributed systems. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-vs-bulkhead.png" alt="Circuit Breaker vs Bulkhead Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The circuit breaker pattern monitors calls to a dependency. When failures exceed a threshold, the circuit breaker trips to the OPEN state, and subsequent calls return immediately with an error without actually invoking the failing dependency. After a timeout, the circuit enters HALF-OPEN state and allows a probe request. If the probe succeeds, the circuit resets to CLOSED. If it fails, it returns to OPEN. This prevents the calling service from wasting resources on a failing dependency and allows the dependency time to recover. </p>
 <p>The three circuit breaker states serve distinct purposes. CLOSED: normal operation, calls proceed with failure counting. OPEN: failures exceed threshold, calls fail fast without invoking the dependency. HALF-OPEN: recovery attempt, limited calls allowed to test if the dependency has recovered. The transition thresholds and timeout durations must be configured per dependency — a critical database may have a higher failure threshold and shorter timeout than a non-critical analytics service. </p>
@@ -130,7 +134,9 @@
 <p>Configuration should be dynamic where possible. Circuit breaker thresholds and timeouts may need adjustment during incidents. Bulkhead sizes may need adjustment based on traffic patterns. Feature flags or runtime configuration changes allow tuning without redeployment. The initial configuration should be conservative — circuit breakers trip quickly, bulkheads are sized generously — and tightened based on operational experience.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a>.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -142,7 +148,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/timeout-retry-patterns.html" class="related-card">Timeout and Retry Patterns</a><a href="/en/architecture/retry-patterns.html" class="related-card">Retry Patterns</a><a href="/en/architecture/monolith-first-strategy.html" class="related-card">Monolith-First Strategy</a><a href="/en/architecture/saga-choreography.html" class="related-card">Saga Choreography Pattern</a></div>
+      <div class="related-grid"><a href="/en/architecture/bulkhead-pattern.html" class="related-card">Bulkhead Pattern for Resilience</a><a href="/en/architecture/timeout-retry-patterns.html" class="related-card">Timeout and Retry Patterns</a><a href="/en/architecture/retry-patterns.html" class="related-card">Retry Patterns</a><a href="/en/architecture/monolith-first-strategy.html" class="related-card">Monolith-First Strategy</a></div>
     </section>
     
   </div>

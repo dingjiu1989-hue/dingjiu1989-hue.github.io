@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-retrieval-optimization.png",
       "datePublished": "2026-02-19",
       "dateModified": "2026-05-11",
-      "wordCount": "1407",
+      "wordCount": "1517",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/rag-retrieval-optimization.html"},
@@ -99,18 +101,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-retrieval-optimization.png" alt="RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h2>
 <h3>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h3>
-<h3>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h3>
-<h3>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h3>
-<h3>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h3>
-<h3>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h3>
-<h3>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h3>
-<h3>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h3>
-<h3>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h3>
-<h3>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h3>
-<h3>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h3>
-<h3>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h3>
-<h3>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h3>
-<h3>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h3>
+<h4>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h4>
+<h4>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h4>
+<h4>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h4>
+<h4>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h4>
+<h4>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h4>
+<h4>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h4>
+<h4>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h4>
+<h4>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h4>
+<h4>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h4>
+<h4>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h4>
+<h4>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h4>
+<h4>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h4>
+<h4>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h4>
+<h4>RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</h4>
 <h4>Introduction</h4>
 <p>Retrieval quality is the single biggest factor in RAG system performance. Even the best LLM cannot produce accurate answers from irrelevant context. This article covers three optimization layers: hybrid search that combines embedding similarity with keyword matching, re-ranking that refines initial results, and query transformation that bridges the gap between user questions and searchable terms.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-retrieval-optimization.png" alt="RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Hybrid Search</h4>
@@ -121,20 +125,20 @@
 <p>def hybrid_search(</p>
 <p>query: str, collection: str = "documents", limit: int = 10</p>
 <p>) -&gt; list[dict]:</p>
-<h3>Generate dense vector</h3>
+<h4>Generate dense vector</h4>
 <p>dense_vector = embedding_model.encode(query).tolist()</p>
-<h3>Sparse vector (BM25-style)</h3>
+<h4>Sparse vector (BM25-style)</h4>
 <p>sparse_vector = sparse_encoder.encode(query)</p>
 <p>results = client.search_batch(</p>
 <p>collection_name=collection,</p>
 <p>requests=[</p>
-<h3>Dense search</h3>
+<h4>Dense search</h4>
 <p>{</p>
 <p>"vector": dense_vector,</p>
 <p>"limit": limit * 2,</p>
 <p>"with_payload": True,</p>
 <p>},</p>
-<h3>Sparse search</h3>
+<h4>Sparse search</h4>
 <p>{</p>
 <p>"vector": sparse_vector,</p>
 <p>"limit": limit * 2,</p>
@@ -142,7 +146,7 @@
 <p>},</p>
 <p>],</p>
 <p>)</p>
-<h3>Fusion: Reciprocal Rank Fusion</h3>
+<h4>Fusion: Reciprocal Rank Fusion</h4>
 <p>return rrf_fusion(results[0], results[1], k=60)</p>
 <h4>Reciprocal Rank Fusion</h4>
 <p>RRF combines ranked lists from multiple retrieval methods:</p>
@@ -160,9 +164,9 @@
 <p>from sentence_transformers import CrossEncoder</p>
 <p>reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")</p>
 <p>def retrieve_and_rerank(query: str, top_k: int = 50, rerank_top: int = 5) -&gt; list[dict]:</p>
-<h3>First stage: fast bi-encoder retrieval</h3>
+<h4>First stage: fast bi-encoder retrieval</h4>
 <p>candidates = hybrid_search(query, limit=top_k)</p>
-<h3>Second stage: cross-encoder re-ranking</h3>
+<h4>Second stage: cross-encoder re-ranking</h4>
 <p>pairs = [(query, cand["text"]) for cand in candidates]</p>
 <p>scores = reranker.predict(pairs)</p>
 <p>for cand, score in zip(candidates, scores):</p>
@@ -204,7 +208,7 @@
 <p>for sq in sub_queries:</p>
 <p>results = hybrid_search(sq, limit=5)</p>
 <p>all_results.extend(results)</p>
-<h3>Deduplicate by ID</h3>
+<h4>Deduplicate by ID</h4>
 <p>seen = set()</p>
 <p>unique_results = []</p>
 <p>for r in all_results:</p>
@@ -230,6 +234,8 @@
 <h4>Conclusion</h4>
 <p>Optimize RAG retrieval in three layers. First, implement hybrid search combining dense and sparse vectors with RRF fusion. Second, add cross-encoder re-ranking for precision on early-stage results. Third, transform user queries through expansion, decomposition, or HyDE techniques. Measure recall@k after each change to validate improvements before deploying.</p>
 <p><strong>See also:</strong> <a href="/en/ai/rag-pipeline-optimization.html">RAG Pipeline Optimization: Production Best Practices</a>, <a href="/en/ai/vector-database-tuning.html">Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/vector-database-tuning.html">Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search</a>, <a href="/en/ai/embeddings-techniques.html">Embeddings: Techniques and Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/vector-database-tuning.html">Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search</a>, <a href="/en/ai/embeddings-techniques.html">Embeddings: Techniques and Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/vector-database-tuning.html">Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search</a>, <a href="/en/ai/embeddings-techniques.html">Embeddings: Techniques and Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/vector-database-tuning.html">Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search</a>, <a href="/en/ai/embeddings-techniques.html">Embeddings: Techniques and Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/vector-database-tuning.html">Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search</a>, <a href="/en/ai/embeddings-techniques.html">Embeddings: Techniques and Best Practices</a></p></div>
     </article>

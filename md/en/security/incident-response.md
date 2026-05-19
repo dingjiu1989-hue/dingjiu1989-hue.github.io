@@ -1,7 +1,7 @@
 ---
 title: "Incident Response Playbook for Developers"
 description: "Practical incident response using the NIST framework: preparation, detection, containment, eradication, recovery, and post-mortems."
-date: 2026-05-12
+date: 2026-03-04
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/incident-response.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/security/incident-response.html
 
 ## Incident Response Playbook for Developers
 
-## Incident Response Playbook for Developers
+### Incident Response Playbook for Developers
 
-## Incident Response Playbook for Developers
+#### Incident Response Playbook for Developers
 
-## Incident Response Playbook for Developers
+#### Incident Response Playbook for Developers
 
-## Incident Response Playbook for Developers
+#### Incident Response Playbook for Developers
 
-## Incident Response Playbook for Developers
+#### Incident Response Playbook for Developers
 
-## Incident Response Playbook for Developers
+#### Incident Response Playbook for Developers
 
-## Incident Response Playbook for Developers
+#### Incident Response Playbook for Developers
 
-## Incident Response Playbook for Developers
+#### Incident Response Playbook for Developers
 
-## Incident Response Playbook for Developers
+#### Incident Response Playbook for Developers
 
-## Incident Response Playbook for Developers
+#### Incident Response Playbook for Developers
 
-## Incident Response Playbook for Developers
+#### Incident Response Playbook for Developers
 
-## Incident Response Playbook for Developers
+#### Incident Response Playbook for Developers
+
+#### Incident Response Playbook for Developers
+
+#### Incident Response Playbook for Developers
+
+#### Incident Response Playbook for Developers
 
 Incident response is the structured process of handling security breaches and cyber attacks. Every development team needs a plan, because it is not a matter of if an incident will happen, but when. This article presents a practical incident response playbook based on the NIST SP 800-61 framework.
 
-### The NIST Incident Response Framework
+#### The NIST Incident Response Framework
 
 The NIST framework defines four phases: Preparation, Detection and Analysis, Containment Eradication and Recovery, and Post-Incident Activity. We add a fifth phase, Triage, between Detection and Containment.
 
@@ -129,11 +135,11 @@ Containment stops the attack from spreading. Eradication removes the attacker's 
 
 
 
-## Example: Block an IP at the firewall
+#### Example: Block an IP at the firewall
 
 iptables -A INPUT -s 203.0.113.50 -j DROP
 
-## Example: Disable a compromised AWS IAM user
+#### Example: Disable a compromised AWS IAM user
 
 aws iam update-access-key \
 
@@ -203,7 +209,7 @@ The post-mortem is where the team learns from the incident and improves processe
 
 
 
-### Post-Mortem: Service Credential Leak
+#### Post-Mortem: Service Credential Leak
 
 **Date** : 2026-04-15
 
@@ -233,7 +239,7 @@ GitHub Actions workflow accidentally logged AWS_SECRET_ACCESS_KEY to debug outpu
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Add alert for API keys used outside expected regions (owner: Platform, due: 04-30)
 
-### Forensic Evidence Collection
+#### Forensic Evidence Collection
 
 Proper evidence collection preserves data for legal action and root cause analysis.
 
@@ -248,19 +254,25 @@ Proper evidence collection preserves data for legal action and root cause analys
 
 
 
-## Capture memory dump with LiME
+#### Capture memory dump with LiME
 
 insmod lime.ko "path=/evidence/memory.dump format=lime"
 
-## Capture disk image
+#### Capture disk image
 
 dd if=/dev/sda of=/evidence/disk.img bs=4M conv=noerror,sync
 
-### Conclusion
+#### Conclusion
 
 A well-practiced incident response process turns a potential disaster into a manageable event. Preparation separates professional teams from those that panic. Detection without response is just noise. And every incident, no matter how small, is an opportunity to improve.
 
 **See also:** [Incident Response Plan](</en/security/incident-response-plan.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>).
+
+**See also:** [Incident Response Plan](</en/security/incident-response-plan.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>)
+
+**See also:** [Incident Response Plan](</en/security/incident-response-plan.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>)
+
+**See also:** [Incident Response Plan](</en/security/incident-response-plan.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>)
 
 **See also:** [Incident Response Plan](</en/security/incident-response-plan.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>)
 

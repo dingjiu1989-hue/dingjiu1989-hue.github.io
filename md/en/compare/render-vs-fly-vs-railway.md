@@ -1,7 +1,7 @@
 ---
 title: "Render vs Fly.io vs Railway: Best PaaS for Side Projects and Startups (2026)"
 description: "Compare Render, Fly.io, and Railway for deploying side projects and startups — pricing, performance, and developer experience."
-date: 2026-05-08
+date: 2025-11-26
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/render-vs-fly-vs-railway.html
 ---

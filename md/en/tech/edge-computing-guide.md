@@ -1,7 +1,7 @@
 ---
 title: "Edge Computing Complete Guide 2026: Cloudflare Workers, Deno Deploy, and Vercel Edge"
 description: "Build and deploy applications at the edge — compare Cloudflare Workers, Deno Deploy, Vercel Edge, and AWS Lambda@Edge for performance and cost."
-date: 2026-05-08
+date: 2025-10-17
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/edge-computing-guide.html
 ---

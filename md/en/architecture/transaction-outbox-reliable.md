@@ -1,7 +1,7 @@
 ---
 title: "Transactional Outbox Pattern"
 description: "Master reliable message publishing with the transactional outbox: polling publisher, transaction log tailing, and idempotency"
-date: 2026-05-12
+date: 2026-05-05
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/transaction-outbox-reliable.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/transaction-outbox-reliab
 
 ## Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
+
+#### Transactional Outbox Pattern
+
+#### Transactional Outbox Pattern
+
+#### Transactional Outbox Pattern
 
 The transactional outbox pattern solves a fundamental problem in event-driven microservices: how to reliably publish messages as part of a database transaction. When a service updates its database and publishes an event, these two operations must be atomic. If the database update succeeds but the message publish fails, the system is inconsistent. The outbox pattern uses a local database table as a temporary message store, ensuring reliable publication through the same transaction that updates business data. 
 
@@ -79,6 +85,12 @@ Clean up published records regularly. A background job can delete records that h
 The transactional outbox pattern is a reliable, battle-tested solution for atomic message publication. Combined with idempotent consumers and careful monitoring, it ensures no messages are lost and no duplicate messages cause problems.
 
 **See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>).
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>)
 

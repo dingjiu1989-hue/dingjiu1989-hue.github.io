@@ -1,7 +1,7 @@
 ---
 title: "Best Job Scheduling and Cron Tools 2026: Inngest vs Trigger.dev vs QStash vs Airflow"
 description: "Compare modern job scheduling, cron, and task orchestration tools for developers — from simple cron jobs to complex DAGs."
-date: 2026-05-08
+date: 2025-11-01
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-scheduling-cron-tools.html
 ---

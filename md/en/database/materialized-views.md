@@ -1,7 +1,7 @@
 ---
 title: "Materialized Views"
 description: "Using materialized views for performance optimization with refresh strategies, use cases, and SQL examples."
-date: 2026-05-12
+date: 2026-04-10
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/materialized-views.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/materialized-views.html
 
 ## Materialized Views
 
-## Materialized Views
+### Materialized Views
 
-## Materialized Views
+#### Materialized Views
 
-## Materialized Views
+#### Materialized Views
 
-## Materialized Views
+#### Materialized Views
 
-## Materialized Views
+#### Materialized Views
 
-## Materialized Views
+#### Materialized Views
 
-## Materialized Views
+#### Materialized Views
 
-## Materialized Views
+#### Materialized Views
 
-## Materialized Views
+#### Materialized Views
 
-## Materialized Views
+#### Materialized Views
 
-## Materialized Views
+#### Materialized Views
+
+#### Materialized Views
+
+#### Materialized Views
+
+#### Materialized Views
 
 What are Materialized Views? 
 
@@ -129,6 +135,12 @@ Conclusion
 Materialized views are essential for dashboard and reporting performance. Use concurrent refresh to avoid locks. Add indexes on frequently filtered columns. Choose refresh strategy based on freshness requirements. Monitor storage overhead for large views.
 
 **See also:** [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>).
+
+**See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
+
+**See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
+
+**See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
 
 **See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
 

@@ -1,7 +1,7 @@
 ---
 title: "Backend for Frontend (BFF) Pattern"
-description: "Learn the Backend for Frontend pattern for building client-specific APIs."
-date: 2026-05-11
+description: "Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data aggregation, protocol translation, and when to use BFF vs. API Gateway in microservices."
+date: 2025-12-25
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/backend-for-frontend.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/backend-for-frontend.html
 
 ## Backend for Frontend (BFF) Pattern
 
-## Backend for Frontend (BFF) Pattern
+### Backend for Frontend (BFF) Pattern
 
-## Backend for Frontend (BFF) Pattern
+#### Backend for Frontend (BFF) Pattern
 
-## Backend for Frontend (BFF) Pattern
+#### Backend for Frontend (BFF) Pattern
 
-## Backend for Frontend (BFF) Pattern
+#### Backend for Frontend (BFF) Pattern
 
-## Backend for Frontend (BFF) Pattern
+#### Backend for Frontend (BFF) Pattern
 
-## Backend for Frontend (BFF) Pattern
+#### Backend for Frontend (BFF) Pattern
 
-## Backend for Frontend (BFF) Pattern
+#### Backend for Frontend (BFF) Pattern
 
-## Backend for Frontend (BFF) Pattern
+#### Backend for Frontend (BFF) Pattern
 
-## Backend for Frontend (BFF) Pattern
+#### Backend for Frontend (BFF) Pattern
 
-## Backend for Frontend (BFF) Pattern
+#### Backend for Frontend (BFF) Pattern
 
-## Backend for Frontend (BFF) Pattern
+#### Backend for Frontend (BFF) Pattern
+
+#### Backend for Frontend (BFF) Pattern
+
+#### Backend for Frontend (BFF) Pattern
+
+#### Backend for Frontend (BFF) Pattern
 
 The Backend for Frontend (BFF) pattern, popularized by Phil Calçado from SoundCloud, addresses a fundamental tension in API design: a single backend cannot optimally serve multiple, diverse clients. Mobile applications have different data requirements, bandwidth constraints, and interaction patterns than web browsers or IoT devices. The BFF pattern creates a dedicated backend layer for each client type. 
 
@@ -67,3 +73,9 @@ In practice, the BFF pattern has become a standard recommendation for microservi
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>), [Event Sourcing Pattern](</en/architecture/event-sourcing.html>)
 
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>), [Event Sourcing Pattern](</en/architecture/event-sourcing.html>)
+
+**See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)
+
+**See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)
+
+**See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)

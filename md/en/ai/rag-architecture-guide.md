@@ -1,7 +1,7 @@
 ---
 title: "RAG Architecture Guide"
 description: "A comprehensive guide to Retrieval-Augmented Generation architecture, covering indexing, retrieval, generation, and production deployment."
-date: 2026-05-11
+date: 2025-12-13
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/rag-architecture-guide.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/ai/rag-architecture-guide.html
 
 ## RAG Architecture Guide
 
-## RAG Architecture Guide
+### RAG Architecture Guide
 
-## RAG Architecture Guide
+#### RAG Architecture Guide
 
-## RAG Architecture Guide
+#### RAG Architecture Guide
 
-## RAG Architecture Guide
+#### RAG Architecture Guide
 
-## RAG Architecture Guide
+#### RAG Architecture Guide
 
-## RAG Architecture Guide
+#### RAG Architecture Guide
 
-## RAG Architecture Guide
+#### RAG Architecture Guide
 
-## RAG Architecture Guide
+#### RAG Architecture Guide
 
-## RAG Architecture Guide
+#### RAG Architecture Guide
 
-## RAG Architecture Guide
+#### RAG Architecture Guide
 
-## RAG Architecture Guide
+#### RAG Architecture Guide
 
-## RAG Architecture Guide
+#### RAG Architecture Guide
 
-### Introduction
+#### RAG Architecture Guide
+
+#### RAG Architecture Guide
+
+#### RAG Architecture Guide
+
+#### Introduction
 
 Retrieval-Augmented Generation (RAG) has become the dominant architecture for production LLM applications. By combining a retrieval system with a generative model, RAG overcomes the limitations of static model knowledge — providing access to up-to-date information, reducing hallucinations, and grounding responses in verifiable sources. This guide explores RAG architecture from the ground up.
 
-### Core Components
+#### Core Components
 
 A RAG system consists of three primary stages: indexing, retrieval, and generation.
 
@@ -107,7 +113,7 @@ The generation stage constructs prompts combining retrieved context with the use
 
 **Re-ranking** is a critical step between retrieval and generation. A cross-encoder model scores each retrieved document for relevance to the query, filtering out low-quality matches before they reach the LLM.
 
-### Advanced RAG Patterns
+#### Advanced RAG Patterns
 
 #### Agentic RAG
 
@@ -142,7 +148,7 @@ Self-RAG introduces reflection steps where the model evaluates its own retrieval
 
 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. If not, either retrieve more information or revise the answer
 
-### Production Considerations
+#### Production Considerations
 
 **Latency optimization** : Embedding generation and vector search both add latency. Strategies include caching frequent queries, using smaller embedding models for initial retrieval, and parallelizing retrieval across multiple data sources.
 
@@ -150,11 +156,17 @@ Self-RAG introduces reflection steps where the model evaluates its own retrieval
 
 **Monitoring** : Track embedding drift (when the distribution of queries changes), retrieval success rate, and end-user feedback to continuously improve the system.
 
-### Conclusion
+#### Conclusion
 
 RAG architecture provides a powerful framework for building LLM applications grounded in real data. The key to success is understanding the interaction between indexing quality, retrieval strategy, and generation prompts. Start with a simple pipeline, measure performance, and add sophistication — hybrid retrieval, re-ranking, agentic patterns — only where data shows they improve outcomes.
 
 **See also:** [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>).
+
+**See also:** [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>)
+
+**See also:** [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>)
+
+**See also:** [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>)
 
 **See also:** [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>)
 

@@ -1,7 +1,7 @@
 ---
 title: "Best Code Formatters and Linters"
 description: "Comprehensive guide to code formatters and linters for JavaScript, Python, Rust, Go, and more languages."
-date: 2026-05-11
+date: 2025-12-09
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/code-formatters-linters.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/tools/code-formatters-linters.html
 
 ## Best Code Formatters and Linters
 
-## Best Code Formatters and Linters
+### Best Code Formatters and Linters
 
-## Best Code Formatters and Linters
+#### Best Code Formatters and Linters
 
-## Best Code Formatters and Linters
+#### Best Code Formatters and Linters
 
-## Best Code Formatters and Linters
+#### Best Code Formatters and Linters
 
-## Best Code Formatters and Linters
+#### Best Code Formatters and Linters
 
-## Best Code Formatters and Linters
+#### Best Code Formatters and Linters
 
-## Best Code Formatters and Linters
+#### Best Code Formatters and Linters
 
-## Best Code Formatters and Linters
+#### Best Code Formatters and Linters
 
-## Best Code Formatters and Linters
+#### Best Code Formatters and Linters
 
-## Best Code Formatters and Linters
+#### Best Code Formatters and Linters
 
-## Best Code Formatters and Linters
+#### Best Code Formatters and Linters
 
-## Best Code Formatters and Linters
+#### Best Code Formatters and Linters
+
+#### Best Code Formatters and Linters
+
+#### Best Code Formatters and Linters
+
+#### Best Code Formatters and Linters
 
 Code formatters and linters enforce consistent style and catch bugs before they reach production. Modern tools have evolved significantly, with Rust-based formatters offering dramatic speed improvements over earlier JavaScript-based tools.
 
-### The Modern Tooling Stack
+#### The Modern Tooling Stack
 
 In 2026, the landscape has shifted toward unified, fast tools that combine formatting and linting:
 
@@ -56,15 +62,15 @@ Kotlin: ktlint
 
 The trend is clear: Rust-based tools are replacing slower alternatives across the ecosystem.
 
-### JavaScript/TypeScript: Biome
+#### JavaScript/TypeScript: Biome
 
 Biome has emerged as the leading tool for JavaScript and TypeScript, unifying the roles of ESLint (linting) and Prettier (formatting).
 
-## Install
+#### Install
 
 npm install --save-dev --save-exact @biomejs/biome
 
-## Initialize configuration
+#### Initialize configuration
 
 npx @biomejs/biome init
 
@@ -124,15 +130,15 @@ npx @biomejs/biome init
 
 }
 
-## Check code
+#### Check code
 
 npx @biomejs/biome check src/
 
-## Format code
+#### Format code
 
 npx @biomejs/biome format --write src/
 
-## Fix lint violations
+#### Fix lint violations
 
 npx @biomejs/biome check --apply src/
 
@@ -170,13 +176,13 @@ rules: {
 
 ESLint's flat config (v9+) simplified the configuration significantly. The ecosystem is gradually migrating, but the large plugin library still makes ESLint valuable for specialized needs.
 
-### Python: Ruff
+#### Python: Ruff
 
 Ruff has revolutionized Python linting and formatting. Written in Rust, it is 10-100x faster than Flake8 and Black.
 
 pip install ruff
 
-## pyproject.toml
+#### pyproject.toml
 
 [tool.ruff]
 
@@ -196,37 +202,37 @@ quote-style = "double"
 
 indent-style = "space"
 
-## Lint
+#### Lint
 
 ruff check src/
 
-## Format
+#### Format
 
 ruff format src/
 
-## Fix
+#### Fix
 
 ruff check --fix src/
 
 Ruff replaces Flake8, isort, pyupgrade, and autopep8 with a single tool.
 
-### Rust: rustfmt and Clippy
+#### Rust: rustfmt and Clippy
 
 Rust's tooling is built-in and first-class:
 
-## Format
+#### Format
 
 rustfmt src/main.rs
 
-## Lint
+#### Lint
 
 cargo clippy
 
-## Clippy with strict checks
+#### Clippy with strict checks
 
 cargo clippy -- -W clippy::pedantic
 
-## rustfmt.toml
+#### rustfmt.toml
 
 max_width = 100
 
@@ -234,29 +240,29 @@ tab_spaces = 4
 
 edition = "2024"
 
-### Go: gofmt and Staticcheck
+#### Go: gofmt and Staticcheck
 
 Go has the simplest approach -- `gofmt` is the official formatter, and there is no debate about style:
 
-## Format (enforces the one true style)
+#### Format (enforces the one true style)
 
 gofmt -w .
 
-## Vet for suspicious constructs
+#### Vet for suspicious constructs
 
 go vet ./...
 
-## Staticcheck for additional linting
+#### Staticcheck for additional linting
 
 go install honnef.co/go/tools/cmd/staticcheck@latest
 
 staticcheck ./...
 
-### Multi-Language: pre-commit Hooks
+#### Multi-Language: pre-commit Hooks
 
 Run formatters and linters automatically before every commit:
 
-## .pre-commit-config.yaml
+#### .pre-commit-config.yaml
 
 repos:
 
@@ -304,7 +310,7 @@ pip install pre-commit
 
 pre-commit install
 
-### Editor Integration
+#### Editor Integration
 
 All major editors support formatters and linters via LSP:
 
@@ -322,11 +328,11 @@ All major editors support formatters and linters via LSP:
 
 }
 
-### CI Integration
+#### CI Integration
 
 Enforce formatting and linting in CI:
 
-## .github/workflows/lint.yml
+#### .github/workflows/lint.yml
 
 name: Lint
 
@@ -348,11 +354,17 @@ steps:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: npx @biomejs/biome ci src/
 
-### Summary
+#### Summary
 
 The code quality tooling landscape in 2026 is defined by speed. Rust-based tools (Biome, Ruff) have displaced slower alternatives in the JavaScript and Python ecosystems. Go and Rust have official tooling that eliminates style debates. Use pre-commit hooks to enforce formatting locally and CI checks to prevent unformatted code from reaching the main branch. The key principle is automation -- manually policing code style is a waste of human attention. Let the tools handle formatting so code reviews can focus on architecture and logic.
 
 **See also:** [Package Managers Compared](</en/tools/package-managers-compared.html>), [Linter and Formatter: ESLint, Prettier, Biome, Ruff](</en/tools/linter-formatter.html>), [Test Automation Frameworks 2026](</en/tools/test-automation-frameworks.html>).
+
+**See also:** [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>)
+
+**See also:** [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>)
+
+**See also:** [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>)
 
 **See also:** [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>)
 

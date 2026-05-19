@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration.png",
       "datePublished": "2025-12-22",
       "dateModified": "2026-05-19",
-      "wordCount": "1542",
+      "wordCount": "1622",
       "keywords": "Database, SQL",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "SQL"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-migration.html"},
@@ -98,17 +100,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration.png" alt="Database Migration Tools and Strategies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Database Migration Tools and Strategies</h2>
 <h3>Database Migration Tools and Strategies</h3>
-<h3>Database Migration Tools and Strategies</h3>
-<h3>Database Migration Tools and Strategies</h3>
-<h3>Database Migration Tools and Strategies</h3>
-<h3>Database Migration Tools and Strategies</h3>
-<h3>Database Migration Tools and Strategies</h3>
-<h3>Database Migration Tools and Strategies</h3>
-<h3>Database Migration Tools and Strategies</h3>
-<h3>Database Migration Tools and Strategies</h3>
-<h3>Database Migration Tools and Strategies</h3>
-<h3>Database Migration Tools and Strategies</h3>
-<h3>Database Migration Tools and Strategies</h3>
+<h4>Database Migration Tools and Strategies</h4>
+<h4>Database Migration Tools and Strategies</h4>
+<h4>Database Migration Tools and Strategies</h4>
+<h4>Database Migration Tools and Strategies</h4>
+<h4>Database Migration Tools and Strategies</h4>
+<h4>Database Migration Tools and Strategies</h4>
+<h4>Database Migration Tools and Strategies</h4>
+<h4>Database Migration Tools and Strategies</h4>
+<h4>Database Migration Tools and Strategies</h4>
+<h4>Database Migration Tools and Strategies</h4>
+<h4>Database Migration Tools and Strategies</h4>
+<h4>Database Migration Tools and Strategies</h4>
+<h4>Database Migration Tools and Strategies</h4>
 <p>Why Database Migrations Matter </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration.png" alt="Database Migration Tools and Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Database migrations are how you version-control your schema changes. Without a migration system, schema changes are applied manually, untracked, and unrepeatable. Migrations ensure that every environment (dev, staging, production) has the same schema, changes are auditable, and rollbacks are possible. </p>
 <p>Migration Tools by Language </p>
@@ -117,15 +121,15 @@
 <p>Setup </p>
 <p>pip install alembic</p>
 <p>alembic init alembic</p>
-<h3>alembic/env.py</h3>
+<h4>alembic/env.py</h4>
 <p>from myapp.models import Base</p>
 <p>target_metadata = Base.metadata</p>
 <p>Creating Migrations </p>
-<h3>Auto-generate migration</h3>
+<h4>Auto-generate migration</h4>
 <p>alembic revision --autogenerate -m "add user roles table"</p>
-<h3>Apply migrations</h3>
+<h4>Apply migrations</h4>
 <p>alembic upgrade head</p>
-<h3>Rollback</h3>
+<h4>Rollback</h4>
 <p>alembic downgrade -1</p>
 <p>Migration File </p>
 <p>"""add user roles table</p>
@@ -149,15 +153,15 @@
 <p>op.drop_index('ix_user_roles_user_id')</p>
 <p>op.drop_table('user_roles')</p>
 <p>Flyway (Java) </p>
-<h3>Migration naming convention:</h3>
-<h3>V1__create_users.sql</h3>
-<h3>V2__add_email_column.sql</h3>
-<h3>V3__create_orders_table.sql</h3>
-<h3>Apply migrations</h3>
+<h4>Migration naming convention:</h4>
+<h4>V1__create_users.sql</h4>
+<h4>V2__add_email_column.sql</h4>
+<h4>V3__create_orders_table.sql</h4>
+<h4>Apply migrations</h4>
 <p>flyway migrate</p>
-<h3>Check status</h3>
+<h4>Check status</h4>
 <p>flyway info</p>
-<h3>Repair checksums</h3>
+<h4>Repair checksums</h4>
 <p>flyway repair</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- V2__add_email_column.sql</p>
 <p>ALTER TABLE users ADD COLUMN email VARCHAR(255) UNIQUE;</p>
@@ -180,8 +184,8 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Backfill existing rows</p>
 <p>UPDATE users SET email_new = email WHERE email_new IS NULL;</p>
 <p><strong>Phase 2: Migrate</strong></p>
-<h3>Application reads from new column, still writes to both</h3>
-<h3>Deploy application update</h3>
+<h4>Application reads from new column, still writes to both</h4>
+<h4>Deploy application update</h4>
 <p><strong>Phase 3: Contract</strong></p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Stop writing to old column</p>
 <p>ALTER TABLE users DROP COLUMN email;</p>
@@ -213,7 +217,7 @@
 <p>offset += batch_size</p>
 <p>print(f"Updated {offset} rows...")</p>
 <p>Online Schema Change (pt-online-schema-change) </p>
-<h3>For MySQL without downtime</h3>
+<h4>For MySQL without downtime</h4>
 <p>pt-online-schema-change \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--alter "ADD COLUMN email VARCHAR(255)" \</p>
 <p>D=database,t=users \</p>
@@ -226,12 +230,12 @@
 <p>def downgrade():</p>
 <p>op.drop_column('users', 'email')</p>
 <p>Test Migrations </p>
-<h3>Test upgrade and downgrade</h3>
+<h4>Test upgrade and downgrade</h4>
 <p>alembic upgrade head</p>
 <p>alembic downgrade base</p>
 <p>alembic upgrade head</p>
 <p>CI/CD Integration </p>
-<h3>.github/workflows/migrate.yml</h3>
+<h4>.github/workflows/migrate.yml</h4>
 <p>jobs:</p>
 <p>migrate:</p>
 <p>runs-on: ubuntu-latest</p>
@@ -250,6 +254,8 @@
 <p>Summary </p>
 <p>Database migrations bring the same version control discipline to schema changes that Git brings to code. Use tools like Alembic or Flyway, always write reversible migrations with upgrade and downgrade paths, adopt the expand-contract pattern for zero-downtime changes, batch large table modifications, and integrate migrations into your CI/CD pipeline. Test every migration against a copy of production data before deploying to production.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-migration-strategies.html">Database Migration Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-schema-migration-strategies.html">Database Schema Migration: Version Control, Rollback, and Zero-Downtime</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a></p></div>
     </article>

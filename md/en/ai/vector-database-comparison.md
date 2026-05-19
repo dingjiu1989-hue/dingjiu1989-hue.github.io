@@ -1,7 +1,7 @@
 ---
 title: "Vector Database Comparison 2026: Pinecone vs Weaviate vs Qdrant vs Milvus vs pgvector"
 description: "Compare vector databases for RAG and semantic search — performance at scale, indexing speed, filtering, and cost for production deployments."
-date: 2026-05-08
+date: 2025-11-11
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/vector-database-comparison.html
 ---

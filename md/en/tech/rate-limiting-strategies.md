@@ -1,7 +1,7 @@
 ---
 title: "Rate Limiting Strategies for APIs: Token Bucket, Sliding Window, and Beyond"
 description: "Deep dive into rate limiting algorithms: token bucket, fixed window, sliding window log, sliding window counter, and leaky bucket. Implementation in Redis and comparison of approaches for different API types."
-date: 2026-05-08
+date: 2025-10-16
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/rate-limiting-strategies.html
 ---

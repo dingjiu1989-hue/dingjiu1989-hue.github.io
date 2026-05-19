@@ -1,7 +1,7 @@
 ---
 title: "Selling Digital Products as a Developer"
 description: "Learn how to create and sell digital products as a developer for passive income."
-date: 2026-05-11
+date: 2025-12-05
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/digital-products.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/digital-products.html
 
 ## Selling Digital Products as a Developer
 
-## Selling Digital Products as a Developer
+### Selling Digital Products as a Developer
 
-## Selling Digital Products as a Developer
+#### Selling Digital Products as a Developer
 
-## Selling Digital Products as a Developer
+#### Selling Digital Products as a Developer
 
-## Selling Digital Products as a Developer
+#### Selling Digital Products as a Developer
 
-## Selling Digital Products as a Developer
+#### Selling Digital Products as a Developer
 
-## Selling Digital Products as a Developer
+#### Selling Digital Products as a Developer
 
-## Selling Digital Products as a Developer
+#### Selling Digital Products as a Developer
 
-## Selling Digital Products as a Developer
+#### Selling Digital Products as a Developer
 
-## Selling Digital Products as a Developer
+#### Selling Digital Products as a Developer
 
-## Selling Digital Products as a Developer
+#### Selling Digital Products as a Developer
 
-## Selling Digital Products as a Developer
+#### Selling Digital Products as a Developer
 
-## Selling Digital Products as a Developer
+#### Selling Digital Products as a Developer
 
-### Digital Products for Developers
+#### Selling Digital Products as a Developer
+
+#### Selling Digital Products as a Developer
+
+#### Selling Digital Products as a Developer
+
+#### Digital Products for Developers
 
 Digital products offer developers a path to passive income by leveraging existing skills. Unlike services (consulting, freelancing), digital products scale without proportional time investment. The key is identifying products that developers need and are willing to pay for.
 
@@ -85,6 +91,12 @@ Use anchoring on pricing pages: show three tiers with the middle option as your 
 Digital products for developers leverage your existing skills into scalable income streams. Starter kits, components, courses, and tools each serve different developer needs. Focus on solving a specific pain point, deliver genuine quality, and distribute through developer channels. The upfront investment creates ongoing revenue with maintenance effort proportional to the product's scope.
 
 **See also:** [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Creating and Selling Digital Products as a Developer](</en/sidehustle/digital-product-creation.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>).
+
+**See also:** [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
+
+**See also:** [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
+
+**See also:** [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
 
 **See also:** [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
 

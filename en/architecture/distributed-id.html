@@ -47,13 +47,18 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/distributed-id.png",
       "datePublished": "2026-04-23",
       "dateModified": "2026-05-13",
-      "wordCount": "964",
+      "wordCount": "1032",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/distributed-id.html"},
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/distributed-id-generation-3380"
+      ],
       "articleBody": "UUID v7, Snowflake, ULID, database sequences, k-ordered IDs and their tradeoffs in distributed systems"
     }
     </script>
@@ -96,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/distributed-id.png" alt="Distributed ID Generation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Distributed ID Generation</h2>
 <h3>Distributed ID Generation</h3>
-<h3>Distributed ID Generation</h3>
-<h3>Distributed ID Generation</h3>
-<h3>Distributed ID Generation</h3>
-<h3>Distributed ID Generation</h3>
-<h3>Distributed ID Generation</h3>
-<h3>Distributed ID Generation</h3>
-<h3>Distributed ID Generation</h3>
-<h3>Distributed ID Generation</h3>
-<h3>Distributed ID Generation</h3>
-<h3>Distributed ID Generation</h3>
-<h3>Distributed ID Generation</h3>
+<h4>Distributed ID Generation</h4>
+<h4>Distributed ID Generation</h4>
+<h4>Distributed ID Generation</h4>
+<h4>Distributed ID Generation</h4>
+<h4>Distributed ID Generation</h4>
+<h4>Distributed ID Generation</h4>
+<h4>Distributed ID Generation</h4>
+<h4>Distributed ID Generation</h4>
+<h4>Distributed ID Generation</h4>
+<h4>Distributed ID Generation</h4>
+<h4>Distributed ID Generation</h4>
+<h4>Distributed ID Generation</h4>
+<h4>Distributed ID Generation</h4>
 <p>Distributed ID generation is a foundational infrastructure concern for any system that spans multiple databases or services. IDs must be unique across all nodes, generate quickly without coordination, and often carry useful properties like time-orderedness, compactness, or security. The choice of ID generation strategy affects database performance, sorting behavior, and system complexity. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/distributed-id.png" alt="Distributed ID Generation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>UUID v7 is the newest contender, standardized in RFC 9562. It generates time-ordered, random-based UUIDs. The first 48 bits contain a Unix timestamp with millisecond precision. The remaining bits contain random data. UUID v7 combines the ordering benefit of time-based IDs with the distribution properties of random IDs. Database indexes benefit from the time-ordered prefix, which reduces B-tree index fragmentation compared to purely random UUIDs. </p>
 <p>Snowflake IDs, popularized by Twitter (now X), provide compact 64-bit integer IDs. The typical bit layout includes a timestamp (41 bits, giving ~69 years of unique timestamps), a worker ID (10 bits, supporting up to 1024 nodes), and a sequence number (12 bits, allowing 4096 IDs per millisecond per worker). Snowflake IDs are monotonically increasing, sortable, and compact for storage and indexing. The downsides are dependence on clock synchronization — clock skew can produce duplicate or out-of-order IDs. </p>
@@ -117,6 +124,8 @@
 <p>Security considerations apply when IDs are exposed to clients. Sequential numeric IDs reveal the rate at which resources are created. Time-based IDs reveal the creation timestamp. In some contexts, unpredictable IDs are preferred to prevent enumeration attacks. UUID v4 provides randomness but poor index performance. A hybrid approach uses random IDs for external exposure and maps them to internally optimized IDs through a lookup table. </p>
 <p>The choice depends on database technology, ID length constraints, ordering requirements, and security needs. Modern recommendations favor UUID v7 as a default choice: it provides time-orderedness for good index performance, sufficient randomness for moderate security, and standardized format for interoperability. Snowflake variants remain excellent when compact 64-bit integer IDs are required for storage efficiency or legacy system compatibility.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p></div>
     </article>

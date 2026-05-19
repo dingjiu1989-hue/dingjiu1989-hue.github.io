@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/microservices-communication.png",
       "datePublished": "2025-12-02",
       "dateModified": "2026-04-03",
-      "wordCount": "1537",
+      "wordCount": "1594",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/microservices-communication.html"},
@@ -99,19 +101,21 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/microservices-communication.png" alt="Microservices Communication Patterns" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Microservices Communication Patterns</h2>
 <h3>Microservices Communication Patterns</h3>
-<h3>Microservices Communication Patterns</h3>
-<h3>Microservices Communication Patterns</h3>
-<h3>Microservices Communication Patterns</h3>
-<h3>Microservices Communication Patterns</h3>
-<h3>Microservices Communication Patterns</h3>
-<h3>Microservices Communication Patterns</h3>
-<h3>Microservices Communication Patterns</h3>
-<h3>Microservices Communication Patterns</h3>
-<h3>Microservices Communication Patterns</h3>
-<h3>Microservices Communication Patterns</h3>
-<h3>Microservices Communication Patterns</h3>
-<h3>Microservices Communication Patterns</h3>
-<h3>Microservices Communication Patterns</h3>
+<h4>Microservices Communication Patterns</h4>
+<h4>Microservices Communication Patterns</h4>
+<h4>Microservices Communication Patterns</h4>
+<h4>Microservices Communication Patterns</h4>
+<h4>Microservices Communication Patterns</h4>
+<h4>Microservices Communication Patterns</h4>
+<h4>Microservices Communication Patterns</h4>
+<h4>Microservices Communication Patterns</h4>
+<h4>Microservices Communication Patterns</h4>
+<h4>Microservices Communication Patterns</h4>
+<h4>Microservices Communication Patterns</h4>
+<h4>Microservices Communication Patterns</h4>
+<h4>Microservices Communication Patterns</h4>
+<h4>Microservices Communication Patterns</h4>
+<h4>Microservices Communication Patterns</h4>
 <p>Microservices must communicate with each other to fulfill user requests. Choosing the right communication pattern is one of the most consequential architectural decisions. This guide covers the major patterns with their trade-offs and implementation strategies.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/microservices-communication.png" alt="Microservices Communication Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Synchronous vs Asynchronous Communication</h4>
 <p>The foundational decision is whether services communicate synchronously (blocking, request-response) or asynchronously (event-driven, fire-and-forget).</p>
@@ -119,7 +123,7 @@
 <p><strong>Asynchronous patterns</strong> decouple services and improve resilience. A service emits an event without knowing or caring which other services consume it. These suit high-volume, loosely coupled systems.</p>
 <h4>Pattern 1: HTTP/REST</h4>
 <p>The simplest approach -- services expose RESTful HTTP endpoints:</p>
-<h3>Service A calls Service B via REST</h3>
+<h4>Service A calls Service B via REST</h4>
 <p>import requests</p>
 <p>def get_user_orders(user_id):</p>
 <p>response = requests.get(</p>
@@ -143,7 +147,7 @@
 <p>message GetUserOrdersResponse {</p>
 <p>repeated Order orders = 1;</p>
 <p>}</p>
-<h3>Client code</h3>
+<h4>Client code</h4>
 <p>async with grpc.aio.insecure_channel("order-service:50051") as channel:</p>
 <p>stub = OrderServiceStub(channel)</p>
 <p>response = await stub.GetUserOrders(user_id="123")</p>
@@ -152,7 +156,7 @@
 <p><strong>Use when</strong> : High throughput is required, services are within the same cluster, you need streaming capabilities.</p>
 <h4>Pattern 3: Message Queues</h4>
 <p>Use a message broker for asynchronous communication:</p>
-<h3>Order Service publishes an event</h3>
+<h4>Order Service publishes an event</h4>
 <p>import pika</p>
 <p>def publish_order_created(order):</p>
 <p>connection = pika.BlockingConnection(</p>
@@ -166,7 +170,7 @@
 <p>body=json.dumps(order)</p>
 <p>)</p>
 <p>connection.close()</p>
-<h3>Notification Service consumes the event</h3>
+<h4>Notification Service consumes the event</h4>
 <p>def on_order_created(ch, method, properties, body):</p>
 <p>order = json.loads(body)</p>
 <p>send_email(order['user_email'], f"Order {order['id']} confirmed")</p>
@@ -176,7 +180,7 @@
 <p><strong>Use when</strong> : Services are fully independent, you need to handle traffic spikes, multiple services react to the same event.</p>
 <h4>Pattern 4: Event Sourcing and CQRS</h4>
 <p>Event sourcing stores state changes as an append-only event log. CQRS separates read and write models:</p>
-<h3>Event sourced aggregate</h3>
+<h4>Event sourced aggregate</h4>
 <p>class OrderAggregate:</p>
 <p>def <strong>init</strong>(self, order_id):</p>
 <p>self.order_id = order_id</p>
@@ -226,6 +230,8 @@
 <h4>Summary</h4>
 <p>There is no single best microservices communication pattern. REST provides simplicity, gRPC delivers performance, message queues offer resilience, and event sourcing gives auditability. The right mix depends on your throughput requirements, consistency needs, and team expertise. Pattern choices should evolve with your system -- start simple with synchronous calls for straightforward operations and introduce asynchronous patterns when the coupling becomes a bottleneck.</p>
 <p><strong>See also:</strong> <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a>, <a href="/en/tech/git-workflows-2026.html">Git Workflows for Teams</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p></div>
     </article>

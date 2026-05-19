@@ -1,7 +1,7 @@
 ---
 title: "Zero-Downtime Database Migrations"
 description: "Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and production practices"
-date: 2026-05-12
+date: 2026-04-23
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/database-migration-zero-downtime.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/database-migration-zero-d
 
 ## Zero-Downtime Database Migrations
 
-## Zero-Downtime Database Migrations
+### Zero-Downtime Database Migrations
 
-## Zero-Downtime Database Migrations
+#### Zero-Downtime Database Migrations
 
-## Zero-Downtime Database Migrations
+#### Zero-Downtime Database Migrations
 
-## Zero-Downtime Database Migrations
+#### Zero-Downtime Database Migrations
 
-## Zero-Downtime Database Migrations
+#### Zero-Downtime Database Migrations
 
-## Zero-Downtime Database Migrations
+#### Zero-Downtime Database Migrations
 
-## Zero-Downtime Database Migrations
+#### Zero-Downtime Database Migrations
 
-## Zero-Downtime Database Migrations
+#### Zero-Downtime Database Migrations
 
-## Zero-Downtime Database Migrations
+#### Zero-Downtime Database Migrations
 
-## Zero-Downtime Database Migrations
+#### Zero-Downtime Database Migrations
 
-## Zero-Downtime Database Migrations
+#### Zero-Downtime Database Migrations
+
+#### Zero-Downtime Database Migrations
+
+#### Zero-Downtime Database Migrations
+
+#### Zero-Downtime Database Migrations
 
 Database migrations are the highest-risk operation in zero-downtime deployments. Schema changes can lock tables, break queries, or silently corrupt data. In a distributed system where multiple service instances run different versions simultaneously, every migration must be backward compatible with both old and new code. The expand-contract pattern is the canonical approach to achieving this. 
 
@@ -57,6 +63,12 @@ Monitoring during migration is critical. Track migration progress, database CPU,
 Testing migrations against production data volume is essential. Synthetic migrations against staging databases with small data volumes miss performance problems that emerge at scale. Use anonymized production data snapshots or automated data generation that matches production distribution to validate migration performance before deployment.
 
 **See also:** [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>).
+
+**See also:** [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>)
+
+**See also:** [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>)
+
+**See also:** [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>)
 
 **See also:** [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>)
 

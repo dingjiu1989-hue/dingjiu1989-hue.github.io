@@ -1,7 +1,7 @@
 ---
 title: "DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared"
 description: "Compare embedded databases — DuckDB for analytical queries (OLAP), SQLite for transactional workloads (OLTP), when to use each, and how they complement."
-date: 2026-05-08
+date: 2025-11-26
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/duckdb-vs-sqlite.html
 ---

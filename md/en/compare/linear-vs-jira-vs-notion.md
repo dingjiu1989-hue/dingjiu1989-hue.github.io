@@ -1,7 +1,7 @@
 ---
 title: "Linear vs Jira vs Notion: Best Project Management Tool for Developers (2026)"
 description: "Compare Linear, Jira, and Notion for developer project management — speed, simplicity, integrations, and which team size each fits."
-date: 2026-05-08
+date: 2025-11-25
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/linear-vs-jira-vs-notion.html
 ---

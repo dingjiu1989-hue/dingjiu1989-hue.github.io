@@ -1,7 +1,7 @@
 ---
 title: "LLM Cost Optimization: Cut Your AI API Bills by 50-80% (2026 Guide)"
 description: "Practical strategies to reduce LLM costs: prompt caching, model routing, batch processing, semantic caching, and when to use smaller models. Includes real cost comparison tables and a savings calculator."
-date: 2026-05-08
+date: 2025-11-10
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/llm-cost-optimization.html
 ---

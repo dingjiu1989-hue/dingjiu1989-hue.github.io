@@ -1,7 +1,7 @@
 ---
 title: "API Gateway Patterns"
 description: "Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementation strategies"
-date: 2026-05-12
+date: 2026-05-01
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/api-gateway-patterns.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/api-gateway-patterns.html
 
 ## API Gateway Patterns
 
-## API Gateway Patterns
+### API Gateway Patterns
 
-## API Gateway Patterns
+#### API Gateway Patterns
 
-## API Gateway Patterns
+#### API Gateway Patterns
 
-## API Gateway Patterns
+#### API Gateway Patterns
 
-## API Gateway Patterns
+#### API Gateway Patterns
 
-## API Gateway Patterns
+#### API Gateway Patterns
 
-## API Gateway Patterns
+#### API Gateway Patterns
 
-## API Gateway Patterns
+#### API Gateway Patterns
 
-## API Gateway Patterns
+#### API Gateway Patterns
 
-## API Gateway Patterns
+#### API Gateway Patterns
 
-## API Gateway Patterns
+#### API Gateway Patterns
+
+#### API Gateway Patterns
+
+#### API Gateway Patterns
+
+#### API Gateway Patterns
 
 An API gateway is a server that acts as the single entry point for client requests in a microservice architecture. It receives client requests, routes them to appropriate backend services, aggregates responses, and enforces cross-cutting concerns like authentication, rate limiting, and logging. This article examines the core API gateway patterns and their implementation considerations. 
 
@@ -85,3 +91,9 @@ API gateway patterns are essential for microservice architectures, providing cen
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)
 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)
+
+**See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)

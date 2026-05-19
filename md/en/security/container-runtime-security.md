@@ -1,7 +1,7 @@
 ---
 title: "Container Runtime Security"
 description: "Securing container runtime with seccomp, AppArmor, SELinux, Falco, and runtime threat detection."
-date: 2026-05-12
+date: 2026-03-16
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/container-runtime-security.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/security/container-runtime-security.ht
 
 ## Container Runtime Security
 
-## Container Runtime Security
+### Container Runtime Security
 
-## Container Runtime Security
+#### Container Runtime Security
 
-## Container Runtime Security
+#### Container Runtime Security
 
-## Container Runtime Security
+#### Container Runtime Security
 
-## Container Runtime Security
+#### Container Runtime Security
 
-## Container Runtime Security
+#### Container Runtime Security
 
-## Container Runtime Security
+#### Container Runtime Security
 
-## Container Runtime Security
+#### Container Runtime Security
 
-## Container Runtime Security
+#### Container Runtime Security
 
-## Container Runtime Security
+#### Container Runtime Security
 
-## Container Runtime Security
+#### Container Runtime Security
+
+#### Container Runtime Security
+
+#### Container Runtime Security
+
+#### Container Runtime Security
 
 Runtime Security Fundamentals 
 
@@ -108,21 +114,21 @@ AppArmor
 
 AppArmor uses path-based access control: 
 
-## AppArmor profile for container
+#### AppArmor profile for container
 
-## include
+#### include
 
 profile container-strict flags=(attach_disconnected) {
 
-## include
+#### include
 
-## Network
+#### Network
 
 network inet tcp,
 
 network inet udp,
 
-## Filesystem
+#### Filesystem
 
 / r,
 
@@ -134,7 +140,7 @@ network inet udp,
 
 /app/bin ix,
 
-## Deny everything else
+#### Deny everything else
 
 deny /etc/shadow r,
 
@@ -148,13 +154,13 @@ SELinux for Containers
 
 SELinux provides mandatory access control: 
 
-## Enable SELinux for container runtime
+#### Enable SELinux for container runtime
 
 sudo setenforce 1
 
 sudo semanage permissive -a container_t
 
-## Apply SELinux context to container
+#### Apply SELinux context to container
 
 podman run \
 
@@ -164,7 +170,7 @@ podman run \
 
 nginx
 
-## Check SELinux context
+#### Check SELinux context
 
 ps -eZ | grep container
 
@@ -172,7 +178,7 @@ Falco Runtime Detection
 
 Falco detects anomalous behavior: 
 
-## falco-rules.yaml
+#### falco-rules.yaml
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rule: Terminal shell in container
 
@@ -230,7 +236,7 @@ Write to sensitive host path from container
 
 priority: CRITICAL
 
-## Falco event consumer
+#### Falco event consumer
 
 import json
 
@@ -307,6 +313,12 @@ Conclusion
 Container runtime security requires multiple layers. Use seccomp to restrict system calls, AppArmor for path-based controls, and SELinux for mandatory access. Deploy Falco for runtime threat detection. Run containers with the minimum capabilities required. Monitor and alert on suspicious behavior in real time.
 
 **See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Container Scanning Tools: Securing Images in CI/CD](</en/security/container-scanning-tools.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>).
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Helm Security](</en/security/helm-security.html>), [Kubernetes Security](</en/security/kubernetes-security.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Helm Security](</en/security/helm-security.html>), [Kubernetes Security](</en/security/kubernetes-security.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Helm Security](</en/security/helm-security.html>), [Kubernetes Security](</en/security/kubernetes-security.html>)
 
 **See also:** [Container Image Security](</en/security/container-image-security.html>), [Helm Security](</en/security/helm-security.html>), [Kubernetes Security](</en/security/kubernetes-security.html>)
 

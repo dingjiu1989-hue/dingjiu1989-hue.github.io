@@ -1,7 +1,7 @@
 ---
 title: "Transactional Outbox Pattern"
 description: "Reliable event publishing with transactional outbox: implementations, idempotent consumers, dual-write resolution"
-date: 2026-05-14
+date: 2026-05-12
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/transaction-outbox.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/transaction-outbox.html
 
 ## Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
 
-## Transactional Outbox Pattern
+#### Transactional Outbox Pattern
+
+#### Transactional Outbox Pattern
+
+#### Transactional Outbox Pattern
+
+#### Transactional Outbox Pattern
 
 The transactional outbox pattern solves one of the most pervasive problems in event-driven architectures: the dual-write problem. When a service must both update its database and publish an event (or send a message), these two operations cannot be atomic across different systems. The outbox pattern ensures that the database write and message publication are eventually consistent without requiring distributed transactions or two-phase commit. 
 
@@ -53,6 +59,12 @@ Performance considerations include outbox table cleanup. Over time, the outbox t
 The transactional outbox pattern is production-proven across organizations handling billions of events daily. It is the foundation of reliable event-driven architectures and a prerequisite for systems that require data consistency guarantees exceeding eventual consistency.
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>).
+
+**See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
+
+**See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
+
+**See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
 
 **See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
 

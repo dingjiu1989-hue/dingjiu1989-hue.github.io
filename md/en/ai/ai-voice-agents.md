@@ -1,7 +1,7 @@
 ---
 title: "Building AI Voice Agents: Complete Technical Guide (2026)"
 description: "How to build real-time AI voice agents: STT (Whisper) + LLM (GPT-4o/Claude) + TTS (ElevenLabs). Covers WebRTC streaming, latency optimization, voice activity detection, and interruption handling."
-date: 2026-05-08
+date: 2025-11-10
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-voice-agents.html
 ---

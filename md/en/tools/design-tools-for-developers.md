@@ -1,7 +1,7 @@
 ---
 title: "Design Tools for Developers: Build Beautiful UI Without a Designer"
 description: "Figma basics, color palette generators, free icon libraries, illustration sources, and typography tools. Everything a developer needs to create polished, professional UI."
-date: 2026-05-08
+date: 2025-10-27
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/design-tools-for-developers.html
 ---
@@ -58,7 +58,7 @@ Resource| Description
 
 ## Stock Photos That Don't Look Like Stock Photos
 
-See our [Best Free Stock Photo Sites](</en/sidehustle/free-images/>) guide for the full list. Quick picks: Unsplash for natural photos, Pexels for videos too, and Kaboompics for styled flat lays.
+See our [Best Free Stock Photo Sites](</en/sidehustle/free-images.html>) guide for the full list. Quick picks: Unsplash for natural photos, Pexels for videos too, and Kaboompics for styled flat lays.
 
 ## The Developer Design Stack (Save This)
 

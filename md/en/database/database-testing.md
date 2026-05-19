@@ -1,7 +1,7 @@
 ---
 title: "Database Testing Strategies for Developers"
 description: "Database testing with in-memory DBs for unit tests, Testcontainers for integration tests, migration testing, and property-based testing."
-date: 2026-05-12
+date: 2026-03-27
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/database-testing.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/database-testing.html
 
 ## Database Testing Strategies for Developers
 
-## Database Testing Strategies for Developers
+### Database Testing Strategies for Developers
 
-## Database Testing Strategies for Developers
+#### Database Testing Strategies for Developers
 
-## Database Testing Strategies for Developers
+#### Database Testing Strategies for Developers
 
-## Database Testing Strategies for Developers
+#### Database Testing Strategies for Developers
 
-## Database Testing Strategies for Developers
+#### Database Testing Strategies for Developers
 
-## Database Testing Strategies for Developers
+#### Database Testing Strategies for Developers
 
-## Database Testing Strategies for Developers
+#### Database Testing Strategies for Developers
 
-## Database Testing Strategies for Developers
+#### Database Testing Strategies for Developers
 
-## Database Testing Strategies for Developers
+#### Database Testing Strategies for Developers
 
-## Database Testing Strategies for Developers
+#### Database Testing Strategies for Developers
 
-## Database Testing Strategies for Developers
+#### Database Testing Strategies for Developers
+
+#### Database Testing Strategies for Developers
+
+#### Database Testing Strategies for Developers
+
+#### Database Testing Strategies for Developers
 
 Database Testing Strategies 
 
@@ -109,6 +115,12 @@ Conclusion
 Use in-memory databases for fast unit tests. Use Testcontainers for integration tests against real databases. Test migrations for backward compatibility. Use factory patterns for data fixtures. The most valuable test is one that uses a real database.
 
 **See also:** [Database Migration Tools and Strategies](</en/database/database-migration.html>), [Database Migration Strategies](</en/database/database-migration-strategies.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>).
+
+**See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>)
+
+**See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>)
+
+**See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>)
 
 **See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>)
 

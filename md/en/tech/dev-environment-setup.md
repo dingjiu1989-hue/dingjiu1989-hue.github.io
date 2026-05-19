@@ -1,7 +1,7 @@
 ---
 title: "Developer Environment Setup Guide"
 description: "Comprehensive guide to setting up a productive developer environment with tools, configuration, and automation."
-date: 2026-05-11
+date: 2025-12-02
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/dev-environment-setup.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/tech/dev-environment-setup.html
 
 ## Developer Environment Setup Guide
 
-## Developer Environment Setup Guide
+### Developer Environment Setup Guide
 
-## Developer Environment Setup Guide
+#### Developer Environment Setup Guide
 
-## Developer Environment Setup Guide
+#### Developer Environment Setup Guide
 
-## Developer Environment Setup Guide
+#### Developer Environment Setup Guide
 
-## Developer Environment Setup Guide
+#### Developer Environment Setup Guide
 
-## Developer Environment Setup Guide
+#### Developer Environment Setup Guide
 
-## Developer Environment Setup Guide
+#### Developer Environment Setup Guide
 
-## Developer Environment Setup Guide
+#### Developer Environment Setup Guide
 
-## Developer Environment Setup Guide
+#### Developer Environment Setup Guide
 
-## Developer Environment Setup Guide
+#### Developer Environment Setup Guide
 
-## Developer Environment Setup Guide
+#### Developer Environment Setup Guide
 
-## Developer Environment Setup Guide
+#### Developer Environment Setup Guide
 
-## Developer Environment Setup Guide
+#### Developer Environment Setup Guide
+
+#### Developer Environment Setup Guide
+
+#### Developer Environment Setup Guide
+
+#### Developer Environment Setup Guide
 
 A well-configured developer environment is the foundation of productivity. Investing time in setting up your shell, editor, and tooling pays dividends every single day. This guide covers a complete development environment setup that works across platforms.
 
-### Operating System Choice
+#### Operating System Choice
 
 Choose an operating system that supports the tools you need:
 
@@ -53,11 +59,11 @@ Choose an operating system that supports the tools you need:
 
 For most developers, macOS or WSL2 on Windows provides the best balance of tooling and usability.
 
-### Shell Configuration
+#### Shell Configuration
 
 Modern shells improve daily productivity. Zsh with Oh My Zsh is the standard:
 
-## Install Zsh and Oh My Zsh
+#### Install Zsh and Oh My Zsh
 
 sudo apt install zsh -y
 
@@ -65,7 +71,7 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 
 Essential Zsh plugins:
 
-## ~/.zshrc
+#### ~/.zshrc
 
 plugins=(
 
@@ -93,7 +99,7 @@ command-not-found
 
 For power users, consider Fish shell for autosuggestions out of the box, or Nushell for structured data pipelines.
 
-### Git Configuration
+#### Git Configuration
 
 Set up a robust Git configuration:
 
@@ -123,7 +129,7 @@ git config --global core.excludesfile ~/.gitignore_global
 
 A global `.gitignore` prevents committing common OS and editor files:
 
-## ~/.gitignore_global
+#### ~/.gitignore_global
 
 .DS_Store
 
@@ -143,11 +149,11 @@ Thumbs.db
 
 .env.local
 
-### Package Managers
+#### Package Managers
 
 Install language-specific package managers:
 
-## Node.js (via nvm for version management)
+#### Node.js (via nvm for version management)
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 
@@ -155,15 +161,15 @@ nvm install --lts
 
 nvm use --lts
 
-## Python
+#### Python
 
 sudo apt install python3 python3-pip python3-venv
 
-## Rust
+#### Rust
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-## Go
+#### Go
 
 wget https://go.dev/dl/go1.22.linux-amd64.tar.gz
 
@@ -171,11 +177,11 @@ sudo tar -C /usr/local -xzf go1.22.linux-amd64.tar.gz
 
 Use version managers (`nvm`, `pyenv`, `rbenv`, `sdkman`) to manage multiple language versions.
 
-### Editor Setup
+#### Editor Setup
 
 VS Code is the most popular editor for good reason. Essential extensions:
 
-## Install via CLI
+#### Install via CLI
 
 code --install-extension ms-python.python
 
@@ -221,23 +227,23 @@ Settings to consider:
 
 }
 
-### Docker Setup
+#### Docker Setup
 
 Docker is essential for local development consistency:
 
-## Ubuntu
+#### Ubuntu
 
 sudo apt install docker.io docker-compose-v2
 
 sudo usermod -aG docker $USER # Log out and back in
 
-## macOS
+#### macOS
 
 brew install --cask docker
 
 Create a development Docker Compose file for your project's dependencies:
 
-## dev-dependencies.yml
+#### dev-dependencies.yml
 
 services:
 
@@ -267,7 +273,7 @@ volumes:
 
 pgdata:
 
-### Local HTTPS with mkcert
+#### Local HTTPS with mkcert
 
 Test HTTPS locally:
 
@@ -279,7 +285,7 @@ mkcert localhost 127.0.0.1 ::1
 
 This creates locally trusted TLS certificates for development.
 
-### Dotfiles Management
+#### Dotfiles Management
 
 Store your configuration in a Git repository:
 
@@ -303,7 +309,7 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 config checkout
 
-### Containerized Development with Dev Containers
+#### Containerized Development with Dev Containers
 
 VS Code Dev Containers package the entire development environment:
 
@@ -339,11 +345,17 @@ VS Code Dev Containers package the entire development environment:
 
 Every developer gets identical tools regardless of their host OS.
 
-### Summary
+#### Summary
 
 A productive developer environment is personal, but some investments benefit everyone: a modern shell with autosuggestions, a well-configured editor with formatting on save, Docker for reproducible dependencies, and dotfiles versioned in Git. The initial setup takes an afternoon, but the time saved over a career is immense. Start with the basics -- shell, Git, editor, and Docker -- then add specialized tools as your workflow requires them.
 
 **See also:** [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [SSH Security Hardening](</en/tech/ssh-security-hardening.html>).
+
+**See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>)
+
+**See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>)
+
+**See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>)
 
 **See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>)
 

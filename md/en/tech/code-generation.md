@@ -1,7 +1,7 @@
 ---
 title: "Code Generation"
 description: "Learn code generation: scaffolding tools, OpenAPI codegen, GraphQL codegen, template engines, and productivity patterns"
-date: 2026-05-12
+date: 2026-01-06
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/code-generation.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/tech/code-generation.html
 
 ## Code Generation
 
-## Code Generation
+### Code Generation
 
-## Code Generation
+#### Code Generation
 
-## Code Generation
+#### Code Generation
 
-## Code Generation
+#### Code Generation
 
-## Code Generation
+#### Code Generation
 
-## Code Generation
+#### Code Generation
 
-## Code Generation
+#### Code Generation
 
-## Code Generation
+#### Code Generation
 
-## Code Generation
+#### Code Generation
 
-## Code Generation
+#### Code Generation
 
-## Code Generation
+#### Code Generation
 
-## Code Generation
+#### Code Generation
 
-## Code Generation
+#### Code Generation
+
+#### Code Generation
+
+#### Code Generation
+
+#### Code Generation
 
 Code generation automates the creation of repetitive, boilerplate code. It enforces consistency, reduces human error, and accelerates development. This article explores the major code generation approaches: scaffolding tools, API client generation, GraphQL code generation, and custom template engines.
 
-### Scaffolding Tools
+#### Scaffolding Tools
 
 Scaffolding tools generate initial project structures with pre-configured build systems, directory layouts, and common dependencies. They eliminate the repetitive setup that every project requires and ensure consistent project structures across the organization.
 
@@ -46,7 +52,7 @@ Popular scaffolding tools include Yeoman (JavaScript), Cookiecutter (Python), an
 
 Organizations should invest in custom scaffolding templates that encode their specific conventions, preferred libraries, security policies, and CI/CD configurations. A standardized scaffold reduces onboarding time and ensures every project follows the same patterns.
 
-### OpenAPI Code Generation
+#### OpenAPI Code Generation
 
 OpenAPI specifications enable automatic generation of both server and client code. Tools like OpenAPI Generator and Swagger Codegen read an OpenAPI spec and generate type definitions, API client libraries, server stubs, and documentation.
 
@@ -54,7 +60,7 @@ Server-side code generation produces controllers and service interfaces. The dev
 
 Client-side code generation produces type-safe API clients. Generated clients include request/response types, endpoint methods, and serialization logic. This eliminates manual HTTP client code that is error-prone and tedious to maintain. When the API changes, regenerating the client highlights all affected code.
 
-### GraphQL Code Generation
+#### GraphQL Code Generation
 
 GraphQL's typed schema makes it an ideal candidate for code generation. Tools like GraphQL Code Generator read a GraphQL schema and generate TypeScript types, React hooks, and resolver types.
 
@@ -62,7 +68,7 @@ Generated TypeScript types provide compile-time safety for GraphQL operations. W
 
 For React applications, GraphQL Code Generator generates typed hooks for each query and mutation. The generated hooks include response types, variable types, and loading state types. This eliminates manual type annotation and ensures the frontend types always match the schema.
 
-### Template Engines
+#### Template Engines
 
 Custom code generation uses template engines to generate files from templates and data. A template is a text file with placeholders that the engine fills with generated content. Mustache, Handlebars, and EJS are popular template engines.
 
@@ -70,7 +76,7 @@ Templates can generate any text-based file: source code, configuration files, do
 
 Custom templates are most valuable for generating repetitive code within a project. Common examples include creating new components following a consistent pattern, generating CRUD endpoints for each database table, and creating test files that mirror source file structure.
 
-### Best Practices
+#### Best Practices
 
 Generated code should be clearly marked as generated. Include a comment at the top of generated files indicating they are auto-generated and the source command used. This prevents developers from manually editing generated files—changes would be lost on regeneration.
 
@@ -81,6 +87,12 @@ Regeneration should be automated and part of the build process. When an API spec
 Code generation is a powerful productivity tool, but it should be used thoughtfully. Generate code where it eliminates significant manual work or enforces consistency. Avoid generating code that adds complexity without proportional benefit—simple tasks may not need generation.
 
 **See also:** [API Documentation](</en/tech/api-documentation.html>), [Task Queues](</en/tech/task-queues.html>), [Testing Strategies](</en/tech/testing-strategies.html>).
+
+**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [API Documentation](</en/tech/api-documentation.html>), [Task Queues](</en/tech/task-queues.html>)
+
+**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [API Documentation](</en/tech/api-documentation.html>), [Task Queues](</en/tech/task-queues.html>)
+
+**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [API Documentation](</en/tech/api-documentation.html>), [Task Queues](</en/tech/task-queues.html>)
 
 **See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [API Documentation](</en/tech/api-documentation.html>), [Task Queues](</en/tech/task-queues.html>)
 

@@ -1,7 +1,7 @@
 ---
 title: "API Authentication Methods"
 description: "Comprehensive guide to API authentication covering API keys, OAuth2 client credentials, mTLS, HMAC signing, and implementation trade-offs."
-date: 2026-05-12
+date: 2026-03-06
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/api-authentication.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/security/api-authentication.html
 
 ## API Authentication Methods
 
-## API Authentication Methods
+### API Authentication Methods
 
-## API Authentication Methods
+#### API Authentication Methods
 
-## API Authentication Methods
+#### API Authentication Methods
 
-## API Authentication Methods
+#### API Authentication Methods
 
-## API Authentication Methods
+#### API Authentication Methods
 
-## API Authentication Methods
+#### API Authentication Methods
 
-## API Authentication Methods
+#### API Authentication Methods
 
-## API Authentication Methods
+#### API Authentication Methods
 
-## API Authentication Methods
+#### API Authentication Methods
 
-## API Authentication Methods
+#### API Authentication Methods
 
-## API Authentication Methods
+#### API Authentication Methods
 
-## API Authentication Methods
+#### API Authentication Methods
 
-## API Authentication Methods
+#### API Authentication Methods
+
+#### API Authentication Methods
+
+#### API Authentication Methods
+
+#### API Authentication Methods
 
 Introduction 
 
@@ -88,7 +94,7 @@ import requests
 
 from authlib.integrations.requests_client import OAuth2Session
 
-## Client configuration
+#### Client configuration
 
 client = OAuth2Session(
 
@@ -100,7 +106,7 @@ scope='read:orders write:orders'
 
 )
 
-## Obtain access token
+#### Obtain access token
 
 token = client.fetch_token(
 
@@ -110,7 +116,7 @@ grant_type='client_credentials'
 
 )
 
-## Use token for API calls
+#### Use token for API calls
 
 response = client.get(
 
@@ -150,7 +156,7 @@ options={"verify_exp": True}
 
 )
 
-## Validate scopes
+#### Validate scopes
 
 token_scopes = payload.get("scope", "").split()
 
@@ -166,7 +172,7 @@ Mutual TLS (mTLS)
 
 mTLS extends TLS so that both client and server present certificates, establishing mutual authentication at the transport layer. 
 
-## Generate client certificate
+#### Generate client certificate
 
 openssl req -newkey rsa:2048 -nodes \
 
@@ -176,7 +182,7 @@ openssl req -newkey rsa:2048 -nodes \
 
 -subj "/CN=payment-service.production.internal"
 
-## Sign with internal CA
+#### Sign with internal CA
 
 openssl x509 -req -in client-csr.pem \
 
@@ -186,7 +192,7 @@ openssl x509 -req -in client-csr.pem \
 
 -days 365 -sha256
 
-## Configure server for mTLS (Nginx)
+#### Configure server for mTLS (Nginx)
 
 server {
 
@@ -204,7 +210,7 @@ ssl_verify_depth 2;
 
 location /api/ {
 
-## Extract client certificate info
+#### Extract client certificate info
 
 proxy_set_header X-Client-CN $ssl_client_s_dn;
 
@@ -216,7 +222,7 @@ proxy_pass http://backend;
 
 }
 
-## Flask app reading mTLS client info
+#### Flask app reading mTLS client info
 
 from flask import Flask, request
 
@@ -234,7 +240,7 @@ if client_verify != 'SUCCESS':
 
 return {"error": "TLS verification failed"}, 403
 
-## Authorize based on client certificate CN
+#### Authorize based on client certificate CN
 
 allowed_clients = {
 
@@ -276,7 +282,7 @@ timestamp = str(int(time.time()))
 
 nonce = secrets.token_hex(8)
 
-## Build message to sign
+#### Build message to sign
 
 message = f"{method}\n{path}\n{timestamp}\n{nonce}\n".encode() + body
 
@@ -320,7 +326,7 @@ nonce = headers.get('X-Nonce')
 
 signature = headers.get('X-Signature')
 
-## Replay protection
+#### Replay protection
 
 if int(time.time()) - int(timestamp) > 300:
 
@@ -332,7 +338,7 @@ return False # Replay
 
 self.nonce_store.add(nonce)
 
-## Verify signature
+#### Verify signature
 
 secret = self.secrets.get(api_key)
 
@@ -355,6 +361,12 @@ Conclusion
 No single API authentication method fits all use cases. Use API keys for low-risk internal tools, OAuth2 client credentials for third-party integrations with scope requirements, mTLS for service mesh and zero-trust architectures, and HMAC signing when request integrity and non-repudiation are critical. Always combine authentication with TLS encryption.
 
 **See also:** [Microservice Security](</en/security/microservice-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>), [Secure Configuration Management](</en/security/secure-configuration.html>).
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Container Image Security](</en/security/container-image-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Container Image Security](</en/security/container-image-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Container Image Security](</en/security/container-image-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
 
 **See also:** [Microservice Security](</en/security/microservice-security.html>), [Container Image Security](</en/security/container-image-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
 

@@ -47,13 +47,18 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-events.png",
       "datePublished": "2026-04-24",
       "dateModified": "2026-05-16",
-      "wordCount": "974",
+      "wordCount": "1044",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/domain-events.html"},
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/domain-events-design-and-implementation-26hf"
+      ],
       "articleBody": "Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery"
     }
     </script>
@@ -96,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-events.png" alt="Domain Events: Design and Implementation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Domain Events: Design and Implementation</h2>
 <h3>Domain Events: Design and Implementation</h3>
-<h3>Domain Events: Design and Implementation</h3>
-<h3>Domain Events: Design and Implementation</h3>
-<h3>Domain Events: Design and Implementation</h3>
-<h3>Domain Events: Design and Implementation</h3>
-<h3>Domain Events: Design and Implementation</h3>
-<h3>Domain Events: Design and Implementation</h3>
-<h3>Domain Events: Design and Implementation</h3>
-<h3>Domain Events: Design and Implementation</h3>
-<h3>Domain Events: Design and Implementation</h3>
-<h3>Domain Events: Design and Implementation</h3>
-<h3>Domain Events: Design and Implementation</h3>
+<h4>Domain Events: Design and Implementation</h4>
+<h4>Domain Events: Design and Implementation</h4>
+<h4>Domain Events: Design and Implementation</h4>
+<h4>Domain Events: Design and Implementation</h4>
+<h4>Domain Events: Design and Implementation</h4>
+<h4>Domain Events: Design and Implementation</h4>
+<h4>Domain Events: Design and Implementation</h4>
+<h4>Domain Events: Design and Implementation</h4>
+<h4>Domain Events: Design and Implementation</h4>
+<h4>Domain Events: Design and Implementation</h4>
+<h4>Domain Events: Design and Implementation</h4>
+<h4>Domain Events: Design and Implementation</h4>
+<h4>Domain Events: Design and Implementation</h4>
 <p>Domain events capture significant state changes within a bounded context. They are a tactical pattern from Domain-Driven Design that enables loose coupling between domain aggregates while maintaining consistency boundaries. A domain event represents something that happened in the past and is meaningful to domain experts: OrderSubmitted, PaymentReceived, InventoryDepleted. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-events.png" alt="Domain Events: Design and Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Designing domain events requires careful consideration of what information to include. Each event should contain the aggregate identifier, a timestamp of when the event occurred, the event type, and the data relevant to the change. Crucially, domain events should not contain internal implementation details of the aggregate. The specific fields should represent what happened from the domain perspective, not what data structures changed internally. Event naming follows past-tense convention: OrderShipped rather than ShipOrder, which would be a command. </p>
 <p>The publishing lifecycle has distinct phases. First, the domain event is raised within the aggregate during a command execution. The aggregate appends the event to a collection of unpublished events. When the repository saves the aggregate, it persists both the aggregate state and publishes the events. This atomicity is critical — publishing events must be transactional with the state change to prevent inconsistencies between what the system recorded and what other services learned. </p>
@@ -117,6 +124,8 @@
 <p>Event versioning addresses schema evolution. Domain events are persistent contracts that may be consumed by services running different versions. Strategies include keeping past event classes in the codebase, using a schema registry with compatibility checks, and designing events with optional fields and sensible defaults. Forward compatibility — where new consumers can read old events and vice versa — requires disciplined schema evolution. </p>
 <p>Testing domain events requires verifying that the correct events are raised for each command, that event data contains the expected information, and that handlers produce the correct side effects. Unit tests validate event raising within aggregates, while integration tests verify the full publish-and-handle pipeline including the outbox pattern.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p></div>
     </article>

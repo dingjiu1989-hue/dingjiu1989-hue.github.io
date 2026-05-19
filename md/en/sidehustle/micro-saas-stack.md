@@ -1,7 +1,7 @@
 ---
 title: "Micro-SaaS Tech Stack: Building Lean in 2026"
 description: "Choose the right tech stack for your micro-SaaS: hosting, database, auth, payments, and email for solo founders and small teams."
-date: 2026-05-12
+date: 2026-01-21
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/micro-saas-stack.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/micro-saas-stack.html
 
 ## Micro-SaaS Tech Stack: Building Lean in 2026
 
-## Micro-SaaS Tech Stack: Building Lean in 2026
+### Micro-SaaS Tech Stack: Building Lean in 2026
 
-## Micro-SaaS Tech Stack: Building Lean in 2026
+#### Micro-SaaS Tech Stack: Building Lean in 2026
 
-## Micro-SaaS Tech Stack: Building Lean in 2026
+#### Micro-SaaS Tech Stack: Building Lean in 2026
 
-## Micro-SaaS Tech Stack: Building Lean in 2026
+#### Micro-SaaS Tech Stack: Building Lean in 2026
 
-## Micro-SaaS Tech Stack: Building Lean in 2026
+#### Micro-SaaS Tech Stack: Building Lean in 2026
 
-## Micro-SaaS Tech Stack: Building Lean in 2026
+#### Micro-SaaS Tech Stack: Building Lean in 2026
 
-## Micro-SaaS Tech Stack: Building Lean in 2026
+#### Micro-SaaS Tech Stack: Building Lean in 2026
 
-## Micro-SaaS Tech Stack: Building Lean in 2026
+#### Micro-SaaS Tech Stack: Building Lean in 2026
 
-## Micro-SaaS Tech Stack: Building Lean in 2026
+#### Micro-SaaS Tech Stack: Building Lean in 2026
 
-## Micro-SaaS Tech Stack: Building Lean in 2026
+#### Micro-SaaS Tech Stack: Building Lean in 2026
 
-## Micro-SaaS Tech Stack: Building Lean in 2026
+#### Micro-SaaS Tech Stack: Building Lean in 2026
 
-## Micro-SaaS Tech Stack: Building Lean in 2026
+#### Micro-SaaS Tech Stack: Building Lean in 2026
 
-### The Micro-SaaS Tech Stack: Building Lean
+#### Micro-SaaS Tech Stack: Building Lean in 2026
+
+#### Micro-SaaS Tech Stack: Building Lean in 2026
+
+#### Micro-SaaS Tech Stack: Building Lean in 2026
+
+#### The Micro-SaaS Tech Stack: Building Lean
 
 Choosing the right tech stack for a micro-SaaS is about maximizing developer productivity while minimizing operational costs. As a solo founder or small team, every decision should reduce complexity, not add to it.
 
@@ -67,6 +73,12 @@ Transactional email requires dedicated services. Resend provides 100 free emails
 The ideal micro-SaaS stack combines managed services that maximize developer productivity. Starting with Supabase (database + auth), Vercel (hosting), Stripe (payments), and Resend (email) provides all the infrastructure needed to launch a SaaS product. The key insight is to pay for services that reduce complexity rather than self-managing infrastructure.
 
 **See also:** [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>).
+
+**See also:** [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>), [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>)
+
+**See also:** [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>), [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>)
+
+**See also:** [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>), [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>)
 
 **See also:** [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>), [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>)
 

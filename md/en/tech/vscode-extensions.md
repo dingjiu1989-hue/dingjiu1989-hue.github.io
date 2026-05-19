@@ -1,7 +1,7 @@
 ---
 title: "10 Must-Have VS Code Extensions to Double Your Productivity"
 description: "Handpicked VS Code extensions for AI completion, Git visualization, code formatting, and remote development. Install these first on any new editor."
-date: 2026-05-07
+date: 2025-10-02
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/vscode-extensions.html
 ---

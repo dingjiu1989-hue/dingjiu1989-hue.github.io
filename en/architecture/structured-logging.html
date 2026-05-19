@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/structured-logging.png",
       "datePublished": "2026-04-30",
       "dateModified": "2026-05-07",
-      "wordCount": "1050",
+      "wordCount": "1101",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/structured-logging.html"},
@@ -96,17 +98,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/structured-logging.png" alt="Structured Logging" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Structured Logging</h2>
 <h3>Structured Logging</h3>
-<h3>Structured Logging</h3>
-<h3>Structured Logging</h3>
-<h3>Structured Logging</h3>
-<h3>Structured Logging</h3>
-<h3>Structured Logging</h3>
-<h3>Structured Logging</h3>
-<h3>Structured Logging</h3>
-<h3>Structured Logging</h3>
-<h3>Structured Logging</h3>
-<h3>Structured Logging</h3>
-<h3>Structured Logging</h3>
+<h4>Structured Logging</h4>
+<h4>Structured Logging</h4>
+<h4>Structured Logging</h4>
+<h4>Structured Logging</h4>
+<h4>Structured Logging</h4>
+<h4>Structured Logging</h4>
+<h4>Structured Logging</h4>
+<h4>Structured Logging</h4>
+<h4>Structured Logging</h4>
+<h4>Structured Logging</h4>
+<h4>Structured Logging</h4>
+<h4>Structured Logging</h4>
+<h4>Structured Logging</h4>
 <p>Structured logging is the practice of emitting logs as structured data — typically JSON — rather than free-form text strings. This transformation is foundational to observability. Structured logs can be parsed, filtered, and queried by machines without requiring fragile regular expressions. The initial investment in structured logging pays dividends in every incident investigation, deployment verification, and system analysis. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/structured-logging.png" alt="Structured Logging" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The JSON log format is the standard. Each log line is a JSON object with required fields: timestamp (ISO 8601 with timezone and microseconds), level, logger (source file or component), message (human-readable summary), and trace_id (correlation ID for request tracing). Optional fields include: service, version, environment, request details, error stack traces, and any business-specific context. Every field should be consistently named and typed across all services in the organization. </p>
 <p>Correlation IDs bridge logs across service boundaries. When a request enters the system, it is assigned a trace ID (UUID). This ID is propagated to all downstream services through HTTP headers or message metadata. Every log entry within that request's scope includes the trace ID. When investigating an issue, the trace ID ties together logs from the API gateway, the order service, the payment service, and the database — providing a unified view of what happened during that specific request. </p>
@@ -118,6 +122,8 @@
 <p>Dynamic debugging with structured logging enables log-based metrics. If a log entry includes a response_time_ms field, the aggregation system can compute percentile latency metrics directly from logs without separate instrumentation. This is useful for ad-hoc analysis but should not replace purpose-built metrics for production alerting, as log-based metric computation is more expensive. </p>
 <p>Log retention policies balance debugging needs with storage costs. Typical retention: 7-14 days for production logs in hot storage, 30-90 days in warm storage, 12 months in cold archival storage. Compliance-required logs (audit trails, financial transactions) have longer retention with immutable storage. The retention policy should be per-service, as different services have different debugging windows and compliance requirements.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/observability-three-pillars.html">Observability: Logs, Metrics, and Traces</a>, <a href="/en/architecture/schema-registry.html">Schema Registry</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p></div>
     </article>

@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/certificate-management.png",
       "datePublished": "2026-03-08",
       "dateModified": "2026-05-10",
-      "wordCount": "1720",
+      "wordCount": "1770",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/certificate-management.html"},
@@ -99,33 +101,35 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/certificate-management.png" alt="Certificate Management" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Certificate Management</h2>
 <h3>Certificate Management</h3>
-<h3>Certificate Management</h3>
-<h3>Certificate Management</h3>
-<h3>Certificate Management</h3>
-<h3>Certificate Management</h3>
-<h3>Certificate Management</h3>
-<h3>Certificate Management</h3>
-<h3>Certificate Management</h3>
-<h3>Certificate Management</h3>
-<h3>Certificate Management</h3>
-<h3>Certificate Management</h3>
-<h3>Certificate Management</h3>
-<h3>Certificate Management</h3>
-<h3>Certificate Management</h3>
+<h4>Certificate Management</h4>
+<h4>Certificate Management</h4>
+<h4>Certificate Management</h4>
+<h4>Certificate Management</h4>
+<h4>Certificate Management</h4>
+<h4>Certificate Management</h4>
+<h4>Certificate Management</h4>
+<h4>Certificate Management</h4>
+<h4>Certificate Management</h4>
+<h4>Certificate Management</h4>
+<h4>Certificate Management</h4>
+<h4>Certificate Management</h4>
+<h4>Certificate Management</h4>
+<h4>Certificate Management</h4>
+<h4>Certificate Management</h4>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/certificate-management.png" alt="Certificate Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>TLS certificate management is a critical operational responsibility. Expired certificates cause service outages, security warnings, and loss of user trust. Modern certificate management leverages the ACME protocol and Let's Encrypt to automate issuance and renewal at scale. </p>
 <p>Let's Encrypt </p>
 <p>Let's Encrypt is a free, automated, and open certificate authority (CA) that provides DV certificates trusted by all major browsers. </p>
-<h3>Install Certbot (Let's Encrypt client)</h3>
+<h4>Install Certbot (Let's Encrypt client)</h4>
 <p>sudo apt install certbot python3-certbot-nginx</p>
-<h3>Obtain certificate with webroot authentication</h3>
+<h4>Obtain certificate with webroot authentication</h4>
 <p>sudo certbot certonly --webroot \</p>
 <p>-w /var/www/example.com -d example.com \</p>
 <p>-w /var/www/api.example.com -d api.example.com \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--email admin@example.com \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--agree-tos \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--non-interactive</p>
-<h3>Obtain certificate with DNS challenge (for wildcards)</h3>
+<h4>Obtain certificate with DNS challenge (for wildcards)</h4>
 <p>sudo certbot certonly --manual \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--preferred-challenges dns \</p>
 <p>-d example.com -d *.example.com</p>
@@ -160,27 +164,27 @@
 <p>return registration</p>
 <p>def request_certificate(self, domain, csr_pem):</p>
 <p>"""Request certificate issuance."""</p>
-<h3>Create authorization</h3>
+<h4>Create authorization</h4>
 <p>order = self.acme.new_order(csr_pem)</p>
-<h3>Complete challenges for each identifier</h3>
+<h4>Complete challenges for each identifier</h4>
 <p>for auth in order.authorizations:</p>
-<h3>HTTP-01 or DNS-01 challenge</h3>
+<h4>HTTP-01 or DNS-01 challenge</h4>
 <p>challenge = auth.body.challenges[0]</p>
 <p>self.respond_challenge(challenge)</p>
-<h3>Finalize order</h3>
+<h4>Finalize order</h4>
 <p>order = self.acme.finalize_order(order, csr_pem)</p>
 <p>return order.fullchain_pem</p>
 <p>Automated Renewal </p>
 <p>Certificate renewal should be fully automated with monitoring and alerting. </p>
-<h3>Certbot systemd timer for automatic renewal</h3>
-<h3>/etc/systemd/system/certbot-renewal.service</h3>
+<h4>Certbot systemd timer for automatic renewal</h4>
+<h4>/etc/systemd/system/certbot-renewal.service</h4>
 <p>[Unit]</p>
 <p>Description=Certbot Renewal</p>
 <p>[Service]</p>
 <p>Type=oneshot</p>
 <p>ExecStart=/usr/bin/certbot renew --quiet --pre-hook "systemctl reload nginx"</p>
 <p>ExecStartPost=/usr/bin/systemctl reload nginx</p>
-<h3>/etc/systemd/system/certbot-renewal.timer</h3>
+<h4>/etc/systemd/system/certbot-renewal.timer</h4>
 <p>[Unit]</p>
 <p>Description=Run certbot renewal twice daily</p>
 <p>[Timer]</p>
@@ -189,10 +193,10 @@
 <p>Persistent=true</p>
 <p>[Install]</p>
 <p>WantedBy=timers.target</p>
-<h3>Enable timer</h3>
+<h4>Enable timer</h4>
 <p>sudo systemctl enable certbot-renewal.timer</p>
 <p>sudo systemctl start certbot-renewal.timer</p>
-<h3>Test renewal process</h3>
+<h4>Test renewal process</h4>
 <p>sudo certbot renew --dry-run</p>
 <p>Certificate Monitoring </p>
 <p>Monitor certificate expiration to catch renewal failures before they cause outages. </p>
@@ -210,14 +214,14 @@
 <p>with socket.create_connection((hostname, port), timeout=10) as sock:</p>
 <p>with context.wrap_socket(sock, server_hostname=hostname) as ssock:</p>
 <p>cert = ssock.getpeercert()</p>
-<h3>Parse expiration</h3>
+<h4>Parse expiration</h4>
 <p>expires = datetime.datetime.strptime(</p>
 <p>cert['notAfter'], '%b %d %H:%M:%S %Y %Z'</p>
 <p>)</p>
 <p>remaining = (expires - datetime.datetime.utcnow()).days</p>
-<h3>Check issuer</h3>
+<h4>Check issuer</h4>
 <p>issuer = dict(x[0] for x in cert['issuer'])</p>
-<h3>Check SANs</h3>
+<h4>Check SANs</h4>
 <p>sans = [san[1] for san in cert.get('subjectAltName', [])]</p>
 <p>return {</p>
 <p>'hostname': hostname,</p>
@@ -252,10 +256,10 @@
 <p>'error': str(e)</p>
 <p>})</p>
 <p>return results</p>
-<h3>OpenSSL-based certificate check</h3>
+<h4>OpenSSL-based certificate check</h4>
 <p>echo | openssl s_client -connect example.com:443 -servername example.com 2&gt;/dev/null | \</p>
 <p>openssl x509 -noout -enddate -subject -issuer</p>
-<h3>Mass certificate check</h3>
+<h4>Mass certificate check</h4>
 <p>for domain in $(cat domains.txt); do</p>
 <p>expires=$(echo | openssl s_client -connect $domain:443 -servername $domain 2&gt;/dev/null | \</p>
 <p>openssl x509 -noout -enddate | cut -d= -f2)</p>
@@ -263,17 +267,19 @@
 <p>echo "$domain: expires in $remaining days ($expires)"</p>
 <p>done</p>
 <p>Certificate Revocation </p>
-<h3>Check OCSP status</h3>
+<h4>Check OCSP status</h4>
 <p>openssl ocsp -issuer chain.pem -cert cert.pem \</p>
 <p>-url $(openssl x509 -in cert.pem -noout -ocsp_uri) \</p>
 <p>-header "Host" $(openssl x509 -in cert.pem -noout -ocsp_uri | cut -d/ -f3) \</p>
 <p>-CAfile root.pem</p>
-<h3>CRL check</h3>
+<h4>CRL check</h4>
 <p>curl -O http://crl.example.com/intermediate.crl</p>
 <p>openssl crl -in intermediate.crl -noout -text | grep -A1 "Serial Number"</p>
 <p>Conclusion </p>
 <p>Modern certificate management means automation. Use Let's Encrypt with Certbot for domain-validated certificates, implement ACME for custom automation, set up systemd timers for renewal, and deploy monitoring that alerts days or weeks before expiration. Never rely on manual renewal processes — they fail under pressure and at scale.</p>
 <p><strong>See also:</strong> <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a></p></div>
     </article>

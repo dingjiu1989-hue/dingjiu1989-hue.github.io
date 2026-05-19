@@ -1,7 +1,7 @@
 ---
 title: "Security Log Management"
 description: "Best practices for security log management including centralized logging, SIEM integration, log retention, and audit trail implementation."
-date: 2026-05-11
+date: 2025-12-18
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/log-management-security.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/security/log-management-security.html
 
 ## Security Log Management
 
-## Security Log Management
+### Security Log Management
 
-## Security Log Management
+#### Security Log Management
 
-## Security Log Management
+#### Security Log Management
 
-## Security Log Management
+#### Security Log Management
 
-## Security Log Management
+#### Security Log Management
 
-## Security Log Management
+#### Security Log Management
 
-## Security Log Management
+#### Security Log Management
 
-## Security Log Management
+#### Security Log Management
 
-## Security Log Management
+#### Security Log Management
 
-## Security Log Management
+#### Security Log Management
 
-## Security Log Management
+#### Security Log Management
 
-## Security Log Management
+#### Security Log Management
 
-## Security Log Management
+#### Security Log Management
+
+#### Security Log Management
+
+#### Security Log Management
+
+#### Security Log Management
 
 Why Log Management Matters for Security 
 
@@ -131,7 +137,7 @@ Centralized Log Aggregation
 
 Distribute log collection agents and centralize storage: 
 
-## Filebeat configuration
+#### Filebeat configuration
 
 filebeat.inputs:
 
@@ -167,7 +173,7 @@ SIEM Integration
 
 A Security Information and Event Management (SIEM) system correlates logs from multiple sources to detect attacks: 
 
-## Example: Custom SIEM rule for brute force detection
+#### Example: Custom SIEM rule for brute force detection
 
 from datetime import datetime, timedelta
 
@@ -235,13 +241,13 @@ self.previous_hash = self.load_last_hash()
 
 def secure_log(self, event):
 
-## Add chained hash for tamper detection
+#### Add chained hash for tamper detection
 
 event['_prev_hash'] = self.previous_hash
 
 event['_timestamp'] = datetime.utcnow().isoformat()
 
-## Create HMAC signature
+#### Create HMAC signature
 
 payload = json.dumps(event, sort_keys=True)
 
@@ -259,7 +265,7 @@ event['_signature'] = signature
 
 self.previous_hash = signature
 
-## Write to append-only log
+#### Write to append-only log
 
 with open('/var/log/secure/audit.log', 'a') as f:
 
@@ -342,6 +348,12 @@ Summary
 Implement structured JSON logging for all security-relevant events, centralize logs with tools like the ELK stack, integrate with a SIEM for correlation and alerting, enforce retention policies based on compliance requirements, protect log integrity with chained HMAC signatures, and redact sensitive data before storage. Regular log review and monitoring should be a scheduled operational activity, not an afterthought during incident response.
 
 **See also:** [Container Security Best Practices](</en/security/container-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>).
+
+**See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Container Security Best Practices](</en/security/container-security.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
+
+**See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Container Security Best Practices](</en/security/container-security.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
+
+**See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Container Security Best Practices](</en/security/container-security.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
 
 **See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Container Security Best Practices](</en/security/container-security.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
 

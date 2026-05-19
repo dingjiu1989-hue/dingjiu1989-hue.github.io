@@ -1,7 +1,7 @@
 ---
 title: "Best API Clients 2026: Postman vs Bruno vs Insomnia vs HTTPie vs Thunder Client"
 description: "Compare API testing clients for REST and GraphQL — from Postman's full platform to Bruno's git-native approach to VS Code-native Thunder Client."
-date: 2026-05-08
+date: 2025-11-03
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-api-clients-2026.html
 ---

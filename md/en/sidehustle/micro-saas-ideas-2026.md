@@ -1,7 +1,7 @@
 ---
 title: "50 Micro-SaaS Ideas for Solo Developers in 2026"
 description: "Curated list of 50 micro-SaaS ideas you can build solo in 2-8 weeks. Each includes target market, monetization model, and estimated revenue potential. No AI wrapper noise."
-date: 2026-05-08
+date: 2025-10-21
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/micro-saas-ideas-2026.html
 ---

@@ -47,13 +47,18 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/distributed-tracing-deep.png",
       "datePublished": "2026-04-23",
       "dateModified": "2026-05-18",
-      "wordCount": "1159",
+      "wordCount": "1220",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/distributed-tracing-deep.html"},
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/distributed-tracing-deep-dive-cob"
+      ],
       "articleBody": "Trace context propagation, sampling strategies, visualization, and implementation of distributed tracing"
     }
     </script>
@@ -96,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/distributed-tracing-deep.png" alt="Distributed Tracing: Deep Dive" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Distributed Tracing: Deep Dive</h2>
 <h3>Distributed Tracing: Deep Dive</h3>
-<h3>Distributed Tracing: Deep Dive</h3>
-<h3>Distributed Tracing: Deep Dive</h3>
-<h3>Distributed Tracing: Deep Dive</h3>
-<h3>Distributed Tracing: Deep Dive</h3>
-<h3>Distributed Tracing: Deep Dive</h3>
-<h3>Distributed Tracing: Deep Dive</h3>
-<h3>Distributed Tracing: Deep Dive</h3>
-<h3>Distributed Tracing: Deep Dive</h3>
-<h3>Distributed Tracing: Deep Dive</h3>
-<h3>Distributed Tracing: Deep Dive</h3>
-<h3>Distributed Tracing: Deep Dive</h3>
+<h4>Distributed Tracing: Deep Dive</h4>
+<h4>Distributed Tracing: Deep Dive</h4>
+<h4>Distributed Tracing: Deep Dive</h4>
+<h4>Distributed Tracing: Deep Dive</h4>
+<h4>Distributed Tracing: Deep Dive</h4>
+<h4>Distributed Tracing: Deep Dive</h4>
+<h4>Distributed Tracing: Deep Dive</h4>
+<h4>Distributed Tracing: Deep Dive</h4>
+<h4>Distributed Tracing: Deep Dive</h4>
+<h4>Distributed Tracing: Deep Dive</h4>
+<h4>Distributed Tracing: Deep Dive</h4>
+<h4>Distributed Tracing: Deep Dive</h4>
+<h4>Distributed Tracing: Deep Dive</h4>
 <p>Distributed tracing reconstructs the path of a single request as it traverses multiple services, databases, and queues. Without tracing, understanding the performance of a distributed system requires correlating logs and metrics manually — a process that breaks down under complexity. Tracing provides an end-to-end view: which services were called, in what order, for how long, and whether they succeeded. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/distributed-tracing-deep.png" alt="Distributed Tracing: Deep Dive" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Trace context propagation is the mechanism that connects spans across service boundaries. When Service A calls Service B, it must pass trace context — trace ID, parent span ID, and any sampling decision — through the request. For HTTP, this is typically done through W3C Trace-Context headers (traceparent and tracestate). For messaging, the context is embedded in the message headers. For gRPC, it rides on metadata. The library or framework should propagate context automatically; manual propagation is error-prone and leads to broken traces. </p>
 <p>Span attributes enrich individual spans with domain-specific information. Standard attributes include: HTTP method and URL, database query text (sanitized), message queue topic, and error details. Custom attributes add business context: customer tier, product category, payment amount. Every attribute increases storage cost, so attributes should be chosen carefully. The OpenTelemetry semantic conventions provide a standardized attribute namespace, ensuring consistent querying across different services and languages. </p>
@@ -118,6 +125,8 @@
 <p>Tracing infrastructure components collect and process trace data. OpenTelemetry SDKs instrument the application and export spans. The OpenTelemetry Collector receives spans, processes them (sampling, attribute enrichment, batching), and exports to a backend. The backend (Jaeger, Tempo, Datadog) stores and indexes spans for querying. Each component must handle backpressure gracefully — if the backend is slow, the collector should buffer and retry rather than drop spans or slow down the application. </p>
 <p>Correlation with logs completes the observability picture. Span IDs embedded in log entries enable cross-referencing: find a slow trace, view the span details, and jump to the associated logs for that span. The OpenTelemetry approach generates all signals from the same instrumentation context, ensuring that trace IDs flow naturally into log records and metric labels. This unified context is the foundation of effective observability in distributed systems.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a></p></div>
     </article>

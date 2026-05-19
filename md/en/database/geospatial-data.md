@@ -1,7 +1,7 @@
 ---
 title: "Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries"
 description: "Comprehensive guide to geospatial data with PostGIS. Understand geometry vs geography types, spatial indexes, and common geospatial queries for GIS applications."
-date: 2026-05-12
+date: 2026-04-06
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/geospatial-data.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/geospatial-data.html
 
 ## Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
 
-## Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
 
-## Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
 
-## Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
 
-## Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
 
-## Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
 
-## Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
 
-## Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
 
-## Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
 
-## Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
 
-## Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
 
-## Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+
+#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+
+#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+
+#### Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
 
 Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries 
 
@@ -273,6 +279,12 @@ PostGIS vs Other Tools
 PostGIS is the most complete open-source spatial database. Use it as the system of record for all geospatial data, and only replicate to specialized tools (map rendering engines, geocoding services) when necessary. Start with geography types for global datasets and geometry for local projections, and always verify index usage in EXPLAIN plans for spatial queries.
 
 **See also:** [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>).
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>)
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>)
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>)
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>)
 

@@ -1,7 +1,7 @@
 ---
 title: "Bug Bounty Hunting Guide 2026: From First Bug to Consistent Income"
 description: "Practical guide to bug bounty hunting for developers — platforms, payout ranges, reconnaissance methodology, and realistic earning timelines."
-date: 2026-05-08
+date: 2025-10-25
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/bug-bounty-hunting-guide.html
 ---

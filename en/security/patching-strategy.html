@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/patching-strategy.png",
       "datePublished": "2026-03-12",
       "dateModified": "2026-05-01",
-      "wordCount": "2280",
+      "wordCount": "2324",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/patching-strategy.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/patching-strategy.png" alt="Patching Strategy" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Patching Strategy</h2>
 <h3>Patching Strategy</h3>
-<h3>Patching Strategy</h3>
-<h3>Patching Strategy</h3>
-<h3>Patching Strategy</h3>
-<h3>Patching Strategy</h3>
-<h3>Patching Strategy</h3>
-<h3>Patching Strategy</h3>
-<h3>Patching Strategy</h3>
-<h3>Patching Strategy</h3>
-<h3>Patching Strategy</h3>
-<h3>Patching Strategy</h3>
-<h3>Patching Strategy</h3>
+<h4>Patching Strategy</h4>
+<h4>Patching Strategy</h4>
+<h4>Patching Strategy</h4>
+<h4>Patching Strategy</h4>
+<h4>Patching Strategy</h4>
+<h4>Patching Strategy</h4>
+<h4>Patching Strategy</h4>
+<h4>Patching Strategy</h4>
+<h4>Patching Strategy</h4>
+<h4>Patching Strategy</h4>
+<h4>Patching Strategy</h4>
+<h4>Patching Strategy</h4>
+<h4>Patching Strategy</h4>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/patching-strategy.png" alt="Patching Strategy" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Patching is the most fundamental security practice, yet organizations consistently struggle with timely patch deployment. The challenge is balancing speed against stability — deploying patches too slowly leaves systems vulnerable, while deploying too quickly risks breaking critical applications. A mature patching strategy addresses both sides of this equation. </p>
 <p>Vulnerability Prioritization </p>
@@ -131,14 +135,14 @@
 <p>affected_systems: int</p>
 <p>def prioritize(vuln: Vulnerability) -&gt; int:</p>
 <p>score = vuln.cvss_score</p>
-<h3>Asset criticality multiplier</h3>
+<h4>Asset criticality multiplier</h4>
 <p>score *= (vuln.asset_criticality / 3)</p>
-<h3>Exploit availability</h3>
+<h4>Exploit availability</h4>
 <p>if vuln.exploit_available:</p>
 <p>score *= 1.5</p>
 <p>if vuln.in_wild:</p>
 <p>score *= 2.0</p>
-<h3>Reachability</h3>
+<h4>Reachability</h4>
 <p>if vuln.affected_systems &gt; 100:</p>
 <p>score *= 1.3</p>
 <p>return round(score, 1)</p>
@@ -188,27 +192,27 @@
 <p>strategy: rolling_update</p>
 <p>max_surge: 25%</p>
 <p>max_unavailable: 0</p>
-<h3>!/bin/bash</h3>
-<h3>Automated patch testing script</h3>
+<h4>!/bin/bash</h4>
+<h4>Automated patch testing script</h4>
 <p>set -euo pipefail</p>
 <p>PATCH_ID="$1"</p>
 <p>ENVIRONMENTS=("dev" "staging" "canary" "prod")</p>
 <p>for env in "${ENVIRONMENTS[@]}"; do</p>
 <p>echo "=== Deploying patch $PATCH_ID to $env ==="</p>
-<h3>Apply patch</h3>
+<h4>Apply patch</h4>
 <p>if ! ansible-playbook -i inventories/$env patch-playbook.yml \</p>
 <p>-e patch_id=$PATCH_ID; then</p>
 <p>echo "FAILED: Patch deployment to $env"</p>
 <p>rollback_patch $env $PATCH_ID</p>
 <p>exit 1</p>
 <p>fi</p>
-<h3>Run validation</h3>
+<h4>Run validation</h4>
 <p>if ! run_validation_tests $env; then</p>
 <p>echo "FAILED: Validation in $env"</p>
 <p>rollback_patch $env $PATCH_ID</p>
 <p>exit 1</p>
 <p>fi</p>
-<h3>Monitor for issues</h3>
+<h4>Monitor for issues</h4>
 <p>sleep $([ "$env" == "production" ] &amp;&amp; echo 3600 || echo 300)</p>
 <p>if check_alerts $env; then</p>
 <p>echo "ALERTS detected in $env after patch"</p>
@@ -248,8 +252,8 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- continuous_monitoring</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- post_incident_review</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- remove_virtual_patches_if_applicable</p>
-<h3>Virtual patching via WAF as immediate stopgap</h3>
-<h3>Deploy WAF rule to block exploit attempts</h3>
+<h4>Virtual patching via WAF as immediate stopgap</h4>
+<h4>Deploy WAF rule to block exploit attempts</h4>
 <p>cat &gt; /etc/modsecurity/crs/custom/emergency-sqli.conf &lt;&lt; 'EOF'</p>
 <p>SecRule REQUEST_FILENAME "@contains /api/endpoint" \</p>
 <p>"id:9999999,phase:2,deny,status:403,\</p>
@@ -286,6 +290,8 @@
 <p>Conclusion </p>
 <p>A mature patching strategy prioritizes based on exploitability and asset criticality, tests patches in progressive environments, maintains emergency procedures for zero-day vulnerabilities, and always plans for rollback. Automate as much of the pipeline as possible — manual patching does not scale and is prone to error in high-pressure situations.</p>
 <p><strong>See also:</strong> <a href="/en/security/vulnerability-management.html">Vulnerability Management</a>, <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p></div>
     </article>

@@ -1,7 +1,7 @@
 ---
 title: "When to Refactor vs Rewrite: A Developer's Decision Framework for 2026"
 description: "Practical decision framework for choosing between refactoring and rewriting. Includes strangler fig pattern, characterization tests, real-world case studies, and red flags to watch for."
-date: 2026-05-09
+date: 2025-11-28
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/refactor-vs-rewrite.html
 ---

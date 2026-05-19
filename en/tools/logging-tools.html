@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/logging-tools.png",
       "datePublished": "2026-01-27",
       "dateModified": "2026-05-04",
-      "wordCount": "1821",
+      "wordCount": "1918",
       "keywords": "Developer Tools, Productivity",
       "about": [{"@type": "Thing", "name": "Developer Tools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/logging-tools.html"},
@@ -109,24 +111,26 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/logging-tools.png" alt="Logging Tools: ELK Stack vs Loki vs Splunk" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Logging Tools: ELK Stack vs Loki vs Splunk</h2>
 <h3>Logging Tools: ELK Stack vs Loki vs Splunk</h3>
-<h3>Logging Tools: ELK Stack vs Loki vs Splunk</h3>
-<h3>Logging Tools: ELK Stack vs Loki vs Splunk</h3>
-<h3>Logging Tools: ELK Stack vs Loki vs Splunk</h3>
-<h3>Logging Tools: ELK Stack vs Loki vs Splunk</h3>
-<h3>Logging Tools: ELK Stack vs Loki vs Splunk</h3>
-<h3>Logging Tools: ELK Stack vs Loki vs Splunk</h3>
-<h3>Logging Tools: ELK Stack vs Loki vs Splunk</h3>
-<h3>Logging Tools: ELK Stack vs Loki vs Splunk</h3>
-<h3>Logging Tools: ELK Stack vs Loki vs Splunk</h3>
-<h3>Logging Tools: ELK Stack vs Loki vs Splunk</h3>
-<h3>Logging Tools: ELK Stack vs Loki vs Splunk</h3>
-<h3>Logging Tools: ELK Stack vs Loki vs Splunk</h3>
+<h4>Logging Tools: ELK Stack vs Loki vs Splunk</h4>
+<h4>Logging Tools: ELK Stack vs Loki vs Splunk</h4>
+<h4>Logging Tools: ELK Stack vs Loki vs Splunk</h4>
+<h4>Logging Tools: ELK Stack vs Loki vs Splunk</h4>
+<h4>Logging Tools: ELK Stack vs Loki vs Splunk</h4>
+<h4>Logging Tools: ELK Stack vs Loki vs Splunk</h4>
+<h4>Logging Tools: ELK Stack vs Loki vs Splunk</h4>
+<h4>Logging Tools: ELK Stack vs Loki vs Splunk</h4>
+<h4>Logging Tools: ELK Stack vs Loki vs Splunk</h4>
+<h4>Logging Tools: ELK Stack vs Loki vs Splunk</h4>
+<h4>Logging Tools: ELK Stack vs Loki vs Splunk</h4>
+<h4>Logging Tools: ELK Stack vs Loki vs Splunk</h4>
+<h4>Logging Tools: ELK Stack vs Loki vs Splunk</h4>
+<h4>Logging Tools: ELK Stack vs Loki vs Splunk</h4>
 <h4>Introduction</h4>
 <p>Centralized logging transforms noisy application output into a searchable, actionable resource. The three leading approaches--ELK Stack (Elasticsearch, Logstash, Kibana), Grafana Loki, and Splunk--take fundamentally different approaches to log ingestion, indexing, and querying. Choosing the right one affects both your daily operations and your monthly infrastructure bill.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/logging-tools.png" alt="Logging Tools: ELK Stack vs Loki vs Splunk" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Architecture Comparison</h4>
 <h4>ELK Stack</h4>
 <p>Elasticsearch indexes every field in every log line, enabling rich full-text search at the cost of higher storage consumption:</p>
-<h3>Filebeat configuration for shipping logs</h3>
+<h4>Filebeat configuration for shipping logs</h4>
 <p>filebeat.inputs:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: container</p>
 <p>paths:</p>
@@ -144,7 +148,7 @@
 <p>hosts: ["elasticsearch:9200"]</p>
 <p>index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"</p>
 <p>pipeline: "parse-logs"</p>
-<h3>Elasticsearch index lifecycle policy</h3>
+<h4>Elasticsearch index lifecycle policy</h4>
 <p>PUT _ilm/policy/logs-30day</p>
 <p>{</p>
 <p>"policy": {</p>
@@ -172,7 +176,7 @@
 <p>}</p>
 <h4>Grafana Loki</h4>
 <p>Loki indexes only metadata labels, leaving log content unindexed for dramatically lower storage costs:</p>
-<h3>Loki configuration</h3>
+<h4>Loki configuration</h4>
 <p>auth_enabled: false</p>
 <p>server:</p>
 <p>http_listen_port: 3100</p>
@@ -209,20 +213,20 @@
 <p>retention_enabled: true</p>
 <h4>Splunk</h4>
 <p>Splunk uses a proprietary indexer architecture with heavy indexing at ingest:</p>
-<h3>inputs.conf - Splunk forwarder configuration</h3>
+<h4>inputs.conf - Splunk forwarder configuration</h4>
 <p>[monitor:///var/log/app/*.log]</p>
 <p>disabled = false</p>
 <p>index = production</p>
 <p>sourcetype = applog</p>
 <p>crcSalt = </p>
-<h3>props.conf - Field extraction</h3>
+<h4>props.conf - Field extraction</h4>
 <p>[applog]</p>
 <p>SHOULD_LINEMERGE = true</p>
 <p>LINE_BREAKER = ([\r\n]+)</p>
 <p>TRUNCATE = 20000</p>
 <p>KV_MODE = json</p>
 <p>REPORT-appfields = app-timestamp-extract, app-level-extract</p>
-<h3>transforms.conf</h3>
+<h4>transforms.conf</h4>
 <p>[app-timestamp-extract]</p>
 <p>REGEX = (\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})</p>
 <p>FORMAT = date::$1</p>
@@ -291,7 +295,7 @@
 <p>| Cardinality limits | 20k fields/document | Label value cardinality | 10k source types |</p>
 <p>| Full-text search | Excellent | Limited (filter + grep) | Excellent |</p>
 <h4>Retention Policies</h4>
-<h3>Loki: retention via compactor</h3>
+<h4>Loki: retention via compactor</h4>
 <p>compactor:</p>
 <p>retention_enabled: true</p>
 <p>retention_rules:</p>
@@ -325,6 +329,8 @@
 </ul>
 <p>For most engineering teams, Loki paired with Grafana offers the best balance of cost and capability. Move to ELK when you need indexed structured search on arbitrary fields. Reserve Splunk for regulated environments where audit trails and access controls justify the expense.</p>
 <p><strong>See also:</strong> <a href="/en/tools/best-log-management-tools.html">Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom</a>, <a href="/en/tools/monitoring-tools.html">Monitoring Tools: Grafana vs Datadog vs New Relic</a>, <a href="/en/tools/feature-flag-tools.html">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tools/best-log-management-tools.html">Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom</a>, <a href="/en/tools/monitoring-tools.html">Monitoring Tools: Grafana vs Datadog vs New Relic</a>, <a href="/en/tools/feature-flag-tools.html">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/best-log-management-tools.html">Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom</a>, <a href="/en/tools/monitoring-tools.html">Monitoring Tools: Grafana vs Datadog vs New Relic</a>, <a href="/en/tools/feature-flag-tools.html">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/best-log-management-tools.html">Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom</a>, <a href="/en/tools/monitoring-tools.html">Monitoring Tools: Grafana vs Datadog vs New Relic</a>, <a href="/en/tools/feature-flag-tools.html">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/best-log-management-tools.html">Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom</a>, <a href="/en/tools/monitoring-tools.html">Monitoring Tools: Grafana vs Datadog vs New Relic</a>, <a href="/en/tools/feature-flag-tools.html">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/best-log-management-tools.html">Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom</a>, <a href="/en/tools/monitoring-tools.html">Monitoring Tools: Grafana vs Datadog vs New Relic</a>, <a href="/en/tools/feature-flag-tools.html">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></p></div>
     </article>

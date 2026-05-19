@@ -1,7 +1,7 @@
 ---
 title: "Best API Testing Tools 2026: Postman vs Insomnia vs Bruno vs Hurl"
 description: "GUI vs CLI vs Git-native — compare the top API testing and debugging tools. REST, GraphQL, gRPC testing workflows and team collaboration features compared."
-date: 2026-05-08
+date: 2025-10-28
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-api-testing-tools.html
 ---

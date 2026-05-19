@@ -1,7 +1,7 @@
 ---
 title: "Schema Design Patterns: Normalization, Denormalization, Naming Conventions"
 description: "Explore database schema design patterns: normalization vs denormalization, naming conventions, timestamp handling, and practical schema design for production applications."
-date: 2026-05-12
+date: 2026-04-08
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/schema-design.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/schema-design.html
 
 ## Schema Design Patterns: Normalization, Denormalization, Naming Conventions
 
-## Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
 
-## Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
 
-## Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
 
-## Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
 
-## Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
 
-## Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
 
-## Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
 
-## Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
 
-## Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
 
-## Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
 
-## Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+
+#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+
+#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+
+#### Schema Design Patterns: Normalization, Denormalization, Naming Conventions
 
 Schema Design Patterns: Normalization, Denormalization, Naming Conventions 
 
@@ -346,6 +352,12 @@ Practical Schema Checklist
 Schema design is a long-term investment. A well-designed schema reduces bugs, makes queries faster, and makes the codebase easier for new developers to understand. Invest the time upfront; the payoff compounds over years of maintenance.
 
 **See also:** [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Schema Migration: Version Control, Rollback, and Zero-Downtime](</en/database/database-schema-migration-strategies.html>).
+
+**See also:** [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>)
+
+**See also:** [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>)
+
+**See also:** [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>)
 
 **See also:** [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>)
 

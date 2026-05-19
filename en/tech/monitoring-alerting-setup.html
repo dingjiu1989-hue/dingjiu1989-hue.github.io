@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/monitoring-alerting-setup.png",
       "datePublished": "2025-12-02",
       "dateModified": "2026-04-02",
-      "wordCount": "3381",
+      "wordCount": "3445",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/monitoring-alerting-setup.html"},
@@ -99,19 +101,21 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/monitoring-alerting-setup.png" alt="Monitoring and Alerting Setup" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Monitoring and Alerting Setup</h2>
 <h3>Monitoring and Alerting Setup</h3>
-<h3>Monitoring and Alerting Setup</h3>
-<h3>Monitoring and Alerting Setup</h3>
-<h3>Monitoring and Alerting Setup</h3>
-<h3>Monitoring and Alerting Setup</h3>
-<h3>Monitoring and Alerting Setup</h3>
-<h3>Monitoring and Alerting Setup</h3>
-<h3>Monitoring and Alerting Setup</h3>
-<h3>Monitoring and Alerting Setup</h3>
-<h3>Monitoring and Alerting Setup</h3>
-<h3>Monitoring and Alerting Setup</h3>
-<h3>Monitoring and Alerting Setup</h3>
-<h3>Monitoring and Alerting Setup</h3>
-<h3>Monitoring and Alerting Setup</h3>
+<h4>Monitoring and Alerting Setup</h4>
+<h4>Monitoring and Alerting Setup</h4>
+<h4>Monitoring and Alerting Setup</h4>
+<h4>Monitoring and Alerting Setup</h4>
+<h4>Monitoring and Alerting Setup</h4>
+<h4>Monitoring and Alerting Setup</h4>
+<h4>Monitoring and Alerting Setup</h4>
+<h4>Monitoring and Alerting Setup</h4>
+<h4>Monitoring and Alerting Setup</h4>
+<h4>Monitoring and Alerting Setup</h4>
+<h4>Monitoring and Alerting Setup</h4>
+<h4>Monitoring and Alerting Setup</h4>
+<h4>Monitoring and Alerting Setup</h4>
+<h4>Monitoring and Alerting Setup</h4>
+<h4>Monitoring and Alerting Setup</h4>
 <p>A robust monitoring and alerting system is the backbone of reliable production infrastructure. Without it, you are flying blind -- discovering outages only when users complain. This guide covers setting up a complete monitoring stack and designing effective alert rules.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/monitoring-alerting-setup.png" alt="Monitoring and Alerting Setup" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>The Four Golden Signals</h4>
 <p>Google's SRE book defines four key metrics for user-facing systems:</p>
@@ -131,7 +135,7 @@
 <p>System Notification</p>
 <p>Metrics Channels</p>
 <p>Install Prometheus and configure it to scrape targets:</p>
-<h3>prometheus.yml</h3>
+<h4>prometheus.yml</h4>
 <p>global:</p>
 <p>scrape_interval: 15s</p>
 <p>evaluation_interval: 15s</p>
@@ -164,7 +168,7 @@
 <p>Use Histogram metrics for latency, Counter for request counts, and Gauge for current resource usage. Avoid unbounded label cardinality.</p>
 <h4>Centralized Logging</h4>
 <p>The ELK stack (Elasticsearch, Logstash, Kibana) remains popular, but the Grafana Loki stack is simpler and cheaper for log aggregation:</p>
-<h3>docker-compose for Loki + Promtail</h3>
+<h4>docker-compose for Loki + Promtail</h4>
 <p>services:</p>
 <p>loki:</p>
 <p>image: grafana/loki:3.0</p>
@@ -180,7 +184,7 @@
 <p>Promtail tails log files, adds labels, and ships them to Loki. Grafana queries both Prometheus (metrics) and Loki (logs) in a unified dashboard.</p>
 <h4>Effective Alerting Rules</h4>
 <p>Design alerts that are actionable and meaningful:</p>
-<h3>prometheus-alerts.yml</h3>
+<h4>prometheus-alerts.yml</h4>
 <p>groups:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: application</p>
 <p>rules:</p>
@@ -226,7 +230,7 @@
 </ul>
 <h4>Notification Channels</h4>
 <p>Route alerts through Alertmanager:</p>
-<h3>alertmanager.yml</h3>
+<h4>alertmanager.yml</h4>
 <p>route:</p>
 <p>receiver: 'team-page'</p>
 <p>routes:</p>
@@ -260,7 +264,7 @@
 </ul>
 <h4>Synthetic Monitoring</h4>
 <p>Complement real-user monitoring with synthetic checks:</p>
-<h3>blackbox-exporter targets</h3>
+<h4>blackbox-exporter targets</h4>
 <p>modules:</p>
 <p>http_2xx:</p>
 <p>prober: http</p>
@@ -271,6 +275,8 @@
 <h4>Summary</h4>
 <p>A complete monitoring stack requires metrics (Prometheus), logs (Loki), dashboards (Grafana), and alerting (Alertmanager). Instrument your applications with the four golden signals, design alerts that fire on symptoms not causes, and ensure every alert has a clear path to resolution. Start simple with Prometheus and Grafana, then add log aggregation and synthetic monitoring as your infrastructure grows.</p>
 <p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/log-management.html">Log Management</a>, <a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p></div>
     </article>

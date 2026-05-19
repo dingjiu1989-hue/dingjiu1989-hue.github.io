@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-context-window.png",
       "datePublished": "2025-12-12",
       "dateModified": "2026-05-13",
-      "wordCount": "2287",
+      "wordCount": "2343",
       "keywords": "Artificial Intelligence, Machine Learning",
       "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/llm-context-window.html"},
@@ -98,18 +100,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-context-window.png" alt="LLM Context Window Management" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>LLM Context Window Management</h2>
 <h3>LLM Context Window Management</h3>
-<h3>LLM Context Window Management</h3>
-<h3>LLM Context Window Management</h3>
-<h3>LLM Context Window Management</h3>
-<h3>LLM Context Window Management</h3>
-<h3>LLM Context Window Management</h3>
-<h3>LLM Context Window Management</h3>
-<h3>LLM Context Window Management</h3>
-<h3>LLM Context Window Management</h3>
-<h3>LLM Context Window Management</h3>
-<h3>LLM Context Window Management</h3>
-<h3>LLM Context Window Management</h3>
-<h3>LLM Context Window Management</h3>
+<h4>LLM Context Window Management</h4>
+<h4>LLM Context Window Management</h4>
+<h4>LLM Context Window Management</h4>
+<h4>LLM Context Window Management</h4>
+<h4>LLM Context Window Management</h4>
+<h4>LLM Context Window Management</h4>
+<h4>LLM Context Window Management</h4>
+<h4>LLM Context Window Management</h4>
+<h4>LLM Context Window Management</h4>
+<h4>LLM Context Window Management</h4>
+<h4>LLM Context Window Management</h4>
+<h4>LLM Context Window Management</h4>
+<h4>LLM Context Window Management</h4>
+<h4>LLM Context Window Management</h4>
 <h4>Introduction</h4>
 <p>Context window size has grown from 2K tokens in early GPT models to 200K tokens in GPT-4, 200K in Claude 3, and even 1 million tokens in Gemini 1.5 Pro. Despite this growth, effective context management remains critical — models attend less effectively to information in the middle of long contexts, token costs scale with context length, and response latency increases. This guide covers strategies for managing context windows in production.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-context-window.png" alt="LLM Context Window Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>The "Lost in the Middle" Problem</h4>
@@ -155,7 +159,7 @@
 <p>def get_conversation_context(conversation, max_turns=10):</p>
 <p>"""Keep only the most recent max_turns of conversation."""</p>
 <p>trimmed = conversation[-max_turns:]</p>
-<h3>Include a summary of earlier turns if needed</h3>
+<h4>Include a summary of earlier turns if needed</h4>
 <p>if len(conversation) &gt; max_turns:</p>
 <p>summary = summarize_conversation(conversation[:-max_turns])</p>
 <p>trimmed = [{"role": "system", "content": f"Earlier summary: {summary}"}] + trimmed</p>
@@ -195,19 +199,19 @@
 <p>ranked = cross_encoder_rank(chunks, query)</p>
 <p>selected = []</p>
 <p>token_count = 0</p>
-<h3>Always include the top chunk</h3>
+<h4>Always include the top chunk</h4>
 <p>top = ranked[0]</p>
 <p>if token_count + len(top) &lt;= max_tokens:</p>
 <p>selected.append(top)</p>
 <p>token_count += len(top)</p>
-<h3>Fill from both ends inward</h3>
+<h4>Fill from both ends inward</h4>
 <p>for chunk in ranked[1:]:</p>
 <p>if token_count + len(chunk) &lt;= max_tokens:</p>
 <p>selected.append(chunk)</p>
 <p>token_count += len(chunk)</p>
 <p>else:</p>
 <p>break</p>
-<h3>Reorder: best chunk last, second best first, rest in middle</h3>
+<h4>Reorder: best chunk last, second best first, rest in middle</h4>
 <p>return reorder_for_positioning(selected)</p>
 <h4>Long Document Processing</h4>
 <h4>Map-Reduce for Very Long Documents</h4>
@@ -250,6 +254,8 @@
 <h4>Conclusion</h4>
 <p>Effective context management is essential for building reliable LLM applications, regardless of context window size. Prioritize important information, use hierarchical summarization for long conversations, rank documents carefully in RAG systems, and monitor context usage in production. The models with million-token windows are impressive, but they work best when you treat their attention with respect rather than as unlimited storage.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/llm-evaluation-metrics.html">LLM Evaluation Metrics</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p></div>
     </article>

@@ -15,7 +15,7 @@
     gtag('config', 'G-XGFYGQE9NS');
     </script>
     <meta property="og:title" content="Hexagonal Architecture (Ports and Adapters)">
-    <meta property="og:description" content="Learn hexagonal architecture for building maintainable, testable applications.">
+    <meta property="og:description" content="Learn hexagonal architecture for building maintainable, testable applications — ports and adapters, dependency inversion, domain isolation, and migrating legacy code to hexagonal structure.">
     <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/hexagonal-architecture.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
@@ -25,13 +25,13 @@
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Hexagonal Architecture (Ports and Adapters)">
-    <meta name="twitter:description" content="Learn hexagonal architecture for building maintainable, testable applications.">
+    <meta name="twitter:description" content="Learn hexagonal architecture for building maintainable, testable applications — ports and adapters, dependency inversion, domain isolation, and migrating legacy code to hexagonal structure.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/hexagonal-architecture.png">
     <meta property="article:published_time" content="2025-12-27">
     <meta property="article:modified_time" content="2026-04-15">
     <meta property="article:tag" content="Architecture, System Design">
     <title>Hexagonal Architecture (Ports and Adapters) — SourceHub</title>
-    <meta name="description" content="Learn hexagonal architecture for building maintainable, testable applications.">
+    <meta name="description" content="Learn hexagonal architecture for building maintainable, testable applications — ports and adapters, dependency inversion, domain isolation, and migrating legacy code to hexagonal structure.">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/hexagonal-architecture.html">
     <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/hexagonal-architecture.html">
@@ -43,21 +43,23 @@
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "Hexagonal Architecture (Ports and Adapters)",
-      "description": "Learn hexagonal architecture for building maintainable, testable applications.",
+      "description": "Learn hexagonal architecture for building maintainable, testable applications — ports and adapters, dependency inversion, domain isolation, and migrating legacy code to hexagonal structure.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/hexagonal-architecture.png",
       "datePublished": "2025-12-27",
       "dateModified": "2026-04-15",
-      "wordCount": "1067",
+      "wordCount": "1132",
       "keywords": "Architecture, System Design",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/hexagonal-architecture.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/hexagonal-architecture-ports-and-adapters-fi8"
       ],
-      "articleBody": "Learn hexagonal architecture for building maintainable, testable applications."
+      "articleBody": "Learn hexagonal architecture for building maintainable, testable applications \u2014 ports and adapters, dependency inversion, domain isolation, and migrating legacy code to hexagonal structure."
     }
     </script>
     <script type="application/ld+json">
@@ -98,17 +100,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/hexagonal-architecture.png" alt="Hexagonal Architecture (Ports and Adapters)" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Hexagonal Architecture (Ports and Adapters)</h2>
 <h3>Hexagonal Architecture (Ports and Adapters)</h3>
-<h3>Hexagonal Architecture (Ports and Adapters)</h3>
-<h3>Hexagonal Architecture (Ports and Adapters)</h3>
-<h3>Hexagonal Architecture (Ports and Adapters)</h3>
-<h3>Hexagonal Architecture (Ports and Adapters)</h3>
-<h3>Hexagonal Architecture (Ports and Adapters)</h3>
-<h3>Hexagonal Architecture (Ports and Adapters)</h3>
-<h3>Hexagonal Architecture (Ports and Adapters)</h3>
-<h3>Hexagonal Architecture (Ports and Adapters)</h3>
-<h3>Hexagonal Architecture (Ports and Adapters)</h3>
-<h3>Hexagonal Architecture (Ports and Adapters)</h3>
-<h3>Hexagonal Architecture (Ports and Adapters)</h3>
+<h4>Hexagonal Architecture (Ports and Adapters)</h4>
+<h4>Hexagonal Architecture (Ports and Adapters)</h4>
+<h4>Hexagonal Architecture (Ports and Adapters)</h4>
+<h4>Hexagonal Architecture (Ports and Adapters)</h4>
+<h4>Hexagonal Architecture (Ports and Adapters)</h4>
+<h4>Hexagonal Architecture (Ports and Adapters)</h4>
+<h4>Hexagonal Architecture (Ports and Adapters)</h4>
+<h4>Hexagonal Architecture (Ports and Adapters)</h4>
+<h4>Hexagonal Architecture (Ports and Adapters)</h4>
+<h4>Hexagonal Architecture (Ports and Adapters)</h4>
+<h4>Hexagonal Architecture (Ports and Adapters)</h4>
+<h4>Hexagonal Architecture (Ports and Adapters)</h4>
+<h4>Hexagonal Architecture (Ports and Adapters)</h4>
 <p>Hexagonal Architecture, also known as the Ports and Adapters pattern, was introduced by Alistair Cockburn to create applications that are isolated from their technical infrastructure. The core idea is that the application's business logic is at the center, communicating with the outside world through well-defined ports and adapters. This separation makes the application testable, maintainable, and adaptable to changing infrastructure. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/hexagonal-architecture.png" alt="Hexagonal Architecture (Ports and Adapters)" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Core Concept </p>
 <p>In Hexagonal Architecture, the application core contains the domain logic and business rules. It defines ports—interfaces that express what the application needs from the outside world (driven ports) and what the outside world can do with the application (driving ports). Adapters implement these ports to connect the core to specific technologies. </p>
@@ -131,7 +135,9 @@
 <p>Hexagonal Architecture pairs well with Domain-Driven Design, where the core contains the domain model and the ports express the domain's requirements from infrastructure. It also integrates naturally with Clean Architecture—the hexagonal core is the inner layer, and the adapters are the outer layers. For any long-lived application with significant business logic, the investment in hexagonal isolation pays substantial dividends.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/clean-architecture.html">Clean Architecture Explained</a>, <a href="/en/architecture/serverless-architecture.html">Serverless Architecture Patterns</a>, <a href="/en/architecture/rest-api-design.html">REST API Design Best Practices</a>.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/clean-architecture.html">Clean Architecture Explained</a>, <a href="/en/architecture/rest-api-design.html">REST API Design Best Practices</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/clean-architecture.html">Clean Architecture Explained</a>, <a href="/en/architecture/rest-api-design.html">REST API Design Best Practices</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/clean-architecture.html">Clean Architecture Explained</a>, <a href="/en/architecture/rest-api-design.html">REST API Design Best Practices</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/clean-architecture.html">Clean Architecture Explained</a>, <a href="/en/architecture/rest-api-design.html">REST API Design Best Practices</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/clean-architecture.html">Clean Architecture Explained</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/clean-architecture.html">Clean Architecture Explained</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/clean-architecture.html">Clean Architecture Explained</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -143,7 +149,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/clean-architecture.html" class="related-card">Clean Architecture Explained</a><a href="/en/architecture/rest-api-design.html" class="related-card">REST API Design Best Practices</a><a href="/en/architecture/retry-backoff.html" class="related-card">Retry and Backoff Strategies</a><a href="/en/architecture/serverless-architecture.html" class="related-card">Serverless Architecture Patterns</a></div>
+      <div class="related-grid"><a href="/en/architecture/clean-architecture.html" class="related-card">Clean Architecture Explained</a><a href="/en/architecture/strangler-fig.html" class="related-card">Strangler Fig Pattern for Legacy Migration</a><a href="/en/architecture/backend-for-frontend.html" class="related-card">Backend for Frontend (BFF) Pattern</a><a href="/en/architecture/bulkhead-pattern.html" class="related-card">Bulkhead Pattern for Resilience</a></div>
     </section>
     
   </div>

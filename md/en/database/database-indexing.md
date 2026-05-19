@@ -1,7 +1,7 @@
 ---
 title: "Database Indexing Strategies"
 description: "A comprehensive guide to database indexing covering B-tree, hash, GiST, GIN indexes, composite indexes, and query optimization."
-date: 2026-05-11
+date: 2025-12-22
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/database-indexing.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/database-indexing.html
 
 ## Database Indexing Strategies
 
-## Database Indexing Strategies
+### Database Indexing Strategies
 
-## Database Indexing Strategies
+#### Database Indexing Strategies
 
-## Database Indexing Strategies
+#### Database Indexing Strategies
 
-## Database Indexing Strategies
+#### Database Indexing Strategies
 
-## Database Indexing Strategies
+#### Database Indexing Strategies
 
-## Database Indexing Strategies
+#### Database Indexing Strategies
 
-## Database Indexing Strategies
+#### Database Indexing Strategies
 
-## Database Indexing Strategies
+#### Database Indexing Strategies
 
-## Database Indexing Strategies
+#### Database Indexing Strategies
 
-## Database Indexing Strategies
+#### Database Indexing Strategies
 
-## Database Indexing Strategies
+#### Database Indexing Strategies
+
+#### Database Indexing Strategies
+
+#### Database Indexing Strategies
+
+#### Database Indexing Strategies
 
 What Is Database Indexing? 
 
@@ -207,6 +213,12 @@ Summary
 Indexes are the most impactful performance optimization for database queries. Use B-tree indexes as the default for most workloads, composite indexes with carefully ordered columns for multi-condition queries, and specialized types (GIN, GiST, BRIN) for specific use cases. Monitor index usage and remove unused indexes to keep write performance optimal. Always run queries through EXPLAIN ANALYZE to verify the planner is using your indexes effectively.
 
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>).
+
+**See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained](</en/tech/database-indexing-guide.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
+
+**See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained](</en/tech/database-indexing-guide.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
+
+**See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained](</en/tech/database-indexing-guide.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
 
 **See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained](</en/tech/database-indexing-guide.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
 

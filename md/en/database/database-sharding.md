@@ -1,7 +1,7 @@
 ---
 title: "Database Sharding: Strategies and Trade-offs"
 description: "Explore key-based, range-based, and directory-based sharding strategies with rebalancing challenges and tools like Vitess and Citus."
-date: 2026-05-12
+date: 2026-03-27
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/database-sharding.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/database-sharding.html
 
 ## Database Sharding: Strategies and Trade-offs
 
-## Database Sharding: Strategies and Trade-offs
+### Database Sharding: Strategies and Trade-offs
 
-## Database Sharding: Strategies and Trade-offs
+#### Database Sharding: Strategies and Trade-offs
 
-## Database Sharding: Strategies and Trade-offs
+#### Database Sharding: Strategies and Trade-offs
 
-## Database Sharding: Strategies and Trade-offs
+#### Database Sharding: Strategies and Trade-offs
 
-## Database Sharding: Strategies and Trade-offs
+#### Database Sharding: Strategies and Trade-offs
 
-## Database Sharding: Strategies and Trade-offs
+#### Database Sharding: Strategies and Trade-offs
 
-## Database Sharding: Strategies and Trade-offs
+#### Database Sharding: Strategies and Trade-offs
 
-## Database Sharding: Strategies and Trade-offs
+#### Database Sharding: Strategies and Trade-offs
 
-## Database Sharding: Strategies and Trade-offs
+#### Database Sharding: Strategies and Trade-offs
 
-## Database Sharding: Strategies and Trade-offs
+#### Database Sharding: Strategies and Trade-offs
 
-## Database Sharding: Strategies and Trade-offs
+#### Database Sharding: Strategies and Trade-offs
+
+#### Database Sharding: Strategies and Trade-offs
+
+#### Database Sharding: Strategies and Trade-offs
+
+#### Database Sharding: Strategies and Trade-offs
 
 What is Sharding? 
 
@@ -99,6 +105,12 @@ Conclusion
 Choose key-based sharding for even distribution, range-based for time-series data, and directory-based for maximum flexibility. Design shard keys carefully for even distribution. Plan for rebalancing from the start. Avoid cross-shard queries where possible.
 
 **See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Normalization Explained](</en/database/database-normalization.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>).
+
+**See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Normalization Explained](</en/database/database-normalization.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
+
+**See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Normalization Explained](</en/database/database-normalization.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
+
+**See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Normalization Explained](</en/database/database-normalization.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
 
 **See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Normalization Explained](</en/database/database-normalization.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
 

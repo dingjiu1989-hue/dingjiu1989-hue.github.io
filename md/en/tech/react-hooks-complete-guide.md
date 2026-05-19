@@ -1,7 +1,7 @@
 ---
 title: "React Hooks Complete Guide 2026: From useState to useOptimistic"
 description: "Every React hook explained with real examples: useState, useEffect, useContext, useReducer, useMemo, useCallback, useRef, useTransition, useDeferredValue, and the new useOptimistic hook."
-date: 2026-05-08
+date: 2025-10-13
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/react-hooks-complete-guide.html
 ---

@@ -13577,6 +13577,8 @@ def make_article_html(art, board_id, board_name, all_posts):
       "keywords": "{tags_str}",
       "about": [{about_json}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {{"@type": "Person", "name": "SourceHub"}},
       "publisher": {{"@type": "Organization", "name": "SourceHub", "logo": {{"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}}}},
       "mainEntityOfPage": {{"@type": "WebPage", "@id": "{art_url}"}}{sameas_json},
@@ -13692,6 +13694,7 @@ def make_homepage(data):
       "name": "SourceHub",
       "url": "https://dingjiu1989-hue.github.io/en/",
       "description": "{site['tagline']}",
+      "acquireLicensePage": "https://dingjiu1989-hue.github.io/en/about.html",
       "potentialAction": {{
         "@type": "SearchAction",
         "target": {{

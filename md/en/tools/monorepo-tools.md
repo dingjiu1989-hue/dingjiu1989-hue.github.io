@@ -1,7 +1,7 @@
 ---
 title: "Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison"
 description: "Compare monorepo build tools: Turborepo for caching, Nx for extensibility, Bazel for correctness at scale, and Lage for simplicity with Microsoft-ecosystem inte"
-date: 2026-05-12
+date: 2026-02-05
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/monorepo-tools.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/tools/monorepo-tools.html
 
 ## Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
 
-## Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
 
-## Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+#### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
 
-## Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+#### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
 
-## Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+#### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
 
-## Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+#### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
 
-## Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+#### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
 
-## Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+#### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
 
-## Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+#### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
 
-## Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+#### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
 
-## Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+#### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
 
-## Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+#### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
 
-## Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+#### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
 
-### Introduction
+#### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+
+#### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+
+#### Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+
+#### Introduction
 
 Monorepos — storing multiple projects in a single repository — offer simplified dependency management, atomic commits, and shared tooling. But without the right build tool, monorepos become slow as they grow. This article compares four leading monorepo orchestration tools: Turborepo, Nx, Bazel, and Lage.
 
-### Turborepo
+#### Turborepo
 
 Vercel's build orchestrator focuses on caching and task scheduling:
 
@@ -94,23 +100,23 @@ Vercel's build orchestrator focuses on caching and task scheduling:
 
 }
 
-## Run builds across all workspaces in dependency order
+#### Run builds across all workspaces in dependency order
 
 turbo run build
 
-## Run with parallel execution (default: CPU count)
+#### Run with parallel execution (default: CPU count)
 
 turbo run build --parallel
 
-## Dry run to see execution plan
+#### Dry run to see execution plan
 
 turbo run build --dry
 
-## Filter specific packages
+#### Filter specific packages
 
 turbo run build --filter=packages/core...
 
-## Remote caching (Vercel)
+#### Remote caching (Vercel)
 
 turbo run build --remote-only
 
@@ -118,15 +124,15 @@ turbo run build --remote-only
 
 **Weaknesses** : Limited to JavaScript/TypeScript ecosystem, less sophisticated dependency graph analysis than Nx, remote caching requires Vercel.
 
-### Nx
+#### Nx
 
 Nx provides build orchestration with powerful code generation and dependency analysis:
 
-## Create an Nx workspace
+#### Create an Nx workspace
 
 npx create-nx-workspace@latest myorg
 
-## Add capabilities
+#### Add capabilities
 
 nx g @nx/next:app my-app
 
@@ -134,15 +140,15 @@ nx g @nx/react:lib shared-ui
 
 nx g @nx/node:lib api-interfaces
 
-## Run tasks
+#### Run tasks
 
 nx run-many -t build test lint
 
-## Visualize dependencies
+#### Visualize dependencies
 
 nx graph
 
-## Affected commands (only run what changed)
+#### Affected commands (only run what changed)
 
 nx affected:test --base=main
 
@@ -188,11 +194,11 @@ nx affected:test --base=main
 
 **Weaknesses** : Steeper learning curve, configuration overhead for simple projects, opinionated directory structure, Nx Cloud costs for advanced features.
 
-### Bazel
+#### Bazel
 
 Google's build system prioritizes correctness and hermetic builds:
 
-## BUILD.bazel
+#### BUILD.bazel
 
 load("@npm//:defs.bzl", "npm_link_all_packages")
 
@@ -222,7 +228,7 @@ out_dir = "dist",
 
 )
 
-## python_binary for a data science component
+#### python_binary for a data science component
 
 load("@rules_python//python:defs.bzl", "py_binary")
 
@@ -236,19 +242,19 @@ deps = ["@pypi//pandas"],
 
 )
 
-## Build with caching and parallelism
+#### Build with caching and parallelism
 
 bazel build //packages/core:all
 
-## Run tests
+#### Run tests
 
 bazel test //packages/...
 
-## Query dependency graph
+#### Query dependency graph
 
 bazel query "deps(//packages/core)"
 
-## Remote execution
+#### Remote execution
 
 bazel build --config=remote //...
 
@@ -256,7 +262,7 @@ bazel build --config=remote //...
 
 **Weaknesses** : Very steep learning curve, verbose configuration, not JavaScript-native, slower cold builds, requires significant infrastructure.
 
-### Lage
+#### Lage
 
 Microsoft's task runner focused on simplicity:
 
@@ -284,19 +290,19 @@ concurrency: 8,
 
 };
 
-## Run the build pipeline
+#### Run the build pipeline
 
 lage build
 
-## Run tests
+#### Run tests
 
 lage test
 
-## Show execution plan
+#### Show execution plan
 
 lage build --dry
 
-## Filter by scope
+#### Filter by scope
 
 lage build --scope packages/core
 
@@ -304,7 +310,7 @@ lage build --scope packages/core
 
 **Weaknesses** : Smaller community, fewer features than Turborepo/Nx, limited plugin ecosystem, primarily JS/TS.
 
-### Comparison
+#### Comparison
 
 | Feature | Turborepo | Nx | Bazel | Lage |
 
@@ -324,7 +330,7 @@ lage build --scope packages/core
 
 | Ideal repo size | Small-large | Small-large | Large | Small-medium |
 
-### Recommendations
+#### Recommendations
 
   * **Start simple** : Use Turborepo for most JavaScript/TypeScript monorepos — best setup experience.
 
@@ -340,6 +346,12 @@ lage build --scope packages/core
 
 
 **See also:** [Build Tools: esbuild, swc, turbopack, vite — Speed Comparison](</en/tools/build-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>).
+
+**See also:** [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Build Tools: esbuild, swc, turbopack, vite — Speed Comparison](</en/tools/build-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
+
+**See also:** [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Build Tools: esbuild, swc, turbopack, vite — Speed Comparison](</en/tools/build-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
+
+**See also:** [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Build Tools: esbuild, swc, turbopack, vite — Speed Comparison](</en/tools/build-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
 
 **See also:** [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Build Tools: esbuild, swc, turbopack, vite — Speed Comparison](</en/tools/build-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
 

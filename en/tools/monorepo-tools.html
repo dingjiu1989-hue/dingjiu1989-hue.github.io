@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/monorepo-tools.png",
       "datePublished": "2026-02-05",
       "dateModified": "2026-05-13",
-      "wordCount": "1302",
+      "wordCount": "1414",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/monorepo-tools.html"},
@@ -110,18 +112,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/monorepo-tools.png" alt="Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h2>
 <h3>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h3>
-<h3>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h3>
-<h3>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h3>
-<h3>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h3>
-<h3>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h3>
-<h3>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h3>
-<h3>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h3>
-<h3>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h3>
-<h3>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h3>
-<h3>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h3>
-<h3>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h3>
-<h3>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h3>
-<h3>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h3>
+<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
+<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
+<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
+<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
+<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
+<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
+<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
+<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
+<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
+<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
+<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
+<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
+<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
+<h4>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h4>
 <h4>Introduction</h4>
 <p>Monorepos — storing multiple projects in a single repository — offer simplified dependency management, atomic commits, and shared tooling. But without the right build tool, monorepos become slow as they grow. This article compares four leading monorepo orchestration tools: Turborepo, Nx, Bazel, and Lage.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/monorepo-tools.png" alt="Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Turborepo</h4>
@@ -152,31 +156,31 @@
 <p>}</p>
 <p>}</p>
 <p>}</p>
-<h3>Run builds across all workspaces in dependency order</h3>
+<h4>Run builds across all workspaces in dependency order</h4>
 <p>turbo run build</p>
-<h3>Run with parallel execution (default: CPU count)</h3>
+<h4>Run with parallel execution (default: CPU count)</h4>
 <p>turbo run build --parallel</p>
-<h3>Dry run to see execution plan</h3>
+<h4>Dry run to see execution plan</h4>
 <p>turbo run build --dry</p>
-<h3>Filter specific packages</h3>
+<h4>Filter specific packages</h4>
 <p>turbo run build --filter=packages/core...</p>
-<h3>Remote caching (Vercel)</h3>
+<h4>Remote caching (Vercel)</h4>
 <p>turbo run build --remote-only</p>
 <p><strong>Strengths</strong> : Fastest setup, excellent documentation, incremental adoption, parallel execution, remote caching with Vercel integration. The caching granularity (file-level inputs) is well-designed.</p>
 <p><strong>Weaknesses</strong> : Limited to JavaScript/TypeScript ecosystem, less sophisticated dependency graph analysis than Nx, remote caching requires Vercel.</p>
 <h4>Nx</h4>
 <p>Nx provides build orchestration with powerful code generation and dependency analysis:</p>
-<h3>Create an Nx workspace</h3>
+<h4>Create an Nx workspace</h4>
 <p>npx create-nx-workspace@latest myorg</p>
-<h3>Add capabilities</h3>
+<h4>Add capabilities</h4>
 <p>nx g @nx/next:app my-app</p>
 <p>nx g @nx/react:lib shared-ui</p>
 <p>nx g @nx/node:lib api-interfaces</p>
-<h3>Run tasks</h3>
+<h4>Run tasks</h4>
 <p>nx run-many -t build test lint</p>
-<h3>Visualize dependencies</h3>
+<h4>Visualize dependencies</h4>
 <p>nx graph</p>
-<h3>Affected commands (only run what changed)</h3>
+<h4>Affected commands (only run what changed)</h4>
 <p>nx affected:test --base=main</p>
 <p>// nx.json</p>
 <p>{</p>
@@ -201,7 +205,7 @@
 <p><strong>Weaknesses</strong> : Steeper learning curve, configuration overhead for simple projects, opinionated directory structure, Nx Cloud costs for advanced features.</p>
 <h4>Bazel</h4>
 <p>Google's build system prioritizes correctness and hermetic builds:</p>
-<h3>BUILD.bazel</h3>
+<h4>BUILD.bazel</h4>
 <p>load("@npm//:defs.bzl", "npm_link_all_packages")</p>
 <p>npm_link_all_packages(name = "node_modules")</p>
 <p>load("@aspect_rules_ts//ts:defs.bzl", "ts_project")</p>
@@ -216,20 +220,20 @@
 <p>tsconfig = "//:tsconfig",</p>
 <p>out_dir = "dist",</p>
 <p>)</p>
-<h3>python_binary for a data science component</h3>
+<h4>python_binary for a data science component</h4>
 <p>load("@rules_python//python:defs.bzl", "py_binary")</p>
 <p>py_binary(</p>
 <p>name = "data_pipeline",</p>
 <p>srcs = ["pipeline.py"],</p>
 <p>deps = ["@pypi//pandas"],</p>
 <p>)</p>
-<h3>Build with caching and parallelism</h3>
+<h4>Build with caching and parallelism</h4>
 <p>bazel build //packages/core:all</p>
-<h3>Run tests</h3>
+<h4>Run tests</h4>
 <p>bazel test //packages/...</p>
-<h3>Query dependency graph</h3>
+<h4>Query dependency graph</h4>
 <p>bazel query "deps(//packages/core)"</p>
-<h3>Remote execution</h3>
+<h4>Remote execution</h4>
 <p>bazel build --config=remote //...</p>
 <p><strong>Strengths</strong> : Correct by design (hermetic builds), polyglot (JS, Python, Go, Java in one repo), remote build execution, fine-grained caching, handles largest monorepos.</p>
 <p><strong>Weaknesses</strong> : Very steep learning curve, verbose configuration, not JavaScript-native, slower cold builds, requires significant infrastructure.</p>
@@ -247,13 +251,13 @@
 <p>cache: true,</p>
 <p>concurrency: 8,</p>
 <p>};</p>
-<h3>Run the build pipeline</h3>
+<h4>Run the build pipeline</h4>
 <p>lage build</p>
-<h3>Run tests</h3>
+<h4>Run tests</h4>
 <p>lage test</p>
-<h3>Show execution plan</h3>
+<h4>Show execution plan</h4>
 <p>lage build --dry</p>
-<h3>Filter by scope</h3>
+<h4>Filter by scope</h4>
 <p>lage build --scope packages/core</p>
 <p><strong>Strengths</strong> : Simple configuration, fast, good Microsoft-ecosystem integration, incremental builds, lightweight.</p>
 <p><strong>Weaknesses</strong> : Smaller community, fewer features than Turborepo/Nx, limited plugin ecosystem, primarily JS/TS.</p>
@@ -286,6 +290,8 @@
 </li>
 </ul>
 <p><strong>See also:</strong> <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/ide-comparison-2026.html">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a>, <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/ide-comparison-2026.html">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a>, <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/ide-comparison-2026.html">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a>, <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/ide-comparison-2026.html">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a>, <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/ide-comparison-2026.html">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a>, <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/ide-comparison-2026.html">IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features</a></p></div>
     </article>

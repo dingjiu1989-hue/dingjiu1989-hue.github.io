@@ -1,7 +1,7 @@
 ---
 title: "Developer Consulting Side Hustle: From $0 to $150/Hour"
 description: "Complete guide to starting a software consulting business: finding your niche, setting rates, finding clients, contracts, and scaling beyond trading time for money."
-date: 2026-05-08
+date: 2025-10-21
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/developer-consulting-guide.html
 ---

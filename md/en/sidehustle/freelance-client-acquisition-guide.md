@@ -1,7 +1,7 @@
 ---
 title: "How to Find and Close Your First Freelance Client: A Developer's Step-by-Step Guide"
 description: "Step-by-step guide to getting your first freelance development client — niche selection, portfolio building, Upwork strategy, cold outreach, and closing deals."
-date: 2026-05-09
+date: 2025-11-29
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/freelance-client-acquisition-guide.html
 ---

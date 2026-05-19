@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-best-practices.png",
       "datePublished": "2026-05-14",
       "dateModified": "2026-05-19",
-      "wordCount": "2533",
+      "wordCount": "2605",
       "keywords": "Database, SQL",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "SQL"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-security-best-practices.html"},
@@ -95,17 +97,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-best-practices.png" alt="Database Security Hardening Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Database Security Hardening Guide</h2>
 <h3>Database Security Hardening Guide</h3>
-<h3>Database Security Hardening Guide</h3>
-<h3>Database Security Hardening Guide</h3>
-<h3>Database Security Hardening Guide</h3>
-<h3>Database Security Hardening Guide</h3>
-<h3>Database Security Hardening Guide</h3>
-<h3>Database Security Hardening Guide</h3>
-<h3>Database Security Hardening Guide</h3>
-<h3>Database Security Hardening Guide</h3>
-<h3>Database Security Hardening Guide</h3>
-<h3>Database Security Hardening Guide</h3>
-<h3>Database Security Hardening Guide</h3>
+<h4>Database Security Hardening Guide</h4>
+<h4>Database Security Hardening Guide</h4>
+<h4>Database Security Hardening Guide</h4>
+<h4>Database Security Hardening Guide</h4>
+<h4>Database Security Hardening Guide</h4>
+<h4>Database Security Hardening Guide</h4>
+<h4>Database Security Hardening Guide</h4>
+<h4>Database Security Hardening Guide</h4>
+<h4>Database Security Hardening Guide</h4>
+<h4>Database Security Hardening Guide</h4>
+<h4>Database Security Hardening Guide</h4>
+<h4>Database Security Hardening Guide</h4>
+<h4>Database Security Hardening Guide</h4>
 <p>Database security is a critical component of any organization's security posture. Databases store the most valuable data: customer records, financial data, intellectual property, and credentials. This guide covers the key security practices including encryption, access control, network isolation, and secret management. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-best-practices.png" alt="Database Security Hardening Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Encryption at Rest </p>
 <p>Encryption at rest protects data stored on disk. If an attacker gains access to the underlying storage, encrypted data remains unreadable without the encryption key. </p>
@@ -128,11 +132,11 @@
 <p>) ENCRYPTION='Y';</p>
 <p>Application-Level Encryption </p>
 <p>For maximum protection, encrypt sensitive columns at the application level. The database never sees the plaintext. </p>
-<h3>Application-level encryption with AWS KMS</h3>
+<h4>Application-level encryption with AWS KMS</h4>
 <p>import boto3</p>
 <p>from cryptography.fernet import Fernet</p>
 <p>def encrypt_column(plaintext, kms_key_id):</p>
-<h3>Generate a data key from KMS</h3>
+<h4>Generate a data key from KMS</h4>
 <p>kms = boto3.client('kms')</p>
 <p>response = kms.generate_data_key(</p>
 <p>KeyId=kms_key_id,</p>
@@ -140,7 +144,7 @@
 <p>)</p>
 <p>data_key = response['Plaintext']</p>
 <p>encrypted_key = response['CiphertextBlob']</p>
-<h3>Encrypt the data with the data key</h3>
+<h4>Encrypt the data with the data key</h4>
 <p>f = Fernet(base64.urlsafe_b64encode(data_key))</p>
 <p>ciphertext = f.encrypt(plaintext.encode())</p>
 <p>return ciphertext, encrypted_key</p>
@@ -175,9 +179,9 @@
 <p>ssl_key_file = '/etc/ssl/private/server.key'</p>
 <p>ssl_ca_file = '/etc/ssl/certs/ca.crt'</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- In pg_hba.conf</p>
-<h3>Require TLS for all connections</h3>
+<h4>Require TLS for all connections</h4>
 <p>hostssl all all 0.0.0.0/0 md5</p>
-<h3>MySQL: Require TLS</h3>
+<h4>MySQL: Require TLS</h4>
 <p>[mysqld]</p>
 <p>require_secure_transport = ON</p>
 <p>ssl_ca = /etc/ssl/certs/ca.pem</p>
@@ -273,7 +277,7 @@
 <p>ORDER BY timestamp DESC;</p>
 <p>Centralized Audit Log Collection </p>
 <p>Forward database audit logs to a SIEM for analysis and alerting. </p>
-<h3>Filebeat configuration for shipping database audit logs</h3>
+<h4>Filebeat configuration for shipping database audit logs</h4>
 <p>filebeat.inputs:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: log</p>
 <p>paths:</p>
@@ -287,7 +291,7 @@
 <p>Network isolation limits which systems can reach the database. </p>
 <p>VPC and Subnet Design </p>
 <p>Place databases in private subnets with no direct internet access. Only application servers in the same VPC should connect. </p>
-<h3>Terraform: Database in private subnet</h3>
+<h4>Terraform: Database in private subnet</h4>
 <p>resource "aws_subnet" "db_private" {</p>
 <p>vpc_id = aws_vpc.main.id</p>
 <p>cidr_block = "10.0.3.0/24"</p>
@@ -347,21 +351,21 @@
 <p>Secret Rotation </p>
 <p>Database credentials need regular rotation. Compromised credentials that are never rotated become permanent backdoors. </p>
 <p>Automated Rotation with HashiCorp Vault </p>
-<h3>Vault database secrets engine configuration</h3>
+<h4>Vault database secrets engine configuration</h4>
 <p>path "database/creds/my-app" {</p>
 <p>capabilities = ["read"]</p>
 <p>}</p>
-<h3>Dynamic database credentials with Vault</h3>
+<h4>Dynamic database credentials with Vault</h4>
 <p>import hvac</p>
 <p>client = hvac.Client(url='https://vault.example.com')</p>
 <p>client.auth.approle('my-role-id', 'my-secret-id')</p>
-<h3>Get short-lived database credentials</h3>
+<h4>Get short-lived database credentials</h4>
 <p>creds = client.secrets.database.generate_credentials(</p>
 <p>name='my-app'</p>
 <p>)</p>
 <p>db_user = creds['data']['username'] # v-token-myapp-a1b2c3...</p>
 <p>db_pass = creds['data']['password'] # random password</p>
-<h3>These credentials expire in 1 hour</h3>
+<h4>These credentials expire in 1 hour</h4>
 <p><strong>Rotation frequency</strong> :</p>
 <ul>
 <li>
@@ -419,6 +423,8 @@
 <p>Conclusion </p>
 <p>Database security requires defense in depth. Encrypt data at rest and in transit. Isolate databases on private networks. Implement row-level security and audit logging. Follow least privilege for database roles. Automate secret rotation. A well-secured database makes it significantly harder for attackers to exfiltrate sensitive data, even if they breach other parts of the infrastructure.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-security-hardening.html">Database Security Hardening</a>, <a href="/en/database/connection-pooling.html">Connection Pooling Guide</a>, <a href="/en/database/database-indexing.html">Database Indexing Strategies</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-security-hardening.html">Database Security Hardening</a>, <a href="/en/database/connection-pooling.html">Connection Pooling Guide</a>, <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-security-hardening.html">Database Security Hardening</a>, <a href="/en/database/connection-pooling.html">Connection Pooling Guide</a>, <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-security-hardening.html">Database Security Hardening</a>, <a href="/en/database/connection-pooling.html">Connection Pooling Guide</a>, <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-security-hardening.html">Database Security Hardening</a>, <a href="/en/database/connection-pooling.html">Connection Pooling Guide</a>, <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-security-hardening.html">Database Security Hardening</a>, <a href="/en/database/connection-pooling.html">Connection Pooling Guide</a>, <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a></p></div>
     </article>

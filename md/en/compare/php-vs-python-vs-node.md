@@ -1,7 +1,7 @@
 ---
 title: "PHP vs Python vs Node.js: Best Backend Language for Web Development (2026)"
 description: "Compare the three most popular backend languages — ecosystem maturity, performance, developer experience, job market, and real-world use cases."
-date: 2026-05-08
+date: 2025-11-26
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/php-vs-python-vs-node.html
 ---

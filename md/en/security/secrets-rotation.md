@@ -1,7 +1,7 @@
 ---
 title: "Secrets Rotation"
 description: "Implementing automated secrets rotation with zero-downtime strategies and HashiCorp Vault agent."
-date: 2026-05-12
+date: 2026-03-18
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/secrets-rotation.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/security/secrets-rotation.html
 
 ## Secrets Rotation
 
-## Secrets Rotation
+### Secrets Rotation
 
-## Secrets Rotation
+#### Secrets Rotation
 
-## Secrets Rotation
+#### Secrets Rotation
 
-## Secrets Rotation
+#### Secrets Rotation
 
-## Secrets Rotation
+#### Secrets Rotation
 
-## Secrets Rotation
+#### Secrets Rotation
 
-## Secrets Rotation
+#### Secrets Rotation
 
-## Secrets Rotation
+#### Secrets Rotation
 
-## Secrets Rotation
+#### Secrets Rotation
 
-## Secrets Rotation
+#### Secrets Rotation
 
-## Secrets Rotation
+#### Secrets Rotation
+
+#### Secrets Rotation
+
+#### Secrets Rotation
+
+#### Secrets Rotation
 
 Why Rotate Secrets? 
 
@@ -52,7 +58,7 @@ self.client = hvac.Client(url=vault_url, token=vault_token)
 
 def rotate_db_credentials(self, db_name, role_name):
 
-## Generate new credentials via Vault
+#### Generate new credentials via Vault
 
 creds = self.client.secrets.database.generate_credentials(
 
@@ -62,7 +68,7 @@ name=role_name
 
 )
 
-## Test new credentials
+#### Test new credentials
 
 conn = psycopg2.connect(
 
@@ -80,7 +86,7 @@ dbname=db_name
 
 conn.close()
 
-## Update application configuration
+#### Update application configuration
 
 self.update_app_config(db_name, creds["data"])
 
@@ -100,23 +106,23 @@ self.iam = boto3.client("iam")
 
 def rotate_access_keys(self, username):
 
-## List existing keys
+#### List existing keys
 
 keys = self.iam.list_access_keys(UserName=username)["AccessKeyMetadata"]
 
-## Create new key
+#### Create new key
 
 new_key = self.iam.create_access_key(UserName=username)["AccessKeyMetadata"]
 
-## Wait for propagation
+#### Wait for propagation
 
 time.sleep(10)
 
-## Update services with new key
+#### Update services with new key
 
 self.update_services(username, new_key["AccessKeyId"], new_key["SecretAccessKey"])
 
-## Deactivate and delete old keys
+#### Deactivate and delete old keys
 
 for key in keys:
 
@@ -132,7 +138,7 @@ Status="Inactive"
 
 )
 
-## Delete after grace period
+#### Delete after grace period
 
 self.schedule_deletion(key["AccessKeyId"], username, delay_hours=24)
 
@@ -162,7 +168,7 @@ phase_3:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Decommission secret A
 
-## Dual credential support
+#### Dual credential support
 
 class RotatingCredentialProvider:
 
@@ -192,7 +198,7 @@ self.primary = new_credential
 
 Vault Agent for Automatic Rotation 
 
-## vault-agent-config.hcl
+#### vault-agent-config.hcl
 
 vault {
 
@@ -226,9 +232,9 @@ command = "/usr/local/bin/reload-app.sh"
 
 }
 
-## Template
+#### Template
 
-## /etc/app/config.ctmpl
+#### /etc/app/config.ctmpl
 
 {{- with secret "database/creds/app-role" }}
 
@@ -240,7 +246,7 @@ DB_PASSWORD={{ .Data.password }}
 
 Certificate Rotation 
 
-## Automatic certificate renewal
+#### Automatic certificate renewal
 
 from cryptography import x509
 
@@ -256,7 +262,7 @@ def auto_renew_certificate(domain, vault_path):
 
 client = hvac.Client()
 
-## Check expiry
+#### Check expiry
 
 existing = client.secrets.pki.read_certificate(vault_path)
 
@@ -289,6 +295,12 @@ Conclusion
 Automated secrets rotation reduces the blast radius of credential exposure. Use Vault for centralized secrets management with dynamic credentials for databases and short-lived certificates. Implement dual-credential support for zero-downtime rotation. Rotate AWS keys automatically with a deactivation grace period.
 
 **See also:** [Data Classification](</en/security/data-classification.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [Session Management Security](</en/security/session-management.html>).
+
+**See also:** [Data Classification](</en/security/data-classification.html>), [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
+
+**See also:** [Data Classification](</en/security/data-classification.html>), [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
+
+**See also:** [Data Classification](</en/security/data-classification.html>), [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
 
 **See also:** [Data Classification](</en/security/data-classification.html>), [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
 

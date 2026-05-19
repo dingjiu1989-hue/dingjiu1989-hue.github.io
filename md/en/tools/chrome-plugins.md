@@ -1,7 +1,7 @@
 ---
 title: "15 Essential Chrome Extensions for Developers (2026)"
 description: "Handpicked Chrome extensions for productivity, security, development, and design. The first things to install on a fresh browser."
-date: 2026-05-07
+date: 2025-10-06
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/chrome-plugins.html
 ---

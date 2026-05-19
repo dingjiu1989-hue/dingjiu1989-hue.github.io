@@ -1,7 +1,7 @@
 ---
 title: "Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance"
 description: "Explore database design patterns for application development: Repository pattern, Unit of Work, Query Objects, and table inheritance strategies."
-date: 2026-05-12
+date: 2026-04-02
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/database-design-patterns.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/database-design-patterns.html
 
 ## Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
 
-## Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
+### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
 
-## Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
+#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
 
-## Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
+#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
 
-## Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
+#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
 
-## Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
+#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
 
-## Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
+#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
 
-## Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
+#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
 
-## Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
+#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
 
-## Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
+#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
 
-## Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
+#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
 
-## Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
+#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
+
+#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
+
+#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
+
+#### Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
 
 Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance 
 
@@ -241,7 +247,7 @@ repo.delete(obj.id)
 
 def _get_repo(self, obj_type):
 
-## Repository registry determines which repository maps to which type
+#### Repository registry determines which repository maps to which type
 
 pass
 
@@ -521,6 +527,12 @@ Choosing the Right Pattern
 These patterns are not prescriptive rules but tools. Use them when they simplify your code; do not force them into a simple application that would be better served by direct SQL or a lightweight ORM.
 
 **See also:** [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Caching](</en/database/database-caching.html>).
+
+**See also:** [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
+
+**See also:** [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
+
+**See also:** [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
 
 **See also:** [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
 

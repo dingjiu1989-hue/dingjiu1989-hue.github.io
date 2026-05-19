@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/bug-bounty.png",
       "datePublished": "2026-03-06",
       "dateModified": "2026-04-12",
-      "wordCount": "1908",
+      "wordCount": "1951",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/bug-bounty.html"},
@@ -99,36 +101,38 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/bug-bounty.png" alt="Bug Bounty Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Bug Bounty Guide</h2>
 <h3>Bug Bounty Guide</h3>
-<h3>Bug Bounty Guide</h3>
-<h3>Bug Bounty Guide</h3>
-<h3>Bug Bounty Guide</h3>
-<h3>Bug Bounty Guide</h3>
-<h3>Bug Bounty Guide</h3>
-<h3>Bug Bounty Guide</h3>
-<h3>Bug Bounty Guide</h3>
-<h3>Bug Bounty Guide</h3>
-<h3>Bug Bounty Guide</h3>
-<h3>Bug Bounty Guide</h3>
-<h3>Bug Bounty Guide</h3>
-<h3>Bug Bounty Guide</h3>
-<h3>Bug Bounty Guide</h3>
+<h4>Bug Bounty Guide</h4>
+<h4>Bug Bounty Guide</h4>
+<h4>Bug Bounty Guide</h4>
+<h4>Bug Bounty Guide</h4>
+<h4>Bug Bounty Guide</h4>
+<h4>Bug Bounty Guide</h4>
+<h4>Bug Bounty Guide</h4>
+<h4>Bug Bounty Guide</h4>
+<h4>Bug Bounty Guide</h4>
+<h4>Bug Bounty Guide</h4>
+<h4>Bug Bounty Guide</h4>
+<h4>Bug Bounty Guide</h4>
+<h4>Bug Bounty Guide</h4>
+<h4>Bug Bounty Guide</h4>
+<h4>Bug Bounty Guide</h4>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/bug-bounty.png" alt="Bug Bounty Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Bug bounty programs invite security researchers to find and report vulnerabilities in exchange for monetary rewards or acknowledgment. They represent a paradigm shift from traditional security testing — continuous, crowd-sourced, and performance-based. Success requires methodical technique, clear communication, and platform-specific knowledge. </p>
 <p>Finding Vulnerabilities </p>
 <p>Reconnaissance-Driven Approach </p>
 <p>Successful bug bounty hunters invest heavily in reconnaissance. The more you know about a target, the more attack surface you can discover. </p>
-<h3>Subdomain enumeration pipeline</h3>
+<h4>Subdomain enumeration pipeline</h4>
 <p>subfinder -d target.com -silent | tee subs_raw.txt</p>
 <p>assetfinder --subs-only target.com | tee -a subs_raw.txt</p>
-<h3>Deduplicate and validate</h3>
+<h4>Deduplicate and validate</h4>
 <p>cat subs_raw.txt | sort -u | httprobe -c 50 &gt; live_subs.txt</p>
-<h3>Technology fingerprinting on discovered subdomains</h3>
+<h4>Technology fingerprinting on discovered subdomains</h4>
 <p>cat live_subs.txt | httpx -sc -title -tech-detect -o tech_report.txt</p>
-<h3>Directory brute-forcing</h3>
+<h4>Directory brute-forcing</h4>
 <p>ffuf -u https://admin.target.com/FUZZ -w /usr/share/wordlists/dirb/common.txt \</p>
 <p>-ac -t 100 -o admin_fuzz.json</p>
 <p>Attack-Specific Techniques </p>
-<h3>Automated XSS discovery</h3>
+<h4>Automated XSS discovery</h4>
 <p>import requests</p>
 <p>from urllib.parse import urljoin, urlparse, parse_qs</p>
 <p>def hunt_xss(base_url):</p>
@@ -139,9 +143,9 @@
 <p>'"&gt;',</p>
 <p>'{{constructor.constructor("alert(1)")()}}', # SSTI-based XSS</p>
 <p>]</p>
-<h3>Extract all forms</h3>
+<h4>Extract all forms</h4>
 <p>response = requests.get(base_url)</p>
-<h3>Parse and find all forms, inputs</h3>
+<h4>Parse and find all forms, inputs</h4>
 <p>for endpoint in discover_endpoints(base_url):</p>
 <p>params = extract_params(endpoint)</p>
 <p>for param in params:</p>
@@ -152,14 +156,14 @@
 <p>)</p>
 <p>resp = requests.get(test_url)</p>
 <p>if payload in resp.text and not resp.text.count('"') &gt; 3:</p>
-<h3>Check if payload rendered unescaped</h3>
+<h4>Check if payload rendered unescaped</h4>
 <p>print(f"[+] XSS found: {test_url}")</p>
-<h3>IDOR detection with autorize (Burp extension)</h3>
-<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Record authenticated session cookies</h3>
-<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Enable Autorize with victim cookie</h3>
-<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Browse application as victim user</h3>
-<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Monitor BApp output for unauthorized access</h3>
-<h3>GraphQL introspection for API discovery</h3>
+<h4>IDOR detection with autorize (Burp extension)</h4>
+<h4>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Record authenticated session cookies</h4>
+<h4>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Enable Autorize with victim cookie</h4>
+<h4>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Browse application as victim user</h4>
+<h4>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Monitor BApp output for unauthorized access</h4>
+<h4>GraphQL introspection for API discovery</h4>
 <p>curl -X POST https://api.target.com/graphql \</p>
 <p>-H "Content-Type: application/json" \</p>
 <p>-d '{"query":"query { __schema { types { name fields { name } } } }"}'</p>
@@ -233,6 +237,8 @@
 <p>Conclusion </p>
 <p>Bug bounty hunting combines technical skill, persistence, and communication. Invest heavily in recon, develop methodical testing approaches, write clear reports with reproducible steps, and understand each platform's nuances. Quality always outperforms quantity — one critical bug well reported is worth more than dozens of duplicates.</p>
 <p><strong>See also:</strong> <a href="/en/security/soc-operations.html">SOC Operations</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a>, <a href="/en/security/threat-modeling.html">Threat Modeling</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/soc-operations.html">SOC Operations</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/soc-operations.html">SOC Operations</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/soc-operations.html">SOC Operations</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/soc-operations.html">SOC Operations</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/soc-operations.html">SOC Operations</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p></div>
     </article>

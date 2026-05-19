@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intelligence.png",
       "datePublished": "2026-03-05",
       "dateModified": "2026-04-22",
-      "wordCount": "2718",
+      "wordCount": "2780",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/threat-intelligence.html"},
@@ -98,18 +100,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intelligence.png" alt="Threat Intelligence: Gathering and Applying Intel" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Threat Intelligence: Gathering and Applying Intel</h2>
 <h3>Threat Intelligence: Gathering and Applying Intel</h3>
-<h3>Threat Intelligence: Gathering and Applying Intel</h3>
-<h3>Threat Intelligence: Gathering and Applying Intel</h3>
-<h3>Threat Intelligence: Gathering and Applying Intel</h3>
-<h3>Threat Intelligence: Gathering and Applying Intel</h3>
-<h3>Threat Intelligence: Gathering and Applying Intel</h3>
-<h3>Threat Intelligence: Gathering and Applying Intel</h3>
-<h3>Threat Intelligence: Gathering and Applying Intel</h3>
-<h3>Threat Intelligence: Gathering and Applying Intel</h3>
-<h3>Threat Intelligence: Gathering and Applying Intel</h3>
-<h3>Threat Intelligence: Gathering and Applying Intel</h3>
-<h3>Threat Intelligence: Gathering and Applying Intel</h3>
-<h3>Threat Intelligence: Gathering and Applying Intel</h3>
+<h4>Threat Intelligence: Gathering and Applying Intel</h4>
+<h4>Threat Intelligence: Gathering and Applying Intel</h4>
+<h4>Threat Intelligence: Gathering and Applying Intel</h4>
+<h4>Threat Intelligence: Gathering and Applying Intel</h4>
+<h4>Threat Intelligence: Gathering and Applying Intel</h4>
+<h4>Threat Intelligence: Gathering and Applying Intel</h4>
+<h4>Threat Intelligence: Gathering and Applying Intel</h4>
+<h4>Threat Intelligence: Gathering and Applying Intel</h4>
+<h4>Threat Intelligence: Gathering and Applying Intel</h4>
+<h4>Threat Intelligence: Gathering and Applying Intel</h4>
+<h4>Threat Intelligence: Gathering and Applying Intel</h4>
+<h4>Threat Intelligence: Gathering and Applying Intel</h4>
+<h4>Threat Intelligence: Gathering and Applying Intel</h4>
+<h4>Threat Intelligence: Gathering and Applying Intel</h4>
 <p>Threat intelligence is evidence-based knowledge about existing or emerging threats to an organization. It transforms raw data into actionable insights that help security teams prevent attacks, detect intrusions faster, and respond more effectively. This article covers the sources, frameworks, and tools for operational threat intelligence.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intelligence.png" alt="Threat Intelligence: Gathering and Applying Intel" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>The Intelligence Lifecycle</h4>
 <p>Threat intelligence follows a structured lifecycle:</p>
@@ -144,12 +148,12 @@
 <p><strong>Telegram channels / Discord servers</strong> : Some threat actor groups communicate openly about tactics and targets.</p>
 </li>
 </ul>
-<h3>OSINT example: Find exposed S3 buckets</h3>
+<h4>OSINT example: Find exposed S3 buckets</h4>
 <p>curl -s "https://censys.io/api/v1/search/ipv4" \</p>
 <p>-H "Content-Type: application/json" \</p>
 <p>-u "$API_ID:$API_SECRET" \</p>
 <p>-d '{"query": "services.service_name: S3"}'</p>
-<h3>Check if a domain appears in breach data</h3>
+<h4>Check if a domain appears in breach data</h4>
 <p>curl -s "https://haveibeenpwned.com/api/v3/breacheddomain/example.com" \</p>
 <p>-H "hibp-api-key: $API_KEY"</p>
 <h4>Threat Feeds</h4>
@@ -187,11 +191,11 @@
 <p><strong>Abuse.ch</strong> : Free feeds for malware URLs (URLhaus), C2 servers (Feodo Tracker), and ransomware domains.</p>
 </li>
 </ul>
-<h3>Python: Consuming AlienVault OTX feed</h3>
+<h4>Python: Consuming AlienVault OTX feed</h4>
 <p>import requests</p>
 <p>OTX_API_KEY = "your-api-key"</p>
 <p>headers = {"X-OTX-API-KEY": OTX_API_KEY}</p>
-<h3>Get latest pulses</h3>
+<h4>Get latest pulses</h4>
 <p>response = requests.get(</p>
 <p>"https://otx.alienvault.com/api/v1/pulses/subscribed",</p>
 <p>headers=headers</p>
@@ -241,7 +245,7 @@
 </ul>
 <h4>Using ATT&CK; for Threat Intelligence</h4>
 <p>Map observed indicators and behaviors to ATT&CK; techniques to understand attacker objectives and capabilities.</p>
-<h3>Threat actor profile using ATT&CK;</h3>
+<h4>Threat actor profile using ATT&CK;</h4>
 <p>threat_actor: "APT-Example"</p>
 <p>motivation: "Financial gain"</p>
 <p>targeted_sectors: ["Finance", "Technology"]</p>
@@ -322,7 +326,7 @@
 <p><strong>Channel</strong> : A publish-subscribe mechanism for real-time intelligence sharing.</p>
 </li>
 </ul>
-<h3>Fetch indicators from a TAXII collection</h3>
+<h4>Fetch indicators from a TAXII collection</h4>
 <p>curl -s -H "Accept: application/taxii+json" \</p>
 <p>-H "Authorization: Bearer $TOKEN" \</p>
 <p>https://taxii.example.com/api/v2/collections/collection-id/objects/</p>
@@ -361,6 +365,8 @@
 <h4>Conclusion</h4>
 <p>Threat intelligence turns raw data into defensive action. Invest in OSINT collection, subscribe to relevant threat feeds, map observations to the MITRE ATT&CK; framework, and share intelligence using STIX/TAXII standards. Most importantly, operationalize the intelligence — a feed that nobody acts on has zero security value.</p>
 <p><strong>See also:</strong> <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a>, <a href="/en/security/threat-intel-feeds.html">Threat Intelligence Feeds</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p></div>
     </article>

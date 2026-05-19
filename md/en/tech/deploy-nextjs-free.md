@@ -1,7 +1,7 @@
 ---
 title: "How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)"
 description: "Get your Next.js app live on the internet in 10 minutes without spending a cent. Covers Vercel, Cloudflare Pages, and environment variable setup."
-date: 2026-05-08
+date: 2025-10-09
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/deploy-nextjs-free.html
 ---

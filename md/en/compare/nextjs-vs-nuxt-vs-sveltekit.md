@@ -1,7 +1,7 @@
 ---
 title: "Next.js vs Nuxt vs SvelteKit (2026): Best Full-Stack Meta-Framework?"
 description: "Compare the top React, Vue, and Svelte meta-frameworks on SSR, ISR, routing, data fetching, and deployment. Find the right full-stack foundation."
-date: 2026-05-08
+date: 2025-11-17
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/nextjs-vs-nuxt-vs-sveltekit.html
 ---

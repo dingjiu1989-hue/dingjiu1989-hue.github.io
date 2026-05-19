@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/dotfile-management.png",
       "datePublished": "2026-02-03",
       "dateModified": "2026-04-25",
-      "wordCount": "1134",
+      "wordCount": "1239",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/dotfile-management.html"},
@@ -110,35 +112,37 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/dotfile-management.png" alt="Dotfile Management: chezmoi, GNU Stow, Bare Git Repos" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h2>
 <h3>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h3>
-<h3>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h3>
-<h3>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h3>
-<h3>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h3>
-<h3>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h3>
-<h3>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h3>
-<h3>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h3>
-<h3>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h3>
-<h3>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h3>
-<h3>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h3>
-<h3>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h3>
-<h3>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h3>
-<h3>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h3>
+<h4>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h4>
+<h4>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h4>
+<h4>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h4>
+<h4>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h4>
+<h4>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h4>
+<h4>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h4>
+<h4>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h4>
+<h4>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h4>
+<h4>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h4>
+<h4>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h4>
+<h4>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h4>
+<h4>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h4>
+<h4>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h4>
+<h4>Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h4>
 <h4>Introduction</h4>
 <p>Dotfiles — configuration files for your shell, editor, git, and other tools — are the backbone of your development environment. Properly managing them ensures consistency across machines, easy recovery after a crash, and collaboration with your team. This article compares the three main approaches: chezmoi, GNU Stow, and bare git repositories.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/dotfile-management.png" alt="Dotfile Management: chezmoi, GNU Stow, Bare Git Repos" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Bare Git Repo</h4>
 <p>The simplest approach: use git directly without any additional tool:</p>
-<h3>Initialize a bare repository in your home directory</h3>
+<h4>Initialize a bare repository in your home directory</h4>
 <p>git init --bare $HOME/.dotfiles</p>
-<h3>Create an alias to manage it</h3>
+<h4>Create an alias to manage it</h4>
 <p>alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'</p>
-<h3>Add the alias to your shell config</h3>
+<h4>Add the alias to your shell config</h4>
 <p>echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'" &gt;&gt; ~/.zshrc</p>
-<h3>Start tracking files</h3>
+<h4>Start tracking files</h4>
 <p>dotfiles status</p>
 <p>dotfiles add ~/.zshrc ~/.gitconfig ~/.tmux.conf</p>
 <p>dotfiles commit -m "Initial dotfiles"</p>
 <p>dotfiles remote add origin git@github.com:user/dotfiles.git</p>
 <p>dotfiles push -u origin main</p>
-<h3>On a new machine:</h3>
+<h4>On a new machine:</h4>
 <p>git clone --bare https://github.com/user/dotfiles.git $HOME/.dotfiles</p>
 <p>alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'</p>
 <p>dotfiles checkout</p>
@@ -146,7 +150,7 @@
 <p><strong>Cons</strong> : No templating (machine-specific configs require symlink hacks). Lacks encryption for secrets. Easy to accidentally commit sensitive data.</p>
 <h4>GNU Stow</h4>
 <p>Stow creates symlinks from a structured directory to your home directory:</p>
-<h3>Directory structure</h3>
+<h4>Directory structure</h4>
 <p>~/dotfiles/</p>
 <p>zsh/</p>
 <p>.zshrc</p>
@@ -159,51 +163,51 @@
 <p>nvim/</p>
 <p>.config/nvim/</p>
 <p>init.lua</p>
-<h3>Install all packages</h3>
+<h4>Install all packages</h4>
 <p>stow -t $HOME zsh git tmux nvim</p>
-<h3>Stow creates symlinks:</h3>
-<h3>~/dotfiles/zsh/.zshrc -&gt; ~/.zshrc</h3>
-<h3>~/dotfiles/git/.gitconfig -&gt; ~/.gitconfig</h3>
-<h3>Uninstall a package</h3>
+<h4>Stow creates symlinks:</h4>
+<h4>~/dotfiles/zsh/.zshrc -&gt; ~/.zshrc</h4>
+<h4>~/dotfiles/git/.gitconfig -&gt; ~/.gitconfig</h4>
+<h4>Uninstall a package</h4>
 <p>stow -D -t $HOME zsh</p>
-<h3>Restow (update symlinks after changes)</h3>
+<h4>Restow (update symlinks after changes)</h4>
 <p>stow -R -t $HOME nvim</p>
 <p><strong>Pros</strong> : Clean directory structure. Easy to understand. Works on any Unix system.</p>
 <p><strong>Cons</strong> : No templating. No encryption. Conflicts if files overlap. Root privileges needed for system configs.</p>
 <h4>chezmoi</h4>
 <p>chezmoi is purpose-built for dotfile management with advanced features:</p>
-<h3>Install chezmoi</h3>
+<h4>Install chezmoi</h4>
 <p>sh -c "$(curl -fsLS get.chezmoi.io)"</p>
-<h3>Initialize</h3>
+<h4>Initialize</h4>
 <p>chezmoi init</p>
-<h3>Add a file</h3>
+<h4>Add a file</h4>
 <p>chezmoi add ~/.zshrc</p>
 <p>chezmoi add ~/.config/nvim/init.lua</p>
-<h3>Edit a tracked file</h3>
+<h4>Edit a tracked file</h4>
 <p>chezmoi edit ~/.zshrc</p>
-<h3>See what would change</h3>
+<h4>See what would change</h4>
 <p>chezmoi diff</p>
-<h3>Apply changes</h3>
+<h4>Apply changes</h4>
 <p>chezmoi apply</p>
-<h3>On a new machine</h3>
+<h4>On a new machine</h4>
 <p>chezmoi init https://github.com/user/dotfiles.git</p>
 <p>chezmoi apply</p>
 <h4>Templating with chezmoi</h4>
 <p>chezmoi supports Go templates for machine-specific configs:</p>
-<h3>.zshrc.tmpl — template file</h3>
+<h4>.zshrc.tmpl — template file</h4>
 <p>export EDITOR='{{ if eq .chezmoi.os "darwin" }}code{{ else }}nvim{{ end }}'</p>
 <p>{{ if eq .chezmoi.hostname "work-laptop" }}</p>
 <p>export WORK_MODE=true</p>
 <p>export AWS_PROFILE=work</p>
 <p>{{ end }}</p>
-<h3>Template data includes: OS, hostname, architecture, username, and custom variables</h3>
+<h4>Template data includes: OS, hostname, architecture, username, and custom variables</h4>
 <h4>Secret Management</h4>
-<h3>Store secrets in your password manager</h3>
+<h4>Store secrets in your password manager</h4>
 <p>chezmoi secret set github_token</p>
 <p>chezmoi secret set ssh_private_key</p>
-<h3>Use in templates</h3>
+<h4>Use in templates</h4>
 <p>{{ (secret "github_token") | quote }}</p>
-<h3>Or use encrypted files with age/gpg</h3>
+<h4>Or use encrypted files with age/gpg</h4>
 <p>chezmoi age encrypt ~/.ssh/id_ed25519 &gt; ~/.local/share/chezmoi/encrypted_dot_ssh/id_ed25519.age</p>
 <h4>Comparison</h4>
 <p>| Feature | Bare Git | GNU Stow | chezmoi |</p>
@@ -236,6 +240,8 @@
 </ul>
 <p>Choose chezmoi if you have more than two machines or need secret management. Choose bare git for simplicity on single-machine setups. Choose Stow if you prefer Unix philosophy and have mostly identical machines.</p>
 <p><strong>See also:</strong> <a href="/en/tools/git-gui-tools.html">Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop</a>, <a href="/en/tools/issue-tracking-tools.html">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</a>, <a href="/en/tools/note-taking-apps.html">Note-Taking and Knowledge Management Tools</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tools/git-advanced-tools.html">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</a>, <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/git-advanced-tools.html">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</a>, <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/git-advanced-tools.html">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</a>, <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/git-advanced-tools.html">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</a>, <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/git-advanced-tools.html">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</a>, <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a></p></div>
     </article>

@@ -1,7 +1,7 @@
 ---
 title: "CDN Architecture"
 description: "Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content delivery networks"
-date: 2026-05-12
+date: 2026-04-22
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/cdn-architecture.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/cdn-architecture.html
 
 ## CDN Architecture
 
-## CDN Architecture
+### CDN Architecture
 
-## CDN Architecture
+#### CDN Architecture
 
-## CDN Architecture
+#### CDN Architecture
 
-## CDN Architecture
+#### CDN Architecture
 
-## CDN Architecture
+#### CDN Architecture
 
-## CDN Architecture
+#### CDN Architecture
 
-## CDN Architecture
+#### CDN Architecture
 
-## CDN Architecture
+#### CDN Architecture
 
-## CDN Architecture
+#### CDN Architecture
 
-## CDN Architecture
+#### CDN Architecture
 
-## CDN Architecture
+#### CDN Architecture
+
+#### CDN Architecture
+
+#### CDN Architecture
+
+#### CDN Architecture
 
 Content Delivery Networks (CDNs) distribute content across geographically dispersed servers to reduce latency, offload origin infrastructure, and absorb large-scale traffic spikes. Modern CDNs have evolved from simple static asset caches into sophisticated application delivery platforms that cache dynamic content, execute edge compute, and provide security functions. Understanding CDN architecture is essential for architects designing global-scale systems. 
 
@@ -55,6 +61,12 @@ Multi-CDN architectures provide redundancy and geographic optimization. Differen
 Performance monitoring includes cache hit ratio, time to first byte (TTFB), and availability per edge region. Cache hit ratio should be monitored per URL pattern — a sudden drop indicates a configuration change or origin issue. TTFB from different regions reveals geographic performance disparities. Availability alerts should trigger when the CDN returns elevated error rates from any region. Real User Monitoring (RUM) provides client-side performance data that complements server-side CDN metrics.
 
 **See also:** [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>).
+
+**See also:** [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
+
+**See also:** [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
+
+**See also:** [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 
 **See also:** [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 

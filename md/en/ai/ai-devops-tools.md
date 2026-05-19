@@ -1,7 +1,7 @@
 ---
 title: "AI for DevOps in 2026: Best Tools and Practical Use Cases"
 description: "How AI is changing DevOps: automated incident response, AI-powered monitoring, log analysis, CI/CD pipeline optimization, and infrastructure as code generation. 12 tools compared with real workflows."
-date: 2026-05-08
+date: 2025-11-07
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-devops-tools.html
 ---

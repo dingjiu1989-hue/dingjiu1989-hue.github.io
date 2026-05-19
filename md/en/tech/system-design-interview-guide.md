@@ -1,7 +1,7 @@
 ---
 title: "System Design Interview Prep: Complete Developer Guide (2026)"
 description: "Comprehensive system design interview preparation: key concepts (load balancing, caching, sharding, consensus), frameworks for answering design questions, and 10 practice problems with solutions (design URL shortener, chat system, news feed, etc.)."
-date: 2026-05-08
+date: 2025-10-15
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/system-design-interview-guide.html
 ---

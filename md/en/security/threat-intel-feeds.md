@@ -1,7 +1,7 @@
 ---
 title: "Threat Intelligence Feeds"
 description: "Integrating threat intelligence feeds with STIX/TAXII, SIEM correlation, and scoring for actionable insights."
-date: 2026-05-12
+date: 2026-03-19
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/threat-intel-feeds.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/security/threat-intel-feeds.html
 
 ## Threat Intelligence Feeds
 
-## Threat Intelligence Feeds
+### Threat Intelligence Feeds
 
-## Threat Intelligence Feeds
+#### Threat Intelligence Feeds
 
-## Threat Intelligence Feeds
+#### Threat Intelligence Feeds
 
-## Threat Intelligence Feeds
+#### Threat Intelligence Feeds
 
-## Threat Intelligence Feeds
+#### Threat Intelligence Feeds
 
-## Threat Intelligence Feeds
+#### Threat Intelligence Feeds
 
-## Threat Intelligence Feeds
+#### Threat Intelligence Feeds
 
-## Threat Intelligence Feeds
+#### Threat Intelligence Feeds
 
-## Threat Intelligence Feeds
+#### Threat Intelligence Feeds
 
-## Threat Intelligence Feeds
+#### Threat Intelligence Feeds
 
-## Threat Intelligence Feeds
+#### Threat Intelligence Feeds
+
+#### Threat Intelligence Feeds
+
+#### Threat Intelligence Feeds
+
+#### Threat Intelligence Feeds
 
 Threat Intelligence Fundamentals 
 
@@ -44,7 +50,7 @@ from stix2 import Indicator, Bundle, TAXIICollectionSource
 
 from taxii2client import Collection
 
-## Create a STIX indicator
+#### Create a STIX indicator
 
 indicator = Indicator(
 
@@ -60,13 +66,13 @@ valid_from="2026-01-01T00:00:00Z"
 
 )
 
-## Bundle indicators
+#### Bundle indicators
 
 bundle = Bundle(indicator)
 
 print(bundle.serialize(pretty=True))
 
-## Consume from TAXII feed
+#### Consume from TAXII feed
 
 collection = Collection("https://taxii.example.com/collections/123")
 
@@ -126,19 +132,19 @@ def score_indicator(ioc, context):
 
 score = 50 # Base score
 
-## Age decay: newer indicators are more valuable
+#### Age decay: newer indicators are more valuable
 
 age_days = (datetime.utcnow() - ioc.valid_from).days
 
 score -= min(age_days * 2, 30)
 
-## Multiple feeds increase confidence
+#### Multiple feeds increase confidence
 
 feed_count = len(ioc.get("sources", []))
 
 score += feed_count * 10
 
-## Context matching increases relevance
+#### Context matching increases relevance
 
 if context.get("industry") in ioc.get("target_industries", []):
 
@@ -156,7 +162,7 @@ Automated Blocking
 
 High-confidence indicators can trigger automated blocking: 
 
-## threat-intel-automation.yaml
+#### threat-intel-automation.yaml
 
 automation_rules:
 
@@ -189,6 +195,12 @@ Conclusion
 Threat intelligence feeds provide critical context for security operations. Standardize on STIX/TAXII, integrate with your SIEM, score indicators for relevance, and automate high-confidence blocking. Quality over quantity: five well-curated feeds beat fifty noisy ones.
 
 **See also:** [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Container Runtime Security](</en/security/container-runtime-security.html>), [SBOM Management](</en/security/sbom-management.html>).
+
+**See also:** [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Threat Hunting](</en/security/threat-hunting.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)
+
+**See also:** [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Threat Hunting](</en/security/threat-hunting.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)
+
+**See also:** [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Threat Hunting](</en/security/threat-hunting.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)
 
 **See also:** [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Threat Hunting](</en/security/threat-hunting.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)
 

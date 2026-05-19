@@ -1,7 +1,7 @@
 ---
 title: "Database Views: Simple, Materialized, and Updateable Views"
 description: "Learn about database views including simple views, materialized views, updateable views, and the performance trade-offs between them in PostgreSQL."
-date: 2026-05-12
+date: 2026-04-05
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/database-views.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/database-views.html
 
 ## Database Views: Simple, Materialized, and Updateable Views
 
-## Database Views: Simple, Materialized, and Updateable Views
+### Database Views: Simple, Materialized, and Updateable Views
 
-## Database Views: Simple, Materialized, and Updateable Views
+#### Database Views: Simple, Materialized, and Updateable Views
 
-## Database Views: Simple, Materialized, and Updateable Views
+#### Database Views: Simple, Materialized, and Updateable Views
 
-## Database Views: Simple, Materialized, and Updateable Views
+#### Database Views: Simple, Materialized, and Updateable Views
 
-## Database Views: Simple, Materialized, and Updateable Views
+#### Database Views: Simple, Materialized, and Updateable Views
 
-## Database Views: Simple, Materialized, and Updateable Views
+#### Database Views: Simple, Materialized, and Updateable Views
 
-## Database Views: Simple, Materialized, and Updateable Views
+#### Database Views: Simple, Materialized, and Updateable Views
 
-## Database Views: Simple, Materialized, and Updateable Views
+#### Database Views: Simple, Materialized, and Updateable Views
 
-## Database Views: Simple, Materialized, and Updateable Views
+#### Database Views: Simple, Materialized, and Updateable Views
 
-## Database Views: Simple, Materialized, and Updateable Views
+#### Database Views: Simple, Materialized, and Updateable Views
 
-## Database Views: Simple, Materialized, and Updateable Views
+#### Database Views: Simple, Materialized, and Updateable Views
+
+#### Database Views: Simple, Materialized, and Updateable Views
+
+#### Database Views: Simple, Materialized, and Updateable Views
+
+#### Database Views: Simple, Materialized, and Updateable Views
 
 Database Views: Simple, Materialized, and Updateable Views 
 
@@ -195,6 +201,12 @@ SELECT * FROM employees WHERE active = true;
 Choose wisely between simple and materialized views. Simple views suit OLTP workloads where freshness matters. Materialized views fit analytical dashboards, reporting, and any query where millisecond latency justifies a few minutes of staleness.
 
 **See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>).
+
+**See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
+
+**See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
+
+**See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
 
 **See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
 

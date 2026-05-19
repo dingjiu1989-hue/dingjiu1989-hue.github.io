@@ -1,7 +1,7 @@
 ---
 title: "Encryption at Rest Guide"
 description: "A comprehensive guide to encryption at rest covering disk encryption, database encryption, key management, and AWS/GCP implementation."
-date: 2026-05-11
+date: 2025-12-17
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/encryption-at-rest.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/security/encryption-at-rest.html
 
 ## Encryption at Rest Guide
 
-## Encryption at Rest Guide
+### Encryption at Rest Guide
 
-## Encryption at Rest Guide
+#### Encryption at Rest Guide
 
-## Encryption at Rest Guide
+#### Encryption at Rest Guide
 
-## Encryption at Rest Guide
+#### Encryption at Rest Guide
 
-## Encryption at Rest Guide
+#### Encryption at Rest Guide
 
-## Encryption at Rest Guide
+#### Encryption at Rest Guide
 
-## Encryption at Rest Guide
+#### Encryption at Rest Guide
 
-## Encryption at Rest Guide
+#### Encryption at Rest Guide
 
-## Encryption at Rest Guide
+#### Encryption at Rest Guide
 
-## Encryption at Rest Guide
+#### Encryption at Rest Guide
 
-## Encryption at Rest Guide
+#### Encryption at Rest Guide
 
-## Encryption at Rest Guide
+#### Encryption at Rest Guide
 
-## Encryption at Rest Guide
+#### Encryption at Rest Guide
+
+#### Encryption at Rest Guide
+
+#### Encryption at Rest Guide
+
+#### Encryption at Rest Guide
 
 What Is Encryption at Rest? 
 
@@ -48,7 +54,7 @@ Disk-Level Encryption
 
 LUKS (Linux Unified Key Setup) 
 
-## Encrypt a disk with LUKS
+#### Encrypt a disk with LUKS
 
 sudo cryptsetup luksFormat /dev/sdb1
 
@@ -60,11 +66,11 @@ sudo mount /dev/mapper/encrypted_volume /mnt/secure
 
 AWS EBS Encryption 
 
-## Enable default EBS encryption
+#### Enable default EBS encryption
 
 aws ec2 enable-ebs-encryption-by-default --region us-east-1
 
-## Create an encrypted volume with a custom KMS key
+#### Create an encrypted volume with a custom KMS key
 
 aws ec2 create-volume \
 
@@ -80,9 +86,9 @@ aws ec2 create-volume \
 
 GCE Persistent Disk Encryption 
 
-## Google Cloud uses AES-256 by default (CSEK for customer-managed)
+#### Google Cloud uses AES-256 by default (CSEK for customer-managed)
 
-## Create and apply a CSEK
+#### Create and apply a CSEK
 
 gcloud compute disks create secure-disk \
 
@@ -252,7 +258,7 @@ def decrypt_field(self, ciphertext):
 
 return self.cipher.decrypt(ciphertext).decode()
 
-## Usage
+#### Usage
 
 key = Fernet.generate_key() # Store this securely in a vault
 
@@ -268,7 +274,7 @@ user_data = {
 
 }
 
-## Store user_data in database
+#### Store user_data in database
 
 db.users.insert_one(user_data)
 
@@ -339,6 +345,12 @@ Summary
 Encryption at rest is a non-negotiable security control for any application handling sensitive data. Implement defense in depth: disk encryption for the entire volume, transparent database encryption for tables, column-level encryption for the most sensitive fields, and application-level encryption for end-to-end protection. Use AWS KMS or similar managed services for key management with automatic rotation, and always encrypt backups before storing them offsite.
 
 **See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Key Management Systems](</en/security/key-management.html>).
+
+**See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
+
+**See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
+
+**See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
 
 **See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
 

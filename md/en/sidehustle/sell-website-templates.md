@@ -1,7 +1,7 @@
 ---
 title: "How to Sell Website Templates and UI Kits: Marketplaces, Pricing, and Marketing Strategy"
 description: "Guide to selling website templates, UI kits, and framework starter kits — ThemeForest vs direct sales, pricing strategy, and maintenance economics."
-date: 2026-05-08
+date: 2025-10-26
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/sell-website-templates.html
 ---

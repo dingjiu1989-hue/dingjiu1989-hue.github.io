@@ -1,7 +1,7 @@
 ---
 title: "Load Testing Guide 2026: k6 vs Artillery vs Locust vs wrk2 for Performance Testing"
 description: "Compare load testing tools and learn to design realistic performance tests — ramp patterns, assertions, CI integration, and interpreting results."
-date: 2026-05-08
+date: 2025-10-19
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/load-testing-guide.html
 ---

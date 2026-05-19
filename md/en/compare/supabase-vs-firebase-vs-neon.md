@@ -1,7 +1,7 @@
 ---
 title: "Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers"
 description: "Comparing the top BaaS and serverless database options — SQL vs NoSQL, open source vs proprietary, pricing models, and vendor lock-in risks."
-date: 2026-05-08
+date: 2025-11-14
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/supabase-vs-firebase-vs-neon.html
 ---

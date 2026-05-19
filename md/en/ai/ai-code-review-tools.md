@@ -1,7 +1,7 @@
 ---
 title: "AI Code Review: Best Tools, Setup Guide, and ROI Analysis"
 description: "How to set up AI-powered code review in your workflow: CodeRabbit vs CodeReviewBot vs Copilot Code Review. Configuration, false positive handling, and real time savings from teams using AI review."
-date: 2026-05-08
+date: 2025-11-09
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-code-review-tools.html
 ---

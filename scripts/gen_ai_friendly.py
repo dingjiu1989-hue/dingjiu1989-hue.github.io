@@ -264,14 +264,39 @@ def gen_llms_full():
         return local_h.handle(m.group(1)).strip()
 
     en_data = json.loads(EN_ARTICLES.read_text(encoding="utf-8"))
+
+    # Build article list first so we can generate a Table of Contents
+    all_articles = []
+    for board in en_data["boards"]:
+        for art in board["posts"]:
+            all_articles.append({**art, "board_id": board["id"]})
+
     full_lines = [
         "# AI Study Room — Full Content (English)",
         f"Generated: {TODAY}",
-        f"Total articles: {sum(len(b['posts']) for b in en_data['boards'])}",
+        f"Total articles: {len(all_articles)} across {len(en_data['boards'])} topic boards",
+        f"License: Creative Commons Attribution 4.0 (CC BY 4.0)",
+        f"License URL: https://creativecommons.org/licenses/by/4.0/",
+        f"Site: {BASE}/en/",
+        f"JSON Feed (full content): {BASE}/en/feed.json",
+        f"RSS Feed: {BASE}/en/feed.xml",
         "",
-        "---",
+        "## Table of Contents",
         "",
     ]
+
+    # Generate TOC grouped by board, using explicit slug-based anchors
+    for board in en_data["boards"]:
+        board_name = BOARD_NAMES_EN.get(board["id"], board["id"].title())
+        full_lines.append(f"### {board_name} ({len(board['posts'])} articles)")
+        full_lines.append("")
+        for art in board["posts"]:
+            desc = art.get("description", "")[:100]
+            full_lines.append(f"- [{art['title']}](#{art['slug']}) — {desc}")
+        full_lines.append("")
+
+    full_lines.append("---")
+    full_lines.append("")
 
     for board in en_data["boards"]:
         for art in board["posts"]:
@@ -288,9 +313,12 @@ def gen_llms_full():
             body = body.replace(f'# {art["title"]} \n', '')
             body = re.sub(r'\n{3,}', '\n\n', body)
             body = body.strip()
-            full_lines.append(f"## {art['title']}")
-            full_lines.append(f"URL: {BASE}/en/{board['id']}/{art['slug']}.html")
-            full_lines.append(f"Date: {art['date']} | Board: {board['id']}")
+            slug = art["slug"]
+            title = art["title"]
+            tags_str = ', '.join(art.get('tags', []))
+            full_lines.append(f'## <a id="{slug}"></a>{title}')
+            full_lines.append(f"URL: {BASE}/en/{board['id']}/{slug}.html")
+            full_lines.append(f"Date: {art['date']} | Board: {board['id']} | Tags: {tags_str}")
             full_lines.append(f"Description: {art.get('description', '')}")
             full_lines.append("")
             full_lines.append(body)
@@ -395,6 +423,26 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
+# Apple (Siri, Spotlight, Apple Intelligence)
+User-agent: Applebot
+Allow: /
+
+# Amazon (Alexa, product search)
+User-agent: Amazonbot
+Allow: /
+
+# ByteDance/TikTok
+User-agent: Bytespider
+Allow: /
+
+# You.com AI search
+User-agent: YouBot
+Allow: /
+
+# Huawei (Petal Search)
+User-agent: PetalBot
+Allow: /
+
 # ── Misc web crawlers ──
 User-agent: *
 Allow: /
@@ -419,7 +467,7 @@ Sitemap: https://dingjiu1989-hue.github.io/sitemap.xml
 Sitemap: https://dingjiu1989-hue.github.io/images/sitemap.xml
 """
     (ROOT / "robots.txt").write_text(robots, encoding="utf-8")
-    print("  robots.txt updated: 16 AI crawler rules")
+    print("  robots.txt updated: 21 AI crawler rules")
 
 
 # ── Run ─────────────────────────────────────────────────────────────────

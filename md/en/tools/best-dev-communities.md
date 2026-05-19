@@ -1,7 +1,7 @@
 ---
 title: "Best Developer Communities 2026: Where to Learn, Share, and Grow"
 description: "The top online communities for developers — forums, Discord servers, Slack groups, and social platforms. Find your people, get unstuck, and grow your career."
-date: 2026-05-08
+date: 2025-10-30
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-dev-communities.html
 ---

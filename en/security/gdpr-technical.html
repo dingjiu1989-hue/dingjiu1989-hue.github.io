@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/gdpr-technical.png",
       "datePublished": "2026-03-17",
       "dateModified": "2026-04-03",
-      "wordCount": "1040",
+      "wordCount": "1083",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/gdpr-technical.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/gdpr-technical.png" alt="GDPR Technical Controls" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>GDPR Technical Controls</h2>
 <h3>GDPR Technical Controls</h3>
-<h3>GDPR Technical Controls</h3>
-<h3>GDPR Technical Controls</h3>
-<h3>GDPR Technical Controls</h3>
-<h3>GDPR Technical Controls</h3>
-<h3>GDPR Technical Controls</h3>
-<h3>GDPR Technical Controls</h3>
-<h3>GDPR Technical Controls</h3>
-<h3>GDPR Technical Controls</h3>
-<h3>GDPR Technical Controls</h3>
-<h3>GDPR Technical Controls</h3>
-<h3>GDPR Technical Controls</h3>
+<h4>GDPR Technical Controls</h4>
+<h4>GDPR Technical Controls</h4>
+<h4>GDPR Technical Controls</h4>
+<h4>GDPR Technical Controls</h4>
+<h4>GDPR Technical Controls</h4>
+<h4>GDPR Technical Controls</h4>
+<h4>GDPR Technical Controls</h4>
+<h4>GDPR Technical Controls</h4>
+<h4>GDPR Technical Controls</h4>
+<h4>GDPR Technical Controls</h4>
+<h4>GDPR Technical Controls</h4>
+<h4>GDPR Technical Controls</h4>
+<h4>GDPR Technical Controls</h4>
 <p>GDPR Technical Requirements </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/gdpr-technical.png" alt="GDPR Technical Controls" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>GDPR requires technical controls for data protection by design and by default. Key areas include data mapping, consent, deletion, and privacy impact assessments. </p>
 <p>Data Mapping </p>
@@ -212,7 +216,7 @@
 <p>errors = []</p>
 <p>for source in self.data_sources:</p>
 <p>try:</p>
-<h3>Soft delete first</h3>
+<h4>Soft delete first</h4>
 <p>source<a href="user_id, soft=True">"delete"</a></p>
 <p>results.append({</p>
 <p>"source": source["name"],</p>
@@ -226,7 +230,7 @@
 <p>"source": source["name"],</p>
 <p>"error": str(e)</p>
 <p>})</p>
-<h3>Hard delete after retention period</h3>
+<h4>Hard delete after retention period</h4>
 <p>schedule_hard_delete(user_id, self.data_sources)</p>
 <p>return {</p>
 <p>"user_id": user_id,</p>
@@ -235,7 +239,7 @@
 <p>"deletion_request_id": str(uuid.uuid4())</p>
 <p>}</p>
 <p>Privacy Impact Assessment </p>
-<h3>Automated PIA template</h3>
+<h4>Automated PIA template</h4>
 <p>PIA_TEMPLATE = {</p>
 <p>"project_name": "",</p>
 <p>"data_flows": [],</p>
@@ -264,7 +268,7 @@
 <p>pia = copy.deepcopy(PIA_TEMPLATE)</p>
 <p>pia["project_name"] = project_name</p>
 <p>pia["data_flows"] = data_flows</p>
-<h3>Auto-detect high risk indicators</h3>
+<h4>Auto-detect high risk indicators</h4>
 <p>for flow in data_flows:</p>
 <p>if flow.get("sensitive_data"):</p>
 <p>pia["risk_assessment"]["identified_risks"].append({</p>
@@ -277,6 +281,8 @@
 <p>Conclusion </p>
 <p>GDPR technical controls require systematic implementation. Maintain detailed data mapping, implement robust consent management, build capabilities for right to deletion, and conduct privacy impact assessments. Automate where possible and maintain comprehensive audit trails. Remember: privacy by design means building controls into your architecture from the start.</p>
 <p><strong>See also:</strong> <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/soc2-technical.html">SOC 2 Technical Controls</a>, <a href="/en/security/data-classification.html">Data Classification</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/soc2-technical.html">SOC 2 Technical Controls</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p>
+<p><strong>See also:</strong> <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/soc2-technical.html">SOC 2 Technical Controls</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p>
 <p><strong>See also:</strong> <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/soc2-technical.html">SOC 2 Technical Controls</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p>
 <p><strong>See also:</strong> <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/soc2-technical.html">SOC 2 Technical Controls</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/soc2-technical.html">SOC 2 Technical Controls</a>, <a href="/en/security/data-masking.html">Data Masking and Redaction</a></p></div>
     </article>

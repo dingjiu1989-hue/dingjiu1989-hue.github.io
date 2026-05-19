@@ -1,7 +1,7 @@
 ---
 title: "Secure Software Development Lifecycle"
 description: "Integrating security into every phase of the SDLC: threat modeling, secure coding, SAST, DAST, dependency scanning, and security reviews."
-date: 2026-05-11
+date: 2025-12-19
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/secure-sdlc.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/security/secure-sdlc.html
 
 ## Secure Software Development Lifecycle
 
-## Secure Software Development Lifecycle
+### Secure Software Development Lifecycle
 
-## Secure Software Development Lifecycle
+#### Secure Software Development Lifecycle
 
-## Secure Software Development Lifecycle
+#### Secure Software Development Lifecycle
 
-## Secure Software Development Lifecycle
+#### Secure Software Development Lifecycle
 
-## Secure Software Development Lifecycle
+#### Secure Software Development Lifecycle
 
-## Secure Software Development Lifecycle
+#### Secure Software Development Lifecycle
 
-## Secure Software Development Lifecycle
+#### Secure Software Development Lifecycle
 
-## Secure Software Development Lifecycle
+#### Secure Software Development Lifecycle
 
-## Secure Software Development Lifecycle
+#### Secure Software Development Lifecycle
 
-## Secure Software Development Lifecycle
+#### Secure Software Development Lifecycle
 
-## Secure Software Development Lifecycle
+#### Secure Software Development Lifecycle
 
-## Secure Software Development Lifecycle
+#### Secure Software Development Lifecycle
 
-## Secure Software Development Lifecycle
+#### Secure Software Development Lifecycle
+
+#### Secure Software Development Lifecycle
+
+#### Secure Software Development Lifecycle
+
+#### Secure Software Development Lifecycle
 
 What Is Secure SDLC? 
 
@@ -80,7 +86,7 @@ Threat Modeling with STRIDE
 
 Creating a Threat Model 
 
-## Structured threat model entry
+#### Structured threat model entry
 
 threat_model = {
 
@@ -164,7 +170,7 @@ maxAge: 900000
 
 Pre-Commit Hooks 
 
-## .pre-commit-config.yaml
+#### .pre-commit-config.yaml
 
 repos:
 
@@ -202,7 +208,7 @@ Phase 4: Testing
 
 SAST (Static Application Security Testing) 
 
-## GitHub CodeQL configuration
+#### GitHub CodeQL configuration
 
 name: "CodeQL"
 
@@ -276,7 +282,7 @@ npx snyk monitor
 
 DAST (Dynamic Application Security Testing) 
 
-## Run OWASP ZAP against staging environment
+#### Run OWASP ZAP against staging environment
 
 docker run -v $(pwd):/zap/wrk:rw \
 
@@ -294,7 +300,7 @@ Phase 5: Deployment
 
 Security Gates 
 
-## Deployment approval gates
+#### Deployment approval gates
 
 environment:
 
@@ -349,6 +355,12 @@ Summary
 A mature Secure SDLC integrates security activities into every phase of development. Start with threat modeling during design, enforce secure coding standards during implementation, automate SAST and dependency scanning in CI/CD, perform DAST before deployment, and maintain a vulnerability management program for production. The earlier a vulnerability is found, the cheaper and easier it is to fix.
 
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Container Security Best Practices](</en/security/container-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>).
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 

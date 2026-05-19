@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/serverless-framework.png",
       "datePublished": "2025-12-31",
       "dateModified": "2026-04-09",
-      "wordCount": "3079",
+      "wordCount": "3141",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/serverless-framework.html"},
@@ -99,24 +101,26 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/serverless-framework.png" alt="Serverless Framework: From Zero to Production" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Serverless Framework: From Zero to Production</h2>
 <h3>Serverless Framework: From Zero to Production</h3>
-<h3>Serverless Framework: From Zero to Production</h3>
-<h3>Serverless Framework: From Zero to Production</h3>
-<h3>Serverless Framework: From Zero to Production</h3>
-<h3>Serverless Framework: From Zero to Production</h3>
-<h3>Serverless Framework: From Zero to Production</h3>
-<h3>Serverless Framework: From Zero to Production</h3>
-<h3>Serverless Framework: From Zero to Production</h3>
-<h3>Serverless Framework: From Zero to Production</h3>
-<h3>Serverless Framework: From Zero to Production</h3>
-<h3>Serverless Framework: From Zero to Production</h3>
-<h3>Serverless Framework: From Zero to Production</h3>
-<h3>Serverless Framework: From Zero to Production</h3>
-<h3>Serverless Framework: From Zero to Production</h3>
+<h4>Serverless Framework: From Zero to Production</h4>
+<h4>Serverless Framework: From Zero to Production</h4>
+<h4>Serverless Framework: From Zero to Production</h4>
+<h4>Serverless Framework: From Zero to Production</h4>
+<h4>Serverless Framework: From Zero to Production</h4>
+<h4>Serverless Framework: From Zero to Production</h4>
+<h4>Serverless Framework: From Zero to Production</h4>
+<h4>Serverless Framework: From Zero to Production</h4>
+<h4>Serverless Framework: From Zero to Production</h4>
+<h4>Serverless Framework: From Zero to Production</h4>
+<h4>Serverless Framework: From Zero to Production</h4>
+<h4>Serverless Framework: From Zero to Production</h4>
+<h4>Serverless Framework: From Zero to Production</h4>
+<h4>Serverless Framework: From Zero to Production</h4>
+<h4>Serverless Framework: From Zero to Production</h4>
 <h4>Introduction</h4>
 <p>The Serverless Framework provides a unified experience for deploying functions, APIs, and event-driven architectures across major cloud providers. While serverless eliminates infrastructure management, it introduces challenges around cold starts, observability, and cost control. This guide walks through taking a serverless application from development to production using the Serverless Framework on AWS Lambda.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/serverless-framework.png" alt="Serverless Framework: From Zero to Production" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Project Setup and Structure</h4>
 <p>A well-structured serverless project separates concerns across functions, layers, and configuration:</p>
-<h3>serverless.yml</h3>
+<h4>serverless.yml</h4>
 <p>service: order-processor</p>
 <p>frameworkVersion: "4"</p>
 <p>provider:</p>
@@ -236,30 +240,30 @@
 <p>};</p>
 <h4>Local Development</h4>
 <p>The <code>serverless-offline</code> plugin provides a local Lambda emulator:</p>
-<h3>Start local API Gateway emulator</h3>
+<h4>Start local API Gateway emulator</h4>
 <p>serverless offline --stage dev --httpPort 4000</p>
-<h3>Invoke a function directly</h3>
+<h4>Invoke a function directly</h4>
 <p>serverless invoke local --function createOrder \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--path test/fixtures/create-order.json</p>
-<h3>Run with warm container simulation</h3>
+<h4>Run with warm container simulation</h4>
 <p>serverless offline --stage dev \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--noPrependStageInUrl \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--reloadHandler</p>
 <h4>Cold Start Optimization</h4>
 <p>Cold starts add latency when Lambda scales up a new execution environment:</p>
-<h3>Optimize for cold starts</h3>
+<h4>Optimize for cold starts</h4>
 <p>provider:</p>
-<h3>Use AWS Graviton for better price/performance</h3>
+<h4>Use AWS Graviton for better price/performance</h4>
 <p>architecture: arm64</p>
-<h3>Increase memory speeds up CPU allocation</h3>
-<h3>(and proportionally reduces cold start time)</h3>
+<h4>Increase memory speeds up CPU allocation</h4>
+<h4>(and proportionally reduces cold start time)</h4>
 <p>memorySize: 1024</p>
 <p>functions:</p>
 <p>latencyCritical:</p>
 <p>handler: src/handlers/critical.handler</p>
-<h3>Provisioned concurrency for critical paths</h3>
+<h4>Provisioned concurrency for critical paths</h4>
 <p>provisionedConcurrency: 5</p>
-<h3>Reserve concurrency to prevent throttling</h3>
+<h4>Reserve concurrency to prevent throttling</h4>
 <p>reservedConcurrency: 20</p>
 <p>Code-level optimizations:</p>
 <p>// Cold start optimization techniques</p>
@@ -312,13 +316,13 @@
 <p>ComparisonOperator: GreaterThanThreshold</p>
 <h4>Cost Analysis</h4>
 <p>Serverless costs are driven by invocation count, duration, and memory allocation:</p>
-<h3>Calculate monthly cost estimate</h3>
-<h3>Invocations: 10M/month</h3>
-<h3>Avg duration: 200ms</h3>
-<h3>Memory: 1024MB</h3>
-<h3>Cost = 10M * (0.2s / 1000ms) * 1GB * $0.00001667/GB-second</h3>
-<h3>= 10M * 0.2 * 0.00001667</h3>
-<h3>= ~$33.34/month</h3>
+<h4>Calculate monthly cost estimate</h4>
+<h4>Invocations: 10M/month</h4>
+<h4>Avg duration: 200ms</h4>
+<h4>Memory: 1024MB</h4>
+<h4>Cost = 10M * (0.2s / 1000ms) * 1GB * $0.00001667/GB-second</h4>
+<h4>= 10M * 0.2 * 0.00001667</h4>
+<h4>= ~$33.34/month</h4>
 <p>Optimize cost with <code>serverless-prune-plugin</code> to remove old versions:</p>
 <p>custom:</p>
 <p>prune:</p>
@@ -326,6 +330,8 @@
 <p>number: 3 # Keep only 3 latest versions</p>
 <p>For high-throughput workloads, compare Lambda cost against ECS Fargate at sustained traffic levels. Lambda often wins for variable, low-volume traffic but becomes expensive at steady-state high throughput. Use these patterns to build production-grade serverless applications that are cost-effective, observable, and performant from day one.</p>
 <p><strong>See also:</strong> <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p></div>
     </article>

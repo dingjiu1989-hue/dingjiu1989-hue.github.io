@@ -1,7 +1,7 @@
 ---
 title: "Rate Limiting Patterns"
-description: "Explore rate limiting patterns for protecting APIs and services from abuse."
-date: 2026-05-11
+description: "Explore rate limiting patterns for protecting APIs and services from abuse — token bucket, sliding window, distributed rate limiting with Redis, and integration with API gateway and load balancer."
+date: 2025-12-29
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-patterns.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-patterns.ht
 
 ## Rate Limiting Patterns
 
-## Rate Limiting Patterns
+### Rate Limiting Patterns
 
-## Rate Limiting Patterns
+#### Rate Limiting Patterns
 
-## Rate Limiting Patterns
+#### Rate Limiting Patterns
 
-## Rate Limiting Patterns
+#### Rate Limiting Patterns
 
-## Rate Limiting Patterns
+#### Rate Limiting Patterns
 
-## Rate Limiting Patterns
+#### Rate Limiting Patterns
 
-## Rate Limiting Patterns
+#### Rate Limiting Patterns
 
-## Rate Limiting Patterns
+#### Rate Limiting Patterns
 
-## Rate Limiting Patterns
+#### Rate Limiting Patterns
 
-## Rate Limiting Patterns
+#### Rate Limiting Patterns
 
-## Rate Limiting Patterns
+#### Rate Limiting Patterns
+
+#### Rate Limiting Patterns
+
+#### Rate Limiting Patterns
+
+#### Rate Limiting Patterns
 
 Rate limiting is a critical component of any production API or service. It protects your system from abuse, ensures fair usage among consumers, and maintains service quality under load. This article explores the most common rate limiting algorithms and how to choose the right one for your use case. 
 
@@ -175,3 +181,9 @@ Rate limiting is essential for production APIs. Start with the token bucket algo
 **See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>)
 
 **See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>)
+
+**See also:** [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)

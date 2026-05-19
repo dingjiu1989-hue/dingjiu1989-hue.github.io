@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/api-gateway-implementation.png",
       "datePublished": "2026-05-14",
       "dateModified": "2026-05-18",
-      "wordCount": "3485",
+      "wordCount": "3542",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/api-gateway-implementation.html"},
@@ -99,25 +101,27 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/api-gateway-implementation.png" alt="API Gateway Implementation Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>API Gateway Implementation Guide</h2>
 <h3>API Gateway Implementation Guide</h3>
-<h3>API Gateway Implementation Guide</h3>
-<h3>API Gateway Implementation Guide</h3>
-<h3>API Gateway Implementation Guide</h3>
-<h3>API Gateway Implementation Guide</h3>
-<h3>API Gateway Implementation Guide</h3>
-<h3>API Gateway Implementation Guide</h3>
-<h3>API Gateway Implementation Guide</h3>
-<h3>API Gateway Implementation Guide</h3>
-<h3>API Gateway Implementation Guide</h3>
-<h3>API Gateway Implementation Guide</h3>
-<h3>API Gateway Implementation Guide</h3>
-<h3>API Gateway Implementation Guide</h3>
-<h3>API Gateway Implementation Guide</h3>
+<h4>API Gateway Implementation Guide</h4>
+<h4>API Gateway Implementation Guide</h4>
+<h4>API Gateway Implementation Guide</h4>
+<h4>API Gateway Implementation Guide</h4>
+<h4>API Gateway Implementation Guide</h4>
+<h4>API Gateway Implementation Guide</h4>
+<h4>API Gateway Implementation Guide</h4>
+<h4>API Gateway Implementation Guide</h4>
+<h4>API Gateway Implementation Guide</h4>
+<h4>API Gateway Implementation Guide</h4>
+<h4>API Gateway Implementation Guide</h4>
+<h4>API Gateway Implementation Guide</h4>
+<h4>API Gateway Implementation Guide</h4>
+<h4>API Gateway Implementation Guide</h4>
+<h4>API Gateway Implementation Guide</h4>
 <h4>Introduction</h4>
 <p>An API gateway sits at the boundary between clients and backend services, handling cross-cutting concerns like authentication, rate limiting, routing, and observability. Choosing the right gateway and deployment pattern is critical for microservice architectures. This guide compares Kong, Tyk, and Apache APISIX across the dimensions that matter in production.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/api-gateway-implementation.png" alt="API Gateway Implementation Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Gateway Comparison</h4>
 <h4>Kong Gateway</h4>
 <p>Kong is built on OpenResty (NGINX + Lua) and offers enterprise features through a plugin ecosystem:</p>
-<h3>Kong declarative config (kong.yml)</h3>
+<h4>Kong declarative config (kong.yml)</h4>
 <p>_format_version: "3.0"</p>
 <p>services:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: user-service</p>
@@ -143,7 +147,7 @@
 <p>methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]</p>
 <h4>Apache APISIX</h4>
 <p>APISIX provides sub-millisecond route matching via a radix tree and supports hot-reload of plugins:</p>
-<h3>APISIX Admin API</h3>
+<h4>APISIX Admin API</h4>
 <p>curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '</p>
 <p>{</p>
 <p>"uri": "/api/v1/orders/*",</p>
@@ -273,7 +277,7 @@
 <p>}</p>
 <h4>Analytics and Observability</h4>
 <p>All three gateways export metrics for monitoring and billing:</p>
-<h3>APISIX: Prometheus and logging</h3>
+<h4>APISIX: Prometheus and logging</h4>
 <p>plugins:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: prometheus</p>
 <p>config:</p>
@@ -330,6 +334,8 @@
 <p>servicePort: 80</p>
 <p>Select the centralized pattern for simpler operations and the sidecar pattern for strict traffic isolation in multi-tenant environments. Whichever gateway you choose, invest in declarative configuration management and CI/CD integration from day one to avoid configuration drift at scale.</p>
 <p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p></div>
     </article>

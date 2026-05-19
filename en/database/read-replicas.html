@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/read-replicas.png",
       "datePublished": "2026-04-08",
       "dateModified": "2026-04-20",
-      "wordCount": "1464",
+      "wordCount": "1561",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/read-replicas.html"},
@@ -99,24 +101,26 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/read-replicas.png" alt="Read Replicas: Scaling Reads, Replication Lag, and Failover" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Read Replicas: Scaling Reads, Replication Lag, and Failover</h2>
 <h3>Read Replicas: Scaling Reads, Replication Lag, and Failover</h3>
-<h3>Read Replicas: Scaling Reads, Replication Lag, and Failover</h3>
-<h3>Read Replicas: Scaling Reads, Replication Lag, and Failover</h3>
-<h3>Read Replicas: Scaling Reads, Replication Lag, and Failover</h3>
-<h3>Read Replicas: Scaling Reads, Replication Lag, and Failover</h3>
-<h3>Read Replicas: Scaling Reads, Replication Lag, and Failover</h3>
-<h3>Read Replicas: Scaling Reads, Replication Lag, and Failover</h3>
-<h3>Read Replicas: Scaling Reads, Replication Lag, and Failover</h3>
-<h3>Read Replicas: Scaling Reads, Replication Lag, and Failover</h3>
-<h3>Read Replicas: Scaling Reads, Replication Lag, and Failover</h3>
-<h3>Read Replicas: Scaling Reads, Replication Lag, and Failover</h3>
-<h3>Read Replicas: Scaling Reads, Replication Lag, and Failover</h3>
+<h4>Read Replicas: Scaling Reads, Replication Lag, and Failover</h4>
+<h4>Read Replicas: Scaling Reads, Replication Lag, and Failover</h4>
+<h4>Read Replicas: Scaling Reads, Replication Lag, and Failover</h4>
+<h4>Read Replicas: Scaling Reads, Replication Lag, and Failover</h4>
+<h4>Read Replicas: Scaling Reads, Replication Lag, and Failover</h4>
+<h4>Read Replicas: Scaling Reads, Replication Lag, and Failover</h4>
+<h4>Read Replicas: Scaling Reads, Replication Lag, and Failover</h4>
+<h4>Read Replicas: Scaling Reads, Replication Lag, and Failover</h4>
+<h4>Read Replicas: Scaling Reads, Replication Lag, and Failover</h4>
+<h4>Read Replicas: Scaling Reads, Replication Lag, and Failover</h4>
+<h4>Read Replicas: Scaling Reads, Replication Lag, and Failover</h4>
+<h4>Read Replicas: Scaling Reads, Replication Lag, and Failover</h4>
+<h4>Read Replicas: Scaling Reads, Replication Lag, and Failover</h4>
 <p>Read Replicas: Scaling Reads, Replication Lag, and Failover </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/read-replicas.png" alt="Read Replicas: Scaling Reads, Replication Lag, and Failover" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Read replicas are copies of your primary database that serve read queries. They are the most common and cost-effective way to scale database read throughput. This article covers setup, load balancing, lag monitoring, and failover strategies. </p>
 <p>How Read Replicas Work </p>
 <p>The primary database streams changes to replicas via the write-ahead log (WAL). In PostgreSQL, this is called streaming replication. The replica continuously applies WAL records to stay current. </p>
 <p>PostgreSQL Streaming Replication Setup </p>
 <p>On the primary: </p>
-<h3>postgresql.conf</h3>
+<h4>postgresql.conf</h4>
 <p>wal_level = replica</p>
 <p>max_wal_senders = 5</p>
 <p>wal_keep_size = 1024</p>
@@ -129,7 +133,7 @@
 <p>-U replicator -P -v --wal-method=stream</p>
 <p>Create a <code>standby.signal</code> file and start PostgreSQL. The replica streams continuously. </p>
 <p>MySQL Replica Setup </p>
-<h3>my.cnf on primary</h3>
+<h4>my.cnf on primary</h4>
 <p>server_id = 1</p>
 <p>log_bin = /var/log/mysql/mysql-bin.log</p>
 <p>binlog_format = ROW</p>
@@ -169,7 +173,7 @@
 <p>cur.execute(query, params or ())</p>
 <p>conn.commit()</p>
 <p>A <strong>proxy layer</strong> like PgBouncer, ProxySQL, or HAProxy handles routing transparently: </p>
-<h3>ProxySQL query rules</h3>
+<h4>ProxySQL query rules</h4>
 <p>mysql_query_rules:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rule_id: 1</p>
 <p>active: 1</p>
@@ -209,27 +213,27 @@
 <p>Handling Stale Reads </p>
 <p>Applications that route reads of recently written data back to the primary avoid inconsistent behavior. One pattern is to mark rows with a timestamp and route queries for recent rows accordingly: </p>
 <p>def get_order(order_id):</p>
-<h3>Orders updated within the last 30 seconds route to primary</h3>
+<h4>Orders updated within the last 30 seconds route to primary</h4>
 <p>order = router.execute_read(</p>
 <p>"SELECT created_at FROM orders WHERE id = %s", (order_id,)</p>
 <p>)</p>
 <p>if order and (datetime.utcnow() - order[0]) &lt; timedelta(seconds=30):</p>
 <p>conn = router.get_connection(read_only=False)</p>
-<h3>Query primary</h3>
+<h4>Query primary</h4>
 <p>else:</p>
 <p>conn = router.get_connection(read_only=True)</p>
 <p>Failover Strategies </p>
 <p>When the primary fails, one replica must become the new primary: </p>
 <p>PostgreSQL </p>
-<h3>Promote a replica to primary</h3>
+<h4>Promote a replica to primary</h4>
 <p>pg_ctl promote -D /var/lib/postgresql/data</p>
 <p>Or via <code>pg_rewind</code> for a clean re-sync: </p>
-<h3>After promotion, rewind old primary to follow new primary</h3>
+<h4>After promotion, rewind old primary to follow new primary</h4>
 <p>pg_rewind --target-pgdata=/var/lib/postgresql/data \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-server='host=new-primary-db ...'</p>
 <p>Managed Failover </p>
 <p>Tools like Patroni automate failover: </p>
-<h3>patroni.yml</h3>
+<h4>patroni.yml</h4>
 <p>scope: myapp</p>
 <p>consul:</p>
 <p>host: consul.service.consul:8500</p>
@@ -262,6 +266,8 @@
 </ul>
 <p>Read replicas are a proven, low-risk approach to scaling reads. Combined with proper monitoring and automated failover, they form the foundation of a highly available database architecture.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p></div>
     </article>

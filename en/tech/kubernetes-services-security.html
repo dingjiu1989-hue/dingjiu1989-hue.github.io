@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/kubernetes-services-security.png",
       "datePublished": "2025-12-02",
       "dateModified": "2026-05-08",
-      "wordCount": "3960",
+      "wordCount": "4022",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/kubernetes-services-security.html"},
@@ -110,19 +112,21 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/kubernetes-services-security.png" alt="Kubernetes Security Best Practices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Kubernetes Security Best Practices</h2>
 <h3>Kubernetes Security Best Practices</h3>
-<h3>Kubernetes Security Best Practices</h3>
-<h3>Kubernetes Security Best Practices</h3>
-<h3>Kubernetes Security Best Practices</h3>
-<h3>Kubernetes Security Best Practices</h3>
-<h3>Kubernetes Security Best Practices</h3>
-<h3>Kubernetes Security Best Practices</h3>
-<h3>Kubernetes Security Best Practices</h3>
-<h3>Kubernetes Security Best Practices</h3>
-<h3>Kubernetes Security Best Practices</h3>
-<h3>Kubernetes Security Best Practices</h3>
-<h3>Kubernetes Security Best Practices</h3>
-<h3>Kubernetes Security Best Practices</h3>
-<h3>Kubernetes Security Best Practices</h3>
+<h4>Kubernetes Security Best Practices</h4>
+<h4>Kubernetes Security Best Practices</h4>
+<h4>Kubernetes Security Best Practices</h4>
+<h4>Kubernetes Security Best Practices</h4>
+<h4>Kubernetes Security Best Practices</h4>
+<h4>Kubernetes Security Best Practices</h4>
+<h4>Kubernetes Security Best Practices</h4>
+<h4>Kubernetes Security Best Practices</h4>
+<h4>Kubernetes Security Best Practices</h4>
+<h4>Kubernetes Security Best Practices</h4>
+<h4>Kubernetes Security Best Practices</h4>
+<h4>Kubernetes Security Best Practices</h4>
+<h4>Kubernetes Security Best Practices</h4>
+<h4>Kubernetes Security Best Practices</h4>
+<h4>Kubernetes Security Best Practices</h4>
 <p>Kubernetes security is complex because the attack surface spans multiple layers: containers, clusters, networks, and cloud infrastructure. This guide covers the most impactful security practices for production Kubernetes deployments.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/kubernetes-services-security.png" alt="Kubernetes Security Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Pod Security Standards</h4>
 <p>Kubernetes deprecated PodSecurityPolicies in favor of Pod Security Admission (PSA), which enforces three security levels:</p>
@@ -236,7 +240,7 @@
 <p>Service accounts should only have permissions required for their specific function. Use <code>Role</code> for namespace-scoped access and <code>ClusterRole</code> only for cluster-wide resources.</p>
 <h4>Secrets Management</h4>
 <p>Kubernetes Secrets are base64-encoded, not encrypted by default. Enable encryption at rest:</p>
-<h3>Create encryption config</h3>
+<h4>Create encryption config</h4>
 <p>cat &gt; encryption-config.yaml &lt;</p>
 <p>apiVersion: apiserver.config.k8s.io/v1</p>
 <p>kind: EncryptionConfiguration</p>
@@ -278,7 +282,7 @@
 <p>image: registry.example.com/myapp:1.0.0</p>
 <p>imagePullPolicy: Always</p>
 <p>Use image scanning in CI/CD:</p>
-<h3>Scan container images before deployment</h3>
+<h4>Scan container images before deployment</h4>
 <p>trivy image registry.example.com/myapp:1.0.0</p>
 <p>Configure admission controllers to reject images with critical vulnerabilities.</p>
 <h4>Resource Limits</h4>
@@ -298,7 +302,7 @@
 <p>Falco detects anomalous behavior: shell in a container, unexpected file system access, suspicious network connections. It can trigger alerts or kill offending pods.</p>
 <h4>Audit Logging</h4>
 <p>Enable Kubernetes audit logging:</p>
-<h3>kube-apiserver configuration</h3>
+<h4>kube-apiserver configuration</h4>
 <p>apiServer:</p>
 <p>audit:</p>
 <p>enabled: true</p>
@@ -317,6 +321,8 @@
 <h4>Summary</h4>
 <p>Kubernetes security requires defense in depth: Pod Security Admission for pod hardening, network policies for segmentation, RBAC for access control, external secrets for sensitive data, and runtime security for threat detection. Start with pod security -- run containers as non-root, drop capabilities, and enable seccomp. Add network policies for isolation. Finally, implement RBAC and secrets management. Most Kubernetes compromises exploit misconfigurations rather than software vulnerabilities -- hardening these configurations is the highest-impact security investment.</p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/bash-scripting-guide.html">Bash Scripting Best Practices</a>, <a href="/en/tech/ssh-security-hardening.html">SSH Security Hardening</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/bash-scripting-guide.html">Bash Scripting Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/bash-scripting-guide.html">Bash Scripting Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/bash-scripting-guide.html">Bash Scripting Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/bash-scripting-guide.html">Bash Scripting Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/bash-scripting-guide.html">Bash Scripting Best Practices</a></p></div>
     </article>

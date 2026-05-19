@@ -1,7 +1,7 @@
 ---
 title: "Docker in 30 Minutes: From Install to First Container"
 description: "A hands-on Docker tutorial for absolute beginners. Learn images, containers, and Dockerfiles by building and running your first containerized app."
-date: 2026-05-08
+date: 2025-10-08
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/docker-quickstart.html
 ---

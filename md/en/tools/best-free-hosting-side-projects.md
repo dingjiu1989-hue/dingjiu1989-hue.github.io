@@ -1,7 +1,7 @@
 ---
 title: "Best Free Hosting for Side Projects 2026: 12 Platforms With Generous Free Tiers"
 description: "Ship your side project for $0. Compare free hosting platforms with real limits, no credit card required options, and what you get before you pay a cent."
-date: 2026-05-08
+date: 2025-10-28
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-free-hosting-side-projects.html
 ---

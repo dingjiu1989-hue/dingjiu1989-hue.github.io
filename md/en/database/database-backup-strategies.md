@@ -1,7 +1,7 @@
 ---
 title: "Database Backup and Recovery Strategies"
 description: "Learn database backup strategies including full, incremental, and differential backups, point-in-time recovery, and disaster recovery planning."
-date: 2026-05-11
+date: 2025-12-22
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/database-backup-strategies.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/database-backup-strategies.ht
 
 ## Database Backup and Recovery Strategies
 
-## Database Backup and Recovery Strategies
+### Database Backup and Recovery Strategies
 
-## Database Backup and Recovery Strategies
+#### Database Backup and Recovery Strategies
 
-## Database Backup and Recovery Strategies
+#### Database Backup and Recovery Strategies
 
-## Database Backup and Recovery Strategies
+#### Database Backup and Recovery Strategies
 
-## Database Backup and Recovery Strategies
+#### Database Backup and Recovery Strategies
 
-## Database Backup and Recovery Strategies
+#### Database Backup and Recovery Strategies
 
-## Database Backup and Recovery Strategies
+#### Database Backup and Recovery Strategies
 
-## Database Backup and Recovery Strategies
+#### Database Backup and Recovery Strategies
 
-## Database Backup and Recovery Strategies
+#### Database Backup and Recovery Strategies
 
-## Database Backup and Recovery Strategies
+#### Database Backup and Recovery Strategies
 
-## Database Backup and Recovery Strategies
+#### Database Backup and Recovery Strategies
+
+#### Database Backup and Recovery Strategies
+
+#### Database Backup and Recovery Strategies
+
+#### Database Backup and Recovery Strategies
 
 RPO and RTO 
 
@@ -44,7 +50,7 @@ Backup Types
 
 Point-in-Time Recovery (WAL Archiving) 
 
-## postgresql.conf
+#### postgresql.conf
 
 wal_level = replica
 
@@ -54,13 +60,13 @@ archive_command = 'cp %p /backups/wal/%f'
 
 archive_timeout = 60
 
-## Full base backup
+#### Full base backup
 
 pg_basebackup -h localhost -D /backups/base/$(date +%Y%m%d) -X stream -P
 
-## Restore to point in time
+#### Restore to point in time
 
-## recovery.conf
+#### recovery.conf
 
 restore_command = 'cp /backups/wal/%f %p'
 
@@ -68,7 +74,7 @@ recovery_target_time = '2026-05-11 14:23:45'
 
 Cloud Backups 
 
-## AWS RDS
+#### AWS RDS
 
 aws rds create-db-snapshot --db-instance-identifier mydb
 
@@ -78,7 +84,7 @@ aws rds restore-db-instance-from-db-snapshot \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-snapshot-identifier mydb-snapshot
 
-## Point-in-time restore
+#### Point-in-time restore
 
 aws rds restore-db-instance-to-point-in-time \
 
@@ -97,6 +103,12 @@ Conclusion
 Define RPO/RTO before designing backup strategy. Use continuous WAL archiving for PITR. Follow the 3-2-1 rule. Test restores regularly. Automate the entire process.
 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Backup Strategies to Object Storage](</en/database/database-backup-to-s3.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>).
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Backup Strategies to Object Storage](</en/database/database-backup-to-s3.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Backup Strategies to Object Storage](</en/database/database-backup-to-s3.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Backup Strategies to Object Storage](</en/database/database-backup-to-s3.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Backup Strategies to Object Storage](</en/database/database-backup-to-s3.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
 

@@ -1,7 +1,7 @@
 ---
 title: "Linter and Formatter: ESLint, Prettier, Biome, Ruff"
 description: "Compare linters and formatters in 2026: ESLint + Prettier for JavaScript, Biome as an all-in-one Rust alternative, and Ruff for Python linting and formatting."
-date: 2026-05-12
+date: 2026-02-04
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/linter-formatter.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/tools/linter-formatter.html
 
 ## Linter and Formatter: ESLint, Prettier, Biome, Ruff
 
-## Linter and Formatter: ESLint, Prettier, Biome, Ruff
+### Linter and Formatter: ESLint, Prettier, Biome, Ruff
 
-## Linter and Formatter: ESLint, Prettier, Biome, Ruff
+#### Linter and Formatter: ESLint, Prettier, Biome, Ruff
 
-## Linter and Formatter: ESLint, Prettier, Biome, Ruff
+#### Linter and Formatter: ESLint, Prettier, Biome, Ruff
 
-## Linter and Formatter: ESLint, Prettier, Biome, Ruff
+#### Linter and Formatter: ESLint, Prettier, Biome, Ruff
 
-## Linter and Formatter: ESLint, Prettier, Biome, Ruff
+#### Linter and Formatter: ESLint, Prettier, Biome, Ruff
 
-## Linter and Formatter: ESLint, Prettier, Biome, Ruff
+#### Linter and Formatter: ESLint, Prettier, Biome, Ruff
 
-## Linter and Formatter: ESLint, Prettier, Biome, Ruff
+#### Linter and Formatter: ESLint, Prettier, Biome, Ruff
 
-## Linter and Formatter: ESLint, Prettier, Biome, Ruff
+#### Linter and Formatter: ESLint, Prettier, Biome, Ruff
 
-## Linter and Formatter: ESLint, Prettier, Biome, Ruff
+#### Linter and Formatter: ESLint, Prettier, Biome, Ruff
 
-## Linter and Formatter: ESLint, Prettier, Biome, Ruff
+#### Linter and Formatter: ESLint, Prettier, Biome, Ruff
 
-## Linter and Formatter: ESLint, Prettier, Biome, Ruff
+#### Linter and Formatter: ESLint, Prettier, Biome, Ruff
 
-## Linter and Formatter: ESLint, Prettier, Biome, Ruff
+#### Linter and Formatter: ESLint, Prettier, Biome, Ruff
 
-### Introduction
+#### Linter and Formatter: ESLint, Prettier, Biome, Ruff
+
+#### Linter and Formatter: ESLint, Prettier, Biome, Ruff
+
+#### Linter and Formatter: ESLint, Prettier, Biome, Ruff
+
+#### Introduction
 
 Code quality tools have converged into two categories: linters (find bugs and enforce style rules) and formatters (automatically format code). The traditional approach uses separate tools for each. Newer all-in-one tools combine both in a single binary. This article compares ESLint + Prettier, Biome, and Ruff.
 
-### ESLint + Prettier
+#### ESLint + Prettier
 
 The established standard for JavaScript/TypeScript:
 
@@ -100,7 +106,7 @@ ignores: ["dist/**", "node_modules/** "],
 
 }
 
-## Check and fix
+#### Check and fix
 
 npx eslint src/
 
@@ -114,7 +120,7 @@ npx prettier --write src/
 
 **Weaknesses** : Two separate tools require coordination. ESLint configuration can be verbose. Performance can be slow on large codebases. Running both adds build time.
 
-### Biome
+#### Biome
 
 A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
 
@@ -196,7 +202,7 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
 
 }
 
-## Check and format
+#### Check and format
 
 biome check src/
 
@@ -206,11 +212,11 @@ biome format src/
 
 biome ci src/ # CI mode (strict)
 
-## Lint only
+#### Lint only
 
 biome lint src/
 
-## Organize imports
+#### Organize imports
 
 biome check --formatter-enabled=true --linter-enabled=true
 
@@ -220,11 +226,11 @@ biome check --formatter-enabled=true --linter-enabled=true
 
 **Weaknesses** : Smaller ecosystem (fewer community rules), newer (some edge cases not covered), migration effort from ESLint.
 
-### Ruff
+#### Ruff
 
 A Rust-based linter and formatter for Python:
 
-## pyproject.toml
+#### pyproject.toml
 
 [tool.ruff]
 
@@ -278,7 +284,7 @@ line-ending = "lf"
 
 "tests/**" = ["S101"] # Allow assert in tests
 
-## Check and fix
+#### Check and fix
 
 ruff check src/
 
@@ -294,7 +300,7 @@ ruff check src/ --watch # Watch mode
 
 **Weaknesses** : Some rules not yet implemented (Pylint plugin parity). Python only.
 
-### Comparison
+#### Comparison
 
 | Feature | ESLint + Prettier | Biome | Ruff |
 
@@ -316,7 +322,7 @@ ruff check src/ --watch # Watch mode
 
 | Migrate from | N/A | `biome migrate eslint` | `ruff migrate` |
 
-### Recommendations
+#### Recommendations
 
   * **New JS/TS projects** : Start with Biome for the best developer experience and speed.
 
@@ -334,6 +340,12 @@ ruff check src/ --watch # Watch mode
 The industry is clearly moving toward Rust-based all-in-one tools. Biome and Ruff represent the future of code quality tooling: fast, unified, and simple to configure.
 
 **See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>), [Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features](</en/tools/package-managers.html>).
+
+**See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
+
+**See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
+
+**See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
 
 **See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
 

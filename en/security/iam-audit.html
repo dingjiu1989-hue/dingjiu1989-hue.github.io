@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/iam-audit.png",
       "datePublished": "2026-03-18",
       "dateModified": "2026-05-01",
-      "wordCount": "1085",
+      "wordCount": "1118",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/iam-audit.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/iam-audit.png" alt="IAM Audit" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>IAM Audit</h2>
 <h3>IAM Audit</h3>
-<h3>IAM Audit</h3>
-<h3>IAM Audit</h3>
-<h3>IAM Audit</h3>
-<h3>IAM Audit</h3>
-<h3>IAM Audit</h3>
-<h3>IAM Audit</h3>
-<h3>IAM Audit</h3>
-<h3>IAM Audit</h3>
-<h3>IAM Audit</h3>
-<h3>IAM Audit</h3>
-<h3>IAM Audit</h3>
+<h4>IAM Audit</h4>
+<h4>IAM Audit</h4>
+<h4>IAM Audit</h4>
+<h4>IAM Audit</h4>
+<h4>IAM Audit</h4>
+<h4>IAM Audit</h4>
+<h4>IAM Audit</h4>
+<h4>IAM Audit</h4>
+<h4>IAM Audit</h4>
+<h4>IAM Audit</h4>
+<h4>IAM Audit</h4>
+<h4>IAM Audit</h4>
+<h4>IAM Audit</h4>
 <p>IAM Audit Fundamentals </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/iam-audit.png" alt="IAM Audit" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Identity and Access Management (IAM) audits verify that users have appropriate permissions. Regular audits prevent privilege creep, detect unused roles, and identify security gaps. </p>
 <p>Permission Review </p>
@@ -131,16 +135,16 @@
 <p>"groups": [],</p>
 <p>"last_used": None</p>
 <p>}</p>
-<h3>Inline policies</h3>
+<h4>Inline policies</h4>
 <p>policies = self.iam.list_user_policies(UserName=user["UserName"])</p>
 <p>user_info["policies"] = policies["PolicyNames"]</p>
-<h3>Attached managed policies</h3>
+<h4>Attached managed policies</h4>
 <p>attached = self.iam.list_attached_user_policies(UserName=user["UserName"])</p>
 <p>user_info["managed_policies"] = [p["PolicyName"] for p in attached["AttachedPolicies"]]</p>
-<h3>Groups</h3>
+<h4>Groups</h4>
 <p>groups = self.iam.list_groups_for_user(UserName=user["UserName"])</p>
 <p>user_info["groups"] = [g["GroupName"] for g in groups["Groups"]]</p>
-<h3>Last activity</h3>
+<h4>Last activity</h4>
 <p>last_used = self.iam.get_user(UserName=user["UserName"])</p>
 <p>if "PasswordLastUsed" in last_used["User"]:</p>
 <p>user_info["last_used"] = last_used["User"]["PasswordLastUsed"]</p>
@@ -179,7 +183,7 @@
 <p>if isinstance(actions, str):</p>
 <p>actions = [actions]</p>
 <p>resource = stmt.get("Resource", "*")</p>
-<h3>Check for IAM modify permissions</h3>
+<h4>Check for IAM modify permissions</h4>
 <p>escalation_actions = [</p>
 <p>"iam:CreatePolicy",</p>
 <p>"iam:AttachUserPolicy",</p>
@@ -208,7 +212,7 @@
 <p>},</p>
 <p>"findings": findings</p>
 <p>}</p>
-<h3>Flag users with admin access who don't need it</h3>
+<h4>Flag users with admin access who don't need it</h4>
 <p>for user in findings["users"]:</p>
 <p>if "AdministratorAccess" in user.get("managed_policies", []):</p>
 <p>if user.get("last_used") and \</p>
@@ -232,6 +236,8 @@
 <p>Conclusion </p>
 <p>Regular IAM audits are essential for maintaining least privilege. Automate permission reviews, detect unused roles, and analyze privilege escalation paths. Generate actionable reports and enforce remediation SLAs. Audit at least quarterly, with automated scanning running continuously.</p>
 <p><strong>See also:</strong> <a href="/en/security/identity-access-management.html">IAM: Identity and Access Management Fundamentals</a>, <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p></div>
     </article>

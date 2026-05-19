@@ -1,7 +1,7 @@
 ---
 title: "DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost"
 description: "In-depth comparison of DynamoDB vs Cassandra covering data model, consistency levels, scaling strategies, query patterns, and cost considerations."
-date: 2026-05-12
+date: 2026-04-05
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/dynamodb-vs-cassandra.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/dynamodb-vs-cassandra.html
 
 ## DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
 
-## DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+### DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
 
-## DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+#### DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
 
-## DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+#### DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
 
-## DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+#### DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
 
-## DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+#### DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
 
-## DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+#### DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
 
-## DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+#### DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
 
-## DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+#### DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
 
-## DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+#### DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
 
-## DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+#### DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
 
-## DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+#### DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+
+#### DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+
+#### DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+
+#### DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
 
 DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost 
 
@@ -81,7 +87,7 @@ Key design rules:
 
 
 
-## DynamoDB query
+#### DynamoDB query
 
 import boto3
 
@@ -144,7 +150,7 @@ Key design rules:
 
 
 
-## Cassandra query
+#### Cassandra query
 
 from cassandra.cluster import Cluster
 
@@ -168,7 +174,7 @@ DynamoDB Consistency Levels
 
 DynamoDB offers tunable consistency at the request level: 
 
-## Eventually consistent read (cheaper)
+#### Eventually consistent read (cheaper)
 
 response = client.get_item(
 
@@ -180,7 +186,7 @@ ConsistentRead=False
 
 )
 
-## Strongly consistent read
+#### Strongly consistent read
 
 response = client.get_item(
 
@@ -226,7 +232,7 @@ DynamoDB Scaling
 
 DynamoDB scales vertically by provisioning read and write capacity units (RCUs and WCUs). Auto-scaling adjusts capacity based on traffic: 
 
-## Configure auto-scaling
+#### Configure auto-scaling
 
 client.update_table(
 
@@ -242,9 +248,9 @@ ProvisionedThroughput={
 
 )
 
-## Or use on-demand mode (pay-per-request)
+#### Or use on-demand mode (pay-per-request)
 
-## No capacity planning needed, but higher per-request cost
+#### No capacity planning needed, but higher per-request cost
 
 DynamoDB partitions are invisible to users. The service automatically splits partitions when they exceed 10 GB or when throughput exceeds 3000 RCU or 1000 WCU per partition. 
 
@@ -252,7 +258,7 @@ Cassandra Scaling
 
 Cassandra scales horizontally by adding nodes. Data is distributed using consistent hashing: 
 
-## cassandra.yaml
+#### cassandra.yaml
 
 num_tokens: 256
 
@@ -262,13 +268,13 @@ replication_factor: 3
 
 Adding a node: 
 
-## Add node to cluster
+#### Add node to cluster
 
 nodetool status
 
 nodetool join
 
-## Rebalance data
+#### Rebalance data
 
 nodetool rebuild
 
@@ -322,6 +328,12 @@ When to Choose Which
 DynamoDB and Cassandra are both excellent at what they do: high-throughput, scalable key-value and wide-column workloads. The choice depends on your operational preferences, cloud strategy, and cost sensitivity. For most applications starting out, a relational database with read replicas is the simpler and more flexible choice.
 
 **See also:** [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>).
+
+**See also:** [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
+
+**See also:** [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
+
+**See also:** [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
 
 **See also:** [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
 

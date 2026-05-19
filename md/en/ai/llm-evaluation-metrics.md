@@ -1,7 +1,7 @@
 ---
 title: "LLM Evaluation Metrics"
 description: "A comprehensive overview of LLM evaluation metrics including accuracy, perplexity, BLEU, ROUGE, and human evaluation frameworks."
-date: 2026-05-11
+date: 2025-12-12
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/llm-evaluation-metrics.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-evaluation-metrics.html
 
 ## LLM Evaluation Metrics
 
-## LLM Evaluation Metrics
+### LLM Evaluation Metrics
 
-## LLM Evaluation Metrics
+#### LLM Evaluation Metrics
 
-## LLM Evaluation Metrics
+#### LLM Evaluation Metrics
 
-## LLM Evaluation Metrics
+#### LLM Evaluation Metrics
 
-## LLM Evaluation Metrics
+#### LLM Evaluation Metrics
 
-## LLM Evaluation Metrics
+#### LLM Evaluation Metrics
 
-## LLM Evaluation Metrics
+#### LLM Evaluation Metrics
 
-## LLM Evaluation Metrics
+#### LLM Evaluation Metrics
 
-## LLM Evaluation Metrics
+#### LLM Evaluation Metrics
 
-## LLM Evaluation Metrics
+#### LLM Evaluation Metrics
 
-## LLM Evaluation Metrics
+#### LLM Evaluation Metrics
 
-## LLM Evaluation Metrics
+#### LLM Evaluation Metrics
 
-### Introduction
+#### LLM Evaluation Metrics
+
+#### LLM Evaluation Metrics
+
+#### LLM Evaluation Metrics
+
+#### Introduction
 
 Evaluating large language models is fundamentally different from evaluating traditional machine learning models. LLMs produce open-ended outputs, have no single ground truth measure, and can fail in ways that accuracy cannot capture. This guide covers the evaluation metrics and frameworks used to measure LLM performance across different tasks.
 
-### Classification Metrics
+#### Classification Metrics
 
 For classification tasks — sentiment analysis, intent detection, topic classification — standard ML metrics apply:
 
@@ -67,7 +73,7 @@ Recall = 850/(850+100) = 0.895
 
 F1 = 2 * (0.944*0.895)/(0.944+0.895) = 0.919
 
-### Generation Metrics
+#### Generation Metrics
 
 #### ROUGE (Recall-Oriented Understudy for Gisting Evaluation)
 
@@ -107,7 +113,7 @@ Perplexity = exp(-1/N * Σ log P(token_i | context))
 
 Perplexity is useful for comparing models on the same dataset but cannot compare across datasets. A general model will have higher perplexity than a domain-specific one on the same domain text.
 
-### Task-Specific Benchmarks
+#### Task-Specific Benchmarks
 
 Standardized benchmarks enable model-to-model comparison:
 
@@ -128,7 +134,7 @@ Standardized benchmarks enable model-to-model comparison:
 
 When reporting benchmark scores, always include the exact evaluation setup (few-shot count, prompt template, decoding parameters) since these significantly affect results.
 
-### LLM-as-Judge Evaluation
+#### LLM-as-Judge Evaluation
 
 Using an LLM to evaluate another LLM's outputs has become the standard approach for open-ended tasks:
 
@@ -154,7 +160,7 @@ Output a JSON object with scores and brief reasoning.
 
 **GPT-4 and Claude-3.5 Opus** are the most commonly used judge models. Agreement between LLM judges and human raters ranges from 70-85% for most tasks, making this approach cost-effective and scalable.
 
-### Human Evaluation
+#### Human Evaluation
 
 Despite automation advances, human evaluation remains the gold standard:
 
@@ -171,7 +177,7 @@ Despite automation advances, human evaluation remains the gold standard:
 
 A good annotation rubric defines each score level with concrete examples. For a 5-point helpfulness scale, each point should have anchor examples.
 
-### Evaluation in Production
+#### Evaluation in Production
 
 Production evaluation goes beyond benchmarks:
 
@@ -186,11 +192,17 @@ Production evaluation goes beyond benchmarks:
 
 
 
-### Conclusion
+#### Conclusion
 
 No single metric captures LLM quality. Effective evaluation combines automated metrics for regression testing, LLM-as-judge for scalable quality assessment, task-specific benchmarks for capability tracking, and human evaluation for final quality assurance. Build an evaluation pipeline that includes all these levels and update it as your use case evolves.
 
 **See also:** [LLM Context Window Management](</en/ai/llm-context-window.html>), [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>).
+
+**See also:** [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
+
+**See also:** [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
+
+**See also:** [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
 
 **See also:** [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
 

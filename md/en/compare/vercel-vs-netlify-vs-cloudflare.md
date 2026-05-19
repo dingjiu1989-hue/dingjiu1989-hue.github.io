@@ -1,7 +1,7 @@
 ---
 title: "Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers"
 description: "Detailed comparison of free tiers, pricing at scale, serverless functions, edge networks, and developer experience. Real numbers, clear recommendations."
-date: 2026-05-12
+date: 2026-02-25
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/vercel-vs-netlify-vs-cloudflare.html
 ---

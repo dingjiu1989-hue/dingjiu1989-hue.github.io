@@ -1,7 +1,7 @@
 ---
 title: "GraphQL API Design: Schema Best Practices, Federation, and Performance"
 description: "Design production GraphQL APIs: schema-first design, N+1 query solutions (DataLoader), federation for microservices, error handling patterns, and caching strategies. Real examples from GitHub and Shopify APIs."
-date: 2026-05-08
+date: 2025-10-14
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/graphql-api-design.html
 ---

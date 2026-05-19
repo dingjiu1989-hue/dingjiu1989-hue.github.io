@@ -1,7 +1,7 @@
 ---
 title: "Developer Note Taking Tools"
 description: "Compare note-taking tools for developers including Notion, Obsidian, Logseq, and Dendron for knowledge management."
-date: 2026-05-11
+date: 2025-12-10
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/note-taking-tools.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/tools/note-taking-tools.html
 
 ## Developer Note Taking Tools
 
-## Developer Note Taking Tools
+### Developer Note Taking Tools
 
-## Developer Note Taking Tools
+#### Developer Note Taking Tools
 
-## Developer Note Taking Tools
+#### Developer Note Taking Tools
 
-## Developer Note Taking Tools
+#### Developer Note Taking Tools
 
-## Developer Note Taking Tools
+#### Developer Note Taking Tools
 
-## Developer Note Taking Tools
+#### Developer Note Taking Tools
 
-## Developer Note Taking Tools
+#### Developer Note Taking Tools
 
-## Developer Note Taking Tools
+#### Developer Note Taking Tools
 
-## Developer Note Taking Tools
+#### Developer Note Taking Tools
 
-## Developer Note Taking Tools
+#### Developer Note Taking Tools
 
-## Developer Note Taking Tools
+#### Developer Note Taking Tools
 
-## Developer Note Taking Tools
+#### Developer Note Taking Tools
+
+#### Developer Note Taking Tools
+
+#### Developer Note Taking Tools
+
+#### Developer Note Taking Tools
 
 Developers have unique note-taking requirements: code snippets with syntax highlighting, technical diagrams, system design notes, and integration with development workflows. This guide evaluates the best tools for developer knowledge management.
 
-### Requirements for Developer Notes
+#### Requirements for Developer Notes
 
 A developer note-taking tool should support:
 
@@ -53,7 +59,7 @@ A developer note-taking tool should support:
 
 
 
-### Obsidian
+#### Obsidian
 
 Obsidian is the leading personal knowledge management tool for developers. It treats each note as a plain Markdown file on your local filesystem.
 
@@ -74,15 +80,15 @@ Obsidian is the leading personal knowledge management tool for developers. It tr
 
 
 
-## API Design Notes
+#### API Design Notes
 
-### Endpoints
+#### Endpoints
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [[POST /api/users]] - Create user
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [[GET /api/users/:id]] - Get user details
 
-### Database Schema
+#### Database Schema
 
 CREATE TABLE users (
 
@@ -92,7 +98,7 @@ email VARCHAR(255) UNIQUE
 
 );
 
-### Architecture
+#### Architecture
 
 graph LR
 
@@ -104,7 +110,7 @@ API --> Cache[(Redis)]
 
 **Use for** : Technical diary, project documentation, system design notes.
 
-### Logseq
+#### Logseq
 
 Logseq is an open-source knowledge management tool using an outliner paradigm. Notes are structured as hierarchical blocks.
 
@@ -125,7 +131,7 @@ Logseq is an open-source knowledge management tool using an outliner paradigm. N
 
 **Use for** : Daily standup notes, meeting minutes, research notes.
 
-### Notion
+#### Notion
 
 Notion is the most versatile workspace tool, combining notes, databases, wikis, and project management.
 
@@ -148,7 +154,7 @@ Notion is the most versatile workspace tool, combining notes, databases, wikis, 
 
 **Cons** : No local storage (cloud-only), no Vim mode, can be slow with large databases.
 
-### Dendron
+#### Dendron
 
 Dendron is a VS Code extension that provides hierarchical note-taking. It treats notes like a file system with lookup-based navigation.
 
@@ -167,7 +173,7 @@ Dendron is a VS Code extension that provides hierarchical note-taking. It treats
 
 
 
-## Dendron hierarchy
+#### Dendron hierarchy
 
 dev.python.fastapi.setup
 
@@ -179,7 +185,7 @@ dev.aws.s3.bucket-policies
 
 **Use for** : Structured technical reference, API documentation, system design reference.
 
-### Boost Note
+#### Boost Note
 
 Boost Note is an open-source Markdown editor designed for developers, with a focus on code snippets and team collaboration.
 
@@ -198,7 +204,7 @@ Boost Note is an open-source Markdown editor designed for developers, with a foc
 
 
 
-### Comparison Table
+#### Comparison Table
 
 | Feature | Obsidian | Logseq | Notion | Dendron | Boost Note |
 
@@ -220,13 +226,13 @@ Boost Note is an open-source Markdown editor designed for developers, with a foc
 
 | Price | Free (sync paid) | Free | Free (team paid) | Free | Free |
 
-### Workflow Integration
+#### Workflow Integration
 
 #### Git-Based Note Backups
 
 For local-first tools (Obsidian, Logseq, Dendron), store your notes in a Git repository:
 
-## Create a notes repository
+#### Create a notes repository
 
 mkdir ~/notes && cd ~/notes
 
@@ -234,7 +240,7 @@ git init
 
 git remote add origin https://github.com/you/notes.git
 
-## Sync daily
+#### Sync daily
 
 git add -A
 
@@ -248,7 +254,7 @@ Automate with a cron job or Obsidian's Git plugin.
 
 For quick terminal notes:
 
-## Using a simple shell function
+#### Using a simple shell function
 
 function note() {
 
@@ -260,7 +266,7 @@ echo "" >> ~/notes/scratchpad.md
 
 }
 
-## Usage
+#### Usage
 
 note "Remember to check the RDS backup schedule"
 
@@ -268,7 +274,7 @@ note "Remember to check the RDS backup schedule"
 
 Some developers integrate notes with their codebase. Jupyter Notebooks combine code with narrative text. Tools like `jupytext` convert between .ipynb and .md formats.
 
-### Recommendations
+#### Recommendations
 
   * **Individual developer** : Obsidian for comprehensive knowledge management.
 
@@ -283,11 +289,17 @@ Some developers integrate notes with their codebase. Jupyter Notebooks combine c
 
 
 
-### Summary
+#### Summary
 
 Developer note-taking has evolved from plain text files to rich knowledge management systems. Obsidian offers the best balance of local-first control, Markdown-native format, and powerful linking. Notion excels for team collaboration. Dendron provides the tightest VS Code integration. The common thread is Markdown -- choose a tool that stores notes in plain Markdown so you are never locked into a proprietary format and can always version control your knowledge base.
 
 **See also:** [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>), [Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq](</en/tools/best-note-taking-apps-developers.html>).
+
+**See also:** [Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq](</en/tools/best-note-taking-apps-developers.html>), [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
+
+**See also:** [Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq](</en/tools/best-note-taking-apps-developers.html>), [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
+
+**See also:** [Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq](</en/tools/best-note-taking-apps-developers.html>), [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
 
 **See also:** [Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq](</en/tools/best-note-taking-apps-developers.html>), [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
 

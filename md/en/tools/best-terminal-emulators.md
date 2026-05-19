@@ -1,7 +1,7 @@
 ---
 title: "Best Terminal Emulators for Developers 2026: Warp vs iTerm2 vs Kitty vs WezTerm"
 description: "In-depth comparison of modern terminal emulators: speed, features, customization, GPU acceleration, and AI integration. Find the best terminal for YOUR workflow with our decision matrix."
-date: 2026-05-14
+date: 2026-05-12
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-terminal-emulators.html
 ---

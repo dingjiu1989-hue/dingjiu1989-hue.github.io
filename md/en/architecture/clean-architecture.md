@@ -1,7 +1,7 @@
 ---
 title: "Clean Architecture Explained"
 description: "Understand Clean Architecture principles for building maintainable, testable software systems."
-date: 2026-05-11
+date: 2026-05-15
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/clean-architecture.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/clean-architecture.html
 
 ## Clean Architecture Explained
 
-## Clean Architecture Explained
+### Clean Architecture Explained
 
-## Clean Architecture Explained
+#### Clean Architecture Explained
 
-## Clean Architecture Explained
+#### Clean Architecture Explained
 
-## Clean Architecture Explained
+#### Clean Architecture Explained
 
-## Clean Architecture Explained
+#### Clean Architecture Explained
 
-## Clean Architecture Explained
+#### Clean Architecture Explained
 
-## Clean Architecture Explained
+#### Clean Architecture Explained
 
-## Clean Architecture Explained
+#### Clean Architecture Explained
 
-## Clean Architecture Explained
+#### Clean Architecture Explained
 
-## Clean Architecture Explained
+#### Clean Architecture Explained
 
-## Clean Architecture Explained
+#### Clean Architecture Explained
+
+#### Clean Architecture Explained
+
+#### Clean Architecture Explained
+
+#### Clean Architecture Explained
 
 Clean Architecture, introduced by Robert C. Martin, is an architectural philosophy that organizes code into concentric layers with strict dependency rules. The goal is to create systems that are independent of frameworks, testable, and independent of UI, database, and external agencies. 
 
@@ -67,6 +73,12 @@ Implementing Clean Architecture requires disciplined project structure. A common
 Clean Architecture is not appropriate for every project. Small applications with simple business logic may find the layering overhead excessive. For complex, long-lived applications with evolving business rules, the investment in clean separation pays substantial dividends in maintainability, testability, and adaptability to changing frameworks.
 
 **See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>).
+
+**See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
+
+**See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
+
+**See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
 
 **See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
 

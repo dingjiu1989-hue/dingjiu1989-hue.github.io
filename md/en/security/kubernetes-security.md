@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes Security"
 description: "Securing Kubernetes with RBAC, Pod Security Standards, network policies, and audit logging."
-date: 2026-05-12
+date: 2026-03-18
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/kubernetes-security.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/security/kubernetes-security.html
 
 ## Kubernetes Security
 
-## Kubernetes Security
+### Kubernetes Security
 
-## Kubernetes Security
+#### Kubernetes Security
 
-## Kubernetes Security
+#### Kubernetes Security
 
-## Kubernetes Security
+#### Kubernetes Security
 
-## Kubernetes Security
+#### Kubernetes Security
 
-## Kubernetes Security
+#### Kubernetes Security
 
-## Kubernetes Security
+#### Kubernetes Security
 
-## Kubernetes Security
+#### Kubernetes Security
 
-## Kubernetes Security
+#### Kubernetes Security
 
-## Kubernetes Security
+#### Kubernetes Security
 
-## Kubernetes Security
+#### Kubernetes Security
+
+#### Kubernetes Security
+
+#### Kubernetes Security
+
+#### Kubernetes Security
 
 Kubernetes Security Challenges 
 
@@ -106,7 +112,7 @@ Pod Security Standards
 
 Enforce Pod Security Standards with admission controllers: 
 
-## Pod Security Admission
+#### Pod Security Admission
 
 apiVersion: pods-security.admission.config.k8s.io/v1
 
@@ -130,7 +136,7 @@ exemptions:
 
 namespaces: ["kube-system", "kube-public"]
 
-## Pod Security Standards - Restricted level
+#### Pod Security Standards - Restricted level
 
 apiVersion: v1
 
@@ -238,7 +244,7 @@ Audit Logging
 
 Enable and monitor audit logs: 
 
-## audit-policy.yaml
+#### audit-policy.yaml
 
 apiVersion: audit.k8s.io/v1
 
@@ -270,7 +276,7 @@ verbs: ["watch"]
 
 requestSources: ["controller"]
 
-## Audit log analyzer
+#### Audit log analyzer
 
 import json
 
@@ -284,7 +290,7 @@ for line in log_lines:
 
 event = json.loads(line)
 
-## Detect secret access patterns
+#### Detect secret access patterns
 
 if event.get("objectRef", {}).get("resource") == "secrets":
 
@@ -300,7 +306,7 @@ suspicious_activities.append({
 
 })
 
-## Detect RBAC changes
+#### Detect RBAC changes
 
 if event.get("objectRef", {}).get("apiGroup") == "rbac.authorization.k8s.io":
 
@@ -321,6 +327,12 @@ Conclusion
 Kubernetes security requires a layered approach. Lock down RBAC with least privilege, enforce Pod Security Standards, isolate workloads with network policies, and enable comprehensive audit logging. Use admission controllers to enforce policies at deploy time. Monitor audit logs for suspicious activity patterns.
 
 **See also:** [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>), [Cloud Network Security](</en/security/cloud-network-security.html>).
+
+**See also:** [Audit Logging Best Practices](</en/security/audit-logging.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>), [Cloud Network Security](</en/security/cloud-network-security.html>)
+
+**See also:** [Audit Logging Best Practices](</en/security/audit-logging.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>), [Cloud Network Security](</en/security/cloud-network-security.html>)
+
+**See also:** [Audit Logging Best Practices](</en/security/audit-logging.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>), [Cloud Network Security](</en/security/cloud-network-security.html>)
 
 **See also:** [Audit Logging Best Practices](</en/security/audit-logging.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>), [Cloud Network Security](</en/security/cloud-network-security.html>)
 

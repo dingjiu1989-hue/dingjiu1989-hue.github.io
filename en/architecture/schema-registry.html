@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/schema-registry.png",
       "datePublished": "2026-05-05",
       "dateModified": "2026-05-19",
-      "wordCount": "1052",
+      "wordCount": "1092",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html"},
@@ -96,17 +98,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/schema-registry.png" alt="Schema Registry" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Schema Registry</h2>
 <h3>Schema Registry</h3>
-<h3>Schema Registry</h3>
-<h3>Schema Registry</h3>
-<h3>Schema Registry</h3>
-<h3>Schema Registry</h3>
-<h3>Schema Registry</h3>
-<h3>Schema Registry</h3>
-<h3>Schema Registry</h3>
-<h3>Schema Registry</h3>
-<h3>Schema Registry</h3>
-<h3>Schema Registry</h3>
-<h3>Schema Registry</h3>
+<h4>Schema Registry</h4>
+<h4>Schema Registry</h4>
+<h4>Schema Registry</h4>
+<h4>Schema Registry</h4>
+<h4>Schema Registry</h4>
+<h4>Schema Registry</h4>
+<h4>Schema Registry</h4>
+<h4>Schema Registry</h4>
+<h4>Schema Registry</h4>
+<h4>Schema Registry</h4>
+<h4>Schema Registry</h4>
+<h4>Schema Registry</h4>
+<h4>Schema Registry</h4>
 <p>A schema registry is a centralized service that stores, validates, and manages schemas for data in event-driven and message-based systems. As organizations adopt event-driven architectures with asynchronous communication, managing data formats across producers and consumers becomes critical. The schema registry solves the problem of data contract evolution by enforcing compatibility rules and providing a single source of truth for schema definitions. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/schema-registry.png" alt="Schema Registry" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The Problem Schema Registries Solve </p>
 <p>In any system where services exchange data, the producer and consumer must agree on the data format. Without a schema registry, this agreement is implicit and fragile. A producer changes a field name, and consumers break without warning. Different consumers may expect different versions. Debugging data format issues becomes a serialization nightmare. </p>
@@ -130,6 +134,8 @@
 <p>Organizations should use schema registries for all event and message formats. Register schemas before publishing data. Use automated compatibility checks in CI/CD pipelines. Version schemas explicitly and never delete old versions. Monitor schema registration to track evolution. Establish governance for schema changes, particularly for shared event types consumed by multiple services. </p>
 <p>A well-managed schema registry prevents the most common data contract failures in distributed systems. Combined with good versioning practices and compatibility checking, it enables safe, independent evolution of producers and consumers.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/consumer-driven-contracts.html">Consumer-Driven Contracts in Microservices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p></div>
     </article>

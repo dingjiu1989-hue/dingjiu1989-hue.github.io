@@ -1,7 +1,7 @@
 ---
 title: "AI-Assisted Programming: From Zero to 10x Productivity"
 description: "A comprehensive comparison of GitHub Copilot, Cursor, and Claude Code. Learn to build an efficient human-AI development workflow and avoid common AI coding pitfalls."
-date: 2026-05-07
+date: 2025-10-07
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-coding.html
 ---

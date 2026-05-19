@@ -1,7 +1,7 @@
 ---
 title: "Data Consistency Models Explained"
 description: "Learn about strong, eventual, causal, read-your-writes, and monotonic read consistency models plus CAP theorem trade-offs in practice."
-date: 2026-05-12
+date: 2026-03-26
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/data-consistency-models.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/data-consistency-models.html
 
 ## Data Consistency Models Explained
 
-## Data Consistency Models Explained
+### Data Consistency Models Explained
 
-## Data Consistency Models Explained
+#### Data Consistency Models Explained
 
-## Data Consistency Models Explained
+#### Data Consistency Models Explained
 
-## Data Consistency Models Explained
+#### Data Consistency Models Explained
 
-## Data Consistency Models Explained
+#### Data Consistency Models Explained
 
-## Data Consistency Models Explained
+#### Data Consistency Models Explained
 
-## Data Consistency Models Explained
+#### Data Consistency Models Explained
 
-## Data Consistency Models Explained
+#### Data Consistency Models Explained
 
-## Data Consistency Models Explained
+#### Data Consistency Models Explained
 
-## Data Consistency Models Explained
+#### Data Consistency Models Explained
 
-## Data Consistency Models Explained
+#### Data Consistency Models Explained
+
+#### Data Consistency Models Explained
+
+#### Data Consistency Models Explained
+
+#### Data Consistency Models Explained
 
 Consistency in Distributed Systems 
 
@@ -79,6 +85,12 @@ Conclusion
 Use strong consistency where correctness is critical. Use eventual consistency for scale. Session-level guarantees (read-your-writes, monotonic reads) cover most real-world use cases without the cost of global strong consistency.
 
 **See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>).
+
+**See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
+
+**See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
+
+**See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
 
 **See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
 

@@ -1,7 +1,7 @@
 ---
 title: "Best Authentication Solutions 2026: Clerk vs Auth0 vs Supabase Auth vs NextAuth vs Lucia"
 description: "Compare auth providers and libraries on setup speed, pricing, security, social login support, and developer experience. Find the right auth for your stack."
-date: 2026-05-08
+date: 2025-10-30
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-auth-solutions.html
 ---

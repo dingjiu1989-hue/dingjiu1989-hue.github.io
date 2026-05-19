@@ -1,7 +1,7 @@
 ---
 title: "Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring"
 description: "Prioritize features systematically using RICE scoring, MoSCoW method, and opportunity scoring for your SaaS product."
-date: 2026-05-12
+date: 2026-01-21
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/feature-prioritization.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/feature-prioritization.html
 
 ## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+#### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+#### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+#### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+#### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+#### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+#### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+#### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+#### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+#### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+#### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+#### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-### Feature Prioritization Frameworks for SaaS
+#### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+
+#### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+
+#### Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+
+#### Feature Prioritization Frameworks for SaaS
 
 Feature prioritization is the most consequential product decision a founder makes. Building the wrong features wastes months of development time while competitors iterate on what customers actually need. Systematic prioritization frameworks remove subjectivity from these decisions.
 
@@ -87,6 +93,12 @@ Avoid prioritizing by vocal minority — a few loud customers don't represent yo
 Systematic feature prioritization replaces guesswork with data-driven decision making. RICE provides quantitative comparison across your full backlog. MoSCoW scopes individual releases. Opportunity scoring validates your roadmap against actual user needs. Together, these frameworks ensure you build what matters most to your product's success.
 
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>).
+
+**See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>)
+
+**See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>)
+
+**See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>)
 
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>)
 

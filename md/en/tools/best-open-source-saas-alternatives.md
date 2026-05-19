@@ -1,7 +1,7 @@
 ---
 title: "25 Best Open Source Alternatives to Popular SaaS Tools (2026)"
 description: "Replace Google Analytics, Slack, Notion, Figma, Vercel, and 20 more SaaS tools with free self-hosted alternatives. Save thousands per month."
-date: 2026-05-08
+date: 2025-10-28
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-open-source-saas-alternatives.html
 ---

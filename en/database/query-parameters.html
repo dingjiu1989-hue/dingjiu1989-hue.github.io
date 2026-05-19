@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/query-parameters.png",
       "datePublished": "2026-04-08",
       "dateModified": "2026-05-01",
-      "wordCount": "2098",
+      "wordCount": "2221",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/query-parameters.html"},
@@ -99,28 +101,30 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/query-parameters.png" alt="Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h2>
 <h3>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h3>
-<h3>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h3>
-<h3>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h3>
-<h3>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h3>
-<h3>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h3>
-<h3>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h3>
-<h3>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h3>
-<h3>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h3>
-<h3>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h3>
-<h3>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h3>
-<h3>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h3>
-<h3>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h3>
+<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
+<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
+<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
+<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
+<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
+<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
+<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
+<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
+<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
+<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
+<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
+<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
+<h4>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h4>
 <p>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/query-parameters.png" alt="Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Parameterized queries are simultaneously the most important security practice and a significant performance optimization. This article explains how bind parameters work, how PostgreSQL caches query plans, and why parameterization is non-negotiable. </p>
 <p>SQL Injection: The Problem </p>
 <p>Without parameterization, user input is concatenated into SQL strings: </p>
-<h3>DANGEROUS: Never do this</h3>
+<h4>DANGEROUS: Never do this</h4>
 <p>user_id = request.args.get("id")</p>
 <p>cursor.execute(f"SELECT * FROM users WHERE id = {user_id}")</p>
 <p>An attacker provides <code>1; DROP TABLE users;</code> as the <code>id</code> parameter, and the query becomes: </p>
 <p>SELECT * FROM users WHERE id = 1; DROP TABLE users;</p>
 <p>Parameterization prevents this by separating SQL code from data: </p>
-<h3>SAFE: Use parameterized query</h3>
+<h4>SAFE: Use parameterized query</h4>
 <p>cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))</p>
 <p>The database receives the SQL structure and the parameter values separately. The parameter value <code>1; DROP TABLE users;</code> is treated as a literal string, not executable SQL. </p>
 <p>Bind Parameters </p>
@@ -159,12 +163,12 @@
 <p>Most PostgreSQL drivers implement automatic prepared statement caching: </p>
 <p>import psycopg2</p>
 <p>from psycopg2 import pool</p>
-<h3>psycopg2 automatically caches prepared statements per connection</h3>
+<h4>psycopg2 automatically caches prepared statements per connection</h4>
 <p>conn = psycopg2.connect("dbname=mydb")</p>
 <p>cursor = conn.cursor()</p>
-<h3>First call: prepares and executes</h3>
+<h4>First call: prepares and executes</h4>
 <p>cursor.execute("SELECT * FROM users WHERE id = %s", (42,))</p>
-<h3>Second call: reuses cached prepared statement</h3>
+<h4>Second call: reuses cached prepared statement</h4>
 <p>cursor.execute("SELECT * FROM users WHERE id = %s", (99,))</p>
 <p>Generic Query Plans </p>
 <p>For prepared statements with bind parameters, PostgreSQL generates a <strong>generic plan</strong> after the fifth execution. The generic plan assumes average parameter values rather than specific ones: </p>
@@ -199,16 +203,16 @@
 <p>High <code>stddev_exec_time</code> on parameterized queries suggests plan instability: the same query performs very differently depending on parameter values. </p>
 <p>Parameterization Beyond SQL Injection </p>
 <p>Parameterization also handles type conversion automatically: </p>
-<h3>Without parameterization: type conversion issues</h3>
-<h3>f-string produces: ... WHERE created_at = 2026-05-12 (subtraction!)</h3>
+<h4>Without parameterization: type conversion issues</h4>
+<h4>f-string produces: ... WHERE created_at = 2026-05-12 (subtraction!)</h4>
 <p>cursor.execute(f"SELECT * FROM orders WHERE created_at = '{date_string}'")</p>
-<h3>With parameterization: driver handles quoting</h3>
+<h4>With parameterization: driver handles quoting</h4>
 <p>cursor.execute("SELECT * FROM orders WHERE created_at = %s", (date_obj,))</p>
 <p>Best Practices </p>
 <p>Always Parameterize </p>
-<h3>Good</h3>
+<h4>Good</h4>
 <p>cursor.execute("UPDATE users SET email = %s WHERE id = %s", (new_email, uid))</p>
-<h3>Bad: f-string or string concatenation</h3>
+<h4>Bad: f-string or string concatenation</h4>
 <p>cursor.execute(f"UPDATE users SET email = '{new_email}' WHERE id = {uid}")</p>
 <p>Dynamic IN Clauses </p>
 <p>For variable-length IN clauses, use <code>ANY(ARRAY[...])</code>: </p>
@@ -229,7 +233,7 @@
 <p>("bob@example.com", "Bob"),</p>
 <p>("carol@example.com", "Carol"),</p>
 <p>]</p>
-<h3>Uses server-side prepared statement for all rows</h3>
+<h4>Uses server-side prepared statement for all rows</h4>
 <p>psycopg2.extras.execute_values(</p>
 <p>cursor,</p>
 <p>"INSERT INTO users (email, name) VALUES %s",</p>
@@ -250,6 +254,8 @@
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Dynamic identifiers cannot be parameterized</strong> : Table/column names must be validated separately: <code>python # Column name cannot be a bind parameter! cursor.execute("SELECT %s FROM users", ("email",)) # Always validate dynamic identifiers against a whitelist allowed_columns = {'email', 'name', 'age'} if column not in allowed_columns: raise ValueError(f"Invalid column: {column}")</code> 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Stored procedures still need parameterization</strong> : Do not concatenate input inside procedures. </p>
 <p>Parameterization is the single most impactful practice for database security and performance. It is supported by every modern database driver and should be used for every query that includes any data from outside the SQL text.</p>
 <p><strong>See also:</strong> <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/database-caching.html">Database Caching</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
+<p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p></div>
     </article>

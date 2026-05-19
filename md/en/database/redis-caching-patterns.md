@@ -1,7 +1,7 @@
 ---
 title: "Redis Caching Patterns"
 description: "Redis caching patterns including cache-aside, read-through, write-through, and cache invalidation strategies."
-date: 2026-05-12
+date: 2026-04-13
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/redis-caching-patterns.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/redis-caching-patterns.html
 
 ## Redis Caching Patterns
 
-## Redis Caching Patterns
+### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
+
+#### Redis Caching Patterns
+
+#### Redis Caching Patterns
+
+#### Redis Caching Patterns
 
 Redis as Cache 
 
@@ -107,6 +113,12 @@ Conclusion
 Use cache-aside as the default pattern. Always set TTLs to prevent memory exhaustion. Monitor cache hit rates. Implement mutex locking for stampede prevention. Pipeline batch operations for performance.
 
 **See also:** [Database Caching](</en/database/database-caching.html>), [Database Scalability](</en/database/database-scalability.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>).
+
+**See also:** [Database Caching](</en/database/database-caching.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Scalability](</en/database/database-scalability.html>)
+
+**See also:** [Database Caching](</en/database/database-caching.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Scalability](</en/database/database-scalability.html>)
+
+**See also:** [Database Caching](</en/database/database-caching.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Scalability](</en/database/database-scalability.html>)
 
 **See also:** [Database Caching](</en/database/database-caching.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Scalability](</en/database/database-scalability.html>)
 

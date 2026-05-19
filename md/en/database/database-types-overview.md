@@ -1,7 +1,7 @@
 ---
 title: "Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector"
 description: "Comprehensive overview of database types: relational, document, key-value, graph, time-series, and vector databases. Compare use cases and trade-offs."
-date: 2026-05-12
+date: 2026-04-03
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/database-types-overview.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/database-types-overview.html
 
 ## Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
 
-## Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
 
-## Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
 
-## Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
 
-## Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
 
-## Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
 
-## Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
 
-## Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
 
-## Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
 
-## Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
 
-## Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
 
-## Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+
+#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+
+#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+
+#### Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
 
 Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector 
 
@@ -329,6 +335,12 @@ Choosing the Right Database
 The polyglot persistence approach uses multiple databases for different workloads. Start with a general-purpose database for most needs, and add specialized databases only when your requirements exceed what your primary database can provide.
 
 **See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>).
+
+**See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
+
+**See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
+
+**See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
 
 **See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
 

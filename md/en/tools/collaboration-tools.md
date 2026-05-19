@@ -1,7 +1,7 @@
 ---
 title: "Developer Collaboration Tools: Slack vs Discord vs Linear"
 description: "Compare Slack, Discord, and Linear for async communication, incident response, knowledge management, integrations, API access, and workflow automation."
-date: 2026-05-12
+date: 2026-01-27
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/collaboration-tools.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/tools/collaboration-tools.html
 
 ## Developer Collaboration Tools: Slack vs Discord vs Linear
 
-## Developer Collaboration Tools: Slack vs Discord vs Linear
+### Developer Collaboration Tools: Slack vs Discord vs Linear
 
-## Developer Collaboration Tools: Slack vs Discord vs Linear
+#### Developer Collaboration Tools: Slack vs Discord vs Linear
 
-## Developer Collaboration Tools: Slack vs Discord vs Linear
+#### Developer Collaboration Tools: Slack vs Discord vs Linear
 
-## Developer Collaboration Tools: Slack vs Discord vs Linear
+#### Developer Collaboration Tools: Slack vs Discord vs Linear
 
-## Developer Collaboration Tools: Slack vs Discord vs Linear
+#### Developer Collaboration Tools: Slack vs Discord vs Linear
 
-## Developer Collaboration Tools: Slack vs Discord vs Linear
+#### Developer Collaboration Tools: Slack vs Discord vs Linear
 
-## Developer Collaboration Tools: Slack vs Discord vs Linear
+#### Developer Collaboration Tools: Slack vs Discord vs Linear
 
-## Developer Collaboration Tools: Slack vs Discord vs Linear
+#### Developer Collaboration Tools: Slack vs Discord vs Linear
 
-## Developer Collaboration Tools: Slack vs Discord vs Linear
+#### Developer Collaboration Tools: Slack vs Discord vs Linear
 
-## Developer Collaboration Tools: Slack vs Discord vs Linear
+#### Developer Collaboration Tools: Slack vs Discord vs Linear
 
-## Developer Collaboration Tools: Slack vs Discord vs Linear
+#### Developer Collaboration Tools: Slack vs Discord vs Linear
 
-## Developer Collaboration Tools: Slack vs Discord vs Linear
+#### Developer Collaboration Tools: Slack vs Discord vs Linear
 
-### Introduction
+#### Developer Collaboration Tools: Slack vs Discord vs Linear
+
+#### Developer Collaboration Tools: Slack vs Discord vs Linear
+
+#### Developer Collaboration Tools: Slack vs Discord vs Linear
+
+#### Introduction
 
 Developer collaboration extends far beyond chat messages. Modern engineering teams need tools that support asynchronous communication, incident response, knowledge management, and workflow automation. The choice between Slack, Discord, and Linear (which serves a different but complementary role) depends on team size, culture, and operational requirements.
 
-### Collaboration Platform Capabilities
+#### Collaboration Platform Capabilities
 
 #### Slack
 
@@ -228,7 +234,7 @@ async def on_ready():
 
 print(f'{bot.user} connected')
 
-## Set up voice channel for daily standup
+#### Set up voice channel for daily standup
 
 channel = bot.get_channel(STANDUP_VOICE_ID)
 
@@ -260,7 +266,7 @@ embed.add_field(name='Service', value=service)
 
 embed.add_field(name='Environment', value=env)
 
-## Send deployment request via webhook
+#### Send deployment request via webhook
 
 await ctx.send(embed=embed)
 
@@ -282,11 +288,11 @@ title: "Investigate payment latency spike"
 
 description: """
 
-### Summary
+#### Summary
 
 P99 latency for /api/charge increased from 200ms to 2s
 
-### Investigation Steps
+#### Investigation Steps
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Check database query performance
 
@@ -296,7 +302,7 @@ P99 latency for /api/charge increased from 200ms to 2s
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Check downstream dependencies
 
-### Related
+#### Related
 
 Sentry error: PAY-1234
 
@@ -334,7 +340,7 @@ url
 
 Linear's keyboard-first interface and automation rules reduce issue management overhead:
 
-## Linear automations
+#### Linear automations
 
 workflows:
 
@@ -386,7 +392,7 @@ template: "This issue has been inactive for 30 days. Closing."
 
 value: canceled
 
-### API Access and Automation
+#### API Access and Automation
 
 | Feature | Slack | Discord | Linear |
 
@@ -402,7 +408,7 @@ value: canceled
 
 | Events API | Event subscriptions | Gateway intents | Webhooks |
 
-### Knowledge Management
+#### Knowledge Management
 
   * **Slack** : Canvas and huddles for lightweight documentation, but history is lost in free tier.
 
@@ -413,11 +419,11 @@ value: canceled
 
 
 
-### Integration Ecosystem
+#### Integration Ecosystem
 
 Slack's 2,400+ app directory is unmatched for enterprise toolchain integration. Discord's bot ecosystem is developer-centric but less business-oriented. Linear's integrations focus on developer tools (GitHub, GitLab, Sentry, Figma) and are purpose-built rather than generic.
 
-### Team Communication Flow
+#### Team Communication Flow
 
 Technical Design Doc (Linear)
 
@@ -451,7 +457,7 @@ v
 
 Post-Deploy Monitoring (Datadog alert in Slack)
 
-### Decision Guide
+#### Decision Guide
 
   * **Slack** : Best for professional teams of 10+ with complex workflows and enterprise compliance needs.
 
@@ -465,6 +471,12 @@ Post-Deploy Monitoring (Datadog alert in Slack)
 The most effective setups combine all three: Slack for day-to-day chat and alerts, Linear for work management, and Discord for community engagement or voice communication.
 
 **See also:** [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>).
+
+**See also:** [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>)
+
+**See also:** [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>)
+
+**See also:** [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>)
 
 **See also:** [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>)
 

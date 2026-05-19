@@ -1,7 +1,7 @@
 ---
 title: "Web Security Fundamentals 2026: A Developer Complete Guide"
 description: "Everything developers need to know about web security in 2026 — OWASP Top 10, authentication, encryption, CSP, and production security patterns."
-date: 2026-05-11
+date: 2025-12-17
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/web-security-fundamentals-2026.html
 ---
@@ -10,29 +10,35 @@ url: https://dingjiu1989-hue.github.io/en/security/web-security-fundamentals-202
 
 ## Web Security Fundamentals 2026: A Developer Complete Guide
 
-## Web Security Fundamentals 2026: A Developer Complete Guide
+### Web Security Fundamentals 2026: A Developer Complete Guide
 
-## Web Security Fundamentals 2026: A Developer Complete Guide
+#### Web Security Fundamentals 2026: A Developer Complete Guide
 
-## Web Security Fundamentals 2026: A Developer Complete Guide
+#### Web Security Fundamentals 2026: A Developer Complete Guide
 
-## Web Security Fundamentals 2026: A Developer Complete Guide
+#### Web Security Fundamentals 2026: A Developer Complete Guide
 
-## Web Security Fundamentals 2026: A Developer Complete Guide
+#### Web Security Fundamentals 2026: A Developer Complete Guide
 
-## Web Security Fundamentals 2026: A Developer Complete Guide
+#### Web Security Fundamentals 2026: A Developer Complete Guide
 
-## Web Security Fundamentals 2026: A Developer Complete Guide
+#### Web Security Fundamentals 2026: A Developer Complete Guide
 
-## Web Security Fundamentals 2026: A Developer Complete Guide
+#### Web Security Fundamentals 2026: A Developer Complete Guide
 
-## Web Security Fundamentals 2026: A Developer Complete Guide
+#### Web Security Fundamentals 2026: A Developer Complete Guide
 
-## Web Security Fundamentals 2026: A Developer Complete Guide
+#### Web Security Fundamentals 2026: A Developer Complete Guide
 
-## Web Security Fundamentals 2026: A Developer Complete Guide
+#### Web Security Fundamentals 2026: A Developer Complete Guide
 
-## Web Security Fundamentals 2026: A Developer Complete Guide
+#### Web Security Fundamentals 2026: A Developer Complete Guide
+
+#### Web Security Fundamentals 2026: A Developer Complete Guide
+
+#### Web Security Fundamentals 2026: A Developer Complete Guide
+
+#### Web Security Fundamentals 2026: A Developer Complete Guide
 
 #### Stored XSS
 
@@ -113,7 +119,7 @@ next();
 
 TLS Configuration Check (2026 Minimum) 
 
-## nginx TLS config — modern profile
+#### nginx TLS config — modern profile
 
 ssl_protocols TLSv1.2 TLSv1.3;
 
@@ -145,7 +151,7 @@ Dependency Scanning Tools
 
 Running a Scan in CI 
 
-## .github/workflows/security-scan.yml
+#### .github/workflows/security-scan.yml
 
 name: Security Scan
 
@@ -259,7 +265,7 @@ next();
 
 });
 
-## FastAPI with SecureHeaders middleware
+#### FastAPI with SecureHeaders middleware
 
 from secure import SecureHeaders
 
@@ -345,7 +351,7 @@ Proper Error Handling
 
 Never leak stack traces, database schemas, or internal paths to API consumers. 
 
-## BAD — leaks internals
+#### BAD — leaks internals
 
 @app.exception_handler(Exception)
 
@@ -359,7 +365,7 @@ content={"error": str(exc), "traceback": traceback.format_exc()}
 
 )
 
-## GOOD — sanitized errors with logging
+#### GOOD — sanitized errors with logging
 
 import logging
 
@@ -494,6 +500,12 @@ Start with the production checklist above and work through each item. Automate e
 _Last updated: May 2026_
 
 **See also:** [AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026](</en/ai/ai-security-complete-guide.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys](</en/tech/authentication-best-practices-2026.html>).
+
+**See also:** [AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026](</en/ai/ai-security-complete-guide.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys](</en/tech/authentication-best-practices-2026.html>)
+
+**See also:** [AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026](</en/ai/ai-security-complete-guide.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys](</en/tech/authentication-best-practices-2026.html>)
+
+**See also:** [AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026](</en/ai/ai-security-complete-guide.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys](</en/tech/authentication-best-practices-2026.html>)
 
 **See also:** [AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026](</en/ai/ai-security-complete-guide.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys](</en/tech/authentication-best-practices-2026.html>)
 

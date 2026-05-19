@@ -1,7 +1,7 @@
 ---
 title: "API Gateway Security Patterns"
 description: "Security patterns for API gateways including authentication, rate limiting, IP blocking, request validation, and threat detection."
-date: 2026-05-11
+date: 2025-12-17
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/api-gateway-security.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/security/api-gateway-security.html
 
 ## API Gateway Security Patterns
 
-## API Gateway Security Patterns
+### API Gateway Security Patterns
 
-## API Gateway Security Patterns
+#### API Gateway Security Patterns
 
-## API Gateway Security Patterns
+#### API Gateway Security Patterns
 
-## API Gateway Security Patterns
+#### API Gateway Security Patterns
 
-## API Gateway Security Patterns
+#### API Gateway Security Patterns
 
-## API Gateway Security Patterns
+#### API Gateway Security Patterns
 
-## API Gateway Security Patterns
+#### API Gateway Security Patterns
 
-## API Gateway Security Patterns
+#### API Gateway Security Patterns
 
-## API Gateway Security Patterns
+#### API Gateway Security Patterns
 
-## API Gateway Security Patterns
+#### API Gateway Security Patterns
 
-## API Gateway Security Patterns
+#### API Gateway Security Patterns
 
-## API Gateway Security Patterns
+#### API Gateway Security Patterns
 
-## API Gateway Security Patterns
+#### API Gateway Security Patterns
+
+#### API Gateway Security Patterns
+
+#### API Gateway Security Patterns
+
+#### API Gateway Security Patterns
 
 The API Gateway as Security Perimeter 
 
@@ -46,7 +52,7 @@ Authentication and Authorization
 
 The gateway validates tokens before requests reach backend services, offloading this responsibility from individual services. 
 
-## Kong Gateway authentication configuration
+#### Kong Gateway authentication configuration
 
 services:
 
@@ -220,7 +226,7 @@ minimum: 1
 
 Request Size Limiting 
 
-## Nginx as API gateway
+#### Nginx as API gateway
 
 http {
 
@@ -238,7 +244,7 @@ server_name api.example.com;
 
 location /api/ {
 
-## Limit request size per endpoint
+#### Limit request size per endpoint
 
 location /api/upload {
 
@@ -282,7 +288,7 @@ ssl_session_cache shared:SSL:10m;
 
 ssl_session_timeout 10m;
 
-## Backend communication (re-encrypt)
+#### Backend communication (re-encrypt)
 
 location /api/internal/ {
 
@@ -342,7 +348,7 @@ Threat Detection and WAF
 
 ModSecurity with OWASP CRS 
 
-## Enable WAF on the gateway
+#### Enable WAF on the gateway
 
 location /api/ {
 
@@ -350,23 +356,23 @@ modsecurity on;
 
 modsecurity_rules_file /etc/nginx/modsecurity/owasp-crs/crs-setup.conf;
 
-## Custom rules
+#### Custom rules
 
 modsecurity_rules '
 
-## Block SQL injection patterns
+#### Block SQL injection patterns
 
 SecRule REQUEST_URI "@rx (?i:(?:union[\s]+select|select[\s]+from))" \
 
 "id:1000,deny,status:403,msg:\'SQL Injection blocked\'"
 
-## Block common XSS attempts
+#### Block common XSS attempts
 
 SecRule ARGS "@rx ]*>" \
 
 "id:1001,deny,status:403,msg:\'XSS blocked\'"
 
-## Rate limit login attempts
+#### Rate limit login attempts
 
 SecRule IP:LOGIN_ATTEMPT "@gt 5" \
 
@@ -449,6 +455,12 @@ Summary
 The API gateway is the ideal location to centralize security controls: authentication, rate limiting, request validation, IP restrictions, TLS termination, CORS management, and WAF rules. By enforcing these policies at the gateway, individual services remain simpler and can focus on business logic while maintaining a consistent security posture across your entire API surface.
 
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [Container Security Best Practices](</en/security/container-security.html>).
+
+**See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Security Log Management](</en/security/log-management-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>)
+
+**See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Security Log Management](</en/security/log-management-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>)
+
+**See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Security Log Management](</en/security/log-management-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>)
 
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Security Log Management](</en/security/log-management-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>)
 

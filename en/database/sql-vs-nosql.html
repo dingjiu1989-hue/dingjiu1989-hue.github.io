@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/sql-vs-nosql.png",
       "datePublished": "2025-12-24",
       "dateModified": "2026-04-05",
-      "wordCount": "1364",
+      "wordCount": "1446",
       "keywords": "Database, SQL",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "SQL"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/sql-vs-nosql.html"},
@@ -109,17 +111,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/sql-vs-nosql.png" alt="SQL vs NoSQL Decision Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>SQL vs NoSQL Decision Guide</h2>
 <h3>SQL vs NoSQL Decision Guide</h3>
-<h3>SQL vs NoSQL Decision Guide</h3>
-<h3>SQL vs NoSQL Decision Guide</h3>
-<h3>SQL vs NoSQL Decision Guide</h3>
-<h3>SQL vs NoSQL Decision Guide</h3>
-<h3>SQL vs NoSQL Decision Guide</h3>
-<h3>SQL vs NoSQL Decision Guide</h3>
-<h3>SQL vs NoSQL Decision Guide</h3>
-<h3>SQL vs NoSQL Decision Guide</h3>
-<h3>SQL vs NoSQL Decision Guide</h3>
-<h3>SQL vs NoSQL Decision Guide</h3>
-<h3>SQL vs NoSQL Decision Guide</h3>
+<h4>SQL vs NoSQL Decision Guide</h4>
+<h4>SQL vs NoSQL Decision Guide</h4>
+<h4>SQL vs NoSQL Decision Guide</h4>
+<h4>SQL vs NoSQL Decision Guide</h4>
+<h4>SQL vs NoSQL Decision Guide</h4>
+<h4>SQL vs NoSQL Decision Guide</h4>
+<h4>SQL vs NoSQL Decision Guide</h4>
+<h4>SQL vs NoSQL Decision Guide</h4>
+<h4>SQL vs NoSQL Decision Guide</h4>
+<h4>SQL vs NoSQL Decision Guide</h4>
+<h4>SQL vs NoSQL Decision Guide</h4>
+<h4>SQL vs NoSQL Decision Guide</h4>
+<h4>SQL vs NoSQL Decision Guide</h4>
 <p>The Great Database Debate </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/sql-vs-nosql.png" alt="SQL vs NoSQL Decision Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The choice between SQL and NoSQL is one of the most consequential architectural decisions you will make. Neither is universally better; each excels in different scenarios. The key is understanding the trade-offs and matching them to your requirements. </p>
 <p>Core Differences </p>
@@ -186,10 +190,10 @@
 <p>}</p>
 <p>});</p>
 <p>Horizontal Scaling </p>
-<h3>MongoDB sharding</h3>
+<h4>MongoDB sharding</h4>
 <p>sh.shardCollection("mydb.users", { "region": "hashed" })</p>
-<h3>Cassandra auto-sharding (no manual setup)</h3>
-<h3>Just add nodes to the cluster</h3>
+<h4>Cassandra auto-sharding (no manual setup)</h4>
+<h4>Just add nodes to the cluster</h4>
 <p>High Write Throughput </p>
 <p>// DynamoDB: 10,000 writes/second per partition</p>
 <p>const params = {</p>
@@ -243,21 +247,23 @@
 <p>| Requirement | SQL (PostgreSQL) | NoSQL (MongoDB) | NoSQL (DynamoDB) | |-------------|------------------|-----------------|-------------------| | Complex queries | Excellent | Moderate (aggregation) | Limited | | Data integrity | Strong | Moderate | Moderate | | Write throughput | Moderate | High | Very high | | Read performance | Good (with indexes) | Good | Excellent (PK queries) | | Schema flexibility | Low | High | High | | Operational overhead | Medium | Medium | Low (serverless) | | Cost (large scale) | Higher | Moderate | Pay-per-request | </p>
 <p>Hybrid: Using Both </p>
 <p>Many successful architectures use both SQL and NoSQL for different purposes: </p>
-<h3>Example: SQL for transactions, NoSQL for reads</h3>
-<h3>Write to PostgreSQL (ACID guarantee)</h3>
+<h4>Example: SQL for transactions, NoSQL for reads</h4>
+<h4>Write to PostgreSQL (ACID guarantee)</h4>
 <p>db.execute("""</p>
 <p>INSERT INTO orders (id, customer_id, total)</p>
 <p>VALUES (%s, %s, %s)</p>
 <p>""", [order_id, customer_id, total])</p>
-<h3>Update Redis cache for fast reads</h3>
+<h4>Update Redis cache for fast reads</h4>
 <p>redis.setex(f"order:{order_id}", 3600, json.dumps(order_data))</p>
-<h3>Update Elasticsearch for search</h3>
+<h4>Update Elasticsearch for search</h4>
 <p>es.index(index='orders', id=order_id, body=order_data)</p>
 <p>Migration Paths </p>
 <p>| Starting Point | Problem | Target | Strategy | |----------------|---------|--------|----------| | SQL | Scaling writes | NoSQL | Dual-write, then cut over | | NoSQL | Complex queries | SQL | Define schema, migrate data | | NoSQL | Data integrity issues | SQL | Add constraints, enforce at app level first | | SQL | Flexible schema needed | NoSQL | Start with embedded docs for polymorphic data | </p>
 <p>Summary </p>
 <p>Choose SQL when you need complex queries, strong data integrity, and ACID transactions. Choose NoSQL when you need flexible schemas, horizontal scaling, and high write throughput. For complex applications, a polyglot persistence approach that uses the right database for each workload often provides the best results. Start with SQL (PostgreSQL) as the default and add NoSQL databases specifically for workloads where SQL is limiting.</p>
 <p><strong>See also:</strong> <a href="/en/database/nosql-databases-guide.html">NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</a>, <a href="/en/database/database-indexing.html">Database Indexing Strategies</a>, <a href="/en/database/acid-vs-base.html">ACID vs BASE Transactions</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tools/best-database-gui-tools.html">Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip</a>, <a href="/en/database/nosql-databases-guide.html">NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/best-database-gui-tools.html">Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip</a>, <a href="/en/database/nosql-databases-guide.html">NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/best-database-gui-tools.html">Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip</a>, <a href="/en/database/nosql-databases-guide.html">NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/best-database-gui-tools.html">Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip</a>, <a href="/en/database/nosql-databases-guide.html">NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/best-database-gui-tools.html">Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip</a>, <a href="/en/database/nosql-databases-guide.html">NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a></p></div>
     </article>

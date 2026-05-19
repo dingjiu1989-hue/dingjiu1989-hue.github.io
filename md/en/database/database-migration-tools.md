@@ -1,7 +1,7 @@
 ---
 title: "Database Migration Tools: Alembic, Flyway, Liquibase, Versioning"
 description: "Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategies, rollback patterns, and best practices for schema changes."
-date: 2026-05-12
+date: 2026-04-02
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/database-migration-tools.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/database-migration-tools.html
 
 ## Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
 
-## Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
+### Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
 
-## Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
+#### Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
 
-## Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
+#### Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
 
-## Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
+#### Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
 
-## Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
+#### Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
 
-## Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
+#### Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
 
-## Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
+#### Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
 
-## Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
+#### Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
 
-## Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
+#### Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
 
-## Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
+#### Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
 
-## Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
+#### Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
+
+#### Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
+
+#### Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
+
+#### Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
 
 Database Migration Tools: Alembic, Flyway, Liquibase, Versioning 
 
@@ -57,7 +63,7 @@ Alembic is the migration tool for SQLAlchemy (Python). It generates migration sc
 
 Setup 
 
-## alembic.ini
+#### alembic.ini
 
 [alembic]
 
@@ -69,7 +75,7 @@ alembic init alembic
 
 Creating a Migration 
 
-## alembic/versions/0001_create_users.py
+#### alembic/versions/0001_create_users.py
 
 """create users table
 
@@ -111,7 +117,7 @@ op.drop_table('users')
 
 Auto-Generation 
 
-## Generate migration from model changes
+#### Generate migration from model changes
 
 alembic revision --autogenerate -m "add avatar column"
 
@@ -165,7 +171,7 @@ ALTER TABLE users ADD COLUMN avatar_url VARCHAR(500);
 
 Configuration 
 
-## flyway.conf
+#### flyway.conf
 
 flyway.url = jdbc:postgresql://localhost:5432/mydb
 
@@ -271,9 +277,9 @@ CREATE OR REPLACE VIEW active_users AS
 
 SELECT * FROM users WHERE deleted_at IS NULL;
 
-## Alembic: revision_identifiers.py with %(revision)s
+#### Alembic: revision_identifiers.py with %(revision)s
 
-## Or mark as "revision_identifiers = False" for repeatable patterns
+#### Or mark as "revision_identifiers = False" for repeatable patterns
 
 Best Practices 
 
@@ -286,6 +292,12 @@ Best Practices
 Database migrations bring schema changes into the software development lifecycle. Choose the tool that fits your language ecosystem, establish clear conventions, and make schema changes as routine as code changes.
 
 **See also:** [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Schema Migration: Version Control, Rollback, and Zero-Downtime](</en/database/database-schema-migration-strategies.html>), [Database Migration Strategies](</en/database/database-migration-strategies.html>).
+
+**See also:** [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Schema Migration: Version Control, Rollback, and Zero-Downtime](</en/database/database-schema-migration-strategies.html>)
+
+**See also:** [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Schema Migration: Version Control, Rollback, and Zero-Downtime](</en/database/database-schema-migration-strategies.html>)
+
+**See also:** [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Schema Migration: Version Control, Rollback, and Zero-Downtime](</en/database/database-schema-migration-strategies.html>)
 
 **See also:** [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Schema Migration: Version Control, Rollback, and Zero-Downtime](</en/database/database-schema-migration-strategies.html>)
 

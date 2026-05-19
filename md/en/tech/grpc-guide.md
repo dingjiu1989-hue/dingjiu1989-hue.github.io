@@ -1,7 +1,7 @@
 ---
 title: "gRPC Complete Guide 2026: Protocol Buffers, Service Definitions, and Production Patterns"
 description: "Master gRPC for high-performance service-to-service communication — protobuf types, streaming, interceptors, and when to use it over REST."
-date: 2026-05-08
+date: 2025-10-17
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/grpc-guide.html
 ---

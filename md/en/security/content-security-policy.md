@@ -1,7 +1,7 @@
 ---
 title: "Content Security Policy"
 description: "Complete guide to Content Security Policy covering directives, nonce/hash strategies, reporting mechanisms, and strict CSP migration."
-date: 2026-05-12
+date: 2026-03-09
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/content-security-policy.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/security/content-security-policy.html
 
 ## Content Security Policy
 
-## Content Security Policy
+### Content Security Policy
 
-## Content Security Policy
+#### Content Security Policy
 
-## Content Security Policy
+#### Content Security Policy
 
-## Content Security Policy
+#### Content Security Policy
 
-## Content Security Policy
+#### Content Security Policy
 
-## Content Security Policy
+#### Content Security Policy
 
-## Content Security Policy
+#### Content Security Policy
 
-## Content Security Policy
+#### Content Security Policy
 
-## Content Security Policy
+#### Content Security Policy
 
-## Content Security Policy
+#### Content Security Policy
 
-## Content Security Policy
+#### Content Security Policy
 
-## Content Security Policy
+#### Content Security Policy
 
-## Content Security Policy
+#### Content Security Policy
+
+#### Content Security Policy
+
+#### Content Security Policy
+
+#### Content Security Policy
 
 Introduction 
 
@@ -114,7 +120,7 @@ hash_b64 = base64.b64encode(hash_bytes).decode()
 
 return f"'sha256-{hash_b64}'"
 
-## Generate once, add to CSP
+#### Generate once, add to CSP
 
 script = "document.getElementById('app').innerHTML = '
 
@@ -124,7 +130,7 @@ Hello
 
 script_hash = generate_script_hash(script)
 
-## CSP: script-src 'sha256-abc123...'
+#### CSP: script-src 'sha256-abc123...'
 
 Content-Security-Policy: 
 
@@ -172,7 +178,7 @@ report-to csp-endpoint;
 
 }
 
-## Flask CSP report collector
+#### Flask CSP report collector
 
 @app.route('/csp-violation-report', methods=['POST'])
 
@@ -186,7 +192,7 @@ directive = report['csp-report']['violated-directive']
 
 page = report['csp-report']['document-uri']
 
-## Log to security monitoring
+#### Log to security monitoring
 
 security_logger.warning(
 
@@ -194,7 +200,7 @@ f"CSP violation on {page}: {directive} blocked {blocked}"
 
 )
 
-## Alert if critical pattern
+#### Alert if critical pattern
 
 if 'exfiltration' in blocked.lower():
 
@@ -206,13 +212,13 @@ Strict CSP Migration
 
 Migrating from allowlist CSP to strict CSP provides better security. 
 
-## Allowlist CSP (vulnerable to CDN-based bypass)
+#### Allowlist CSP (vulnerable to CDN-based bypass)
 
 Content-Security-Policy: 
 
 script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com;
 
-## Strict CSP (nonce-based, resistant to bypass)
+#### Strict CSP (nonce-based, resistant to bypass)
 
 Content-Security-Policy: 
 
@@ -226,7 +232,7 @@ The `'strict-dynamic'` keyword propagates trust from nonced scripts to their dyn
 
 Deployment Strategy 
 
-## Step 1: Deploy in report-only mode
+#### Step 1: Deploy in report-only mode
 
 Content-Security-Policy-Report-Only: 
 
@@ -236,11 +242,11 @@ script-src 'nonce-abc123';
 
 report-uri /csp-reports;
 
-## Step 2: Monitor reports for 2-4 weeks
+#### Step 2: Monitor reports for 2-4 weeks
 
-## Step 3: Fix violations identified in reports
+#### Step 3: Fix violations identified in reports
 
-## Step 4: Switch to enforcement mode
+#### Step 4: Switch to enforcement mode
 
 Content-Security-Policy:
 
@@ -250,13 +256,19 @@ script-src 'nonce-abc123';
 
 report-uri /csp-reports;
 
-## Step 5: Gradually remove report-uri when confident
+#### Step 5: Gradually remove report-uri when confident
 
 Conclusion 
 
 CSP is one of the most powerful defense-in-depth mechanisms against XSS. Use nonce-based strict CSP rather than allowlist-based policies, deploy in report-only mode initially to identify violations, always set `object-src 'none'` and `base-uri 'self'` as hardening measures, and monitor reports continuously for policy violations and potential attacks.
 
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Session Management Security](</en/security/session-management.html>).
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Email Security](</en/security/email-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Email Security](</en/security/email-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Email Security](</en/security/email-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
 
 **See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Email Security](</en/security/email-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
 

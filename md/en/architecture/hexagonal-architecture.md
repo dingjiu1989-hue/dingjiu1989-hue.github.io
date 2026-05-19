@@ -1,7 +1,7 @@
 ---
 title: "Hexagonal Architecture (Ports and Adapters)"
-description: "Learn hexagonal architecture for building maintainable, testable applications."
-date: 2026-05-11
+description: "Learn hexagonal architecture for building maintainable, testable applications — ports and adapters, dependency inversion, domain isolation, and migrating legacy code to hexagonal structure."
+date: 2025-12-27
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/hexagonal-architecture.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/hexagonal-architecture.ht
 
 ## Hexagonal Architecture (Ports and Adapters)
 
-## Hexagonal Architecture (Ports and Adapters)
+### Hexagonal Architecture (Ports and Adapters)
 
-## Hexagonal Architecture (Ports and Adapters)
+#### Hexagonal Architecture (Ports and Adapters)
 
-## Hexagonal Architecture (Ports and Adapters)
+#### Hexagonal Architecture (Ports and Adapters)
 
-## Hexagonal Architecture (Ports and Adapters)
+#### Hexagonal Architecture (Ports and Adapters)
 
-## Hexagonal Architecture (Ports and Adapters)
+#### Hexagonal Architecture (Ports and Adapters)
 
-## Hexagonal Architecture (Ports and Adapters)
+#### Hexagonal Architecture (Ports and Adapters)
 
-## Hexagonal Architecture (Ports and Adapters)
+#### Hexagonal Architecture (Ports and Adapters)
 
-## Hexagonal Architecture (Ports and Adapters)
+#### Hexagonal Architecture (Ports and Adapters)
 
-## Hexagonal Architecture (Ports and Adapters)
+#### Hexagonal Architecture (Ports and Adapters)
 
-## Hexagonal Architecture (Ports and Adapters)
+#### Hexagonal Architecture (Ports and Adapters)
 
-## Hexagonal Architecture (Ports and Adapters)
+#### Hexagonal Architecture (Ports and Adapters)
+
+#### Hexagonal Architecture (Ports and Adapters)
+
+#### Hexagonal Architecture (Ports and Adapters)
+
+#### Hexagonal Architecture (Ports and Adapters)
 
 Hexagonal Architecture, also known as the Ports and Adapters pattern, was introduced by Alistair Cockburn to create applications that are isolated from their technical infrastructure. The core idea is that the application's business logic is at the center, communicating with the outside world through well-defined ports and adapters. This separation makes the application testable, maintainable, and adaptable to changing infrastructure. 
 
@@ -77,3 +83,9 @@ Hexagonal Architecture pairs well with Domain-Driven Design, where the core cont
 **See also:** [Clean Architecture Explained](</en/architecture/clean-architecture.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>)
 
 **See also:** [Clean Architecture Explained](</en/architecture/clean-architecture.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>)
+
+**See also:** [Clean Architecture Explained](</en/architecture/clean-architecture.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
+
+**See also:** [Clean Architecture Explained](</en/architecture/clean-architecture.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
+
+**See also:** [Clean Architecture Explained](</en/architecture/clean-architecture.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)

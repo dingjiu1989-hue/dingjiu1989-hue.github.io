@@ -1,7 +1,7 @@
 ---
 title: "JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations"
 description: "Comprehensive guide to using JSON in PostgreSQL. Compare JSONB and JSON types, indexing strategies, query operators, and when to choose PostgreSQL over MongoDB."
-date: 2026-05-12
+date: 2026-04-08
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/json-in-postgresql.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/json-in-postgresql.html
 
 ## JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
 
-## JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
+### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
 
-## JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
+#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
 
-## JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
+#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
 
-## JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
+#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
 
-## JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
+#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
 
-## JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
+#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
 
-## JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
+#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
 
-## JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
+#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
 
-## JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
+#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
 
-## JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
+#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
 
-## JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
+#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
+
+#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
+
+#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
+
+#### JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations
 
 JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations 
 
@@ -247,6 +253,12 @@ CHECK (jsonb_typeof(attributes -> 'price') = 'number');
 PostgreSQL's JSONB support bridges the gap between relational and document databases. Used wisely, it eliminates the need for a separate document store in many applications.
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Document Databases: MongoDB, CouchDB, Firestore](</en/database/document-databases.html>).
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
 

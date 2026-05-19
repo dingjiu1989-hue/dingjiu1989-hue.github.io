@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/couchbase-guide.png",
       "datePublished": "2026-03-31",
       "dateModified": "2026-05-05",
-      "wordCount": "2132",
+      "wordCount": "2232",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/couchbase-guide.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/couchbase-guide.png" alt="Couchbase Guide: N1QL, Document Model, Clustering, and Caching" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h2>
 <h3>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h3>
-<h3>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h3>
-<h3>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h3>
-<h3>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h3>
-<h3>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h3>
-<h3>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h3>
-<h3>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h3>
-<h3>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h3>
-<h3>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h3>
-<h3>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h3>
-<h3>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h3>
-<h3>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h3>
+<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
+<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
+<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
+<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
+<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
+<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
+<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
+<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
+<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
+<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
+<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
+<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
+<h4>Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h4>
 <p>Couchbase Guide: N1QL, Document Model, Clustering, and Caching </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/couchbase-guide.png" alt="Couchbase Guide: N1QL, Document Model, Clustering, and Caching" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Couchbase is a distributed NoSQL document database that combines the flexibility of JSON documents with the query power of SQL. Its key differentiator is the integrated caching layer that automatically keeps frequently accessed data in memory. </p>
 <p>Document Data Model </p>
@@ -138,16 +142,16 @@
 <p>))</p>
 <p>bucket = cluster.bucket('myapp')</p>
 <p>collection = bucket.default_collection()</p>
-<h3>Create/Update</h3>
+<h4>Create/Update</h4>
 <p>collection.upsert('user_alice_42', {</p>
 <p>'type': 'user',</p>
 <p>'email': 'alice@example.com',</p>
 <p>'name': 'Alice Smith'</p>
 <p>})</p>
-<h3>Read</h3>
+<h4>Read</h4>
 <p>result = collection.get('user_alice_42')</p>
 <p>user = result.content_as[dict]</p>
-<h3>CAS (Compare-And-Swap) for optimistic locking</h3>
+<h4>CAS (Compare-And-Swap) for optimistic locking</h4>
 <p>result = collection.get('user_alice_42')</p>
 <p>cas = result.cas</p>
 <p>user = result.content_as[dict]</p>
@@ -202,20 +206,20 @@
 <p>Search Service </p>
 <p>Provides full-text search capabilities using FTS (based on Bleve). </p>
 <p>Cluster Management </p>
-<h3>Initialize cluster</h3>
+<h4>Initialize cluster</h4>
 <p>couchbase-cli cluster-init -c 127.0.0.1 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--cluster-username admin \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--cluster-password password \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--cluster-ramsize 2048 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--cluster-index-ramsize 512 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--services data,index,query</p>
-<h3>Add node</h3>
+<h4>Add node</h4>
 <p>couchbase-cli server-add -c 192.168.1.1 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--server-add 192.168.1.2 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--server-add-username admin \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--server-add-password password \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--services data,index,query</p>
-<h3>Rebalance</h3>
+<h4>Rebalance</h4>
 <p>couchbase-cli rebalance -c 192.168.1.1</p>
 <p>Integrated Caching Layer </p>
 <p>Couchbase's most distinctive feature is its integrated cache. Every data node includes an in-memory cache (managed by the "couchbase" engine) that stores frequently accessed documents. </p>
@@ -235,7 +239,7 @@
 </li>
 </ul>
 <p>Memory Quotas </p>
-<h3>Set bucket memory quota (important tuning parameter)</h3>
+<h4>Set bucket memory quota (important tuning parameter)</h4>
 <p>couchbase-cli bucket-create -c 127.0.0.1 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--bucket myapp \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--bucket-type couchbase \</p>
@@ -252,16 +256,16 @@
 </li>
 </ul>
 <p>Durability Settings </p>
-<h3>Wait for replication to N nodes before acknowledging</h3>
+<h4>Wait for replication to N nodes before acknowledging</h4>
 <p>collection.upsert('doc_id', doc,</p>
 <p>durability= Durability.MAJORITY_AND_PERSIST_TO_ACTIVE)</p>
-<h3>Or use observe-based durability</h3>
+<h4>Or use observe-based durability</h4>
 <p>collection.upsert('doc_id', doc,</p>
 <p>durability_level= DurabilityLevel.PERSIST_TO_MAJORITY)</p>
 <p>Use Cases </p>
 <p>Session Store </p>
 <p>Couchbase's sub-millisecond get/set operations and built-in TTL make it an excellent session store: </p>
-<h3>Set session with TTL (24 hours)</h3>
+<h4>Set session with TTL (24 hours)</h4>
 <p>collection.upsert('session_token_xyz', {</p>
 <p>'user_id': 'alice_42',</p>
 <p>'created_at': '2026-05-12T10:00:00Z'</p>
@@ -284,6 +288,8 @@
 <p>| Feature | Couchbase | MongoDB | Redis | |---------|-----------|---------|-------| | Query language | N1QL (SQL-like) | MQL (JSON-based) | Command-based | | Caching | Built-in (cache-first) | WiredTiger cache | Pure in-memory | | Durability | Tunable (async to sync) | Journal + replication | AOF/RDB persistence | | Cross-datacenter | XDCR (bidirectional) | Replica sets | Active-Active | | Full-text search | Built-in (Bleve) | Built-in (Atlas Search) | RediSearch module | </p>
 <p>Couchbase fills a unique niche: a document database with SQL querying and built-in caching. It is a strong choice when you need low-latency document access combined with ad-hoc query capabilities, and when you want to simplify your architecture by avoiding a separate cache layer.</p>
 <p><strong>See also:</strong> <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a></p></div>
     </article>

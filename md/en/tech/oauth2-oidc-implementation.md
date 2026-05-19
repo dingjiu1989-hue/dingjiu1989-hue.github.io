@@ -1,7 +1,7 @@
 ---
 title: "OAuth 2.0 and OIDC Implementation Guide 2026: Complete Developer Walkthrough"
 description: "Implement OAuth 2.0 and OpenID Connect from scratch — understand authorization codes, PKCE, JWT tokens, and security best practices."
-date: 2026-05-08
+date: 2025-10-16
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/oauth2-oidc-implementation.html
 ---

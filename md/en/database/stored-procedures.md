@@ -1,7 +1,7 @@
 ---
 title: "Stored Procedures vs Functions: When to Use, Languages, Security"
 description: "An in-depth guide to stored procedures and functions in PostgreSQL and SQL Server. Learn language options, security considerations, testing, and best practices."
-date: 2026-05-12
+date: 2026-04-09
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/stored-procedures.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/stored-procedures.html
 
 ## Stored Procedures vs Functions: When to Use, Languages, Security
 
-## Stored Procedures vs Functions: When to Use, Languages, Security
+### Stored Procedures vs Functions: When to Use, Languages, Security
 
-## Stored Procedures vs Functions: When to Use, Languages, Security
+#### Stored Procedures vs Functions: When to Use, Languages, Security
 
-## Stored Procedures vs Functions: When to Use, Languages, Security
+#### Stored Procedures vs Functions: When to Use, Languages, Security
 
-## Stored Procedures vs Functions: When to Use, Languages, Security
+#### Stored Procedures vs Functions: When to Use, Languages, Security
 
-## Stored Procedures vs Functions: When to Use, Languages, Security
+#### Stored Procedures vs Functions: When to Use, Languages, Security
 
-## Stored Procedures vs Functions: When to Use, Languages, Security
+#### Stored Procedures vs Functions: When to Use, Languages, Security
 
-## Stored Procedures vs Functions: When to Use, Languages, Security
+#### Stored Procedures vs Functions: When to Use, Languages, Security
 
-## Stored Procedures vs Functions: When to Use, Languages, Security
+#### Stored Procedures vs Functions: When to Use, Languages, Security
 
-## Stored Procedures vs Functions: When to Use, Languages, Security
+#### Stored Procedures vs Functions: When to Use, Languages, Security
 
-## Stored Procedures vs Functions: When to Use, Languages, Security
+#### Stored Procedures vs Functions: When to Use, Languages, Security
 
-## Stored Procedures vs Functions: When to Use, Languages, Security
+#### Stored Procedures vs Functions: When to Use, Languages, Security
+
+#### Stored Procedures vs Functions: When to Use, Languages, Security
+
+#### Stored Procedures vs Functions: When to Use, Languages, Security
+
+#### Stored Procedures vs Functions: When to Use, Languages, Security
 
 Stored Procedures vs Functions: When to Use, Languages, Security 
 
@@ -265,6 +271,12 @@ Favor application code when:
 A balanced architecture puts data-integrity rules in the database and complex orchestration in the application layer, using each environment for what it does best.
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>).
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
 

@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/endpoint-security.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-19",
-      "wordCount": "1933",
+      "wordCount": "1991",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/endpoint-security.html"},
@@ -96,25 +98,27 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/endpoint-security.png" alt="Endpoint Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Endpoint Security</h2>
 <h3>Endpoint Security</h3>
-<h3>Endpoint Security</h3>
-<h3>Endpoint Security</h3>
-<h3>Endpoint Security</h3>
-<h3>Endpoint Security</h3>
-<h3>Endpoint Security</h3>
-<h3>Endpoint Security</h3>
-<h3>Endpoint Security</h3>
-<h3>Endpoint Security</h3>
-<h3>Endpoint Security</h3>
-<h3>Endpoint Security</h3>
-<h3>Endpoint Security</h3>
-<h3>Endpoint Security</h3>
-<h3>Endpoint Security</h3>
+<h4>Endpoint Security</h4>
+<h4>Endpoint Security</h4>
+<h4>Endpoint Security</h4>
+<h4>Endpoint Security</h4>
+<h4>Endpoint Security</h4>
+<h4>Endpoint Security</h4>
+<h4>Endpoint Security</h4>
+<h4>Endpoint Security</h4>
+<h4>Endpoint Security</h4>
+<h4>Endpoint Security</h4>
+<h4>Endpoint Security</h4>
+<h4>Endpoint Security</h4>
+<h4>Endpoint Security</h4>
+<h4>Endpoint Security</h4>
+<h4>Endpoint Security</h4>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/endpoint-security.png" alt="Endpoint Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Endpoint security protects devices — laptops, servers, mobile devices, and IoT — that connect to corporate networks. Modern endpoint protection has evolved from signature-based antivirus to sophisticated platforms combining behavioral detection, threat intelligence, and automated response. </p>
 <p>EDR vs XDR vs Traditional Antivirus </p>
 <p>Traditional Antivirus (AV) </p>
 <p>Signature-based AV compares files against a database of known malware hashes. It is effective against commodity malware but fails against zero-day threats, fileless attacks, and polymorphic malware. </p>
-<h3>ClamAV command-line scanning</h3>
+<h4>ClamAV command-line scanning</h4>
 <p>clamscan --recursive --infected /home/user</p>
 <p>clamscan --database=/var/lib/clamav --log=/var/log/clamav.log /</p>
 <p>Limitations of signature-based AV:</p>
@@ -134,7 +138,7 @@
 </ul>
 <p>Endpoint Detection and Response (EDR) </p>
 <p>EDR platforms continuously monitor endpoint activity, recording system calls, process creation, network connections, file system changes, and registry modifications. They provide visibility into attacker behavior across the kill chain. </p>
-<h3>Hypothetical EDR telemetry query</h3>
+<h4>Hypothetical EDR telemetry query</h4>
 <p>def query_process_tree(process_id, timespan_hours=24):</p>
 <p>return edr_api.query(f"""</p>
 <p>SELECT pid, parent_pid, name, command_line, </p>
@@ -146,9 +150,9 @@
 <p>""")</p>
 <p>Extended Detection and Response (XDR) </p>
 <p>XDR extends EDR by correlating telemetry across endpoints, network traffic, email, cloud workloads, and identity systems. This cross-domain correlation reveals multi-stage attacks spanning different infrastructure layers. </p>
-<h3>XDR cross-domain correlation example</h3>
+<h4>XDR cross-domain correlation example</h4>
 <p>def correlate_alerts():</p>
-<h3>Correlate endpoint alert with network flow</h3>
+<h4>Correlate endpoint alert with network flow</h4>
 <p>endpoint_alerts = xdr.get_alerts(sources=['endpoint'], severity='high')</p>
 <p>network_flows = xdr.get_flows(source_ip_subnet='10.0.0.0/8', </p>
 <p>time_range='last_1h')</p>
@@ -164,7 +168,7 @@
 <p>Detection Techniques </p>
 <p>Behavioral Detection </p>
 <p>Monitors sequences of actions rather than static indicators. Detects ransomware by observing mass file encryption patterns. </p>
-<h3>Behavioral detection rule</h3>
+<h4>Behavioral detection rule</h4>
 <p>detection_rules:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Ransomware Behavior"</p>
 <p>conditions:</p>
@@ -178,7 +182,7 @@
 <p>Machine learning models analyze features extracted from endpoint telemetry to classify benign and malicious behavior. Models must be trained on diverse datasets and continuously updated to avoid concept drift. </p>
 <p>Response Automation </p>
 <p>SOAR (Security Orchestration, Automation, and Response) platforms automate response actions based on detection triggers. </p>
-<h3>Automated response playbook</h3>
+<h4>Automated response playbook</h4>
 <p>playbook:</p>
 <p>name: "Host Isolation and Investigation"</p>
 <p>trigger: severity == critical AND threat_type == ransomware</p>
@@ -200,6 +204,8 @@
 <p>Conclusion </p>
 <p>Modern endpoint protection demands more than antivirus. EDR provides deep visibility into endpoint activity, while XDR extends correlation across the entire security stack. Automated response reduces dwell time, but requires careful tuning to avoid disrupting legitimate operations.</p>
 <p><strong>See also:</strong> <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></p>
+<p><strong>See also:</strong> <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></p>
 <p><strong>See also:</strong> <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></p>
 <p><strong>See also:</strong> <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></p></div>
     </article>

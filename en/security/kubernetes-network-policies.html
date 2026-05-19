@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-network-policies.png",
       "datePublished": "2026-03-10",
       "dateModified": "2026-04-29",
-      "wordCount": "3552",
+      "wordCount": "3612",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/kubernetes-network-policies.html"},
@@ -99,18 +101,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-network-policies.png" alt="Kubernetes Network Policies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Kubernetes Network Policies</h2>
 <h3>Kubernetes Network Policies</h3>
-<h3>Kubernetes Network Policies</h3>
-<h3>Kubernetes Network Policies</h3>
-<h3>Kubernetes Network Policies</h3>
-<h3>Kubernetes Network Policies</h3>
-<h3>Kubernetes Network Policies</h3>
-<h3>Kubernetes Network Policies</h3>
-<h3>Kubernetes Network Policies</h3>
-<h3>Kubernetes Network Policies</h3>
-<h3>Kubernetes Network Policies</h3>
-<h3>Kubernetes Network Policies</h3>
-<h3>Kubernetes Network Policies</h3>
-<h3>Kubernetes Network Policies</h3>
+<h4>Kubernetes Network Policies</h4>
+<h4>Kubernetes Network Policies</h4>
+<h4>Kubernetes Network Policies</h4>
+<h4>Kubernetes Network Policies</h4>
+<h4>Kubernetes Network Policies</h4>
+<h4>Kubernetes Network Policies</h4>
+<h4>Kubernetes Network Policies</h4>
+<h4>Kubernetes Network Policies</h4>
+<h4>Kubernetes Network Policies</h4>
+<h4>Kubernetes Network Policies</h4>
+<h4>Kubernetes Network Policies</h4>
+<h4>Kubernetes Network Policies</h4>
+<h4>Kubernetes Network Policies</h4>
+<h4>Kubernetes Network Policies</h4>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-network-policies.png" alt="Kubernetes Network Policies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Kubernetes by default allows all pod-to-pod communication — a flat network model that is convenient but insecure. Network policies provide pod-level firewalling, enabling micro-segmentation and zero-trust networking within the cluster. </p>
 <p>Understanding Network Policies </p>
@@ -159,7 +163,7 @@
 <p>Default Deny Policies </p>
 <p>Start with default deny policies and explicitly allow required traffic. This enforces least-privilege networking. </p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---</p>
-<h3>Default deny all ingress</h3>
+<h4>Default deny all ingress</h4>
 <p>apiVersion: networking.k8s.io/v1</p>
 <p>kind: NetworkPolicy</p>
 <p>metadata:</p>
@@ -169,7 +173,7 @@
 <p>policyTypes:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Ingress</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---</p>
-<h3>Default deny all egress</h3>
+<h4>Default deny all egress</h4>
 <p>apiVersion: networking.k8s.io/v1</p>
 <p>kind: NetworkPolicy</p>
 <p>metadata:</p>
@@ -180,7 +184,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Egress</p>
 <p>Cilium: eBPF-Based Networking </p>
 <p>Cilium leverages eBPF to provide network policies with identity-based security, HTTP-aware rules, and cluster mesh capabilities. </p>
-<h3>CiliumNetworkPolicy with HTTP-aware filtering</h3>
+<h4>CiliumNetworkPolicy with HTTP-aware filtering</h4>
 <p>apiVersion: cilium.io/v2</p>
 <p>kind: CiliumNetworkPolicy</p>
 <p>metadata:</p>
@@ -205,7 +209,7 @@
 <p>path: "/api/v1/orders"</p>
 <p>headers:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "X-API-Version: 2"</p>
-<h3>DNS-aware egress policy with Cilium</h3>
+<h4>DNS-aware egress policy with Cilium</h4>
 <p>apiVersion: cilium.io/v2</p>
 <p>kind: CiliumNetworkPolicy</p>
 <p>metadata:</p>
@@ -228,7 +232,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- matchPattern: "*"</p>
 <p>Calico: Policy-First Networking </p>
 <p>Calico provides a rich policy model with both Kubernetes-native and extended policy resources. </p>
-<h3>Calico network policy with advanced features</h3>
+<h4>Calico network policy with advanced features</h4>
 <p>apiVersion: projectcalico.org/v3</p>
 <p>kind: NetworkPolicy</p>
 <p>metadata:</p>
@@ -257,16 +261,16 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "*.payment-gateway.com"</p>
 <p>ports:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 443</p>
-<h3>Calico policy enforcement and troubleshooting</h3>
+<h4>Calico policy enforcement and troubleshooting</h4>
 <p>calicoctl get networkpolicy -n production</p>
 <p>calicoctl get workloadendpoint -n production</p>
 <p>calicoctl get profiles</p>
-<h3>Test connectivity</h3>
+<h4>Test connectivity</h4>
 <p>calicoctl policy test --pod production/payment-pod-xyz \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--to-pod production/database-pod-abc --port 5432</p>
 <p>Zero-Trust for Pods </p>
 <p>Zero-trust networking assumes no pod is inherently trusted. Every connection must be authenticated and authorized. </p>
-<h3>Zero-trust: identity-aware policy with SPIFFE</h3>
+<h4>Zero-trust: identity-aware policy with SPIFFE</h4>
 <p>apiVersion: spiffe.io/v1beta1</p>
 <p>kind: SPIREIdentity</p>
 <p>metadata:</p>
@@ -295,19 +299,21 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- protocol: TCP</p>
 <p>port: 8443</p>
 <p>Policy Testing and Validation </p>
-<h3>Test network policies before deployment</h3>
+<h4>Test network policies before deployment</h4>
 <p>netcheck \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--kubeconfig ~/.kube/config \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--namespace production \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--test-policy policy.yaml \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--output detailed</p>
-<h3>Monitor policy decisions</h3>
+<h4>Monitor policy decisions</h4>
 <p>cilium monitor -v --type drop | grep policy</p>
-<h3>Policy audit mode (log without enforcing)</h3>
+<h4>Policy audit mode (log without enforcing)</h4>
 <p>kubectl annotate ns production "projectcalico.org/policy-audit-mode=enabled"</p>
 <p>Conclusion </p>
 <p>Kubernetes network policies are essential for cluster security. Start with default-deny, use namespace isolation, leverage CNI-specific features like HTTP-aware filtering with Cilium or service-account policies with Calico, and adopt zero-trust principles where every connection is explicitly authorized. Always test policies in audit mode before enforcement.</p>
 <p><strong>See also:</strong> <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p></div>
     </article>

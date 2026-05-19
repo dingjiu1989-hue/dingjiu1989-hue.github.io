@@ -1,7 +1,7 @@
 ---
 title: "WebSocket vs SSE vs Polling: Real-Time Data Patterns for Web Apps"
 description: "Compare WebSocket, Server-Sent Events, long polling, and short polling for real-time features. When to use each, with code examples and scaling considerations."
-date: 2026-05-08
+date: 2025-10-13
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/websocket-vs-sse-vs-polling.html
 ---

@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-security.png",
       "datePublished": "2026-03-18",
       "dateModified": "2026-04-05",
-      "wordCount": "1265",
+      "wordCount": "1310",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/kubernetes-security.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-security.png" alt="Kubernetes Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Kubernetes Security</h2>
 <h3>Kubernetes Security</h3>
-<h3>Kubernetes Security</h3>
-<h3>Kubernetes Security</h3>
-<h3>Kubernetes Security</h3>
-<h3>Kubernetes Security</h3>
-<h3>Kubernetes Security</h3>
-<h3>Kubernetes Security</h3>
-<h3>Kubernetes Security</h3>
-<h3>Kubernetes Security</h3>
-<h3>Kubernetes Security</h3>
-<h3>Kubernetes Security</h3>
-<h3>Kubernetes Security</h3>
+<h4>Kubernetes Security</h4>
+<h4>Kubernetes Security</h4>
+<h4>Kubernetes Security</h4>
+<h4>Kubernetes Security</h4>
+<h4>Kubernetes Security</h4>
+<h4>Kubernetes Security</h4>
+<h4>Kubernetes Security</h4>
+<h4>Kubernetes Security</h4>
+<h4>Kubernetes Security</h4>
+<h4>Kubernetes Security</h4>
+<h4>Kubernetes Security</h4>
+<h4>Kubernetes Security</h4>
+<h4>Kubernetes Security</h4>
 <p>Kubernetes Security Challenges </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-security.png" alt="Kubernetes Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Kubernetes introduces a large attack surface: the API server, etcd, kubelets, and container runtime all need protection. </p>
 <p>RBAC Configuration </p>
@@ -147,7 +151,7 @@
 <p>verbs: ["get"]</p>
 <p>Pod Security Standards </p>
 <p>Enforce Pod Security Standards with admission controllers: </p>
-<h3>Pod Security Admission</h3>
+<h4>Pod Security Admission</h4>
 <p>apiVersion: pods-security.admission.config.k8s.io/v1</p>
 <p>kind: PodSecurityConfiguration</p>
 <p>defaults:</p>
@@ -159,7 +163,7 @@
 <p>warn-version: "latest"</p>
 <p>exemptions:</p>
 <p>namespaces: ["kube-system", "kube-public"]</p>
-<h3>Pod Security Standards - Restricted level</h3>
+<h4>Pod Security Standards - Restricted level</h4>
 <p>apiVersion: v1</p>
 <p>kind: Pod</p>
 <p>metadata:</p>
@@ -213,7 +217,7 @@
 <p>port: 5432</p>
 <p>Audit Logging </p>
 <p>Enable and monitor audit logs: </p>
-<h3>audit-policy.yaml</h3>
+<h4>audit-policy.yaml</h4>
 <p>apiVersion: audit.k8s.io/v1</p>
 <p>kind: Policy</p>
 <p>rules:</p>
@@ -229,14 +233,14 @@
 <p>verbs: ["watch"]</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: None</p>
 <p>requestSources: ["controller"]</p>
-<h3>Audit log analyzer</h3>
+<h4>Audit log analyzer</h4>
 <p>import json</p>
 <p>from collections import Counter</p>
 <p>def analyze_audit_logs(log_lines):</p>
 <p>suspicious_activities = []</p>
 <p>for line in log_lines:</p>
 <p>event = json.loads(line)</p>
-<h3>Detect secret access patterns</h3>
+<h4>Detect secret access patterns</h4>
 <p>if event.get("objectRef", {}).get("resource") == "secrets":</p>
 <p>if event.get("verb") in ["get", "list"]:</p>
 <p>suspicious_activities.append({</p>
@@ -244,7 +248,7 @@
 <p>"user": event.get("user", {}).get("username"),</p>
 <p>"count": 1</p>
 <p>})</p>
-<h3>Detect RBAC changes</h3>
+<h4>Detect RBAC changes</h4>
 <p>if event.get("objectRef", {}).get("apiGroup") == "rbac.authorization.k8s.io":</p>
 <p>suspicious_activities.append({</p>
 <p>"type": "rbac_change",</p>
@@ -255,6 +259,8 @@
 <p>Conclusion </p>
 <p>Kubernetes security requires a layered approach. Lock down RBAC with least privilege, enforce Pod Security Standards, isolate workloads with network policies, and enable comprehensive audit logging. Use admission controllers to enforce policies at deploy time. Monitor audit logs for suspicious activity patterns.</p>
 <p><strong>See also:</strong> <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>, <a href="/en/security/cloud-network-security.html">Cloud Network Security</a></p></div>
     </article>

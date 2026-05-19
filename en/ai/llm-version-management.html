@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-version-management.png",
       "datePublished": "2026-02-17",
       "dateModified": "2026-05-14",
-      "wordCount": "1641",
+      "wordCount": "1760",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/llm-version-management.html"},
@@ -99,18 +101,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-version-management.png" alt="LLM Version Management: Model Registry, A/B Testing, Rollback" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>LLM Version Management: Model Registry, A/B Testing, Rollback</h2>
 <h3>LLM Version Management: Model Registry, A/B Testing, Rollback</h3>
-<h3>LLM Version Management: Model Registry, A/B Testing, Rollback</h3>
-<h3>LLM Version Management: Model Registry, A/B Testing, Rollback</h3>
-<h3>LLM Version Management: Model Registry, A/B Testing, Rollback</h3>
-<h3>LLM Version Management: Model Registry, A/B Testing, Rollback</h3>
-<h3>LLM Version Management: Model Registry, A/B Testing, Rollback</h3>
-<h3>LLM Version Management: Model Registry, A/B Testing, Rollback</h3>
-<h3>LLM Version Management: Model Registry, A/B Testing, Rollback</h3>
-<h3>LLM Version Management: Model Registry, A/B Testing, Rollback</h3>
-<h3>LLM Version Management: Model Registry, A/B Testing, Rollback</h3>
-<h3>LLM Version Management: Model Registry, A/B Testing, Rollback</h3>
-<h3>LLM Version Management: Model Registry, A/B Testing, Rollback</h3>
-<h3>LLM Version Management: Model Registry, A/B Testing, Rollback</h3>
+<h4>LLM Version Management: Model Registry, A/B Testing, Rollback</h4>
+<h4>LLM Version Management: Model Registry, A/B Testing, Rollback</h4>
+<h4>LLM Version Management: Model Registry, A/B Testing, Rollback</h4>
+<h4>LLM Version Management: Model Registry, A/B Testing, Rollback</h4>
+<h4>LLM Version Management: Model Registry, A/B Testing, Rollback</h4>
+<h4>LLM Version Management: Model Registry, A/B Testing, Rollback</h4>
+<h4>LLM Version Management: Model Registry, A/B Testing, Rollback</h4>
+<h4>LLM Version Management: Model Registry, A/B Testing, Rollback</h4>
+<h4>LLM Version Management: Model Registry, A/B Testing, Rollback</h4>
+<h4>LLM Version Management: Model Registry, A/B Testing, Rollback</h4>
+<h4>LLM Version Management: Model Registry, A/B Testing, Rollback</h4>
+<h4>LLM Version Management: Model Registry, A/B Testing, Rollback</h4>
+<h4>LLM Version Management: Model Registry, A/B Testing, Rollback</h4>
+<h4>LLM Version Management: Model Registry, A/B Testing, Rollback</h4>
 <h4>Introduction</h4>
 <p>LLMs change frequently: new model releases, fine-tuned versions, updated system prompts, and modified retrieval pipelines all constitute "versions" of your AI system. Unlike traditional software where you can pin a dependency version, LLM behavior shifts with each API update. This article covers the tools and practices for managing LLM versions in production.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-version-management.png" alt="LLM Version Management: Model Registry, A/B Testing, Rollback" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Model Registry</h4>
@@ -157,7 +161,7 @@
 <p>if model["status"] == ModelStatus.PRODUCTION.value:</p>
 <p>return model</p>
 <p>return None</p>
-<h3>Usage</h3>
+<h4>Usage</h4>
 <p>registry = ModelRegistry(redis_client)</p>
 <p>registry.register_model("claude-sonnet-v4-1", {</p>
 <p>"provider": "anthropic",</p>
@@ -183,7 +187,7 @@
 <p>}</p>
 <p>def select_model(self, experiment: str, user_id: str) -&gt; str:</p>
 <p>exp = self.experiments[experiment]</p>
-<h3>Deterministic assignment based on user_id hash</h3>
+<h4>Deterministic assignment based on user_id hash</h4>
 <p>hash_val = int(hashlib.md5(f"{experiment}:{user_id}".encode()).hexdigest(), 16)</p>
 <p>if (hash_val % 1000) / 1000 &lt; exp["traffic_split"]:</p>
 <p>return exp["model_a"], "a"</p>
@@ -201,7 +205,7 @@
 <p>return None # Not enough data</p>
 <p>error_rate_a = results["a"]["errors"] / results["a"]["calls"]</p>
 <p>error_rate_b = results["b"]["errors"] / results["b"]["calls"]</p>
-<h3>Simple decision: lower error rate wins</h3>
+<h4>Simple decision: lower error rate wins</h4>
 <p>if error_rate_a &lt; error_rate_b:</p>
 <p>return exp["model_a"]</p>
 <p>return exp["model_b"]</p>
@@ -224,9 +228,9 @@
 <p>print(f"Deploying to stage: {stage['name']} ({stage['traffic']*100}% traffic)")</p>
 <p>self.registry.promote(model_id, ModelStatus.CANARY)</p>
 <p>await self._route_traffic(model_id, stage["traffic"])</p>
-<h3>Wait for evaluation period</h3>
+<h4>Wait for evaluation period</h4>
 <p>await asyncio.sleep(stage["duration_min"] * 60)</p>
-<h3>Evaluate performance</h3>
+<h4>Evaluate performance</h4>
 <p>scores = await self.evaluate(model_id)</p>
 <p>if scores.get("overall", 0) &lt; stage["eval_threshold"]:</p>
 <p>print(f"Stage {stage['name']} failed evaluation. Rolling back.")</p>
@@ -263,6 +267,8 @@
 <h4>Conclusion</h4>
 <p>Treat LLM versions as managed artifacts, not API parameters. Use a model registry to track every version with its metadata, system prompt, and evaluation scores. Implement A/B testing to compare versions on live traffic. Deploy new models gradually through canary, small, medium, and full rollout stages with automated evaluation gates at each stage. Maintain the ability to roll back instantly when metrics degrade. This discipline makes LLM version management as reliable as traditional software deployment.</p>
 <p><strong>See also:</strong> <a href="/en/ai/model-evaluation-harness.html">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/prompt-management.html">Prompt Management: Versioning, Testing, Collaboration, Deployment</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/model-evaluation-harness.html">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/prompt-management.html">Prompt Management: Versioning, Testing, Collaboration, Deployment</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/model-evaluation-harness.html">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/prompt-management.html">Prompt Management: Versioning, Testing, Collaboration, Deployment</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/model-evaluation-harness.html">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/prompt-management.html">Prompt Management: Versioning, Testing, Collaboration, Deployment</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/model-evaluation-harness.html">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/prompt-management.html">Prompt Management: Versioning, Testing, Collaboration, Deployment</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/model-evaluation-harness.html">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/prompt-management.html">Prompt Management: Versioning, Testing, Collaboration, Deployment</a></p></div>
     </article>

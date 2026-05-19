@@ -1,7 +1,7 @@
 ---
 title: "ESLint vs Prettier vs Biome (2026): Which Code Formatter Wins?"
 description: "In-depth comparison of JavaScript/TypeScript formatting and linting tools: speed, features, plugin ecosystems, and migration paths. Biome is 25x faster than Prettier — but should you switch?"
-date: 2026-05-08
+date: 2025-11-22
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/eslint-vs-prettier-vs-biome.html
 ---

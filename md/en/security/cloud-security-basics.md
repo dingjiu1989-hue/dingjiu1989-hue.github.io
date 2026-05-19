@@ -1,7 +1,7 @@
 ---
 title: "Cloud Security Basics: Shared Responsibility Model Explained"
 description: "Understand the AWS/GCP/Azure shared responsibility model, IAM policies, network security groups, and key cloud security services."
-date: 2026-05-12
+date: 2026-03-03
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/cloud-security-basics.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/security/cloud-security-basics.html
 
 ## Cloud Security Basics: Shared Responsibility Model Explained
 
-## Cloud Security Basics: Shared Responsibility Model Explained
+### Cloud Security Basics: Shared Responsibility Model Explained
 
-## Cloud Security Basics: Shared Responsibility Model Explained
+#### Cloud Security Basics: Shared Responsibility Model Explained
 
-## Cloud Security Basics: Shared Responsibility Model Explained
+#### Cloud Security Basics: Shared Responsibility Model Explained
 
-## Cloud Security Basics: Shared Responsibility Model Explained
+#### Cloud Security Basics: Shared Responsibility Model Explained
 
-## Cloud Security Basics: Shared Responsibility Model Explained
+#### Cloud Security Basics: Shared Responsibility Model Explained
 
-## Cloud Security Basics: Shared Responsibility Model Explained
+#### Cloud Security Basics: Shared Responsibility Model Explained
 
-## Cloud Security Basics: Shared Responsibility Model Explained
+#### Cloud Security Basics: Shared Responsibility Model Explained
 
-## Cloud Security Basics: Shared Responsibility Model Explained
+#### Cloud Security Basics: Shared Responsibility Model Explained
 
-## Cloud Security Basics: Shared Responsibility Model Explained
+#### Cloud Security Basics: Shared Responsibility Model Explained
 
-## Cloud Security Basics: Shared Responsibility Model Explained
+#### Cloud Security Basics: Shared Responsibility Model Explained
 
-## Cloud Security Basics: Shared Responsibility Model Explained
+#### Cloud Security Basics: Shared Responsibility Model Explained
 
-## Cloud Security Basics: Shared Responsibility Model Explained
+#### Cloud Security Basics: Shared Responsibility Model Explained
+
+#### Cloud Security Basics: Shared Responsibility Model Explained
+
+#### Cloud Security Basics: Shared Responsibility Model Explained
+
+#### Cloud Security Basics: Shared Responsibility Model Explained
 
 The shared responsibility model is the foundational concept in cloud security. It defines what the cloud provider secures versus what the customer must secure. Misunderstanding this boundary is the root cause of most cloud data breaches.
 
-### The Shared Responsibility Model
+#### The Shared Responsibility Model
 
 Every major cloud provider — AWS, Google Cloud, and Azure — operates under a shared responsibility model. The provider secures the infrastructure that runs the services. The customer secures everything they deploy on top of that infrastructure.
 
@@ -46,7 +52,7 @@ Every major cloud provider — AWS, Google Cloud, and Azure — operates under a
 
 **Azure shared responsibility** : Microsoft secures physical hosts, networks, and datacenters. The customer secures their data, identities, applications, and account management. For platform-as-a-service (PaaS) services, Microsoft takes on more responsibility for the runtime.
 
-### Identity and Access Management (IAM)
+#### Identity and Access Management (IAM)
 
 IAM is the gatekeeper of your cloud environment. Every API call to a cloud provider passes through IAM authorization.
 
@@ -97,7 +103,7 @@ Best practices for IAM:
 
 GCP IAM uses roles that are collections of permissions. Primitive roles (Owner, Editor, Viewer) are broad. Predefined roles are service-specific and more granular.
 
-## Assign a predefined role to a service account
+#### Assign a predefined role to a service account
 
 gcloud projects add-iam-policy-binding my-project \
 
@@ -117,7 +123,7 @@ az role assignment create \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--scope "/subscriptions/SUB_ID/resourceGroups/RG"
 
-### Network Security Groups
+#### Network Security Groups
 
 Cloud virtual networks need traffic filtering at multiple layers.
 
@@ -127,7 +133,7 @@ Cloud virtual networks need traffic filtering at multiple layers.
 
 **Azure Network Security Groups (NSGs)** : Filter traffic at the subnet or NIC level. NSGs contain security rules with priority, source, destination, protocol, direction, and action (allow or deny).
 
-### Cloud Security Services
+#### Cloud Security Services
 
 #### AWS CloudTrail
 
@@ -145,7 +151,7 @@ Security Command Center provides threat detection, vulnerability scanning, and a
 
 Azure Defender (formerly Azure Security Center) provides unified security management and advanced threat protection across hybrid cloud workloads. It includes just-in-time VM access, file integrity monitoring, and vulnerability assessments.
 
-### Key Management
+#### Key Management
 
 Encryption key management differs across providers:
 
@@ -160,11 +166,17 @@ Encryption key management differs across providers:
 
 Never store secrets in code, configuration files, or environment variables exposed through debugging endpoints. Use a proper secrets manager with automatic rotation.
 
-### Conclusion
+#### Conclusion
 
 Cloud security starts with understanding the shared responsibility model. From there, it requires disciplined IAM management, proper network segmentation, and full utilization of your provider's security tooling. The shift to cloud does not eliminate security responsibilities — it transforms them.
 
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Network Security Fundamentals](</en/security/network-security.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>).
+
+**See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Network Security Fundamentals](</en/security/network-security.html>)
+
+**See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Network Security Fundamentals](</en/security/network-security.html>)
+
+**See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Network Security Fundamentals](</en/security/network-security.html>)
 
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Network Security Fundamentals](</en/security/network-security.html>)
 

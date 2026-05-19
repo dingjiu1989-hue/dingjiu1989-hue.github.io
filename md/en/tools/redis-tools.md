@@ -1,7 +1,7 @@
 ---
 title: "Redis Tools: RedisInsight, Redis CLI, Redis Commander"
 description: "Essential tools for Redis management: RedisInsight for GUI-based visualization and analysis, Redis CLI for command-line operations, and Redis Commander for web-"
-date: 2026-05-12
+date: 2026-02-05
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/redis-tools.html
 ---
@@ -10,39 +10,45 @@ url: https://dingjiu1989-hue.github.io/en/tools/redis-tools.html
 
 ## Redis Tools: RedisInsight, Redis CLI, Redis Commander
 
-## Redis Tools: RedisInsight, Redis CLI, Redis Commander
+### Redis Tools: RedisInsight, Redis CLI, Redis Commander
 
-## Redis Tools: RedisInsight, Redis CLI, Redis Commander
+#### Redis Tools: RedisInsight, Redis CLI, Redis Commander
 
-## Redis Tools: RedisInsight, Redis CLI, Redis Commander
+#### Redis Tools: RedisInsight, Redis CLI, Redis Commander
 
-## Redis Tools: RedisInsight, Redis CLI, Redis Commander
+#### Redis Tools: RedisInsight, Redis CLI, Redis Commander
 
-## Redis Tools: RedisInsight, Redis CLI, Redis Commander
+#### Redis Tools: RedisInsight, Redis CLI, Redis Commander
 
-## Redis Tools: RedisInsight, Redis CLI, Redis Commander
+#### Redis Tools: RedisInsight, Redis CLI, Redis Commander
 
-## Redis Tools: RedisInsight, Redis CLI, Redis Commander
+#### Redis Tools: RedisInsight, Redis CLI, Redis Commander
 
-## Redis Tools: RedisInsight, Redis CLI, Redis Commander
+#### Redis Tools: RedisInsight, Redis CLI, Redis Commander
 
-## Redis Tools: RedisInsight, Redis CLI, Redis Commander
+#### Redis Tools: RedisInsight, Redis CLI, Redis Commander
 
-## Redis Tools: RedisInsight, Redis CLI, Redis Commander
+#### Redis Tools: RedisInsight, Redis CLI, Redis Commander
 
-## Redis Tools: RedisInsight, Redis CLI, Redis Commander
+#### Redis Tools: RedisInsight, Redis CLI, Redis Commander
 
-## Redis Tools: RedisInsight, Redis CLI, Redis Commander
+#### Redis Tools: RedisInsight, Redis CLI, Redis Commander
 
-### Introduction
+#### Redis Tools: RedisInsight, Redis CLI, Redis Commander
+
+#### Redis Tools: RedisInsight, Redis CLI, Redis Commander
+
+#### Redis Tools: RedisInsight, Redis CLI, Redis Commander
+
+#### Introduction
 
 Redis is one of the most widely used data stores for caching, session management, message queues, and real-time applications. Managing Redis effectively requires the right tools for visualizing data, profiling performance, and debugging issues. This article covers the essential Redis tools: RedisInsight, the Redis CLI, and web-based administration tools.
 
-### Redis CLI
+#### Redis CLI
 
 The command-line interface is the most fundamental Redis tool, shipped with every Redis installation:
 
-## Basic commands
+#### Basic commands
 
 redis-cli ping # Test connection
 
@@ -52,7 +58,7 @@ redis-cli monitor # Real-time command monitoring
 
 redis-cli --stat # Real-time statistics
 
-## Key operations
+#### Key operations
 
 redis-cli keys "*" # List all keys (avoid in production!)
 
@@ -60,7 +66,7 @@ redis-cli --scan --pattern "session:*" # Safe key scanning
 
 redis-cli dbsize # Number of keys in database
 
-## Value inspection
+#### Value inspection
 
 redis-cli type user:123
 
@@ -70,7 +76,7 @@ redis-cli hgetall user:123
 
 redis-cli smembers "tags:article:456"
 
-## Performance debugging
+#### Performance debugging
 
 redis-cli --bigkeys # Find largest keys
 
@@ -82,27 +88,27 @@ redis-cli --latency # Connection latency test
 
 redis-cli --rdb /tmp/dump.rdb # Generate RDB dump
 
-## Cluster mode
+#### Cluster mode
 
 redis-cli -c cluster nodes
 
 redis-cli -c cluster info
 
-## With SSL/tls
+#### With SSL/tls
 
 redis-cli --tls --cacert ca.crt --cert client.crt --key client.key
 
 **Pipeline mode** for bulk operations:
 
-## Load data from file
+#### Load data from file
 
 cat commands.txt | redis-cli --pipe
 
-## Generate test data with inline scripting
+#### Generate test data with inline scripting
 
 redis-cli --eval script.lua key1 key2 , arg1 arg2
 
-### RedisInsight
+#### RedisInsight
 
 Redis's official GUI tool for visualization and analysis:
 
@@ -127,29 +133,29 @@ Redis's official GUI tool for visualization and analysis:
 
 
 
-## Start RedisInsight
+#### Start RedisInsight
 
-## Download from https://redis.com/redis-enterprise/redis-insight/
+#### Download from https://redis.com/redis-enterprise/redis-insight/
 
-## Or run as Docker container
+#### Or run as Docker container
 
 docker run -d -p 5540:5540 redis/redisinsight:latest
 
-## Access at http://localhost:5540
+#### Access at http://localhost:5540
 
 **Workbench** for advanced querying:
 
-## RedisInsight Workbench supports:
+#### RedisInsight Workbench supports:
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Multi-line queries with Ctrl+Enter
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Multi-line queries with Ctrl+Enter
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Query history with search
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Query history with search
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Result visualization (JSON, Table, Raw)
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Result visualization (JSON, Table, Raw)
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Command autocomplete
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Command autocomplete
 
-## Memory analysis commands
+#### Memory analysis commands
 
 MEMORY DOCTOR # Get memory optimization suggestions
 
@@ -157,7 +163,7 @@ MEMORY USAGE user:123 # Memory used by a specific key
 
 MEMORY STATS # Overall memory statistics
 
-## Performance analysis
+#### Performance analysis
 
 SLOWLOG GET 20 # Most recent slow commands
 
@@ -167,29 +173,29 @@ INFO COMMANDSTATS # Command execution statistics
 
 **Strengths** : Official Redis tool, excellent memory analysis and optimization recommendations, professional data visualization, free.
 
-### Redis Commander
+#### Redis Commander
 
 A web-based Redis management tool built with Node.js:
 
-## Install globally
+#### Install globally
 
 npm install -g redis-commander
 
-## Start with default settings
+#### Start with default settings
 
 redis-commander
 
-## With custom configuration
+#### With custom configuration
 
 redis-commander --redis-host redis.example.com --redis-port 6379
 
 redis-commander --redis-password yourpassword
 
-## Docker
+#### Docker
 
 docker run -d -p 8081:8081 rediscommander/redis-commander:latest
 
-## Access at http://localhost:8081
+#### Access at http://localhost:8081
 
 // Custom configuration
 
@@ -234,35 +240,35 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
 
 
 
-### Redis Monitoring with redis-stat
+#### Redis Monitoring with redis-stat
 
-## Install via gem
+#### Install via gem
 
 gem install redis-stat
 
-## Run monitoring dashboard
+#### Run monitoring dashboard
 
 redis-stat --server=6379 1 # 1 second refresh interval
 
-## Run on headless server
+#### Run on headless server
 
 redis-stat --daemon --server=redis:6379 5
 
-### Production Usage
+#### Production Usage
 
-## !/bin/bash
+#### !/bin/bash
 
-## Redis production health check script
+#### Redis production health check script
 
 echo "=== Redis Health Check ==="
 
 echo ""
 
-## Connection test
+#### Connection test
 
 echo "Ping: $(redis-cli ping)"
 
-## Memory usage
+#### Memory usage
 
 MEM=$(redis-cli info memory | grep "used_memory_human" | cut -d: -f2)
 
@@ -270,25 +276,25 @@ MAXMEM=$(redis-cli info memory | grep "maxmemory_human" | cut -d: -f2)
 
 echo "Memory: $MEM / $MAXMEM"
 
-## Key count
+#### Key count
 
 KEYS=$(redis-cli dbsize)
 
 echo "Total keys: $KEYS"
 
-## Connected clients
+#### Connected clients
 
 CLIENTS=$(redis-cli info clients | grep "connected_clients" | cut -d: -f2)
 
 echo "Clients: $CLIENTS"
 
-## Commands per second
+#### Commands per second
 
 OPS=$(redis-cli info stats | grep "instantaneous_ops_per_sec" | cut -d: -f2)
 
 echo "Operations/sec: $OPS"
 
-## Hit rate
+#### Hit rate
 
 HITS=$(redis-cli info stats | grep "keyspace_hits" | cut -d: -f2)
 
@@ -302,7 +308,7 @@ echo "Hit rate: ${RATE}%"
 
 fi
 
-### Comparison
+#### Comparison
 
 | Tool | Type | Best For | Complexity |
 
@@ -316,7 +322,7 @@ fi
 
 | redis-stat | CLI dashboard | Real-time monitoring | Low |
 
-### Recommendations
+#### Recommendations
 
   * **Daily operations** : Redis CLI for quick commands and scripting.
 
@@ -334,6 +340,12 @@ fi
 The most effective setup combines the Redis CLI for scripting and automation with RedisInsight for data visualization and memory optimization. Use Redis Commander for lightweight web-based access when a desktop GUI is not available.
 
 **See also:** [Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja](</en/tools/reverse-engineering.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>).
+
+**See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
+
+**See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
+
+**See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
 
 **See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
 

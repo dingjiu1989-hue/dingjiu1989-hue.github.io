@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-caching.png",
       "datePublished": "2026-04-09",
       "dateModified": "2026-05-05",
-      "wordCount": "574",
+      "wordCount": "661",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-caching.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-caching.png" alt="Database Caching" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Database Caching</h2>
 <h3>Database Caching</h3>
-<h3>Database Caching</h3>
-<h3>Database Caching</h3>
-<h3>Database Caching</h3>
-<h3>Database Caching</h3>
-<h3>Database Caching</h3>
-<h3>Database Caching</h3>
-<h3>Database Caching</h3>
-<h3>Database Caching</h3>
-<h3>Database Caching</h3>
-<h3>Database Caching</h3>
-<h3>Database Caching</h3>
+<h4>Database Caching</h4>
+<h4>Database Caching</h4>
+<h4>Database Caching</h4>
+<h4>Database Caching</h4>
+<h4>Database Caching</h4>
+<h4>Database Caching</h4>
+<h4>Database Caching</h4>
+<h4>Database Caching</h4>
+<h4>Database Caching</h4>
+<h4>Database Caching</h4>
+<h4>Database Caching</h4>
+<h4>Database Caching</h4>
+<h4>Database Caching</h4>
 <p>Why Cache? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-caching.png" alt="Database Caching" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Caching reduces database load and improves response times. A good caching strategy can reduce database queries by 90% or more. </p>
 <p>Caching Strategies </p>
@@ -150,7 +154,7 @@
 <p>value = redis.get(key)</p>
 <p>if value:</p>
 <p>return json.loads(value)</p>
-<h3>Try to acquire lock</h3>
+<h4>Try to acquire lock</h4>
 <p>lock_key = f"lock:{key}"</p>
 <p>if redis.setnx(lock_key, "1"):</p>
 <p>redis.expire(lock_key, 10)</p>
@@ -158,13 +162,15 @@
 <p>redis.setex(key, ttl, json.dumps(value))</p>
 <p>redis.delete(lock_key)</p>
 <p>return value</p>
-<h3>Wait for the other thread</h3>
+<h4>Wait for the other thread</h4>
 <p>import time</p>
 <p>time.sleep(0.1)</p>
 <p>return json.loads(redis.get(key))</p>
 <p>Conclusion </p>
 <p>Use cache-aside as the default pattern. Set appropriate TTLs. Implement mutex locking for cache stampede prevention. Monitor cache hit rates. Always have a fallback when cache is unavailable.</p>
 <p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-migration-strategies.html">Database Migration Strategies</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
+<p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p></div>
     </article>

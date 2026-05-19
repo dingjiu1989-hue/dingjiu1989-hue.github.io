@@ -1,7 +1,7 @@
 ---
 title: "Retry Patterns"
 description: "Learn retry strategies: exponential backoff, jitter, retry budgets, and circuit breaker integration for resilient systems"
-date: 2026-05-12
+date: 2026-05-04
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/retry-patterns.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/retry-patterns.html
 
 ## Retry Patterns
 
-## Retry Patterns
+### Retry Patterns
 
-## Retry Patterns
+#### Retry Patterns
 
-## Retry Patterns
+#### Retry Patterns
 
-## Retry Patterns
+#### Retry Patterns
 
-## Retry Patterns
+#### Retry Patterns
 
-## Retry Patterns
+#### Retry Patterns
 
-## Retry Patterns
+#### Retry Patterns
 
-## Retry Patterns
+#### Retry Patterns
 
-## Retry Patterns
+#### Retry Patterns
 
-## Retry Patterns
+#### Retry Patterns
 
-## Retry Patterns
+#### Retry Patterns
+
+#### Retry Patterns
+
+#### Retry Patterns
+
+#### Retry Patterns
 
 Retry patterns are fundamental to building resilient distributed systems. Network failures, transient service unavailability, and resource contention are inevitable in any distributed architecture. A well-designed retry mechanism can gracefully handle these failures without overwhelming downstream services or degrading user experience. This article covers exponential backoff, jitter, retry budgets, and integration with circuit breakers. 
 
@@ -75,3 +81,9 @@ Retries are a powerful tool, but they are not a substitute for addressing underl
 **See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 
 **See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
+
+**See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)

@@ -1,7 +1,7 @@
 ---
 title: "Database Migration Strategies"
 description: "Zero-downtime database migration strategies with rollback planning, testing, and CI/CD integration."
-date: 2026-05-12
+date: 2026-04-09
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/database-migration-strategies.html
 ---

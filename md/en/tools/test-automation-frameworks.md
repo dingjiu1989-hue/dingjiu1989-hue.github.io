@@ -1,7 +1,7 @@
 ---
 title: "Test Automation Frameworks 2026"
 description: "Compare modern test automation frameworks across languages including Vitest, Playwright, pytest, and Rust testing tools."
-date: 2026-05-11
+date: 2025-12-10
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/test-automation-frameworks.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/tools/test-automation-frameworks.html
 
 ## Test Automation Frameworks 2026
 
-## Test Automation Frameworks 2026
+### Test Automation Frameworks 2026
 
-## Test Automation Frameworks 2026
+#### Test Automation Frameworks 2026
 
-## Test Automation Frameworks 2026
+#### Test Automation Frameworks 2026
 
-## Test Automation Frameworks 2026
+#### Test Automation Frameworks 2026
 
-## Test Automation Frameworks 2026
+#### Test Automation Frameworks 2026
 
-## Test Automation Frameworks 2026
+#### Test Automation Frameworks 2026
 
-## Test Automation Frameworks 2026
+#### Test Automation Frameworks 2026
 
-## Test Automation Frameworks 2026
+#### Test Automation Frameworks 2026
 
-## Test Automation Frameworks 2026
+#### Test Automation Frameworks 2026
 
-## Test Automation Frameworks 2026
+#### Test Automation Frameworks 2026
 
-## Test Automation Frameworks 2026
+#### Test Automation Frameworks 2026
 
-## Test Automation Frameworks 2026
+#### Test Automation Frameworks 2026
+
+#### Test Automation Frameworks 2026
+
+#### Test Automation Frameworks 2026
+
+#### Test Automation Frameworks 2026
 
 Test automation frameworks have evolved significantly, with faster runners, better browser testing, and tighter developer experience. This guide covers the best testing frameworks in 2026 across multiple languages and testing domains.
 
-### Unit Testing Frameworks
+#### Unit Testing Frameworks
 
 Unit tests verify individual functions and modules in isolation. Speed is critical since these run on every save.
 
@@ -114,7 +120,7 @@ expect(() => calculateDiscount(-10)).toThrow('Invalid amount')
 
 pytest is the dominant Python testing framework with a rich plugin ecosystem.
 
-## test_pricing.py
+#### test_pricing.py
 
 import pytest
 
@@ -144,7 +150,7 @@ def test_multiple_amounts(amount, expected):
 
 assert calculate_discount(amount) == expected
 
-## Run with coverage
+#### Run with coverage
 
 pytest --cov=src --cov-report=term-missing --cov-fail-under=80
 
@@ -156,13 +162,13 @@ Rust has built-in testing with `cargo test`. Additional frameworks enhance the e
 
 // Unit test (built-in)
 
-## [cfg(test)]
+#### [cfg(test)]
 
 mod tests {
 
 use super::*;
 
-## [test]
+#### [test]
 
 fn test_discount() {
 
@@ -170,9 +176,9 @@ assert_eq!(calculate_discount(150), 135);
 
 }
 
-## [test]
+#### [test]
 
-## [should_panic(expected = "Invalid amount")]
+#### [should_panic(expected = "Invalid amount")]
 
 fn test_negative() {
 
@@ -186,7 +192,7 @@ calculate_discount(-10);
 
 use myapp::calculate_discount;
 
-## [test]
+#### [test]
 
 fn integration_discount() {
 
@@ -196,7 +202,7 @@ assert_eq!(calculate_discount(200), 180);
 
 **Additional crates** : `rstest` for parameterized tests, `proptest` for property-based testing, `quickcheck` for randomized testing.
 
-### Browser/End-to-End Testing
+#### Browser/End-to-End Testing
 
 E2E tests verify that the entire application works correctly from the user's perspective.
 
@@ -286,7 +292,7 @@ await expect(page.locator('[data-testid="welcome"]')).toContainText('Welcome')
 
 | Multi-tab/window | Yes | Limited |
 
-### API Testing
+#### API Testing
 
 #### Supertest (Node.js)
 
@@ -336,7 +342,7 @@ assert response.status_code == 200
 
 assert isinstance(response.json(), list)
 
-### Property-Based Testing
+#### Property-Based Testing
 
 Property-based testing generates random inputs to find edge cases.
 
@@ -386,11 +392,11 @@ for a, b in zip(result, result[1:]):
 
 assert a <= b
 
-### Coverage and Quality Metrics
+#### Coverage and Quality Metrics
 
 Integrate coverage into your CI pipeline:
 
-## GitHub Actions with coverage
+#### GitHub Actions with coverage
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run tests with coverage
 
@@ -416,7 +422,7 @@ Set meaningful thresholds:
 
 | Mutation score | 50% | 70% |
 
-### Recommendations
+#### Recommendations
 
 | Domain | Framework | Language | Why |
 
@@ -440,11 +446,17 @@ Set meaningful thresholds:
 
 | Property tests | Hypothesis | Python | Mature ecosystem |
 
-### Summary
+#### Summary
 
 The testing landscape in 2026 is converging on fast, developer-friendly tools. Vitest leads for JavaScript unit testing with near-instant feedback. Playwright has become the standard for browser testing with multi-browser support and excellent debugging tools. pytest remains unmatched in the Python ecosystem. The key principles are the same regardless of framework: test behavior, not implementation; keep unit tests fast; invest in a few critical E2E tests; and use property-based testing for functions with complex logic. Integrate testing into your development workflow so tests run on every save and every commit.
 
 **See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>).
+
+**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>)
+
+**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>)
+
+**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>)
 
 **See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>)
 

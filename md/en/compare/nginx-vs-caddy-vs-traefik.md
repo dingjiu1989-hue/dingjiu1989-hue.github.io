@@ -1,7 +1,7 @@
 ---
 title: "Nginx vs Caddy vs Traefik (2026): Web Server & Reverse Proxy Face-Off"
 description: "Compare Nginx, Caddy, and Traefik on configuration simplicity, automatic HTTPS, Docker/K8s integration, performance, and observability. Caddy's auto-TLS is a game-changer."
-date: 2026-05-08
+date: 2025-11-24
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/nginx-vs-caddy-vs-traefik.html
 ---

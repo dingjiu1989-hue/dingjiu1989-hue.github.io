@@ -1,7 +1,7 @@
 ---
 title: "Read Replicas: Scaling Reads, Replication Lag, and Failover"
 description: "Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, and best practices for PostgreSQL and MySQL."
-date: 2026-05-12
+date: 2026-04-08
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/read-replicas.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/read-replicas.html
 
 ## Read Replicas: Scaling Reads, Replication Lag, and Failover
 
-## Read Replicas: Scaling Reads, Replication Lag, and Failover
+### Read Replicas: Scaling Reads, Replication Lag, and Failover
 
-## Read Replicas: Scaling Reads, Replication Lag, and Failover
+#### Read Replicas: Scaling Reads, Replication Lag, and Failover
 
-## Read Replicas: Scaling Reads, Replication Lag, and Failover
+#### Read Replicas: Scaling Reads, Replication Lag, and Failover
 
-## Read Replicas: Scaling Reads, Replication Lag, and Failover
+#### Read Replicas: Scaling Reads, Replication Lag, and Failover
 
-## Read Replicas: Scaling Reads, Replication Lag, and Failover
+#### Read Replicas: Scaling Reads, Replication Lag, and Failover
 
-## Read Replicas: Scaling Reads, Replication Lag, and Failover
+#### Read Replicas: Scaling Reads, Replication Lag, and Failover
 
-## Read Replicas: Scaling Reads, Replication Lag, and Failover
+#### Read Replicas: Scaling Reads, Replication Lag, and Failover
 
-## Read Replicas: Scaling Reads, Replication Lag, and Failover
+#### Read Replicas: Scaling Reads, Replication Lag, and Failover
 
-## Read Replicas: Scaling Reads, Replication Lag, and Failover
+#### Read Replicas: Scaling Reads, Replication Lag, and Failover
 
-## Read Replicas: Scaling Reads, Replication Lag, and Failover
+#### Read Replicas: Scaling Reads, Replication Lag, and Failover
 
-## Read Replicas: Scaling Reads, Replication Lag, and Failover
+#### Read Replicas: Scaling Reads, Replication Lag, and Failover
+
+#### Read Replicas: Scaling Reads, Replication Lag, and Failover
+
+#### Read Replicas: Scaling Reads, Replication Lag, and Failover
+
+#### Read Replicas: Scaling Reads, Replication Lag, and Failover
 
 Read Replicas: Scaling Reads, Replication Lag, and Failover 
 
@@ -44,7 +50,7 @@ PostgreSQL Streaming Replication Setup
 
 On the primary: 
 
-## postgresql.conf
+#### postgresql.conf
 
 wal_level = replica
 
@@ -70,7 +76,7 @@ Create a `standby.signal` file and start PostgreSQL. The replica streams continu
 
 MySQL Replica Setup 
 
-## my.cnf on primary
+#### my.cnf on primary
 
 server_id = 1
 
@@ -150,7 +156,7 @@ conn.commit()
 
 A **proxy layer** like PgBouncer, ProxySQL, or HAProxy handles routing transparently: 
 
-## ProxySQL query rules
+#### ProxySQL query rules
 
 mysql_query_rules:
 
@@ -213,7 +219,7 @@ Applications that route reads of recently written data back to the primary avoid
 
 def get_order(order_id):
 
-## Orders updated within the last 30 seconds route to primary
+#### Orders updated within the last 30 seconds route to primary
 
 order = router.execute_read(
 
@@ -225,7 +231,7 @@ if order and (datetime.utcnow() - order[0]) < timedelta(seconds=30):
 
 conn = router.get_connection(read_only=False)
 
-## Query primary
+#### Query primary
 
 else:
 
@@ -237,13 +243,13 @@ When the primary fails, one replica must become the new primary:
 
 PostgreSQL 
 
-## Promote a replica to primary
+#### Promote a replica to primary
 
 pg_ctl promote -D /var/lib/postgresql/data
 
 Or via `pg_rewind` for a clean re-sync: 
 
-## After promotion, rewind old primary to follow new primary
+#### After promotion, rewind old primary to follow new primary
 
 pg_rewind --target-pgdata=/var/lib/postgresql/data \
 
@@ -253,7 +259,7 @@ Managed Failover
 
 Tools like Patroni automate failover: 
 
-## patroni.yml
+#### patroni.yml
 
 scope: myapp
 
@@ -293,6 +299,12 @@ Best Practices
 Read replicas are a proven, low-risk approach to scaling reads. Combined with proper monitoring and automated failover, they form the foundation of a highly available database architecture.
 
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Scalability](</en/database/database-scalability.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>).
+
+**See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
 
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
 

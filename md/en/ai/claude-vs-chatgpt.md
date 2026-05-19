@@ -1,7 +1,7 @@
 ---
 title: "Claude vs ChatGPT (2026): Which AI Assistant Is Right for You?"
 description: "An honest head-to-head comparison of Claude and ChatGPT for coding, writing, analysis, and multimodal tasks. Pick the right tool for every job."
-date: 2026-05-08
+date: 2025-11-05
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/claude-vs-chatgpt.html
 ---

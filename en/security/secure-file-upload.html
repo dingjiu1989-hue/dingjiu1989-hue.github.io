@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.png",
       "datePublished": "2025-12-19",
       "dateModified": "2026-04-19",
-      "wordCount": "2390",
+      "wordCount": "2446",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/secure-file-upload.html"},
@@ -98,19 +100,21 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.png" alt="Secure File Upload Implementation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Secure File Upload Implementation</h2>
 <h3>Secure File Upload Implementation</h3>
-<h3>Secure File Upload Implementation</h3>
-<h3>Secure File Upload Implementation</h3>
-<h3>Secure File Upload Implementation</h3>
-<h3>Secure File Upload Implementation</h3>
-<h3>Secure File Upload Implementation</h3>
-<h3>Secure File Upload Implementation</h3>
-<h3>Secure File Upload Implementation</h3>
-<h3>Secure File Upload Implementation</h3>
-<h3>Secure File Upload Implementation</h3>
-<h3>Secure File Upload Implementation</h3>
-<h3>Secure File Upload Implementation</h3>
-<h3>Secure File Upload Implementation</h3>
-<h3>Secure File Upload Implementation</h3>
+<h4>Secure File Upload Implementation</h4>
+<h4>Secure File Upload Implementation</h4>
+<h4>Secure File Upload Implementation</h4>
+<h4>Secure File Upload Implementation</h4>
+<h4>Secure File Upload Implementation</h4>
+<h4>Secure File Upload Implementation</h4>
+<h4>Secure File Upload Implementation</h4>
+<h4>Secure File Upload Implementation</h4>
+<h4>Secure File Upload Implementation</h4>
+<h4>Secure File Upload Implementation</h4>
+<h4>Secure File Upload Implementation</h4>
+<h4>Secure File Upload Implementation</h4>
+<h4>Secure File Upload Implementation</h4>
+<h4>Secure File Upload Implementation</h4>
+<h4>Secure File Upload Implementation</h4>
 <p>The Risk of File Uploads </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.png" alt="Secure File Upload Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>File upload functionality is one of the most dangerous features an application can expose. An unrestricted file upload can lead to remote code execution, malware distribution, data breaches, and server compromise. Every file upload endpoint must be treated as a critical attack surface. </p>
 <p>Threat Model </p>
@@ -119,11 +123,11 @@
 <p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Extension </p>
 <p>Allowlist-based validation is essential. Blocklisting (e.g., rejecting <code>.exe</code> files) will always miss edge cases. </p>
 <p>ALLOWED_EXTENSIONS = {</p>
-<h3>Images</h3>
+<h4>Images</h4>
 <p>'.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg',</p>
-<h3>Documents</h3>
+<h4>Documents</h4>
 <p>'.pdf', '.doc', '.docx', '.xls', '.xlsx',</p>
-<h3>Other</h3>
+<h4>Other</h4>
 <p>'.txt', '.csv'</p>
 <p>}</p>
 <p>def validate_extension(filename):</p>
@@ -167,7 +171,7 @@
 <p>def sanitize_image(file_bytes):</p>
 <p>"""Re-encode image to strip metadata and break embedded payloads."""</p>
 <p>img = Image.open(io.BytesIO(file_bytes))</p>
-<h3>Convert to ensure clean output</h3>
+<h4>Convert to ensure clean output</h4>
 <p>img = img.convert('RGB')</p>
 <p>output = io.BytesIO()</p>
 <p>img.save(output, format='PNG')</p>
@@ -175,9 +179,9 @@
 <p>Secure Storage </p>
 <p>Never Store in Webroot </p>
 <p>Storing uploaded files inside the web server's document root is dangerous. If the filename or path is guessable, files can be accessed directly. </p>
-<h3>UNSAFE: Stored in webroot</h3>
+<h4>UNSAFE: Stored in webroot</h4>
 <p>upload_dir = '/var/www/html/uploads/'</p>
-<h3>SAFE: Outside webroot</h3>
+<h4>SAFE: Outside webroot</h4>
 <p>upload_dir = '/data/uploads/' # Served through app logic</p>
 <p>Generate Safe Filenames </p>
 <p>Never use user-provided filenames. Generate random filenames: </p>
@@ -221,14 +225,14 @@
 <p>| Level | Limit | Mitigation | |-------|-------|------------| | Per file | 10 MB | Reject on client and server | | Per user | 500 MB | Track in database, reject when exceeded | | Per day (total) | 5 GB | Aggregate monitoring, rate limit | | Disk usage | 80% capacity | Alert, stop accepting uploads | </p>
 <p>Server Configuration </p>
 <p>Prevent uploaded files from being executed by the web server: </p>
-<h3>Nginx configuration</h3>
+<h4>Nginx configuration</h4>
 <p>location /uploads/ {</p>
-<h3>Only serve specific file types</h3>
+<h4>Only serve specific file types</h4>
 <p>location ~* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(jpg|jpeg|png|gif|pdf)$ {</p>
 <p>add_header Content-Disposition 'attachment';</p>
 <p>expires 30d;</p>
 <p>}</p>
-<h3>Deny everything else</h3>
+<h4>Deny everything else</h4>
 <p>location ~* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. {</p>
 <p>deny all;</p>
 <p>return 404;</p>
@@ -237,6 +241,8 @@
 <p>Summary </p>
 <p>Secure file upload requires defense in depth. Validate extensions and MIME types server-side, sanitize images by re-encoding them, generate random filenames, store files outside the webroot or in object storage, enforce strict size limits at multiple layers, and scan for malware. Never trust client-provided metadata, and process uploaded files with minimal privileges in isolated environments.</p>
 <p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a></p></div>
     </article>

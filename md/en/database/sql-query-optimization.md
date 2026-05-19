@@ -1,7 +1,7 @@
 ---
 title: "SQL Query Optimization"
 description: "Master SQL query optimization with EXPLAIN plans, indexing strategies, JOIN optimization, and common performance anti-patterns."
-date: 2026-05-11
+date: 2025-12-24
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/sql-query-optimization.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/sql-query-optimization.html
 
 ## SQL Query Optimization
 
-## SQL Query Optimization
+### SQL Query Optimization
 
-## SQL Query Optimization
+#### SQL Query Optimization
 
-## SQL Query Optimization
+#### SQL Query Optimization
 
-## SQL Query Optimization
+#### SQL Query Optimization
 
-## SQL Query Optimization
+#### SQL Query Optimization
 
-## SQL Query Optimization
+#### SQL Query Optimization
 
-## SQL Query Optimization
+#### SQL Query Optimization
 
-## SQL Query Optimization
+#### SQL Query Optimization
 
-## SQL Query Optimization
+#### SQL Query Optimization
 
-## SQL Query Optimization
+#### SQL Query Optimization
 
-## SQL Query Optimization
+#### SQL Query Optimization
+
+#### SQL Query Optimization
+
+#### SQL Query Optimization
+
+#### SQL Query Optimization
 
 Why Query Optimization Matters 
 
@@ -265,6 +271,12 @@ Summary
 SQL query optimization starts with understanding the query plan through EXPLAIN ANALYZE. Ensure appropriate indexes exist for your query patterns, prefer covering indexes for index-only scans, avoid functions on indexed columns, replace OFFSET pagination with keyset pagination, and rewrite correlated subqueries as joins or lateral joins. Measure before and after each optimization to confirm the improvement.
 
 **See also:** [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>), [Database Indexing Strategies](</en/database/database-indexing.html>).
+
+**See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
+
+**See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
+
+**See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
 
 **See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
 

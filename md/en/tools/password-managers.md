@@ -1,7 +1,7 @@
 ---
 title: "Best Password Managers for Developers"
 description: "Compare the best password managers with developer-specific features like CLI access, SSH key management, and API integration."
-date: 2026-05-15
+date: 2026-05-13
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/password-managers.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/tools/password-managers.html
 
 ## Best Password Managers for Developers
 
-## Best Password Managers for Developers
+### Best Password Managers for Developers
 
-## Best Password Managers for Developers
+#### Best Password Managers for Developers
 
-## Best Password Managers for Developers
+#### Best Password Managers for Developers
 
-## Best Password Managers for Developers
+#### Best Password Managers for Developers
 
-## Best Password Managers for Developers
+#### Best Password Managers for Developers
 
-## Best Password Managers for Developers
+#### Best Password Managers for Developers
 
-## Best Password Managers for Developers
+#### Best Password Managers for Developers
 
-## Best Password Managers for Developers
+#### Best Password Managers for Developers
 
-## Best Password Managers for Developers
+#### Best Password Managers for Developers
 
-## Best Password Managers for Developers
+#### Best Password Managers for Developers
 
-## Best Password Managers for Developers
+#### Best Password Managers for Developers
 
-## Best Password Managers for Developers
+#### Best Password Managers for Developers
+
+#### Best Password Managers for Developers
+
+#### Best Password Managers for Developers
+
+#### Best Password Managers for Developers
 
 Password managers are essential security tools, but developers have additional requirements beyond basic credential storage: CLI access for terminal workflows, SSH key management, TOTP generation, and team sharing. This guide evaluates password managers from a developer perspective.
 
-### Developer Requirements
+#### Developer Requirements
 
 A developer-friendly password manager should offer:
 
@@ -57,7 +63,7 @@ A developer-friendly password manager should offer:
 
 
 
-### 1Password
+#### 1Password
 
 1Password is the most popular password manager among developers. It offers a robust CLI and excellent developer experience.
 
@@ -80,21 +86,21 @@ A developer-friendly password manager should offer:
 
 
 
-## 1Password CLI examples
+#### 1Password CLI examples
 
-## Sign in
+#### Sign in
 
 op account add --address my.1password.com --email user@example.com
 
-## Get a password
+#### Get a password
 
 op read "op://Personal/GitHub/password"
 
-## Get an API token for automation
+#### Get an API token for automation
 
 op item get "GitHub" --fields "token" --reveal
 
-## Use in scripts securely
+#### Use in scripts securely
 
 API_TOKEN=$(op read "op://Development/API/token")
 
@@ -102,11 +108,11 @@ curl -H "Authorization: Bearer $API_TOKEN" https://api.example.com/data
 
 **SSH Agent Integration:**
 
-## Use 1Password as your SSH agent
+#### Use 1Password as your SSH agent
 
 export SSH_AUTH_SOCK=~/.1password/agent.sock
 
-## Load SSH keys from 1Password
+#### Load SSH keys from 1Password
 
 ssh-add -l
 
@@ -114,7 +120,7 @@ ssh-add -l
 
 **Cons** : Paid subscription ($35/year), no free tier for teams.
 
-### Bitwarden
+#### Bitwarden
 
 Bitwarden is the leading open-source password manager. It offers a self-hosted option and strong CLI tools.
 
@@ -133,27 +139,27 @@ Bitwarden is the leading open-source password manager. It offers a self-hosted o
 
 
 
-## Bitwarden CLI examples
+#### Bitwarden CLI examples
 
-## Login
+#### Login
 
 bw login user@example.com
 
-## Get a password
+#### Get a password
 
 bw get password github.com
 
-## List items
+#### List items
 
 bw list items --search "github"
 
-## Export vault
+#### Export vault
 
 bw export --format json --output vault-backup.json
 
 **Self-Hosted Deployment:**
 
-## Docker Compose for Vaultwarden
+#### Docker Compose for Vaultwarden
 
 services:
 
@@ -181,27 +187,27 @@ vw-data:
 
 **Cons** : UI less polished, no built-in SSH agent, CLI can be slow.
 
-### pass (Standard Unix Password Manager)
+#### pass (Standard Unix Password Manager)
 
 `pass` is the standard Unix password manager, using GPG encryption and a Git repository for storage. It is minimal, scriptable, and follows the Unix philosophy.
 
-## Initialize password store
+#### Initialize password store
 
 pass init "your-gpg-key-id"
 
-## Add a password
+#### Add a password
 
 pass insert github.com/personal
 
-## Generate a random password
+#### Generate a random password
 
 pass generate github.com/personal 32
 
-## Get a password (with clipboard)
+#### Get a password (with clipboard)
 
 pass -c github.com/personal
 
-## Git integration
+#### Git integration
 
 pass git push origin master
 
@@ -231,29 +237,29 @@ web01.gpg
 
 **Cons** : GPG dependency, no GUI, no team sharing, no TOTP built-in.
 
-### gopass
+#### gopass
 
 gopass is a modern rewrite of pass with additional features. It supports teams, YAML-based secrets, and multiple backends.
 
-## Initialize
+#### Initialize
 
 gopass setup
 
-## Create a secret with multiple fields
+#### Create a secret with multiple fields
 
 gopass insert --echo webserver/login
 
-## username: admin
+#### username: admin
 
-## password: secret123
+#### password: secret123
 
-## url: https://internal.example.com
+#### url: https://internal.example.com
 
-## Mount different storage backends
+#### Mount different storage backends
 
 gopass mounts mount work git@github.com:company/secrets.git
 
-## Sync all mounts
+#### Sync all mounts
 
 gopass sync
 
@@ -261,11 +267,11 @@ gopass sync
 
 **Cons** : More complex than pass, GPG still required.
 
-### Browser-Based Options
+#### Browser-Based Options
 
 **Dashlane** and **Keeper** focus on consumer and enterprise respectively, with limited developer-specific features. They lack CLI support and SSH integration.
 
-### Security Considerations
+#### Security Considerations
 
 | Feature | 1Password | Bitwarden | pass | gopass |
 
@@ -281,11 +287,11 @@ gopass sync
 
 | Open source | No (proprietary) | Yes | Yes | Yes |
 
-### CI/CD Integration
+#### CI/CD Integration
 
 For DevOps workflows, password managers can supply secrets to CI/CD pipelines:
 
-## GitHub Actions with 1Password
+#### GitHub Actions with 1Password
 
 jobs:
 
@@ -309,13 +315,13 @@ DB_PASSWORD: op://Production/Database/password
 
 Bitwarden equivalent via API:
 
-## Get session token
+#### Get session token
 
 BW_SESSION=$(bw login --apikey < api_key.txt)
 
 bw get password "Production/Database" --session $BW_SESSION
 
-### Recommendations
+#### Recommendations
 
   * **Solo developers** : pass or gopass for Unix-native simplicity with Git backup.
 
@@ -330,11 +336,17 @@ bw get password "Production/Database" --session $BW_SESSION
 
 
 
-### Summary
+#### Summary
 
 Password managers are a critical part of developer security hygiene. 1Password offers the best overall developer experience with its CLI, SSH agent, and CI/CD integration. Bitwarden provides a strong open-source alternative with self-hosting capability. pass and gopass appeal to Unix purists who want maximum scriptability and Git-native workflows. Choose based on whether you prioritize polish (1Password), openness (Bitwarden), or minimalism (pass).
 
 **See also:** [Developer Collaboration Tools: Slack vs Discord vs Linear](</en/tools/collaboration-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Best Code Snippet Managers 2026: Raycast Snippets vs Pieces vs massCode vs Espanso](</en/tools/best-code-snippet-tools.html>).
+
+**See also:** [Developer Collaboration Tools: Slack vs Discord vs Linear](</en/tools/collaboration-tools.html>), [Best Code Snippet Managers 2026: Raycast Snippets vs Pieces vs massCode vs Espanso](</en/tools/best-code-snippet-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>)
+
+**See also:** [Developer Collaboration Tools: Slack vs Discord vs Linear](</en/tools/collaboration-tools.html>), [Best Code Snippet Managers 2026: Raycast Snippets vs Pieces vs massCode vs Espanso](</en/tools/best-code-snippet-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>)
+
+**See also:** [Developer Collaboration Tools: Slack vs Discord vs Linear](</en/tools/collaboration-tools.html>), [Best Code Snippet Managers 2026: Raycast Snippets vs Pieces vs massCode vs Espanso](</en/tools/best-code-snippet-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>)
 
 **See also:** [Developer Collaboration Tools: Slack vs Discord vs Linear](</en/tools/collaboration-tools.html>), [Best Code Snippet Managers 2026: Raycast Snippets vs Pieces vs massCode vs Espanso](</en/tools/best-code-snippet-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>)
 

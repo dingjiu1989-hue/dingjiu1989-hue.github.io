@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/metrics-types.png",
       "datePublished": "2026-04-27",
       "dateModified": "2026-04-30",
-      "wordCount": "1121",
+      "wordCount": "1190",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/metrics-types.html"},
@@ -96,17 +98,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/metrics-types.png" alt="Metrics Types and Monitoring Methodologies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Metrics Types and Monitoring Methodologies</h2>
 <h3>Metrics Types and Monitoring Methodologies</h3>
-<h3>Metrics Types and Monitoring Methodologies</h3>
-<h3>Metrics Types and Monitoring Methodologies</h3>
-<h3>Metrics Types and Monitoring Methodologies</h3>
-<h3>Metrics Types and Monitoring Methodologies</h3>
-<h3>Metrics Types and Monitoring Methodologies</h3>
-<h3>Metrics Types and Monitoring Methodologies</h3>
-<h3>Metrics Types and Monitoring Methodologies</h3>
-<h3>Metrics Types and Monitoring Methodologies</h3>
-<h3>Metrics Types and Monitoring Methodologies</h3>
-<h3>Metrics Types and Monitoring Methodologies</h3>
-<h3>Metrics Types and Monitoring Methodologies</h3>
+<h4>Metrics Types and Monitoring Methodologies</h4>
+<h4>Metrics Types and Monitoring Methodologies</h4>
+<h4>Metrics Types and Monitoring Methodologies</h4>
+<h4>Metrics Types and Monitoring Methodologies</h4>
+<h4>Metrics Types and Monitoring Methodologies</h4>
+<h4>Metrics Types and Monitoring Methodologies</h4>
+<h4>Metrics Types and Monitoring Methodologies</h4>
+<h4>Metrics Types and Monitoring Methodologies</h4>
+<h4>Metrics Types and Monitoring Methodologies</h4>
+<h4>Metrics Types and Monitoring Methodologies</h4>
+<h4>Metrics Types and Monitoring Methodologies</h4>
+<h4>Metrics Types and Monitoring Methodologies</h4>
+<h4>Metrics Types and Monitoring Methodologies</h4>
 <p>Metrics provide the quantitative foundation for understanding system health, detecting anomalies, and driving alerts. The four primary metric types — counters, gauges, histograms, and summaries — each serve distinct purposes. Combined with monitoring methodologies like RED, USE, and the Four Golden Signals, they form a complete picture of system behavior and are essential for effective operations. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/metrics-types.png" alt="Metrics Types and Monitoring Methodologies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Counters are monotonically increasing values that only go up (or reset to zero on restart). They measure cumulative events: total requests served, total errors, total bytes sent. Counters are useful for computing rates over time — requests per second, error rate — which are the most common observability signals. A counter alone is rarely useful; it is the rate of change that matters. Rate computation requires tracking the counter value over a time window and dividing the delta by the window duration. </p>
 <p>Gauges represent a single numeric value that can go up or down arbitrarily. They measure current state: memory usage, CPU utilization, queue depth, active connections, number of goroutines. Gauges are instantaneous snapshots and should be sampled frequently enough to capture meaningful variation. Unlike counters, gauges are useful as absolute values — a memory gauge at 95% of available memory is actionable on its own. </p>
@@ -118,6 +122,8 @@
 <p>Metric naming conventions maintain consistency across services. A hierarchical naming scheme is typical: service_name.metric_name.operation.result. For example: orders_service.request_count.create_order.total, orders_service.latency_seconds.create_order.p99. Units should be embedded in the name (seconds, bytes, count). Labels or tags add cardinality dimensions: status code, endpoint, version. Label cardinality must be bounded to prevent metrics system overload. </p>
 <p>Metric retention and aggregation tiers optimize storage. Raw high-resolution metrics (10-second intervals) are retained for short periods (7-30 days). Rolled-up aggregates (5-minute, 1-hour, 1-day resolutions) extend retention to years. Long-term trends use high-level aggregates; incident investigation uses raw metrics. The metrics system (Prometheus, VictoriaMetrics, M3) should transparently handle this downsampling.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/observability-three-pillars.html">Observability: Logs, Metrics, and Traces</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/observability-three-pillars.html">Observability: Logs, Metrics, and Traces</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/observability-three-pillars.html">Observability: Logs, Metrics, and Traces</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/observability-three-pillars.html">Observability: Logs, Metrics, and Traces</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/observability-three-pillars.html">Observability: Logs, Metrics, and Traces</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/observability-three-pillars.html">Observability: Logs, Metrics, and Traces</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p></div>
     </article>

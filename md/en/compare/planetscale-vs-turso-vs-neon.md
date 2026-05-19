@@ -1,7 +1,7 @@
 ---
 title: "PlanetScale vs Turso vs Neon (2026): Best Serverless Database?"
 description: "MySQL vs SQLite vs PostgreSQL — the serverless database showdown. Compare branching, edge support, free tiers, and developer workflows for modern applications."
-date: 2026-05-08
+date: 2025-11-21
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/planetscale-vs-turso-vs-neon.html
 ---

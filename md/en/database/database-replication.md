@@ -1,7 +1,7 @@
 ---
 title: "Database Replication Patterns"
 description: "Explore database replication patterns including leader-follower, multi-leader, peer-to-peer, and strategies for high availability and read scaling."
-date: 2026-05-11
+date: 2025-12-23
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/database-replication.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/database-replication.html
 
 ## Database Replication Patterns
 
-## Database Replication Patterns
+### Database Replication Patterns
 
-## Database Replication Patterns
+#### Database Replication Patterns
 
-## Database Replication Patterns
+#### Database Replication Patterns
 
-## Database Replication Patterns
+#### Database Replication Patterns
 
-## Database Replication Patterns
+#### Database Replication Patterns
 
-## Database Replication Patterns
+#### Database Replication Patterns
 
-## Database Replication Patterns
+#### Database Replication Patterns
 
-## Database Replication Patterns
+#### Database Replication Patterns
 
-## Database Replication Patterns
+#### Database Replication Patterns
 
-## Database Replication Patterns
+#### Database Replication Patterns
 
-## Database Replication Patterns
+#### Database Replication Patterns
+
+#### Database Replication Patterns
+
+#### Database Replication Patterns
+
+#### Database Replication Patterns
 
 Replication Fundamentals 
 
@@ -99,6 +105,12 @@ Conclusion
 Choose synchronous for zero data loss, asynchronous for performance. Monitor replication lag closely. Test failover procedures regularly.
 
 **See also:** [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>).
+
+**See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
+
+**See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
+
+**See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
 
 **See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
 

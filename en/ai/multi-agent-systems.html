@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-agent-systems.png",
       "datePublished": "2026-02-17",
       "dateModified": "2026-04-17",
-      "wordCount": "1650",
+      "wordCount": "1750",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/multi-agent-systems.html"},
@@ -99,18 +101,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-agent-systems.png" alt="Multi-Agent Systems: Coordination, Communication, Consensus" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Multi-Agent Systems: Coordination, Communication, Consensus</h2>
 <h3>Multi-Agent Systems: Coordination, Communication, Consensus</h3>
-<h3>Multi-Agent Systems: Coordination, Communication, Consensus</h3>
-<h3>Multi-Agent Systems: Coordination, Communication, Consensus</h3>
-<h3>Multi-Agent Systems: Coordination, Communication, Consensus</h3>
-<h3>Multi-Agent Systems: Coordination, Communication, Consensus</h3>
-<h3>Multi-Agent Systems: Coordination, Communication, Consensus</h3>
-<h3>Multi-Agent Systems: Coordination, Communication, Consensus</h3>
-<h3>Multi-Agent Systems: Coordination, Communication, Consensus</h3>
-<h3>Multi-Agent Systems: Coordination, Communication, Consensus</h3>
-<h3>Multi-Agent Systems: Coordination, Communication, Consensus</h3>
-<h3>Multi-Agent Systems: Coordination, Communication, Consensus</h3>
-<h3>Multi-Agent Systems: Coordination, Communication, Consensus</h3>
-<h3>Multi-Agent Systems: Coordination, Communication, Consensus</h3>
+<h4>Multi-Agent Systems: Coordination, Communication, Consensus</h4>
+<h4>Multi-Agent Systems: Coordination, Communication, Consensus</h4>
+<h4>Multi-Agent Systems: Coordination, Communication, Consensus</h4>
+<h4>Multi-Agent Systems: Coordination, Communication, Consensus</h4>
+<h4>Multi-Agent Systems: Coordination, Communication, Consensus</h4>
+<h4>Multi-Agent Systems: Coordination, Communication, Consensus</h4>
+<h4>Multi-Agent Systems: Coordination, Communication, Consensus</h4>
+<h4>Multi-Agent Systems: Coordination, Communication, Consensus</h4>
+<h4>Multi-Agent Systems: Coordination, Communication, Consensus</h4>
+<h4>Multi-Agent Systems: Coordination, Communication, Consensus</h4>
+<h4>Multi-Agent Systems: Coordination, Communication, Consensus</h4>
+<h4>Multi-Agent Systems: Coordination, Communication, Consensus</h4>
+<h4>Multi-Agent Systems: Coordination, Communication, Consensus</h4>
+<h4>Multi-Agent Systems: Coordination, Communication, Consensus</h4>
 <h4>Introduction</h4>
 <p>A single LLM agent has limitations: finite context windows, single perspective bias, and vulnerability to cascading errors. Multi-agent systems address these by distributing work across specialized agents that communicate, coordinate, and reach consensus. This article covers the architectural patterns for building effective multi-agent systems.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-agent-systems.png" alt="Multi-Agent Systems: Coordination, Communication, Consensus" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Agent Roles and Specialization</h4>
@@ -132,7 +136,7 @@
 <p>response = self.llm(messages, tools=self.spec.tools)</p>
 <p>self.message_history.append({"role": "assistant", "content": response})</p>
 <p>return response</p>
-<h3>Define specialized agents</h3>
+<h4>Define specialized agents</h4>
 <p>researcher = Agent(AgentSpec(</p>
 <p>name="Researcher",</p>
 <p>role="Information retrieval and fact-checking",</p>
@@ -224,9 +228,9 @@
 <p>async def debate(self, problem: str) -&gt; str:</p>
 <p>positions = {a.spec.name: await a.process(problem) for a in self.agents}</p>
 <p>for round_num in range(self.rounds):</p>
-<h3>Share positions</h3>
+<h4>Share positions</h4>
 <p>summary = "\n".join(f"{name}: {pos}" for name, pos in positions.items())</p>
-<h3>Each agent critiques and refines</h3>
+<h4>Each agent critiques and refines</h4>
 <p>new_positions = {}</p>
 <p>for agent in self.agents:</p>
 <p>critique = await agent.process(</p>
@@ -235,7 +239,7 @@
 <p>)</p>
 <p>new_positions[agent.spec.name] = critique</p>
 <p>positions = new_positions</p>
-<h3>Final consensus</h3>
+<h4>Final consensus</h4>
 <p>consensus_agent = self.agents[0]</p>
 <p>summary = "\n".join(f"{name}: {pos}" for name, pos in positions.items())</p>
 <p>consensus = await consensus_agent.process(</p>
@@ -250,18 +254,18 @@
 <p>self.workers = workers</p>
 <p>self.bus = bus</p>
 <p>async def run(self, task: str) -&gt; str:</p>
-<h3>Manager creates a plan</h3>
+<h4>Manager creates a plan</h4>
 <p>plan = await self.manager.process(f"Decompose this task into sub-tasks and assign to workers: {task}")</p>
 <p>sub_tasks = self._parse_plan(plan)</p>
-<h3>Distribute to workers</h3>
+<h4>Distribute to workers</h4>
 <p>worker_futures = []</p>
 <p>for sub_task in sub_tasks:</p>
 <p>worker = self._select_worker(sub_task)</p>
 <p>future = worker.process(sub_task["description"])</p>
 <p>worker_futures.append(future)</p>
-<h3>Collect results</h3>
+<h4>Collect results</h4>
 <p>results = await asyncio.gather(*worker_futures)</p>
-<h3>Manager synthesizes final output</h3>
+<h4>Manager synthesizes final output</h4>
 <p>results_text = "\n".join(f"{st['id']}: {r}" for st, r in zip(sub_tasks, results))</p>
 <p>final = await self.manager.process(</p>
 <p>f"Synthesize these results into a coherent output:\n{results_text}",</p>
@@ -288,6 +292,8 @@
 <h4>Conclusion</h4>
 <p>Multi-agent systems distribute intelligence across specialized agents. Sequential handoff is suitable for linear pipelines. Debate and consensus produces higher-quality answers by challenging assumptions. Manager-worker scales to complex tasks by decomposing and delegating. Choose your coordination pattern based on the task: sequential for well-defined steps, debate for decisions requiring multiple perspectives, and manager-worker for complex projects with parallelizable sub-tasks.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p></div>
     </article>

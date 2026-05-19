@@ -1,7 +1,7 @@
 ---
 title: "AI Agents for Developers: A Practical Guide to Building and Using Agents"
 description: "What AI agents actually are, how they work (tools, memory, planning loops), and frameworks to build them — LangChain, CrewAI, and AutoGPT compared."
-date: 2026-05-08
+date: 2025-11-06
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-agents-guide.html
 ---

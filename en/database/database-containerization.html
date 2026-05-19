@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-containerization.png",
       "datePublished": "2026-04-02",
       "dateModified": "2026-04-25",
-      "wordCount": "1550",
+      "wordCount": "1651",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-containerization.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-containerization.png" alt="Databases in Containers: StatefulSets, Persistent Volumes, and Backup" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h2>
 <h3>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h3>
-<h3>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h3>
-<h3>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h3>
-<h3>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h3>
-<h3>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h3>
-<h3>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h3>
-<h3>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h3>
-<h3>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h3>
-<h3>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h3>
-<h3>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h3>
-<h3>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h3>
-<h3>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h3>
+<h4>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h4>
+<h4>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h4>
+<h4>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h4>
+<h4>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h4>
+<h4>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h4>
+<h4>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h4>
+<h4>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h4>
+<h4>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h4>
+<h4>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h4>
+<h4>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h4>
+<h4>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h4>
+<h4>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h4>
+<h4>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h4>
 <p>Databases in Containers: StatefulSets, Persistent Volumes, and Backup </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-containerization.png" alt="Databases in Containers: StatefulSets, Persistent Volumes, and Backup" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Running databases in containers was once considered an anti-pattern, but modern orchestration and storage primitives have made it viable for many production workloads. This article covers Kubernetes patterns for stateful databases, storage management, and operational considerations. </p>
 <p>StatefulSets vs Deployments </p>
@@ -213,13 +217,13 @@
 <p>memory: "8Gi"</p>
 <p>cpu: "4"</p>
 <p>Automated Failover </p>
-<h3>Simulate pod failure to test failover</h3>
+<h4>Simulate pod failure to test failover</h4>
 <p>kubectl delete pod myapp-db-0</p>
-<h3>Operator automatically:</h3>
-<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Detects primary is gone</h3>
-<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Promotes the most advanced replica</h3>
-<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Updates the service to point to new primary</h3>
-<h3>Typical failover time: 15-30 seconds</h3>
+<h4>Operator automatically:</h4>
+<h4>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Detects primary is gone</h4>
+<h4>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Promotes the most advanced replica</h4>
+<h4>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Updates the service to point to new primary</h4>
+<h4>Typical failover time: 15-30 seconds</h4>
 <p>Backup in Containers </p>
 <p>Volume Snapshots </p>
 <p>apiVersion: snapshot.storage.k8s.io/v1</p>
@@ -243,7 +247,7 @@
 <p>Performance Considerations </p>
 <p>Network Overhead </p>
 <p>Container networking adds latency vs bare metal: </p>
-<h3>Use hostNetwork for lowest latency</h3>
+<h4>Use hostNetwork for lowest latency</h4>
 <p>spec:</p>
 <p>template:</p>
 <p>spec:</p>
@@ -259,7 +263,7 @@
 <p>cpu: "8" # PostgreSQL bursts here normally</p>
 <p>memory: "24Gi" # Allocate extra for OS cache (effective_cache_size)</p>
 <p>Tuning for Kubernetes </p>
-<h3>postgresql.conf tuned for container environments</h3>
+<h4>postgresql.conf tuned for container environments</h4>
 <p>shared_buffers = '4GB' # 25% of container memory limit</p>
 <p>effective_cache_size = '12GB' # 75% of container memory limit</p>
 <p>work_mem = '64MB'</p>
@@ -268,7 +272,7 @@
 <p>random_page_cost = 1.1 # SSD in containers</p>
 <p>Anti-Patterns to Avoid </p>
 <p>EmptyDir for Data </p>
-<h3>WRONG: data lost on pod restart</h3>
+<h4>WRONG: data lost on pod restart</h4>
 <p>volumes:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: data</p>
 <p>emptyDir: {}</p>
@@ -276,18 +280,18 @@
 <p>Multiple Writable Replicas </p>
 <p>Without proper clustering (Patroni, Stolon, CNPG), multiple replicas with the same PVC cause data corruption. </p>
 <p>Using Deployments </p>
-<h3>WRONG: Deployments do not guarantee stable identity or storage</h3>
+<h4>WRONG: Deployments do not guarantee stable identity or storage</h4>
 <p>apiVersion: apps/v1</p>
 <p>kind: Deployment</p>
 <p>Always use StatefulSets for databases. </p>
 <p>Monitoring </p>
-<h3>Check pod status</h3>
+<h4>Check pod status</h4>
 <p>kubectl get pods -l app=postgres</p>
-<h3>Check PVC status</h3>
+<h4>Check PVC status</h4>
 <p>kubectl get pvc -l app=postgres</p>
-<h3>Check WAL archiving status</h3>
+<h4>Check WAL archiving status</h4>
 <p>kubectl exec myapp-db-1 -- psql -c "SELECT * FROM pg_stat_archiver;"</p>
-<h3>View operator logs</h3>
+<h4>View operator logs</h4>
 <p>kubectl logs -n postgres-operator deployment/postgres-operator</p>
 <p>When to Containerize </p>
 <p><strong>Containerize your database when</strong> : </p>
@@ -322,6 +326,8 @@
 </ul>
 <p>Databases in containers are production-viable with the right operator, storage class, and backup strategy. For most teams, a managed database service is simpler and more cost-effective. Containerization makes sense when you need portability, GitOps-driven management, and full control over the database configuration.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/materialized-views.html">Materialized Views</a>, <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p></div>
     </article>

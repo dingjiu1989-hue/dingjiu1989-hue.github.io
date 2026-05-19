@@ -1,7 +1,7 @@
 ---
 title: "EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types"
 description: "Master PostgreSQL EXPLAIN ANALYZE: read query plans, understand cost estimation, compare scan types, and analyze join strategies for query optimization."
-date: 2026-05-12
+date: 2026-04-08
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/query-optimization-explain.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/query-optimization-explain.ht
 
 ## EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
 
-## EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
+### EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
 
-## EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
+#### EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
 
-## EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
+#### EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
 
-## EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
+#### EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
 
-## EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
+#### EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
 
-## EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
+#### EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
 
-## EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
+#### EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
 
-## EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
+#### EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
 
-## EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
+#### EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
 
-## EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
+#### EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
 
-## EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
+#### EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
+
+#### EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
+
+#### EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
+
+#### EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types
 
 EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types 
 
@@ -261,6 +267,12 @@ Reading `EXPLAIN ANALYZE` output is the most important skill for query optimizat
 Every query optimization should start and end with `EXPLAIN (ANALYZE, BUFFERS)`. The plan tells you what the database actually did, not what you expected it to do.
 
 **See also:** [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>).
+
+**See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 
 **See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 

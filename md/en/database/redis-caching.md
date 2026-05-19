@@ -1,7 +1,7 @@
 ---
 title: "Redis Caching Patterns"
 description: "Explore Redis caching patterns including cache-aside, write-through, lazy loading, distributed locking, session storage, and rate limiting."
-date: 2026-05-11
+date: 2025-12-24
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/redis-caching.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/redis-caching.html
 
 ## Redis Caching Patterns
 
-## Redis Caching Patterns
+### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
 
-## Redis Caching Patterns
+#### Redis Caching Patterns
+
+#### Redis Caching Patterns
+
+#### Redis Caching Patterns
+
+#### Redis Caching Patterns
 
 Redis as a Cache 
 
@@ -56,7 +62,7 @@ def get_user(user_id):
 
 cache_key = f"user:{user_id}"
 
-## Try cache first
+#### Try cache first
 
 cached = r.get(cache_key)
 
@@ -64,13 +70,13 @@ if cached:
 
 return json.loads(cached)
 
-## Cache miss: load from database
+#### Cache miss: load from database
 
 user = db.query("SELECT * FROM users WHERE id = %s", [user_id])
 
 if user:
 
-## Populate cache with TTL
+#### Populate cache with TTL
 
 r.setex(cache_key, 3600, json.dumps(user))
 
@@ -86,11 +92,11 @@ def update_user(user_id, data):
 
 cache_key = f"user:{user_id}"
 
-## Write to cache first
+#### Write to cache first
 
 r.setex(cache_key, 3600, json.dumps(data))
 
-## Then write to database
+#### Then write to database
 
 db.execute(
 
@@ -110,11 +116,11 @@ def write_behind(user_id, data):
 
 cache_key = f"user:{user_id}"
 
-## Write to cache immediately
+#### Write to cache immediately
 
 r.setex(cache_key, 3600, json.dumps(data))
 
-## Queue database write for batch processing
+#### Queue database write for batch processing
 
 r.lpush("db:write:queue", json.dumps({
 
@@ -156,7 +162,7 @@ return None
 
 def release_lock(lock_name, identifier):
 
-## Use Lua script for atomic release
+#### Use Lua script for atomic release
 
 script = """
 
@@ -182,17 +188,17 @@ key = f"ratelimit:{user_id}"
 
 now = time.time()
 
-## Remove old entries
+#### Remove old entries
 
 r.zremrangebyscore(key, 0, now - window_seconds)
 
-## Count current requests
+#### Count current requests
 
 if r.zcard(key) >= max_requests:
 
 return True
 
-## Add current request
+#### Add current request
 
 r.zadd(key, {now: now})
 
@@ -202,7 +208,7 @@ return False
 
 Session Storage 
 
-## Store session with hash
+#### Store session with hash
 
 def create_session(session_id, user_data, ttl=86400):
 
@@ -242,7 +248,7 @@ Connection Pooling
 
 from redis.connection import ConnectionPool
 
-## Reuse connections across requests
+#### Reuse connections across requests
 
 pool = ConnectionPool(
 
@@ -260,7 +266,7 @@ r = redis.Redis(connection_pool=pool)
 
 Pipeline / Batching 
 
-## Batch operations to reduce round trips
+#### Batch operations to reduce round trips
 
 pipe = r.pipeline()
 
@@ -272,19 +278,19 @@ results = pipe.execute()
 
 Monitoring 
 
-## Redis CLI monitoring
+#### Redis CLI monitoring
 
 redis-cli info stats
 
-## Key metrics to watch
+#### Key metrics to watch
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- hit_rate: keyspace_hits / (keyspace_hits + keyspace_misses)
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- hit_rate: keyspace_hits / (keyspace_hits + keyspace_misses)
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- evicted_keys: keys evicted due to maxmemory
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- evicted_keys: keys evicted due to maxmemory
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- maxmemory: configured memory limit
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- maxmemory: configured memory limit
 
-## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- connected_clients: active connections
+#### \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- connected_clients: active connections
 
 Common Pitfalls 
 
@@ -295,6 +301,12 @@ Summary
 Redis caching can dramatically improve application performance when the right pattern is applied. Use cache-aside as the default pattern with appropriate TTLs, implement write-through for consistency-critical data, use distributed locking for race conditions, and sorted sets for rate limiting. Monitor hit rates and eviction counts, and always set TTLs to prevent memory exhaustion.
 
 **See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Replication Patterns](</en/database/database-replication.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>).
+
+**See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Replication Patterns](</en/database/database-replication.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)
+
+**See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Replication Patterns](</en/database/database-replication.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)
+
+**See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Replication Patterns](</en/database/database-replication.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)
 
 **See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Replication Patterns](</en/database/database-replication.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)
 

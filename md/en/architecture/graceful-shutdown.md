@@ -1,7 +1,7 @@
 ---
 title: "Graceful Shutdown Patterns"
 description: "Signal handling, connection draining, processing in-flight requests, and best practices for graceful service shutdown"
-date: 2026-05-12
+date: 2026-04-25
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/graceful-shutdown.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/graceful-shutdown.html
 
 ## Graceful Shutdown Patterns
 
-## Graceful Shutdown Patterns
+### Graceful Shutdown Patterns
 
-## Graceful Shutdown Patterns
+#### Graceful Shutdown Patterns
 
-## Graceful Shutdown Patterns
+#### Graceful Shutdown Patterns
 
-## Graceful Shutdown Patterns
+#### Graceful Shutdown Patterns
 
-## Graceful Shutdown Patterns
+#### Graceful Shutdown Patterns
 
-## Graceful Shutdown Patterns
+#### Graceful Shutdown Patterns
 
-## Graceful Shutdown Patterns
+#### Graceful Shutdown Patterns
 
-## Graceful Shutdown Patterns
+#### Graceful Shutdown Patterns
 
-## Graceful Shutdown Patterns
+#### Graceful Shutdown Patterns
 
-## Graceful Shutdown Patterns
+#### Graceful Shutdown Patterns
 
-## Graceful Shutdown Patterns
+#### Graceful Shutdown Patterns
+
+#### Graceful Shutdown Patterns
+
+#### Graceful Shutdown Patterns
+
+#### Graceful Shutdown Patterns
 
 Graceful shutdown ensures that when a service instance stops, it completes its in-flight work, closes connections cleanly, and leaves data in a consistent state. In distributed systems, where multiple instances provide resilience, graceful shutdown is essential for zero-downtime operations. Hard-killing processes leaves requests incomplete, connections half-open, and data potentially corrupted. 
 
@@ -55,6 +61,12 @@ Testing graceful shutdown is critical but often overlooked. Deploy a canary inst
 Stateful services require additional consideration. Services that own data or maintain state must complete or roll back stateful operations during shutdown, not just drain them. A saga orchestrator must persist workflow state before shutdown. A stream processor must commit offsets. These state management operations should be the highest-priority step in the shutdown sequence.
 
 **See also:** [Health Check Patterns](</en/architecture/health-check-patterns.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>).
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 

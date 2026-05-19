@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/secure-sdlc.png",
       "datePublished": "2025-12-19",
       "dateModified": "2026-05-06",
-      "wordCount": "4633",
+      "wordCount": "4708",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/secure-sdlc.html"},
@@ -98,19 +100,21 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-sdlc.png" alt="Secure Software Development Lifecycle" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Secure Software Development Lifecycle</h2>
 <h3>Secure Software Development Lifecycle</h3>
-<h3>Secure Software Development Lifecycle</h3>
-<h3>Secure Software Development Lifecycle</h3>
-<h3>Secure Software Development Lifecycle</h3>
-<h3>Secure Software Development Lifecycle</h3>
-<h3>Secure Software Development Lifecycle</h3>
-<h3>Secure Software Development Lifecycle</h3>
-<h3>Secure Software Development Lifecycle</h3>
-<h3>Secure Software Development Lifecycle</h3>
-<h3>Secure Software Development Lifecycle</h3>
-<h3>Secure Software Development Lifecycle</h3>
-<h3>Secure Software Development Lifecycle</h3>
-<h3>Secure Software Development Lifecycle</h3>
-<h3>Secure Software Development Lifecycle</h3>
+<h4>Secure Software Development Lifecycle</h4>
+<h4>Secure Software Development Lifecycle</h4>
+<h4>Secure Software Development Lifecycle</h4>
+<h4>Secure Software Development Lifecycle</h4>
+<h4>Secure Software Development Lifecycle</h4>
+<h4>Secure Software Development Lifecycle</h4>
+<h4>Secure Software Development Lifecycle</h4>
+<h4>Secure Software Development Lifecycle</h4>
+<h4>Secure Software Development Lifecycle</h4>
+<h4>Secure Software Development Lifecycle</h4>
+<h4>Secure Software Development Lifecycle</h4>
+<h4>Secure Software Development Lifecycle</h4>
+<h4>Secure Software Development Lifecycle</h4>
+<h4>Secure Software Development Lifecycle</h4>
+<h4>Secure Software Development Lifecycle</h4>
 <p>What Is Secure SDLC? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-sdlc.png" alt="Secure Software Development Lifecycle" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Secure Software Development Lifecycle (Secure SDLC) is the practice of integrating security activities into every phase of the software development process, rather than treating security as a separate phase or an afterthought. The goal is to identify and fix vulnerabilities as early as possible when they are cheapest to remediate. </p>
 <p>The Cost of Late Fixes </p>
@@ -133,7 +137,7 @@
 <p>Threat Modeling with STRIDE </p>
 <p>| Category | Threat | Example | |----------|--------|---------| | Spoofing | Impersonating a user | Forged JWT token | | Tampering | Modifying data | SQL injection | | Repudiation | Denying actions | Missing audit logs | | Information Disclosure | Leaking data | Exposed API keys | | Denial of Service | Overloading service | Rate limit bypass | | Elevation of Privilege | Gaining unauthorized access | IDOR vulnerability | </p>
 <p>Creating a Threat Model </p>
-<h3>Structured threat model entry</h3>
+<h4>Structured threat model entry</h4>
 <p>threat_model = {</p>
 <p>"id": "TM-001",</p>
 <p>"feature": "Payment Processing",</p>
@@ -175,7 +179,7 @@
 <p>maxAge: 900000</p>
 <p>});</p>
 <p>Pre-Commit Hooks </p>
-<h3>.pre-commit-config.yaml</h3>
+<h4>.pre-commit-config.yaml</h4>
 <p>repos:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/pre-commit/pre-commit-hooks</p>
 <p>rev: v4.5.0</p>
@@ -194,7 +198,7 @@
 <p>args: ['--config=auto', '--error']</p>
 <p>Phase 4: Testing </p>
 <p>SAST (Static Application Security Testing) </p>
-<h3>GitHub CodeQL configuration</h3>
+<h4>GitHub CodeQL configuration</h4>
 <p>name: "CodeQL"</p>
 <p>on:</p>
 <p>push:</p>
@@ -231,7 +235,7 @@
 <p>npx snyk test --severity-threshold=high</p>
 <p>npx snyk monitor</p>
 <p>DAST (Dynamic Application Security Testing) </p>
-<h3>Run OWASP ZAP against staging environment</h3>
+<h4>Run OWASP ZAP against staging environment</h4>
 <p>docker run -v $(pwd):/zap/wrk:rw \</p>
 <p>-t ghcr.io/zaproxy/zaproxy:stable \</p>
 <p>zap-full-scan.py \</p>
@@ -240,7 +244,7 @@
 <p>-I # Include passive scan warnings</p>
 <p>Phase 5: Deployment </p>
 <p>Security Gates </p>
-<h3>Deployment approval gates</h3>
+<h4>Deployment approval gates</h4>
 <p>environment:</p>
 <p>name: production</p>
 <p>required_approvals: 2</p>
@@ -268,6 +272,8 @@
 <p>Summary </p>
 <p>A mature Secure SDLC integrates security activities into every phase of development. Start with threat modeling during design, enforce secure coding standards during implementation, automate SAST and dependency scanning in CI/CD, perform DAST before deployment, and maintain a vulnerability management program for production. The earlier a vulnerability is found, the cheaper and easier it is to fix.</p>
 <p><strong>See also:</strong> <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/cloud-security-basics.html">Cloud Security Basics: Shared Responsibility Model Explained</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/cloud-security-basics.html">Cloud Security Basics: Shared Responsibility Model Explained</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/cloud-security-basics.html">Cloud Security Basics: Shared Responsibility Model Explained</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/cloud-security-basics.html">Cloud Security Basics: Shared Responsibility Model Explained</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/cloud-security-basics.html">Cloud Security Basics: Shared Responsibility Model Explained</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p></div>
     </article>

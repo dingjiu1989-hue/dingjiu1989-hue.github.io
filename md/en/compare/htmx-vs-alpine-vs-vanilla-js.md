@@ -1,7 +1,7 @@
 ---
 title: "HTMX vs Alpine.js vs Vanilla JS: Lightweight Frontend Approaches Compared (2026)"
 description: "Compare lightweight alternatives to heavy JS frameworks — HTMX for hypermedia, Alpine.js for reactive sprinkles, and Vanilla JS for full control."
-date: 2026-05-08
+date: 2025-11-26
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/htmx-vs-alpine-vs-vanilla-js.html
 ---

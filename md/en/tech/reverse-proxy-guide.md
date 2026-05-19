@@ -1,7 +1,7 @@
 ---
 title: "Reverse Proxy Guide"
 description: "Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load balancing."
-date: 2026-05-11
+date: 2025-12-03
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/reverse-proxy-guide.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/tech/reverse-proxy-guide.html
 
 ## Reverse Proxy Guide
 
-## Reverse Proxy Guide
+### Reverse Proxy Guide
 
-## Reverse Proxy Guide
+#### Reverse Proxy Guide
 
-## Reverse Proxy Guide
+#### Reverse Proxy Guide
 
-## Reverse Proxy Guide
+#### Reverse Proxy Guide
 
-## Reverse Proxy Guide
+#### Reverse Proxy Guide
 
-## Reverse Proxy Guide
+#### Reverse Proxy Guide
 
-## Reverse Proxy Guide
+#### Reverse Proxy Guide
 
-## Reverse Proxy Guide
+#### Reverse Proxy Guide
 
-## Reverse Proxy Guide
+#### Reverse Proxy Guide
 
-## Reverse Proxy Guide
+#### Reverse Proxy Guide
 
-## Reverse Proxy Guide
+#### Reverse Proxy Guide
 
-## Reverse Proxy Guide
+#### Reverse Proxy Guide
 
-## Reverse Proxy Guide
+#### Reverse Proxy Guide
+
+#### Reverse Proxy Guide
+
+#### Reverse Proxy Guide
+
+#### Reverse Proxy Guide
 
 A reverse proxy sits in front of your application servers, handling incoming requests and distributing them to backend services. It is essential for TLS termination, load balancing, caching, and security. This guide covers two of the most popular options: Nginx and Caddy.
 
-### Why Use a Reverse Proxy
+#### Why Use a Reverse Proxy
 
   * **TLS termination** : Handle HTTPS once at the proxy layer.
 
@@ -53,7 +59,7 @@ A reverse proxy sits in front of your application servers, handling incoming req
 
 
 
-### Nginx Reverse Proxy
+#### Nginx Reverse Proxy
 
 Nginx is the industry standard for reverse proxying. It is mature, highly performant, and extremely configurable.
 
@@ -157,13 +163,13 @@ add_header X-Cache-Status $upstream_cache_status;
 
 The `$upstream_cache_status` header helps debug caching (HIT, MISS, STALE, etc.). `proxy_cache_use_stale` serves stale content when the backend is down.
 
-### Caddy Reverse Proxy
+#### Caddy Reverse Proxy
 
 Caddy is a modern web server with automatic HTTPS, simpler configuration, and Go-based performance. It is ideal for teams that want a zero-fuss reverse proxy.
 
 #### Basic Reverse Proxy
 
-## Caddyfile
+#### Caddyfile
 
 app.example.com {
 
@@ -217,7 +223,7 @@ header_up X-Real-IP {remote_host}
 
 }
 
-## Add security headers
+#### Add security headers
 
 header {
 
@@ -231,7 +237,7 @@ X-Content-Type-Options "nosniff"
 
 Caddy's `header` directive works for both request and response headers.
 
-### Nginx vs Caddy: Comparison
+#### Nginx vs Caddy: Comparison
 
 | Feature | Nginx | Caddy |
 
@@ -253,7 +259,7 @@ Caddy's `header` directive works for both request and response headers.
 
 | HTTP/3 | Supported | Supported |
 
-### Security Headers
+#### Security Headers
 
 Regardless of which reverse proxy you choose, add these security headers:
 
@@ -279,7 +285,7 @@ Strict-Transport-Security "max-age=31536000; includeSubDomains"
 
 }
 
-### Rate Limiting
+#### Rate Limiting
 
 Nginx:
 
@@ -315,15 +321,21 @@ reverse_proxy localhost:3000
 
 }
 
-### Health Checks
+#### Health Checks
 
 Nginx health checks require the Plus version or are handled externally (e.g., via Docker health checks). Caddy includes built-in active health checks that mark unhealthy backends as down and stop routing traffic to them.
 
-### Summary
+#### Summary
 
 Nginx and Caddy are both excellent reverse proxies. Nginx offers unmatched flexibility and performance for complex deployments. Caddy provides automatic TLS and simpler configuration, making it ideal for smaller teams or simpler setups. For TLS-heavy deployments, Caddy's automatic certificates save significant operational overhead. For high-traffic scenarios requiring fine-grained control, Nginx remains the standard. Both can route traffic, terminate TLS, add security headers, and cache responses -- choose based on your team's expertise and operational complexity tolerance.
 
 **See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>).
+
+**See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
+
+**See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
+
+**See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
 
 **See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
 

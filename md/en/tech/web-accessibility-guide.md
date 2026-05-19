@@ -1,7 +1,7 @@
 ---
 title: "Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice"
 description: "Practical accessibility guide for developers: semantic HTML, ARIA labels (when and when not to use), keyboard navigation, screen reader testing, color contrast, and automated a11y testing in CI/CD."
-date: 2026-05-08
+date: 2025-10-14
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/web-accessibility-guide.html
 ---

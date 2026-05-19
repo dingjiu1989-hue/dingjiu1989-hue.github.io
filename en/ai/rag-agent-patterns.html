@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.png",
       "datePublished": "2026-02-18",
       "dateModified": "2026-04-04",
-      "wordCount": "1382",
+      "wordCount": "1495",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/rag-agent-patterns.html"},
@@ -99,33 +101,35 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.png" alt="RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h2>
 <h3>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h3>
-<h3>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h3>
-<h3>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h3>
-<h3>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h3>
-<h3>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h3>
-<h3>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h3>
-<h3>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h3>
-<h3>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h3>
-<h3>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h3>
-<h3>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h3>
-<h3>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h3>
-<h3>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h3>
-<h3>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h3>
+<h4>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h4>
+<h4>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h4>
+<h4>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h4>
+<h4>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h4>
+<h4>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h4>
+<h4>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h4>
+<h4>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h4>
+<h4>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h4>
+<h4>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h4>
+<h4>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h4>
+<h4>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h4>
+<h4>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h4>
+<h4>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h4>
+<h4>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h4>
 <h4>Introduction</h4>
 <p>Basic RAG retrieves documents once and generates an answer. RAG agents take this further: they decide when to retrieve, formulate their own queries, verify retrieved information, and adapt their strategy based on the question complexity. This article covers three agentic RAG patterns that dramatically improve retrieval quality.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.png" alt="RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Self-Query RAG</h4>
 <p>Instead of using the raw user question as the search query, the agent generates an optimized query:</p>
 <p>def self_query_rag(question: str) -&gt; str:</p>
-<h3>Step 1: Generate search query</h3>
+<h4>Step 1: Generate search query</h4>
 <p>search_query = call_llm(f"""</p>
 <p>Generate an optimal search query for a vector database.</p>
 <p>Extract key terms, rephrase questions as search statements.</p>
 <p>Output ONLY the search query, nothing else.</p>
 <p>User question: {question}</p>
 <p>""")</p>
-<h3>Step 2: Retrieve using optimized query</h3>
+<h4>Step 2: Retrieve using optimized query</h4>
 <p>chunks = vector_search(search_query, k=5)</p>
-<h3>Step 3: Generate answer from retrieved chunks</h3>
+<h4>Step 3: Generate answer from retrieved chunks</h4>
 <p>context = "\n\n".join(chunks)</p>
 <p>answer = call_llm(f"""</p>
 <p>Answer the question based on the context below.</p>
@@ -139,9 +143,9 @@
 <p>Corrective RAG adds a verification step between retrieval and generation. If retrieved documents are irrelevant, the agent takes corrective action:</p>
 <p>def corrective_rag(question: str, max_attempts: int = 3) -&gt; str:</p>
 <p>for attempt in range(max_attempts):</p>
-<h3>Retrieve</h3>
+<h4>Retrieve</h4>
 <p>chunks = vector_search(question, k=5)</p>
-<h3>Score relevance</h3>
+<h4>Score relevance</h4>
 <p>relevance_scores = []</p>
 <p>for chunk in chunks:</p>
 <p>score = call_llm(f"""</p>
@@ -152,16 +156,16 @@
 <p>relevance_scores.append(float(score.strip()))</p>
 <p>avg_relevance = sum(relevance_scores) / len(relevance_scores)</p>
 <p>if avg_relevance &gt;= 7:</p>
-<h3>High confidence: generate answer</h3>
+<h4>High confidence: generate answer</h4>
 <p>context = "\n\n".join(chunks[:3])</p>
 <p>return generate_answer(question, context)</p>
 <p>elif avg_relevance &gt;= 4:</p>
-<h3>Medium confidence: try query decomposition</h3>
+<h4>Medium confidence: try query decomposition</h4>
 <p>sub_questions = decompose_question(question)</p>
 <p>sub_answers = [corrective_rag(sq) for sq in sub_questions]</p>
 <p>return synthesize_answers(question, sub_answers)</p>
 <p>else:</p>
-<h3>Low confidence: reformulate query</h3>
+<h4>Low confidence: reformulate query</h4>
 <p>question = reformulate_query(question, chunks)</p>
 <p>return "Unable to find sufficient information to answer this question."</p>
 <p>CRAG prevents the "hallucinate confidently from irrelevant context" failure mode common in naive RAG. Each attempt either improves the query or escalates to a more sophisticated strategy.</p>
@@ -176,7 +180,7 @@
 <p>"analytical": self.analytical_retrieval,</p>
 <p>}</p>
 <p>def retrieve(self, question: str) -&gt; list[str]:</p>
-<h3>Classify the question type</h3>
+<h4>Classify the question type</h4>
 <p>q_type = call_llm(f"""</p>
 <p>Classify this question as one of: factoid, comparison, procedural, analytical</p>
 <p>Respond with only the type name.</p>
@@ -185,24 +189,24 @@
 <p>strategy = self.strategies.get(q_type.strip(), self.factoid_retrieval)</p>
 <p>return strategy(question)</p>
 <p>def factoid_retrieval(self, question: str) -&gt; list[str]:</p>
-<h3>Simple direct retrieval</h3>
+<h4>Simple direct retrieval</h4>
 <p>return vector_search(question, k=3)</p>
 <p>def comparison_retrieval(self, question: str) -&gt; list[str]:</p>
-<h3>Retrieve documents for each side of the comparison</h3>
+<h4>Retrieve documents for each side of the comparison</h4>
 <p>entities = extract_comparison_entities(question)</p>
 <p>docs = []</p>
 <p>for entity in entities:</p>
 <p>docs.extend(vector_search(entity, k=3))</p>
 <p>return docs[:6]</p>
 <p>def procedural_retrieval(self, question: str) -&gt; list[str]:</p>
-<h3>Step-by-step retrieval</h3>
+<h4>Step-by-step retrieval</h4>
 <p>steps = decompose_steps(question)</p>
 <p>docs = []</p>
 <p>for step in steps:</p>
 <p>docs.extend(vector_search(step, k=2))</p>
 <p>return docs[:8]</p>
 <p>def analytical_retrieval(self, question: str) -&gt; list[str]:</p>
-<h3>Retrieve broadly then narrow</h3>
+<h4>Retrieve broadly then narrow</h4>
 <p>broad = vector_search(question, k=20)</p>
 <p>reranked = rerank(question, broad)</p>
 <p>return reranked[:5]</p>
@@ -214,7 +218,7 @@
 <p>for hop in range(max_hops):</p>
 <p>chunks = vector_search(current_query, k=3)</p>
 <p>context_chunks.extend(chunks)</p>
-<h3>Check if we need another hop</h3>
+<h4>Check if we need another hop</h4>
 <p>needs_more = call_llm(f"""</p>
 <p>Can you answer '{question}' with the information retrieved so far?</p>
 <p>Answer YES or NO. If NO, specify what additional information is needed.</p>
@@ -222,7 +226,7 @@
 <p>""")</p>
 <p>if needs_more.startswith("YES"):</p>
 <p>break</p>
-<h3>Extract the next search target</h3>
+<h4>Extract the next search target</h4>
 <p>current_query = call_llm(f"""</p>
 <p>What additional information do we need to answer '{question}'?</p>
 <p>Output a single search query.</p>
@@ -232,6 +236,8 @@
 <h4>Conclusion</h4>
 <p>RAG agents extend basic retrieval with reasoning. Self-query RAG optimizes the search query for better retrieval. Corrective RAG verifies retrieved content and adapts when relevance is low. Adaptive retrieval selects the strategy that fits the question type. Multi-hop retrieval follows information chains across documents. These patterns transform RAG from a single-pass lookup into an intelligent research process.</p>
 <p><strong>See also:</strong> <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-pipeline-optimization.html">RAG Pipeline Optimization: Production Best Practices</a>, <a href="/en/ai/agent-planning.html">Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p></div>
     </article>

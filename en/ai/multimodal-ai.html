@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/multimodal-ai.png",
       "datePublished": "2026-02-10",
       "dateModified": "2026-05-09",
-      "wordCount": "2723",
+      "wordCount": "2790",
       "keywords": "Artificial Intelligence, Machine Learning",
       "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/multimodal-ai.html"},
@@ -98,25 +100,27 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/multimodal-ai.png" alt="Multimodal AI Applications in 2026" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Multimodal AI Applications in 2026</h2>
 <h3>Multimodal AI Applications in 2026</h3>
-<h3>Multimodal AI Applications in 2026</h3>
-<h3>Multimodal AI Applications in 2026</h3>
-<h3>Multimodal AI Applications in 2026</h3>
-<h3>Multimodal AI Applications in 2026</h3>
-<h3>Multimodal AI Applications in 2026</h3>
-<h3>Multimodal AI Applications in 2026</h3>
-<h3>Multimodal AI Applications in 2026</h3>
-<h3>Multimodal AI Applications in 2026</h3>
-<h3>Multimodal AI Applications in 2026</h3>
-<h3>Multimodal AI Applications in 2026</h3>
-<h3>Multimodal AI Applications in 2026</h3>
-<h3>Multimodal AI Applications in 2026</h3>
+<h4>Multimodal AI Applications in 2026</h4>
+<h4>Multimodal AI Applications in 2026</h4>
+<h4>Multimodal AI Applications in 2026</h4>
+<h4>Multimodal AI Applications in 2026</h4>
+<h4>Multimodal AI Applications in 2026</h4>
+<h4>Multimodal AI Applications in 2026</h4>
+<h4>Multimodal AI Applications in 2026</h4>
+<h4>Multimodal AI Applications in 2026</h4>
+<h4>Multimodal AI Applications in 2026</h4>
+<h4>Multimodal AI Applications in 2026</h4>
+<h4>Multimodal AI Applications in 2026</h4>
+<h4>Multimodal AI Applications in 2026</h4>
+<h4>Multimodal AI Applications in 2026</h4>
+<h4>Multimodal AI Applications in 2026</h4>
 <h4>Introduction</h4>
 <p>Multimodal AI models that understand and generate across text, images, audio, and video have moved from research papers to production APIs. By 2026, models like GPT-4o, Claude 3.5 Sonnet, Gemini 2.0, and open-source alternatives support native multimodal inputs, enabling applications that were impractical with separate unimodal pipelines. This article covers current capabilities, architectures, and production patterns for multimodal AI applications.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/multimodal-ai.png" alt="Multimodal AI Applications in 2026" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Vision-Language Models</h4>
 <p>Modern vision-language models (VLMs) accept images and text together in a single context window:</p>
 <p>from anthropic import Anthropic</p>
 <p>client = Anthropic(api_key="sk-...")</p>
-<h3>Analyze an image with text instructions</h3>
+<h4>Analyze an image with text instructions</h4>
 <p>response = client.messages.create(</p>
 <p>model="claude-sonnet-4-20260512",</p>
 <p>max_tokens=1024,</p>
@@ -144,7 +148,7 @@
 <p>],</p>
 <p>}],</p>
 <p>)</p>
-<h3>The model "sees" the image and processes it jointly with text</h3>
+<h4>The model "sees" the image and processes it jointly with text</h4>
 <p>analysis = response.content[0].text</p>
 <h4>Document AI and OCR</h4>
 <p>Extract structured data from complex documents:</p>
@@ -242,15 +246,15 @@
 <p>tables: List[dict],</p>
 <p>):</p>
 <p>embeddings = []</p>
-<h3>Index text chunks</h3>
+<h4>Index text chunks</h4>
 <p>text_chunks = self._chunk_text(text)</p>
 <p>text_embeddings = self.text_encoder.encode(text_chunks)</p>
 <p>embeddings.extend(text_embeddings)</p>
-<h3>Index images</h3>
+<h4>Index images</h4>
 <p>for img in images:</p>
 <p>img_embedding = self.image_encoder.encode(img)</p>
 <p>embeddings.append(img_embedding)</p>
-<h3>Index with metadata about modality</h3>
+<h4>Index with metadata about modality</h4>
 <p>self.collection.add(</p>
 <p>embeddings=embeddings,</p>
 <p>ids=[f"{doc_id}_{i}" for i in range(len(embeddings))],</p>
@@ -261,9 +265,9 @@
 <p>],</p>
 <p>)</p>
 <p>def query(self, question: str, top_k: int = 5) -&gt; List[dict]:</p>
-<h3>Encode query</h3>
+<h4>Encode query</h4>
 <p>query_embedding = self.text_encoder.encode(question)</p>
-<h3>Retrieve across all modalities</h3>
+<h4>Retrieve across all modalities</h4>
 <p>results = self.collection.query(</p>
 <p>query_embeddings=[query_embedding],</p>
 <p>n_results=top_k,</p>
@@ -282,15 +286,15 @@
 <p>buffer.append(chunk)</p>
 <p>buffer_duration += self._chunk_duration(chunk)</p>
 <p>if buffer_duration &gt;= self.buffer_duration:</p>
-<h3>Process buffer</h3>
+<h4>Process buffer</h4>
 <p>segment = b"".join(buffer)</p>
-<h3>Real-time transcription + analysis</h3>
+<h4>Real-time transcription + analysis</h4>
 <p>result = await self._analyze_segment(segment)</p>
-<h3>Extract action items, sentiment, entities</h3>
+<h4>Extract action items, sentiment, entities</h4>
 <p>actions = self._extract_actions(result)</p>
 <p>if actions:</p>
 <p>await self._route_actions(actions)</p>
-<h3>Keep overlap for continuity</h3>
+<h4>Keep overlap for continuity</h4>
 <p>overlap_bytes = int(</p>
 <p>len(segment) * (self.overlap / buffer_duration)</p>
 <p>)</p>
@@ -329,7 +333,7 @@
 <p>| Medical imaging | Analyze X-rays, MRIs with clinical notes | Regulatory approval, hallucination risk |</p>
 <p>| Video understanding | Summarize meetings, detect events | Long video context limits |</p>
 <h4>Production Considerations</h4>
-<h3>Multimodal model selection criteria</h3>
+<h4>Multimodal model selection criteria</h4>
 <p>selection:</p>
 <p>latency:</p>
 <p>text_only: "&lt; 500ms"</p>
@@ -351,6 +355,8 @@
 <p>audio_transcription: "&gt;95% WER on clean speech, &gt;80% on accented"</p>
 <p>Multimodal AI is rapidly maturing but still requires careful evaluation for each use case. Start with well-scoped document processing or image analysis tasks before expanding to real-time audio or video pipelines.</p>
 <p><strong>See also:</strong> <a href="/en/ai/multimodal-models.html">Multimodal AI Models: Vision, Audio, and Text</a>, <a href="/en/ai/ai-embeddings-explained.html">AI Embeddings Explained</a>, <a href="/en/ai/rag-architecture-guide.html">RAG Architecture Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/multimodal-models.html">Multimodal AI Models: Vision, Audio, and Text</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/multimodal-models.html">Multimodal AI Models: Vision, Audio, and Text</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/multimodal-models.html">Multimodal AI Models: Vision, Audio, and Text</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/multimodal-models.html">Multimodal AI Models: Vision, Audio, and Text</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/multimodal-models.html">Multimodal AI Models: Vision, Audio, and Text</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a></p></div>
     </article>

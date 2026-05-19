@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-architecture.png",
       "datePublished": "2026-04-29",
       "dateModified": "2026-05-19",
-      "wordCount": "1133",
+      "wordCount": "1179",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-architecture.html"},
@@ -96,17 +98,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-architecture.png" alt="Rate Limiting Architecture" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Rate Limiting Architecture</h2>
 <h3>Rate Limiting Architecture</h3>
-<h3>Rate Limiting Architecture</h3>
-<h3>Rate Limiting Architecture</h3>
-<h3>Rate Limiting Architecture</h3>
-<h3>Rate Limiting Architecture</h3>
-<h3>Rate Limiting Architecture</h3>
-<h3>Rate Limiting Architecture</h3>
-<h3>Rate Limiting Architecture</h3>
-<h3>Rate Limiting Architecture</h3>
-<h3>Rate Limiting Architecture</h3>
-<h3>Rate Limiting Architecture</h3>
-<h3>Rate Limiting Architecture</h3>
+<h4>Rate Limiting Architecture</h4>
+<h4>Rate Limiting Architecture</h4>
+<h4>Rate Limiting Architecture</h4>
+<h4>Rate Limiting Architecture</h4>
+<h4>Rate Limiting Architecture</h4>
+<h4>Rate Limiting Architecture</h4>
+<h4>Rate Limiting Architecture</h4>
+<h4>Rate Limiting Architecture</h4>
+<h4>Rate Limiting Architecture</h4>
+<h4>Rate Limiting Architecture</h4>
+<h4>Rate Limiting Architecture</h4>
+<h4>Rate Limiting Architecture</h4>
+<h4>Rate Limiting Architecture</h4>
 <p>Rate limiting protects system resources by controlling the rate at which clients can make requests. It prevents abuse, ensures fair resource allocation, and maintains system stability under load. The choice of rate limiting algorithm — how limits are tracked and enforced — determines the system's accuracy, memory usage, and ability to handle burst traffic. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-architecture.png" alt="Rate Limiting Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The token bucket algorithm is the most widely used rate limiting approach. A bucket holds tokens that replenish at a fixed rate. Each request consumes one token. If the bucket is empty, the request is rejected. The bucket capacity allows bursts — if the bucket is full, a client can send a burst of requests equal to the bucket size. Token bucket has two parameters: the fill rate (steady-state requests per second) and the bucket size (maximum burst). This combination provides both sustained throughput limits and burst tolerance. </p>
 <p>The sliding window algorithm provides precise rate enforcement over time windows. A sliding window log stores timestamps for each request. When a new request arrives, timestamps outside the window are removed, and the count is checked against the limit. The sliding window counter variant improves memory efficiency by tracking two counters: the current window count and the previous window count, with a weighted estimate for the current position. This provides good accuracy with bounded memory. </p>
@@ -120,7 +124,9 @@
 <p>Client identification is the prerequisite for rate limiting. Simple identification uses IP address, which is unreliable behind proxies or NAT. API keys or JWT claims provide reliable client identity. Anonymous clients may be identified by a combination of factors (IP + user agent + geolocation). The identification method determines the limit's fairness — IP-based limiting unfairly restricts users behind shared IPs, while API key limiting requires all clients to authenticate.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -132,7 +138,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/distributed-locking.html" class="related-card">Distributed Locking Mechanisms</a><a href="/en/architecture/api-gateway-patterns.html" class="related-card">API Gateway Patterns</a><a href="/en/architecture/consensus-algorithms.html" class="related-card">Consensus Algorithms: Paxos, Raft, Zab</a><a href="/en/architecture/distributed-id.html" class="related-card">Distributed ID Generation</a></div>
+      <div class="related-grid"><a href="/en/architecture/rate-limiting-patterns.html" class="related-card">Rate Limiting Patterns</a><a href="/en/architecture/distributed-locking.html" class="related-card">Distributed Locking Mechanisms</a><a href="/en/architecture/api-gateway-patterns.html" class="related-card">API Gateway Patterns</a><a href="/en/architecture/consensus-algorithms.html" class="related-card">Consensus Algorithms: Paxos, Raft, Zab</a></div>
     </section>
     
   </div>

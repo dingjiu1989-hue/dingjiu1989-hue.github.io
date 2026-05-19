@@ -1,7 +1,7 @@
 ---
 title: "Circuit Breaker vs Bulkhead Pattern"
 description: "Differences, when to use each, resilience patterns, and combined application of circuit breaker and bulkhead"
-date: 2026-05-12
+date: 2026-05-19
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/circuit-breaker-vs-bulkhead.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/circuit-breaker-vs-bulkhe
 
 ## Circuit Breaker vs Bulkhead Pattern
 
-## Circuit Breaker vs Bulkhead Pattern
+### Circuit Breaker vs Bulkhead Pattern
 
-## Circuit Breaker vs Bulkhead Pattern
+#### Circuit Breaker vs Bulkhead Pattern
 
-## Circuit Breaker vs Bulkhead Pattern
+#### Circuit Breaker vs Bulkhead Pattern
 
-## Circuit Breaker vs Bulkhead Pattern
+#### Circuit Breaker vs Bulkhead Pattern
 
-## Circuit Breaker vs Bulkhead Pattern
+#### Circuit Breaker vs Bulkhead Pattern
 
-## Circuit Breaker vs Bulkhead Pattern
+#### Circuit Breaker vs Bulkhead Pattern
 
-## Circuit Breaker vs Bulkhead Pattern
+#### Circuit Breaker vs Bulkhead Pattern
 
-## Circuit Breaker vs Bulkhead Pattern
+#### Circuit Breaker vs Bulkhead Pattern
 
-## Circuit Breaker vs Bulkhead Pattern
+#### Circuit Breaker vs Bulkhead Pattern
 
-## Circuit Breaker vs Bulkhead Pattern
+#### Circuit Breaker vs Bulkhead Pattern
 
-## Circuit Breaker vs Bulkhead Pattern
+#### Circuit Breaker vs Bulkhead Pattern
+
+#### Circuit Breaker vs Bulkhead Pattern
+
+#### Circuit Breaker vs Bulkhead Pattern
+
+#### Circuit Breaker vs Bulkhead Pattern
 
 Circuit breaker and bulkhead are two fundamental resilience patterns from the stability arsenal, but they solve different problems and are most effective when used together. The circuit breaker protects downstream services from cascading failures by failing fast when a dependency is unhealthy. The bulkhead isolates failure by limiting the resources a failing component can consume. Understanding when and how to apply each is essential for building resilient distributed systems. 
 
@@ -57,3 +63,9 @@ Configuration should be dynamic where possible. Circuit breaker thresholds and t
 **See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
 
 **See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
+
+**See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)

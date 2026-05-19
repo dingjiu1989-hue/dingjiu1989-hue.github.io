@@ -1,7 +1,7 @@
 ---
 title: "Alerting Strategies for Production Systems"
 description: "Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design"
-date: 2026-05-12
+date: 2026-04-21
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/alerting-strategies.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/alerting-strategies.html
 
 ## Alerting Strategies for Production Systems
 
-## Alerting Strategies for Production Systems
+### Alerting Strategies for Production Systems
 
-## Alerting Strategies for Production Systems
+#### Alerting Strategies for Production Systems
 
-## Alerting Strategies for Production Systems
+#### Alerting Strategies for Production Systems
 
-## Alerting Strategies for Production Systems
+#### Alerting Strategies for Production Systems
 
-## Alerting Strategies for Production Systems
+#### Alerting Strategies for Production Systems
 
-## Alerting Strategies for Production Systems
+#### Alerting Strategies for Production Systems
 
-## Alerting Strategies for Production Systems
+#### Alerting Strategies for Production Systems
 
-## Alerting Strategies for Production Systems
+#### Alerting Strategies for Production Systems
 
-## Alerting Strategies for Production Systems
+#### Alerting Strategies for Production Systems
 
-## Alerting Strategies for Production Systems
+#### Alerting Strategies for Production Systems
 
-## Alerting Strategies for Production Systems
+#### Alerting Strategies for Production Systems
+
+#### Alerting Strategies for Production Systems
+
+#### Alerting Strategies for Production Systems
+
+#### Alerting Strategies for Production Systems
 
 Alerting is the mechanism that converts observability data into human action. A well-designed alerting strategy ensures that the right people are notified at the right time with sufficient context to take effective action. Poor alerting — too many, too few, or poorly targeted — degrades operational effectiveness and drives engineer burnout. The goal is not to minimize alerts but to make every alert actionable. 
 
@@ -55,6 +61,12 @@ Alert response SLAs define expectations. A P0 alert should be acknowledged withi
 Silencing rules provide controlled noise reduction. Scheduled maintenance windows suppress alerts for planned changes. Dependencies allow alert suppression based on upstream alerts — if the database is down, do not page for "product service connection timeout," because the root cause is already covered. Override and escalation allow emergency overrides for critical situations. Silencing rules should be temporary and require a documented reason.
 
 **See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Caching Strategies](</en/architecture/cache-strategies.html>).
+
+**See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
+
+**See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
+
+**See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
 
 **See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
 

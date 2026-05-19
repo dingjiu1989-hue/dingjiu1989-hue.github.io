@@ -1,7 +1,7 @@
 ---
 title: "Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning"
 description: "Learn PostgreSQL index maintenance: detect and fix index bloat, use REINDEX safely, monitor with pg_stat_user_indexes, and tune fillfactor for write-heavy tables."
-date: 2026-05-12
+date: 2026-04-07
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/index-maintenance.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/index-maintenance.html
 
 ## Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
 
-## Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
+### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
 
-## Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
+#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
 
-## Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
+#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
 
-## Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
+#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
 
-## Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
+#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
 
-## Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
+#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
 
-## Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
+#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
 
-## Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
+#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
 
-## Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
+#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
 
-## Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
+#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
 
-## Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
+#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
+
+#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
+
+#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
+
+#### Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
 
 Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning 
 
@@ -89,7 +95,7 @@ External Tools
 
 `pg_repack` rebuilds indexes without locks: 
 
-## Rebuild all indexes on a table without blocking writes
+#### Rebuild all indexes on a table without blocking writes
 
 pg_repack -h localhost -d mydb --table orders -o idx_orders_user_id
 
@@ -189,7 +195,7 @@ Autovacuum Configuration
 
 Autovacuum manages both table and index cleanup: 
 
-## postgresql.conf
+#### postgresql.conf
 
 autovacuum = on
 
@@ -290,6 +296,12 @@ Best Practices
 Index maintenance is not a one-time activity. Build monitoring and automation into your database operations, and check index health as part of your regular performance review cycle.
 
 **See also:** [PostgreSQL Vacuuming: Maintenance, Tuning, and Automation](</en/database/database-vacuuming-maintenance.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>).
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
 

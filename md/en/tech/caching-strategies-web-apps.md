@@ -1,7 +1,7 @@
 ---
 title: "Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching"
 description: "Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-while-revalidate, and cache invalidation strategies."
-date: 2026-05-08
+date: 2025-10-12
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/caching-strategies-web-apps.html
 ---

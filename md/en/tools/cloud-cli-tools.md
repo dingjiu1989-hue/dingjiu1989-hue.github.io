@@ -1,7 +1,7 @@
 ---
 title: "Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons"
 description: "Compare cloud CLI tools: aws-cli for AWS, gcloud for GCP, az for Azure, and s5cmd for high-speed S3 operations. Installation, authentication, and productivity t"
-date: 2026-05-12
+date: 2026-01-30
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/cloud-cli-tools.html
 ---
@@ -10,49 +10,55 @@ url: https://dingjiu1989-hue.github.io/en/tools/cloud-cli-tools.html
 
 ## Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
 
-## Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
 
-## Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+#### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
 
-## Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+#### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
 
-## Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+#### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
 
-## Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+#### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
 
-## Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+#### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
 
-## Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+#### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
 
-## Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+#### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
 
-## Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+#### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
 
-## Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+#### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
 
-## Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+#### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
 
-## Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+#### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
 
-### Introduction
+#### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+
+#### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+
+#### Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+
+#### Introduction
 
 Cloud provider CLIs are essential for infrastructure management, automation, and day-to-day operations. Each major cloud provider has its own CLI with unique features and syntax. This article covers the primary CLIs (aws-cli, gcloud, az) plus s5cmd for high-performance S3 operations, with practical examples and productivity patterns.
 
-### AWS CLI
+#### AWS CLI
 
 The most mature cloud CLI, now at version 2:
 
-## Installation
+#### Installation
 
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
 
 sudo installer -pkg AWSCLIV2.pkg -target /
 
-## Or via brew
+#### Or via brew
 
 brew install awscli
 
-## Configuration
+#### Configuration
 
 aws configure
 
@@ -60,7 +66,7 @@ aws configure set region us-west-2
 
 aws configure set cli_pager ""
 
-## Profile management
+#### Profile management
 
 aws configure --profile production
 
@@ -68,7 +74,7 @@ aws s3 ls --profile production
 
 export AWS_PROFILE=production
 
-## Common operations
+#### Common operations
 
 aws s3 ls s3://my-bucket/ --recursive --human-readable
 
@@ -80,7 +86,7 @@ aws logs tail /aws/lambda/my-function --follow
 
 aws ecs update-service --cluster prod --service api --force-new-deployment
 
-## With JMESPath filtering
+#### With JMESPath filtering
 
 aws ec2 describe-instances \
 
@@ -92,7 +98,7 @@ aws ec2 describe-instances \
 
 **Productivity aliases** :
 
-## ~/.zshrc
+#### ~/.zshrc
 
 alias awsp="export AWS_PROFILE=$(aws configure list-profiles | fzf)"
 
@@ -106,19 +112,19 @@ alias ec2ls="aws ec2 describe-instances --query 'Reservations[_].Instances[_].[I
 
 alias logs-tail="aws logs tail --follow"
 
-### gcloud (Google Cloud CLI)
+#### gcloud (Google Cloud CLI)
 
-## Installation
+#### Installation
 
 brew install --cask google-cloud-sdk
 
-## Or via curl
+#### Or via curl
 
 curl https://sdk.cloud.google.com | bash
 
 exec -l $SHELL
 
-## Authentication
+#### Authentication
 
 gcloud auth login
 
@@ -128,7 +134,7 @@ gcloud config set project my-project
 
 gcloud config set compute/region us-central1
 
-## Common operations
+#### Common operations
 
 gcloud compute instances list
 
@@ -142,7 +148,7 @@ gcloud logging read "resource.type=cloud_run_revision AND severity>=ERROR" --lim
 
 gcloud sql instances describe my-db
 
-## Configuration management
+#### Configuration management
 
 gcloud config configurations create dev
 
@@ -150,19 +156,19 @@ gcloud config configurations activate prod
 
 gcloud config list
 
-### Azure CLI (az)
+#### Azure CLI (az)
 
-## Installation
+#### Installation
 
 brew install azure-cli
 
-## Authentication
+#### Authentication
 
 az login
 
 az account set --subscription "my-subscription"
 
-## Common operations
+#### Common operations
 
 az vm list --output table
 
@@ -176,31 +182,31 @@ az sql db show --resource-group my-rg --server my-server --name my-db
 
 az group list --query "[].{Name:name, Location:location}" --output table
 
-## JMESPath queries
+#### JMESPath queries
 
 az vm list --query "[?tags.Environment=='production'].{Name:name, Size:hardwareProfile.vmSize}" --output table
 
-### s5cmd
+#### s5cmd
 
 A high-performance S3 CLI written in Go:
 
-## Installation
+#### Installation
 
 brew install s5cmd
 
-## Configuration (reuses AWS CLI credentials)
+#### Configuration (reuses AWS CLI credentials)
 
-## Just set AWS_PROFILE or AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY
+#### Just set AWS_PROFILE or AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY
 
-## Speed comparison
+#### Speed comparison
 
-## Copy 10,000 files:
+#### Copy 10,000 files:
 
 time aws s3 cp --recursive s3://bucket/prefix/ ./local/ # ~60 seconds
 
 time s5cmd cp "s3://bucket/prefix/*" ./local/ # ~8 seconds
 
-## Operations
+#### Operations
 
 s5cmd ls s3://my-bucket/
 
@@ -210,7 +216,7 @@ s5cmd mv s3://bucket/old-key s3://bucket/new-key
 
 s5cmd rm s3://bucket/old-prefix/*
 
-## Batch operations from file
+#### Batch operations from file
 
 echo "s3://bucket/logs/2026-01-01.log" > files.txt
 
@@ -218,19 +224,19 @@ echo "s3://bucket/logs/2026-01-02.log" >> files.txt
 
 s5cmd cp files.txt ./logs/
 
-## Run commands in parallel
+#### Run commands in parallel
 
 s5cmd --numworkers 64 cp s3://large-bucket/* ./downloads/
 
-## Dry run
+#### Dry run
 
 s5cmd --dry-run cp s3://bucket/* ./local/
 
-### Multi-Cloud Tools
+#### Multi-Cloud Tools
 
-## Cloud-specific environment management
+#### Cloud-specific environment management
 
-## aws-vault — secure AWS credential management
+#### aws-vault — secure AWS credential management
 
 brew install aws-vault
 
@@ -238,13 +244,13 @@ aws-vault add prod
 
 aws-vault exec prod -- aws s3 ls
 
-## AWS SSO helper
+#### AWS SSO helper
 
 aws sso login --profile prod
 
 export AWS_PROFILE=prod
 
-## Cloud comparison commands
+#### Cloud comparison commands
 
 echo "=== AWS ==="
 
@@ -258,7 +264,7 @@ echo "=== Azure ==="
 
 az account show
 
-### Comparison
+#### Comparison
 
 | Feature | aws-cli v2 | gcloud | az | s5cmd |
 
@@ -278,7 +284,7 @@ az account show
 
 | File transfer | Sequential | Sequential | Sequential | Parallel |
 
-### Recommendations
+#### Recommendations
 
   * **AWS-focused** : aws-cli v2 for full API coverage with s5cmd for large S3 transfers.
 
@@ -296,6 +302,12 @@ az account show
 
 
 **See also:** [Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP](</en/tools/cloud-cost-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Shell Frameworks: zsh, fish, bash Customization](</en/tools/shell-frameworks.html>).
+
+**See also:** [Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP](</en/tools/cloud-cost-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)
+
+**See also:** [Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP](</en/tools/cloud-cost-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)
+
+**See also:** [Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP](</en/tools/cloud-cost-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)
 
 **See also:** [Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP](</en/tools/cloud-cost-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)
 

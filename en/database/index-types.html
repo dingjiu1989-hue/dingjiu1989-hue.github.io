@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/index-types.png",
       "datePublished": "2026-04-07",
       "dateModified": "2026-05-05",
-      "wordCount": "1461",
+      "wordCount": "1555",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/index-types.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/index-types.png" alt="Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h2>
 <h3>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h3>
-<h3>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h3>
-<h3>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h3>
-<h3>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h3>
-<h3>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h3>
-<h3>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h3>
-<h3>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h3>
-<h3>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h3>
-<h3>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h3>
-<h3>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h3>
-<h3>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h3>
-<h3>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h3>
+<h4>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h4>
+<h4>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h4>
+<h4>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h4>
+<h4>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h4>
+<h4>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h4>
+<h4>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h4>
+<h4>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h4>
+<h4>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h4>
+<h4>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h4>
+<h4>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h4>
+<h4>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h4>
+<h4>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h4>
+<h4>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</h4>
 <p>Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/index-types.png" alt="Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>PostgreSQL offers six index types, each designed for different data distributions and query patterns. Choosing the wrong index type wastes storage and degrades performance. This article explains each type, its strengths, and when to use it. </p>
 <p>B-tree (Default) </p>
@@ -251,6 +255,8 @@
 <p>| Query Pattern | Recommended Index | |---------------|-------------------| | Equality + range | B-tree | | Equality only (high cardinality) | B-tree (or Hash) | | Full-text search | GIN | | JSONB queries | GIN (jsonb_path_ops) | | Geospatial (points) | GiST or SP-GiST | | Geospatial (polygons) | GiST | | Range types | GiST | | Arrays | GIN | | Time-ordered data, huge tables | BRIN | | Text prefix search (autocomplete) | SP-GiST | </p>
 <p>The best index is the one that matches your query patterns exactly. A B-tree index on a column never used in WHERE or ORDER BY is wasted storage. Conversely, a BRIN index on a randomly-ordered column may be useless because it does not exclude any blocks. Measure before and after creating indexes using <code>EXPLAIN (ANALYZE, BUFFERS)</code> to confirm the performance benefit.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-index-types.html">B-Tree, Hash, GiST, GIN: Index Type Selection Guide</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-index-types.html">B-Tree, Hash, GiST, GIN: Index Type Selection Guide</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-index-types.html">B-Tree, Hash, GiST, GIN: Index Type Selection Guide</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-index-types.html">B-Tree, Hash, GiST, GIN: Index Type Selection Guide</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-index-types.html">B-Tree, Hash, GiST, GIN: Index Type Selection Guide</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-index-types.html">B-Tree, Hash, GiST, GIN: Index Type Selection Guide</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p></div>
     </article>

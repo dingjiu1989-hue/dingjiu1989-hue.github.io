@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/webhook-security.png",
       "datePublished": "2025-12-19",
       "dateModified": "2026-04-27",
-      "wordCount": "1530",
+      "wordCount": "1589",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/webhook-security.html"},
@@ -109,19 +111,21 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/webhook-security.png" alt="Webhook Security Best Practices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Webhook Security Best Practices</h2>
 <h3>Webhook Security Best Practices</h3>
-<h3>Webhook Security Best Practices</h3>
-<h3>Webhook Security Best Practices</h3>
-<h3>Webhook Security Best Practices</h3>
-<h3>Webhook Security Best Practices</h3>
-<h3>Webhook Security Best Practices</h3>
-<h3>Webhook Security Best Practices</h3>
-<h3>Webhook Security Best Practices</h3>
-<h3>Webhook Security Best Practices</h3>
-<h3>Webhook Security Best Practices</h3>
-<h3>Webhook Security Best Practices</h3>
-<h3>Webhook Security Best Practices</h3>
-<h3>Webhook Security Best Practices</h3>
-<h3>Webhook Security Best Practices</h3>
+<h4>Webhook Security Best Practices</h4>
+<h4>Webhook Security Best Practices</h4>
+<h4>Webhook Security Best Practices</h4>
+<h4>Webhook Security Best Practices</h4>
+<h4>Webhook Security Best Practices</h4>
+<h4>Webhook Security Best Practices</h4>
+<h4>Webhook Security Best Practices</h4>
+<h4>Webhook Security Best Practices</h4>
+<h4>Webhook Security Best Practices</h4>
+<h4>Webhook Security Best Practices</h4>
+<h4>Webhook Security Best Practices</h4>
+<h4>Webhook Security Best Practices</h4>
+<h4>Webhook Security Best Practices</h4>
+<h4>Webhook Security Best Practices</h4>
+<h4>Webhook Security Best Practices</h4>
 <p>Why Webhook Security Matters </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/webhook-security.png" alt="Webhook Security Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Webhooks are HTTP callbacks that allow services to push real-time events to your application. Unlike APIs where you initiate the request, webhooks are delivered to a public endpoint that anyone with the URL can call. Without proper security, an attacker can replay webhook events, send fake event data, or probe your internal infrastructure. </p>
 <p>Threat Model </p>
@@ -133,23 +137,23 @@
 <p>import hashlib</p>
 <p>def verify_stripe_signature(payload, sig_header, secret):</p>
 <p>"""Verify Stripe webhook signature."""</p>
-<h3>Signature format: t=timestamp,v1=signature</h3>
+<h4>Signature format: t=timestamp,v1=signature</h4>
 <p>parts = dict(item.split('=', 1) for item in sig_header.split(','))</p>
 <p>if 'v1' not in parts or 't' not in parts:</p>
 <p>return False</p>
 <p>timestamp = parts['t']</p>
 <p>expected_sig = parts['v1']</p>
-<h3>Prevent replay: signature must be within 5 minutes</h3>
+<h4>Prevent replay: signature must be within 5 minutes</h4>
 <p>if abs(int(timestamp) - time.time()) &gt; 300:</p>
 <p>return False</p>
-<h3>Compute expected signature</h3>
+<h4>Compute expected signature</h4>
 <p>signed_payload = f"{timestamp}.{payload}".encode()</p>
 <p>computed_sig = hmac.new(</p>
 <p>secret.encode(),</p>
 <p>signed_payload,</p>
 <p>hashlib.sha256</p>
 <p>).hexdigest()</p>
-<h3>Constant-time comparison</h3>
+<h4>Constant-time comparison</h4>
 <p>return hmac.compare_digest(computed_sig, expected_sig)</p>
 <p>GitHub-Style Signatures </p>
 <p>const crypto = require('crypto');</p>
@@ -203,7 +207,7 @@
 <p>@verify_webhook(WEBHOOK_SECRET)</p>
 <p>def handle_webhook():</p>
 <p>event = request.json</p>
-<h3>Process the verified event</h3>
+<h4>Process the verified event</h4>
 <p>return 'OK', 200</p>
 <p>Defense 2: Replay Protection </p>
 <p>Timestamp-Based Prevention </p>
@@ -293,6 +297,8 @@
 <p>Summary </p>
 <p>Webhook endpoints are publicly accessible by design, making them an attractive target. Always verify payload signatures using HMAC-SHA256, implement replay protection with timestamps, track idempotency keys to prevent duplicate processing, validate payload structure, and restrict by IP when possible. These controls turn a publicly accessible endpoint into a secure integration point that only processes legitimate webhook events.</p>
 <p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p></div>
     </article>

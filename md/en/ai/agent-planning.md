@@ -1,7 +1,7 @@
 ---
 title: "Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection"
 description: "Explore agent planning frameworks: ReAct for reasoning and acting, Plan-and-Execute for task decomposition, Tree of Thoughts for exploration, and self-reflectio"
-date: 2026-05-12
+date: 2026-02-13
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/agent-planning.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/ai/agent-planning.html
 
 ## Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
 
-## Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
 
-## Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+#### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
 
-## Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+#### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
 
-## Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+#### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
 
-## Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+#### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
 
-## Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+#### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
 
-## Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+#### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
 
-## Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+#### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
 
-## Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+#### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
 
-## Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+#### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
 
-## Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+#### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
 
-## Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+#### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
 
-### Introduction
+#### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+
+#### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+
+#### Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
+
+#### Introduction
 
 Planning transforms LLMs from reactive responders into proactive agents that can decompose complex goals, explore solution paths, and recover from failures. This article covers four major planning frameworks: ReAct for tight coupling of reasoning and action, Plan-and-Execute for hierarchical decomposition, Tree of Thoughts for exploring multiple reasoning paths, and self-reflection for learning from mistakes.
 
-### ReAct (Reasoning + Acting)
+#### ReAct (Reasoning + Acting)
 
 ReAct interleaves reasoning traces with tool calls, allowing the agent to think about what to do next based on current observations:
 
@@ -64,7 +70,7 @@ if "Final Answer:" in response:
 
 return response.split("Final Answer:")[-1].strip()
 
-## Parse the Thought/Action/Observation cycle
+#### Parse the Thought/Action/Observation cycle
 
 thought = self._extract(response, "Thought:")
 
@@ -124,7 +130,7 @@ return tool["function"](<**action\["args"\]>)
 
 return f"Error: Unknown tool '{action['name']}'"
 
-### Plan-and-Execute
+#### Plan-and-Execute
 
 This framework separates planning from execution. A planner creates a step-by-step plan, then an executor follows it:
 
@@ -140,31 +146,31 @@ self.tools = tools
 
 async def run(self, task: str) -> str:
 
-## Phase 1: Create a plan
+#### Phase 1: Create a plan
 
 plan = await self._create_plan(task)
 
 results = []
 
-## Phase 2: Execute each step
+#### Phase 2: Execute each step
 
 for i, step in enumerate(plan):
 
 print(f"Executing step {i+1}: {step['description']}")
 
-## Check dependencies
+#### Check dependencies
 
 context = self._gather_context(step, results)
 
 result = await self._execute_step(step, context)
 
-## Verify step completion
+#### Verify step completion
 
 verified = await self._verify_step(step, result)
 
 if not verified:
 
-## Re-plan from this point
+#### Re-plan from this point
 
 plan = await self._replan(task, i, plan, result)
 
@@ -172,7 +178,7 @@ continue
 
 results.append({"step": step, "result": result})
 
-## Phase 3: Synthesize final answer
+#### Phase 3: Synthesize final answer
 
 return await self._synthesize(task, plan, results)
 
@@ -212,7 +218,7 @@ Create a revised plan starting from the failure point.
 
 return json.loads(response)
 
-### Tree of Thoughts (ToT)
+#### Tree of Thoughts (ToT)
 
 ToT explores multiple reasoning paths simultaneously, evaluating each branch:
 
@@ -228,7 +234,7 @@ self.depth = depth
 
 def solve(self, problem: str) -> str:
 
-## Initialize the tree with root thoughts
+#### Initialize the tree with root thoughts
 
 candidates = self._generate_thoughts(problem, [])
 
@@ -238,7 +244,7 @@ best_score = float("-inf")
 
 for level in range(self.depth):
 
-## Evaluate each candidate
+#### Evaluate each candidate
 
 scored = []
 
@@ -256,7 +262,7 @@ best_score = score
 
 best_path = state
 
-## Select top-k candidates for expansion
+#### Select top-k candidates for expansion
 
 scored.sort(key=lambda x: x[1], reverse=True)
 
@@ -264,7 +270,7 @@ top_candidates = scored[:self.branches]
 
 if level < self.depth - 1:
 
-## Generate next thoughts from top candidates
+#### Generate next thoughts from top candidates
 
 candidates = []
 
@@ -292,7 +298,7 @@ Each should be a plausible continuation. Be diverse.
 
 """)
 
-## Parse response into multiple thought continuations
+#### Parse response into multiple thought continuations
 
 return [current_state + [t] for t in parse_thoughts(response)]
 
@@ -314,7 +320,7 @@ Output ONLY a number.
 
 return float(score.strip())
 
-### Reflection
+#### Reflection
 
 Reflection enables agents to learn from their mistakes during execution:
 
@@ -340,13 +346,13 @@ if self._is_successful(result):
 
 return result["output"]
 
-## Reflect on the failure
+#### Reflect on the failure
 
 reflection = self._reflect(task, result)
 
 self.reflection_log.append(reflection)
 
-## Update strategy based on reflection
+#### Update strategy based on reflection
 
 task = self._revise_task(task, reflection)
 
@@ -390,7 +396,7 @@ and avoid repeating the same mistake.
 
 """)
 
-### Choosing a Framework
+#### Choosing a Framework
 
 | Framework | Best For | When to Use |
 
@@ -404,11 +410,17 @@ and avoid repeating the same mistake.
 
 | Reflection | Error-prone environments | When learning from mistakes is critical |
 
-### Conclusion
+#### Conclusion
 
 Agent planning frameworks provide structure for LLM reasoning. ReAct couples reasoning with tool use for interactive tasks. Plan-and-Execute separates planning from execution for complex workflows. Tree of Thoughts explores multiple reasoning paths for problems with branching solutions. Reflection enables continuous improvement by learning from failures. In practice, combine these patterns: use ReAct for execution, Plan-and-Execute for structure, ToT for exploration, and Reflection for improvement.
 
 **See also:** [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>).
+
+**See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)
+
+**See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)
+
+**See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)
 
 **See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)
 

@@ -1,7 +1,7 @@
 ---
 title: "CSS Container Queries Guide: Component-Based Responsive Design Without Media Queries"
 description: "Complete guide to CSS container queries — syntax, real-world patterns, container query units, style queries, and when to still use media queries."
-date: 2026-05-12
+date: 2025-12-31
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/css-container-queries-guide.html
 ---

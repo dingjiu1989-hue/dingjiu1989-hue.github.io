@@ -1,7 +1,7 @@
 ---
 title: "Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal"
 description: "Implement Graph RAG using knowledge graphs: extract entities and relationships from documents, traverse graph connections, and combine graph retrieval with vect"
-date: 2026-05-12
+date: 2026-02-16
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/graph-rag.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/ai/graph-rag.html
 
 ## Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
 
-## Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
 
-## Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+#### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
 
-## Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+#### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
 
-## Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+#### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
 
-## Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+#### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
 
-## Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+#### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
 
-## Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+#### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
 
-## Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+#### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
 
-## Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+#### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
 
-## Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+#### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
 
-## Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+#### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
 
-## Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+#### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
 
-### Introduction
+#### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+
+#### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+
+#### Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+
+#### Introduction
 
 Traditional RAG retrieves documents based on semantic similarity. Graph RAG goes further by modeling the relationships between entities: people, companies, concepts, and their connections. This enables queries like "Which employees worked on projects managed by Alice?" that require traversing relationships rather than matching text. This article covers building knowledge graphs from documents and using them for retrieval.
 
-### Entity Extraction
+#### Entity Extraction
 
 The first step is extracting entities and their relationships from documents:
 
@@ -88,7 +94,7 @@ Text: {combined_text[:8000]}
 
 return response
 
-### Building the Knowledge Graph
+#### Building the Knowledge Graph
 
 Use a graph database like Neo4j to store and query the extracted structure:
 
@@ -104,7 +110,7 @@ def insert_entities_and_relations(self, extraction: ExtractionResult):
 
 with self.driver.session() as session:
 
-## Create entities
+#### Create entities
 
 for entity in extraction.entities:
 
@@ -122,7 +128,7 @@ description=entity.description,
 
 )
 
-## Create relationships
+#### Create relationships
 
 for rel in extraction.relationships:
 
@@ -172,7 +178,7 @@ max_depth=max_depth,
 
 return [record.data() for record in result]
 
-### Graph + Vector Hybrid Retrieval
+#### Graph + Vector Hybrid Retrieval
 
 The most powerful pattern combines graph traversal with vector similarity:
 
@@ -186,15 +192,15 @@ self.vector_store = vector_store
 
 def retrieve(self, query: str, k: int = 5) -> list[str]:
 
-## Step 1: Identify starting entities from the query
+#### Step 1: Identify starting entities from the query
 
 query_entities = self.extract_query_entities(query)
 
-## Step 2: Vector search for broader context
+#### Step 2: Vector search for broader context
 
 vector_results = self.vector_store.similarity_search(query, k=k)
 
-## Step 3: Graph traversal from identified entities
+#### Step 3: Graph traversal from identified entities
 
 graph_context = []
 
@@ -218,7 +224,7 @@ for i in range(len(path['path_nodes']))
 
 graph_context.append(context)
 
-## Step 4: Combine and rank results
+#### Step 4: Combine and rank results
 
 combined = graph_context + [doc.page_content for doc in vector_results]
 
@@ -238,17 +244,17 @@ Query: {query}
 
 return [line.strip() for line in response.strip().split("\n") if line.strip()]
 
-### Microsoft's GraphRAG Pattern
+#### Microsoft's GraphRAG Pattern
 
 Microsoft's GraphRAG uses a global-to-local search approach:
 
 def graphrag_search(query: str, graph: KnowledgeGraph, vector_store, llm) -> str:
 
-## Step 1: Local search - find directly relevant entities
+#### Step 1: Local search - find directly relevant entities
 
 local_entities = extract_query_entities(query)
 
-## Step 2: Global search - find related communities
+#### Step 2: Global search - find related communities
 
 community_context = []
 
@@ -258,11 +264,11 @@ community = graph.traverse(entity, max_depth=3)
 
 community_context.extend(community)
 
-## Step 3: Vector search for text chunks
+#### Step 3: Vector search for text chunks
 
 text_chunks = vector_store.similarity_search(query, k=10)
 
-## Step 4: Synthesize answer
+#### Step 4: Synthesize answer
 
 context_parts = []
 
@@ -288,7 +294,7 @@ Query: {query}
 
 return answer
 
-### When to Use Graph RAG
+#### When to Use Graph RAG
 
 Graph RAG excels over vector-only RAG when:
 
@@ -303,11 +309,17 @@ Graph RAG excels over vector-only RAG when:
 
 
 
-### Conclusion
+#### Conclusion
 
 Graph RAG extends vector-based retrieval with relationship traversal. Extract entities and relationships from documents to build a knowledge graph. Combine graph traversal with vector search for queries that require understanding connections. The hybrid approach handles both semantic similarity questions ("find documents about topic X") and relational questions ("how is entity A connected to entity B"). Start with vector-only RAG and add graph capabilities when your users ask questions that require understanding relationships.
 
 **See also:** [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>), [RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets](</en/ai/rag-evaluation.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>).
+
+**See also:** [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>)
+
+**See also:** [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>)
+
+**See also:** [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>)
 
 **See also:** [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>)
 

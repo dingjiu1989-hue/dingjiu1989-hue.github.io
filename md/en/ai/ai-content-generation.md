@@ -1,7 +1,7 @@
 ---
 title: "AI Content Generation Workflows"
 description: "Build production-ready AI content generation workflows with quality control, multi-stage pipelines, and human-in-the-loop review."
-date: 2026-05-11
+date: 2025-12-11
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-content-generation.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-content-generation.html
 
 ## AI Content Generation Workflows
 
-## AI Content Generation Workflows
+### AI Content Generation Workflows
 
-## AI Content Generation Workflows
+#### AI Content Generation Workflows
 
-## AI Content Generation Workflows
+#### AI Content Generation Workflows
 
-## AI Content Generation Workflows
+#### AI Content Generation Workflows
 
-## AI Content Generation Workflows
+#### AI Content Generation Workflows
 
-## AI Content Generation Workflows
+#### AI Content Generation Workflows
 
-## AI Content Generation Workflows
+#### AI Content Generation Workflows
 
-## AI Content Generation Workflows
+#### AI Content Generation Workflows
 
-## AI Content Generation Workflows
+#### AI Content Generation Workflows
 
-## AI Content Generation Workflows
+#### AI Content Generation Workflows
 
-## AI Content Generation Workflows
+#### AI Content Generation Workflows
 
-## AI Content Generation Workflows
+#### AI Content Generation Workflows
 
-### Introduction
+#### AI Content Generation Workflows
+
+#### AI Content Generation Workflows
+
+#### AI Content Generation Workflows
+
+#### Introduction
 
 AI content generation has moved beyond simple blog post generators to sophisticated production workflows that match or exceed human quality at a fraction of the cost. The key insight is that great AI-generated content comes not from a single prompt, but from a well-designed multi-stage pipeline with quality gates, human review, and continuous improvement.
 
-### Workflow Architecture
+#### Workflow Architecture
 
 A production content generation system typically has five stages:
 
@@ -170,7 +176,7 @@ Human reviewers focus on what AI cannot:
 
 Build clear review guidelines and provide side-by-side comparison with the brief. Track reviewer time and error rates to optimize the process.
 
-### Multi-Modal Generation
+#### Multi-Modal Generation
 
 Modern workflows generate supporting assets alongside text:
 
@@ -185,7 +191,7 @@ Modern workflows generate supporting assets alongside text:
 
 
 
-### Scaling Considerations
+#### Scaling Considerations
 
 **Cost optimization** : Each stage of the pipeline consumes tokens. Budgeting:
 
@@ -207,11 +213,17 @@ Modern workflows generate supporting assets alongside text:
 
 **Human scale** : One reviewer can handle 10-20 AI-generated articles per day, depending on quality requirements and article complexity.
 
-### Conclusion
+#### Conclusion
 
 Production AI content generation requires a structured, multi-stage workflow with clear quality gates. The best results come from combining AI's speed and consistency with human judgment at key decision points. Start with a simple pipeline, measure output quality, and add sophistication based on data. The goal is not to replace writers but to amplify their productivity by handling research, structure, and first drafts, letting them focus on what humans do best.
 
 **See also:** [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>).
+
+**See also:** [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>)
+
+**See also:** [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>)
+
+**See also:** [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>)
 
 **See also:** [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>)
 

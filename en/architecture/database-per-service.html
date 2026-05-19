@@ -15,7 +15,7 @@
     gtag('config', 'G-XGFYGQE9NS');
     </script>
     <meta property="og:title" content="Database per Service Pattern">
-    <meta property="og:description" content="Learn the database per service pattern for microservices data management.">
+    <meta property="og:description" content="Learn the database per service pattern for microservices data management — data isolation, eventual consistency, cross-service queries, saga patterns, and trade-offs vs. shared databases.">
     <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/database-per-service.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
@@ -25,13 +25,13 @@
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database per Service Pattern">
-    <meta name="twitter:description" content="Learn the database per service pattern for microservices data management.">
+    <meta name="twitter:description" content="Learn the database per service pattern for microservices data management — data isolation, eventual consistency, cross-service queries, saga patterns, and trade-offs vs. shared databases.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/database-per-service.png">
     <meta property="article:published_time" content="2025-12-26">
     <meta property="article:modified_time" content="2026-05-05">
     <meta property="article:tag" content="Architecture, System Design">
     <title>Database per Service Pattern — SourceHub</title>
-    <meta name="description" content="Learn the database per service pattern for microservices data management.">
+    <meta name="description" content="Learn the database per service pattern for microservices data management — data isolation, eventual consistency, cross-service queries, saga patterns, and trade-offs vs. shared databases.">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/database-per-service.html">
     <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/database-per-service.html">
@@ -43,21 +43,23 @@
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "Database per Service Pattern",
-      "description": "Learn the database per service pattern for microservices data management.",
+      "description": "Learn the database per service pattern for microservices data management — data isolation, eventual consistency, cross-service queries, saga patterns, and trade-offs vs. shared databases.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/database-per-service.png",
       "datePublished": "2025-12-26",
       "dateModified": "2026-05-05",
-      "wordCount": "1165",
+      "wordCount": "1225",
       "keywords": "Architecture, System Design",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/database-per-service.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/database-per-service-pattern-3h3j"
       ],
-      "articleBody": "Learn the database per service pattern for microservices data management."
+      "articleBody": "Learn the database per service pattern for microservices data management \u2014 data isolation, eventual consistency, cross-service queries, saga patterns, and trade-offs vs. shared databases."
     }
     </script>
     <script type="application/ld+json">
@@ -98,17 +100,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/database-per-service.png" alt="Database per Service Pattern" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Database per Service Pattern</h2>
 <h3>Database per Service Pattern</h3>
-<h3>Database per Service Pattern</h3>
-<h3>Database per Service Pattern</h3>
-<h3>Database per Service Pattern</h3>
-<h3>Database per Service Pattern</h3>
-<h3>Database per Service Pattern</h3>
-<h3>Database per Service Pattern</h3>
-<h3>Database per Service Pattern</h3>
-<h3>Database per Service Pattern</h3>
-<h3>Database per Service Pattern</h3>
-<h3>Database per Service Pattern</h3>
-<h3>Database per Service Pattern</h3>
+<h4>Database per Service Pattern</h4>
+<h4>Database per Service Pattern</h4>
+<h4>Database per Service Pattern</h4>
+<h4>Database per Service Pattern</h4>
+<h4>Database per Service Pattern</h4>
+<h4>Database per Service Pattern</h4>
+<h4>Database per Service Pattern</h4>
+<h4>Database per Service Pattern</h4>
+<h4>Database per Service Pattern</h4>
+<h4>Database per Service Pattern</h4>
+<h4>Database per Service Pattern</h4>
+<h4>Database per Service Pattern</h4>
+<h4>Database per Service Pattern</h4>
 <p>The database per service pattern is a fundamental principle of microservice architecture: each service owns its data exclusively and no other service can directly access its database. This pattern ensures loose coupling between services, allowing them to evolve independently, choose appropriate storage technologies, and scale autonomously. However, it introduces significant challenges for queries that span multiple services. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/database-per-service.png" alt="Database per Service Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Data Ownership </p>
 <p>In the database per service pattern, each service has complete ownership of its data schema, storage technology, and access patterns. No other service can read or write to the database directly—all data access must go through the owning service's API. </p>
@@ -134,7 +138,9 @@
 <p>Database per service is a powerful pattern for achieving service autonomy and independent scalability, but it requires disciplined data management, investment in cross-service query patterns, and acceptance of eventual consistency. For teams that make this investment, the pattern enables truly independent service evolution.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -146,7 +152,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/sidecar-pattern.html" class="related-card">Sidecar Pattern in Microservices Architecture</a><a href="/en/architecture/saga-pattern.html" class="related-card">Saga Pattern for Distributed Transactions</a><a href="/en/architecture/event-carried-state-transfer.html" class="related-card">Event-Carried State Transfer Pattern</a><a href="/en/architecture/backend-for-frontend.html" class="related-card">Backend for Frontend (BFF) Pattern</a></div>
+      <div class="related-grid"><a href="/en/architecture/backend-for-frontend.html" class="related-card">Backend for Frontend (BFF) Pattern</a><a href="/en/architecture/bulkhead-pattern.html" class="related-card">Bulkhead Pattern for Resilience</a><a href="/en/architecture/strangler-fig.html" class="related-card">Strangler Fig Pattern for Legacy Migration</a><a href="/en/architecture/saga-pattern.html" class="related-card">Saga Pattern for Distributed Transactions</a></div>
     </section>
     
   </div>

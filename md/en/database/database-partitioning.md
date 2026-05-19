@@ -1,7 +1,7 @@
 ---
 title: "Database Table Partitioning: Range, List, Hash"
 description: "Explore PostgreSQL table partitioning methods including range, list, and hash. Learn partition pruning, maintenance strategies, and performance implications."
-date: 2026-05-12
+date: 2026-04-03
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/database-partitioning.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/database-partitioning.html
 
 ## Database Table Partitioning: Range, List, Hash
 
-## Database Table Partitioning: Range, List, Hash
+### Database Table Partitioning: Range, List, Hash
 
-## Database Table Partitioning: Range, List, Hash
+#### Database Table Partitioning: Range, List, Hash
 
-## Database Table Partitioning: Range, List, Hash
+#### Database Table Partitioning: Range, List, Hash
 
-## Database Table Partitioning: Range, List, Hash
+#### Database Table Partitioning: Range, List, Hash
 
-## Database Table Partitioning: Range, List, Hash
+#### Database Table Partitioning: Range, List, Hash
 
-## Database Table Partitioning: Range, List, Hash
+#### Database Table Partitioning: Range, List, Hash
 
-## Database Table Partitioning: Range, List, Hash
+#### Database Table Partitioning: Range, List, Hash
 
-## Database Table Partitioning: Range, List, Hash
+#### Database Table Partitioning: Range, List, Hash
 
-## Database Table Partitioning: Range, List, Hash
+#### Database Table Partitioning: Range, List, Hash
 
-## Database Table Partitioning: Range, List, Hash
+#### Database Table Partitioning: Range, List, Hash
 
-## Database Table Partitioning: Range, List, Hash
+#### Database Table Partitioning: Range, List, Hash
+
+#### Database Table Partitioning: Range, List, Hash
+
+#### Database Table Partitioning: Range, List, Hash
+
+#### Database Table Partitioning: Range, List, Hash
 
 Database Table Partitioning: Range, List, Hash 
 
@@ -233,6 +239,12 @@ Common Pitfalls
 Partitioning is a powerful technique when applied deliberately. Measure your workload patterns, choose the right method, and automate partition lifecycle management to keep your database performing predictably as it grows.
 
 **See also:** [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>).
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
 

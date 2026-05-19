@@ -1,7 +1,7 @@
 ---
 title: "LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits"
 description: "Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rate limiting strategies for production sys"
-date: 2026-05-12
+date: 2026-02-16
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/llm-api-design.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-api-design.html
 
 ## LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
 
-## LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
 
-## LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+#### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
 
-## LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+#### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
 
-## LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+#### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
 
-## LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+#### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
 
-## LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+#### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
 
-## LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+#### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
 
-## LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+#### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
 
-## LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+#### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
 
-## LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+#### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
 
-## LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+#### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
 
-## LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+#### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
 
-### Introduction
+#### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+
+#### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+
+#### LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+
+#### Introduction
 
 Designing APIs that wrap large language models requires handling concerns that traditional REST APIs do not face: streaming token-by-token responses, enforcing structured output schemas, managing unpredictable latency, and protecting against runaway costs. This guide covers the four critical pillars of LLM API design with production-ready patterns.
 
-### Streaming Responses
+#### Streaming Responses
 
 Streaming is the standard way to return LLM outputs. Instead of waiting for the full response, the client receives tokens as they are generated:
 
@@ -98,7 +104,7 @@ headers={
 
 The Server-Sent Events protocol is the most compatible streaming format. Each `data:` line is a new token chunk. Clients use `EventSource` or fetch with `ReadableStream` to consume the stream progressively.
 
-### Structured Output
+#### Structured Output
 
 Raw LLM text is unreliable for programmatic consumption. Use structured output modes to enforce JSON schemas:
 
@@ -172,7 +178,7 @@ prompt += f"\n\nPrevious attempt failed: {e}. Please fix the JSON."
 
 return None
 
-### Error Handling
+#### Error Handling
 
 LLM APIs fail in distinctive ways. Build a retry strategy around each failure mode:
 
@@ -226,7 +232,7 @@ raise
 
 Each error type deserves a different handler: rate limits get exponential backoff, context windows trigger input truncation, and content filter errors should be logged and escalated.
 
-### Rate Limiting
+#### Rate Limiting
 
 Protect your API from abuse and cost spikes with layered rate limiting:
 
@@ -280,11 +286,17 @@ await rate_limiter.check(user_id, estimated)
 
 return await generate_response(body["prompt"])
 
-### Conclusion
+#### Conclusion
 
 Designing LLM APIs requires balancing responsiveness with cost control. Stream responses for user experience, enforce structured output for programmatic reliability, implement retry logic calibrated to each error type, and gate access with rate and budget limits. These four patterns form the foundation of any production LLM service.
 
 **See also:** [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>).
+
+**See also:** [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>)
+
+**See also:** [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>)
+
+**See also:** [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>)
 
 **See also:** [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>)
 

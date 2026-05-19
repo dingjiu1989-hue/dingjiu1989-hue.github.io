@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/threat-modeling.png",
       "datePublished": "2026-03-19",
       "dateModified": "2026-05-15",
-      "wordCount": "1404",
+      "wordCount": "1433",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/threat-modeling.html"},
@@ -99,40 +101,42 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-modeling.png" alt="Threat Modeling" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Threat Modeling</h2>
 <h3>Threat Modeling</h3>
-<h3>Threat Modeling</h3>
-<h3>Threat Modeling</h3>
-<h3>Threat Modeling</h3>
-<h3>Threat Modeling</h3>
-<h3>Threat Modeling</h3>
-<h3>Threat Modeling</h3>
-<h3>Threat Modeling</h3>
-<h3>Threat Modeling</h3>
-<h3>Threat Modeling</h3>
-<h3>Threat Modeling</h3>
-<h3>Threat Modeling</h3>
+<h4>Threat Modeling</h4>
+<h4>Threat Modeling</h4>
+<h4>Threat Modeling</h4>
+<h4>Threat Modeling</h4>
+<h4>Threat Modeling</h4>
+<h4>Threat Modeling</h4>
+<h4>Threat Modeling</h4>
+<h4>Threat Modeling</h4>
+<h4>Threat Modeling</h4>
+<h4>Threat Modeling</h4>
+<h4>Threat Modeling</h4>
+<h4>Threat Modeling</h4>
+<h4>Threat Modeling</h4>
 <p>Why Threat Model? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-modeling.png" alt="Threat Modeling" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Threat modeling identifies potential security issues during design, when they are cheapest to fix. It shifts security left and builds protection into architecture. </p>
 <p>STRIDE Methodology </p>
 <p>Microsoft's STRIDE categorizes threats: </p>
 <p>| Category | Definition | Example | |----------|------------|---------| | Spoofing | Impersonating someone | Fake login page | | Tampering | Modifying data | Altering database records | | Repudiation | Denying actions | Missing audit logs | | Information Disclosure | Exposing data | SQL injection | | Denial of Service | Disrupting service | DDoS attack | | Elevation of Privilege | Gaining unauthorized access | Buffer overflow | </p>
-<h3>STRIDE threat analysis</h3>
+<h4>STRIDE threat analysis</h4>
 <p>def analyze_with_stride(component, data_flow):</p>
 <p>threats = []</p>
-<h3>Spoofing</h3>
+<h4>Spoofing</h4>
 <p>if not component.get("authentication"):</p>
 <p>threats.append({</p>
 <p>"category": "Spoofing",</p>
 <p>"threat": f"Attacker could impersonate {component['name']}",</p>
 <p>"mitigation": "Implement mutual TLS authentication"</p>
 <p>})</p>
-<h3>Tampering</h3>
+<h4>Tampering</h4>
 <p>if not data_flow.get("integrity_check"):</p>
 <p>threats.append({</p>
 <p>"category": "Tampering",</p>
 <p>"threat": f"Data in {data_flow['name']} could be modified",</p>
 <p>"mitigation": "Use message signing or HMAC"</p>
 <p>})</p>
-<h3>Information Disclosure</h3>
+<h4>Information Disclosure</h4>
 <p>if not data_flow.get("encryption"):</p>
 <p>threats.append({</p>
 <p>"category": "Information Disclosure",</p>
@@ -192,7 +196,7 @@
 <p>def add_mitigation(self, mitigation):</p>
 <p>self.mitigations.append(mitigation)</p>
 <p>return self</p>
-<h3>Example: Attack tree for credential theft</h3>
+<h4>Example: Attack tree for credential theft</h4>
 <p>root = AttackTreeNode(</p>
 <p>"Steal User Credentials",</p>
 <p>"Attacker goal: acquire valid credentials"</p>
@@ -216,10 +220,10 @@
 <p>"Exploit browser vulnerability"</p>
 <p>)))</p>
 <p>Threat Modeling Tools </p>
-<h3>Microsoft Threat Modeling Tool</h3>
-<h3>OWASP Threat Dragon</h3>
-<h3>PyTM - Pythonic threat modeling</h3>
-<h3>Example: PyTM model</h3>
+<h4>Microsoft Threat Modeling Tool</h4>
+<h4>OWASP Threat Dragon</h4>
+<h4>PyTM - Pythonic threat modeling</h4>
+<h4>Example: PyTM model</h4>
 <p>from pytm import TM, Server, Dataflow, Boundary</p>
 <p>tm = TM("Web Application")</p>
 <p>internet = Boundary("Internet")</p>
@@ -231,7 +235,7 @@
 <p>request.data = "SQL Query"</p>
 <p>tm.process()</p>
 <p>Integration with Development </p>
-<h3>Threat modeling in CI</h3>
+<h4>Threat modeling in CI</h4>
 <p>threat_modeling_pipeline:</p>
 <p>triggers:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- new_feature_creation</p>
@@ -249,6 +253,8 @@
 <p>Conclusion </p>
 <p>Threat modeling is an essential security practice. Use STRIDE for threat identification, DREAD for prioritization, and PASTA for comprehensive analysis. Build attack trees to explore attacker paths. Integrate threat modeling into your development lifecycle. Automate where possible but maintain human oversight for design-level analysis. The goal is to find and fix security issues before they reach production.</p>
 <p><strong>See also:</strong> <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/soc-operations.html">SOC Operations</a></p>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/soc-operations.html">SOC Operations</a></p>
 <p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/soc-operations.html">SOC Operations</a></p>
 <p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/soc-operations.html">SOC Operations</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/soc-operations.html">SOC Operations</a></p></div>
     </article>

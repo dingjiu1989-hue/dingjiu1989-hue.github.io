@@ -1,7 +1,7 @@
 ---
 title: "Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja"
 description: "Compare reverse engineering tools: Ghidra for free comprehensive analysis, IDA Free for industry standard disassembly, radare2 for command-line reverse engineer"
-date: 2026-05-12
+date: 2026-02-05
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/reverse-engineering.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/tools/reverse-engineering.html
 
 ## Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
 
-## Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
 
-## Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+#### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
 
-## Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+#### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
 
-## Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+#### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
 
-## Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+#### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
 
-## Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+#### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
 
-## Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+#### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
 
-## Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+#### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
 
-## Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+#### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
 
-## Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+#### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
 
-## Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+#### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
 
-## Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+#### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
 
-### Introduction
+#### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+
+#### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+
+#### Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
+
+#### Introduction
 
 Reverse engineering is the art of understanding how software works without access to its source code. Modern reverse engineering tools provide disassembly, decompilation, debugging, and scripting capabilities. This article compares four major platforms: Ghidra, IDA Free, radare2, and Binary Ninja.
 
-### Ghidra
+#### Ghidra
 
 NSA's open-source reverse engineering framework:
 
@@ -113,7 +119,7 @@ println(" Referenced by: " + ref.getFromAddress());
 
 
 
-## Ghidra Python script
+#### Ghidra Python script
 
 from ghidra.program.model.symbol import SourceType
 
@@ -139,11 +145,11 @@ print(f" Referenced from: {ref.getFromAddress()}")
 
 **Key strengths** : Free and open-source, excellent decompiler, collaborative features, extensive processor support, active development.
 
-### IDA Free
+#### IDA Free
 
 Hex-Rays' industry-standard disassembler (free edition):
 
-## IDAPython scripting
+#### IDAPython scripting
 
 import idautils
 
@@ -159,7 +165,7 @@ func = ida_funcs.get_func(func_addr)
 
 name = ida_funcs.get_func_name(func_addr)
 
-## Identify functions with many cross-references
+#### Identify functions with many cross-references
 
 xref_count = len(list(idautils.CodeRefsTo(func_addr, 0)))
 
@@ -167,7 +173,7 @@ if xref_count > 20:
 
 print(f"Hot function: {name} at {hex(func_addr)} ({xref_count} refs)")
 
-## Check if function references suspicious strings
+#### Check if function references suspicious strings
 
 for ref in idautils.XrefsFrom(func_addr):
 
@@ -179,7 +185,7 @@ if string_val and b"password" in string_val.lower():
 
 print(f"Password reference in {name} at {hex(func_addr)}")
 
-## Rename subroutines based on string references
+#### Rename subroutines based on string references
 
 for addr, name in idautils.Names():
 
@@ -201,11 +207,11 @@ break
 
 **Limitations of Free edition** : No decompiler (Hex-Rays decompiler is paid), x86/x64 only, no collaborative features.
 
-### radare2
+#### radare2
 
 The most powerful command-line reverse engineering framework:
 
-## Open a binary
+#### Open a binary
 
 r2 ./binary
 
@@ -213,7 +219,7 @@ r2 -d ./binary # Debug mode
 
 r2 -A ./binary # Analyze automatically
 
-## Common commands
+#### Common commands
 
 aaaa # Full analysis
 
@@ -229,7 +235,7 @@ V # Visual mode (arrow keys to navigate)
 
 VV # Graph view (control flow graph)
 
-## Searching
+#### Searching
 
 / \x00\x00\x00 # Search for bytes
 
@@ -239,7 +245,7 @@ VV # Graph view (control flow graph)
 
 wx 9090 # Write bytes (patch)
 
-## Analysis
+#### Analysis
 
 afvn new_name var_4 # Rename local variable
 
@@ -249,29 +255,29 @@ axt 0x401000 # Find XREFs to address
 
 axf 0x401000 # Find XREFs from address
 
-## Output formats
+#### Output formats
 
 pdf > output.asm # Save disassembly
 
 pdr # Decompiled pseudocode (experimental)
 
-## Scripting (r2pipe)
+#### Scripting (r2pipe)
 
 r2 -q -c 'aaa; afl~main' ./binary
 
-### Binary Ninja
+#### Binary Ninja
 
 Modern reverse engineering platform with Python scripting:
 
 import binaryninja as bn
 
-## Open binary
+#### Open binary
 
 bv = bn.BinaryViewType.get_view_of_file("./binary")
 
 bv.update_analysis()
 
-## Analyze functions
+#### Analyze functions
 
 for func in bv.functions:
 
@@ -281,7 +287,7 @@ print(f" Basic blocks: {len(func.basic_blocks)}")
 
 print(f" Callers: {len(func.callers)}")
 
-## High-level IL
+#### High-level IL
 
 for block in func.high_level_il:
 
@@ -289,7 +295,7 @@ for instr in block:
 
 print(f" HLIL: {instr}")
 
-## Medium-level IL (more detailed)
+#### Medium-level IL (more detailed)
 
 for block in func.medium_level_il:
 
@@ -299,7 +305,7 @@ if "call" in str(instr).lower():
 
 print(f" Call: {instr}")
 
-## Find all calls to a specific function
+#### Find all calls to a specific function
 
 target = bv.get_function_at(bv.symbols["strcpy"][0].address)
 
@@ -309,7 +315,7 @@ caller = ref.function
 
 print(f"strcpy called from: {caller.name} @ {hex(ref.address)}")
 
-## Data flow analysis
+#### Data flow analysis
 
 var = func.mlil.ssa_form[42].dest
 
@@ -319,7 +325,7 @@ for use in uses:
 
 print(f" Used at: {use.address}")
 
-### Comparison
+#### Comparison
 
 | Feature | Ghidra | IDA Free | radare2 | Binary Ninja |
 
@@ -337,7 +343,7 @@ print(f" Used at: {use.address}")
 
 | Learning curve | High | High | Very high | Medium |
 
-### Recommendations
+#### Recommendations
 
   * **Starting reverse engineering** : Ghidra provides the best free experience with its decompiler and user-friendly interface.
 
@@ -355,6 +361,12 @@ print(f" Used at: {use.address}")
 All four tools are capable of serious reverse engineering work. Ghidra offers the best free decompiler and the broadest platform support. Binary Ninja has the cleanest API for scripting. radare2 is unbeatable for command-line automation.
 
 **See also:** [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling](</en/tools/memory-analysis.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>).
+
+**See also:** [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
+
+**See also:** [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
+
+**See also:** [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
 
 **See also:** [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
 

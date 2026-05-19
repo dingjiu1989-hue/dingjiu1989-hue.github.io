@@ -1,7 +1,7 @@
 ---
 title: "Timeout and Retry Patterns"
 description: "Deadline propagation, exponential backoff, jitter, circuit breaker integration, and retry best practices"
-date: 2026-05-12
+date: 2026-04-30
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/timeout-retry-patterns.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/timeout-retry-patterns.ht
 
 ## Timeout and Retry Patterns
 
-## Timeout and Retry Patterns
+### Timeout and Retry Patterns
 
-## Timeout and Retry Patterns
+#### Timeout and Retry Patterns
 
-## Timeout and Retry Patterns
+#### Timeout and Retry Patterns
 
-## Timeout and Retry Patterns
+#### Timeout and Retry Patterns
 
-## Timeout and Retry Patterns
+#### Timeout and Retry Patterns
 
-## Timeout and Retry Patterns
+#### Timeout and Retry Patterns
 
-## Timeout and Retry Patterns
+#### Timeout and Retry Patterns
 
-## Timeout and Retry Patterns
+#### Timeout and Retry Patterns
 
-## Timeout and Retry Patterns
+#### Timeout and Retry Patterns
 
-## Timeout and Retry Patterns
+#### Timeout and Retry Patterns
 
-## Timeout and Retry Patterns
+#### Timeout and Retry Patterns
+
+#### Timeout and Retry Patterns
+
+#### Timeout and Retry Patterns
+
+#### Timeout and Retry Patterns
 
 Timeouts and retries are the most basic building blocks of resilient distributed systems, yet they are among the most commonly misconfigured. A timeout that is too short causes unnecessary failures under normal load spikes. A timeout that is too long causes cascading resource exhaustion. Retries without backpressure amplify failure. Getting these patterns right requires understanding the tradeoffs and the interactions between them. 
 
@@ -59,3 +65,9 @@ Consistent configuration across services is essential but elusive. Timeout and r
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
 
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
+
+**See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>)
+
+**See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>)
+
+**See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>)

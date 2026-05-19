@@ -1,7 +1,7 @@
 ---
 title: "Best Feature Flag Tools 2026: LaunchDarkly vs Split vs Flagsmith vs PostHog"
 description: "Compare feature flag and experimentation platforms for safe deployments, A/B testing, and gradual rollouts."
-date: 2026-05-08
+date: 2025-10-31
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-feature-flag-tools.html
 ---

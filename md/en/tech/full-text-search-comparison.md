@@ -1,7 +1,7 @@
 ---
 title: "Full-Text Search Implementation: Elasticsearch vs Meilisearch vs PostgreSQL FTS (2026)"
 description: "Compare search engines for your application: Elasticsearch (powerful, complex), Meilisearch (developer-friendly, fast), and PostgreSQL full-text search (no extra infrastructure). Benchmarks, setup guides, and decision matrix."
-date: 2026-05-08
+date: 2025-10-15
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/full-text-search-comparison.html
 ---

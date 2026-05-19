@@ -1,7 +1,7 @@
 ---
 title: "AI API Cost Optimization"
 description: "Strategies for reducing LLM API costs including prompt compression, caching, model selection, batching, and token budgeting."
-date: 2026-05-11
+date: 2025-12-11
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-api-cost-optimization.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-api-cost-optimization.html
 
 ## AI API Cost Optimization
 
-## AI API Cost Optimization
+### AI API Cost Optimization
 
-## AI API Cost Optimization
+#### AI API Cost Optimization
 
-## AI API Cost Optimization
+#### AI API Cost Optimization
 
-## AI API Cost Optimization
+#### AI API Cost Optimization
 
-## AI API Cost Optimization
+#### AI API Cost Optimization
 
-## AI API Cost Optimization
+#### AI API Cost Optimization
 
-## AI API Cost Optimization
+#### AI API Cost Optimization
 
-## AI API Cost Optimization
+#### AI API Cost Optimization
 
-## AI API Cost Optimization
+#### AI API Cost Optimization
 
-## AI API Cost Optimization
+#### AI API Cost Optimization
 
-## AI API Cost Optimization
+#### AI API Cost Optimization
 
-## AI API Cost Optimization
+#### AI API Cost Optimization
 
-### Introduction
+#### AI API Cost Optimization
+
+#### AI API Cost Optimization
+
+#### AI API Cost Optimization
+
+#### Introduction
 
 LLM API costs can quickly become the largest line item in an AI application's budget. A single production application processing millions of requests can incur monthly API costs ranging from hundreds to hundreds of thousands of dollars. This guide covers proven strategies for reducing AI API costs by 50-80% without sacrificing quality.
 
-### Understanding Pricing Models
+#### Understanding Pricing Models
 
 Most LLM APIs charge per token — typically at different rates for input and output:
 
@@ -57,7 +63,7 @@ Most LLM APIs charge per token — typically at different rates for input and ou
 
 Output tokens are typically 3-6x more expensive than input tokens. This asymmetry has major implications for optimization strategy.
 
-### Strategy 1: Model Selection
+#### Strategy 1: Model Selection
 
 **Use the cheapest model that meets your requirements.** Most applications over-index on capability:
 
@@ -92,7 +98,7 @@ return "claude-3-opus" # $15/M input
 
 This pattern alone can reduce costs by 60-80% while maintaining overall quality.
 
-### Strategy 2: Prompt Optimization
+#### Strategy 2: Prompt Optimization
 
 **Shorter prompts cost less.** Every token in your system prompt, few-shot examples, and retrieved context costs money.
 
@@ -107,7 +113,7 @@ This pattern alone can reduce costs by 60-80% while maintaining overall quality.
 
 
 
-### Strategy 3: Caching
+#### Strategy 3: Caching
 
 Prompt caching can cut input token costs by 50-90% for repeated system prompts and contexts:
 
@@ -157,7 +163,7 @@ return response
 
 For semantic caching (similar but not identical queries), use embedding similarity to find cache hits.
 
-### Strategy 4: Batching and Rate Limiting
+#### Strategy 4: Batching and Rate Limiting
 
   * **Request batching** : Send multiple prompts in a single API call when the provider supports it (Google, Together, OpenAI batch API)
 
@@ -168,7 +174,7 @@ For semantic caching (similar but not identical queries), use embedding similari
 
 
 
-### Strategy 5: Smart Output Management
+#### Strategy 5: Smart Output Management
 
 **Limit output tokens aggressively.** Each output token is 3-6x the cost of an input token:
 
@@ -183,7 +189,7 @@ For semantic caching (similar but not identical queries), use embedding similari
 
 
 
-### Strategy 6: Hybrid Architecture
+#### Strategy 6: Hybrid Architecture
 
 Don't use LLMs for everything. A hybrid architecture combines cheap deterministic code with expensive AI calls:
 
@@ -198,7 +204,7 @@ Don't use LLMs for everything. A hybrid architecture combines cheap deterministi
 
 
 
-### Monitoring and Budgeting
+#### Monitoring and Budgeting
 
 Implement cost tracking from day one:
 
@@ -213,11 +219,17 @@ Implement cost tracking from day one:
 
 
 
-### Conclusion
+#### Conclusion
 
 LLM API costs are manageable with the right strategies. The most impactful levers are model selection (using cheap models whenever possible), prompt optimization (shorter prompts cost less), caching (avoid recomputing the same thing), and hybrid architectures (use deterministic code where it suffices). Start by measuring your current token usage and identifying the biggest opportunities, then implement optimizations in order of impact.
 
 **See also:** [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>).
+
+**See also:** [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)
+
+**See also:** [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)
+
+**See also:** [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)
 
 **See also:** [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)
 

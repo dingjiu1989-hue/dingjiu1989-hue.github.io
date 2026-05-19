@@ -1,7 +1,7 @@
 ---
 title: "AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection"
 description: "Monitor LLM applications in production: track latency percentiles, token consumption, error rates by type, and detect response drift with automated alerting."
-date: 2026-05-12
+date: 2026-02-14
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-monitoring-alerting.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-monitoring-alerting.html
 
 ## AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
 
-## AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
 
-## AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+#### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
 
-## AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+#### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
 
-## AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+#### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
 
-## AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+#### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
 
-## AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+#### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
 
-## AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+#### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
 
-## AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+#### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
 
-## AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+#### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
 
-## AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+#### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
 
-## AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+#### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
 
-## AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+#### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
 
-### Introduction
+#### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+
+#### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+
+#### AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+
+#### Introduction
 
 AI applications introduce new monitoring dimensions beyond traditional infrastructure metrics. LLM responses can be slow, expensive, incorrect, or suddenly change behavior when providers update models. This article covers the metrics, tools, and alerting strategies for production AI monitoring, including drift detection that catches quality degradation before users complain.
 
-### Core Metrics
+#### Core Metrics
 
 Every AI application should track these foundational metrics:
 
@@ -106,7 +112,7 @@ self.token_usage.labels(provider=provider, model=model, token_type="output").inc
 
 self.cost_total.labels(provider=provider, model=model).inc(cost)
 
-### Token Usage Tracking
+#### Token Usage Tracking
 
 Monitor token consumption per user, feature, and time period:
 
@@ -162,7 +168,7 @@ WHERE user_id = $1 AND DATE(timestamp) = CURRENT_DATE
 
 return (row["today_cost"] or 0) < daily_budget
 
-### Error Rate Monitoring
+#### Error Rate Monitoring
 
 LLM applications experience distinctive error types:
 
@@ -214,7 +220,7 @@ alerts.append(f"Error rate {rate:.1%} for {key} exceeds threshold {self.alert_th
 
 return alerts
 
-### Drift Detection
+#### Drift Detection
 
 The most critical AI-specific monitoring: detect when model behavior changes:
 
@@ -274,7 +280,7 @@ change = abs(current_rate - baseline_rate)
 
 return {"changed": change > 0.05, "baseline": baseline_rate, "current": current_rate, "change": change}
 
-### Alerting Configuration
+#### Alerting Configuration
 
 class AIAlertManager:
 
@@ -288,7 +294,7 @@ def check_and_alert(self, metrics: dict):
 
 alerts = []
 
-## Latency alerts
+#### Latency alerts
 
 if metrics.get("p99_latency_ms", 0) > 10000:
 
@@ -296,7 +302,7 @@ alerts.append(Alert(severity="critical", title="High P99 latency",
 
 message=f"P99 latency is {metrics['p99_latency_ms']}ms"))
 
-## Error rate alerts
+#### Error rate alerts
 
 if metrics.get("error_rate", 0) > 0.05:
 
@@ -304,7 +310,7 @@ alerts.append(Alert(severity="critical", title="Elevated error rate",
 
 message=f"Error rate is {metrics['error_rate']:.1%}"))
 
-## Cost anomaly alerts
+#### Cost anomaly alerts
 
 if metrics.get("daily_cost", 0) > metrics.get("daily_budget", float("inf")) * 1.2:
 
@@ -312,7 +318,7 @@ alerts.append(Alert(severity="warning", title="Cost anomaly detected",
 
 message=f"Cost ${metrics['daily_cost']:.2f} exceeds 120% of budget"))
 
-## Drift alerts
+#### Drift alerts
 
 if metrics.get("drift_detected", False):
 
@@ -322,11 +328,17 @@ message=f"Drift score: {metrics.get('drift_score', 0):.3f}"))
 
 return alerts
 
-### Conclusion
+#### Conclusion
 
 AI monitoring extends traditional observability with LLM-specific metrics. Track latency percentiles (P50, P95, P99) to detect slowdowns. Monitor token usage and cost per user and feature to control spending. Categorize errors by type (rate limit, context window, content filter) to identify provider issues. Most importantly, implement drift detection to catch subtle quality changes when models are updated or system prompts are modified. Alert on all four dimensions and investigate any metric that deviates more than 20% from its baseline.
 
 **See also:** [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>).
+
+**See also:** [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>)
+
+**See also:** [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>)
+
+**See also:** [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>)
 
 **See also:** [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>)
 

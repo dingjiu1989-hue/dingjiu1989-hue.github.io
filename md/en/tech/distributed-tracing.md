@@ -1,7 +1,7 @@
 ---
 title: "Distributed Tracing with OpenTelemetry"
 description: "Implement distributed tracing with OpenTelemetry covering spans, context propagation, sampling strategies, Jaeger/Zipkin visualization, and log/metric correlation."
-date: 2026-05-12
+date: 2025-12-30
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/distributed-tracing.html
 ---
@@ -10,37 +10,43 @@ url: https://dingjiu1989-hue.github.io/en/tech/distributed-tracing.html
 
 ## Distributed Tracing with OpenTelemetry
 
-## Distributed Tracing with OpenTelemetry
+### Distributed Tracing with OpenTelemetry
 
-## Distributed Tracing with OpenTelemetry
+#### Distributed Tracing with OpenTelemetry
 
-## Distributed Tracing with OpenTelemetry
+#### Distributed Tracing with OpenTelemetry
 
-## Distributed Tracing with OpenTelemetry
+#### Distributed Tracing with OpenTelemetry
 
-## Distributed Tracing with OpenTelemetry
+#### Distributed Tracing with OpenTelemetry
 
-## Distributed Tracing with OpenTelemetry
+#### Distributed Tracing with OpenTelemetry
 
-## Distributed Tracing with OpenTelemetry
+#### Distributed Tracing with OpenTelemetry
 
-## Distributed Tracing with OpenTelemetry
+#### Distributed Tracing with OpenTelemetry
 
-## Distributed Tracing with OpenTelemetry
+#### Distributed Tracing with OpenTelemetry
 
-## Distributed Tracing with OpenTelemetry
+#### Distributed Tracing with OpenTelemetry
 
-## Distributed Tracing with OpenTelemetry
+#### Distributed Tracing with OpenTelemetry
 
-## Distributed Tracing with OpenTelemetry
+#### Distributed Tracing with OpenTelemetry
 
-## Distributed Tracing with OpenTelemetry
+#### Distributed Tracing with OpenTelemetry
 
-### Introduction
+#### Distributed Tracing with OpenTelemetry
+
+#### Distributed Tracing with OpenTelemetry
+
+#### Distributed Tracing with OpenTelemetry
+
+#### Introduction
 
 Distributed tracing provides end-to-end visibility into requests as they traverse multiple services. Unlike logs (which are service-local) and metrics (which are aggregate), traces capture the causal relationship between operations in a distributed system. OpenTelemetry has become the industry standard for instrumentation, offering a unified API for traces, metrics, and logs. This article covers implementing distributed tracing with OpenTelemetry in production.
 
-### Core Concepts: Traces, Spans, and Context
+#### Core Concepts: Traces, Spans, and Context
 
 A trace represents a complete request flow. Each unit of work within a trace is a span, carrying metadata about timing, status, and parent-child relationships:
 
@@ -98,7 +104,7 @@ span.end();
 
 }
 
-### Context Propagation
+#### Context Propagation
 
 Propagation carries trace context across service boundaries. For HTTP services, the `W3C TraceContext` format is standard:
 
@@ -182,11 +188,11 @@ span.end();
 
 });
 
-### Sampling Strategies
+#### Sampling Strategies
 
 Sampling controls the volume of traces collected. Use head-based sampling for simplicity or tail-based for intelligent selection:
 
-## OpenTelemetry Collector: tail-based sampling
+#### OpenTelemetry Collector: tail-based sampling
 
 processors:
 
@@ -274,11 +280,11 @@ return { decision: SamplingDecision.RECORD_AND_SAMPLED };
 
 }
 
-### Visualization with Jaeger and Zipkin
+#### Visualization with Jaeger and Zipkin
 
 Jaeger provides rich trace visualization and analysis capabilities:
 
-## docker-compose.yml for Jaeger
+#### docker-compose.yml for Jaeger
 
 services:
 
@@ -328,7 +334,7 @@ receivers: [otlp]
 
 exporters: [jaeger]
 
-### Baggage Propagation
+#### Baggage Propagation
 
 Baggage carries non-sampling key-value pairs across service boundaries for contextual information:
 
@@ -362,7 +368,7 @@ return baggage?.getEntry("user.id")?.value;
 
 }
 
-### Correlation with Logs and Metrics
+#### Correlation with Logs and Metrics
 
 Link traces to logs using `trace_id` and `span_id`:
 
@@ -410,7 +416,7 @@ trace_id: spanContext?.traceId,
 
 }
 
-### Production Configuration
+#### Production Configuration
 
 Deploy the OpenTelemetry Collector as a sidecar or DaemonSet for centralized configuration:
 
@@ -443,6 +449,12 @@ ports:
 Instrumentation should be additive and never break business logic. Start with critical paths (payment, auth, order creation) and expand coverage iteratively. A well-instrumented system reduces mean time to diagnosis from hours to minutes.
 
 **See also:** [Monitoring and Alerting Setup](</en/tech/monitoring-alerting-setup.html>), [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>).
+
+**See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
+
+**See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
+
+**See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
 
 **See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
 

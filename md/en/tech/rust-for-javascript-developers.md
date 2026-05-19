@@ -1,7 +1,7 @@
 ---
 title: "Rust for JavaScript Developers: Complete Learning Path (2026)"
 description: "Learn Rust from a JavaScript/TypeScript perspective — ownership, borrowing, async, and building your first Rust project with practical comparisons."
-date: 2026-05-08
+date: 2025-10-17
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/rust-for-javascript-developers.html
 ---

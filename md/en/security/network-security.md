@@ -1,7 +1,7 @@
 ---
 title: "Network Security Fundamentals"
 description: "Core network security concepts: firewalls, VPNs, IDS/IPS, zero-trust networking, segmentation, and micro-segmentation."
-date: 2026-05-12
+date: 2026-03-05
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/network-security.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/security/network-security.html
 
 ## Network Security Fundamentals
 
-## Network Security Fundamentals
+### Network Security Fundamentals
 
-## Network Security Fundamentals
+#### Network Security Fundamentals
 
-## Network Security Fundamentals
+#### Network Security Fundamentals
 
-## Network Security Fundamentals
+#### Network Security Fundamentals
 
-## Network Security Fundamentals
+#### Network Security Fundamentals
 
-## Network Security Fundamentals
+#### Network Security Fundamentals
 
-## Network Security Fundamentals
+#### Network Security Fundamentals
 
-## Network Security Fundamentals
+#### Network Security Fundamentals
 
-## Network Security Fundamentals
+#### Network Security Fundamentals
 
-## Network Security Fundamentals
+#### Network Security Fundamentals
 
-## Network Security Fundamentals
+#### Network Security Fundamentals
 
-## Network Security Fundamentals
+#### Network Security Fundamentals
+
+#### Network Security Fundamentals
+
+#### Network Security Fundamentals
+
+#### Network Security Fundamentals
 
 Network security protects the communication channels between systems. As organizations move to the cloud and adopt zero-trust architectures, traditional perimeter-based network security is giving way to more granular, identity-aware approaches. This article covers the foundational concepts every developer and security practitioner needs.
 
-### Firewalls
+#### Firewalls
 
 Firewalls filter network traffic based on pre-defined rules. They are the first line of defense in network security.
 
@@ -60,7 +66,7 @@ Stateful firewalls maintain a connection table. They track the state of active c
 
 NGFWs combine traditional firewall capabilities with application-layer inspection, intrusion prevention, and threat intelligence. They can identify applications regardless of port or protocol and enforce policies based on user identity.
 
-## iptables stateful rule example
+#### iptables stateful rule example
 
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
@@ -70,7 +76,7 @@ iptables -A INPUT -m state --state NEW -p tcp --dport 80 -j ACCEPT
 
 iptables -A INPUT -j DROP
 
-### Virtual Private Networks (VPNs)
+#### Virtual Private Networks (VPNs)
 
 VPNs create encrypted tunnels between endpoints over untrusted networks. They extend a private network across a public network, allowing remote users and branch offices to access internal resources.
 
@@ -78,7 +84,7 @@ VPNs create encrypted tunnels between endpoints over untrusted networks. They ex
 
 Connects entire networks to each other, such as an office to a cloud VPC. AWS VPN, Azure VPN Gateway, and GCP Cloud VPN all implement IPsec tunnels.
 
-## AWS CLI: create a VPN connection
+#### AWS CLI: create a VPN connection
 
 aws ec2 create-vpn-connection \
 
@@ -96,7 +102,7 @@ Connects individual users to the corporate network. VPN clients include OpenVPN,
 
 VPNs are not a panacea. They grant broad network access, often violating least-privilege principles. If a VPN credential is compromised, the attacker gains full network access. Modern architectures increasingly replace VPNs with zero-trust network access (ZTNA) solutions.
 
-### Intrusion Detection and Prevention Systems (IDS/IPS)
+#### Intrusion Detection and Prevention Systems (IDS/IPS)
 
 IDS monitors network traffic for suspicious activity and generates alerts. IPS sits inline and actively blocks detected threats.
 
@@ -122,7 +128,7 @@ IDS monitors network traffic for suspicious activity and generates alerts. IPS s
 
 
 
-## Suricata configuration snippet
+#### Suricata configuration snippet
 
 vars:
 
@@ -146,7 +152,7 @@ cluster-id: 99
 
 cluster-type: cluster_flow
 
-### Zero-Trust Networking
+#### Zero-Trust Networking
 
 Zero trust assumes no implicit trust based on network location. Every access request must be authenticated, authorized, and encrypted.
 
@@ -171,7 +177,7 @@ Zero trust assumes no implicit trust based on network location. Every access req
 
 
 
-## Example: zero-trust access policy via proxy
+#### Example: zero-trust access policy via proxy
 
 policies:
 
@@ -197,7 +203,7 @@ value: "10.0.0.0/8"
 
 action: "allow"
 
-### Network Segmentation and Micro-Segmentation
+#### Network Segmentation and Micro-Segmentation
 
 Segmentation divides a network into smaller segments to limit attack propagation.
 
@@ -211,7 +217,7 @@ Uses VLANs and subnets to separate traffic. A web server resides in one subnet, 
 
 Micro-segmentation takes segmentation to the individual workload level. In a cloud environment, every workload has its own security group that allows traffic only from specific sources on specific ports.
 
-## AWS Security Group for a database instance
+#### AWS Security Group for a database instance
 
 resource "aws_security_group" "db" {
 
@@ -243,7 +249,7 @@ cidr_blocks = ["0.0.0.0/0"]
 
 Micro-segmentation is essential in Kubernetes environments. Network policies control which pods can communicate.
 
-## Kubernetes network policy
+#### Kubernetes network policy
 
 apiVersion: networking.k8s.io/v1
 
@@ -275,11 +281,17 @@ ports:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- port: 8080
 
-### Conclusion
+#### Conclusion
 
 Network security has evolved from simple perimeter firewalls to sophisticated zero-trust architectures. The fundamentals still matter: proper firewall rules, careful VPN use, intrusion detection, and network segmentation. But the trend is clear — the network boundary is disappearing, and security must follow the workload, not the perimeter.
 
 **See also:** [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>).
+
+**See also:** [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>)
+
+**See also:** [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>)
+
+**See also:** [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>)
 
 **See also:** [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>)
 

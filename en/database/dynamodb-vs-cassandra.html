@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/dynamodb-vs-cassandra.png",
       "datePublished": "2026-04-05",
       "dateModified": "2026-04-12",
-      "wordCount": "1595",
+      "wordCount": "1715",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/dynamodb-vs-cassandra.html"},
@@ -110,17 +112,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/dynamodb-vs-cassandra.png" alt="DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h2>
 <h3>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h3>
-<h3>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h3>
-<h3>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h3>
-<h3>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h3>
-<h3>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h3>
-<h3>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h3>
-<h3>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h3>
-<h3>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h3>
-<h3>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h3>
-<h3>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h3>
-<h3>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h3>
-<h3>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h3>
+<h4>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h4>
+<h4>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h4>
+<h4>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h4>
+<h4>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h4>
+<h4>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h4>
+<h4>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h4>
+<h4>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h4>
+<h4>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h4>
+<h4>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h4>
+<h4>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h4>
+<h4>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h4>
+<h4>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h4>
+<h4>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h4>
 <p>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/dynamodb-vs-cassandra.png" alt="DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>DynamoDB and Cassandra are both distributed, horizontally scalable NoSQL databases. They share a common heritage (both influenced by Amazon's Dynamo paper), but their implementations and operational models differ significantly. </p>
 <p>Data Model </p>
@@ -154,7 +158,7 @@
 <p>Secondary indexes can be local (same partition key, different sort key) or global (different partition key).</p>
 </li>
 </ul>
-<h3>DynamoDB query</h3>
+<h4>DynamoDB query</h4>
 <p>import boto3</p>
 <p>client = boto3.client('dynamodb')</p>
 <p>response = client.query(</p>
@@ -194,7 +198,7 @@
 <p>Denormalization is expected and encouraged.</p>
 </li>
 </ul>
-<h3>Cassandra query</h3>
+<h4>Cassandra query</h4>
 <p>from cassandra.cluster import Cluster</p>
 <p>cluster = Cluster(['127.0.0.1'])</p>
 <p>session = cluster.connect('mykeyspace')</p>
@@ -206,13 +210,13 @@
 <p>DynamoDB Consistency Levels </p>
 <p>| Level | Description | Cost | |-------|-------------|------| | Eventual | Reads may return stale data | 0.5 RCU per read | | Strong | Returns most up-to-date data | 1 RCU per read | | Transactional | Serial isolation for reads/writes | 2 RCU/WCU per operation | </p>
 <p>DynamoDB offers tunable consistency at the request level: </p>
-<h3>Eventually consistent read (cheaper)</h3>
+<h4>Eventually consistent read (cheaper)</h4>
 <p>response = client.get_item(</p>
 <p>TableName='Users',</p>
 <p>Key={'user_id': {'S': 'user_42'}},</p>
 <p>ConsistentRead=False</p>
 <p>)</p>
-<h3>Strongly consistent read</h3>
+<h4>Strongly consistent read</h4>
 <p>response = client.get_item(</p>
 <p>TableName='Users',</p>
 <p>Key={'user_id': {'S': 'user_42'}},</p>
@@ -235,7 +239,7 @@
 <p>Scaling </p>
 <p>DynamoDB Scaling </p>
 <p>DynamoDB scales vertically by provisioning read and write capacity units (RCUs and WCUs). Auto-scaling adjusts capacity based on traffic: </p>
-<h3>Configure auto-scaling</h3>
+<h4>Configure auto-scaling</h4>
 <p>client.update_table(</p>
 <p>TableName='Users',</p>
 <p>ProvisionedThroughput={</p>
@@ -243,20 +247,20 @@
 <p>'WriteCapacityUnits': 100</p>
 <p>}</p>
 <p>)</p>
-<h3>Or use on-demand mode (pay-per-request)</h3>
-<h3>No capacity planning needed, but higher per-request cost</h3>
+<h4>Or use on-demand mode (pay-per-request)</h4>
+<h4>No capacity planning needed, but higher per-request cost</h4>
 <p>DynamoDB partitions are invisible to users. The service automatically splits partitions when they exceed 10 GB or when throughput exceeds 3000 RCU or 1000 WCU per partition. </p>
 <p>Cassandra Scaling </p>
 <p>Cassandra scales horizontally by adding nodes. Data is distributed using consistent hashing: </p>
-<h3>cassandra.yaml</h3>
+<h4>cassandra.yaml</h4>
 <p>num_tokens: 256</p>
 <p>initial_token:</p>
 <p>replication_factor: 3</p>
 <p>Adding a node: </p>
-<h3>Add node to cluster</h3>
+<h4>Add node to cluster</h4>
 <p>nodetool status</p>
 <p>nodetool join</p>
-<h3>Rebalance data</h3>
+<h4>Rebalance data</h4>
 <p>nodetool rebuild</p>
 <p>Scaling is linear: doubling nodes doubles throughput. No partitioning limits; the only constraint is disk space per node. </p>
 <p>Cost Comparison </p>
@@ -309,6 +313,8 @@
 </ul>
 <p>DynamoDB and Cassandra are both excellent at what they do: high-throughput, scalable key-value and wide-column workloads. The choice depends on your operational preferences, cloud strategy, and cost sensitivity. For most applications starting out, a relational database with read replicas is the simpler and more flexible choice.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a></p>
+<p><strong>See also:</strong> <a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a></p>
 <p><strong>See also:</strong> <a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a></p>
 <p><strong>See also:</strong> <a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a></p></div>
     </article>

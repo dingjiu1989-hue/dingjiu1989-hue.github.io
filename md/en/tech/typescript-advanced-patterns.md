@@ -1,7 +1,7 @@
 ---
 title: "Advanced TypeScript Patterns: Generics, Mapped Types, and Template Literals"
 description: "Go beyond basic TypeScript with advanced patterns: conditional types, mapped types, template literal types, infer, and brand types. Real examples that make your code safer."
-date: 2026-05-08
+date: 2025-10-08
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/typescript-advanced-patterns.html
 ---

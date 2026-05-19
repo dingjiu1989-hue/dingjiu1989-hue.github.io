@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/api-authentication.png",
       "datePublished": "2026-03-06",
       "dateModified": "2026-05-14",
-      "wordCount": "1394",
+      "wordCount": "1438",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/api-authentication.html"},
@@ -99,19 +101,21 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/api-authentication.png" alt="API Authentication Methods" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>API Authentication Methods</h2>
 <h3>API Authentication Methods</h3>
-<h3>API Authentication Methods</h3>
-<h3>API Authentication Methods</h3>
-<h3>API Authentication Methods</h3>
-<h3>API Authentication Methods</h3>
-<h3>API Authentication Methods</h3>
-<h3>API Authentication Methods</h3>
-<h3>API Authentication Methods</h3>
-<h3>API Authentication Methods</h3>
-<h3>API Authentication Methods</h3>
-<h3>API Authentication Methods</h3>
-<h3>API Authentication Methods</h3>
-<h3>API Authentication Methods</h3>
-<h3>API Authentication Methods</h3>
+<h4>API Authentication Methods</h4>
+<h4>API Authentication Methods</h4>
+<h4>API Authentication Methods</h4>
+<h4>API Authentication Methods</h4>
+<h4>API Authentication Methods</h4>
+<h4>API Authentication Methods</h4>
+<h4>API Authentication Methods</h4>
+<h4>API Authentication Methods</h4>
+<h4>API Authentication Methods</h4>
+<h4>API Authentication Methods</h4>
+<h4>API Authentication Methods</h4>
+<h4>API Authentication Methods</h4>
+<h4>API Authentication Methods</h4>
+<h4>API Authentication Methods</h4>
+<h4>API Authentication Methods</h4>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/api-authentication.png" alt="API Authentication Methods" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>API authentication verifies the identity of clients calling your API. Choosing the right authentication method depends on the threat model, client type, and operational requirements. This guide covers the four dominant approaches and their appropriate use cases. </p>
 <p>API Keys </p>
@@ -138,18 +142,18 @@
 <p>The OAuth2 client credentials grant is designed for server-to-server communication where the client is the resource owner. </p>
 <p>import requests</p>
 <p>from authlib.integrations.requests_client import OAuth2Session</p>
-<h3>Client configuration</h3>
+<h4>Client configuration</h4>
 <p>client = OAuth2Session(</p>
 <p>client_id='my-service',</p>
 <p>client_secret='my-secret',</p>
 <p>scope='read:orders write:orders'</p>
 <p>)</p>
-<h3>Obtain access token</h3>
+<h4>Obtain access token</h4>
 <p>token = client.fetch_token(</p>
 <p>url='https://auth.example.com/oauth/token',</p>
 <p>grant_type='client_credentials'</p>
 <p>)</p>
-<h3>Use token for API calls</h3>
+<h4>Use token for API calls</h4>
 <p>response = client.get(</p>
 <p>'https://api.example.com/orders',</p>
 <p>headers={'Accept': 'application/json'}</p>
@@ -169,7 +173,7 @@
 <p>issuer="https://auth.example.com",</p>
 <p>options={"verify_exp": True}</p>
 <p>)</p>
-<h3>Validate scopes</h3>
+<h4>Validate scopes</h4>
 <p>token_scopes = payload.get("scope", "").split()</p>
 <p>required_scopes = {"read:orders"}</p>
 <p>if not required_scopes.issubset(set(token_scopes)):</p>
@@ -177,17 +181,17 @@
 <p>return payload</p>
 <p>Mutual TLS (mTLS) </p>
 <p>mTLS extends TLS so that both client and server present certificates, establishing mutual authentication at the transport layer. </p>
-<h3>Generate client certificate</h3>
+<h4>Generate client certificate</h4>
 <p>openssl req -newkey rsa:2048 -nodes \</p>
 <p>-keyout client-key.pem \</p>
 <p>-out client-csr.pem \</p>
 <p>-subj "/CN=payment-service.production.internal"</p>
-<h3>Sign with internal CA</h3>
+<h4>Sign with internal CA</h4>
 <p>openssl x509 -req -in client-csr.pem \</p>
 <p>-CA ca-cert.pem -CAkey ca-key.pem \</p>
 <p>-CAcreateserial -out client-cert.pem \</p>
 <p>-days 365 -sha256</p>
-<h3>Configure server for mTLS (Nginx)</h3>
+<h4>Configure server for mTLS (Nginx)</h4>
 <p>server {</p>
 <p>listen 443 ssl;</p>
 <p>ssl_certificate /etc/nginx/server-cert.pem;</p>
@@ -196,13 +200,13 @@
 <p>ssl_verify_client on;</p>
 <p>ssl_verify_depth 2;</p>
 <p>location /api/ {</p>
-<h3>Extract client certificate info</h3>
+<h4>Extract client certificate info</h4>
 <p>proxy_set_header X-Client-CN $ssl_client_s_dn;</p>
 <p>proxy_set_header X-Client-Verify $ssl_client_verify;</p>
 <p>proxy_pass http://backend;</p>
 <p>}</p>
 <p>}</p>
-<h3>Flask app reading mTLS client info</h3>
+<h4>Flask app reading mTLS client info</h4>
 <p>from flask import Flask, request</p>
 <p>app = Flask(<strong>name</strong>)</p>
 <p>@app.route('/api/data')</p>
@@ -211,7 +215,7 @@
 <p>client_verify = request.headers.get('X-Client-Verify')</p>
 <p>if client_verify != 'SUCCESS':</p>
 <p>return {"error": "TLS verification failed"}, 403</p>
-<h3>Authorize based on client certificate CN</h3>
+<h4>Authorize based on client certificate CN</h4>
 <p>allowed_clients = {</p>
 <p>'payment-service.production.internal': ['read:transactions'],</p>
 <p>'order-service.production.internal': ['read:write:orders'],</p>
@@ -232,7 +236,7 @@
 <p>def sign_request(self, method: str, path: str, body: bytes = b'') -&gt; Dict[str, str]:</p>
 <p>timestamp = str(int(time.time()))</p>
 <p>nonce = secrets.token_hex(8)</p>
-<h3>Build message to sign</h3>
+<h4>Build message to sign</h4>
 <p>message = f"{method}\n{path}\n{timestamp}\n{nonce}\n".encode() + body</p>
 <p>signature = hmac.new(</p>
 <p>self.api_secret,</p>
@@ -254,13 +258,13 @@
 <p>timestamp = headers.get('X-Timestamp')</p>
 <p>nonce = headers.get('X-Nonce')</p>
 <p>signature = headers.get('X-Signature')</p>
-<h3>Replay protection</h3>
+<h4>Replay protection</h4>
 <p>if int(time.time()) - int(timestamp) &gt; 300:</p>
 <p>return False # Expired</p>
 <p>if nonce in self.nonce_store:</p>
 <p>return False # Replay</p>
 <p>self.nonce_store.add(nonce)</p>
-<h3>Verify signature</h3>
+<h4>Verify signature</h4>
 <p>secret = self.secrets.get(api_key)</p>
 <p>if not secret:</p>
 <p>return False</p>
@@ -272,6 +276,8 @@
 <p>Conclusion </p>
 <p>No single API authentication method fits all use cases. Use API keys for low-risk internal tools, OAuth2 client credentials for third-party integrations with scope requirements, mTLS for service mesh and zero-trust architectures, and HMAC signing when request integrity and non-repudiation are critical. Always combine authentication with TLS encryption.</p>
 <p><strong>See also:</strong> <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a>, <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p></div>
     </article>

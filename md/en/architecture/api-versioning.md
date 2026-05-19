@@ -1,7 +1,7 @@
 ---
 title: "API Versioning Strategies"
 description: "Explore API versioning strategies for maintaining backward compatibility as your API evolves."
-date: 2026-05-11
+date: 2025-12-25
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/api-versioning.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/api-versioning.html
 
 ## API Versioning Strategies
 
-## API Versioning Strategies
+### API Versioning Strategies
 
-## API Versioning Strategies
+#### API Versioning Strategies
 
-## API Versioning Strategies
+#### API Versioning Strategies
 
-## API Versioning Strategies
+#### API Versioning Strategies
 
-## API Versioning Strategies
+#### API Versioning Strategies
 
-## API Versioning Strategies
+#### API Versioning Strategies
 
-## API Versioning Strategies
+#### API Versioning Strategies
 
-## API Versioning Strategies
+#### API Versioning Strategies
 
-## API Versioning Strategies
+#### API Versioning Strategies
 
-## API Versioning Strategies
+#### API Versioning Strategies
 
-## API Versioning Strategies
+#### API Versioning Strategies
+
+#### API Versioning Strategies
+
+#### API Versioning Strategies
+
+#### API Versioning Strategies
 
 APIs evolve. New features are added, existing endpoints change, and eventually, breaking changes are unavoidable. API versioning is the practice of managing these changes without breaking existing clients. This article covers the major versioning strategies and when to use each. 
 
@@ -246,3 +252,9 @@ API versioning is a practical necessity for evolving APIs. URL path versioning i
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>)
 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>)
+
+**See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)

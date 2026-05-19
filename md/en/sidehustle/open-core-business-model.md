@@ -1,7 +1,7 @@
 ---
 title: "Open Core Business Model: From Open Source Project to Profitable Business"
 description: "How to commercialize an open source project using the open core model — which features to keep open vs paid, pricing, and community management."
-date: 2026-05-08
+date: 2025-10-24
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/open-core-business-model.html
 ---

@@ -1,7 +1,7 @@
 ---
 title: "OLTP vs OLAP: Workload Optimization"
 description: "Compare OLTP and OLAP workloads: row vs column store, indexing strategies, query patterns, hybrid approaches, and HTAP databases."
-date: 2026-05-12
+date: 2026-03-29
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/oltp-vs-olap.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/oltp-vs-olap.html
 
 ## OLTP vs OLAP: Workload Optimization
 
-## OLTP vs OLAP: Workload Optimization
+### OLTP vs OLAP: Workload Optimization
 
-## OLTP vs OLAP: Workload Optimization
+#### OLTP vs OLAP: Workload Optimization
 
-## OLTP vs OLAP: Workload Optimization
+#### OLTP vs OLAP: Workload Optimization
 
-## OLTP vs OLAP: Workload Optimization
+#### OLTP vs OLAP: Workload Optimization
 
-## OLTP vs OLAP: Workload Optimization
+#### OLTP vs OLAP: Workload Optimization
 
-## OLTP vs OLAP: Workload Optimization
+#### OLTP vs OLAP: Workload Optimization
 
-## OLTP vs OLAP: Workload Optimization
+#### OLTP vs OLAP: Workload Optimization
 
-## OLTP vs OLAP: Workload Optimization
+#### OLTP vs OLAP: Workload Optimization
 
-## OLTP vs OLAP: Workload Optimization
+#### OLTP vs OLAP: Workload Optimization
 
-## OLTP vs OLAP: Workload Optimization
+#### OLTP vs OLAP: Workload Optimization
 
-## OLTP vs OLAP: Workload Optimization
+#### OLTP vs OLAP: Workload Optimization
+
+#### OLTP vs OLAP: Workload Optimization
+
+#### OLTP vs OLAP: Workload Optimization
+
+#### OLTP vs OLAP: Workload Optimization
 
 OLTP (Online Transaction Processing) and OLAP (Online Analytical Processing) represent two fundamentally different approaches to database usage. They differ in data structure, query patterns, performance requirements, and optimal storage formats. Understanding these differences is essential for choosing the right database architecture. 
 
@@ -292,7 +298,7 @@ Dual Databases
 
 Run OLTP on a row-oriented database and replicate to a columnar database for analytics. 
 
-## Architecture: OLTP + OLAP independently
+#### Architecture: OLTP + OLAP independently
 
 oltp:
 
@@ -434,6 +440,12 @@ Conclusion
 OLTP and OLAP have fundamentally different requirements. OLTP needs fast point queries, high concurrency, and ACID transactions. OLAP needs fast scans of many rows, efficient aggregation, and columnar storage. The best approach for mixed workloads is typically a dual database architecture with CDC replication. HTAP databases are improving but remain a compromise for demanding workloads. Choose your database architecture based on your dominant workload pattern and accept that running both patterns optimally in one system is inherently challenging.
 
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Indexing Strategies](</en/database/database-indexing.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>).
+
+**See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Indexing Strategies](</en/database/database-indexing.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>)
+
+**See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Indexing Strategies](</en/database/database-indexing.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>)
+
+**See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Indexing Strategies](</en/database/database-indexing.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>)
 
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Indexing Strategies](</en/database/database-indexing.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>)
 

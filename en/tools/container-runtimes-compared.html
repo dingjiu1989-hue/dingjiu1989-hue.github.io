@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/container-runtimes-compared.png",
       "datePublished": "2025-12-09",
       "dateModified": "2026-05-06",
-      "wordCount": "1364",
+      "wordCount": "1411",
       "keywords": "Developer Tools, Productivity",
       "about": [{"@type": "Thing", "name": "Developer Tools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/container-runtimes-compared.html"},
@@ -109,18 +111,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/container-runtimes-compared.png" alt="Container Runtimes Compared" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Container Runtimes Compared</h2>
 <h3>Container Runtimes Compared</h3>
-<h3>Container Runtimes Compared</h3>
-<h3>Container Runtimes Compared</h3>
-<h3>Container Runtimes Compared</h3>
-<h3>Container Runtimes Compared</h3>
-<h3>Container Runtimes Compared</h3>
-<h3>Container Runtimes Compared</h3>
-<h3>Container Runtimes Compared</h3>
-<h3>Container Runtimes Compared</h3>
-<h3>Container Runtimes Compared</h3>
-<h3>Container Runtimes Compared</h3>
-<h3>Container Runtimes Compared</h3>
-<h3>Container Runtimes Compared</h3>
+<h4>Container Runtimes Compared</h4>
+<h4>Container Runtimes Compared</h4>
+<h4>Container Runtimes Compared</h4>
+<h4>Container Runtimes Compared</h4>
+<h4>Container Runtimes Compared</h4>
+<h4>Container Runtimes Compared</h4>
+<h4>Container Runtimes Compared</h4>
+<h4>Container Runtimes Compared</h4>
+<h4>Container Runtimes Compared</h4>
+<h4>Container Runtimes Compared</h4>
+<h4>Container Runtimes Compared</h4>
+<h4>Container Runtimes Compared</h4>
+<h4>Container Runtimes Compared</h4>
+<h4>Container Runtimes Compared</h4>
 <p>Container runtimes are the engines that actually run containers. While Docker is the most well-known, alternatives like Podman and containerd have gained significant traction. Understanding the differences helps you choose the right runtime for your use case.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/container-runtimes-compared.png" alt="Container Runtimes Compared" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>What is a Container Runtime?</h4>
 <p>A container runtime manages the lifecycle of containers -- pulling images, creating container filesystems, and running processes in isolated environments. Runtimes exist at two levels:</p>
@@ -166,7 +170,7 @@
 </li>
 </ul>
 <p><strong>Best for</strong> : Development environments, CI/CD pipelines, and teams that need the largest ecosystem.</p>
-<h3>Typical Docker workflow</h3>
+<h4>Typical Docker workflow</h4>
 <p>docker build -t myapp .</p>
 <p>docker run -d -p 3000:3000 myapp</p>
 <p>docker compose up -d # Multi-service</p>
@@ -203,10 +207,10 @@
 </li>
 </ul>
 <p><strong>Best for</strong> : Security-conscious teams, production environments, and users who want rootless containers.</p>
-<h3>Podman commands mirror Docker</h3>
+<h4>Podman commands mirror Docker</h4>
 <p>podman build -t myapp .</p>
 <p>podman run -d -p 3000:3000 myapp</p>
-<h3>Podman-specific: run in a pod</h3>
+<h4>Podman-specific: run in a pod</h4>
 <p>podman pod create --name my-pod -p 3000:3000</p>
 <p>podman run --pod my-pod -d myapp</p>
 <h4>containerd</h4>
@@ -239,10 +243,10 @@
 </li>
 </ul>
 <p><strong>Best for</strong> : Kubernetes nodes, embedded systems, and users who need a minimal runtime.</p>
-<h3>interact with containerd directly using ctr or nerdctl</h3>
+<h4>interact with containerd directly using ctr or nerdctl</h4>
 <p>sudo ctr images pull docker.io/library/alpine:latest</p>
 <p>sudo ctr run --rm -t docker.io/library/alpine:latest alpine sh</p>
-<h3>nerdctl provides a Docker-compatible CLI for containerd</h3>
+<h4>nerdctl provides a Docker-compatible CLI for containerd</h4>
 <p>nerdctl run -d -p 3000:3000 myapp</p>
 <h4>CRI-O</h4>
 <p>CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Interface) compliance.</p>
@@ -297,22 +301,24 @@
 <p>| Kubernetes YAML | Can use | Can use directly |</p>
 <h4>Migration Guide</h4>
 <p><strong>Moving from Docker to Podman:</strong></p>
-<h3>On Fedora/RHEL</h3>
+<h4>On Fedora/RHEL</h4>
 <p>sudo dnf install podman podman-docker</p>
-<h3>The podman-docker package provides the /usr/bin/docker symlink</h3>
-<h3>Test compatibility</h3>
+<h4>The podman-docker package provides the /usr/bin/docker symlink</h4>
+<h4>Test compatibility</h4>
 <p>podman info</p>
 <p>alias docker=podman</p>
 <p>docker run hello-world</p>
 <p><strong>Moving from Docker to containerd + nerdctl:</strong></p>
-<h3>Install containerd</h3>
+<h4>Install containerd</h4>
 <p>sudo apt install containerd</p>
-<h3>Install nerdctl (Docker-compatible CLI)</h3>
+<h4>Install nerdctl (Docker-compatible CLI)</h4>
 <p>wget https://github.com/containerd/nerdctl/releases/download/v1.7/nerdctl-1.7-linux-amd64.tar.gz</p>
 <p>sudo tar -C /usr/local/bin -xzf nerdctl-1.7-linux-amd64.tar.gz</p>
 <h4>Summary</h4>
 <p>Docker remains the best choice for development environments due to its ecosystem and tooling. Podman is the strongest alternative for production and security-conscious teams, offering daemonless and rootless operation. containerd is the runtime of choice for Kubernetes nodes and embedded systems. All three are mature and production-ready -- choose based on your security requirements, ecosystem needs, and team expertise.</p>
 <p><strong>See also:</strong> <a href="/en/tools/text-editors-compared.html">Text Editors Compared</a>, <a href="/en/tools/package-managers-compared.html">Package Managers Compared</a>, <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tools/text-editors-compared.html">Text Editors Compared</a>, <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>, <a href="/en/tools/package-managers-compared.html">Package Managers Compared</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/text-editors-compared.html">Text Editors Compared</a>, <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>, <a href="/en/tools/package-managers-compared.html">Package Managers Compared</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/text-editors-compared.html">Text Editors Compared</a>, <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>, <a href="/en/tools/package-managers-compared.html">Package Managers Compared</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/text-editors-compared.html">Text Editors Compared</a>, <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>, <a href="/en/tools/package-managers-compared.html">Package Managers Compared</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/text-editors-compared.html">Text Editors Compared</a>, <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>, <a href="/en/tools/package-managers-compared.html">Package Managers Compared</a></p></div>
     </article>

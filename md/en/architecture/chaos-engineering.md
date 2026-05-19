@@ -1,7 +1,7 @@
 ---
 title: "Chaos Engineering: Building Resilient Systems"
 description: "Introduction to chaos engineering: principles, practices, and tools for testing system resilience in production."
-date: 2026-05-12
+date: 2026-05-06
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/chaos-engineering.html
 ---
@@ -10,55 +10,67 @@ url: https://dingjiu1989-hue.github.io/en/architecture/chaos-engineering.html
 
 ## Chaos Engineering: Building Resilient Systems
 
-## Chaos Engineering: Building Resilient Systems
+### Chaos Engineering: Building Resilient Systems
 
-## Chaos Engineering: Building Resilient Systems
+#### Chaos Engineering: Building Resilient Systems
 
-## Chaos Engineering: Building Resilient Systems
+#### Chaos Engineering: Building Resilient Systems
 
-## Chaos Engineering: Building Resilient Systems
+#### Chaos Engineering: Building Resilient Systems
 
-## Chaos Engineering: Building Resilient Systems
+#### Chaos Engineering: Building Resilient Systems
 
-## Chaos Engineering: Building Resilient Systems
+#### Chaos Engineering: Building Resilient Systems
 
-## Chaos Engineering: Building Resilient Systems
+#### Chaos Engineering: Building Resilient Systems
 
-## Chaos Engineering: Building Resilient Systems
+#### Chaos Engineering: Building Resilient Systems
 
-## Chaos Engineering: Building Resilient Systems
+#### Chaos Engineering: Building Resilient Systems
 
-## Chaos Engineering: Building Resilient Systems
+#### Chaos Engineering: Building Resilient Systems
 
-## Chaos Engineering: Building Resilient Systems
+#### Chaos Engineering: Building Resilient Systems
+
+#### Chaos Engineering: Building Resilient Systems
+
+#### Chaos Engineering: Building Resilient Systems
+
+#### Chaos Engineering: Building Resilient Systems
 
 Chaos engineering is the discipline of experimenting on a system to build confidence in its capacity to withstand turbulent conditions. By intentionally injecting failures, teams discover weaknesses before they cause user-facing incidents.
 
-### Core Principles
+#### Core Principles
 
 Chaos engineering follows four principles: define a steady state (what normal operation looks like), hypothesize that the steady state will persist, introduce realistic variables (server failures, network delays, resource exhaustion), and measure the difference between the hypothesized state and the actual state.
 
 The goal is not to break things randomly. Each experiment has a clear hypothesis and measurable outcomes. This scientific approach distinguishes chaos engineering from simple testing.
 
-### Types of Experiments
+#### Types of Experiments
 
 Common chaos experiments include killing random pods in a Kubernetes cluster, introducing network latency between services, exhausting CPU or memory on a node, terminating database connections, and failing an entire availability zone.
 
 Advanced experiments simulate dependent service degradation, certificate expiration, DNS failures, and traffic spikes. Each experiment should target a specific failure mode and have a defined blast radius.
 
-### Tools
+#### Tools
 
 Chaos Monkey (by Netflix) pioneered the field by randomly terminating production instances. Chaos Mesh runs on Kubernetes and supports pod, network, and stress experiments. Gremlin provides a commercial platform with a GUI and scheduling. LitmusChaos is an open-source CNCF project with a wide range of experiments.
 
-### Getting Started
+#### Getting Started
 
 Begin with small, low-risk experiments in staging environments. Run experiments during business hours when engineers are available to respond. Start with infrastructure failures (kill a pod) before moving to complex scenarios (simulate a region outage). Document every experiment and its results. Gradually move to production experiments with careful blast radius controls.
 
-### Blast Radius
+#### Blast Radius
 
 Always define the blast radius before an experiment. Tools like Chaos Mesh allow you to target specific namespaces, deployments, or pods. Use an automated rollback mechanism that stops the experiment if error rates exceed thresholds. Production experiments should start at 1% traffic or less.
 
 **See also:** [Git Workflows for Teams](</en/tech/git-workflows-2026.html>), [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>).
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>)
 

@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/identity-management.png",
       "datePublished": "2026-03-04",
       "dateModified": "2026-04-13",
-      "wordCount": "2788",
+      "wordCount": "2847",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/identity-management.html"},
@@ -98,18 +100,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/identity-management.png" alt="Identity and Access Management (IAM) Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Identity and Access Management (IAM) Guide</h2>
 <h3>Identity and Access Management (IAM) Guide</h3>
-<h3>Identity and Access Management (IAM) Guide</h3>
-<h3>Identity and Access Management (IAM) Guide</h3>
-<h3>Identity and Access Management (IAM) Guide</h3>
-<h3>Identity and Access Management (IAM) Guide</h3>
-<h3>Identity and Access Management (IAM) Guide</h3>
-<h3>Identity and Access Management (IAM) Guide</h3>
-<h3>Identity and Access Management (IAM) Guide</h3>
-<h3>Identity and Access Management (IAM) Guide</h3>
-<h3>Identity and Access Management (IAM) Guide</h3>
-<h3>Identity and Access Management (IAM) Guide</h3>
-<h3>Identity and Access Management (IAM) Guide</h3>
-<h3>Identity and Access Management (IAM) Guide</h3>
+<h4>Identity and Access Management (IAM) Guide</h4>
+<h4>Identity and Access Management (IAM) Guide</h4>
+<h4>Identity and Access Management (IAM) Guide</h4>
+<h4>Identity and Access Management (IAM) Guide</h4>
+<h4>Identity and Access Management (IAM) Guide</h4>
+<h4>Identity and Access Management (IAM) Guide</h4>
+<h4>Identity and Access Management (IAM) Guide</h4>
+<h4>Identity and Access Management (IAM) Guide</h4>
+<h4>Identity and Access Management (IAM) Guide</h4>
+<h4>Identity and Access Management (IAM) Guide</h4>
+<h4>Identity and Access Management (IAM) Guide</h4>
+<h4>Identity and Access Management (IAM) Guide</h4>
+<h4>Identity and Access Management (IAM) Guide</h4>
+<h4>Identity and Access Management (IAM) Guide</h4>
 <p>Identity and Access Management (IAM) is the discipline of ensuring the right people have access to the right resources at the right time for the right reasons. Poor IAM is the leading cause of data breaches. This guide covers modern IAM concepts including SSO, SAML, OIDC, SCIM, just-in-time access, and access reviews.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/identity-management.png" alt="Identity and Access Management (IAM) Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Single Sign-On (SSO)</h4>
 <p>SSO allows users to authenticate once and gain access to multiple applications without re-entering credentials. It improves both security and user experience.</p>
@@ -172,9 +176,9 @@
 </li>
 </ul>
 <h4>OIDC Flow</h4>
-<h3>Python example: OIDC authentication request</h3>
+<h4>Python example: OIDC authentication request</h4>
 <p>import requests</p>
-<h3>Step 1: Redirect user to IdP authorization endpoint</h3>
+<h4>Step 1: Redirect user to IdP authorization endpoint</h4>
 <p>auth_url = "https://idp.example.com/authorize"</p>
 <p>params = {</p>
 <p>"response_type": "code",</p>
@@ -183,8 +187,8 @@
 <p>"scope": "openid profile email",</p>
 <p>"state": "random-state-value"</p>
 <p>}</p>
-<h3>User is redirected to: auth_url?response_type=code&client;_id=...</h3>
-<h3>Step 2: Exchange authorization code for tokens</h3>
+<h4>User is redirected to: auth_url?response_type=code&client;_id=...</h4>
+<h4>Step 2: Exchange authorization code for tokens</h4>
 <p>token_url = "https://idp.example.com/token"</p>
 <p>response = requests.post(token_url, data={</p>
 <p>"grant_type": "authorization_code",</p>
@@ -194,10 +198,10 @@
 <p>"client_secret": "my-secret"</p>
 <p>})</p>
 <p>tokens = response.json()</p>
-<h3>tokens contains: access_token, id_token, refresh_token</h3>
+<h4>tokens contains: access_token, id_token, refresh_token</h4>
 <h4>OIDC in Cloud Infrastructure</h4>
 <p>Cloud providers use OIDC for workload identity. A service running in AWS can get an OIDC token from the AWS metadata endpoint and use it to authenticate to external services.</p>
-<h3>GitHub Actions OIDC with AWS</h3>
+<h4>GitHub Actions OIDC with AWS</h4>
 <p>name: Deploy</p>
 <p>permissions:</p>
 <p>id-token: write</p>
@@ -246,7 +250,7 @@
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Approval from a manager or ticket system.</p>
 <p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Automatic expiration after the approved window.</p>
 <p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Full audit logging of the elevation.</p>
-<h3>Example: PagerDuty JIT access request</h3>
+<h4>Example: PagerDuty JIT access request</h4>
 <p>def request_jit_access(resource, duration_minutes=60, reason=""):</p>
 <p>approval = submit_approval_request(</p>
 <p>requester=get_current_user(),</p>
@@ -286,7 +290,7 @@
 <p>Document all review outcomes for audit purposes.</p>
 </li>
 </ul>
-<h3>Automated access review report</h3>
+<h4>Automated access review report</h4>
 <p>def generate_access_review():</p>
 <p>users = list_all_users()</p>
 <p>report = []</p>
@@ -302,6 +306,8 @@
 <h4>Conclusion</h4>
 <p>Modern IAM requires SSO for user convenience, SAML or OIDC for protocol support, SCIM for automated provisioning, JIT access for privilege management, and regular access reviews to prevent creep. The goal is simple: every access decision should be intentional, verifiable, and timely.</p>
 <p><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/sso-architecture.html">SSO Architecture</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a></p></div>
     </article>

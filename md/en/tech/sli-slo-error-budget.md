@@ -1,7 +1,7 @@
 ---
 title: "SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts"
 description: "Technical guide to service level indicators and objectives covering SLI definition, SLO setting methodology, error budget policies, and burn rate alert design."
-date: 2026-05-12
+date: 2026-01-03
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/sli-slo-error-budget.html
 ---
@@ -10,39 +10,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/sli-slo-error-budget.html
 
 ## SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
 
-## SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
 
-## SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
 
-## SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
 
-## SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
 
-## SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
 
-## SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
 
-## SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
 
-## SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
 
-## SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
 
-## SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
 
-## SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
 
-## SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
 
-## SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
 
-### Introduction
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+
+#### SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+
+#### Introduction
 
 Service Level Indicators (SLIs), Service Level Objectives (SLOs), and Error Budgets form the foundation of Site Reliability Engineering (SRE) practice. Originating from Google's SRE teams, these concepts provide a data-driven framework for balancing reliability with feature velocity. Rather than aiming for 100% uptime, SRE uses error budgets to make explicit trade-offs between reliability and innovation.
 
 This article covers SLI definition, SLO setting methodology, error budget policies, and burn rate alert design.
 
-### Defining SLIs
+#### Defining SLIs
 
 An SLI is a carefully chosen metric that measures a specific aspect of service reliability. Common SLI categories include availability (ratio of successful requests), latency (request duration), throughput (requests per second), and durability (data persistence).
 
@@ -56,7 +62,7 @@ latency_sli = fast_requests / total_requests
 
 SLI definition requires choosing measurement windows and aggregation methods. A 30-second measurement window catches transient issues, while a 5-minute window smooths noise. Rolling windows (30 days for monthly SLOs) provide stability.
 
-### Setting SLOs
+#### Setting SLOs
 
 An SLO sets a target value for an SLI over a defined period. Common targets are 99.9% (three nines), 99.99% (four nines), and 99.999% (five nines). Each additional nine approximately increases allowed downtime by an order of magnitude:
 
@@ -73,7 +79,7 @@ SLO targets should not be aspirational. A target that has never been met provide
 
 Not all services need the same SLO. Critical user journeys (authentication, checkout, data access) should have higher SLOs than secondary features. Multi-tier SLOs — target (internal goal) and minimum (customer commitment) — provide a buffer between aspirational goals and contractual obligations.
 
-### Error Budgets
+#### Error Budgets
 
 The error budget is the allowed amount of unreliability within the SLO period. For a 99.9% SLO over 30 days, the error budget is 0.1% of total events — or approximately 43 minutes of downtime.
 
@@ -81,7 +87,7 @@ The error budget defines how much risk the team can take. When the budget is ful
 
 Error budget policies encode these decisions in automated processes. A CI/CD pipeline gate checks error budget consumption before allowing a production deployment. This creates a direct feedback loop between reliability and feature velocity.
 
-### Burn Rate Alerts
+#### Burn Rate Alerts
 
 Burn rate alerts detect excessive error budget consumption before the budget is exhausted. The burn rate is how fast the error budget is being consumed relative to the SLO period.
 
@@ -96,7 +102,7 @@ A burn rate of 1 means the budget will be fully consumed by the end of the perio
 
 This approach ensures critical incidents are paged immediately while gradual issues are investigated before they exhaust the budget.
 
-### Implementation with Prometheus
+#### Implementation with Prometheus
 
 Prometheus and the slo-exporter pattern implement SLO monitoring effectively:
 
@@ -124,11 +130,17 @@ severity: critical
 
 The burn rate alert multiplies the SLO error rate (1 - SLO target) by the burn rate threshold. This approach normalizes alerts across different SLO targets.
 
-### Conclusion
+#### Conclusion
 
 SLIs, SLOs, and error budgets transform reliability from a subjective goal into an objective discipline. Well-defined SLIs measure what matters from the customer perspective. Realistic SLOs provide clear targets. Error budgets enable data-driven decisions about feature releases. Burn rate alerts catch problems before they exhaust reliability budgets. Together, these practices enable teams to make explicit, informed trade-offs between reliability and velocity.
 
 **See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>).
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
 
 **See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
 

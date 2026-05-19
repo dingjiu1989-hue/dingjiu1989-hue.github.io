@@ -1,7 +1,7 @@
 ---
 title: "Package Managers Compared"
 description: "Comprehensive comparison of npm, yarn, pnpm, pip, cargo, and other package managers across languages."
-date: 2026-05-11
+date: 2025-12-10
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/package-managers-compared.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/tools/package-managers-compared.html
 
 ## Package Managers Compared
 
-## Package Managers Compared
+### Package Managers Compared
 
-## Package Managers Compared
+#### Package Managers Compared
 
-## Package Managers Compared
+#### Package Managers Compared
 
-## Package Managers Compared
+#### Package Managers Compared
 
-## Package Managers Compared
+#### Package Managers Compared
 
-## Package Managers Compared
+#### Package Managers Compared
 
-## Package Managers Compared
+#### Package Managers Compared
 
-## Package Managers Compared
+#### Package Managers Compared
 
-## Package Managers Compared
+#### Package Managers Compared
 
-## Package Managers Compared
+#### Package Managers Compared
 
-## Package Managers Compared
+#### Package Managers Compared
 
-## Package Managers Compared
+#### Package Managers Compared
+
+#### Package Managers Compared
+
+#### Package Managers Compared
+
+#### Package Managers Compared
 
 Package managers are the backbone of modern software development. They handle dependency resolution, version management, and package distribution. This guide compares the most important package managers across JavaScript, Python, Rust, and other ecosystems.
 
-### JavaScript Ecosystem
+#### JavaScript Ecosystem
 
 JavaScript has the richest package manager landscape, with three main contenders:
 
@@ -44,23 +50,23 @@ JavaScript has the richest package manager landscape, with three main contenders
 
 The default package manager for Node.js. It is bundled with Node, making it the baseline choice.
 
-## Initialize project
+#### Initialize project
 
 npm init -y
 
-## Install dependencies
+#### Install dependencies
 
 npm install express
 
-## Install globally
+#### Install globally
 
 npm install -g typescript
 
-## List outdated packages
+#### List outdated packages
 
 npm outdated
 
-## Audit for vulnerabilities
+#### Audit for vulnerabilities
 
 npm audit
 
@@ -72,23 +78,23 @@ npm audit
 
 Created by Meta to address npm's early performance issues. Yarn 2+ (Berry) introduced Plug'n'Play for zero-install workflows.
 
-## Install
+#### Install
 
 npm install -g yarn
 
-## Initialize
+#### Initialize
 
 yarn init
 
-## Add dependency
+#### Add dependency
 
 yarn add express
 
-## Zero-install configuration
+#### Zero-install configuration
 
 yarn set version berry # Yarn 2+
 
-## .yarnrc.yml
+#### .yarnrc.yml
 
 nodeLinker: pnp # Plug'n'Play mode
 
@@ -102,19 +108,19 @@ enableGlobalCache: true
 
 The fastest and most disk-efficient package manager. It uses hard links and symlinks to share dependencies across projects.
 
-## Install
+#### Install
 
 npm install -g pnpm
 
-## Initialize
+#### Initialize
 
 pnpm init
 
-## Add dependency
+#### Add dependency
 
 pnpm add express
 
-## Install all dependencies
+#### Install all dependencies
 
 pnpm install
 
@@ -136,7 +142,7 @@ pnpm stores dependencies in a global content-addressable store. Multiple project
 
 | Disk usage (100 projects) | 5.2GB | 5.2GB | 3.1GB | 1.3GB |
 
-### Python: pip and uv
+#### Python: pip and uv
 
 Python's ecosystem has traditionally used pip, but uv is a game-changing Rust-based alternative.
 
@@ -144,21 +150,21 @@ Python's ecosystem has traditionally used pip, but uv is a game-changing Rust-ba
 
 The standard Python package manager:
 
-## Install from requirements file
+#### Install from requirements file
 
 pip install -r requirements.txt
 
-## Create virtual environment
+#### Create virtual environment
 
 python -m venv .venv
 
 source .venv/bin/activate
 
-## Install package
+#### Install package
 
 pip install requests
 
-## Freeze current packages
+#### Freeze current packages
 
 pip freeze > requirements.txt
 
@@ -166,21 +172,21 @@ pip freeze > requirements.txt
 
 uv is a drop-in replacement for pip that is 10-100x faster:
 
-## Install uv
+#### Install uv
 
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-## Create virtual environment
+#### Create virtual environment
 
 uv venv
 
 source .venv/bin/activate
 
-## Install from requirements file
+#### Install from requirements file
 
 uv pip install -r requirements.txt
 
-## Install packages
+#### Install packages
 
 uv pip install requests fastapi uvicorn
 
@@ -190,7 +196,7 @@ uv also includes a project manager (`uv init`, `uv add`, `uv run`) that competes
 
 Poetry introduced pyproject.toml-based dependency management:
 
-## pyproject.toml
+#### pyproject.toml
 
 [tool.poetry.dependencies]
 
@@ -208,11 +214,11 @@ build-backend = "poetry.core.masonry.api"
 
 uv has rapidly gained adoption due to its speed and compatibility with existing workflows.
 
-### Rust: Cargo
+#### Rust: Cargo
 
 Cargo is widely considered the gold standard for package managers:
 
-## Cargo.toml
+#### Cargo.toml
 
 [package]
 
@@ -234,47 +240,47 @@ reqwest = "0.12"
 
 criterion = "0.5"
 
-## Build
+#### Build
 
 cargo build
 
-## Run tests
+#### Run tests
 
 cargo test
 
-## Check for outdated
+#### Check for outdated
 
 cargo outdated
 
-## Security audit
+#### Security audit
 
 cargo audit
 
 Cargo's strengths: deterministic builds, integrated testing and benchmarking, comprehensive documentation, crates.io integration.
 
-### Go: go mod
+#### Go: go mod
 
 Go modules are built into the Go toolchain:
 
-## Initialize module
+#### Initialize module
 
 go mod init github.com/user/myapp
 
-## Add dependency
+#### Add dependency
 
 go get github.com/gorilla/mux
 
-## Tidy dependencies
+#### Tidy dependencies
 
 go mod tidy
 
-## Verify
+#### Verify
 
 go mod verify
 
 Go's approach is minimal but effective. The module graph is stored in `go.sum` for integrity verification.
 
-### Comparison Table
+#### Comparison Table
 
 | Manager | Language | Speed | Disk Efficiency | Lock File | Workspaces | Dev Tools |
 
@@ -296,7 +302,7 @@ Go's approach is minimal but effective. The module graph is stored in `go.sum` f
 
 | Bundler | Ruby | Medium | Medium | Gemfile.lock | No | Test |
 
-### Recommendations
+#### Recommendations
 
   * **JavaScript** : Use pnpm for new projects (fastest, disk-efficient). Stick with npm if you want zero-config setup.
 
@@ -311,11 +317,17 @@ Go's approach is minimal but effective. The module graph is stored in `go.sum` f
 
 
 
-### Summary
+#### Summary
 
 The package manager landscape is converging on speed and determinism. Rust-based tools (uv, pnpm's native core) represent the next generation, offering 10-100x performance improvements. Choose the fastest tool for your primary ecosystem but maintain compatibility for your team and CI. Deterministic lock files and verified checksums are non-negotiable for production builds.
 
 **See also:** [Container Runtimes Compared](</en/tools/container-runtimes-compared.html>), [Best Code Formatters and Linters](</en/tools/code-formatters-linters.html>), [Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features](</en/tools/package-managers.html>).
+
+**See also:** [Container Runtimes Compared](</en/tools/container-runtimes-compared.html>), [Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features](</en/tools/package-managers.html>), [CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins](</en/tools/ci-cd-tools-comparison.html>)
+
+**See also:** [Container Runtimes Compared](</en/tools/container-runtimes-compared.html>), [Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features](</en/tools/package-managers.html>), [CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins](</en/tools/ci-cd-tools-comparison.html>)
+
+**See also:** [Container Runtimes Compared](</en/tools/container-runtimes-compared.html>), [Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features](</en/tools/package-managers.html>), [CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins](</en/tools/ci-cd-tools-comparison.html>)
 
 **See also:** [Container Runtimes Compared](</en/tools/container-runtimes-compared.html>), [Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features](</en/tools/package-managers.html>), [CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins](</en/tools/ci-cd-tools-comparison.html>)
 

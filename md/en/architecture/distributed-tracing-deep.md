@@ -1,7 +1,7 @@
 ---
 title: "Distributed Tracing: Deep Dive"
 description: "Trace context propagation, sampling strategies, visualization, and implementation of distributed tracing"
-date: 2026-05-12
+date: 2026-04-23
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/distributed-tracing-deep.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/distributed-tracing-deep.
 
 ## Distributed Tracing: Deep Dive
 
-## Distributed Tracing: Deep Dive
+### Distributed Tracing: Deep Dive
 
-## Distributed Tracing: Deep Dive
+#### Distributed Tracing: Deep Dive
 
-## Distributed Tracing: Deep Dive
+#### Distributed Tracing: Deep Dive
 
-## Distributed Tracing: Deep Dive
+#### Distributed Tracing: Deep Dive
 
-## Distributed Tracing: Deep Dive
+#### Distributed Tracing: Deep Dive
 
-## Distributed Tracing: Deep Dive
+#### Distributed Tracing: Deep Dive
 
-## Distributed Tracing: Deep Dive
+#### Distributed Tracing: Deep Dive
 
-## Distributed Tracing: Deep Dive
+#### Distributed Tracing: Deep Dive
 
-## Distributed Tracing: Deep Dive
+#### Distributed Tracing: Deep Dive
 
-## Distributed Tracing: Deep Dive
+#### Distributed Tracing: Deep Dive
 
-## Distributed Tracing: Deep Dive
+#### Distributed Tracing: Deep Dive
+
+#### Distributed Tracing: Deep Dive
+
+#### Distributed Tracing: Deep Dive
+
+#### Distributed Tracing: Deep Dive
 
 Distributed tracing reconstructs the path of a single request as it traverses multiple services, databases, and queues. Without tracing, understanding the performance of a distributed system requires correlating logs and metrics manually — a process that breaks down under complexity. Tracing provides an end-to-end view: which services were called, in what order, for how long, and whether they succeeded. 
 
@@ -53,6 +59,12 @@ Tracing infrastructure components collect and process trace data. OpenTelemetry 
 Correlation with logs completes the observability picture. Span IDs embedded in log entries enable cross-referencing: find a slow trace, view the span details, and jump to the associated logs for that span. The OpenTelemetry approach generates all signals from the same instrumentation context, ensuring that trace IDs flow naturally into log records and metric labels. This unified context is the foundation of effective observability in distributed systems.
 
 **See also:** [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>).
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)
 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)
 

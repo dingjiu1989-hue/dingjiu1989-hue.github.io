@@ -1,7 +1,7 @@
 ---
 title: "Logging Tools: ELK Stack vs Loki vs Splunk"
 description: "Compare ELK Stack, Grafana Loki, and Splunk for log aggregation, structured logging, indexing strategies, retention policies, query capabilities, and cost."
-date: 2026-05-12
+date: 2026-01-27
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/logging-tools.html
 ---
@@ -10,41 +10,47 @@ url: https://dingjiu1989-hue.github.io/en/tools/logging-tools.html
 
 ## Logging Tools: ELK Stack vs Loki vs Splunk
 
-## Logging Tools: ELK Stack vs Loki vs Splunk
+### Logging Tools: ELK Stack vs Loki vs Splunk
 
-## Logging Tools: ELK Stack vs Loki vs Splunk
+#### Logging Tools: ELK Stack vs Loki vs Splunk
 
-## Logging Tools: ELK Stack vs Loki vs Splunk
+#### Logging Tools: ELK Stack vs Loki vs Splunk
 
-## Logging Tools: ELK Stack vs Loki vs Splunk
+#### Logging Tools: ELK Stack vs Loki vs Splunk
 
-## Logging Tools: ELK Stack vs Loki vs Splunk
+#### Logging Tools: ELK Stack vs Loki vs Splunk
 
-## Logging Tools: ELK Stack vs Loki vs Splunk
+#### Logging Tools: ELK Stack vs Loki vs Splunk
 
-## Logging Tools: ELK Stack vs Loki vs Splunk
+#### Logging Tools: ELK Stack vs Loki vs Splunk
 
-## Logging Tools: ELK Stack vs Loki vs Splunk
+#### Logging Tools: ELK Stack vs Loki vs Splunk
 
-## Logging Tools: ELK Stack vs Loki vs Splunk
+#### Logging Tools: ELK Stack vs Loki vs Splunk
 
-## Logging Tools: ELK Stack vs Loki vs Splunk
+#### Logging Tools: ELK Stack vs Loki vs Splunk
 
-## Logging Tools: ELK Stack vs Loki vs Splunk
+#### Logging Tools: ELK Stack vs Loki vs Splunk
 
-## Logging Tools: ELK Stack vs Loki vs Splunk
+#### Logging Tools: ELK Stack vs Loki vs Splunk
 
-### Introduction
+#### Logging Tools: ELK Stack vs Loki vs Splunk
+
+#### Logging Tools: ELK Stack vs Loki vs Splunk
+
+#### Logging Tools: ELK Stack vs Loki vs Splunk
+
+#### Introduction
 
 Centralized logging transforms noisy application output into a searchable, actionable resource. The three leading approaches--ELK Stack (Elasticsearch, Logstash, Kibana), Grafana Loki, and Splunk--take fundamentally different approaches to log ingestion, indexing, and querying. Choosing the right one affects both your daily operations and your monthly infrastructure bill.
 
-### Architecture Comparison
+#### Architecture Comparison
 
 #### ELK Stack
 
 Elasticsearch indexes every field in every log line, enabling rich full-text search at the cost of higher storage consumption:
 
-## Filebeat configuration for shipping logs
+#### Filebeat configuration for shipping logs
 
 filebeat.inputs:
 
@@ -80,7 +86,7 @@ index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"
 
 pipeline: "parse-logs"
 
-## Elasticsearch index lifecycle policy
+#### Elasticsearch index lifecycle policy
 
 PUT _ilm/policy/logs-30day
 
@@ -136,7 +142,7 @@ PUT _ilm/policy/logs-30day
 
 Loki indexes only metadata labels, leaving log content unindexed for dramatically lower storage costs:
 
-## Loki configuration
+#### Loki configuration
 
 auth_enabled: false
 
@@ -210,7 +216,7 @@ retention_enabled: true
 
 Splunk uses a proprietary indexer architecture with heavy indexing at ingest:
 
-## inputs.conf - Splunk forwarder configuration
+#### inputs.conf - Splunk forwarder configuration
 
 [monitor:///var/log/app/*.log]
 
@@ -222,7 +228,7 @@ sourcetype = applog
 
 crcSalt = 
 
-## props.conf - Field extraction
+#### props.conf - Field extraction
 
 [applog]
 
@@ -236,7 +242,7 @@ KV_MODE = json
 
 REPORT-appfields = app-timestamp-extract, app-level-extract
 
-## transforms.conf
+#### transforms.conf
 
 [app-timestamp-extract]
 
@@ -250,7 +256,7 @@ REGEX = "level":"(\w+)"
 
 FORMAT = level::$1
 
-### Structured Logging
+#### Structured Logging
 
 No matter which platform you choose, structured logging at the application level is essential:
 
@@ -320,7 +326,7 @@ The same structured log renders differently across platforms:
 
 }
 
-### Query Capabilities
+#### Query Capabilities
 
 #### ELK (Kibana Query Language)
 
@@ -358,7 +364,7 @@ service=payment level=ERROR
 
 | head 10
 
-### Indexing Strategies
+#### Indexing Strategies
 
 | Strategy | ELK | Loki | Splunk |
 
@@ -372,9 +378,9 @@ service=payment level=ERROR
 
 | Full-text search | Excellent | Limited (filter + grep) | Excellent |
 
-### Retention Policies
+#### Retention Policies
 
-## Loki: retention via compactor
+#### Loki: retention via compactor
 
 compactor:
 
@@ -400,7 +406,7 @@ priority: 1
 
 period: 7d # Staging logs retained shorter
 
-### Cost Comparison
+#### Cost Comparison
 
 | Factor | ELK (self-hosted) | ELK (Elastic Cloud) | Loki + S3 | Splunk |
 
@@ -414,7 +420,7 @@ period: 7d # Staging logs retained shorter
 
 Loki offers the lowest storage cost by far due to its S3-based object storage and label-only indexing. ELK provides the best query flexibility at moderate cost. Splunk delivers enterprise-grade reliability but at a premium that only makes sense for compliance-heavy industries.
 
-### Decision Matrix
+#### Decision Matrix
 
   * **ELK Stack** : Best for teams needing full-text search across all fields, complex aggregations, and existing Elasticsearch expertise.
 
@@ -428,6 +434,12 @@ Loki offers the lowest storage cost by far due to its S3-based object storage an
 For most engineering teams, Loki paired with Grafana offers the best balance of cost and capability. Move to ELK when you need indexed structured search on arbitrary fields. Reserve Splunk for regulated environments where audit trails and access controls justify the expense.
 
 **See also:** [Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom](</en/tools/best-log-management-tools.html>), [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>).
+
+**See also:** [Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom](</en/tools/best-log-management-tools.html>), [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>)
+
+**See also:** [Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom](</en/tools/best-log-management-tools.html>), [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>)
+
+**See also:** [Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom](</en/tools/best-log-management-tools.html>), [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>)
 
 **See also:** [Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom](</en/tools/best-log-management-tools.html>), [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>)
 

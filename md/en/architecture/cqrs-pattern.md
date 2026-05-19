@@ -1,7 +1,7 @@
 ---
 title: "CQRS Pattern: Command Query Responsibility Segregation"
 description: "Learn CQRS pattern with read/write separation, event sourcing integration, materialized views, and guidance on when to use it."
-date: 2026-05-12
+date: 2026-04-20
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/cqrs-pattern.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/cqrs-pattern.html
 
 ## CQRS Pattern: Command Query Responsibility Segregation
 
-## CQRS Pattern: Command Query Responsibility Segregation
+### CQRS Pattern: Command Query Responsibility Segregation
 
-## CQRS Pattern: Command Query Responsibility Segregation
+#### CQRS Pattern: Command Query Responsibility Segregation
 
-## CQRS Pattern: Command Query Responsibility Segregation
+#### CQRS Pattern: Command Query Responsibility Segregation
 
-## CQRS Pattern: Command Query Responsibility Segregation
+#### CQRS Pattern: Command Query Responsibility Segregation
 
-## CQRS Pattern: Command Query Responsibility Segregation
+#### CQRS Pattern: Command Query Responsibility Segregation
 
-## CQRS Pattern: Command Query Responsibility Segregation
+#### CQRS Pattern: Command Query Responsibility Segregation
 
-## CQRS Pattern: Command Query Responsibility Segregation
+#### CQRS Pattern: Command Query Responsibility Segregation
 
-## CQRS Pattern: Command Query Responsibility Segregation
+#### CQRS Pattern: Command Query Responsibility Segregation
 
-## CQRS Pattern: Command Query Responsibility Segregation
+#### CQRS Pattern: Command Query Responsibility Segregation
 
-## CQRS Pattern: Command Query Responsibility Segregation
+#### CQRS Pattern: Command Query Responsibility Segregation
 
-## CQRS Pattern: Command Query Responsibility Segregation
+#### CQRS Pattern: Command Query Responsibility Segregation
+
+#### CQRS Pattern: Command Query Responsibility Segregation
+
+#### CQRS Pattern: Command Query Responsibility Segregation
+
+#### CQRS Pattern: Command Query Responsibility Segregation
 
 Command Query Responsibility Segregation (CQRS) is a pattern that separates read and write operations into distinct models. Rather than using a single model for both commands (writes) and queries (reads), CQRS introduces separate interfaces, data structures, and often separate data stores for each side. This separation unlocks significant scalability and flexibility advantages in complex domains. 
 
@@ -65,3 +71,9 @@ Testing CQRS systems requires verifying both the command behavior (do commands p
 **See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>)
 
 **See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)

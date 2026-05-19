@@ -1,7 +1,7 @@
 ---
 title: "Cloud IAM Deep Dive"
 description: "In-depth guide to cloud IAM covering AWS IAM policies, GCP IAM roles, least privilege principles, and policy simulation techniques."
-date: 2026-05-12
+date: 2026-03-08
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/cloud-iam.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/security/cloud-iam.html
 
 ## Cloud IAM Deep Dive
 
-## Cloud IAM Deep Dive
+### Cloud IAM Deep Dive
 
-## Cloud IAM Deep Dive
+#### Cloud IAM Deep Dive
 
-## Cloud IAM Deep Dive
+#### Cloud IAM Deep Dive
 
-## Cloud IAM Deep Dive
+#### Cloud IAM Deep Dive
 
-## Cloud IAM Deep Dive
+#### Cloud IAM Deep Dive
 
-## Cloud IAM Deep Dive
+#### Cloud IAM Deep Dive
 
-## Cloud IAM Deep Dive
+#### Cloud IAM Deep Dive
 
-## Cloud IAM Deep Dive
+#### Cloud IAM Deep Dive
 
-## Cloud IAM Deep Dive
+#### Cloud IAM Deep Dive
 
-## Cloud IAM Deep Dive
+#### Cloud IAM Deep Dive
 
-## Cloud IAM Deep Dive
+#### Cloud IAM Deep Dive
 
-## Cloud IAM Deep Dive
+#### Cloud IAM Deep Dive
 
-## Cloud IAM Deep Dive
+#### Cloud IAM Deep Dive
+
+#### Cloud IAM Deep Dive
+
+#### Cloud IAM Deep Dive
+
+#### Cloud IAM Deep Dive
 
 Introduction 
 
@@ -105,7 +111,7 @@ Least Privilege with AWS
 
 AWS Access Advisor shows service last-accessed information, helping identify unused permissions. IAM Access Analyzer generates policies based on CloudTrail access patterns. 
 
-## Generate policy from CloudTrail activity
+#### Generate policy from CloudTrail activity
 
 aws accessanalyzer create-analyzer --analyzer-name my-analyzer --type ACCOUNT
 
@@ -137,7 +143,7 @@ folders/987654321/roles/customInstanceAdmin
 
 projects/my-project/roles/customComputeAdmin
 
-## Create a custom GCP IAM role
+#### Create a custom GCP IAM role
 
 gcloud iam roles create customComputeAdmin \
 
@@ -153,7 +159,7 @@ compute.instances.stop,compute.instances.list \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--stage=GA
 
-## Bind role to a service account at the project level
+#### Bind role to a service account at the project level
 
 gcloud projects add-iam-policy-binding my-project \
 
@@ -165,7 +171,7 @@ Policy Simulation
 
 Both AWS and GCP provide policy simulation tools to verify permissions before deployment. 
 
-## AWS IAM policy simulation
+#### AWS IAM policy simulation
 
 aws iam simulate-principal-policy \
 
@@ -175,7 +181,7 @@ aws iam simulate-principal-policy \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--resource-arns arn:aws:s3:::my-bucket
 
-## GCP policy troubleshooter
+#### GCP policy troubleshooter
 
 gcloud policy-intelligence query-activity \
 
@@ -198,6 +204,12 @@ Conclusion
 Cloud IAM requires continuous attention. Implement least privilege by starting with minimal permissions and expanding based on demonstrated need. Use policy simulation tools before deploying changes, audit permissions regularly with Access Analyzer and policy intelligence tools, and enforce conditions like MFA and source IP restrictions wherever possible.
 
 **See also:** [Key Management Systems](</en/security/key-management.html>), [Input Validation Deep Dive](</en/security/input-validation.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>).
+
+**See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [Key Management Systems](</en/security/key-management.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>)
+
+**See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [Key Management Systems](</en/security/key-management.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>)
+
+**See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [Key Management Systems](</en/security/key-management.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>)
 
 **See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [Key Management Systems](</en/security/key-management.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>)
 

@@ -1,7 +1,7 @@
 ---
 title: "Kafka vs RabbitMQ vs Apache Pulsar"
 description: "Compare Kafka, RabbitMQ, and Apache Pulsar across throughput, latency, message model, persistence, routing, ecosystem, and migration scenarios."
-date: 2026-05-12
+date: 2026-02-23
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/kafka-vs-rabbitmq.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/compare/kafka-vs-rabbitmq.html
 
 ## Kafka vs RabbitMQ vs Apache Pulsar
 
-## Kafka vs RabbitMQ vs Apache Pulsar
+### Kafka vs RabbitMQ vs Apache Pulsar
 
-## Kafka vs RabbitMQ vs Apache Pulsar
+#### Kafka vs RabbitMQ vs Apache Pulsar
 
-## Kafka vs RabbitMQ vs Apache Pulsar
+#### Kafka vs RabbitMQ vs Apache Pulsar
 
-## Kafka vs RabbitMQ vs Apache Pulsar
+#### Kafka vs RabbitMQ vs Apache Pulsar
 
-## Kafka vs RabbitMQ vs Apache Pulsar
+#### Kafka vs RabbitMQ vs Apache Pulsar
 
-## Kafka vs RabbitMQ vs Apache Pulsar
+#### Kafka vs RabbitMQ vs Apache Pulsar
 
-## Kafka vs RabbitMQ vs Apache Pulsar
+#### Kafka vs RabbitMQ vs Apache Pulsar
 
-## Kafka vs RabbitMQ vs Apache Pulsar
+#### Kafka vs RabbitMQ vs Apache Pulsar
 
-## Kafka vs RabbitMQ vs Apache Pulsar
+#### Kafka vs RabbitMQ vs Apache Pulsar
 
-## Kafka vs RabbitMQ vs Apache Pulsar
+#### Kafka vs RabbitMQ vs Apache Pulsar
 
-## Kafka vs RabbitMQ vs Apache Pulsar
+#### Kafka vs RabbitMQ vs Apache Pulsar
 
-## Kafka vs RabbitMQ vs Apache Pulsar
+#### Kafka vs RabbitMQ vs Apache Pulsar
 
-### Kafka vs RabbitMQ: Choosing Your Message Broker
+#### Kafka vs RabbitMQ vs Apache Pulsar
+
+#### Kafka vs RabbitMQ vs Apache Pulsar
+
+#### Kafka vs RabbitMQ vs Apache Pulsar
+
+#### Kafka vs RabbitMQ: Choosing Your Message Broker
 
 Message queuing remains a critical architectural decision in 2026, with Apache Kafka and RabbitMQ dominating the landscape. Despite both being message brokers, their design philosophies lead to vastly different performance characteristics and operational patterns.
 
@@ -73,6 +79,12 @@ Prefer RabbitMQ for task queues, RPC-style request-reply, complex routing requir
 Kafka and RabbitMQ are complementary tools rather than direct competitors. Many organizations run both: RabbitMQ for transactional messaging and task distribution, Kafka for event streaming and data pipelines. Understanding their strengths ensures you use each where it excels.
 
 **See also:** [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>), [Nginx vs Apache: Web Server Comparison 2026](</en/compare/nginx-vs-apache.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>).
+
+**See also:** [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>), [Nginx vs Apache: Web Server Comparison 2026](</en/compare/nginx-vs-apache.html>), [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>)
+
+**See also:** [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>), [Nginx vs Apache: Web Server Comparison 2026](</en/compare/nginx-vs-apache.html>), [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>)
+
+**See also:** [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>), [Nginx vs Apache: Web Server Comparison 2026](</en/compare/nginx-vs-apache.html>), [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>)
 
 **See also:** [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>), [Nginx vs Apache: Web Server Comparison 2026](</en/compare/nginx-vs-apache.html>), [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>)
 

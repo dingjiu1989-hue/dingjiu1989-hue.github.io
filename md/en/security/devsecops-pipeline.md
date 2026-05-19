@@ -1,7 +1,7 @@
 ---
 title: "DevSecOps: Integrating Security into CI/CD"
 description: "Integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your CI/CD pipeline for shift-left security."
-date: 2026-05-12
+date: 2026-03-04
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/devsecops-pipeline.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/security/devsecops-pipeline.html
 
 ## DevSecOps: Integrating Security into CI/CD
 
-## DevSecOps: Integrating Security into CI/CD
+### DevSecOps: Integrating Security into CI/CD
 
-## DevSecOps: Integrating Security into CI/CD
+#### DevSecOps: Integrating Security into CI/CD
 
-## DevSecOps: Integrating Security into CI/CD
+#### DevSecOps: Integrating Security into CI/CD
 
-## DevSecOps: Integrating Security into CI/CD
+#### DevSecOps: Integrating Security into CI/CD
 
-## DevSecOps: Integrating Security into CI/CD
+#### DevSecOps: Integrating Security into CI/CD
 
-## DevSecOps: Integrating Security into CI/CD
+#### DevSecOps: Integrating Security into CI/CD
 
-## DevSecOps: Integrating Security into CI/CD
+#### DevSecOps: Integrating Security into CI/CD
 
-## DevSecOps: Integrating Security into CI/CD
+#### DevSecOps: Integrating Security into CI/CD
 
-## DevSecOps: Integrating Security into CI/CD
+#### DevSecOps: Integrating Security into CI/CD
 
-## DevSecOps: Integrating Security into CI/CD
+#### DevSecOps: Integrating Security into CI/CD
 
-## DevSecOps: Integrating Security into CI/CD
+#### DevSecOps: Integrating Security into CI/CD
 
-## DevSecOps: Integrating Security into CI/CD
+#### DevSecOps: Integrating Security into CI/CD
+
+#### DevSecOps: Integrating Security into CI/CD
+
+#### DevSecOps: Integrating Security into CI/CD
+
+#### DevSecOps: Integrating Security into CI/CD
 
 DevSecOps embeds security into every stage of the software development lifecycle. Rather than running security assessments at the end of a release cycle, DevSecOps shifts security left into development and CI/CD pipelines. This article covers how to integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your pipelines.
 
-### Shift-Left Security
+#### Shift-Left Security
 
 The shift-left principle moves security testing earlier in the development process. Finding and fixing a vulnerability during development costs 10 times less than fixing it in production, and 100 times less than fixing it after a breach.
 
@@ -50,7 +56,7 @@ Integration Test -> DAST -> Staging -> Policy Check -> Production
 
 Each gate can pass, fail with a warning, or fail and block the pipeline. The severity determines the action: critical and high findings block the pipeline, while medium and low findings create tickets for the development team.
 
-### Static Application Security Testing (SAST)
+#### Static Application Security Testing (SAST)
 
 SAST analyzes source code without executing it. It identifies vulnerabilities like SQL injection, cross-site scripting (XSS), buffer overflows, and insecure cryptographic usage.
 
@@ -69,7 +75,7 @@ SAST analyzes source code without executing it. It identifies vulnerabilities li
 
 #### Pipeline Integration
 
-## GitHub Actions: SAST with Semgrep
+#### GitHub Actions: SAST with Semgrep
 
 name: SAST Scan
 
@@ -122,7 +128,7 @@ fi
 
 
 
-### Dependency Scanning
+#### Dependency Scanning
 
 Modern applications use dozens of open-source libraries. Each library introduces transitive dependencies with potential vulnerabilities.
 
@@ -130,11 +136,11 @@ Modern applications use dozens of open-source libraries. Each library introduces
 
 An SBOM is a formal inventory of all software components in an application. Generate SBOMs in CycloneDX or SPDX format.
 
-## Generate SBOM with Syft
+#### Generate SBOM with Syft
 
 syft packages . -o cyclonedx-json > sbom.json
 
-## Scan SBOM for vulnerabilities with Grype
+#### Scan SBOM for vulnerabilities with Grype
 
 grype sbom:./sbom.json
 
@@ -151,7 +157,7 @@ grype sbom:./sbom.json
 
 
 
-## Dependabot configuration
+#### Dependabot configuration
 
 version: 2
 
@@ -186,7 +192,7 @@ labels:
 
 
 
-### Dynamic Application Security Testing (DAST)
+#### Dynamic Application Security Testing (DAST)
 
 DAST tests the running application from the outside, simulating real-world attack patterns. It discovers vulnerabilities that SAST misses, such as authentication bypass, session management flaws, and business logic errors.
 
@@ -203,7 +209,7 @@ DAST tests the running application from the outside, simulating real-world attac
 
 #### Pipeline Integration
 
-## DAST with OWASP ZAP in CI/CD
+#### DAST with OWASP ZAP in CI/CD
 
 services:
 
@@ -256,13 +262,13 @@ fi
 
 
 
-### Container Scanning
+#### Container Scanning
 
 Container images bundle applications with their runtime dependencies. Vulnerabilities in base images or installed packages become part of the container.
 
 #### Scanning Pipeline Integration
 
-## Dockerfile with security best practices
+#### Dockerfile with security best practices
 
 FROM alpine:3.19 AS builder
 
@@ -280,7 +286,7 @@ USER app
 
 EXPOSE 8080
 
-## Container scanning with Trivy in CI/CD
+#### Container scanning with Trivy in CI/CD
 
 jobs:
 
@@ -331,7 +337,7 @@ sarif_file: trivy-results.sarif
 
 
 
-### Policy-as-Code
+#### Policy-as-Code
 
 Policy-as-code defines security and compliance rules as executable code. Policies are versioned, reviewed, and enforced automatically in the pipeline.
 
@@ -339,7 +345,7 @@ Policy-as-code defines security and compliance rules as executable code. Policie
 
 OPA enforces policies across the software lifecycle. Rego is OPA's policy language.
 
-## Rego policy: Require encryption at rest
+#### Rego policy: Require encryption at rest
 
 package kubernetes.storage
 
@@ -357,7 +363,7 @@ msg := sprintf("Volume %v must have encryption enabled", [volume.name])
 
 #### Policy Gates in the Pipeline
 
-## Conftest: Policy enforcement for Kubernetes manifests
+#### Conftest: Policy enforcement for Kubernetes manifests
 
 steps:
 
@@ -394,7 +400,7 @@ conftest test main.tf \
 
 
 
-### Building a DevSecOps Culture
+#### Building a DevSecOps Culture
 
 Tools alone do not make DevSecOps successful. The human elements matter more.
 
@@ -409,11 +415,17 @@ Tools alone do not make DevSecOps successful. The human elements matter more.
 
 
 
-### Conclusion
+#### Conclusion
 
 DevSecOps shifts security from a final gate to an integrated part of the development process. SAST catches code-level vulnerabilities, dependency scanning manages supply chain risk, DAST validates runtime behavior, container scanning secures artifacts, and policy-as-code enforces standards. Together, these practices make security a natural part of delivering software, not an obstacle to it.
 
 **See also:** [Secure Software Development Lifecycle](</en/security/secure-sdlc.html>), [Container Security Best Practices](</en/security/container-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>).
+
+**See also:** [Secure Software Development Lifecycle](</en/security/secure-sdlc.html>), [Container Security Best Practices](</en/security/container-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [Secure Software Development Lifecycle](</en/security/secure-sdlc.html>), [Container Security Best Practices](</en/security/container-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [Secure Software Development Lifecycle](</en/security/secure-sdlc.html>), [Container Security Best Practices](</en/security/container-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 
 **See also:** [Secure Software Development Lifecycle](</en/security/secure-sdlc.html>), [Container Security Best Practices](</en/security/container-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 

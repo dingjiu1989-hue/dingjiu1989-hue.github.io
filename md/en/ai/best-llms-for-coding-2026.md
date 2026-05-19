@@ -1,7 +1,7 @@
 ---
 title: "Best LLMs for Coding in 2026: Claude vs GPT-4o vs Gemini vs DeepSeek vs CodeLlama"
 description: "Compare the top LLMs specifically for coding tasks — code generation, debugging, refactoring, and code review. Real benchmarks and hands-on comparisons."
-date: 2026-05-08
+date: 2025-11-05
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/best-llms-for-coding-2026.html
 ---

@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-data-privacy.png",
       "datePublished": "2026-02-14",
       "dateModified": "2026-05-06",
-      "wordCount": "2346",
+      "wordCount": "2466",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-data-privacy.html"},
@@ -99,18 +101,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-data-privacy.png" alt="AI Data Privacy: PII Detection, Data Anonymization, Local Processing" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h2>
 <h3>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h3>
-<h3>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h3>
-<h3>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h3>
-<h3>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h3>
-<h3>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h3>
-<h3>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h3>
-<h3>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h3>
-<h3>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h3>
-<h3>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h3>
-<h3>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h3>
-<h3>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h3>
-<h3>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h3>
-<h3>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h3>
+<h4>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h4>
+<h4>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h4>
+<h4>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h4>
+<h4>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h4>
+<h4>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h4>
+<h4>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h4>
+<h4>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h4>
+<h4>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h4>
+<h4>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h4>
+<h4>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h4>
+<h4>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h4>
+<h4>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h4>
+<h4>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h4>
+<h4>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h4>
 <h4>Introduction</h4>
 <p>AI applications process vast amounts of data, much of it containing personally identifiable information (PII). Sending raw PII to LLM APIs creates compliance risks under GDPR, CCPA, and other regulations. This article covers practical techniques for detecting and redacting PII, anonymizing training data, and processing sensitive information locally.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-data-privacy.png" alt="AI Data Privacy: PII Detection, Data Anonymization, Local Processing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>PII Detection</h4>
@@ -119,7 +123,7 @@
 <p>import spacy</p>
 <p>from presidio_analyzer import AnalyzerEngine</p>
 <p>from presidio_anonymizer import AnonymizerEngine</p>
-<h3>Initialize Presidio analyzers</h3>
+<h4>Initialize Presidio analyzers</h4>
 <p>nlp = spacy.load("en_core_web_lg")</p>
 <p>analyzer = AnalyzerEngine()</p>
 <p>anonymizer = AnonymizerEngine()</p>
@@ -169,10 +173,10 @@
 <p>elif field == "ssn":</p>
 <p>return fake.ssn()</p>
 <p>else:</p>
-<h3>Tokenization: stable pseudonym via hashing</h3>
+<h4>Tokenization: stable pseudonym via hashing</h4>
 <p>hashed = hashlib.sha256(value.encode()).hexdigest()[:16]</p>
 <p>return f"USER_{hashed}"</p>
-<h3>Differential privacy: add calibrated noise</h3>
+<h4>Differential privacy: add calibrated noise</h4>
 <p>def add_laplace_noise(true_value: float, epsilon: float = 1.0) -&gt; float:</p>
 <p>"""Add Laplace noise for differential privacy.</p>
 <p>Lower epsilon = more privacy, less accuracy."""</p>
@@ -194,7 +198,7 @@
 <p>from transformers import pipeline</p>
 <p>class LocalTextProcessor:</p>
 <p>def <strong>init</strong>(self):</p>
-<h3>Load small models for local inference</h3>
+<h4>Load small models for local inference</h4>
 <p>self.classifier = pipeline(</p>
 <p>"text-classification",</p>
 <p>model="distilbert-base-uncased-finetuned-sst-2-english",</p>
@@ -211,7 +215,7 @@
 <p>device=-1,</p>
 <p>)</p>
 <p>def process_sensitive_data(self, text: str, task: str) -&gt; dict:</p>
-<h3>All processing happens locally; nothing leaves this machine</h3>
+<h4>All processing happens locally; nothing leaves this machine</h4>
 <p>if task == "classify":</p>
 <p>return {"label": self.classifier(text)[0]["label"]}</p>
 <p>elif task == "extract_entities":</p>
@@ -221,25 +225,25 @@
 <h4>Hybrid Approach</h4>
 <p>For complex tasks requiring powerful LLMs, strip PII before sending, then re-integrate after:</p>
 <p>def safe_llm_call(user_text: str) -&gt; str:</p>
-<h3>Step 1: Detect and redact PII</h3>
+<h4>Step 1: Detect and redact PII</h4>
 <p>pii_entities = detect_pii(user_text)</p>
 <p>redacted_text = redact_pii(user_text)</p>
-<h3>Store PII mapping for later restoration</h3>
+<h4>Store PII mapping for later restoration</h4>
 <p>pii_map = {</p>
 <p>entity["text"]: f"[{entity['entity']}_{i}]"</p>
 <p>for i, entity in enumerate(pii_entities)</p>
 <p>}</p>
-<h3>Step 2: Send redacted text to LLM</h3>
+<h4>Step 2: Send redacted text to LLM</h4>
 <p>safe_prompt = f"Process this text: {redacted_text}"</p>
 <p>response = call_llm(safe_prompt)</p>
-<h3>Step 3: The response should use placeholders, not real data</h3>
-<h3>No restoration needed if the LLM just processes the structure</h3>
+<h4>Step 3: The response should use placeholders, not real data</h4>
+<h4>No restoration needed if the LLM just processes the structure</h4>
 <p>return response</p>
-<h3>For cases where PII must be restored:</h3>
+<h4>For cases where PII must be restored:</h4>
 <p>def process_and_restore(user_text: str, context: dict) -&gt; str:</p>
 <p>redacted, pii_map = redact_with_map(user_text)</p>
 <p>result = call_llm(f"Based on this data: {redacted}, generate a response.")</p>
-<h3>The LLM response should reference PII generically</h3>
+<h4>The LLM response should reference PII generically</h4>
 <p>return result</p>
 <h4>Compliance Checklist</h4>
 <p>data_privacy_audit:</p>
@@ -262,6 +266,8 @@
 <h4>Conclusion</h4>
 <p>AI data privacy requires proactive protection rather than reactive compliance. Detect and redact PII before any external API call. Use local models for sensitive processing when possible. Implement a hybrid approach for complex tasks: strip PII before cloud LLM inference, and never log raw user data. Regular privacy audits ensure that your protection measures stay effective as your application evolves.</p>
 <p><strong>See also:</strong> <a href="/en/ai/fine-tuning-strategies.html">LLM Fine-Tuning Strategies and Techniques</a>, <a href="/en/ai/model-deployment.html">Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization</a>, <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/model-deployment.html">Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/model-deployment.html">Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/model-deployment.html">Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/model-deployment.html">Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/model-deployment.html">Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization</a></p></div>
     </article>

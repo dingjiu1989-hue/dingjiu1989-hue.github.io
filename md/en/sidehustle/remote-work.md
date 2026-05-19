@@ -1,7 +1,7 @@
 ---
 title: "Best Remote Work Platforms: Upwork, Toptal, and Beyond"
 description: "A curated list of top remote work platforms for freelancers and digital nomads, covering Upwork, Toptal, We Work Remotely, and niche alternatives."
-date: 2026-05-07
+date: 2025-10-03
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/remote-work.html
 ---

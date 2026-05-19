@@ -1,7 +1,7 @@
 ---
 title: "Audit Logging Best Practices"
 description: "Guide to audit logging covering immutable logs, log integrity verification, centralized logging architecture, retention policies, and compliance requirements."
-date: 2026-05-12
+date: 2026-03-06
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/audit-logging.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/security/audit-logging.html
 
 ## Audit Logging Best Practices
 
-## Audit Logging Best Practices
+### Audit Logging Best Practices
 
-## Audit Logging Best Practices
+#### Audit Logging Best Practices
 
-## Audit Logging Best Practices
+#### Audit Logging Best Practices
 
-## Audit Logging Best Practices
+#### Audit Logging Best Practices
 
-## Audit Logging Best Practices
+#### Audit Logging Best Practices
 
-## Audit Logging Best Practices
+#### Audit Logging Best Practices
 
-## Audit Logging Best Practices
+#### Audit Logging Best Practices
 
-## Audit Logging Best Practices
+#### Audit Logging Best Practices
 
-## Audit Logging Best Practices
+#### Audit Logging Best Practices
 
-## Audit Logging Best Practices
+#### Audit Logging Best Practices
 
-## Audit Logging Best Practices
+#### Audit Logging Best Practices
 
-## Audit Logging Best Practices
+#### Audit Logging Best Practices
 
-## Audit Logging Best Practices
+#### Audit Logging Best Practices
+
+#### Audit Logging Best Practices
+
+#### Audit Logging Best Practices
+
+#### Audit Logging Best Practices
 
 Introduction 
 
@@ -66,7 +72,7 @@ def write_log(self, event):
 
 """Write a tamper-evident log entry."""
 
-## Create log entry with metadata
+#### Create log entry with metadata
 
 entry = {
 
@@ -78,7 +84,7 @@ entry = {
 
 }
 
-## Add hash of previous entry (blockchain-style chain)
+#### Add hash of previous entry (blockchain-style chain)
 
 prev_entry = self.storage.get_last()
 
@@ -90,7 +96,7 @@ else:
 
 entry['prev_hash'] = '0' * 64
 
-## Calculate hash of this entry
+#### Calculate hash of this entry
 
 entry_json = json.dumps(entry, sort_keys=True)
 
@@ -98,7 +104,7 @@ entry_hash = hashlib.sha256(entry_json.encode()).hexdigest()
 
 entry['hash'] = entry_hash
 
-## HMAC sign the hash
+#### HMAC sign the hash
 
 entry['signature'] = hmac.new(
 
@@ -110,7 +116,7 @@ hashlib.sha256
 
 ).hexdigest()
 
-## Write to WORM storage
+#### Write to WORM storage
 
 log_id = f"{entry['timestamp']}_{entry['sequence']}"
 
@@ -128,7 +134,7 @@ prev_hash = '0' * 64
 
 for entry in entries:
 
-## Verify hash
+#### Verify hash
 
 entry_copy = {k: v for k, v in entry.items() 
 
@@ -144,13 +150,13 @@ if computed_hash != entry['hash']:
 
 return False, f"Hash mismatch at sequence {entry['sequence']}"
 
-## Verify chain link
+#### Verify chain link
 
 if entry['prev_hash'] != prev_hash:
 
 return False, f"Chain break at sequence {entry['sequence']}"
 
-## Verify HMAC
+#### Verify HMAC
 
 expected_sig = hmac.new(
 
@@ -172,21 +178,21 @@ return True, "Log chain verified"
 
 Append-Only Logging 
 
-## Linux auditd configuration for immutable logs
+#### Linux auditd configuration for immutable logs
 
-## /etc/audit/rules.d/audit.rules
+#### /etc/audit/rules.d/audit.rules
 
-## Make audit log immutable
+#### Make audit log immutable
 
 -e 2
 
-## Log all administrative commands
+#### Log all administrative commands
 
 -w /usr/bin/su -p x -k privilege_escalation
 
 -w /usr/bin/sudo -p x -k privilege_escalation
 
-## Log critical file access
+#### Log critical file access
 
 -w /etc/passwd -p wa -k passwd_changes
 
@@ -194,25 +200,25 @@ Append-Only Logging
 
 -w /etc/ssh/sshd_config -p wa -k ssh_config
 
-## Log system calls for process creation
+#### Log system calls for process creation
 
 -a always,exit -S execve -k process_creation
 
-## Log network configuration changes
+#### Log network configuration changes
 
 -w /sbin/iptables -p x -k firewall_changes
 
 -w /sbin/ip6tables -p x -k firewall_changes
 
-## Set log file permissions
+#### Set log file permissions
 
 -a exclude,never -F auid>=1000
 
 Log Integrity Monitoring 
 
-## Forward logs to remote syslog server (prevents local tampering)
+#### Forward logs to remote syslog server (prevents local tampering)
 
-## /etc/rsyslog.d/remote-logging.conf
+#### /etc/rsyslog.d/remote-logging.conf
 
 _._ @@logs.example.com:514 # TCP with TLS
 
@@ -224,7 +230,7 @@ $ActionSendStreamDriverAuthMode x509/name
 
 $ActionSendStreamDriverPermittedPeer *.example.com
 
-## Use Logstash/Filebeat for shipping
+#### Use Logstash/Filebeat for shipping
 
 filebeat.inputs:
 
@@ -254,7 +260,7 @@ ssl.verification_mode: certificate
 
 Centralized Logging Architecture 
 
-## Loki/Promtail centralized logging configuration
+#### Loki/Promtail centralized logging configuration
 
 scrape_configs:
 
@@ -348,7 +354,7 @@ storage: glacier
 
 compliance: legal_hold
 
-## Automated log rotation and archival
+#### Automated log rotation and archival
 
 class LogRotationManager:
 
@@ -368,7 +374,7 @@ file_age = now - datetime.fromtimestamp(log_file.stat().st_mtime)
 
 if file_age.days > retention_days:
 
-## Compress
+#### Compress
 
 gzip_path = log_file.with_suffix('.log.gz')
 
@@ -378,7 +384,7 @@ with gzip.open(gzip_path, 'wb') as f_out:
 
 shutil.copyfileobj(f_in, f_out)
 
-## Upload to cold storage
+#### Upload to cold storage
 
 self.archive_bucket.upload(
 
@@ -388,7 +394,7 @@ f"audit_logs/{gzip_path.name}"
 
 )
 
-## Delete local copy
+#### Delete local copy
 
 log_file.unlink()
 
@@ -427,6 +433,12 @@ Conclusion
 Audit logging is a critical security control that requires careful architectural planning. Implement chain-of-hash verification for tamper evidence, write to immutable WORM storage, centralize logs for unified access, enforce retention policies aligned with compliance requirements, and protect log integrity throughout the lifecycle. The most sophisticated detection capabilities are useless if logs can be silently altered or deleted.
 
 **See also:** [Kubernetes Security](</en/security/kubernetes-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>), [Infrastructure as Code Security](</en/security/iac-security.html>).
+
+**See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
+
+**See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
+
+**See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
 
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
 

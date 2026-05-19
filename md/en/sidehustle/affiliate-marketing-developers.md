@@ -1,7 +1,7 @@
 ---
 title: "Affiliate Marketing for Developers: The Technical Guide to Your First $1,000"
 description: "Use your coding skills to build programmatic affiliate sites, automate content, and optimize conversions. The developer's unfair advantage in affiliate marketing."
-date: 2026-05-07
+date: 2025-10-05
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/affiliate-marketing-developers.html
 ---

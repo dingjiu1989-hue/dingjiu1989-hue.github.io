@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/microservice-security.png",
       "datePublished": "2026-03-11",
       "dateModified": "2026-04-14",
-      "wordCount": "3206",
+      "wordCount": "3252",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/microservice-security.html"},
@@ -99,24 +101,26 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/microservice-security.png" alt="Microservice Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Microservice Security</h2>
 <h3>Microservice Security</h3>
-<h3>Microservice Security</h3>
-<h3>Microservice Security</h3>
-<h3>Microservice Security</h3>
-<h3>Microservice Security</h3>
-<h3>Microservice Security</h3>
-<h3>Microservice Security</h3>
-<h3>Microservice Security</h3>
-<h3>Microservice Security</h3>
-<h3>Microservice Security</h3>
-<h3>Microservice Security</h3>
-<h3>Microservice Security</h3>
-<h3>Microservice Security</h3>
+<h4>Microservice Security</h4>
+<h4>Microservice Security</h4>
+<h4>Microservice Security</h4>
+<h4>Microservice Security</h4>
+<h4>Microservice Security</h4>
+<h4>Microservice Security</h4>
+<h4>Microservice Security</h4>
+<h4>Microservice Security</h4>
+<h4>Microservice Security</h4>
+<h4>Microservice Security</h4>
+<h4>Microservice Security</h4>
+<h4>Microservice Security</h4>
+<h4>Microservice Security</h4>
+<h4>Microservice Security</h4>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/microservice-security.png" alt="Microservice Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Microservice architectures distribute application functionality across multiple independent services, each with its own data store, API, and deployment lifecycle. This distribution increases the attack surface — intra-service communication must be secured, secrets must be distributed without exposure, and visibility must span service boundaries. </p>
 <p>Service Mesh mTLS </p>
 <p>A service mesh provides a dedicated infrastructure layer for handling service-to-service communication. It transparently encrypts traffic between services using mutual TLS (mTLS). </p>
 <p>Istio mTLS Configuration </p>
-<h3>Enable mTLS across the mesh</h3>
+<h4>Enable mTLS across the mesh</h4>
 <p>apiVersion: security.istio.io/v1beta1</p>
 <p>kind: PeerAuthentication</p>
 <p>metadata:</p>
@@ -125,7 +129,7 @@
 <p>spec:</p>
 <p>mtls:</p>
 <p>mode: STRICT # Reject plain-text traffic</p>
-<h3>Per-namespace mTLS policy</h3>
+<h4>Per-namespace mTLS policy</h4>
 <p>apiVersion: security.istio.io/v1beta1</p>
 <p>kind: PeerAuthentication</p>
 <p>metadata:</p>
@@ -140,7 +144,7 @@
 <p>portLevelMtls:</p>
 <p>8080:</p>
 <p>mode: DISABLE # Allow plaintext for health checks only</p>
-<h3>Authorization policy for service-to-service access</h3>
+<h4>Authorization policy for service-to-service access</h4>
 <p>apiVersion: security.istio.io/v1beta1</p>
 <p>kind: AuthorizationPolicy</p>
 <p>metadata:</p>
@@ -160,7 +164,7 @@
 <p>methods: ["POST", "GET"]</p>
 <p>paths: ["/api/v1/charges"]</p>
 <p>Envoy Sidecar Configuration </p>
-<h3>Envoy TLS configuration (used under the hood by Istio)</h3>
+<h4>Envoy TLS configuration (used under the hood by Istio)</h4>
 <p>static_resources:</p>
 <p>listeners:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: service_listener</p>
@@ -194,7 +198,7 @@
 <p>trusted_ca: { filename: "/etc/certs/ca.pem" }</p>
 <p>API Gateway Security </p>
 <p>The API gateway is the ingress point for external traffic and performs authentication, rate limiting, and request validation. </p>
-<h3>Kong API Gateway security configuration</h3>
+<h4>Kong API Gateway security configuration</h4>
 <p>_format_version: "3.0"</p>
 <p>services:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: order-service</p>
@@ -228,7 +232,7 @@
 <p>headers: ["Authorization", "Content-Type"]</p>
 <p>Secret Distribution </p>
 <p>Never store secrets in code or configuration files. Use a dedicated secret management system. </p>
-<h3>Kubernetes External Secrets Operator</h3>
+<h4>Kubernetes External Secrets Operator</h4>
 <p>apiVersion: external-secrets.io/v1beta1</p>
 <p>kind: ExternalSecret</p>
 <p>metadata:</p>
@@ -250,7 +254,7 @@
 <p>remoteRef:</p>
 <p>key: production/database/credentials</p>
 <p>property: password</p>
-<h3>HashiCorp Vault integration</h3>
+<h4>HashiCorp Vault integration</h4>
 <p>import hvac</p>
 <p>class VaultSecretManager:</p>
 <p>def <strong>init</strong>(self):</p>
@@ -280,7 +284,7 @@
 <p>from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter</p>
 <p>from opentelemetry.sdk.trace import TracerProvider</p>
 <p>from opentelemetry.sdk.trace.export import BatchSpanProcessor</p>
-<h3>Initialize distributed tracing</h3>
+<h4>Initialize distributed tracing</h4>
 <p>provider = TracerProvider()</p>
 <p>processor = BatchSpanProcessor(OTLPSpanExporter())</p>
 <p>provider.add_span_processor(processor)</p>
@@ -290,10 +294,10 @@
 <p>with tracer.start_as_current_span("process_order") as span:</p>
 <p>span.set_attribute("order_id", request.order_id)</p>
 <p>span.set_attribute("user_id", request.user_id)</p>
-<h3>Add security-relevant attributes</h3>
+<h4>Add security-relevant attributes</h4>
 <p>span.set_attribute("auth.method", "oauth2")</p>
 <p>span.set_attribute("ip_address", request.client_ip)</p>
-<h3>Call downstream service</h3>
+<h4>Call downstream service</h4>
 <p>with tracer.start_as_current_span("validate_payment") as child_span:</p>
 <p>child_span.set_attribute("payment_provider", "stripe")</p>
 <p>result = payment_service.validate(request)</p>
@@ -322,6 +326,8 @@
 <p>Conclusion </p>
 <p>Microservice security requires shifting from perimeter-based defense to identity-based security. Use a service mesh for automatic mTLS between services, enforce authorization at the API gateway, distribute secrets through dedicated systems like Vault or External Secrets Operator, and implement distributed tracing for cross-service visibility. Each service should be treated as an untrusted external system — authenticate and authorize every request, regardless of source.</p>
 <p><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
+<p><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p>
 <p><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/api-authentication.html">API Authentication Methods</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p></div>
     </article>

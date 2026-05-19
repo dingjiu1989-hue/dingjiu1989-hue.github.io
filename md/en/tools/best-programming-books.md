@@ -1,7 +1,7 @@
 ---
 title: "Best Programming Books 2026: 15 Books Every Developer Should Read"
 description: "Curated programming books across software design, system architecture, algorithms, engineering culture, and career growth. The books that stay relevant year after year."
-date: 2026-05-08
+date: 2025-10-29
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-programming-books.html
 ---

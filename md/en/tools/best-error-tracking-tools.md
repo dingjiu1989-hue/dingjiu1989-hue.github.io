@@ -1,7 +1,7 @@
 ---
 title: "Best Error Tracking Tools 2026: Sentry vs Datadog vs LogRocket vs Bugsnag"
 description: "Compare the top error and exception monitoring tools for developers — Sentry, Datadog, LogRocket, Bugsnag, and Rollbar."
-date: 2026-05-08
+date: 2025-10-30
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-error-tracking-tools.html
 ---

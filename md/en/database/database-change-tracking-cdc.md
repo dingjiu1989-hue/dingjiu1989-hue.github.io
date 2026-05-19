@@ -1,7 +1,7 @@
 ---
 title: "Change Data Capture: Tracking Database Changes in Real-Time"
 description: "Implement change data capture (CDC) for real-time data synchronization, event streaming, and audit logging."
-date: 2026-05-12
+date: 2026-04-14
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/database-change-tracking-cdc.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/database/database-change-tracking-cdc.
 
 ## Change Data Capture: Tracking Database Changes in Real-Time
 
-## Change Data Capture: Tracking Database Changes in Real-Time
+### Change Data Capture: Tracking Database Changes in Real-Time
 
-## Change Data Capture: Tracking Database Changes in Real-Time
+#### Change Data Capture: Tracking Database Changes in Real-Time
 
-## Change Data Capture: Tracking Database Changes in Real-Time
+#### Change Data Capture: Tracking Database Changes in Real-Time
 
-## Change Data Capture: Tracking Database Changes in Real-Time
+#### Change Data Capture: Tracking Database Changes in Real-Time
 
-## Change Data Capture: Tracking Database Changes in Real-Time
+#### Change Data Capture: Tracking Database Changes in Real-Time
 
-## Change Data Capture: Tracking Database Changes in Real-Time
+#### Change Data Capture: Tracking Database Changes in Real-Time
 
-## Change Data Capture: Tracking Database Changes in Real-Time
+#### Change Data Capture: Tracking Database Changes in Real-Time
 
-## Change Data Capture: Tracking Database Changes in Real-Time
+#### Change Data Capture: Tracking Database Changes in Real-Time
 
-## Change Data Capture: Tracking Database Changes in Real-Time
+#### Change Data Capture: Tracking Database Changes in Real-Time
 
-## Change Data Capture: Tracking Database Changes in Real-Time
+#### Change Data Capture: Tracking Database Changes in Real-Time
 
-## Change Data Capture: Tracking Database Changes in Real-Time
+#### Change Data Capture: Tracking Database Changes in Real-Time
+
+#### Change Data Capture: Tracking Database Changes in Real-Time
+
+#### Change Data Capture: Tracking Database Changes in Real-Time
+
+#### Change Data Capture: Tracking Database Changes in Real-Time
 
 Change Data Capture (CDC) tracks row-level changes in a database and streams them to other systems. CDC captures inserts, updates, and deletes without application-level instrumentation. It is the foundation for event-driven architectures and real-time data pipelines.
 
-### CDC Methods
+#### CDC Methods
 
 Log-based CDC reads the database transaction log (WAL in PostgreSQL, binlog in MySQL). It captures all changes with minimal database impact. Log-based CDC is the preferred method because it does not require schema changes and has low overhead.
 
@@ -42,15 +48,21 @@ Trigger-based CDC uses database triggers to capture changes. It provides more co
 
 Polling-based CDC periodically queries tables for changes using timestamp or version columns. It is the simplest to implement but has higher latency and database impact. Polling is suitable for low-frequency synchronization.
 
-### Tools
+#### Tools
 
 Debezium is the most popular CDC platform. It connects to database transaction logs and streams changes to Apache Kafka. Debezium supports PostgreSQL, MySQL, MongoDB, SQL Server, and Oracle.
 
-### Use Cases
+#### Use Cases
 
 CDC supports data warehouse synchronization, cache invalidation, search index updates, event streams for microservices, and real-time analytics. It reduces coupling between operational and analytical systems.
 
 **See also:** [Database Audit Triggers: Automatic Change Tracking](</en/database/database-audit-triggers.html>), [Database Auditing: Tracking Data Changes](</en/database/database-auditing.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>).
+
+**See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Audit Triggers: Automatic Change Tracking](</en/database/database-audit-triggers.html>)
+
+**See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Audit Triggers: Automatic Change Tracking](</en/database/database-audit-triggers.html>)
+
+**See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Audit Triggers: Automatic Change Tracking](</en/database/database-audit-triggers.html>)
 
 **See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Audit Triggers: Automatic Change Tracking](</en/database/database-audit-triggers.html>)
 

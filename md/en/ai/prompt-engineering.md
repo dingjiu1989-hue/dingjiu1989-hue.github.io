@@ -1,7 +1,7 @@
 ---
 title: "Prompt Engineering: From Beginner to Expert"
 description: "Master the art of prompting: role assignment, task description, format constraints, and few-shot examples. Real before/after comparisons that reveal what makes prompts work."
-date: 2026-05-07
+date: 2025-10-07
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/prompt-engineering.html
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Zod vs Yup vs Valibot (2026): Best TypeScript Schema Validation Library?"
 description: "Compare schema validation libraries on TypeScript inference, bundle size, performance, and DX. Zod's dominance, Valibot's lean approach, and where Yup still fits."
-date: 2026-05-08
+date: 2025-11-21
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/zod-vs-yup-vs-valibot.html
 ---

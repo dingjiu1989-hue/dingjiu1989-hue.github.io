@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/sbom-management.png",
       "datePublished": "2026-03-18",
       "dateModified": "2026-04-13",
-      "wordCount": "1224",
+      "wordCount": "1262",
       "keywords": "Security, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/sbom-management.html"},
@@ -99,30 +101,32 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/sbom-management.png" alt="SBOM Management" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>SBOM Management</h2>
 <h3>SBOM Management</h3>
-<h3>SBOM Management</h3>
-<h3>SBOM Management</h3>
-<h3>SBOM Management</h3>
-<h3>SBOM Management</h3>
-<h3>SBOM Management</h3>
-<h3>SBOM Management</h3>
-<h3>SBOM Management</h3>
-<h3>SBOM Management</h3>
-<h3>SBOM Management</h3>
-<h3>SBOM Management</h3>
-<h3>SBOM Management</h3>
+<h4>SBOM Management</h4>
+<h4>SBOM Management</h4>
+<h4>SBOM Management</h4>
+<h4>SBOM Management</h4>
+<h4>SBOM Management</h4>
+<h4>SBOM Management</h4>
+<h4>SBOM Management</h4>
+<h4>SBOM Management</h4>
+<h4>SBOM Management</h4>
+<h4>SBOM Management</h4>
+<h4>SBOM Management</h4>
+<h4>SBOM Management</h4>
+<h4>SBOM Management</h4>
 <p>What is an SBOM? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/sbom-management.png" alt="SBOM Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>A Software Bill of Materials (SBOM) is a detailed inventory of all components in a software application. It enables vulnerability tracking, license compliance, and supply chain risk management. </p>
 <p>SBOM Generation </p>
 <p>Generate SBOMs using SPDX or CycloneDX formats: </p>
-<h3>Generate SBOM with Syft</h3>
+<h4>Generate SBOM with Syft</h4>
 <p>syft packages myapp:latest -o cyclonedx-json &gt; sbom.cyclonedx.json</p>
 <p>syft packages myapp:latest -o spdx-json &gt; sbom.spdx.json</p>
 <p>syft dir:./src -o cyclonedx-json &gt; src-sbom.json</p>
-<h3>Generate SBOM for multiple languages</h3>
+<h4>Generate SBOM for multiple languages</h4>
 <p>syft packages package-lock.json -o cyclonedx-json</p>
 <p>syft packages requirements.txt -o cyclonedx-json</p>
 <p>syft packages go.sum -o cyclonedx-json</p>
-<h3>Programmatic SBOM generation</h3>
+<h4>Programmatic SBOM generation</h4>
 <p>import json</p>
 <p>def generate_sbom(packages, metadata):</p>
 <p>sbom = {</p>
@@ -152,7 +156,7 @@
 <p>return sbom</p>
 <p>SBOM Verification </p>
 <p>Verify SBOM integrity and completeness: </p>
-<h3>sbom-verification-pipeline.yaml</h3>
+<h4>sbom-verification-pipeline.yaml</h4>
 <p>verification_steps:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: validate_format</p>
 <p>tool: cyclonedx-cli</p>
@@ -178,7 +182,7 @@
 <p>purl = component.get("purl")</p>
 <p>if not purl:</p>
 <p>continue</p>
-<h3>Query OSV database</h3>
+<h4>Query OSV database</h4>
 <p>response = requests.post(self.osv_api, json={</p>
 <p>"package": {</p>
 <p>"purl": purl</p>
@@ -197,7 +201,7 @@
 <p>})</p>
 <p>return vulnerabilities</p>
 <p>SBOM Storage and Management </p>
-<h3>SBOM storage strategy</h3>
+<h4>SBOM storage strategy</h4>
 <p>sbom_storage:</p>
 <p>format: cyclonedx-json</p>
 <p>storage: s3://sbom-bucket/</p>
@@ -218,16 +222,18 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- stage: expired</p>
 <p>action: archive</p>
 <p>SBOM as Attestation </p>
-<h3>Sign SBOM with cosign</h3>
+<h4>Sign SBOM with cosign</h4>
 <p>cosign attest-blob sbom.cyclonedx.json \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--signer "identity" \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--type cyclonedx \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--predicate sbom.cyclonedx.json</p>
-<h3>Verify attestation</h3>
+<h4>Verify attestation</h4>
 <p>cosign verify-attestation --type cyclonedx sbom.cyclonedx.json</p>
 <p>Conclusion </p>
 <p>SBOMs are essential for supply chain security. Generate them automatically in your CI pipeline, verify their integrity, and correlate components with vulnerability databases. Store SBOMs alongside your artifacts and sign them for tamper evidence. Use SBOMs for compliance, vulnerability management, and incident response.</p>
 <p><strong>See also:</strong> <a href="/en/security/vulnerability-management.html">Vulnerability Management</a>, <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/patching-strategy.html">Patching Strategy</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/vulnerability-management.html">Vulnerability Management</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/vulnerability-management.html">Vulnerability Management</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/vulnerability-management.html">Vulnerability Management</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/vulnerability-management.html">Vulnerability Management</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/helm-security.html">Helm Security</a>, <a href="/en/security/vulnerability-management.html">Vulnerability Management</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p></div>
     </article>

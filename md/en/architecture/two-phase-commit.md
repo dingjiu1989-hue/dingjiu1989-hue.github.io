@@ -1,7 +1,7 @@
 ---
 title: "Two-Phase Commit (2PC) for Distributed Transactions"
 description: "Two-phase commit protocol: coordinator, prepare/commit phases, failure scenarios, XA protocol, and when to use sagas instead."
-date: 2026-05-12
+date: 2026-04-21
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/two-phase-commit.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/two-phase-commit.html
 
 ## Two-Phase Commit (2PC) for Distributed Transactions
 
-## Two-Phase Commit (2PC) for Distributed Transactions
+### Two-Phase Commit (2PC) for Distributed Transactions
 
-## Two-Phase Commit (2PC) for Distributed Transactions
+#### Two-Phase Commit (2PC) for Distributed Transactions
 
-## Two-Phase Commit (2PC) for Distributed Transactions
+#### Two-Phase Commit (2PC) for Distributed Transactions
 
-## Two-Phase Commit (2PC) for Distributed Transactions
+#### Two-Phase Commit (2PC) for Distributed Transactions
 
-## Two-Phase Commit (2PC) for Distributed Transactions
+#### Two-Phase Commit (2PC) for Distributed Transactions
 
-## Two-Phase Commit (2PC) for Distributed Transactions
+#### Two-Phase Commit (2PC) for Distributed Transactions
 
-## Two-Phase Commit (2PC) for Distributed Transactions
+#### Two-Phase Commit (2PC) for Distributed Transactions
 
-## Two-Phase Commit (2PC) for Distributed Transactions
+#### Two-Phase Commit (2PC) for Distributed Transactions
 
-## Two-Phase Commit (2PC) for Distributed Transactions
+#### Two-Phase Commit (2PC) for Distributed Transactions
 
-## Two-Phase Commit (2PC) for Distributed Transactions
+#### Two-Phase Commit (2PC) for Distributed Transactions
 
-## Two-Phase Commit (2PC) for Distributed Transactions
+#### Two-Phase Commit (2PC) for Distributed Transactions
+
+#### Two-Phase Commit (2PC) for Distributed Transactions
+
+#### Two-Phase Commit (2PC) for Distributed Transactions
+
+#### Two-Phase Commit (2PC) for Distributed Transactions
 
 Two-phase commit (2PC) is a distributed transaction protocol that ensures atomic commitment across multiple databases or services. While it provides strong consistency guarantees, 2PC introduces significant complexity, blocking behavior, and failure modes that require careful consideration. This article examines the protocol mechanics, XA standard, coordinator failure scenarios, and modern alternatives. 
 
@@ -71,3 +77,9 @@ Two-phase commit remains useful for specific scenarios, particularly within a si
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency](</en/tech/distributed-transactions-guide.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency](</en/tech/distributed-transactions-guide.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency](</en/tech/distributed-transactions-guide.html>)
+
+**See also:** [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency](</en/tech/distributed-transactions-guide.html>)
+
+**See also:** [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency](</en/tech/distributed-transactions-guide.html>)

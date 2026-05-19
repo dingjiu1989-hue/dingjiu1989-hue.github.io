@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/terraform-state-management.png",
       "datePublished": "2026-01-04",
       "dateModified": "2026-04-05",
-      "wordCount": "1366",
+      "wordCount": "1446",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/terraform-state-management.html"},
@@ -99,19 +101,21 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/terraform-state-management.png" alt="Terraform State Management: Remote State, Locking, Migration, and Workspaces" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h2>
 <h3>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h3>
-<h3>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h3>
-<h3>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h3>
-<h3>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h3>
-<h3>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h3>
-<h3>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h3>
-<h3>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h3>
-<h3>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h3>
-<h3>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h3>
-<h3>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h3>
-<h3>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h3>
-<h3>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h3>
-<h3>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h3>
-<h3>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h3>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
+<h4>Terraform State Management: Remote State, Locking, Migration, and Workspaces</h4>
 <h4>Introduction</h4>
 <p>Terraform state is the mapping between resources defined in configuration and the real-world infrastructure they represent. State management is arguably the most important operational concern in Terraform usage. Mismanaged state causes deployment failures, resource duplication, and in extreme cases, accidental resource destruction.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/terraform-state-management.png" alt="Terraform State Management: Remote State, Locking, Migration, and Workspaces" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>This article covers Terraform state fundamentals, remote backends, state locking, migration strategies, workspaces, and Terragrunt for managing complex multi-environment deployments.</p>
@@ -147,7 +151,7 @@
 <p>Workspace names are referenced in configuration as <code>${terraform.workspace}</code>. However, workspaces have significant limitations: the isolation is weak (all workspaces share the same backend), variable values must be duplicated across workspaces, and it is easy to accidentally apply changes to the wrong workspace.</p>
 <h4>Terragrunt: Orchestrating Multiple Terraform Configurations</h4>
 <p>Terragrunt, from Gruntwork, addresses Terraform's limitations for multi-environment, multi-module infrastructure. It provides DRY (Don't Repeat Yourself) configuration through remote state management, provider configuration inheritance, and dependency management between modules.</p>
-<h3>terragrunt.hcl</h3>
+<h4>terragrunt.hcl</h4>
 <p>remote_state {</p>
 <p>backend = "s3"</p>
 <p>config = {</p>
@@ -160,6 +164,8 @@
 <h4>Conclusion</h4>
 <p>Terraform state management is not optional infrastructure — it is the foundation of reliable IaC. Remote backends with locking, careful migration procedures, and appropriate environment isolation are essential practices. For organizations managing many environments, Terragrunt provides the abstraction needed to maintain DRY configuration while enforcing consistency across deployments.</p>
 <p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/react-server-components.html">React Server Components</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/react-server-components.html">React Server Components</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/react-server-components.html">React Server Components</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/react-server-components.html">React Server Components</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/react-server-components.html">React Server Components</a></p></div>
     </article>

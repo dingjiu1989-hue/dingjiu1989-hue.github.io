@@ -1,7 +1,7 @@
 ---
 title: "Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development"
 description: "Compare the 3 major Git branching strategies with real-world scenarios. Pick the right workflow for your team size, release cadence, and deployment model."
-date: 2026-05-08
+date: 2025-10-08
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/git-workflows-team-guide.html
 ---

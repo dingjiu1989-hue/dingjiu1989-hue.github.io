@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/local-llm-setup.png",
       "datePublished": "2025-12-12",
       "dateModified": "2026-05-04",
-      "wordCount": "1428",
+      "wordCount": "1480",
       "keywords": "Artificial Intelligence, Machine Learning",
       "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/local-llm-setup.html"},
@@ -98,36 +100,38 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/local-llm-setup.png" alt="Running LLMs Locally" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Running LLMs Locally</h2>
 <h3>Running LLMs Locally</h3>
-<h3>Running LLMs Locally</h3>
-<h3>Running LLMs Locally</h3>
-<h3>Running LLMs Locally</h3>
-<h3>Running LLMs Locally</h3>
-<h3>Running LLMs Locally</h3>
-<h3>Running LLMs Locally</h3>
-<h3>Running LLMs Locally</h3>
-<h3>Running LLMs Locally</h3>
-<h3>Running LLMs Locally</h3>
-<h3>Running LLMs Locally</h3>
-<h3>Running LLMs Locally</h3>
-<h3>Running LLMs Locally</h3>
+<h4>Running LLMs Locally</h4>
+<h4>Running LLMs Locally</h4>
+<h4>Running LLMs Locally</h4>
+<h4>Running LLMs Locally</h4>
+<h4>Running LLMs Locally</h4>
+<h4>Running LLMs Locally</h4>
+<h4>Running LLMs Locally</h4>
+<h4>Running LLMs Locally</h4>
+<h4>Running LLMs Locally</h4>
+<h4>Running LLMs Locally</h4>
+<h4>Running LLMs Locally</h4>
+<h4>Running LLMs Locally</h4>
+<h4>Running LLMs Locally</h4>
+<h4>Running LLMs Locally</h4>
 <h4>Introduction</h4>
 <p>Running large language models locally has become practical thanks to quantization techniques, efficient inference engines, and a thriving open-source ecosystem. Whether for privacy, cost savings, or offline availability, local LLMs offer a compelling alternative to cloud APIs for many workloads. This guide covers the two most popular local LLM platforms — Ollama and LM Studio.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/local-llm-setup.png" alt="Running LLMs Locally" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Ollama</h4>
 <p><a href="https://ollama.ai">Ollama</a> is the most popular tool for running LLMs locally, known for its simplicity and command-line focus.</p>
 <h4>Installation</h4>
-<h3>macOS</h3>
+<h4>macOS</h4>
 <p>brew install ollama</p>
-<h3>Linux</h3>
+<h4>Linux</h4>
 <p>curl -fsSL https://ollama.ai/install.sh | sh</p>
-<h3>Windows</h3>
-<h3>Download from https://ollama.ai/download</h3>
+<h4>Windows</h4>
+<h4>Download from https://ollama.ai/download</h4>
 <h4>Getting Started</h4>
 <p>Ollama makes running a model a single command:</p>
-<h3>Pull and run a model</h3>
+<h4>Pull and run a model</h4>
 <p>ollama run llama3.2:3b</p>
-<h3>List available models</h3>
+<h4>List available models</h4>
 <p>ollama list</p>
-<h3>Pull a specific model without running</h3>
+<h4>Pull a specific model without running</h4>
 <p>ollama pull mistral:7b</p>
 <h4>Popular Models for Ollama</h4>
 <p>| Model | Size | RAM Required | Best For |</p>
@@ -156,9 +160,9 @@
 <h4>Custom Modelfiles</h4>
 <p>Create custom models with system prompts and parameters:</p>
 <p>FROM llama3.1:8b</p>
-<h3>Set system prompt</h3>
+<h4>Set system prompt</h4>
 <p>SYSTEM "You are a helpful coding assistant. Provide concise code examples."</p>
-<h3>Configure parameters</h3>
+<h4>Configure parameters</h4>
 <p>PARAMETER temperature 0.3</p>
 <p>PARAMETER top_p 0.9</p>
 <p>Build and run:</p>
@@ -224,9 +228,9 @@
 <p>Rule of thumb: each quantization step roughly doubles model size but improves quality marginally. Q4_K_M is the sweet spot.</p>
 <h4>GPU Acceleration</h4>
 <p>Both Ollama and LM Studio support GPU acceleration via CUDA (NVIDIA), Metal (Apple Silicon), or Vulkan (AMD):</p>
-<h3>Ollama uses Metal automatically on Apple Silicon</h3>
-<h3>For NVIDIA, install CUDA and Ollama detects it</h3>
-<h3>Check which device is being used</h3>
+<h4>Ollama uses Metal automatically on Apple Silicon</h4>
+<h4>For NVIDIA, install CUDA and Ollama detects it</h4>
+<h4>Check which device is being used</h4>
 <p>ollama run llama3.2:3b --verbose</p>
 <h4>Context Window</h4>
 <p>Larger context windows consume more memory. A 128K context with Q4_K_M requires approximately:</p>
@@ -262,6 +266,8 @@
 <h4>Conclusion</h4>
 <p>Running LLMs locally is easier than ever with Ollama and LM Studio. Ollama offers command-line simplicity and a rich set of pre-built models. LM Studio provides a polished GUI and OpenAI-compatible API. Start with a 7B model at Q4_K_M quantization on a machine with 8-16 GB of RAM, and scale up as your needs grow. Local LLMs won't replace cloud APIs for every use case, but they are an essential tool in the AI practitioner's toolkit.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p></div>
     </article>

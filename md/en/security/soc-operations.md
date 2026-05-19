@@ -1,7 +1,7 @@
 ---
 title: "SOC Operations"
 description: "Practical guide to Security Operations Center operations including tier model, SIEM tuning, playbooks, KPIs, and shift handoff procedures."
-date: 2026-05-12
+date: 2026-03-13
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/soc-operations.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/security/soc-operations.html
 
 ## SOC Operations
 
-## SOC Operations
+### SOC Operations
 
-## SOC Operations
+#### SOC Operations
 
-## SOC Operations
+#### SOC Operations
 
-## SOC Operations
+#### SOC Operations
 
-## SOC Operations
+#### SOC Operations
 
-## SOC Operations
+#### SOC Operations
 
-## SOC Operations
+#### SOC Operations
 
-## SOC Operations
+#### SOC Operations
 
-## SOC Operations
+#### SOC Operations
 
-## SOC Operations
+#### SOC Operations
 
-## SOC Operations
+#### SOC Operations
+
+#### SOC Operations
+
+#### SOC Operations
+
+#### SOC Operations
 
 Introduction 
 
@@ -59,11 +65,11 @@ Responsibilities:
 
 
 
-## Tier 1 triage automation example
+#### Tier 1 triage automation example
 
 def triage_alert(alert):
 
-## Check against known false positive patterns
+#### Check against known false positive patterns
 
 for fp_pattern in false_positive_patterns:
 
@@ -73,11 +79,11 @@ alert.auto_close()
 
 return
 
-## Enrich with threat intelligence
+#### Enrich with threat intelligence
 
 alert.iocs = enrich_iocs(alert.extract_iocs())
 
-## Escalate if critical
+#### Escalate if critical
 
 if alert.severity == 'critical':
 
@@ -131,7 +137,7 @@ SIEM Tuning
 
 SIEM tuning reduces noise while maintaining detection coverage. A well-tuned SIEM generates alerts that analysts can actually investigate. 
 
-## Example: correlation rule tuning cycle
+#### Example: correlation rule tuning cycle
 
 SIEM_ALERTS=10000
 
@@ -151,7 +157,7 @@ Playbooks
 
 Playbooks provide step-by-step instructions for handling specific scenarios. They reduce mean time to respond (MTTR) and ensure consistency. 
 
-## Incident response playbook example
+#### Incident response playbook example
 
 playbook:
 
@@ -242,6 +248,12 @@ Conclusion
 A well-structured SOC combines skilled personnel, documented processes, and appropriate technology. Focus on reducing alert fatigue through continuous tuning, maintaining comprehensive playbooks, measuring performance with meaningful KPIs, and ensuring smooth shift transitions.
 
 **See also:** [Security Metrics and Reporting](</en/security/security-metrics.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>), [DNS Security](</en/security/dns-security.html>).
+
+**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [DNS Security](</en/security/dns-security.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
+
+**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [DNS Security](</en/security/dns-security.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
+
+**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [DNS Security](</en/security/dns-security.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
 
 **See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [DNS Security](</en/security/dns-security.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
 

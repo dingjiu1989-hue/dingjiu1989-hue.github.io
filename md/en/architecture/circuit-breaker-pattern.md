@@ -1,7 +1,7 @@
 ---
 title: "Circuit Breaker Pattern: Building Resilient Systems"
 description: "Circuit breaker state machine (closed/open/half-open), implementation with Resilience4j, monitoring, and recovery strategies."
-date: 2026-05-12
+date: 2026-04-20
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/circuit-breaker-pattern.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/circuit-breaker-pattern.h
 
 ## Circuit Breaker Pattern: Building Resilient Systems
 
-## Circuit Breaker Pattern: Building Resilient Systems
+### Circuit Breaker Pattern: Building Resilient Systems
 
-## Circuit Breaker Pattern: Building Resilient Systems
+#### Circuit Breaker Pattern: Building Resilient Systems
 
-## Circuit Breaker Pattern: Building Resilient Systems
+#### Circuit Breaker Pattern: Building Resilient Systems
 
-## Circuit Breaker Pattern: Building Resilient Systems
+#### Circuit Breaker Pattern: Building Resilient Systems
 
-## Circuit Breaker Pattern: Building Resilient Systems
+#### Circuit Breaker Pattern: Building Resilient Systems
 
-## Circuit Breaker Pattern: Building Resilient Systems
+#### Circuit Breaker Pattern: Building Resilient Systems
 
-## Circuit Breaker Pattern: Building Resilient Systems
+#### Circuit Breaker Pattern: Building Resilient Systems
 
-## Circuit Breaker Pattern: Building Resilient Systems
+#### Circuit Breaker Pattern: Building Resilient Systems
 
-## Circuit Breaker Pattern: Building Resilient Systems
+#### Circuit Breaker Pattern: Building Resilient Systems
 
-## Circuit Breaker Pattern: Building Resilient Systems
+#### Circuit Breaker Pattern: Building Resilient Systems
 
-## Circuit Breaker Pattern: Building Resilient Systems
+#### Circuit Breaker Pattern: Building Resilient Systems
+
+#### Circuit Breaker Pattern: Building Resilient Systems
+
+#### Circuit Breaker Pattern: Building Resilient Systems
+
+#### Circuit Breaker Pattern: Building Resilient Systems
 
 The circuit breaker pattern prevents cascading failures in distributed systems. When a service depends on another service that is failing, the circuit breaker detects the failures and stops sending requests to the failing service, allowing it time to recover. This article covers the circuit breaker state machine, implementation with Resilience4j, monitoring, and recovery strategies. 
 
@@ -211,7 +217,7 @@ return PaymentResponse.failed("Payment temporarily unavailable, please retry");
 
 }
 
-## application.yml
+#### application.yml
 
 resilience4j.circuitbreaker:
 
@@ -400,7 +406,7 @@ Key Metrics to Monitor
 
 
 
-## Prometheus metric format (from Resilience4j exporter)
+#### Prometheus metric format (from Resilience4j exporter)
 
 resilience4j_circuitbreaker_state{name="paymentService",state="closed"} 1
 
@@ -539,3 +545,9 @@ The circuit breaker pattern prevents cascading failures by detecting when a remo
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>)
 
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>)
+
+**See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)

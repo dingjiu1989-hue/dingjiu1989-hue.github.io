@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png",
       "datePublished": "2026-03-31",
       "dateModified": "2026-04-21",
-      "wordCount": "2229",
+      "wordCount": "2336",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/connection-management.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h2>
 <h3>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h3>
-<h3>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h3>
-<h3>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h3>
-<h3>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h3>
-<h3>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h3>
-<h3>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h3>
-<h3>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h3>
-<h3>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h3>
-<h3>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h3>
-<h3>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h3>
-<h3>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h3>
-<h3>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h3>
+<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
+<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
+<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
+<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
+<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
+<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
+<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
+<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
+<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
+<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
+<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
+<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
+<h4>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h4>
 <p>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Every database connection consumes memory, file descriptors, and CPU. Connection management directly impacts database performance and application scalability. This article covers pooling strategies, popular poolers, and tuning guidelines. </p>
 <p>Why Connection Pooling Matters </p>
@@ -125,7 +129,7 @@
 <p>PgBouncer (Server-Side Pooling) </p>
 <p>PgBouncer is a lightweight connection pooler for PostgreSQL. It runs as a separate process and proxies connections to the database. </p>
 <p>Installation and Configuration </p>
-<h3>pgbouncer.ini</h3>
+<h4>pgbouncer.ini</h4>
 <p>[databases]</p>
 <p>mydb = host=127.0.0.1 port=5432 dbname=mydb</p>
 <p>[pgbouncer]</p>
@@ -146,7 +150,7 @@
 <p>echo '"app_user"' '"secure_password_hash"' &gt; /etc/pgbouncer/userlist.txt</p>
 <p>Connecting Through PgBouncer </p>
 <p>import psycopg2</p>
-<h3>Connect to PgBouncer port, not PostgreSQL directly</h3>
+<h4>Connect to PgBouncer port, not PostgreSQL directly</h4>
 <p>conn = psycopg2.connect(</p>
 <p>host="localhost",</p>
 <p>port=6432,</p>
@@ -166,7 +170,7 @@
 <p>HikariCP (Client-Side Pooling) </p>
 <p>HikariCP is the most popular connection pool for Java applications. It manages connections from within the application process. </p>
 <p>Spring Boot Configuration </p>
-<h3>application.yml</h3>
+<h4>application.yml</h4>
 <p>spring:</p>
 <p>datasource:</p>
 <p>url: jdbc:postgresql://localhost:5432/mydb</p>
@@ -203,7 +207,7 @@
 <p>connections = 2 * CPU_cores + effective_spindle_count</p>
 <p>A 4-core machine with SSDs: <code>2 * 4 + 1 = 9</code> concurrent connections for optimal throughput. Beyond this, context switching and lock contention degrade performance. </p>
 <p>Max Connections Tuning </p>
-<h3>postgresql.conf</h3>
+<h4>postgresql.conf</h4>
 <p>max_connections = 200</p>
 <p>superuser_reserved_connections = 5</p>
 <p>Application Statement Timeout </p>
@@ -212,15 +216,15 @@
 <p>ALTER DATABASE mydb SET idle_in_transaction_session_timeout = '5min';</p>
 <p>Common Pitfalls </p>
 <p>Connection Leaks </p>
-<h3>Bad: connection not returned to pool</h3>
+<h4>Bad: connection not returned to pool</h4>
 <p>def get_user(user_id):</p>
 <p>conn = pool.getconn()</p>
 <p>cursor = conn.cursor()</p>
 <p>cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))</p>
 <p>result = cursor.fetchone()</p>
-<h3>Missing: pool.putconn(conn)</h3>
+<h4>Missing: pool.putconn(conn)</h4>
 <p>return result</p>
-<h3>Good: always use try/finally or context manager</h3>
+<h4>Good: always use try/finally or context manager</h4>
 <p>def get_user(user_id):</p>
 <p>conn = pool.getconn()</p>
 <p>try:</p>
@@ -242,7 +246,7 @@
 <p>spring.datasource.hikari:</p>
 <p>maximum-pool-size: 20</p>
 <p>connection-timeout: 5000 # 5 seconds max wait</p>
-<h3>After 5 seconds, throw SQLException instead of hanging forever</h3>
+<h4>After 5 seconds, throw SQLException instead of hanging forever</h4>
 <p>Monitoring Connection Health </p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Connection utilization</p>
 <p>SELECT</p>
@@ -267,6 +271,8 @@
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Set pool size to CPU*2+disk</strong> : More connections than that add latency, not throughput. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Use PgBouncer in transaction mode</strong> : Best balance for web applications. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Set connection timeouts</strong> : Prevent applications from hanging indefinitely. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Monitor and alert</strong> on connection utilization trends. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Use prepared statement caching</strong> : Reduces query planning overhead. 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Separate pools for OLTP and analytics</strong> : Different pool sizes and timeout values for different workloads. </p>
 <p>Connection management is invisible when done correctly and catastrophic when done poorly. A well-tuned pool keeps your database responsive under load and your applications free from connection-related failures.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p></div>
     </article>

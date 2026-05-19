@@ -1,7 +1,7 @@
 ---
 title: "Prisma vs Drizzle vs TypeORM (2026): Best TypeScript ORM?"
 description: "Schema-first vs SQL-like vs decorator-based — find the right TypeScript ORM for your stack. Performance benchmarks, migration workflows, and real-world DX compared."
-date: 2026-05-08
+date: 2025-11-17
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/prisma-vs-drizzle-vs-typeorm.html
 ---

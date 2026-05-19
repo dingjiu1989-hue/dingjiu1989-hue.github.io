@@ -1,7 +1,7 @@
 ---
 title: "How to Build and Monetize a Paid Developer Community in 2026"
 description: "Step-by-step guide: platform choice (Discord vs Circle vs Skool), content strategy, pricing tiers, member growth, and retention. How dev communities like Vue.js Forge and Kent C. Dodds earn $50K+/month."
-date: 2026-05-08
+date: 2025-10-21
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/paid-communities-guide.html
 ---

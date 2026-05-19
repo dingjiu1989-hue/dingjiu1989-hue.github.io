@@ -1,7 +1,7 @@
 ---
 title: "10 Free Online Tools You'll Use Every Single Day"
 description: "10 completely free, no-registration online tools for image editing, file conversion, text processing, and more. Lightweight utilities you can use and close."
-date: 2026-05-07
+date: 2025-10-07
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/online-tools-2026.html
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector"
 description: "Compare distributed tracing tools: Jaeger for end-to-end tracing, Zipkin for lineage-based tracing, Grafana Tempo for cost-effective object storage-backed trace"
-date: 2026-05-12
+date: 2026-02-07
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/tracing-tools.html
 ---
@@ -10,39 +10,45 @@ url: https://dingjiu1989-hue.github.io/en/tools/tracing-tools.html
 
 ## Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
 
-## Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
 
-## Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+#### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
 
-## Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+#### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
 
-## Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+#### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
 
-## Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+#### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
 
-## Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+#### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
 
-## Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+#### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
 
-## Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+#### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
 
-## Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+#### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
 
-## Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+#### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
 
-## Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+#### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
 
-## Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+#### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
 
-### Introduction
+#### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+
+#### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+
+#### Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+
+#### Introduction
 
 Distributed tracing is essential for understanding request flows across microservices. When a single user request hits 10-50 services, traditional logging cannot show you the full picture. Tracing captures the causality chain: which service called which, how long each call took, and where failures occurred. This article covers Jaeger, Zipkin, Grafana Tempo, and the OpenTelemetry Collector.
 
-### OpenTelemetry Collector
+#### OpenTelemetry Collector
 
 The foundation for modern observability — receives, processes, and exports telemetry data:
 
-## otel-collector-config.yaml
+#### otel-collector-config.yaml
 
 receivers:
 
@@ -92,7 +98,7 @@ span:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 'attributes["http.method"] == "OPTIONS"'
 
-## Sampling for cost control
+#### Sampling for cost control
 
 probabilistic_sampler:
 
@@ -136,21 +142,21 @@ processors: [batch]
 
 exporters: [prometheus]
 
-## Run the collector
+#### Run the collector
 
 otelcol --config otel-collector-config.yaml
 
-## Run as Docker
+#### Run as Docker
 
 docker run -v $(pwd)/otel-collector-config.yaml:/etc/otel/config.yaml otel/opentelemetry-collector-contrib
 
 **Key features** : Vendor-agnostic data collection, tail-based sampling, attribute enrichment, batch processing, multi-destination export, service graph computation.
 
-### Jaeger
+#### Jaeger
 
 Uber's distributed tracing system, now a CNCF graduated project:
 
-## docker-compose.yml
+#### docker-compose.yml
 
 services:
 
@@ -170,7 +176,7 @@ ports:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "4318:4318" # OTLP HTTP
 
-## Python instrumentation with OpenTelemetry
+#### Python instrumentation with OpenTelemetry
 
 from opentelemetry import trace
 
@@ -184,7 +190,7 @@ from opentelemetry.instrumentation.flask import FlaskInstrumentor
 
 from opentelemetry.instrumentation.requests import RequestsInstrumentor
 
-## Set up tracing
+#### Set up tracing
 
 provider = TracerProvider()
 
@@ -200,13 +206,13 @@ provider.add_span_processor(processor)
 
 trace.set_tracer_provider(provider)
 
-## Auto-instrument libraries
+#### Auto-instrument libraries
 
 FlaskInstrumentor().instrument()
 
 RequestsInstrumentor().instrument()
 
-## Manual instrumentation
+#### Manual instrumentation
 
 from opentelemetry import trace
 
@@ -238,11 +244,11 @@ return order
 
 **Key features** : Rich UI with trace search and filtering, service dependency graph, deep span detail view, comparison view for similar traces, OTLP native support.
 
-### Tempo (Grafana Tempo)
+#### Tempo (Grafana Tempo)
 
 Grafana's tracing backend with object storage for cost-effective retention:
 
-## tempo-config.yaml
+#### tempo-config.yaml
 
 server:
 
@@ -300,25 +306,25 @@ search:
 
 max_duration: 168h # 7 days of searchable data
 
-## Run Tempo
+#### Run Tempo
 
 docker run -v $(pwd)/tempo-config.yaml:/etc/tempo.yaml grafana/tempo:latest
 
-## Query via Grafana
+#### Query via Grafana
 
-## Grafana datasource: Tempo
+#### Grafana datasource: Tempo
 
-## TraceQL query:
+#### TraceQL query:
 
-## { resource.service.name = "payment-service" && span.http.status_code >= 500 }
+#### { resource.service.name = "payment-service" && span.http.status_code >= 500 }
 
 **Key features** : Object storage backend (S3, GCS, Azure) for low-cost long retention, TraceQL query language, seamless Grafana integration, high scalability.
 
-### Zipkin
+#### Zipkin
 
 Twitter's distributed tracing system (original inspiration for OpenTracing):
 
-## docker-compose.yml
+#### docker-compose.yml
 
 services:
 
@@ -330,7 +336,7 @@ ports:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "9411:9411"
 
-## Zipkin with OpenTelemetry
+#### Zipkin with OpenTelemetry
 
 from opentelemetry.exporter.zipkin.json import ZipkinExporter
 
@@ -346,7 +352,7 @@ provider.add_span_processor(BatchSpanProcessor(zipkin_exporter))
 
 trace.set_tracer_provider(provider)
 
-### Comparison
+#### Comparison
 
 | Feature | Jaeger | Zipkin | Tempo | OTel Collector |
 
@@ -364,7 +370,7 @@ trace.set_tracer_provider(provider)
 
 | Cost at scale | Medium | Medium | Low (S3) | N/A |
 
-### Recommendations
+#### Recommendations
 
   * **Best all-around** : Jaeger with OTLP ingestion. Rich UI, good scalability, active community.
 
@@ -380,6 +386,12 @@ trace.set_tracer_provider(provider)
 The OpenTelemetry Collector should be the first component in any tracing infrastructure. It receives traces from instrumented services, applies sampling and enrichment, and forwards to the backend of your choice (Jaeger, Tempo, or both). This decouples instrumentation from storage decisions.
 
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP](</en/tools/cloud-cost-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>).
+
+**See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
+
+**See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
+
+**See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
 
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
 

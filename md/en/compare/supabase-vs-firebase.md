@@ -1,7 +1,7 @@
 ---
 title: "Supabase vs Firebase"
 description: "Compare Supabase and Firebase for backend-as-a-service — database, authentication, real-time features, pricing, and vendor lock-in."
-date: 2026-05-11
+date: 2025-12-16
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/supabase-vs-firebase.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/compare/supabase-vs-firebase.html
 
 ## Supabase vs Firebase
 
-## Supabase vs Firebase
+### Supabase vs Firebase
 
-## Supabase vs Firebase
+#### Supabase vs Firebase
 
-## Supabase vs Firebase
+#### Supabase vs Firebase
 
-## Supabase vs Firebase
+#### Supabase vs Firebase
 
-## Supabase vs Firebase
+#### Supabase vs Firebase
 
-## Supabase vs Firebase
+#### Supabase vs Firebase
 
-## Supabase vs Firebase
+#### Supabase vs Firebase
 
-## Supabase vs Firebase
+#### Supabase vs Firebase
 
-## Supabase vs Firebase
+#### Supabase vs Firebase
 
-## Supabase vs Firebase
+#### Supabase vs Firebase
 
-## Supabase vs Firebase
+#### Supabase vs Firebase
 
-## Supabase vs Firebase
+#### Supabase vs Firebase
 
-### Introduction
+#### Supabase vs Firebase
+
+#### Supabase vs Firebase
+
+#### Supabase vs Firebase
+
+#### Introduction
 
 Supabase and Firebase are the leading Backend-as-a-Service (BaaS) platforms, providing database, authentication, storage, and serverless functions out of the box. Both eliminate the need to build and manage backend infrastructure, but they take fundamentally different approaches. Firebase is built on NoSQL (Firestore) and is fully managed by Google. Supabase is built on PostgreSQL and is open source. This comparison helps you choose the right platform for your project.
 
-### Database: SQL vs NoSQL
+#### Database: SQL vs NoSQL
 
 The database choice is the most important factor in deciding between these platforms.
 
@@ -154,7 +160,7 @@ ORDER BY posts.created_at DESC
 
 LIMIT 10;
 
-### Authentication
+#### Authentication
 
 Both platforms offer comprehensive auth:
 
@@ -186,7 +192,7 @@ ON profiles FOR SELECT
 
 USING (auth.uid() = user_id);
 
-### Real-time Features
+#### Real-time Features
 
   * **Firebase** : Real-time is built into Firestore at the database level. Every listener receives updates automatically. This is seamless but can be expensive at scale.
 
@@ -195,7 +201,7 @@ USING (auth.uid() = user_id);
 
 
 
-### Pricing Comparison
+#### Pricing Comparison
 
 | Aspect | Firebase | Supabase |
 
@@ -211,13 +217,13 @@ USING (auth.uid() = user_id);
 
 Firebase's Spark plan is generous for prototyping, but costs can scale unpredictably with usage. Supabase's compute-based model is more predictable.
 
-### Ecosystem and Tooling
+#### Ecosystem and Tooling
 
 **Firebase** offers a richer ecosystem of integrations: Crashlytics, Performance Monitoring, Analytics, Cloud Messaging, Remote Config, and A/B Testing. This makes Firebase the better choice for mobile app development where you need these services.
 
 **Supabase** integrates with the broader PostgreSQL ecosystem: you can use any Postgres tool (pgAdmin, DBeaver, Prisma, Drizzle) and access the database directly with standard SQL clients.
 
-### When to Choose What
+#### When to Choose What
 
 **Choose Firebase when:**
 
@@ -251,11 +257,17 @@ Firebase's Spark plan is generous for prototyping, but costs can scale unpredict
 
 
 
-### Conclusion
+#### Conclusion
 
 The choice between Supabase and Firebase is largely a choice between SQL and NoSQL. Firebase offers a tightly integrated ecosystem perfect for mobile apps and rapid prototyping. Supabase offers the power and flexibility of PostgreSQL with open-source transparency and lower vendor lock-in. In 2026, Supabase has matured significantly and is the preferred choice for web applications with relational data, while Firebase remains strong for mobile-first applications.
 
 **See also:** [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>).
+
+**See also:** [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>)
+
+**See also:** [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>)
+
+**See also:** [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>)
 
 **See also:** [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>)
 

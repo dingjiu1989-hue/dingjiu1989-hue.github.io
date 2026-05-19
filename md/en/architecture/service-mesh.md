@@ -1,7 +1,7 @@
 ---
 title: "Service Mesh Patterns: Istio and Linkerd"
 description: "Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and when to use a mesh."
-date: 2026-05-12
+date: 2026-04-20
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/service-mesh.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/service-mesh.html
 
 ## Service Mesh Patterns: Istio and Linkerd
 
-## Service Mesh Patterns: Istio and Linkerd
+### Service Mesh Patterns: Istio and Linkerd
 
-## Service Mesh Patterns: Istio and Linkerd
+#### Service Mesh Patterns: Istio and Linkerd
 
-## Service Mesh Patterns: Istio and Linkerd
+#### Service Mesh Patterns: Istio and Linkerd
 
-## Service Mesh Patterns: Istio and Linkerd
+#### Service Mesh Patterns: Istio and Linkerd
 
-## Service Mesh Patterns: Istio and Linkerd
+#### Service Mesh Patterns: Istio and Linkerd
 
-## Service Mesh Patterns: Istio and Linkerd
+#### Service Mesh Patterns: Istio and Linkerd
 
-## Service Mesh Patterns: Istio and Linkerd
+#### Service Mesh Patterns: Istio and Linkerd
 
-## Service Mesh Patterns: Istio and Linkerd
+#### Service Mesh Patterns: Istio and Linkerd
 
-## Service Mesh Patterns: Istio and Linkerd
+#### Service Mesh Patterns: Istio and Linkerd
 
-## Service Mesh Patterns: Istio and Linkerd
+#### Service Mesh Patterns: Istio and Linkerd
 
-## Service Mesh Patterns: Istio and Linkerd
+#### Service Mesh Patterns: Istio and Linkerd
+
+#### Service Mesh Patterns: Istio and Linkerd
+
+#### Service Mesh Patterns: Istio and Linkerd
+
+#### Service Mesh Patterns: Istio and Linkerd
 
 A service mesh is a dedicated infrastructure layer for handling service-to-service communication. It manages traffic routing, security, observability, and resilience without requiring changes to application code. This article covers the core patterns of service meshes, how Istio and Linkerd implement them, and guidance on when a service mesh adds value. 
 
@@ -63,7 +69,7 @@ Sidecar Proxy Pattern
 
 The sidecar proxy is the foundation of service mesh. It runs as a separate container in the same pod as the application. 
 
-## Kubernetes pod with Istio sidecar
+#### Kubernetes pod with Istio sidecar
 
 apiVersion: v1
 
@@ -115,7 +121,7 @@ Service meshes provide fine-grained traffic control beyond simple round-robin lo
 
 Virtual Services and Destination Rules (Istio) 
 
-## Istio VirtualService: Route traffic based on headers
+#### Istio VirtualService: Route traffic based on headers
 
 apiVersion: networking.istio.io/v1beta1
 
@@ -159,7 +165,7 @@ subset: v1 # Everyone else goes to v1
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
 
-## Istio DestinationRule: Load balancing and connection pool
+#### Istio DestinationRule: Load balancing and connection pool
 
 apiVersion: networking.istio.io/v1beta1
 
@@ -207,7 +213,7 @@ maxRequestsPerConnection: 10
 
 Traffic Splitting (Canary Deployments) 
 
-## Canary deployment: 10% traffic to new version
+#### Canary deployment: 10% traffic to new version
 
 apiVersion: networking.istio.io/v1beta1
 
@@ -245,7 +251,7 @@ weight: 90
 
 Linkerd uses a similar approach with TrafficSplit: 
 
-## Linkerd TrafficSplit for canary
+#### Linkerd TrafficSplit for canary
 
 apiVersion: split.smi-spec.io/v1alpha2
 
@@ -271,7 +277,7 @@ weight: 100m
 
 Timeouts and Retries 
 
-## Istio: Request timeouts and retries
+#### Istio: Request timeouts and retries
 
 apiVersion: networking.istio.io/v1beta1
 
@@ -311,7 +317,7 @@ Service meshes provide automatic mutual TLS between services without application
 
 Istio mTLS modes 
 
-## STRICT mTLS: All traffic must use mTLS
+#### STRICT mTLS: All traffic must use mTLS
 
 apiVersion: security.istio.io/v1beta1
 
@@ -329,7 +335,7 @@ mtls:
 
 mode: STRICT
 
-## PERMISSIVE: Accept both mTLS and plaintext (migration mode)
+#### PERMISSIVE: Accept both mTLS and plaintext (migration mode)
 
 apiVersion: security.istio.io/v1beta1
 
@@ -347,7 +353,7 @@ mtls:
 
 mode: PERMISSIVE
 
-## DISABLE: Disable mTLS for specific workloads
+#### DISABLE: Disable mTLS for specific workloads
 
 apiVersion: security.istio.io/v1beta1
 
@@ -375,11 +381,11 @@ Linkerd mTLS
 
 Linkerd automatically enables mTLS between meshed pods. It uses a 24-hour certificate rotation with automatic renewal. 
 
-## Check mTLS status in Linkerd
+#### Check mTLS status in Linkerd
 
 linkerd viz stat deploy --from deploy
 
-## Look for TLS columns showing encrypted traffic
+#### Look for TLS columns showing encrypted traffic
 
 mTLS benefits:
 
@@ -398,7 +404,7 @@ Service meshes provide rich observability without code instrumentation.
 
 Metrics 
 
-## Istio: Enable Prometheus metrics
+#### Istio: Enable Prometheus metrics
 
 apiVersion: telemetry.istio.io/v1alpha1
 
@@ -439,7 +445,7 @@ Istio exports standard metrics:
 
 Distributed Tracing 
 
-## Istio: Enable tracing with Zipkin, Jaeger, or OpenTelemetry
+#### Istio: Enable tracing with Zipkin, Jaeger, or OpenTelemetry
 
 apiVersion: telemetry.istio.io/v1alpha1
 
@@ -465,7 +471,7 @@ Authorization Policies
 
 Service meshes enforce authorization at the network level. Policies specify which services can communicate. 
 
-## Istio: Authorization policy
+#### Istio: Authorization policy
 
 apiVersion: security.istio.io/v1beta1
 
@@ -606,6 +612,12 @@ Conclusion
 Service meshes extract networking, security, and observability from application code into a dedicated infrastructure layer. They provide powerful traffic management (canary, blue-green), automatic mTLS, and rich observability without code changes. Istio is feature-rich and complex. Linkerd is lightweight and simple. Add a service mesh to your architecture only when the complexity of managing service-to-service communication outweighs the operational cost of the mesh itself.
 
 **See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>).
+
+**See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 
 **See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 

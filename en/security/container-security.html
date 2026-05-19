@@ -46,10 +46,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/container-security.png",
       "datePublished": "2025-12-17",
       "dateModified": "2026-05-17",
-      "wordCount": "2201",
+      "wordCount": "2252",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/container-security.html"},
@@ -108,35 +110,37 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/container-security.png" alt="Container Security Best Practices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Container Security Best Practices</h2>
 <h3>Container Security Best Practices</h3>
-<h3>Container Security Best Practices</h3>
-<h3>Container Security Best Practices</h3>
-<h3>Container Security Best Practices</h3>
-<h3>Container Security Best Practices</h3>
-<h3>Container Security Best Practices</h3>
-<h3>Container Security Best Practices</h3>
-<h3>Container Security Best Practices</h3>
-<h3>Container Security Best Practices</h3>
-<h3>Container Security Best Practices</h3>
-<h3>Container Security Best Practices</h3>
-<h3>Container Security Best Practices</h3>
-<h3>Container Security Best Practices</h3>
-<h3>Container Security Best Practices</h3>
+<h4>Container Security Best Practices</h4>
+<h4>Container Security Best Practices</h4>
+<h4>Container Security Best Practices</h4>
+<h4>Container Security Best Practices</h4>
+<h4>Container Security Best Practices</h4>
+<h4>Container Security Best Practices</h4>
+<h4>Container Security Best Practices</h4>
+<h4>Container Security Best Practices</h4>
+<h4>Container Security Best Practices</h4>
+<h4>Container Security Best Practices</h4>
+<h4>Container Security Best Practices</h4>
+<h4>Container Security Best Practices</h4>
+<h4>Container Security Best Practices</h4>
+<h4>Container Security Best Practices</h4>
+<h4>Container Security Best Practices</h4>
 <p>The Container Attack Surface </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/container-security.png" alt="Container Security Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Containers share the host kernel, which introduces unique security considerations. While containers provide process isolation through namespaces and cgroups, a misconfigured container can expose the host system to significant risk. Container security spans the entire lifecycle: build, ship, and run. </p>
 <p>Build Phase Security </p>
 <p>Use Minimal Base Images </p>
 <p>Smaller base images reduce the attack surface by eliminating unnecessary tools and libraries. </p>
-<h3>UNSAFE: Large attack surface</h3>
+<h4>UNSAFE: Large attack surface</h4>
 <p>FROM ubuntu:22.04</p>
 <p>RUN apt-get update &amp;&amp; apt-get install -y python3</p>
-<h3>BETTER: Minimal distribution</h3>
+<h4>BETTER: Minimal distribution</h4>
 <p>FROM python:3.12-slim</p>
-<h3>BEST: Distroless (no shell, no package manager)</h3>
+<h4>BEST: Distroless (no shell, no package manager)</h4>
 <p>FROM gcr.io/distroless/python3</p>
 <p>| Image | Size | Packages | Attack Surface | |-------|------|----------|----------------| | ubuntu:22.04 | 77 MB | 600+ | Large | | python:3.12-slim | 120 MB | 100+ | Moderate | | gcr.io/distroless/python3 | 60 MB | ~10 | Minimal | | alpine:3.19 | 7 MB | ~5 | Small (uses musl libc) | </p>
 <p>Scan for Vulnerabilities </p>
 <p>Integrate image scanning into your CI/CD pipeline: </p>
-<h3>.github/workflows/security.yml</h3>
+<h4>.github/workflows/security.yml</h4>
 <p>name: Container Security Scan</p>
 <p>on: [push]</p>
 <p>jobs:</p>
@@ -159,14 +163,14 @@
 <p>sarif_file: 'trivy-results.sarif'</p>
 <p>Multi-Stage Builds </p>
 <p>Use multi-stage builds to keep the final image clean: </p>
-<h3>Build stage</h3>
+<h4>Build stage</h4>
 <p>FROM golang:1.22 AS builder</p>
 <p>WORKDIR /app</p>
 <p>COPY go.mod go.sum ./</p>
 <p>RUN go mod download</p>
 <p>COPY . .</p>
 <p>RUN CGO_ENABLED=0 go build -o /app/server</p>
-<h3>Runtime stage</h3>
+<h4>Runtime stage</h4>
 <p>FROM gcr.io/distroless/static:nonroot</p>
 <p>COPY --from=builder /app/server /server</p>
 <p>USER nonroot:nonroot</p>
@@ -175,15 +179,15 @@
 <p>Ship Phase Security </p>
 <p>Sign and Verify Images </p>
 <p>Use Docker Content Trust or cosign to sign images and verify integrity: </p>
-<h3>Generate a signing key pair</h3>
+<h4>Generate a signing key pair</h4>
 <p>cosign generate-key-pair</p>
-<h3>Sign the image</h3>
+<h4>Sign the image</h4>
 <p>cosign sign --key cosign.key ghcr.io/myorg/myapp:latest</p>
-<h3>Verify before deployment</h3>
+<h4>Verify before deployment</h4>
 <p>cosign verify --key cosign.pub ghcr.io/myorg/myapp:latest</p>
 <p>Use a Private Registry </p>
 <p>Push images to a private registry with access controls and vulnerability scanning: </p>
-<h3>Push to private ECR</h3>
+<h4>Push to private ECR</h4>
 <p>aws ecr get-login-password --region us-east-1 | \</p>
 <p>docker login --username AWS --password-stdin $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com</p>
 <p>docker tag app:latest $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/app:latest</p>
@@ -199,7 +203,7 @@
 <p>CMD ["node", "server.js"]</p>
 <p>Read-Only Root Filesystem </p>
 <p>Mount the root filesystem as read-only to prevent file-system-based attacks: </p>
-<h3>Kubernetes pod security context</h3>
+<h4>Kubernetes pod security context</h4>
 <p>apiVersion: v1</p>
 <p>kind: Pod</p>
 <p>metadata:</p>
@@ -241,7 +245,7 @@
 <p>Kubernetes Pod Security Standards </p>
 <p>Kubernetes defines three Pod Security Standards: </p>
 <p>| Standard | Description | When to Use | |----------|-------------|-------------| | Privileged | Unrestricted policy | System-level pods | | Baseline | Minimally restrictive, prevents known escalations | Most workloads | | Restricted | Heavily restricted, follows pod hardening best practices | Security-critical workloads | </p>
-<h3>Apply Restricted standard via namespace labels</h3>
+<h4>Apply Restricted standard via namespace labels</h4>
 <p>apiVersion: v1</p>
 <p>kind: Namespace</p>
 <p>metadata:</p>
@@ -251,17 +255,19 @@
 <p>pod-security.kubernetes.io/enforce-version: latest</p>
 <p>Runtime Monitoring </p>
 <p>Use tools like Falco for runtime threat detection: </p>
-<h3>Install Falco</h3>
+<h4>Install Falco</h4>
 <p>helm install falco falcosecurity/falco \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--set falco.driver.kind=modern-bpf</p>
-<h3>Falco detects:</h3>
-<h3>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Shell spawned in container</h3>
-<h3>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sensitive file reads</h3>
-<h3>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Unexpected network connections</h3>
-<h3>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Privilege escalation attempts</h3>
+<h4>Falco detects:</h4>
+<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Shell spawned in container</h4>
+<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sensitive file reads</h4>
+<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Unexpected network connections</h4>
+<h4>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Privilege escalation attempts</h4>
 <p>Summary </p>
 <p>Container security requires attention at every stage of the lifecycle. Build minimal images based on distroless or scratch, scan for vulnerabilities before deployment, sign images to verify integrity, run containers as non-root with read-only filesystems, drop all unnecessary capabilities, set resource limits, and enforce Pod Security Standards in Kubernetes. Combine these preventive measures with runtime monitoring for defense in depth.</p>
 <p><strong>See also:</strong> <a href="/en/security/container-image-security.html">Container Image Security</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
+<p><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p></div>
     </article>

@@ -1,7 +1,7 @@
 ---
 title: "RAG Best Practices 2026: Building Production-Ready Retrieval Systems"
 description: "Complete guide to retrieval-augmented generation: chunking strategies, embedding model selection, hybrid search (vector + keyword), re-ranking, and multi-hop retrieval. Real examples with LangChain and LlamaIndex."
-date: 2026-05-08
+date: 2025-11-10
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/rag-best-practices.html
 ---

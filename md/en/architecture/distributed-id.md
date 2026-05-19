@@ -1,7 +1,7 @@
 ---
 title: "Distributed ID Generation"
 description: "UUID v7, Snowflake, ULID, database sequences, k-ordered IDs and their tradeoffs in distributed systems"
-date: 2026-05-12
+date: 2026-04-23
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/distributed-id.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/distributed-id.html
 
 ## Distributed ID Generation
 
-## Distributed ID Generation
+### Distributed ID Generation
 
-## Distributed ID Generation
+#### Distributed ID Generation
 
-## Distributed ID Generation
+#### Distributed ID Generation
 
-## Distributed ID Generation
+#### Distributed ID Generation
 
-## Distributed ID Generation
+#### Distributed ID Generation
 
-## Distributed ID Generation
+#### Distributed ID Generation
 
-## Distributed ID Generation
+#### Distributed ID Generation
 
-## Distributed ID Generation
+#### Distributed ID Generation
 
-## Distributed ID Generation
+#### Distributed ID Generation
 
-## Distributed ID Generation
+#### Distributed ID Generation
 
-## Distributed ID Generation
+#### Distributed ID Generation
+
+#### Distributed ID Generation
+
+#### Distributed ID Generation
+
+#### Distributed ID Generation
 
 Distributed ID generation is a foundational infrastructure concern for any system that spans multiple databases or services. IDs must be unique across all nodes, generate quickly without coordination, and often carry useful properties like time-orderedness, compactness, or security. The choice of ID generation strategy affects database performance, sorting behavior, and system complexity. 
 
@@ -51,6 +57,12 @@ Security considerations apply when IDs are exposed to clients. Sequential numeri
 The choice depends on database technology, ID length constraints, ordering requirements, and security needs. Modern recommendations favor UUID v7 as a default choice: it provides time-orderedness for good index performance, sufficient randomness for moderate security, and standardized format for interoperability. Snowflake variants remain excellent when compact 64-bit integer IDs are required for storage efficiency or legacy system compatibility.
 
 **See also:** [Caching Strategies](</en/architecture/cache-strategies.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>).
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
 

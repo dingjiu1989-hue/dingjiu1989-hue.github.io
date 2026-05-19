@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-slow-query-fix.png",
       "datePublished": "2026-04-03",
       "dateModified": "2026-04-22",
-      "wordCount": "2406",
+      "wordCount": "2520",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-slow-query-fix.html"},
@@ -99,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-slow-query-fix.png" alt="Slow Query Troubleshooting: Identification, Profiling, and Optimization" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h2>
 <h3>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h3>
-<h3>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h3>
-<h3>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h3>
-<h3>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h3>
-<h3>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h3>
-<h3>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h3>
-<h3>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h3>
-<h3>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h3>
-<h3>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h3>
-<h3>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h3>
-<h3>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h3>
-<h3>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h3>
+<h4>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h4>
+<h4>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h4>
+<h4>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h4>
+<h4>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h4>
+<h4>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h4>
+<h4>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h4>
+<h4>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h4>
+<h4>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h4>
+<h4>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h4>
+<h4>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h4>
+<h4>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h4>
+<h4>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h4>
+<h4>Slow Query Troubleshooting: Identification, Profiling, and Optimization</h4>
 <p>Slow Query Troubleshooting: Identification, Profiling, and Optimization </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-slow-query-fix.png" alt="Slow Query Troubleshooting: Identification, Profiling, and Optimization" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Slow queries are the most common database performance problem. This article presents a systematic workflow: from identifying the slowest queries through profiling to implementing and verifying optimizations. </p>
 <p>Step 1: Identify Slow Queries </p>
@@ -157,10 +161,10 @@
 <p>AND query_start &lt; now() - interval '5 seconds'</p>
 <p>ORDER BY duration DESC;</p>
 <p>External Tools </p>
-<h3>pgBadger: parse PostgreSQL logs for slow queries</h3>
+<h4>pgBadger: parse PostgreSQL logs for slow queries</h4>
 <p>pgbadger /var/log/postgresql/postgresql.log -o report.html</p>
-<h3>pgFincore: analyze cache hit rates</h3>
-<h3>pgbouncer logs for pool-level insights</h3>
+<h4>pgFincore: analyze cache hit rates</h4>
+<h4>pgbouncer logs for pool-level insights</h4>
 <p>Step 2: Profile the Problem Query </p>
 <p>Once identified, profile the slow query: </p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Reset statistics for this specific query</p>
@@ -282,6 +286,8 @@
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Profile</strong> : Run EXPLAIN (ANALYZE, BUFFERS, TIMING). 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Diagnose</strong> : Identify the bottleneck node in the plan. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Fix</strong> : Add index, rewrite query, update statistics, or tune parameters. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Verify</strong> : Re-run EXPLAIN ANALYZE to confirm improvement. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Monitor</strong> : Track query performance over time for regression. </p>
 <p>Most slow queries are fixed by adding the right index. When that is not enough, analyze the plan for unexpected join strategies, inefficient scans, or plan instability. A systematic approach prevents guessing and ensures each optimization has a measurable impact.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-query-profiling.html">Database Query Profiling: Finding and Fixing Performance Bottlenecks</a>, <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-query-profiling.html">Database Query Profiling: Finding and Fixing Performance Bottlenecks</a>, <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-query-profiling.html">Database Query Profiling: Finding and Fixing Performance Bottlenecks</a>, <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-query-profiling.html">Database Query Profiling: Finding and Fixing Performance Bottlenecks</a>, <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-query-profiling.html">Database Query Profiling: Finding and Fixing Performance Bottlenecks</a>, <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-query-profiling.html">Database Query Profiling: Finding and Fixing Performance Bottlenecks</a>, <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a></p></div>
     </article>

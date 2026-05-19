@@ -1,7 +1,7 @@
 ---
 title: "Text Editors Compared"
 description: "In-depth comparison of VS Code, NeoVim, Zed, and JetBrains IDEs for modern development workflows."
-date: 2026-05-11
+date: 2025-12-10
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/text-editors-compared.html
 ---
@@ -10,33 +10,39 @@ url: https://dingjiu1989-hue.github.io/en/tools/text-editors-compared.html
 
 ## Text Editors Compared
 
-## Text Editors Compared
+### Text Editors Compared
 
-## Text Editors Compared
+#### Text Editors Compared
 
-## Text Editors Compared
+#### Text Editors Compared
 
-## Text Editors Compared
+#### Text Editors Compared
 
-## Text Editors Compared
+#### Text Editors Compared
 
-## Text Editors Compared
+#### Text Editors Compared
 
-## Text Editors Compared
+#### Text Editors Compared
 
-## Text Editors Compared
+#### Text Editors Compared
 
-## Text Editors Compared
+#### Text Editors Compared
 
-## Text Editors Compared
+#### Text Editors Compared
 
-## Text Editors Compared
+#### Text Editors Compared
 
-## Text Editors Compared
+#### Text Editors Compared
+
+#### Text Editors Compared
+
+#### Text Editors Compared
+
+#### Text Editors Compared
 
 The text editor is a developer's most personal tool. VS Code dominates the market, but NeoVim, Zed, and JetBrains IDEs each have passionate followings. This comparison helps you choose based on your workflow and priorities.
 
-### VS Code
+#### VS Code
 
 Microsoft's VS Code is the most widely used editor in 2026, with over 70% market share among developers.
 
@@ -90,7 +96,7 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
 
 **Best for** : General-purpose development, TypeScript/React, remote development, most teams.
 
-### NeoVim
+#### NeoVim
 
 NeoVim is a modern fork of Vim with a vibrant plugin ecosystem and Lua-based configuration.
 
@@ -182,7 +188,7 @@ dependencies = { 'nvim-lua/plenary.nvim' }
 
 **Best for** : Terminal-focused developers, keyboard efficiency enthusiasts, users who want maximum customization.
 
-### Zed
+#### Zed
 
 Zed is a new editor built in Rust with GPU-accelerated rendering. It was created by the original Atom team.
 
@@ -252,7 +258,7 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
 
 **Best for** : Developers who want a fast, modern editor with built-in collaboration. Early adopters.
 
-### JetBrains IDEs
+#### JetBrains IDEs
 
 JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLand) with deep language understanding.
 
@@ -288,7 +294,7 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
 
 **Best for** : Enterprise Java/Kotlin development, teams that want the best refactoring and debugging tools.
 
-### Performance Comparison
+#### Performance Comparison
 
 | Editor | Startup Time | Memory (idle) | Memory (10 files) | Binary Size |
 
@@ -302,7 +308,7 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
 
 | JetBrains | 10-20s | 600MB | 1.5GB | ~800MB |
 
-### Configuration Comparison
+#### Configuration Comparison
 
 | Aspect | VS Code | NeoVim | Zed | JetBrains |
 
@@ -316,7 +322,7 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
 
 | Reproducible config | Via settings sync | Yes (Git repo) | Limited | Via IDE settings |
 
-### Recommendations
+#### Recommendations
 
   * **New developers** : Start with VS Code (lowest barrier, largest community).
 
@@ -333,11 +339,17 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
 
 
 
-### Summary
+#### Summary
 
 There is no single best editor. VS Code offers the best ecosystem and accessibility. NeoVim provides unmatched efficiency for terminal-based workflows. Zed delivers exceptional performance with modern architecture. JetBrains IDEs offer the deepest language-specific features. Many developers use multiple editors: VS Code for most work, NeoVim for quick terminal edits, and a JetBrains IDE for specific language requirements. Choose based on your primary language, performance needs, and willingness to invest in configuration.
 
 **See also:** [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [Container Runtimes Compared](</en/tools/container-runtimes-compared.html>), [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>).
+
+**See also:** [Container Runtimes Compared](</en/tools/container-runtimes-compared.html>), [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>)
+
+**See also:** [Container Runtimes Compared](</en/tools/container-runtimes-compared.html>), [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>)
+
+**See also:** [Container Runtimes Compared](</en/tools/container-runtimes-compared.html>), [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>)
 
 **See also:** [Container Runtimes Compared](</en/tools/container-runtimes-compared.html>), [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>)
 

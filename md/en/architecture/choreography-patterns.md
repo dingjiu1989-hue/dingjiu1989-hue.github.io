@@ -1,7 +1,7 @@
 ---
 title: "Choreography Patterns"
 description: "Learn choreography patterns: event contracts, monitoring, saga coordination, and decentralized workflow management"
-date: 2026-05-12
+date: 2026-05-02
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/choreography-patterns.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/choreography-patterns.htm
 
 ## Choreography Patterns
 
-## Choreography Patterns
+### Choreography Patterns
 
-## Choreography Patterns
+#### Choreography Patterns
 
-## Choreography Patterns
+#### Choreography Patterns
 
-## Choreography Patterns
+#### Choreography Patterns
 
-## Choreography Patterns
+#### Choreography Patterns
 
-## Choreography Patterns
+#### Choreography Patterns
 
-## Choreography Patterns
+#### Choreography Patterns
 
-## Choreography Patterns
+#### Choreography Patterns
 
-## Choreography Patterns
+#### Choreography Patterns
 
-## Choreography Patterns
+#### Choreography Patterns
 
-## Choreography Patterns
+#### Choreography Patterns
+
+#### Choreography Patterns
+
+#### Choreography Patterns
+
+#### Choreography Patterns
 
 Choreography is an architectural pattern for coordinating distributed workflows without a central coordinator. Unlike orchestration, where a central service directs all participants, choreography uses events to achieve coordination—each service performs its task and emits events that trigger the next steps. This decentralized approach offers scalability and loose coupling but introduces challenges in observability and error handling. 
 
@@ -75,6 +81,12 @@ Choreography is appropriate when workflows are relatively stable, events are nat
 Many organizations use a hybrid approach: choreography for simple, stable workflows and orchestration for complex, frequently changing ones. The key is matching the coordination pattern to the workflow's complexity and change rate.
 
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>).
+
+**See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>)
+
+**See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>)
+
+**See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>)
 
 **See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>)
 

@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/request-reply-pattern.png",
       "datePublished": "2026-05-08",
       "dateModified": "2026-05-09",
-      "wordCount": "740",
+      "wordCount": "826",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/request-reply-pattern.html"},
@@ -96,17 +98,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/request-reply-pattern.png" alt="Request-Reply Pattern for Asynchronous Communication" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Request-Reply Pattern for Asynchronous Communication</h2>
 <h3>Request-Reply Pattern for Asynchronous Communication</h3>
-<h3>Request-Reply Pattern for Asynchronous Communication</h3>
-<h3>Request-Reply Pattern for Asynchronous Communication</h3>
-<h3>Request-Reply Pattern for Asynchronous Communication</h3>
-<h3>Request-Reply Pattern for Asynchronous Communication</h3>
-<h3>Request-Reply Pattern for Asynchronous Communication</h3>
-<h3>Request-Reply Pattern for Asynchronous Communication</h3>
-<h3>Request-Reply Pattern for Asynchronous Communication</h3>
-<h3>Request-Reply Pattern for Asynchronous Communication</h3>
-<h3>Request-Reply Pattern for Asynchronous Communication</h3>
-<h3>Request-Reply Pattern for Asynchronous Communication</h3>
-<h3>Request-Reply Pattern for Asynchronous Communication</h3>
+<h4>Request-Reply Pattern for Asynchronous Communication</h4>
+<h4>Request-Reply Pattern for Asynchronous Communication</h4>
+<h4>Request-Reply Pattern for Asynchronous Communication</h4>
+<h4>Request-Reply Pattern for Asynchronous Communication</h4>
+<h4>Request-Reply Pattern for Asynchronous Communication</h4>
+<h4>Request-Reply Pattern for Asynchronous Communication</h4>
+<h4>Request-Reply Pattern for Asynchronous Communication</h4>
+<h4>Request-Reply Pattern for Asynchronous Communication</h4>
+<h4>Request-Reply Pattern for Asynchronous Communication</h4>
+<h4>Request-Reply Pattern for Asynchronous Communication</h4>
+<h4>Request-Reply Pattern for Asynchronous Communication</h4>
+<h4>Request-Reply Pattern for Asynchronous Communication</h4>
+<h4>Request-Reply Pattern for Asynchronous Communication</h4>
 <p>The request-reply pattern enables asynchronous request-response communication using message queues. Unlike synchronous HTTP calls, the client sends a request message and continues processing. The response arrives later through a reply queue. This decouples the sender from the receiver in both time and space.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/request-reply-pattern.png" alt="Request-Reply Pattern for Asynchronous Communication" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Architecture</h4>
 <p>The client sends a request to a request queue, including a correlation ID and a reply-to address in the message header. The server consumes from the request queue, processes the request, and sends the response to the reply-to address with the same correlation ID. The client listens on the reply queue and matches responses by correlation ID.</p>
@@ -123,6 +127,8 @@
 <p>Request-reply patterns must handle timeouts. The client should set a timeout based on expected processing time. If no response arrives within the timeout, the client can retry or fail gracefully. Monitor timeout rates to detect server issues.</p>
 <p>Dead letter queues for request queues capture requests that cannot be processed. Monitor DLQ depth and reprocess after addressing root causes.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p></div>
     </article>

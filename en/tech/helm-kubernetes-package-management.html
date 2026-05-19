@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/helm-kubernetes-package-management.png",
       "datePublished": "2025-12-30",
       "dateModified": "2026-04-16",
-      "wordCount": "3080",
+      "wordCount": "3152",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/helm-kubernetes-package-management.html"},
@@ -99,19 +101,21 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/helm-kubernetes-package-management.png" alt="Helm Charts: Kubernetes Package Management" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Helm Charts: Kubernetes Package Management</h2>
 <h3>Helm Charts: Kubernetes Package Management</h3>
-<h3>Helm Charts: Kubernetes Package Management</h3>
-<h3>Helm Charts: Kubernetes Package Management</h3>
-<h3>Helm Charts: Kubernetes Package Management</h3>
-<h3>Helm Charts: Kubernetes Package Management</h3>
-<h3>Helm Charts: Kubernetes Package Management</h3>
-<h3>Helm Charts: Kubernetes Package Management</h3>
-<h3>Helm Charts: Kubernetes Package Management</h3>
-<h3>Helm Charts: Kubernetes Package Management</h3>
-<h3>Helm Charts: Kubernetes Package Management</h3>
-<h3>Helm Charts: Kubernetes Package Management</h3>
-<h3>Helm Charts: Kubernetes Package Management</h3>
-<h3>Helm Charts: Kubernetes Package Management</h3>
-<h3>Helm Charts: Kubernetes Package Management</h3>
+<h4>Helm Charts: Kubernetes Package Management</h4>
+<h4>Helm Charts: Kubernetes Package Management</h4>
+<h4>Helm Charts: Kubernetes Package Management</h4>
+<h4>Helm Charts: Kubernetes Package Management</h4>
+<h4>Helm Charts: Kubernetes Package Management</h4>
+<h4>Helm Charts: Kubernetes Package Management</h4>
+<h4>Helm Charts: Kubernetes Package Management</h4>
+<h4>Helm Charts: Kubernetes Package Management</h4>
+<h4>Helm Charts: Kubernetes Package Management</h4>
+<h4>Helm Charts: Kubernetes Package Management</h4>
+<h4>Helm Charts: Kubernetes Package Management</h4>
+<h4>Helm Charts: Kubernetes Package Management</h4>
+<h4>Helm Charts: Kubernetes Package Management</h4>
+<h4>Helm Charts: Kubernetes Package Management</h4>
+<h4>Helm Charts: Kubernetes Package Management</h4>
 <h4>Introduction</h4>
 <p>Helm is the de facto package manager for Kubernetes, enabling developers to define, install, and upgrade complex applications through reusable chart packages. A single Helm chart can encapsulate dozens of Kubernetes resources into a versioned, configurable unit that can be deployed across multiple environments with minimal repetition.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/helm-kubernetes-package-management.png" alt="Helm Charts: Kubernetes Package Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>This guide covers advanced Helm concepts including chart structure, templating, dependency management, CI/CD integration, and enterprise best practices.</p>
@@ -226,11 +230,11 @@
 <p>"required": ["image", "replicaCount"]</p>
 <p>}</p>
 <p>Environment-specific overrides keep values DRY:</p>
-<h3>values.yaml (defaults)</h3>
+<h4>values.yaml (defaults)</h4>
 <p>replicaCount: 1</p>
 <p>image:</p>
 <p>tag: latest</p>
-<h3>values-staging.yaml</h3>
+<h4>values-staging.yaml</h4>
 <p>replicaCount: 2</p>
 <p>image:</p>
 <p>tag: staging-abc123</p>
@@ -238,7 +242,7 @@
 <p>enabled: true</p>
 <p>hosts:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- host: staging.my-app.com</p>
-<h3>values-production.yaml</h3>
+<h4>values-production.yaml</h4>
 <p>replicaCount: 6</p>
 <p>image:</p>
 <p>tag: v2.0.0</p>
@@ -271,7 +275,7 @@
 <p>condition: replica-db.enabled</p>
 <h4>CI/CD Integration</h4>
 <p>Integrate Helm linting and testing into pipelines:</p>
-<h3>.github/workflows/helm-release.yml</h3>
+<h4>.github/workflows/helm-release.yml</h4>
 <p>name: Helm Release</p>
 <p>on:</p>
 <p>push:</p>
@@ -298,10 +302,10 @@
 <p>helm push my-app-*.tgz oci://ghcr.io/${{ github.repository }}/charts</p>
 <h4>Chart Versioning and Publishing</h4>
 <p>Use OCI registries for chart distribution:</p>
-<h3>Login and push</h3>
+<h4>Login and push</h4>
 <p>helm registry login ghcr.io -u $USER</p>
 <p>helm push my-app-1.2.3.tgz oci://ghcr.io/my-org/charts</p>
-<h3>Install from OCI</h3>
+<h4>Install from OCI</h4>
 <p>helm install my-app oci://ghcr.io/my-org/charts/my-app --version 1.2.3</p>
 <p>Follow semantic versioning strictly. Breaking template changes require a major version bump, as <code>helm upgrade</code> must never silently break deployed resources.</p>
 <h4>Best Practices</h4>
@@ -327,6 +331,8 @@
 </ul>
 <p>Helm remains the most widely adopted packaging tool in the Kubernetes ecosystem, and mastering its advanced features is essential for operating production-grade workloads at scale.</p>
 <p><strong>See also:</strong> <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/git-workflows-2026.html">Git Workflows for Teams</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p></div>
     </article>

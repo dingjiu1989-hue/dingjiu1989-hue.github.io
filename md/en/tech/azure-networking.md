@@ -1,7 +1,7 @@
 ---
 title: "Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing"
 description: "Comprehensive guide to Azure networking covering Virtual Networks, VNet peering, Azure Firewall, Load Balancer, Application Gateway, and network security best practices."
-date: 2026-05-12
+date: 2026-01-01
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/azure-networking.html
 ---
@@ -10,39 +10,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/azure-networking.html
 
 ## Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
 
-## Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
 
-## Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
 
-## Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
 
-## Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
 
-## Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
 
-## Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
 
-## Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
 
-## Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
 
-## Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
 
-## Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
 
-## Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
 
-## Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
 
-## Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
 
-### Introduction
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+
+#### Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+
+#### Introduction
 
 Microsoft Azure provides a comprehensive networking portfolio designed for hybrid cloud architectures. Azure Virtual Network (VNet) is the foundational building block, offering network isolation and connectivity for Azure resources. Azure's networking model differs significantly from AWS and GCP, with unique concepts like network security groups at the subnet level, Azure Firewall as a managed service, and Azure DNS Private Zones.
 
 This article covers Azure VNet design, VNet peering, Azure Firewall, Load Balancer, Application Gateway, and network security practices.
 
-### Virtual Networks and Subnet Design
+#### Virtual Networks and Subnet Design
 
 Azure VNets are regional resources. Each VNet has a CIDR block and contains subnets within a single region. Subnets can be delegated to specific Azure services like Azure App Service or Azure SQL Managed Instance.
 
@@ -60,7 +66,7 @@ az network nsg rule create \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--protocol Tcp --destination-port-ranges 80
 
-### VNet Peering
+#### VNet Peering
 
 VNet Peering connects two VNets within the same region (or different regions via Global VNet Peering) using Azure's backbone network. Peered VNets enable resources to communicate with private IP addresses with low latency.
 
@@ -68,7 +74,7 @@ Peering is not transitive — VNet A to VNet B and VNet B to VNet C does not con
 
 Gateway transit enables spoke VNets to use the hub's VPN gateway for hybrid connectivity without deploying VPN gateways in every spoke — a significant cost optimization.
 
-### Azure Firewall
+#### Azure Firewall
 
 Azure Firewall is a managed cloud-native firewall service with built-in high availability and auto-scaling. It provides application (FQDN) and network-level filtering, threat intelligence integration, and outbound SNAT support.
 
@@ -78,7 +84,7 @@ Azure Firewall Manager provides centralized policy management across multiple fi
 
 For organizations requiring web application firewall (WAF) capabilities, Azure Application Gateway with WAF provides protection against OWASP Top 10 vulnerabilities at Layer 7.
 
-### Azure Load Balancer and Application Gateway
+#### Azure Load Balancer and Application Gateway
 
 Azure Load Balancer distributes inbound traffic at Layer 4 (TCP/UDP) across virtual machine instances. It supports public and internal load balancing, port forwarding, and outbound SNAT. The Standard SKU provides zone-redundancy and advanced health probes.
 
@@ -107,23 +113,29 @@ az network application-gateway create \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--http-settings-cookie-based-affinity Enabled
 
-### Azure DNS and Private Zones
+#### Azure DNS and Private Zones
 
 Azure DNS hosts domains and provides name resolution using Azure infrastructure. Azure Private DNS Zones enable internal name resolution within VNets without custom DNS servers. Private zones can be linked to multiple VNets, providing consistent internal DNS resolution across peered networks.
 
 Auto-registration in private zones automatically creates DNS records for VMs, eliminating manual DNS entry management.
 
-### Hybrid Connectivity
+#### Hybrid Connectivity
 
 Azure VPN Gateway connects on-premises networks to Azure via IPsec tunnels. Active-Active mode provides high availability with two active tunnels. ExpressRoute provides dedicated private connectivity with higher bandwidth guarantees and lower latency than VPN.
 
 ExpressRoute with Global Reach enables on-premises sites connected to different ExpressRoute circuits to communicate through Microsoft's network, eliminating the need for MPLS between data centers.
 
-### Conclusion
+#### Conclusion
 
 Azure's networking services are designed for enterprise hybrid cloud scenarios. VNet peering provides connectivity within Azure, Azure Firewall delivers centralized security, and Application Gateway enables intelligent traffic distribution. NSGs provide granular traffic filtering, while ExpressRoute and VPN Gateway connect on-premises networks. Understanding these services and their interactions is essential for designing secure, scalable Azure network architectures.
 
 **See also:** [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>).
+
+**See also:** [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>)
+
+**See also:** [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>)
+
+**See also:** [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>)
 
 **See also:** [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>)
 

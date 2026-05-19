@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/log-management-security.png",
       "datePublished": "2025-12-18",
       "dateModified": "2026-05-13",
-      "wordCount": "1604",
+      "wordCount": "1659",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/log-management-security.html"},
@@ -98,19 +100,21 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/log-management-security.png" alt="Security Log Management" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Security Log Management</h2>
 <h3>Security Log Management</h3>
-<h3>Security Log Management</h3>
-<h3>Security Log Management</h3>
-<h3>Security Log Management</h3>
-<h3>Security Log Management</h3>
-<h3>Security Log Management</h3>
-<h3>Security Log Management</h3>
-<h3>Security Log Management</h3>
-<h3>Security Log Management</h3>
-<h3>Security Log Management</h3>
-<h3>Security Log Management</h3>
-<h3>Security Log Management</h3>
-<h3>Security Log Management</h3>
-<h3>Security Log Management</h3>
+<h4>Security Log Management</h4>
+<h4>Security Log Management</h4>
+<h4>Security Log Management</h4>
+<h4>Security Log Management</h4>
+<h4>Security Log Management</h4>
+<h4>Security Log Management</h4>
+<h4>Security Log Management</h4>
+<h4>Security Log Management</h4>
+<h4>Security Log Management</h4>
+<h4>Security Log Management</h4>
+<h4>Security Log Management</h4>
+<h4>Security Log Management</h4>
+<h4>Security Log Management</h4>
+<h4>Security Log Management</h4>
+<h4>Security Log Management</h4>
 <p>Why Log Management Matters for Security </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/log-management-security.png" alt="Security Log Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Logs are the definitive record of what happened in your system. When a security incident occurs, logs provide the evidence needed to determine the attack vector, scope of compromise, and affected data. Without proper log management, incident response becomes guesswork, and forensic analysis is impossible. </p>
 <p>What to Log </p>
@@ -171,7 +175,7 @@
 <p>}</p>
 <p>Centralized Log Aggregation </p>
 <p>Distribute log collection agents and centralize storage: </p>
-<h3>Filebeat configuration</h3>
+<h4>Filebeat configuration</h4>
 <p>filebeat.inputs:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: filestream</p>
 <p>id: app-logs</p>
@@ -189,7 +193,7 @@
 <p>ssl.verification_mode: certificate</p>
 <p>SIEM Integration </p>
 <p>A Security Information and Event Management (SIEM) system correlates logs from multiple sources to detect attacks: </p>
-<h3>Example: Custom SIEM rule for brute force detection</h3>
+<h4>Example: Custom SIEM rule for brute force detection</h4>
 <p>from datetime import datetime, timedelta</p>
 <p>class BruteForceDetector:</p>
 <p>def <strong>init</strong>(self, redis_client):</p>
@@ -223,10 +227,10 @@
 <p>self.secret_key = secret_key</p>
 <p>self.previous_hash = self.load_last_hash()</p>
 <p>def secure_log(self, event):</p>
-<h3>Add chained hash for tamper detection</h3>
+<h4>Add chained hash for tamper detection</h4>
 <p>event['_prev_hash'] = self.previous_hash</p>
 <p>event['_timestamp'] = datetime.utcnow().isoformat()</p>
-<h3>Create HMAC signature</h3>
+<h4>Create HMAC signature</h4>
 <p>payload = json.dumps(event, sort_keys=True)</p>
 <p>signature = hmac.new(</p>
 <p>self.secret_key.encode(),</p>
@@ -235,7 +239,7 @@
 <p>).hexdigest()</p>
 <p>event['_signature'] = signature</p>
 <p>self.previous_hash = signature</p>
-<h3>Write to append-only log</h3>
+<h4>Write to append-only log</h4>
 <p>with open('/var/log/secure/audit.log', 'a') as f:</p>
 <p>f.write(json.dumps(event) + '\n')</p>
 <p>def verify_chain(self):</p>
@@ -277,6 +281,8 @@
 <p>Summary </p>
 <p>Implement structured JSON logging for all security-relevant events, centralize logs with tools like the ELK stack, integrate with a SIEM for correlation and alerting, enforce retention policies based on compliance requirements, protect log integrity with chained HMAC signatures, and redact sensitive data before storage. Regular log review and monitoring should be a scheduled operational activity, not an afterthought during incident response.</p>
 <p><strong>See also:</strong> <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/secrets-management.html">Secrets Management for Developers</a></p>
+<p><strong>See also:</strong> <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/secrets-management.html">Secrets Management for Developers</a></p>
 <p><strong>See also:</strong> <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/secrets-management.html">Secrets Management for Developers</a></p>
 <p><strong>See also:</strong> <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/secrets-management.html">Secrets Management for Developers</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/secrets-management.html">Secrets Management for Developers</a></p></div>
     </article>

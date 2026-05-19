@@ -1,7 +1,7 @@
 ---
 title: "Scaling Customer Support as a Solo SaaS Developer"
 description: "Scale customer support for your SaaS: chatbots, knowledge base, ticketing systems, and automation for solo founders."
-date: 2026-05-12
+date: 2026-01-21
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/customer-support-scaling.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/customer-support-scaling.ht
 
 ## Scaling Customer Support as a Solo SaaS Developer
 
-## Scaling Customer Support as a Solo SaaS Developer
+### Scaling Customer Support as a Solo SaaS Developer
 
-## Scaling Customer Support as a Solo SaaS Developer
+#### Scaling Customer Support as a Solo SaaS Developer
 
-## Scaling Customer Support as a Solo SaaS Developer
+#### Scaling Customer Support as a Solo SaaS Developer
 
-## Scaling Customer Support as a Solo SaaS Developer
+#### Scaling Customer Support as a Solo SaaS Developer
 
-## Scaling Customer Support as a Solo SaaS Developer
+#### Scaling Customer Support as a Solo SaaS Developer
 
-## Scaling Customer Support as a Solo SaaS Developer
+#### Scaling Customer Support as a Solo SaaS Developer
 
-## Scaling Customer Support as a Solo SaaS Developer
+#### Scaling Customer Support as a Solo SaaS Developer
 
-## Scaling Customer Support as a Solo SaaS Developer
+#### Scaling Customer Support as a Solo SaaS Developer
 
-## Scaling Customer Support as a Solo SaaS Developer
+#### Scaling Customer Support as a Solo SaaS Developer
 
-## Scaling Customer Support as a Solo SaaS Developer
+#### Scaling Customer Support as a Solo SaaS Developer
 
-## Scaling Customer Support as a Solo SaaS Developer
+#### Scaling Customer Support as a Solo SaaS Developer
 
-## Scaling Customer Support as a Solo SaaS Developer
+#### Scaling Customer Support as a Solo SaaS Developer
 
-### Customer Support for Solo SaaS Developers
+#### Scaling Customer Support as a Solo SaaS Developer
+
+#### Scaling Customer Support as a Solo SaaS Developer
+
+#### Scaling Customer Support as a Solo SaaS Developer
+
+#### Customer Support for Solo SaaS Developers
 
 As a solo founder, you are your entire customer support team. Without a strategy to scale support, every new customer increases your workload. Building a support system that automates common requests and documents solutions is essential for sustainable growth.
 
@@ -75,6 +81,12 @@ Maintain a changelog visible to your support provider. Every product change shou
 Customer support for solo founders is about leverage. Every investment in documentation, automation, and self-service multiplies your capacity. The most sustainable approach combines excellent documentation that deflects common issues, smart automation for initial triage, and a lightweight ticketing system for tracking what remains.
 
 **See also:** [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>).
+
+**See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>)
+
+**See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>)
+
+**See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>)
 
 **See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>)
 

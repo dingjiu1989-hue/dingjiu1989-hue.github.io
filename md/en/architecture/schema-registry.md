@@ -1,7 +1,7 @@
 ---
 title: "Schema Registry"
 description: "Learn schema registry principles: Avro, Protobuf, JSON Schema, compatibility checks, and evolution strategies"
-date: 2026-05-12
+date: 2026-05-05
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html
 
 ## Schema Registry
 
-## Schema Registry
+### Schema Registry
 
-## Schema Registry
+#### Schema Registry
 
-## Schema Registry
+#### Schema Registry
 
-## Schema Registry
+#### Schema Registry
 
-## Schema Registry
+#### Schema Registry
 
-## Schema Registry
+#### Schema Registry
 
-## Schema Registry
+#### Schema Registry
 
-## Schema Registry
+#### Schema Registry
 
-## Schema Registry
+#### Schema Registry
 
-## Schema Registry
+#### Schema Registry
 
-## Schema Registry
+#### Schema Registry
+
+#### Schema Registry
+
+#### Schema Registry
+
+#### Schema Registry
 
 A schema registry is a centralized service that stores, validates, and manages schemas for data in event-driven and message-based systems. As organizations adopt event-driven architectures with asynchronous communication, managing data formats across producers and consumers becomes critical. The schema registry solves the problem of data contract evolution by enforcing compatibility rules and providing a single source of truth for schema definitions. 
 
@@ -77,6 +83,12 @@ Organizations should use schema registries for all event and message formats. Re
 A well-managed schema registry prevents the most common data contract failures in distributed systems. Combined with good versioning practices and compatibility checking, it enables safe, independent evolution of producers and consumers.
 
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Consumer-Driven Contracts in Microservices](</en/architecture/consumer-driven-contracts.html>).
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 

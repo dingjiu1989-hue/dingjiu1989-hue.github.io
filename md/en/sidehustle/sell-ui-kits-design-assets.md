@@ -1,7 +1,7 @@
 ---
 title: "Selling UI Kits, Icons, and Design Assets as a Developer in 2026"
 description: "How developers can create and sell design assets: Figma UI kits, icon sets, Tailwind templates, and illustration packs. Covers design tools, pricing, marketplace comparison (Gumroad, Creative Market, UI8)."
-date: 2026-05-08
+date: 2025-10-22
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/sell-ui-kits-design-assets.html
 ---

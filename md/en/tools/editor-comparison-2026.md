@@ -1,7 +1,7 @@
 ---
 title: "VS Code vs JetBrains vs Cursor: Ultimate Code Editor Showdown (2026)"
 description: "In-depth comparison of the three major code editors: performance, AI capabilities, plugin ecosystems, and pricing. Find your perfect match."
-date: 2026-05-07
+date: 2025-10-06
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/editor-comparison-2026.html
 ---

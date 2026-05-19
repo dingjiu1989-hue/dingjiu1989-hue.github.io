@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/ambassador-pattern.png",
       "datePublished": "2026-05-05",
       "dateModified": "2026-05-16",
-      "wordCount": "644",
+      "wordCount": "715",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/ambassador-pattern.html"},
@@ -96,17 +98,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/ambassador-pattern.png" alt="Ambassador Pattern for Service Communication" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Ambassador Pattern for Service Communication</h2>
 <h3>Ambassador Pattern for Service Communication</h3>
-<h3>Ambassador Pattern for Service Communication</h3>
-<h3>Ambassador Pattern for Service Communication</h3>
-<h3>Ambassador Pattern for Service Communication</h3>
-<h3>Ambassador Pattern for Service Communication</h3>
-<h3>Ambassador Pattern for Service Communication</h3>
-<h3>Ambassador Pattern for Service Communication</h3>
-<h3>Ambassador Pattern for Service Communication</h3>
-<h3>Ambassador Pattern for Service Communication</h3>
-<h3>Ambassador Pattern for Service Communication</h3>
-<h3>Ambassador Pattern for Service Communication</h3>
-<h3>Ambassador Pattern for Service Communication</h3>
+<h4>Ambassador Pattern for Service Communication</h4>
+<h4>Ambassador Pattern for Service Communication</h4>
+<h4>Ambassador Pattern for Service Communication</h4>
+<h4>Ambassador Pattern for Service Communication</h4>
+<h4>Ambassador Pattern for Service Communication</h4>
+<h4>Ambassador Pattern for Service Communication</h4>
+<h4>Ambassador Pattern for Service Communication</h4>
+<h4>Ambassador Pattern for Service Communication</h4>
+<h4>Ambassador Pattern for Service Communication</h4>
+<h4>Ambassador Pattern for Service Communication</h4>
+<h4>Ambassador Pattern for Service Communication</h4>
+<h4>Ambassador Pattern for Service Communication</h4>
+<h4>Ambassador Pattern for Service Communication</h4>
 <p>The ambassador pattern places a helper service between a client and a remote service to handle cross-cutting communication concerns. Unlike the sidecar pattern which runs as a local helper, the ambassador acts as a smart proxy that manages retries, circuit breaking, authentication, and protocol translation on behalf of the client.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/ambassador-pattern.png" alt="Ambassador Pattern for Service Communication" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Architecture Overview</h4>
 <p>The ambassador sits at the edge of a service boundary, intercepting all outbound communication. The client service connects to a local ambassador instance, which forwards requests to the target service. This indirection allows the ambassador to add capabilities that the client does not natively support.</p>
@@ -120,6 +124,8 @@
 <h4>Implementation Considerations</h4>
 <p>Ambassadors add network hop latency. Measure the performance impact before deploying in production. Use connection pooling to reduce overhead. Ensure the ambassador can scale independently of its clients. Implement health checking so clients can detect ambassador failures and route around them.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p></div>
     </article>

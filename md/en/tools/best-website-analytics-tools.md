@@ -1,7 +1,7 @@
 ---
 title: "Best Privacy-First Analytics Tools 2026: PostHog vs Plausible vs Umami vs Mixpanel"
 description: "Compare website and product analytics tools with a focus on privacy, self-hosting, and developer-friendly features."
-date: 2026-05-08
+date: 2025-11-02
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-website-analytics-tools.html
 ---

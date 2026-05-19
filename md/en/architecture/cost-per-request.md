@@ -1,7 +1,7 @@
 ---
 title: "Cost Per Request Modeling"
 description: "Compute, storage, network, database per-request cost modeling, and optimization strategies"
-date: 2026-05-12
+date: 2026-04-22
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/cost-per-request.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/cost-per-request.html
 
 ## Cost Per Request Modeling
 
-## Cost Per Request Modeling
+### Cost Per Request Modeling
 
-## Cost Per Request Modeling
+#### Cost Per Request Modeling
 
-## Cost Per Request Modeling
+#### Cost Per Request Modeling
 
-## Cost Per Request Modeling
+#### Cost Per Request Modeling
 
-## Cost Per Request Modeling
+#### Cost Per Request Modeling
 
-## Cost Per Request Modeling
+#### Cost Per Request Modeling
 
-## Cost Per Request Modeling
+#### Cost Per Request Modeling
 
-## Cost Per Request Modeling
+#### Cost Per Request Modeling
 
-## Cost Per Request Modeling
+#### Cost Per Request Modeling
 
-## Cost Per Request Modeling
+#### Cost Per Request Modeling
 
-## Cost Per Request Modeling
+#### Cost Per Request Modeling
+
+#### Cost Per Request Modeling
+
+#### Cost Per Request Modeling
+
+#### Cost Per Request Modeling
 
 Cost per request modeling decomposes infrastructure costs into the cost of serving a single request. This metric enables data-driven optimization: if a request costs \$0.001 and you serve 100 million requests per month, a 20% reduction saves \$20,000 monthly. More importantly, understanding per-request costs reveals which features, endpoints, or user segments are profitable and which may need rethinking. 
 
@@ -53,6 +59,12 @@ Cost attribution requires distributed tracing metadata. Each trace span should c
 Right-sizing infrastructure is the fundamental cost optimization. Over-provisioned services waste money on idle capacity. Under-provisioned services waste money on performance-related customer churn. Autoscaling policies should target 60-70% utilization during peak — low enough to handle traffic spikes, high enough to avoid waste. For services with predictable traffic patterns, scheduled scaling reduces costs further by matching capacity to expected load.
 
 **See also:** [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>).
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 

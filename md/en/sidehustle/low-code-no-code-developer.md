@@ -1,7 +1,7 @@
 ---
 title: "No-Code/Low-Code for Developers: How to Leverage It for Profit in 2026"
 description: "Why developers should embrace low-code tools: faster client projects, rapid prototyping, and building internal tools. Compare Bubble, Xano, Retool, n8n, and Zapier from a developer's perspective."
-date: 2026-05-08
+date: 2025-10-23
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/low-code-no-code-developer.html
 ---

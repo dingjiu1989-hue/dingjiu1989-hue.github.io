@@ -47,13 +47,18 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-composition.png",
       "datePublished": "2026-04-21",
       "dateModified": "2026-04-29",
-      "wordCount": "932",
+      "wordCount": "984",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/api-composition.html"},
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/api-composition-and-aggregation-4bki"
+      ],
       "articleBody": "API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation strategies"
     }
     </script>
@@ -96,17 +101,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-composition.png" alt="API Composition and Aggregation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>API Composition and Aggregation</h2>
 <h3>API Composition and Aggregation</h3>
-<h3>API Composition and Aggregation</h3>
-<h3>API Composition and Aggregation</h3>
-<h3>API Composition and Aggregation</h3>
-<h3>API Composition and Aggregation</h3>
-<h3>API Composition and Aggregation</h3>
-<h3>API Composition and Aggregation</h3>
-<h3>API Composition and Aggregation</h3>
-<h3>API Composition and Aggregation</h3>
-<h3>API Composition and Aggregation</h3>
-<h3>API Composition and Aggregation</h3>
-<h3>API Composition and Aggregation</h3>
+<h4>API Composition and Aggregation</h4>
+<h4>API Composition and Aggregation</h4>
+<h4>API Composition and Aggregation</h4>
+<h4>API Composition and Aggregation</h4>
+<h4>API Composition and Aggregation</h4>
+<h4>API Composition and Aggregation</h4>
+<h4>API Composition and Aggregation</h4>
+<h4>API Composition and Aggregation</h4>
+<h4>API Composition and Aggregation</h4>
+<h4>API Composition and Aggregation</h4>
+<h4>API Composition and Aggregation</h4>
+<h4>API Composition and Aggregation</h4>
+<h4>API Composition and Aggregation</h4>
 <p>API composition addresses a fundamental challenge in distributed architectures: how to aggregate data from multiple backend services into a single, efficient client response. In a monolithic application, the database can join tables across domains with a single query. In a microservice architecture, each service owns its data, and aggregation must happen at the application layer. Three primary patterns address this: the API composition layer, GraphQL federation, and the Backend for Frontend (BFF) pattern. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-composition.png" alt="API Composition and Aggregation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The API composition layer is a dedicated service that orchestrates calls to downstream services, aggregates results, and returns a unified response. It is conceptually simple: the composer receives a request, calls the relevant services in parallel where possible, merges the data, and responds. The challenge lies in handling partial failures. If one of five downstream services fails, does the entire request fail, or does the composer return partial data? Strategies include timeout handling with fallback responses, circuit breaker integration, and return of partial results with error indicators. </p>
 <p>The N+1 query problem manifests in API composition when the composer fetches a list from one service, then iterates over each item to fetch details from another. Batch endpoints or GraphQL DataLoader patterns mitigate this by collecting keys and making batched requests. For example, instead of fetching each order's customer details individually, the composer collects all customer IDs and makes a single batch request to the customer service. </p>
@@ -117,7 +124,9 @@
 <p>The choice between these patterns depends on client diversity, team structure, and performance requirements. API composition suits homogeneous clients and simpler architectures. GraphQL federation excels when clients need flexible data shapes. BFF shines with diverse client platforms and independent team ownership of client experiences.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -129,7 +138,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/api-composition-pattern.html" class="related-card">API Composition Pattern</a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card">API Gateway vs Service Mesh</a><a href="/en/architecture/saga-orchestration.html" class="related-card">Saga Orchestration Pattern</a><a href="/en/architecture/api-gateway-patterns.html" class="related-card">API Gateway Patterns</a></div>
+      <div class="related-grid"><a href="/en/architecture/api-composition-pattern.html" class="related-card">API Composition Pattern</a><a href="/en/architecture/backend-for-frontend.html" class="related-card">Backend for Frontend (BFF) Pattern</a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card">API Gateway vs Service Mesh</a><a href="/en/architecture/saga-orchestration.html" class="related-card">Saga Orchestration Pattern</a></div>
     </section>
     
   </div>

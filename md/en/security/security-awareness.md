@@ -1,7 +1,7 @@
 ---
 title: "Security Awareness Training"
 description: "Building an effective security awareness program with phishing simulations, gamification, and measurable metrics."
-date: 2026-05-12
+date: 2026-03-19
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/security-awareness.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/security/security-awareness.html
 
 ## Security Awareness Training
 
-## Security Awareness Training
+### Security Awareness Training
 
-## Security Awareness Training
+#### Security Awareness Training
 
-## Security Awareness Training
+#### Security Awareness Training
 
-## Security Awareness Training
+#### Security Awareness Training
 
-## Security Awareness Training
+#### Security Awareness Training
 
-## Security Awareness Training
+#### Security Awareness Training
 
-## Security Awareness Training
+#### Security Awareness Training
 
-## Security Awareness Training
+#### Security Awareness Training
 
-## Security Awareness Training
+#### Security Awareness Training
 
-## Security Awareness Training
+#### Security Awareness Training
 
-## Security Awareness Training
+#### Security Awareness Training
+
+#### Security Awareness Training
+
+#### Security Awareness Training
+
+#### Security Awareness Training
 
 Why Security Awareness Matters 
 
@@ -52,7 +58,7 @@ msg["Subject"] = template["subject"]
 
 msg["From"] = template["from_address"]
 
-## Use a unique tracking pixel or link
+#### Use a unique tracking pixel or link
 
 tracking_url = f"https://sim.local/track/{tracking_id}"
 
@@ -132,7 +138,7 @@ Automated Remediation
 
 When users fail simulations, trigger automated training: 
 
-## remediation-pipeline.yml
+#### remediation-pipeline.yml
 
 on_phishing_click:
 
@@ -161,6 +167,12 @@ Conclusion
 A mature security awareness program combines realistic simulations, engaging gamification, and data-driven metrics. The goal is not perfection but continuous improvement. Track your metrics, iterate on your content, and celebrate your defenders.
 
 **See also:** [Phishing Awareness and Technical Defenses](</en/security/phishing-awareness.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>), [Email Security](</en/security/email-security.html>).
+
+**See also:** [Phishing Awareness and Technical Defenses](</en/security/phishing-awareness.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>), [Container Image Security](</en/security/container-image-security.html>)
+
+**See also:** [Phishing Awareness and Technical Defenses](</en/security/phishing-awareness.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>), [Container Image Security](</en/security/container-image-security.html>)
+
+**See also:** [Phishing Awareness and Technical Defenses](</en/security/phishing-awareness.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>), [Container Image Security](</en/security/container-image-security.html>)
 
 **See also:** [Phishing Awareness and Technical Defenses](</en/security/phishing-awareness.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>), [Container Image Security](</en/security/container-image-security.html>)
 

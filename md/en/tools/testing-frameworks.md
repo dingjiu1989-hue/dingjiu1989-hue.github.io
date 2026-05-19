@@ -1,7 +1,7 @@
 ---
 title: "Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest"
 description: "Compare testing frameworks in 2026: Vitest for modern JS testing, Jest for stability, Playwright and Cypress for browser testing, and pytest for Python."
-date: 2026-05-12
+date: 2026-02-06
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/testing-frameworks.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/tools/testing-frameworks.html
 
 ## Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
 
-## Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
 
-## Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+#### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
 
-## Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+#### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
 
-## Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+#### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
 
-## Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+#### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
 
-## Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+#### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
 
-## Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+#### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
 
-## Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+#### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
 
-## Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+#### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
 
-## Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+#### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
 
-## Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+#### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
 
-## Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+#### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
 
-### Introduction
+#### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+
+#### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+
+#### Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+
+#### Introduction
 
 Testing frameworks have evolved significantly. Vitest has become the dominant choice for JavaScript unit testing, Playwright leads browser testing, and pytest remains the Python standard. This comparison covers the frameworks you need in your testing toolbox, with setup examples and best practices.
 
-### Vitest
+#### Vitest
 
 Vitest is the modern JavaScript test runner, native ESM, and Vite-integrated:
 
@@ -120,7 +126,7 @@ expect(increment(Infinity)).toBe(Infinity);
 
 **Strengths** : Near-instant watch mode (HMR for tests), Jest-compatible API, native TypeScript, ESM support, excellent performance, built-in coverage and mocking.
 
-### Jest
+#### Jest
 
 The established standard, still widely used in older projects:
 
@@ -152,7 +158,7 @@ collectCoverageFrom: ["src/*_/_.{ts,tsx}"],
 
 **Weaknesses** : Slower than Vitest, CJS-focused, heavier configuration, ts-jest is slower than Vitest's esbuild transpilation.
 
-### Playwright
+#### Playwright
 
 The leading browser testing framework by Microsoft:
 
@@ -218,7 +224,7 @@ await expect(page).toHaveURL("/dashboard");
 
 **Strengths** : Cross-browser, fast execution, auto-waiting, network interception, debugging tools, component testing. 
 
-### Cypress
+#### Cypress
 
 An alternative browser testing framework with a unique architecture:
 
@@ -258,11 +264,11 @@ bundler: "vite",
 
 **Weaknesses** : Slower than Playwright, limited to Chromium-based browsers, less ideal for parallel execution.
 
-### pytest
+#### pytest
 
 The standard Python testing framework:
 
-## conftest.py
+#### conftest.py
 
 import pytest
 
@@ -288,7 +294,7 @@ yield client
 
 await client.close()
 
-## test_api.py
+#### test_api.py
 
 import pytest
 
@@ -328,7 +334,7 @@ response = await async_client.post("/users", json={"email": email})
 
 assert response.status_code == expected
 
-### Comparison
+#### Comparison
 
 | Feature | Vitest | Jest | Playwright | Cypress | pytest |
 
@@ -344,7 +350,7 @@ assert response.status_code == expected
 
 | Watch mode | Instant | Good | N/A | N/A | pytest-watch |
 
-### Recommendations
+#### Recommendations
 
   * **JavaScript unit tests** : Vitest is the default choice for new projects.
 
@@ -362,6 +368,12 @@ assert response.status_code == expected
 The ideal testing stack in 2026: Vitest for unit tests, Playwright for E2E tests, pytest for Python services.
 
 **See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Shell Frameworks: zsh, fish, bash Customization](</en/tools/shell-frameworks.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>).
+
+**See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Linter and Formatter: ESLint, Prettier, Biome, Ruff](</en/tools/linter-formatter.html>)
+
+**See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Linter and Formatter: ESLint, Prettier, Biome, Ruff](</en/tools/linter-formatter.html>)
+
+**See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Linter and Formatter: ESLint, Prettier, Biome, Ruff](</en/tools/linter-formatter.html>)
 
 **See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Linter and Formatter: ESLint, Prettier, Biome, Ruff](</en/tools/linter-formatter.html>)
 

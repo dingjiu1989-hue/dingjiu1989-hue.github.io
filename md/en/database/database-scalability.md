@@ -1,7 +1,7 @@
 ---
 title: "Database Scalability"
 description: "Strategies for database scalability: vertical scaling, horizontal scaling, read replicas, and caching."
-date: 2026-05-12
+date: 2026-04-09
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/database-scalability.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/database-scalability.html
 
 ## Database Scalability
 
-## Database Scalability
+### Database Scalability
 
-## Database Scalability
+#### Database Scalability
 
-## Database Scalability
+#### Database Scalability
 
-## Database Scalability
+#### Database Scalability
 
-## Database Scalability
+#### Database Scalability
 
-## Database Scalability
+#### Database Scalability
 
-## Database Scalability
+#### Database Scalability
 
-## Database Scalability
+#### Database Scalability
 
-## Database Scalability
+#### Database Scalability
 
-## Database Scalability
+#### Database Scalability
 
-## Database Scalability
+#### Database Scalability
+
+#### Database Scalability
+
+#### Database Scalability
+
+#### Database Scalability
 
 Scalability Options 
 
@@ -40,7 +46,7 @@ Vertical Scaling
 
 Upgrade to a larger server with more CPU, RAM, and storage. 
 
-## AWS RDS instance upgrade
+#### AWS RDS instance upgrade
 
 resource "aws_db_instance" "main" {
 
@@ -72,7 +78,7 @@ return self.primary
 
 return random.choice(self.replicas)
 
-## Route reads to replicas, writes to primary
+#### Route reads to replicas, writes to primary
 
 db_router.get_conn(write=True).execute("INSERT INTO ...")
 
@@ -131,6 +137,12 @@ Conclusion
 Scale vertically first (simple). Add read replicas for read loads. Add caching for repeated queries. Shard only when necessary. Monitor your bottleneck before choosing a strategy. Most applications never need sharding.
 
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Redis Caching Patterns](</en/database/redis-caching-patterns.html>).
+
+**See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 

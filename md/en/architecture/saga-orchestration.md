@@ -1,7 +1,7 @@
 ---
 title: "Saga Orchestration Pattern"
 description: "Coordinator pattern for distributed transactions, compensation strategies, state machines, and Temporal workflows"
-date: 2026-05-12
+date: 2026-04-29
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/saga-orchestration.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/saga-orchestration.html
 
 ## Saga Orchestration Pattern
 
-## Saga Orchestration Pattern
+### Saga Orchestration Pattern
 
-## Saga Orchestration Pattern
+#### Saga Orchestration Pattern
 
-## Saga Orchestration Pattern
+#### Saga Orchestration Pattern
 
-## Saga Orchestration Pattern
+#### Saga Orchestration Pattern
 
-## Saga Orchestration Pattern
+#### Saga Orchestration Pattern
 
-## Saga Orchestration Pattern
+#### Saga Orchestration Pattern
 
-## Saga Orchestration Pattern
+#### Saga Orchestration Pattern
 
-## Saga Orchestration Pattern
+#### Saga Orchestration Pattern
 
-## Saga Orchestration Pattern
+#### Saga Orchestration Pattern
 
-## Saga Orchestration Pattern
+#### Saga Orchestration Pattern
 
-## Saga Orchestration Pattern
+#### Saga Orchestration Pattern
+
+#### Saga Orchestration Pattern
+
+#### Saga Orchestration Pattern
+
+#### Saga Orchestration Pattern
 
 Saga orchestration manages distributed transactions through a central coordinator that directs participating services through a sequence of local transactions. Unlike two-phase commit, sagas embrace eventual consistency — each step commits independently, and failures trigger compensating transactions to undo completed steps. The orchestrator provides clear workflow visibility, centralized error handling, and explicit state management. 
 
@@ -53,6 +59,12 @@ Testing orchestrated sagas benefits from the explicit workflow definition. Unit 
 Saga orchestration is the preferred pattern when workflows involve many participants, require strict compensation guarantees, or need auditable execution records. The trade-off is coupling to the orchestrator — but for complex business flows, this coupling provides the visibility and control that production systems require.
 
 **See also:** [Orchestration Patterns](</en/architecture/orchestration-patterns.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Saga vs Process Manager: Orchestration Patterns Compared](</en/architecture/saga-process-manager.html>).
+
+**See also:** [Orchestration Patterns](</en/architecture/orchestration-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
+
+**See also:** [Orchestration Patterns](</en/architecture/orchestration-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
+
+**See also:** [Orchestration Patterns](</en/architecture/orchestration-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
 
 **See also:** [Orchestration Patterns](</en/architecture/orchestration-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
 

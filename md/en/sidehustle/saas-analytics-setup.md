@@ -1,7 +1,7 @@
 ---
 title: "SaaS Analytics Setup: PostHog, Plausible, and Umami"
 description: "Set up SaaS analytics with self-hosted PostHog, Plausible, and Umami for product insights and user behavior tracking."
-date: 2026-05-12
+date: 2026-01-22
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-analytics-setup.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-analytics-setup.html
 
 ## SaaS Analytics Setup: PostHog, Plausible, and Umami
 
-## SaaS Analytics Setup: PostHog, Plausible, and Umami
+### SaaS Analytics Setup: PostHog, Plausible, and Umami
 
-## SaaS Analytics Setup: PostHog, Plausible, and Umami
+#### SaaS Analytics Setup: PostHog, Plausible, and Umami
 
-## SaaS Analytics Setup: PostHog, Plausible, and Umami
+#### SaaS Analytics Setup: PostHog, Plausible, and Umami
 
-## SaaS Analytics Setup: PostHog, Plausible, and Umami
+#### SaaS Analytics Setup: PostHog, Plausible, and Umami
 
-## SaaS Analytics Setup: PostHog, Plausible, and Umami
+#### SaaS Analytics Setup: PostHog, Plausible, and Umami
 
-## SaaS Analytics Setup: PostHog, Plausible, and Umami
+#### SaaS Analytics Setup: PostHog, Plausible, and Umami
 
-## SaaS Analytics Setup: PostHog, Plausible, and Umami
+#### SaaS Analytics Setup: PostHog, Plausible, and Umami
 
-## SaaS Analytics Setup: PostHog, Plausible, and Umami
+#### SaaS Analytics Setup: PostHog, Plausible, and Umami
 
-## SaaS Analytics Setup: PostHog, Plausible, and Umami
+#### SaaS Analytics Setup: PostHog, Plausible, and Umami
 
-## SaaS Analytics Setup: PostHog, Plausible, and Umami
+#### SaaS Analytics Setup: PostHog, Plausible, and Umami
 
-## SaaS Analytics Setup: PostHog, Plausible, and Umami
+#### SaaS Analytics Setup: PostHog, Plausible, and Umami
 
-## SaaS Analytics Setup: PostHog, Plausible, and Umami
+#### SaaS Analytics Setup: PostHog, Plausible, and Umami
 
-### SaaS Analytics Setup: Privacy-Focused Tools
+#### SaaS Analytics Setup: PostHog, Plausible, and Umami
+
+#### SaaS Analytics Setup: PostHog, Plausible, and Umami
+
+#### SaaS Analytics Setup: PostHog, Plausible, and Umami
+
+#### SaaS Analytics Setup: Privacy-Focused Tools
 
 Analytics are essential for SaaS decision-making, but traditional tools like Google Analytics are increasingly problematic — slow, privacy-invasive, and providing limited product insights. Modern privacy-focused alternatives offer better performance, data ownership, and actionable product metrics.
 
@@ -87,6 +93,12 @@ Use a data layer to separate analytics instrumentation from your application cod
 Privacy-focused analytics tools provide better performance, data ownership, and actionable insights than traditional analytics. PostHog serves comprehensive product analytics needs, Plausible provides lightweight web analytics, and Umami offers simple self-hosted analytics. Choose based on your data needs, privacy requirements, and infrastructure preferences.
 
 **See also:** [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>).
+
+**See also:** [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
+
+**See also:** [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
+
+**See also:** [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
 
 **See also:** [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
 

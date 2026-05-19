@@ -1,7 +1,7 @@
 ---
 title: "API Gateway vs Service Mesh"
 description: "Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and Kong examples"
-date: 2026-05-12
+date: 2026-04-24
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/gateway-vs-mesh.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/gateway-vs-mesh.html
 
 ## API Gateway vs Service Mesh
 
-## API Gateway vs Service Mesh
+### API Gateway vs Service Mesh
 
-## API Gateway vs Service Mesh
+#### API Gateway vs Service Mesh
 
-## API Gateway vs Service Mesh
+#### API Gateway vs Service Mesh
 
-## API Gateway vs Service Mesh
+#### API Gateway vs Service Mesh
 
-## API Gateway vs Service Mesh
+#### API Gateway vs Service Mesh
 
-## API Gateway vs Service Mesh
+#### API Gateway vs Service Mesh
 
-## API Gateway vs Service Mesh
+#### API Gateway vs Service Mesh
 
-## API Gateway vs Service Mesh
+#### API Gateway vs Service Mesh
 
-## API Gateway vs Service Mesh
+#### API Gateway vs Service Mesh
 
-## API Gateway vs Service Mesh
+#### API Gateway vs Service Mesh
 
-## API Gateway vs Service Mesh
+#### API Gateway vs Service Mesh
+
+#### API Gateway vs Service Mesh
+
+#### API Gateway vs Service Mesh
+
+#### API Gateway vs Service Mesh
 
 API Gateway and Service Mesh solve different problems but operate in overlapping territory, creating confusion about where each belongs. The API Gateway manages north-south traffic (client to service), while the Service Mesh manages east-west traffic (service to service). Understanding their distinct responsibilities, overlap, and coexistence patterns is essential for a well-architected system. 
 
@@ -49,6 +55,12 @@ Observability benefits significantly from using both. The gateway provides clien
 Operational complexity is the primary cost. Operating both systems requires expertise in each. Many teams start with just an API Gateway and add a Service Mesh only when they need advanced traffic management patterns or organization-wide security policies. The decision should be driven by concrete needs — canary deployments across services, zero-trust security requirements, or observability gaps — rather than architectural fashion.
 
 **See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>).
+
+**See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 

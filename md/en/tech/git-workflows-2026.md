@@ -1,7 +1,7 @@
 ---
 title: "Git Workflows for Teams"
 description: "A practical guide to modern Git workflows for collaborative team development in 2026."
-date: 2026-05-11
+date: 2025-12-02
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/git-workflows-2026.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/tech/git-workflows-2026.html
 
 ## Git Workflows for Teams
 
-## Git Workflows for Teams
+### Git Workflows for Teams
 
-## Git Workflows for Teams
+#### Git Workflows for Teams
 
-## Git Workflows for Teams
+#### Git Workflows for Teams
 
-## Git Workflows for Teams
+#### Git Workflows for Teams
 
-## Git Workflows for Teams
+#### Git Workflows for Teams
 
-## Git Workflows for Teams
+#### Git Workflows for Teams
 
-## Git Workflows for Teams
+#### Git Workflows for Teams
 
-## Git Workflows for Teams
+#### Git Workflows for Teams
 
-## Git Workflows for Teams
+#### Git Workflows for Teams
 
-## Git Workflows for Teams
+#### Git Workflows for Teams
 
-## Git Workflows for Teams
+#### Git Workflows for Teams
 
-## Git Workflows for Teams
+#### Git Workflows for Teams
 
-## Git Workflows for Teams
+#### Git Workflows for Teams
+
+#### Git Workflows for Teams
+
+#### Git Workflows for Teams
+
+#### Git Workflows for Teams
 
 Git workflows define how teams collaborate on code. Choosing the right workflow impacts productivity, release cadence, and code quality. In 2026, several mature patterns dominate, each suited to different team structures and deployment strategies.
 
-### Trunk-Based Development
+#### Trunk-Based Development
 
 Trunk-based development has become the default for teams practicing continuous deployment. Developers work on short-lived feature branches (hours to a couple of days) and merge directly into `main` multiple times per day.
 
@@ -57,7 +63,7 @@ Key practices:
 
 Trunk-based development minimizes merge conflicts and keeps integration pain low. It pairs well with feature flagging systems like LaunchDarkly or Flagsmith.
 
-### GitHub Flow
+#### GitHub Flow
 
 GitHub Flow is a simplified trunk-based variant popular with open source and small teams:
 
@@ -73,7 +79,7 @@ GitHub Flow is a simplified trunk-based variant popular with open source and sma
 
 The simplicity is its strength -- there is no `develop` branch, no release branches, and no hotfix branches. Every branch is treated equally, and `main` is always deployable.
 
-### GitFlow
+#### GitFlow
 
 GitFlow remains relevant for projects with scheduled releases and strict versioning:
 
@@ -92,7 +98,7 @@ GitFlow remains relevant for projects with scheduled releases and strict version
 
 GitFlow provides clear separation between work-in-progress and released code. However, it adds complexity -- teams should only adopt it when they genuinely need release branches and maintenance branches simultaneously.
 
-### Pull Request Best Practices
+#### Pull Request Best Practices
 
 Regardless of workflow, effective pull requests are critical:
 
@@ -102,17 +108,17 @@ Regardless of workflow, effective pull requests are critical:
 
 **Use draft PRs for early feedback.** Open a draft PR before the code is complete to get architectural feedback early.
 
-### Rebase vs Merge
+#### Rebase vs Merge
 
 The debate between rebasing and merging continues. Most teams adopt a pragmatic hybrid:
 
-## Rebase feature branch onto main
+#### Rebase feature branch onto main
 
 git checkout feature/xyz
 
 git rebase main
 
-## Merge with --no-ff for pull requests
+#### Merge with --no-ff for pull requests
 
 git checkout main
 
@@ -120,7 +126,7 @@ git merge --no-ff feature/xyz
 
 Use rebase to keep feature branches up to date and maintain a clean history. Use merge commits to record when a feature was integrated. Squash-merge is popular for trunk-based workflows since it creates a single commit per PR.
 
-### Commit Message Conventions
+#### Commit Message Conventions
 
 Conventional Commits has become the standard:
 
@@ -132,7 +138,7 @@ docs(readme): update installation instructions
 
 This format enables automated changelog generation, semantic versioning, and changelog-driven releases. Tools like `commitlint` enforce these conventions in CI.
 
-### Branch Naming Conventions
+#### Branch Naming Conventions
 
 Adopt a consistent branch naming scheme:
 
@@ -149,7 +155,7 @@ Adopt a consistent branch naming scheme:
 
 Use hyphens to separate words and keep names under 50 characters.
 
-### Code Review Automation
+#### Code Review Automation
 
 Modern Git platforms support automated checks that must pass before merging:
 
@@ -166,17 +172,17 @@ Modern Git platforms support automated checks that must pass before merging:
 
 Configure branch protection rules to require passing CI checks and approved reviews. This prevents unreviewed or broken code from reaching main.
 
-### Handling Merge Conflicts
+#### Handling Merge Conflicts
 
 Conflicts are inevitable. Best practices for resolution:
 
-## Update your branch first
+#### Update your branch first
 
 git fetch origin
 
 git rebase origin/main
 
-## Resolve conflicts in your editor
+#### Resolve conflicts in your editor
 
 git add resolved-file.py
 
@@ -184,23 +190,29 @@ git rebase --continue
 
 For complex conflicts, use a visual merge tool like `kdiff3`, `meld`, or VS Code's built-in merge editor. Always test after resolving conflicts.
 
-### Git Hooks and Automation
+#### Git Hooks and Automation
 
 Client-side hooks enforce local standards:
 
-## !/bin/sh
+#### !/bin/sh
 
-## .git/hooks/pre-commit
+#### .git/hooks/pre-commit
 
 npm run lint && npm run typecheck
 
 Team-wide hooks can be managed with `husky` (JavaScript) or `lefthook` (multi-language). Server-side hooks in CI prevent non-compliant commits from being merged.
 
-### Summary
+#### Summary
 
 The best Git workflow is the one your team consistently follows. Start simple -- GitHub Flow or trunk-based development -- and adopt more structure only when the team's scale demands it. Combine clear branching policies, small PRs, automated checks, and Conventional Commits to build a workflow that keeps your team shipping quality code.
 
 **See also:** [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>).
+
+**See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
+
+**See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
+
+**See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
 
 **See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
 

@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/two-factor-authentication.png",
       "datePublished": "2025-12-19",
       "dateModified": "2026-04-13",
-      "wordCount": "1224",
+      "wordCount": "1276",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/two-factor-authentication.html"},
@@ -98,19 +100,21 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/two-factor-authentication.png" alt="Two-Factor Authentication Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Two-Factor Authentication Guide</h2>
 <h3>Two-Factor Authentication Guide</h3>
-<h3>Two-Factor Authentication Guide</h3>
-<h3>Two-Factor Authentication Guide</h3>
-<h3>Two-Factor Authentication Guide</h3>
-<h3>Two-Factor Authentication Guide</h3>
-<h3>Two-Factor Authentication Guide</h3>
-<h3>Two-Factor Authentication Guide</h3>
-<h3>Two-Factor Authentication Guide</h3>
-<h3>Two-Factor Authentication Guide</h3>
-<h3>Two-Factor Authentication Guide</h3>
-<h3>Two-Factor Authentication Guide</h3>
-<h3>Two-Factor Authentication Guide</h3>
-<h3>Two-Factor Authentication Guide</h3>
-<h3>Two-Factor Authentication Guide</h3>
+<h4>Two-Factor Authentication Guide</h4>
+<h4>Two-Factor Authentication Guide</h4>
+<h4>Two-Factor Authentication Guide</h4>
+<h4>Two-Factor Authentication Guide</h4>
+<h4>Two-Factor Authentication Guide</h4>
+<h4>Two-Factor Authentication Guide</h4>
+<h4>Two-Factor Authentication Guide</h4>
+<h4>Two-Factor Authentication Guide</h4>
+<h4>Two-Factor Authentication Guide</h4>
+<h4>Two-Factor Authentication Guide</h4>
+<h4>Two-Factor Authentication Guide</h4>
+<h4>Two-Factor Authentication Guide</h4>
+<h4>Two-Factor Authentication Guide</h4>
+<h4>Two-Factor Authentication Guide</h4>
+<h4>Two-Factor Authentication Guide</h4>
 <p>Why 2FA Matters </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/two-factor-authentication.png" alt="Two-Factor Authentication Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Passwords alone are insufficient. Data breaches expose billions of credentials annually, phishing campaigns trick users into revealing their passwords, and credential stuffing attacks automate login attempts across services. Two-factor authentication (2FA) adds a second layer of verification that renders stolen passwords useless. </p>
 <p>2FA Factor Types </p>
@@ -161,7 +165,7 @@
 <p>from twilio.rest import Client</p>
 <p>def send_sms_code(phone_number):</p>
 <p>code = ''.join(random.choices('0123456789', k=6))</p>
-<h3>Store code with expiry in Redis</h3>
+<h4>Store code with expiry in Redis</h4>
 <p>redis.setex(f"2fa:{phone_number}", 300, code)</p>
 <p>client = Client(TWILIO_SID, TWILIO_TOKEN)</p>
 <p>client.messages.create(</p>
@@ -240,6 +244,8 @@
 <p>Summary </p>
 <p>Implement TOTP as the primary 2FA method, supplement with backup codes for recovery, and offer WebAuthn/passkeys as an upgrade path for security-conscious users. Always rate limit 2FA endpoints, hash backup codes before storage, and provide clear recovery workflows. SMS-based 2FA is better than no 2FA but should be deprecated in favor of app-based or hardware-based authenticators.</p>
 <p><strong>See also:</strong> <a href="/en/security/mfa-implementation.html">MFA Implementation</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/mfa-implementation.html">MFA Implementation</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/security/mfa-implementation.html">MFA Implementation</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/security/mfa-implementation.html">MFA Implementation</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/security/mfa-implementation.html">MFA Implementation</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/mfa-implementation.html">MFA Implementation</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a></p></div>
     </article>

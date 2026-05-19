@@ -1,7 +1,7 @@
 ---
 title: "Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More"
 description: "A curated toolkit covering terminal emulators, Git GUIs, API clients, database browsers, diff tools, and code screenshot utilities. Everything a developer needs on a fresh machine — all free."
-date: 2026-05-08
+date: 2025-10-27
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-free-dev-tools-2026.html
 ---
@@ -55,7 +55,7 @@ Tool| What It Is| Why Use It
   3. Version control: **Git + lazygit**
   4. API testing: **Bruno** or **Hoppscotch**
   5. Database: **DBeaver** or **TablePlus**
-  6. Editor: already covered — see [Code Editor Showdown](</en/tech/editor-comparison-2026/>)
+  6. Editor: already covered — see [Code Editor Showdown](</en/compare/code-editors-comparison-2026.html>)
 
 
 

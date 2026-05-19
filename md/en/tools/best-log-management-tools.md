@@ -1,7 +1,7 @@
 ---
 title: "Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom"
 description: "Compare log aggregation and management platforms for developers — query speed, pricing, retention, and Kubernetes support."
-date: 2026-05-08
+date: 2025-10-31
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-log-management-tools.html
 ---

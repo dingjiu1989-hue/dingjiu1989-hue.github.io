@@ -1,7 +1,7 @@
 ---
 title: "Bug Bounty Guide"
 description: "Practical guide to bug bounty hunting including vulnerability discovery techniques, report writing, and platform-specific tips for HackerOne and Bugcrowd."
-date: 2026-05-12
+date: 2026-03-06
 board: security
 url: https://dingjiu1989-hue.github.io/en/security/bug-bounty.html
 ---
@@ -10,31 +10,37 @@ url: https://dingjiu1989-hue.github.io/en/security/bug-bounty.html
 
 ## Bug Bounty Guide
 
-## Bug Bounty Guide
+### Bug Bounty Guide
 
-## Bug Bounty Guide
+#### Bug Bounty Guide
 
-## Bug Bounty Guide
+#### Bug Bounty Guide
 
-## Bug Bounty Guide
+#### Bug Bounty Guide
 
-## Bug Bounty Guide
+#### Bug Bounty Guide
 
-## Bug Bounty Guide
+#### Bug Bounty Guide
 
-## Bug Bounty Guide
+#### Bug Bounty Guide
 
-## Bug Bounty Guide
+#### Bug Bounty Guide
 
-## Bug Bounty Guide
+#### Bug Bounty Guide
 
-## Bug Bounty Guide
+#### Bug Bounty Guide
 
-## Bug Bounty Guide
+#### Bug Bounty Guide
 
-## Bug Bounty Guide
+#### Bug Bounty Guide
 
-## Bug Bounty Guide
+#### Bug Bounty Guide
+
+#### Bug Bounty Guide
+
+#### Bug Bounty Guide
+
+#### Bug Bounty Guide
 
 Introduction 
 
@@ -46,21 +52,21 @@ Reconnaissance-Driven Approach
 
 Successful bug bounty hunters invest heavily in reconnaissance. The more you know about a target, the more attack surface you can discover. 
 
-## Subdomain enumeration pipeline
+#### Subdomain enumeration pipeline
 
 subfinder -d target.com -silent | tee subs_raw.txt
 
 assetfinder --subs-only target.com | tee -a subs_raw.txt
 
-## Deduplicate and validate
+#### Deduplicate and validate
 
 cat subs_raw.txt | sort -u | httprobe -c 50 > live_subs.txt
 
-## Technology fingerprinting on discovered subdomains
+#### Technology fingerprinting on discovered subdomains
 
 cat live_subs.txt | httpx -sc -title -tech-detect -o tech_report.txt
 
-## Directory brute-forcing
+#### Directory brute-forcing
 
 ffuf -u https://admin.target.com/FUZZ -w /usr/share/wordlists/dirb/common.txt \
 
@@ -68,7 +74,7 @@ ffuf -u https://admin.target.com/FUZZ -w /usr/share/wordlists/dirb/common.txt \
 
 Attack-Specific Techniques 
 
-## Automated XSS discovery
+#### Automated XSS discovery
 
 import requests
 
@@ -90,11 +96,11 @@ payloads = [
 
 ]
 
-## Extract all forms
+#### Extract all forms
 
 response = requests.get(base_url)
 
-## Parse and find all forms, inputs
+#### Parse and find all forms, inputs
 
 for endpoint in discover_endpoints(base_url):
 
@@ -116,21 +122,21 @@ resp = requests.get(test_url)
 
 if payload in resp.text and not resp.text.count('"') > 3:
 
-## Check if payload rendered unescaped
+#### Check if payload rendered unescaped
 
 print(f"[+] XSS found: {test_url}")
 
-## IDOR detection with autorize (Burp extension)
+#### IDOR detection with autorize (Burp extension)
 
-## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Record authenticated session cookies
+#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Record authenticated session cookies
 
-## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Enable Autorize with victim cookie
+#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Enable Autorize with victim cookie
 
-## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Browse application as victim user
+#### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Browse application as victim user
 
-## 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Monitor BApp output for unauthorized access
+#### 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Monitor BApp output for unauthorized access
 
-## GraphQL introspection for API discovery
+#### GraphQL introspection for API discovery
 
 curl -X POST https://api.target.com/graphql \
 
@@ -247,6 +253,12 @@ Conclusion
 Bug bounty hunting combines technical skill, persistence, and communication. Invest heavily in recon, develop methodical testing approaches, write clear reports with reproducible steps, and understand each platform's nuances. Quality always outperforms quantity — one critical bug well reported is worth more than dozens of duplicates.
 
 **See also:** [SOC Operations](</en/security/soc-operations.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Threat Modeling](</en/security/threat-modeling.html>).
+
+**See also:** [SOC Operations](</en/security/soc-operations.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [SOC Operations](</en/security/soc-operations.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [SOC Operations](</en/security/soc-operations.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Certificate Management](</en/security/certificate-management.html>)
 
 **See also:** [SOC Operations](</en/security/soc-operations.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Certificate Management](</en/security/certificate-management.html>)
 

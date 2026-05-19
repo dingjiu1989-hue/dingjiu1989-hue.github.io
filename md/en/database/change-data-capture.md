@@ -1,7 +1,7 @@
 ---
 title: "Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing"
 description: "Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream processing integration. Real-time data pipelines without performance overhead."
-date: 2026-05-12
+date: 2026-03-30
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/change-data-capture.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/change-data-capture.html
 
 ## Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
 
-## Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
 
-## Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
 
-## Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
 
-## Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
 
-## Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
 
-## Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
 
-## Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
 
-## Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
 
-## Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
 
-## Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
 
-## Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+
+#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+
+#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+
+#### Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
 
 Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing 
 
@@ -234,6 +240,12 @@ Anti-Patterns
 CDC is the most robust approach for keeping secondary systems synchronized with a primary database. Combined with Kafka, it enables event-driven architectures where the database is the source of truth and every change is an event.
 
 **See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Foreign Key Constraints: Referential Integrity in Practice](</en/database/database-foreign-key-constraints.html>).
+
+**See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 
 **See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 

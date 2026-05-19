@@ -1,7 +1,7 @@
 ---
 title: "Caching Strategies and Patterns in Distributed Systems"
 description: "Caching patterns: cache-aside, write-through, write-behind, eviction policies, distributed caching with Redis, CDN caching, and invalidation."
-date: 2026-05-12
+date: 2026-04-20
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/caching-strategies.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/caching-strategies.html
 
 ## Caching Strategies and Patterns in Distributed Systems
 
-## Caching Strategies and Patterns in Distributed Systems
+### Caching Strategies and Patterns in Distributed Systems
 
-## Caching Strategies and Patterns in Distributed Systems
+#### Caching Strategies and Patterns in Distributed Systems
 
-## Caching Strategies and Patterns in Distributed Systems
+#### Caching Strategies and Patterns in Distributed Systems
 
-## Caching Strategies and Patterns in Distributed Systems
+#### Caching Strategies and Patterns in Distributed Systems
 
-## Caching Strategies and Patterns in Distributed Systems
+#### Caching Strategies and Patterns in Distributed Systems
 
-## Caching Strategies and Patterns in Distributed Systems
+#### Caching Strategies and Patterns in Distributed Systems
 
-## Caching Strategies and Patterns in Distributed Systems
+#### Caching Strategies and Patterns in Distributed Systems
 
-## Caching Strategies and Patterns in Distributed Systems
+#### Caching Strategies and Patterns in Distributed Systems
 
-## Caching Strategies and Patterns in Distributed Systems
+#### Caching Strategies and Patterns in Distributed Systems
 
-## Caching Strategies and Patterns in Distributed Systems
+#### Caching Strategies and Patterns in Distributed Systems
 
-## Caching Strategies and Patterns in Distributed Systems
+#### Caching Strategies and Patterns in Distributed Systems
+
+#### Caching Strategies and Patterns in Distributed Systems
+
+#### Caching Strategies and Patterns in Distributed Systems
+
+#### Caching Strategies and Patterns in Distributed Systems
 
 Caching is the single most effective performance optimization in distributed systems. A well-designed cache reduces database load, decreases response latency, and improves system throughput. This article covers the major caching patterns, eviction policies, distributed caching with Redis, CDN caching, and the hardest problem in computer science: cache invalidation. 
 
@@ -50,7 +56,7 @@ self.database = database
 
 def get_user(self, user_id):
 
-## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache first
+#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache first
 
 cached = self.cache.get(f"user:{user_id}")
 
@@ -58,13 +64,13 @@ if cached is not None:
 
 return cached
 
-## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss: read from database
+#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss: read from database
 
 user = self.database.query("SELECT * FROM users WHERE id = ?", user_id)
 
 if user:
 
-## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache for next time
+#### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache for next time
 
 self.cache.set(f"user:{user_id}", user, ttl=3600)
 
@@ -72,13 +78,13 @@ return user
 
 def update_user(self, user_id, data):
 
-## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database
+#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database
 
 self.database.execute("UPDATE users SET name = ? WHERE id = ?",
 
 data['name'], user_id)
 
-## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Invalidate cache (not update!)
+#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Invalidate cache (not update!)
 
 self.cache.delete(f"user:{user_id}")
 
@@ -118,13 +124,13 @@ self.database = database
 
 def update_user(self, user_id, data):
 
-## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database
+#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database
 
 self.database.execute("UPDATE users SET name = ? WHERE id = ?",
 
 data['name'], user_id)
 
-## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache synchronously
+#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache synchronously
 
 user = self.database.query("SELECT * FROM users WHERE id = ?", user_id)
 
@@ -178,7 +184,7 @@ async def flusher():
 
 while True:
 
-## Batch writes and flush periodically
+#### Batch writes and flush periodically
 
 batch = []
 
@@ -206,13 +212,13 @@ asyncio.create_task(flusher())
 
 def update_user(self, user_id, data):
 
-## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache immediately
+#### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache immediately
 
 user = {**self.cache.get(f"user:{user_id}", {}),** data}
 
 self.cache.set(f"user:{user_id}", user)
 
-## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Queue database update
+#### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Queue database update
 
 self.write_queue.put_nowait({
 
@@ -272,13 +278,13 @@ self.cache.set(f"user:{user_id}", user, ttl=3600)
 
 return user
 
-## Check if we should refresh
+#### Check if we should refresh
 
 ttl = self.cache.ttl(f"user:{user_id}")
 
 if ttl < 3600 * (1 - self.refresh_threshold):
 
-## Asynchronously refresh in background
+#### Asynchronously refresh in background
 
 self._async_refresh(f"user:{user_id}", user_id)
 
@@ -340,7 +346,7 @@ Redis is the dominant distributed cache. It provides in-memory data structures, 
 
 Redis Cluster Setup 
 
-## docker-compose.yml for Redis Cluster
+#### docker-compose.yml for Redis Cluster
 
 version: '3'
 
@@ -448,7 +454,7 @@ Content Delivery Networks (CDNs) cache static and dynamic content at edge locati
 
 Cache Control Headers 
 
-## Nginx: Static asset caching headers
+#### Nginx: Static asset caching headers
 
 location /static/ {
 
@@ -460,7 +466,7 @@ add_header Cache-Control "public, immutable";
 
 location /api/content/ {
 
-## Dynamic content: shorter cache
+#### Dynamic content: shorter cache
 
 expires 5m;
 
@@ -470,7 +476,7 @@ add_header Cache-Control "public, must-revalidate";
 
 location /api/user/ {
 
-## Private content: no CDN caching
+#### Private content: no CDN caching
 
 add_header Cache-Control "private, no-cache";
 
@@ -478,7 +484,7 @@ add_header Cache-Control "private, no-cache";
 
 CDN Cache Invalidation 
 
-## CloudFront: Invalidate specific paths
+#### CloudFront: Invalidate specific paths
 
 aws cloudfront create-invalidation \
 
@@ -486,7 +492,7 @@ aws cloudfront create-invalidation \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--paths "/api/content/*" "/index.html"
 
-## Fastly: Purge by key
+#### Fastly: Purge by key
 
 curl -X POST https://api.fastly.com/service/SERVICE/purge \
 
@@ -514,7 +520,7 @@ Event-Driven Invalidation
 
 When data changes, publish an invalidation event. 
 
-## Event-driven invalidation
+#### Event-driven invalidation
 
 class EventDrivenCache:
 
@@ -524,7 +530,7 @@ self.cache = cache
 
 self.message_bus = message_bus
 
-## Subscribe to invalidation events
+#### Subscribe to invalidation events
 
 self.message_bus.subscribe("cache.invalidate", self.handle_invalidation)
 
@@ -544,17 +550,17 @@ def update_product(product_id, data):
 
 with transaction():
 
-## Update database
+#### Update database
 
 db.execute("UPDATE products SET price = ? WHERE id = ?",
 
 data['price'], product_id)
 
-## Invalidate cache in same transaction if possible
+#### Invalidate cache in same transaction if possible
 
 cache.delete(f"product:{product_id}")
 
-## Publish invalidation for other cache nodes
+#### Publish invalidation for other cache nodes
 
 message_bus.publish("cache.invalidate", {"key": f"product:{product_id}"})
 
@@ -567,3 +573,9 @@ Choose cache-aside for most general-purpose caching. Use write-through when read
 **See also:** [Caching Strategies](</en/architecture/cache-strategies.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>)
 
 **See also:** [Caching Strategies](</en/architecture/cache-strategies.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>)
+
+**See also:** [Caching Strategies](</en/architecture/cache-strategies.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Caching Strategies](</en/architecture/cache-strategies.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Caching Strategies](</en/architecture/cache-strategies.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)

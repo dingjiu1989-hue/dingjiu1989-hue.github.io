@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/terraform-infrastructure-code.png",
       "datePublished": "2025-12-03",
       "dateModified": "2026-05-03",
-      "wordCount": "1363",
+      "wordCount": "1435",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/terraform-infrastructure-code.html"},
@@ -99,23 +101,25 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/terraform-infrastructure-code.png" alt="Terraform Infrastructure as Code" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Terraform Infrastructure as Code</h2>
 <h3>Terraform Infrastructure as Code</h3>
-<h3>Terraform Infrastructure as Code</h3>
-<h3>Terraform Infrastructure as Code</h3>
-<h3>Terraform Infrastructure as Code</h3>
-<h3>Terraform Infrastructure as Code</h3>
-<h3>Terraform Infrastructure as Code</h3>
-<h3>Terraform Infrastructure as Code</h3>
-<h3>Terraform Infrastructure as Code</h3>
-<h3>Terraform Infrastructure as Code</h3>
-<h3>Terraform Infrastructure as Code</h3>
-<h3>Terraform Infrastructure as Code</h3>
-<h3>Terraform Infrastructure as Code</h3>
-<h3>Terraform Infrastructure as Code</h3>
-<h3>Terraform Infrastructure as Code</h3>
+<h4>Terraform Infrastructure as Code</h4>
+<h4>Terraform Infrastructure as Code</h4>
+<h4>Terraform Infrastructure as Code</h4>
+<h4>Terraform Infrastructure as Code</h4>
+<h4>Terraform Infrastructure as Code</h4>
+<h4>Terraform Infrastructure as Code</h4>
+<h4>Terraform Infrastructure as Code</h4>
+<h4>Terraform Infrastructure as Code</h4>
+<h4>Terraform Infrastructure as Code</h4>
+<h4>Terraform Infrastructure as Code</h4>
+<h4>Terraform Infrastructure as Code</h4>
+<h4>Terraform Infrastructure as Code</h4>
+<h4>Terraform Infrastructure as Code</h4>
+<h4>Terraform Infrastructure as Code</h4>
+<h4>Terraform Infrastructure as Code</h4>
 <p>Terraform has become the standard tool for Infrastructure as Code (IaC). It allows you to define, provision, and manage cloud resources across providers using declarative configuration. This guide covers practical Terraform patterns for production use.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/terraform-infrastructure-code.png" alt="Terraform Infrastructure as Code" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Core Concepts</h4>
 <p>Terraform uses a declarative approach -- you describe the desired state, and Terraform figures out how to reach it:</p>
-<h3>main.tf</h3>
+<h4>main.tf</h4>
 <p>terraform {</p>
 <p>required_version = "&gt;= 1.8"</p>
 <p>required_providers {</p>
@@ -145,7 +149,7 @@
 <p>State is the most critical part of Terraform. It maps configuration to real-world resources.</p>
 <h4>Remote State Backend</h4>
 <p>Always use remote state storage with locking:</p>
-<h3>backend configuration during init: terraform init -backend-config=backend.hcl</h3>
+<h4>backend configuration during init: terraform init -backend-config=backend.hcl</h4>
 <p>bucket = "company-terraform-state"</p>
 <p>key = "env:/${environment}/networking/terraform.tfstate"</p>
 <p>region = "us-east-1"</p>
@@ -167,7 +171,7 @@
 <p>}</p>
 <h4>Module Design</h4>
 <p>Modules are reusable Terraform configurations. Design them for composability:</p>
-<h3>modules/vpc/main.tf</h3>
+<h4>modules/vpc/main.tf</h4>
 <p>variable "vpc_cidr" {</p>
 <p>description = "CIDR block for the VPC"</p>
 <p>type = string</p>
@@ -198,7 +202,7 @@
 <p>Use input validation to catch errors early. Document all variables and outputs with descriptions.</p>
 <h4>Workspace and Environment Management</h4>
 <p>Use workspaces or directory structure for environment isolation:</p>
-<h3>Directory structure:</h3>
+<h4>Directory structure:</h4>
 <p>terraform/</p>
 <p>env/</p>
 <p>production/</p>
@@ -215,14 +219,14 @@
 <p>Workspaces are simpler but can become confusing with many environments. Directory-based separation is clearer for complex setups.</p>
 <h4>Terraform Plan and Apply Workflow</h4>
 <p>The standard workflow in CI/CD:</p>
-<h3>Initialize with backend</h3>
+<h4>Initialize with backend</h4>
 <p>terraform init -backend-config=backend-$ENV.hcl</p>
-<h3>Format and validate</h3>
+<h4>Format and validate</h4>
 <p>terraform fmt -check</p>
 <p>terraform validate</p>
-<h3>Plan</h3>
+<h4>Plan</h4>
 <p>terraform plan -out=tfplan -var-file=$ENV.tfvars</p>
-<h3>Apply (typically in CI with approval gate)</h3>
+<h4>Apply (typically in CI with approval gate)</h4>
 <p>terraform apply tfplan</p>
 <p>Never run <code>terraform apply</code> without a plan file in CI. Always review the plan output before applying.</p>
 <h4>Managing Secrets</h4>
@@ -244,9 +248,9 @@
 <h4><code>terraform plan</code> as a Test</h4>
 <p>Run <code>terraform plan</code> in CI to detect drift and validate changes without applying:</p>
 <p>terraform plan -detailed-exitcode</p>
-<h3>Exit code 0: no changes</h3>
-<h3>Exit code 1: error</h3>
-<h3>Exit code 2: changes needed</h3>
+<h4>Exit code 0: no changes</h4>
+<h4>Exit code 1: error</h4>
+<h4>Exit code 2: changes needed</h4>
 <h4>Terratest for Integration Tests</h4>
 <p>// test/vpc_test.go</p>
 <p>func TestVPC(t *testing.T) {</p>
@@ -284,7 +288,7 @@
 </ul>
 <h4>Sentinel and Policy as Code</h4>
 <p>For teams, enforce policies with Sentinel (HashiCorp Enterprise) or Open Policy Agent:</p>
-<h3>Deny public S3 buckets</h3>
+<h4>Deny public S3 buckets</h4>
 <p>deny[msg] {</p>
 <p>resource := input.resource_changes[_]</p>
 <p>resource.type == "aws_s3_bucket"</p>
@@ -294,6 +298,8 @@
 <h4>Summary</h4>
 <p>Terraform brings software engineering practices to infrastructure. Use remote state with locking, compose resources into modules, separate environments, and integrate planning into CI/CD. Never hardcode secrets, always validate configurations, and protect critical resources from accidental destruction. With these practices, Terraform enables infrastructure that is versioned, reviewable, reproducible, and auditable.</p>
 <p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a></p></div>
     </article>

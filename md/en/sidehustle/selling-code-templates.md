@@ -1,7 +1,7 @@
 ---
 title: "Selling Code Templates and UI Kits: A Developer's Guide to Template Income"
 description: "Everything about building and selling code templates — Next.js starters, React component libraries, Tailwind UI kits. Platforms, pricing, marketing, and the key to template success."
-date: 2026-05-08
+date: 2025-10-21
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/selling-code-templates.html
 ---

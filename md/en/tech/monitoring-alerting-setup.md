@@ -1,7 +1,7 @@
 ---
 title: "Monitoring and Alerting Setup"
 description: "Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting."
-date: 2026-05-11
+date: 2025-12-02
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/monitoring-alerting-setup.html
 ---
@@ -10,35 +10,41 @@ url: https://dingjiu1989-hue.github.io/en/tech/monitoring-alerting-setup.html
 
 ## Monitoring and Alerting Setup
 
-## Monitoring and Alerting Setup
+### Monitoring and Alerting Setup
 
-## Monitoring and Alerting Setup
+#### Monitoring and Alerting Setup
 
-## Monitoring and Alerting Setup
+#### Monitoring and Alerting Setup
 
-## Monitoring and Alerting Setup
+#### Monitoring and Alerting Setup
 
-## Monitoring and Alerting Setup
+#### Monitoring and Alerting Setup
 
-## Monitoring and Alerting Setup
+#### Monitoring and Alerting Setup
 
-## Monitoring and Alerting Setup
+#### Monitoring and Alerting Setup
 
-## Monitoring and Alerting Setup
+#### Monitoring and Alerting Setup
 
-## Monitoring and Alerting Setup
+#### Monitoring and Alerting Setup
 
-## Monitoring and Alerting Setup
+#### Monitoring and Alerting Setup
 
-## Monitoring and Alerting Setup
+#### Monitoring and Alerting Setup
 
-## Monitoring and Alerting Setup
+#### Monitoring and Alerting Setup
 
-## Monitoring and Alerting Setup
+#### Monitoring and Alerting Setup
+
+#### Monitoring and Alerting Setup
+
+#### Monitoring and Alerting Setup
+
+#### Monitoring and Alerting Setup
 
 A robust monitoring and alerting system is the backbone of reliable production infrastructure. Without it, you are flying blind -- discovering outages only when users complain. This guide covers setting up a complete monitoring stack and designing effective alert rules.
 
-### The Four Golden Signals
+#### The Four Golden Signals
 
 Google's SRE book defines four key metrics for user-facing systems:
 
@@ -54,7 +60,7 @@ Google's SRE book defines four key metrics for user-facing systems:
 
 Every monitoring system should capture these four signals for each service.
 
-### Metrics Collection Stack
+#### Metrics Collection Stack
 
 The Prometheus ecosystem has become the standard for metrics collection:
 
@@ -72,7 +78,7 @@ Metrics Channels
 
 Install Prometheus and configure it to scrape targets:
 
-## prometheus.yml
+#### prometheus.yml
 
 global:
 
@@ -96,7 +102,7 @@ static_configs:
 
 Use `scrape_interval` of 15 seconds for most metrics. For high-cardinality metrics (e.g., per-request tracing), use a longer interval or sample.
 
-### Application Instrumentation
+#### Application Instrumentation
 
 Export application metrics in Prometheus format:
 
@@ -134,11 +140,11 @@ next();
 
 Use Histogram metrics for latency, Counter for request counts, and Gauge for current resource usage. Avoid unbounded label cardinality.
 
-### Centralized Logging
+#### Centralized Logging
 
 The ELK stack (Elasticsearch, Logstash, Kibana) remains popular, but the Grafana Loki stack is simpler and cheaper for log aggregation:
 
-## docker-compose for Loki + Promtail
+#### docker-compose for Loki + Promtail
 
 services:
 
@@ -166,11 +172,11 @@ ports: ["3000:3000"]
 
 Promtail tails log files, adds labels, and ships them to Loki. Grafana queries both Prometheus (metrics) and Loki (logs) in a unified dashboard.
 
-### Effective Alerting Rules
+#### Effective Alerting Rules
 
 Design alerts that are actionable and meaningful:
 
-## prometheus-alerts.yml
+#### prometheus-alerts.yml
 
 groups:
 
@@ -241,11 +247,11 @@ severity: critical
 
 
 
-### Notification Channels
+#### Notification Channels
 
 Route alerts through Alertmanager:
 
-## alertmanager.yml
+#### alertmanager.yml
 
 route:
 
@@ -277,7 +283,7 @@ channel: '#alerts'
 
 Critical alerts go to PagerDuty or Opsgenie for immediate attention. Warnings go to Slack for team awareness.
 
-### Dashboard Best Practices
+#### Dashboard Best Practices
 
 Effective Grafana dashboards follow these principles:
 
@@ -292,11 +298,11 @@ Effective Grafana dashboards follow these principles:
 
 
 
-### Synthetic Monitoring
+#### Synthetic Monitoring
 
 Complement real-user monitoring with synthetic checks:
 
-## blackbox-exporter targets
+#### blackbox-exporter targets
 
 modules:
 
@@ -312,11 +318,17 @@ valid_status_codes: [200, 201, 204]
 
 Run synthetic checks from multiple geographic locations to detect regional outages.
 
-### Summary
+#### Summary
 
 A complete monitoring stack requires metrics (Prometheus), logs (Loki), dashboards (Grafana), and alerting (Alertmanager). Instrument your applications with the four golden signals, design alerts that fire on symptoms not causes, and ensure every alert has a clear path to resolution. Start simple with Prometheus and Grafana, then add log aggregation and synthetic monitoring as your infrastructure grows.
 
 **See also:** [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Log Management](</en/tech/log-management.html>), [Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability](</en/tech/prometheus-deep-dive.html>).
+
+**See also:** [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
+
+**See also:** [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
+
+**See also:** [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
 
 **See also:** [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
 

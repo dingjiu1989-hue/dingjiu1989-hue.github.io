@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes vs Docker Swarm vs Nomad (2026): Container Orchestration Compared"
 description: "Honest comparison of container orchestration tools for teams of all sizes. Complexity vs simplicity, learning curves, and when Docker Swarm or Nomad makes more sense than Kubernetes."
-date: 2026-05-08
+date: 2025-11-24
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/kubernetes-vs-docker-swarm-vs-nomad.html
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Bash Scripting Best Practices"
 description: "Essential patterns for writing reliable, maintainable shell scripts in production environments."
-date: 2026-05-11
+date: 2025-12-01
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/bash-scripting-guide.html
 ---
@@ -10,39 +10,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/bash-scripting-guide.html
 
 ## Bash Scripting Best Practices
 
-## Bash Scripting Best Practices
+### Bash Scripting Best Practices
 
-## Bash Scripting Best Practices
+#### Bash Scripting Best Practices
 
-## Bash Scripting Best Practices
+#### Bash Scripting Best Practices
 
-## Bash Scripting Best Practices
+#### Bash Scripting Best Practices
 
-## Bash Scripting Best Practices
+#### Bash Scripting Best Practices
 
-## Bash Scripting Best Practices
+#### Bash Scripting Best Practices
 
-## Bash Scripting Best Practices
+#### Bash Scripting Best Practices
 
-## Bash Scripting Best Practices
+#### Bash Scripting Best Practices
 
-## Bash Scripting Best Practices
+#### Bash Scripting Best Practices
 
-## Bash Scripting Best Practices
+#### Bash Scripting Best Practices
 
-## Bash Scripting Best Practices
+#### Bash Scripting Best Practices
 
-## Bash Scripting Best Practices
+#### Bash Scripting Best Practices
 
-## Bash Scripting Best Practices
+#### Bash Scripting Best Practices
+
+#### Bash Scripting Best Practices
+
+#### Bash Scripting Best Practices
+
+#### Bash Scripting Best Practices
 
 Bash scripting remains one of the most critical skills for developers, DevOps engineers, and system administrators. Despite its age, Bash is everywhere -- from CI/CD pipelines to deployment scripts and system automation. Writing robust, maintainable shell scripts requires discipline and adherence to proven practices.
 
-### Start with Strict Mode
+#### Start with Strict Mode
 
 Every production Bash script should begin with strict mode settings that catch errors early:
 
-## !/usr/bin/env bash
+#### !/usr/bin/env bash
 
 set -euo pipefail
 
@@ -73,7 +79,7 @@ exit 1
 
 trap 'error_handler $LINENO' ERR
 
-### Use Functions for Modularity
+#### Use Functions for Modularity
 
 Avoid writing long linear scripts. Break logic into functions with clear names:
 
@@ -85,7 +91,7 @@ send_notification() { ... }
 
 Declare all functions at the top of the script, followed by argument parsing, followed by the main execution flow. This makes the script readable and testable.
 
-### Prefer `[[ ]]` Over `[ ]`
+#### Prefer `[[ ]]` Over `[ ]`
 
 The double-bracket `[[ ]]` construct is a Bash keyword with fewer surprises:
 
@@ -97,21 +103,21 @@ fi
 
 Unlike single brackets, double brackets handle empty variables safely, support pattern matching, and avoid word-splitting.
 
-### Quote Everything
+#### Quote Everything
 
 Unquoted variables are one of the most common sources of bugs:
 
-## Wrong
+#### Wrong
 
 if [ -f $file ]; then # breaks if file has spaces
 
-## Right
+#### Right
 
 if [[ -f "$file" ]]; then
 
 Quote all variable expansions: `"$var"`, `"${array[@]}"`, and command substitutions `"$(command)"`.
 
-### Use `trap` for Cleanup
+#### Use `trap` for Cleanup
 
 Always clean up temporary files and resources:
 
@@ -127,7 +133,7 @@ trap cleanup EXIT
 
 The `EXIT` trap fires regardless of why the script exits -- success, failure, or signal. For signal-specific handling, add separate traps for `INT` and `TERM`.
 
-### Argument Parsing with `getopts`
+#### Argument Parsing with `getopts`
 
 Use `getopts` for reliable argument parsing instead of manual position checks:
 
@@ -151,7 +157,7 @@ done
 
 This handles short flags robustly, including missing argument errors.
 
-### Use `readonly` and `declare -r`
+#### Use `readonly` and `declare -r`
 
 Mark constants and configuration values as readonly:
 
@@ -161,13 +167,13 @@ readonly CONFIG_PATH="/etc/myapp/config.yml"
 
 This prevents accidental overwrites and documents intent.
 
-### Prefer `printf` Over `echo`
+#### Prefer `printf` Over `echo`
 
 The `echo` command behaves differently across shells and platforms. Use `printf` for portable, predictable output:
 
 printf "Processing file: %s\n" "$filename"
 
-### Logging with Timestamps
+#### Logging with Timestamps
 
 Implement a simple logging function for better observability:
 
@@ -187,7 +193,7 @@ error() { log "ERROR" "$@"; }
 
 Send logs to stderr so they don't interfere with stdout data output.
 
-### Validating Dependencies
+#### Validating Dependencies
 
 Check required commands before proceeding:
 
@@ -209,11 +215,11 @@ done
 
 require jq curl openssl
 
-### Avoid `eval` and Backtick Substitution
+#### Avoid `eval` and Backtick Substitution
 
 Never use `eval` unless absolutely necessary -- it is a security risk. Use `$()` instead of backticks for command substitution; `$()` nests cleanly and is visually distinct.
 
-### Use Arrays for Lists
+#### Use Arrays for Lists
 
 Modern Bash supports arrays, which handle spaces correctly:
 
@@ -233,11 +239,11 @@ done
 
 The `-print0` / `read -d ''` pattern handles filenames with any special characters.
 
-### ShellCheck Integration
+#### ShellCheck Integration
 
 Run [ShellCheck](<https://www.shellcheck.net/>) as part of your CI pipeline. It catches hundreds of common pitfalls and enforces consistency. Integrate it with VS Code via the shellcheck extension for real-time feedback during editing.
 
-### Testing Bash Scripts
+#### Testing Bash Scripts
 
 Use `bats` (Bash Automated Testing System) for unit testing:
 
@@ -251,11 +257,17 @@ run validate_input ""
 
 Test your error handlers, edge cases with spaces, and exit codes.
 
-### Summary
+#### Summary
 
 Bash scripting is not dead -- it is the glue that holds modern infrastructure together. By following these practices, you will write scripts that are robust, maintainable, and production-ready. Strict mode, proper quoting, function decomposition, traps, and ShellCheck validation will prevent the majority of common issues before they reach production.
 
 **See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Microservices Communication Patterns](</en/tech/microservices-communication.html>).
+
+**See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
+
+**See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
+
+**See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
 
 **See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
 

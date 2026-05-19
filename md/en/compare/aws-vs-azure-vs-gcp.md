@@ -1,7 +1,7 @@
 ---
 title: "AWS vs Azure vs GCP (2026): Best Cloud for Developers?"
 description: "Not the enterprise sales pitch — a developer-focused comparison of free tiers, serverless, deployment UX, AI services, and real costs for side projects."
-date: 2026-05-08
+date: 2025-11-19
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/aws-vs-azure-vs-gcp.html
 ---

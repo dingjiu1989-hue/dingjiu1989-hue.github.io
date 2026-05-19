@@ -1,7 +1,7 @@
 ---
 title: "Orchestration Patterns"
 description: "Explore orchestration patterns: workflow engines, Temporal, state machines, and centralized workflow coordination"
-date: 2026-05-12
+date: 2026-05-04
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/orchestration-patterns.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/architecture/orchestration-patterns.ht
 
 ## Orchestration Patterns
 
-## Orchestration Patterns
+### Orchestration Patterns
 
-## Orchestration Patterns
+#### Orchestration Patterns
 
-## Orchestration Patterns
+#### Orchestration Patterns
 
-## Orchestration Patterns
+#### Orchestration Patterns
 
-## Orchestration Patterns
+#### Orchestration Patterns
 
-## Orchestration Patterns
+#### Orchestration Patterns
 
-## Orchestration Patterns
+#### Orchestration Patterns
 
-## Orchestration Patterns
+#### Orchestration Patterns
 
-## Orchestration Patterns
+#### Orchestration Patterns
 
-## Orchestration Patterns
+#### Orchestration Patterns
 
-## Orchestration Patterns
+#### Orchestration Patterns
+
+#### Orchestration Patterns
+
+#### Orchestration Patterns
+
+#### Orchestration Patterns
 
 Orchestration is an architectural pattern for coordinating distributed workflows using a central controller. Unlike choreography, where services coordinate through events, orchestration uses an explicit workflow engine or orchestrator service that tells each participant what to do and when. This centralized approach provides visibility, control, and error handling that are difficult to achieve with decentralized coordination. 
 
@@ -73,6 +79,12 @@ The trade-off is coupling. The orchestrator must know about all participants and
 In practice, many organizations use a hybrid approach: orchestration for complex business workflows and choreography for simple, stable event flows. Workflow engines like Temporal support both patterns, allowing teams to choose the right level of coordination for each workflow. The key is recognizing that orchestration and choreography are complementary tools, not competing philosophies.
 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Event Notification vs Event-Carried State Transfer](</en/architecture/event-notification-vs-event-carrying.html>).
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 

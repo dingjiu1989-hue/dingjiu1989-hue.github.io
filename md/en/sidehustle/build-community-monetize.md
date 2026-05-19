@@ -1,7 +1,7 @@
 ---
 title: "Building and Monetizing Developer Communities: Discord, Forums, and Paid Groups"
 description: "How to build an engaged developer community and monetize it through paid memberships, sponsorships, events, and exclusive content."
-date: 2026-05-08
+date: 2025-10-24
 board: sidehustle
 url: https://dingjiu1989-hue.github.io/en/sidehustle/build-community-monetize.html
 ---

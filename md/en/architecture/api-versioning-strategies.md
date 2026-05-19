@@ -1,7 +1,7 @@
 ---
 title: "API Versioning Strategies"
 description: "Compare URI, header, and query parameter API versioning approaches with their trade-offs and best practices"
-date: 2026-05-12
+date: 2026-05-01
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/api-versioning-strategies.html
 ---

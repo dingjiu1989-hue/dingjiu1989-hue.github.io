@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-orchestration.png",
       "datePublished": "2026-04-29",
       "dateModified": "2026-05-09",
-      "wordCount": "973",
+      "wordCount": "1031",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/saga-orchestration.html"},
@@ -96,17 +98,19 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-orchestration.png" alt="Saga Orchestration Pattern" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Saga Orchestration Pattern</h2>
 <h3>Saga Orchestration Pattern</h3>
-<h3>Saga Orchestration Pattern</h3>
-<h3>Saga Orchestration Pattern</h3>
-<h3>Saga Orchestration Pattern</h3>
-<h3>Saga Orchestration Pattern</h3>
-<h3>Saga Orchestration Pattern</h3>
-<h3>Saga Orchestration Pattern</h3>
-<h3>Saga Orchestration Pattern</h3>
-<h3>Saga Orchestration Pattern</h3>
-<h3>Saga Orchestration Pattern</h3>
-<h3>Saga Orchestration Pattern</h3>
-<h3>Saga Orchestration Pattern</h3>
+<h4>Saga Orchestration Pattern</h4>
+<h4>Saga Orchestration Pattern</h4>
+<h4>Saga Orchestration Pattern</h4>
+<h4>Saga Orchestration Pattern</h4>
+<h4>Saga Orchestration Pattern</h4>
+<h4>Saga Orchestration Pattern</h4>
+<h4>Saga Orchestration Pattern</h4>
+<h4>Saga Orchestration Pattern</h4>
+<h4>Saga Orchestration Pattern</h4>
+<h4>Saga Orchestration Pattern</h4>
+<h4>Saga Orchestration Pattern</h4>
+<h4>Saga Orchestration Pattern</h4>
+<h4>Saga Orchestration Pattern</h4>
 <p>Saga orchestration manages distributed transactions through a central coordinator that directs participating services through a sequence of local transactions. Unlike two-phase commit, sagas embrace eventual consistency — each step commits independently, and failures trigger compensating transactions to undo completed steps. The orchestrator provides clear workflow visibility, centralized error handling, and explicit state management. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-orchestration.png" alt="Saga Orchestration Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The orchestrator is a dedicated service responsible for executing the saga. It maintains the workflow state, sends commands to participants, receives results, and decides the next action. The state must be persisted durably — if the orchestrator crashes, it must resume precisely where it left off. This typically involves storing the saga instance state (current step, completed steps, accumulated data) in a database or workflow engine. </p>
 <p>Compensation is the mechanism for undoing completed steps. For each step that makes a forward change, the saga designer defines a compensating action that reverses that change. If step 3 fails, the orchestrator invokes the compensations for steps 2 and 1 in reverse order. Compensations must be idempotent — they may be called multiple times if the orchestrator fails during compensation execution. </p>
@@ -118,6 +122,8 @@
 <p>Testing orchestrated sagas benefits from the explicit workflow definition. Unit tests verify state transitions and compensation logic. Integration tests verify end-to-end saga execution with actual service instances. Resilience tests verify recovery from orchestrator crashes, participant failures, and network partitions. The explicitness of orchestration makes these tests more comprehensive than testing equivalent choreographed sagas. </p>
 <p>Saga orchestration is the preferred pattern when workflows involve many participants, require strict compensation guarantees, or need auditable execution records. The trade-off is coupling to the orchestrator — but for complex business flows, this coupling provides the visibility and control that production systems require.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/orchestration-patterns.html">Orchestration Patterns</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/saga-process-manager.html">Saga vs Process Manager: Orchestration Patterns Compared</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/orchestration-patterns.html">Orchestration Patterns</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/orchestration-patterns.html">Orchestration Patterns</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/orchestration-patterns.html">Orchestration Patterns</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/orchestration-patterns.html">Orchestration Patterns</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/orchestration-patterns.html">Orchestration Patterns</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p></div>
     </article>

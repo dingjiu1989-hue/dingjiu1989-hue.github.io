@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-strategies.png",
       "datePublished": "2026-02-10",
       "dateModified": "2026-04-05",
-      "wordCount": "1923",
+      "wordCount": "1984",
       "keywords": "Artificial Intelligence, Machine Learning",
       "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-testing-strategies.html"},
@@ -98,18 +100,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-strategies.png" alt="Testing Strategies for AI Applications" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Testing Strategies for AI Applications</h2>
 <h3>Testing Strategies for AI Applications</h3>
-<h3>Testing Strategies for AI Applications</h3>
-<h3>Testing Strategies for AI Applications</h3>
-<h3>Testing Strategies for AI Applications</h3>
-<h3>Testing Strategies for AI Applications</h3>
-<h3>Testing Strategies for AI Applications</h3>
-<h3>Testing Strategies for AI Applications</h3>
-<h3>Testing Strategies for AI Applications</h3>
-<h3>Testing Strategies for AI Applications</h3>
-<h3>Testing Strategies for AI Applications</h3>
-<h3>Testing Strategies for AI Applications</h3>
-<h3>Testing Strategies for AI Applications</h3>
-<h3>Testing Strategies for AI Applications</h3>
+<h4>Testing Strategies for AI Applications</h4>
+<h4>Testing Strategies for AI Applications</h4>
+<h4>Testing Strategies for AI Applications</h4>
+<h4>Testing Strategies for AI Applications</h4>
+<h4>Testing Strategies for AI Applications</h4>
+<h4>Testing Strategies for AI Applications</h4>
+<h4>Testing Strategies for AI Applications</h4>
+<h4>Testing Strategies for AI Applications</h4>
+<h4>Testing Strategies for AI Applications</h4>
+<h4>Testing Strategies for AI Applications</h4>
+<h4>Testing Strategies for AI Applications</h4>
+<h4>Testing Strategies for AI Applications</h4>
+<h4>Testing Strategies for AI Applications</h4>
+<h4>Testing Strategies for AI Applications</h4>
 <h4>Introduction</h4>
 <p>Testing AI applications differs fundamentally from testing deterministic software. Model outputs are probabilistic, edge cases are infinite, and a passing unit test does not guarantee correct behavior in production. A comprehensive AI testing strategy combines traditional software testing with AI-specific evaluation methodologies to catch regressions, hallucinations, and performance degradations before they reach users.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-strategies.png" alt="Testing Strategies for AI Applications" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Evaluation Datasets</h4>
@@ -125,7 +129,7 @@
 <p>domain: str</p>
 <p>difficulty: str # "easy", "medium", "hard"</p>
 <p>tags: List[str]</p>
-<h3>For non-deterministic evaluation</h3>
+<h4>For non-deterministic evaluation</h4>
 <p>criteria: List[Callable[[str], bool]]</p>
 <p>class EvalDataset:</p>
 <p>def <strong>init</strong>(self, name: str):</p>
@@ -188,7 +192,7 @@
 <p>for test_case in self.dataset.test_cases:</p>
 <p>try:</p>
 <p>output = await self._invoke_model(model_name, test_case.input)</p>
-<h3>Evaluate against all criteria</h3>
+<h4>Evaluate against all criteria</h4>
 <p>passed = all(</p>
 <p>criterion(output) for criterion in test_case.criteria</p>
 <p>)</p>
@@ -210,7 +214,7 @@
 <p>"error": str(e),</p>
 <p>})</p>
 <p>results["score"] = results["passed"] / results["total"]</p>
-<h3>Compare with previous run</h3>
+<h4>Compare with previous run</h4>
 <p>if previous_results:</p>
 <p>score_delta = results["score"] - previous_results["score"]</p>
 <p>results["regression"] = score_delta &lt; -0.02</p>
@@ -267,7 +271,7 @@
 <p>evaluation = await self.evaluate_pair(</p>
 <p>prompt, output_a, output_b, criteria</p>
 <p>)</p>
-<h3>Aggregate across criteria</h3>
+<h4>Aggregate across criteria</h4>
 <p>winner = evaluation["winner"]</p>
 <p>results[f"{winner}_wins"] += 1</p>
 <p>results["total"] = len(prompts)</p>
@@ -281,13 +285,13 @@
 <p>self.kb = knowledge_base</p>
 <p>async def check_factual_claims(self, output: str) -&gt; List[dict]:</p>
 <p>"""Extract factual claims and verify them against a knowledge base."""</p>
-<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract atomic claims</h3>
+<h4>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract atomic claims</h4>
 <p>claims = await self._extract_claims(output)</p>
 <p>verified_claims = []</p>
 <p>for claim in claims:</p>
-<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Search knowledge base</h3>
+<h4>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Search knowledge base</h4>
 <p>evidence = await self.kb.search(claim["text"])</p>
-<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify claim against evidence</h3>
+<h4>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify claim against evidence</h4>
 <p>verification = await self._verify_claim(</p>
 <p>claim["text"],</p>
 <p>evidence,</p>
@@ -349,10 +353,10 @@
 <p>prompt = self.prompts[name]</p>
 <p>results = []</p>
 <p>for case in test_cases:</p>
-<h3>Render template with test inputs</h3>
+<h4>Render template with test inputs</h4>
 <p>rendered = prompt["template"].format(**case["inputs"])</p>
 <p>output = await self._invoke(rendered)</p>
-<h3>Run tests</h3>
+<h4>Run tests</h4>
 <p>test_results = [</p>
 <p>test(output) for test in prompt["tests"]</p>
 <p>]</p>
@@ -400,6 +404,8 @@
 <p>}</p>
 <p>A mature AI testing pipeline runs golden set regression on every PR, A/B evaluations before model upgrades, hallucination detection on every production response, and performance benchmarks weekly. No single metric captures model quality; combine automated tests with human evaluation for production releases.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p></div>
     </article>

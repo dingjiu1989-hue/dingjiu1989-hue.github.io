@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-chaining-patterns.png",
       "datePublished": "2025-12-12",
       "dateModified": "2026-04-27",
-      "wordCount": "1589",
+      "wordCount": "1645",
       "keywords": "Artificial Intelligence, Machine Learning",
       "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/llm-chaining-patterns.html"},
@@ -98,18 +100,20 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-chaining-patterns.png" alt="LLM Chaining and Pipeline Patterns" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>LLM Chaining and Pipeline Patterns</h2>
 <h3>LLM Chaining and Pipeline Patterns</h3>
-<h3>LLM Chaining and Pipeline Patterns</h3>
-<h3>LLM Chaining and Pipeline Patterns</h3>
-<h3>LLM Chaining and Pipeline Patterns</h3>
-<h3>LLM Chaining and Pipeline Patterns</h3>
-<h3>LLM Chaining and Pipeline Patterns</h3>
-<h3>LLM Chaining and Pipeline Patterns</h3>
-<h3>LLM Chaining and Pipeline Patterns</h3>
-<h3>LLM Chaining and Pipeline Patterns</h3>
-<h3>LLM Chaining and Pipeline Patterns</h3>
-<h3>LLM Chaining and Pipeline Patterns</h3>
-<h3>LLM Chaining and Pipeline Patterns</h3>
-<h3>LLM Chaining and Pipeline Patterns</h3>
+<h4>LLM Chaining and Pipeline Patterns</h4>
+<h4>LLM Chaining and Pipeline Patterns</h4>
+<h4>LLM Chaining and Pipeline Patterns</h4>
+<h4>LLM Chaining and Pipeline Patterns</h4>
+<h4>LLM Chaining and Pipeline Patterns</h4>
+<h4>LLM Chaining and Pipeline Patterns</h4>
+<h4>LLM Chaining and Pipeline Patterns</h4>
+<h4>LLM Chaining and Pipeline Patterns</h4>
+<h4>LLM Chaining and Pipeline Patterns</h4>
+<h4>LLM Chaining and Pipeline Patterns</h4>
+<h4>LLM Chaining and Pipeline Patterns</h4>
+<h4>LLM Chaining and Pipeline Patterns</h4>
+<h4>LLM Chaining and Pipeline Patterns</h4>
+<h4>LLM Chaining and Pipeline Patterns</h4>
 <h4>Introduction</h4>
 <p>Single LLM calls are rarely sufficient for complex tasks. Chaining — connecting multiple LLM calls in a pipeline — enables sophisticated workflows where each step builds on or refines the output of the previous one. This guide covers the essential chaining patterns used in production AI systems.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-chaining-patterns.png" alt="LLM Chaining and Pipeline Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Why Chain?</h4>
@@ -149,16 +153,16 @@
 <p>Process multiple items independently, then combine results.</p>
 <p><strong>Use case</strong> : Summarizing many documents, analyzing multiple customer reviews</p>
 <p>def map_reduce(items, map_prompt, reduce_prompt):</p>
-<h3>Map: process each item independently</h3>
+<h4>Map: process each item independently</h4>
 <p>intermediate = []</p>
 <p>for item in items:</p>
 <p>result = call_llm(map_prompt, item)</p>
 <p>intermediate.append(result)</p>
-<h3>Reduce: combine all intermediate results</h3>
+<h4>Reduce: combine all intermediate results</h4>
 <p>combined = "\n---\n".join(intermediate)</p>
 <p>final = call_llm(reduce_prompt, combined)</p>
 <p>return final</p>
-<h3>Example: summarize 50 customer reviews</h3>
+<h4>Example: summarize 50 customer reviews</h4>
 <p>reviews = load_reviews()</p>
 <p>map_prompt = "Summarize this customer review in one sentence, focusing on sentiment and key points:"</p>
 <p>reduce_prompt = "Combine these review summaries into an overall analysis with common themes:"</p>
@@ -180,9 +184,9 @@
 <p>Route input to different sub-chains based on classification.</p>
 <p><strong>Use case</strong> : Customer support ticket routing</p>
 <p>def routing_chain(query):</p>
-<h3>First, classify the query type</h3>
+<h4>First, classify the query type</h4>
 <p>category = classify_query(query)</p>
-<h3>Route to specialized handler</h3>
+<h4>Route to specialized handler</h4>
 <p>if category == "billing":</p>
 <p>return billing_chain(query)</p>
 <p>elif category == "technical":</p>
@@ -210,15 +214,15 @@
 <p>Add verification steps between generation steps to catch errors early.</p>
 <p>def generate_with_validation(topic):</p>
 <p>draft = generate_draft(topic)</p>
-<h3>Validation gate</h3>
+<h4>Validation gate</h4>
 <p>issues = validate_draft(draft)</p>
 <p>if issues:</p>
 <p>draft = revise_draft(draft, issues)</p>
-<h3>Re-validate</h3>
+<h4>Re-validate</h4>
 <p>issues = validate_draft(draft)</p>
 <p>if not issues:</p>
 <p>return draft</p>
-<h3>If still has issues after revision, flag for human review</h3>
+<h4>If still has issues after revision, flag for human review</h4>
 <p>return {"draft": draft, "issues": issues, "needs_review": True}</p>
 <p>def validate_draft(draft):</p>
 <p>return call_llm("""</p>
@@ -257,6 +261,8 @@
 <h4>Conclusion</h4>
 <p>LLM chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Start with sequential chains for simple transformations, add map-reduce for batch processing, and incorporate routing and branching for complex workflows. The key principle: each step should do one thing well, with clear inputs, outputs, and validation criteria.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-evaluation-metrics.html">LLM Evaluation Metrics</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p></div>
     </article>

@@ -47,10 +47,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/terraform-tools.png",
       "datePublished": "2026-02-06",
       "dateModified": "2026-04-04",
-      "wordCount": "1878",
+      "wordCount": "1986",
       "keywords": "Technology, DevTools, Productivity",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
       "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/terraform-tools.html"},
@@ -110,23 +112,25 @@
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/terraform-tools.png" alt="Terraform Tools: Terragrunt, terratest, tfsec, Infracost" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h2>
 <h3>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h3>
-<h3>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h3>
-<h3>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h3>
-<h3>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h3>
-<h3>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h3>
-<h3>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h3>
-<h3>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h3>
-<h3>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h3>
-<h3>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h3>
-<h3>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h3>
-<h3>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h3>
-<h3>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h3>
-<h3>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h3>
+<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
+<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
+<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
+<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
+<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
+<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
+<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
+<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
+<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
+<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
+<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
+<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
+<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
+<h4>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h4>
 <h4>Introduction</h4>
 <p>Terraform has become the standard for infrastructure as code, but managing Terraform at scale requires additional tools. Terragrunt reduces configuration duplication. Terratest enables automated infrastructure testing. Tfsec scans configurations for security issues. Infracost provides cost estimates before deployment. This article covers each tool with practical examples.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/terraform-tools.png" alt="Terraform Tools: Terragrunt, terratest, tfsec, Infracost" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <h4>Terragrunt</h4>
 <p>A thin wrapper that keeps Terraform configurations DRY:</p>
-<h3>terragrunt.hcl (root configuration)</h3>
+<h4>terragrunt.hcl (root configuration)</h4>
 <p>remote_state {</p>
 <p>backend = "s3"</p>
 <p>config = {</p>
@@ -156,7 +160,7 @@
 <p>aws_region = "us-east-1"</p>
 <p>environment = reverse(split("/", get_terragrunt_dir()))[1]</p>
 <p>}</p>
-<h3>dev/vpc/terragrunt.hcl</h3>
+<h4>dev/vpc/terragrunt.hcl</h4>
 <p>terraform {</p>
 <p>source = "../../modules/vpc"</p>
 <p>}</p>
@@ -171,15 +175,15 @@
 <p>private_subnets = ["10.0.1.0/24", "10.0.2.0/24"]</p>
 <p>public_subnets = ["10.0.101.0/24", "10.0.102.0/24"]</p>
 <p>}</p>
-<h3>Apply all modules in dependency order</h3>
+<h4>Apply all modules in dependency order</h4>
 <p>terragrunt run-all apply</p>
-<h3>Plan only changed modules</h3>
+<h4>Plan only changed modules</h4>
 <p>terragrunt run-all plan</p>
-<h3>Output dependency graph</h3>
+<h4>Output dependency graph</h4>
 <p>terragrunt graph | dot -Tpng &gt; graph.png</p>
-<h3>Validate all configurations</h3>
+<h4>Validate all configurations</h4>
 <p>terragrunt run-all validate</p>
-<h3>Destroy with confirmation</h3>
+<h4>Destroy with confirmation</h4>
 <p>terragrunt run-all destroy</p>
 <h4>Terratest</h4>
 <p>Go library for writing automated infrastructure tests:</p>
@@ -219,19 +223,19 @@
 <p>}</p>
 <h4>tfsec (now Trivy)</h4>
 <p>Security scanning for Terraform configurations:</p>
-<h3>Install tfsec</h3>
+<h4>Install tfsec</h4>
 <p>brew install tfsec</p>
-<h3>Or use Trivy which includes tfsec rules</h3>
+<h4>Or use Trivy which includes tfsec rules</h4>
 <p>brew install trivy</p>
-<h3>Scan Terraform files</h3>
+<h4>Scan Terraform files</h4>
 <p>tfsec .</p>
 <p>tfsec ./environments/production</p>
 <p>tfsec --no-color --format json &gt; scan-results.json</p>
-<h3>In CI</h3>
+<h4>In CI</h4>
 <p>tfsec --soft-fail # Don't fail CI, just report</p>
-<h3>Trivy equivalent</h3>
+<h4>Trivy equivalent</h4>
 <p>trivy config --severity HIGH,CRITICAL .</p>
-<h3>Bad configuration that tfsec catches</h3>
+<h4>Bad configuration that tfsec catches</h4>
 <p>resource "aws_s3_bucket" "data" {</p>
 <p>bucket = "my-data-bucket"</p>
 <p>acl = "public-read" # tfsec: aws-s3-no-public-read-acl</p>
@@ -244,7 +248,7 @@
 <p>cidr_blocks = ["0.0.0.0/0"] # tfsec: aws-vpc-no-public-ingress-sgr</p>
 <p>}</p>
 <p>}</p>
-<h3>Fixed configuration</h3>
+<h4>Fixed configuration</h4>
 <p>resource "aws_s3_bucket" "data" {</p>
 <p>bucket = "my-data-bucket"</p>
 <p>acl = "private"</p>
@@ -259,19 +263,19 @@
 <p>}</p>
 <h4>Infracost</h4>
 <p>Cost estimation for Terraform projects:</p>
-<h3>Install</h3>
+<h4>Install</h4>
 <p>brew install infracost</p>
 <p>infracost auth login</p>
-<h3>Generate cost estimate for current state</h3>
+<h4>Generate cost estimate for current state</h4>
 <p>infracost breakdown --path .</p>
-<h3>Compare with previous state</h3>
+<h4>Compare with previous state</h4>
 <p>infracost diff --path . --compare-to previous-cost.json</p>
-<h3>Output in different formats</h3>
+<h4>Output in different formats</h4>
 <p>infracost breakdown --path . --format json</p>
 <p>infracost breakdown --path . --format html --out-file cost-report.html</p>
-<h3>In CI</h3>
+<h4>In CI</h4>
 <p>infracost diff --path . --show-skipped</p>
-<h3>.infracost.yml — usage estimates</h3>
+<h4>.infracost.yml — usage estimates</h4>
 <p>version: 0.1</p>
 <p>projects:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- path: ./environments/production</p>
@@ -287,7 +291,7 @@
 <p>monthly_tier_1_requests: 10000</p>
 <h4>Other Essential Tools</h4>
 <p><strong>pre-commit hooks</strong> for Terraform:</p>
-<h3>.pre-commit-config.yaml</h3>
+<h4>.pre-commit-config.yaml</h4>
 <p>repos:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/antonbabenko/pre-commit-terraform</p>
 <p>rev: v1.96.0</p>
@@ -326,6 +330,8 @@
 </ul>
 <p>The ideal Terraform workflow combines all these tools: Terragrunt for structure, pre-commit for quality, tfssec for security, Infracost for cost awareness, and Terratest for deployment validation.</p>
 <p><strong>See also:</strong> <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></p>
+<p><strong>See also:</strong> <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a>, <a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></p></div>
     </article>

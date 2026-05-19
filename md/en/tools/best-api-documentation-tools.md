@@ -1,7 +1,7 @@
 ---
 title: "Best API Documentation Tools 2026: OpenAPI, Postman, Mintlify, ReadMe"
 description: "Comparison of API documentation platforms: auto-generation, interactive docs, versioning, collaboration, and pricing. From open source Swagger UI to enterprise platforms."
-date: 2026-05-08
+date: 2025-10-30
 board: tools
 url: https://dingjiu1989-hue.github.io/en/tools/best-api-documentation-tools.html
 ---

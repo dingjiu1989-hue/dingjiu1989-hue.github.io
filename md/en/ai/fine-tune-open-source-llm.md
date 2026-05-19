@@ -1,7 +1,7 @@
 ---
 title: "Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)"
 description: "How to fine-tune Llama, Mistral, and other open models: data preparation with JSONL, LoRA vs full fine-tuning, cost comparison, and deployment. Code examples using Together AI and local GPU."
-date: 2026-05-08
+date: 2025-11-07
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/fine-tune-open-source-llm.html
 ---

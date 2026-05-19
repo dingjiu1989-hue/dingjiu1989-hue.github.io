@@ -1,7 +1,7 @@
 ---
 title: "Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes"
 description: "Learn full-text search in PostgreSQL using tsvector, tsquery, and GIN indexes. Understand ranking, stemming, and when to use PostgreSQL vs Elasticsearch."
-date: 2026-05-12
+date: 2026-04-06
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/full-text-search-postgresql.html
 ---
@@ -10,27 +10,33 @@ url: https://dingjiu1989-hue.github.io/en/database/full-text-search-postgresql.h
 
 ## Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
 
-## Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
+### Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
 
-## Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
+#### Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
 
-## Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
+#### Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
 
-## Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
+#### Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
 
-## Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
+#### Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
 
-## Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
+#### Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
 
-## Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
+#### Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
 
-## Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
+#### Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
 
-## Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
+#### Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
 
-## Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
+#### Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
 
-## Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
+#### Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
+
+#### Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
+
+#### Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
+
+#### Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
 
 Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes 
 
@@ -259,6 +265,12 @@ SELECT * FROM articles WHERE title % 'databas'; -- similarity search
 PostgreSQL full-text search is adequate for the majority of applications: documentation sites, blog search, e-commerce product search, and knowledge bases. Consider dedicated search engines only when you need fuzzy matching, faceted aggregation across millions of documents, or distributed search at scale.
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [B-Tree, Hash, GiST, GIN: Index Type Selection Guide](</en/database/database-index-types.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>).
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)
+
+**See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)
 
