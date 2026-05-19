@@ -65,3 +65,5 @@ Event Storming produces several valuable outcomes: a shared understanding of the
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
 
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
+
+**See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)

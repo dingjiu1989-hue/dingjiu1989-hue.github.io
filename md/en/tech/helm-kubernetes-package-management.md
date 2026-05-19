@@ -428,3 +428,5 @@ Helm remains the most widely adopted packaging tool in the Kubernetes ecosystem,
 **See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Git Workflows for Teams](</en/tech/git-workflows-2026.html>)
 
 **See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Git Workflows for Teams](</en/tech/git-workflows-2026.html>)
+
+**See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Git Workflows for Teams](</en/tech/git-workflows-2026.html>)

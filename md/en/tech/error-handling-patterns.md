@@ -73,3 +73,5 @@ The most robust error handling strategies combine multiple patterns. Use Result 
 **See also:** [React Server Components](</en/tech/react-server-components.html>), [Testing Strategies](</en/tech/testing-strategies.html>), [API Versioning Strategies: REST vs GraphQL Approaches](</en/tech/api-versioning-rest-graphql.html>)
 
 **See also:** [React Server Components](</en/tech/react-server-components.html>), [Testing Strategies](</en/tech/testing-strategies.html>), [API Versioning Strategies: REST vs GraphQL Approaches](</en/tech/api-versioning-rest-graphql.html>)
+
+**See also:** [React Server Components](</en/tech/react-server-components.html>), [Testing Strategies](</en/tech/testing-strategies.html>), [API Versioning Strategies: REST vs GraphQL Approaches](</en/tech/api-versioning-rest-graphql.html>)

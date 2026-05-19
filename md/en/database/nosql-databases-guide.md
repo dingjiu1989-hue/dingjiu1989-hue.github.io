@@ -274,3 +274,5 @@ NoSQL databases excel at scale and flexibility but require different design thin
 **See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)
 
 **See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)
+
+**See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)

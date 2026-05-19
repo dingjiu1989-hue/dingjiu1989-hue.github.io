@@ -45,3 +45,5 @@ Scan early and often. Use minimal base images (distroless, Alpine). Pin base ima
 **See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>)
 
 **See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>)
+
+**See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>)

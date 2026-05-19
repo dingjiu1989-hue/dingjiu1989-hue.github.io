@@ -83,3 +83,5 @@ Secret management is a foundational security practice. The investment in robust 
 **See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>)
 
 **See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>)
+
+**See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>)

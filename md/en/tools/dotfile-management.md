@@ -230,3 +230,5 @@ Choose chezmoi if you have more than two machines or need secret management. Cho
 **See also:** [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
 
 **See also:** [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
+
+**See also:** [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)

@@ -188,3 +188,5 @@ Technical writing is a viable side hustle that leverages your development skills
 **See also:** [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Product Hunt Launch Guide](</en/sidehustle/product-hunt-launch.html>)
 
 **See also:** [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Product Hunt Launch Guide](</en/sidehustle/product-hunt-launch.html>)
+
+**See also:** [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Product Hunt Launch Guide](</en/sidehustle/product-hunt-launch.html>)

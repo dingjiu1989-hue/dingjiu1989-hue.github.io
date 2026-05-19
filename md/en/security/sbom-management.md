@@ -259,3 +259,5 @@ SBOMs are essential for supply chain security. Generate them automatically in yo
 **See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Compliance Automation](</en/security/compliance-automation.html>)
 
 **See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Compliance Automation](</en/security/compliance-automation.html>)
+
+**See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Compliance Automation](</en/security/compliance-automation.html>)

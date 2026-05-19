@@ -71,3 +71,5 @@ Use strong consistency where correctness is critical. Use eventual consistency f
 **See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
 
 **See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
+
+**See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)

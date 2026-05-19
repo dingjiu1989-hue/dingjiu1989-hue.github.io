@@ -67,3 +67,5 @@ Choose Neo4j for mature graph capabilities and Cypher. Choose ArangoDB for multi
 **See also:** [Data Modeling Best Practices](</en/database/data-modeling.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>)
 
 **See also:** [Data Modeling Best Practices](</en/database/data-modeling.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>)
+
+**See also:** [Data Modeling Best Practices](</en/database/data-modeling.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>)

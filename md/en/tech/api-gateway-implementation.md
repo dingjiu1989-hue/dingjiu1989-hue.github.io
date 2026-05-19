@@ -459,3 +459,5 @@ Select the centralized pattern for simpler operations and the sidecar pattern fo
 **See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>)
 
 **See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>)
+
+**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>)

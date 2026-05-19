@@ -41,3 +41,5 @@ When to avoid monolith-first: if the system is inherently distributed (IoT data 
 **See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)
 
 **See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)
+
+**See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)

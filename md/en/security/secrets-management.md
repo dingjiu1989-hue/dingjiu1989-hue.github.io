@@ -227,3 +227,5 @@ Treat secrets as the critical infrastructure they are. Use a dedicated secrets v
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
 
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
+
+**See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)

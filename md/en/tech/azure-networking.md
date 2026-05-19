@@ -112,3 +112,5 @@ Azure's networking services are designed for enterprise hybrid cloud scenarios. 
 **See also:** [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability](</en/tech/prometheus-deep-dive.html>)
 
 **See also:** [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability](</en/tech/prometheus-deep-dive.html>)
+
+**See also:** [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability](</en/tech/prometheus-deep-dive.html>)

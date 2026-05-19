@@ -373,3 +373,5 @@ Serverless security requires adapting traditional security principles to a new e
 **See also:** [Session Management Security](</en/security/session-management.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Certificate Management](</en/security/certificate-management.html>)
 
 **See also:** [Session Management Security](</en/security/session-management.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [Session Management Security](</en/security/session-management.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Certificate Management](</en/security/certificate-management.html>)

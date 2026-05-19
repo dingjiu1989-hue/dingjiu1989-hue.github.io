@@ -214,3 +214,5 @@ Open source monetization is about finding the right balance between community co
 **See also:** [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Landing Page Conversion Optimization](</en/sidehustle/landing-page-conversion.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>)
 
 **See also:** [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Landing Page Conversion Optimization](</en/sidehustle/landing-page-conversion.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>)
+
+**See also:** [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Landing Page Conversion Optimization](</en/sidehustle/landing-page-conversion.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>)

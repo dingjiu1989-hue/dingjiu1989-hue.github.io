@@ -91,3 +91,5 @@ The choice between SQLite and DuckDB is not a competition but a recognition of w
 **See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>)
 
 **See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>)
+
+**See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>)

@@ -265,3 +265,5 @@ RAG agents extend basic retrieval with reasoning. Self-query RAG optimizes the s
 **See also:** [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)
 
 **See also:** [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)
+
+**See also:** [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)

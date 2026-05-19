@@ -336,3 +336,5 @@ The trend is toward local-first, git-integrated tools. Bruno represents this new
 **See also:** [Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop](</en/tools/git-gui-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
 
 **See also:** [Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop](</en/tools/git-gui-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
+
+**See also:** [Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop](</en/tools/git-gui-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)

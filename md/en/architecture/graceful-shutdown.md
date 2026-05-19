@@ -47,3 +47,5 @@ Stateful services require additional consideration. Services that own data or ma
 **See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 
 **See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)

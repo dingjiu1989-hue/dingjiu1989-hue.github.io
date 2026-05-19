@@ -53,3 +53,5 @@ Throttle when protecting external API dependencies with rate limits, when the sy
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)

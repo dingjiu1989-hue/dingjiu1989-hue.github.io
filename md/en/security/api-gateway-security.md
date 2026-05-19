@@ -437,3 +437,5 @@ The API gateway is the ideal location to centralize security controls: authentic
 **See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)
 
 **See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)
+
+**See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)

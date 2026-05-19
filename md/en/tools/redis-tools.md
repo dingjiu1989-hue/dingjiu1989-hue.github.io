@@ -324,3 +324,5 @@ The most effective setup combines the Redis CLI for scripting and automation wit
 **See also:** [Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja](</en/tools/reverse-engineering.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>)
 
 **See also:** [Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja](</en/tools/reverse-engineering.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>)
+
+**See also:** [Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja](</en/tools/reverse-engineering.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>)

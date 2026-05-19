@@ -75,3 +75,5 @@ Contract testing provides a practical mechanism for managing service dependencie
 **See also:** [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Metric Collection](</en/tech/metric-collection.html>), [Node.js Streams](</en/tech/nodejs-streams.html>)
 
 **See also:** [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Metric Collection](</en/tech/metric-collection.html>), [Node.js Streams](</en/tech/nodejs-streams.html>)
+
+**See also:** [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Metric Collection](</en/tech/metric-collection.html>), [Node.js Streams](</en/tech/nodejs-streams.html>)

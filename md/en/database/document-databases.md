@@ -55,3 +55,5 @@ Document databases typically outperform relational databases for read-heavy work
 **See also:** [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
 
 **See also:** [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
+
+**See also:** [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)

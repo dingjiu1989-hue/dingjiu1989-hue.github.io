@@ -59,3 +59,5 @@ The key lesson of 2026 is that architecture is not a binary choice. The modular 
 **See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)
 
 **See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)
+
+**See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)

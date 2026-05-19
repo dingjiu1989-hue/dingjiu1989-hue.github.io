@@ -43,3 +43,5 @@ Alfred (macOS) and PowerToys (Windows) provide launcher shortcuts. Keyboard Maes
 **See also:** [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
 
 **See also:** [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
+
+**See also:** [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)

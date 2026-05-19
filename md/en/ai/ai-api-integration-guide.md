@@ -117,4 +117,4 @@ Strategy| Savings| How
 
 **Bottom line:** Use streaming for any user-facing feature. Use function calling to extend the AI with your own data. Cache aggressively. Route simple queries to cheaper models. See also: [Prompt Engineering](</en/ai/prompt-engineering.html>) and [Best LLMs for Coding](</en/ai/best-llms-for-coding-2026.html>).
 
-**See also:** [Best AI Video Generation Tools for Developers 2026: Runway vs Pika vs Sora](</en/ai/ai-video-generation-tools.html>), [AI Image Generation Guide: DALL-E 3 vs Midjourney vs Stable Diffusion vs Firefly](</en/ai/ai-image-generation-guide.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>)
+**See also:** [LLM Function Calling: Complete Developer Guide with Code Examples](</en/ai/function-calling-guide.html>), [Best AI Video Generation Tools for Developers 2026: Runway vs Pika vs Sora](</en/ai/ai-video-generation-tools.html>), [AI Image Generation Guide: DALL-E 3 vs Midjourney vs Stable Diffusion vs Firefly](</en/ai/ai-image-generation-guide.html>)

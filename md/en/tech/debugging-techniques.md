@@ -71,3 +71,5 @@ Build a debugging toolkit over time. Maintain scripts for common debugging tasks
 **See also:** [Performance Testing](</en/tech/performance-testing.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Secret Management](</en/tech/secret-management.html>)
 
 **See also:** [Performance Testing](</en/tech/performance-testing.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Secret Management](</en/tech/secret-management.html>)
+
+**See also:** [Performance Testing](</en/tech/performance-testing.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Secret Management](</en/tech/secret-management.html>)

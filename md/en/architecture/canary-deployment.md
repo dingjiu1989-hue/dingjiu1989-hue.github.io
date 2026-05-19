@@ -49,3 +49,5 @@ Kubernetes-native tools like Flagger and Argo Rollouts automate canary deploymen
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>)
 
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>)
