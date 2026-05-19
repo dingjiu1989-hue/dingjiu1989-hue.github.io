@@ -265,3 +265,5 @@ Optimize RAG retrieval in three layers. First, implement hybrid search combining
 **See also:** [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)
 
 **See also:** [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)
+
+**See also:** [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)

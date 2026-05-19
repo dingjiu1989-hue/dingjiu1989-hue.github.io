@@ -91,3 +91,5 @@ Track QPS, latency, connections, cache hit ratio, and replication lag. Use Prome
 **See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
 
 **See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
+
+**See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)

@@ -163,3 +163,5 @@ There is no "best" cloud provider — only the best fit for your specific needs.
 **See also:** [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>), [PlanetScale vs Neon](</en/compare/planetscale-vs-neon.html>)
 
 **See also:** [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>), [PlanetScale vs Neon](</en/compare/planetscale-vs-neon.html>)
+
+**See also:** [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>), [PlanetScale vs Neon](</en/compare/planetscale-vs-neon.html>)

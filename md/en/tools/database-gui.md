@@ -234,3 +234,5 @@ Many developers use a combination: TablePlus for daily PostgreSQL/MySQL work, DB
 **See also:** [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
 
 **See also:** [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
+
+**See also:** [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)

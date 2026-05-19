@@ -2,8 +2,8 @@
 title: "AI每日资讯 — 2026年5月19日：Gemini 3发布、Anthropic收购、马斯克败诉、Cerebras IPO"
 description: "今日AI十大要闻：Google Gemini 3携Antigravity IDE发布、Anthropic收购开发者工具公司、马斯克诉OpenAI案败诉、Cerebras 55亿美元IPO、NVIDIA H200中国协议、IBM模拟AI芯片突破等。附原文来源链接。"
 date: 2026-05-19
-board: ai
-url: https://dingjiu1989-hue.github.io/ai/ai-daily-news-2026-05-19.html
+board: daily
+url: https://dingjiu1989-hue.github.io/daily/ai-daily-news-2026-05-19.html
 ---
 
 # AI每日资讯 — 2026年5月19日

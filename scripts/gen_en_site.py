@@ -94,6 +94,7 @@ def _strip_title_headings(md_text, title):
     return '\n'.join(result)
 
 BOARD_NAMES = {
+    'daily': 'AI Daily Digest',
     'tech': 'Tech Tutorials',
     'sidehustle': 'Side Hustle',
     'tools': 'Tool Recommendations',
@@ -13812,6 +13813,7 @@ def make_category(data, board_id):
     cn_hreflang = f'    <link rel="alternate" hreflang="zh-CN" href="{cn_url}">\n' if cn_path.exists() else ''
 
     board_titles = {
+        'daily': 'AI Daily Digest',
         'tech': 'Tech Tutorials',
         'sidehustle': 'Side Hustle',
         'tools': 'Tool Recommendations',
@@ -13822,6 +13824,7 @@ def make_category(data, board_id):
         'architecture': 'Architecture',
     }
     board_descs = {
+        'daily': 'Daily curated top 10 AI news with source attribution. Bilingual EN/CN.',
         'tech': 'Programming tutorials, developer tools, and productivity guides.',
         'sidehustle': 'Freelancing, remote work, and side income strategies for developers.',
         'tools': 'Curated tool recommendations for productivity, design, and development.',
@@ -13961,21 +13964,17 @@ def make_all_html(data):
         items = ''
         for p in sorted(posts, key=lambda x: x.get('date', ''), reverse=True):
             pin = ' 📌' if p.get('pinned') else ''
+            desc = p.get('description', '')[:80]
             items += (
-                f'<li style="padding:0.35rem 0;font-size:0.88rem;">'
-                f'<a href="/en/{board["id"]}/{p["slug"]}.html">{p["title"]}</a>'
-                f' <span style="color:#656d76;font-size:0.75rem;">{p.get("date", "")}</span>{pin}'
+                f'<li><a href="/en/{board["id"]}/{p["slug"]}.html">{p["title"]}</a>'
+                f' <span class="all-date">{p.get("date", "")}</span>{pin}'
                 f'</li>'
             )
         boards_html += (
-            f'<div class="board" style="margin-bottom:1.5rem;">'
-            f'<div class="board-header">'
-            f'<span class="board-icon">{board.get("icon", "")}</span> '
-            f'<span class="board-name">{board_name}</span> '
-            f'<span class="board-count">{len(posts)} articles</span>'
-            f'</div>'
-            f'<ul style="padding:0.75rem 1rem;list-style:none;">{items}</ul>'
-            f'</div>'
+            f'<section class="all-board">'
+            f'<h3>{board.get("icon", "")} {board_name} <span class="board-count">{len(posts)}</span></h3>'
+            f'<ul>{items}</ul>'
+            f'</section>'
         )
 
     return f'''<!DOCTYPE html>
@@ -13985,12 +13984,34 @@ def make_all_html(data):
     <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Articles — SourceHub</title>
-    <meta name="description" content="Complete index of all {total} articles across {len(data['boards'])} boards. Browse by category or search.">
+    <title>All {total} Articles — SourceHub</title>
+    <meta name="description" content="Complete index of {total} developer articles across {len(data['boards'])} topic boards: tech tutorials, AI guides, tool comparisons, side hustle, security, database, and architecture.">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="alternate" type="application/rss+xml" title="SourceHub RSS" href="/en/feed.xml">
     <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/all.html">
     <meta name="robots" content="index, follow">
+    <meta property="og:title" content="All {total} Articles — SourceHub">
+    <meta property="og:description" content="Complete index of {total} developer articles across {len(data['boards'])} topic boards.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/all.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/og-default.jpg">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="All {total} Articles — SourceHub">
+    <meta name="twitter:description" content="Complete developer article index: {total} articles across {len(data['boards'])} topic boards.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/og-default.jpg">
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "All Articles — SourceHub",
+      "description": "Complete index of {total} developer articles across {len(data['boards'])} topic boards.",
+      "url": "https://dingjiu1989-hue.github.io/en/all.html",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "about": {{"@type": "WebSite", "name": "SourceHub", "url": "https://dingjiu1989-hue.github.io/en/"}}
+    }}
+    </script>
 </head>
 <body>
 <div id="nav-placeholder"></div>

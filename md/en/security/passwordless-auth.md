@@ -275,3 +275,5 @@ Passwordless authentication improves both security and UX. Use WebAuthn with pla
 **See also:** [Kubernetes Security](</en/security/kubernetes-security.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
 
 **See also:** [Kubernetes Security](</en/security/kubernetes-security.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
+
+**See also:** [Kubernetes Security](</en/security/kubernetes-security.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)

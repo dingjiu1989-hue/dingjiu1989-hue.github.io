@@ -271,3 +271,5 @@ Regular IAM audits are essential for maintaining least privilege. Automate permi
 **See also:** [Security Awareness Training](</en/security/security-awareness.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
 
 **See also:** [Security Awareness Training](</en/security/security-awareness.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
+
+**See also:** [Security Awareness Training](</en/security/security-awareness.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)

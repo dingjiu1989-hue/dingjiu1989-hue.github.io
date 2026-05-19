@@ -55,3 +55,5 @@ Contracts can become large and brittle if consumers test too many scenarios. Foc
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>)
 
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>)

@@ -24,8 +24,8 @@ EN_MD = f"""---
 title: "AI Daily Digest — {TODAY}: [Top 3 Headlines Here]"
 description: "Top 10 AI news today: [key topics]. Curated from trusted sources with full attribution."
 date: {TODAY}
-board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/{SLUG}.html
+board: daily
+url: https://dingjiu1989-hue.github.io/en/daily/{SLUG}.html
 ---
 
 # AI Daily Digest — {TODAY}
@@ -100,8 +100,8 @@ CN_MD = f"""---
 title: "AI每日资讯 — {TODAY}：[Top 3 Headlines in Chinese]"
 description: "今日AI十大要闻：[key topics in Chinese]。附原文来源链接。"
 date: {TODAY}
-board: ai
-url: https://dingjiu1989-hue.github.io/ai/{SLUG}.html
+board: daily
+url: https://dingjiu1989-hue.github.io/daily/{SLUG}.html
 ---
 
 # AI每日资讯 — {TODAY}
@@ -190,8 +190,8 @@ Recommended AI News Sources:
 
 
 def main():
-    en_md_dir = ROOT / "md" / "en" / "ai"
-    cn_md_dir = ROOT / "md" / "zh" / "ai"
+    en_md_dir = ROOT / "md" / "en" / "daily"
+    cn_md_dir = ROOT / "md" / "zh" / "daily"
     en_md_dir.mkdir(parents=True, exist_ok=True)
     cn_md_dir.mkdir(parents=True, exist_ok=True)
 

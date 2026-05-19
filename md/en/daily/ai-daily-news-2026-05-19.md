@@ -2,8 +2,8 @@
 title: "AI Daily Digest — May 19, 2026: Gemini 3, Anthropic M&A, Musk Defeated, Cerebras IPO"
 description: "Top 10 AI news: Google Gemini 3 + Antigravity IDE, Anthropic acquires dev-tools startup, Musk loses OpenAI lawsuit, Cerebras $5.5B IPO, NVIDIA H200 China deal, IBM analog AI chip, OpenAI safety models, Google warns of AI agent poisoning, Hugging Face malware, humanoid robots enter factories. Curated with source attribution."
 date: 2026-05-19
-board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-daily-news-2026-05-19.html
+board: daily
+url: https://dingjiu1989-hue.github.io/en/daily/ai-daily-news-2026-05-19.html
 ---
 
 # AI Daily Digest — May 19, 2026: Gemini 3, Anthropic M&A, Musk Defeated, Cerebras IPO
@@ -73,3 +73,5 @@ Multiple companies have begun testing humanoid robots in live manufacturing envi
 _AI Daily Digest is curated from trusted technology news sources. Last updated: May 19, 2026._
 
 **See also:** [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>), [Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)](</en/ai/fine-tune-open-source-llm.html>), [AI Agents Memory Patterns: Working, Episodic, Semantic, and Reflective Memory](</en/ai/ai-agents-memory-patterns.html>)
+
+**See also:** [Building Multimodal AI Applications: Vision, Audio, and Text Combined (2026)](</en/ai/multimodal-ai-guide.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>)

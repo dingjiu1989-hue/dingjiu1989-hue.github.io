@@ -53,3 +53,5 @@ Testing migrations against production data volume is essential. Synthetic migrat
 **See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
 
 **See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)

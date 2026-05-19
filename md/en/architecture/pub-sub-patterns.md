@@ -55,3 +55,5 @@ Design event schemas for backward compatibility. Use schema registries to manage
 **See also:** [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
 
 **See also:** [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
+
+**See also:** [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)

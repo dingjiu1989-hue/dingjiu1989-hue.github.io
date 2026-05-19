@@ -127,3 +127,5 @@ Terraform and OpenTofu remain the standard for multi-cloud IaC with broad provid
 **See also:** [Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison](</en/tools/monorepo-tools.html>), [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)
 
 **See also:** [Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison](</en/tools/monorepo-tools.html>), [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)
+
+**See also:** [Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison](</en/tools/monorepo-tools.html>), [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)

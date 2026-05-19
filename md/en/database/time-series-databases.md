@@ -83,3 +83,5 @@ Choose InfluxDB for purpose-built time-series, TimescaleDB for SQL compatibility
 **See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
 
 **See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
+
+**See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)

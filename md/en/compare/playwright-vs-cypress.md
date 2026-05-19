@@ -327,3 +327,5 @@ Playwright and Cypress are both excellent testing frameworks, but they serve dif
 **See also:** [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Linear vs Jira vs Notion: Best Project Management Tool for Developers (2026)](</en/compare/linear-vs-jira-vs-notion.html>)
 
 **See also:** [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Linear vs Jira vs Notion: Best Project Management Tool for Developers (2026)](</en/compare/linear-vs-jira-vs-notion.html>)
+
+**See also:** [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Linear vs Jira vs Notion: Best Project Management Tool for Developers (2026)](</en/compare/linear-vs-jira-vs-notion.html>)

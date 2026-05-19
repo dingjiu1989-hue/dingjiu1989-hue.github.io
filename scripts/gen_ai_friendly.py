@@ -110,6 +110,7 @@ url: {BASE}/en/{board['id']}/{art['slug']}.html
 # ── 2. Generate llms.txt ───────────────────────────────────────────────
 
 BOARD_NAMES_EN = {
+    "daily": "AI Daily Digest",
     "tech": "Tech Tutorials",
     "sidehustle": "Side Hustle Guides",
     "tools": "Tool Recommendations",
@@ -120,6 +121,7 @@ BOARD_NAMES_EN = {
     "architecture": "Architecture Patterns",
 }
 BOARD_NAMES_CN = {
+    "daily": "AI每日资讯",
     "tech": "技术教程",
     "sidehustle": "副业指南",
     "tools": "工具推荐",

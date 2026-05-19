@@ -67,3 +67,5 @@ Start with B-Tree. If B-Tree does not support your query type, evaluate GiST or 
 **See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>)
 
 **See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>)
+
+**See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>)

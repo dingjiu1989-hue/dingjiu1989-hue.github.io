@@ -408,3 +408,5 @@ DevSecOps shifts security from a final gate to an integrated part of the develop
 **See also:** [Security Log Management](</en/security/log-management-security.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>)
 
 **See also:** [Security Log Management](</en/security/log-management-security.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>)
+
+**See also:** [Security Log Management](</en/security/log-management-security.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>)

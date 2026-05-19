@@ -349,3 +349,5 @@ Couchbase fills a unique niche: a document database with SQL querying and built-
 **See also:** [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
 
 **See also:** [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
+
+**See also:** [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)

@@ -97,3 +97,5 @@ AI red teaming is a practice, not a project. Attack techniques evolve continuous
 **See also:** [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [AI Data Privacy: PII Detection, Data Anonymization, Local Processing](</en/ai/ai-data-privacy.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>)
 
 **See also:** [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [AI Data Privacy: PII Detection, Data Anonymization, Local Processing](</en/ai/ai-data-privacy.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>)
+
+**See also:** [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [AI Data Privacy: PII Detection, Data Anonymization, Local Processing](</en/ai/ai-data-privacy.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>)

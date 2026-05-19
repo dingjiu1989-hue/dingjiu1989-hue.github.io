@@ -50,7 +50,7 @@ ARTICLE_ONLY_TAGS = {
     "speakable": r'SpeakableSpecification',
 }
 
-ARTICLE_ONLY_PAGES = {"nav.html", "footer.html", "privacy.html", "index.html", "about.html"}
+ARTICLE_ONLY_PAGES = {"nav.html", "footer.html", "privacy.html", "index.html", "about.html", "all.html"}
 
 # Tags that are only required when a Chinese counterpart exists on disk
 CONDITIONAL_TAGS = {

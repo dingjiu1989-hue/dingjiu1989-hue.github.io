@@ -101,3 +101,5 @@ In 2026, both PostgreSQL and MySQL are excellent choices. PostgreSQL has pulled 
 **See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Nginx vs Apache: Web Server Comparison 2026](</en/compare/nginx-vs-apache.html>), [npm vs Yarn vs pnpm: Package Manager Comparison](</en/compare/npm-vs-yarn-vs-pnpm.html>)
 
 **See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Nginx vs Apache: Web Server Comparison 2026](</en/compare/nginx-vs-apache.html>), [npm vs Yarn vs pnpm: Package Manager Comparison](</en/compare/npm-vs-yarn-vs-pnpm.html>)
+
+**See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Nginx vs Apache: Web Server Comparison 2026](</en/compare/nginx-vs-apache.html>), [npm vs Yarn vs pnpm: Package Manager Comparison](</en/compare/npm-vs-yarn-vs-pnpm.html>)

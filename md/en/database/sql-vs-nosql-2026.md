@@ -189,3 +189,5 @@ The 2026 database landscape offers more choices than ever. PostgreSQL remains th
 **See also:** [Partitioning vs Sharding](</en/database/partitioning-vs-sharding.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)
 
 **See also:** [Partitioning vs Sharding](</en/database/partitioning-vs-sharding.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)
+
+**See also:** [Partitioning vs Sharding](</en/database/partitioning-vs-sharding.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)

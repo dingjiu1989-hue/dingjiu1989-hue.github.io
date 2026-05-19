@@ -77,3 +77,5 @@ Choose the simplest billing stack that meets your tax and complexity needs. Star
 **See also:** [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>)
 
 **See also:** [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>)
+
+**See also:** [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>)

@@ -83,3 +83,5 @@ Size pools based on CPU cores, not concurrent users. Use PgBouncer for high-scal
 **See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
 
 **See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
+
+**See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)

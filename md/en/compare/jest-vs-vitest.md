@@ -61,3 +61,5 @@ Third-party integration is a consideration. Some testing libraries provide Jest-
 **See also:** [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>)
 
 **See also:** [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>)
+
+**See also:** [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>)

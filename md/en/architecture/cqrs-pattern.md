@@ -57,3 +57,5 @@ Testing CQRS systems requires verifying both the command behavior (do commands p
 **See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
 
 **See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
+
+**See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)

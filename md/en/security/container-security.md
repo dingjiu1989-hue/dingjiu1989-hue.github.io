@@ -309,3 +309,5 @@ Container security requires attention at every stage of the lifecycle. Build min
 **See also:** [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 
 **See also:** [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)

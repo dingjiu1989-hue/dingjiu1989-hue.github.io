@@ -305,3 +305,5 @@ Automate compliance with CIS benchmark scanning, remediation, reporting, and mon
 **See also:** [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Data Classification](</en/security/data-classification.html>), [SBOM Management](</en/security/sbom-management.html>)
 
 **See also:** [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Data Classification](</en/security/data-classification.html>), [SBOM Management](</en/security/sbom-management.html>)
+
+**See also:** [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Data Classification](</en/security/data-classification.html>), [SBOM Management](</en/security/sbom-management.html>)

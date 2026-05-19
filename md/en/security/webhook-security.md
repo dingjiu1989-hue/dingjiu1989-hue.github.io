@@ -369,3 +369,5 @@ Webhook endpoints are publicly accessible by design, making them an attractive t
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [HTTP Security Headers Checklist](</en/security/http-security-headers.html>)
 
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [HTTP Security Headers Checklist](</en/security/http-security-headers.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [HTTP Security Headers Checklist](</en/security/http-security-headers.html>)

@@ -91,3 +91,5 @@ Layer encryption, access control, RLS, audit logging, and network isolation. Rot
 **See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 
 **See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)

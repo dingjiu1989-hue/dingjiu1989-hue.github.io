@@ -79,3 +79,5 @@ Performance testing is an ongoing activity, not a one-time effort. As the system
 **See also:** [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Web Performance Optimization Techniques 2026](</en/tech/web-performance-optimization.html>)
 
 **See also:** [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Web Performance Optimization Techniques 2026](</en/tech/web-performance-optimization.html>)
+
+**See also:** [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Web Performance Optimization Techniques 2026](</en/tech/web-performance-optimization.html>)

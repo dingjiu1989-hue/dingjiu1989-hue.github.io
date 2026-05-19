@@ -264,3 +264,5 @@ Implement TOTP as the primary 2FA method, supplement with backup codes for recov
 **See also:** [Passwordless Authentication](</en/security/passwordless-auth.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 
 **See also:** [Passwordless Authentication](</en/security/passwordless-auth.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [Passwordless Authentication](</en/security/passwordless-auth.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
