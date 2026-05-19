@@ -13963,13 +13963,7 @@ def make_all_html(data):
         board_name = BOARD_NAMES.get(board['id'], board['id'].title())
         items = ''
         for p in sorted(posts, key=lambda x: x.get('date', ''), reverse=True):
-            pin = ' 📌' if p.get('pinned') else ''
-            desc = p.get('description', '')[:80]
-            items += (
-                f'<li><a href="/en/{board["id"]}/{p["slug"]}.html">{p["title"]}</a>'
-                f' <span class="all-date">{p.get("date", "")}</span>{pin}'
-                f'</li>'
-            )
+            items += f'<li><a href="/en/{board["id"]}/{p["slug"]}.html">{p["title"]}</a></li>'
         boards_html += (
             f'<section class="all-board">'
             f'<h3>{board.get("icon", "")} {board_name} <span class="board-count">{len(posts)}</span></h3>'
@@ -13988,6 +13982,8 @@ def make_all_html(data):
     <meta name="description" content="Complete index of {total} developer articles across {len(data['boards'])} topic boards: tech tutorials, AI guides, tool comparisons, side hustle, security, database, and architecture.">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/all.html">
+    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/all.html">
+    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/all.html">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="All {total} Articles — SourceHub">
     <meta property="og:description" content="Complete index of {total} developer articles across {len(data['boards'])} topic boards.">

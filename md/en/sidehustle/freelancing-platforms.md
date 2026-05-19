@@ -289,3 +289,5 @@ Freelancing platforms provide accessible entry points for developer side income.
 **See also:** [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [No-Code and Low-Code Business Opportunities](</en/sidehustle/no-code-business.html>)
 
 **See also:** [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [No-Code and Low-Code Business Opportunities](</en/sidehustle/no-code-business.html>)
+
+**See also:** [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [No-Code and Low-Code Business Opportunities](</en/sidehustle/no-code-business.html>)

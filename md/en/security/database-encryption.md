@@ -271,3 +271,5 @@ Layer your database encryption strategy. Use TDE for bulk encryption with minima
 **See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [Helm Security](</en/security/helm-security.html>), [MFA Implementation](</en/security/mfa-implementation.html>)
 
 **See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [Helm Security](</en/security/helm-security.html>), [MFA Implementation](</en/security/mfa-implementation.html>)
+
+**See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [Helm Security](</en/security/helm-security.html>), [MFA Implementation](</en/security/mfa-implementation.html>)

@@ -63,3 +63,5 @@ Start stateless. Use external state stores when state is required. Only use stat
 **See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
 
 **See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
+
+**See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)

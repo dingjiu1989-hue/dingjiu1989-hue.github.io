@@ -431,3 +431,5 @@ These patterns form the foundation of scalable, secure GitHub Actions usage in e
 **See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)
 
 **See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)
+
+**See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)

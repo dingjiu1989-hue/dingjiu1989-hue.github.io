@@ -240,3 +240,5 @@ A well-structured SOC combines skilled personnel, documented processes, and appr
 **See also:** [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)
 
 **See also:** [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)

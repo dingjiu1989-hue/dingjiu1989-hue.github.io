@@ -51,3 +51,5 @@ Use sagas for compensating transactions where eventual consistency is acceptable
 **See also:** [Event Notification vs Event-Carried State Transfer](</en/architecture/event-notification-vs-event-carrying.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>)
 
 **See also:** [Event Notification vs Event-Carried State Transfer](</en/architecture/event-notification-vs-event-carrying.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>)
+
+**See also:** [Event Notification vs Event-Carried State Transfer](</en/architecture/event-notification-vs-event-carrying.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>)

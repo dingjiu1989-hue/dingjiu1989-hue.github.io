@@ -61,3 +61,5 @@ In practice, the BFF pattern has become a standard recommendation for microservi
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
 
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
+
+**See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)

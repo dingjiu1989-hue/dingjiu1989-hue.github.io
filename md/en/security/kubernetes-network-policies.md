@@ -423,3 +423,5 @@ Kubernetes network policies are essential for cluster security. Start with defau
 **See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Serverless Security](</en/security/serverless-security.html>)
 
 **See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Serverless Security](</en/security/serverless-security.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Serverless Security](</en/security/serverless-security.html>)

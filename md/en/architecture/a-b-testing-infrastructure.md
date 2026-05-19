@@ -51,3 +51,5 @@ The experiment platform should provide self-service capabilities for product man
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)

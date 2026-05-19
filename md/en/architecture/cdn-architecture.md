@@ -53,3 +53,5 @@ Performance monitoring includes cache hit ratio, time to first byte (TTFB), and 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)

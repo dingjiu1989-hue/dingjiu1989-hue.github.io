@@ -416,3 +416,5 @@ The ideal Terraform workflow combines all these tools: Terragrunt for structure,
 **See also:** [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench](</en/tools/infrastructure-scanners-2026.html>), [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>)
 
 **See also:** [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench](</en/tools/infrastructure-scanners-2026.html>), [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>)
+
+**See also:** [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench](</en/tools/infrastructure-scanners-2026.html>), [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>)

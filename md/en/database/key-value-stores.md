@@ -61,3 +61,5 @@ Design keys carefully to avoid hot partitions. Prefix keys with a namespace for 
 **See also:** [Database Caching](</en/database/database-caching.html>), [Database Scalability](</en/database/database-scalability.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
 
 **See also:** [Database Caching](</en/database/database-caching.html>), [Database Scalability](</en/database/database-scalability.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
+
+**See also:** [Database Caching](</en/database/database-caching.html>), [Database Scalability](</en/database/database-scalability.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)

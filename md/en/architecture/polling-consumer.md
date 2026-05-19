@@ -57,3 +57,5 @@ Implementation complexity is often lower with polling libraries and frameworks, 
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
 
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
+
+**See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)

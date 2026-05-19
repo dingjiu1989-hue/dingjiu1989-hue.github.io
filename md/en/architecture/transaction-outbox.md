@@ -51,3 +51,5 @@ The transactional outbox pattern is production-proven across organizations handl
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)

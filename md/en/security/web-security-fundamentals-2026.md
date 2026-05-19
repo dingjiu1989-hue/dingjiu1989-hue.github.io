@@ -490,3 +490,5 @@ _Last updated: May 2026_
 **See also:** [Content Security Policy](</en/security/content-security-policy.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 
 **See also:** [Content Security Policy](</en/security/content-security-policy.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Content Security Policy](</en/security/content-security-policy.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)

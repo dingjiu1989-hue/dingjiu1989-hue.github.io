@@ -245,3 +245,5 @@ PostgreSQL's JSONB support bridges the gap between relational and document datab
 **See also:** [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)
 
 **See also:** [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)
+
+**See also:** [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)

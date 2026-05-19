@@ -49,3 +49,5 @@ Many production systems combine both patterns. Orchestration manages core busine
 **See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
 
 **See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
+
+**See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)

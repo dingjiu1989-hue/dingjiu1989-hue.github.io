@@ -216,3 +216,5 @@ Transactions are not just a SQL feature; they are a correctness contract between
 **See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
 
 **See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
+
+**See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
