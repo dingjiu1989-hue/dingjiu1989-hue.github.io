@@ -405,3 +405,5 @@ For new projects starting in 2026, MariaDB offers the better value proposition f
 **See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>)
 
 **See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>)
+
+**See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>)

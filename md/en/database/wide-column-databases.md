@@ -57,3 +57,5 @@ Use Cassandra or ScyllaDB for high-throughput write workloads, multi-region depl
 **See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Document Databases: MongoDB, CouchDB, Firestore](</en/database/document-databases.html>)
 
 **See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Document Databases: MongoDB, CouchDB, Firestore](</en/database/document-databases.html>)
+
+**See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Document Databases: MongoDB, CouchDB, Firestore](</en/database/document-databases.html>)

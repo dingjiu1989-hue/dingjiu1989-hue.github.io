@@ -624,3 +624,5 @@ For modern applications, gRPC is the better choice for service-to-service commun
 **See also:** [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>), [React vs Vue vs Svelte in 2026](</en/compare/react-vs-vue-2026.html>)
 
 **See also:** [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>), [React vs Vue vs Svelte in 2026](</en/compare/react-vs-vue-2026.html>)
+
+**See also:** [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>), [React vs Vue vs Svelte in 2026](</en/compare/react-vs-vue-2026.html>)

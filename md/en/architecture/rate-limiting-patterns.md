@@ -165,3 +165,5 @@ Rate limiting is essential for production APIs. Start with the token bucket algo
 **See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)
 
 **See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)
+
+**See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)

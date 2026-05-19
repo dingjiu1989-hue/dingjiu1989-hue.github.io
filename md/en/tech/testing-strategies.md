@@ -67,3 +67,5 @@ A well-structured test suite provides fast feedback, catches regressions, and do
 **See also:** [Code Generation](</en/tech/code-generation.html>), [Contract Testing](</en/tech/contract-testing.html>), [Dependency Management](</en/tech/dependency-management.html>)
 
 **See also:** [Code Generation](</en/tech/code-generation.html>), [Contract Testing](</en/tech/contract-testing.html>), [Dependency Management](</en/tech/dependency-management.html>)
+
+**See also:** [Code Generation](</en/tech/code-generation.html>), [Contract Testing](</en/tech/contract-testing.html>), [Dependency Management](</en/tech/dependency-management.html>)

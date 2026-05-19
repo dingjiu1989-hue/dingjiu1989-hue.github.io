@@ -61,3 +61,5 @@ The key insight of strategic DDD is that a single, unified model for an entire e
 **See also:** [Event Storming](</en/architecture/event-storming.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Orchestration Patterns](</en/architecture/orchestration-patterns.html>)
 
 **See also:** [Event Storming](</en/architecture/event-storming.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Orchestration Patterns](</en/architecture/orchestration-patterns.html>)
+
+**See also:** [Event Storming](</en/architecture/event-storming.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Orchestration Patterns](</en/architecture/orchestration-patterns.html>)

@@ -47,3 +47,5 @@ Correlation with logs completes the observability picture. Span IDs embedded in 
 **See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
 
 **See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
+
+**See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)

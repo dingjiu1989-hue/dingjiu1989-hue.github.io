@@ -49,3 +49,5 @@ Silencing rules provide controlled noise reduction. Scheduled maintenance window
 **See also:** [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 
 **See also:** [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)

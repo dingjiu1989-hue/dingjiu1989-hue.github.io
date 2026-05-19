@@ -233,3 +233,5 @@ A proper TLS configuration requires modern protocol versions (TLS 1.2 and 1.3), 
 **See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
 
 **See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)

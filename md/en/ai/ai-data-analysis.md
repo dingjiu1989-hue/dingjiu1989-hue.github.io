@@ -99,3 +99,5 @@ LLMs transform data analysis from syntax-heavy coding into collaborative dialogu
 **See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>), [Best LLMs for Coding in 2026: Claude vs GPT-4o vs Gemini vs DeepSeek vs CodeLlama](</en/ai/best-llms-for-coding-2026.html>)
 
 **See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>), [Best LLMs for Coding in 2026: Claude vs GPT-4o vs Gemini vs DeepSeek vs CodeLlama](</en/ai/best-llms-for-coding-2026.html>)
+
+**See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>), [Best LLMs for Coding in 2026: Claude vs GPT-4o vs Gemini vs DeepSeek vs CodeLlama](</en/ai/best-llms-for-coding-2026.html>)

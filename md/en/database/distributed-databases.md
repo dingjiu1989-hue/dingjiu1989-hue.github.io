@@ -97,3 +97,5 @@ Choose Dynamo-style (Cassandra, DynamoDB) for availability and tunable consisten
 **See also:** [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [Database Replication Patterns](</en/database/database-replication.html>)
 
 **See also:** [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [Database Replication Patterns](</en/database/database-replication.html>)
+
+**See also:** [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [Database Replication Patterns](</en/database/database-replication.html>)

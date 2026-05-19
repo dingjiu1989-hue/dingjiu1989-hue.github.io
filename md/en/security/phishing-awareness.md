@@ -59,3 +59,5 @@ Spear phishing targets specific individuals with personalized emails. Whaling ta
 **See also:** [CORS Security](</en/security/cors-security.html>), [Endpoint Security](</en/security/endpoint-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
 
 **See also:** [CORS Security](</en/security/cors-security.html>), [Endpoint Security](</en/security/endpoint-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
+
+**See also:** [CORS Security](</en/security/cors-security.html>), [Endpoint Security](</en/security/endpoint-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)

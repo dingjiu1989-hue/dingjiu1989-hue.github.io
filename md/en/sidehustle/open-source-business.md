@@ -71,3 +71,5 @@ Building a sustainable open source business requires aligning your monetization 
 **See also:** [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [Email Marketing for Developers: Mailchimp, ConvertKit, Automation](</en/sidehustle/email-marketing-dev.html>), [SaaS Exit Strategies: Acquisition, IPO, Lifestyle, Acqui-Hire](</en/sidehustle/exit-strategies.html>)
 
 **See also:** [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [Email Marketing for Developers: Mailchimp, ConvertKit, Automation](</en/sidehustle/email-marketing-dev.html>), [SaaS Exit Strategies: Acquisition, IPO, Lifestyle, Acqui-Hire](</en/sidehustle/exit-strategies.html>)
+
+**See also:** [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [Email Marketing for Developers: Mailchimp, ConvertKit, Automation](</en/sidehustle/email-marketing-dev.html>), [SaaS Exit Strategies: Acquisition, IPO, Lifestyle, Acqui-Hire](</en/sidehustle/exit-strategies.html>)

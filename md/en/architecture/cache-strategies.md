@@ -63,3 +63,5 @@ Modern caching systems like Redis, Memcached, and CDN platforms provide configur
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
 
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
+
+**See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
