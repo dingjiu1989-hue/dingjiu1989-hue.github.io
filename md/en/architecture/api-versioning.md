@@ -246,3 +246,5 @@ API versioning is a practical necessity for evolving APIs. URL path versioning i
 **See also:** [REST API Design Best Practices](</en/architecture/rest-api-design.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>)
 
 **See also:** [REST API Design Best Practices](</en/architecture/rest-api-design.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>)
+
+**See also:** [REST API Design Best Practices](</en/architecture/rest-api-design.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>)

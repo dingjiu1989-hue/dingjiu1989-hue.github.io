@@ -49,3 +49,5 @@ Transactional outbox ensures events are published reliably. The outbox stores ev
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
 
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
+
+**See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)

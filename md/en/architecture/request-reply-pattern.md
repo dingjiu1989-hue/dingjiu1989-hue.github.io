@@ -67,3 +67,5 @@ Dead letter queues for request queues capture requests that cannot be processed.
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Claim Check Pattern](</en/architecture/claim-check.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Claim Check Pattern](</en/architecture/claim-check.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Claim Check Pattern](</en/architecture/claim-check.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)

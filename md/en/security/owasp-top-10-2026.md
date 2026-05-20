@@ -227,3 +227,5 @@ The OWASP Top 10 2026 reflects the maturing security landscape. Broken access co
 **See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Container Image Security](</en/security/container-image-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
 
 **See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Container Image Security](</en/security/container-image-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Container Image Security](</en/security/container-image-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)

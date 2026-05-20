@@ -59,3 +59,5 @@ Use Auth0 for general-purpose web and mobile apps. Use Okta for enterprise SSO a
 **See also:** [Security Testing Tools: SAST, DAST, IAST, and RASP Compared](</en/security/security-testing-tools.html>), [WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai](</en/security/waf-comparison.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 
 **See also:** [Security Testing Tools: SAST, DAST, IAST, and RASP Compared](</en/security/security-testing-tools.html>), [WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai](</en/security/waf-comparison.html>), [API Authentication Methods](</en/security/api-authentication.html>)
+
+**See also:** [Security Testing Tools: SAST, DAST, IAST, and RASP Compared](</en/security/security-testing-tools.html>), [WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai](</en/security/waf-comparison.html>), [API Authentication Methods](</en/security/api-authentication.html>)

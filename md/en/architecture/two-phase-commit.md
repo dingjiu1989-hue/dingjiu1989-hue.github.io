@@ -71,3 +71,5 @@ Two-phase commit remains useful for specific scenarios, particularly within a si
 **See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>)
 
 **See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>)
+
+**See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>)

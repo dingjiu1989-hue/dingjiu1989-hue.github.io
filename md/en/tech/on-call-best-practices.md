@@ -138,3 +138,5 @@ Effective on-call practices combine thoughtful rotation design, clear escalation
 **See also:** [Rust vs Go: A Practical Comparison](</en/tech/rust-vs-go-practical.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>), [Kubernetes Pod Design: Patterns and Best Practices](</en/tech/kubernetes-pod-design.html>)
 
 **See also:** [Rust vs Go: A Practical Comparison](</en/tech/rust-vs-go-practical.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>), [Kubernetes Pod Design: Patterns and Best Practices](</en/tech/kubernetes-pod-design.html>)
+
+**See also:** [Rust vs Go: A Practical Comparison](</en/tech/rust-vs-go-practical.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>), [Kubernetes Pod Design: Patterns and Best Practices](</en/tech/kubernetes-pod-design.html>)

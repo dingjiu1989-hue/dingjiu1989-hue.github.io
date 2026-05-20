@@ -251,3 +251,5 @@ Effective penetration testing follows a disciplined methodology. PTES provides c
 **See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Secure Configuration Management](</en/security/secure-configuration.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
 
 **See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Secure Configuration Management](</en/security/secure-configuration.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
+
+**See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Secure Configuration Management](</en/security/secure-configuration.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
