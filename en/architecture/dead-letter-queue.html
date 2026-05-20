@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-07">
     <meta property="article:modified_time" content="2026-05-13">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/dead-letter-queue.webp" type="image/webp" fetchpriority="high">
     <title>Dead Letter Queues: Handling Message Failures — SourceHub</title>
     <meta name="description" content="Understanding dead letter queues: how to handle failed messages in event-driven architectures and message brokers.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/dead-letter-queue.png",
       "datePublished": "2026-05-07",
       "dateModified": "2026-05-13",
-      "wordCount": "745",
+      "wordCount": "776",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -95,8 +98,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Dead Letter Queues: Handling Message Failures</h1>
       <div class="article-meta">Published 2026-05-07 · Last active 2026-05-13 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/dead-letter-queue.png" alt="Dead Letter Queues: Handling Message Failures" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>A dead letter queue (DLQ) is a message queue that stores messages that a system cannot successfully process. When a consumer repeatedly fails to process a message, the message broker moves it to the DLQ instead of discarding it. This prevents message loss while isolating problematic messages from the main processing pipeline.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/dead-letter-queue.png" alt="Dead Letter Queues: Handling Message Failures" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/dead-letter-queue.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/dead-letter-queue.png" alt="Dead Letter Queues: Handling Message Failures" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>A dead letter queue (DLQ) is a message queue that stores messages that a system cannot successfully process. When a consumer repeatedly fails to process a message, the message broker moves it to the DLQ instead of discarding it. This prevents message loss while isolating problematic messages from the main processing pipeline.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/dead-letter-queue.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/dead-letter-queue.png" alt="Dead Letter Queues: Handling Message Failures" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>How DLQ Works</h2>
 <p>Most message brokers support a configurable retry policy. A message is delivered to a consumer. If processing fails, the consumer rejects or nacks the message. The broker redelivers the message up to the maximum retry count. After exhausting retries, the broker moves the message to the DLQ.</p>
 <p>The DLQ stores the original message along with metadata such as the failure reason, retry count, and timestamps. Operators can inspect DLQ messages, fix the underlying issue, and replay messages back to the main queue.</p>
@@ -113,6 +116,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a></p>

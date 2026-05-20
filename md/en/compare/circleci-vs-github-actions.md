@@ -93,3 +93,5 @@ Choose CircleCI if you need maximum performance and configurability for complex 
 **See also:** [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>)
 
 **See also:** [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>)
+
+**See also:** [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>)

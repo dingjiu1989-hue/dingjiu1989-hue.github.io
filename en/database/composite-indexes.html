@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-03-31">
     <meta property="article:modified_time" content="2026-04-22">
     <meta property="article:tag" content="Database, Backend, Data">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/database/composite-indexes.webp" type="image/webp" fetchpriority="high">
     <title>Composite Indexes: Column Order, Covering Indexes, and Partial Indexes — SourceHub</title>
     <meta name="description" content="Master composite indexes in PostgreSQL: column order optimization, covering indexes, partial indexes, and index-only scans for maximum query performance.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/composite-indexes.png",
       "datePublished": "2026-03-31",
       "dateModified": "2026-04-22",
-      "wordCount": "2671",
+      "wordCount": "2706",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</h1>
       <div class="article-meta">Published 2026-03-31 · Last active 2026-04-22 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/composite-indexes.png" alt="Composite Indexes: Column Order, Covering Indexes, and Partial Indexes" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Composite Indexes: Column Order, Covering Indexes, and Partial Indexes </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/composite-indexes.png" alt="Composite Indexes: Column Order, Covering Indexes, and Partial Indexes" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/composite-indexes.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/composite-indexes.png" alt="Composite Indexes: Column Order, Covering Indexes, and Partial Indexes" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Composite Indexes: Column Order, Covering Indexes, and Partial Indexes </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/composite-indexes.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/composite-indexes.png" alt="Composite Indexes: Column Order, Covering Indexes, and Partial Indexes" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Composite indexes (indexes on multiple columns) are powerful but easy to misuse. The column order determines which queries benefit, and the right combination of covering and partial indexes can dramatically reduce query time. </p>
 <p>Column Order: The Cardinality Rule </p>
 <p>The general rule for column order in a composite B-tree index is: </p>
@@ -222,6 +225,7 @@
 <p><strong>See also:</strong> <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a>, <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a></p>
 <p><strong>See also:</strong> <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a>, <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a></p>
 <p><strong>See also:</strong> <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a>, <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/multi-master-replication.html">Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR</a>, <a href="/en/database/materialized-views.html">Materialized Views</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/multi-master-replication.html">Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR</a>, <a href="/en/database/materialized-views.html">Materialized Views</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/multi-master-replication.html">Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR</a>, <a href="/en/database/materialized-views.html">Materialized Views</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/multi-master-replication.html">Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR</a>, <a href="/en/database/materialized-views.html">Materialized Views</a></p>

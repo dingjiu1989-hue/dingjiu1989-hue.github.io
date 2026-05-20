@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-15">
     <meta property="article:modified_time" content="2026-04-18">
     <meta property="article:tag" content="Database, Backend, Data">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/database/database-pagination-techniques.webp" type="image/webp" fetchpriority="high">
     <title>Database Pagination: Offset, Cursor, Keyset, and Seek Methods — SourceHub</title>
     <meta name="description" content="Database pagination strategies compared: OFFSET/LIMIT vs cursor-based pagination for performance and consistency.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-pagination-techniques.png",
       "datePublished": "2026-04-15",
       "dateModified": "2026-04-18",
-      "wordCount": "950",
+      "wordCount": "974",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h1>
       <div class="article-meta">Published 2026-04-15 · Last active 2026-04-18 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-pagination-techniques.png" alt="Database Pagination: Offset, Cursor, Keyset, and Seek Methods" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Pagination divides large result sets into manageable pages. The choice of pagination method affects query performance, data consistency, and user experience. Different approaches suit different use cases.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-pagination-techniques.png" alt="Database Pagination: Offset, Cursor, Keyset, and Seek Methods" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-pagination-techniques.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-pagination-techniques.png" alt="Database Pagination: Offset, Cursor, Keyset, and Seek Methods" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Pagination divides large result sets into manageable pages. The choice of pagination method affects query performance, data consistency, and user experience. Different approaches suit different use cases.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-pagination-techniques.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-pagination-techniques.png" alt="Database Pagination: Offset, Cursor, Keyset, and Seek Methods" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Offset Pagination</h2>
 <p>OFFSET/LIMIT pagination is the simplest approach. SELECT * FROM orders ORDER BY id LIMIT 20 OFFSET 40 returns page 3 with 20 items per page. It is intuitive and easy to implement.</p>
 <p>Problems: OFFSET scans and discards skipped rows—OFFSET 100000 on a query scanning 100k rows still reads all of them. Performance degrades as page number increases. New rows inserted before the current page cause row shifts, and users may see duplicate or missing items.</p>
@@ -123,6 +126,7 @@
 <p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
+<p><strong>See also:</strong> <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/materialized-views.html">Materialized Views</a></p>
 <p><strong>See also:</strong> <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/materialized-views.html">Materialized Views</a></p>
 <p><strong>See also:</strong> <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/materialized-views.html">Materialized Views</a></p>
 <p><strong>See also:</strong> <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/materialized-views.html">Materialized Views</a></p>

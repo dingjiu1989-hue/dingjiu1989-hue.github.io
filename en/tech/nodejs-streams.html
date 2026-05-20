@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-01-09">
     <meta property="article:modified_time" content="2026-04-21">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-streams.webp" type="image/webp" fetchpriority="high">
     <title>Node.js Streams — SourceHub</title>
     <meta name="description" content="Master Node.js streams: readable, writable, transform streams, backpressure handling, and the pipeline API">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-streams.png",
       "datePublished": "2026-01-09",
       "dateModified": "2026-04-21",
-      "wordCount": "1149",
+      "wordCount": "1162",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Node.js Streams</h1>
       <div class="article-meta">Published 2026-01-09 · Last active 2026-04-21 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-streams.png" alt="Node.js Streams" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Node.js streams are one of the most powerful yet misunderstood features of the platform. Streams enable processing of data piece by piece rather than loading entire datasets into memory. This makes them essential for handling large files, network communication, and data processing pipelines. This article covers the four stream types, backpressure, and the pipeline API.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-streams.png" alt="Node.js Streams" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-streams.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-streams.png" alt="Node.js Streams" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Node.js streams are one of the most powerful yet misunderstood features of the platform. Streams enable processing of data piece by piece rather than loading entire datasets into memory. This makes them essential for handling large files, network communication, and data processing pipelines. This article covers the four stream types, backpressure, and the pipeline API.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-streams.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-streams.png" alt="Node.js Streams" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Stream Types</h2>
 <p>Node.js has four fundamental stream types. Readable streams produce data that can be consumed. Writable streams consume data. Transform streams read data, transform it, and write the transformed data. Duplex streams implement both readable and writable interfaces independently.</p>
 <p>Readable streams include <code>fs.createReadStream</code> for files, HTTP request objects, and <code>process.stdin</code>. Writable streams include <code>fs.createWriteStream</code>, HTTP response objects, and <code>process.stdout</code>. Transform streams like <code>zlib.createGzip</code> and <code>crypto.createCipher</code> sit between readable and writable streams.</p>
@@ -135,6 +138,7 @@
 <p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/error-handling-patterns.html">Error Handling Patterns</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/error-handling-patterns.html">Error Handling Patterns</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/error-handling-patterns.html">Error Handling Patterns</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/developer-portal.html">Developer Portal</a>, <a href="/en/tech/event-processing.html">Event Processing</a>, <a href="/en/tech/metric-collection.html">Metric Collection</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/developer-portal.html">Developer Portal</a>, <a href="/en/tech/event-processing.html">Event Processing</a>, <a href="/en/tech/metric-collection.html">Metric Collection</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/developer-portal.html">Developer Portal</a>, <a href="/en/tech/event-processing.html">Event Processing</a>, <a href="/en/tech/metric-collection.html">Metric Collection</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/developer-portal.html">Developer Portal</a>, <a href="/en/tech/event-processing.html">Event Processing</a>, <a href="/en/tech/metric-collection.html">Metric Collection</a></p>

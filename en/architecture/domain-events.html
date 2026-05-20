@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-24">
     <meta property="article:modified_time" content="2026-05-16">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-events.webp" type="image/webp" fetchpriority="high">
     <title>Domain Events: Design and Implementation — SourceHub</title>
     <meta name="description" content="Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-events.png",
       "datePublished": "2026-04-24",
       "dateModified": "2026-05-16",
-      "wordCount": "1096",
+      "wordCount": "1121",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Domain Events: Design and Implementation</h1>
       <div class="article-meta">Published 2026-04-24 · Last active 2026-05-16 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-events.png" alt="Domain Events: Design and Implementation" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Domain events capture significant state changes within a bounded context. They are a tactical pattern from Domain-Driven Design that enables loose coupling between domain aggregates while maintaining consistency boundaries. A domain event represents something that happened in the past and is meaningful to domain experts: OrderSubmitted, PaymentReceived, InventoryDepleted. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-events.png" alt="Domain Events: Design and Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-events.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-events.png" alt="Domain Events: Design and Implementation" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Domain events capture significant state changes within a bounded context. They are a tactical pattern from Domain-Driven Design that enables loose coupling between domain aggregates while maintaining consistency boundaries. A domain event represents something that happened in the past and is meaningful to domain experts: OrderSubmitted, PaymentReceived, InventoryDepleted. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-events.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-events.png" alt="Domain Events: Design and Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Designing domain events requires careful consideration of what information to include. Each event should contain the aggregate identifier, a timestamp of when the event occurred, the event type, and the data relevant to the change. Crucially, domain events should not contain internal implementation details of the aggregate. The specific fields should represent what happened from the domain perspective, not what data structures changed internally. Event naming follows past-tense convention: OrderShipped rather than ShipOrder, which would be a command. </p>
 <p>The publishing lifecycle has distinct phases. First, the domain event is raised within the aggregate during a command execution. The aggregate appends the event to a collection of unpublished events. When the repository saves the aggregate, it persists both the aggregate state and publishes the events. This atomicity is critical — publishing events must be transactional with the state change to prevent inconsistencies between what the system recorded and what other services learned. </p>
 <p>In-process domain event handling occurs within the same transaction. Event handlers registered in the application layer execute immediately after the aggregate is saved. These handlers are appropriate for side effects that must be consistent with the transaction, such as sending notifications or invalidating caches. They execute synchronously, so they must be fast and reliable. </p>
@@ -114,6 +117,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>

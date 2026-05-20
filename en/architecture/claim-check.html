@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-02">
     <meta property="article:modified_time" content="2026-05-02">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.webp" type="image/webp" fetchpriority="high">
     <title>Claim Check Pattern — SourceHub</title>
     <meta name="description" content="Learn the claim check pattern: store large payloads, pass references, and enable asynchronous processing">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png",
       "datePublished": "2026-05-02",
       "dateModified": "2026-05-02",
-      "wordCount": "1245",
+      "wordCount": "1273",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -95,8 +98,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Claim Check Pattern</h1>
       <div class="article-meta">Published 2026-05-02 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>The claim check pattern is a messaging pattern that addresses the challenge of passing large payloads through a message broker. Instead of including the payload in the message, the producer stores the payload in a shared data store and sends a reference (claim check) in the message. The consumer retrieves the payload using the reference. This pattern is essential for systems where message size limits are a concern. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>The claim check pattern is a messaging pattern that addresses the challenge of passing large payloads through a message broker. Instead of including the payload in the message, the producer stores the payload in a shared data store and sends a reference (claim check) in the message. The consumer retrieves the payload using the reference. This pattern is essential for systems where message size limits are a concern. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The Problem with Large Messages </p>
 <p>Message brokers impose size limits. Kafka has a default max message size of 1MB, though this can be increased. SQS has a 256KB limit. RabbitMQ can handle larger messages but performance degrades significantly. Even where limits can be increased, large messages cause problems: increased broker storage, slower serialization and deserialization, increased network transfer time, and memory pressure on consumers. </p>
 <p>A single high-resolution image, a large CSV file, or a JSON document with many nested objects can easily exceed these limits. The claim check pattern solves this problem without requiring changes to the message broker configuration. </p>
@@ -123,6 +126,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p>

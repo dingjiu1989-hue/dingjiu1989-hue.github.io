@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-11">
     <meta property="article:modified_time" content="2026-05-19">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transactional-inbox.webp" type="image/webp" fetchpriority="high">
     <title>Transactional Inbox Pattern for Reliable Messaging — SourceHub</title>
     <meta name="description" content="The transactional inbox pattern ensures reliable message processing by storing incoming messages before handling them.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/transactional-inbox.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-19",
-      "wordCount": "775",
+      "wordCount": "798",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -95,8 +98,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Transactional Inbox Pattern for Reliable Messaging</h1>
       <div class="article-meta">Published 2026-05-11 · Last active 2026-05-19 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transactional-inbox.png" alt="Transactional Inbox Pattern for Reliable Messaging" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>The transactional inbox pattern ensures reliable message processing by storing incoming messages in a persistent inbox before processing them. This guarantees at-least-once processing without duplicating work during retries.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transactional-inbox.png" alt="Transactional Inbox Pattern for Reliable Messaging" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transactional-inbox.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transactional-inbox.png" alt="Transactional Inbox Pattern for Reliable Messaging" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>The transactional inbox pattern ensures reliable message processing by storing incoming messages in a persistent inbox before processing them. This guarantees at-least-once processing without duplicating work during retries.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transactional-inbox.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transactional-inbox.png" alt="Transactional Inbox Pattern for Reliable Messaging" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>The Problem</h2>
 <p>In distributed systems, messages can be delivered multiple times. Network failures, consumer crashes, and broker retries all cause duplicate deliveries without the producer knowing. Without the inbox pattern, duplicate messages cause duplicate side effects—charging a customer twice, creating duplicate records.</p>
 <h2>How It Works</h2>
@@ -116,6 +119,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p>

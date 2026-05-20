@@ -1326,3 +1326,5 @@ The best system design is the one that solves today's problem without creating t
 **See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)
 
 **See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)
+
+**See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)

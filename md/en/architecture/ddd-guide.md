@@ -206,3 +206,5 @@ DDD provides a powerful toolkit for building software that deeply models the bus
 **See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)
 
 **See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)
+
+**See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)

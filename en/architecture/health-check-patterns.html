@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-27">
     <meta property="article:modified_time" content="2026-05-14">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/health-check-patterns.webp" type="image/webp" fetchpriority="high">
     <title>Health Check Patterns — SourceHub</title>
     <meta name="description" content="Liveness vs readiness probes, custom health checks, dependency health, graceful degradation, and production practices">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/health-check-patterns.png",
       "datePublished": "2026-04-27",
       "dateModified": "2026-05-14",
-      "wordCount": "1200",
+      "wordCount": "1226",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Health Check Patterns</h1>
       <div class="article-meta">Published 2026-04-27 · Last active 2026-05-14 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/health-check-patterns.png" alt="Health Check Patterns" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Health checks are the mechanism by which orchestration platforms and load balancers determine whether an application instance is capable of serving requests. Two distinct check types serve different purposes: liveness and readiness. Understanding the difference and implementing them correctly is essential for reliable deployments, self-healing infrastructure, and graceful degradation. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/health-check-patterns.png" alt="Health Check Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/health-check-patterns.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/health-check-patterns.png" alt="Health Check Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Health checks are the mechanism by which orchestration platforms and load balancers determine whether an application instance is capable of serving requests. Two distinct check types serve different purposes: liveness and readiness. Understanding the difference and implementing them correctly is essential for reliable deployments, self-healing infrastructure, and graceful degradation. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/health-check-patterns.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/health-check-patterns.png" alt="Health Check Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Liveness probes determine whether the application process is alive. If a liveness probe fails, the application is stuck or deadlocked — unable to recover without restart. The orchestrator will terminate and restart the container or process. Liveness probes should check only whether the process can operate at all. Common checks include: reading a health file written by the application, checking that the main event loop is running, or verifying that internal goroutine counts are within bounds. </p>
 <p>The danger of aggressive liveness probes is the "restart loop of death." If the application becomes slow due to a dependency outage, and the liveness probe times out, the orchestrator restarts the process. The new process immediately encounters the same dependency outage, fails again, and gets restarted in a loop. This not only fails to solve the problem but compounds it by adding startup overhead. Liveness probes should be conservative — use a longer interval (30 seconds) with high failure thresholds. </p>
 <p>Readiness probes determine whether the application is ready to accept traffic. If a readiness probe fails, the instance is removed from service but not restarted. Readiness probes should check that dependencies — databases, message brokers, upstream services — are accessible and that the application has sufficient capacity. A failing readiness probe means the instance should stop accepting new traffic but can recover once dependencies become available. </p>
@@ -115,6 +118,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></p>

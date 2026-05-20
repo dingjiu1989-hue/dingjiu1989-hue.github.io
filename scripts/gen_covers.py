@@ -148,6 +148,8 @@ def draw_cover(title, board, lang, output_path):
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     img.save(str(output_path), "PNG")
+    webp_path = str(output_path).replace('.png', '.webp')
+    img.save(webp_path, "WEBP", quality=82)
 
 
 def main():
@@ -180,6 +182,7 @@ def main():
         draw.text(((W - tw) // 2, (H - 50) // 2), text, fill="#FFFFFF", font=font)
         default_path.parent.mkdir(parents=True, exist_ok=True)
         img.save(str(default_path), "PNG")
+        img.save(str(default_path).replace('.png', '.webp'), "WEBP", quality=82)
         print("Created default og image")
 
     print("Done.")

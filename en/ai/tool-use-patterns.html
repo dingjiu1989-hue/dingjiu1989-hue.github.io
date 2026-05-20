@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-02-19">
     <meta property="article:modified_time" content="2026-04-28">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.webp" type="image/webp" fetchpriority="high">
     <title>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning — SourceHub</title>
     <meta name="description" content="Explore LLM tool use patterns including function calling, structured tool definitions, multi-step reasoning with tool loops, and error recovery strategies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.png",
       "datePublished": "2026-02-19",
       "dateModified": "2026-04-28",
-      "wordCount": "1447",
+      "wordCount": "1491",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -98,9 +101,9 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h1>
       <div class="article-meta">Published 2026-02-19 · Last active 2026-04-28 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.png" alt="Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning" width="1200" height="630" loading="lazy">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.png" alt="Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><h2>Introduction</h2>
-<p>Tool use, or function calling, enables LLMs to interact with external systems: query databases, call APIs, execute code, and retrieve information. This capability transforms LLMs from text generators into autonomous agents. This article covers the essential patterns for defining, invoking, and chaining tool calls in production systems.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.png" alt="Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<p>Tool use, or function calling, enables LLMs to interact with external systems: query databases, call APIs, execute code, and retrieve information. This capability transforms LLMs from text generators into autonomous agents. This article covers the essential patterns for defining, invoking, and chaining tool calls in production systems.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.png" alt="Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Defining Tools</h2>
 <p>Every tool needs a clear schema that the LLM can understand and the application can execute:</p>
 <p>from openai import OpenAI</p>
@@ -230,6 +233,7 @@
 <p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>

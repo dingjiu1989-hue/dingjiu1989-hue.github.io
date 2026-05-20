@@ -51,3 +51,5 @@ Testing domain events requires verifying that the correct events are raised for 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)

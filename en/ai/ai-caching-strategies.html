@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,12 +32,13 @@
     <meta property="article:published_time" content="2026-02-10">
     <meta property="article:modified_time" content="2026-05-04">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-caching-strategies.webp" type="image/webp" fetchpriority="high">
     <title>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement — SourceHub</title>
     <meta name="description" content="Reduce LLM API costs and latency with AI caching strategies: semantic caching, intelligent invalidation, and cost-optimized caching tiers.">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/ai/ai-caching-strategies.html">
     <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/ai-caching-strategies.html">
-    <link rel="prev" href="https://dingjiu1989-hue.github.io/en/ai/responsible-ai.html">
+    <link rel="prev" href="https://dingjiu1989-hue.github.io/en/ai/multimodal-ai.html">
     <link rel="next" href="https://dingjiu1989-hue.github.io/en/ai/rag-architecture-guide.html">
     <meta name="robots" content="index, follow">
     <script type="application/ld+json">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-caching-strategies.png",
       "datePublished": "2026-02-10",
       "dateModified": "2026-05-04",
-      "wordCount": "1643",
+      "wordCount": "1689",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h1>
       <div class="article-meta">Published 2026-02-10 · Last active 2026-05-04 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-caching-strategies.png" alt="AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>LLM API calls are expensive and slow. The average GPT-4 response costs about a cent and takes seconds. For production applications serving thousands of users, caching is not optional. It is an economic necessity. Here is how to cache AI responses effectively.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-caching-strategies.png" alt="AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-caching-strategies.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-caching-strategies.png" alt="AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>LLM API calls are expensive and slow. The average GPT-4 response costs about a cent and takes seconds. For production applications serving thousands of users, caching is not optional. It is an economic necessity. Here is how to cache AI responses effectively.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-caching-strategies.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-caching-strategies.png" alt="AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>The Case for Caching</h2>
 <p>Without caching, every user query hits the LLM API. This means every query costs money, every query takes seconds, and your API costs scale linearly with usage.</p>
 <p>With caching, repeated or similar queries return instant, free responses. For applications where users ask similar questions like a documentation chatbot or a customer support bot, cache hit rates of 40% to 70% are achievable.</p>
@@ -138,6 +141,7 @@
 <p><strong>See also:</strong> <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a></p>

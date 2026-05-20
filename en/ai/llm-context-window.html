@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2025-12-12">
     <meta property="article:modified_time" content="2026-05-13">
     <meta property="article:tag" content="Artificial Intelligence, Machine Learning">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-context-window.webp" type="image/webp" fetchpriority="high">
     <title>LLM Context Window Management — SourceHub</title>
     <meta name="description" content="Best practices for managing LLM context windows effectively including sliding windows, summarization, and retrieval strategies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-context-window.png",
       "datePublished": "2025-12-12",
       "dateModified": "2026-05-13",
-      "wordCount": "2365",
+      "wordCount": "2381",
       "keywords": "Artificial Intelligence, Machine Learning",
       "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
       "inLanguage": "en",
@@ -97,9 +100,9 @@
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">LLM Context Window Management</h1>
       <div class="article-meta">Published 2025-12-12 · Last active 2026-05-13 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-context-window.png" alt="LLM Context Window Management" width="1200" height="630" loading="lazy">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-context-window.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-context-window.png" alt="LLM Context Window Management" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><h2>Introduction</h2>
-<p>Context window size has grown from 2K tokens in early GPT models to 200K tokens in GPT-4, 200K in Claude 3, and even 1 million tokens in Gemini 1.5 Pro. Despite this growth, effective context management remains critical — models attend less effectively to information in the middle of long contexts, token costs scale with context length, and response latency increases. This guide covers strategies for managing context windows in production.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-context-window.png" alt="LLM Context Window Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<p>Context window size has grown from 2K tokens in early GPT models to 200K tokens in GPT-4, 200K in Claude 3, and even 1 million tokens in Gemini 1.5 Pro. Despite this growth, effective context management remains critical — models attend less effectively to information in the middle of long contexts, token costs scale with context length, and response latency increases. This guide covers strategies for managing context windows in production.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-context-window.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-context-window.png" alt="LLM Context Window Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>The "Lost in the Middle" Problem</h2>
 <p>Research consistently shows that LLMs perform best when relevant information appears at the beginning or end of the context window. Information in the middle is more likely to be ignored or incorrectly processed.</p>
 <p><strong>Performance by position (approximate):</strong></p>
@@ -243,6 +246,7 @@
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-document-processing.html">AI Document Processing</a>, <a href="/en/ai/llm-evaluation-metrics.html">LLM Evaluation Metrics</a>, <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-document-processing.html">AI Document Processing</a>, <a href="/en/ai/llm-evaluation-metrics.html">LLM Evaluation Metrics</a>, <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-document-processing.html">AI Document Processing</a>, <a href="/en/ai/llm-evaluation-metrics.html">LLM Evaluation Metrics</a>, <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-document-processing.html">AI Document Processing</a>, <a href="/en/ai/llm-evaluation-metrics.html">LLM Evaluation Metrics</a>, <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a></p>

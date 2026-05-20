@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-06">
     <meta property="article:modified_time" content="2026-05-19">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consumer-driven-contracts.webp" type="image/webp" fetchpriority="high">
     <title>Consumer-Driven Contracts in Microservices — SourceHub</title>
     <meta name="description" content="Learn consumer-driven contract testing to ensure microservice compatibility without brittle integration tests.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/consumer-driven-contracts.png",
       "datePublished": "2026-05-06",
       "dateModified": "2026-05-19",
-      "wordCount": "752",
+      "wordCount": "776",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -95,8 +98,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Consumer-Driven Contracts in Microservices</h1>
       <div class="article-meta">Published 2026-05-06 · Last active 2026-05-19 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consumer-driven-contracts.png" alt="Consumer-Driven Contracts in Microservices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Consumer-driven contracts (CDC) is a pattern where service consumers define the expectations for the API they consume. The provider tests against these contracts to ensure changes do not break consumers. This approach enables independent service evolution while maintaining compatibility.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consumer-driven-contracts.png" alt="Consumer-Driven Contracts in Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consumer-driven-contracts.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consumer-driven-contracts.png" alt="Consumer-Driven Contracts in Microservices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Consumer-driven contracts (CDC) is a pattern where service consumers define the expectations for the API they consume. The provider tests against these contracts to ensure changes do not break consumers. This approach enables independent service evolution while maintaining compatibility.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consumer-driven-contracts.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consumer-driven-contracts.png" alt="Consumer-Driven Contracts in Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>How CDC Works</h2>
 <p>Each consumer creates a contract file specifying exactly how it uses the provider's API—which endpoints, request parameters, and response fields. These contracts are shared with the provider. The provider runs a contract verification suite that tests its API against all consumer contracts before deployment.</p>
 <p>If a provider change would break any consumer, the contract test fails. The provider must either revert the change or coordinate with the consumer to update the contract. This feedback loop catches breaking changes before they reach production.</p>
@@ -115,6 +118,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/contract-testing.html">Contract Testing for Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/contract-testing.html">Contract Testing for Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/contract-testing.html">Contract Testing for Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a></p>

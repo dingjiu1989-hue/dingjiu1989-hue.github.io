@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-15">
     <meta property="article:modified_time" content="2026-05-12">
     <meta property="article:tag" content="Database, Backend, Data">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/database/database-query-profiling.webp" type="image/webp" fetchpriority="high">
     <title>Database Query Profiling: Finding and Fixing Performance Bottlenecks — SourceHub</title>
     <meta name="description" content="Profile database queries to identify bottlenecks: execution plans, wait events, and systematic optimization.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-query-profiling.png",
       "datePublished": "2026-04-15",
       "dateModified": "2026-05-12",
-      "wordCount": "718",
+      "wordCount": "766",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Query Profiling: Finding and Fixing Performance Bottlenecks</h1>
       <div class="article-meta">Published 2026-04-15 · Last active 2026-05-12 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-query-profiling.png" alt="Database Query Profiling: Finding and Fixing Performance Bottlenecks" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Query profiling identifies why a query is slow. Rather than guessing, profiling measures where time is spent: CPU, I/O, locks, or network. This data guides targeted optimization.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-query-profiling.png" alt="Database Query Profiling: Finding and Fixing Performance Bottlenecks" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-query-profiling.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-query-profiling.png" alt="Database Query Profiling: Finding and Fixing Performance Bottlenecks" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Query profiling identifies why a query is slow. Rather than guessing, profiling measures where time is spent: CPU, I/O, locks, or network. This data guides targeted optimization.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-query-profiling.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-query-profiling.png" alt="Database Query Profiling: Finding and Fixing Performance Bottlenecks" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Profiling Tools</h2>
 <p>PostgreSQL: EXPLAIN ANALYZE BUFFERS shows execution plan with actual timing and buffer access. pg_stat_statements tracks query statistics. auto_explain logs slow queries automatically. pgBadger analyzes PostgreSQL logs for query performance patterns.</p>
 <p>MySQL: EXPLAIN ANALYZE (MySQL 8.0.18+) shows execution plan. performance_schema tracks query execution statistics. sys schema provides query performance summaries. pt-query-digest analyzes slow query logs.</p>
@@ -113,6 +116,7 @@
 <p><strong>See also:</strong> <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/orm-performance.html">ORM Performance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/orm-performance.html">ORM Performance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/orm-performance.html">ORM Performance</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a></p>

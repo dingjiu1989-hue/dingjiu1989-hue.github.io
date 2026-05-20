@@ -329,3 +329,5 @@ The polyglot persistence approach uses multiple databases for different workload
 **See also:** [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>)
 
 **See also:** [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>)
+
+**See also:** [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>)

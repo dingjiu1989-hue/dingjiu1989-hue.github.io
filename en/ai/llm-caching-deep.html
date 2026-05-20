@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-02-16">
     <meta property="article:modified_time" content="2026-04-22">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-caching-deep.webp" type="image/webp" fetchpriority="high">
     <title>LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies — SourceHub</title>
     <meta name="description" content="Deep dive into LLM caching strategies: semantic similarity caching, exact match caching, TTL-based expiration, and cache invalidation patterns for cost reductio">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-caching-deep.png",
       "datePublished": "2026-02-16",
       "dateModified": "2026-04-22",
-      "wordCount": "1763",
+      "wordCount": "1806",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -98,9 +101,9 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</h1>
       <div class="article-meta">Published 2026-02-16 · Last active 2026-04-22 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-caching-deep.png" alt="LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies" width="1200" height="630" loading="lazy">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-caching-deep.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-caching-deep.png" alt="LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><h2>Introduction</h2>
-<p>LLM API calls are expensive, both in cost and latency. Caching previously generated responses can reduce costs by 20-80% depending on the application. Unlike traditional HTTP caching where exact URL matching suffices, LLM caching must handle semantically equivalent but textually different queries. This article covers caching strategies from simple exact match to sophisticated semantic caching.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-caching-deep.png" alt="LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<p>LLM API calls are expensive, both in cost and latency. Caching previously generated responses can reduce costs by 20-80% depending on the application. Unlike traditional HTTP caching where exact URL matching suffices, LLM caching must handle semantically equivalent but textually different queries. This article covers caching strategies from simple exact match to sophisticated semantic caching.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-caching-deep.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-caching-deep.png" alt="LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Exact Match Cache</h2>
 <p>The simplest cache: identical inputs produce identical outputs:</p>
 <p>import hashlib</p>
@@ -244,6 +247,7 @@
 <p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a></p>

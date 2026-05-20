@@ -1,7 +1,7 @@
 ---
 title: "Leader Election in Distributed Systems"
 description: "Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best practices"
-date: 2026-04-27
+date: 2026-05-20
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/leader-election.html
 ---
@@ -39,6 +39,8 @@ Observability of leadership state is essential. Expose leadership status as a me
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
+
+**See also:** [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
 
 **See also:** [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
 

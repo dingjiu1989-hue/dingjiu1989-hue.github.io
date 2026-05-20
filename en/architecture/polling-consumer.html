@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-07">
     <meta property="article:modified_time" content="2026-05-19">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/polling-consumer.webp" type="image/webp" fetchpriority="high">
     <title>Polling Consumer vs Event-Driven Consumer — SourceHub</title>
     <meta name="description" content="Compare polling and event-driven consumer patterns: when to poll, when to push, and hybrid approaches.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/polling-consumer.png",
       "datePublished": "2026-05-07",
       "dateModified": "2026-05-19",
-      "wordCount": "688",
+      "wordCount": "711",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -106,8 +109,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Polling Consumer vs Event-Driven Consumer</h1>
       <div class="article-meta">Published 2026-05-07 · Last active 2026-05-19 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/polling-consumer.png" alt="Polling Consumer vs Event-Driven Consumer" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Consumers in distributed systems retrieve messages through two primary mechanisms: polling (pull) and event-driven (push). Each approach has distinct trade-offs for latency, resource usage, and implementation complexity.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/polling-consumer.png" alt="Polling Consumer vs Event-Driven Consumer" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/polling-consumer.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/polling-consumer.png" alt="Polling Consumer vs Event-Driven Consumer" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Consumers in distributed systems retrieve messages through two primary mechanisms: polling (pull) and event-driven (push). Each approach has distinct trade-offs for latency, resource usage, and implementation complexity.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/polling-consumer.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/polling-consumer.png" alt="Polling Consumer vs Event-Driven Consumer" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Polling Consumer</h2>
 <p>A polling consumer periodically checks a queue or endpoint for new messages. The consumer controls the polling frequency, which determines the trade-off between latency (how quickly messages are received) and resource cost (API calls, CPU usage).</p>
 <p>Polling is simple to implement and provides natural backpressure—if the consumer is overloaded, it can slow its polling rate. It works well when message arrival is unpredictable or when the consumer needs to control its processing cadence.</p>
@@ -126,6 +129,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a></p>

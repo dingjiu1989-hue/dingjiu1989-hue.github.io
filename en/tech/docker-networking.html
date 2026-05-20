@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-01-01">
     <meta property="article:modified_time" content="2026-04-11">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/tech/docker-networking.webp" type="image/webp" fetchpriority="high">
     <title>Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting — SourceHub</title>
     <meta name="description" content="In-depth guide to Docker networking covering bridge networks, overlay networking for Swarm, host mode, macvlan drivers, network policies, and common troubleshooting approaches.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/docker-networking.png",
       "datePublished": "2026-01-01",
       "dateModified": "2026-04-11",
-      "wordCount": "1612",
+      "wordCount": "1658",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -98,9 +101,9 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</h1>
       <div class="article-meta">Published 2026-01-01 · Last active 2026-04-11 · 240 views · 2 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/docker-networking.png" alt="Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting" width="1200" height="630" loading="lazy">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/docker-networking.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/docker-networking.png" alt="Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><h2>Introduction</h2>
-<p>Docker networking is a critical component of containerized applications. Understanding the available network drivers and their behavior is essential for designing secure, performant multi-container deployments. Docker provides five built-in network drivers: bridge, host, overlay, macvlan, and none. Each serves different use cases with distinct trade-offs.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/docker-networking.png" alt="Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<p>Docker networking is a critical component of containerized applications. Understanding the available network drivers and their behavior is essential for designing secure, performant multi-container deployments. Docker provides five built-in network drivers: bridge, host, overlay, macvlan, and none. Each serves different use cases with distinct trade-offs.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/docker-networking.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/docker-networking.png" alt="Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>This article explores each driver in detail, along with network policies and troubleshooting techniques.</p>
 <h2>Bridge Networks</h2>
 <p>The bridge network driver creates an internal virtual network within the Docker host. Containers connected to the same bridge network can communicate using IP addresses or container names (when embedded DNS is enabled). The default bridge network (<code>docker0</code>) has limitations: containers cannot resolve each other by name unless linked — a deprecated feature.</p>
@@ -151,6 +154,7 @@
 <p><strong>See also:</strong> <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a></p>

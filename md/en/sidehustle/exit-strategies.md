@@ -81,3 +81,5 @@ SaaS exit strategies range from high-growth acquisition targets to sustainable l
 **See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [SaaS Migration Guide: Data Export, Import, Zero-Downtime](</en/sidehustle/saas-migration-guide.html>)
 
 **See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [SaaS Migration Guide: Data Export, Import, Zero-Downtime](</en/sidehustle/saas-migration-guide.html>)
+
+**See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [SaaS Migration Guide: Data Export, Import, Zero-Downtime](</en/sidehustle/saas-migration-guide.html>)

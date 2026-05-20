@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-01">
     <meta property="article:modified_time" content="2026-04-15">
     <meta property="article:tag" content="Database, Backend, Data">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/database/database-concurrency.webp" type="image/webp" fetchpriority="high">
     <title>Database Concurrency Control: MVCC, Locking, and Deadlocks — SourceHub</title>
     <meta name="description" content="Deep dive into database concurrency control mechanisms: optimistic vs pessimistic locking, MVCC internals, deadlock detection, and PostgreSQL implementation.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-concurrency.png",
       "datePublished": "2026-04-01",
       "dateModified": "2026-04-15",
-      "wordCount": "1940",
+      "wordCount": "1977",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Concurrency Control: MVCC, Locking, and Deadlocks</h1>
       <div class="article-meta">Published 2026-04-01 · Last active 2026-04-15 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-concurrency.png" alt="Database Concurrency Control: MVCC, Locking, and Deadlocks" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Database Concurrency Control: MVCC, Locking, and Deadlocks </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-concurrency.png" alt="Database Concurrency Control: MVCC, Locking, and Deadlocks" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-concurrency.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-concurrency.png" alt="Database Concurrency Control: MVCC, Locking, and Deadlocks" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Database Concurrency Control: MVCC, Locking, and Deadlocks </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-concurrency.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-concurrency.png" alt="Database Concurrency Control: MVCC, Locking, and Deadlocks" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Modern databases must handle thousands of concurrent transactions reading and writing the same rows. Concurrency control mechanisms ensure correctness while maximizing throughput. PostgreSQL's approach is built on Multi-Version Concurrency Control (MVCC). </p>
 <p>Multi-Version Concurrency Control (MVCC) </p>
 <p>MVCC is the foundation of concurrency in PostgreSQL and Oracle. Instead of locking rows for readers, MVCC preserves multiple versions of each row. Each transaction sees a snapshot of data as it existed at that transaction's start time. </p>
@@ -202,6 +205,7 @@
 <p><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/database-locking-mechanisms.html">Database Locking: Row Locks, Table Locks, and Deadlock Prevention</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/database-locking-mechanisms.html">Database Locking: Row Locks, Table Locks, and Deadlock Prevention</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/database-locking-mechanisms.html">Database Locking: Row Locks, Table Locks, and Deadlock Prevention</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a></p>

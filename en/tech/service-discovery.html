@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2025-12-31">
     <meta property="article:modified_time" content="2026-05-18">
     <meta property="article:tag" content="Technology, Programming, DevOps">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.webp" type="image/webp" fetchpriority="high">
     <title>Service Discovery in Microservices — SourceHub</title>
     <meta name="description" content="Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, including health checking and blue-green deployment strategies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.png",
       "datePublished": "2025-12-31",
       "dateModified": "2026-05-18",
-      "wordCount": "1295",
+      "wordCount": "1323",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Service Discovery in Microservices</h1>
       <div class="article-meta">Published 2025-12-31 · Last active 2026-05-18 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.png" alt="Service Discovery in Microservices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Service discovery enables services to find and communicate with each other in a distributed system. In static environments, service locations could be hardcoded. In dynamic environments like Kubernetes, service instances are ephemeral—they come and go, scale up and down, and move between hosts. Service discovery provides a mechanism for locating available service instances.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.png" alt="Service Discovery in Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.png" alt="Service Discovery in Microservices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Service discovery enables services to find and communicate with each other in a distributed system. In static environments, service locations could be hardcoded. In dynamic environments like Kubernetes, service instances are ephemeral—they come and go, scale up and down, and move between hosts. Service discovery provides a mechanism for locating available service instances.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.png" alt="Service Discovery in Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>The Service Discovery Problem</h2>
 <p>Service discovery solves two problems. Registration: when a service instance starts, it must register its location and capabilities so other services can find it. Lookup: when a service needs to call another service, it must discover the location of available instances.</p>
 <p>Effective service discovery handles dynamic environments. It reacts to instance registration immediately—new instances become available as soon as they register. It handles instance failures—when an instance crashes or becomes unhealthy, it is removed from the available pool. It distributes load across available instances.</p>
@@ -130,6 +133,7 @@
 <p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>

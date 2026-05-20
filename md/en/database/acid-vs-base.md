@@ -87,3 +87,5 @@ Choose ACID where correctness is critical and BASE where scale matters. Modern d
 **See also:** [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>), [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>)
 
 **See also:** [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>), [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>)
+
+**See also:** [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>), [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>)

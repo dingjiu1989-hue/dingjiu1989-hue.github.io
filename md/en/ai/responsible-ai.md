@@ -1,7 +1,7 @@
 ---
 title: "Responsible AI Development Practices"
 description: "Implement bias detection, fairness metrics, explainability with SHAP and LIME, transparency documentation, regulatory compliance, and safety guardrails."
-date: 2026-02-10
+date: 2026-05-19
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/responsible-ai.html
 ---
@@ -519,6 +519,8 @@ Building responsible AI requires ongoing commitment, not a one-time checklist. I
 **See also:** [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>)
 
 **See also:** [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>)
+
+**See also:** [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>)
 
 **See also:** [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>)
 

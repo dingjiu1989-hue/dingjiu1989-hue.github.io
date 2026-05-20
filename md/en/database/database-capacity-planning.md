@@ -343,3 +343,5 @@ Capacity planning is not a one-time exercise. Review your database capacity mont
 **See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
 
 **See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
+
+**See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)

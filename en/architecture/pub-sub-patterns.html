@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-14">
     <meta property="article:modified_time" content="2026-05-19">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/pub-sub-patterns.webp" type="image/webp" fetchpriority="high">
     <title>Pub-Sub Patterns: Event-Driven Communication — SourceHub</title>
     <meta name="description" content="A deep dive into publish-subscribe patterns for decoupled service communication in distributed systems.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/pub-sub-patterns.png",
       "datePublished": "2026-05-14",
       "dateModified": "2026-05-19",
-      "wordCount": "737",
+      "wordCount": "761",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -95,8 +98,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Pub-Sub Patterns: Event-Driven Communication</h1>
       <div class="article-meta">Published 2026-05-14 · Last active 2026-05-19 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/pub-sub-patterns.png" alt="Pub-Sub Patterns: Event-Driven Communication" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>The publish-subscribe (pub-sub) pattern enables one-to-many communication between services without direct coupling. Publishers emit events without knowing which subscribers will receive them. Subscribers express interest in certain events and receive them asynchronously.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/pub-sub-patterns.png" alt="Pub-Sub Patterns: Event-Driven Communication" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/pub-sub-patterns.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/pub-sub-patterns.png" alt="Pub-Sub Patterns: Event-Driven Communication" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>The publish-subscribe (pub-sub) pattern enables one-to-many communication between services without direct coupling. Publishers emit events without knowing which subscribers will receive them. Subscribers express interest in certain events and receive them asynchronously.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/pub-sub-patterns.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/pub-sub-patterns.png" alt="Pub-Sub Patterns: Event-Driven Communication" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Core Concepts</h2>
 <p>A pub-sub system has three components: publishers that produce events, a message broker that routes events, and subscribers that consume events. Events are categorized into topics or channels. Subscribers register interest in specific topics and receive all events published to those topics.</p>
 <h2>Message Brokers</h2>
@@ -115,6 +118,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>

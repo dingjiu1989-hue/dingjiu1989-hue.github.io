@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2025-12-30">
     <meta property="article:modified_time" content="2026-04-18">
     <meta property="article:tag" content="Technology, Programming, DevOps">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-advanced.webp" type="image/webp" fetchpriority="high">
     <title>Advanced GitHub Actions Workflows — SourceHub</title>
     <meta name="description" content="Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching strategies for production-grade CI/CD pipelines.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-advanced.png",
       "datePublished": "2025-12-30",
       "dateModified": "2026-04-18",
-      "wordCount": "4471",
+      "wordCount": "4498",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
@@ -98,9 +101,9 @@
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Advanced GitHub Actions Workflows</h1>
       <div class="article-meta">Published 2025-12-30 · Last active 2026-04-18 · 360 views · 3 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-advanced.png" alt="Advanced GitHub Actions Workflows" width="1200" height="630" loading="lazy">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-advanced.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-advanced.png" alt="Advanced GitHub Actions Workflows" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><h2>Introduction</h2>
-<p>GitHub Actions has evolved beyond simple CI/CD into a full-featured automation platform. Teams managing monorepos, multi-service architectures, or compliance-sensitive deployments need advanced workflows that are maintainable, fast, and secure. This article explores production-ready patterns for GitHub Actions at scale.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-advanced.png" alt="Advanced GitHub Actions Workflows" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<p>GitHub Actions has evolved beyond simple CI/CD into a full-featured automation platform. Teams managing monorepos, multi-service architectures, or compliance-sensitive deployments need advanced workflows that are maintainable, fast, and secure. This article explores production-ready patterns for GitHub Actions at scale.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-advanced.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-advanced.png" alt="Advanced GitHub Actions Workflows" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Reusable Workflows</h2>
 <p>Reusable workflows eliminate duplication across repositories. Define a workflow in <code>.github/workflows/deploy-shared.yml</code> with <code>workflow_call</code>:</p>
 <h2>.github/workflows/deploy-shared.yml</h2>
@@ -305,6 +308,7 @@
 <p><strong>See also:</strong> <a href="/en/tech/github-actions-workflows.html">GitHub Actions Workflows: Advanced Patterns</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/github-actions-workflows.html">GitHub Actions Workflows: Advanced Patterns</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/github-actions-workflows.html">GitHub Actions Workflows: Advanced Patterns</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a>, <a href="/en/tech/bash-scripting-guide.html">Bash Scripting Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a>, <a href="/en/tech/bash-scripting-guide.html">Bash Scripting Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a>, <a href="/en/tech/bash-scripting-guide.html">Bash Scripting Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a>, <a href="/en/tech/bash-scripting-guide.html">Bash Scripting Best Practices</a></p>

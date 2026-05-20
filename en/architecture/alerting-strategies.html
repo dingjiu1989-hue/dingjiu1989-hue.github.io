@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-21">
     <meta property="article:modified_time" content="2026-05-11">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/alerting-strategies.webp" type="image/webp" fetchpriority="high">
     <title>Alerting Strategies for Production Systems — SourceHub</title>
     <meta name="description" content="Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/alerting-strategies.png",
       "datePublished": "2026-04-21",
       "dateModified": "2026-05-11",
-      "wordCount": "1247",
+      "wordCount": "1261",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Alerting Strategies for Production Systems</h1>
       <div class="article-meta">Published 2026-04-21 · Last active 2026-05-11 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/alerting-strategies.png" alt="Alerting Strategies for Production Systems" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Alerting is the mechanism that converts observability data into human action. A well-designed alerting strategy ensures that the right people are notified at the right time with sufficient context to take effective action. Poor alerting — too many, too few, or poorly targeted — degrades operational effectiveness and drives engineer burnout. The goal is not to minimize alerts but to make every alert actionable. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/alerting-strategies.png" alt="Alerting Strategies for Production Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/alerting-strategies.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/alerting-strategies.png" alt="Alerting Strategies for Production Systems" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Alerting is the mechanism that converts observability data into human action. A well-designed alerting strategy ensures that the right people are notified at the right time with sufficient context to take effective action. Poor alerting — too many, too few, or poorly targeted — degrades operational effectiveness and drives engineer burnout. The goal is not to minimize alerts but to make every alert actionable. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/alerting-strategies.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/alerting-strategies.png" alt="Alerting Strategies for Production Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Alert fatigue is the primary symptom of alerting dysfunction. When engineers receive alerts that require no action (stale alerts, self-resolving conditions, duplicate notifications), they learn to ignore them. Eventually, critical alerts get buried in noise. The cure is ruthless alert hygiene: every alert that pages someone must require human judgment or action. If an alert fires and the engineer consistently finds nothing to do, the alert should be deleted or downgraded to a warning. </p>
 <p>Threshold tuning is a continuous process, not a one-time configuration. Static thresholds are rarely correct for long — traffic patterns shift, deployments change characteristics, and business cycles create different performance profiles. Dynamic thresholding using historical baselines accounts for predictable patterns (daily seasonality, weekly cycles). An alert should fire when the current metric deviates significantly from the expected value at this time of day, not when it exceeds an arbitrary absolute value. </p>
 <p>The alert severity hierarchy should be clearly defined and consistently applied. P0 (Critical): customer-facing outage or data loss, requires immediate response, pages an engineer. P1 (High): significant degradation, may become critical if unresolved, pages during business hours. P2 (Medium): non-critical degradation, creates a ticket for next business day review. P3 (Low): informational, logged for trend analysis. Each severity level has different response SLAs, escalation paths, and notification channels. </p>
@@ -116,6 +119,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>

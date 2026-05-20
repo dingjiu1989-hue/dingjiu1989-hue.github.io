@@ -55,3 +55,5 @@ Manual inspection and replay tools should be available for operational teams. So
 **See also:** [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>)
 
 **See also:** [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>)
+
+**See also:** [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>)

@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2025-12-19">
     <meta property="article:modified_time" content="2026-04-19">
     <meta property="article:tag" content="Security, Cybersecurity">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.webp" type="image/webp" fetchpriority="high">
     <title>Secure File Upload Implementation — SourceHub</title>
     <meta name="description" content="Best practices for implementing secure file upload functionality including validation, storage, scanning, and access control.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.png",
       "datePublished": "2025-12-19",
       "dateModified": "2026-04-19",
-      "wordCount": "2498",
+      "wordCount": "2523",
       "keywords": "Security, Cybersecurity",
       "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
       "inLanguage": "en",
@@ -97,8 +100,8 @@
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Secure File Upload Implementation</h1>
       <div class="article-meta">Published 2025-12-19 · Last active 2026-04-19 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.png" alt="Secure File Upload Implementation" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>The Risk of File Uploads </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.png" alt="Secure File Upload Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.png" alt="Secure File Upload Implementation" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>The Risk of File Uploads </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.png" alt="Secure File Upload Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>File upload functionality is one of the most dangerous features an application can expose. An unrestricted file upload can lead to remote code execution, malware distribution, data breaches, and server compromise. Every file upload endpoint must be treated as a critical attack surface. </p>
 <p>Threat Model </p>
 <p>| Attack | Description | |--------|-------------| | Malicious file upload | Attacker uploads a PHP shell or executable | | File size DoS | Huge files exhaust disk space or memory | | Path traversal | Filename manipulates directory traversal | | MIME type spoofing | File extension does not match content | | Malware distribution | Legitimate-looking files containing malware | | Zip bombs | Compressed archive that expands to enormous size | | SSRF via file processing | Server-side parsing of attacker-controlled files | </p>
@@ -229,6 +232,7 @@
 <p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/container-security.html">Container Security Best Practices</a></p>
+<p><strong>See also:</strong> <a href="/en/security/secrets-management.html">Secrets Management for Developers</a>, <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/secrets-management.html">Secrets Management for Developers</a>, <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/secrets-management.html">Secrets Management for Developers</a>, <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/secrets-management.html">Secrets Management for Developers</a>, <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>

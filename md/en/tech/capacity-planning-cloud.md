@@ -128,3 +128,5 @@ Cloud capacity planning requires a multi-faceted approach. Auto-scaling handles 
 **See also:** [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Compose vs Kubernetes: When to Use Each and Migration Path](</en/tech/docker-compose-vs-kubernetes.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>)
 
 **See also:** [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Compose vs Kubernetes: When to Use Each and Migration Path](</en/tech/docker-compose-vs-kubernetes.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>)
+
+**See also:** [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Compose vs Kubernetes: When to Use Each and Migration Path](</en/tech/docker-compose-vs-kubernetes.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>)

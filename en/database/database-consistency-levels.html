@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-14">
     <meta property="article:modified_time" content="2026-05-11">
     <meta property="article:tag" content="Database, Backend, Data">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/database/database-consistency-levels.webp" type="image/webp" fetchpriority="high">
     <title>Database Consistency Levels Explained — SourceHub</title>
     <meta name="description" content="Understanding database consistency: strong consistency, eventual consistency, and tunable consistency in distributed systems.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-consistency-levels.png",
       "datePublished": "2026-04-14",
       "dateModified": "2026-05-11",
-      "wordCount": "1000",
+      "wordCount": "1044",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Consistency Levels Explained</h1>
       <div class="article-meta">Published 2026-04-14 · Last active 2026-05-11 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-consistency-levels.png" alt="Database Consistency Levels Explained" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Consistency in distributed databases describes how up-to-date the data is across all nodes when a read occurs after a write. Different consistency levels offer trade-offs between correctness, availability, and performance.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-consistency-levels.png" alt="Database Consistency Levels Explained" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-consistency-levels.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-consistency-levels.png" alt="Database Consistency Levels Explained" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Consistency in distributed databases describes how up-to-date the data is across all nodes when a read occurs after a write. Different consistency levels offer trade-offs between correctness, availability, and performance.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-consistency-levels.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-consistency-levels.png" alt="Database Consistency Levels Explained" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Strong Consistency</h2>
 <p>Strong consistency guarantees that after a write completes, all subsequent reads return the most recent write. Every node sees the same data at the same time. This is the standard in single-node databases and distributed databases using consensus protocols.</p>
 <p>Strong consistency requires coordination between nodes before confirming a write. Writes must replicate to a quorum of nodes (typically a majority). This adds latency proportional to network round-trips between nodes.</p>
@@ -120,6 +123,7 @@
 <p><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a></p>
+<p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a></p>
 <p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a></p>
 <p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a></p>
 <p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a></p>

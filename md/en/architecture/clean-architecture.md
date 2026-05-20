@@ -67,3 +67,5 @@ Clean Architecture is not appropriate for every project. Small applications with
 **See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 
 **See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)

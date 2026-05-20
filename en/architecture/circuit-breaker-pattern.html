@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-20">
     <meta property="article:modified_time" content="2026-04-21">
     <meta property="article:tag" content="Architecture, System Design">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.webp" type="image/webp" fetchpriority="high">
     <title>Circuit Breaker Pattern: Building Resilient Systems — SourceHub</title>
     <meta name="description" content="Circuit breaker state machine (closed/open/half-open), implementation with Resilience4j, monitoring, and recovery strategies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png",
       "datePublished": "2026-04-20",
       "dateModified": "2026-04-21",
-      "wordCount": "2529",
+      "wordCount": "2555",
       "keywords": "Architecture, System Design",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
       "inLanguage": "en",
@@ -97,8 +100,8 @@
         <span class="tag-cat">System Design</span></div>
       <h1 class="article-title">Circuit Breaker Pattern: Building Resilient Systems</h1>
       <div class="article-meta">Published 2026-04-20 · Last active 2026-04-21 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png" alt="Circuit Breaker Pattern: Building Resilient Systems" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>The circuit breaker pattern prevents cascading failures in distributed systems. When a service depends on another service that is failing, the circuit breaker detects the failures and stops sending requests to the failing service, allowing it time to recover. This article covers the circuit breaker state machine, implementation with Resilience4j, monitoring, and recovery strategies. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png" alt="Circuit Breaker Pattern: Building Resilient Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png" alt="Circuit Breaker Pattern: Building Resilient Systems" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>The circuit breaker pattern prevents cascading failures in distributed systems. When a service depends on another service that is failing, the circuit breaker detects the failures and stops sending requests to the failing service, allowing it time to recover. This article covers the circuit breaker state machine, implementation with Resilience4j, monitoring, and recovery strategies. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png" alt="Circuit Breaker Pattern: Building Resilient Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The Circuit Breaker State Machine </p>
 <p>A circuit breaker has three states: Closed, Open, and Half-Open. </p>
 <p>+-----------+</p>
@@ -404,6 +407,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p>

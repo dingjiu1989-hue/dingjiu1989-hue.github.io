@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-19">
     <meta property="article:modified_time" content="2026-05-19">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/tech/dockerfile-best-practices.webp" type="image/webp" fetchpriority="high">
     <title>Dockerfile Best Practices for Production — SourceHub</title>
     <meta name="description" content="Optimize Dockerfiles for production: multi-stage builds, layer caching, security scanning, and minimal images.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/dockerfile-best-practices.png",
       "datePublished": "2026-05-19",
       "dateModified": "2026-05-19",
-      "wordCount": "809",
+      "wordCount": "835",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -109,8 +112,8 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Dockerfile Best Practices for Production</h1>
       <div class="article-meta">Published 2026-05-19 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/dockerfile-best-practices.png" alt="Dockerfile Best Practices for Production" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Writing efficient Dockerfiles reduces image size, improves build speed, and enhances security. These best practices apply to production container builds.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/dockerfile-best-practices.png" alt="Dockerfile Best Practices for Production" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/dockerfile-best-practices.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/dockerfile-best-practices.png" alt="Dockerfile Best Practices for Production" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Writing efficient Dockerfiles reduces image size, improves build speed, and enhances security. These best practices apply to production container builds.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/dockerfile-best-practices.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/dockerfile-best-practices.png" alt="Dockerfile Best Practices for Production" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Multi-Stage Builds</h2>
 <p>Multi-stage builds separate build and runtime environments. Use one stage with all build tools (compilers, package managers) and a second minimal stage for the runtime. The resulting image contains only the application binary and its runtime dependencies.</p>
 <p>Multi-stage builds dramatically reduce image size. A Go application might go from 1GB (with golang:1.21) to 20MB (with scratch). Python applications benefit from using slim base images in final stages.</p>
@@ -131,6 +134,7 @@
 <p><strong>See also:</strong> <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a></p>

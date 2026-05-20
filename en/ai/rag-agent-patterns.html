@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-02-18">
     <meta property="article:modified_time" content="2026-04-04">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.webp" type="image/webp" fetchpriority="high">
     <title>RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval — SourceHub</title>
     <meta name="description" content="Explore RAG agent patterns that go beyond simple retrieval: self-querying agents, corrective RAG with verification, and adaptive retrieval strategies for comple">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.png",
       "datePublished": "2026-02-18",
       "dateModified": "2026-04-04",
-      "wordCount": "1621",
+      "wordCount": "1668",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -98,9 +101,9 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</h1>
       <div class="article-meta">Published 2026-02-18 · Last active 2026-04-04 · 480 views · 4 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.png" alt="RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval" width="1200" height="630" loading="lazy">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.png" alt="RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><h2>Introduction</h2>
-<p>Basic RAG retrieves documents once and generates an answer. RAG agents take this further: they decide when to retrieve, formulate their own queries, verify retrieved information, and adapt their strategy based on the question complexity. This article covers three agentic RAG patterns that dramatically improve retrieval quality.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.png" alt="RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<p>Basic RAG retrieves documents once and generates an answer. RAG agents take this further: they decide when to retrieve, formulate their own queries, verify retrieved information, and adapt their strategy based on the question complexity. This article covers three agentic RAG patterns that dramatically improve retrieval quality.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-agent-patterns.png" alt="RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Self-Query RAG</h2>
 <p>Instead of using the raw user question as the search query, the agent generates an optimized query:</p>
 <p>def self_query_rag(question: str) -&gt; str:</p>
@@ -225,6 +228,7 @@
 <p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>

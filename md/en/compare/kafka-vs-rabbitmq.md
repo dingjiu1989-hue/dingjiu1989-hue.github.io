@@ -71,3 +71,5 @@ Kafka and RabbitMQ are complementary tools rather than direct competitors. Many 
 **See also:** [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [Kubernetes vs Nomad: Container Orchestration Compared](</en/compare/kubernetes-vs-nomad.html>)
 
 **See also:** [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [Kubernetes vs Nomad: Container Orchestration Compared](</en/compare/kubernetes-vs-nomad.html>)
+
+**See also:** [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [Kubernetes vs Nomad: Container Orchestration Compared](</en/compare/kubernetes-vs-nomad.html>)

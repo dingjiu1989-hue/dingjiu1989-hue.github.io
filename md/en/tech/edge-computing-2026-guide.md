@@ -838,3 +838,5 @@ The winning architectures of 2026 are **layered** : edge for the hot path (auth,
 **See also:** [DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide](</en/tech/devops-for-developers.html>), [How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)](</en/tech/deploy-nextjs-free.html>), [Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice](</en/tech/web-accessibility-guide.html>)
 
 **See also:** [DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide](</en/tech/devops-for-developers.html>), [How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)](</en/tech/deploy-nextjs-free.html>), [Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice](</en/tech/web-accessibility-guide.html>)
+
+**See also:** [DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide](</en/tech/devops-for-developers.html>), [How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)](</en/tech/deploy-nextjs-free.html>), [Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice](</en/tech/web-accessibility-guide.html>)

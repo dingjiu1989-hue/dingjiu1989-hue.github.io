@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-02-14">
     <meta property="article:modified_time" content="2026-04-10">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.webp" type="image/webp" fetchpriority="high">
     <title>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection — SourceHub</title>
     <meta name="description" content="Monitor LLM applications in production: track latency percentiles, token consumption, error rates by type, and detect response drift with automated alerting.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.png",
       "datePublished": "2026-02-14",
       "dateModified": "2026-04-10",
-      "wordCount": "1980",
+      "wordCount": "2030",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
@@ -98,9 +101,9 @@
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h1>
       <div class="article-meta">Published 2026-02-14 · Last active 2026-04-10 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.png" alt="AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection" width="1200" height="630" loading="lazy">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.png" alt="AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><h2>Introduction</h2>
-<p>AI applications introduce new monitoring dimensions beyond traditional infrastructure metrics. LLM responses can be slow, expensive, incorrect, or suddenly change behavior when providers update models. This article covers the metrics, tools, and alerting strategies for production AI monitoring, including drift detection that catches quality degradation before users complain.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.png" alt="AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<p>AI applications introduce new monitoring dimensions beyond traditional infrastructure metrics. LLM responses can be slow, expensive, incorrect, or suddenly change behavior when providers update models. This article covers the metrics, tools, and alerting strategies for production AI monitoring, including drift detection that catches quality degradation before users complain.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.png" alt="AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Core Metrics</h2>
 <p>Every AI application should track these foundational metrics:</p>
 <p>from prometheus_client import Counter, Histogram, Gauge</p>
@@ -251,6 +254,7 @@
 <p><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a></p>

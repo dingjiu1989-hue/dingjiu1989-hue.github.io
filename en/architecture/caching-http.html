@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-21">
     <meta property="article:modified_time" content="2026-05-13">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-http.webp" type="image/webp" fetchpriority="high">
     <title>HTTP Caching Architecture — SourceHub</title>
     <meta name="description" content="Cache-Control, ETags, CDN caching, stale-while-revalidate, and cache invalidation strategies">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-http.png",
       "datePublished": "2026-04-21",
       "dateModified": "2026-05-13",
-      "wordCount": "1300",
+      "wordCount": "1322",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">HTTP Caching Architecture</h1>
       <div class="article-meta">Published 2026-04-21 · Last active 2026-05-13 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-http.png" alt="HTTP Caching Architecture" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>HTTP caching is the most cost-effective performance optimization available. A single cache hit eliminates an entire request path through the network, load balancers, application servers, and databases. The HTTP specification provides a comprehensive caching framework through headers, validation mechanisms, and extension directives. Understanding and applying these correctly is essential for building performant web systems. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-http.png" alt="HTTP Caching Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-http.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-http.png" alt="HTTP Caching Architecture" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>HTTP caching is the most cost-effective performance optimization available. A single cache hit eliminates an entire request path through the network, load balancers, application servers, and databases. The HTTP specification provides a comprehensive caching framework through headers, validation mechanisms, and extension directives. Understanding and applying these correctly is essential for building performant web systems. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-http.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-http.png" alt="HTTP Caching Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Cache-Control headers are the primary mechanism for controlling HTTP caching behavior. The max-age directive specifies the maximum time in seconds that a response can be cached. The s-maxage directive overrides max-age for shared caches (CDNs, reverse proxies). The private directive limits caching to the browser (no shared caching). The public directive allows any cache, including shared ones. The no-cache directive requires revalidation with the origin server before serving from cache. The no-store directive prevents any caching. </p>
 <p>ETags provide cache validation. An ETag is a unique identifier for a specific version of a resource. When a client has a cached response with an ETag, it sends If-None-Match with that ETag on subsequent requests. If the resource has not changed, the server returns 304 Not Modified with an empty body. This saves bandwidth even when the cached response needs revalidation. Strong ETags change when the content changes. Weak ETags (prefixed with W/) change when the semantic meaning changes but not necessarily the byte representation. </p>
 <p>Conditional requests with If-Modified-Since and If-None-Match provide similar validation. Last-Modified headers provide a timestamp that the client can use with If-Modified-Since. However, timestamps are less reliable than ETags — they have second-level granularity, can be inconsistent across servers, and do not detect changes that occur within the same second. ETags are preferred for accuracy; Last-Modified serves as a fallback. </p>
@@ -116,6 +119,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a></p>

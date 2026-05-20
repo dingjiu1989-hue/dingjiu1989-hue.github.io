@@ -65,3 +65,5 @@ Ultimately, the Strangler Fig pattern is the safest path to modernizing critical
 **See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>)
 
 **See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>)
+
+**See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>)

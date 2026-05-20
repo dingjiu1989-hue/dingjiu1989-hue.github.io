@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2025-12-31">
     <meta property="article:modified_time" content="2026-04-25">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/tech/ansible-automation.webp" type="image/webp" fetchpriority="high">
     <title>Ansible Automation: Playbooks, Roles, Inventory, and Vault — SourceHub</title>
     <meta name="description" content="Deep dive into Ansible automation covering playbooks, roles, inventory management, Ansible Vault, idempotency patterns, and a comparison with Terraform.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/ansible-automation.png",
       "datePublished": "2025-12-31",
       "dateModified": "2026-04-25",
-      "wordCount": "1770",
+      "wordCount": "1815",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -98,9 +101,9 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Ansible Automation: Playbooks, Roles, Inventory, and Vault</h1>
       <div class="article-meta">Published 2025-12-31 · Last active 2026-04-25 · 120 views · 1 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/ansible-automation.png" alt="Ansible Automation: Playbooks, Roles, Inventory, and Vault" width="1200" height="630" loading="lazy">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/ansible-automation.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/ansible-automation.png" alt="Ansible Automation: Playbooks, Roles, Inventory, and Vault" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><h2>Introduction</h2>
-<p>Ansible has become one of the most widely adopted configuration management and automation tools in the DevOps ecosystem. Acquired by Red Hat in 2015, it stands out for its agentless architecture, YAML-based syntax, and push-based execution model. Unlike Puppet or Chef, which require agents installed on managed nodes, Ansible communicates over SSH or WinRM, making it trivial to get started with existing infrastructure.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/ansible-automation.png" alt="Ansible Automation: Playbooks, Roles, Inventory, and Vault" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<p>Ansible has become one of the most widely adopted configuration management and automation tools in the DevOps ecosystem. Acquired by Red Hat in 2015, it stands out for its agentless architecture, YAML-based syntax, and push-based execution model. Unlike Puppet or Chef, which require agents installed on managed nodes, Ansible communicates over SSH or WinRM, making it trivial to get started with existing infrastructure.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/ansible-automation.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/ansible-automation.png" alt="Ansible Automation: Playbooks, Roles, Inventory, and Vault" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>This article provides a technical deep dive into Ansible's core components: playbooks, roles, inventory management, Ansible Vault, idempotency, and a comparison with Terraform for infrastructure provisioning.</p>
 <h2>Playbooks: The Heart of Automation</h2>
 <p>Ansible Playbooks are YAML files that define automation workflows. A playbook contains one or more plays, each targeting a group of hosts and defining a set of tasks to execute. Tasks are executed sequentially, and each task calls an Ansible module.</p>
@@ -161,6 +164,7 @@
 <p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/react-server-components.html">React Server Components</a>, <a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/react-server-components.html">React Server Components</a>, <a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/react-server-components.html">React Server Components</a>, <a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a></p>

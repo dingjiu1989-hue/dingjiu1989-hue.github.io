@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-21">
     <meta property="article:modified_time" content="2026-05-07">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/asynchronous-communication.webp" type="image/webp" fetchpriority="high">
     <title>Asynchronous Communication in Distributed Systems — SourceHub</title>
     <meta name="description" content="Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and patterns">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/asynchronous-communication.png",
       "datePublished": "2026-04-21",
       "dateModified": "2026-05-07",
-      "wordCount": "1137",
+      "wordCount": "1163",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Asynchronous Communication in Distributed Systems</h1>
       <div class="article-meta">Published 2026-04-21 · Last active 2026-05-07 · 360 views · 3 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/asynchronous-communication.png" alt="Asynchronous Communication in Distributed Systems" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Asynchronous communication is the backbone of resilient distributed systems. By decoupling services in time and space, it enables independent scaling, fault isolation, and event-driven workflows. The core infrastructure choices are message brokers, event buses, and brokerless messaging, each with distinct tradeoffs in reliability, latency, and operational complexity. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/asynchronous-communication.png" alt="Asynchronous Communication in Distributed Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/asynchronous-communication.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/asynchronous-communication.png" alt="Asynchronous Communication in Distributed Systems" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Asynchronous communication is the backbone of resilient distributed systems. By decoupling services in time and space, it enables independent scaling, fault isolation, and event-driven workflows. The core infrastructure choices are message brokers, event buses, and brokerless messaging, each with distinct tradeoffs in reliability, latency, and operational complexity. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/asynchronous-communication.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/asynchronous-communication.png" alt="Asynchronous Communication in Distributed Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Message brokers like RabbitMQ, Amazon SQS, and ActiveMQ provide reliable point-to-point communication. Producers send messages to queues, and consumers pull or receive pushes. Brokers guarantee message delivery through persistent storage, acknowledgments, and dead-letter mechanisms. At-least-once delivery is the standard guarantee; exactly-once delivery requires idempotent consumers or additional infrastructure like transactional outbox patterns. Brokers excel when each message should be processed by exactly one consumer, making them ideal for task distribution and work queues. </p>
 <p>Event buses (Kafka, Amazon Kinesis, Pulsar) follow a publish-subscribe model where messages are organized into topics or streams. Multiple consumer groups can independently read the same event stream at their own pace. Events persist for a configurable retention period, allowing new consumers to replay historical data. This makes event buses suitable for event sourcing, stream processing, and data integration patterns where multiple consumers derive different value from the same events. Kafka's partitioned log model provides ordering guarantees within a partition and horizontal scalability. </p>
 <p>Brokerless messaging (NATS, ZeroMQ) eliminates the intermediary. Producers and consumers communicate directly or through a lightweight forwarding layer. This reduces latency and operational overhead but shifts reliability responsibility to the application. If the consumer is unavailable, the message is lost unless the application implements retry and buffering. Brokerless systems suit high-throughput, low-latency scenarios where some message loss is acceptable, such as real-time analytics or monitoring data. </p>
@@ -114,6 +117,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/dead-letter-queue.html">Dead Letter Queues: Handling Message Failures</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/dead-letter-queue.html">Dead Letter Queues: Handling Message Failures</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/dead-letter-queue.html">Dead Letter Queues: Handling Message Failures</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a></p>

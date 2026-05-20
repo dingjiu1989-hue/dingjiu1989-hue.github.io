@@ -63,3 +63,5 @@ Use Oh My Zsh + Powerlevel10k for maximum Zsh customization and speed. Use Stars
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
 
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)

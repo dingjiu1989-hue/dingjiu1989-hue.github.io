@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-03-31">
     <meta property="article:modified_time" content="2026-04-21">
     <meta property="article:tag" content="Database, Backend, Data">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.webp" type="image/webp" fetchpriority="high">
     <title>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning — SourceHub</title>
     <meta name="description" content="Comprehensive guide to database connection management. Learn connection pooling with PgBouncer and HikariCP, max connections tuning, and best practices.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png",
       "datePublished": "2026-03-31",
       "dateModified": "2026-04-21",
-      "wordCount": "2360",
+      "wordCount": "2394",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h1>
       <div class="article-meta">Published 2026-03-31 · Last active 2026-04-21 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Every database connection consumes memory, file descriptors, and CPU. Connection management directly impacts database performance and application scalability. This article covers pooling strategies, popular poolers, and tuning guidelines. </p>
 <p>Why Connection Pooling Matters </p>
 <p>Each PostgreSQL backend process consumes approximately 5-10 MB of RAM, even when idle. A server with 500 connections uses 2.5-5 GB just for connection overhead. Beyond memory, connection creation is expensive: a new connection requires a TCP handshake, SSL negotiation, authentication, and backend forking. </p>
@@ -261,6 +264,7 @@
 <p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
+<p><strong>See also:</strong> <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a></p>

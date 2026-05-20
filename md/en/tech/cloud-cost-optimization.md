@@ -279,3 +279,5 @@ Cloud cost optimization is an ongoing process, not a one-time cleanup. Start wit
 **See also:** [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
 
 **See also:** [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
+
+**See also:** [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)

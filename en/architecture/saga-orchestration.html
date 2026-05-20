@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-29">
     <meta property="article:modified_time" content="2026-05-09">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-orchestration.webp" type="image/webp" fetchpriority="high">
     <title>Saga Orchestration Pattern — SourceHub</title>
     <meta name="description" content="Coordinator pattern for distributed transactions, compensation strategies, state machines, and Temporal workflows">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-orchestration.png",
       "datePublished": "2026-04-29",
       "dateModified": "2026-05-09",
-      "wordCount": "1107",
+      "wordCount": "1129",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -95,8 +98,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Saga Orchestration Pattern</h1>
       <div class="article-meta">Published 2026-04-29 · Last active 2026-05-09 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-orchestration.png" alt="Saga Orchestration Pattern" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Saga orchestration manages distributed transactions through a central coordinator that directs participating services through a sequence of local transactions. Unlike two-phase commit, sagas embrace eventual consistency — each step commits independently, and failures trigger compensating transactions to undo completed steps. The orchestrator provides clear workflow visibility, centralized error handling, and explicit state management. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-orchestration.png" alt="Saga Orchestration Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-orchestration.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-orchestration.png" alt="Saga Orchestration Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Saga orchestration manages distributed transactions through a central coordinator that directs participating services through a sequence of local transactions. Unlike two-phase commit, sagas embrace eventual consistency — each step commits independently, and failures trigger compensating transactions to undo completed steps. The orchestrator provides clear workflow visibility, centralized error handling, and explicit state management. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-orchestration.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-orchestration.png" alt="Saga Orchestration Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The orchestrator is a dedicated service responsible for executing the saga. It maintains the workflow state, sends commands to participants, receives results, and decides the next action. The state must be persisted durably — if the orchestrator crashes, it must resume precisely where it left off. This typically involves storing the saga instance state (current step, completed steps, accumulated data) in a database or workflow engine. </p>
 <p>Compensation is the mechanism for undoing completed steps. For each step that makes a forward change, the saga designer defines a compensating action that reverses that change. If step 3 fails, the orchestrator invokes the compensations for steps 2 and 1 in reverse order. Compensations must be idempotent — they may be called multiple times if the orchestrator fails during compensation execution. </p>
 <p>State machines provide a natural model for saga orchestration. The saga exists in one of several states: Pending, Active, Compensating, Completed, or Failed. Each step transition moves the saga to a new state. The orchestrator uses a state machine library or workflow engine to define available transitions, guard conditions, and timeout handling. This makes the saga logic explicit and testable. </p>
@@ -112,6 +115,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/orchestration-patterns.html">Orchestration Patterns</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/orchestration-patterns.html">Orchestration Patterns</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/orchestration-patterns.html">Orchestration Patterns</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>

@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-22">
     <meta property="article:modified_time" content="2026-05-17">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.webp" type="image/webp" fetchpriority="high">
     <title>Cost Per Request Modeling — SourceHub</title>
     <meta name="description" content="Compute, storage, network, database per-request cost modeling, and optimization strategies">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.png",
       "datePublished": "2026-04-22",
       "dateModified": "2026-05-17",
-      "wordCount": "1196",
+      "wordCount": "1215",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Cost Per Request Modeling</h1>
       <div class="article-meta">Published 2026-04-22 · Last active 2026-05-17 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.png" alt="Cost Per Request Modeling" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Cost per request modeling decomposes infrastructure costs into the cost of serving a single request. This metric enables data-driven optimization: if a request costs \$0.001 and you serve 100 million requests per month, a 20% reduction saves \$20,000 monthly. More importantly, understanding per-request costs reveals which features, endpoints, or user segments are profitable and which may need rethinking. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.png" alt="Cost Per Request Modeling" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.png" alt="Cost Per Request Modeling" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Cost per request modeling decomposes infrastructure costs into the cost of serving a single request. This metric enables data-driven optimization: if a request costs \$0.001 and you serve 100 million requests per month, a 20% reduction saves \$20,000 monthly. More importantly, understanding per-request costs reveals which features, endpoints, or user segments are profitable and which may need rethinking. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.png" alt="Cost Per Request Modeling" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Compute cost is calculated from the resources consumed during request processing. For a containerized service with 500 millicores of CPU and 512 MB of memory allocation, running on instances costing \$50/month with 100 requests per second capacity, the per-request compute cost is approximately \$0.0000058 (50 / 30 / 86400 / 100 * 500/1000). This minimal per-request cost compounds through the chain of services involved — the API gateway, multiple backend services, and background job processors all contribute. </p>
 <p>Storage cost includes database capacity, object storage, and caching layers. A request that reads 10 KB of product data, writes 2 KB of order data, and caches the result for 60 seconds has a direct storage cost plus the amortized cost of the storage infrastructure. Database IOPS and provisioned throughput costs are usually larger than raw storage costs. For relational databases, each request's storage cost must account for the total database cost divided across all served requests, not just the marginal cost. </p>
 <p>Network cost is often the easiest to quantify. Cloud providers charge for inter-zone, inter-region, and egress traffic. A request that enters through the load balancer, hits three services across two availability zones, and returns a 50 KB response incurs network costs at each hop. Network costs scale linearly with response size and service depth. Optimizing network cost involves reducing response sizes (compression, partial responses), collocating services in the same availability zone, and using internal load balancers. </p>
@@ -115,6 +118,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p>

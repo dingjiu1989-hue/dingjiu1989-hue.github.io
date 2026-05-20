@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-12">
     <meta property="article:modified_time" content="2026-05-19">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox.webp" type="image/webp" fetchpriority="high">
     <title>Transactional Outbox Pattern — SourceHub</title>
     <meta name="description" content="Reliable event publishing with transactional outbox: implementations, idempotent consumers, dual-write resolution">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-19",
-      "wordCount": "1169",
+      "wordCount": "1201",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -95,8 +98,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Transactional Outbox Pattern</h1>
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-19 · 240 views · 2 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox.png" alt="Transactional Outbox Pattern" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>The transactional outbox pattern solves one of the most pervasive problems in event-driven architectures: the dual-write problem. When a service must both update its database and publish an event (or send a message), these two operations cannot be atomic across different systems. The outbox pattern ensures that the database write and message publication are eventually consistent without requiring distributed transactions or two-phase commit. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox.png" alt="Transactional Outbox Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox.png" alt="Transactional Outbox Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>The transactional outbox pattern solves one of the most pervasive problems in event-driven architectures: the dual-write problem. When a service must both update its database and publish an event (or send a message), these two operations cannot be atomic across different systems. The outbox pattern ensures that the database write and message publication are eventually consistent without requiring distributed transactions or two-phase commit. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox.png" alt="Transactional Outbox Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The core mechanism is elegant. Instead of publishing the event directly to the message broker at the time of the state change, the application writes both the aggregate data and the event record to the same database within a single local transaction. The event table serves as a buffer. A separate process — the outbox publisher — reads unpublished events, publishes them to the message broker, and marks them as published. This guarantees that every committed state change produces at least one event publication. </p>
 <p>Implementation variations depend on the database and event bus. In relational databases, the outbox table contains columns for event ID, aggregate type, aggregate ID, event type, payload (typically JSON or Avro), and a processed flag. A composite index on processed status and creation time allows efficient polling. The outbox publisher runs as a background thread, scheduled job, or change data capture (CDC) consumer. </p>
 <p>CDC-based implementation avoids polling overhead. Tools like Debezium read the database's transaction log (WAL in PostgreSQL, binlog in MySQL) and stream changes directly to Kafka. When the application inserts an event into the outbox table, Debezium captures the insert as a CDC event and publishes it to Kafka. This eliminates the need for a separate polling publisher and reduces latency to near-real-time. The trade-off is operational complexity — operating CDC infrastructure requires database expertise. </p>
@@ -112,6 +115,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>

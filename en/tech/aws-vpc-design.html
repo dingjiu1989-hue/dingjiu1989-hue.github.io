@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-01-01">
     <meta property="article:modified_time" content="2026-04-18">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/tech/aws-vpc-design.webp" type="image/webp" fetchpriority="high">
     <title>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups — SourceHub</title>
     <meta name="description" content="Technical guide to AWS VPC design including subnet strategies, NAT gateways, VPC peering, Transit Gateway architecture, security groups, and network ACLs.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/aws-vpc-design.png",
       "datePublished": "2026-01-01",
       "dateModified": "2026-04-18",
-      "wordCount": "1331",
+      "wordCount": "1359",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -98,9 +101,9 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
       <div class="article-meta">Published 2026-01-01 · Last active 2026-04-18 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/aws-vpc-design.png" alt="AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups" width="1200" height="630" loading="lazy">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/aws-vpc-design.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/aws-vpc-design.png" alt="AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><h2>Introduction</h2>
-<p>Amazon Virtual Private Cloud (VPC) is the foundational networking layer for AWS infrastructure. Every AWS resource — EC2 instances, RDS databases, Lambda functions, ECS tasks — exists within a VPC. Proper VPC design directly impacts security, performance, scalability, and cost. A poorly designed VPC can cause connectivity issues, security vulnerabilities, and expensive data transfer bills.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/aws-vpc-design.png" alt="AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<p>Amazon Virtual Private Cloud (VPC) is the foundational networking layer for AWS infrastructure. Every AWS resource — EC2 instances, RDS databases, Lambda functions, ECS tasks — exists within a VPC. Proper VPC design directly impacts security, performance, scalability, and cost. A poorly designed VPC can cause connectivity issues, security vulnerabilities, and expensive data transfer bills.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/aws-vpc-design.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/aws-vpc-design.png" alt="AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>This article covers subnet design, NAT strategies, VPC peering, Transit Gateway, security groups, and network ACLs.</p>
 <h2>VPC and Subnet Design</h2>
 <p>A VPC spans all Availability Zones (AZs) in a region. The CIDR block must be large enough to accommodate current and future workloads. The standard RFC 1918 ranges are used: 10.0.0.0/8, 172.16.0.0/12, or 192.168.0.0/16. A /16 CIDR (65,536 addresses) provides sufficient capacity for most organizations.</p>
@@ -142,6 +145,7 @@
 <p><strong>See also:</strong> <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/performance-testing.html">Performance Testing</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/performance-testing.html">Performance Testing</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/performance-testing.html">Performance Testing</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/performance-testing.html">Performance Testing</a></p>

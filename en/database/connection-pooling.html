@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2025-12-22">
     <meta property="article:modified_time" content="2026-05-18">
     <meta property="article:tag" content="Database, SQL">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-pooling.webp" type="image/webp" fetchpriority="high">
     <title>Connection Pooling Guide — SourceHub</title>
     <meta name="description" content="Master database connection pooling with PgBouncer, HikariCP, and application-level pools to optimize performance and resource usage.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/connection-pooling.png",
       "datePublished": "2025-12-22",
       "dateModified": "2026-05-18",
-      "wordCount": "687",
+      "wordCount": "719",
       "keywords": "Database, SQL",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "SQL"}],
       "inLanguage": "en",
@@ -97,8 +100,8 @@
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Connection Pooling Guide</h1>
       <div class="article-meta">Published 2025-12-22 · Last active 2026-05-18 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-pooling.png" alt="Connection Pooling Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Why Connection Pooling Matters </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-pooling.png" alt="Connection Pooling Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-pooling.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-pooling.png" alt="Connection Pooling Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Why Connection Pooling Matters </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-pooling.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-pooling.png" alt="Connection Pooling Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Creating database connections is expensive: TCP handshake, SSL negotiation, and authentication add 7-35ms per connection. Connection pooling reuses established connections. </p>
 <p>How Pools Work </p>
 <p>A pool maintains a set of open connections. When a thread requests one, an idle connection is returned immediately. If all are busy, the thread waits. </p>
@@ -131,6 +134,7 @@
 <p><strong>See also:</strong> <a href="/en/tech/postgresql-query-optimization.html">PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds</a>, <a href="/en/database/query-performance-tuning.html">Query Performance Tuning Tools</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/postgresql-query-optimization.html">PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds</a>, <a href="/en/database/query-performance-tuning.html">Query Performance Tuning Tools</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/postgresql-query-optimization.html">PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds</a>, <a href="/en/database/query-performance-tuning.html">Query Performance Tuning Tools</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a></p>
+<p><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/sql-query-optimization.html">SQL Query Optimization</a>, <a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a></p>
 <p><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/sql-query-optimization.html">SQL Query Optimization</a>, <a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a></p>
 <p><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/sql-query-optimization.html">SQL Query Optimization</a>, <a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a></p>
 <p><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/sql-query-optimization.html">SQL Query Optimization</a>, <a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a></p>

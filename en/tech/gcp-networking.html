@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-01-01">
     <meta property="article:modified_time" content="2026-04-23">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/tech/gcp-networking.webp" type="image/webp" fetchpriority="high">
     <title>GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC — SourceHub</title>
     <meta name="description" content="Technical exploration of Google Cloud networking covering VPC design, Cloud NAT configuration, Private Google Access, Shared VPC architecture, and Cloud Interconnect.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/gcp-networking.png",
       "datePublished": "2026-01-01",
       "dateModified": "2026-04-23",
-      "wordCount": "2425",
+      "wordCount": "2474",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -98,9 +101,9 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</h1>
       <div class="article-meta">Published 2026-01-01 · Last active 2026-04-23 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/gcp-networking.png" alt="GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC" width="1200" height="630" loading="lazy">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/gcp-networking.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/gcp-networking.png" alt="GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><h2>Introduction</h2>
-<p>Google Cloud Platform (GCP) offers a distinctive networking model compared to AWS and Azure. GCP VPCs are global resources, not regional — a single VPC spans all regions, simplifying multi-region architectures. Firewall rules are distributed and stateful, and Cloud NAT provides managed outbound connectivity. Understanding these differences is critical for designing efficient and secure GCP networks.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/gcp-networking.png" alt="GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<p>Google Cloud Platform (GCP) offers a distinctive networking model compared to AWS and Azure. GCP VPCs are global resources, not regional — a single VPC spans all regions, simplifying multi-region architectures. Firewall rules are distributed and stateful, and Cloud NAT provides managed outbound connectivity. Understanding these differences is critical for designing efficient and secure GCP networks.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/gcp-networking.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/gcp-networking.png" alt="GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>This article covers GCP VPC design, Cloud NAT, Private Google Access, Shared VPC, and Cloud Interconnect.</p>
 <h2>Global VPCs and Subnet Design</h2>
 <p>Unlike AWS VPCs, which are regional, GCP VPCs are global. Subnets are regional but belong to a global VPC. This design enables seamless multi-region communication without VPC peering or transit gateways. A single global VPC with subnets in each region provides a flat network for global services.</p>
@@ -143,6 +146,7 @@
 <p><strong>See also:</strong> <a href="/en/tech/aws-vpc-design.html">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</a>, <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/aws-vpc-design.html">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</a>, <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/aws-vpc-design.html">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</a>, <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a></p>

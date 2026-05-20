@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-25">
     <meta property="article:modified_time" content="2026-05-14">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.webp" type="image/webp" fetchpriority="high">
     <title>Graceful Shutdown Patterns — SourceHub</title>
     <meta name="description" content="Signal handling, connection draining, processing in-flight requests, and best practices for graceful service shutdown">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.png",
       "datePublished": "2026-04-25",
       "dateModified": "2026-05-14",
-      "wordCount": "1157",
+      "wordCount": "1180",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Graceful Shutdown Patterns</h1>
       <div class="article-meta">Published 2026-04-25 · Last active 2026-05-14 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.png" alt="Graceful Shutdown Patterns" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Graceful shutdown ensures that when a service instance stops, it completes its in-flight work, closes connections cleanly, and leaves data in a consistent state. In distributed systems, where multiple instances provide resilience, graceful shutdown is essential for zero-downtime operations. Hard-killing processes leaves requests incomplete, connections half-open, and data potentially corrupted. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.png" alt="Graceful Shutdown Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.png" alt="Graceful Shutdown Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Graceful shutdown ensures that when a service instance stops, it completes its in-flight work, closes connections cleanly, and leaves data in a consistent state. In distributed systems, where multiple instances provide resilience, graceful shutdown is essential for zero-downtime operations. Hard-killing processes leaves requests incomplete, connections half-open, and data potentially corrupted. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.png" alt="Graceful Shutdown Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Signal handling is the foundation. The service should register handlers for SIGTERM (the standard termination signal from orchestration platforms) and SIGINT (interactive termination). When received, the signal handler initiates the shutdown sequence. The handler should not block indefinitely — it should set a deadline for graceful shutdown and force-terminate if exceeded. Kubernetes sends SIGTERM to pods and waits for the terminationGracePeriodSeconds before sending SIGKILL. </p>
 <p>The shutdown sequence follows a well-defined order. First, the service should stop accepting new requests. This means unregistering from the service discovery registry, failing readiness probes, closing listener sockets, and rejecting incoming connections. The service should not return to "accepting" state once shutdown begins, even if the signal was spurious. </p>
 <p>Second, the service drains in-flight requests. It waits for currently processing requests to complete, up to a configurable deadline. Long-running requests may need to be interrupted or saved for later resumption. The service should track in-flight requests and log any that are still active when the drain deadline expires. This information is invaluable for debugging why shutdown actually took the time it did. </p>
@@ -116,6 +119,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>

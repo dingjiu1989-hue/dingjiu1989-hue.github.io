@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-01-12">
     <meta property="article:modified_time" content="2026-04-21">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/tech/task-queues.webp" type="image/webp" fetchpriority="high">
     <title>Task Queues — SourceHub</title>
     <meta name="description" content="Learn task queues: Celery, Bull, Sidekiq, delayed jobs, prioritization, and background processing patterns">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/task-queues.png",
       "datePublished": "2026-01-12",
       "dateModified": "2026-04-21",
-      "wordCount": "1233",
+      "wordCount": "1248",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Task Queues</h1>
       <div class="article-meta">Published 2026-01-12 · Last active 2026-04-21 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/task-queues.png" alt="Task Queues" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Task queues enable asynchronous processing of work outside the main application request-response cycle. They handle email sending, image processing, report generation, data synchronization, and any other work that does not need to complete before the user receives a response. This article compares the leading task queue systems and covers design patterns.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/task-queues.png" alt="Task Queues" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/task-queues.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/task-queues.png" alt="Task Queues" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Task queues enable asynchronous processing of work outside the main application request-response cycle. They handle email sending, image processing, report generation, data synchronization, and any other work that does not need to complete before the user receives a response. This article compares the leading task queue systems and covers design patterns.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/task-queues.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/task-queues.png" alt="Task Queues" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Why Task Queues</h2>
 <p>Synchronous request processing keeps users waiting. If every request waits for email sending, image resizing, and report generation, response times become unacceptable. Task queues move this work to background workers, allowing the request to return immediately while the work completes asynchronously.</p>
 <p>Task queues also provide reliability. If a worker crashes while processing a task, the task can be retried on another worker. If the system is under heavy load, tasks queue up rather than being dropped. Workers can be scaled independently based on queue depth.</p>
@@ -133,6 +136,7 @@
 <p><strong>See also:</strong> <a href="/en/tech/code-generation.html">Code Generation</a>, <a href="/en/tech/testing-strategies.html">Testing Strategies</a>, <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/code-generation.html">Code Generation</a>, <a href="/en/tech/testing-strategies.html">Testing Strategies</a>, <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/code-generation.html">Code Generation</a>, <a href="/en/tech/testing-strategies.html">Testing Strategies</a>, <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/debugging-techniques.html">Debugging Techniques</a>, <a href="/en/tech/dependency-management.html">Dependency Management</a>, <a href="/en/tech/distributed-caching.html">Distributed Caching</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/debugging-techniques.html">Debugging Techniques</a>, <a href="/en/tech/dependency-management.html">Dependency Management</a>, <a href="/en/tech/distributed-caching.html">Distributed Caching</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/debugging-techniques.html">Debugging Techniques</a>, <a href="/en/tech/dependency-management.html">Dependency Management</a>, <a href="/en/tech/distributed-caching.html">Distributed Caching</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/debugging-techniques.html">Debugging Techniques</a>, <a href="/en/tech/dependency-management.html">Dependency Management</a>, <a href="/en/tech/distributed-caching.html">Distributed Caching</a></p>

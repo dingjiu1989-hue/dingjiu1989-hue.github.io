@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-01-02">
     <meta property="article:modified_time" content="2026-05-14">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/tech/prometheus-deep-dive.webp" type="image/webp" fetchpriority="high">
     <title>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability — SourceHub</title>
     <meta name="description" content="A comprehensive look at Prometheus monitoring covering metrics collection, PromQL queries, recording rules, alertmanager setup, and high availability architecture.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/prometheus-deep-dive.png",
       "datePublished": "2026-01-02",
       "dateModified": "2026-05-14",
-      "wordCount": "1915",
+      "wordCount": "1950",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "en",
@@ -98,9 +101,9 @@
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h1>
       <div class="article-meta">Published 2026-01-02 · Last active 2026-05-14 · 120 views · 1 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/prometheus-deep-dive.png" alt="Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability" width="1200" height="630" loading="lazy">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/prometheus-deep-dive.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/prometheus-deep-dive.png" alt="Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><h2>Introduction</h2>
-<p>Prometheus has emerged as the de facto standard for monitoring cloud-native infrastructure. Originally developed at SoundCloud and later donated to the Cloud Native Computing Foundation (CNCF), it has become the second graduated project after Kubernetes. Its pull-based metrics collection model, powerful query language, and multi-dimensional data model differentiate it from traditional monitoring solutions like Nagios or Zabbix.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/prometheus-deep-dive.png" alt="Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<p>Prometheus has emerged as the de facto standard for monitoring cloud-native infrastructure. Originally developed at SoundCloud and later donated to the Cloud Native Computing Foundation (CNCF), it has become the second graduated project after Kubernetes. Its pull-based metrics collection model, powerful query language, and multi-dimensional data model differentiate it from traditional monitoring solutions like Nagios or Zabbix.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/tech/prometheus-deep-dive.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/prometheus-deep-dive.png" alt="Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>This article explores Prometheus architecture, metrics collection, PromQL, recording rules, alerting, and strategies for high availability.</p>
 <h2>Metrics Collection Architecture</h2>
 <p>Prometheus scrapes metrics from instrumented targets over HTTP. Targets expose metrics at a standard endpoint, typically <code>/metrics</code>, in plaintext format. Exporters bridge the gap for third-party systems: the Node Exporter provides OS-level metrics, the Blackbox Exporter probes external endpoints, and numerous specialized exporters exist for databases, message queues, and cloud services.</p>
@@ -161,6 +164,7 @@
 <p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p>
+<p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a>, <a href="/en/tech/react-server-components.html">React Server Components</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a>, <a href="/en/tech/react-server-components.html">React Server Components</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a>, <a href="/en/tech/react-server-components.html">React Server Components</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a>, <a href="/en/tech/react-server-components.html">React Server Components</a></p>

@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-04">
     <meta property="article:modified_time" content="2026-05-19">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.webp" type="image/webp" fetchpriority="high">
     <title>Materialized View Pattern — SourceHub</title>
     <meta name="description" content="Explore the materialized view pattern: read models, caching strategies, CQRS integration, and efficient cross-service queries">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.png",
       "datePublished": "2026-05-04",
       "dateModified": "2026-05-19",
-      "wordCount": "1282",
+      "wordCount": "1305",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -95,8 +98,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Materialized View Pattern</h1>
       <div class="article-meta">Published 2026-05-04 · Last active 2026-05-19 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.png" alt="Materialized View Pattern" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>The materialized view pattern creates pre-computed, denormalized read models that are optimized for specific query patterns. Instead of querying multiple services or performing expensive joins at query time, the system maintains a dedicated data store containing exactly the data needed for each query. This pattern is essential for read-heavy workloads and complex cross-service queries in microservice architectures. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.png" alt="Materialized View Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.png" alt="Materialized View Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>The materialized view pattern creates pre-computed, denormalized read models that are optimized for specific query patterns. Instead of querying multiple services or performing expensive joins at query time, the system maintains a dedicated data store containing exactly the data needed for each query. This pattern is essential for read-heavy workloads and complex cross-service queries in microservice architectures. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.png" alt="Materialized View Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The Problem </p>
 <p>In a microservice architecture, each service owns its database. A query that needs data from multiple services cannot use a simple database join. The alternatives—API composition (calling multiple services and combining results) or client-side joins—are slow, resource-intensive, and do not scale for complex queries. </p>
 <p>For example, a dashboard that shows "orders with customer names and product details" needs data from the Order, Customer, and Product services. A query-time join across these services would be slow and unreliable. The materialized view pattern solves this by maintaining a pre-joined read model. </p>
@@ -125,6 +128,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p>

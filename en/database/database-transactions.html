@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-03">
     <meta property="article:modified_time" content="2026-05-05">
     <meta property="article:tag" content="Database, Backend, Data">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/database/database-transactions.webp" type="image/webp" fetchpriority="high">
     <title>Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints — SourceHub</title>
     <meta name="description" content="Master database transactions with a deep dive into ACID properties, isolation levels, nested transactions, savepoints, and PostgreSQL-specific transaction semantics.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-transactions.png",
       "datePublished": "2026-04-03",
       "dateModified": "2026-05-05",
-      "wordCount": "2006",
+      "wordCount": "2047",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</h1>
       <div class="article-meta">Published 2026-04-03 · Last active 2026-05-05 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-transactions.png" alt="Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-transactions.png" alt="Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-transactions.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-transactions.png" alt="Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-transactions.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-transactions.png" alt="Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>A transaction is a unit of work that the database executes atomically. Transactions are the bedrock of data integrity in relational databases. Understanding them deeply separates competent engineers from great ones. </p>
 <p>ACID in Practice </p>
 <p>ACID stands for Atomicity, Consistency, Isolation, Durability. Each property maps to concrete database behavior. </p>
@@ -210,6 +213,7 @@
 <p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
+<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>

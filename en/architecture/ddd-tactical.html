@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-02">
     <meta property="article:modified_time" content="2026-05-19">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/ddd-tactical.webp" type="image/webp" fetchpriority="high">
     <title>DDD Tactical Patterns — SourceHub</title>
     <meta name="description" content="Master DDD tactical patterns: aggregate, entity, value object, domain service, and repository implementation">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/ddd-tactical.png",
       "datePublished": "2026-05-02",
       "dateModified": "2026-05-19",
-      "wordCount": "1101",
+      "wordCount": "1123",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -95,8 +98,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">DDD Tactical Patterns</h1>
       <div class="article-meta">Published 2026-05-02 · Last active 2026-05-19 · 120 views · 1 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/ddd-tactical.png" alt="DDD Tactical Patterns" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Domain-Driven Design (DDD) tactical patterns provide concrete building blocks for implementing domain models. While strategic DDD focuses on boundaries and relationships between domains, tactical patterns guide the implementation of individual domain elements. This article explores the core tactical patterns: entities, value objects, aggregates, domain services, repositories, and domain events. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/ddd-tactical.png" alt="DDD Tactical Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/ddd-tactical.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/ddd-tactical.png" alt="DDD Tactical Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Domain-Driven Design (DDD) tactical patterns provide concrete building blocks for implementing domain models. While strategic DDD focuses on boundaries and relationships between domains, tactical patterns guide the implementation of individual domain elements. This article explores the core tactical patterns: entities, value objects, aggregates, domain services, repositories, and domain events. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/ddd-tactical.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/ddd-tactical.png" alt="DDD Tactical Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Entities </p>
 <p>An entity is an object that has a distinct identity that runs through time and across different states. Two entities with the same attributes but different identities are different objects. The identity is typically represented by a unique identifier—a UUID, a database-generated ID, or a business key. </p>
 <p>Entities are mutable and their state changes over time. An <code>Order</code> entity changes from "pending" to "shipped" as the business process progresses. The entity is responsible for maintaining its own invariants—an <code>Order</code> should not allow shipping before payment is confirmed. </p>
@@ -122,6 +125,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/ddd-strategic.html">DDD Strategic Design</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/ddd-strategic.html">DDD Strategic Design</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/ddd-strategic.html">DDD Strategic Design</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>

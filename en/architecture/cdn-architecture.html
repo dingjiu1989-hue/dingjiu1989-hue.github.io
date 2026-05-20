@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-22">
     <meta property="article:modified_time" content="2026-05-11">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cdn-architecture.webp" type="image/webp" fetchpriority="high">
     <title>CDN Architecture — SourceHub</title>
     <meta name="description" content="Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content delivery networks">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/cdn-architecture.png",
       "datePublished": "2026-04-22",
       "dateModified": "2026-05-11",
-      "wordCount": "1319",
+      "wordCount": "1335",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">CDN Architecture</h1>
       <div class="article-meta">Published 2026-04-22 · Last active 2026-05-11 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cdn-architecture.png" alt="CDN Architecture" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Content Delivery Networks (CDNs) distribute content across geographically dispersed servers to reduce latency, offload origin infrastructure, and absorb large-scale traffic spikes. Modern CDNs have evolved from simple static asset caches into sophisticated application delivery platforms that cache dynamic content, execute edge compute, and provide security functions. Understanding CDN architecture is essential for architects designing global-scale systems. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cdn-architecture.png" alt="CDN Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cdn-architecture.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cdn-architecture.png" alt="CDN Architecture" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Content Delivery Networks (CDNs) distribute content across geographically dispersed servers to reduce latency, offload origin infrastructure, and absorb large-scale traffic spikes. Modern CDNs have evolved from simple static asset caches into sophisticated application delivery platforms that cache dynamic content, execute edge compute, and provide security functions. Understanding CDN architecture is essential for architects designing global-scale systems. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cdn-architecture.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cdn-architecture.png" alt="CDN Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Edge caching is the foundational CDN capability. Edge servers cache responses from the origin server and serve them directly to users. Cache placement is determined by the user's geographic proximity to the edge node. The CDN's global DNS resolves the domain to the nearest edge server IP based on latency measurements. When a request arrives, the edge server checks its cache — on hit, it serves the cached response instantly; on miss, it fetches from the origin, caches the response, and serves it. </p>
 <p>Origin shielding reduces load on the origin server by consolidating cache misses. Without shielding, every edge node that experiences a cache miss sends a request to the origin simultaneously during a cache fill event. With shielding, edge nodes forward cache misses to a shield or parent layer, which makes a single request to the origin and distributes the response to all requesting edges. This dramatically reduces origin request volume during cache warmup periods. </p>
 <p>Dynamic content acceleration optimizes requests that cannot be cached. The CDN uses optimized routing and TCP optimizations to accelerate uncacheable requests. Route optimization selects the best path from the edge node to the origin, avoiding internet congestion. TCP optimizations include: connection reuse (keep-alive), TLS session resumption, and optimized TCP window sizes. For users far from the origin, dynamic acceleration often provides a 2-5x improvement in connection setup time. </p>
@@ -116,6 +119,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>

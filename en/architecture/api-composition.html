@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-21">
     <meta property="article:modified_time" content="2026-04-29">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-composition.webp" type="image/webp" fetchpriority="high">
     <title>API Composition and Aggregation — SourceHub</title>
     <meta name="description" content="API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation strategies">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-composition.png",
       "datePublished": "2026-04-21",
       "dateModified": "2026-04-29",
-      "wordCount": "1044",
+      "wordCount": "1066",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">API Composition and Aggregation</h1>
       <div class="article-meta">Published 2026-04-21 · Last active 2026-04-29 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-composition.png" alt="API Composition and Aggregation" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>API composition addresses a fundamental challenge in distributed architectures: how to aggregate data from multiple backend services into a single, efficient client response. In a monolithic application, the database can join tables across domains with a single query. In a microservice architecture, each service owns its data, and aggregation must happen at the application layer. Three primary patterns address this: the API composition layer, GraphQL federation, and the Backend for Frontend (BFF) pattern. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-composition.png" alt="API Composition and Aggregation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-composition.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-composition.png" alt="API Composition and Aggregation" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>API composition addresses a fundamental challenge in distributed architectures: how to aggregate data from multiple backend services into a single, efficient client response. In a monolithic application, the database can join tables across domains with a single query. In a microservice architecture, each service owns its data, and aggregation must happen at the application layer. Three primary patterns address this: the API composition layer, GraphQL federation, and the Backend for Frontend (BFF) pattern. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-composition.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/api-composition.png" alt="API Composition and Aggregation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The API composition layer is a dedicated service that orchestrates calls to downstream services, aggregates results, and returns a unified response. It is conceptually simple: the composer receives a request, calls the relevant services in parallel where possible, merges the data, and responds. The challenge lies in handling partial failures. If one of five downstream services fails, does the entire request fail, or does the composer return partial data? Strategies include timeout handling with fallback responses, circuit breaker integration, and return of partial results with error indicators. </p>
 <p>The N+1 query problem manifests in API composition when the composer fetches a list from one service, then iterates over each item to fetch details from another. Batch endpoints or GraphQL DataLoader patterns mitigate this by collecting keys and making batched requests. For example, instead of fetching each order's customer details individually, the composer collects all customer IDs and makes a single batch request to the customer service. </p>
 <p>GraphQL federation provides an alternative approach where multiple services expose their own GraphQL schemas, and a federation gateway merges them into a unified graph. Each service contributes types and fields to the global schema. The gateway resolves queries by delegating field resolution to the appropriate service. Apollo Federation and Netflix's DGS framework are popular implementations. Federation eliminates the need for a separate aggregation service while providing typed, flexible queries that clients can tailor to their needs. The trade-off is increased complexity in schema management and the challenge of distributed field resolution performance. </p>
@@ -113,6 +116,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/throttling-pattern.html">Throttling Pattern for System Protection</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/throttling-pattern.html">Throttling Pattern for System Protection</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/throttling-pattern.html">Throttling Pattern for System Protection</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/throttling-pattern.html">Throttling Pattern for System Protection</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p>

@@ -353,3 +353,5 @@ All four tools are capable of serious reverse engineering work. Ghidra offers th
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>)
 
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>)

@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-30">
     <meta property="article:modified_time" content="2026-05-19">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/soa-vs-microservices.webp" type="image/webp" fetchpriority="high">
     <title>SOA vs Microservices — SourceHub</title>
     <meta name="description" content="Enterprise service bus, service granularity, governance differences between SOA and microservices architectures">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/soa-vs-microservices.png",
       "datePublished": "2026-04-30",
       "dateModified": "2026-05-19",
-      "wordCount": "1021",
+      "wordCount": "1038",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -106,8 +109,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">SOA vs Microservices</h1>
       <div class="article-meta">Published 2026-04-30 · Last active 2026-05-19 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/soa-vs-microservices.png" alt="SOA vs Microservices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Service-Oriented Architecture (SOA) and microservices share the fundamental principle of decomposing systems into independently deployable services, but they differ substantially in scope, granularity, governance, and infrastructure philosophy. Understanding these differences is critical for architects choosing between or integrating both approaches. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/soa-vs-microservices.png" alt="SOA vs Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/soa-vs-microservices.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/soa-vs-microservices.png" alt="SOA vs Microservices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Service-Oriented Architecture (SOA) and microservices share the fundamental principle of decomposing systems into independently deployable services, but they differ substantially in scope, granularity, governance, and infrastructure philosophy. Understanding these differences is critical for architects choosing between or integrating both approaches. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/soa-vs-microservices.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/soa-vs-microservices.png" alt="SOA vs Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Granularity is the most visible distinction. SOA services tend to be coarse-grained, often representing entire business capabilities like "Customer Management" or "Order Processing." These services typically expose multiple operations and manage comprehensive data domains. Microservices aim for fine-grained decomposition, where a single service might handle only "Address Validation" or "Payment Authorization." The microservice philosophy favors services small enough to be rewritten in a sprint or two, owned by a single team. </p>
 <p>Enterprise Service Bus (ESB) is the architectural centerpiece of traditional SOA. The ESB provides message routing, protocol translation, message enhancement, and orchestration. It acts as a smart intermediary that mediates all service interactions. Microservices reject the centralized ESB in favor of a "smart endpoints, dumb pipes" approach. Communication uses lightweight protocols directly between services or through a message broker that handles only transport. The reasoning is that the ESB becomes a single point of failure, a scalability bottleneck, and a monolithic piece of middleware that itself needs to be maintained and scaled. </p>
 <p>Governance models differ fundamentally. SOA typically employs centralized governance with an enterprise service registry, standardized service contracts (often WSDL or SOAP), and architectural review boards that approve service designs. Microservices favor decentralized governance, where each team makes independent technology and protocol decisions. Standardization emerges from shared platform tooling and conventions rather than mandates. Common infrastructure like service meshes, API gateways, and container orchestration provides interoperability without dictating service implementation. </p>
@@ -121,6 +124,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a></p>

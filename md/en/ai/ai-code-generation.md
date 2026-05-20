@@ -170,3 +170,5 @@ AI code generation is a powerful productivity multiplier when used correctly. Pr
 **See also:** [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>)
 
 **See also:** [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>)
+
+**See also:** [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>)

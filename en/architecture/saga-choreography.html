@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-29">
     <meta property="article:modified_time" content="2026-05-14">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-choreography.webp" type="image/webp" fetchpriority="high">
     <title>Saga Choreography Pattern — SourceHub</title>
     <meta name="description" content="Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose choreography">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-choreography.png",
       "datePublished": "2026-04-29",
       "dateModified": "2026-05-14",
-      "wordCount": "1098",
+      "wordCount": "1120",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -95,8 +98,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Saga Choreography Pattern</h1>
       <div class="article-meta">Published 2026-04-29 · Last active 2026-05-14 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-choreography.png" alt="Saga Choreography Pattern" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Saga choreography distributes saga execution across participating services through event-driven coordination. There is no central coordinator — each service performs its local transaction, publishes an event, and subscribes to events that trigger its next action. This decentralized approach maximizes autonomy and minimizes coupling, making it attractive for systems where team independence and service evolution are paramount. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-choreography.png" alt="Saga Choreography Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-choreography.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-choreography.png" alt="Saga Choreography Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Saga choreography distributes saga execution across participating services through event-driven coordination. There is no central coordinator — each service performs its local transaction, publishes an event, and subscribes to events that trigger its next action. This decentralized approach maximizes autonomy and minimizes coupling, making it attractive for systems where team independence and service evolution are paramount. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-choreography.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-choreography.png" alt="Saga Choreography Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>In a choreographed saga, each service owns its part of the workflow. When the Order Service creates an order, it publishes OrderCreated. The Payment Service subscribes to OrderCreated, processes payment, and publishes PaymentProcessed. The Inventory Service subscribes to PaymentProcessed, reserves stock, and publishes InventoryReserved. The Shipping Service subscribes to InventoryReserved and schedules shipment. The workflow emerges from these chains of reactions. </p>
 <p>The strength of choreography is that each service only knows about its own domain events. New services can be added by subscribing to existing events and publishing new ones — no existing service needs to change. This makes choreography highly extensible and aligned with bounded context boundaries. Each team can evolve its service independently as long as event contracts remain compatible. </p>
 <p>Error handling in choreography is decentralized but nontrivial. If the Payment Service fails, it publishes PaymentFailed. The Inventory Service must subscribe to PaymentFailed and compensate by releasing the reserved stock. This means each service must know about and handle failure events for the services it depends on. The compensation logic is distributed across services rather than centralized, making it harder to verify correctness. </p>
@@ -112,6 +115,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>

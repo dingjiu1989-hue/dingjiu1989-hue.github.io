@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2025-12-26">
     <meta property="article:modified_time" content="2026-04-23">
     <meta property="article:tag" content="Architecture, System Design">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-sourcing.webp" type="image/webp" fetchpriority="high">
     <title>Event Sourcing Pattern — SourceHub</title>
     <meta name="description" content="Learn the event sourcing pattern for capturing state changes as immutable events.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-sourcing.png",
       "datePublished": "2025-12-26",
       "dateModified": "2026-04-23",
-      "wordCount": "1014",
+      "wordCount": "1039",
       "keywords": "Architecture, System Design",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
       "inLanguage": "en",
@@ -97,8 +100,8 @@
         <span class="tag-cat">System Design</span></div>
       <h1 class="article-title">Event Sourcing Pattern</h1>
       <div class="article-meta">Published 2025-12-26 · Last active 2026-04-23 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-sourcing.png" alt="Event Sourcing Pattern" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Event sourcing is an architectural pattern that stores the state of a system as a sequence of immutable events rather than as the current state. Instead of updating a database row to reflect a new state, the system appends an event describing what happened. The current state is derived by replaying all events for a given entity. This fundamental shift in data management provides powerful capabilities for audit, debugging, and system evolution. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-sourcing.png" alt="Event Sourcing Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-sourcing.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-sourcing.png" alt="Event Sourcing Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Event sourcing is an architectural pattern that stores the state of a system as a sequence of immutable events rather than as the current state. Instead of updating a database row to reflect a new state, the system appends an event describing what happened. The current state is derived by replaying all events for a given entity. This fundamental shift in data management provides powerful capabilities for audit, debugging, and system evolution. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-sourcing.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-sourcing.png" alt="Event Sourcing Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The Event Store </p>
 <p>The event store is the centerpiece of an event-sourced system. It is an append-only database that stores events in the order they occurred. Each event represents a fact about the system: "OrderPlaced", "PaymentReceived", "ItemShipped". Events are immutable once written—they cannot be changed or deleted. New events can only be appended. </p>
 <p>Event stores typically provide two key operations: append an event to a stream, and read all events from a stream. Many event stores also support subscription mechanisms that notify consumers when new events are appended. Popular event store implementations include EventStoreDB, Kafka (when used as an event store), and specialized databases like Axon Server. </p>
@@ -118,6 +121,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a></p>

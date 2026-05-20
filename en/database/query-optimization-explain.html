@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-08">
     <meta property="article:modified_time" content="2026-04-25">
     <meta property="article:tag" content="Database, Backend, Data">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/database/query-optimization-explain.webp" type="image/webp" fetchpriority="high">
     <title>EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types — SourceHub</title>
     <meta name="description" content="Master PostgreSQL EXPLAIN ANALYZE: read query plans, understand cost estimation, compare scan types, and analyze join strategies for query optimization.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/query-optimization-explain.png",
       "datePublished": "2026-04-08",
       "dateModified": "2026-04-25",
-      "wordCount": "2562",
+      "wordCount": "2606",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</h1>
       <div class="article-meta">Published 2026-04-08 · Last active 2026-04-25 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/query-optimization-explain.png" alt="EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/query-optimization-explain.png" alt="EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/query-optimization-explain.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/query-optimization-explain.png" alt="EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/query-optimization-explain.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/query-optimization-explain.png" alt="EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The <code>EXPLAIN</code> command is the single most important tool for understanding query performance. This article teaches you to read execution plans, interpret cost estimates, and identify optimization opportunities in PostgreSQL. </p>
 <p>EXPLAIN Basics </p>
 <p>EXPLAIN SELECT * FROM users WHERE email = 'alice@example.com';</p>
@@ -239,6 +242,7 @@
 <p><strong>See also:</strong> <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p>
 <p><strong>See also:</strong> <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p>
 <p><strong>See also:</strong> <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p>
+<p><strong>See also:</strong> <a href="/en/database/multi-master-replication.html">Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
 <p><strong>See also:</strong> <a href="/en/database/multi-master-replication.html">Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
 <p><strong>See also:</strong> <a href="/en/database/multi-master-replication.html">Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
 <p><strong>See also:</strong> <a href="/en/database/multi-master-replication.html">Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>

@@ -75,3 +75,5 @@ The decision to adopt EDA should be driven by concrete requirements for decoupli
 **See also:** [Health Check Patterns](</en/architecture/health-check-patterns.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
 
 **See also:** [Health Check Patterns](</en/architecture/health-check-patterns.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
+
+**See also:** [Health Check Patterns](</en/architecture/health-check-patterns.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)

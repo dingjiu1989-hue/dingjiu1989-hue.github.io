@@ -1,7 +1,7 @@
 ---
 title: "ORM Performance"
 description: "Optimizing ORM performance by fixing N+1 queries, managing lazy loading, and tuning query generation."
-date: 2026-04-10
+date: 2026-05-19
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/orm-performance.html
 ---
@@ -125,6 +125,8 @@ Profile your ORM queries in production. Fix N+1 with eager loading. Select only 
 **See also:** [Database Query Profiling: Finding and Fixing Performance Bottlenecks](</en/database/database-query-profiling.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>)
 
 **See also:** [Database Query Profiling: Finding and Fixing Performance Bottlenecks](</en/database/database-query-profiling.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>)
+
+**See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>)
 
 **See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>)
 

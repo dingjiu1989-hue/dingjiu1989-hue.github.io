@@ -197,3 +197,5 @@ The best Git workflow is the one your team consistently follows. Start simple --
 **See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Git Workflows](</en/tech/git-workflows.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
 
 **See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Git Workflows](</en/tech/git-workflows.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
+
+**See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Git Workflows](</en/tech/git-workflows.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)

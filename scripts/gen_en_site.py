@@ -13367,6 +13367,7 @@ def make_article_html(art, board_id, board_name, all_posts):
 
     # Cover image for social sharing + article hero
     cover_url = f'https://dingjiu1989-hue.github.io/images/covers/en/{board_id}/{slug}.png'
+    cover_webp = f'https://dingjiu1989-hue.github.io/images/covers/en/{board_id}/{slug}.webp'
     tags_str = ', '.join(art.get('tags', []))
     # "about" structured topics for AI crawlers
     about_entries = ', '.join(f'{{"@type": "Thing", "name": "{t}"}}' for t in art.get('tags', [])[:5])
@@ -13548,7 +13549,7 @@ def make_article_html(art, board_id, board_name, all_posts):
         see_also = f'<p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> {", ".join(links)}</p>'
 
     # Insert cover image inline after first paragraph for visual engagement
-    inline_img = f'<img src="{cover_url}" alt="{art["title"]}" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">'
+    inline_img = f'<picture><source srcset="{cover_webp}" type="image/webp"><img src="{cover_url}" alt="{art["title"]}" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>'
     body_raw = body_html
     first_p_end = body_raw.find('</p>')
     if first_p_end > 0:
@@ -13590,6 +13591,8 @@ def make_article_html(art, board_id, board_name, all_posts):
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -13599,6 +13602,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     gtag('config', 'G-XGFYGQE9NS');
     </script>
 {og_tags}
+    <link rel="preload" as="image" href="{cover_webp}" type="image/webp" fetchpriority="high">
     <title>{art['title']} — SourceHub</title>
     <meta name="description" content="{art['description']}">
     <link rel="stylesheet" href="/css/style.css">
@@ -13660,7 +13664,7 @@ def make_article_html(art, board_id, board_name, all_posts):
       <div class="article-tags">{pin_h}{tags_h}</div>
       <h1 class="article-title">{art['title']}</h1>
       <div class="article-meta">Published {art['date']}{' · Last active ' + art['lastActive'] if art.get('lastActive') and art['lastActive'] != art['date'] else ''} · {art['replies'] * 120} views · {art['replies']} replies</div>
-      <img class="article-cover" src="{cover_url}" alt="{art['title']}" width="1200" height="630" loading="lazy">
+      <picture><source srcset="{cover_webp}" type="image/webp"><img class="article-cover" src="{cover_url}" alt="{art['title']}" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body">{body_raw}{see_also}</div>
     </article>
     {ad_mid}
@@ -13699,6 +13703,8 @@ def make_homepage(data):
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -13865,6 +13871,8 @@ def make_category(data, board_id):
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>

@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-06">
     <meta property="article:modified_time" content="2026-05-14">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/canary-deployment.webp" type="image/webp" fetchpriority="high">
     <title>Canary Deployments for Safe Releases — SourceHub</title>
     <meta name="description" content="Learn canary deployment: rolling out changes to a subset of users first to reduce deployment risk.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/canary-deployment.png",
       "datePublished": "2026-05-06",
       "dateModified": "2026-05-14",
-      "wordCount": "694",
+      "wordCount": "718",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -95,8 +98,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Canary Deployments for Safe Releases</h1>
       <div class="article-meta">Published 2026-05-06 · Last active 2026-05-14 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/canary-deployment.png" alt="Canary Deployments for Safe Releases" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Canary deployment is a release strategy that introduces a new version of an application to a small subset of users before rolling it out to the entire user base. Named after the "canary in a coal mine," this approach limits the blast radius of problematic releases.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/canary-deployment.png" alt="Canary Deployments for Safe Releases" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/canary-deployment.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/canary-deployment.png" alt="Canary Deployments for Safe Releases" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Canary deployment is a release strategy that introduces a new version of an application to a small subset of users before rolling it out to the entire user base. Named after the "canary in a coal mine," this approach limits the blast radius of problematic releases.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/canary-deployment.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/canary-deployment.png" alt="Canary Deployments for Safe Releases" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>The Canary Process</h2>
 <p>A new version is deployed alongside the stable version. A load balancer or traffic router directs a small percentage of requests—typically 1-5%—to the new version. Monitoring systems compare error rates, latency, and business metrics between the canary and stable versions. If the canary performs well, traffic is gradually increased to 10%, 25%, 50%, and finally 100%.</p>
 <h2>Metrics-Driven Rollout</h2>
@@ -114,6 +117,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a></p>

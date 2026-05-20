@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -27,16 +29,16 @@
     <meta name="twitter:title" content="Leader Election in Distributed Systems">
     <meta name="twitter:description" content="Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best practices">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/leader-election.png">
-    <meta property="article:published_time" content="2026-04-27">
+    <meta property="article:published_time" content="2026-05-20">
     <meta property="article:modified_time" content="2026-05-16">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/leader-election.webp" type="image/webp" fetchpriority="high">
     <title>Leader Election in Distributed Systems — SourceHub</title>
     <meta name="description" content="Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best practices">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/leader-election.html">
     <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/leader-election.html">
-    <link rel="prev" href="https://dingjiu1989-hue.github.io/en/architecture/microservices-vs-monolith.html">
-    <link rel="next" href="https://dingjiu1989-hue.github.io/en/architecture/graceful-shutdown.html">
+    <link rel="next" href="https://dingjiu1989-hue.github.io/en/architecture/circuit-breaker-vs-bulkhead.html">
     <meta name="robots" content="index, follow">
     <script type="application/ld+json">
     {
@@ -45,9 +47,9 @@
       "headline": "Leader Election in Distributed Systems",
       "description": "Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best practices",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/leader-election.png",
-      "datePublished": "2026-04-27",
+      "datePublished": "2026-05-20",
       "dateModified": "2026-05-16",
-      "wordCount": "1196",
+      "wordCount": "1218",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -97,9 +99,9 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Leader Election in Distributed Systems</h1>
-      <div class="article-meta">Published 2026-04-27 · Last active 2026-05-16 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/leader-election.png" alt="Leader Election in Distributed Systems" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Leader election is the mechanism by which distributed systems select a single node to coordinate work or make decisions on behalf of the group. It is essential for systems where exactly one node must perform certain operations — assigning monotonically increasing sequence numbers, performing periodic maintenance, or managing group membership changes. The leader must be unique at any time, and the system must remain available despite leader failures. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/leader-election.png" alt="Leader Election in Distributed Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <div class="article-meta">Published 2026-05-20 · Last active 2026-05-16 · 0 views · 0 replies</div>
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/leader-election.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/leader-election.png" alt="Leader Election in Distributed Systems" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Leader election is the mechanism by which distributed systems select a single node to coordinate work or make decisions on behalf of the group. It is essential for systems where exactly one node must perform certain operations — assigning monotonically increasing sequence numbers, performing periodic maintenance, or managing group membership changes. The leader must be unique at any time, and the system must remain available despite leader failures. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/leader-election.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/leader-election.png" alt="Leader Election in Distributed Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Leader election algorithms are broadly categorized into two types: consensus-based and lease-based. Consensus-based elections use Paxos, Raft, or Zab to guarantee that exactly one leader exists at any epoch. These provide strong safety guarantees but require a quorum of nodes for election decisions. Lease-based elections use a distributed lock with a TTL — the holder is the leader until its lease expires. These are simpler but vulnerable to split-brain if clock skew exceeds the lease duration. </p>
 <p>ZooKeeper implements leader election through ephemeral sequential znodes. Multiple candidates create an ephemeral sequential znode under an election path. The candidate with the smallest sequence number becomes the leader. Other candidates watch the preceding znode. When the leader's session expires (detected through ZooKeeper heartbeats), the ephemeral znode is deleted, and the next candidate in sequence becomes leader. Leader election commands are available directly through the ZooKeeper API, and libraries like Apache Curator provide production-ready implementations. </p>
 <p>Etcd's leadership election uses the concurrency package's mutex, which is built on etcd's linearizable read and write guarantees. A leader candidate attempts to acquire a lock associated with a lease. The lease TTL defines the leader's maximum tenure without renewal. The leader must periodically refresh the lease. If the lease expires, the lock is released, and a new leader can acquire it. Etcd's Raft consensus ensures that the lock state is consistent across all nodes. </p>
@@ -115,6 +117,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>

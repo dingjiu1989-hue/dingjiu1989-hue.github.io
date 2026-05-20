@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-14">
     <meta property="article:modified_time" content="2026-05-17">
     <meta property="article:tag" content="Database, Backend, Data">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.webp" type="image/webp" fetchpriority="high">
     <title>Connection Pooling: Tuning, Best Practices, and Pitfalls — SourceHub</title>
     <meta name="description" content="Master database connection pooling: pool sizing, timeout tuning, and common pitfalls in production.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.png",
       "datePublished": "2026-04-14",
       "dateModified": "2026-05-17",
-      "wordCount": "1043",
+      "wordCount": "1087",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -109,8 +112,8 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
       <div class="article-meta">Published 2026-04-14 · Last active 2026-05-17 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.png" alt="Connection Pooling: Tuning, Best Practices, and Pitfalls" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Connection pooling reuses database connections to avoid the overhead of establishing new connections for every request. Opening a database connection involves TCP handshake, SSL negotiation, and authentication—typically 10-50ms of overhead. Pooling eliminates this latency by maintaining a cache of established connections.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.png" alt="Connection Pooling: Tuning, Best Practices, and Pitfalls" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.png" alt="Connection Pooling: Tuning, Best Practices, and Pitfalls" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Connection pooling reuses database connections to avoid the overhead of establishing new connections for every request. Opening a database connection involves TCP handshake, SSL negotiation, and authentication—typically 10-50ms of overhead. Pooling eliminates this latency by maintaining a cache of established connections.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.png" alt="Connection Pooling: Tuning, Best Practices, and Pitfalls" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Pool Size Tuning</h2>
 <p>The optimal pool size depends on your database's capability. PostgreSQL handles connections with one process per connection. Each idle connection consumes roughly 5-10 MB of memory. A pool of 100 connections uses 500 MB to 1 GB of memory even when idle.</p>
 <p>The HikariCP formula provides guidance: pool_size = (core_count * 2) + effective_spindle_count. For a typical 8-core server with SSDs, this gives about 20 connections. More connections do not mean more throughput—they increase context switching and contention.</p>
@@ -131,6 +134,7 @@
 <p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a></p>
 <p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a></p>
 <p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a></p>
+<p><strong>See also:</strong> <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a></p>
 <p><strong>See also:</strong> <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a></p>
 <p><strong>See also:</strong> <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a></p>
 <p><strong>See also:</strong> <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a></p>

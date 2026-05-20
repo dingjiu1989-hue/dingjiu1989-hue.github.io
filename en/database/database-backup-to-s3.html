@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-14">
     <meta property="article:modified_time" content="2026-05-13">
     <meta property="article:tag" content="Database, Backend, Data">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-to-s3.webp" type="image/webp" fetchpriority="high">
     <title>Database Backup Strategies to Object Storage — SourceHub</title>
     <meta name="description" content="Automate database backups to S3/GCS: incremental backups, point-in-time recovery, and retention policies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-to-s3.png",
       "datePublished": "2026-04-14",
       "dateModified": "2026-05-13",
-      "wordCount": "1043",
+      "wordCount": "1090",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Backup Strategies to Object Storage</h1>
       <div class="article-meta">Published 2026-04-14 · Last active 2026-05-13 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-to-s3.png" alt="Database Backup Strategies to Object Storage" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Backing up databases to object storage (S3, GCS, Azure Blob) provides durable, cost-effective, and scalable backup storage. Object storage's built-in replication and lifecycle management simplify backup retention.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-to-s3.png" alt="Database Backup Strategies to Object Storage" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-to-s3.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-to-s3.png" alt="Database Backup Strategies to Object Storage" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Backing up databases to object storage (S3, GCS, Azure Blob) provides durable, cost-effective, and scalable backup storage. Object storage's built-in replication and lifecycle management simplify backup retention.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-to-s3.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-to-s3.png" alt="Database Backup Strategies to Object Storage" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Backup Types</h2>
 <p>Full backups capture the entire database. They are the foundation of any backup strategy but are slow and space-intensive for large databases. Frequency depends on data change rate—typically daily for most databases.</p>
 <p>Incremental backups capture only data changed since the last full or incremental backup. They are faster and smaller but require the full backup chain for restoration. Recommended interval is minutes to hours.</p>
@@ -123,6 +126,7 @@
 <p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
 <p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
 <p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-containerization.html">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-containerization.html">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-containerization.html">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-containerization.html">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>

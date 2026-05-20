@@ -89,3 +89,5 @@ blocklist = ['
 **See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>)
 
 **See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>)
+
+**See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>)

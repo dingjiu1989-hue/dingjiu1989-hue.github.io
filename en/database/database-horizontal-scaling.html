@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-04-15">
     <meta property="article:modified_time" content="2026-05-05">
     <meta property="article:tag" content="Database, Backend, Data">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/database/database-horizontal-scaling.webp" type="image/webp" fetchpriority="high">
     <title>Database Horizontal Scaling Strategies — SourceHub</title>
     <meta name="description" content="Learn horizontal scaling strategies for databases: sharding, replication, read replicas, and distributed architectures.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-horizontal-scaling.png",
       "datePublished": "2026-04-15",
       "dateModified": "2026-05-05",
-      "wordCount": "944",
+      "wordCount": "986",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
@@ -99,8 +102,8 @@
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
       <h1 class="article-title">Database Horizontal Scaling Strategies</h1>
       <div class="article-meta">Published 2026-04-15 · Last active 2026-05-05 · 720 views · 6 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-horizontal-scaling.png" alt="Database Horizontal Scaling Strategies" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Horizontal scaling distributes database load across multiple machines. Unlike vertical scaling (upgrading to a bigger server), horizontal scaling adds more servers to handle increased load. This approach provides near-linear scalability but adds architectural complexity.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-horizontal-scaling.png" alt="Database Horizontal Scaling Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-horizontal-scaling.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-horizontal-scaling.png" alt="Database Horizontal Scaling Strategies" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Horizontal scaling distributes database load across multiple machines. Unlike vertical scaling (upgrading to a bigger server), horizontal scaling adds more servers to handle increased load. This approach provides near-linear scalability but adds architectural complexity.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/database/database-horizontal-scaling.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-horizontal-scaling.png" alt="Database Horizontal Scaling Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Sharding</h2>
 <p>Sharding splits data across multiple database instances based on a shard key. Each shard holds a subset of the data. Sharding distributes both read and write load, making it suitable for write-heavy workloads.</p>
 <p>Choosing the right shard key is critical. A good shard key evenly distributes data and queries. Common strategies include hash-based sharding (shard key % N), range-based sharding (user IDs 1-10000 on shard A, 10001-20000 on shard B), and geographic sharding (US customers on one shard, EU on another).</p>
@@ -121,6 +124,7 @@
 <p><strong>See also:</strong> <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
 <p><strong>See also:</strong> <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
 <p><strong>See also:</strong> <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>

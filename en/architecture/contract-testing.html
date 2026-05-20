@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-06">
     <meta property="article:modified_time" content="2026-05-10">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/contract-testing.webp" type="image/webp" fetchpriority="high">
     <title>Contract Testing for Microservices — SourceHub</title>
     <meta name="description" content="A practical guide to contract testing: ensuring service compatibility without slow end-to-end integration tests.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/contract-testing.png",
       "datePublished": "2026-05-06",
       "dateModified": "2026-05-10",
-      "wordCount": "743",
+      "wordCount": "760",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -98,8 +101,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Contract Testing for Microservices</h1>
       <div class="article-meta">Published 2026-05-06 · Last active 2026-05-10 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/contract-testing.png" alt="Contract Testing for Microservices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Contract testing verifies that a service provider meets the expectations of its consumers without running the full system. Each consumer defines the contract—specific API behavior it depends on. The provider validates against all consumer contracts in its CI pipeline.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/contract-testing.png" alt="Contract Testing for Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/contract-testing.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/contract-testing.png" alt="Contract Testing for Microservices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Contract testing verifies that a service provider meets the expectations of its consumers without running the full system. Each consumer defines the contract—specific API behavior it depends on. The provider validates against all consumer contracts in its CI pipeline.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/contract-testing.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/contract-testing.png" alt="Contract Testing for Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Why Contract Testing</h2>
 <p>End-to-end testing is slow, brittle, and expensive for microservices. Deploying a full test environment with every service is impractical at scale. Contract testing provides rapid feedback with minimal infrastructure. A provider can verify contract compatibility in seconds, not hours.</p>
 <p>Contract testing catches breaking changes before deployment. If a provider change would break any consumer, the contract test fails in CI. The provider team knows immediately and can adjust before the change reaches production.</p>
@@ -120,6 +123,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/consumer-driven-contracts.html">Consumer-Driven Contracts in Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/consumer-driven-contracts.html">Consumer-Driven Contracts in Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/consumer-driven-contracts.html">Consumer-Driven Contracts in Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>

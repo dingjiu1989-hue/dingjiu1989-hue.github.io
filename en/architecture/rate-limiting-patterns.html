@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2025-12-29">
     <meta property="article:modified_time" content="2026-04-05">
     <meta property="article:tag" content="Architecture, System Design">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-patterns.webp" type="image/webp" fetchpriority="high">
     <title>Rate Limiting Patterns — SourceHub</title>
     <meta name="description" content="Explore rate limiting patterns for protecting APIs and services from abuse — token bucket, sliding window, distributed rate limiting with Redis, and integration with API gateway and load balancer.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-patterns.png",
       "datePublished": "2025-12-29",
       "dateModified": "2026-04-05",
-      "wordCount": "1390",
+      "wordCount": "1412",
       "keywords": "Architecture, System Design",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
       "inLanguage": "en",
@@ -97,8 +100,8 @@
         <span class="tag-cat">System Design</span></div>
       <h1 class="article-title">Rate Limiting Patterns</h1>
       <div class="article-meta">Published 2025-12-29 · Last active 2026-04-05 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-patterns.png" alt="Rate Limiting Patterns" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Rate limiting is a critical component of any production API or service. It protects your system from abuse, ensures fair usage among consumers, and maintains service quality under load. This article explores the most common rate limiting algorithms and how to choose the right one for your use case. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-patterns.png" alt="Rate Limiting Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-patterns.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-patterns.png" alt="Rate Limiting Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Rate limiting is a critical component of any production API or service. It protects your system from abuse, ensures fair usage among consumers, and maintains service quality under load. This article explores the most common rate limiting algorithms and how to choose the right one for your use case. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-patterns.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/rate-limiting-patterns.png" alt="Rate Limiting Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Why Rate Limiting Matters </p>
 <p>Rate limiting prevents a single client from consuming an unfair share of resources. Without it, a misbehaving client or an accidental infinite loop can degrade service for all users. Rate limiting also helps: </p>
 <ul>
@@ -192,6 +195,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/ddd-strategic.html">DDD Strategic Design</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/ddd-strategic.html">DDD Strategic Design</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/ddd-strategic.html">DDD Strategic Design</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/ddd-strategic.html">DDD Strategic Design</a></p>

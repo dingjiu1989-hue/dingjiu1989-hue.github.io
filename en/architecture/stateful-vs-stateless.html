@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-10">
     <meta property="article:modified_time" content="2026-05-19">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/stateful-vs-stateless.webp" type="image/webp" fetchpriority="high">
     <title>Stateful vs Stateless Architecture Patterns — SourceHub</title>
     <meta name="description" content="Compare stateful and stateless architecture patterns: trade-offs for scalability, resilience, and implementation complexity.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/stateful-vs-stateless.png",
       "datePublished": "2026-05-10",
       "dateModified": "2026-05-19",
-      "wordCount": "776",
+      "wordCount": "794",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -106,8 +109,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Stateful vs Stateless Architecture Patterns</h1>
       <div class="article-meta">Published 2026-05-10 · Last active 2026-05-19 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/stateful-vs-stateless.png" alt="Stateful vs Stateless Architecture Patterns" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>The choice between stateful and stateless architecture shapes every aspect of a distributed system—scalability, resilience, complexity, and operational cost.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/stateful-vs-stateless.png" alt="Stateful vs Stateless Architecture Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/stateful-vs-stateless.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/stateful-vs-stateless.png" alt="Stateful vs Stateless Architecture Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>The choice between stateful and stateless architecture shapes every aspect of a distributed system—scalability, resilience, complexity, and operational cost.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/stateful-vs-stateless.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/stateful-vs-stateless.png" alt="Stateful vs Stateless Architecture Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Stateless Architecture</h2>
 <p>A stateless service does not store any session state between requests. Each request contains all the information needed to process it. Any instance can handle any request. This simplifies horizontal scaling—add instances behind a load balancer, and no data needs to be shared.</p>
 <p>Stateless services are easy to deploy, upgrade, and recover. Failed instances can be replaced without data loss. Rolling deployments affect only in-flight requests. This operational simplicity makes stateless the default choice for most modern services.</p>
@@ -129,6 +132,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a>, <a href="/en/architecture/event-notification-vs-event-carrying.html">Event Notification vs Event-Carried State Transfer</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a>, <a href="/en/architecture/event-notification-vs-event-carrying.html">Event Notification vs Event-Carried State Transfer</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a>, <a href="/en/architecture/event-notification-vs-event-carrying.html">Event Notification vs Event-Carried State Transfer</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>

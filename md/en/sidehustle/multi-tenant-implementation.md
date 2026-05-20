@@ -81,3 +81,5 @@ Multi-tenant architecture choices have long-term implications for your SaaS. Sta
 **See also:** [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>), [Affiliate Marketing for Developer Products](</en/sidehustle/affiliate-marketing-tech.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>)
 
 **See also:** [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>), [Affiliate Marketing for Developer Products](</en/sidehustle/affiliate-marketing-tech.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>)
+
+**See also:** [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>), [Affiliate Marketing for Developer Products](</en/sidehustle/affiliate-marketing-tech.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>)

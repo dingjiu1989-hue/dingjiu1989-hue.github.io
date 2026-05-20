@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-08">
     <meta property="article:modified_time" content="2026-05-09">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/request-reply-pattern.webp" type="image/webp" fetchpriority="high">
     <title>Request-Reply Pattern for Asynchronous Communication — SourceHub</title>
     <meta name="description" content="Implement the request-reply pattern with message queues for asynchronous request-response messaging.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/request-reply-pattern.png",
       "datePublished": "2026-05-08",
       "dateModified": "2026-05-09",
-      "wordCount": "831",
+      "wordCount": "853",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -95,8 +98,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Request-Reply Pattern for Asynchronous Communication</h1>
       <div class="article-meta">Published 2026-05-08 · Last active 2026-05-09 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/request-reply-pattern.png" alt="Request-Reply Pattern for Asynchronous Communication" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>The request-reply pattern enables asynchronous request-response communication using message queues. Unlike synchronous HTTP calls, the client sends a request message and continues processing. The response arrives later through a reply queue. This decouples the sender from the receiver in both time and space.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/request-reply-pattern.png" alt="Request-Reply Pattern for Asynchronous Communication" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/request-reply-pattern.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/request-reply-pattern.png" alt="Request-Reply Pattern for Asynchronous Communication" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>The request-reply pattern enables asynchronous request-response communication using message queues. Unlike synchronous HTTP calls, the client sends a request message and continues processing. The response arrives later through a reply queue. This decouples the sender from the receiver in both time and space.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/request-reply-pattern.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/request-reply-pattern.png" alt="Request-Reply Pattern for Asynchronous Communication" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Architecture</h2>
 <p>The client sends a request to a request queue, including a correlation ID and a reply-to address in the message header. The server consumes from the request queue, processes the request, and sends the response to the reply-to address with the same correlation ID. The client listens on the reply queue and matches responses by correlation ID.</p>
 <h2>Temporary vs Permanent Replies</h2>
@@ -117,6 +120,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/claim-check.html">Claim Check Pattern</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/claim-check.html">Claim Check Pattern</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/claim-check.html">Claim Check Pattern</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/claim-check.html">Claim Check Pattern</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></p>

@@ -51,3 +51,5 @@ Use event notification when the consumer always needs fresh data or the event's 
 **See also:** [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
 
 **See also:** [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
+
+**See also:** [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)

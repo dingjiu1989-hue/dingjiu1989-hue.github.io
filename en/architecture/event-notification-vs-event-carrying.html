@@ -6,6 +6,8 @@
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -30,6 +32,7 @@
     <meta property="article:published_time" content="2026-05-07">
     <meta property="article:modified_time" content="2026-05-13">
     <meta property="article:tag" content="Architecture, System Design, Backend">
+    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-notification-vs-event-carrying.webp" type="image/webp" fetchpriority="high">
     <title>Event Notification vs Event-Carried State Transfer — SourceHub</title>
     <meta name="description" content="Compare event notification and event-carried state transfer patterns for microservices communication.">
     <link rel="stylesheet" href="/css/style.css">
@@ -47,7 +50,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-notification-vs-event-carrying.png",
       "datePublished": "2026-05-07",
       "dateModified": "2026-05-13",
-      "wordCount": "547",
+      "wordCount": "565",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -106,8 +109,8 @@
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Event Notification vs Event-Carried State Transfer</h1>
       <div class="article-meta">Published 2026-05-07 · Last active 2026-05-13 · 0 views · 0 replies</div>
-      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-notification-vs-event-carrying.png" alt="Event Notification vs Event-Carried State Transfer" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Event notification and event-carried state transfer are two patterns for communicating state changes between microservices. The choice affects coupling, data consistency, and service autonomy.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-notification-vs-event-carrying.png" alt="Event Notification vs Event-Carried State Transfer" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-notification-vs-event-carrying.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-notification-vs-event-carrying.png" alt="Event Notification vs Event-Carried State Transfer" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Event notification and event-carried state transfer are two patterns for communicating state changes between microservices. The choice affects coupling, data consistency, and service autonomy.</p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-notification-vs-event-carrying.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-notification-vs-event-carrying.png" alt="Event Notification vs Event-Carried State Transfer" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Event Notification</h2>
 <p>The publisher sends only a reference to the changed entity. Consumers must query the publisher's API for details. This minimizes coupling—consumers know only that something changed. The publisher's API remains the source of truth.</p>
 <p>Drawbacks: each consumer must make additional API calls. This increases latency and reduces availability. If the publisher is down during event processing, consumers cannot get the full picture.</p>
@@ -122,6 +125,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/polling-consumer.html">Polling Consumer vs Event-Driven Consumer</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></p>

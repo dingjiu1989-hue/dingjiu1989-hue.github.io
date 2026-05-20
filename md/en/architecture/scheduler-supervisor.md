@@ -83,3 +83,5 @@ The scheduler supervisor pattern transforms unreliable background job execution 
 **See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 
 **See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
