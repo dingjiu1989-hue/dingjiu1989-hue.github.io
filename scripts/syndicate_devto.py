@@ -94,8 +94,10 @@ def get_published_slugs(force_refresh=False):
     if not force_refresh and cache_path.exists():
         try:
             cache = json.loads(cache_path.read_text(encoding="utf-8"))
-            if time.time() - cache.get("ts", 0) < cache_ttl:
-                return set(cache.get("slugs", []))
+            cached_slugs = cache.get("slugs", [])
+            # If cache is non-empty and fresh, use it
+            if cached_slugs and time.time() - cache.get("ts", 0) < cache_ttl:
+                return set(cached_slugs)
         except Exception:
             pass
     slugs = set()
