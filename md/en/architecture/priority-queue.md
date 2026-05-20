@@ -63,3 +63,5 @@ Priority queues are valuable for order processing (expedite orders first), incid
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Caching Strategies](</en/architecture/cache-strategies.html>)
 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Caching Strategies](</en/architecture/cache-strategies.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Caching Strategies](</en/architecture/cache-strategies.html>)

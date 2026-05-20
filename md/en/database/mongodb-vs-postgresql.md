@@ -91,3 +91,5 @@ Choose MongoDB for document-shaped data and high write throughput. Choose Postgr
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
 
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
+
+**See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)

@@ -65,3 +65,5 @@ Use pnpm for monorepos, disk-constrained environments, and teams that value stri
 **See also:** [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>)
 
 **See also:** [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>)
+
+**See also:** [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>)

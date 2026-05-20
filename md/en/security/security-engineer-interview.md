@@ -234,3 +234,5 @@ Study these areas in depth: OWASP Top 10, cloud security (AWS/GCP/Azure), networ
 **See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)
 
 **See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)

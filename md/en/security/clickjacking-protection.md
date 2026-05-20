@@ -266,3 +266,5 @@ Clickjacking is one of the easiest vulnerabilities to prevent but remains surpri
 **See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
 
 **See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
+
+**See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)

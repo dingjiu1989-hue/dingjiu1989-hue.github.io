@@ -55,3 +55,5 @@ Choosing between algorithms is less important than choosing a mature implementat
 **See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
 
 **See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)

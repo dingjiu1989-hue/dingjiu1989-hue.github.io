@@ -387,3 +387,5 @@ Smart contract security requires a multi-layered approach. Understand common vul
 **See also:** [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 
 **See also:** [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)

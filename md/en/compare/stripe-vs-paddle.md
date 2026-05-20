@@ -103,3 +103,5 @@ For most indie developers and small SaaS companies, the merchant of record model
 **See also:** [GitHub Actions vs GitLab CI: CI/CD Platforms Compared](</en/compare/github-actions-vs-gitlab-ci.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>), [Prometheus vs Datadog: Monitoring Platform Comparison](</en/compare/prometheus-vs-datadog.html>)
 
 **See also:** [GitHub Actions vs GitLab CI: CI/CD Platforms Compared](</en/compare/github-actions-vs-gitlab-ci.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>), [Prometheus vs Datadog: Monitoring Platform Comparison](</en/compare/prometheus-vs-datadog.html>)
+
+**See also:** [GitHub Actions vs GitLab CI: CI/CD Platforms Compared](</en/compare/github-actions-vs-gitlab-ci.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>), [Prometheus vs Datadog: Monitoring Platform Comparison](</en/compare/prometheus-vs-datadog.html>)

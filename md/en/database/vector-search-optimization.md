@@ -95,3 +95,5 @@ Tune HNSW parameters for your data distribution. Use quantization to reduce memo
 **See also:** [Database Indexing Strategies](</en/database/database-indexing.html>), [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>)
 
 **See also:** [Database Indexing Strategies](</en/database/database-indexing.html>), [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>)
+
+**See also:** [Database Indexing Strategies](</en/database/database-indexing.html>), [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>)

@@ -586,3 +586,5 @@ Event-driven architecture decouples services through asynchronous event communic
 **See also:** [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
 
 **See also:** [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
+
+**See also:** [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)

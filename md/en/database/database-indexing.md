@@ -209,3 +209,5 @@ Indexes are the most impactful performance optimization for database queries. Us
 **See also:** [B-Tree, Hash, GiST, GIN: Index Type Selection Guide](</en/database/database-index-types.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
 
 **See also:** [B-Tree, Hash, GiST, GIN: Index Type Selection Guide](</en/database/database-index-types.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
+
+**See also:** [B-Tree, Hash, GiST, GIN: Index Type Selection Guide](</en/database/database-index-types.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)

@@ -65,3 +65,5 @@ Start with one service pair. Choose a provider with multiple consumers to maximi
 **See also:** [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [SOA vs Microservices](</en/architecture/soa-vs-microservices.html>)
 
 **See also:** [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [SOA vs Microservices](</en/architecture/soa-vs-microservices.html>)
+
+**See also:** [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [SOA vs Microservices](</en/architecture/soa-vs-microservices.html>)

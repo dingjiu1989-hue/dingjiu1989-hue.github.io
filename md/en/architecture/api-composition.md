@@ -51,3 +51,5 @@ The choice between these patterns depends on client diversity, team structure, a
 **See also:** [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
 
 **See also:** [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
+
+**See also:** [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)

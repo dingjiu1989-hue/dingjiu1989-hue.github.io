@@ -67,3 +67,5 @@ The ideal micro-SaaS stack combines managed services that maximize developer pro
 **See also:** [Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring](</en/sidehustle/feature-prioritization.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>), [SEO for SaaS: Technical SEO, Content Clusters, Link Building](</en/sidehustle/seo-for-saas.html>)
 
 **See also:** [Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring](</en/sidehustle/feature-prioritization.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>), [SEO for SaaS: Technical SEO, Content Clusters, Link Building](</en/sidehustle/seo-for-saas.html>)
+
+**See also:** [Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring](</en/sidehustle/feature-prioritization.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>), [SEO for SaaS: Technical SEO, Content Clusters, Link Building](</en/sidehustle/seo-for-saas.html>)

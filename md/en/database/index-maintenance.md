@@ -292,3 +292,5 @@ Index maintenance is not a one-time activity. Build monitoring and automation in
 **See also:** [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)
 
 **See also:** [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)
+
+**See also:** [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)

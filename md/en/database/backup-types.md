@@ -244,3 +244,5 @@ The 3-2-1 rule applies to databases: three copies of data, on two different medi
 **See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
 
 **See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)

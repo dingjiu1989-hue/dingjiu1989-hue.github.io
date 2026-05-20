@@ -271,3 +271,5 @@ Secure Helm deployments with chart signing and provenance verification. Use exte
 **See also:** [Software Signing](</en/security/software-signing.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
 
 **See also:** [Software Signing](</en/security/software-signing.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
+
+**See also:** [Software Signing](</en/security/software-signing.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)

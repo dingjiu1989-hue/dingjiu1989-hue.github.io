@@ -343,3 +343,5 @@ Most slow queries are fixed by adding the right index. When that is not enough, 
 **See also:** [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>), [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>)
 
 **See also:** [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>), [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>)
+
+**See also:** [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>), [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>)

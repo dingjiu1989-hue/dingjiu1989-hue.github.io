@@ -101,3 +101,5 @@ Choose synchronous for zero data loss, asynchronous for performance. Monitor rep
 **See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)
 
 **See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)

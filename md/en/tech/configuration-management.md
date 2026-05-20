@@ -87,3 +87,5 @@ Effective configuration management ensures applications run correctly in any env
 **See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>)
 
 **See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>)
+
+**See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>)

@@ -73,3 +73,5 @@ Nginx remains the performance leader and enterprise standard, but Caddy's automa
 **See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)
 
 **See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)
+
+**See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)

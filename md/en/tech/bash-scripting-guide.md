@@ -254,3 +254,5 @@ Bash scripting is not dead -- it is the glue that holds modern infrastructure to
 **See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
 
 **See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
+
+**See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)

@@ -1,7 +1,7 @@
 ---
 title: "Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting"
 description: "In-depth guide to Docker networking covering bridge networks, overlay networking for Swarm, host mode, macvlan drivers, network policies, and common troubleshooting approaches."
-date: 2026-01-01
+date: 2026-05-20
 board: tech
 url: https://dingjiu1989-hue.github.io/en/tech/docker-networking.html
 ---
@@ -94,6 +94,8 @@ Docker networking offers flexibility through its driver architecture. Bridge net
 **See also:** [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>)
 
 **See also:** [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>)
+
+**See also:** [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
 
 **See also:** [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
 

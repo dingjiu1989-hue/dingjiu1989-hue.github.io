@@ -251,3 +251,5 @@ OAuth2 is complex but essential for modern authentication. PKCE makes authorizat
 **See also:** [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Authentication Methods](</en/security/api-authentication.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 
 **See also:** [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Authentication Methods](</en/security/api-authentication.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Authentication Methods](</en/security/api-authentication.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
