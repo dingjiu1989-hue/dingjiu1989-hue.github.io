@@ -230,6 +230,45 @@ def update_stats(data, json_path):
 
 
 # ══════════════════════════════════════════════════════════════════════
+# 7. GOOGLE SEARCH CONSOLE SITEMAP SUBMISSION
+# ══════════════════════════════════════════════════════════════════════
+
+def submit_sitemap_gsc():
+    """Resubmit sitemaps to Google Search Console to trigger recrawl."""
+    TOKEN_FILE = ROOT / "data" / "gsc-token.json"
+    if not TOKEN_FILE.exists():
+        log('No GSC token, skipping sitemap submission')
+        return True
+
+    try:
+        from google.oauth2.credentials import Credentials
+        from google.auth.transport.requests import Request
+        from googleapiclient.discovery import build
+
+        creds = Credentials.from_authorized_user_file(str(TOKEN_FILE), ["https://www.googleapis.com/auth/webmasters"])
+        if creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+
+        service = build("searchconsole", "v1", credentials=creds)
+        feeds = [
+            f"{BASE_URL}/sitemap.xml",
+            f"{BASE_URL}/images/sitemap.xml",
+            f"{BASE_URL}/en/feed.xml",
+            f"{BASE_URL}/feed.xml",
+        ]
+        for feed in feeds:
+            try:
+                service.sitemaps().submit(siteUrl=BASE_URL + "/", feedpath=feed).execute()
+                log(f'GSC submitted: {feed}')
+            except Exception as e:
+                log(f'GSC submit error ({feed}): {e}')
+        return True
+    except Exception as e:
+        log(f'GSC API error: {e}')
+        return False
+
+
+# ══════════════════════════════════════════════════════════════════════
 # MAIN
 # ══════════════════════════════════════════════════════════════════════
 def main():
@@ -264,6 +303,9 @@ def main():
         update_stats(en_data, EN_ARTICLES_JSON)
     else:
         log('No English data, skipping')
+
+    print('[7/7] GSC sitemap submission')
+    submit_sitemap_gsc()
 
     print('Done.')
     if not health['healthy']:
