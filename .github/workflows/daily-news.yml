@@ -1,0 +1,61 @@
+name: Daily AI News Auto-Generation
+
+on:
+  schedule:
+    # Beijing Time 7:00 AM (UTC 23:00 the previous day)
+    - cron: '0 23 * * *'
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate daily AI news from RSS feeds
+        run: python3 scripts/gen_daily_news.py
+
+      - name: Register new articles
+        run: python3 scripts/register_new_articles.py
+
+      - name: Rebuild full site
+        run: python3 scripts/gen_en_site.py
+
+      - name: Generate AI-friendly files
+        run: python3 scripts/gen_ai_friendly.py
+
+      - name: Update RSS feeds and JSON feeds
+        run: |
+          python3 scripts/gen_rss.py
+          python3 scripts/generate_json_feed.py
+
+      - name: Submit URLs to IndexNow
+        run: python3 scripts/indexnow_submit.py
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: daily AI news auto-generation for $(date +%Y-%m-%d)"
+          git pull --rebase
+          git push
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "::warning::Daily news generation failed. Check workflow logs for details."
