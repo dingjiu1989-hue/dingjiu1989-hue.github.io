@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Generate all English site HTML files from /en/articles.json in one pass."""
-import json, re, html as html_mod
+import json, re, html as html_mod, urllib.parse
 from pathlib import Path
 from datetime import date
 
@@ -13475,7 +13475,9 @@ def make_article_html(art, board_id, board_name, all_posts):
     }}
     </script>'''
 
-    body_len = len(body_html)
+    encoded_title = urllib.parse.quote(art['title'])
+    share_twitter = f'https://twitter.com/intent/tweet?text={encoded_title}&url={art_url}'
+    share_linkedin = f'https://www.linkedin.com/sharing/share-offsite/?url={art_url}'
     # wordCount from plain text (not HTML) — ~5 chars/word average
     body_text = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', body_html)).strip()
     body_text_len = len(body_text)
@@ -13668,16 +13670,39 @@ def make_article_html(art, board_id, board_name, all_posts):
       <div class="article-body">{body_raw}{see_also}</div>
     </article>
     {ad_mid}
+    <div class="share-bar">
+      <span>Share:</span>
+      <a href="{share_twitter}" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="{share_linkedin}" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+    </div>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid">{related_html}</div>
     </section>
     {tools_html}
   </div>
+  <div class="container" style="max-width:750px;">
+    <div class="giscus"></div>
+  </div>
 </main>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<script src="https://giscus.app/client.js"
+  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
+  data-repo-id="R_kgDOSWcDOw"
+  data-category="Announcements"
+  data-category-id="DIC_kwDOSWcDO84C9bsh"
+  data-mapping="pathname"
+  data-strict="1"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="top"
+  data-theme="light"
+  data-lang="en"
+  crossorigin="anonymous"
+  async>
+</script>
 </body>
 </html>'''
 

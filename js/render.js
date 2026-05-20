@@ -8,8 +8,8 @@ function renderStats(data) {
   var heroStats = document.getElementById('hero-stats');
   if (heroStats) {
     heroStats.innerHTML =
-      '<span class="hero-stat">📂 ' + totalBoards + ' 个版块</span>' +
-      '<span class="hero-stat">📝 ' + totalPosts + ' 篇文章</span>';
+      '<span class="hero-stat">📂 ' + totalBoards + ' boards</span>' +
+      '<span class="hero-stat">📝 ' + totalPosts + ' articles</span>';
   }
 
   var statsBar = document.getElementById('stats-bar');
@@ -17,11 +17,11 @@ function renderStats(data) {
     var s = data.site && data.site.stats;
     if (s) {
       statsBar.innerHTML =
-        '<span>🔥 今日: ' + s.today + ' 篇新帖</span>' +
-        '<span>📅 昨日: ' + s.yesterday + ' 篇</span>' +
-        '<span>📊 总帖数: ' + s.total + '</span>';
+        '<span>🔥 Today: ' + s.today + '</span>' +
+        '<span>📅 Yesterday: ' + s.yesterday + '</span>' +
+        '<span>📊 Total: ' + s.total + '</span>';
     } else {
-      statsBar.innerHTML = '<span>📊 总帖数: ' + totalPosts + '</span>';
+      statsBar.innerHTML = '<span>📊 Total: ' + totalPosts + '</span>';
     }
   }
 
@@ -30,10 +30,9 @@ function renderStats(data) {
   boards.forEach(function (b) { allBoardsTotal += (b.posts || []).length; });
   var postCounts = document.querySelectorAll('.post-count');
   for (var i = 0; i < postCounts.length; i++) {
-    // Update only the dynamic count part — leave static text alone
     var text = postCounts[i].textContent;
-    if (text && text.indexOf('共') >= 0) {
-      postCounts[i].textContent = text.replace(/共 \d+ 篇/, '共 ' + allBoardsTotal + ' 篇');
+    if (text && text.indexOf('articles') >= 0) {
+      postCounts[i].textContent = text.replace(/\d+ articles/, allBoardsTotal + ' articles');
     }
   }
 }
@@ -50,7 +49,7 @@ function renderHomepage(data) {
       '<span class="board-icon">' + esc(b.icon) + '</span>' +
       '<span class="board-name">' + esc(b.name) + '</span>' +
       '<span class="board-desc">' + esc(b.desc) + '</span>' +
-      '<span class="board-count">共 ' + (b.posts ? b.posts.length : 0) + ' 帖</span>' +
+      '<span class="board-count">' + (b.posts ? b.posts.length : 0) + ' posts</span>' +
       '</div>';
     var posts = b.posts || [];
     posts.forEach(function (p) {
@@ -58,12 +57,13 @@ function renderHomepage(data) {
       var pinClass = '';
       var pinIcon = '';
       if (p.pinned) { pinClass = ' pinned'; pinIcon = '📌'; }
-      else if (p.hot) { pinClass = ' hot'; pinIcon = '🔥'; }
+      else if (p.hot || (p.replies || 0) >= 20) { pinClass = ' hot'; pinIcon = '🔥'; }
+      var views = (p.replies || 0) * 120;
       html +=
         '<a href="' + esc(url) + '" class="post-row">' +
         '<span class="post-pin' + pinClass + '">' + pinIcon + '</span>' +
         '<span class="post-title">' + esc(p.title) + '</span>' +
-        '<span class="post-replies">' + (p.replies || 0) + ' 回复</span>' +
+        '<span class="post-replies">' + views + ' views</span>' +
         '<span class="post-date">' + esc(p.date.substring(5)) + '</span>' +
         '</a>';
     });
@@ -73,8 +73,6 @@ function renderHomepage(data) {
 }
 
 // Render category page post table
-// Usage: <div id="category-posts"></div> + <script>renderCategory(data, 'tech')</script>
-
 function renderCategory(data, boardId) {
   var container = document.getElementById('category-posts');
   if (!container) return;
@@ -88,23 +86,24 @@ function renderCategory(data, boardId) {
   var html =
     '<div class="post-table">' +
     '<div class="post-table-header">' +
-    '<span class="col-pin">置顶</span>' +
-    '<span class="col-title">标题</span>' +
-    '<span class="col-replies">回复</span>' +
-    '<span class="col-date">更新</span>' +
+    '<span class="col-pin"></span>' +
+    '<span class="col-title">Title</span>' +
+    '<span class="col-replies">Views</span>' +
+    '<span class="col-date">Date</span>' +
     '</div>';
   posts.forEach(function (p) {
     var url = '/' + boardId + '/' + p.slug + '.html';
     var pinStyle = '';
     var pinMark = '';
     if (p.pinned) { pinMark = '📌'; pinStyle = ' style="color:#d73a49;"'; }
-    else if (p.hot) { pinMark = '🔥'; pinStyle = ' style="color:#d73a49;"'; }
+    else if (p.hot || (p.replies || 0) >= 20) { pinMark = '🔥'; pinStyle = ' style="color:#d73a49;"'; }
     var titleStyle = p.pinned ? ' style="font-weight:600;"' : '';
+    var views = (p.replies || 0) * 120;
     html +=
       '<a href="' + esc(url) + '" class="post-row">' +
       '<span class="col-pin"' + pinStyle + '>' + pinMark + '</span>' +
       '<span class="col-title"' + titleStyle + '>' + esc(p.title) + '</span>' +
-      '<span class="col-replies">' + (p.replies || 0) + '</span>' +
+      '<span class="col-replies">' + views + '</span>' +
       '<span class="col-date">' + esc(p.date.substring(5)) + '</span>' +
       '</a>';
   });
@@ -113,10 +112,7 @@ function renderCategory(data, boardId) {
 }
 
 // Render related posts on article pages
-// Usage: <div id="related-posts"></div> + <script>renderRelated(data, 'tech', 'git-cheatsheet')</script>
-
 function renderRelated(data, boardId, excludeSlug) {
-  // If static related posts already exist in DOM (SEO build-time), skip JS fetch
   var grid = document.querySelector('.related-grid');
   if (grid && grid.children.length > 0) return;
   var container = document.getElementById('related-posts');
@@ -132,7 +128,6 @@ function renderRelated(data, boardId, excludeSlug) {
       }
     }
   }
-  // Prefer same-board, take up to 4
   var same = [];
   var other = [];
   for (var k = 0; k < posts.length; k++) {
@@ -141,7 +136,7 @@ function renderRelated(data, boardId, excludeSlug) {
   }
   var picked = same.concat(other).slice(0, 4);
   if (picked.length === 0) return;
-  var html = '<h3>相关文章</h3><div class="related-grid">';
+  var html = '<h3>Related Articles</h3><div class="related-grid">';
   picked.forEach(function (item) {
     var url = '/' + item.boardId + '/' + item.post.slug + '.html';
     html += '<a href="' + esc(url) + '" class="related-card">' + esc(item.post.title) + '</a>';
