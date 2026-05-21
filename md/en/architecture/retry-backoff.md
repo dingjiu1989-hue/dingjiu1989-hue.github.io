@@ -199,3 +199,5 @@ Effective retry strategies are essential for distributed system resilience. Alwa
 **See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
 
 **See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)

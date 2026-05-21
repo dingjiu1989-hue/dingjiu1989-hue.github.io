@@ -91,3 +91,5 @@ A pragmatic approach is to use materialized views for the most important queries
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
 
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)

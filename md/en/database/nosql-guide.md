@@ -101,3 +101,5 @@ Match the NoSQL type to your data model. Document for nested data, key-value for
 **See also:** [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>)
 
 **See also:** [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>)
+
+**See also:** [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>)

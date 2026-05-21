@@ -63,3 +63,5 @@ Cloudflare Zero Trust, Zscaler, and Tailscale provide ZTN solutions. Istio and C
 **See also:** [SSO Architecture](</en/security/sso-architecture.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>)
 
 **See also:** [SSO Architecture](</en/security/sso-architecture.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>)
+
+**See also:** [SSO Architecture](</en/security/sso-architecture.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>)

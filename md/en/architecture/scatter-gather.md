@@ -75,3 +75,5 @@ Identify and isolate slow recipients. Implement circuit breakers for recipients 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)
 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)
+
+**See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)

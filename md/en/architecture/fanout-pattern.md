@@ -71,3 +71,5 @@ Filtered subscriptions reduce unnecessary processing. Not every consumer needs e
 **See also:** [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
 
 **See also:** [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
+
+**See also:** [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)

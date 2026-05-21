@@ -93,3 +93,5 @@ API gateway patterns are essential for microservice architectures, providing cen
 **See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
 
 **See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
+
+**See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)

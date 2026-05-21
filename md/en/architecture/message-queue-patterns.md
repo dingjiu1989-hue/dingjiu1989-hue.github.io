@@ -89,3 +89,5 @@ Message queue patterns form the backbone of reliable asynchronous communication 
 **See also:** [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
 
 **See also:** [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
+
+**See also:** [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)

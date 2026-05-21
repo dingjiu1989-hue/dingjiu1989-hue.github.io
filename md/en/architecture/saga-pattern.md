@@ -93,3 +93,5 @@ The Saga pattern is essential for maintaining data consistency in distributed sy
 **See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
 
 **See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
+
+**See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)

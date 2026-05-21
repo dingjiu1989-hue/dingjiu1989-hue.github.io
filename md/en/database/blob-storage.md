@@ -77,3 +77,5 @@ Evaluate egress costs carefully. Cloud blob storage charges for data transfer, w
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>)
 
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>)
+
+**See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>)

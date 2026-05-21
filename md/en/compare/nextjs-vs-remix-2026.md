@@ -89,3 +89,5 @@ Both frameworks produce excellent React applications. Next.js pushes forward wit
 **See also:** [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>)
 
 **See also:** [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>)
+
+**See also:** [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>)

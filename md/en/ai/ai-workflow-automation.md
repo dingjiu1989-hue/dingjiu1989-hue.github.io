@@ -391,3 +391,5 @@ AI workflow automation requires reliability guarantees beyond simple scripting. 
 **See also:** [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>)
 
 **See also:** [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>)
+
+**See also:** [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>)

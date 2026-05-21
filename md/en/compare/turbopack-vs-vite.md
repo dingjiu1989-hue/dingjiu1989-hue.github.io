@@ -295,3 +295,5 @@ Vite and Turbopack serve different ecosystems. Vite is the mature, universal bui
 **See also:** [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [AWS vs Azure vs GCP 2026](</en/compare/aws-vs-azure-vs-gcp-2026.html>), [GraphQL vs REST API](</en/compare/graphql-vs-rest.html>)
 
 **See also:** [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [AWS vs Azure vs GCP 2026](</en/compare/aws-vs-azure-vs-gcp-2026.html>), [GraphQL vs REST API](</en/compare/graphql-vs-rest.html>)
+
+**See also:** [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [AWS vs Azure vs GCP 2026](</en/compare/aws-vs-azure-vs-gcp-2026.html>), [GraphQL vs REST API](</en/compare/graphql-vs-rest.html>)

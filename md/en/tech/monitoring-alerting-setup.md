@@ -325,3 +325,5 @@ A complete monitoring stack requires metrics (Prometheus), logs (Loki), dashboar
 **See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
 
 **See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
+
+**See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)

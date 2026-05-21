@@ -65,3 +65,5 @@ Log retention policies balance debugging needs with storage costs. Typical reten
 **See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 
 **See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)

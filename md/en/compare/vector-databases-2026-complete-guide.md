@@ -641,3 +641,5 @@ The best vector database is the one you actually deploy. Start simple (pgvector 
 **See also:** [MySQL vs MariaDB: The Complete Comparison](</en/compare/mysql-vs-mariadb.html>), [Rust vs Go vs Zig in 2026: A Complete Comparison for Systems Programming](</en/compare/rust-go-zig-comparison.html>), [DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared](</en/compare/duckdb-vs-sqlite.html>)
 
 **See also:** [MySQL vs MariaDB: The Complete Comparison](</en/compare/mysql-vs-mariadb.html>), [Rust vs Go vs Zig in 2026: A Complete Comparison for Systems Programming](</en/compare/rust-go-zig-comparison.html>), [DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared](</en/compare/duckdb-vs-sqlite.html>)
+
+**See also:** [MySQL vs MariaDB: The Complete Comparison](</en/compare/mysql-vs-mariadb.html>), [Rust vs Go vs Zig in 2026: A Complete Comparison for Systems Programming](</en/compare/rust-go-zig-comparison.html>), [DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared](</en/compare/duckdb-vs-sqlite.html>)

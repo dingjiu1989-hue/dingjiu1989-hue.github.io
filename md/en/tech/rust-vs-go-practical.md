@@ -87,3 +87,5 @@ The practical choice depends on your priorities. Choose Go for development veloc
 **See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>)
 
 **See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>)
+
+**See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>)

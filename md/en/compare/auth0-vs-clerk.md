@@ -89,3 +89,5 @@ Auth0 remains the enterprise standard with unmatched identity protocol support a
 **See also:** [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>), [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>)
 
 **See also:** [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>), [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>)
+
+**See also:** [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>), [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>)

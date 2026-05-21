@@ -333,3 +333,5 @@ SOC 2 technical controls require systematic implementation across logging, acces
 **See also:** [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>)
 
 **See also:** [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>)
+
+**See also:** [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>)

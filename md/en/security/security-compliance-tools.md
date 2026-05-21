@@ -63,3 +63,5 @@ Map controls to framework requirements. Configure integrations with infrastructu
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [SOC Operations](</en/security/soc-operations.html>), [Kubernetes Security](</en/security/kubernetes-security.html>)
 
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [SOC Operations](</en/security/soc-operations.html>), [Kubernetes Security](</en/security/kubernetes-security.html>)
+
+**See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [SOC Operations](</en/security/soc-operations.html>), [Kubernetes Security](</en/security/kubernetes-security.html>)

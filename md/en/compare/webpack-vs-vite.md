@@ -77,3 +77,5 @@ Most new projects should default to Vite. The ecosystem has matured to the point
 **See also:** [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)
 
 **See also:** [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)
+
+**See also:** [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)

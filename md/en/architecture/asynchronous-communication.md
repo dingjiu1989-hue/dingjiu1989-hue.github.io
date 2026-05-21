@@ -63,3 +63,5 @@ Choosing the right messaging infrastructure depends on consumption patterns, dur
 **See also:** [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>)
 
 **See also:** [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>)
+
+**See also:** [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>)
