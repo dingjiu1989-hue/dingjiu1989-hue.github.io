@@ -190,3 +190,5 @@ The best tool depends on database types, team workflow, and budget. DBeaver prov
 **See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces](</en/tools/devcontainer-setup.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)
 
 **See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces](</en/tools/devcontainer-setup.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)
+
+**See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces](</en/tools/devcontainer-setup.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)

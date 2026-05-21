@@ -273,3 +273,5 @@ SQL query optimization starts with understanding the query plan through EXPLAIN 
 **See also:** [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
 
 **See also:** [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
+
+**See also:** [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)

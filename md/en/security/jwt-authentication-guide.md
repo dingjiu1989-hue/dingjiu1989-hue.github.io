@@ -159,3 +159,5 @@ JWTs are a powerful authentication mechanism when implemented correctly. Use asy
 **See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
 
 **See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
+
+**See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)

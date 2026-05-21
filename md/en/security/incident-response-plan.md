@@ -259,3 +259,5 @@ A well-rehearsed incident response plan reduces breach impact by 50% or more. In
 **See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [Security Awareness Training](</en/security/security-awareness.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>)
 
 **See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [Security Awareness Training](</en/security/security-awareness.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>)
+
+**See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [Security Awareness Training](</en/security/security-awareness.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>)

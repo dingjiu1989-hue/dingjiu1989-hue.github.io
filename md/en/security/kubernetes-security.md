@@ -329,3 +329,5 @@ Kubernetes security requires a layered approach. Lock down RBAC with least privi
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [IAM Audit](</en/security/iam-audit.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [IAM Audit](</en/security/iam-audit.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [IAM Audit](</en/security/iam-audit.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>)

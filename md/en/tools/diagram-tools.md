@@ -325,3 +325,5 @@ Diagram-as-code tools have made technical diagrams maintainable and version-cont
 **See also:** [Project Management Tools for Developers](</en/tools/project-management-tools.html>), [Best Terminal Emulators 2026](</en/tools/terminal-emulators.html>), [Developer Collaboration Tools: Slack vs Discord vs Linear](</en/tools/collaboration-tools.html>)
 
 **See also:** [Project Management Tools for Developers](</en/tools/project-management-tools.html>), [Best Terminal Emulators 2026](</en/tools/terminal-emulators.html>), [Developer Collaboration Tools: Slack vs Discord vs Linear](</en/tools/collaboration-tools.html>)
+
+**See also:** [Project Management Tools for Developers](</en/tools/project-management-tools.html>), [Best Terminal Emulators 2026](</en/tools/terminal-emulators.html>), [Developer Collaboration Tools: Slack vs Discord vs Linear](</en/tools/collaboration-tools.html>)

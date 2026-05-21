@@ -346,3 +346,5 @@ Implement structured JSON logging for all security-relevant events, centralize l
 **See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
 
 **See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
+
+**See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)

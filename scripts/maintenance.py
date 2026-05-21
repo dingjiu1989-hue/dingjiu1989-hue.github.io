@@ -197,27 +197,31 @@ def generate_rss(data, path, lang, site_url=BASE_URL):
 
 
 # ══════════════════════════════════════════════════════════════════════
-# 4. STATS ROTATION
+# 4. STATS ROTATION + FRESHNESS BUMP
 # ══════════════════════════════════════════════════════════════════════
 def update_stats(data, json_path):
     import random
+    from datetime import date, timedelta
+    STALE = 30
+    threshold = date.today() - timedelta(days=STALE)
 
-    all_posts = []
+    # Bump lastActive (NOT date) on eligible old articles to signal freshness
+    eligible = []
     for board in data.get('boards', []):
         for post in board.get('posts', []):
-            all_posts.append(post)
-
-    bumped = random.sample(all_posts, min(3, len(all_posts)))
+            la = post.get('lastActive') or post['date']
+            if la < threshold.isoformat():
+                eligible.append(post)
+    bumped = random.sample(eligible, min(5, len(eligible))) if eligible else []
     for post in bumped:
-        old_date = post.get('date', '')
-        if old_date != TODAY:
-            post['date'] = TODAY
-            log(f'  Bumped date: {post["slug"]} ({old_date} → {TODAY})')
+        old = post.get('lastActive', post['date'])
+        post['lastActive'] = TODAY
+        log(f'  Freshness: {post["slug"]} ({old} → {TODAY})')
 
     total = sum(len(b.get('posts', [])) for b in data.get('boards', []))
     stats = data.setdefault('site', {}).setdefault('stats', {})
     prev_today = stats.get('today', 0)
-    new_today = len(bumped) + random.randint(0, 2)
+    new_today = max(1, len(bumped) + random.randint(0, 2))
     stats['today'] = new_today
     stats['yesterday'] = prev_today if prev_today > 0 else stats.get('yesterday', 0)
     stats['total'] = total

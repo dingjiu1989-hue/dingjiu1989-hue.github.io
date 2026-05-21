@@ -262,3 +262,5 @@ A well-designed composite index can eliminate the need for multiple single-colum
 **See also:** [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Materialized Views](</en/database/materialized-views.html>)
 
 **See also:** [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Materialized Views](</en/database/materialized-views.html>)
+
+**See also:** [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Materialized Views](</en/database/materialized-views.html>)

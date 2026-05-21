@@ -281,3 +281,5 @@ PostGIS is the most complete open-source spatial database. Use it as the system 
 **See also:** [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
 
 **See also:** [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
+
+**See also:** [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)

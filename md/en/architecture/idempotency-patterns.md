@@ -1,7 +1,7 @@
 ---
 title: "Idempotency Patterns in Distributed Systems"
 description: "Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns"
-date: 2026-04-27
+date: 2026-05-20
 board: architecture
 url: https://dingjiu1989-hue.github.io/en/architecture/idempotency-patterns.html
 ---
@@ -39,6 +39,8 @@ Idempotency should be designed into every external-facing API and every event ha
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
+
+**See also:** [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 
 **See also:** [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 

@@ -339,3 +339,5 @@ Data warehouses remain essential for BI and reporting. Data lakes are ideal for 
 **See also:** [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
 
 **See also:** [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
+
+**See also:** [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)

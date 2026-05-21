@@ -337,3 +337,5 @@ Multi-modal RAG extends retrieval to images, tables, and other visual content. T
 **See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)
 
 **See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)
+
+**See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)

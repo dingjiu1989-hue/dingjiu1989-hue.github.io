@@ -1,7 +1,7 @@
 ---
 title: "Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE"
 description: "Master graph queries in SQL using recursive CTEs, adjacency lists, and the WITH RECURSIVE clause. Compare SQL graph queries vs dedicated graph databases."
-date: 2026-04-06
+date: 2026-05-20
 board: database
 url: https://dingjiu1989-hue.github.io/en/database/graph-queries.html
 ---
@@ -293,6 +293,8 @@ Recursive CTEs prove that SQL can handle graph queries. For bounded-depth hierar
 **See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Materialized Views](</en/database/materialized-views.html>)
 
 **See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Materialized Views](</en/database/materialized-views.html>)
+
+**See also:** [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>)
 
 **See also:** [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>)
 

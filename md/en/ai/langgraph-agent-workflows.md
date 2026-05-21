@@ -181,3 +181,5 @@ LangGraph transforms agent building from fragile linear chains into robust state
 **See also:** [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [Building AI Voice Agents: Complete Technical Guide (2026)](</en/ai/ai-voice-agents.html>)
 
 **See also:** [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [Building AI Voice Agents: Complete Technical Guide (2026)](</en/ai/ai-voice-agents.html>)
+
+**See also:** [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [Building AI Voice Agents: Complete Technical Guide (2026)](</en/ai/ai-voice-agents.html>)

@@ -1,7 +1,7 @@
 ---
 title: "AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement"
 description: "Reduce LLM API costs and latency with AI caching strategies: semantic caching, intelligent invalidation, and cost-optimized caching tiers."
-date: 2026-05-21
+date: 2026-02-10
 board: ai
 url: https://dingjiu1989-hue.github.io/en/ai/ai-caching-strategies.html
 ---
@@ -85,6 +85,8 @@ Start with exact match caching and add semantic caching once you understand your
 **See also:** [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>)
 
 **See also:** [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>)
+
+**See also:** [AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection](</en/ai/ai-monitoring-alerting.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>)
 
 **See also:** [AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection](</en/ai/ai-monitoring-alerting.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>)
 

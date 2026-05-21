@@ -346,3 +346,5 @@ lage build --scope packages/core
 **See also:** [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Dotfile Management: chezmoi, GNU Stow, Bare Git Repos](</en/tools/dotfile-management.html>), [Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing](</en/tools/helm-tools.html>)
 
 **See also:** [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Dotfile Management: chezmoi, GNU Stow, Bare Git Repos](</en/tools/dotfile-management.html>), [Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing](</en/tools/helm-tools.html>)
+
+**See also:** [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Dotfile Management: chezmoi, GNU Stow, Bare Git Repos](</en/tools/dotfile-management.html>), [Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing](</en/tools/helm-tools.html>)

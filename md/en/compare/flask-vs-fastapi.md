@@ -63,3 +63,5 @@ Use FastAPI for new projects requiring async performance and automatic API docum
 **See also:** [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)
 
 **See also:** [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)
+
+**See also:** [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)

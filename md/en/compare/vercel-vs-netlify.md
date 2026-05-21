@@ -1,7 +1,7 @@
 ---
 title: "Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX"
 description: "Compare Vercel and Netlify for web hosting: serverless functions, edge computing, pricing models, and developer experience."
-date: 2026-05-21
+date: 2026-02-25
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/vercel-vs-netlify.html
 ---
@@ -75,6 +75,8 @@ Both platforms are excellent. Choose based on your framework, traffic volume, an
 **See also:** [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [GitHub Actions vs GitLab CI: CI/CD Platforms Compared](</en/compare/github-actions-vs-gitlab-ci.html>)
 
 **See also:** [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [GitHub Actions vs GitLab CI: CI/CD Platforms Compared](</en/compare/github-actions-vs-gitlab-ci.html>)
+
+**See also:** [Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options](</en/compare/datadog-vs-grafana-cloud.html>), [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>), [Stripe vs Paddle vs Lemon Squeezy: Payment Processing, Subscriptions, Tax Handling, and Global Reach](</en/compare/stripe-vs-paddle.html>)
 
 **See also:** [Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options](</en/compare/datadog-vs-grafana-cloud.html>), [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>), [Stripe vs Paddle vs Lemon Squeezy: Payment Processing, Subscriptions, Tax Handling, and Global Reach](</en/compare/stripe-vs-paddle.html>)
 

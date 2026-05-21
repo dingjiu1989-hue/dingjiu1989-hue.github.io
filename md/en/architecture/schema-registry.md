@@ -85,3 +85,5 @@ A well-managed schema registry prevents the most common data contract failures i
 **See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
 
 **See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)

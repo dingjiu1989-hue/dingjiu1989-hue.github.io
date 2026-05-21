@@ -61,3 +61,5 @@ Production experience suggests starting with orchestration for critical workflow
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)

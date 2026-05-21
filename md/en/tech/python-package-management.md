@@ -71,3 +71,5 @@ Use pip for simple projects and containers. Use Poetry for library development a
 **See also:** [Git Workflows](</en/tech/git-workflows.html>), [Log Management](</en/tech/log-management.html>), [Python Performance Optimization](</en/tech/python-performance.html>)
 
 **See also:** [Git Workflows](</en/tech/git-workflows.html>), [Log Management](</en/tech/log-management.html>), [Python Performance Optimization](</en/tech/python-performance.html>)
+
+**See also:** [Git Workflows](</en/tech/git-workflows.html>), [Log Management](</en/tech/log-management.html>), [Python Performance Optimization](</en/tech/python-performance.html>)

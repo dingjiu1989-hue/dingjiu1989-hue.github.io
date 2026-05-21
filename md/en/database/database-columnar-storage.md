@@ -75,3 +75,5 @@ Use columnar storage for data warehousing, business intelligence dashboards, tim
 **See also:** [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Materialized Views](</en/database/materialized-views.html>)
 
 **See also:** [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Materialized Views](</en/database/materialized-views.html>)
+
+**See also:** [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Materialized Views](</en/database/materialized-views.html>)

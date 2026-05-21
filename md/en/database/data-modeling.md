@@ -106,3 +106,5 @@ Start with 3NF for data integrity. Denormalize for performance when needed. For 
 **See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Data Consistency Models Explained](</en/database/data-consistency-models.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)
 
 **See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Data Consistency Models Explained](</en/database/data-consistency-models.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)
+
+**See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Data Consistency Models Explained](</en/database/data-consistency-models.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)

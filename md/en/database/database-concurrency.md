@@ -216,3 +216,5 @@ PostgreSQL's MVCC provides the foundation: readers and writers coexist without b
 **See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
 
 **See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)

@@ -65,3 +65,5 @@ Use the sidecar pattern for genuinely cross-cutting concerns that apply to most 
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Claim Check Pattern](</en/architecture/claim-check.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>)
 
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Claim Check Pattern](</en/architecture/claim-check.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>)
+
+**See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Claim Check Pattern](</en/architecture/claim-check.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>)

@@ -321,3 +321,5 @@ Solid.js and Qwik represent two different paths beyond the virtual DOM. Solid.js
 **See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>)
 
 **See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>)
+
+**See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>)

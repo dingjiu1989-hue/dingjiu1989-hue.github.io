@@ -442,3 +442,5 @@ OLTP and OLAP have fundamentally different requirements. OLTP needs fast point q
 **See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Vector Search Optimization Techniques](</en/database/vector-search-optimization.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
 
 **See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Vector Search Optimization Techniques](</en/database/vector-search-optimization.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
+
+**See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Vector Search Optimization Techniques](</en/database/vector-search-optimization.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)

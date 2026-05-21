@@ -79,3 +79,5 @@ Kubernetes has won the orchestration war in terms of mindshare, but Nomad serves
 **See also:** [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)
 
 **See also:** [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)
+
+**See also:** [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)

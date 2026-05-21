@@ -139,3 +139,5 @@ Scale vertically first (simple). Add read replicas for read loads. Add caching f
 **See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Pagination: Offset, Cursor, Keyset, and Seek Methods](</en/database/database-pagination-techniques.html>)
 
 **See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Pagination: Offset, Cursor, Keyset, and Seek Methods](</en/database/database-pagination-techniques.html>)
+
+**See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Pagination: Offset, Cursor, Keyset, and Seek Methods](</en/database/database-pagination-techniques.html>)

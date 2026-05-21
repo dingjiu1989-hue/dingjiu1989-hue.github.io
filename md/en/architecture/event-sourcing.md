@@ -69,3 +69,5 @@ Event sourcing is a powerful pattern that provides unmatched auditability and te
 **See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>)
 
 **See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>)
+
+**See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>)

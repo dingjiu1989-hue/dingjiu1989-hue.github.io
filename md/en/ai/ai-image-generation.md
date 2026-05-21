@@ -264,3 +264,5 @@ Each AI image generation platform has distinct strengths. DALL-E 3 wins for reli
 **See also:** [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>)
 
 **See also:** [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>)
+
+**See also:** [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>)

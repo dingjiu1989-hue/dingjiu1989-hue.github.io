@@ -614,3 +614,5 @@ Service meshes extract networking, security, and observability from application 
 **See also:** [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Two-Phase Commit (2PC) for Distributed Transactions](</en/architecture/two-phase-commit.html>)
 
 **See also:** [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Two-Phase Commit (2PC) for Distributed Transactions](</en/architecture/two-phase-commit.html>)
+
+**See also:** [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Two-Phase Commit (2PC) for Distributed Transactions](</en/architecture/two-phase-commit.html>)

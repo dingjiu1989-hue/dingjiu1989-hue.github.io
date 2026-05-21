@@ -85,3 +85,5 @@ _AI Daily Digest is curated from trusted technology news sources. Last updated: 
 **See also:** [Prompt Injection Prevention: Securing Your LLM Applications (2026)](</en/ai/prompt-injection-prevention.html>), [Building Multimodal AI Applications: Vision, Audio, and Text Combined (2026)](</en/ai/multimodal-ai-guide.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
 
 **See also:** [LLM Function Calling: Complete Developer Guide with Code Examples](</en/ai/function-calling-guide.html>), [Prompt Injection Prevention: Securing Your LLM Applications (2026)](</en/ai/prompt-injection-prevention.html>), [Building Multimodal AI Applications: Vision, Audio, and Text Combined (2026)](</en/ai/multimodal-ai-guide.html>)
+
+**See also:** [Prompt Injection Prevention: Securing Your LLM Applications (2026)](</en/ai/prompt-injection-prevention.html>), [Building Multimodal AI Applications: Vision, Audio, and Text Combined (2026)](</en/ai/multimodal-ai-guide.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)

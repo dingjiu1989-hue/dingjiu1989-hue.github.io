@@ -303,3 +303,5 @@ Redis caching can dramatically improve application performance when the right pa
 **See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
 
 **See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
+
+**See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)

@@ -61,3 +61,5 @@ Configuration should be dynamic where possible. Circuit breaker thresholds and t
 **See also:** [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 
 **See also:** [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)

@@ -204,3 +204,5 @@ Consider using multiple editors for different tasks. Many developers use VS Code
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)
 
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)
