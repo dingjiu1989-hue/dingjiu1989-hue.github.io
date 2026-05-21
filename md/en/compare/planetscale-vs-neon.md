@@ -307,3 +307,5 @@ PlanetScale and Neon both solve the same fundamental problem — making database
 **See also:** [Supabase vs Firebase](</en/compare/supabase-vs-firebase.html>), [Tailwind CSS vs Bootstrap](</en/compare/tailwind-vs-bootstrap.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>)
 
 **See also:** [Supabase vs Firebase](</en/compare/supabase-vs-firebase.html>), [Tailwind CSS vs Bootstrap](</en/compare/tailwind-vs-bootstrap.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>)
+
+**See also:** [Supabase vs Firebase](</en/compare/supabase-vs-firebase.html>), [Tailwind CSS vs Bootstrap](</en/compare/tailwind-vs-bootstrap.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>)

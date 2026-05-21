@@ -71,3 +71,5 @@ Regular VACUUM and ANALYZE keep statistics current. Outdated statistics produce 
 **See also:** [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>)
 
 **See also:** [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>)
+
+**See also:** [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>)

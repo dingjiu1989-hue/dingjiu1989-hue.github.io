@@ -67,3 +67,5 @@ Include only the state that consumers need, not the producer's entire internal m
 **See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
 
 **See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
+
+**See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)

@@ -59,3 +59,5 @@ The choice of deployment strategy depends on application architecture, team matu
 **See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 
 **See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)

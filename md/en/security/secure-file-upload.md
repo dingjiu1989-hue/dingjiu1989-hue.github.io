@@ -289,3 +289,5 @@ Secure file upload requires defense in depth. Validate extensions and MIME types
 **See also:** [Secrets Management for Developers](</en/security/secrets-management.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 
 **See also:** [Secrets Management for Developers](</en/security/secrets-management.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [Secrets Management for Developers](</en/security/secrets-management.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)

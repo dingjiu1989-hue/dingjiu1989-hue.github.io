@@ -55,3 +55,5 @@ Start documenting decisions during design discussions. Write the ADR when the de
 **See also:** [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 
 **See also:** [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)

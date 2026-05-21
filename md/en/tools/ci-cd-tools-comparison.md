@@ -418,3 +418,5 @@ No single CI/CD tool is perfect for every scenario. Evaluate based on your team'
 **See also:** [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>)
 
 **See also:** [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>)
+
+**See also:** [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>)

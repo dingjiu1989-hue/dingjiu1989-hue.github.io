@@ -75,3 +75,5 @@ Some applications combine methods: cursor for forward pagination (infinite scrol
 **See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Scalability](</en/database/database-scalability.html>), [Materialized Views](</en/database/materialized-views.html>)
 
 **See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Scalability](</en/database/database-scalability.html>), [Materialized Views](</en/database/materialized-views.html>)
+
+**See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Scalability](</en/database/database-scalability.html>), [Materialized Views](</en/database/materialized-views.html>)

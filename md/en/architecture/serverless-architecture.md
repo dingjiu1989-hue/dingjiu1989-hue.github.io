@@ -75,3 +75,5 @@ Serverless architecture is not appropriate for every workload. Predictable, high
 **See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>)
 
 **See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>)
+
+**See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>)

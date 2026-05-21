@@ -79,3 +79,5 @@ Tactical patterns provide a shared vocabulary for implementation. When a team us
 **See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 
 **See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)

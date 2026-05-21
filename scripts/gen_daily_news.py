@@ -28,13 +28,14 @@ SLUG = f"ai-daily-news-{TODAY}"
 # ── RSS Feeds ──
 RSS_FEEDS = [
     ("TechCrunch AI",      "https://techcrunch.com/category/artificial-intelligence/feed/"),
-    ("The Verge AI",       "https://www.theverge.com/ai-artificial-intelligence/rss.xml"),
-    ("Ars Technica AI",    "https://feeds.arstechnica.com/arstechnica/ai"),
-    ("VentureBeat AI",     "https://venturebeat.com/category/ai/feed/"),
+    ("The Verge AI",       "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml"),
+    ("Ars Technica AI",    "https://arstechnica.com/tag/ai/feed/"),
+    ("VentureBeat AI",     "https://venturebeat.com/category/ai/feed"),
     ("VentureBeat",        "https://feeds.feedburner.com/venturebeat/SZYF"),
     ("MIT Tech Review AI", "https://www.technologyreview.com/topic/artificial-intelligence/feed/"),
     ("ZDNet AI",           "https://www.zdnet.com/topic/artificial-intelligence/rss.xml"),
     ("MarkTechPost",       "https://www.marktechpost.com/feed/"),
+    ("NVIDIA Blog",        "https://blogs.nvidia.com/feed/"),
 ]
 
 # ── User Agent ──

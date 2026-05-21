@@ -364,3 +364,5 @@ The terminal emulator landscape in 2026 offers options for every preference. iTe
 **See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
 
 **See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
+
+**See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)

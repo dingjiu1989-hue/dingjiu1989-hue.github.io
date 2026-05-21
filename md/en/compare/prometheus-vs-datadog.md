@@ -75,3 +75,5 @@ Choose Prometheus for cost-sensitive deployments, Kubernetes-native monitoring, 
 **See also:** [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>)
 
 **See also:** [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>)
+
+**See also:** [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>)

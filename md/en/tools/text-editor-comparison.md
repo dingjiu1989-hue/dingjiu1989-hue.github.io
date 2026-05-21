@@ -61,3 +61,5 @@ Start with VS Code. Move to Neovim for keyboard efficiency. Use JetBrains for co
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>), [Shell Frameworks: zsh, fish, bash Customization](</en/tools/shell-frameworks.html>)
 
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>), [Shell Frameworks: zsh, fish, bash Customization](</en/tools/shell-frameworks.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>), [Shell Frameworks: zsh, fish, bash Customization](</en/tools/shell-frameworks.html>)

@@ -67,3 +67,5 @@ For REST API consumers, idempotency keys serve a similar purpose. The client gen
 **See also:** [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
 
 **See also:** [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
+
+**See also:** [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)

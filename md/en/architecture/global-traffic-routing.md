@@ -61,3 +61,5 @@ Multi-cloud routing adds another dimension of complexity. Traffic must be routed
 **See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
 
 **See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)

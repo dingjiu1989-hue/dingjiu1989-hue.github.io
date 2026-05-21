@@ -410,3 +410,5 @@ A comprehensive infrastructure testing strategy combines static analysis for fas
 **See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Testing Strategies](</en/tech/testing-strategies.html>)
 
 **See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Testing Strategies](</en/tech/testing-strategies.html>)
+
+**See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Testing Strategies](</en/tech/testing-strategies.html>)

@@ -75,3 +75,5 @@ Log all key management operations: creation, rotation, revocation, and access. C
 **See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure Configuration Management](</en/security/secure-configuration.html>), [GDPR Technical Controls](</en/security/gdpr-technical.html>)
 
 **See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure Configuration Management](</en/security/secure-configuration.html>), [GDPR Technical Controls](</en/security/gdpr-technical.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure Configuration Management](</en/security/secure-configuration.html>), [GDPR Technical Controls](</en/security/gdpr-technical.html>)

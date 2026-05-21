@@ -79,3 +79,5 @@ Customer support for solo founders is about leverage. Every investment in docume
 **See also:** [LinkedIn Personal Brand for Technical Founders](</en/sidehustle/linkedin-personal-brand.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>), [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>)
 
 **See also:** [LinkedIn Personal Brand for Technical Founders](</en/sidehustle/linkedin-personal-brand.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>), [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>)
+
+**See also:** [LinkedIn Personal Brand for Technical Founders](</en/sidehustle/linkedin-personal-brand.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>), [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>)
