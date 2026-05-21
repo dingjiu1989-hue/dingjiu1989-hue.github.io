@@ -4,6 +4,27 @@
 
 ---
 
+## Freshness Bump Was Changing Publication Dates (Not lastActive)
+
+**Symptoms:** Old articles appeared to be published on today's date. The `date` field in `articles.json` was being overwritten with the current date, making a January article look like it was published in May.
+
+**Root cause:** `update_stats()` in `maintenance.py` used `post['date'] = TODAY` instead of `post['lastActive'] = TODAY`. This corrupted the original publication dates of 3 random articles per maintenance run.
+
+**Fix (2026-05-21):** `update_stats()` now bumps `lastActive` only, leaving `date` untouched. Uses a 30-day staleness threshold:
+```python
+la = post.get('lastActive') or post['date']
+if la < threshold.isoformat():
+    post['lastActive'] = TODAY
+```
+
+**Impact:** 5 articles bumped per run, 2x/day via maintenance.yml → ~308 eligible → full cycle in ~31 days. Bumped articles get updated `dateModified` JSON-LD, sitemap `<lastmod>`, and visible "Last active" badge.
+
+**Files involved:**
+- `scripts/maintenance.py` — `update_stats()` function
+- `scripts/bump_freshness.py` — new standalone script (same logic, for manual use)
+
+**Note:** This bug was introduced in a previous maintenance refactor. The original intent was always to bump freshness signals, not publication dates.
+
 ## CLS (Cumulative Layout Shift) from JS-Injected Nav/Footer
 
 **Symptoms:** Page content jumps after load when JavaScript injects the navigation bar and footer. Lighthouse/PageSpeed flags CLS > 0.1.
