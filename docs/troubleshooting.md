@@ -4,6 +4,36 @@
 
 ---
 
+## robots.txt Counter Gets Stale
+
+**Symptoms:** The log message says "21 AI crawler rules" but the actual count is different.
+
+**Root cause:** The counter is a hardcoded string in `scripts/gen_ai_friendly.py` (line 479). It's not computed from the actual rules list.
+
+**Fix:** Update the number manually when adding/removing crawlers. Current count: 23.
+
+**Current crawler list (23):** Googlebot, Bingbot, GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, anthropic-ai, Google-Extended, PerplexityBot, meta-externalagent, FacebookBot, cohere-ai, CCBot, Applebot, Amazonbot, GrokBot, xAI, Bytespider, YouBot, PetalBot, plus `*` catch-all.
+
+---
+
+## Daily Article Lost from articles.json After Git Rebase
+
+**Symptoms:** Article md file exists, HTML was built via fallback, but the article is missing from `articles.json` and won't appear in the sitemap.
+
+**Root cause:** During `git rebase`, the auto-generated `articles.json` had conflicts. Resolving with `--ours` (remote) accepted a version that was generated before the daily article was registered.
+
+**Fix:** Re-run `register_new_articles.py` to pick up the md file, then rebuild:
+```bash
+python3 scripts/register_new_articles.py
+python3 scripts/gen_en_site.py
+```
+
+**Prevention:** After any rebase involving `articles.json`, verify the article count matches expectations.
+
+---
+
+## Freshness Bump Was Changing Publication Dates (Not lastActive)
+
 ## Freshness Bump Was Changing Publication Dates (Not lastActive)
 
 **Symptoms:** Old articles appeared to be published on today's date. The `date` field in `articles.json` was being overwritten with the current date, making a January article look like it was published in May.
