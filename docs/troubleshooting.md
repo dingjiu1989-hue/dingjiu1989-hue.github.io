@@ -1,5 +1,102 @@
 # Troubleshooting & Known Issues
 
+> Living document. Add new issues here as they are discovered and resolved.
+
+---
+
+## CLS (Cumulative Layout Shift) from JS-Injected Nav/Footer
+
+**Symptoms:** Page content jumps after load when JavaScript injects the navigation bar and footer. Lighthouse/PageSpeed flags CLS > 0.1.
+
+**Root cause:** Nav and footer are loaded via `js/include.js` and injected after page render. Without reserved space, all content below shifts down.
+
+**Fix (2026-05-20):** Added `min-height` CSS placeholders in `css/style.css`:
+```css
+#nav-placeholder { min-height: 48px; }
+#footer-placeholder { min-height: 100px; }
+```
+
+**Files involved:**
+- `css/style.css` — `.nav-placeholder` and `.footer-placeholder` min-height rules
+
+---
+
+## LCP (Largest Contentful Paint) Too Slow
+
+**Symptoms:** LCP > 2.5s on article pages. The cover image (1200x630 PNG) is the LCP element.
+
+**Root cause:** Cover images were served as 1200x630 PNG without optimization, loaded without priority hints.
+
+**Fix (2026-05-20):** Three-pronged optimization:
+1. `fetchpriority="high"` + `decoding="sync"` on cover `<img>`
+2. `<link rel="preload" as="image" type="image/webp" fetchpriority="high">` in `<head>`
+3. WebP conversion: `gen_covers.py` now generates `.webp` versions (quality=82)
+4. `<picture>` element with WebP source + PNG fallback
+
+**Cover images:** 1000 covers converted (25.7MB → 15.8MB, 38% reduction).
+
+**Files involved:**
+- `scripts/gen_en_site.py` — article template, `<picture>` element, preload link
+- `scripts/gen_covers.py` — WebP generation with Pillow
+
+---
+
+## WebP Cover Images Not Generated
+
+**Symptoms:** All covers are PNG only; `images/covers/en/` has no `.webp` files.
+
+**Root cause:** `gen_covers.py` only saved PNG, not WebP.
+
+**Fix (2026-05-20):** Added WebP output to `gen_covers.py`:
+```python
+img.save(webp_path, "WEBP", quality=82)
+```
+
+**To regenerate missing WebP covers:**
+```bash
+python3 scripts/gen_covers.py
+```
+
+---
+
+## GSC OAuth redirect_uri Error
+
+**Symptoms:** Browser shows "Missing required parameter: redirect_uri" when authorizing GSC OAuth.
+
+**Root cause:** Opening the authorization URL directly in a browser vs. using `flow.run_local_server()`. The latter creates a local HTTP server with the correct `redirect_uri` (http://localhost:PORT/), which the former lacks.
+
+**Fix (2026-05-20):** Delete old token and use `run_local_server`:
+```bash
+rm data/gsc-token.json
+python3 -c "
+from google_auth_oauthlib.flow import InstalledAppFlow
+flow = InstalledAppFlow.from_client_secrets_file('oauth-client.json',
+    ['https://www.googleapis.com/auth/webmasters'])
+creds = flow.run_local_server(port=0, open_browser=True)
+import json
+with open('data/gsc-token.json', 'w') as f:
+    json.dump(json.loads(creds.to_json()), f)
+"
+```
+
+---
+
+## GSC OAuth Token Expired
+
+**Symptoms:** `google.auth.exceptions.RefreshError: invalid_grant` when running maintenance or weekly audit scripts.
+
+**Root cause:** GSC OAuth refresh token expired (valid ~6 months). Token was originally authorized 2026-05-15.
+
+**Fix (2026-05-20):** Same procedure as above — delete token and re-authorize via `run_local_server()`.
+
+**Files involved:**
+- `data/gsc-token.json` — OAuth token file
+- `oauth-client.json` — Google Cloud OAuth client (SourceHub SEO project)
+
+**Next token expiry:** ~2026-11-20.
+
+---
+
 ## GSC Sitemap "无法抓取" (Can't Crawl)
 
 **Symptoms:** Google Search Console shows all sitemaps as "无法抓取" with "未知" type and 0 discovered pages.
@@ -15,41 +112,13 @@
 ```bash
 python3 -c "
 from pathlib import Path
-import sys
-sys.path.insert(0, '.')
+import sys; sys.path.insert(0, '.')
 from scripts.maintenance import submit_sitemap_gsc
 submit_sitemap_gsc()
 "
 ```
 
 **Expected resolution time:** 24-48 hours for GSC to recrawl and update status.
-
----
-
-## GSC OAuth Token Expired
-
-**Symptoms:** `google.auth.exceptions.RefreshError: invalid_grant` when running maintenance or weekly audit scripts.
-
-**Root cause:** GSC OAuth refresh token expired (valid ~6 months). Token was originally authorized 2026-05-15.
-
-**Fix (2026-05-20):** Delete old token and re-authorize via local server flow:
-```bash
-rm data/gsc-token.json
-python3 -c "
-from google_auth_oauthlib.flow import InstalledAppFlow
-flow = InstalledAppFlow.from_client_secrets_file('oauth-client.json', ['https://www.googleapis.com/auth/webmasters'])
-creds = flow.run_local_server(port=0, open_browser=True)
-import json
-with open('data/gsc-token.json', 'w') as f:
-    json.dump(json.loads(creds.to_json()), f)
-"
-```
-
-**Files involved:**
-- `data/gsc-token.json` — OAuth token file
-- `oauth-client.json` — Google Cloud OAuth client (SourceHub SEO project)
-
-**Next token expiry:** ~2026-11-20 (re-authorize when `invalid_grant` appears).
 
 ---
 
@@ -66,8 +135,7 @@ with open('data/gsc-token.json', 'w') as f:
 | VentureBeat AI | `https://venturebeat.com/category/ai/feed/` | `https://venturebeat.com/category/ai/feed` (no trailing slash) | 2026-05-21 |
 | Anthropic Blog | `https://www.anthropic.com/feed.xml` | Removed (no working feed URL found) | 2026-05-21 |
 
-**To add/replace a feed:**
-Edit the `RSS_FEEDS` list at the top of `scripts/gen_daily_news.py`.
+**To add/replace a feed:** Edit the `RSS_FEEDS` list at the top of `scripts/gen_daily_news.py`.
 
 **Current working feeds (9):**
 TechCrunch AI, The Verge AI, Ars Technica AI, VentureBeat AI, VentureBeat (main), MIT Tech Review AI, ZDNet AI, MarkTechPost, NVIDIA Blog.
@@ -87,8 +155,112 @@ if cached_slugs:  # Only use cache if non-empty
 # Otherwise force refresh from API
 ```
 
-**To force refresh cache:**
-Delete `.devto-published-cache.json` and re-run syndication.
+**To force refresh cache:** Delete `.devto-published-cache.json` and re-run syndication.
+
+---
+
+## Dev.to Syndication Circuit Breaker
+
+**Symptoms:** Syndication stops after 2 consecutive failures.
+
+**Design:** `syndicate_devto.py` has a circuit breaker that stops publishing after 2 consecutive failures.
+
+**Reset:**
+```bash
+python3 scripts/syndicate_devto.py --force
+```
+Or delete the circuit breaker state file.
+
+**Check status:**
+```bash
+python3 scripts/syndicate_devto.py --dry-run
+```
+
+---
+
+## `maintenance.py` vs `maintain.py` Confusion
+
+**Symptoms:** Workflow or cron references `maintenance.py` when it should reference `maintain.py` or vice versa.
+
+**Root cause:** Two files with similar names:
+- `scripts/maintenance.py` — Daily ops: sitemap freshness, RSS, GSC submission, health checks
+- `scripts/maintain.py` — Weekly: full rebuild + dev.to syndication
+
+**Fix:** Always check which file is appropriate for the task. The GitHub Actions workflows reference the correct one (`maintenance.yml` → `maintenance.py`).
+
+---
+
+## Git Push Rejected (Remote Ahead)
+
+**Symptoms:** `git push` fails with "Updates were rejected because the remote contains work that you do not have locally."
+
+**Root cause:** GitHub Actions workflows (`maintenance.yml`, `devto-syndicate.yml`, `daily-news.yml`) commit changes between local commits.
+
+**Fix:**
+```bash
+git pull --rebase origin main
+git push origin main
+```
+
+**Common after:** running the full pipeline locally while GitHub Actions is also running.
+
+---
+
+## Python Version / Library Warnings
+
+**Symptoms:** Non-blocking warnings during script execution:
+```
+FutureWarning: You are using a Python version 3.9 past its end of life
+NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+
+```
+
+**Root cause:** MacOS ships Python 3.9, which is EOL. Google's libraries now require 3.10+. urllib3 v2 requires OpenSSL 1.1.1+ but LibreSSL 2.8.3 is installed.
+
+**Impact:** None. All scripts work correctly. Warnings can be safely ignored.
+
+**Recommended fix:** Install Python 3.11+ via Homebrew:
+```bash
+brew install python@3.11
+```
+
+---
+
+## Duplicate Title Headings in MD Files
+
+**Symptoms:** 623 article files had 10,000+ redundant heading tags that duplicated the article title, causing poor SEO heading structure.
+
+**Root cause:** The original article generation pipeline inserted the article title as an H1 inside the markdown body, while the page template also rendered it as an HTML `<h1>`. On each rebuild cycle, the inflation compounded.
+
+**Fix (2026-05-20):** Added `_strip_title_headings()` in `gen_en_site.py` that strips markdown headings matching the article title from the body content.
+
+**Residual risk:** Old files may still have shifted heading levels (e.g., H2 where H3 should be). The fix prevents new inflation but does not retroactively fix all files.
+
+---
+
+## Heading Level Inflation in MD→HTML Conversion
+
+**Symptoms:** Every rebuild cycle increases heading levels (h1→h2→h3→...), degrading SEO and readability.
+
+**Root cause:** `md_to_html()` in `gen_en_site.py` increments heading levels (e.g., `#` → `<h2>` instead of `<h1>`). Combined with duplicate title headings, each rebuild on the same md file compounds the shift.
+
+**Fix (2026-05-20):** `_strip_title_headings()` removes markdown headings matching the article title. The page template provides the H1; body headings should remain at their natural level.
+
+**Check for residual inflation:**
+```bash
+grep -c '<h2>' en/tech/some-article.html  # Should only have 1-2 H2s per article
+```
+
+---
+
+## all.html Size Over 100KB
+
+**Symptoms:** `en/all.html` exceeds 100 KB, impacting page load performance.
+
+**Root cause:** Full article metadata list with date strings in every list item.
+
+**Fix (2026-05-20):** Removed `<small>` date wrappers and `title` attribute dates. Final size: 97 KB from 132 KB.
+
+**If it grows again:** Check `gen_en_site.py` — the `all.html` generation section. Compact list items further if needed.
 
 ---
 
@@ -109,31 +281,7 @@ Delete `.devto-published-cache.json` and re-run syndication.
 **Limits:**
 - GSC sitemap: 50 MB, 50,000 URLs — safe
 - GitHub Pages: 100 MB per file — safe
-- RSS reader compatibility: < 1 MB recommended for `en/feed.xml` (borderline, truncate in `gen_rss.py` if needed)
-
----
-
-## all.html Size Over 100KB
-
-**Symptoms:** `en/all.html` exceeds 100 KB, impacting page load performance.
-
-**Root cause:** Full article metadata list with date strings in every list item.
-
-**Fix (2026-05-20):** Removed `<small>` date wrappers and `title` attribute dates. Final size: 97 KB from 132 KB.
-
-**If it grows again:** Check `gen_en_site.py` — the `all.html` generation section. Compact list items further if needed.
-
----
-
-## Heading Level Inflation in MD→HTML Conversion
-
-**Symptoms:** Every rebuild cycle increases heading levels (h1→h2→h3→...), degrading SEO and readability.
-
-**Root cause:** `md_to_html()` in `gen_en_site.py` increments heading levels (e.g., `#` → `<h2>` instead of `<h1>`), and each rebuild on the same md file compounds the shift.
-
-**Fix (2026-05-20):** Added `_strip_title_headings()` that removes markdown headings matching the article title. The page template provides the H1; body headings should remain at their natural level.
-
-**Status:** Residual issue — the fix prevents new inflation but existing files may still have shifted headings. Run a one-time scan to check.
+- RSS reader compatibility: < 1 MB recommended for `en/feed.xml` (borderline)
 
 ---
 
@@ -143,7 +291,7 @@ Delete `.devto-published-cache.json` and re-run syndication.
 
 **Root cause:** CN `articles.json` doesn't have a `daily` board, but `md/zh/daily/` directory exists with files.
 
-**Fix:** No fix needed — CN site has fewer boards than EN. The EN registration succeeds (857+ articles), and the CN failure is non-fatal. If CN daily board is ever needed, add it to `zh/articles.json`.
+**Fix:** No fix needed — CN site has fewer boards than EN. The EN registration succeeds (857+ articles), and the CN failure is non-fatal.
 
 ---
 
@@ -152,10 +300,10 @@ Delete `.devto-published-cache.json` and re-run syndication.
 **Symptoms:** Comments section is empty or doesn't load on article pages.
 
 **Checklist:**
-1. Verify the page has `<script src="https://giscus.app/client.js">` with correct `data-repo`, `data-repo-id`, `data-category-id`
-2. Check GitHub Discussions is enabled on the repo
-3. Verify the Giscus app is installed on the repo
-4. Check browser console for CSP or CORS errors
+1. Page has `<script src="https://giscus.app/client.js">` with correct `data-repo`, `data-repo-id`, `data-category-id`?
+2. GitHub Discussions enabled on the repo?
+3. Giscus app installed on the repo?
+4. Browser console shows CSP or CORS errors?
 
 **Giscus config (in `gen_en_site.py`):**
 ```
@@ -168,13 +316,39 @@ data-mapping: "pathname"
 
 ---
 
-## Dev.to Syndication Circuit Breaker
+## GitHub Actions Workflow Failures
 
-**Symptoms:** Syndication stops after 2 consecutive failures.
+**Symptoms:** GitHub Actions workflow fails with unclear error message.
 
-**Design:** `syndicate_devto.py` has a circuit breaker that stops publishing after 2 consecutive failures. Reset by re-running with `--force` or deleting the circuit breaker state.
+### Common causes and fixes:
 
-**Check status:**
-```bash
-python3 scripts/syndicate_devto.py --dry-run
-```
+**1. The `GITHUB_TOKEN` doesn't have write permission.**
+- Fix: Workflow `permissions:` block needs `contents: write`
+
+**2. Python script crashed mid-way.**
+- Fix: Check the workflow log for the exact Python error. Most failures are from `register_new_articles.py` CN board crash (harmless) or OAuth token expiry (needs re-auth).
+
+**3. Workflow not triggering on schedule.**
+- Fix: Ensure the cron expression uses UTC (GitHub Actions default). The workflow must have been pushed to the default branch (`main`).
+
+**4. "Could not apply" during `git pull --rebase` in workflow.**
+- Fix: This happens when two workflows commit simultaneously. The commit gets orphaned and needs a manual rebase.
+
+---
+
+## Adding a New Issue
+
+When you discover a new problem:
+
+1. Add a new `## Title` section to this file with:
+   - **Symptoms** — what you observed
+   - **Root cause** — why it happened
+   - **Fix** — what was changed (with code/config snippets)
+   - **Files involved** — which files were modified
+   - **Date** — when it was fixed
+2. Commit and push the updated file:
+   ```bash
+   git add docs/troubleshooting.md
+   git commit -m "docs: add troubleshooting entry for <issue>"
+   git push
+   ```
