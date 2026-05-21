@@ -73,3 +73,5 @@ Track metrics per step: processing time, success rate, and queue depth. A routin
 **See also:** [Claim Check Pattern](</en/architecture/claim-check.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Ambassador Pattern for Service Communication](</en/architecture/ambassador-pattern.html>)
 
 **See also:** [Claim Check Pattern](</en/architecture/claim-check.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Ambassador Pattern for Service Communication](</en/architecture/ambassador-pattern.html>)
+
+**See also:** [Claim Check Pattern](</en/architecture/claim-check.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Ambassador Pattern for Service Communication](</en/architecture/ambassador-pattern.html>)

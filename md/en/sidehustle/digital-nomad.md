@@ -527,3 +527,5 @@ The digital nomad lifestyle is not a permanent vacation; it is a different way o
 **See also:** [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Product Hunt Launch Guide](</en/sidehustle/product-hunt-launch.html>), [Building a Twitter/X Personal Brand](</en/sidehustle/twitter-personal-brand.html>)
 
 **See also:** [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Product Hunt Launch Guide](</en/sidehustle/product-hunt-launch.html>), [Building a Twitter/X Personal Brand](</en/sidehustle/twitter-personal-brand.html>)
+
+**See also:** [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Product Hunt Launch Guide](</en/sidehustle/product-hunt-launch.html>), [Building a Twitter/X Personal Brand](</en/sidehustle/twitter-personal-brand.html>)

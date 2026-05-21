@@ -67,3 +67,5 @@ Use Docusaurus for comprehensive project docs, Nextra for minimal setups, MkDocs
 **See also:** [Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing](</en/tools/helm-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>)
 
 **See also:** [Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing](</en/tools/helm-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>)
+
+**See also:** [Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing](</en/tools/helm-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>)

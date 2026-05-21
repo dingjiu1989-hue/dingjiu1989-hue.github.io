@@ -95,3 +95,5 @@ Multi-cloud is a tactical architectural decision, not a strategic imperative. Or
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Monorepo vs Multirepo: Repository Strategy Comparison](</en/tech/monorepo-vs-multirepo.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>)
 
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Monorepo vs Multirepo: Repository Strategy Comparison](</en/tech/monorepo-vs-multirepo.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>)
+
+**See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Monorepo vs Multirepo: Repository Strategy Comparison](</en/tech/monorepo-vs-multirepo.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>)

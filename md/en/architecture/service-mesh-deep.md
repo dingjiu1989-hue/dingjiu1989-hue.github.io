@@ -83,3 +83,5 @@ The choice depends on your requirements. Istio for maximum features and traffic 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)
 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)

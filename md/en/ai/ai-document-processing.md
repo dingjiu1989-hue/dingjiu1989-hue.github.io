@@ -348,3 +348,5 @@ AI document processing transforms document-heavy workflows from hours of manual 
 **See also:** [Multimodal AI Applications in 2026](</en/ai/multimodal-ai.html>), [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>)
 
 **See also:** [Multimodal AI Applications in 2026](</en/ai/multimodal-ai.html>), [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>)
+
+**See also:** [Multimodal AI Applications in 2026](</en/ai/multimodal-ai.html>), [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>)

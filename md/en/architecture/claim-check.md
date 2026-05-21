@@ -85,3 +85,5 @@ The claim check pattern is a simple, effective solution for handling large paylo
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>)
 
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>)

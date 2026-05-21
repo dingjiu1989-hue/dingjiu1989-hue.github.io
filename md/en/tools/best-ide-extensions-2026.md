@@ -189,3 +189,5 @@ The most impactful IDE extensions in 2026 are AI assistants (Copilot, Cursor), c
 **See also:** [Best Code Snippet Managers 2026: Raycast Snippets vs Pieces vs massCode vs Espanso](</en/tools/best-code-snippet-tools.html>), [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>)
 
 **See also:** [Best Code Snippet Managers 2026: Raycast Snippets vs Pieces vs massCode vs Espanso](</en/tools/best-code-snippet-tools.html>), [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>)
+
+**See also:** [Best Code Snippet Managers 2026: Raycast Snippets vs Pieces vs massCode vs Espanso](</en/tools/best-code-snippet-tools.html>), [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>)

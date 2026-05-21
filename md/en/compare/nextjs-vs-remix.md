@@ -351,3 +351,5 @@ All three frameworks are excellent choices that prioritize performance and devel
 **See also:** [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>)
 
 **See also:** [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>)
+
+**See also:** [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>)

@@ -269,3 +269,5 @@ There is no single best microservices communication pattern. REST provides simpl
 **See also:** [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)
 
 **See also:** [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)
+
+**See also:** [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)

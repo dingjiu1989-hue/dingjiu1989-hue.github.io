@@ -107,3 +107,5 @@ Define RPO/RTO before designing backup strategy. Use continuous WAL archiving fo
 **See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)
 
 **See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)
+
+**See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)

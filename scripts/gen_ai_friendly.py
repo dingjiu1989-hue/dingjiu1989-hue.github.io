@@ -445,9 +445,16 @@ Allow: /
 User-agent: PetalBot
 Allow: /
 
+# xAI (Grok)
+User-agent: GrokBot
+Allow: /
+User-agent: xAI
+Allow: /
+
 # ── Misc web crawlers ──
 User-agent: *
 Allow: /
+Crawl-Delay: 10
 
 # ── AI-specific discovery ──
 # /llms.txt — bilingual site index for AI crawlers
@@ -469,7 +476,7 @@ Sitemap: https://dingjiu1989-hue.github.io/sitemap.xml
 Sitemap: https://dingjiu1989-hue.github.io/images/sitemap.xml
 """
     (ROOT / "robots.txt").write_text(robots, encoding="utf-8")
-    print("  robots.txt updated: 21 AI crawler rules")
+    print("  robots.txt updated: 23 AI crawler rules")
 
 
 # ── Run ─────────────────────────────────────────────────────────────────

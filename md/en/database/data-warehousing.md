@@ -115,3 +115,5 @@ Design with star schema for performance. Build resilient ETL pipelines. Leverage
 **See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)
 
 **See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)
+
+**See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)

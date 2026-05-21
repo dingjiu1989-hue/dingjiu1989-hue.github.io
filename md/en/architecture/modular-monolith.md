@@ -59,3 +59,5 @@ The modular monolith is not a permanent state — it is a starting position. As 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)

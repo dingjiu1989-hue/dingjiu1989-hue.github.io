@@ -469,3 +469,5 @@ For high-throughput workloads, compare Lambda cost against ECS Fargate at sustai
 **See also:** [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
 
 **See also:** [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
+
+**See also:** [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)

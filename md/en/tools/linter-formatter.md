@@ -342,3 +342,5 @@ The industry is clearly moving toward Rust-based all-in-one tools. Biome and Ruf
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Dotfile Management: chezmoi, GNU Stow, Bare Git Repos](</en/tools/dotfile-management.html>)
 
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Dotfile Management: chezmoi, GNU Stow, Bare Git Repos](</en/tools/dotfile-management.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Dotfile Management: chezmoi, GNU Stow, Bare Git Repos](</en/tools/dotfile-management.html>)

@@ -429,3 +429,5 @@ Mobile security requires defense in depth. Obfuscate your code to slow down reve
 **See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Secure Software Development Lifecycle](</en/security/secure-sdlc.html>)
 
 **See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Secure Software Development Lifecycle](</en/security/secure-sdlc.html>)
+
+**See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Secure Software Development Lifecycle](</en/security/secure-sdlc.html>)

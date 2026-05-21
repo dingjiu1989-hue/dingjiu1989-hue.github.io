@@ -173,3 +173,5 @@ Embeddings are a versatile and powerful tool in the AI practitioner's toolkit. T
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [AI Image Generation Guide](</en/ai/ai-image-generation.html>)
 
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [AI Image Generation Guide](</en/ai/ai-image-generation.html>)
+
+**See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [AI Image Generation Guide](</en/ai/ai-image-generation.html>)

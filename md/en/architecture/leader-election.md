@@ -63,3 +63,5 @@ Observability of leadership state is essential. Expose leadership status as a me
 **See also:** [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
 
 **See also:** [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
+
+**See also:** [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)

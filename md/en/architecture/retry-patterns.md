@@ -81,3 +81,5 @@ Retries are a powerful tool, but they are not a substitute for addressing underl
 **See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 
 **See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
