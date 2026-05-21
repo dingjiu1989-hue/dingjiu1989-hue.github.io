@@ -253,8 +253,6 @@ def submit_sitemap_gsc():
         feeds = [
             f"{BASE_URL}/sitemap.xml",
             f"{BASE_URL}/images/sitemap.xml",
-            f"{BASE_URL}/en/feed.xml",
-            f"{BASE_URL}/feed.xml",
         ]
         for feed in feeds:
             try:
