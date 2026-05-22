@@ -50,7 +50,7 @@
       "image": "https://aidev.fit/images/covers/en/architecture/rate-limiting-architecture.png",
       "datePublished": "2026-04-29",
       "dateModified": "2026-05-19",
-      "wordCount": "1595",
+      "wordCount": "1625",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -101,7 +101,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Rate Limiting Architecture</h1>
-      <div class="article-meta"><time datetime="2026-04-29">Published 2026-04-29</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 0 views · 0 replies · 7 min read</div>
+      <div class="article-meta"><time datetime="2026-04-29">Published 2026-04-29</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 0 views · 0 replies · 8 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/rate-limiting-architecture.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/rate-limiting-architecture.png" alt="Rate Limiting Architecture" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Rate limiting protects system resources by controlling the rate at which clients can make requests. It prevents abuse, ensures fair resource allocation, and maintains system stability under load. The choice of rate limiting algorithm — how limits are tracked and enforced — determines the system's accuracy, memory usage, and ability to handle burst traffic. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/rate-limiting-architecture.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/rate-limiting-architecture.png" alt="Rate Limiting Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The token bucket algorithm is the most widely used rate limiting approach. A bucket holds tokens that replenish at a fixed rate. Each request consumes one token. If the bucket is empty, the request is rejected. The bucket capacity allows bursts — if the bucket is full, a client can send a burst of requests equal to the bucket size. Token bucket has two parameters: the fill rate (steady-state requests per second) and the bucket size (maximum burst). This combination provides both sustained throughput limits and burst tolerance. </p>
@@ -120,6 +120,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a></p>

@@ -13838,6 +13838,11 @@ def make_homepage(data):
   </section>
 
   <div class="container">
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search articles by title, tag, or keyword..." autocomplete="off">
+      <div id="search-results" class="search-results"></div>
+    </div>
+
     <div class="stats-bar" id="stats-bar">
       <span>📊 Total Posts: {total_posts}</span>
     </div>
@@ -13850,6 +13855,7 @@ def make_homepage(data):
 
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<script src="/js/search.js"></script>
 </body>
 </html>'''
 

@@ -50,7 +50,7 @@
       "image": "https://aidev.fit/images/covers/en/architecture/event-collaboration.png",
       "datePublished": "2026-04-24",
       "dateModified": "2026-05-19",
-      "wordCount": "1392",
+      "wordCount": "1422",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
@@ -112,7 +112,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Event Collaboration: Choreography vs Orchestration</h1>
-      <div class="article-meta"><time datetime="2026-04-24">Published 2026-04-24</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 0 views · 0 replies · 6 min read</div>
+      <div class="article-meta"><time datetime="2026-04-24">Published 2026-04-24</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 0 views · 0 replies · 7 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/event-collaboration.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/event-collaboration.png" alt="Event Collaboration: Choreography vs Orchestration" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Event collaboration is the architectural pattern where services communicate through events rather than direct requests. This shifts the coordination model from asking (request-response) to telling (event notification). Two fundamental patterns govern how these collaborations are structured: choreography, where each service independently responds to events, and orchestration, where a central coordinator directs the workflow. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/event-collaboration.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/event-collaboration.png" alt="Event Collaboration: Choreography vs Orchestration" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>In choreography, services are loosely coupled through events. When a service completes an operation, it publishes an event. Other services subscribe to relevant events and react accordingly. There is no central controller — the workflow emerges from the collective behavior of participating services. For example, when the Order Service creates an order, it publishes an OrderCreated event. The Inventory Service subtracts stock, the Payment Service charges the customer, and the Shipping Service schedules delivery — each acting independently. </p>
@@ -129,6 +129,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/dead-letter-queue.html">Dead Letter Queues: Handling Message Failures</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/dead-letter-queue.html">Dead Letter Queues: Handling Message Failures</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/dead-letter-queue.html">Dead Letter Queues: Handling Message Failures</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/dead-letter-queue.html">Dead Letter Queues: Handling Message Failures</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a></p>
