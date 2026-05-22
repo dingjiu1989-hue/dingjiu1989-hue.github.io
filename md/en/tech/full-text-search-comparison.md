@@ -75,5 +75,3 @@ Cloud| Meilisearch Cloud| Typesense Cloud
 Best For| Developer happiness, rapid integration| Instant search (sub-10ms), high throughput  
   
 **Bottom line:** Start with PostgreSQL FTS if you only need basic keyword search — it is free, already running, and handles 80% of use cases. Move to Meilisearch or Typesense when you need typo tolerance, faceted search, or instant-search UX. Only reach for Elasticsearch when you have a dedicated ops team and need to scale to billions of documents or complex aggregations. See also: [PostgreSQL Query Optimization](</en/tech/postgresql-query-optimization.html>) and [PostgreSQL vs MySQL vs SQLite](</en/compare/postgresql-vs-mysql-vs-sqlite.html>).
-
-**See also:** [Zero-Downtime Database Migration Strategies for Production](</en/tech/database-migration-strategies.html>), [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>)

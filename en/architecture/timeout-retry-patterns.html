@@ -56,12 +56,12 @@
       "image": "https://aidev.fit/images/covers/en/architecture/timeout-retry-patterns.png",
       "datePublished": "2026-04-30",
       "dateModified": "2026-05-12",
-      "wordCount": "1466",
+      "wordCount": "1026",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -97,6 +97,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -108,7 +109,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Timeout and Retry Patterns</h1>
-      <div class="article-meta"><time datetime="2026-04-30">Published 2026-04-30</time> · <time datetime="2026-05-12">Last active 2026-05-12</time> · 0 views · 0 replies · 7 min read</div>
+      <div class="article-meta"><time datetime="2026-04-30">Published 2026-04-30</time> · <time datetime="2026-05-12">Last active 2026-05-12</time> · 162 views · 0 replies · 5 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/timeout-retry-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/timeout-retry-patterns.png" alt="Timeout and Retry Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Timeouts and retries are the most basic building blocks of resilient distributed systems, yet they are among the most commonly misconfigured. A timeout that is too short causes unnecessary failures under normal load spikes. A timeout that is too long causes cascading resource exhaustion. Retries without backpressure amplify failure. Getting these patterns right requires understanding the tradeoffs and the interactions between them. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/timeout-retry-patterns.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/timeout-retry-patterns.png" alt="Timeout and Retry Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Timeouts define the maximum time a caller waits for a response. Every remote call must have a timeout — without one, a hung dependency can hold open resources indefinitely, eventually exhausting connection pools and thread pools. The timeout should be set per operation type: a simple key-value lookup may have a 100ms timeout, while a complex report generation may have 30 seconds. The timeout should be based on the operation's p99.9 latency plus a safety margin. </p>
@@ -120,32 +121,13 @@
 <p>Retry with circuit breaker integration prevents retrying a failing service. Once the circuit breaker opens, retries should stop. The retry logic should check the circuit breaker state before each attempt. If the circuit is open, the retry should fail fast rather than attempt the call. When the circuit is half-open, a single retry is allowed as a probe. This integration is built into most resilience frameworks (Resilience4j, Polly) but requires explicit configuration. </p>
 <p>Selective retry categorizes failures into retriable and non-retriable. Network timeouts, 503 Service Unavailable, and 429 Too Many Requests are retriable — they indicate transient issues that may resolve. 400 Bad Request and 404 Not Found are not retriable — they will always fail. 500 Internal Server Error may or may not be retriable depending on whether the error is idempotent. The retry logic must distinguish these cases to avoid wasting effort on certain-failure retries. </p>
 <p>Retry budgets limit total retry volume over time. A budget of 5% means that at most 5% of calls to a dependency are retries. If the normal call rate is 1000/s, the retry budget is 50/s. This prevents retries from dominating traffic during extended failures. Retry budgets are adaptive — as failures increase, the budget limits the system's self-inflicted load. Google's gRPC retry implementation supports retry budgets natively. </p>
-<p>Consistent configuration across services is essential but elusive. Timeout and retry policies should be documented, standardized, and enforced through shared infrastructure libraries rather than reimplemented in each service. A platform team should own the shared resilience library and maintain it across languages as the organization grows. The configuration should be visible as metrics — track retry counts, backoff durations, and timeout rates to identify misconfigured services.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p></div>
+<p>Consistent configuration across services is essential but elusive. Timeout and retry policies should be documented, standardized, and enforced through shared infrastructure libraries rather than reimplemented in each service. A platform team should own the shared resilience library and maintain it across languages as the organization grows. The configuration should be visible as metrics — track retry counts, backoff durations, and timeout rates to identify misconfigured services.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -156,9 +138,14 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Timeout%20and%20Retry%20Patterns&url=https://aidev.fit/en/architecture/timeout-retry-patterns.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/architecture/timeout-retry-patterns.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Timeout%20and%20Retry%20Patterns&url=https%3A//aidev.fit/en/architecture/timeout-retry-patterns.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/timeout-retry-patterns.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=Timeout%20and%20Retry%20Patterns&url=https%3A//aidev.fit/en/architecture/timeout-retry-patterns.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=Timeout%20and%20Retry%20Patterns&u=https%3A//aidev.fit/en/architecture/timeout-retry-patterns.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=Timeout%20and%20Retry%20Patterns&body=https%3A//aidev.fit/en/architecture/timeout-retry-patterns.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/timeout-retry-patterns.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/structured-logging.html" class="prev-next-btn prev-link">← Structured Logging</a><a href="/en/architecture/multi-tenancy.html" class="prev-next-btn next-link">Multi-Tenancy Architecture →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/architecture/retry-patterns.html" class="related-card"><span class="related-card-title">Retry Patterns</span><span class="related-card-desc">Learn retry strategies: exponential backoff, jitter, retry budgets, and circuit breaker integration </span></a><a href="/en/architecture/retry-backoff.html" class="related-card"><span class="related-card-title">Retry and Backoff Strategies</span><span class="related-card-desc">Learn retry and backoff strategies for building resilient distributed systems — exponential backoff,</span></a><a href="/en/architecture/circuit-breaker-vs-bulkhead.html" class="related-card"><span class="related-card-title">Circuit Breaker vs Bulkhead Pattern</span><span class="related-card-desc">Differences, when to use each, resilience patterns, and combined application of circuit breaker and </span></a><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="related-card-title">Graceful Shutdown Patterns</span><span class="related-card-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful</span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/feature-flags-architecture.html" class="related-card"><span class="related-card-title">Feature Flags Architecture</span><span class="related-card-desc">Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feat</span></a></div>
@@ -166,34 +153,17 @@
     
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

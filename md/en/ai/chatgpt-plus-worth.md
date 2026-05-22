@@ -57,5 +57,3 @@ $200/month is a serious commitment. The main draws are **unlimited access** (no 
 ## My Recommendation
 
 Start free. When you find yourself frustrated by limits, upgrade to Plus. If Plus still isn't enough — and you're earning money from the work ChatGPT helps with — consider Pro. The path is: **Free → Plus (when limited) → Pro (when Plus is a bottleneck)**. Most people will never need Pro.
-
-**See also:** [25 Best AI Tools for Developers in 2026: Code, Debug, Deploy](</en/ai/best-ai-tools-developers-2026.html>), [Open Source LLMs Compared 2026: Llama 3 vs Mistral vs Qwen vs Gemma](</en/ai/open-source-llm-comparison.html>), [Prompt Engineering: From Beginner to Expert](</en/ai/prompt-engineering.html>)

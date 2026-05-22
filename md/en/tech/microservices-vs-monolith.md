@@ -60,5 +60,3 @@ Independent scaling needs| **Extract that service** (not everything)
 Multiple tech stacks required| **Microservices**  
   
 **Bottom line:** Start with a modular monolith. Extract microservices only when you have a clear reason: independent scaling, team autonomy, or polyglot persistence. Premature microservices are the #1 cause of unnecessary complexity in software projects. See also: [API architecture comparison](</en/compare/trpc-vs-graphql-vs-rest.html>) and [API design patterns](</en/tech/api-design-patterns.html>).
-
-**See also:** [React Server Components Guide: Architecture, Patterns, and When to Use RSC in 2026](</en/tech/react-server-components-guide.html>), [Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each](</en/tech/testing-strategies-web-apps.html>), [Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching](</en/tech/caching-strategies-web-apps.html>)

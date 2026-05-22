@@ -64,7 +64,3 @@ Your own site + Stripe| 2.9% + 30c| Maximum margin, requires driving your own tr
   3. **Launch on Product Hunt, Hacker News, and relevant subreddits.** Time your launch for Tuesday-Thursday morning US Eastern time. Prepare your launch assets (screenshots, description, first comment) in advance.
   4. **Build a reviews page.** Offer free copies to 5-10 developers in exchange for honest testimonials. Display these prominently on your sales page.
   5. **Keep marketing.** The launch is day 1, not the finish line. Write guest posts, appear on podcasts, create YouTube tutorials that feature your product. Digital products have a long tail — a product launched today can still sell 3 years later.
-
-
-
-**See also:** [How to Build and Sell VS Code Extensions: A Developer's Guide to Recurring Revenue](</en/sidehustle/sell-vscode-extensions.html>), [How to Create and Sell an Online Coding Course That Makes $10K+](</en/sidehustle/create-online-course.html>), [How to Start and Monetize a Developer Podcast in 2026](</en/sidehustle/developer-podcast-guide.html>)

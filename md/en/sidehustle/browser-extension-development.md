@@ -86,5 +86,3 @@ WXT (Framework)| Type-safe extensions, modern DX| TypeScript-first, cross-browse
 
 
 **Bottom line:** Browser extensions are a $2B+ market that most developers ignore. Manifest V3 has raised the technical bar (disqualifying amateurs) while improving security for users. Start with Plasmo or WXT for the best developer experience, target Chrome first (80%+ market share), and submit early — the CWS review process often finds issues you will miss. See also: [Chrome Extension Monetization](</en/sidehustle/chrome-extension-monetization.html>) and [Web Security Basics](</en/tech/web-security-basics.html>).
-
-**See also:** [Email Marketing for Developers](</en/sidehustle/email-marketing.html>), [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [How to Find and Close Your First Freelance Client: A Developer's Step-by-Step Guide](</en/sidehustle/freelance-client-acquisition-guide.html>)

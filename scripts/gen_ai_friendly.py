@@ -33,7 +33,7 @@ h.unicode_snob = True
 
 def extract_body(html):
     """Extract article body HTML and convert to Markdown."""
-    m = re.search(r'<div class="article-body">(.*?)</article>', html, re.DOTALL)
+    m = re.search(r'<div class="article-body">(.*?)</div>', html, re.DOTALL)
     if not m:
         return None
     body_html = m.group(1)
@@ -55,10 +55,12 @@ def gen_markdown_copies():
     local_h.unicode_snob = True
 
     def _extract(html):
-        m = re.search(r'<div class="article-body">(.*?)</article>', html, re.DOTALL)
+        m = re.search(r'<div class="article-body">(.*?)</div>', html, re.DOTALL)
         if not m:
             return None
-        return local_h.handle(m.group(1)).strip()
+        body = m.group(1)
+        body = re.sub(r'<p class="see-also"[^>]*>.*?</p>', '', body, flags=re.DOTALL)
+        return local_h.handle(body).strip()
 
     MD_DIR.mkdir(exist_ok=True)
     (MD_DIR / "en").mkdir(exist_ok=True)
@@ -345,10 +347,12 @@ def gen_llms_full():
     local_h.unicode_snob = True
 
     def _extract(html):
-        m = re.search(r'<div class="article-body">(.*?)</article>', html, re.DOTALL)
+        m = re.search(r'<div class="article-body">(.*?)</div>', html, re.DOTALL)
         if not m:
             return None
-        return local_h.handle(m.group(1)).strip()
+        body = m.group(1)
+        body = re.sub(r'<p class="see-also"[^>]*>.*?</p>', '', body, flags=re.DOTALL)
+        return local_h.handle(body).strip()
 
     en_data = json.loads(EN_ARTICLES.read_text(encoding="utf-8"))
 

@@ -50,5 +50,3 @@ Scheduling| Built-in calendar| Calendly or similar
 Best Strategy| Start here, build reputation| Transition once you have a waitlist  
   
 **Bottom line:** Start on Codementor to get your first students and reviews — the platform fee is worth the client acquisition. Once you have a steady stream of referrals and testimonials, transition to independent mentoring (via Calendly + Stripe) and keep 100%. The most profitable niche is FAANG interview prep — developers will pay $100-200/hour to prepare for a $300K+ job. See also: [Developer Consulting Guide](</en/sidehustle/developer-consulting-guide.html>) and [Create an Online Course](</en/sidehustle/create-online-course.html>).
-
-**See also:** [How to Make Money with Chrome Extensions in 2026: Complete Guide](</en/sidehustle/chrome-extension-monetization.html>), [Building a Web Scraping Business: Technical and Legal Guide (2026)](</en/sidehustle/web-scraping-business.html>), [Selling UI Kits, Icons, and Design Assets as a Developer in 2026](</en/sidehustle/sell-ui-kits-design-assets.html>)

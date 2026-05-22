@@ -119,5 +119,3 @@ Strategy| Pros| Cons
 **Recommendation:** UUID v7 for distributed systems and public-facing IDs. BIGINT for internal tables. Avoid exposing auto-increment IDs in URLs.
 
 **Bottom line:** Normalize to 3NF, index every FK and query column, use appropriate data types, and always have foreign key constraints. A well-designed schema is cheaper to fix now than later. See also: [database comparison](</en/compare/postgresql-vs-mysql-vs-sqlite.html>) and [ORM comparison](</en/compare/prisma-vs-drizzle-vs-typeorm.html>).
-
-**See also:** [Error Handling Best Practices: From Try/Catch to Structured Errors](</en/tech/error-handling-best-practices.html>), [GraphQL API Design: Schema Best Practices, Federation, and Performance](</en/tech/graphql-api-design.html>), [Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns](</en/tech/database-sharding-strategies.html>)

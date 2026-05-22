@@ -86,5 +86,3 @@ Most situations call for neither pure refactor nor pure rewrite, but a combinati
 
 
 **Bottom line:** Refactoring is the default right answer in 80% of cases. Rewrites win when the technology is truly obsolete or the system is small enough to replace quickly. The worst outcome isn't messy code — it's a rewrite that takes 18 months, misses critical features, and kills the product. Ship incrementally, measure everything, and let data drive the decision.
-
-**See also:** [WebSocket vs SSE vs Polling: Real-Time Data Patterns for Web Apps](</en/tech/websocket-vs-sse-vs-polling.html>), [Node.js Streams: Complete Guide to Efficient Data Processing](</en/tech/nodejs-streams-guide.html>), [Zero-Downtime Database Migration Strategies for Production](</en/tech/database-migration-strategies.html>)

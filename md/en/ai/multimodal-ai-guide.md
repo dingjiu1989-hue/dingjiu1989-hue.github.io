@@ -75,5 +75,3 @@ Audio input (per minute)| $0.006| $0.002| N/A
 Video input (per minute)| $0.017 (extracted frames)| $0.013 (native video)| N/A  
   
 **Bottom line:** GPT-4o is the best all-around multimodal model — it handles text, images, and audio with a single API, and the real-time voice capability is unmatched. Gemini wins for native video understanding (processing video without frame extraction). Claude excels at document understanding (PDFs, charts, diagrams). For most developer applications, start with GPT-4o for image+text tasks, and consider Gemini when you need native video or the 1M token context window. See also: [AI Image Generation Guide](</en/ai/ai-image-generation-guide.html>) and [AI API Integration Guide](</en/ai/ai-api-integration-guide.html>).
-
-**See also:** [Multimodal AI Applications in 2026](</en/ai/multimodal-ai.html>), [Best LLMs for Coding in 2026: Claude vs GPT-4o vs Gemini vs DeepSeek vs CodeLlama](</en/ai/best-llms-for-coding-2026.html>), [Open Source LLMs Compared 2026: Llama 3 vs Mistral vs Qwen vs Gemma](</en/ai/open-source-llm-comparison.html>)

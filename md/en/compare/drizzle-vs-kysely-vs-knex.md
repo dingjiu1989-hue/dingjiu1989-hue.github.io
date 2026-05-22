@@ -44,5 +44,3 @@ Need Oracle or Redshift support| Knex.js| Only option with broad legacy DB suppo
 Serverless / edge (minimal bundle)| Drizzle ORM| Smallest bundle size, works great at edge  
   
 **Bottom line:** Drizzle ORM hits the sweet spot for most new TypeScript projects — you get the type safety of Prisma with the SQL-level control of a query builder. Kysely is the choice for SQL purists who want zero abstraction. Knex.js remains solid but its TypeScript story is weaker than the newcomers. See also: [Prisma vs Drizzle vs TypeORM](</en/compare/prisma-vs-drizzle-vs-typeorm.html>) and [Database Design Fundamentals](</en/tech/database-design-fundamentals.html>).
-
-**See also:** [Redis vs Memcached vs Dragonfly (2026): In-Memory Data Store Comparison](</en/compare/redis-vs-memcached-vs-dragonfly.html>), [Kubernetes vs Docker Swarm vs Nomad (2026): Container Orchestration Compared](</en/compare/kubernetes-vs-docker-swarm-vs-nomad.html>), [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>)

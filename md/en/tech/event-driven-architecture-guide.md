@@ -72,5 +72,3 @@ Two services need a synchronous response| No — use REST/gRPC| Events are async
     # (refunding twice = bad; but idempotent refund = safe to retry)
 
 **Bottom line:** Start with simple event notification (one service emits, others react) before adopting event sourcing or CQRS. For most projects, RabbitMQ or Redis Streams provide enough throughput with simpler operations. Only reach for Kafka when you need replay, long-term retention, or 1M+ msg/s throughput. The biggest mistake is going fully event-driven when simple request-response would suffice — EDA is a powerful tool, not a default architecture. See also: [Microservices vs Monolith](</en/tech/microservices-vs-monolith.html>) and [Webhook Implementation Guide](</en/tech/webhook-implementation-guide.html>).
-
-**See also:** [GraphQL API Design: Schema Best Practices, Federation, and Performance](</en/tech/graphql-api-design.html>), [System Design Interview Prep: Complete Developer Guide (2026)](</en/tech/system-design-interview-guide.html>), [Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns](</en/tech/database-sharding-strategies.html>)

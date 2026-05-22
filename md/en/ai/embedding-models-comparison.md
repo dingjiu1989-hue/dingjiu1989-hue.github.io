@@ -50,5 +50,3 @@ Maximum quality, budget for GPU| E5-Mistral-7B-Instruct| Highest MTEB score amon
 Long documents (newsletters, legal, research)| Jina embeddings v3 or E5-Mistral| Best long-context (8K+) embeddings  
   
 **Bottom line:** OpenAI text-embedding-3-large at 256 dimensions is the best default for 90% of projects — good enough quality, managed, and Matryoshka lets you increase dimensions later. Switch to BGE-M3 if you want to self-host and eliminate API costs. Use Cohere Embed v4 for multilingual needs. E5-Mistral is overkill for most projects but worth considering when every percentage point of search accuracy matters. See also: [RAG Best Practices](</en/ai/rag-best-practices.html>) and [Open Source LLM Comparison](</en/ai/open-source-llm-comparison.html>).
-
-**See also:** [AI Image Generation Guide: DALL-E 3 vs Midjourney vs Stable Diffusion vs Firefly](</en/ai/ai-image-generation-guide.html>), [Open Source LLMs Compared 2026: Llama 3 vs Mistral vs Qwen vs Gemma](</en/ai/open-source-llm-comparison.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>)

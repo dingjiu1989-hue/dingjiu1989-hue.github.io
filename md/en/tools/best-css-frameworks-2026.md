@@ -46,5 +46,3 @@ Prefer standard CSS, want minimal tooling| Open Props| Pure CSS custom propertie
 Performance-critical app (every KB counts)| UnoCSS or Panda CSS| Both output minimal atomic CSS with zero runtime  
   
 **My take for 2026:** **Tailwind CSS v4** is still the default choice for most projects — the ecosystem, documentation, and developer availability are unmatched. But **UnoCSS** is the dark horse worth watching: it's faster, more flexible, and eating Tailwind's lunch in the Vite ecosystem. If you're starting a greenfield project in 2026 and don't need Tailwind UI, try UnoCSS — the attribute mode alone makes your templates more readable. For teams building their own design system, **Panda CSS** is the most forward-thinking choice: type-safe, compile-time, and the recipe pattern is genuinely better than utility classes for component variants.
-
-**See also:** [Best Password Managers for Developers](</en/tools/password-managers.html>), [Test Automation Frameworks 2026](</en/tools/test-automation-frameworks.html>), [Best Free Tier Platforms for Developer Projects 2026: The Ultimate List](</en/tools/best-free-tier-platforms.html>)

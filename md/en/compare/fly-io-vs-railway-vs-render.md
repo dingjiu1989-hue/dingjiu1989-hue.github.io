@@ -56,5 +56,3 @@ AI/ML inference, GPU required| **Fly.io**
 Zero config, template-driven| **Railway**  
   
 **Bottom line:** Railway for the best developer experience (auto-detect, one-click templates). Fly.io for global distribution and Docker control. Render for simple static + API setups. All three beat AWS for developer experience. See also: [Frontend Hosting Comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>) and [Edge Functions Comparison](</en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html>).
-
-**See also:** [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [AWS vs Azure vs GCP (2026): Best Cloud for Developers?](</en/compare/aws-vs-azure-vs-gcp.html>), [Kubernetes vs Docker Swarm vs Nomad (2026): Container Orchestration Compared](</en/compare/kubernetes-vs-docker-swarm-vs-nomad.html>)

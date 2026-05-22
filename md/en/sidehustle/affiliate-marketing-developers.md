@@ -86,7 +86,3 @@ Direct SaaS programs| 20-50%| Check footer links on SaaS sites for "Affiliates"
   * **Building content sites with no unique value.** Google's 2024-2026 updates heavily penalize sites that only aggregate without adding original analysis. Your programmatic content must include unique data (benchmarks, comparisons, analysis) that generic AI content can't replicate.
   * **Over-optimizing before traffic.** Ship a useful site with 20-30 pages first. Optimize after you have 1,000+ monthly visitors.
   * **Getting attached to one traffic source.** Diversify to GitHub, YouTube, newsletters, and direct traffic from day one.
-
-
-
-**See also:** [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>)

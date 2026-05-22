@@ -66,5 +66,3 @@ Maximum free tier| **GCP** Always Free
 Maximum services, large scale| **AWS**  
   
 **Bottom line:** For most side projects, you don't need AWS/Azure/GCP — Vercel + Supabase covers 90% of use cases. If you need cloud: GCP for the best developer experience, AWS for maximum capabilities, Azure for Microsoft shops and OpenAI access. See our [hosting comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>) and [backend comparison](</en/compare/supabase-vs-firebase-vs-neon.html>) for lighter alternatives.
-
-**See also:** [PlanetScale vs Turso vs Neon (2026): Best Serverless Database?](</en/compare/planetscale-vs-turso-vs-neon.html>), [Fly.io vs Railway vs Render (2026): Best Modern PaaS for Developers?](</en/compare/fly-io-vs-railway-vs-render.html>), [Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers](</en/compare/supabase-vs-firebase-vs-neon.html>)

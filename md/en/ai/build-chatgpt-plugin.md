@@ -114,5 +114,3 @@ Create an `openapi.json` file that ChatGPT reads to understand your API. This mu
     }
 
 **Bottom line:** ChatGPT Plugins are most valuable when they connect to live data or systems that change — static knowledge is better served by Custom GPTs with uploaded files. Start simple: one endpoint, deploy on Railway or Fly.io (free tier), test thoroughly, then add more features. The barrier to entry is running a public API — but the reward is a GPT that does real work, not just chatting. See also: [How to Build and Sell APIs](</en/sidehustle/build-and-sell-api.html>) and [AI API Integration Guide](</en/ai/ai-api-integration-guide.html>).
-
-**See also:** [Is ChatGPT Plus Worth It? Free vs Plus vs Pro Compared (2026)](</en/ai/chatgpt-plus-worth.html>), [Building Custom AI Agents with LangGraph: A Practical Guide](</en/ai/langgraph-agent-workflows.html>), [Claude vs ChatGPT (2026): Which AI Assistant Is Right for You?](</en/ai/claude-vs-chatgpt.html>)

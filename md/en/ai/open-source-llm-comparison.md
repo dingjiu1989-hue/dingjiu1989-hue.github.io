@@ -43,5 +43,3 @@ SWE-bench Verified| 34.6%| 40.2%| 29.8%| 22.1%
 **Gemma 3 — Best for:** Google Cloud/GCP shops, JAX/Keras ecosystem users, and teams that want a lightweight model with strong safety alignment. **Weak spot:** Smaller context window (32K); licensing has use restrictions that are stricter than Apache 2.0.
 
 **Bottom line:** Llama 3.1 70B is the default open source choice — best ecosystem, solid benchmarks, and runs on 2x consumer GPUs. Mistral Large 2 is the best for coding. Qwen 2.5 wins on cost-efficiency and context length. Gemma 3 is great for Google-integrated stacks. See also: [Best LLMs for Coding](</en/ai/best-llms-for-coding-2026.html>) and [Fine-Tuning Open Source LLMs](</en/ai/fine-tune-open-source-llm.html>).
-
-**See also:** [Best AI Video Generation Tools for Developers 2026: Runway vs Pika vs Sora](</en/ai/ai-video-generation-tools.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>)

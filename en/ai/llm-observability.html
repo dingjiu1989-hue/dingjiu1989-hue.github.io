@@ -36,7 +36,7 @@
     <meta name="twitter:description" content="Implement LLM observability for production AI applications: distributed tracing, token usage tracking, latency monitoring, and cost attribution.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/ai/llm-observability.png">
     <meta property="article:published_time" content="2026-02-12">
-    <meta property="article:modified_time" content="2026-04-20">
+    <meta property="article:modified_time" content="2026-05-22">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/llm-observability.webp" type="image/webp" fetchpriority="high">
     <title>LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution — SourceHub</title>
@@ -55,13 +55,13 @@
       "description": "Implement LLM observability for production AI applications: distributed tracing, token usage tracking, latency monitoring, and cost attribution.",
       "image": "https://aidev.fit/images/covers/en/ai/llm-observability.png",
       "datePublished": "2026-02-12",
-      "dateModified": "2026-04-20",
-      "wordCount": "2226",
+      "dateModified": "2026-05-22",
+      "wordCount": "999",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -97,6 +97,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -108,7 +109,7 @@
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</h1>
-      <div class="article-meta"><time datetime="2026-02-12">Published 2026-02-12</time> · <time datetime="2026-04-20">Last active 2026-04-20</time> · 0 views · 0 replies · 11 min read</div>
+      <div class="article-meta"><time datetime="2026-02-12">Published 2026-02-12</time> · <time datetime="2026-05-22">Last active 2026-05-22</time> · 227 views · 0 replies · 4 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/ai/llm-observability.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/llm-observability.png" alt="LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Production LLM applications fail in ways traditional monitoring does not capture. You need observability that tracks prompts, responses, tokens, latency, and costs across every model call. Here is the LLM observability framework.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/llm-observability.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/llm-observability.png" alt="LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Why LLM Observability Is Different</h2>
@@ -139,32 +140,13 @@
 <p>Define alert thresholds for the metrics that matter. Response time exceeds 5 seconds for P95. Error rate exceeds 2%. Cost per day exceeds a threshold. Tokens per request exceed expected range.</p>
 <p>When an alert fires, the trace data should let you identify the problematic request, reproduce it, and understand what went wrong. Without traces, you know something is broken but cannot diagnose it.</p>
 <p>Build runbooks for common LLM failures. Model down: failover to a fallback model. High latency: reduce max_tokens or switch to a smaller model. Cost spike: identify the source and apply rate limits.</p>
-<p>LLM observability is not optional for production applications. Start with basic token and latency tracking, add tracing for critical paths, and expand gradually. The cost of observability is a fraction of the cost of undetected LLM failures.</p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a>.</p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p></div>
+<p>LLM observability is not optional for production applications. Start with basic token and latency tracking, add tracing for critical paths, and expand gradually. The cost of observability is a fraction of the cost of undetected LLM failures.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    <details class="article-toc"><summary>Table of Contents (6)</summary><ol><li><a href="#why-llm-observability-is-different">Why LLM Observability Is Different</a></li><li><a href="#tracing-llm-calls">Tracing LLM Calls</a></li><li><a href="#token-tracking">Token Tracking</a></li><li><a href="#latency-monitoring">Latency Monitoring</a></li><li><a href="#cost-attribution">Cost Attribution</a></li><li><a href="#alerting-and-incident-response">Alerting and Incident Response</a></li></ol></details>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -175,9 +157,14 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=LLM%20Observability%3A%20Tracing%2C%20Token%20Tracking%2C%20Latency%20Monitoring%2C%20and%20Cost%20Attribution&url=https://aidev.fit/en/ai/llm-observability.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/ai/llm-observability.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=LLM%20Observability%3A%20Tracing%2C%20Token%20Tracking%2C%20Latency%20Monitoring%2C%20and%20Cost%20Attribution&url=https%3A//aidev.fit/en/ai/llm-observability.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/llm-observability.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=LLM%20Observability%3A%20Tracing%2C%20Token%20Tracking%2C%20Latency%20Monitoring%2C%20and%20Cost%20Attribution&url=https%3A//aidev.fit/en/ai/llm-observability.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=LLM%20Observability%3A%20Tracing%2C%20Token%20Tracking%2C%20Latency%20Monitoring%2C%20and%20Cost%20Attribution&u=https%3A//aidev.fit/en/ai/llm-observability.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=LLM%20Observability%3A%20Tracing%2C%20Token%20Tracking%2C%20Latency%20Monitoring%2C%20and%20Cost%20Attribution&body=https%3A//aidev.fit/en/ai/llm-observability.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/llm-observability.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/vector-database-tuning.html" class="prev-next-btn prev-link">← Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search</a><a href="/en/ai/ai-gateway.html" class="prev-next-btn next-link">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/ai/ai-monitoring-alerting.html" class="related-card"><span class="related-card-title">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</span><span class="related-card-desc">Monitor LLM applications in production: track latency percentiles, token consumption, error rates by</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="related-card-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="related-card-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fa</span></a><a href="/en/ai/ai-api-gateway.html" class="related-card"><span class="related-card-title">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</span><span class="related-card-desc">Design an AI API gateway for multi-provider LLM access: load balancing across models, automatic fall</span></a><a href="/en/ai/ai-testing-frameworks.html" class="related-card"><span class="related-card-title">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</span><span class="related-card-desc">Comprehensive guide to AI testing frameworks including DeepEval, Ragas, and LangSmith. Implement aut</span></a><a href="/en/ai/fine-tuning-vs-rag.html" class="related-card"><span class="related-card-title">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</span><span class="related-card-desc">Compare fine-tuning and RAG for LLM applications: when to use each approach, hybrid fine-tuned RAG p</span></a><a href="/en/ai/ai-model-deployment-strategies.html" class="related-card"><span class="related-card-title">AI Model Deployment: Strategies for Production LLM Serving</span><span class="related-card-desc">Deploy LLMs to production: serving infrastructure, batching, caching, load balancing, and cost optim</span></a></div>
@@ -190,34 +177,17 @@
     </section>
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

@@ -64,5 +64,3 @@ Want open source and no lock-in| **Supabase or Neon**
 Quickest from zero to working MVP| **Supabase** (most built-in features)  
   
 For most web apps in 2026, **Supabase is the best starting point.** It gives you the most features out of the box while keeping the escape hatch open. See our [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>) for the full tech stack.
-
-**See also:** [Prisma vs Drizzle vs TypeORM (2026): Best TypeScript ORM?](</en/compare/prisma-vs-drizzle-vs-typeorm.html>), [Hono vs Express vs Fastify (2026): Best Node.js Backend Framework?](</en/compare/hono-vs-express-vs-fastify.html>), [Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers](</en/compare/vercel-vs-netlify-vs-cloudflare.html>)

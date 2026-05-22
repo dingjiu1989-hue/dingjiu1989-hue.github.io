@@ -69,5 +69,3 @@ Table bloat| Dead tuples from UPDATE/DELETE| VACUUM ANALYZE; adjust autovacuum s
     SELECT pg_reload_conf();
 
 **Bottom line:** 90% of PostgreSQL performance problems are solved by adding the right index and adjusting work_mem. Before adding indexes, run EXPLAIN (ANALYZE, BUFFERS) on the slow query. If you see Seq Scan on a large table, add an index. If you see external merge on disk, increase work_mem. These two fixes alone resolve the vast majority of performance issues. See also: [Full-Text Search Comparison](</en/tech/full-text-search-comparison.html>) and [Database Migrations Guide](</en/tech/database-migration-strategies.html>).
-
-**See also:** [Database Design Fundamentals: Normalization, Indexing, and Schema Design](</en/tech/database-design-fundamentals.html>), [Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns](</en/tech/database-sharding-strategies.html>), [Zero-Downtime Database Migration Strategies for Production](</en/tech/database-migration-strategies.html>)

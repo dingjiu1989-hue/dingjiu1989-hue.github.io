@@ -66,5 +66,3 @@ Daily journal, Zettelkasten| **Obsidian**
 Issue tracker devs won't hate| **Linear**  
   
 **Bottom line:** These three tools complement each other — they're not competitors. Obsidian for personal knowledge (your second brain). Notion for team documentation and collaborative planning. Linear for tracking what needs to be built. The optimal stack: Obsidian for you, Notion for the team, Linear for the code. See also: [free online tools guide](</en/tools/online-tools-2026.html>) for more developer productivity tools.
-
-**See also:** [Prisma vs Drizzle vs TypeORM (2026): Best TypeScript ORM?](</en/compare/prisma-vs-drizzle-vs-typeorm.html>), [Bun vs Node.js vs Deno (2026): Best JavaScript Runtime?](</en/compare/bun-vs-node-vs-deno.html>), [Warp vs iTerm2 vs Kitty: Best Terminal Emulator for Developers (2026)](</en/compare/warp-vs-iterm2-vs-kitty.html>)

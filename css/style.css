@@ -270,6 +270,8 @@ a:hover { text-decoration: underline; }
 .related-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem;
+}
 
 /* === Share Bar === */
 .share-bar {
@@ -289,8 +291,6 @@ a:hover { text-decoration: underline; }
 
 /* === Giscus Comments === */
 .giscus { margin: 1.5rem 0 2.5rem; min-height: 200px; }
-  gap: 0.75rem;
-}
 .related-card {
   display: block;
   padding: 0.75rem 1rem;
@@ -419,3 +419,217 @@ a:hover { text-decoration: underline; }
   text-align: center;
   color: #656d76;
 }
+
+/* === Reading Progress Bar === */
+#reading-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 9999;
+  background: transparent;
+}
+#reading-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  transition: width 0.1s linear;
+}
+
+/* === Back to Top Button === */
+#back-to-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #24292f;
+  color: #fff;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+#back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+#back-to-top:hover {
+  background: #0969da;
+}
+
+/* === Prev/Next Navigation === */
+.prev-next-nav {
+  display: flex;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+  justify-content: space-between;
+}
+.prev-next-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  color: #0969da;
+  text-decoration: none;
+  transition: background 0.15s;
+  max-width: 48%;
+}
+.prev-next-btn:hover {
+  background: #f0f6ff;
+  text-decoration: none;
+}
+.prev-next-btn.disabled {
+  color: #8b949e;
+  cursor: default;
+  opacity: 0.4;
+}
+.prev-next-btn.prev-link { text-align: left; }
+.prev-next-btn.next-link { text-align: right; }
+
+/* === Share Bar Copy Button === */
+.copy-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.6rem;
+  height: 32px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 16px;
+  color: #24292f;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.copy-link-btn:hover { background: #d0d7de; }
+.copy-link-btn.copied {
+  background: #2da44e;
+  color: #fff;
+}
+
+/* === Comment CTA Inline === */
+.comment-cta-inline {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  text-align: center;
+}
+.comment-cta-inline p {
+  margin: 0 0 0.5rem;
+  font-size: 0.92rem;
+  color: #92400e;
+}
+.comment-cta-inline a {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #92400e;
+  text-decoration: underline;
+}
+
+/* === Table of Contents === */
+.article-toc {
+  margin: 1.25rem 0;
+  padding: 0.75rem 1rem;
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  font-size: 0.88rem;
+}
+.article-toc summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #24292f;
+  padding: 0.25rem 0;
+}
+.article-toc ol {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+}
+.article-toc li {
+  margin: 0.25rem 0;
+  line-height: 1.4;
+}
+.article-toc a {
+  color: #0969da;
+  text-decoration: none;
+}
+.article-toc a:hover { text-decoration: underline; }
+
+/* === Discussion CTA === */
+.discussion-cta {
+  margin: 2rem 0 1rem;
+  padding: 1.25rem 1.5rem;
+  background: #f0f6ff;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  text-align: center;
+}
+.discussion-cta p {
+  font-size: 0.95rem;
+  color: #24292f;
+  margin-bottom: 0.4rem;
+}
+.discussion-cta p:first-child { font-weight: 700; }
+.discussion-cta p:nth-child(2) {
+  font-size: 0.85rem;
+  color: #656d76;
+  margin: 0 0 0.6rem;
+}
+.discussion-cta a {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0969da;
+  text-decoration: underline;
+}
+
+/* === Reply Badge === */
+.reply-badge {
+  display: inline-block;
+  padding: 0.1rem 0.45rem;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  background: #2da44e;
+  vertical-align: middle;
+  margin-left: 0.3rem;
+}
+.reply-badge.active {
+  background: #1a7f37;
+  animation: badge-pulse 2s ease-in-out;
+}
+@keyframes badge-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* === Social Footer Links === */
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  color: #0969da;
+  font-size: 0.82rem;
+  text-decoration: none;
+}
+.footer-links a:hover { text-decoration: underline; }

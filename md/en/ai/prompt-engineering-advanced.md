@@ -79,5 +79,3 @@ For complex coding tasks, explicitly ask the model to plan before writing:
     - One edge case it handles
 
 **Bottom line:** Advanced prompt engineering is about structure, not magic words. XML delimiters, curated examples, and explicit reasoning steps produce the biggest quality gains. The best prompt engineers treat prompts like code — version controlled, tested, and iteratively improved with A/B comparisons. See also: [Prompt Engineering Basics](</en/ai/prompt-engineering.html>) and [AI API Integration Guide](</en/ai/ai-api-integration-guide.html>).
-
-**See also:** [RAG Best Practices 2026: Building Production-Ready Retrieval Systems](</en/ai/rag-best-practices.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>)

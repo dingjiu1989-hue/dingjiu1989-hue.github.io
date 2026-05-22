@@ -56,12 +56,12 @@
       "image": "https://aidev.fit/images/covers/en/ai/embeddings-techniques.png",
       "datePublished": "2026-02-19",
       "dateModified": "2026-04-17",
-      "wordCount": "1695",
+      "wordCount": "531",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -108,6 +108,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -119,7 +120,7 @@
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">Embeddings: Techniques and Best Practices</h1>
-      <div class="article-meta"><time datetime="2026-02-19">Published 2026-02-19</time> · <time datetime="2026-04-17">Last active 2026-04-17</time> · 360 views · 3 replies · 8 min read</div>
+      <div class="article-meta"><time datetime="2026-02-19">Published 2026-02-19</time> · <time datetime="2026-04-17">Last active 2026-04-17</time> · 578 views · 3 replies · 2 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/ai/embeddings-techniques.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/embeddings-techniques.png" alt="Embeddings: Techniques and Best Practices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Embeddings convert text into dense vector representations that capture semantic meaning. They are the foundation of semantic search, clustering, recommendation systems, and retrieval-augmented generation.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/embeddings-techniques.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/embeddings-techniques.png" alt="Embeddings: Techniques and Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Embedding Models</h2>
@@ -135,32 +136,13 @@
 <p>Pinecone, Weaviate, Qdrant, and Milvus are purpose-built vector databases. PostgreSQL with pgvector extends existing databases with vector search. Chroma is lightweight for development. Each offers different trade-offs in scalability, consistency, and query features.</p>
 <p>Index type determines search speed-accuracy trade-off. HNSW (Hierarchical Navigable Small World) offers fast approximate nearest neighbor search. IVF (Inverted File Index) is more memory-efficient. Brute force search is exact but slow for large collections.</p>
 <h2>Preprocessing</h2>
-<p>Clean text before embedding. Remove HTML tags, normalize unicode, standardize whitespace, and handle special characters. For retrieval, prepend task prefixes matching the embedding model's training format. Test different chunk sizes and overlap strategies for your specific use case.</p>
-<p><strong>See also:</strong> <a href="/en/ai/vector-database-tuning.html">Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search</a>, <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>.</p>
-<p><strong>See also:</strong> <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a>, <a href="/en/ai/vector-database-tuning.html">Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a>, <a href="/en/ai/vector-database-tuning.html">Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a>, <a href="/en/ai/vector-database-tuning.html">Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a>, <a href="/en/ai/vector-database-tuning.html">Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a>, <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a>, <a href="/en/ai/vector-database-tuning.html">Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p></div>
+<p>Clean text before embedding. Remove HTML tags, normalize unicode, standardize whitespace, and handle special characters. For retrieval, prepend task prefixes matching the embedding model's training format. Test different chunk sizes and overlap strategies for your specific use case.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-code-generation-tools.html">AI Code Generation: Tools, Workflows, and Best Practices</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#embedding-models">Embedding Models</a></li><li><a href="#embedding-quality-factors">Embedding Quality Factors</a></li><li><a href="#similarity-metrics">Similarity Metrics</a></li><li><a href="#vector-databases">Vector Databases</a></li><li><a href="#preprocessing">Preprocessing</a></li></ol></details>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -171,9 +153,14 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Embeddings%3A%20Techniques%20and%20Best%20Practices&url=https://aidev.fit/en/ai/embeddings-techniques.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/ai/embeddings-techniques.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Embeddings%3A%20Techniques%20and%20Best%20Practices&url=https%3A//aidev.fit/en/ai/embeddings-techniques.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/embeddings-techniques.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=Embeddings%3A%20Techniques%20and%20Best%20Practices&url=https%3A//aidev.fit/en/ai/embeddings-techniques.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=Embeddings%3A%20Techniques%20and%20Best%20Practices&u=https%3A//aidev.fit/en/ai/embeddings-techniques.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=Embeddings%3A%20Techniques%20and%20Best%20Practices&body=https%3A//aidev.fit/en/ai/embeddings-techniques.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/embeddings-techniques.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/fine-tuning-strategies.html" class="prev-next-btn prev-link">← LLM Fine-Tuning Strategies and Techniques</a><a href="/en/ai/prompt-management.html" class="prev-next-btn next-link">Prompt Management: Versioning, Testing, Collaboration, Deployment →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/ai/rag-chunking-strategies.html" class="related-card"><span class="related-card-title">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</span><span class="related-card-desc">Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategie</span></a><a href="/en/ai/rag-retrieval-optimization.html" class="related-card"><span class="related-card-title">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</span><span class="related-card-desc">Optimize RAG retrieval with hybrid search combining dense and sparse methods, cross-encoder re-ranki</span></a><a href="/en/ai/vector-database-tuning.html" class="related-card"><span class="related-card-title">Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search</span><span class="related-card-desc">Optimize vector database performance: index parameter tuning, search configuration for speed and acc</span></a><a href="/en/ai/ai-data-privacy.html" class="related-card"><span class="related-card-title">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</span><span class="related-card-desc">Protect user privacy in AI applications with PII detection and redaction, data anonymization techniq</span></a><a href="/en/ai/llm-caching-deep.html" class="related-card"><span class="related-card-title">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</span><span class="related-card-desc">Deep dive into LLM caching strategies: semantic similarity caching, exact match caching, TTL-based e</span></a><a href="/en/ai/model-deployment.html" class="related-card"><span class="related-card-title">Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization</span><span class="related-card-desc">Deploy LLMs in production with vLLM, Hugging Face TGI, and ONNX Runtime. Learn quantization techniqu</span></a></div>
@@ -186,34 +173,17 @@
     </section>
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

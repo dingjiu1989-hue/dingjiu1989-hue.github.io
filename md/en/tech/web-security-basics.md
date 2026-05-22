@@ -114,5 +114,3 @@ CSP is your last line of defense. It tells the browser what sources of scripts, 
 
 
 **Bottom line:** Use parameterized queries, auto-escaping frameworks, SameSite cookies, CSP headers, and explicit CORS allowlists. Security is layers — implement them all, and a single failure won't compromise you. See also: [REST API Best Practices](</en/tech/rest-api-best-practices.html>) and [API Design Patterns](</en/tech/api-design-patterns.html>).
-
-**See also:** [API Design Patterns: Rate Limiting, Pagination, Idempotency, and More](</en/tech/api-design-patterns.html>), [Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching](</en/tech/caching-strategies-web-apps.html>), [WebSocket vs SSE vs Polling: Real-Time Data Patterns for Web Apps](</en/tech/websocket-vs-sse-vs-polling.html>)

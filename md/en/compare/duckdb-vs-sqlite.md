@@ -58,5 +58,3 @@ BI dashboard with complex aggregations| DuckDB| Vectorized execution, rich SQL, 
 Both OLTP + OLAP in the same app| Both| SQLite for transactions, DuckDB for analytics queries  
   
 **Bottom line:** SQLite and DuckDB are not competitors — they are complementary. SQLite is your application's transactional database; DuckDB is your analytical engine. Use SQLite for writes, point lookups, and application state. Use DuckDB for queries that scan, aggregate, or join large datasets. Many modern data stacks use both: SQLite for the operational database, DuckDB for the analytical queries, and they happily coexist. See also: [Best Database Tools for Developers](</en/tools/best-database-gui-tools.html>) and [Columnar Database Guide](</en/compare/duckdb-vs-sqlite.html>).
-
-**See also:** [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>), [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>)

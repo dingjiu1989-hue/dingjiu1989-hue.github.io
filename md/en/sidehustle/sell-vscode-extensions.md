@@ -53,5 +53,3 @@ _* Revenue estimates based on public install counts, pricing, and creator interv
 **VS Code API stability:** The VS Code extension API is stable and well-documented, but monthly VS Code releases can break extensions. Test against VS Code Insiders to catch issues early. The most common breakages: theme color token changes, webview API updates, and TreeView rendering changes.
 
 **Bottom line:** Building a VS Code extension is one of the most accessible developer side hustles — your customers are developers (you understand them), the platform handles distribution, and the free-to-paid funnel is proven. Start with a pain point you feel yourself (scratch your own itch), ship the free version, and iterate based on GitHub issues. See also: [Chrome Extension Monetization](</en/sidehustle/chrome-extension-monetization.html>) for the browser extension equivalent.
-
-**See also:** [Monetizing APIs](</en/sidehustle/api-monetization.html>), [Developer Newsletter Monetization: From Side Project to Full-Time Income](</en/sidehustle/newsletter-monetization-guide.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)

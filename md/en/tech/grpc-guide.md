@@ -93,5 +93,3 @@ Health Checking| K8s/load balancer needs to know service is healthy| Implement g
 Reflection| Enable grpcurl and debugging tools| Register reflection service in server  
   
 **Bottom line:** Use gRPC for internal service-to-service communication where performance matters — microservices, data-intensive backends, and real-time streaming. Use REST for public APIs, browser-facing endpoints, and when broad ecosystem compatibility (curl, Postman, web browsers) is needed. The two are not mutually exclusive — many teams use gRPC internally and expose REST externally via an API gateway (gRPC-gateway or Envoy). See also: [tRPC vs GraphQL vs REST](</en/compare/trpc-vs-graphql-vs-rest.html>) and [API Design Patterns](</en/tech/api-design-patterns.html>).
-
-**See also:** [Load Testing Guide 2026: k6 vs Artillery vs Locust vs wrk2 for Performance Testing](</en/tech/load-testing-guide.html>), [Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops](</en/tech/python-asyncio-guide.html>), [Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency](</en/tech/distributed-transactions-guide.html>)

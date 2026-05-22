@@ -56,12 +56,12 @@
       "image": "https://aidev.fit/images/covers/en/ai/tool-use-patterns.png",
       "datePublished": "2026-02-19",
       "dateModified": "2026-04-28",
-      "wordCount": "1978",
+      "wordCount": "937",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -97,6 +97,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -108,7 +109,7 @@
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h1>
-      <div class="article-meta"><time datetime="2026-02-19">Published 2026-02-19</time> · <time datetime="2026-04-28">Last active 2026-04-28</time> · 0 views · 0 replies · 9 min read</div>
+      <div class="article-meta"><time datetime="2026-02-19">Published 2026-02-19</time> · <time datetime="2026-04-28">Last active 2026-04-28</time> · 200 views · 0 replies · 4 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/ai/tool-use-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/tool-use-patterns.png" alt="Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><h2>Introduction</h2>
 <p>Tool use, or function calling, enables LLMs to interact with external systems: query databases, call APIs, execute code, and retrieve information. This capability transforms LLMs from text generators into autonomous agents. This article covers the essential patterns for defining, invoking, and chaining tool calls in production systems.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/tool-use-patterns.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/tool-use-patterns.png" alt="Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
@@ -234,32 +235,13 @@
 <p>return {"success": False, "error": f"Unexpected error: {e}"}</p>
 <p>When a tool fails, pass the error message back to the LLM so it can retry with corrected arguments or choose a different approach.</p>
 <h2>Conclusion</h2>
-<p>Tool use transforms LLMs from passive text generators into active problem-solvers. Define tools with clear schemas, implement a robust function-calling loop, chain tool calls for multi-step tasks, and always handle errors gracefully by feeding failures back into the conversation context.</p>
-<p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>.</p>
-<p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p></div>
+<p>Tool use transforms LLMs from passive text generators into active problem-solvers. Define tools with clear schemas, implement a robust function-calling loop, chain tool calls for multi-step tasks, and always handle errors gracefully by feeding failures back into the conversation context.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    <details class="article-toc"><summary>Table of Contents (12)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#defining-tools">Defining Tools</a></li><li><a href="#function-calling-loop">Function Calling Loop</a></li><li><a href="#multi-step-reasoning-with-tools">Multi-Step Reasoning with Tools</a></li><li><a href="#step-1:-search-for-information">Step 1: Search for information</a></li><li><a href="#execute-search,-get-results">Execute search, get results</a></li><li><a href="#step-2:-verify-facts-using-a-different-source">Step 2: Verify facts using a different source</a></li><li><a href="#step-3:-structure-the-findings">Step 3: Structure the findings</a></li><li><a href="#step-4:-generate-the-summary">Step 4: Generate the summary</a></li><li><a href="#structured-tools-with-validation">Structured Tools with Validation</a></li><li><a href="#error-handling-in-tool-calls">Error Handling in Tool Calls</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -270,9 +252,14 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Tool%20Use%20Patterns%3A%20Function%20Calling%2C%20Structured%20Tools%2C%20Multi-Step%20Reasoning&url=https://aidev.fit/en/ai/tool-use-patterns.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/ai/tool-use-patterns.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Tool%20Use%20Patterns%3A%20Function%20Calling%2C%20Structured%20Tools%2C%20Multi-Step%20Reasoning&url=https%3A//aidev.fit/en/ai/tool-use-patterns.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/tool-use-patterns.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=Tool%20Use%20Patterns%3A%20Function%20Calling%2C%20Structured%20Tools%2C%20Multi-Step%20Reasoning&url=https%3A//aidev.fit/en/ai/tool-use-patterns.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=Tool%20Use%20Patterns%3A%20Function%20Calling%2C%20Structured%20Tools%2C%20Multi-Step%20Reasoning&u=https%3A//aidev.fit/en/ai/tool-use-patterns.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=Tool%20Use%20Patterns%3A%20Function%20Calling%2C%20Structured%20Tools%2C%20Multi-Step%20Reasoning&body=https%3A//aidev.fit/en/ai/tool-use-patterns.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/tool-use-patterns.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/fine-tuning-strategies.html" class="prev-next-btn prev-link">← LLM Fine-Tuning Strategies and Techniques</a><a href="/en/ai/prompt-management.html" class="prev-next-btn next-link">Prompt Management: Versioning, Testing, Collaboration, Deployment →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/ai/llm-api-design.html" class="related-card"><span class="related-card-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="related-card-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handli</span></a><a href="/en/ai/multi-agent-systems.html" class="related-card"><span class="related-card-title">Multi-Agent Systems: Coordination, Communication, Consensus</span><span class="related-card-desc">Design multi-agent systems with LLM-powered agents: coordination patterns, inter-agent communication</span></a><a href="/en/ai/rag-agent-patterns.html" class="related-card"><span class="related-card-title">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</span><span class="related-card-desc">Explore RAG agent patterns that go beyond simple retrieval: self-querying agents, corrective RAG wit</span></a><a href="/en/ai/ai-prompt-chaining.html" class="related-card"><span class="related-card-title">Prompt Chaining: Building Multi-Step LLM Workflows</span><span class="related-card-desc">Design prompt chains for complex LLM tasks: chain types, state management, error handling, and perfo</span></a><a href="/en/ai/ai-caching-strategies.html" class="related-card"><span class="related-card-title">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</span><span class="related-card-desc">Reduce LLM API costs and latency with AI caching strategies: semantic caching, intelligent invalidat</span></a><a href="/en/ai/ai-monitoring-alerting.html" class="related-card"><span class="related-card-title">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</span><span class="related-card-desc">Monitor LLM applications in production: track latency percentiles, token consumption, error rates by</span></a></div>
@@ -285,34 +272,17 @@
     </section>
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

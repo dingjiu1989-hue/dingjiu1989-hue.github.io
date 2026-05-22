@@ -71,5 +71,3 @@ See our [Best Free Stock Photo Sites](</en/sidehustle/free-images.html>) guide f
 
 
 You can build a SaaS landing page, portfolio site, or product UI with just these five tools. No design background needed.
-
-**See also:** [Building AI-Powered CLI Tools: A Complete Guide for Developers](</en/tools/ai-cli-tools-guide.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Best Static Site Generators 2026: Astro vs Hugo vs 11ty vs Jekyll](</en/tools/best-static-site-generators-2026.html>)

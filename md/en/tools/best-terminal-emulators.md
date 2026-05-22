@@ -47,5 +47,3 @@ Use SSH extensively| Kitty| Native SSH kittens solve remote pain points
 Want pretty defaults| Warp| Best out-of-box experience  
   
 **Bottom line:** If you are on a Mac, try Warp first — the AI features genuinely save time. If you prefer total control or need cross-platform, go with Kitty or WezTerm. iTerm2 remains the safest choice for established workflows. All four are free, so test each for a day before committing. See also: [Linux Commands Guide](</en/tech/linux-commands.html>) and [Best Free Dev Tools](</en/tools/best-free-dev-tools-2026.html>).
-
-**See also:** [Building AI-Powered CLI Tools: A Complete Guide for Developers](</en/tools/ai-cli-tools-guide.html>), [Best Free Tier Platforms for Developer Projects 2026: The Ultimate List](</en/tools/best-free-tier-platforms.html>), [Best Headless CMS Platforms 2026: Strapi vs Sanity vs Contentful vs Payload](</en/tools/best-headless-cms-platforms.html>)

@@ -60,5 +60,3 @@ Gateway| Routes queries to the right subgraph(s), stitches responses| Apollo Rou
 
 
 **Bottom line:** GraphQL's flexibility is also its biggest risk — without guardrails (depth limiting, cost analysis, persisted queries), a single malicious query can take down your server. Invest in the DataLoader pattern from day one. If you are a single team, start with a monolith schema before reaching for federation. See also: [tRPC vs GraphQL vs REST](</en/compare/trpc-vs-graphql-vs-rest.html>) and [API Design Patterns](</en/tech/api-design-patterns.html>).
-
-**See also:** [API Versioning Strategies: URL, Header, and Query Parameter Approaches Compared](</en/tech/api-versioning-strategies.html>), [Error Handling Best Practices: From Try/Catch to Structured Errors](</en/tech/error-handling-best-practices.html>), [Microservices vs Monolith (2026): Making the Right Architectural Choice](</en/tech/microservices-vs-monolith.html>)

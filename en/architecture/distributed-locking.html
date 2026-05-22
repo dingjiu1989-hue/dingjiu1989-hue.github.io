@@ -56,12 +56,12 @@
       "image": "https://aidev.fit/images/covers/en/architecture/distributed-locking.png",
       "datePublished": "2026-04-23",
       "dateModified": "2026-05-09",
-      "wordCount": "1448",
+      "wordCount": "860",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -97,6 +97,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -108,7 +109,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Distributed Locking Mechanisms</h1>
-      <div class="article-meta"><time datetime="2026-04-23">Published 2026-04-23</time> · <time datetime="2026-05-09">Last active 2026-05-09</time> · 0 views · 0 replies · 7 min read</div>
+      <div class="article-meta"><time datetime="2026-04-23">Published 2026-04-23</time> · <time datetime="2026-05-09">Last active 2026-05-09</time> · 225 views · 0 replies · 4 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/distributed-locking.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/distributed-locking.png" alt="Distributed Locking Mechanisms" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Distributed locking coordinates access to shared resources across multiple processes or machines. While single-node locking is well-understood, distributed environments introduce unique challenges: network partitions, process pauses, clock drift, and partial failures. Different locking approaches offer distinct tradeoffs between consistency, availability, and performance. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/distributed-locking.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/distributed-locking.png" alt="Distributed Locking Mechanisms" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Lease-based locking is the most common pattern. The lock has a time-to-live (TTL). The holder must periodically renew the lease before it expires. If the holder crashes or is partitioned, the lease expires and another process can acquire the lock. This prevents permanent lock holder failures. The critical implementation detail is choosing an appropriate lease duration — too short causes unnecessary lock releases, too long extends recovery time after holder failure. </p>
@@ -119,32 +120,13 @@
 <p>Fencing tokens address the fundamental problem with distributed locks: preventing stale lock holders from accessing the shared resource. A fencing token is a monotonically increasing number issued to the lock holder. The holder presents this token with each write request to the resource. The resource rejects writes with outdated tokens. Without fencing, a process that holds a stale lock (due to pause or partition) could corrupt data when it resumes and writes to the resource. </p>
 <p>Implementing fencing requires the resource to check the token. For example, a database table could have a lock_token column. Each write includes the token, and the database rejects writes where the stored token is higher than the provided one. This ensures that even if a stale lock holder attempts to write, the write is rejected. </p>
 <p>The choice between locking mechanisms depends on consistency requirements. ZooKeeper and etcd provide strong consistency and proper fencing but require operating a consensus cluster. Redis provides high performance and availability but with weaker guarantees under failure scenarios. For idempotent operations where the cost of duplicate execution is acceptable, Redis locks suffice. For strictly exclusive access to shared resources, ZooKeeper or etcd with fencing tokens is necessary. </p>
-<p>Optimistic concurrency is an alternative worth considering. Rather than acquiring a distributed lock, the application performs its operation and checks for conflicts. If a conflict is detected (row version, etag), it retries. This avoids distributed locking entirely for workloads where contention is low. Many distributed systems find that optimistic approaches with appropriate retry logic outperform pessimistic locking at scale.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/saga-process-manager.html">Saga vs Process Manager: Orchestration Patterns Compared</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p></div>
+<p>Optimistic concurrency is an alternative worth considering. Rather than acquiring a distributed lock, the application performs its operation and checks for conflicts. If a conflict is detected (row version, etag), it retries. This avoids distributed locking entirely for workloads where contention is low. Many distributed systems find that optimistic approaches with appropriate retry logic outperform pessimistic locking at scale.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -155,9 +137,14 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Distributed%20Locking%20Mechanisms&url=https://aidev.fit/en/architecture/distributed-locking.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/architecture/distributed-locking.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Distributed%20Locking%20Mechanisms&url=https%3A//aidev.fit/en/architecture/distributed-locking.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/distributed-locking.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=Distributed%20Locking%20Mechanisms&url=https%3A//aidev.fit/en/architecture/distributed-locking.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=Distributed%20Locking%20Mechanisms&u=https%3A//aidev.fit/en/architecture/distributed-locking.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=Distributed%20Locking%20Mechanisms&body=https%3A//aidev.fit/en/architecture/distributed-locking.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/distributed-locking.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/distributed-tracing-deep.html" class="prev-next-btn prev-link">← Distributed Tracing: Deep Dive</a><a href="/en/architecture/cdn-architecture.html" class="prev-next-btn next-link">CDN Architecture →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/architecture/rate-limiting-architecture.html" class="related-card"><span class="related-card-title">Rate Limiting Architecture</span><span class="related-card-desc">Token bucket, sliding window, distributed rate limiting, Redis-based implementation, and algorithm t</span></a><a href="/en/architecture/asynchronous-communication.html" class="related-card"><span class="related-card-title">Asynchronous Communication in Distributed Systems</span><span class="related-card-desc">Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and pattern</span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="related-card-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="related-card-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices</span></a><a href="/en/architecture/idempotency-patterns.html" class="related-card"><span class="related-card-title">Idempotency Patterns in Distributed Systems</span><span class="related-card-desc">Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation </span></a><a href="/en/architecture/leader-election.html" class="related-card"><span class="related-card-title">Leader Election in Distributed Systems</span><span class="related-card-desc">Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best </span></a><a href="/en/architecture/circuit-breaker-vs-bulkhead.html" class="related-card"><span class="related-card-title">Circuit Breaker vs Bulkhead Pattern</span><span class="related-card-desc">Differences, when to use each, resilience patterns, and combined application of circuit breaker and </span></a></div>
@@ -165,34 +152,17 @@
     
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

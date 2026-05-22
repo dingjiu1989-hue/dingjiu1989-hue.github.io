@@ -136,5 +136,3 @@ Not every project needs the full DevOps stack:
 
 
 **Bottom line:** Learn CI/CD and Docker first — they're universally useful. Add Terraform when your infra has 5+ resources. Add K8s only when you have 10+ containers and need orchestration. The best operations is the one you don't have to think about. See also: [CI/CD tools comparison](</en/tools/best-cicd-tools-2026.html>) and [Docker vs Podman](</en/compare/docker-vs-podman.html>).
-
-**See also:** [Environment Variables: The Complete Guide for Developers](</en/tech/environment-variables-guide.html>), [CI/CD Pipeline Complete Guide 2026: From Git Push to Production](</en/tech/ci-cd-pipeline-guide.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>)

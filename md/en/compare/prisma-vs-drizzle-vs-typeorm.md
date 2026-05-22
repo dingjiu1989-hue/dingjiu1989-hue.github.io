@@ -66,5 +66,3 @@ NestJS application| **TypeORM** (native integration)
 Side project, fastest to ship| **Prisma**  
   
 **Bottom line:** Prisma for the best DX and fastest time-to-ship. Drizzle for performance and SQL purists. TypeORM for enterprise NestJS projects. In 2026, the Prisma vs Drizzle debate is the new "tabs vs spaces" — both are excellent, pick one and build. See also: [Database comparison guide](</en/compare/postgresql-vs-mysql-vs-sqlite.html>) and [Supabase vs Firebase vs Neon](</en/compare/supabase-vs-firebase-vs-neon.html>) for backend infrastructure.
-
-**See also:** [Zod vs Yup vs Valibot (2026): Best TypeScript Schema Validation Library?](</en/compare/zod-vs-yup-vs-valibot.html>), [PlanetScale vs Turso vs Neon (2026): Best Serverless Database?](</en/compare/planetscale-vs-turso-vs-neon.html>), [Prisma vs Drizzle ORM](</en/compare/prisma-vs-drizzle.html>)

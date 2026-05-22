@@ -77,21 +77,3 @@ _Which of today's AI developments excites you most? The Gemini 3.5 agent pivot f
 * * *
 
 _AI Daily Digest is compiled from trusted technology news sources. For corrections or suggestions, contact us at the project repository._
-
-**See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)
-
-**See also:** [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
-
-**See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)
-
-**See also:** [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
-
-**See also:** [Supabase vs Firebase](</en/compare/supabase-vs-firebase.html>), [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>)
-
-**See also:** [Supabase vs Firebase](</en/compare/supabase-vs-firebase.html>), [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>)
-
-**See also:** [Supabase vs Firebase](</en/compare/supabase-vs-firebase.html>), [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>)
-
-**See also:** [Supabase vs Firebase](</en/compare/supabase-vs-firebase.html>), [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>)
-
-**See also:** [Supabase vs Firebase](</en/compare/supabase-vs-firebase.html>), [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>)

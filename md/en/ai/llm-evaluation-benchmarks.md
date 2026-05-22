@@ -81,5 +81,3 @@ Auto-Eval Frameworks (Ragas, DeepEval)| $0.001-0.01/eval| 1-3 seconds| Good for 
     # what we have in production for OUR use case?"
 
 **Bottom line:** Standard benchmarks tell you which model is good at standardized tests — but your application is not a standardized test. Build a custom eval dataset of 100-500 representative real use cases from your application, grade them with LLM-as-judge (calibrated against human judgment on 10% of the dataset), and run evals on every prompt or model change. This is the only way to know if a change is actually an improvement. See also: [Open Source LLM Comparison](</en/ai/open-source-llm-comparison.html>) and [RAG Best Practices](</en/ai/rag-best-practices.html>).
-
-**See also:** [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>), [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>)

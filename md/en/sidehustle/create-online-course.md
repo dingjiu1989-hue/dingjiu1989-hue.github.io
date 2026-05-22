@@ -44,5 +44,3 @@ Premium Deep Dive| 15-30 hours| $149-499| "System Design for Senior Engineers"
 Cohort-Based Course| 4-8 weeks live| $500-2,000| "AI Engineering Bootcamp"  
   
 **Bottom line:** Start with a mini-course ($29-49) on a platform like Gumroad or Podia to validate your topic and teaching style. Use the feedback to create a premium full course. The money is not in the course itself — it is in the audience you build around it, which leads to consulting, speaking, and higher-ticket offers. See also: [YouTube Channel Guide](</en/sidehustle/youtube-channel-developers.html>) and [Selling Digital Products](</en/sidehustle/sell-digital-products.html>).
-
-**See also:** [Affiliate Marketing for Developers: The Technical Guide to Your First $1,000](</en/sidehustle/affiliate-marketing-developers.html>), [How to Build and Monetize a Paid Developer Community in 2026](</en/sidehustle/paid-communities-guide.html>), [Domain Flipping and Investing Guide for Developers (2026)](</en/sidehustle/domain-flipping-guide.html>)

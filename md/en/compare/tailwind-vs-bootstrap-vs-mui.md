@@ -65,5 +65,3 @@ Modern component architecture| **shadcn/ui (on Tailwind)**
 Maximum performance| **Tailwind CSS** (smallest bundle)  
   
 **Bottom line:** In 2026, Tailwind CSS + shadcn/ui is the dominant stack for new projects — it gives you custom design with copy-paste components. Bootstrap is still king for quick internal tools. MUI for React data-heavy apps. See our [design tools guide](</en/tools/design-tools-for-developers.html>) for the full visual stack.
-
-**See also:** [GraphQL vs REST API](</en/compare/graphql-vs-rest.html>), [GitHub vs GitLab vs Bitbucket (2026): Which Git Platform Is Best?](</en/compare/github-vs-gitlab-vs-bitbucket.html>), [React vs Vue vs Angular vs Svelte (2026): Best Frontend Framework?](</en/compare/react-vs-vue-vs-angular-vs-svelte.html>)

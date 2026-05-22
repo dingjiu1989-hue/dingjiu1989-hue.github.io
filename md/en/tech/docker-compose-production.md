@@ -107,5 +107,3 @@ With Swarm mode, Compose files gain rolling update support — update your conta
     
 
 **Bottom line:** Docker Compose in production is underrated. If you have fewer than 10 services and do not need auto-scaling or multi-region, Compose (or Compose + Swarm for multi-host) is simpler and more maintainable than Kubernetes. The production checklist: health checks, resource limits, log rotation, secrets management, and a restart policy. See also: [Kubernetes vs Docker Swarm vs Nomad](</en/compare/kubernetes-vs-docker-swarm-vs-nomad.html>) and [Deploy Next.js for Free](</en/tech/deploy-nextjs-free.html>).
-
-**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>)

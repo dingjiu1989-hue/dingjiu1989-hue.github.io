@@ -46,5 +46,3 @@ Step| What Changes
 6\. Remove Jest deps| npm uninstall jest ts-jest @types/jest jest-environment-jsdom  
   
 **Bottom line:** Vitest is the best choice for 90% of new projects — it is faster than Jest, compatible with the Jest ecosystem, and integrates seamlessly with Vite. Jest is still the safe choice for large enterprise codebases with established test infrastructure. Bun Test is worth watching but its ecosystem is not ready for most production use cases yet. See also: [Playwright vs Cypress vs Selenium](</en/compare/playwright-vs-cypress-vs-selenium.html>) and [Testing Strategies for Web Apps](</en/tech/testing-strategies-web-apps.html>).
-
-**See also:** [Prettier vs Biome (2026): Best Code Formatter for Modern JavaScript?](</en/compare/prettier-vs-biome.html>), [HTMX vs Alpine.js vs Vanilla JS: Lightweight Frontend Approaches Compared (2026)](</en/compare/htmx-vs-alpine-vs-vanilla-js.html>), [PHP vs Python vs Node.js: Best Backend Language for Web Development (2026)](</en/compare/php-vs-python-vs-node.html>)

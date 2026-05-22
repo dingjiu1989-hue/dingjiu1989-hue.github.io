@@ -56,12 +56,12 @@
       "image": "https://aidev.fit/images/covers/en/database/database-compression.png",
       "datePublished": "2026-03-31",
       "dateModified": "2026-04-10",
-      "wordCount": "2685",
+      "wordCount": "1642",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -97,6 +97,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -108,7 +109,7 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</h1>
-      <div class="article-meta"><time datetime="2026-03-31">Published 2026-03-31</time> · <time datetime="2026-04-10">Last active 2026-04-10</time> · 0 views · 0 replies · 13 min read</div>
+      <div class="article-meta"><time datetime="2026-03-31">Published 2026-03-31</time> · <time datetime="2026-04-10">Last active 2026-04-10</time> · 118 views · 0 replies · 8 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/database/database-compression.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-compression.png" alt="Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST </p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-compression.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-compression.png" alt="Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Database compression reduces storage footprint and, more importantly, improves query performance by reducing the amount of data read from disk. This article covers compression techniques across PostgreSQL, MySQL, and columnar databases. </p>
@@ -223,32 +224,13 @@
 <li><strong>Use Zstd for new tables</strong> with large TEXT/JSONB columns. It offers the best compression ratio in PostgreSQL.</li>
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Use EXTERNAL storage</strong> for columns that are already compressed (images, compressed archives). 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Benchmark your workload</strong> : Compression benefits vary. Run <code>pgstattuple</code> before and after. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Consider BRIN indexes</strong> on compressed, naturally ordered columns (timestamps, sequence IDs) for additional space savings. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Balance CPU and I/O</strong> : If your database is CPU-bound, avoid heavy compression. If I/O-bound, compress aggressively. </p>
-<p>Compression is a rare optimization that reduces cost and improves performance simultaneously. Measure your data's compressibility and choose the right algorithm for each column type.</p>
-<p><strong>See also:</strong> <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>.</p>
-<p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>, <a href="/en/database/database-views.html">Database Views: Simple, Materialized, and Updateable Views</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p></div>
+<p>Compression is a rare optimization that reduces cost and improves performance simultaneously. Measure your data's compressibility and choose the right algorithm for each column type.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -259,9 +241,14 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Database%20Compression%3A%20Page-Level%2C%20Tuple-Level%2C%20Columnar%2C%20and%20TOAST&url=https://aidev.fit/en/database/database-compression.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/database/database-compression.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Database%20Compression%3A%20Page-Level%2C%20Tuple-Level%2C%20Columnar%2C%20and%20TOAST&url=https%3A//aidev.fit/en/database/database-compression.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-compression.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=Database%20Compression%3A%20Page-Level%2C%20Tuple-Level%2C%20Columnar%2C%20and%20TOAST&url=https%3A//aidev.fit/en/database/database-compression.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=Database%20Compression%3A%20Page-Level%2C%20Tuple-Level%2C%20Columnar%2C%20and%20TOAST&u=https%3A//aidev.fit/en/database/database-compression.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=Database%20Compression%3A%20Page-Level%2C%20Tuple-Level%2C%20Columnar%2C%20and%20TOAST&body=https%3A//aidev.fit/en/database/database-compression.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-compression.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/couchbase-guide.html" class="prev-next-btn prev-link">← Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a><a href="/en/database/backup-types.html" class="prev-next-btn next-link">Database Backup Types: Full, Incremental, Differential, WAL Archiving →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/database-partitioning.html" class="related-card"><span class="related-card-title">Database Table Partitioning: Range, List, Hash</span><span class="related-card-desc">Explore PostgreSQL table partitioning methods including range, list, and hash. Learn partition pruni</span></a><a href="/en/database/database-views.html" class="related-card"><span class="related-card-title">Database Views: Simple, Materialized, and Updateable Views</span><span class="related-card-desc">Learn about database views including simple views, materialized views, updateable views, and the per</span></a><a href="/en/database/backup-types.html" class="related-card"><span class="related-card-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</span><span class="related-card-desc">Explore database backup strategies including full, incremental, differential backups, WAL archiving,</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="related-card-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="related-card-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monit</span></a><a href="/en/database/database-cost-optimization.html" class="related-card"><span class="related-card-title">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</span><span class="related-card-desc">Learn database cost optimization strategies: right-sizing instances, reserved instances, storage tie</span></a><a href="/en/database/multi-master-replication.html" class="related-card"><span class="related-card-title">Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR</span><span class="related-card-desc">Explore multi-master replication strategies including conflict resolution techniques, CRDTs, Galera </span></a></div>
@@ -269,34 +256,17 @@
     
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

@@ -75,5 +75,3 @@ Mixed framework components| **Astro**
 Fastest build, no npm| **Hugo**  
   
 **Bottom line:** Astro is the best default for new projects in 2026 — modern, fast, and framework-flexible. Hugo for speed and large sites. 11ty for maximum control. Jekyll for simple GitHub Pages blogs. This site (AI Study Room) is built with a custom Python generator, but if we were starting today, Astro would be the pick. See our [hosting comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>) for where to deploy your SSG.
-
-**See also:** [Best Free Tier Platforms for Developer Projects 2026: The Ultimate List](</en/tools/best-free-tier-platforms.html>), [Best Developer Communities 2026: Where to Learn, Share, and Grow](</en/tools/best-dev-communities.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>)

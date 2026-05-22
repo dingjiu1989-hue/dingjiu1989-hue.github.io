@@ -45,5 +45,3 @@ Need managed database + web service together| Render or Railway| Both offer inte
 Dockerized app that needs complex networking| Fly.io| WireGuard mesh, advanced networking  
   
 **Bottom line:** For most side projects and early startups, Render is the best default — Git push deploy, managed PostgreSQL, fair pricing, and the simplest experience. Fly.io wins when global latency matters — the edge deployment model is unique and powerful. Railway is the fastest from idea to deployed, perfect for prototyping and hackathons. See also: [Vercel vs Netlify vs Cloudflare](</en/compare/vercel-vs-netlify-vs-cloudflare.html>) and [Fly.io vs Railway vs Render](</en/compare/fly-io-vs-railway-vs-render.html>).
-
-**See also:** [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [GitHub Actions vs GitLab CI: CI/CD Platforms Compared](</en/compare/github-actions-vs-gitlab-ci.html>)

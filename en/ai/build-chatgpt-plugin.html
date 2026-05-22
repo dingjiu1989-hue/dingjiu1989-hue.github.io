@@ -60,8 +60,8 @@
       "keywords": "ChatGPT, Plugin Development, API",
       "about": [{"@type": "Thing", "name": "ChatGPT"}, {"@type": "Thing", "name": "Plugin Development"}, {"@type": "Thing", "name": "API"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -97,6 +97,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -109,7 +110,7 @@
         <span class="tag-cat">API</span>
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
       <h1 class="article-title">How to Build a Custom GPT Plugin: Complete Developer Guide</h1>
-      <div class="article-meta"><time datetime="2025-11-07">Published 2025-11-07</time> · <time datetime="2026-04-20">Last active 2026-04-20</time> · 4920 views · 41 replies · 4 min read</div>
+      <div class="article-meta"><time datetime="2025-11-07">Published 2025-11-07</time> · <time datetime="2026-04-20">Last active 2026-04-20</time> · 4990 views · 41 replies · 4 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/ai/build-chatgpt-plugin.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/build-chatgpt-plugin.png" alt="How to Build a Custom GPT Plugin: Complete Developer Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Custom GPTs and ChatGPT plugins let you extend ChatGPT with your own data, APIs, and functionality. In 2026, the GPT Store has millions of custom GPTs — but most are thin wrappers without real functionality. For developers, the real opportunity is building GPTs that connect to live APIs, databases, and internal tools. This guide walks through building a production-quality ChatGPT plugin with working code examples in Python and Node.js.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/build-chatgpt-plugin.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/build-chatgpt-plugin.png" alt="How to Build a Custom GPT Plugin: Complete Developer Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 
@@ -209,8 +210,13 @@ async def review_code(input: CodeInput):
   }
 }</code></pre>
 
-<p><strong>Bottom line:</strong> ChatGPT Plugins are most valuable when they connect to live data or systems that change — static knowledge is better served by Custom GPTs with uploaded files. Start simple: one endpoint, deploy on Railway or Fly.io (free tier), test thoroughly, then add more features. The barrier to entry is running a public API — but the reward is a GPT that does real work, not just chatting. See also: <a href="/en/sidehustle/build-and-sell-api.html">How to Build and Sell APIs</a> and <a href="/en/ai/ai-api-integration-guide.html">AI API Integration Guide</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/chatgpt-plus-worth.html">Is ChatGPT Plus Worth It? Free vs Plus vs Pro Compared (2026)</a>, <a href="/en/ai/langgraph-agent-workflows.html">Building Custom AI Agents with LangGraph: A Practical Guide</a>, <a href="/en/ai/claude-vs-chatgpt.html">Claude vs ChatGPT (2026): Which AI Assistant Is Right for You?</a></p></div>
+<p><strong>Bottom line:</strong> ChatGPT Plugins are most valuable when they connect to live data or systems that change — static knowledge is better served by Custom GPTs with uploaded files. Start simple: one endpoint, deploy on Railway or Fly.io (free tier), test thoroughly, then add more features. The barrier to entry is running a public API — but the reward is a GPT that does real work, not just chatting. See also: <a href="/en/sidehustle/build-and-sell-api.html">How to Build and Sell APIs</a> and <a href="/en/ai/ai-api-integration-guide.html">AI API Integration Guide</a>.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/chatgpt-plus-worth.html">Is ChatGPT Plus Worth It? Free vs Plus vs Pro Compared (2026)</a>, <a href="/en/ai/langgraph-agent-workflows.html">Building Custom AI Agents with LangGraph: A Practical Guide</a>, <a href="/en/ai/claude-vs-chatgpt.html">Claude vs ChatGPT (2026): Which AI Assistant Is Right for You?</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    <details class="article-toc"><summary>Table of Contents (4)</summary><ol><li><a href="#custom-gpt-vs-chatgpt-plugin:-what-to-build">Custom GPT vs ChatGPT Plugin: What to Build</a></li><li><a href="#building-a-plugin:-architecture">Building a Plugin: Architecture</a></li><li><a href="#step-by-step-implementation-(python-fastapi)">Step-by-Step Implementation (Python/FastAPI)</a></li><li><a href="#openapi-spec-for-your-plugin">OpenAPI Spec for Your Plugin</a></li></ol></details>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -221,9 +227,14 @@ async def review_code(input: CodeInput):
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=How%20to%20Build%20a%20Custom%20GPT%20Plugin%3A%20Complete%20Developer%20Guide&url=https://aidev.fit/en/ai/build-chatgpt-plugin.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/ai/build-chatgpt-plugin.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=How%20to%20Build%20a%20Custom%20GPT%20Plugin%3A%20Complete%20Developer%20Guide&url=https%3A//aidev.fit/en/ai/build-chatgpt-plugin.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/build-chatgpt-plugin.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=How%20to%20Build%20a%20Custom%20GPT%20Plugin%3A%20Complete%20Developer%20Guide&url=https%3A//aidev.fit/en/ai/build-chatgpt-plugin.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=How%20to%20Build%20a%20Custom%20GPT%20Plugin%3A%20Complete%20Developer%20Guide&u=https%3A//aidev.fit/en/ai/build-chatgpt-plugin.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=How%20to%20Build%20a%20Custom%20GPT%20Plugin%3A%20Complete%20Developer%20Guide&body=https%3A//aidev.fit/en/ai/build-chatgpt-plugin.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/build-chatgpt-plugin.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-devops-tools.html" class="prev-next-btn prev-link">← AI for DevOps in 2026: Best Tools and Practical Use Cases</a><a href="/en/ai/run-local-ai-models.html" class="prev-next-btn next-link">How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/ai/function-calling-guide.html" class="related-card"><span class="related-card-title">LLM Function Calling: Complete Developer Guide with Code Examples</span><span class="related-card-desc">How to implement function calling / tool use with OpenAI, Anthropic, and Gemini APIs. Schema design,</span></a><a href="/en/sidehustle/build-and-sell-api.html" class="related-card"><span class="related-card-title">How to Build and Sell APIs: A Developer's Guide to API-as-a-Service</span><span class="related-card-desc">Turn your code into recurring revenue. How to build, document, price, and sell APIs — from idea to f</span></a><a href="/en/tech/webhook-implementation-guide.html" class="related-card"><span class="related-card-title">Webhook Implementation: Design, Security, and Best Practices (2026)</span><span class="related-card-desc">Complete guide to building webhook systems: event design, retry strategies (exponential backoff), id</span></a><a href="/en/ai/chatgpt-vs-claude-vs-gemini-api.html" class="related-card"><span class="related-card-title">ChatGPT API vs Claude API vs Gemini API: Developer Comparison (2026)</span><span class="related-card-desc">In-depth comparison of pricing, context windows, coding ability, multimodal features, and reliabilit</span></a><a href="/en/sidehustle/selling-api-access.html" class="related-card"><span class="related-card-title">Selling API Access: Build and Monetize a Developer API Business in 2026</span><span class="related-card-desc">How to build, price, and sell API access — the business model powering Stripe, Twilio, and OpenAI. C</span></a><a href="/en/ai/mcp-complete-guide.html" class="related-card"><span class="related-card-title">MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</span><span class="related-card-desc">How MCP works, architecture deep-dive, building MCP servers and clients, and why it is the USB-C mom</span></a></div>
@@ -236,34 +247,17 @@ async def review_code(input: CodeInput):
     </section>
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

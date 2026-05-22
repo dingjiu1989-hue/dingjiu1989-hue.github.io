@@ -98,5 +98,3 @@ Duplex| Independent read and write sides (like a telephone)| net.Socket, TLS soc
     // Note: pipeline() handles this automatically — prefer it over manual piping
 
 **Bottom line:** Streams are essential for processing data that exceeds memory limits. The pipeline() API should be your default — it handles backpressure, error propagation, and cleanup correctly. Avoid raw .pipe() and .on('data') patterns unless you have a specific reason. See also: [Caching Strategies](</en/tech/caching-strategies-web-apps.html>) and [REST API Best Practices](</en/tech/rest-api-best-practices.html>).
-
-**See also:** [WebAssembly Guide 2026: Running Native Code in the Browser with Rust and WASI](</en/tech/webassembly-guide.html>), [REST API Best Practices: The Complete Guide for 2026](</en/tech/rest-api-best-practices.html>), [Edge Computing Complete Guide 2026: Cloudflare Workers, Deno Deploy, and Vercel Edge](</en/tech/edge-computing-guide.html>)

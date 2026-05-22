@@ -50,5 +50,3 @@ Server-to-client push notifications, live logs| SSE
 Content site / e-commerce (cache-heavy)| REST (HTTP caching is critical)  
   
 **My recommendation:** Use **REST + OpenAPI** for public APIs and content-heavy services — it's the most cacheable, debuggable, and universally understood. Use **tRPC** for internal TypeScript APIs — the end-to-end type safety eliminates an entire class of integration bugs. Add **WebSocket** or **SSE** selectively for real-time features, not as the primary API architecture. Use **gRPC** when you have 10+ microservices and serialization performance matters (or your organization already uses Protobuf). You can also mix architectures: REST for external, gRPC for internal service-to-service, WebSocket for real-time — each where it fits best. See also: [tRPC vs GraphQL vs REST](</en/compare/trpc-vs-graphql-vs-rest.html>) for a deeper comparison of the three data-fetching architectures.
-
-**See also:** [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>), [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>)

@@ -45,5 +45,3 @@ Creator Funds| Platform pays based on views/engagement| $1-5 per 1,000 views| Va
 
 
 **Bottom line:** Social media monetization for developers is about trust, not follower count. A 5,000-follower developer account that consistently shares useful insights will earn more than a 50,000-follower meme account. Pick one platform, commit to 6 months of consistent posting, and treat your content as a portfolio that brings you better opportunities — not just direct monetization. See also: [YouTube Channel Guide](</en/sidehustle/youtube-channel-developers.html>) and [Affiliate Marketing for Developers](</en/sidehustle/affiliate-marketing-developers.html>).
-
-**See also:** [How to Sell Notion Templates as a Developer — $5K/Month Passive Income](</en/sidehustle/sell-notion-templates.html>), [How to Monetize Your Open Source GitHub Project in 2026](</en/sidehustle/monetize-github-project.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>)

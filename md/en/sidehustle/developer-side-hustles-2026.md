@@ -60,5 +60,3 @@ Long-term wealth (years)| SaaS (#2) or Job Board (#8)
 Build audience + income| Content Creation (#6)  
   
 Pick one. Ship it in two weeks. The only failed side hustle is the one you never start.
-
-**See also:** [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>), [Monetizing APIs](</en/sidehustle/api-monetization.html>)

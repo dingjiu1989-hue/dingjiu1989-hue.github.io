@@ -51,5 +51,3 @@ Enterprise, API governance| Redocly| API registry, style guides, multi-team
 Existing static site (Docusaurus, etc.)| OpenAPI plugin| Embed API docs in existing docs site  
   
 **Bottom line:** Every API needs an OpenAPI 3.1 specification — it is the universal format all these tools consume. Write your spec first, then pick a renderer. For 80% of teams, Postman's free tier (design + test + document) or Scalar's open source renderer (for self-hosted) covers all needs. Upgrade to Mintlify or ReadMe when you need a polished public-facing docs website with analytics. See also: [REST API Best Practices](</en/tech/rest-api-best-practices.html>) and [Build and Sell an API](</en/sidehustle/build-and-sell-api.html>).
-
-**See also:** [Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom](</en/tools/best-log-management-tools.html>), [Best API Clients 2026: Postman vs Bruno vs Insomnia vs HTTPie vs Thunder Client](</en/tools/best-api-clients-2026.html>), [Best Secrets Management Tools 2026: Infisical vs Doppler vs Vault vs SOPS vs 1Password](</en/tools/best-secrets-management-tools.html>)

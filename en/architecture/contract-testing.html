@@ -56,12 +56,12 @@
       "image": "https://aidev.fit/images/covers/en/architecture/contract-testing.png",
       "datePublished": "2026-05-06",
       "dateModified": "2026-05-10",
-      "wordCount": "954",
+      "wordCount": "480",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -97,6 +97,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -108,7 +109,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Contract Testing for Microservices</h1>
-      <div class="article-meta"><time datetime="2026-05-06">Published 2026-05-06</time> · <time datetime="2026-05-10">Last active 2026-05-10</time> · 0 views · 0 replies · 4 min read</div>
+      <div class="article-meta"><time datetime="2026-05-06">Published 2026-05-06</time> · <time datetime="2026-05-10">Last active 2026-05-10</time> · 123 views · 0 replies · 2 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/contract-testing.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/contract-testing.png" alt="Contract Testing for Microservices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Contract testing verifies that a service provider meets the expectations of its consumers without running the full system. Each consumer defines the contract—specific API behavior it depends on. The provider validates against all consumer contracts in its CI pipeline.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/contract-testing.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/contract-testing.png" alt="Contract Testing for Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Why Contract Testing</h2>
@@ -124,32 +125,13 @@
 <p>Publish consumer contract files to a Pact Broker after the consumer's CI passes. The Pact Broker maintains contract version history, webhook notifications, and can-i-deploy queries. Provider CI fetches the latest contracts, runs verification, and reports results back to the broker.</p>
 <p>The can-i-deploy tool checks whether a provider version is compatible with the version of each consumer that will consume it. This prevents incompatible deployments.</p>
 <h2>Adoption</h2>
-<p>Start with one service pair. Choose a provider with multiple consumers to maximize value. Establish the Pact Broker as shared infrastructure. Train teams on writing consumer tests. Gradually expand contract coverage across the organization.</p>
-<p><strong>See also:</strong> <a href="/en/tech/testing-strategies.html">Testing Strategies</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/consumer-driven-contracts.html">Consumer-Driven Contracts in Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/consumer-driven-contracts.html">Consumer-Driven Contracts in Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/consumer-driven-contracts.html">Consumer-Driven Contracts in Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/consumer-driven-contracts.html">Consumer-Driven Contracts in Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/consumer-driven-contracts.html">Consumer-Driven Contracts in Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p></div>
+<p>Start with one service pair. Choose a provider with multiple consumers to maximize value. Establish the Pact Broker as shared infrastructure. Train teams on writing consumer tests. Gradually expand contract coverage across the organization.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/soa-vs-microservices.html">SOA vs Microservices</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#why-contract-testing">Why Contract Testing</a></li><li><a href="#consumer-tests">Consumer Tests</a></li><li><a href="#provider-verification">Provider Verification</a></li><li><a href="#ci-integration">CI Integration</a></li><li><a href="#adoption">Adoption</a></li></ol></details>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -160,9 +142,14 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Contract%20Testing%20for%20Microservices&url=https://aidev.fit/en/architecture/contract-testing.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/architecture/contract-testing.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Contract%20Testing%20for%20Microservices&url=https%3A//aidev.fit/en/architecture/contract-testing.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/contract-testing.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=Contract%20Testing%20for%20Microservices&url=https%3A//aidev.fit/en/architecture/contract-testing.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=Contract%20Testing%20for%20Microservices&u=https%3A//aidev.fit/en/architecture/contract-testing.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=Contract%20Testing%20for%20Microservices&body=https%3A//aidev.fit/en/architecture/contract-testing.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/contract-testing.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/consumer-driven-contracts.html" class="prev-next-btn prev-link">← Consumer-Driven Contracts in Microservices</a><a href="/en/architecture/scheduler-supervisor.html" class="prev-next-btn next-link">Scheduler Supervisor Pattern →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/architecture/consumer-driven-contracts.html" class="related-card"><span class="related-card-title">Consumer-Driven Contracts in Microservices</span><span class="related-card-desc">Learn consumer-driven contract testing to ensure microservice compatibility without brittle integrat</span></a><a href="/en/architecture/sidecar-pattern.html" class="related-card"><span class="related-card-title">Sidecar Pattern in Microservices Architecture</span><span class="related-card-desc">Learn the sidecar pattern for microservices: how to deploy helper components alongside your main ser</span></a><a href="/en/architecture/microservices-vs-monolith.html" class="related-card"><span class="related-card-title">Microservices vs Monolith: Decision Guide</span><span class="related-card-desc">Guide to choosing between microservices and monoliths, including when to start with a monolith, Conw</span></a><a href="/en/architecture/a-b-testing-infrastructure.html" class="related-card"><span class="related-card-title">A/B Testing Infrastructure</span><span class="related-card-desc">Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing </span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="related-card-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="related-card-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices</span></a></div>
@@ -170,34 +157,17 @@
     
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

@@ -60,8 +60,8 @@
       "keywords": "Next.js, Deployment, Free, Tutorial",
       "about": [{"@type": "Thing", "name": "Next.js"}, {"@type": "Thing", "name": "Deployment"}, {"@type": "Thing", "name": "Free"}, {"@type": "Thing", "name": "Tutorial"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -97,6 +97,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -111,7 +112,7 @@
         <span class="tag-cat">Tutorial</span>
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
       <h1 class="article-title">How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)</h1>
-      <div class="article-meta"><time datetime="2025-10-09">Published 2025-10-09</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 5040 views · 42 replies · 3 min read</div>
+      <div class="article-meta"><time datetime="2025-10-09">Published 2025-10-09</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 5119 views · 42 replies · 3 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/tech/deploy-nextjs-free.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/deploy-nextjs-free.png" alt="How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>You built a Next.js app. Now get it on the internet — for free, with a real URL, in 10 minutes. Here's the step-by-step guide covering Vercel (easiest for Next.js), plus Cloudflare Pages as an alternative with unlimited bandwidth.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/deploy-nextjs-free.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/deploy-nextjs-free.png" alt="How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 
@@ -184,8 +185,13 @@ const nextConfig = {
 <tr><td><strong>Best for</strong></td><td>Full Next.js features</td><td>Traffic-heavy static</td><td>Simple static sites</td></tr>
 </table>
 
-<p><strong>Bottom line:</strong> Vercel is the default for Next.js — simplest deploy, full feature support. Cloudflare Pages for unlimited bandwidth. Static export for maximum portability. After deploying, set up a custom domain (free on both platforms) and you're production-ready. See also: <a href="/en/tools/best-free-hosting-side-projects.html">Free Hosting Guide</a> and <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">Hosting Comparison</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/edge-computing-2026-guide.html">Edge Computing in 2026: A Complete Guide for Developers</a>, <a href="/en/tech/docker-quickstart.html">Docker in 30 Minutes: From Install to First Container</a>, <a href="/en/tech/monorepo-setup-guide.html">Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes</a></p></div>
+<p><strong>Bottom line:</strong> Vercel is the default for Next.js — simplest deploy, full feature support. Cloudflare Pages for unlimited bandwidth. Static export for maximum portability. After deploying, set up a custom domain (free on both platforms) and you're production-ready. See also: <a href="/en/tools/best-free-hosting-side-projects.html">Free Hosting Guide</a> and <a href="/en/compare/vercel-vs-netlify-vs-cloudflare.html">Hosting Comparison</a>.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/edge-computing-2026-guide.html">Edge Computing in 2026: A Complete Guide for Developers</a>, <a href="/en/tech/docker-quickstart.html">Docker in 30 Minutes: From Install to First Container</a>, <a href="/en/tech/monorepo-setup-guide.html">Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    <details class="article-toc"><summary>Table of Contents (6)</summary><ol><li><a href="#option-1:-vercel-(easiest,-built-for-next.js)">Option 1: Vercel (Easiest, Built for Next.js)</a></li><li><a href="#step-by-step">Step-by-Step</a></li><li><a href="#environment-variables">Environment Variables</a></li><li><a href="#option-2:-cloudflare-pages-(unlimited-bandwidth)">Option 2: Cloudflare Pages (Unlimited Bandwidth)</a></li><li><a href="#option-3:-static-export-(simplest,-most-portable)">Option 3: Static Export (Simplest, Most Portable)</a></li><li><a href="#quick-comparison">Quick Comparison</a></li></ol></details>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -196,9 +202,14 @@ const nextConfig = {
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=How%20to%20Deploy%20a%20Next.js%20App%20for%20Free%3A%20Step-by-Step%20Guide%20%282026%29&url=https://aidev.fit/en/tech/deploy-nextjs-free.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/tech/deploy-nextjs-free.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=How%20to%20Deploy%20a%20Next.js%20App%20for%20Free%3A%20Step-by-Step%20Guide%20%282026%29&url=https%3A//aidev.fit/en/tech/deploy-nextjs-free.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/deploy-nextjs-free.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=How%20to%20Deploy%20a%20Next.js%20App%20for%20Free%3A%20Step-by-Step%20Guide%20%282026%29&url=https%3A//aidev.fit/en/tech/deploy-nextjs-free.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=How%20to%20Deploy%20a%20Next.js%20App%20for%20Free%3A%20Step-by-Step%20Guide%20%282026%29&u=https%3A//aidev.fit/en/tech/deploy-nextjs-free.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=How%20to%20Deploy%20a%20Next.js%20App%20for%20Free%3A%20Step-by-Step%20Guide%20%282026%29&body=https%3A//aidev.fit/en/tech/deploy-nextjs-free.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/deploy-nextjs-free.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/monorepo-setup-guide.html" class="prev-next-btn prev-link">← Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes</a><a href="/en/tech/docker-quickstart.html" class="prev-next-btn next-link">Docker in 30 Minutes: From Install to First Container →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/tech/edge-computing-guide.html" class="related-card"><span class="related-card-title">Edge Computing Complete Guide 2026: Cloudflare Workers, Deno Deploy, and Vercel Edge</span><span class="related-card-desc">Build and deploy applications at the edge — compare Cloudflare Workers, Deno Deploy, Vercel Edge, an</span></a><a href="/en/tech/environment-variables-guide.html" class="related-card"><span class="related-card-title">Environment Variables: The Complete Guide for Developers</span><span class="related-card-desc">How to manage .env files, secrets, and configs across local dev, CI/CD, and production. Covers .env.</span></a><a href="/en/tools/best-free-hosting-side-projects.html" class="related-card"><span class="related-card-title">Best Free Hosting for Side Projects 2026: 12 Platforms With Generous Free Tiers</span><span class="related-card-desc">Ship your side project for $0. Compare free hosting platforms with real limits, no credit card requi</span></a><a href="/en/tech/css-responsive-design-guide.html" class="related-card"><span class="related-card-title">Responsive CSS in 2026: Container Queries, Grid, and Modern Layout Patterns</span><span class="related-card-desc">Modern CSS responsive design beyond media queries. Container queries, CSS Grid, subgrid, clamp() for</span></a><a href="/en/tech/react-server-components-guide.html" class="related-card"><span class="related-card-title">React Server Components Guide: Architecture, Patterns, and When to Use RSC in 2026</span><span class="related-card-desc">Deep dive into React Server Components — server vs client components, streaming patterns, Server Act</span></a><a href="/en/tech/python-tutorial.html" class="related-card"><span class="related-card-title">Python Tutorial: From Zero to Your First Program</span><span class="related-card-desc">A beginner-friendly Python tutorial. Master variables, conditionals, loops, and functions in 30 minu</span></a></div>
@@ -206,34 +217,17 @@ const nextConfig = {
     
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

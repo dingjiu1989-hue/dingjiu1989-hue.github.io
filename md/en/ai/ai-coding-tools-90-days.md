@@ -165,5 +165,3 @@ My current setup: **Copilot Free** for inline completions, **Claude Pro** for co
 For a more detailed feature-by-feature comparison of Cursor vs Copilot vs Claude Code, see my [full comparison article](<{BASE}/en/compare/cursor-vs-copilot-vs-claude-code.html>). For benchmark data on LLM coding performance across more models, check the [LLM for coding guide](<{BASE}/en/ai/best-llms-for-coding-2026.html>).
 
 _This article was originally published on[SourceHub](<{BASE}/en/ai/ai-coding-tools-90-days.html>)._
-
-**See also:** [Is ChatGPT Plus Worth It? Free vs Plus vs Pro Compared (2026)](</en/ai/chatgpt-plus-worth.html>), [Cursor Advanced Tips: 15 Power User Techniques to 10x Your AI Coding](</en/ai/cursor-advanced-tips.html>), [Prompt Engineering: From Beginner to Expert](</en/ai/prompt-engineering.html>)

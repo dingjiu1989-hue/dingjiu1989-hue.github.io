@@ -68,5 +68,3 @@ Geospatial (maps, locations)| **PostgreSQL + PostGIS**
 Maximum managed service options| **PostgreSQL** (RDS, Supabase, Neon, etc.)  
   
 **Bottom line:** Default to PostgreSQL for any web application. Use SQLite for mobile apps, side projects, and when you want zero operations overhead. MySQL if you're in the PHP/WordPress ecosystem. See our [Supabase vs Firebase vs Neon](</en/compare/supabase-vs-firebase-vs-neon.html>) guide for managed database services.
-
-**See also:** [AWS vs Azure vs GCP (2026): Best Cloud for Developers?](</en/compare/aws-vs-azure-vs-gcp.html>), [Prisma vs Drizzle vs TypeORM (2026): Best TypeScript ORM?](</en/compare/prisma-vs-drizzle-vs-typeorm.html>), [Redis vs Memcached vs Dragonfly (2026): In-Memory Data Store Comparison](</en/compare/redis-vs-memcached-vs-dragonfly.html>)

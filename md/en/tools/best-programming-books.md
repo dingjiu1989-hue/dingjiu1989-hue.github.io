@@ -54,5 +54,3 @@ Book| Author| Why Read It
 
 
 **Bottom line:** Start with The Pragmatic Programmer and A Philosophy of Software Design — both are short, practical, and change how you code immediately. Read DDIA when you're ready for distributed systems. See also: [Developer YouTube Channels](</en/tools/best-dev-youtube-channels.html>) and [Developer Podcasts](</en/tools/best-dev-podcasts.html>).
-
-**See also:** [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [Best Software Supply Chain Security Tools 2026: Snyk vs Socket vs Chainguard vs Anchore vs Sigstore](</en/tools/best-supply-chain-security-tools.html>)

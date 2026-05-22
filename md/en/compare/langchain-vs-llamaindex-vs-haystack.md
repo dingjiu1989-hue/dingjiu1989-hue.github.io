@@ -45,5 +45,3 @@ Rapid prototyping of LLM features| LangChain| Fastest to get started, most examp
 Multi-step reasoning + RAG| LangChain + LlamaIndex| LangChain for agent logic, LlamaIndex for retrieval  
   
 **Bottom line:** LangChain is the default for general LLM applications and agents — it has the largest ecosystem and community. LlamaIndex is superior for RAG-heavy applications where document loading and retrieval quality matter most. Haystack is the dark horse for enterprise deployments that need reliability over hype. Many teams combine LangChain (orchestration) with LlamaIndex (retrieval). See also: [AI Agents Guide](</en/ai/ai-agents-guide.html>) and [AI API Integration Guide](</en/ai/ai-api-integration-guide.html>).
-
-**See also:** [Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide](</en/compare/vector-databases-2026-complete-guide.html>), [Turbopack vs Vite](</en/compare/turbopack-vs-vite.html>), [Zustand vs Redux vs Jotai](</en/compare/zustand-vs-redux.html>)

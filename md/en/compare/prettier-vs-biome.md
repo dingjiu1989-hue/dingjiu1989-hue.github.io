@@ -59,5 +59,3 @@ Maximum editor/CI compatibility| **Prettier**
 Want formatting + linting in one tool| **Biome**  
   
 **Bottom line:** Biome is ready for new JavaScript/TypeScript projects — the speed difference is real, and replacing two tools with one is a win. Prettier remains the safe universal default, especially for mixed-language projects. The 97% compatibility means migration costs are low. See also: [Package Manager Comparison](</en/compare/pnpm-vs-npm-vs-yarn.html>) and [CI/CD Tools](</en/tools/best-cicd-tools-2026.html>).
-
-**See also:** [Vite vs Webpack vs Turbopack (2026): Best Frontend Build Tool?](</en/compare/vite-vs-webpack-vs-turbopack.html>), [Hono vs Express vs Fastify (2026): Best Node.js Backend Framework?](</en/compare/hono-vs-express-vs-fastify.html>), [HTMX vs Alpine.js vs Vanilla JS: Lightweight Frontend Approaches Compared (2026)](</en/compare/htmx-vs-alpine-vs-vanilla-js.html>)

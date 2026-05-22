@@ -48,5 +48,3 @@ The formula: **Target annual salary / 1,000 = hourly rate.** If you want $150K/y
 
 
 **Bottom line:** Consulting is the highest hourly rate you can earn as a developer — but it requires sales skills, a clear specialty, and comfort with variable income. Start part-time while employed, build 2-3 retainer clients at $2,000+/month each, then transition to full-time when you have 6+ months of runway. See also: [Freelance Pricing Guide](</en/sidehustle/freelance-pricing-guide.html>) and [Developer Side Hustles 2026](</en/sidehustle/developer-side-hustles-2026.html>).
-
-**See also:** [How to Start a Profitable YouTube Channel as a Developer (2026 Guide)](</en/sidehustle/youtube-channel-developers.html>), [Content Monetization Strategies for Developers](</en/sidehustle/content-monetization.html>), [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>)

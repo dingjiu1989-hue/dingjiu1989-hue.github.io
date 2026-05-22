@@ -71,5 +71,3 @@ Legal/contract search| No (or hybrid)| Exact terminology matters; "shall" vs "ma
 Code search| Maybe (hybrid)| Function names need exact match; bug descriptions need semantic  
   
 **Bottom line:** For most applications in 2026, the pragmatic choice is **pgvector + OpenAI embeddings + a reranker**. You already have Postgres, pgvector is a single extension, embeddings cost pennies per thousand documents, and the two-stage retrieval gives production-quality results. If you're doing this at scale (1M+ documents), add Qdrant or Pinecone. See also: [Vector Database Comparison](</en/ai/vector-database-comparison.html>) and [RAG Best Practices](</en/ai/rag-best-practices.html>).
-
-**See also:** [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>), [AI Recommendation Systems: From Embeddings to Production](</en/ai/ai-recommendation-systems.html>), [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>)

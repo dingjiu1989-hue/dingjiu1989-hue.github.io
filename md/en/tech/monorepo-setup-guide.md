@@ -126,5 +126,3 @@ CI runs unrelated changes on every commit| Turborepo caches tasks. Only changed 
 
 
 **Bottom line:** Monorepos shine when you have 3+ apps/packages that share code. pnpm workspaces + Turborepo is the best stack in 2026. The shared config package alone saves hours of boilerplate setup per new project. See also: [Package Manager Comparison](</en/compare/pnpm-vs-npm-vs-yarn.html>) and [Build Tools Comparison](</en/compare/vite-vs-webpack-vs-turbopack.html>).
-
-**See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs](</en/tech/api-security-best-practices.html>), [How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)](</en/tech/deploy-nextjs-free.html>)

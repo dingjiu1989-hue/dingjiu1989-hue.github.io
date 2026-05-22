@@ -46,7 +46,7 @@
     <link rel="canonical" href="https://aidev.fit/en/database/database-audit-triggers.html">
     <link rel="prev" href="https://aidev.fit/en/database/database-auditing.html">
     <link rel="next" href="https://aidev.fit/en/database/partitioning-vs-sharding.html">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="noindex, follow">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -56,12 +56,12 @@
       "image": "https://aidev.fit/images/covers/en/database/database-audit-triggers.png",
       "datePublished": "2026-04-13",
       "dateModified": "2026-04-26",
-      "wordCount": "1296",
+      "wordCount": "300",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -97,6 +97,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -108,7 +109,7 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Audit Triggers: Automatic Change Tracking</h1>
-      <div class="article-meta"><time datetime="2026-04-13">Published 2026-04-13</time> · <time datetime="2026-04-26">Last active 2026-04-26</time> · 240 views · 2 replies · 6 min read</div>
+      <div class="article-meta"><time datetime="2026-04-13">Published 2026-04-13</time> · <time datetime="2026-04-26">Last active 2026-04-26</time> · 407 views · 2 replies · 1 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/database/database-audit-triggers.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-audit-triggers.png" alt="Database Audit Triggers: Automatic Change Tracking" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Database triggers can automatically capture changes to sensitive data for audit purposes. An audit trigger logs who changed what, when, and the old and new values. This provides a reliable audit trail that cannot be bypassed.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-audit-triggers.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-audit-triggers.png" alt="Database Audit Triggers: Automatic Change Tracking" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Audit Table Design</h2>
@@ -118,32 +119,13 @@
 <h2>Performance Considerations</h2>
 <p>Audit triggers add overhead to every DML operation. Batch the audit writes when possible. Consider asynchronous audit logging for high-traffic tables. Archive audit data regularly. Index the audit table on timestamp and table name for efficient queries.</p>
 <h2>Compliance</h2>
-<p>Audit logs support SOX, HIPAA, PCI-DSS, and SOC 2 compliance. They provide evidence of data access and modification. Keep audit logs immutable—restrict write access and set retention policies. Test audit coverage regularly.</p>
-<p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/database-auditing.html">Database Auditing: Tracking Data Changes</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>.</p>
-<p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-security-hardening.html">Database Security Hardening</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-security-hardening.html">Database Security Hardening</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-security-hardening.html">Database Security Hardening</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-security-hardening.html">Database Security Hardening</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-security-hardening.html">Database Security Hardening</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
-<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p></div>
+<p>Audit logs support SOX, HIPAA, PCI-DSS, and SOC 2 compliance. They provide evidence of data access and modification. Keep audit logs immutable—restrict write access and set retention policies. Test audit coverage regularly.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    <details class="article-toc"><summary>Table of Contents (4)</summary><ol><li><a href="#audit-table-design">Audit Table Design</a></li><li><a href="#trigger-implementation">Trigger Implementation</a></li><li><a href="#performance-considerations">Performance Considerations</a></li><li><a href="#compliance">Compliance</a></li></ol></details>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -154,9 +136,14 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Database%20Audit%20Triggers%3A%20Automatic%20Change%20Tracking&url=https://aidev.fit/en/database/database-audit-triggers.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/database/database-audit-triggers.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Database%20Audit%20Triggers%3A%20Automatic%20Change%20Tracking&url=https%3A//aidev.fit/en/database/database-audit-triggers.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-audit-triggers.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=Database%20Audit%20Triggers%3A%20Automatic%20Change%20Tracking&url=https%3A//aidev.fit/en/database/database-audit-triggers.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=Database%20Audit%20Triggers%3A%20Automatic%20Change%20Tracking&u=https%3A//aidev.fit/en/database/database-audit-triggers.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=Database%20Audit%20Triggers%3A%20Automatic%20Change%20Tracking&body=https%3A//aidev.fit/en/database/database-audit-triggers.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-audit-triggers.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-auditing.html" class="prev-next-btn prev-link">← Database Auditing: Tracking Data Changes</a><a href="/en/database/partitioning-vs-sharding.html" class="prev-next-btn next-link">Partitioning vs Sharding →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/database-change-tracking-cdc.html" class="related-card"><span class="related-card-title">Change Data Capture: Tracking Database Changes in Real-Time</span><span class="related-card-desc">Implement change data capture (CDC) for real-time data synchronization, event streaming, and audit l</span></a><a href="/en/database/triggers-patterns.html" class="related-card"><span class="related-card-title">Database Triggers: Use Cases, Performance Costs, and Alternatives</span><span class="related-card-desc">Explore database triggers for audit logging, validation, and synchronization. Understand performance</span></a><a href="/en/database/database-security-hardening.html" class="related-card"><span class="related-card-title">Database Security Hardening</span><span class="related-card-desc">Hardening database security with encryption, audit logging, access control, and network isolation.</span></a><a href="/en/database/database-auditing.html" class="related-card"><span class="related-card-title">Database Auditing: Tracking Data Changes</span><span class="related-card-desc">Implement database auditing to track who changed what and when for compliance, security, and debuggi</span></a><a href="/en/database/database-encryption.html" class="related-card"><span class="related-card-title">Database Encryption: Data at Rest and in Transit</span><span class="related-card-desc">Implement database encryption at rest and in transit to protect sensitive data and meet compliance r</span></a><a href="/en/database/backup-types.html" class="related-card"><span class="related-card-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</span><span class="related-card-desc">Explore database backup strategies including full, incremental, differential backups, WAL archiving,</span></a></div>
@@ -164,34 +151,17 @@
     
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

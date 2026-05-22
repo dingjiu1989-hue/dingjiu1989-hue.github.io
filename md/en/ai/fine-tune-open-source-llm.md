@@ -60,5 +60,3 @@ Replicate| ~$0.002/sec (A100)| Fine-tune + deploy in one platform| Community fin
 Local (RTX 4090)| $0 (after hardware)| Privacy, iteration speed| No data leaves your machine  
   
 **Bottom line:** LoRA fine-tuning on Together AI is the fastest path from "I have data" to "I have a fine-tuned model." Start with 100 high-quality examples, use Together AI's one-click LoRA, and evaluate the model on a held-out test set before deploying. For most developer tools, a fine-tuned Llama 3 8B model costs $15-50 to train and $0.20/hour to run — 10-50x cheaper than GPT-4o API calls. See also: [Run Local AI Models](</en/ai/run-local-ai-models.html>) and [Best LLMs for Coding](</en/ai/best-llms-for-coding-2026.html>).
-
-**See also:** [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [LLM Function Calling: Complete Developer Guide with Code Examples](</en/ai/function-calling-guide.html>), [AI Data Privacy: PII Detection, Data Anonymization, Local Processing](</en/ai/ai-data-privacy.html>)

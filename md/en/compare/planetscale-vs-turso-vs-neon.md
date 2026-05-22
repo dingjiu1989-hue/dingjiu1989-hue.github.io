@@ -56,5 +56,3 @@ SQLite at the edge| **Turso**
 Most generous free tier| **PlanetScale** or **Turso**  
   
 **Bottom line:** Neon for Postgres-first projects. Turso for edge/global SQLite. PlanetScale for MySQL workflows with database branching. All three have excellent free tiers — start there and scale when you need to. See also: [Database Engine Comparison](</en/compare/postgresql-vs-mysql-vs-sqlite.html>) and [Supabase vs Firebase vs Neon](</en/compare/supabase-vs-firebase-vs-neon.html>).
-
-**See also:** [Cloudflare Workers vs AWS Lambda vs Deno Deploy (2026): Best Edge Functions?](</en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html>), [Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers](</en/compare/vercel-vs-netlify-vs-cloudflare.html>), [Prisma vs Drizzle vs TypeORM (2026): Best TypeScript ORM?](</en/compare/prisma-vs-drizzle-vs-typeorm.html>)

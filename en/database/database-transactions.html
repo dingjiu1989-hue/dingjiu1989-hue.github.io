@@ -56,12 +56,12 @@
       "image": "https://aidev.fit/images/covers/en/database/database-transactions.png",
       "datePublished": "2026-04-03",
       "dateModified": "2026-05-05",
-      "wordCount": "2502",
+      "wordCount": "1505",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -97,6 +97,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -108,7 +109,7 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</h1>
-      <div class="article-meta"><time datetime="2026-04-03">Published 2026-04-03</time> · <time datetime="2026-05-05">Last active 2026-05-05</time> · 0 views · 0 replies · 12 min read</div>
+      <div class="article-meta"><time datetime="2026-04-03">Published 2026-04-03</time> · <time datetime="2026-05-05">Last active 2026-05-05</time> · 221 views · 0 replies · 7 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/database/database-transactions.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-transactions.png" alt="Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints </p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-transactions.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-transactions.png" alt="Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>A transaction is a unit of work that the database executes atomically. Transactions are the bedrock of data integrity in relational databases. Understanding them deeply separates competent engineers from great ones. </p>
@@ -214,32 +215,13 @@
 <p>WHERE state IN ('active', 'idle in transaction')</p>
 <p>AND xact_start IS NOT NULL</p>
 <p>ORDER BY duration DESC;</p>
-<p>Transactions are not just a SQL feature; they are a correctness contract between your application and the database. Understanding isolation levels and their performance implications is essential for building reliable, concurrent systems.</p>
-<p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a>, <a href="/en/database/database-isolation-levels.html">Database Isolation Levels and Anomalies</a>.</p>
-<p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-concurrency.html">Database Concurrency Control: MVCC, Locking, and Deadlocks</a>, <a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
-<p><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p></div>
+<p>Transactions are not just a SQL feature; they are a correctness contract between your application and the database. Understanding isolation levels and their performance implications is essential for building reliable, concurrent systems.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/new-sql-databases.html">NewSQL Databases: Combining SQL with Horizontal Scaling</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -250,9 +232,14 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Database%20Transactions%20Deep%20Dive%3A%20ACID%2C%20Isolation%20Levels%2C%20Savepoints&url=https://aidev.fit/en/database/database-transactions.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/database/database-transactions.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Database%20Transactions%20Deep%20Dive%3A%20ACID%2C%20Isolation%20Levels%2C%20Savepoints&url=https%3A//aidev.fit/en/database/database-transactions.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-transactions.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=Database%20Transactions%20Deep%20Dive%3A%20ACID%2C%20Isolation%20Levels%2C%20Savepoints&url=https%3A//aidev.fit/en/database/database-transactions.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=Database%20Transactions%20Deep%20Dive%3A%20ACID%2C%20Isolation%20Levels%2C%20Savepoints&u=https%3A//aidev.fit/en/database/database-transactions.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=Database%20Transactions%20Deep%20Dive%3A%20ACID%2C%20Isolation%20Levels%2C%20Savepoints&body=https%3A//aidev.fit/en/database/database-transactions.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-transactions.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-types-overview.html" class="prev-next-btn prev-link">← Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a><a href="/en/database/database-containerization.html" class="prev-next-btn next-link">Databases in Containers: StatefulSets, Persistent Volumes, and Backup →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/database-concurrency.html" class="related-card"><span class="related-card-title">Database Concurrency Control: MVCC, Locking, and Deadlocks</span><span class="related-card-desc">Deep dive into database concurrency control mechanisms: optimistic vs pessimistic locking, MVCC inte</span></a><a href="/en/database/query-optimization-explain.html" class="related-card"><span class="related-card-title">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</span><span class="related-card-desc">Master PostgreSQL EXPLAIN ANALYZE: read query plans, understand cost estimation, compare scan types,</span></a><a href="/en/database/backup-types.html" class="related-card"><span class="related-card-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</span><span class="related-card-desc">Explore database backup strategies including full, incremental, differential backups, WAL archiving,</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="related-card-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="related-card-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing str</span></a><a href="/en/database/database-security-hardening.html" class="related-card"><span class="related-card-title">Database Security Hardening</span><span class="related-card-desc">Hardening database security with encryption, audit logging, access control, and network isolation.</span></a><a href="/en/database/database-isolation-levels.html" class="related-card"><span class="related-card-title">Database Isolation Levels and Anomalies</span><span class="related-card-desc">Learn SQL isolation levels: read uncommitted, read committed, repeatable read, and serializable, and</span></a></div>
@@ -260,34 +247,17 @@
     
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

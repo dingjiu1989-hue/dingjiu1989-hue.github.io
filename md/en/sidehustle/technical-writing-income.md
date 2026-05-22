@@ -50,5 +50,3 @@ Tables, code examples, decision matrices| Wall of text
 Opinionated takes based on experience| Generic summaries anyone could write with ChatGPT  
   
 **Bottom line:** Technical writing is a $50K-150K/year side hustle for developers who do it well. Start with your own blog to build samples. Then reach out to dev tool companies directly — they're always looking for good writers who actually understand the code. See also: [Newsletter Monetization](</en/sidehustle/newsletter-monetization-guide.html>) and [Selling Digital Products](</en/sidehustle/sell-digital-products.html>).
-
-**See also:** [Bug Bounty Hunting Guide 2026: From First Bug to Consistent Income](</en/sidehustle/bug-bounty-hunting-guide.html>), [Personal Finance for Software Engineers: Investing, Equity, and Wealth Building](</en/sidehustle/developer-investing-finance.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)

@@ -53,5 +53,3 @@ Month| Sales| Price| Revenue| Traffic Source
 12| 120| $99| $11,880| SEO + marketplace + newsletter  
   
 **Bottom line:** UI kits and design assets are one of the highest-leverage developer side hustles — build once, sell infinitely. The key insight: developers who can code AND design are rare. If you can produce technically clean code with good design, you have less competition than either pure designers or pure developers. Start with one framework (React + Tailwind), hit 50 components, include a Figma file, and launch on Gumroad. See also: [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>) and [Browser Extension Development](</en/sidehustle/browser-extension-development.html>).
-
-**See also:** [Domain Flipping and Investing Guide for Developers (2026)](</en/sidehustle/domain-flipping-guide.html>), [Selling Digital Products as a Developer](</en/sidehustle/digital-products.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)

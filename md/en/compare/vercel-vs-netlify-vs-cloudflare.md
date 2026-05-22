@@ -65,5 +65,3 @@ Want integrated forms + identity| **Netlify**
 Best DX for a team| **Vercel**  
   
 All three have generous free tiers. **Start on any of them, ship your project, and only worry about switching when you have real traffic.** The cost of overthinking hosting is higher than the cost of picking the "wrong" one for a month.
-
-**See also:** [Stripe vs Paddle vs Lemon Squeezy (2026): Best Payment Processor for SaaS](</en/compare/stripe-vs-paddle-vs-lemonsqueezy.html>), [GitHub vs GitLab vs Bitbucket (2026): Which Git Platform Is Best?](</en/compare/github-vs-gitlab-vs-bitbucket.html>), [React vs Vue vs Svelte in 2026](</en/compare/react-vs-vue-2026.html>)

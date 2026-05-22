@@ -82,5 +82,3 @@ NPM Package Optimization| Replace slow JS build tools with Rust| Use napi-rs to 
     // console.log(fibonacci(40)); // Instant — runs native Rust speed
 
 **Bottom line:** Rust is the highest-ROI second language for JavaScript developers — it unlocks systems programming, WASM, CLI tools, and NPM native modules. The learning curve is real (expect 2-4 weeks of struggle with ownership and lifetimes), but once the mental model clicks, you realize Rust's compiler is not your adversary — it is the most helpful pair programmer you've ever had. Start with the Rust Book and build a CLI tool as your first project. See also: [TypeScript Advanced Patterns](</en/tech/typescript-advanced-patterns.html>) and [Bun vs Node vs Deno](</en/compare/bun-vs-node-vs-deno.html>).
-
-**See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Edge Computing in 2026: A Complete Guide for Developers](</en/tech/edge-computing-2026-guide.html>)

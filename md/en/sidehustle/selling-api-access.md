@@ -65,5 +65,3 @@ Step| What to Do
     #               A simple metering database (PostgreSQL + Redis)
 
 **Bottom line:** The best API businesses solve a specific, high-value problem that developers have repeatedly. Start with a free tier generous enough for hobbyists, charge based on usage (not seats), and invest in documentation and SDKs — they are your product's UI. The moat is not the technology (someone can always build the same API), it is the integration depth, reliability, and trust you build over time. See also: [Building and Selling APIs](</en/sidehustle/build-and-sell-api.html>) and [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>).
-
-**See also:** [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Build vs Buy: Strategic Decisions for Developer Side Projects and SaaS](</en/sidehustle/build-vs-buy-saas-decisions.html>), [10 Developer Side Hustles That Actually Make Money in 2026](</en/sidehustle/developer-side-hustles-2026.html>)

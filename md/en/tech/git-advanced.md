@@ -123,6 +123,4 @@ Hook| When It Runs| Use For
 pre-commit| Before commit is created| Linting, formatting, unit tests  
 commit-msg| After message is entered| Enforce message format  
 pre-push| Before push to remote| Integration tests, security scans  
-post-checkout| After checkout/switching branches| Install dependencies if changed  
-  
-**See also:** [DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide](</en/tech/devops-for-developers.html>), [Environment Variables: The Complete Guide for Developers](</en/tech/environment-variables-guide.html>), [CI/CD Pipeline Complete Guide 2026: From Git Push to Production](</en/tech/ci-cd-pipeline-guide.html>)
+post-checkout| After checkout/switching branches| Install dependencies if changed

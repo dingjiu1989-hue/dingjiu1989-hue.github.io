@@ -47,5 +47,3 @@ Extension| What It Does
 ## The One Extension to Rule Them All
 
 If you only install one: **uBlock Origin**. It makes the web faster, cleaner, and safer. Everything else is optimization on top of that foundation.
-
-**See also:** [Best Markdown Editors](</en/tools/markdown-editors.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)

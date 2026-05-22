@@ -43,5 +43,3 @@ Portfolio or personal site| Astro| Easy to start, beautiful templates, great DX
 eCommerce content pages (non-interactive)| Astro or Hugo| Fast builds, zero JS default, excellent Core Web Vitals  
   
 **Bottom line:** Astro is the best SSG for most projects in 2026 — the zero-JS default, multi-framework support, and Content Collections API make it the most productive choice. Hugo remains king for build speed on very large sites. Gatsby is declining — its GraphQL data layer, once innovative, now adds complexity that newer tools avoid. See also: [Best Static Site Generators](</en/tools/best-static-site-generators-2026.html>) and [Next.js vs Nuxt vs SvelteKit](</en/compare/nextjs-vs-nuxt-vs-sveltekit.html>).
-
-**See also:** [Vite vs Webpack vs Turbopack (2026): Best Frontend Build Tool?](</en/compare/vite-vs-webpack-vs-turbopack.html>), [Playwright vs Cypress vs Selenium (2026): Which Testing Framework Wins?](</en/compare/playwright-vs-cypress-vs-selenium.html>), [PHP vs Python vs Node.js: Best Backend Language for Web Development (2026)](</en/compare/php-vs-python-vs-node.html>)

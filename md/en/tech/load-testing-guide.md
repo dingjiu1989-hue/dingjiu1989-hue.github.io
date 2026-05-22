@@ -96,5 +96,3 @@ Concurrent Users| Simultaneous virtual users| System crashes before reaching tar
     }
 
 **Bottom line:** k6 is the best load testing tool for developers — JavaScript scripting, great CI integration (GitHub Actions, GitLab CI), and built-in metric analysis. The key to useful load tests: use realistic user behavior (varying paths, think times, data), test at your expected peak traffic + 50% headroom, and integrate into CI so you catch performance regressions before they ship. Run small tests frequently (every PR) and large tests before major events. See also: [Rate Limiting Strategies](</en/tech/rate-limiting-strategies.html>) and [PostgreSQL Query Optimization](</en/tech/postgresql-query-optimization.html>).
-
-**See also:** [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)

@@ -46,5 +46,3 @@ I'm a solo developer with a few apps on a VPS| Coolify (easy) or Dokku (Heroku-l
 I'm deploying Rails monoliths (37signals fan)| Kamal  
   
 **What I use:** Coolify on a $40/mo Hetzner VPS running 8 apps (2 Next.js, 3 Python/FastAPI, 2 static Astro sites, 1 Go API). Setup took 10 minutes, adding a new app takes 2 minutes, and the auto-SSL + auto-deploy on git push has never failed. Total monthly cost: $40 instead of $250+ for managed PaaS equivalents. See also: [Best Free Hosting for Side Projects](</en/tools/best-free-hosting-side-projects.html>) and [Best CI/CD Tools](</en/tools/best-cicd-tools-2026.html>).
-
-**See also:** [Nginx vs Caddy vs Traefik (2026): Web Server & Reverse Proxy Face-Off](</en/compare/nginx-vs-caddy-vs-traefik.html>), [GitHub vs GitLab vs Bitbucket (2026): Which Git Platform Is Best?](</en/compare/github-vs-gitlab-vs-bitbucket.html>), [Clerk vs Auth0 vs Lucia Auth (2026): Authentication for Modern Apps](</en/compare/clerk-vs-auth0-vs-lucia.html>)

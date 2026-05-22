@@ -142,5 +142,3 @@ Logging| Auth/authZ failures logged| Anomaly detection alerts
 Headers| CSP, X-Content-Type-Options| Permissions-Policy  
   
 Security is not a feature you add — it's a property every endpoint must have. Start with the checklist above. Implement one item per sprint until they're all covered. The time to think about API security is before the breach, not after.
-
-**See also:** [OAuth 2.0 and OIDC Implementation Guide 2026: Complete Developer Walkthrough](</en/tech/oauth2-oidc-implementation.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>)

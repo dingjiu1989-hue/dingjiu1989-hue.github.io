@@ -97,7 +97,3 @@ Charge monthly by default, offer a 20-30% discount for annual plans. Annual cust
   * **Pricing too low.** Charge at least $15/month. Anything lower signals "this isn't valuable" and makes customer acquisition costs unsustainable.
   * **Building for yourself, not customers.** Ship based on customer feedback, not what you think is cool. Talk to at least one customer every week.
   * **Giving up too early.** Most successful bootstrapped SaaS products took 12-18 months to reach meaningful revenue. The first 6 months are almost always slow. Keep shipping.
-
-
-
-**See also:** [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>), [Bootstrapping Essentials: Building a Startup Without VC Funding](</en/sidehustle/bootstrapping-essentials.html>)

@@ -42,5 +42,3 @@ Writing complex integration tests| Poor (20-40% useful)| AI lacks deep understan
 
 
 **Bottom line:** The biggest AI win in testing is selector self-healing and visual regression — these eliminate the two most time-consuming maintenance tasks in E2E testing. Use GitHub Copilot for generating boilerplate unit tests (saves 20-30% of test writing time). Do not expect AI to replace test design — understanding what to test and how to structure tests still requires human judgment. See also: [Playwright vs Cypress vs Selenium](</en/compare/playwright-vs-cypress-vs-selenium.html>) and [Testing Strategies for Web Apps](</en/tech/testing-strategies-web-apps.html>).
-
-**See also:** [AI-Powered Data Analysis: Using LLMs for Data Science and Visualization](</en/ai/ai-data-analysis.html>), [AI Image Generation Guide: DALL-E 3 vs Midjourney vs Stable Diffusion vs Firefly](</en/ai/ai-image-generation-guide.html>), [AI Code Review: Best Tools, Setup Guide, and ROI Analysis](</en/ai/ai-code-review-tools.html>)

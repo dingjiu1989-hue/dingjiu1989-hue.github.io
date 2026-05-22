@@ -68,5 +68,3 @@ Platform| Fee| Best For
 
 
 **Bottom line:** Templates are the best digital product for developers — you build them with skills you already have. The key is solving real boilerplate pain. Charge more than you think ($99-299 not $19-49). Update regularly to justify the price. See also: [Selling Digital Products](</en/sidehustle/sell-digital-products.html>) and [Micro-SaaS Ideas](</en/sidehustle/micro-saas-ideas-2026.html>).
-
-**See also:** [Technical Writing Income: How Developers Make Money Writing](</en/sidehustle/technical-writing-income.html>), [How to Build and Sell VS Code Extensions: A Developer's Guide to Recurring Revenue](</en/sidehustle/sell-vscode-extensions.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)

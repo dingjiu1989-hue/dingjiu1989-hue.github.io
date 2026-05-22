@@ -49,5 +49,3 @@ Platform| Best For| How to Use It
 
 
 **Bottom line:** Stack Overflow for specific problems. Discord (Reactiflux/Vue Land) for real-time help. Twitter/X for networking and opportunities. Dev.to for writing and teaching. Pick 2-3 and be active. See also: [Developer Podcasts](</en/tools/best-dev-podcasts.html>) and [Developer YouTube Channels](</en/tools/best-dev-youtube-channels.html>).
-
-**See also:** [Best CI/CD Tools 2026: GitHub Actions vs GitLab CI vs CircleCI vs ArgoCD](</en/tools/best-cicd-tools-2026.html>), [Best Free Tier Platforms for Developer Projects 2026: The Ultimate List](</en/tools/best-free-tier-platforms.html>), [Best Terminal Emulators for Developers 2026: Warp vs iTerm2 vs Kitty vs WezTerm](</en/tools/best-terminal-emulators.html>)

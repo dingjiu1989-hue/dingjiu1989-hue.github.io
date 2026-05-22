@@ -145,5 +145,3 @@ Save as `hello.py` and run with `python3 hello.py`. That's it — you're a progr
 
 
 The secret to learning Python: start building things immediately. Don't get stuck in tutorial hell.
-
-**See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)

@@ -72,5 +72,3 @@ Real user errors + perf| Sentry| Continuous (production)
 Synthetic monitoring| Checkly| Every 5-15 min (production)  
   
 **Bottom line:** Lighthouse for dev and CI, Sentry for production errors and real-user performance, Checkly for synthetic uptime/flow monitoring, WebPageTest for deep dives. These four tools together cost $0 for small projects and give you complete visibility. See our [hosting comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>) — good hosting makes performance easier.
-
-**See also:** [Best Code Review Tools 2026: GitHub, GitLab, Graphite, Reviewable Compared](</en/tools/best-code-review-tools.html>), [Best Monitoring and Observability Tools 2026: Datadog vs Grafana vs New Relic vs OpenTelemetry](</en/tools/best-monitoring-tools.html>), [Best Free Tier Platforms for Developer Projects 2026: The Ultimate List](</en/tools/best-free-tier-platforms.html>)

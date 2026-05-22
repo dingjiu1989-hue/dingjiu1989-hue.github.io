@@ -8,8 +8,8 @@ url: https://aidev.fit/en/tech/rest-api-best-practices.html
 
 # REST API Best Practices: The Complete Guide for 2026
 
-REST APIs power the modern web, but most APIs are designed with subtle flaws that cause pain months later. This guide covers the conventions, patterns, and anti-patterns that separate production APIs from weekend projects.
-
+REST APIs power the modern web, but most APIs are designed with subtle flaws that cause pain months later. This guide covers the conventions, patterns, and anti-patterns that separate production APIs from weekend projects.  
+  
 ## 1\. Use Nouns, Not Verbs, for Resources
     
     
@@ -105,5 +105,3 @@ Always return errors in a consistent structure:
 ## 8\. API Documentation
 
 Use OpenAPI 3.1 (Swagger). It's the industry standard and generates interactive docs automatically. Tools like Stoplight, Redoc, and Swagger UI render beautiful docs from a single spec file. If your API doesn't have an OpenAPI spec, it's not ready for production.
-
-**See also:** [Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops](</en/tech/python-asyncio-guide.html>), [Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each](</en/tech/testing-strategies-web-apps.html>), [Node.js Streams: Complete Guide to Efficient Data Processing](</en/tech/nodejs-streams-guide.html>)

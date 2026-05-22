@@ -56,12 +56,12 @@
       "image": "https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.png",
       "datePublished": "2026-04-24",
       "dateModified": "2026-05-04",
-      "wordCount": "1419",
+      "wordCount": "918",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -97,6 +97,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -108,7 +109,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Feature Flags Architecture</h1>
-      <div class="article-meta"><time datetime="2026-04-24">Published 2026-04-24</time> · <time datetime="2026-05-04">Last active 2026-05-04</time> · 0 views · 0 replies · 7 min read</div>
+      <div class="article-meta"><time datetime="2026-04-24">Published 2026-04-24</time> · <time datetime="2026-05-04">Last active 2026-05-04</time> · 96 views · 0 replies · 4 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.png" alt="Feature Flags Architecture" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Feature flags (also called feature toggles) provide runtime control over application behavior without deploying new code. They decouple deployment from release, enabling patterns like canary releases, A/B testing, trunk-based development, and instant rollbacks. The architecture of a feature flag system — how flags are evaluated, stored, distributed, and managed — is critical to both developer experience and system reliability. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.png" alt="Feature Flags Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Flag evaluation must be fast and reliable. Every request potentially evaluates multiple flags, so evaluation latency directly impacts overall request latency. The two primary evaluation models are client-side SDK evaluation and server-side evaluation. In client-side evaluation, the SDK holds a copy of all flag configurations and evaluates locally — this provides sub-millisecond evaluation but requires flag configuration synchronization. In server-side evaluation, the client sends user context to a server that evaluates flags and returns results — this adds a network hop but provides centralized control and audit. </p>
@@ -119,32 +120,13 @@
 <p>Flag lifecycle management is a practical challenge that grows with flag count. Dead flags — flags that have been rolled out to 100% or removed — must be cleaned up. The cleanup process involves: confirming the flag is stable at 100%, removing the flag evaluation code from the application, removing the flag from the management platform, and updating any dependent tests. Automated flag lifecycle tools can surface flags that have been at a constant value beyond a configurable threshold. </p>
 <p>Testing with feature flags requires special consideration. Tests should verify behavior for each flag variant. Parameterized tests that run the same test with each flag configuration catch regressions that only manifest under specific flag states. More importantly, tests should verify that removing the flag (when it is eventually retired) produces the expected behavior — the code should assume the flag-enabled state is the final state. </p>
 <p>Security implications of feature flags are significant. Flags that control security-sensitive behavior — authentication flows, authorization rules, payment processing — must be protected from unauthorized modification. Approval workflows, audit logs, and access controls on flag changes are essential. The flag management platform should enforce separation of duties: the developer who creates a flag should not be the one who approves its production rollout. </p>
-<p>Operational concerns include flag evaluation metrics. Track flag evaluation counts, cache hit rates, and evaluation latency. Monitor for unexpected flag evaluation errors — incorrectly cached or missing flag configurations can cause widespread failures. Implement a kill switch flag that disables all non-critical flags simultaneously in emergency scenarios, providing a circuit breaker for flag-induced issues.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
-<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p></div>
+<p>Operational concerns include flag evaluation metrics. Track flag evaluation counts, cache hit rates, and evaluation latency. Monitor for unexpected flag evaluation errors — incorrectly cached or missing flag configurations can cause widespread failures. Implement a kill switch flag that disables all non-critical flags simultaneously in emergency scenarios, providing a circuit breaker for flag-induced issues.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -155,9 +137,14 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Feature%20Flags%20Architecture&url=https://aidev.fit/en/architecture/feature-flags-architecture.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/architecture/feature-flags-architecture.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Feature%20Flags%20Architecture&url=https%3A//aidev.fit/en/architecture/feature-flags-architecture.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/feature-flags-architecture.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=Feature%20Flags%20Architecture&url=https%3A//aidev.fit/en/architecture/feature-flags-architecture.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=Feature%20Flags%20Architecture&u=https%3A//aidev.fit/en/architecture/feature-flags-architecture.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=Feature%20Flags%20Architecture&body=https%3A//aidev.fit/en/architecture/feature-flags-architecture.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/feature-flags-architecture.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/global-traffic-routing.html" class="prev-next-btn prev-link">← Global Traffic Routing</a><a href="/en/architecture/database-migration-zero-downtime.html" class="prev-next-btn next-link">Zero-Downtime Database Migrations →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="related-card-title">Graceful Shutdown Patterns</span><span class="related-card-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful</span></a><a href="/en/architecture/structured-logging.html" class="related-card"><span class="related-card-title">Structured Logging</span><span class="related-card-desc">JSON log format, correlation IDs, log levels, logging libraries, and best practices for structured l</span></a><a href="/en/architecture/cdn-architecture.html" class="related-card"><span class="related-card-title">CDN Architecture</span><span class="related-card-desc">Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content deliv</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/leader-election.html" class="related-card"><span class="related-card-title">Leader Election in Distributed Systems</span><span class="related-card-desc">Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best </span></a></div>
@@ -165,34 +152,17 @@
     
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

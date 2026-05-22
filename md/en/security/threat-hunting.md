@@ -131,7 +131,7 @@ Effective hunting requires rich telemetry. The best sources include:
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Network connections** (Sysmon Event ID 3, NetFlow, Zeek logs) 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **DNS queries** (Zeek DNS, Windows DNS client logs) 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **File system changes** (Sysmon Event ID 11) 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Registry modifications** (Sysmon Event ID 12-14) 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **PowerShell operational logs** (Event ID 4103, 4104) 
 
-C:\Windows\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_
+C:\Windows\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_
 
 Hunting Tools 
 
@@ -192,51 +192,3 @@ yield Anomaly(field, value, ratio, baseline)
 Conclusion 
 
 Threat hunting transforms security operations from reactive to proactive. Start with structured hypotheses based on threat intelligence, map hunts to MITRE ATT&CK; techniques, ensure comprehensive data collection, and iterate based on findings. Mature hunting programs progressively automate successful hunt patterns into detection rules.
-
-**See also:** [Digital Forensics Guide](</en/security/forensics-guide.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [DNS Security](</en/security/dns-security.html>).
-
-**See also:** [Data Masking and Redaction](</en/security/data-masking.html>), [DNS Security](</en/security/dns-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
-
-**See also:** [Data Masking and Redaction](</en/security/data-masking.html>), [DNS Security](</en/security/dns-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
-
-**See also:** [Data Masking and Redaction](</en/security/data-masking.html>), [DNS Security](</en/security/dns-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
-
-**See also:** [Data Masking and Redaction](</en/security/data-masking.html>), [DNS Security](</en/security/dns-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
-
-**See also:** [Data Masking and Redaction](</en/security/data-masking.html>), [DNS Security](</en/security/dns-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)
-
-**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>)

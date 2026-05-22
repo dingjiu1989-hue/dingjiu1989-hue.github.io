@@ -8,8 +8,8 @@ url: https://aidev.fit/en/tech/ansible-automation.html
 
 # Ansible Automation: Playbooks, Roles, Inventory, and Vault
 
-## Introduction
-
+## Introduction  
+  
 Ansible has become one of the most widely adopted configuration management and automation tools in the DevOps ecosystem. Acquired by Red Hat in 2015, it stands out for its agentless architecture, YAML-based syntax, and push-based execution model. Unlike Puppet or Chef, which require agents installed on managed nodes, Ansible communicates over SSH or WinRM, making it trivial to get started with existing infrastructure.
 
 This article provides a technical deep dive into Ansible's core components: playbooks, roles, inventory management, Ansible Vault, idempotency, and a comparison with Terraform for infrastructure provisioning.
@@ -119,51 +119,3 @@ Many teams use Terraform to provision infrastructure and Ansible to configure it
 ## Conclusion
 
 Ansible's simplicity and agentless architecture make it an excellent choice for configuration management and automation. Understanding playbooks, roles, dynamic inventory, and vault is essential for effective use. When combined with Terraform for provisioning, Ansible forms a complete infrastructure automation stack suitable for organizations of any size.
-
-**See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Infrastructure Composability](</en/tech/infrastructure-composability.html>), [React Server Components](</en/tech/react-server-components.html>).
-
-**See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [React Server Components](</en/tech/react-server-components.html>), [Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability](</en/tech/prometheus-deep-dive.html>)
-
-**See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [React Server Components](</en/tech/react-server-components.html>), [Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability](</en/tech/prometheus-deep-dive.html>)
-
-**See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [React Server Components](</en/tech/react-server-components.html>), [Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability](</en/tech/prometheus-deep-dive.html>)
-
-**See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [React Server Components](</en/tech/react-server-components.html>), [Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability](</en/tech/prometheus-deep-dive.html>)
-
-**See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [React Server Components](</en/tech/react-server-components.html>), [Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability](</en/tech/prometheus-deep-dive.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
-
-**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)

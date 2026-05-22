@@ -54,5 +54,3 @@ Rate Limiter| Token bucket vs sliding window, distributed vs centralized| Race c
 Video Streaming| Transcoding pipeline, adaptive bitrate (HLS/DASH), CDN| Not discussing encoding formats and device compatibility  
   
 **Bottom line:** System design interviews test breadth, not depth. The interviewer wants to see that you can decompose a complex system, identify the critical path, and make reasonable trade-offs. Master the 4-step framework, memorize the 10 core building blocks, and practice estimating QPS/storage quickly. The difference between a "pass" and "fail" is rarely technical accuracy — it is structured thinking and communication. See also: [PostgreSQL Query Optimization](</en/tech/postgresql-query-optimization.html>) and [Full-Text Search Comparison](</en/tech/full-text-search-comparison.html>).
-
-**See also:** [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>), [Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes](</en/tech/monorepo-setup-guide.html>), [Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared](</en/tech/event-driven-architecture-guide.html>)

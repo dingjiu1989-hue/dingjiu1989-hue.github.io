@@ -56,12 +56,12 @@
       "image": "https://aidev.fit/images/covers/en/database/blob-storage.png",
       "datePublished": "2026-04-13",
       "dateModified": "2026-05-02",
-      "wordCount": "1594",
+      "wordCount": "553",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -97,6 +97,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -108,7 +109,7 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Blob Storage: S3, GCS, Azure Blob, MinIO</h1>
-      <div class="article-meta"><time datetime="2026-04-13">Published 2026-04-13</time> · <time datetime="2026-05-02">Last active 2026-05-02</time> · 0 views · 0 replies · 7 min read</div>
+      <div class="article-meta"><time datetime="2026-04-13">Published 2026-04-13</time> · <time datetime="2026-05-02">Last active 2026-05-02</time> · 67 views · 0 replies · 2 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/database/blob-storage.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/blob-storage.png" alt="Blob Storage: S3, GCS, Azure Blob, MinIO" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Blob (Binary Large Object) storage stores unstructured data such as images, videos, backups, logs, and archives. Unlike block storage (hard drives) or file storage (network file shares), blob storage manages objects with metadata identifiers and provides HTTP-based access.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/blob-storage.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/blob-storage.png" alt="Blob Storage: S3, GCS, Azure Blob, MinIO" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>AWS S3</h2>
@@ -125,32 +126,13 @@
 <p>MinIO's lightweight design allows it to run on Kubernetes as a stateful application. The operator automates deployment, scaling, and upgrades. Performance is impressive for Self-hosted storage—10+ GB/s read/write with NVMe drives.</p>
 <h2>Choosing a Blob Storage Solution</h2>
 <p>For cloud-native applications, use the cloud provider's native blob storage. For multi-cloud or on-premises requirements, use MinIO or similar S3-compatible solutions. For archival data, consider S3 Glacier or GCS Archive for lowest cost.</p>
-<p>Evaluate egress costs carefully. Cloud blob storage charges for data transfer, which can dominate total cost for data-heavy applications. Lifecycle policies significantly reduce storage costs for data with well-defined access patterns.</p>
-<p><strong>See also:</strong> <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>.</p>
-<p><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
-<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p></div>
+<p>Evaluate egress costs carefully. Cloud blob storage charges for data transfer, which can dominate total cost for data-heavy applications. Lifecycle policies significantly reduce storage costs for data with well-defined access patterns.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#aws-s3">AWS S3</a></li><li><a href="#google-cloud-storage">Google Cloud Storage</a></li><li><a href="#azure-blob-storage">Azure Blob Storage</a></li><li><a href="#minio">MinIO</a></li><li><a href="#choosing-a-blob-storage-solution">Choosing a Blob Storage Solution</a></li></ol></details>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -161,9 +143,14 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Blob%20Storage%3A%20S3%2C%20GCS%2C%20Azure%20Blob%2C%20MinIO&url=https://aidev.fit/en/database/blob-storage.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/database/blob-storage.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Blob%20Storage%3A%20S3%2C%20GCS%2C%20Azure%20Blob%2C%20MinIO&url=https%3A//aidev.fit/en/database/blob-storage.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/blob-storage.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=Blob%20Storage%3A%20S3%2C%20GCS%2C%20Azure%20Blob%2C%20MinIO&url=https%3A//aidev.fit/en/database/blob-storage.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=Blob%20Storage%3A%20S3%2C%20GCS%2C%20Azure%20Blob%2C%20MinIO&u=https%3A//aidev.fit/en/database/blob-storage.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=Blob%20Storage%3A%20S3%2C%20GCS%2C%20Azure%20Blob%2C%20MinIO&body=https%3A//aidev.fit/en/database/blob-storage.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/blob-storage.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-auditing.html" class="prev-next-btn prev-link">← Database Auditing: Tracking Data Changes</a><a href="/en/database/partitioning-vs-sharding.html" class="prev-next-btn next-link">Partitioning vs Sharding →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/database-backup-to-s3.html" class="related-card"><span class="related-card-title">Database Backup Strategies to Object Storage</span><span class="related-card-desc">Automate database backups to S3/GCS: incremental backups, point-in-time recovery, and retention poli</span></a><a href="/en/database/document-databases.html" class="related-card"><span class="related-card-title">Document Databases: MongoDB, CouchDB, Firestore</span><span class="related-card-desc">Compare document databases: MongoDB, CouchDB, and Firestore for flexible schema and JSON document st</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="related-card-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="related-card-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monit</span></a><a href="/en/database/database-compression.html" class="related-card"><span class="related-card-title">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</span><span class="related-card-desc">Explore database compression techniques including page-level, tuple-level, and columnar compression.</span></a><a href="/en/database/database-cost-optimization.html" class="related-card"><span class="related-card-title">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</span><span class="related-card-desc">Learn database cost optimization strategies: right-sizing instances, reserved instances, storage tie</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="related-card-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="related-card-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategi</span></a></div>
@@ -171,34 +158,17 @@
     
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

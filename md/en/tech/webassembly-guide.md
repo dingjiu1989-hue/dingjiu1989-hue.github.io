@@ -101,5 +101,3 @@ _Benchmarks from real-world tests on Chrome 130, M2 Mac. Wasm wins on CPU-bound 
 ## When Not to Use Wasm
 
 The most common Wasm mistake: porting everything to Wasm because it's "faster." The JS↔Wasm boundary has a cost (serialize → pass → deserialize), so fine-grained calls (calling a Wasm function thousands of times from a JS loop) can be slower than pure JS. The rule: use Wasm for coarse-grained, computationally intensive operations where the work done inside Wasm dwarfs the boundary cost. Batch your data, do the heavy work inside Wasm, return the result. See also: [Edge Computing Guide](</en/tech/edge-computing-guide.html>) and [Bun vs Node vs Deno](</en/compare/bun-vs-node-vs-deno.html>).
-
-**See also:** [React Hooks Complete Guide 2026: From useState to useOptimistic](</en/tech/react-hooks-complete-guide.html>), [Node.js Streams: Complete Guide to Efficient Data Processing](</en/tech/nodejs-streams-guide.html>), [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>)

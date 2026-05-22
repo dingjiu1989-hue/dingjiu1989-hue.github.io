@@ -71,5 +71,3 @@ Pepper| 32-byte random pepper stored in HSM or env var, separate from DB| No pep
 Password requirements| Minimum 8 chars, check against haveibeenpwned API| Requiring special chars that users forget; max length limits  
   
 **Bottom line:** Use session tokens for web apps and JWTs for APIs — do not use JWTs for web app sessions. Implement passkeys as your primary auth method if possible (highest security + best UX). Never roll your own crypto — use well-tested libraries (bcrypt, @simplewebauthn, jose, node-crypto). See also: [Clerk vs Auth0 vs Lucia](</en/compare/clerk-vs-auth0-vs-lucia.html>) and [Web Security Basics](</en/tech/web-security-basics.html>).
-
-**See also:** [Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each](</en/tech/testing-strategies-web-apps.html>), [WebSocket vs SSE vs Polling: Real-Time Data Patterns for Web Apps](</en/tech/websocket-vs-sse-vs-polling.html>), [Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes](</en/tech/monorepo-setup-guide.html>)

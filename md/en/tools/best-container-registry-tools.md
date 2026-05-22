@@ -79,5 +79,3 @@ JFrog Artifactory| Enterprise universal| None| Yes| 30+ formats
 
 
 Most teams end up using two registries: one cloud-native (ECR/GAR) for production and GHCR or Docker Hub for development and public images.
-
-**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)

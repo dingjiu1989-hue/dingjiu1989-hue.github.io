@@ -42,7 +42,3 @@ Site| What You Get
   * **"No attribution required"** means you don't need to credit the photographer. But if it's convenient, still do — it helps the ecosystem.
   * **Avoid images with recognizable people or brands** — those may need a model or property release even if the photo is free.
   * **Don't resell the images as-is** — that's the one thing the license doesn't allow. Modifying and using in your work is fine.
-
-
-
-**See also:** [Landing Page Conversion Optimization](</en/sidehustle/landing-page-conversion.html>), [SaaS Pricing Strategies](</en/sidehustle/saas-pricing.html>), [Freelance Pricing Guide for Developers: How to Charge What You're Worth](</en/sidehustle/freelance-pricing-guide.html>)

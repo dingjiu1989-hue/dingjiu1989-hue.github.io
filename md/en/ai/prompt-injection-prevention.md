@@ -57,5 +57,3 @@ Include fake but realistic-looking "secrets" in your system prompt that should n
     # In monitoring: alert if either string appears in any LLM output
 
 **Bottom line:** There is no silver bullet for prompt injection — use defense in depth. The highest-impact defenses are: (1) wrapping user input in delimiters, (2) least-privilege tool access tied to user auth, and (3) output validation. Treat your LLM's output the same way you treat any user input — never trust it directly. See also: [AI Agents Guide](</en/ai/ai-agents-guide.html>) and [Web Security Basics](</en/tech/web-security-basics.html>).
-
-**See also:** [AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026](</en/ai/ai-security-complete-guide.html>), [LLM Cost Optimization: Cut Your AI API Bills by 50-80% (2026 Guide)](</en/ai/llm-cost-optimization.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>)

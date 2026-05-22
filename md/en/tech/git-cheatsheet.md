@@ -99,5 +99,3 @@ See what you did| `git log --oneline -10`
 Sync with remote| `git pull --rebase`  
   
 Bookmark this page. You'll be back.
-
-**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Edge Computing in 2026: A Complete Guide for Developers](</en/tech/edge-computing-2026-guide.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>)

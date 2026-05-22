@@ -44,5 +44,3 @@ Mixed workloads| Nomad| Only orchestrator that handles non-container workloads n
 Multi-cloud or hybrid cloud| Kubernetes| Portability across AWS, GCP, Azure, on-prem  
   
 **Bottom line:** For 80% of teams, a managed Kubernetes service is the pragmatic choice. Docker Swarm is still the simplest path for "it just works." Nomad is the dark horse for heterogeneous infrastructure. See also: [Docker vs Podman](</en/compare/docker-vs-podman.html>) and [DevOps for Developers](</en/tech/devops-for-developers.html>).
-
-**See also:** [Fly.io vs Railway vs Render (2026): Best Modern PaaS for Developers?](</en/compare/fly-io-vs-railway-vs-render.html>), [Drizzle ORM vs Kysely vs Knex.js (2026): SQL Query Builder Showdown](</en/compare/drizzle-vs-kysely-vs-knex.html>), [Terraform vs Pulumi vs Crossplane (2026): Infrastructure as Code Comparison](</en/compare/terraform-vs-pulumi-vs-crossplane.html>)

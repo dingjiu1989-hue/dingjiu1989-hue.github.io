@@ -56,5 +56,3 @@ High-performance CI/CD team| **Trunk-Based Development**
 Open source project| **GitHub Flow** (fork + PR)  
   
 **Bottom line:** GitHub Flow is the right choice for 80% of teams in 2026. Start there. Evolve to Trunk-Based if your CI/CD maturity allows. Use Git Flow only if you ship versioned releases (mobile, on-premise). See also: [Git Cheatsheet](</en/tech/git-cheatsheet.html>) and [Advanced Git Guide](</en/tech/git-advanced.html>).
-
-**See also:** [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Git Workflows for Teams](</en/tech/git-workflows-2026.html>), [Docker Compose for Production: Multi-Service Deployments Done Right](</en/tech/docker-compose-production.html>)

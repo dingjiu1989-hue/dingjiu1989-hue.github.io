@@ -56,12 +56,12 @@
       "image": "https://aidev.fit/images/covers/en/tech/service-discovery.png",
       "datePublished": "2025-12-31",
       "dateModified": "2026-05-18",
-      "wordCount": "1627",
+      "wordCount": "985",
       "keywords": "Technology, Programming, DevOps",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -97,6 +97,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -108,7 +109,7 @@
         <span class="tag-cat">Programming</span>
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Service Discovery in Microservices</h1>
-      <div class="article-meta"><time datetime="2025-12-31">Published 2025-12-31</time> · <time datetime="2026-05-18">Last active 2026-05-18</time> · 0 views · 0 replies · 8 min read</div>
+      <div class="article-meta"><time datetime="2025-12-31">Published 2025-12-31</time> · <time datetime="2026-05-18">Last active 2026-05-18</time> · 232 views · 0 replies · 4 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/tech/service-discovery.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/service-discovery.png" alt="Service Discovery in Microservices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Service discovery enables services to find and communicate with each other in a distributed system. In static environments, service locations could be hardcoded. In dynamic environments like Kubernetes, service instances are ephemeral—they come and go, scale up and down, and move between hosts. Service discovery provides a mechanism for locating available service instances.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/service-discovery.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/service-discovery.png" alt="Service Discovery in Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>The Service Discovery Problem</h2>
@@ -134,32 +135,13 @@
 <p>Health checks should test meaningful service functionality. A health endpoint that returns 200 immediately upon startup is less useful than one that verifies database connectivity and internal state. Externally accessible health check endpoints enable monitoring systems and load balancers to validate service health.</p>
 <h2>When to Use Each Approach</h2>
 <p>Kubernetes environments should use Kubernetes-native discovery through Services. Non-Kubernetes environments can use Consul for comprehensive discovery with health checking. Simple environments with few services can use DNS-based discovery with health-checked records.</p>
-<p>Service discovery is foundational to distributed system reliability. Combined with health checking and load balancing, it enables resilient, self-healing systems that adapt to changing conditions automatically.</p>
-<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>.</p>
-<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
-<p><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p></div>
+<p>Service discovery is foundational to distributed system reliability. Combined with health checking and load balancing, it enables resilient, self-healing systems that adapt to changing conditions automatically.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    <details class="article-toc"><summary>Table of Contents (7)</summary><ol><li><a href="#the-service-discovery-problem">The Service Discovery Problem</a></li><li><a href="#dns-based-discovery">DNS-Based Discovery</a></li><li><a href="#consul">Consul</a></li><li><a href="#kubernetes-service-discovery">Kubernetes Service Discovery</a></li><li><a href="#client-side-vs-server-side-discovery">Client-Side vs Server-Side Discovery</a></li><li><a href="#health-checking">Health Checking</a></li><li><a href="#when-to-use-each-approach">When to Use Each Approach</a></li></ol></details>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -170,9 +152,14 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Service%20Discovery%20in%20Microservices&url=https://aidev.fit/en/tech/service-discovery.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/tech/service-discovery.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Service%20Discovery%20in%20Microservices&url=https%3A//aidev.fit/en/tech/service-discovery.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/service-discovery.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=Service%20Discovery%20in%20Microservices&url=https%3A//aidev.fit/en/tech/service-discovery.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=Service%20Discovery%20in%20Microservices&u=https%3A//aidev.fit/en/tech/service-discovery.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=Service%20Discovery%20in%20Microservices&body=https%3A//aidev.fit/en/tech/service-discovery.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/service-discovery.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/ansible-automation.html" class="prev-next-btn prev-link">← Ansible Automation: Playbooks, Roles, Inventory, and Vault</a><a href="/en/tech/chaos-engineering.html" class="prev-next-btn next-link">Chaos Engineering: Principles and Practical Tools →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/tech/microservices-communication.html" class="related-card"><span class="related-card-title">Microservices Communication Patterns</span><span class="related-card-desc">Compare synchronous and asynchronous communication patterns for microservices, with practical implem</span></a><a href="/en/tech/api-gateway-implementation.html" class="related-card"><span class="related-card-title">API Gateway Implementation Guide</span><span class="related-card-desc">Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformati</span></a><a href="/en/tech/distributed-tracing.html" class="related-card"><span class="related-card-title">Distributed Tracing with OpenTelemetry</span><span class="related-card-desc">Implement distributed tracing with OpenTelemetry covering spans, context propagation, sampling strat</span></a><a href="/en/tech/serverless-framework.html" class="related-card"><span class="related-card-title">Serverless Framework: From Zero to Production</span><span class="related-card-desc">Deploy AWS Lambda functions with infrastructure as code, local development workflows, monitoring, co</span></a><a href="/en/tech/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Principles and Practical Tools</span><span class="related-card-desc">Learn chaos engineering principles with Chaos Monkey, LitmusChaos, and Gremlin, covering steady-stat</span></a><a href="/en/tech/github-actions-advanced.html" class="related-card"><span class="related-card-title">Advanced GitHub Actions Workflows</span><span class="related-card-desc">Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching </span></a></div>
@@ -180,34 +167,17 @@
     
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

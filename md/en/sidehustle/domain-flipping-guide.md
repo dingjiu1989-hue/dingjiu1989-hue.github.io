@@ -52,5 +52,3 @@ NamePros| 0% (forum)| Peer-to-peer sales, no commission
 Dan.com| 9-15%| Clean UX, lease-to-own options  
   
 **Bottom line:** Domain flipping is a low-maintenance side hustle that rewards technical skills — automation, data analysis, and SEO knowledge. Start small: buy 5-10 undervalued domains ($10-50 each), build simple landing pages, and list them on Afternic. Reinvest profits into better domains. The developer's edge is automation: you can scan thousands of expired domains programmatically while competitors do it manually. See also: [Web Scraping Business](</en/sidehustle/web-scraping-business.html>) and [Selling Digital Products](</en/sidehustle/sell-digital-products.html>).
-
-**See also:** [Building a Web Scraping Business: Technical and Legal Guide (2026)](</en/sidehustle/web-scraping-business.html>), [Selling Stock Photos, Videos, and Digital Media as a Developer](</en/sidehustle/sell-stock-photos-videos.html>), [Bug Bounty Hunting Guide 2026: From First Bug to Consistent Income](</en/sidehustle/bug-bounty-hunting-guide.html>)

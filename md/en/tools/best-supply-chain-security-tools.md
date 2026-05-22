@@ -83,5 +83,3 @@ Sigstore/Cosign| Artifact signing| Keyless OIDC| Yes| Free
 **When you have budget:** Add Snyk for reachability analysis and license compliance. Add Chainguard Enterprise for policy enforcement and centralized visibility.
 
 **When you're enterprise scale:** Anchor Enterprise for policy-as-code across 100+ teams. Chainguard for SLSA Level 3 provenance across your entire container fleet.
-
-**See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>), [Best Terminal Emulators 2026](</en/tools/terminal-emulators.html>)

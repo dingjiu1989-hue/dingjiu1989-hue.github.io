@@ -55,5 +55,3 @@ Channel| Focus| Why Subscribe
 **developedbyed**|  Creative web dev, design| Building beautiful UI with creative coding. Inspires you to make things that look great.  
   
 **Bottom line:** Subscribe to 5-10, not all 20. Mix one web dev channel (Fireship/Theo), one architecture channel (ByteByteGo), and one career channel for a balanced learning diet. YouTube is free mentorship — use it. See also: [Developer Podcasts](</en/tools/best-dev-podcasts.html>) and [Programming Books](</en/tools/best-programming-books.html>).
-
-**See also:** [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>), [Best Developer Hardware 2026: Keyboards, Monitors, Chairs, and Desk Setups](</en/tools/best-developer-hardware-2026.html>), [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>)

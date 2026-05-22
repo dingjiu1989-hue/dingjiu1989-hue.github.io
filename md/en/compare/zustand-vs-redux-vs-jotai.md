@@ -68,5 +68,3 @@ Data fetching + state together| **RTK Query** or **TanStack Query**
 Small to medium app, fast setup| **Zustand**  
   
 **Bottom line:** Zustand is the default choice for most React apps in 2026 — minimal, fast, and TypeScript-first. Redux Toolkit for large teams that want explicit architecture. Jotai for apps where atomic state composition clicks. See also: [Frontend Framework Comparison](</en/compare/react-vs-vue-vs-angular-vs-svelte.html>) and [Testing Strategies](</en/tech/testing-strategies-web-apps.html>).
-
-**See also:** [Best React Component Libraries 2026: shadcn/ui vs Radix UI vs Headless UI vs Ark UI vs React Aria](</en/compare/component-library-comparison.html>), [Next.js vs Nuxt vs SvelteKit (2026): Best Full-Stack Meta-Framework?](</en/compare/nextjs-vs-nuxt-vs-sveltekit.html>), [Prisma vs Drizzle vs TypeORM (2026): Best TypeScript ORM?](</en/compare/prisma-vs-drizzle-vs-typeorm.html>)

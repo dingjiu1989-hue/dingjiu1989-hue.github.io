@@ -60,5 +60,3 @@ Tool| What It Is| Why Use It
 
 
 All tools above are free for individual developers. Bookmark this page and come back next time you set up a new machine.
-
-**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Code Formatters and Linters](</en/tools/code-formatters-linters.html>), [Best Database GUI Clients](</en/tools/database-clients.html>)

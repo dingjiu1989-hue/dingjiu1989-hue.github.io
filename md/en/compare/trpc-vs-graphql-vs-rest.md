@@ -66,5 +66,3 @@ Simple CRUD, file uploads, or CDN caching| **REST**
 Internal tool or admin panel (TS stack)| **tRPC**  
   
 **Bottom line:** tRPC for TypeScript monoliths where development speed matters. GraphQL for complex data models with multiple clients. REST for public APIs and when you need universal compatibility. See our [REST API Best Practices](</en/tech/rest-api-best-practices.html>) guide for implementation details.
-
-**See also:** [TypeScript vs JavaScript in 2026: Is JavaScript Still Worth Using?](</en/compare/typescript-vs-javascript.html>), [Next.js vs Remix vs Astro](</en/compare/nextjs-vs-remix.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>)

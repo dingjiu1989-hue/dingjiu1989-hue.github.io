@@ -69,5 +69,3 @@ Descending Index| Index sorted DESC (not default ASC)| ORDER BY col DESC is the 
 
 
 **Bottom line:** B-Tree indexes solve 90% of indexing needs — they handle =, range, sorting, and prefix matching. GIN is essential for JSONB and full-text search workloads. The most common indexing mistakes: (1) indexing columns that are never queried, (2) missing composite indexes for multi-column WHERE clauses, and (3) not using covering indexes (INCLUDE) to enable Index-Only Scans. Run the unused index query above quarterly — dropping unused indexes speeds up every INSERT/UPDATE. See also: [PostgreSQL Query Optimization](</en/tech/postgresql-query-optimization.html>) and [Database Design Fundamentals](</en/tech/database-design-fundamentals.html>).
-
-**See also:** [Database Design Fundamentals: Normalization, Indexing, and Schema Design](</en/tech/database-design-fundamentals.html>), [Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching](</en/tech/caching-strategies-web-apps.html>), [Rate Limiting Strategies for APIs: Token Bucket, Sliding Window, and Beyond](</en/tech/rate-limiting-strategies.html>)

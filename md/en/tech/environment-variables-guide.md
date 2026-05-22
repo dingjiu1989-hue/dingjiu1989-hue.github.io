@@ -66,5 +66,3 @@ Same API key for dev + prod| Use separate keys. Stripe has test mode keys. Dev d
 Secrets in Docker images| Inject at runtime, not at build time. Use docker run -e or Docker secrets.  
   
 **Bottom line:** Validate env vars at startup with Zod. Never put secrets in NEXT_PUBLIC_* or Git. Use Doppler/Infisical for teams, platform-native for side projects. Document every variable in .env.example. See also: [Web Security Basics](</en/tech/web-security-basics.html>) and [Error Handling Best Practices](</en/tech/error-handling-best-practices.html>).
-
-**See also:** [CI/CD Pipeline Complete Guide 2026: From Git Push to Production](</en/tech/ci-cd-pipeline-guide.html>), [Configuration Management](</en/tech/configuration-management.html>), [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>)

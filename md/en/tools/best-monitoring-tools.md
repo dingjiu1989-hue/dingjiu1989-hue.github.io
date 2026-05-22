@@ -47,5 +47,3 @@ Need AI/ML-driven insights| Datadog or New Relic| Best AI features — anomaly d
 Large enterprise (100+ servers)| Datadog (negotiate) or Grafana Cloud| Negotiate enterprise pricing or own your stack with Grafana  
   
 **Bottom line:** Start with Grafana Cloud's generous free tier — it covers most small-to-medium teams. Graduate to Datadog when you need the integrations and AI features and can justify the cost. The most important decision is not the tool — it is committing to OpenTelemetry as your instrumentation standard, so you can switch observability backends without re-instrumenting your entire codebase. See also: [AI for DevOps](</en/ai/ai-devops-tools.html>) and [DevOps for Developers](</en/tech/devops-for-developers.html>).
-
-**See also:** [Best API Documentation Tools 2026: OpenAPI, Postman, Mintlify, ReadMe](</en/tools/best-api-documentation-tools.html>), [Best Error Tracking Tools 2026: Sentry vs Datadog vs LogRocket vs Bugsnag](</en/tools/best-error-tracking-tools.html>), [Best Uptime Monitoring Tools 2026: Better Uptime vs Pingdom vs UptimeRobot vs Checkly](</en/tools/best-uptime-monitoring-tools.html>)

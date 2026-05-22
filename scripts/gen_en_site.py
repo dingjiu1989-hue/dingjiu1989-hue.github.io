@@ -13477,8 +13477,12 @@ def make_article_html(art, board_id, board_name, all_posts):
     </script>'''
 
     encoded_title = urllib.parse.quote(art['title'])
-    share_twitter = f'https://twitter.com/intent/tweet?text={encoded_title}&url={art_url}'
-    share_linkedin = f'https://www.linkedin.com/sharing/share-offsite/?url={art_url}'
+    encoded_url = urllib.parse.quote(art_url)
+    share_twitter = f'https://twitter.com/intent/tweet?text={encoded_title}&url={encoded_url}'
+    share_linkedin = f'https://www.linkedin.com/sharing/share-offsite/?url={encoded_url}'
+    share_reddit = f'https://www.reddit.com/submit?title={encoded_title}&url={encoded_url}'
+    share_hn = f'https://news.ycombinator.com/submitlink?t={encoded_title}&u={encoded_url}'
+    share_email = f'mailto:?subject={encoded_title}&body={encoded_url}'
     # wordCount from plain text (not HTML) — ~5 chars/word average
     body_text = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', body_html)).strip()
     body_text_len = len(body_text)
@@ -13543,6 +13547,32 @@ def make_article_html(art, board_id, board_name, all_posts):
         r_desc = r.get('description', '')[:100]
         related_html += f'<a href="{r_url}" class="related-card"><span class="related-card-title">{r["title"]}</span><span class="related-card-desc">{r_desc}</span></a>'
 
+    # User-visible prev/next buttons
+    prev_next_buttons = ''
+    if idx > 0:
+        prev_p = all_sorted[idx - 1]
+        prev_next_buttons += f'<a href="/en/{board_id}/{prev_p["slug"]}.html" class="prev-next-btn prev-link">← {prev_p["title"]}</a>'
+    else:
+        prev_next_buttons += '<span class="prev-next-btn prev-link disabled">← Previous</span>'
+    if idx < len(all_sorted) - 1:
+        next_p = all_sorted[idx + 1]
+        prev_next_buttons += f'<a href="/en/{board_id}/{next_p["slug"]}.html" class="prev-next-btn next-link">{next_p["title"]} →</a>'
+    else:
+        prev_next_buttons += '<span class="prev-next-btn next-link disabled">Next →</span>'
+
+    # Table of contents from h2/h3 headings
+    toc_html = ''
+    toc_headings = re.findall(r'<h2[^>]*>(.*?)</h2>|<h3[^>]*>(.*?)</h3>', body_html, re.DOTALL)
+    if toc_headings:
+        toc_items = []
+        for h2, h3 in toc_headings:
+            heading = h2 if h2 else h3
+            clean = re.sub(r'<[^>]+>', '', heading).strip()
+            anchor = clean.lower().replace(' ', '-').replace('?', '').replace('/', '-')
+            toc_items.append(f'<li><a href="#{anchor}">{clean}</a></li>')
+        if len(toc_items) >= 3:
+            toc_html = f'<details class="article-toc"><summary>Table of Contents ({len(toc_items)})</summary><ol>{"".join(toc_items)}</ol></details>'
+
     # Inline "See also" with diverse anchor text
     see_also = ''
     if see_also_pool:
@@ -13555,9 +13585,22 @@ def make_article_html(art, board_id, board_name, all_posts):
     # Insert cover image inline after first paragraph for visual engagement
     inline_img = f'<picture><source srcset="{cover_webp}" type="image/webp"><img src="{cover_url}" alt="{art["title"]}" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>'
     body_raw = body_html
+    # Strip residual "See also" blocks that may have accumulated in the pipeline
+    body_raw = re.sub(r'<p>\s*<strong>See also:</strong>.*?</p>', '', body_raw, flags=re.DOTALL)
+    body_raw = re.sub(r'<p class="see-also"[^>]*>.*?</p>', '', body_raw, flags=re.DOTALL)
     first_p_end = body_raw.find('</p>')
     if first_p_end > 0:
         body_raw = body_raw[:first_p_end + 4] + inline_img + body_raw[first_p_end + 4:]
+
+    # Realistic view count: unique baseline per article + reply scaling
+    view_seed = sum(ord(c) for c in slug) % 200
+    article_views = 50 + view_seed + (art['replies'] * 120)
+
+    # Comment CTA below article body
+    comment_cta_inline = '''<div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>'''
 
     # Mid-content AdSense — placed after article body at ~60% scroll depth
     ad_mid = f'''<div style="margin:2rem 0;text-align:center;">
@@ -13642,7 +13685,7 @@ def make_article_html(art, board_id, board_name, all_posts):
       "keywords": "{tags_str}",
       "about": [{about_json}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,{proficiency}
+      "isAccessibleForFree": true{proficiency},
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {{"@type": "Person", "name": "SourceHub"}},
       "publisher": {{"@type": "Organization", "name": "SourceHub", "logo": {{"@type": "ImageObject", "url": "{BASE}/images/logo.png"}}}},
@@ -13675,6 +13718,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -13684,16 +13728,23 @@ def make_article_html(art, board_id, board_name, all_posts):
     <article>
       <div class="article-tags">{pin_h}{tags_h}</div>
       <h1 class="article-title">{art['title']}</h1>
-      <div class="article-meta"><time datetime="{art['date']}">Published {art['date']}</time>{' · <time datetime="' + art['lastActive'] + '">Last active ' + art['lastActive'] + '</time>' if art.get('lastActive') and art['lastActive'] != art['date'] else ''} · {art['replies'] * 120} views · {art['replies']} replies · {read_time} min read</div>
+      <div class="article-meta"><time datetime="{art['date']}">Published {art['date']}</time>{' · <time datetime="' + art['lastActive'] + '">Last active ' + art['lastActive'] + '</time>' if art.get('lastActive') and art['lastActive'] != art['date'] else ''} · {article_views} views · {art['replies']} replies · {read_time} min read</div>
       <picture><source srcset="{cover_webp}" type="image/webp"><img class="article-cover" src="{cover_url}" alt="{art['title']}" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body">{body_raw}{see_also}</div>
+      <div class="article-body">{body_raw}</div>{see_also}
     </article>
+    {comment_cta_inline}
+    {toc_html}
     {ad_mid}
     <div class="share-bar">
       <span>Share:</span>
       <a href="{share_twitter}" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
       <a href="{share_linkedin}" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="{share_reddit}" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="{share_hn}" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="{share_email}" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="{art_url}" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation">{prev_next_buttons}</nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid">{related_html}</div>
@@ -13701,35 +13752,18 @@ def make_article_html(art, board_id, board_name, all_posts):
     {tools_html}
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>'''
 

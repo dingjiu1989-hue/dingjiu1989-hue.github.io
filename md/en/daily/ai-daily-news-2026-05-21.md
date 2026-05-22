@@ -77,17 +77,3 @@ _Which of today's AI developments excites you most? Are there any trends you thi
 * * *
 
 _AI Daily Digest is compiled from trusted technology news sources. For corrections or suggestions, contact us at the project repository._
-
-**See also:** [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>), [MySQL vs MariaDB: The Complete Comparison](</en/compare/mysql-vs-mariadb.html>)
-
-**See also:** [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>), [MySQL vs MariaDB: The Complete Comparison](</en/compare/mysql-vs-mariadb.html>)
-
-**See also:** [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
-
-**See also:** [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
-
-**See also:** [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
-
-**See also:** [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
-
-**See also:** [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)

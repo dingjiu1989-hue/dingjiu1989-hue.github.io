@@ -58,5 +58,3 @@ Sketchfab| 30%| 3D models (best 3D viewer)| No
     # Portfolio size is the biggest lever — upload consistently
 
 **Bottom line:** Selling stock media is the ultimate passive income — but it requires a portfolio of 500+ assets to generate meaningful monthly income ($500+). Developers have an edge in technical media (code snippets, architecture diagrams, 3D device mockups, API illustrations) where non-technical creators cannot compete. Start with what you already create (diagrams for blog posts, code snippets you've written) and list them today. See also: [Selling UI Kits and Design Assets](</en/sidehustle/sell-ui-kits-design-assets.html>) and [Selling Code Templates](</en/sidehustle/selling-code-templates.html>).
-
-**See also:** [Selling UI Kits, Icons, and Design Assets as a Developer in 2026](</en/sidehustle/sell-ui-kits-design-assets.html>), [Online Coding Tutoring and Mentoring: Complete Developer Guide (2026)](</en/sidehustle/online-coding-tutoring-guide.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>)

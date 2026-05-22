@@ -48,5 +48,3 @@ Are on a budget + Mac/Windows| Sourcetree| Free, mature, good feature set
 Do a lot of rebasing| Fork or GitKraken| Best interactive rebase UIs  
   
 **Bottom line:** Fork is the best overall value — fast, one-time purchase, and the interactive rebase + conflict resolution are best in class. GitKraken is the most polished if you can justify the subscription. GitFiend is the best free option for cross-platform users. A GUI does not replace the CLI — it complements it for visualization-heavy tasks. See also: [Git Commands Cheatsheet](</en/tech/git-cheatsheet.html>) and [Advanced Git Guide](</en/tech/git-advanced.html>).
-
-**See also:** [Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom](</en/tools/best-log-management-tools.html>), [Best API Clients 2026: Postman vs Bruno vs Insomnia vs HTTPie vs Thunder Client](</en/tools/best-api-clients-2026.html>), [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>)

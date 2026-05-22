@@ -60,8 +60,8 @@
       "keywords": "Event-Driven, Architecture, Kafka, Microservices",
       "about": [{"@type": "Thing", "name": "Event-Driven"}, {"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "Kafka"}, {"@type": "Thing", "name": "Microservices"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,,
-      "proficiencyLevel": "Intermediate"
+      "isAccessibleForFree": true,
+      "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -108,6 +108,7 @@
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
+<div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container article-container">
@@ -122,7 +123,7 @@
         <span class="tag-cat">Microservices</span>
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
       <h1 class="article-title">Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared</h1>
-      <div class="article-meta"><time datetime="2025-10-17">Published 2025-10-17</time> · <time datetime="2026-05-06">Last active 2026-05-06</time> · 9240 views · 77 replies · 4 min read</div>
+      <div class="article-meta"><time datetime="2025-10-17">Published 2025-10-17</time> · <time datetime="2026-05-06">Last active 2026-05-06</time> · 9428 views · 77 replies · 4 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/tech/event-driven-architecture-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/event-driven-architecture-guide.png" alt="Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Event-driven architecture (EDA) is the pattern behind the most scalable systems — from Netflix's microservices to Stripe's payment processing. Instead of services calling each other directly (request-response), they communicate through events (messages about things that happened). This guide covers the patterns, message brokers, and practical implementation of event-driven systems.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/event-driven-architecture-guide.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/event-driven-architecture-guide.png" alt="Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 
@@ -185,8 +186,13 @@ POST /orders {status: PENDING, items: [...]}
 # Key: each compensating action must be idempotent
 # (refunding twice = bad; but idempotent refund = safe to retry)</code></pre>
 
-<p><strong>Bottom line:</strong> Start with simple event notification (one service emits, others react) before adopting event sourcing or CQRS. For most projects, RabbitMQ or Redis Streams provide enough throughput with simpler operations. Only reach for Kafka when you need replay, long-term retention, or 1M+ msg/s throughput. The biggest mistake is going fully event-driven when simple request-response would suffice — EDA is a powerful tool, not a default architecture. See also: <a href="/en/tech/microservices-vs-monolith.html">Microservices vs Monolith</a> and <a href="/en/tech/webhook-implementation-guide.html">Webhook Implementation Guide</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/graphql-api-design.html">GraphQL API Design: Schema Best Practices, Federation, and Performance</a>, <a href="/en/tech/system-design-interview-guide.html">System Design Interview Prep: Complete Developer Guide (2026)</a>, <a href="/en/tech/database-sharding-strategies.html">Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns</a></p></div>
+<p><strong>Bottom line:</strong> Start with simple event notification (one service emits, others react) before adopting event sourcing or CQRS. For most projects, RabbitMQ or Redis Streams provide enough throughput with simpler operations. Only reach for Kafka when you need replay, long-term retention, or 1M+ msg/s throughput. The biggest mistake is going fully event-driven when simple request-response would suffice — EDA is a powerful tool, not a default architecture. See also: <a href="/en/tech/microservices-vs-monolith.html">Microservices vs Monolith</a> and <a href="/en/tech/webhook-implementation-guide.html">Webhook Implementation Guide</a>.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/graphql-api-design.html">GraphQL API Design: Schema Best Practices, Federation, and Performance</a>, <a href="/en/tech/system-design-interview-guide.html">System Design Interview Prep: Complete Developer Guide (2026)</a>, <a href="/en/tech/database-sharding-strategies.html">Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns</a></p>
     </article>
+    <div class="comment-cta-inline">
+      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
+      <a href="#giscus-section">Join the discussion ↓</a>
+    </div>
+    <details class="article-toc"><summary>Table of Contents (4)</summary><ol><li><a href="#core-event-driven-patterns">Core Event-Driven Patterns</a></li><li><a href="#message-broker-comparison">Message Broker Comparison</a></li><li><a href="#when-to-go-event-driven">When to Go Event-Driven</a></li><li><a href="#implementing-a-saga:-order-fulfillment-example">Implementing a Saga: Order Fulfillment Example</a></li></ol></details>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
@@ -197,9 +203,14 @@ POST /orders {status: PENDING, items: [...]}
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Event-Driven%20Architecture%20Patterns%3A%20Kafka%2C%20RabbitMQ%2C%20SQS%2C%20and%20EventBridge%20Compared&url=https://aidev.fit/en/tech/event-driven-architecture-guide.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/tech/event-driven-architecture-guide.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Event-Driven%20Architecture%20Patterns%3A%20Kafka%2C%20RabbitMQ%2C%20SQS%2C%20and%20EventBridge%20Compared&url=https%3A//aidev.fit/en/tech/event-driven-architecture-guide.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/event-driven-architecture-guide.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://www.reddit.com/submit?title=Event-Driven%20Architecture%20Patterns%3A%20Kafka%2C%20RabbitMQ%2C%20SQS%2C%20and%20EventBridge%20Compared&url=https%3A//aidev.fit/en/tech/event-driven-architecture-guide.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+      <a href="https://news.ycombinator.com/submitlink?t=Event-Driven%20Architecture%20Patterns%3A%20Kafka%2C%20RabbitMQ%2C%20SQS%2C%20and%20EventBridge%20Compared&u=https%3A//aidev.fit/en/tech/event-driven-architecture-guide.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
+      <a href="mailto:?subject=Event-Driven%20Architecture%20Patterns%3A%20Kafka%2C%20RabbitMQ%2C%20SQS%2C%20and%20EventBridge%20Compared&body=https%3A//aidev.fit/en/tech/event-driven-architecture-guide.html" aria-label="Share via Email">Email</a>
+      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/event-driven-architecture-guide.html" aria-label="Copy link">Copy</button>
     </div>
+    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/grpc-guide.html" class="prev-next-btn prev-link">← gRPC Complete Guide 2026: Protocol Buffers, Service Definitions, and Production Patterns</a><a href="/en/tech/webhook-implementation-guide.html" class="prev-next-btn next-link">Webhook Implementation: Design, Security, and Best Practices (2026) →</a></nav>
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/architecture/system-design-fundamentals-2026.html" class="related-card"><span class="related-card-title">System Design Fundamentals 2026: A Developer Guide to Scalable Applications</span><span class="related-card-desc">System design concepts every developer should know — microservices vs monolith, CQRS, event-driven a</span></a><a href="/en/tech/microservices-vs-monolith.html" class="related-card"><span class="related-card-title">Microservices vs Monolith (2026): Making the Right Architectural Choice</span><span class="related-card-desc">Honest comparison of monolith and microservice architectures — when each makes sense, the real cost </span></a><a href="/en/tech/distributed-transactions-guide.html" class="related-card"><span class="related-card-title">Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency</span><span class="related-card-desc">Master distributed transaction patterns for microservices — choreographed sagas, orchestrated sagas,</span></a><a href="/en/architecture/event-driven-architecture.html" class="related-card"><span class="related-card-title">Event-Driven Architecture: Patterns and Practice</span><span class="related-card-desc">Event-driven architecture with event sourcing, pub/sub, Kafka streaming, event schemas, idempotent c</span></a><a href="/en/tech/react-server-components-guide.html" class="related-card"><span class="related-card-title">React Server Components Guide: Architecture, Patterns, and When to Use RSC in 2026</span><span class="related-card-desc">Deep dive into React Server Components — server vs client components, streaming patterns, Server Act</span></a><a href="/en/architecture/asynchronous-communication.html" class="related-card"><span class="related-card-title">Asynchronous Communication in Distributed Systems</span><span class="related-card-desc">Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and pattern</span></a></div>
@@ -207,34 +218,17 @@ POST /orders {status: PENDING, items: [...]}
     
   </div>
   <div class="container" style="max-width:750px;">
-    <div class="discussion-cta" style="margin:2rem 0 1rem;padding:1.25rem 1.5rem;background:#f0f6ff;border:1px solid #d0d7de;border-radius:8px;text-align:center;">
-      <p style="font-size:0.95rem;color:#24292f;margin-bottom:0.4rem;"><strong>💬 Join the Discussion</strong></p>
-      <p style="font-size:0.85rem;color:#656d76;margin:0;">
-        Have thoughts on this article? Found it helpful? Disagree?
-        <a href="#giscus-section" style="font-weight:600;">Leave a comment below</a>
-        — your insights help other readers too.
-      </p>
+    <div class="discussion-cta">
+      <p><strong>Join the Discussion</strong></p>
+      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
+      <a href="#giscus-section">Leave a comment</a>
     </div>
-    <div id="giscus-section" class="giscus"></div>
+    <div id="giscus-section" data-giscus-loaded="false"></div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
-<script src="https://giscus.app/client.js"
-  data-repo="dingjiu1989-hue/dingjiu1989-hue.github.io"
-  data-repo-id="R_kgDOSWcDOw"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOSWcDO84C9bsh"
-  data-mapping="pathname"
-  data-strict="1"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="light"
-  data-lang="en"
-  crossorigin="anonymous"
-  async>
-</script>
 </body>
 </html>

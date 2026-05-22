@@ -133,6 +133,4 @@ Count files in directory| `ls -1 | wc -l`
 See disk usage of all mounts| `df -h`  
 Check if a port is open| `nc -zv host 443`  
 Watch command output every 2s| `watch -n 2 command`  
-Create alias permanently| `echo 'alias ll="ls -la"' >> ~/.bashrc`  
-  
-**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>), [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>)
+Create alias permanently| `echo 'alias ll="ls -la"' >> ~/.bashrc`

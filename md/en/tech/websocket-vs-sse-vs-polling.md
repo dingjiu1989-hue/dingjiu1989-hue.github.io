@@ -113,5 +113,3 @@ Collaborative editing| **WebSocket** (or CRDT)| Low latency bidirectional requir
 Simple status check| **Short Polling**|  If data changes every 5+ minutes, polling is fine.  
   
 **Bottom line:** Use SSE for server→client streaming — it's simpler than WebSocket, HTTP/2 friendly, and has built-in reconnection. Use WebSocket only when you need bidirectional communication. Use polling only as a last resort. Server-Sent Events is the most underrated real-time pattern. See also: [Backend Framework Comparison](</en/compare/hono-vs-express-vs-fastify.html>) and [Edge Functions Comparison](</en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html>).
-
-**See also:** [Advanced TypeScript Patterns: Generics, Mapped Types, and Template Literals](</en/tech/typescript-advanced-patterns.html>), [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs](</en/tech/api-security-best-practices.html>)

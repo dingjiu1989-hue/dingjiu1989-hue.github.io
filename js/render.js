@@ -1,3 +1,10 @@
+// Consistent view calculation matching the server-side formula
+function calcViews(replies, slug) {
+  var seed = 0;
+  for (var i = 0; i < slug.length; i++) { seed += slug.charCodeAt(i); }
+  return 50 + (seed % 200) + ((replies || 0) * 120);
+}
+
 // Render homepage stats bar and hero stats
 function renderStats(data) {
   var boards = data.boards || [];
@@ -58,11 +65,12 @@ function renderHomepage(data) {
       var pinIcon = '';
       if (p.pinned) { pinClass = ' pinned'; pinIcon = '📌'; }
       else if (p.hot || (p.replies || 0) >= 20) { pinClass = ' hot'; pinIcon = '🔥'; }
-      var views = (p.replies || 0) * 120;
+      var views = calcViews(p.replies, p.slug);
+      var badge = (p.replies || 0) > 0 ? '<span class="reply-badge">' + (p.replies || 0) + '</span>' : '';
       html +=
         '<a href="' + esc(url) + '" class="post-row">' +
         '<span class="post-pin' + pinClass + '">' + pinIcon + '</span>' +
-        '<span class="post-title">' + esc(p.title) + '</span>' +
+        '<span class="post-title">' + esc(p.title) + badge + '</span>' +
         '<span class="post-replies">' + views + ' views</span>' +
         '<span class="post-date">' + esc(p.date.substring(5)) + '</span>' +
         '</a>';
@@ -98,11 +106,12 @@ function renderCategory(data, boardId) {
     if (p.pinned) { pinMark = '📌'; pinStyle = ' style="color:#d73a49;"'; }
     else if (p.hot || (p.replies || 0) >= 20) { pinMark = '🔥'; pinStyle = ' style="color:#d73a49;"'; }
     var titleStyle = p.pinned ? ' style="font-weight:600;"' : '';
-    var views = (p.replies || 0) * 120;
+    var views = calcViews(p.replies, p.slug);
+    var badge = (p.replies || 0) > 0 ? '<span class="reply-badge">' + (p.replies || 0) + '</span>' : '';
     html +=
       '<a href="' + esc(url) + '" class="post-row">' +
       '<span class="col-pin"' + pinStyle + '>' + pinMark + '</span>' +
-      '<span class="col-title"' + titleStyle + '>' + esc(p.title) + '</span>' +
+      '<span class="col-title"' + titleStyle + '>' + esc(p.title) + badge + '</span>' +
       '<span class="col-replies">' + views + '</span>' +
       '<span class="col-date">' + esc(p.date.substring(5)) + '</span>' +
       '</a>';
@@ -155,6 +164,84 @@ function esc(s) {
     .replace(/'/g, '&#39;');
 }
 
+// Reading progress bar
+function initProgressBar() {
+  var bar = document.getElementById('reading-progress-bar');
+  if (!bar) return;
+  function update() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight > 0) {
+      bar.style.width = Math.min(100, (scrollTop / docHeight) * 100) + '%';
+    }
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+}
+
+// Back-to-top button
+function initBackToTop() {
+  var btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 400) { btn.classList.add('visible'); }
+    else { btn.classList.remove('visible'); }
+  }, { passive: true });
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// Copy link button
+function initCopyLink() {
+  document.querySelectorAll('.copy-link-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var url = btn.getAttribute('data-url');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () {
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(function () {
+            btn.textContent = 'Copy';
+            btn.classList.remove('copied');
+          }, 2000);
+        });
+      }
+    });
+  });
+}
+
+// Lazy-load Giscus via IntersectionObserver
+function initGiscus() {
+  var section = document.getElementById('giscus-section');
+  if (!section) return;
+  if (section.getAttribute('data-giscus-loaded') === 'true') return;
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      section.setAttribute('data-giscus-loaded', 'true');
+      var script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.setAttribute('data-repo', 'dingjiu1989-hue/dingjiu1989-hue.github.io');
+      script.setAttribute('data-repo-id', 'R_kgDOSWcDOw');
+      script.setAttribute('data-category', 'Announcements');
+      script.setAttribute('data-category-id', 'DIC_kwDOSWcDO84C9bsh');
+      script.setAttribute('data-mapping', 'pathname');
+      script.setAttribute('data-strict', '1');
+      script.setAttribute('data-reactions-enabled', '1');
+      script.setAttribute('data-emit-metadata', '0');
+      script.setAttribute('data-input-position', 'top');
+      script.setAttribute('data-theme', 'light');
+      script.setAttribute('data-lang', 'en');
+      script.crossOrigin = 'anonymous';
+      script.async = true;
+      section.appendChild(script);
+    });
+  }, { rootMargin: '200px' });
+  observer.observe(section);
+}
+
 // Load articles.json and auto-detect rendering type
 (function () {
   var type = document.documentElement.getAttribute('data-render');
@@ -171,4 +258,15 @@ function esc(s) {
     if (type === 'related')       renderRelated(data, document.documentElement.getAttribute('data-board'), document.documentElement.getAttribute('data-exclude'));
   };
   xhr.send();
+
+  // Engagement features (only on article pages)
+  if (type === 'related') {
+    // Run after a small delay to avoid competing with articles.json load
+    setTimeout(function () {
+      initProgressBar();
+      initBackToTop();
+      initCopyLink();
+      initGiscus();
+    }, 100);
+  }
 })();

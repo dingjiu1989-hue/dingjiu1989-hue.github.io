@@ -93,7 +93,3 @@ Your first prompt rarely produces a perfect result. Use the conversation like a 
   * **Asking for too much at once** — A 5,000-word article with 10 sections will be shallow. Ask for one section at a time.
   * **Not providing examples** — When you care about format or style, show 1-2 examples. It's the most efficient way to communicate what you want.
   * **Accepting the first answer** — The first response is a draft. Push back: "Make it more concise" or "That analogy doesn't work — try another one."
-
-
-
-**See also:** [Best LLMs for Coding in 2026: Claude vs GPT-4o vs Gemini vs DeepSeek vs CodeLlama](</en/ai/best-llms-for-coding-2026.html>), [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [How to Build a Custom GPT Plugin: Complete Developer Guide](</en/ai/build-chatgpt-plugin.html>)
