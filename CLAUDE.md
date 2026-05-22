@@ -17,6 +17,8 @@ Live: https://aidev.fit (via ghost domain dingjiu1989-hue.github.io)
 | `scripts/indexnow_submit.py` | Push URL changes to IndexNow (Bing) |
 | `scripts/register_new_articles.py` | Register new articles into sitemap + feeds |
 | `scripts/ping_search_engines.py` | Ping Google/Bing/WebSub/IndexNow after builds |
+| `scripts/crawler_health_check.py` | Verify all crawler discovery endpoints (run hourly) |
+| `scripts/gsc_analyze.py` | Pull GSC search performance report (28-day window) |
 | `scripts/maintain.py` | Full rebuild: site + AI files + RSS + feeds + covers |
 | `.github/workflows/maintenance.yml` | Hourly rebuild via GitHub Actions |
 | `.github/workflows/devto-syndicate.yml` | Dev.to syndication every 3h |
