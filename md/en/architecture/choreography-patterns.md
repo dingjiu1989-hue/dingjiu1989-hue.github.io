@@ -93,3 +93,5 @@ Many organizations use a hybrid approach: choreography for simple, stable workfl
 **See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
 
 **See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)

@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/query-parameters.webp" type="image/webp" fetchpriority="high">
     <title>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection — SourceHub</title>
     <meta name="description" content="Learn query parameterization in PostgreSQL: bind parameters, prepared statements, plan caching, and protection against SQL injection attacks.">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Database, Backend, Data">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/query-parameters.html">
     <link rel="canonical" href="https://aidev.fit/en/database/query-parameters.html">
     <link rel="prev" href="https://aidev.fit/en/database/schema-design.html">
@@ -44,17 +44,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection",
       "description": "Learn query parameterization in PostgreSQL: bind parameters, prepared statements, plan caching, and protection against SQL injection attacks.",
       "image": "https://aidev.fit/images/covers/en/database/query-parameters.png",
       "datePublished": "2026-04-08",
       "dateModified": "2026-05-01",
-      "wordCount": "2605",
+      "wordCount": "2644",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -100,7 +101,7 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h1>
-      <div class="article-meta">Published 2026-04-08 · Last active 2026-05-01 · 0 views · 0 replies · 13 min read</div>
+      <div class="article-meta"><time datetime="2026-04-08">Published 2026-04-08</time> · <time datetime="2026-05-01">Last active 2026-05-01</time> · 0 views · 0 replies · 13 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/database/query-parameters.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/query-parameters.png" alt="Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection </p><picture><source srcset="https://aidev.fit/images/covers/en/database/query-parameters.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/query-parameters.png" alt="Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Parameterized queries are simultaneously the most important security practice and a significant performance optimization. This article explains how bind parameters work, how PostgreSQL caches query plans, and why parameterization is non-negotiable. </p>
@@ -247,6 +248,7 @@
 <p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>

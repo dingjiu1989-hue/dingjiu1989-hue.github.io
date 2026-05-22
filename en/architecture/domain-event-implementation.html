@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/domain-event-implementation.webp" type="image/webp" fetchpriority="high">
     <title>Domain Event Implementation: Publishing, Handling, and Testing — SourceHub</title>
     <meta name="description" content="Implement domain events in DDD: event definitions, publishing patterns, handlers, and testing strategies.">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/domain-event-implementation.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/domain-event-implementation.html">
     <link rel="prev" href="https://aidev.fit/en/architecture/priority-queue.html">
@@ -44,21 +44,25 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "Domain Event Implementation: Publishing, Handling, and Testing",
       "description": "Implement domain events in DDD: event definitions, publishing patterns, handlers, and testing strategies.",
       "image": "https://aidev.fit/images/covers/en/architecture/domain-event-implementation.png",
       "datePublished": "2026-05-07",
       "dateModified": "2026-05-18",
-      "wordCount": "719",
+      "wordCount": "746",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/domain-event-implementation.html"},
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/domain-event-implementation-publishing-handling-and-testing-4okj"
+      ],
       "articleBody": "Implement domain events in DDD: event definitions, publishing patterns, handlers, and testing strategies."
     }
     </script>
@@ -97,7 +101,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Domain Event Implementation: Publishing, Handling, and Testing</h1>
-      <div class="article-meta">Published 2026-05-07 · Last active 2026-05-18 · 0 views · 0 replies · 3 min read</div>
+      <div class="article-meta"><time datetime="2026-05-07">Published 2026-05-07</time> · <time datetime="2026-05-18">Last active 2026-05-18</time> · 0 views · 0 replies · 3 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/domain-event-implementation.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/domain-event-implementation.png" alt="Domain Event Implementation: Publishing, Handling, and Testing" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Domain events capture significant business occurrences within a domain-driven system. When a domain expert says "when the order is shipped, send an invoice," the "order shipped" is a domain event. Events are named in the past tense: OrderShipped, PaymentReceived, InvoiceGenerated.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/domain-event-implementation.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/domain-event-implementation.png" alt="Domain Event Implementation: Publishing, Handling, and Testing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Event Definition</h2>
@@ -111,6 +115,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>

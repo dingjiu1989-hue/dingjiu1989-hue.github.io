@@ -75,3 +75,5 @@ Ambassadors add network hop latency. Measure the performance impact before deplo
 **See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>)
 
 **See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>)

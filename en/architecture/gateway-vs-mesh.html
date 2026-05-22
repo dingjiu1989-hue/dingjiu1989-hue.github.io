@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/gateway-vs-mesh.webp" type="image/webp" fetchpriority="high">
     <title>API Gateway vs Service Mesh — SourceHub</title>
     <meta name="description" content="Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and Kong examples">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/gateway-vs-mesh.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/gateway-vs-mesh.html">
     <link rel="prev" href="https://aidev.fit/en/architecture/global-traffic-routing.html">
@@ -44,17 +44,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "API Gateway vs Service Mesh",
       "description": "Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and Kong examples",
       "image": "https://aidev.fit/images/covers/en/architecture/gateway-vs-mesh.png",
       "datePublished": "2026-04-24",
       "dateModified": "2026-05-13",
-      "wordCount": "1097",
+      "wordCount": "1114",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -111,7 +112,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">API Gateway vs Service Mesh</h1>
-      <div class="article-meta">Published 2026-04-24 · Last active 2026-05-13 · 0 views · 0 replies · 5 min read</div>
+      <div class="article-meta"><time datetime="2026-04-24">Published 2026-04-24</time> · <time datetime="2026-05-13">Last active 2026-05-13</time> · 0 views · 0 replies · 5 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/gateway-vs-mesh.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/gateway-vs-mesh.png" alt="API Gateway vs Service Mesh" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>API Gateway and Service Mesh solve different problems but operate in overlapping territory, creating confusion about where each belongs. The API Gateway manages north-south traffic (client to service), while the Service Mesh manages east-west traffic (service to service). Understanding their distinct responsibilities, overlap, and coexistence patterns is essential for a well-architected system. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/gateway-vs-mesh.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/gateway-vs-mesh.png" alt="API Gateway vs Service Mesh" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The API Gateway is the single entry point for external clients. It handles cross-cutting concerns that belong at the edge of the system: authentication, TLS termination, rate limiting, request validation, response transformation, and API versioning. Kong, Apigee, and AWS API Gateway are common implementations. The gateway may also implement routing, load balancing, and caching for external traffic. It is explicitly part of your application architecture — it knows about your services, routes, and business-level concerns like rate limits per customer plan. </p>
@@ -127,6 +128,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a></p>

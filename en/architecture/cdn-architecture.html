@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/cdn-architecture.webp" type="image/webp" fetchpriority="high">
     <title>CDN Architecture — SourceHub</title>
     <meta name="description" content="Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content delivery networks">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/cdn-architecture.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/cdn-architecture.html">
     <link rel="prev" href="https://aidev.fit/en/architecture/cost-per-request.html">
@@ -44,17 +44,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "CDN Architecture",
       "description": "Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content delivery networks",
       "image": "https://aidev.fit/images/covers/en/architecture/cdn-architecture.png",
       "datePublished": "2026-04-22",
       "dateModified": "2026-05-11",
-      "wordCount": "1463",
+      "wordCount": "1479",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -100,7 +101,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">CDN Architecture</h1>
-      <div class="article-meta">Published 2026-04-22 · Last active 2026-05-11 · 0 views · 0 replies · 7 min read</div>
+      <div class="article-meta"><time datetime="2026-04-22">Published 2026-04-22</time> · <time datetime="2026-05-11">Last active 2026-05-11</time> · 0 views · 0 replies · 7 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/cdn-architecture.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/cdn-architecture.png" alt="CDN Architecture" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Content Delivery Networks (CDNs) distribute content across geographically dispersed servers to reduce latency, offload origin infrastructure, and absorb large-scale traffic spikes. Modern CDNs have evolved from simple static asset caches into sophisticated application delivery platforms that cache dynamic content, execute edge compute, and provide security functions. Understanding CDN architecture is essential for architects designing global-scale systems. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/cdn-architecture.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/cdn-architecture.png" alt="CDN Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Edge caching is the foundational CDN capability. Edge servers cache responses from the origin server and serve them directly to users. Cache placement is determined by the user's geographic proximity to the edge node. The CDN's global DNS resolves the domain to the nearest edge server IP based on latency measurements. When a request arrives, the edge server checks its cache — on hit, it serves the cached response instantly; on miss, it fetches from the origin, caches the response, and serves it. </p>
@@ -119,6 +120,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>

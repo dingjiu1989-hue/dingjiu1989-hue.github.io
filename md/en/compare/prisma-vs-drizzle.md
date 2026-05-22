@@ -95,3 +95,5 @@ Prisma and Drizzle represent different trade-offs in the ORM spectrum. Prisma pr
 **See also:** [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>), [Next.js vs Nuxt.js: Meta-Framework Comparison](</en/compare/nextjs-vs-nuxtjs.html>)
 
 **See also:** [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>), [Next.js vs Nuxt.js: Meta-Framework Comparison](</en/compare/nextjs-vs-nuxtjs.html>)
+
+**See also:** [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>), [Next.js vs Nuxt.js: Meta-Framework Comparison](</en/compare/nextjs-vs-nuxtjs.html>)

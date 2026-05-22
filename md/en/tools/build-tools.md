@@ -340,3 +340,5 @@ Many teams use a combination: esbuild for dependencies, Vite for development, an
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
 
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)

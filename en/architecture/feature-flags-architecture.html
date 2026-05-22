@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.webp" type="image/webp" fetchpriority="high">
     <title>Feature Flags Architecture — SourceHub</title>
     <meta name="description" content="Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feature flags">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/feature-flags-architecture.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/feature-flags-architecture.html">
     <link rel="prev" href="https://aidev.fit/en/architecture/global-traffic-routing.html">
@@ -44,17 +44,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "Feature Flags Architecture",
       "description": "Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feature flags",
       "image": "https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.png",
       "datePublished": "2026-04-24",
       "dateModified": "2026-05-04",
-      "wordCount": "1356",
+      "wordCount": "1377",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -100,7 +101,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Feature Flags Architecture</h1>
-      <div class="article-meta">Published 2026-04-24 · Last active 2026-05-04 · 0 views · 0 replies · 6 min read</div>
+      <div class="article-meta"><time datetime="2026-04-24">Published 2026-04-24</time> · <time datetime="2026-05-04">Last active 2026-05-04</time> · 0 views · 0 replies · 6 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.png" alt="Feature Flags Architecture" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Feature flags (also called feature toggles) provide runtime control over application behavior without deploying new code. They decouple deployment from release, enabling patterns like canary releases, A/B testing, trunk-based development, and instant rollbacks. The architecture of a feature flag system — how flags are evaluated, stored, distributed, and managed — is critical to both developer experience and system reliability. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.png" alt="Feature Flags Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Flag evaluation must be fast and reliable. Every request potentially evaluates multiple flags, so evaluation latency directly impacts overall request latency. The two primary evaluation models are client-side SDK evaluation and server-side evaluation. In client-side evaluation, the SDK holds a copy of all flag configurations and evaluates locally — this provides sub-millisecond evaluation but requires flag configuration synchronization. In server-side evaluation, the client sends user context to a server that evaluates flags and returns results — this adds a network hop but provides centralized control and audit. </p>
@@ -118,6 +119,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></p>

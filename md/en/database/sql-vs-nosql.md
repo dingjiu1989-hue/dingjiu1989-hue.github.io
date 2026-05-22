@@ -283,3 +283,5 @@ Choose SQL when you need complex queries, strong data integrity, and ACID transa
 **See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)
 
 **See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)
+
+**See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)

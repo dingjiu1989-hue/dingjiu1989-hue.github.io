@@ -85,3 +85,5 @@ In production, bulkheads are one of the most effective patterns for preventing c
 **See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 
 **See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)

@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/a-b-testing-infrastructure.webp" type="image/webp" fetchpriority="high">
     <title>A/B Testing Infrastructure — SourceHub</title>
     <meta name="description" content="Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing at scale">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/a-b-testing-infrastructure.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/a-b-testing-infrastructure.html">
     <link rel="prev" href="https://aidev.fit/en/architecture/caching-http.html">
@@ -44,17 +44,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "A/B Testing Infrastructure",
       "description": "Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing at scale",
       "image": "https://aidev.fit/images/covers/en/architecture/a-b-testing-infrastructure.png",
       "datePublished": "2026-04-21",
       "dateModified": "2026-05-18",
-      "wordCount": "1421",
+      "wordCount": "1443",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -100,7 +101,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">A/B Testing Infrastructure</h1>
-      <div class="article-meta">Published 2026-04-21 · Last active 2026-05-18 · 0 views · 0 replies · 7 min read</div>
+      <div class="article-meta"><time datetime="2026-04-21">Published 2026-04-21</time> · <time datetime="2026-05-18">Last active 2026-05-18</time> · 0 views · 0 replies · 7 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/a-b-testing-infrastructure.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/a-b-testing-infrastructure.png" alt="A/B Testing Infrastructure" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>A/B testing infrastructure enables organizations to make data-driven decisions by comparing user experiences against a control group. At its core, an A/B testing system must: consistently assign users to experiment groups, reliably track metrics for each group, perform statistical analysis to determine significance, and manage the lifecycle of experiments from creation to analysis. The infrastructure requirements scale with experiment volume, traffic, and statistical rigor. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/a-b-testing-infrastructure.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/a-b-testing-infrastructure.png" alt="A/B Testing Infrastructure" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Experiment assignment uses deterministic bucketing. A consistent hash of the user identifier and experiment key determines which variant the user sees. This ensures the user remains in the same variant across sessions. The hash function must distribute users uniformly across variants. Common approaches include MD5 or SHA-256 hashed to a modulus, or using the MurmurHash for better distribution characteristics. The assignment function should produce the same result regardless of the order experiments are evaluated. </p>
@@ -118,6 +119,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p>

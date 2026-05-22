@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/multi-tenancy.webp" type="image/webp" fetchpriority="high">
     <title>Multi-Tenancy Architecture — SourceHub</title>
     <meta name="description" content="Isolation levels, database per tenant, schema per tenant, shared database, routing, and pricing models">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/multi-tenancy.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/multi-tenancy.html">
     <link rel="prev" href="https://aidev.fit/en/architecture/saga-orchestration.html">
@@ -44,17 +44,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "Multi-Tenancy Architecture",
       "description": "Isolation levels, database per tenant, schema per tenant, shared database, routing, and pricing models",
       "image": "https://aidev.fit/images/covers/en/architecture/multi-tenancy.png",
       "datePublished": "2026-04-29",
       "dateModified": "2026-05-03",
-      "wordCount": "1323",
+      "wordCount": "1340",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -100,7 +101,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Multi-Tenancy Architecture</h1>
-      <div class="article-meta">Published 2026-04-29 · Last active 2026-05-03 · 0 views · 0 replies · 6 min read</div>
+      <div class="article-meta"><time datetime="2026-04-29">Published 2026-04-29</time> · <time datetime="2026-05-03">Last active 2026-05-03</time> · 0 views · 0 replies · 6 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/multi-tenancy.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/multi-tenancy.png" alt="Multi-Tenancy Architecture" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Multi-tenancy is the architectural pattern where a single instance of software serves multiple customer organizations (tenants). The design choices around tenant isolation — how much tenants share and how much is dedicated — determine the system's security, scalability, operational complexity, and cost structure. Three primary isolation levels form a spectrum with distinct tradeoffs. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/multi-tenancy.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/multi-tenancy.png" alt="Multi-Tenancy Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Database per tenant provides the strongest isolation. Each tenant gets its own database instance. This simplifies backup and restore (one tenant's data can be manipulated independently), provides natural resource limits (noisy neighbor containment), and makes data migration straightforward. The trade-off is operational cost: provisioning databases, managing connections, and running migration scripts for each tenant. At hundreds or thousands of tenants, the operational overhead becomes significant unless automated through infrastructure-as-code. </p>
@@ -118,6 +119,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/global-traffic-routing.html">Global Traffic Routing</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/global-traffic-routing.html">Global Traffic Routing</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/global-traffic-routing.html">Global Traffic Routing</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a></p>

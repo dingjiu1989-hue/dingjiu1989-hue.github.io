@@ -376,3 +376,5 @@ REST and GraphQL coexist successfully in 2026. REST excels at simple, cacheable,
 **See also:** [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [Next.js vs Remix 2026: React Frameworks Compared](</en/compare/nextjs-vs-remix-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>)
 
 **See also:** [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [Next.js vs Remix 2026: React Frameworks Compared](</en/compare/nextjs-vs-remix-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>)
+
+**See also:** [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [Next.js vs Remix 2026: React Frameworks Compared](</en/compare/nextjs-vs-remix-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>)

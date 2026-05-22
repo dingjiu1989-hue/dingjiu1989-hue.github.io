@@ -79,3 +79,5 @@ Track vacuum activity through pg_stat_progress_vacuum. Monitor last_autovacuum a
 **See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
 
 **See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)

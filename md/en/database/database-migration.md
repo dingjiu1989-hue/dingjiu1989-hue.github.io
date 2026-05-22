@@ -331,3 +331,5 @@ Database migrations bring the same version control discipline to schema changes 
 **See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Normalization Explained](</en/database/database-normalization.html>)
 
 **See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Normalization Explained](</en/database/database-normalization.html>)
+
+**See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Normalization Explained](</en/database/database-normalization.html>)

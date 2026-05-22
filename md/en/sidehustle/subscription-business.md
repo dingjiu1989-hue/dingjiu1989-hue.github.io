@@ -506,3 +506,5 @@ Start with a simple pricing model (one paid tier), launch with Stripe's pre-buil
 **See also:** [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)
 
 **See also:** [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)
+
+**See also:** [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)

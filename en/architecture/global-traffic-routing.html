@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/global-traffic-routing.webp" type="image/webp" fetchpriority="high">
     <title>Global Traffic Routing — SourceHub</title>
     <meta name="description" content="DNS-based routing, Anycast, global load balancers, latency-based routing, and multi-region traffic management">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/global-traffic-routing.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/global-traffic-routing.html">
     <link rel="prev" href="https://aidev.fit/en/architecture/gateway-vs-mesh.html">
@@ -44,17 +44,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "Global Traffic Routing",
       "description": "DNS-based routing, Anycast, global load balancers, latency-based routing, and multi-region traffic management",
       "image": "https://aidev.fit/images/covers/en/architecture/global-traffic-routing.png",
       "datePublished": "2026-04-24",
       "dateModified": "2026-05-19",
-      "wordCount": "1480",
+      "wordCount": "1498",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -100,7 +101,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Global Traffic Routing</h1>
-      <div class="article-meta">Published 2026-04-24 · Last active 2026-05-19 · 0 views · 0 replies · 7 min read</div>
+      <div class="article-meta"><time datetime="2026-04-24">Published 2026-04-24</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 0 views · 0 replies · 7 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/global-traffic-routing.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/global-traffic-routing.png" alt="Global Traffic Routing" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Global traffic routing directs user requests to the optimal backend location based on geography, latency, capacity, and availability. As applications scale to serve users worldwide, the routing infrastructure becomes a critical architectural component that determines latency, reliability, and operational flexibility. Multiple routing techniques — DNS-based, Anycast-based, and application-level — combine to provide comprehensive global traffic management. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/global-traffic-routing.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/global-traffic-routing.png" alt="Global Traffic Routing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>DNS-based routing is the most common approach for directing traffic to the nearest data center. The authoritative DNS server for the domain returns different IP addresses based on the requesting resolver's geographic location or network latency. AWS Route 53, Google Cloud DNS, and Azure Traffic Manager implement latency-based routing by maintaining latency tables between DNS resolvers and application endpoints. When a user in Europe requests the domain, the DNS returns the IP of the European data center. </p>
@@ -119,6 +120,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>

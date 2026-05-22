@@ -95,3 +95,5 @@ API composition is a fundamental pattern in microservice architectures. It provi
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)

@@ -13587,6 +13587,16 @@ def make_article_html(art, board_id, board_name, all_posts):
     else:
         tools_html = ''
 
+    article_type = "TechArticle" if board_id in ("tech", "ai", "compare", "database", "security", "architecture") else "Article"
+    # Determine proficiency level from tags
+    art_tags = [t.lower() for t in art.get('tags', [])] if isinstance(art.get('tags', []), list) else []
+    if any(w in art_tags for w in ['advanced', 'expert', 'production', 'optimization', 'scaling', 'performance']):
+        proficiency = ',\n      "proficiencyLevel": "Advanced"'
+    elif any(w in art_tags for w in ['beginner', 'introduction', 'getting-started', 'guide', 'fundamental', 'basic', 'quickstart', 'overview']):
+        proficiency = ',\n      "proficiencyLevel": "Beginner"'
+    else:
+        proficiency = ',\n      "proficiencyLevel": "Intermediate"' if article_type == "TechArticle" else ''
+
     return f'''<!DOCTYPE html>
 <html lang="en" data-render="related" data-board="{board_id}" data-exclude="{slug}">
 <head>
@@ -13609,14 +13619,14 @@ def make_article_html(art, board_id, board_name, all_posts):
     <link rel="preload" as="image" href="{cover_webp}" type="image/webp" fetchpriority="high">
     <title>{art['title']} — SourceHub</title>
     <meta name="description" content="{art['description']}">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="{tags_str}">
 {cn_hreflang}    <link rel="alternate" hreflang="en" href="{en_url}">
     <link rel="canonical" href="{art_url}">{prev_next}
     <meta name="robots" content="{robots_meta}">
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "{article_type}",
       "headline": "{art['title']}",
       "description": "{art['description']}",
       "image": "{cover_url}",
@@ -13626,7 +13636,7 @@ def make_article_html(art, board_id, board_name, all_posts):
       "keywords": "{tags_str}",
       "about": [{about_json}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,{proficiency}
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {{"@type": "Person", "name": "SourceHub"}},
       "publisher": {{"@type": "Organization", "name": "SourceHub", "logo": {{"@type": "ImageObject", "url": "{BASE}/images/logo.png"}}}},
@@ -13667,7 +13677,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     <article>
       <div class="article-tags">{pin_h}{tags_h}</div>
       <h1 class="article-title">{art['title']}</h1>
-      <div class="article-meta">Published {art['date']}{' · Last active ' + art['lastActive'] if art.get('lastActive') and art['lastActive'] != art['date'] else ''} · {art['replies'] * 120} views · {art['replies']} replies · {read_time} min read</div>
+      <div class="article-meta"><time datetime="{art['date']}">Published {art['date']}</time>{' · <time datetime="' + art['lastActive'] + '">Last active ' + art['lastActive'] + '</time>' if art.get('lastActive') and art['lastActive'] != art['date'] else ''} · {art['replies'] * 120} views · {art['replies']} replies · {read_time} min read</div>
       <picture><source srcset="{cover_webp}" type="image/webp"><img class="article-cover" src="{cover_url}" alt="{art['title']}" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body">{body_raw}{see_also}</div>
     </article>

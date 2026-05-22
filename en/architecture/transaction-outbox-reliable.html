@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/transaction-outbox-reliable.webp" type="image/webp" fetchpriority="high">
     <title>Transactional Outbox Pattern — SourceHub</title>
     <meta name="description" content="Master reliable message publishing with the transactional outbox: polling publisher, transaction log tailing, and idempotency">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/transaction-outbox-reliable.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/transaction-outbox-reliable.html">
     <link rel="prev" href="https://aidev.fit/en/architecture/architecture-decision-records.html">
@@ -44,17 +44,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "Transactional Outbox Pattern",
       "description": "Master reliable message publishing with the transactional outbox: polling publisher, transaction log tailing, and idempotency",
       "image": "https://aidev.fit/images/covers/en/architecture/transaction-outbox-reliable.png",
       "datePublished": "2026-05-05",
       "dateModified": "2026-05-08",
-      "wordCount": "1514",
+      "wordCount": "1542",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -100,7 +101,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Transactional Outbox Pattern</h1>
-      <div class="article-meta">Published 2026-05-05 · Last active 2026-05-08 · 0 views · 0 replies · 7 min read</div>
+      <div class="article-meta"><time datetime="2026-05-05">Published 2026-05-05</time> · <time datetime="2026-05-08">Last active 2026-05-08</time> · 0 views · 0 replies · 7 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/transaction-outbox-reliable.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/transaction-outbox-reliable.png" alt="Transactional Outbox Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>The transactional outbox pattern solves a fundamental problem in event-driven microservices: how to reliably publish messages as part of a database transaction. When a service updates its database and publishes an event, these two operations must be atomic. If the database update succeeds but the message publish fails, the system is inconsistent. The outbox pattern uses a local database table as a temporary message store, ensuring reliable publication through the same transaction that updates business data. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/transaction-outbox-reliable.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/transaction-outbox-reliable.png" alt="Transactional Outbox Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The Dual-Write Problem </p>
@@ -131,6 +132,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a></p>

@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/structured-logging.webp" type="image/webp" fetchpriority="high">
     <title>Structured Logging — SourceHub</title>
     <meta name="description" content="JSON log format, correlation IDs, log levels, logging libraries, and best practices for structured logging">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/structured-logging.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/structured-logging.html">
     <link rel="prev" href="https://aidev.fit/en/architecture/timeout-retry-patterns.html">
@@ -44,17 +44,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "Structured Logging",
       "description": "JSON log format, correlation IDs, log levels, logging libraries, and best practices for structured logging",
       "image": "https://aidev.fit/images/covers/en/architecture/structured-logging.png",
       "datePublished": "2026-04-30",
       "dateModified": "2026-05-07",
-      "wordCount": "1417",
+      "wordCount": "1440",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -100,7 +101,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Structured Logging</h1>
-      <div class="article-meta">Published 2026-04-30 · Last active 2026-05-07 · 0 views · 0 replies · 7 min read</div>
+      <div class="article-meta"><time datetime="2026-04-30">Published 2026-04-30</time> · <time datetime="2026-05-07">Last active 2026-05-07</time> · 0 views · 0 replies · 7 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/structured-logging.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/structured-logging.png" alt="Structured Logging" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Structured logging is the practice of emitting logs as structured data — typically JSON — rather than free-form text strings. This transformation is foundational to observability. Structured logs can be parsed, filtered, and queried by machines without requiring fragile regular expressions. The initial investment in structured logging pays dividends in every incident investigation, deployment verification, and system analysis. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/structured-logging.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/structured-logging.png" alt="Structured Logging" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The JSON log format is the standard. Each log line is a JSON object with required fields: timestamp (ISO 8601 with timezone and microseconds), level, logger (source file or component), message (human-readable summary), and trace_id (correlation ID for request tracing). Optional fields include: service, version, environment, request details, error stack traces, and any business-specific context. Every field should be consistently named and typed across all services in the organization. </p>
@@ -118,6 +119,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>

@@ -75,3 +75,5 @@ Use Nginx for high-concurrency static serving, reverse proxy, and microservices.
 **See also:** [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>), [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>)
 
 **See also:** [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>), [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>)
+
+**See also:** [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>), [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>)

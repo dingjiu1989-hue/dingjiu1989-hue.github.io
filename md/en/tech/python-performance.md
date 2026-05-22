@@ -97,3 +97,5 @@ Python's performance is rarely a problem for applications that are designed corr
 **See also:** [Log Management](</en/tech/log-management.html>), [Performance Testing](</en/tech/performance-testing.html>), [Python Package Management: pip, Poetry, uv, Conda](</en/tech/python-package-management.html>)
 
 **See also:** [Log Management](</en/tech/log-management.html>), [Performance Testing](</en/tech/performance-testing.html>), [Python Package Management: pip, Poetry, uv, Conda](</en/tech/python-package-management.html>)
+
+**See also:** [Log Management](</en/tech/log-management.html>), [Performance Testing](</en/tech/performance-testing.html>), [Python Package Management: pip, Poetry, uv, Conda](</en/tech/python-package-management.html>)

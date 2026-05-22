@@ -97,3 +97,5 @@ The transactional outbox pattern is a reliable, battle-tested solution for atomi
 **See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>)
 
 **See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>)
+
+**See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>)

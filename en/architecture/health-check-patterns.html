@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/health-check-patterns.webp" type="image/webp" fetchpriority="high">
     <title>Health Check Patterns — SourceHub</title>
     <meta name="description" content="Liveness vs readiness probes, custom health checks, dependency health, graceful degradation, and production practices">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/health-check-patterns.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/health-check-patterns.html">
     <link rel="prev" href="https://aidev.fit/en/architecture/microservices-vs-monolith.html">
@@ -44,17 +44,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "Health Check Patterns",
       "description": "Liveness vs readiness probes, custom health checks, dependency health, graceful degradation, and production practices",
       "image": "https://aidev.fit/images/covers/en/architecture/health-check-patterns.png",
       "datePublished": "2026-04-27",
       "dateModified": "2026-05-14",
-      "wordCount": "1433",
+      "wordCount": "1458",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -100,7 +101,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Health Check Patterns</h1>
-      <div class="article-meta">Published 2026-04-27 · Last active 2026-05-14 · 0 views · 0 replies · 7 min read</div>
+      <div class="article-meta"><time datetime="2026-04-27">Published 2026-04-27</time> · <time datetime="2026-05-14">Last active 2026-05-14</time> · 0 views · 0 replies · 7 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/health-check-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/health-check-patterns.png" alt="Health Check Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Health checks are the mechanism by which orchestration platforms and load balancers determine whether an application instance is capable of serving requests. Two distinct check types serve different purposes: liveness and readiness. Understanding the difference and implementing them correctly is essential for reliable deployments, self-healing infrastructure, and graceful degradation. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/health-check-patterns.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/health-check-patterns.png" alt="Health Check Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Liveness probes determine whether the application process is alive. If a liveness probe fails, the application is stuck or deadlocked — unable to recover without restart. The orchestrator will terminate and restart the container or process. Liveness probes should check only whether the process can operate at all. Common checks include: reading a health file written by the application, checking that the main event loop is running, or verifying that internal goroutine counts are within bounds. </p>
@@ -118,6 +119,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>, <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></p>

@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.webp" type="image/webp" fetchpriority="high">
     <title>Distributed Tracing: Deep Dive — SourceHub</title>
     <meta name="description" content="Trace context propagation, sampling strategies, visualization, and implementation of distributed tracing">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/distributed-tracing-deep.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/distributed-tracing-deep.html">
     <link rel="prev" href="https://aidev.fit/en/architecture/distributed-locking.html">
@@ -44,17 +44,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "Distributed Tracing: Deep Dive",
       "description": "Trace context propagation, sampling strategies, visualization, and implementation of distributed tracing",
       "image": "https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.png",
       "datePublished": "2026-04-23",
       "dateModified": "2026-05-18",
-      "wordCount": "1581",
+      "wordCount": "1609",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -100,7 +101,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Distributed Tracing: Deep Dive</h1>
-      <div class="article-meta">Published 2026-04-23 · Last active 2026-05-18 · 120 views · 1 replies · 7 min read</div>
+      <div class="article-meta"><time datetime="2026-04-23">Published 2026-04-23</time> · <time datetime="2026-05-18">Last active 2026-05-18</time> · 120 views · 1 replies · 8 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.png" alt="Distributed Tracing: Deep Dive" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Distributed tracing reconstructs the path of a single request as it traverses multiple services, databases, and queues. Without tracing, understanding the performance of a distributed system requires correlating logs and metrics manually — a process that breaks down under complexity. Tracing provides an end-to-end view: which services were called, in what order, for how long, and whether they succeeded. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.png" alt="Distributed Tracing: Deep Dive" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Trace context propagation is the mechanism that connects spans across service boundaries. When Service A calls Service B, it must pass trace context — trace ID, parent span ID, and any sampling decision — through the request. For HTTP, this is typically done through W3C Trace-Context headers (traceparent and tracestate). For messaging, the context is embedded in the message headers. For gRPC, it rides on metadata. The library or framework should propagate context automatically; manual propagation is error-prone and leads to broken traces. </p>
@@ -118,6 +119,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p>

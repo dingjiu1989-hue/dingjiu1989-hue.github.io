@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/circuit-breaker-vs-bulkhead.webp" type="image/webp" fetchpriority="high">
     <title>Circuit Breaker vs Bulkhead Pattern — SourceHub</title>
     <meta name="description" content="Differences, when to use each, resilience patterns, and combined application of circuit breaker and bulkhead">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html">
     <link rel="prev" href="https://aidev.fit/en/architecture/microservices-vs-monolith-2026.html">
@@ -44,17 +44,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "Circuit Breaker vs Bulkhead Pattern",
       "description": "Differences, when to use each, resilience patterns, and combined application of circuit breaker and bulkhead",
       "image": "https://aidev.fit/images/covers/en/architecture/circuit-breaker-vs-bulkhead.png",
       "datePublished": "2026-05-19",
       "dateModified": "2026-05-19",
-      "wordCount": "1511",
+      "wordCount": "1539",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -108,7 +109,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Circuit Breaker vs Bulkhead Pattern</h1>
-      <div class="article-meta">Published 2026-05-19 · 0 views · 0 replies · 7 min read</div>
+      <div class="article-meta"><time datetime="2026-05-19">Published 2026-05-19</time> · 0 views · 0 replies · 7 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/circuit-breaker-vs-bulkhead.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/circuit-breaker-vs-bulkhead.png" alt="Circuit Breaker vs Bulkhead Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Circuit breaker and bulkhead are two fundamental resilience patterns from the stability arsenal, but they solve different problems and are most effective when used together. The circuit breaker protects downstream services from cascading failures by failing fast when a dependency is unhealthy. The bulkhead isolates failure by limiting the resources a failing component can consume. Understanding when and how to apply each is essential for building resilient distributed systems. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/circuit-breaker-vs-bulkhead.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/circuit-breaker-vs-bulkhead.png" alt="Circuit Breaker vs Bulkhead Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The circuit breaker pattern monitors calls to a dependency. When failures exceed a threshold, the circuit breaker trips to the OPEN state, and subsequent calls return immediately with an error without actually invoking the failing dependency. After a timeout, the circuit enters HALF-OPEN state and allows a probe request. If the probe succeeds, the circuit resets to CLOSED. If it fails, it returns to OPEN. This prevents the calling service from wasting resources on a failing dependency and allows the dependency time to recover. </p>
@@ -126,6 +127,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>

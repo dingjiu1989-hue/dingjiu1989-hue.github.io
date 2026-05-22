@@ -73,3 +73,5 @@ Consistent configuration across services is essential but elusive. Timeout and r
 **See also:** [Health Check Patterns](</en/architecture/health-check-patterns.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [Structured Logging](</en/architecture/structured-logging.html>)
 
 **See also:** [Health Check Patterns](</en/architecture/health-check-patterns.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [Structured Logging](</en/architecture/structured-logging.html>)
+
+**See also:** [Health Check Patterns](</en/architecture/health-check-patterns.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [Structured Logging](</en/architecture/structured-logging.html>)

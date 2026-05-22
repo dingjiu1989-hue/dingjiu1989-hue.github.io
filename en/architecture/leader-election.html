@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/leader-election.webp" type="image/webp" fetchpriority="high">
     <title>Leader Election in Distributed Systems — SourceHub</title>
     <meta name="description" content="Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best practices">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/leader-election.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/leader-election.html">
     <link rel="prev" href="https://aidev.fit/en/architecture/idempotency-patterns.html">
@@ -44,17 +44,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "Leader Election in Distributed Systems",
       "description": "Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best practices",
       "image": "https://aidev.fit/images/covers/en/architecture/leader-election.png",
       "datePublished": "2026-05-20",
       "dateModified": "2026-05-16",
-      "wordCount": "1401",
+      "wordCount": "1424",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -100,7 +101,7 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Leader Election in Distributed Systems</h1>
-      <div class="article-meta">Published 2026-05-20 · Last active 2026-05-16 · 0 views · 0 replies · 7 min read</div>
+      <div class="article-meta"><time datetime="2026-05-20">Published 2026-05-20</time> · <time datetime="2026-05-16">Last active 2026-05-16</time> · 0 views · 0 replies · 7 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/architecture/leader-election.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/leader-election.png" alt="Leader Election in Distributed Systems" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Leader election is the mechanism by which distributed systems select a single node to coordinate work or make decisions on behalf of the group. It is essential for systems where exactly one node must perform certain operations — assigning monotonically increasing sequence numbers, performing periodic maintenance, or managing group membership changes. The leader must be unique at any time, and the system must remain available despite leader failures. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/leader-election.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/leader-election.png" alt="Leader Election in Distributed Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Leader election algorithms are broadly categorized into two types: consensus-based and lease-based. Consensus-based elections use Paxos, Raft, or Zab to guarantee that exactly one leader exists at any epoch. These provide strong safety guarantees but require a quorum of nodes for election decisions. Lease-based elections use a distributed lock with a TTL — the holder is the leader until its lease expires. These are simpler but vulnerable to split-brain if clock skew exceeds the lease duration. </p>
@@ -118,6 +119,7 @@
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></p>

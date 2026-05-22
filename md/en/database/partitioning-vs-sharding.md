@@ -132,3 +132,5 @@ Start with partitioning before considering sharding. Partitioning solves many pr
 **See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Materialized Views](</en/database/materialized-views.html>)
 
 **See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Materialized Views](</en/database/materialized-views.html>)
+
+**See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Materialized Views](</en/database/materialized-views.html>)

@@ -97,3 +97,5 @@ Database per service is a powerful pattern for achieving service autonomy and in
 **See also:** [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>)
 
 **See also:** [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>)
+
+**See also:** [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>)

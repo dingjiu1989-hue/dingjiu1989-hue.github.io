@@ -35,7 +35,7 @@
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/batch-operations.webp" type="image/webp" fetchpriority="high">
     <title>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning — SourceHub</title>
     <meta name="description" content="Master batch operations in PostgreSQL: bulk insert patterns, the COPY command, batch updates, optimal batch sizes, and error handling for large datasets.">
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="keywords" content="Database, Backend, Data">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/batch-operations.html">
     <link rel="canonical" href="https://aidev.fit/en/database/batch-operations.html">
     <link rel="prev" href="https://aidev.fit/en/database/change-data-capture.html">
@@ -44,17 +44,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "TechArticle",
       "headline": "Batch Operations: Bulk Insert, COPY, and Batch Size Tuning",
       "description": "Master batch operations in PostgreSQL: bulk insert patterns, the COPY command, batch updates, optimal batch sizes, and error handling for large datasets.",
       "image": "https://aidev.fit/images/covers/en/database/batch-operations.png",
       "datePublished": "2026-03-30",
       "dateModified": "2026-04-16",
-      "wordCount": "2400",
+      "wordCount": "2444",
       "keywords": "Database, Backend, Data",
       "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
       "inLanguage": "en",
-      "isAccessibleForFree": true,
+      "isAccessibleForFree": true,,
+      "proficiencyLevel": "Intermediate"
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
@@ -100,7 +101,7 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h1>
-      <div class="article-meta">Published 2026-03-30 · Last active 2026-04-16 · 0 views · 0 replies · 12 min read</div>
+      <div class="article-meta"><time datetime="2026-03-30">Published 2026-03-30</time> · <time datetime="2026-04-16">Last active 2026-04-16</time> · 0 views · 0 replies · 12 min read</div>
       <picture><source srcset="https://aidev.fit/images/covers/en/database/batch-operations.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/batch-operations.png" alt="Batch Operations: Bulk Insert, COPY, and Batch Size Tuning" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body"><p>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning </p><picture><source srcset="https://aidev.fit/images/covers/en/database/batch-operations.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/batch-operations.png" alt="Batch Operations: Bulk Insert, COPY, and Batch Size Tuning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Loading or updating large volumes of data row-by-row is prohibitively slow. Batch operations reduce overhead by orders of magnitude. This article covers bulk insert techniques, PostgreSQL's COPY command, batch updates, and the art of choosing the right batch size. </p>
@@ -282,6 +283,7 @@
 <p><strong>See also:</strong> <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a></p>
 <p><strong>See also:</strong> <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a></p>
 <p><strong>See also:</strong> <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a></p>
+<p><strong>See also:</strong> <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a>, <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>

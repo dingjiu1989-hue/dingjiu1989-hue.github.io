@@ -305,3 +305,5 @@ Run DR drills quarterly at minimum. Document every drill outcome and update the 
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
 
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)

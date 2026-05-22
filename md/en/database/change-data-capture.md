@@ -252,3 +252,5 @@ CDC is the most robust approach for keeping secondary systems synchronized with 
 **See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
 
 **See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
+
+**See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
