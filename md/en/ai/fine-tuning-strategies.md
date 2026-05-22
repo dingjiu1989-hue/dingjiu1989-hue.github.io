@@ -3,7 +3,7 @@ title: "LLM Fine-Tuning Strategies and Techniques"
 description: "Compare LLM fine-tuning approaches: full fine-tuning, LoRA, QLoRA, and RLHF for domain adaptation."
 date: 2026-02-19
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/fine-tuning-strategies.html
+url: https://aidev.fit/en/ai/fine-tuning-strategies.html
 ---
 
 # LLM Fine-Tuning Strategies and Techniques
@@ -49,6 +49,10 @@ High-quality training data is the most important factor. Use 1000+ examples for 
 **See also:** [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>), [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>), [AI Data Privacy: PII Detection, Data Anonymization, Local Processing](</en/ai/ai-data-privacy.html>)
 
 **See also:** [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>), [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>), [AI Data Privacy: PII Detection, Data Anonymization, Local Processing](</en/ai/ai-data-privacy.html>)
+
+**See also:** [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>)
+
+**See also:** [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>)
 
 **See also:** [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>)
 

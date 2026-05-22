@@ -3,7 +3,7 @@ title: "Feature Flags Architecture"
 description: "Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feature flags"
 date: 2026-04-24
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/feature-flags-architecture.html
+url: https://aidev.fit/en/architecture/feature-flags-architecture.html
 ---
 
 # Feature Flags Architecture
@@ -39,6 +39,10 @@ Operational concerns include flag evaluation metrics. Track flag evaluation coun
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Structured Logging](</en/architecture/structured-logging.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Structured Logging](</en/architecture/structured-logging.html>)
+
+**See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>)
+
+**See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>)
 
 **See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>)
 

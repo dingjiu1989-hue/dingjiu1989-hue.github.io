@@ -3,7 +3,7 @@ title: "Partitioning vs Sharding"
 description: "Comparing database partitioning and sharding: differences, use cases, and implementation approaches."
 date: 2026-04-12
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/partitioning-vs-sharding.html
+url: https://aidev.fit/en/database/partitioning-vs-sharding.html
 ---
 
 # Partitioning vs Sharding
@@ -100,6 +100,10 @@ Start with partitioning before considering sharding. Partitioning solves many pr
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
 
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
+
+**See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Materialized Views](</en/database/materialized-views.html>)
+
+**See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Materialized Views](</en/database/materialized-views.html>)
 
 **See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Materialized Views](</en/database/materialized-views.html>)
 

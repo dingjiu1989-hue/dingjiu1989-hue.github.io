@@ -3,7 +3,7 @@ title: "React Server Components Guide: Architecture, Patterns, and When to Use R
 description: "Deep dive into React Server Components — server vs client components, streaming patterns, Server Actions, boundary rules, and when RSC is worth the complexity."
 date: 2025-10-20
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/react-server-components-guide.html
+url: https://aidev.fit/en/tech/react-server-components-guide.html
 ---
 
 # React Server Components Guide: Architecture, Patterns, and When to Use RSC in 2026

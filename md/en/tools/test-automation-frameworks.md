@@ -3,7 +3,7 @@ title: "Test Automation Frameworks 2026"
 description: "Compare modern test automation frameworks across languages including Vitest, Playwright, pytest, and Rust testing tools."
 date: 2025-12-10
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/test-automation-frameworks.html
+url: https://aidev.fit/en/tools/test-automation-frameworks.html
 ---
 
 # Test Automation Frameworks 2026
@@ -429,6 +429,10 @@ The testing landscape in 2026 is converging on fast, developer-friendly tools. V
 **See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>)
 
 **See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>)
+
+**See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
+
+**See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
 
 **See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
 

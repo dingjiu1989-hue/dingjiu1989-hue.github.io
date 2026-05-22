@@ -3,7 +3,7 @@ title: "Best Code Formatters and Linters"
 description: "Comprehensive guide to code formatters and linters for JavaScript, Python, Rust, Go, and more languages."
 date: 2025-12-09
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/code-formatters-linters.html
+url: https://aidev.fit/en/tools/code-formatters-linters.html
 ---
 
 # Best Code Formatters and Linters
@@ -337,6 +337,10 @@ The code quality tooling landscape in 2026 is defined by speed. Rust-based tools
 **See also:** [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>)
 
 **See also:** [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>)
+
+**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Database GUI Clients](</en/tools/database-clients.html>), [Best Markdown Editors](</en/tools/markdown-editors.html>)
+
+**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Database GUI Clients](</en/tools/database-clients.html>), [Best Markdown Editors](</en/tools/markdown-editors.html>)
 
 **See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Database GUI Clients](</en/tools/database-clients.html>), [Best Markdown Editors](</en/tools/markdown-editors.html>)
 

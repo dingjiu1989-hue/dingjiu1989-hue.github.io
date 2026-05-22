@@ -3,7 +3,7 @@ title: "CSS Grid and Flexbox: Modern Layout Guide"
 description: "Master CSS Grid and Flexbox for responsive layouts, component design, and complex page structures."
 date: 2026-01-13
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/css-grid-flexbox.html
+url: https://aidev.fit/en/tech/css-grid-flexbox.html
 ---
 
 # CSS Grid and Flexbox: Modern Layout Guide
@@ -43,6 +43,10 @@ Holy grail layout: Grid for header, footer, main content, and sidebars. Card gri
 **See also:** [Advanced Git Techniques for Developers](</en/tech/git-advanced-techniques.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
 
 **See also:** [Advanced Git Techniques for Developers](</en/tech/git-advanced-techniques.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
+
+**See also:** [Configuration Management](</en/tech/configuration-management.html>), [Infrastructure Composability](</en/tech/infrastructure-composability.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>)
+
+**See also:** [Configuration Management](</en/tech/configuration-management.html>), [Infrastructure Composability](</en/tech/infrastructure-composability.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>)
 
 **See also:** [Configuration Management](</en/tech/configuration-management.html>), [Infrastructure Composability](</en/tech/infrastructure-composability.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>)
 

@@ -15,7 +15,7 @@ from datetime import date
 import _ssl_compat  # noqa: F401 — fix macOS LibreSSL TLS 1.3 issue
 
 ROOT = Path(__file__).resolve().parent.parent
-BASE = "https://dingjiu1989-hue.github.io"
+BASE = "https://aidev.fit"
 
 # Risk control config
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -108,7 +108,7 @@ def get_published_slugs(force_refresh=False):
             break
         for art in articles:
             canon = art.get("canonical_url", "")
-            if "dingjiu1989-hue.github.io" in canon:
+            if "aidev.fit" in canon or "dingjiu1989-hue.github.io" in canon:
                 slug = canon.split("/")[-1].replace(".html", "")
                 slugs.add(slug)
         page += 1

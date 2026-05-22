@@ -3,7 +3,7 @@ title: "API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, 
 description: "Complete API security guide covering JWT authentication, RBAC authorization, rate limiting, input validation, CORS, SQL injection prevention, and secrets management with code examples."
 date: 2025-11-28
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/api-security-best-practices.html
+url: https://aidev.fit/en/tech/api-security-best-practices.html
 ---
 
 # API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs

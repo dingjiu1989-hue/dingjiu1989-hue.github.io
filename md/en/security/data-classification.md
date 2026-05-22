@@ -3,7 +3,7 @@ title: "Data Classification"
 description: "Implementing data classification with labeling, handling procedures, and automated classification tools."
 date: 2026-03-16
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/data-classification.html
+url: https://aidev.fit/en/security/data-classification.html
 ---
 
 # Data Classification
@@ -165,6 +165,10 @@ Data classification is foundational to information security. Automate where poss
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
+
+**See also:** [Compliance Automation](</en/security/compliance-automation.html>), [Database Encryption](</en/security/database-encryption.html>), [DDoS Mitigation](</en/security/ddos-mitigation.html>)
+
+**See also:** [Compliance Automation](</en/security/compliance-automation.html>), [Database Encryption](</en/security/database-encryption.html>), [DDoS Mitigation](</en/security/ddos-mitigation.html>)
 
 **See also:** [Compliance Automation](</en/security/compliance-automation.html>), [Database Encryption](</en/security/database-encryption.html>), [DDoS Mitigation](</en/security/ddos-mitigation.html>)
 

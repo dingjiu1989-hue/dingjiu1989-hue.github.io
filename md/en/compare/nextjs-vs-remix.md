@@ -3,7 +3,7 @@ title: "Next.js vs Remix vs Astro"
 description: "Compare Next.js, Remix, and Astro for modern web development — architecture, rendering strategies, data loading, and use cases."
 date: 2025-12-15
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/nextjs-vs-remix.html
+url: https://aidev.fit/en/compare/nextjs-vs-remix.html
 ---
 
 # Next.js vs Remix vs Astro
@@ -327,6 +327,10 @@ All three frameworks are excellent choices that prioritize performance and devel
 **See also:** [Solid.js vs Qwik](</en/compare/solid-vs-qwik.html>), [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>), [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>)
 
 **See also:** [Solid.js vs Qwik](</en/compare/solid-vs-qwik.html>), [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>), [FastAPI vs Flask vs Django](</en/compare/fastapi-vs-flask.html>)
+
+**See also:** [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>)
+
+**See also:** [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>)
 
 **See also:** [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>)
 

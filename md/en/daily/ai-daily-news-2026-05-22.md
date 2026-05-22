@@ -3,7 +3,7 @@ title: "AI Daily Digest — 2026-05-22: Meta lays off thousands of employees to 
 description: "Top 10 AI news today: curated from TechCrunch, The Verge, Ars Technica, VentureBeat, and more."
 date: 2026-05-22
 board: daily
-url: https://dingjiu1989-hue.github.io/en/daily/ai-daily-news-2026-05-22.html
+url: https://aidev.fit/en/daily/ai-daily-news-2026-05-22.html
 ---
 
 # AI Daily Digest — 2026-05-22: Meta lays off thousands of employees to offset AI investment
@@ -77,5 +77,9 @@ _Which of today's AI developments excites you most? Are there any trends you thi
 * * *
 
 _AI Daily Digest is compiled from trusted technology news sources. For corrections or suggestions, contact us at the project repository._
+
+**See also:** [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>), [MySQL vs MariaDB: The Complete Comparison](</en/compare/mysql-vs-mariadb.html>)
+
+**See also:** [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>), [MySQL vs MariaDB: The Complete Comparison](</en/compare/mysql-vs-mariadb.html>)
 
 **See also:** [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>), [MySQL vs MariaDB: The Complete Comparison](</en/compare/mysql-vs-mariadb.html>)

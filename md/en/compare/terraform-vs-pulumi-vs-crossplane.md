@@ -3,7 +3,7 @@ title: "Terraform vs Pulumi vs Crossplane (2026): Infrastructure as Code Compari
 description: "Compare IaC tools by approach: Terraform (declarative HCL), Pulumi (general-purpose languages), Crossplane (Kubernetes-native). State management, drift detection, and multi-cloud support."
 date: 2025-11-24
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/terraform-vs-pulumi-vs-crossplane.html
+url: https://aidev.fit/en/compare/terraform-vs-pulumi-vs-crossplane.html
 ---
 
 # Terraform vs Pulumi vs Crossplane (2026): Infrastructure as Code Comparison

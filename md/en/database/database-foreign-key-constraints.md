@@ -3,7 +3,7 @@ title: "Foreign Key Constraints: Referential Integrity in Practice"
 description: "Master foreign key constraints: referential actions, performance impact, and real-world integrity patterns."
 date: 2026-04-14
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-foreign-key-constraints.html
+url: https://aidev.fit/en/database/database-foreign-key-constraints.html
 ---
 
 # Foreign Key Constraints: Referential Integrity in Practice
@@ -39,6 +39,10 @@ Use foreign keys to enforce relationships that are business rules. Skip them for
 **See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
 
 **See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
+
+**See also:** [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
+
+**See also:** [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
 
 **See also:** [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
 

@@ -3,7 +3,7 @@ title: "Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection"
 description: "Explore agent planning frameworks: ReAct for reasoning and acting, Plan-and-Execute for task decomposition, Tree of Thoughts for exploration, and self-reflectio"
 date: 2026-02-13
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/agent-planning.html
+url: https://aidev.fit/en/ai/agent-planning.html
 ---
 
 # Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection
@@ -393,6 +393,10 @@ Agent planning frameworks provide structure for LLM reasoning. ReAct couples rea
 **See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)
 
 **See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)
+
+**See also:** [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>)
+
+**See also:** [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>)
 
 **See also:** [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>)
 

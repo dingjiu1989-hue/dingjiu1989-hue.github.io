@@ -3,7 +3,7 @@ title: "Ambassador Pattern for Service Communication"
 description: "The ambassador pattern explained: how to offload network communication concerns to a proxy component."
 date: 2026-05-05
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/ambassador-pattern.html
+url: https://aidev.fit/en/architecture/ambassador-pattern.html
 ---
 
 # Ambassador Pattern for Service Communication
@@ -43,6 +43,10 @@ Ambassadors add network hop latency. Measure the performance impact before deplo
 **See also:** [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
 
 **See also:** [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>)
 
 **See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>)
 

@@ -3,7 +3,7 @@ title: "Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio"
 description: "Compare database GUI tools: TablePlus for macOS-native experience, DBeaver for cross-platform versatility, DataGrip for JetBrains integration, and Beekeeper Stu"
 date: 2026-02-02
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/database-gui.html
+url: https://aidev.fit/en/tools/database-gui.html
 ---
 
 # Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio
@@ -224,6 +224,10 @@ Many developers use a combination: TablePlus for daily PostgreSQL/MySQL work, DB
 **See also:** [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop](</en/tools/git-gui-tools.html>), [Best Database GUI Clients](</en/tools/database-clients.html>)
 
 **See also:** [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop](</en/tools/git-gui-tools.html>), [Best Database GUI Clients](</en/tools/database-clients.html>)
+
+**See also:** [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
+
+**See also:** [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
 
 **See also:** [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
 

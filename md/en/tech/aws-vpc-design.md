@@ -3,7 +3,7 @@ title: "AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Gro
 description: "Technical guide to AWS VPC design including subnet strategies, NAT gateways, VPC peering, Transit Gateway architecture, security groups, and network ACLs."
 date: 2026-01-01
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/aws-vpc-design.html
+url: https://aidev.fit/en/tech/aws-vpc-design.html
 ---
 
 # AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
@@ -93,6 +93,10 @@ AWS VPC design requires careful planning of CIDR allocation, subnet layout, and 
 **See also:** [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>)
 
 **See also:** [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>)
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Performance Testing](</en/tech/performance-testing.html>)
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Performance Testing](</en/tech/performance-testing.html>)
 
 **See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Performance Testing](</en/tech/performance-testing.html>)
 

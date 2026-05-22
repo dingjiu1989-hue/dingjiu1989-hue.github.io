@@ -3,7 +3,7 @@ title: "Secrets Rotation"
 description: "Implementing automated secrets rotation with zero-downtime strategies and HashiCorp Vault agent."
 date: 2026-03-18
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/secrets-rotation.html
+url: https://aidev.fit/en/security/secrets-rotation.html
 ---
 
 # Secrets Rotation
@@ -275,6 +275,10 @@ Automated secrets rotation reduces the blast radius of credential exposure. Use 
 **See also:** [Data Classification](</en/security/data-classification.html>), [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
 
 **See also:** [Data Classification](</en/security/data-classification.html>), [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
+
+**See also:** [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Compliance Automation](</en/security/compliance-automation.html>), [Database Encryption](</en/security/database-encryption.html>)
+
+**See also:** [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Compliance Automation](</en/security/compliance-automation.html>), [Database Encryption](</en/security/database-encryption.html>)
 
 **See also:** [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Compliance Automation](</en/security/compliance-automation.html>), [Database Encryption](</en/security/database-encryption.html>)
 

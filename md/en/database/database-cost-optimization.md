@@ -3,7 +3,7 @@ title: "Database Cost Optimization: Instance Sizing, Reserved Instances, Storage
 description: "Learn database cost optimization strategies: right-sizing instances, reserved instances, storage tiering, serverless databases, and practical cost-saving techniques."
 date: 2026-04-02
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-cost-optimization.html
+url: https://aidev.fit/en/database/database-cost-optimization.html
 ---
 
 # Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
@@ -256,6 +256,10 @@ Database cost optimization is an ongoing practice, not a one-time project. Revie
 **See also:** [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)
 
 **See also:** [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)
+
+**See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 
 **See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 

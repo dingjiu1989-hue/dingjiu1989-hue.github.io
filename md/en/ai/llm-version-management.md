@@ -3,7 +3,7 @@ title: "LLM Version Management: Model Registry, A/B Testing, Rollback"
 description: "Manage LLM versions in production with model registries, A/B testing frameworks, gradual rollouts, automated evaluation gates, and instant rollback strategies."
 date: 2026-02-17
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/llm-version-management.html
+url: https://aidev.fit/en/ai/llm-version-management.html
 ---
 
 # LLM Version Management: Model Registry, A/B Testing, Rollback
@@ -321,6 +321,10 @@ Treat LLM versions as managed artifacts, not API parameters. Use a model registr
 **See also:** [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>)
 
 **See also:** [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>)
+
+**See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
+
+**See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
 
 **See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
 

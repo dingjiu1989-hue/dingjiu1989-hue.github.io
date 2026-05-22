@@ -3,7 +3,7 @@ title: "Next.js App Router"
 description: "Explore Next.js App Router: server components, layouts, loading states, error boundaries, and routing architecture"
 date: 2026-01-09
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/nextjs-app-router.html
+url: https://aidev.fit/en/tech/nextjs-app-router.html
 ---
 
 # Next.js App Router
@@ -59,6 +59,10 @@ The App Router represents the future of React development at scale. Its combinat
 **See also:** [React Server Components](</en/tech/react-server-components.html>), [Error Handling Patterns](</en/tech/error-handling-patterns.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>)
 
 **See also:** [React Server Components](</en/tech/react-server-components.html>), [Error Handling Patterns](</en/tech/error-handling-patterns.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>)
+
+**See also:** [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>), [Build Optimization](</en/tech/build-optimization.html>), [Developer Portal](</en/tech/developer-portal.html>)
+
+**See also:** [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>), [Build Optimization](</en/tech/build-optimization.html>), [Developer Portal](</en/tech/developer-portal.html>)
 
 **See also:** [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>), [Build Optimization](</en/tech/build-optimization.html>), [Developer Portal](</en/tech/developer-portal.html>)
 

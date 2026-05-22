@@ -3,7 +3,7 @@ title: "Saga Pattern for Distributed Transactions"
 description: "Learn the saga pattern for managing distributed transactions across microservices."
 date: 2025-12-30
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/saga-pattern.html
+url: https://aidev.fit/en/architecture/saga-pattern.html
 ---
 
 # Saga Pattern for Distributed Transactions
@@ -67,6 +67,10 @@ The Saga pattern is essential for maintaining data consistency in distributed sy
 **See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 
 **See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
+
+**See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
 
 **See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
 

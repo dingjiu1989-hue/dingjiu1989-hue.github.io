@@ -3,7 +3,7 @@ title: "Data Loss Prevention (DLP) Strategies"
 description: "Implement DLP strategies across endpoint, network, and cloud environments with data classification, content inspection, and policy enforcement."
 date: 2026-03-04
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/data-loss-prevention.html
+url: https://aidev.fit/en/security/data-loss-prevention.html
 ---
 
 # Data Loss Prevention (DLP) Strategies
@@ -316,6 +316,10 @@ DLP is not a single product but a program that combines data classification, con
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
+
+**See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>)
+
+**See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>)
 
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>)
 

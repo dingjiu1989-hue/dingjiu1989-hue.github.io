@@ -3,7 +3,7 @@ title: "Error Handling Best Practices: From Try/Catch to Structured Errors"
 description: "Move from random try/catch blocks to a structured error handling system. Covers error types, logging strategies, user-facing messages, and monitoring integration."
 date: 2025-10-10
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/error-handling-best-practices.html
+url: https://aidev.fit/en/tech/error-handling-best-practices.html
 ---
 
 # Error Handling Best Practices: From Try/Catch to Structured Errors

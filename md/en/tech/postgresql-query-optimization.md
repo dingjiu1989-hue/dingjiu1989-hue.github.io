@@ -3,7 +3,7 @@ title: "PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds"
 description: "Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, BRIN), query plan analysis, common anti-patterns, partitioning strategies, and connection pooling with PgBouncer."
 date: 2025-10-15
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/postgresql-query-optimization.html
+url: https://aidev.fit/en/tech/postgresql-query-optimization.html
 ---
 
 # PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds

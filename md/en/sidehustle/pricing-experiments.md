@@ -3,7 +3,7 @@ title: "SaaS Pricing Experiments: A/B Testing and Value Metrics"
 description: "Run SaaS pricing experiments with A/B testing, value metrics, and willingness-to-pay analysis to optimize revenue."
 date: 2026-01-22
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/pricing-experiments.html
+url: https://aidev.fit/en/sidehustle/pricing-experiments.html
 ---
 
 # SaaS Pricing Experiments: A/B Testing and Value Metrics
@@ -57,6 +57,10 @@ SaaS pricing is never final. The best pricing strategies evolve with product mat
 **See also:** [SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Revenue Retention](</en/sidehustle/saas-metrics.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>)
 
 **See also:** [SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Revenue Retention](</en/sidehustle/saas-metrics.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>)
+
+**See also:** [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>)
+
+**See also:** [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>)
 
 **See also:** [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>)
 

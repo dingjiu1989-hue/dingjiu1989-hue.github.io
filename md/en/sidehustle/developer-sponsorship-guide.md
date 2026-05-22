@@ -3,7 +3,7 @@ title: "Developer Sponsorship Guide 2026: GitHub Sponsors, Content Deals, and Co
 description: "How developers get sponsored — open-source funding, content sponsorships, ambassador programs, and building a sponsorable profile from scratch."
 date: 2026-05-15
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/developer-sponsorship-guide.html
+url: https://aidev.fit/en/sidehustle/developer-sponsorship-guide.html
 ---
 
 # Developer Sponsorship Guide 2026: GitHub Sponsors, Content Deals, and Corporate Backing

@@ -3,7 +3,7 @@ title: "Building a Twitter/X Personal Brand"
 description: "A developer's guide to building a personal brand on Twitter/X for career opportunities."
 date: 2025-12-08
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/twitter-personal-brand.html
+url: https://aidev.fit/en/sidehustle/twitter-personal-brand.html
 ---
 
 # Building a Twitter/X Personal Brand
@@ -200,6 +200,10 @@ Twitter/X is the most effective social platform for developers building a profes
 **See also:** [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>)
 
 **See also:** [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>)
+
+**See also:** [Content Monetization Strategies for Developers](</en/sidehustle/content-monetization.html>), [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)
+
+**See also:** [Content Monetization Strategies for Developers](</en/sidehustle/content-monetization.html>), [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)
 
 **See also:** [Content Monetization Strategies for Developers](</en/sidehustle/content-monetization.html>), [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)
 

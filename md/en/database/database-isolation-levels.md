@@ -3,7 +3,7 @@ title: "Database Isolation Levels and Anomalies"
 description: "Learn SQL isolation levels: read uncommitted, read committed, repeatable read, and serializable, and the anomalies they prevent."
 date: 2026-05-12
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-isolation-levels.html
+url: https://aidev.fit/en/database/database-isolation-levels.html
 ---
 
 # Database Isolation Levels and Anomalies
@@ -53,6 +53,10 @@ Use read committed for most applications—good balance of correctness and perfo
 **See also:** [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 
 **See also:** [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>)
+
+**See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>)
 
 **See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>)
 

@@ -3,7 +3,7 @@ title: "Event-Driven Architecture"
 description: "Explore event-driven architecture: event bus, event schema management, versioning, and production patterns"
 date: 2026-05-03
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/event-driven-arch.html
+url: https://aidev.fit/en/architecture/event-driven-arch.html
 ---
 
 # Event-Driven Architecture
@@ -61,6 +61,10 @@ The decision to adopt EDA should be driven by concrete requirements for decoupli
 **See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
 
 **See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
+
+**See also:** [Health Check Patterns](</en/architecture/health-check-patterns.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
+
+**See also:** [Health Check Patterns](</en/architecture/health-check-patterns.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
 
 **See also:** [Health Check Patterns](</en/architecture/health-check-patterns.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
 

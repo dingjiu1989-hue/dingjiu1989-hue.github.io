@@ -3,7 +3,7 @@ title: "SaaS Onboarding: Activation Flow and User Retention"
 description: "Design effective SaaS onboarding: activation flow, time-to-value, user education, and reducing churn through guided first experiences."
 date: 2026-01-23
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-onboarding.html
+url: https://aidev.fit/en/sidehustle/saas-onboarding.html
 ---
 
 # SaaS Onboarding: Activation Flow and User Retention
@@ -57,6 +57,10 @@ Effective SaaS onboarding is a continuous optimization process, not a one-time d
 **See also:** [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>)
 
 **See also:** [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>)
+
+**See also:** [Bootstrapping Essentials: Building a Startup Without VC Funding](</en/sidehustle/bootstrapping-essentials.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
+
+**See also:** [Bootstrapping Essentials: Building a Startup Without VC Funding](</en/sidehustle/bootstrapping-essentials.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
 
 **See also:** [Bootstrapping Essentials: Building a Startup Without VC Funding](</en/sidehustle/bootstrapping-essentials.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
 

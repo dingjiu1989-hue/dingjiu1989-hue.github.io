@@ -3,7 +3,7 @@ title: "Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, a
 description: "Protect your LLM application from prompt injection attacks: input sanitization, guardrail systems, permission models, and ongoing monitoring."
 date: 2026-02-12
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/prompt-injection-defense.html
+url: https://aidev.fit/en/ai/prompt-injection-defense.html
 ---
 
 # Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring
@@ -75,6 +75,10 @@ Prompt injection is not a problem you solve once. It is a threat you manage cont
 **See also:** [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>)
 
 **See also:** [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>)
+
+**See also:** [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>)
+
+**See also:** [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>)
 
 **See also:** [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>)
 

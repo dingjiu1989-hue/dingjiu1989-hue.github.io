@@ -3,7 +3,7 @@ title: "Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB"
 description: "Compare key-value stores for caching, session management, and high-throughput workloads."
 date: 2026-04-17
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/key-value-stores.html
+url: https://aidev.fit/en/database/key-value-stores.html
 ---
 
 # Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB
@@ -49,6 +49,10 @@ Design keys carefully to avoid hot partitions. Prefix keys with a namespace for 
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Wide-Column Databases: Cassandra, HBase, ScyllaDB](</en/database/wide-column-databases.html>)
 
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Wide-Column Databases: Cassandra, HBase, ScyllaDB](</en/database/wide-column-databases.html>)
+
+**See also:** [Database Caching](</en/database/database-caching.html>), [Database Scalability](</en/database/database-scalability.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
+
+**See also:** [Database Caching](</en/database/database-caching.html>), [Database Scalability](</en/database/database-scalability.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
 
 **See also:** [Database Caching](</en/database/database-caching.html>), [Database Scalability](</en/database/database-scalability.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
 

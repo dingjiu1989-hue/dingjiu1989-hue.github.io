@@ -3,7 +3,7 @@ title: "Phishing Awareness and Technical Defenses"
 description: "Defend against phishing attacks: email security, URL filtering, security awareness training, and DMARC/DKIM/SPF."
 date: 2026-03-23
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/phishing-awareness.html
+url: https://aidev.fit/en/security/phishing-awareness.html
 ---
 
 # Phishing Awareness and Technical Defenses
@@ -51,6 +51,10 @@ Spear phishing targets specific individuals with personalized emails. Whaling ta
 **See also:** [Email Security](</en/security/email-security.html>), [Security Awareness Training](</en/security/security-awareness.html>), [DNS Security](</en/security/dns-security.html>)
 
 **See also:** [Email Security](</en/security/email-security.html>), [Security Awareness Training](</en/security/security-awareness.html>), [DNS Security](</en/security/dns-security.html>)
+
+**See also:** [CORS Security](</en/security/cors-security.html>), [Endpoint Security](</en/security/endpoint-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
+
+**See also:** [CORS Security](</en/security/cors-security.html>), [Endpoint Security](</en/security/endpoint-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
 
 **See also:** [CORS Security](</en/security/cors-security.html>), [Endpoint Security](</en/security/endpoint-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
 

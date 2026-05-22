@@ -3,7 +3,7 @@ title: "SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting"
 description: "SaaS bookkeeping essentials: revenue recognition, sales tax compliance, accounting basics for solo founders."
 date: 2026-01-23
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-bookkeeping.html
+url: https://aidev.fit/en/sidehustle/saas-bookkeeping.html
 ---
 
 # SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting
@@ -69,6 +69,10 @@ SaaS bookkeeping requires understanding subscription-specific accounting princip
 **See also:** [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>)
 
 **See also:** [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>)
+
+**See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>), [SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Revenue Retention](</en/sidehustle/saas-metrics.html>)
+
+**See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>), [SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Revenue Retention](</en/sidehustle/saas-metrics.html>)
 
 **See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>), [SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Revenue Retention](</en/sidehustle/saas-metrics.html>)
 

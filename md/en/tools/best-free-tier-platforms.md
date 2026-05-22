@@ -3,7 +3,7 @@ title: "Best Free Tier Platforms for Developer Projects 2026: The Ultimate List"
 description: "50+ platforms with genuinely useful free tiers — hosting, databases, APIs, auth, monitoring, CI/CD, and more. Build your entire stack without paying a cent."
 date: 2025-10-30
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-free-tier-platforms.html
+url: https://aidev.fit/en/tools/best-free-tier-platforms.html
 ---
 
 # Best Free Tier Platforms for Developer Projects 2026: The Ultimate List

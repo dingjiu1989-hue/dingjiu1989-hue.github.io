@@ -3,7 +3,7 @@ title: "HTTP Caching Architecture"
 description: "Cache-Control, ETags, CDN caching, stale-while-revalidate, and cache invalidation strategies"
 date: 2026-04-21
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/caching-http.html
+url: https://aidev.fit/en/architecture/caching-http.html
 ---
 
 # HTTP Caching Architecture
@@ -41,6 +41,10 @@ Cache hit ratio is the primary metric. Monitor cache hit ratio at each layer: br
 **See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>)
 
 **See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>)
 

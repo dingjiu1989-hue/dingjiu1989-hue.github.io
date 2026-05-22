@@ -3,7 +3,7 @@ title: "Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer"
 description: "Compare Apache Kafka management and monitoring tools: AKHQ for comprehensive cluster management, Kafka UI for lightweight monitoring, Kowl for developer-friendl"
 date: 2026-02-03
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/kafka-tools.html
+url: https://aidev.fit/en/tools/kafka-tools.html
 ---
 
 # Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
@@ -338,6 +338,10 @@ For development and staging environments, Kafka UI or Kowl provide excellent web
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>)
 
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>)
+
+**See also:** [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
+
+**See also:** [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
 
 **See also:** [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
 

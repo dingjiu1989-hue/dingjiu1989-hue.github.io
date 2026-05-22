@@ -3,7 +3,7 @@ title: "Issue Tracking Tools: Jira, Linear, GitHub Issues, and More"
 description: "Compare issue tracking and project management tools for software teams of all sizes."
 date: 2026-02-08
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/issue-tracking-tools.html
+url: https://aidev.fit/en/tools/issue-tracking-tools.html
 ---
 
 # Issue Tracking Tools: Jira, Linear, GitHub Issues, and More
@@ -37,6 +37,10 @@ Use Jira for enterprise teams with complex workflows. Use Linear for fast-moving
 **See also:** [Project Management Tools for Developers](</en/tools/project-management-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>)
 
 **See also:** [Project Management Tools for Developers](</en/tools/project-management-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>)
+
+**See also:** [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
+
+**See also:** [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
 
 **See also:** [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
 

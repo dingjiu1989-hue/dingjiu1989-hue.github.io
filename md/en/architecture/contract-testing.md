@@ -3,7 +3,7 @@ title: "Contract Testing for Microservices"
 description: "A practical guide to contract testing: ensuring service compatibility without slow end-to-end integration tests."
 date: 2026-05-06
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/contract-testing.html
+url: https://aidev.fit/en/architecture/contract-testing.html
 ---
 
 # Contract Testing for Microservices
@@ -49,6 +49,10 @@ Start with one service pair. Choose a provider with multiple consumers to maximi
 **See also:** [Consumer-Driven Contracts in Microservices](</en/architecture/consumer-driven-contracts.html>), [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>)
 
 **See also:** [Consumer-Driven Contracts in Microservices](</en/architecture/consumer-driven-contracts.html>), [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>)
+
+**See also:** [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [SOA vs Microservices](</en/architecture/soa-vs-microservices.html>)
+
+**See also:** [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [SOA vs Microservices](</en/architecture/soa-vs-microservices.html>)
 
 **See also:** [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [SOA vs Microservices](</en/architecture/soa-vs-microservices.html>)
 

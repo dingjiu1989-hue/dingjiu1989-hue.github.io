@@ -3,7 +3,7 @@ title: "Web Application Firewall Implementation"
 description: "Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuning, and performance optimization."
 date: 2026-03-15
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/waf-implementation.html
+url: https://aidev.fit/en/security/waf-implementation.html
 ---
 
 # Web Application Firewall Implementation
@@ -146,6 +146,10 @@ A properly tuned WAF is a critical defense layer. Start with CRS in detection mo
 **See also:** [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>), [SOC Operations](</en/security/soc-operations.html>)
 
 **See also:** [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>), [SOC Operations](</en/security/soc-operations.html>)
+
+**See also:** [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai](</en/security/waf-comparison.html>), [API Authentication Methods](</en/security/api-authentication.html>)
+
+**See also:** [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai](</en/security/waf-comparison.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 
 **See also:** [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai](</en/security/waf-comparison.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 

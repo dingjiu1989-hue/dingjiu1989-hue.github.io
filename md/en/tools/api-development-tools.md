@@ -3,7 +3,7 @@ title: "API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger
 description: "Comparative analysis of API development tools covering Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI with features, collaboration models, and workflow recommendations."
 date: 2026-05-12
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/api-development-tools.html
+url: https://aidev.fit/en/tools/api-development-tools.html
 ---
 
 # API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI
@@ -129,6 +129,10 @@ Postman remains the most comprehensive tool for teams needing full API lifecycle
 **See also:** [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>)
 
 **See also:** [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>)
+
+**See also:** [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics](</en/tools/ci-cd-observability.html>)
+
+**See also:** [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics](</en/tools/ci-cd-observability.html>)
 
 **See also:** [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics](</en/tools/ci-cd-observability.html>)
 

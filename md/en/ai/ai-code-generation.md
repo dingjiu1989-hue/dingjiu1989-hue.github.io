@@ -3,7 +3,7 @@ title: "AI Code Generation Best Practices"
 description: "Practical best practices for using AI code generation tools effectively in production development workflows."
 date: 2025-12-11
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-code-generation.html
+url: https://aidev.fit/en/ai/ai-code-generation.html
 ---
 
 # AI Code Generation Best Practices
@@ -156,6 +156,10 @@ AI code generation is a powerful productivity multiplier when used correctly. Pr
 **See also:** [AI Code Generation: Tools, Workflows, and Best Practices](</en/ai/ai-code-generation-tools.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>)
 
 **See also:** [AI Code Generation: Tools, Workflows, and Best Practices](</en/ai/ai-code-generation-tools.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>)
+
+**See also:** [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>)
+
+**See also:** [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>)
 
 **See also:** [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>)
 

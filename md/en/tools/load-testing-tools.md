@@ -3,7 +3,7 @@ title: "Load Testing Tools: k6, Locust, Gatling, Artillery"
 description: "Compare load testing frameworks: k6 for JavaScript-based testing, Locust for Python, Gatling for Scala/Java, and Artillery for Node.js. Script examples, metrics"
 date: 2026-02-04
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/load-testing-tools.html
+url: https://aidev.fit/en/tools/load-testing-tools.html
 ---
 
 # Load Testing Tools: k6, Locust, Gatling, Artillery
@@ -402,6 +402,10 @@ All four tools support CI integration. k6 has the strongest Grafana ecosystem. L
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>), [Linter and Formatter: ESLint, Prettier, Biome, Ruff](</en/tools/linter-formatter.html>)
 
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>), [Linter and Formatter: ESLint, Prettier, Biome, Ruff](</en/tools/linter-formatter.html>)
+
+**See also:** [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
+
+**See also:** [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
 
 **See also:** [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
 

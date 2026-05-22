@@ -3,7 +3,7 @@ title: "Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja"
 description: "Compare reverse engineering tools: Ghidra for free comprehensive analysis, IDA Free for industry standard disassembly, radare2 for command-line reverse engineer"
 date: 2026-02-05
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/reverse-engineering.html
+url: https://aidev.fit/en/tools/reverse-engineering.html
 ---
 
 # Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja
@@ -339,6 +339,10 @@ All four tools are capable of serious reverse engineering work. Ghidra offers th
 **See also:** [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
 
 **See also:** [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>)
 
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>)
 

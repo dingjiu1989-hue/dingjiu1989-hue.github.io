@@ -3,7 +3,7 @@ title: "Blockchain and Smart Contract Security"
 description: "Smart contract vulnerabilities including reentrancy and oracle manipulation, plus auditing tools, formal verification, and wallet security."
 date: 2026-03-03
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/blockchain-security.html
+url: https://aidev.fit/en/security/blockchain-security.html
 ---
 
 # Blockchain and Smart Contract Security
@@ -371,6 +371,10 @@ Smart contract security requires a multi-layered approach. Understand common vul
 **See also:** [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Vulnerability Scanning: Tools and Workflows](</en/security/vulnerability-scanning.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 
 **See also:** [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Vulnerability Scanning: Tools and Workflows](</en/security/vulnerability-scanning.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 
 **See also:** [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 

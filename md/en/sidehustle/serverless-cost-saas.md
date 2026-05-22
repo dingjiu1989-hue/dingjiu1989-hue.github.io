@@ -3,7 +3,7 @@ title: "Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings"
 description: "Optimize serverless costs for your SaaS with Lambda, DynamoDB, and API Gateway saving strategies."
 date: 2026-01-23
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/serverless-cost-saas.html
+url: https://aidev.fit/en/sidehustle/serverless-cost-saas.html
 ---
 
 # Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings
@@ -65,6 +65,10 @@ Serverless cost optimization requires understanding your pricing model and usage
 **See also:** [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>)
 
 **See also:** [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>)
+
+**See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>)
+
+**See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>)
 
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>)
 

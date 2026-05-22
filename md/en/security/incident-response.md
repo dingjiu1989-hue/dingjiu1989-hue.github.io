@@ -3,7 +3,7 @@ title: "Incident Response Playbook for Developers"
 description: "Practical incident response using the NIST framework: preparation, detection, containment, eradication, recovery, and post-mortems."
 date: 2026-03-04
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/incident-response.html
+url: https://aidev.fit/en/security/incident-response.html
 ---
 
 # Incident Response Playbook for Developers
@@ -245,6 +245,10 @@ A well-practiced incident response process turns a potential disaster into a man
 **See also:** [Incident Response Plan](</en/security/incident-response-plan.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>)
 
 **See also:** [Incident Response Plan](</en/security/incident-response-plan.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)
 
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)
 

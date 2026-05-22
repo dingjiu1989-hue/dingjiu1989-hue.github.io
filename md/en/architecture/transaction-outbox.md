@@ -3,7 +3,7 @@ title: "Transactional Outbox Pattern"
 description: "Reliable event publishing with transactional outbox: implementations, idempotent consumers, dual-write resolution"
 date: 2026-05-12
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/transaction-outbox.html
+url: https://aidev.fit/en/architecture/transaction-outbox.html
 ---
 
 # Transactional Outbox Pattern
@@ -39,6 +39,10 @@ The transactional outbox pattern is production-proven across organizations handl
 **See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
 
 **See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 

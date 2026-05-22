@@ -3,7 +3,7 @@ title: "Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes"
 description: "Learn full-text search in PostgreSQL using tsvector, tsquery, and GIN indexes. Understand ranking, stemming, and when to use PostgreSQL vs Elasticsearch."
 date: 2026-04-06
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/full-text-search-postgresql.html
+url: https://aidev.fit/en/database/full-text-search-postgresql.html
 ---
 
 # Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes
@@ -245,6 +245,10 @@ PostgreSQL full-text search is adequate for the majority of applications: docume
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>)
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
 

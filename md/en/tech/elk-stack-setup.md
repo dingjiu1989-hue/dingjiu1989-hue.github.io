@@ -3,7 +3,7 @@ title: "ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimizat
 description: "Comprehensive guide to ELK Stack covering Elasticsearch cluster setup, Logstash pipeline configuration, Kibana visualization, performance tuning, and index lifecycle management."
 date: 2026-01-01
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/elk-stack-setup.html
+url: https://aidev.fit/en/tech/elk-stack-setup.html
 ---
 
 # ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization
@@ -163,6 +163,10 @@ The ELK stack provides a complete log management solution. Elasticsearch deliver
 **See also:** [Node.js Performance Optimization Guide](</en/tech/nodejs-performance.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>)
 
 **See also:** [Node.js Performance Optimization Guide](</en/tech/nodejs-performance.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>)
+
+**See also:** [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>)
+
+**See also:** [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>)
 
 **See also:** [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>)
 

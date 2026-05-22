@@ -3,7 +3,7 @@ title: "Project Management Tools for Developers"
 description: "Compare project management tools including Linear, Jira, GitHub Projects, and Notion for software development teams."
 date: 2025-12-10
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/project-management-tools.html
+url: https://aidev.fit/en/tools/project-management-tools.html
 ---
 
 # Project Management Tools for Developers
@@ -325,6 +325,10 @@ The project management tool landscape has shifted toward developer experience. L
 **See also:** [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>), [Best Project Management Tools for Dev Teams 2026: Linear vs Jira vs ClickUp vs Notion](</en/tools/best-project-management-dev.html>)
 
 **See also:** [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>), [Best Project Management Tools for Dev Teams 2026: Linear vs Jira vs ClickUp vs Notion](</en/tools/best-project-management-dev.html>)
+
+**See also:** [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>), [Best Database GUI Clients](</en/tools/database-clients.html>)
+
+**See also:** [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>), [Best Database GUI Clients](</en/tools/database-clients.html>)
 
 **See also:** [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>), [Best Database GUI Clients](</en/tools/database-clients.html>)
 

@@ -3,7 +3,7 @@ title: "Asynchronous Communication in Distributed Systems"
 description: "Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and patterns"
 date: 2026-04-21
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/asynchronous-communication.html
+url: https://aidev.fit/en/architecture/asynchronous-communication.html
 ---
 
 # Asynchronous Communication in Distributed Systems
@@ -37,6 +37,10 @@ Choosing the right messaging infrastructure depends on consumption patterns, dur
 **See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
 
 **See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
+
+**See also:** [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>)
+
+**See also:** [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>)
 
 **See also:** [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>)
 

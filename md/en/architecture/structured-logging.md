@@ -3,7 +3,7 @@ title: "Structured Logging"
 description: "JSON log format, correlation IDs, log levels, logging libraries, and best practices for structured logging"
 date: 2026-04-30
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/structured-logging.html
+url: https://aidev.fit/en/architecture/structured-logging.html
 ---
 
 # Structured Logging
@@ -39,6 +39,10 @@ Log retention policies balance debugging needs with storage costs. Typical reten
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 
 **See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 

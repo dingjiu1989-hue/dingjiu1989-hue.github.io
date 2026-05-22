@@ -3,7 +3,7 @@ title: "How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide"
 description: "Run powerful AI models on your own machine — private, free, and offline. Complete setup guide for Ollama, LM Studio, and llama.cpp with model recommendations."
 date: 2025-11-06
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/run-local-ai-models.html
+url: https://aidev.fit/en/ai/run-local-ai-models.html
 ---
 
 # How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide

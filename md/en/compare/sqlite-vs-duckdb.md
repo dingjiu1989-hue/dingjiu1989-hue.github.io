@@ -3,7 +3,7 @@ title: "SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics"
 description: "Compare SQLite and DuckDB for embedded analytics, OLTP vs OLAP workloads, query performance, and use cases."
 date: 2026-02-27
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/sqlite-vs-duckdb.html
+url: https://aidev.fit/en/compare/sqlite-vs-duckdb.html
 ---
 
 # SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics
@@ -85,6 +85,10 @@ The choice between SQLite and DuckDB is not a competition but a recognition of w
 **See also:** [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared](</en/compare/duckdb-vs-sqlite.html>), [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>)
 
 **See also:** [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared](</en/compare/duckdb-vs-sqlite.html>), [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>)
+
+**See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>)
+
+**See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>)
 
 **See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>)
 

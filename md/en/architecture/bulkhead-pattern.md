@@ -3,7 +3,7 @@ title: "Bulkhead Pattern for Resilience"
 description: "Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, circuit breaker integration, resource partitioning, and real-world implementation with resilience patterns."
 date: 2025-12-25
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/bulkhead-pattern.html
+url: https://aidev.fit/en/architecture/bulkhead-pattern.html
 ---
 
 # Bulkhead Pattern for Resilience
@@ -53,6 +53,10 @@ In production, bulkheads are one of the most effective patterns for preventing c
 **See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>)
 
 **See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>)
+
+**See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 
 **See also:** [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 

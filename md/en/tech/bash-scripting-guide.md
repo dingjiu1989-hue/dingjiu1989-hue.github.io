@@ -3,7 +3,7 @@ title: "Bash Scripting Best Practices"
 description: "Essential patterns for writing reliable, maintainable shell scripts in production environments."
 date: 2025-12-01
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/bash-scripting-guide.html
+url: https://aidev.fit/en/tech/bash-scripting-guide.html
 ---
 
 # Bash Scripting Best Practices
@@ -238,6 +238,10 @@ Bash scripting is not dead -- it is the glue that holds modern infrastructure to
 **See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
 
 **See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
+
+**See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
+
+**See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
 
 **See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
 

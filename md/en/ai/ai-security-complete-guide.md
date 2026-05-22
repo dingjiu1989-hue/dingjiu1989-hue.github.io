@@ -3,7 +3,7 @@ title: "AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teamin
 description: "Everything developers need to know about AI security: prompt injection attacks, guardrails implementation, red teaming LLMs, and production security patterns."
 date: 2025-12-10
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-security-complete-guide.html
+url: https://aidev.fit/en/ai/ai-security-complete-guide.html
 ---
 
 # AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026
@@ -1418,6 +1418,10 @@ See also: [Prompt Injection Prevention](<>), [AI Agents Guide](<>), [Building RA
 **See also:** [Web Security Fundamentals 2026: A Developer Complete Guide](</en/security/web-security-fundamentals-2026.html>), [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>)
 
 **See also:** [Web Security Fundamentals 2026: A Developer Complete Guide](</en/security/web-security-fundamentals-2026.html>), [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>)
+
+**See also:** [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>), [Prompt Engineering Guide for LLMs](</en/ai/prompt-engineering-guide.html>), [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>)
+
+**See also:** [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>), [Prompt Engineering Guide for LLMs](</en/ai/prompt-engineering-guide.html>), [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>)
 
 **See also:** [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>), [Prompt Engineering Guide for LLMs](</en/ai/prompt-engineering-guide.html>), [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>)
 

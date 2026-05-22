@@ -3,7 +3,7 @@ title: "Zero-Downtime Database Migration Strategies for Production"
 description: "How to safely run database migrations without downtime: expand-contract pattern, feature flags for migrations, backfill strategies, reversible migrations, and handling large tables (100M+ rows)."
 date: 2025-10-14
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/database-migration-strategies.html
+url: https://aidev.fit/en/tech/database-migration-strategies.html
 ---
 
 # Zero-Downtime Database Migration Strategies for Production

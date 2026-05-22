@@ -22,7 +22,7 @@ from datetime import datetime, timezone
 ROOT = Path(__file__).resolve().parent.parent
 TRACKING = ROOT / 'data' / 'medium-published.json'
 EN_JSON = ROOT / 'en' / 'articles.json'
-BASE = 'https://dingjiu1989-hue.github.io'
+BASE = 'https://aidev.fit'
 MEDIUM_API = 'https://api.medium.com/v1'
 
 TOKEN = os.environ.get('MEDIUM_TOKEN')

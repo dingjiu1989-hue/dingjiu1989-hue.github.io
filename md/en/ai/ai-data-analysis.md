@@ -3,7 +3,7 @@ title: "AI-Powered Data Analysis: Using LLMs for Data Science and Visualization"
 description: "Learn how to use LLMs for data analysis: data cleaning, exploratory analysis, statistical testing, and creating visualizations with natural language commands."
 date: 2026-05-11
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-data-analysis.html
+url: https://aidev.fit/en/ai/ai-data-analysis.html
 ---
 
 # AI-Powered Data Analysis: Using LLMs for Data Science and Visualization
@@ -91,6 +91,10 @@ LLMs transform data analysis from syntax-heavy coding into collaborative dialogu
 **See also:** [Building AI-Powered CLI Tools: A Complete Guide for Developers](</en/tools/ai-cli-tools-guide.html>), [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [AI for DevOps in 2026: Best Tools and Practical Use Cases](</en/ai/ai-devops-tools.html>)
 
 **See also:** [Building AI-Powered CLI Tools: A Complete Guide for Developers](</en/tools/ai-cli-tools-guide.html>), [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [AI for DevOps in 2026: Best Tools and Practical Use Cases](</en/ai/ai-devops-tools.html>)
+
+**See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>), [Best LLMs for Coding in 2026: Claude vs GPT-4o vs Gemini vs DeepSeek vs CodeLlama](</en/ai/best-llms-for-coding-2026.html>)
+
+**See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>), [Best LLMs for Coding in 2026: Claude vs GPT-4o vs Gemini vs DeepSeek vs CodeLlama](</en/ai/best-llms-for-coding-2026.html>)
 
 **See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>), [Best LLMs for Coding in 2026: Claude vs GPT-4o vs Gemini vs DeepSeek vs CodeLlama](</en/ai/best-llms-for-coding-2026.html>)
 

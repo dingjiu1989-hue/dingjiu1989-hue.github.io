@@ -3,7 +3,7 @@ title: "MLOps Pipeline: From Training to Production"
 description: "Build MLOps pipelines for machine learning: data validation, model training, evaluation, deployment, and monitoring."
 date: 2026-05-20
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/mlops-pipeline.html
+url: https://aidev.fit/en/ai/mlops-pipeline.html
 ---
 
 # MLOps Pipeline: From Training to Production
@@ -53,6 +53,10 @@ Monitor prediction distributions, latency, error rates, and data drift. Alert on
 **See also:** [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>)
 
 **See also:** [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>)
+
+**See also:** [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>)
+
+**See also:** [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>)
 
 **See also:** [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>)
 

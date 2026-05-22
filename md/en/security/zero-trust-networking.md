@@ -3,7 +3,7 @@ title: "Zero Trust Networking: Architecture and Implementation Guide"
 description: "Implement zero trust networking: micro-segmentation, identity-based access, and encrypted communication."
 date: 2026-03-25
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/zero-trust-networking.html
+url: https://aidev.fit/en/security/zero-trust-networking.html
 ---
 
 # Zero Trust Networking: Architecture and Implementation Guide
@@ -37,6 +37,10 @@ Cloudflare Zero Trust, Zscaler, and Tailscale provide ZTN solutions. Istio and C
 **See also:** [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>)
 
 **See also:** [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>)
+
+**See also:** [SSO Architecture](</en/security/sso-architecture.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>)
+
+**See also:** [SSO Architecture](</en/security/sso-architecture.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>)
 
 **See also:** [SSO Architecture](</en/security/sso-architecture.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>)
 

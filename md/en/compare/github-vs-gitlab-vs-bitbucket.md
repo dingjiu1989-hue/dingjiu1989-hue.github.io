@@ -3,7 +3,7 @@ title: "GitHub vs GitLab vs Bitbucket (2026): Which Git Platform Is Best?"
 description: "Detailed comparison of the three major Git platforms — features, CI/CD, pricing, security, and developer ecosystem. Pick the right home for your code."
 date: 2025-11-16
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/github-vs-gitlab-vs-bitbucket.html
+url: https://aidev.fit/en/compare/github-vs-gitlab-vs-bitbucket.html
 ---
 
 # GitHub vs GitLab vs Bitbucket (2026): Which Git Platform Is Best?

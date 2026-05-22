@@ -3,7 +3,7 @@ title: "RAG Architecture Guide"
 description: "A comprehensive guide to Retrieval-Augmented Generation architecture, covering indexing, retrieval, generation, and production deployment."
 date: 2025-12-13
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/rag-architecture-guide.html
+url: https://aidev.fit/en/ai/rag-architecture-guide.html
 ---
 
 # RAG Architecture Guide
@@ -139,6 +139,10 @@ RAG architecture provides a powerful framework for building LLM applications gro
 **See also:** [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>)
 
 **See also:** [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>)
+
+**See also:** [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>)
+
+**See also:** [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>)
 
 **See also:** [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>)
 

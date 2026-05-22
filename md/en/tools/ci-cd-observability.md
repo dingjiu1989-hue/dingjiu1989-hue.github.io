@@ -3,7 +3,7 @@ title: "CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking,
 description: "Technical guide to CI/CD observability covering build metrics collection, test analytics, deployment tracking, DORA metrics implementation, and tooling recommendations."
 date: 2026-01-28
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/ci-cd-observability.html
+url: https://aidev.fit/en/tools/ci-cd-observability.html
 ---
 
 # CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics
@@ -167,6 +167,10 @@ CI/CD observability transforms pipelines from black boxes to measurable, improva
 **See also:** [Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces](</en/tools/devcontainer-setup.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)
 
 **See also:** [Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces](</en/tools/devcontainer-setup.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)
+
+**See also:** [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>)
+
+**See also:** [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>)
 
 **See also:** [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>)
 

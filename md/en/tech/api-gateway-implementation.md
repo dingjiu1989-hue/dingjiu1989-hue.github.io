@@ -3,7 +3,7 @@ title: "API Gateway Implementation Guide"
 description: "Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformations, analytics, and deployment patterns."
 date: 2026-05-14
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/api-gateway-implementation.html
+url: https://aidev.fit/en/tech/api-gateway-implementation.html
 ---
 
 # API Gateway Implementation Guide
@@ -453,6 +453,10 @@ Select the centralized pattern for simpler operations and the sidecar pattern fo
 **See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
 
 **See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
+
+**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>)
+
+**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>)
 
 **See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>)
 

@@ -3,7 +3,7 @@ title: "Security Awareness Training"
 description: "Building an effective security awareness program with phishing simulations, gamification, and measurable metrics."
 date: 2026-03-19
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/security-awareness.html
+url: https://aidev.fit/en/security/security-awareness.html
 ---
 
 # Security Awareness Training
@@ -147,6 +147,10 @@ A mature security awareness program combines realistic simulations, engaging gam
 **See also:** [Phishing Awareness and Technical Defenses](</en/security/phishing-awareness.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>), [Container Image Security](</en/security/container-image-security.html>)
 
 **See also:** [Phishing Awareness and Technical Defenses](</en/security/phishing-awareness.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>), [Container Image Security](</en/security/container-image-security.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Helm Security](</en/security/helm-security.html>), [IAM Audit](</en/security/iam-audit.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Helm Security](</en/security/helm-security.html>), [IAM Audit](</en/security/iam-audit.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Helm Security](</en/security/helm-security.html>), [IAM Audit](</en/security/iam-audit.html>)
 

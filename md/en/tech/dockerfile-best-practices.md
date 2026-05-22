@@ -3,7 +3,7 @@ title: "Dockerfile Best Practices for Production"
 description: "Optimize Dockerfiles for production: multi-stage builds, layer caching, security scanning, and minimal images."
 date: 2026-05-19
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/dockerfile-best-practices.html
+url: https://aidev.fit/en/tech/dockerfile-best-practices.html
 ---
 
 # Dockerfile Best Practices for Production
@@ -49,6 +49,10 @@ Use .dockerignore to exclude unnecessary files from the build context. Exclude .
 **See also:** [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>)
 
 **See also:** [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>)
+
+**See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [API Documentation](</en/tech/api-documentation.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>)
+
+**See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [API Documentation](</en/tech/api-documentation.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>)
 
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [API Documentation](</en/tech/api-documentation.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>)
 

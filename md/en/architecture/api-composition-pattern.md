@@ -3,7 +3,7 @@ title: "API Composition Pattern"
 description: "Learn API composition: aggregation, parallel calls, error handling strategies, and cross-service data retrieval"
 date: 2026-05-01
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/api-composition-pattern.html
+url: https://aidev.fit/en/architecture/api-composition-pattern.html
 ---
 
 # API Composition Pattern
@@ -63,6 +63,10 @@ API composition is a fundamental pattern in microservice architectures. It provi
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 

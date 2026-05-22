@@ -3,7 +3,7 @@ title: "Query Performance Tuning Tools"
 description: "Master query performance tuning with EXPLAIN ANALYZE, pg_stat_statements, slow query logs, and database profiling tools."
 date: 2025-12-23
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/query-performance-tuning.html
+url: https://aidev.fit/en/database/query-performance-tuning.html
 ---
 
 # Query Performance Tuning Tools
@@ -397,6 +397,10 @@ Performance tuning is a data-driven process. Start with the slow query log or pg
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>)
 
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>)
+
+**See also:** [Vector Search Optimization Techniques](</en/database/vector-search-optimization.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>)
+
+**See also:** [Vector Search Optimization Techniques](</en/database/vector-search-optimization.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>)
 
 **See also:** [Vector Search Optimization Techniques](</en/database/vector-search-optimization.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>)
 

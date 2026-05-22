@@ -3,7 +3,7 @@ title: "Event Collaboration: Choreography vs Orchestration"
 description: "Event-driven collaboration patterns, saga execution, choreography vs orchestration, error handling in distributed workflows"
 date: 2026-04-24
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/event-collaboration.html
+url: https://aidev.fit/en/architecture/event-collaboration.html
 ---
 
 # Event Collaboration: Choreography vs Orchestration
@@ -37,6 +37,10 @@ Many production systems combine both patterns. Orchestration manages core busine
 **See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
 
 **See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
+
+**See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
+
+**See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
 
 **See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
 

@@ -3,7 +3,7 @@ title: "A/B Testing Infrastructure"
 description: "Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing at scale"
 date: 2026-04-21
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/a-b-testing-infrastructure.html
+url: https://aidev.fit/en/architecture/a-b-testing-infrastructure.html
 ---
 
 # A/B Testing Infrastructure
@@ -39,6 +39,10 @@ The experiment platform should provide self-service capabilities for product man
 **See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 
 **See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 

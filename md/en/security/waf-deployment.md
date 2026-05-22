@@ -3,7 +3,7 @@ title: "WAF Deployment Patterns"
 description: "WAF deployment patterns including inline, reverse proxy, cloud WAF, and API protection strategies."
 date: 2026-03-20
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/waf-deployment.html
+url: https://aidev.fit/en/security/waf-deployment.html
 ---
 
 # WAF Deployment Patterns
@@ -289,6 +289,10 @@ Choose the WAF deployment pattern that fits your architecture. Inline WAF offers
 **See also:** [DNS Security](</en/security/dns-security.html>), [Email Security](</en/security/email-security.html>), [Key Management Systems](</en/security/key-management.html>)
 
 **See also:** [DNS Security](</en/security/dns-security.html>), [Email Security](</en/security/email-security.html>), [Key Management Systems](</en/security/key-management.html>)
+
+**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
+
+**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
 
 **See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
 

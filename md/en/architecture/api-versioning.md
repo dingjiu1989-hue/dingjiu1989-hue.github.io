@@ -3,7 +3,7 @@ title: "API Versioning Strategies"
 description: "Explore API versioning strategies for maintaining backward compatibility as your API evolves."
 date: 2025-12-25
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/api-versioning.html
+url: https://aidev.fit/en/architecture/api-versioning.html
 ---
 
 # API Versioning Strategies
@@ -228,6 +228,10 @@ API versioning is a practical necessity for evolving APIs. URL path versioning i
 **See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 
 **See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [REST API Design Best Practices](</en/architecture/rest-api-design.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>)
+
+**See also:** [REST API Design Best Practices](</en/architecture/rest-api-design.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>)
 
 **See also:** [REST API Design Best Practices](</en/architecture/rest-api-design.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>)
 

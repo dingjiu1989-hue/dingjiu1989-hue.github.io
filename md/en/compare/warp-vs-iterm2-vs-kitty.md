@@ -3,7 +3,7 @@ title: "Warp vs iTerm2 vs Kitty: Best Terminal Emulator for Developers (2026)"
 description: "Compare modern terminal emulators — Warp's AI features, iTerm2's stability, Kitty's GPU rendering, and which is right for you."
 date: 2025-11-26
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/warp-vs-iterm2-vs-kitty.html
+url: https://aidev.fit/en/compare/warp-vs-iterm2-vs-kitty.html
 ---
 
 # Warp vs iTerm2 vs Kitty: Best Terminal Emulator for Developers (2026)

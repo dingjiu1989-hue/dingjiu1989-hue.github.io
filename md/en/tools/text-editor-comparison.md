@@ -3,7 +3,7 @@ title: "Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026"
 description: "Compare VS Code, Neovim, JetBrains IDEs, and Zed for developer productivity and workflow."
 date: 2026-02-10
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/text-editor-comparison.html
+url: https://aidev.fit/en/tools/text-editor-comparison.html
 ---
 
 # Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026
@@ -41,6 +41,10 @@ Start with VS Code. Move to Neovim for keyboard efficiency. Use JetBrains for co
 **See also:** [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>)
 
 **See also:** [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>), [Shell Frameworks: zsh, fish, bash Customization](</en/tools/shell-frameworks.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>), [Shell Frameworks: zsh, fish, bash Customization](</en/tools/shell-frameworks.html>)
 
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>), [Shell Frameworks: zsh, fish, bash Customization](</en/tools/shell-frameworks.html>)
 

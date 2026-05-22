@@ -3,7 +3,7 @@ title: "Package Managers Compared"
 description: "Comprehensive comparison of npm, yarn, pnpm, pip, cargo, and other package managers across languages."
 date: 2025-12-10
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/package-managers-compared.html
+url: https://aidev.fit/en/tools/package-managers-compared.html
 ---
 
 # Package Managers Compared
@@ -300,6 +300,10 @@ The package manager landscape is converging on speed and determinism. Rust-based
 **See also:** [Container Runtimes Compared](</en/tools/container-runtimes-compared.html>), [Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features](</en/tools/package-managers.html>), [CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins](</en/tools/ci-cd-tools-comparison.html>)
 
 **See also:** [Container Runtimes Compared](</en/tools/container-runtimes-compared.html>), [Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features](</en/tools/package-managers.html>), [CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins](</en/tools/ci-cd-tools-comparison.html>)
+
+**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq](</en/tools/best-note-taking-apps-developers.html>)
+
+**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq](</en/tools/best-note-taking-apps-developers.html>)
 
 **See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq](</en/tools/best-note-taking-apps-developers.html>)
 

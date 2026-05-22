@@ -3,7 +3,7 @@ title: "Schema Registry"
 description: "Learn schema registry principles: Avro, Protobuf, JSON Schema, compatibility checks, and evolution strategies"
 date: 2026-05-05
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html
+url: https://aidev.fit/en/architecture/schema-registry.html
 ---
 
 # Schema Registry
@@ -63,6 +63,10 @@ A well-managed schema registry prevents the most common data contract failures i
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
 
 **See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
 

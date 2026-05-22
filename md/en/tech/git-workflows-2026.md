@@ -3,7 +3,7 @@ title: "Git Workflows for Teams"
 description: "A practical guide to modern Git workflows for collaborative team development in 2026."
 date: 2025-12-02
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/git-workflows-2026.html
+url: https://aidev.fit/en/tech/git-workflows-2026.html
 ---
 
 # Git Workflows for Teams
@@ -183,6 +183,10 @@ The best Git workflow is the one your team consistently follows. Start simple --
 **See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
 
 **See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
+
+**See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Git Workflows](</en/tech/git-workflows.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
+
+**See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Git Workflows](</en/tech/git-workflows.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
 
 **See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Git Workflows](</en/tech/git-workflows.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
 

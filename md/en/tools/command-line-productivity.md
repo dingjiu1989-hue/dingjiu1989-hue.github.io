@@ -3,7 +3,7 @@ title: "Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazy
 description: "Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code search, jq for JSON processing, bat, tmux, zoxide, and lazygit."
 date: 2026-01-28
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/command-line-productivity.html
+url: https://aidev.fit/en/tools/command-line-productivity.html
 ---
 
 # Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit
@@ -157,6 +157,10 @@ Modern CLI tools dramatically improve terminal productivity. fzf provides instan
 **See also:** [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>)
 
 **See also:** [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>)
+
+**See also:** [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>)
+
+**See also:** [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>)
 
 **See also:** [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>)
 

@@ -3,7 +3,7 @@ title: "Micro-SaaS Tech Stack: Building Lean in 2026"
 description: "Choose the right tech stack for your micro-SaaS: hosting, database, auth, payments, and email for solo founders and small teams."
 date: 2026-01-21
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/micro-saas-stack.html
+url: https://aidev.fit/en/sidehustle/micro-saas-stack.html
 ---
 
 # Micro-SaaS Tech Stack: Building Lean in 2026
@@ -51,6 +51,10 @@ The ideal micro-SaaS stack combines managed services that maximize developer pro
 **See also:** [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>), [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>)
 
 **See also:** [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>), [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>)
+
+**See also:** [Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring](</en/sidehustle/feature-prioritization.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>), [SEO for SaaS: Technical SEO, Content Clusters, Link Building](</en/sidehustle/seo-for-saas.html>)
+
+**See also:** [Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring](</en/sidehustle/feature-prioritization.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>), [SEO for SaaS: Technical SEO, Content Clusters, Link Building](</en/sidehustle/seo-for-saas.html>)
 
 **See also:** [Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring](</en/sidehustle/feature-prioritization.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>), [SEO for SaaS: Technical SEO, Content Clusters, Link Building](</en/sidehustle/seo-for-saas.html>)
 

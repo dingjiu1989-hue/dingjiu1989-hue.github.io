@@ -3,7 +3,7 @@ title: "Terraform State Management: Remote State, Locking, Migration, and Worksp
 description: "Deep dive into Terraform state management covering remote backends, state locking, migration strategies, workspace patterns, and Terragrunt for multi-environment orchestration."
 date: 2026-01-04
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/terraform-state-management.html
+url: https://aidev.fit/en/tech/terraform-state-management.html
 ---
 
 # Terraform State Management: Remote State, Locking, Migration, and Workspaces
@@ -113,6 +113,10 @@ Terraform state management is not optional infrastructure — it is the foundati
 **See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Infrastructure Composability](</en/tech/infrastructure-composability.html>), [React Server Components](</en/tech/react-server-components.html>)
 
 **See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Infrastructure Composability](</en/tech/infrastructure-composability.html>), [React Server Components](</en/tech/react-server-components.html>)
+
+**See also:** [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Configuration Management](</en/tech/configuration-management.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>)
+
+**See also:** [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Configuration Management](</en/tech/configuration-management.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>)
 
 **See also:** [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Configuration Management](</en/tech/configuration-management.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>)
 

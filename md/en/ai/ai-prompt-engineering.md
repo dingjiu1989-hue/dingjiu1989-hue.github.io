@@ -3,7 +3,7 @@ title: "Advanced Prompt Engineering Techniques"
 description: "Master advanced prompt engineering techniques including chain-of-thought, few-shot, and structured prompting for better LLM outputs."
 date: 2025-12-12
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-prompt-engineering.html
+url: https://aidev.fit/en/ai/ai-prompt-engineering.html
 ---
 
 # Advanced Prompt Engineering Techniques
@@ -143,6 +143,10 @@ Advanced prompt engineering combines structured techniques, parameter tuning, an
 **See also:** [Prompt Engineering Guide for LLMs](</en/ai/prompt-engineering-guide.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering: Techniques That Actually Work for Developers](</en/ai/prompt-engineering-advanced.html>)
 
 **See also:** [Prompt Engineering Guide for LLMs](</en/ai/prompt-engineering-guide.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering: Techniques That Actually Work for Developers](</en/ai/prompt-engineering-advanced.html>)
+
+**See also:** [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>)
+
+**See also:** [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>)
 
 **See also:** [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>)
 

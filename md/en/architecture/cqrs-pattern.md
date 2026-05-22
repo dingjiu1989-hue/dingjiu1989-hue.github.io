@@ -3,7 +3,7 @@ title: "CQRS Pattern: Command Query Responsibility Segregation"
 description: "Learn CQRS pattern with read/write separation, event sourcing integration, materialized views, and guidance on when to use it."
 date: 2026-04-20
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/cqrs-pattern.html
+url: https://aidev.fit/en/architecture/cqrs-pattern.html
 ---
 
 # CQRS Pattern: Command Query Responsibility Segregation
@@ -47,6 +47,10 @@ Testing CQRS systems requires verifying both the command behavior (do commands p
 **See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 
 **See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
+
+**See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
 
 **See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
 

@@ -3,7 +3,7 @@ title: "Email Security"
 description: "Complete guide to email security covering SPF, DKIM, DMARC configuration, email gateway deployment, phishing protection, and BEC defense."
 date: 2026-03-10
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/email-security.html
+url: https://aidev.fit/en/security/email-security.html
 ---
 
 # Email Security
@@ -184,6 +184,10 @@ Email security requires defense in depth: authentication protocols prevent spoof
 **See also:** [Phishing Awareness and Technical Defenses](</en/security/phishing-awareness.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>)
 
 **See also:** [Phishing Awareness and Technical Defenses](</en/security/phishing-awareness.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>)
+
+**See also:** [CORS Security](</en/security/cors-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Microservice Security](</en/security/microservice-security.html>)
+
+**See also:** [CORS Security](</en/security/cors-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Microservice Security](</en/security/microservice-security.html>)
 
 **See also:** [CORS Security](</en/security/cors-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Microservice Security](</en/security/microservice-security.html>)
 

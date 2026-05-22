@@ -40,7 +40,7 @@ RSS_FEEDS = [
 
 # ── User Agent ──
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (compatible; AIStudyRoomBot/1.0; +https://dingjiu1989-hue.github.io)"
+    "User-Agent": "Mozilla/5.0 (compatible; AIStudyRoomBot/1.0; +https://aidev.fit)"
 }
 
 
@@ -179,7 +179,7 @@ def make_en_daily(news_items):
         f'description: "Top {len(news_items)} AI news today: curated from TechCrunch, The Verge, Ars Technica, VentureBeat, and more."',
         f"date: {TODAY}",
         "board: daily",
-        f"url: https://dingjiu1989-hue.github.io/en/daily/{SLUG}.html",
+        f"url: https://aidev.fit/en/daily/{SLUG}.html",
         "---",
         "",
         f"# AI Daily Digest — {TODAY}",
@@ -222,7 +222,7 @@ def make_cn_daily(news_items):
         f'description: "今日AI十大要闻：整理自TechCrunch、The Verge、Ars Technica、VentureBeat等可信来源。附原文链接。"',
         f"date: {TODAY}",
         "board: daily",
-        f"url: https://dingjiu1989-hue.github.io/daily/{SLUG}.html",
+        f"url: https://aidev.fit/daily/{SLUG}.html",
         "---",
         "",
         f"# AI每日资讯 — {TODAY}",

@@ -3,7 +3,7 @@ title: "How Developers Can Monetize Social Media: X, LinkedIn, and TikTok (2026)
 description: "How developer influencers earn money on social platforms: sponsored posts, affiliate marketing, consulting leads, and product sales. Real income breakdowns for each platform."
 date: 2025-10-21
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/developer-social-media-monetization.html
+url: https://aidev.fit/en/sidehustle/developer-social-media-monetization.html
 ---
 
 # How Developers Can Monetize Social Media: X, LinkedIn, and TikTok (2026)

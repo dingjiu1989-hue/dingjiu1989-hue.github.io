@@ -3,7 +3,7 @@ title: "Best Free Stock Photo Sites for Commercial Use"
 description: "10+ high-quality free stock photo sites you can use commercially. Unsplash, Pexels, Pixabay, and hidden gems designers and marketers swear by."
 date: 2025-10-01
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/free-images.html
+url: https://aidev.fit/en/sidehustle/free-images.html
 ---
 
 # Best Free Stock Photo Sites for Commercial Use

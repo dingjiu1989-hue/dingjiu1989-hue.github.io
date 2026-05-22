@@ -3,7 +3,7 @@ title: "Webhook Security Best Practices"
 description: "Secure your webhook endpoints with signature verification, replay protection, IP allowlisting, idempotency, and payload validation."
 date: 2025-12-19
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/webhook-security.html
+url: https://aidev.fit/en/security/webhook-security.html
 ---
 
 # Webhook Security Best Practices
@@ -359,6 +359,10 @@ Webhook endpoints are publicly accessible by design, making them an attractive t
 **See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 
 **See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [HTTP Security Headers Checklist](</en/security/http-security-headers.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [HTTP Security Headers Checklist](</en/security/http-security-headers.html>)
 
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [HTTP Security Headers Checklist](</en/security/http-security-headers.html>)
 

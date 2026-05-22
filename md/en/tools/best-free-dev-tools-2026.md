@@ -3,7 +3,7 @@ title: "Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More"
 description: "A curated toolkit covering terminal emulators, Git GUIs, API clients, database browsers, diff tools, and code screenshot utilities. Everything a developer needs on a fresh machine — all free."
 date: 2025-10-27
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-free-dev-tools-2026.html
+url: https://aidev.fit/en/tools/best-free-dev-tools-2026.html
 ---
 
 # Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More

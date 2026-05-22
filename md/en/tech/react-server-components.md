@@ -3,7 +3,7 @@ title: "React Server Components"
 description: "Deep dive into React Server Components: streaming, data fetching patterns, client boundaries, and architectural benefits"
 date: 2026-01-12
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/react-server-components.html
+url: https://aidev.fit/en/tech/react-server-components.html
 ---
 
 # React Server Components
@@ -61,6 +61,10 @@ Server Components are not appropriate for all scenarios. Components with real-ti
 **See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Next.js App Router](</en/tech/nextjs-app-router.html>)
 
 **See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Next.js App Router](</en/tech/nextjs-app-router.html>)
+
+**See also:** [Code Generation](</en/tech/code-generation.html>), [Distributed Caching](</en/tech/distributed-caching.html>), [Event Processing](</en/tech/event-processing.html>)
+
+**See also:** [Code Generation](</en/tech/code-generation.html>), [Distributed Caching](</en/tech/distributed-caching.html>), [Event Processing](</en/tech/event-processing.html>)
 
 **See also:** [Code Generation](</en/tech/code-generation.html>), [Distributed Caching](</en/tech/distributed-caching.html>), [Event Processing](</en/tech/event-processing.html>)
 

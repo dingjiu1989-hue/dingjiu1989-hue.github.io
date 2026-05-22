@@ -3,7 +3,7 @@ title: "Running LLMs Locally"
 description: "Step-by-step guide to running LLMs locally using Ollama and LM Studio with setup instructions, model selection, and performance tips."
 date: 2025-12-12
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/local-llm-setup.html
+url: https://aidev.fit/en/ai/local-llm-setup.html
 ---
 
 # Running LLMs Locally
@@ -247,6 +247,10 @@ Running LLMs locally is easier than ever with Ollama and LM Studio. Ollama offer
 **See also:** [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>)
 
 **See also:** [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>)
+
+**See also:** [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>)
+
+**See also:** [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>)
 
 **See also:** [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>)
 

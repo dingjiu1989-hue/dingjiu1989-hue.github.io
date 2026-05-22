@@ -3,7 +3,7 @@ title: "Best Headless CMS Platforms 2026: Strapi vs Sanity vs Contentful vs Payl
 description: "Compare the top headless CMS platforms for developers — API-first content management with modern developer experience."
 date: 2025-10-31
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-headless-cms-platforms.html
+url: https://aidev.fit/en/tools/best-headless-cms-platforms.html
 ---
 
 # Best Headless CMS Platforms 2026: Strapi vs Sanity vs Contentful vs Payload

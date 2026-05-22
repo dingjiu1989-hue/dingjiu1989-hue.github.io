@@ -3,7 +3,7 @@ title: "Prompt Engineering Guide for LLMs"
 description: "Master prompt engineering: zero-shot, few-shot, chain-of-thought, and structured prompting for LLMs."
 date: 2026-02-21
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/prompt-engineering-guide.html
+url: https://aidev.fit/en/ai/prompt-engineering-guide.html
 ---
 
 # Prompt Engineering Guide for LLMs
@@ -49,6 +49,10 @@ Treat prompting as an iterative process. Test prompts with diverse inputs. Analy
 **See also:** [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>)
 
 **See also:** [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>)
+
+**See also:** [Prompt Chaining: Decomposition, Parallel Execution, State Management](</en/ai/prompt-chaining.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>)
+
+**See also:** [Prompt Chaining: Decomposition, Parallel Execution, State Management](</en/ai/prompt-chaining.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>)
 
 **See also:** [Prompt Chaining: Decomposition, Parallel Execution, State Management](</en/ai/prompt-chaining.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>)
 

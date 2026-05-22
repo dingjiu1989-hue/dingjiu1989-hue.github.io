@@ -3,7 +3,7 @@ title: "HTTP Security Headers Checklist"
 description: "A complete checklist of HTTP security headers to protect your web application from XSS, clickjacking, MIME sniffing, and other attacks."
 date: 2025-12-17
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/http-security-headers.html
+url: https://aidev.fit/en/security/http-security-headers.html
 ---
 
 # HTTP Security Headers Checklist
@@ -149,6 +149,10 @@ Implementing HTTP security headers is one of the highest-ROI security improvemen
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
 
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
+
+**See also:** [Network Security Fundamentals](</en/security/network-security.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Network Security Fundamentals](</en/security/network-security.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 
 **See also:** [Network Security Fundamentals](</en/security/network-security.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 

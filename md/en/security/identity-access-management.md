@@ -3,7 +3,7 @@ title: "IAM: Identity and Access Management Fundamentals"
 description: "IAM fundamentals: user provisioning, authentication, authorization, role-based access, and identity governance."
 date: 2026-03-23
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/identity-access-management.html
+url: https://aidev.fit/en/security/identity-access-management.html
 ---
 
 # IAM: Identity and Access Management Fundamentals
@@ -51,6 +51,10 @@ Periodic access reviews verify that users still need their permissions. Manager-
 **See also:** [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [IAM Audit](</en/security/iam-audit.html>)
 
 **See also:** [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [IAM Audit](</en/security/iam-audit.html>)
+
+**See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Certificate Management](</en/security/certificate-management.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
+
+**See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Certificate Management](</en/security/certificate-management.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
 
 **See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Certificate Management](</en/security/certificate-management.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
 

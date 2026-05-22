@@ -10,9 +10,10 @@ Generate AI-friendly artifacts:
 import json, re, html2text
 from pathlib import Path
 from datetime import date
+from scripts.site_config import BASE_URL, SITE_DOMAIN
 
 ROOT = Path(__file__).resolve().parent.parent
-BASE = "https://dingjiu1989-hue.github.io"
+BASE = BASE_URL
 TODAY = date.today().isoformat()
 
 MD_DIR = ROOT / "md"
@@ -379,7 +380,7 @@ def gen_llms_full():
 
 def update_robots():
     """Explicitly welcome major AI crawlers."""
-    robots = """# AI Study Room — robots.txt
+    robots = f"""# AI Study Room — robots.txt
 # We explicitly welcome AI crawlers. Our content is here to be learned from.
 
 # ── Search engines ──
@@ -472,8 +473,8 @@ Crawl-Delay: 10
 # We push URL updates to IndexNow on every content change.
 # Bing's index powers ChatGPT, Copilot, DuckDuckGo, and other AI search.
 
-Sitemap: https://dingjiu1989-hue.github.io/sitemap.xml
-Sitemap: https://dingjiu1989-hue.github.io/images/sitemap.xml
+Sitemap: {BASE}/sitemap.xml
+Sitemap: {BASE}/images/sitemap.xml
 """
     (ROOT / "robots.txt").write_text(robots, encoding="utf-8")
     print("  robots.txt updated: 23 AI crawler rules")

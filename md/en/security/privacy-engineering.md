@@ -3,7 +3,7 @@ title: "Privacy Engineering"
 description: "Guide to privacy engineering covering privacy by design principles, data mapping, Privacy Impact Assessments (PIA), and consent management."
 date: 2026-03-12
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/privacy-engineering.html
+url: https://aidev.fit/en/security/privacy-engineering.html
 ---
 
 # Privacy Engineering
@@ -393,6 +393,10 @@ Privacy engineering requires embedding privacy controls into the design and arch
 **See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [Data Masking and Redaction](</en/security/data-masking.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
 
 **See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [Data Masking and Redaction](</en/security/data-masking.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
+
+**See also:** [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Patching Strategy](</en/security/patching-strategy.html>), [Secure Configuration Management](</en/security/secure-configuration.html>)
+
+**See also:** [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Patching Strategy](</en/security/patching-strategy.html>), [Secure Configuration Management](</en/security/secure-configuration.html>)
 
 **See also:** [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Patching Strategy](</en/security/patching-strategy.html>), [Secure Configuration Management](</en/security/secure-configuration.html>)
 

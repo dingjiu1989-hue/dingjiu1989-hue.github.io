@@ -3,7 +3,7 @@ title: "CI/CD Best Practices"
 description: "Master CI/CD best practices: pipeline design, artifact management, environment promotion, and deployment strategies"
 date: 2026-01-05
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/ci-cd-best-practices.html
+url: https://aidev.fit/en/tech/ci-cd-best-practices.html
 ---
 
 # CI/CD Best Practices
@@ -69,6 +69,10 @@ CI/CD best practices transform deployment from a high-risk manual operation into
 **See also:** [Configuration Management](</en/tech/configuration-management.html>), [Kubernetes Pod Design: Patterns and Best Practices](</en/tech/kubernetes-pod-design.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
 
 **See also:** [Configuration Management](</en/tech/configuration-management.html>), [Kubernetes Pod Design: Patterns and Best Practices](</en/tech/kubernetes-pod-design.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
+
+**See also:** [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>)
+
+**See also:** [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>)
 
 **See also:** [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>)
 

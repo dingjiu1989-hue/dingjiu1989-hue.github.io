@@ -3,7 +3,7 @@ title: "Microservices vs Monolith (2026): Making the Right Architectural Choice"
 description: "Honest comparison of monolith and microservice architectures — when each makes sense, the real cost of distribution, and why most startups should start monolithic."
 date: 2025-10-08
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/microservices-vs-monolith.html
+url: https://aidev.fit/en/tech/microservices-vs-monolith.html
 ---
 
 # Microservices vs Monolith (2026): Making the Right Architectural Choice

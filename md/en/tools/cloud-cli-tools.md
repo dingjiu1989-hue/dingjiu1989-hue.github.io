@@ -3,7 +3,7 @@ title: "Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons"
 description: "Compare cloud CLI tools: aws-cli for AWS, gcloud for GCP, az for Azure, and s5cmd for high-speed S3 operations. Installation, authentication, and productivity t"
 date: 2026-01-30
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/cloud-cli-tools.html
+url: https://aidev.fit/en/tools/cloud-cli-tools.html
 ---
 
 # Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
@@ -280,6 +280,10 @@ az account show
 **See also:** [Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP](</en/tools/cloud-cost-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)
 
 **See also:** [Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP](</en/tools/cloud-cost-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)
+
+**See also:** [Build Tools: esbuild, swc, turbopack, vite — Speed Comparison](</en/tools/build-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
+
+**See also:** [Build Tools: esbuild, swc, turbopack, vite — Speed Comparison](</en/tools/build-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
 
 **See also:** [Build Tools: esbuild, swc, turbopack, vite — Speed Comparison](</en/tools/build-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
 

@@ -3,7 +3,7 @@ title: "Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization"
 description: "Compare mocking and service virtualization tools: MSW for API mocking in the browser, nock for Node.js HTTP interception, sinon for function stubs, and WireMock"
 date: 2026-02-04
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/mock-tools.html
+url: https://aidev.fit/en/tools/mock-tools.html
 ---
 
 # Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
@@ -358,6 +358,10 @@ Use MSW + Sinon as your core mocking stack. Add nock or WireMock when testing se
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
 
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
+
+**See also:** [Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison](</en/tools/monorepo-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>)
+
+**See also:** [Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison](</en/tools/monorepo-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>)
 
 **See also:** [Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison](</en/tools/monorepo-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>)
 

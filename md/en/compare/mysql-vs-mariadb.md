@@ -3,7 +3,7 @@ title: "MySQL vs MariaDB: The Complete Comparison"
 description: "Compare MySQL and MariaDB covering their divergence history, feature differences, performance benchmarks, compatibility, and migration guide."
 date: 2026-02-24
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/mysql-vs-mariadb.html
+url: https://aidev.fit/en/compare/mysql-vs-mariadb.html
 ---
 
 # MySQL vs MariaDB: The Complete Comparison
@@ -397,6 +397,10 @@ For new projects starting in 2026, MariaDB offers the better value proposition f
 **See also:** [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [React vs Vue vs Svelte in 2026](</en/compare/react-vs-vue-2026.html>)
 
 **See also:** [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [React vs Vue vs Svelte in 2026](</en/compare/react-vs-vue-2026.html>)
+
+**See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>)
+
+**See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>)
 
 **See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>)
 

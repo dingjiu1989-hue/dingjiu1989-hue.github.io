@@ -3,7 +3,7 @@ title: "Webpack vs Vite"
 description: "Compare Webpack and Vite: HMR speed, configuration, production builds, and migration strategies for modern web development"
 date: 2026-01-12
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/webpack-vs-vite.html
+url: https://aidev.fit/en/tech/webpack-vs-vite.html
 ---
 
 # Webpack vs Vite
@@ -57,6 +57,10 @@ The industry trend strongly favors Vite for new projects. The developer experien
 **See also:** [Git Workflows](</en/tech/git-workflows.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Build Optimization](</en/tech/build-optimization.html>)
 
 **See also:** [Git Workflows](</en/tech/git-workflows.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Build Optimization](</en/tech/build-optimization.html>)
+
+**See also:** [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>), [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>)
+
+**See also:** [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>), [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>)
 
 **See also:** [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>), [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>), [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>)
 

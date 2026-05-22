@@ -3,7 +3,7 @@ title: "Redis Caching Patterns"
 description: "Explore Redis caching patterns including cache-aside, write-through, lazy loading, distributed locking, session storage, and rate limiting."
 date: 2025-12-24
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/redis-caching.html
+url: https://aidev.fit/en/database/redis-caching.html
 ---
 
 # Redis Caching Patterns
@@ -281,6 +281,10 @@ Redis caching can dramatically improve application performance when the right pa
 **See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Replication Patterns](</en/database/database-replication.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)
 
 **See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Replication Patterns](</en/database/database-replication.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)
+
+**See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
+
+**See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
 
 **See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
 

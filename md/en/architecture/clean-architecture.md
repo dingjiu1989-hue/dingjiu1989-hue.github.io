@@ -3,7 +3,7 @@ title: "Clean Architecture Explained"
 description: "Understand Clean Architecture principles for building maintainable, testable software systems."
 date: 2026-05-15
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/clean-architecture.html
+url: https://aidev.fit/en/architecture/clean-architecture.html
 ---
 
 # Clean Architecture Explained
@@ -53,6 +53,10 @@ Clean Architecture is not appropriate for every project. Small applications with
 **See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
 
 **See also:** [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
+
+**See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 
 **See also:** [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 

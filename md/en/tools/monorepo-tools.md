@@ -3,7 +3,7 @@ title: "Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison"
 description: "Compare monorepo build tools: Turborepo for caching, Nx for extensibility, Bazel for correctness at scale, and Lage for simplicity with Microsoft-ecosystem inte"
 date: 2026-02-05
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/monorepo-tools.html
+url: https://aidev.fit/en/tools/monorepo-tools.html
 ---
 
 # Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
@@ -324,6 +324,10 @@ lage build --scope packages/core
 **See also:** [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Build Tools: esbuild, swc, turbopack, vite — Speed Comparison](</en/tools/build-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
 
 **See also:** [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Build Tools: esbuild, swc, turbopack, vite — Speed Comparison](</en/tools/build-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
+
+**See also:** [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Dotfile Management: chezmoi, GNU Stow, Bare Git Repos](</en/tools/dotfile-management.html>), [Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing](</en/tools/helm-tools.html>)
+
+**See also:** [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Dotfile Management: chezmoi, GNU Stow, Bare Git Repos](</en/tools/dotfile-management.html>), [Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing](</en/tools/helm-tools.html>)
 
 **See also:** [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Dotfile Management: chezmoi, GNU Stow, Bare Git Repos](</en/tools/dotfile-management.html>), [Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing](</en/tools/helm-tools.html>)
 

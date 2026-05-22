@@ -3,7 +3,7 @@ title: "RAG Pipeline Optimization: Production Best Practices"
 description: "Optimize Retrieval-Augmented Generation pipelines: chunking strategies, embedding selection, retrieval tuning, and evaluation."
 date: 2026-02-23
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/rag-pipeline-optimization.html
+url: https://aidev.fit/en/ai/rag-pipeline-optimization.html
 ---
 
 # RAG Pipeline Optimization: Production Best Practices
@@ -45,6 +45,10 @@ Optimization is iterative. Test chunk size, embedding model, top-k, and prompt t
 **See also:** [RAG Best Practices 2026: Building Production-Ready Retrieval Systems](</en/ai/rag-best-practices.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>), [RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets](</en/ai/rag-evaluation.html>)
 
 **See also:** [RAG Best Practices 2026: Building Production-Ready Retrieval Systems](</en/ai/rag-best-practices.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>), [RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets](</en/ai/rag-evaluation.html>)
+
+**See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>)
+
+**See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>)
 
 **See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>)
 

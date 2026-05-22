@@ -3,7 +3,7 @@ title: "Database Backup and Recovery Strategies"
 description: "Learn database backup strategies including full, incremental, and differential backups, point-in-time recovery, and disaster recovery planning."
 date: 2025-12-22
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-backup-strategies.html
+url: https://aidev.fit/en/database/database-backup-strategies.html
 ---
 
 # Database Backup and Recovery Strategies
@@ -83,6 +83,10 @@ Define RPO/RTO before designing backup strategy. Use continuous WAL archiving fo
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Backup Strategies to Object Storage](</en/database/database-backup-to-s3.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Backup Strategies to Object Storage](</en/database/database-backup-to-s3.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
+
+**See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)
+
+**See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)
 
 **See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)
 

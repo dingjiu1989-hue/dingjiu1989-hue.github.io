@@ -3,7 +3,7 @@ title: "Nginx vs Caddy: Web Server Comparison"
 description: "Compare Nginx and Caddy web servers: configuration, automatic HTTPS, performance, plugins, and use cases."
 date: 2026-02-26
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/nginx-vs-caddy.html
+url: https://aidev.fit/en/compare/nginx-vs-caddy.html
 ---
 
 # Nginx vs Caddy: Web Server Comparison
@@ -57,6 +57,10 @@ Nginx remains the performance leader and enterprise standard, but Caddy's automa
 **See also:** [Nginx vs Apache: Web Server Comparison 2026](</en/compare/nginx-vs-apache.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>)
 
 **See also:** [Nginx vs Apache: Web Server Comparison 2026](</en/compare/nginx-vs-apache.html>), [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics](</en/compare/sqlite-vs-duckdb.html>)
+
+**See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)
+
+**See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)
 
 **See also:** [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>)
 

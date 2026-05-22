@@ -3,7 +3,7 @@ title: "LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost
 description: "Implement LLM observability for production AI applications: distributed tracing, token usage tracking, latency monitoring, and cost attribution."
 date: 2026-02-12
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/llm-observability.html
+url: https://aidev.fit/en/ai/llm-observability.html
 ---
 
 # LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
@@ -79,6 +79,10 @@ LLM observability is not optional for production applications. Start with basic 
 **See also:** [AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection](</en/ai/ai-monitoring-alerting.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>)
 
 **See also:** [AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection](</en/ai/ai-monitoring-alerting.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>)
+
+**See also:** [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>)
+
+**See also:** [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>)
 
 **See also:** [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>)
 

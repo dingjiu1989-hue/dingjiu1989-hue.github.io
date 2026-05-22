@@ -3,7 +3,7 @@ title: "Database Concurrency Control: MVCC, Locking, and Deadlocks"
 description: "Deep dive into database concurrency control mechanisms: optimistic vs pessimistic locking, MVCC internals, deadlock detection, and PostgreSQL implementation."
 date: 2026-04-01
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-concurrency.html
+url: https://aidev.fit/en/database/database-concurrency.html
 ---
 
 # Database Concurrency Control: MVCC, Locking, and Deadlocks
@@ -194,6 +194,10 @@ PostgreSQL's MVCC provides the foundation: readers and writers coexist without b
 **See also:** [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Database Locking: Row Locks, Table Locks, and Deadlock Prevention](</en/database/database-locking-mechanisms.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
 
 **See also:** [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Database Locking: Row Locks, Table Locks, and Deadlock Prevention](</en/database/database-locking-mechanisms.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
 
 **See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
 

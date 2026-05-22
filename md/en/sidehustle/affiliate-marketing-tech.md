@@ -3,7 +3,7 @@ title: "Affiliate Marketing for Developer Products"
 description: "Generate affiliate income from developer tools and SaaS products: programs, strategies, and ethical promotion."
 date: 2026-01-24
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/affiliate-marketing-tech.html
+url: https://aidev.fit/en/sidehustle/affiliate-marketing-tech.html
 ---
 
 # Affiliate Marketing for Developer Products
@@ -49,6 +49,10 @@ Disclose affiliate relationships. FTC guidelines require clear disclosure. Use #
 **See also:** [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>), [Creating and Selling Digital Products as a Developer](</en/sidehustle/digital-product-creation.html>), [Email Marketing for Developers: Mailchimp, ConvertKit, Automation](</en/sidehustle/email-marketing-dev.html>)
 
 **See also:** [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>), [Creating and Selling Digital Products as a Developer](</en/sidehustle/digital-product-creation.html>), [Email Marketing for Developers: Mailchimp, ConvertKit, Automation](</en/sidehustle/email-marketing-dev.html>)
+
+**See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
+
+**See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
 
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
 

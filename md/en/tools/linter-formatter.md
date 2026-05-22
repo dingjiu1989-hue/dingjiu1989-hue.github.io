@@ -3,7 +3,7 @@ title: "Linter and Formatter: ESLint, Prettier, Biome, Ruff"
 description: "Compare linters and formatters in 2026: ESLint + Prettier for JavaScript, Biome as an all-in-one Rust alternative, and Ruff for Python linting and formatting."
 date: 2026-02-04
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/linter-formatter.html
+url: https://aidev.fit/en/tools/linter-formatter.html
 ---
 
 # Linter and Formatter: ESLint, Prettier, Biome, Ruff
@@ -318,6 +318,10 @@ The industry is clearly moving toward Rust-based all-in-one tools. Biome and Ruf
 **See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
 
 **See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest](</en/tools/testing-frameworks.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Dotfile Management: chezmoi, GNU Stow, Bare Git Repos](</en/tools/dotfile-management.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Dotfile Management: chezmoi, GNU Stow, Bare Git Repos](</en/tools/dotfile-management.html>)
 
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Dotfile Management: chezmoi, GNU Stow, Bare Git Repos](</en/tools/dotfile-management.html>)
 

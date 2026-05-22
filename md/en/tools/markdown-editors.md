@@ -3,7 +3,7 @@ title: "Best Markdown Editors"
 description: "Compare the best Markdown editors for developers, writers, and documentation teams in 2026."
 date: 2025-12-10
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/markdown-editors.html
+url: https://aidev.fit/en/tools/markdown-editors.html
 ---
 
 # Best Markdown Editors
@@ -254,6 +254,10 @@ The best Markdown editor depends on your workflow. VS Code with extensions cover
 **See also:** [Best Database GUI Clients](</en/tools/database-clients.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [Best Terminal Emulators 2026](</en/tools/terminal-emulators.html>)
 
 **See also:** [Best Database GUI Clients](</en/tools/database-clients.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [Best Terminal Emulators 2026](</en/tools/terminal-emulators.html>)
+
+**See also:** [Best Git GUI Clients](</en/tools/best-git-clients.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>)
+
+**See also:** [Best Git GUI Clients](</en/tools/best-git-clients.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>)
 
 **See also:** [Best Git GUI Clients](</en/tools/best-git-clients.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>)
 

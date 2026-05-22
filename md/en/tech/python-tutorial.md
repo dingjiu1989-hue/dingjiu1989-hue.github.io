@@ -3,7 +3,7 @@ title: "Python Tutorial: From Zero to Your First Program"
 description: "A beginner-friendly Python tutorial. Master variables, conditionals, loops, and functions in 30 minutes and write your first working program."
 date: 2025-10-01
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/python-tutorial.html
+url: https://aidev.fit/en/tech/python-tutorial.html
 ---
 
 # Python Tutorial: From Zero to Your First Program

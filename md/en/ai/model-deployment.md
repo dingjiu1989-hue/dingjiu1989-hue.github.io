@@ -3,7 +3,7 @@ title: "Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization"
 description: "Deploy LLMs in production with vLLM, Hugging Face TGI, and ONNX Runtime. Learn quantization techniques, GPU memory optimization, and serving strategies."
 date: 2026-02-17
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/model-deployment.html
+url: https://aidev.fit/en/ai/model-deployment.html
 ---
 
 # Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
@@ -277,6 +277,10 @@ Deploying LLMs requires selecting the right serving framework and optimization l
 **See also:** [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [Model Quantization: Making LLMs Smaller and Faster](</en/ai/model-quantization.html>)
 
 **See also:** [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [Model Quantization: Making LLMs Smaller and Faster](</en/ai/model-quantization.html>)
+
+**See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>)
+
+**See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>)
 
 **See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>)
 

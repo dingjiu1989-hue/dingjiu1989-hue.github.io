@@ -3,7 +3,7 @@ title: "Scaling Customer Support as a Solo SaaS Developer"
 description: "Scale customer support for your SaaS: chatbots, knowledge base, ticketing systems, and automation for solo founders."
 date: 2026-01-21
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/customer-support-scaling.html
+url: https://aidev.fit/en/sidehustle/customer-support-scaling.html
 ---
 
 # Scaling Customer Support as a Solo SaaS Developer
@@ -59,6 +59,10 @@ Customer support for solo founders is about leverage. Every investment in docume
 **See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>)
 
 **See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>)
+
+**See also:** [LinkedIn Personal Brand for Technical Founders](</en/sidehustle/linkedin-personal-brand.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>), [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>)
+
+**See also:** [LinkedIn Personal Brand for Technical Founders](</en/sidehustle/linkedin-personal-brand.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>), [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>)
 
 **See also:** [LinkedIn Personal Brand for Technical Founders](</en/sidehustle/linkedin-personal-brand.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>), [SaaS Security Basics: Auth, Encryption, Compliance for Solo Founders](</en/sidehustle/saas-security-basics.html>)
 

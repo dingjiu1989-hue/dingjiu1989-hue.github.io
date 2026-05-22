@@ -3,7 +3,7 @@ title: "Slow Query Optimization: Analysis, Indexing, and Rewriting"
 description: "Systematic approach to finding and fixing slow database queries: EXPLAIN plans, index strategies, and SQL rewriting."
 date: 2026-04-16
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-slow-query-optimization.html
+url: https://aidev.fit/en/database/database-slow-query-optimization.html
 ---
 
 # Slow Query Optimization: Analysis, Indexing, and Rewriting
@@ -51,6 +51,10 @@ Regular VACUUM and ANALYZE keep statistics current. Outdated statistics produce 
 **See also:** [Database Query Profiling: Finding and Fixing Performance Bottlenecks](</en/database/database-query-profiling.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
 
 **See also:** [Database Query Profiling: Finding and Fixing Performance Bottlenecks](</en/database/database-query-profiling.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
+
+**See also:** [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>)
+
+**See also:** [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>)
 
 **See also:** [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>), [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>)
 

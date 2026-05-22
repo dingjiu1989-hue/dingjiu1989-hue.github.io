@@ -3,7 +3,7 @@ title: "SOA vs Microservices"
 description: "Enterprise service bus, service granularity, governance differences between SOA and microservices architectures"
 date: 2026-04-30
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/soa-vs-microservices.html
+url: https://aidev.fit/en/architecture/soa-vs-microservices.html
 ---
 
 # SOA vs Microservices
@@ -35,6 +35,10 @@ Neither approach is universally superior. SOA's mature governance and integratio
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
 
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [DDD Tactical Patterns](</en/architecture/ddd-tactical.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [DDD Tactical Patterns](</en/architecture/ddd-tactical.html>)
 
 **See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [DDD Tactical Patterns](</en/architecture/ddd-tactical.html>)
 

@@ -3,7 +3,7 @@ title: "Cloud IAM Deep Dive"
 description: "In-depth guide to cloud IAM covering AWS IAM policies, GCP IAM roles, least privilege principles, and policy simulation techniques."
 date: 2026-03-08
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/cloud-iam.html
+url: https://aidev.fit/en/security/cloud-iam.html
 ---
 
 # Cloud IAM Deep Dive
@@ -180,6 +180,10 @@ Cloud IAM requires continuous attention. Implement least privilege by starting w
 **See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [Key Management Systems](</en/security/key-management.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>)
 
 **See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [Key Management Systems](</en/security/key-management.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>)
+
+**See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)
+
+**See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)
 
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)
 

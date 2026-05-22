@@ -3,7 +3,7 @@ title: "Testing Strategies"
 description: "Learn comprehensive testing strategies: unit, integration, e2e tests, test pyramid principles, and test double patterns"
 date: 2026-01-12
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/testing-strategies.html
+url: https://aidev.fit/en/tech/testing-strategies.html
 ---
 
 # Testing Strategies
@@ -59,6 +59,10 @@ A well-structured test suite provides fast feedback, catches regressions, and do
 **See also:** [Performance Testing](</en/tech/performance-testing.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>)
 
 **See also:** [Performance Testing](</en/tech/performance-testing.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>)
+
+**See also:** [Code Generation](</en/tech/code-generation.html>), [Contract Testing](</en/tech/contract-testing.html>), [Dependency Management](</en/tech/dependency-management.html>)
+
+**See also:** [Code Generation](</en/tech/code-generation.html>), [Contract Testing](</en/tech/contract-testing.html>), [Dependency Management](</en/tech/dependency-management.html>)
 
 **See also:** [Code Generation](</en/tech/code-generation.html>), [Contract Testing](</en/tech/contract-testing.html>), [Dependency Management](</en/tech/dependency-management.html>)
 

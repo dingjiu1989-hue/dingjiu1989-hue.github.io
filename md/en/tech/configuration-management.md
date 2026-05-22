@@ -3,7 +3,7 @@ title: "Configuration Management"
 description: "Master configuration management: environment variables, config files, feature flags, and best practices for different environments"
 date: 2026-01-06
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/configuration-management.html
+url: https://aidev.fit/en/tech/configuration-management.html
 ---
 
 # Configuration Management
@@ -71,6 +71,10 @@ Effective configuration management ensures applications run correctly in any env
 **See also:** [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
 
 **See also:** [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
+
+**See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>)
+
+**See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>)
 
 **See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>)
 

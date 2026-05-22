@@ -3,7 +3,7 @@ title: "Serverless Framework: From Zero to Production"
 description: "Deploy AWS Lambda functions with infrastructure as code, local development workflows, monitoring, cold start optimization, and cost analysis strategies."
 date: 2025-12-31
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/serverless-framework.html
+url: https://aidev.fit/en/tech/serverless-framework.html
 ---
 
 # Serverless Framework: From Zero to Production
@@ -445,6 +445,10 @@ For high-throughput workloads, compare Lambda cost against ECS Fargate at sustai
 **See also:** [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
 
 **See also:** [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
+
+**See also:** [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
+
+**See also:** [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
 
 **See also:** [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
 

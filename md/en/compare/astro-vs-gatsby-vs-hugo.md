@@ -3,7 +3,7 @@ title: "Astro vs Gatsby vs Hugo (2026): Static Site Generator Speed Test"
 description: "Build performance comparison of three popular SSGs. Astro's partial hydration vs Gatsby's GraphQL layer vs Hugo's Go-powered speed. Which generates the fastest content sites?"
 date: 2025-11-25
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/astro-vs-gatsby-vs-hugo.html
+url: https://aidev.fit/en/compare/astro-vs-gatsby-vs-hugo.html
 ---
 
 # Astro vs Gatsby vs Hugo (2026): Static Site Generator Speed Test

@@ -3,7 +3,7 @@ title: "Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instance
 description: "Technical exploration of cloud capacity planning covering auto-scaling strategies, reserved and spot instance optimization, demand forecasting methods, and cost management."
 date: 2026-01-01
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/capacity-planning-cloud.html
+url: https://aidev.fit/en/tech/capacity-planning-cloud.html
 ---
 
 # Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting
@@ -114,6 +114,10 @@ Cloud capacity planning requires a multi-faceted approach. Auto-scaling handles 
 **See also:** [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>)
 
 **See also:** [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>)
+
+**See also:** [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Compose vs Kubernetes: When to Use Each and Migration Path](</en/tech/docker-compose-vs-kubernetes.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>)
+
+**See also:** [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Compose vs Kubernetes: When to Use Each and Migration Path](</en/tech/docker-compose-vs-kubernetes.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>)
 
 **See also:** [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Compose vs Kubernetes: When to Use Each and Migration Path](</en/tech/docker-compose-vs-kubernetes.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>)
 

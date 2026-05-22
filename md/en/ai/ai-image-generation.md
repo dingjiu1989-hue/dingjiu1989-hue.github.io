@@ -3,7 +3,7 @@ title: "AI Image Generation Guide"
 description: "A comprehensive guide to AI image generation covering DALL-E, Midjourney, Stable Diffusion, prompt engineering, and workflows."
 date: 2025-12-12
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-image-generation.html
+url: https://aidev.fit/en/ai/ai-image-generation.html
 ---
 
 # AI Image Generation Guide
@@ -242,6 +242,10 @@ Each AI image generation platform has distinct strengths. DALL-E 3 wins for reli
 **See also:** [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
 
 **See also:** [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
+
+**See also:** [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>)
+
+**See also:** [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>)
 
 **See also:** [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>)
 

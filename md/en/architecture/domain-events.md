@@ -3,7 +3,7 @@ title: "Domain Events: Design and Implementation"
 description: "Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery"
 date: 2026-04-24
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/domain-events.html
+url: https://aidev.fit/en/architecture/domain-events.html
 ---
 
 # Domain Events: Design and Implementation
@@ -37,6 +37,10 @@ Testing domain events requires verifying that the correct events are raised for 
 **See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
 
 **See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
 

@@ -3,7 +3,7 @@ title: "Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates"
 description: "Learn time-series data management with PostgreSQL and TimescaleDB. Hypertables, continuous aggregates, data retention, and query optimization for time-series workloads."
 date: 2026-04-09
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/time-series-postgresql.html
+url: https://aidev.fit/en/database/time-series-postgresql.html
 ---
 
 # Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
@@ -259,6 +259,10 @@ The combination of hypertables, continuous aggregates, and compression makes Pos
 **See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>)
 
 **See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>)
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 

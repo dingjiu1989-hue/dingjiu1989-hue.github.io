@@ -3,7 +3,7 @@ title: "How to Build and Sell VS Code Extensions: A Developer's Guide to Recurri
 description: "Step-by-step guide to building VS Code extensions with a free-to-paid funnel — theme monetization, license key validation, marketplace optimization."
 date: 2025-10-25
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/sell-vscode-extensions.html
+url: https://aidev.fit/en/sidehustle/sell-vscode-extensions.html
 ---
 
 # How to Build and Sell VS Code Extensions: A Developer's Guide to Recurring Revenue

@@ -3,7 +3,7 @@ title: "Identity and Access Management (IAM) Guide"
 description: "Comprehensive guide to IAM covering SSO, SAML, OIDC, SCIM provisioning, just-in-time access, and access reviews."
 date: 2026-03-04
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/identity-management.html
+url: https://aidev.fit/en/security/identity-management.html
 ---
 
 # Identity and Access Management (IAM) Guide
@@ -336,6 +336,10 @@ Modern IAM requires SSO for user convenience, SAML or OIDC for protocol support,
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
 
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
+
+**See also:** [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [SSO Architecture](</en/security/sso-architecture.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>)
+
+**See also:** [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [SSO Architecture](</en/security/sso-architecture.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>)
 
 **See also:** [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [SSO Architecture](</en/security/sso-architecture.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>)
 

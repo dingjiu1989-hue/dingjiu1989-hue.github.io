@@ -3,7 +3,7 @@ title: "Supabase vs Firebase"
 description: "Compare Supabase and Firebase for backend-as-a-service — database, authentication, real-time features, pricing, and vendor lock-in."
 date: 2025-12-16
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/supabase-vs-firebase.html
+url: https://aidev.fit/en/compare/supabase-vs-firebase.html
 ---
 
 # Supabase vs Firebase
@@ -240,6 +240,10 @@ The choice between Supabase and Firebase is largely a choice between SQL and NoS
 **See also:** [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>)
 
 **See also:** [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [gRPC vs WebSocket: Real-Time Communication](</en/compare/grpc-vs-websocket.html>)
+
+**See also:** [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options](</en/compare/datadog-vs-grafana-cloud.html>), [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>)
+
+**See also:** [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options](</en/compare/datadog-vs-grafana-cloud.html>), [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>)
 
 **See also:** [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options](</en/compare/datadog-vs-grafana-cloud.html>), [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>)
 

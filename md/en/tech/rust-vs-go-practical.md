@@ -3,7 +3,7 @@ title: "Rust vs Go: A Practical Comparison"
 description: "Compare Rust and Go for web services, CLI tools, concurrency models, and deployment in real-world scenarios"
 date: 2026-01-12
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/rust-vs-go-practical.html
+url: https://aidev.fit/en/tech/rust-vs-go-practical.html
 ---
 
 # Rust vs Go: A Practical Comparison
@@ -61,6 +61,10 @@ The practical choice depends on your priorities. Choose Go for development veloc
 **See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [Python Package Management: pip, Poetry, uv, Conda](</en/tech/python-package-management.html>)
 
 **See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [Python Package Management: pip, Poetry, uv, Conda](</en/tech/python-package-management.html>)
+
+**See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>)
+
+**See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>)
 
 **See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>)
 

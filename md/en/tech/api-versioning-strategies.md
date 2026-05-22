@@ -3,7 +3,7 @@ title: "API Versioning Strategies: URL, Header, and Query Parameter Approaches C
 description: "Compare every API versioning strategy — URI path, Accept header, query parameters, and rolling versioning with real-world trade-offs."
 date: 2025-10-17
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/api-versioning-strategies.html
+url: https://aidev.fit/en/tech/api-versioning-strategies.html
 ---
 
 # API Versioning Strategies: URL, Header, and Query Parameter Approaches Compared

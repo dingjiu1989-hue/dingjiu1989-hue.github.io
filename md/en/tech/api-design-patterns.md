@@ -3,7 +3,7 @@ title: "API Design Patterns: Rate Limiting, Pagination, Idempotency, and More"
 description: "Production-proven API patterns every backend developer needs. Rate limiting strategies, cursor vs offset pagination, idempotency keys, bulk operations, and webhook design."
 date: 2026-05-19
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/api-design-patterns.html
+url: https://aidev.fit/en/tech/api-design-patterns.html
 ---
 
 # API Design Patterns: Rate Limiting, Pagination, Idempotency, and More

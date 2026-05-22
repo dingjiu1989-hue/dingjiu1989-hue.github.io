@@ -3,7 +3,7 @@ title: "Metrics Types and Monitoring Methodologies"
 description: "Counters, gauges, histograms, summaries, RED method, USE method, and the four golden signals"
 date: 2026-04-27
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/metrics-types.html
+url: https://aidev.fit/en/architecture/metrics-types.html
 ---
 
 # Metrics Types and Monitoring Methodologies
@@ -39,6 +39,10 @@ Metric retention and aggregation tiers optimize storage. Raw high-resolution met
 **See also:** [Observability: Logs, Metrics, and Traces](</en/architecture/observability-three-pillars.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 
 **See also:** [Observability: Logs, Metrics, and Traces](</en/architecture/observability-three-pillars.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>)
 
 **See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>)
 

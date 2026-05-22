@@ -3,7 +3,7 @@ title: "API Authentication Methods"
 description: "Comprehensive guide to API authentication covering API keys, OAuth2 client credentials, mTLS, HMAC signing, and implementation trade-offs."
 date: 2026-03-06
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/api-authentication.html
+url: https://aidev.fit/en/security/api-authentication.html
 ---
 
 # API Authentication Methods
@@ -337,6 +337,10 @@ No single API authentication method fits all use cases. Use API keys for low-ris
 **See also:** [Microservice Security](</en/security/microservice-security.html>), [Container Image Security](</en/security/container-image-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
 
 **See also:** [Microservice Security](</en/security/microservice-security.html>), [Container Image Security](</en/security/container-image-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
+
+**See also:** [Supply Chain Security](</en/security/supply-chain-security.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [Supply Chain Security](</en/security/supply-chain-security.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>), [Certificate Management](</en/security/certificate-management.html>)
 
 **See also:** [Supply Chain Security](</en/security/supply-chain-security.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>), [Certificate Management](</en/security/certificate-management.html>)
 

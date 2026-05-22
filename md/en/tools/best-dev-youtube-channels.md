@@ -3,7 +3,7 @@ title: "Best Developer YouTube Channels 2026: 20 Channels That Actually Teach Yo
 description: "Curated list of 20 developer YouTube channels across web dev, system design, CS fundamentals, and career growth. No hype — just channels that make you a better engineer."
 date: 2025-10-29
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-dev-youtube-channels.html
+url: https://aidev.fit/en/tools/best-dev-youtube-channels.html
 ---
 
 # Best Developer YouTube Channels 2026: 20 Channels That Actually Teach You Something

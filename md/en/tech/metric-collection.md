@@ -3,7 +3,7 @@ title: "Metric Collection"
 description: "Master metric collection: agent-based, pull-based, and push-based approaches, cardinality management, and observability"
 date: 2026-01-08
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/metric-collection.html
+url: https://aidev.fit/en/tech/metric-collection.html
 ---
 
 # Metric Collection
@@ -75,6 +75,10 @@ Metric collection is the foundation of observability. Well-designed metrics enab
 **See also:** [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Configuration Management](</en/tech/configuration-management.html>), [Error Handling Patterns](</en/tech/error-handling-patterns.html>)
 
 **See also:** [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Configuration Management](</en/tech/configuration-management.html>), [Error Handling Patterns](</en/tech/error-handling-patterns.html>)
+
+**See also:** [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>)
+
+**See also:** [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>)
 
 **See also:** [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>)
 

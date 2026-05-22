@@ -3,7 +3,7 @@ title: "Schema Design Patterns: Normalization, Denormalization, Naming Conventio
 description: "Explore database schema design patterns: normalization vs denormalization, naming conventions, timestamp handling, and practical schema design for production applications."
 date: 2026-04-08
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/schema-design.html
+url: https://aidev.fit/en/database/schema-design.html
 ---
 
 # Schema Design Patterns: Normalization, Denormalization, Naming Conventions
@@ -332,6 +332,10 @@ Schema design is a long-term investment. A well-designed schema reduces bugs, ma
 **See also:** [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>)
 
 **See also:** [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>)
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>)
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>)
 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>)
 

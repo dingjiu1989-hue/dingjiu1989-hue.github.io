@@ -3,7 +3,7 @@ title: "Linux Performance Tuning"
 description: "Practical techniques for optimizing Linux system performance, from kernel parameters to storage I/O tuning."
 date: 2025-12-02
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/linux-performance-tuning.html
+url: https://aidev.fit/en/tech/linux-performance-tuning.html
 ---
 
 # Linux Performance Tuning
@@ -230,6 +230,10 @@ Linux performance tuning is a systematic process of identifying bottlenecks, app
 **See also:** [Git Workflows for Teams](</en/tech/git-workflows-2026.html>), [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>)
 
 **See also:** [Git Workflows for Teams](</en/tech/git-workflows-2026.html>), [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>)
+
+**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>)
+
+**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>)
 
 **See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>)
 

@@ -3,7 +3,7 @@ title: "Cloudflare Workers vs AWS Lambda vs Deno Deploy (2026): Best Edge Functi
 description: "Compare edge/serverless function platforms on cold starts, pricing, global distribution, runtime APIs, and developer experience. Real cold-start benchmarks."
 date: 2025-11-21
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html
+url: https://aidev.fit/en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html
 ---
 
 # Cloudflare Workers vs AWS Lambda vs Deno Deploy (2026): Best Edge Functions?

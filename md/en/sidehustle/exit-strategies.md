@@ -3,7 +3,7 @@ title: "SaaS Exit Strategies: Acquisition, IPO, Lifestyle, Acqui-Hire"
 description: "Explore SaaS exit strategies: acquisition, IPO, lifestyle business, and acqui-hire options for founders planning their future."
 date: 2026-01-21
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/exit-strategies.html
+url: https://aidev.fit/en/sidehustle/exit-strategies.html
 ---
 
 # SaaS Exit Strategies: Acquisition, IPO, Lifestyle, Acqui-Hire
@@ -67,6 +67,10 @@ SaaS exit strategies range from high-growth acquisition targets to sustainable l
 **See also:** [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>)
 
 **See also:** [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>)
+
+**See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [SaaS Migration Guide: Data Export, Import, Zero-Downtime](</en/sidehustle/saas-migration-guide.html>)
+
+**See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [SaaS Migration Guide: Data Export, Import, Zero-Downtime](</en/sidehustle/saas-migration-guide.html>)
 
 **See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [SaaS Migration Guide: Data Export, Import, Zero-Downtime](</en/sidehustle/saas-migration-guide.html>)
 

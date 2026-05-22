@@ -3,7 +3,7 @@ title: "Building RAG From Scratch: A 200-Line Implementation Without Frameworks"
 description: "Build Retrieval-Augmented Generation from scratch with raw OpenAI API, pgvector, and Python — understand every line before using LangChain or LlamaIndex."
 date: 2025-11-14
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/building-rag-from-scratch.html
+url: https://aidev.fit/en/ai/building-rag-from-scratch.html
 ---
 
 # Building RAG From Scratch: A 200-Line Implementation Without Frameworks

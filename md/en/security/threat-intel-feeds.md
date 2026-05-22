@@ -3,7 +3,7 @@ title: "Threat Intelligence Feeds"
 description: "Integrating threat intelligence feeds with STIX/TAXII, SIEM correlation, and scoring for actionable insights."
 date: 2026-03-19
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/threat-intel-feeds.html
+url: https://aidev.fit/en/security/threat-intel-feeds.html
 ---
 
 # Threat Intelligence Feeds
@@ -175,6 +175,10 @@ Threat intelligence feeds provide critical context for security operations. Stan
 **See also:** [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Threat Hunting](</en/security/threat-hunting.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)
 
 **See also:** [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Threat Hunting](</en/security/threat-hunting.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)
+
+**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
+
+**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
 
 **See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Container Image Security](</en/security/container-image-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
 

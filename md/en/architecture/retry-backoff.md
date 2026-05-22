@@ -3,7 +3,7 @@ title: "Retry and Backoff Strategies"
 description: "Learn retry and backoff strategies for building resilient distributed systems — exponential backoff, jitter, idempotency keys, circuit breaker combination, and avoiding thundering herd problems."
 date: 2025-12-29
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/retry-backoff.html
+url: https://aidev.fit/en/architecture/retry-backoff.html
 ---
 
 # Retry and Backoff Strategies
@@ -173,6 +173,10 @@ Effective retry strategies are essential for distributed system resilience. Alwa
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
 
 **See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
 

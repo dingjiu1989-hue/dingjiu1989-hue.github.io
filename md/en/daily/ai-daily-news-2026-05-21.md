@@ -3,7 +3,7 @@ title: "AI Daily Digest — 2026-05-21: Anthropic says it’s about to have its 
 description: "Top 10 AI news today: curated from TechCrunch, The Verge, Ars Technica, VentureBeat, and more."
 date: 2026-05-21
 board: daily
-url: https://dingjiu1989-hue.github.io/en/daily/ai-daily-news-2026-05-21.html
+url: https://aidev.fit/en/daily/ai-daily-news-2026-05-21.html
 ---
 
 # AI Daily Digest — 2026-05-21: Anthropic says it’s about to have its first profitable quart
@@ -81,5 +81,9 @@ _AI Daily Digest is compiled from trusted technology news sources. For correctio
 **See also:** [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>), [MySQL vs MariaDB: The Complete Comparison](</en/compare/mysql-vs-mariadb.html>)
 
 **See also:** [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>), [MySQL vs MariaDB: The Complete Comparison](</en/compare/mysql-vs-mariadb.html>)
+
+**See also:** [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
+
+**See also:** [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
 
 **See also:** [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)

@@ -3,7 +3,7 @@ title: "Design Tools for Developers: Build Beautiful UI Without a Designer"
 description: "Figma basics, color palette generators, free icon libraries, illustration sources, and typography tools. Everything a developer needs to create polished, professional UI."
 date: 2025-10-27
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/design-tools-for-developers.html
+url: https://aidev.fit/en/tools/design-tools-for-developers.html
 ---
 
 # Design Tools for Developers: Build Beautiful UI Without a Designer

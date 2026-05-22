@@ -3,7 +3,7 @@ title: "Circuit Breaker Pattern: Building Resilient Systems"
 description: "Circuit breaker state machine (closed/open/half-open), implementation with Resilience4j, monitoring, and recovery strategies."
 date: 2026-04-20
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/circuit-breaker-pattern.html
+url: https://aidev.fit/en/architecture/circuit-breaker-pattern.html
 ---
 
 # Circuit Breaker Pattern: Building Resilient Systems
@@ -521,6 +521,10 @@ The circuit breaker pattern prevents cascading failures by detecting when a remo
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
 

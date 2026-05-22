@@ -3,7 +3,7 @@ title: "Network Security Fundamentals"
 description: "Core network security concepts: firewalls, VPNs, IDS/IPS, zero-trust networking, segmentation, and micro-segmentation."
 date: 2026-03-05
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/network-security.html
+url: https://aidev.fit/en/security/network-security.html
 ---
 
 # Network Security Fundamentals
@@ -264,6 +264,10 @@ Network security has evolved from simple perimeter firewalls to sophisticated ze
 **See also:** [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>)
 
 **See also:** [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>)
+
+**See also:** [Mobile Application Security Guide](</en/security/mobile-security.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Mobile Application Security Guide](</en/security/mobile-security.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 
 **See also:** [Mobile Application Security Guide](</en/security/mobile-security.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 

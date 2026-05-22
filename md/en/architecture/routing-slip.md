@@ -3,7 +3,7 @@ title: "Routing Slip Pattern for Dynamic Message Processing"
 description: "Implement the routing slip pattern to process messages through a dynamic sequence of processing steps."
 date: 2026-05-09
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/routing-slip.html
+url: https://aidev.fit/en/architecture/routing-slip.html
 ---
 
 # Routing Slip Pattern for Dynamic Message Processing
@@ -49,6 +49,10 @@ Track metrics per step: processing time, success rate, and queue depth. A routin
 **See also:** [Priority Queue Pattern for Message Processing](</en/architecture/priority-queue.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>)
 
 **See also:** [Priority Queue Pattern for Message Processing](</en/architecture/priority-queue.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>)
+
+**See also:** [Claim Check Pattern](</en/architecture/claim-check.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Ambassador Pattern for Service Communication](</en/architecture/ambassador-pattern.html>)
+
+**See also:** [Claim Check Pattern](</en/architecture/claim-check.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Ambassador Pattern for Service Communication](</en/architecture/ambassador-pattern.html>)
 
 **See also:** [Claim Check Pattern](</en/architecture/claim-check.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Ambassador Pattern for Service Communication](</en/architecture/ambassador-pattern.html>)
 

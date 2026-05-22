@@ -3,7 +3,7 @@ title: "Patching Strategy"
 description: "Guide to vulnerability patching strategy covering prioritization, patch testing, emergency patches, rollback planning, and vulnerability management workflows."
 date: 2026-03-12
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/patching-strategy.html
+url: https://aidev.fit/en/security/patching-strategy.html
 ---
 
 # Patching Strategy
@@ -369,6 +369,10 @@ A mature patching strategy prioritizes based on exploitability and asset critica
 **See also:** [Certificate Management](</en/security/certificate-management.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
 
 **See also:** [Certificate Management](</en/security/certificate-management.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
+
+**See also:** [Serverless Security](</en/security/serverless-security.html>), [Session Management Security](</en/security/session-management.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>)
+
+**See also:** [Serverless Security](</en/security/serverless-security.html>), [Session Management Security](</en/security/session-management.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>)
 
 **See also:** [Serverless Security](</en/security/serverless-security.html>), [Session Management Security](</en/security/session-management.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>)
 

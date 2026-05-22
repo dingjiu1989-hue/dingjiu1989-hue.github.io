@@ -3,7 +3,7 @@ title: "Database Horizontal Scaling Strategies"
 description: "Learn horizontal scaling strategies for databases: sharding, replication, read replicas, and distributed architectures."
 date: 2026-04-15
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-horizontal-scaling.html
+url: https://aidev.fit/en/database/database-horizontal-scaling.html
 ---
 
 # Database Horizontal Scaling Strategies
@@ -49,6 +49,10 @@ Use read replicas when reads far exceed writes and eventual consistency is accep
 **See also:** [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Scalability](</en/database/database-scalability.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 
 **See also:** [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Scalability](</en/database/database-scalability.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
+
+**See also:** [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
 
 **See also:** [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
 

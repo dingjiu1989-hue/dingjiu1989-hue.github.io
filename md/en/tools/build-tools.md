@@ -3,7 +3,7 @@ title: "Build Tools: esbuild, swc, turbopack, vite — Speed Comparison"
 description: "Compare modern JavaScript build tools: esbuild, swc, turbopack, and vite. Benchmark bundling speed, plugin ecosystems, configuration, and production output qual"
 date: 2026-01-30
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/build-tools.html
+url: https://aidev.fit/en/tools/build-tools.html
 ---
 
 # Build Tools: esbuild, swc, turbopack, vite — Speed Comparison
@@ -308,6 +308,10 @@ Many teams use a combination: esbuild for dependencies, Vite for development, an
 **See also:** [Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison](</en/tools/monorepo-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>)
 
 **See also:** [Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison](</en/tools/monorepo-tools.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
 
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>)
 

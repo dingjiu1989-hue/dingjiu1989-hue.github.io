@@ -3,7 +3,7 @@ title: "Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning"
 description: "Learn PostgreSQL index maintenance: detect and fix index bloat, use REINDEX safely, monitor with pg_stat_user_indexes, and tune fillfactor for write-heavy tables."
 date: 2026-04-07
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/index-maintenance.html
+url: https://aidev.fit/en/database/index-maintenance.html
 ---
 
 # Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning
@@ -276,6 +276,10 @@ Index maintenance is not a one-time activity. Build monitoring and automation in
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
+
+**See also:** [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)
+
+**See also:** [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)
 
 **See also:** [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)
 

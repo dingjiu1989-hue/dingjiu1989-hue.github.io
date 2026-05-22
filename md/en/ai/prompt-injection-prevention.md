@@ -3,7 +3,7 @@ title: "Prompt Injection Prevention: Securing Your LLM Applications (2026)"
 description: "All major prompt injection attack types and defenses: input sanitization, output validation, privilege separation, and architectural patterns that limit blast radius. Covers OWASP Top 10 for LLM Applications."
 date: 2025-11-10
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/prompt-injection-prevention.html
+url: https://aidev.fit/en/ai/prompt-injection-prevention.html
 ---
 
 # Prompt Injection Prevention: Securing Your LLM Applications (2026)

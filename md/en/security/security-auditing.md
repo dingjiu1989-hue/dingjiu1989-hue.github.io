@@ -3,7 +3,7 @@ title: "Security Auditing and Compliance Frameworks"
 description: "Overview of SOC 2, ISO 27001, PCI DSS, HIPAA compliance frameworks and how to collect audit evidence for continuous compliance."
 date: 2026-03-05
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/security-auditing.html
+url: https://aidev.fit/en/security/security-auditing.html
 ---
 
 # Security Auditing and Compliance Frameworks
@@ -285,6 +285,10 @@ Compliance is not security, but well-designed compliance programs significantly 
 **See also:** [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>), [Security Log Management](</en/security/log-management-security.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>)
 
 **See also:** [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>), [Security Log Management](</en/security/log-management-security.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>)
+
+**See also:** [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)
+
+**See also:** [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)
 
 **See also:** [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)
 

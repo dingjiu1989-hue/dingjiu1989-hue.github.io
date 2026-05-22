@@ -3,7 +3,7 @@ title: "AI Embeddings Explained"
 description: "A practical guide to AI embeddings — what they are, how they work, and how to use them for search, clustering, and classification."
 date: 2025-12-11
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-embeddings-explained.html
+url: https://aidev.fit/en/ai/ai-embeddings-explained.html
 ---
 
 # AI Embeddings Explained
@@ -149,6 +149,10 @@ Embeddings are a versatile and powerful tool in the AI practitioner's toolkit. T
 **See also:** [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [AI Agents for Developers: A Practical Guide to Building and Using Agents](</en/ai/ai-agents-guide.html>), [AI Document Processing](</en/ai/ai-document-processing.html>)
 
 **See also:** [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [AI Agents for Developers: A Practical Guide to Building and Using Agents](</en/ai/ai-agents-guide.html>), [AI Document Processing](</en/ai/ai-document-processing.html>)
+
+**See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [AI Image Generation Guide](</en/ai/ai-image-generation.html>)
+
+**See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [AI Image Generation Guide](</en/ai/ai-image-generation.html>)
 
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [AI Image Generation Guide](</en/ai/ai-image-generation.html>)
 

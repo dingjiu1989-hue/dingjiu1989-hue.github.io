@@ -3,7 +3,7 @@ title: "Connection Pooling Guide"
 description: "Master database connection pooling with PgBouncer, HikariCP, and application-level pools to optimize performance and resource usage."
 date: 2025-12-22
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/connection-pooling.html
+url: https://aidev.fit/en/database/connection-pooling.html
 ---
 
 # Connection Pooling Guide
@@ -73,6 +73,10 @@ Size pools based on CPU cores, not concurrent users. Use PgBouncer for high-scal
 **See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)
 
 **See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>)
+
+**See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
+
+**See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
 
 **See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
 

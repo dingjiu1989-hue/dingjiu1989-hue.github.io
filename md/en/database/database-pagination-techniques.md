@@ -3,7 +3,7 @@ title: "Database Pagination: Offset, Cursor, Keyset, and Seek Methods"
 description: "Database pagination strategies compared: OFFSET/LIMIT vs cursor-based pagination for performance and consistency."
 date: 2026-04-15
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-pagination-techniques.html
+url: https://aidev.fit/en/database/database-pagination-techniques.html
 ---
 
 # Database Pagination: Offset, Cursor, Keyset, and Seek Methods
@@ -55,6 +55,10 @@ Some applications combine methods: cursor for forward pagination (infinite scrol
 **See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>)
 
 **See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>)
+
+**See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Scalability](</en/database/database-scalability.html>), [Materialized Views](</en/database/materialized-views.html>)
+
+**See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Scalability](</en/database/database-scalability.html>), [Materialized Views](</en/database/materialized-views.html>)
 
 **See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Scalability](</en/database/database-scalability.html>), [Materialized Views](</en/database/materialized-views.html>)
 

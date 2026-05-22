@@ -3,7 +3,7 @@ title: "Global Traffic Routing"
 description: "DNS-based routing, Anycast, global load balancers, latency-based routing, and multi-region traffic management"
 date: 2026-04-24
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/global-traffic-routing.html
+url: https://aidev.fit/en/architecture/global-traffic-routing.html
 ---
 
 # Global Traffic Routing
@@ -41,6 +41,10 @@ Multi-cloud routing adds another dimension of complexity. Traffic must be routed
 **See also:** [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
 
 **See also:** [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
+
+**See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
 
 **See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
 

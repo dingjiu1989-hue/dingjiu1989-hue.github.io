@@ -3,7 +3,7 @@ title: "Helm Security"
 description: "Securing Helm deployments with chart signing, provenance verification, secrets management, and best practices."
 date: 2026-03-17
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/helm-security.html
+url: https://aidev.fit/en/security/helm-security.html
 ---
 
 # Helm Security
@@ -255,6 +255,10 @@ Secure Helm deployments with chart signing and provenance verification. Use exte
 **See also:** [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>), [Container Image Security](</en/security/container-image-security.html>)
 
 **See also:** [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>), [Container Image Security](</en/security/container-image-security.html>)
+
+**See also:** [Software Signing](</en/security/software-signing.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
+
+**See also:** [Software Signing](</en/security/software-signing.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
 
 **See also:** [Software Signing](</en/security/software-signing.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
 

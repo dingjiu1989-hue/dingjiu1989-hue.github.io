@@ -3,7 +3,7 @@ title: "Best Code Review Tools 2026: GitHub, GitLab, Graphite, Reviewable Compar
 description: "Compare code review platforms on PR workflows, stacked diffs, AI review, and team collaboration features. Find the review tool that fits your team's workflow."
 date: 2025-10-29
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-code-review-tools.html
+url: https://aidev.fit/en/tools/best-code-review-tools.html
 ---
 
 # Best Code Review Tools 2026: GitHub, GitLab, Graphite, Reviewable Compared

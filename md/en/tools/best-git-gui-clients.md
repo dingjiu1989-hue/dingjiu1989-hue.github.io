@@ -3,7 +3,7 @@ title: "Best Git GUI Clients 2026: GitKraken vs Sourcetree vs Fork vs GitFiend"
 description: "Honest comparison of Git GUI clients for developers who want visual tools: merge conflict resolution, history visualization, performance with large repos, and platform support."
 date: 2025-10-30
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-git-gui-clients.html
+url: https://aidev.fit/en/tools/best-git-gui-clients.html
 ---
 
 # Best Git GUI Clients 2026: GitKraken vs Sourcetree vs Fork vs GitFiend

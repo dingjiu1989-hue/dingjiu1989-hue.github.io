@@ -3,7 +3,7 @@ title: "Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Ma
 description: "Compare Stripe, Paddle, and Chargebee for SaaS billing. Learn subscription management, dunning strategies, and tax compliance."
 date: 2026-01-17
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/billing-integration.html
+url: https://aidev.fit/en/sidehustle/billing-integration.html
 ---
 
 # Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning
@@ -67,6 +67,10 @@ Choose the simplest billing stack that meets your tax and complexity needs. Star
 **See also:** [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>)
 
 **See also:** [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>)
+
+**See also:** [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>)
+
+**See also:** [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>)
 
 **See also:** [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting](</en/sidehustle/saas-bookkeeping.html>)
 

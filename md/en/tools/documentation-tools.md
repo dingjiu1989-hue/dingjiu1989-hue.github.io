@@ -3,7 +3,7 @@ title: "Documentation Tools for Developers 2026"
 description: "Compare Docusaurus, Nextra, MkDocs, and Storybook for technical documentation and component libraries."
 date: 2026-02-03
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/documentation-tools.html
+url: https://aidev.fit/en/tools/documentation-tools.html
 ---
 
 # Documentation Tools for Developers 2026
@@ -43,6 +43,10 @@ Use Docusaurus for comprehensive project docs, Nextra for minimal setups, MkDocs
 **See also:** [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>)
 
 **See also:** [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>)
+
+**See also:** [Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing](</en/tools/helm-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>)
+
+**See also:** [Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing](</en/tools/helm-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>)
 
 **See also:** [Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing](</en/tools/helm-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>)
 

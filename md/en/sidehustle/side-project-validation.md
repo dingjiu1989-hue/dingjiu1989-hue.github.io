@@ -3,7 +3,7 @@ title: "Side Project Validation: Landing Page, Waitlist, Customer Interviews, an
 description: "Validate your side project idea before building: create landing pages, grow a waitlist, conduct customer interviews, and scope an MVP."
 date: 2026-01-20
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/side-project-validation.html
+url: https://aidev.fit/en/sidehustle/side-project-validation.html
 ---
 
 # Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping
@@ -69,6 +69,10 @@ Validation does not guarantee success. But it dramatically improves your odds. T
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Bootstrapping a SaaS: From Idea to First Paying Customer](</en/sidehustle/saas-bootstrapping-guide.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>)
 
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Bootstrapping a SaaS: From Idea to First Paying Customer](</en/sidehustle/saas-bootstrapping-guide.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>)
+
+**See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
+
+**See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
 
 **See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
 

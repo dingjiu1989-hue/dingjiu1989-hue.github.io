@@ -3,7 +3,7 @@ title: "Webpack vs Vite Comparison"
 description: "In-depth comparison of Webpack and Vite for modern frontend development, covering performance, features, and use cases."
 date: 2025-12-03
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/webpack-vs-vite-bundlers.html
+url: https://aidev.fit/en/tech/webpack-vs-vite-bundlers.html
 ---
 
 # Webpack vs Vite Comparison
@@ -217,6 +217,10 @@ Vite has won the "new project" battle with dramatically faster development feedb
 **See also:** [Git Workflows for Teams](</en/tech/git-workflows-2026.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
 
 **See also:** [Git Workflows for Teams](</en/tech/git-workflows-2026.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
+
+**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>)
+
+**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>)
 
 **See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>)
 

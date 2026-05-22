@@ -3,7 +3,7 @@ title: "Domain-Driven Design Fundamentals"
 description: "A practical guide to Domain-Driven Design concepts and implementation strategies."
 date: 2025-12-26
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/ddd-guide.html
+url: https://aidev.fit/en/architecture/ddd-guide.html
 ---
 
 # Domain-Driven Design Fundamentals
@@ -192,6 +192,10 @@ DDD provides a powerful toolkit for building software that deeply models the bus
 **See also:** [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
 
 **See also:** [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>)
+
+**See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)
+
+**See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)
 
 **See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)
 

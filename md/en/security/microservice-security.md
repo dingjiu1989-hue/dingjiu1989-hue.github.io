@@ -3,7 +3,7 @@ title: "Microservice Security"
 description: "Comprehensive guide to microservice security covering service mesh mTLS, API gateways, secret distribution, and observability for distributed systems."
 date: 2026-03-11
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/microservice-security.html
+url: https://aidev.fit/en/security/microservice-security.html
 ---
 
 # Microservice Security
@@ -439,6 +439,10 @@ Microservice security requires shifting from perimeter-based defense to identity
 **See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
 
 **See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
+
+**See also:** [DNS Security](</en/security/dns-security.html>), [Email Security](</en/security/email-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
+
+**See also:** [DNS Security](</en/security/dns-security.html>), [Email Security](</en/security/email-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
 
 **See also:** [DNS Security](</en/security/dns-security.html>), [Email Security](</en/security/email-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>)
 

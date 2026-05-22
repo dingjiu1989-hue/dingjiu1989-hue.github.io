@@ -11,7 +11,7 @@ from datetime import date
 from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parent.parent
-BASE = "https://dingjiu1989-hue.github.io"
+BASE = "https://aidev.fit"
 TODAY = date.today().isoformat()
 
 EN_ARTICLES = ROOT / "en" / "articles.json"

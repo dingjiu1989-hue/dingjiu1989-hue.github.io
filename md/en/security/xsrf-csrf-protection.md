@@ -3,7 +3,7 @@ title: "XSRF/CSRF Protection Guide"
 description: "A practical guide to preventing Cross-Site Request Forgery attacks using CSRF tokens, SameSite cookies, and custom headers."
 date: 2025-12-20
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/xsrf-csrf-protection.html
+url: https://aidev.fit/en/security/xsrf-csrf-protection.html
 ---
 
 # XSRF/CSRF Protection Guide
@@ -221,6 +221,10 @@ CSRF attacks exploit the browser's automatic inclusion of credentials in cross-o
 **See also:** [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)
 
 **See also:** [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 
 **See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 

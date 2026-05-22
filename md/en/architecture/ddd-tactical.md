@@ -3,7 +3,7 @@ title: "DDD Tactical Patterns"
 description: "Master DDD tactical patterns: aggregate, entity, value object, domain service, and repository implementation"
 date: 2026-05-02
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/ddd-tactical.html
+url: https://aidev.fit/en/architecture/ddd-tactical.html
 ---
 
 # DDD Tactical Patterns
@@ -59,6 +59,10 @@ Tactical patterns provide a shared vocabulary for implementation. When a team us
 **See also:** [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 
 **See also:** [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
+
+**See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 
 **See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 

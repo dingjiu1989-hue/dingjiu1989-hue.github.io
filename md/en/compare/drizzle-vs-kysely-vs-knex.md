@@ -3,7 +3,7 @@ title: "Drizzle ORM vs Kysely vs Knex.js (2026): SQL Query Builder Showdown"
 description: "Comparison of TypeScript SQL tools: Drizzle (lightweight ORM), Kysely (type-safe query builder), and Knex.js (veteran). When to use a query builder instead of a full ORM."
 date: 2025-11-24
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/drizzle-vs-kysely-vs-knex.html
+url: https://aidev.fit/en/compare/drizzle-vs-kysely-vs-knex.html
 ---
 
 # Drizzle ORM vs Kysely vs Knex.js (2026): SQL Query Builder Showdown

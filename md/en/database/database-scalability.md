@@ -3,7 +3,7 @@ title: "Database Scalability"
 description: "Strategies for database scalability: vertical scaling, horizontal scaling, read replicas, and caching."
 date: 2026-04-09
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-scalability.html
+url: https://aidev.fit/en/database/database-scalability.html
 ---
 
 # Database Scalability
@@ -117,6 +117,10 @@ Scale vertically first (simple). Add read replicas for read loads. Add caching f
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Pagination: Offset, Cursor, Keyset, and Seek Methods](</en/database/database-pagination-techniques.html>)
+
+**See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Pagination: Offset, Cursor, Keyset, and Seek Methods](</en/database/database-pagination-techniques.html>)
 
 **See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Pagination: Offset, Cursor, Keyset, and Seek Methods](</en/database/database-pagination-techniques.html>)
 

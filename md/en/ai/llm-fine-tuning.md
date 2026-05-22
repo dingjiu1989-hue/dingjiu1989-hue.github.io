@@ -3,7 +3,7 @@ title: "LLM Fine-Tuning Guide"
 description: "Learn how to fine-tune LLMs effectively using LoRA, QLoRA, and full fine-tuning techniques with practical code examples."
 date: 2025-12-12
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/llm-fine-tuning.html
+url: https://aidev.fit/en/ai/llm-fine-tuning.html
 ---
 
 # LLM Fine-Tuning Guide
@@ -215,6 +215,10 @@ Fine-tuning remains the most powerful tool for adapting LLMs to specific domains
 **See also:** [Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)](</en/ai/fine-tune-open-source-llm.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)
 
 **See also:** [Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)](</en/ai/fine-tune-open-source-llm.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)
+
+**See also:** [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)
+
+**See also:** [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)
 
 **See also:** [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)
 

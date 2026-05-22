@@ -3,7 +3,7 @@ title: "Code Editor Plugins: Must-Have Extensions for Productivity"
 description: "Essential code editor plugins for 2026: language support, AI assistants, theme plugins, git integration, testing tools, and productivity extensions for VS Code "
 date: 2026-05-15
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/code-editor-plugins.html
+url: https://aidev.fit/en/tools/code-editor-plugins.html
 ---
 
 # Code Editor Plugins: Must-Have Extensions for Productivity
@@ -188,6 +188,10 @@ Invest time in selecting and configuring your editor plugins. The best setup is 
 **See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>)
 
 **See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>)
+
+**See also:** [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>)
+
+**See also:** [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>)
 
 **See also:** [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>)
 

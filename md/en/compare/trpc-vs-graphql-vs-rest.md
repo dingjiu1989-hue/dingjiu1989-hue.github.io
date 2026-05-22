@@ -3,7 +3,7 @@ title: "tRPC vs GraphQL vs REST (2026): Best API Architecture?"
 description: "End-to-end typesafety vs flexible queries vs simplicity — compare API design patterns for modern web apps. Type safety, performance, caching, and tooling breakdown."
 date: 2025-11-18
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/trpc-vs-graphql-vs-rest.html
+url: https://aidev.fit/en/compare/trpc-vs-graphql-vs-rest.html
 ---
 
 # tRPC vs GraphQL vs REST (2026): Best API Architecture?

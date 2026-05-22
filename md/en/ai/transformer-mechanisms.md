@@ -3,7 +3,7 @@ title: "Transformer Mechanisms in Deep Learning"
 description: "Understand transformer model internals: self-attention, multi-head attention, positional encoding, and feed-forward networks."
 date: 2026-02-23
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/transformer-mechanisms.html
+url: https://aidev.fit/en/ai/transformer-mechanisms.html
 ---
 
 # Transformer Mechanisms in Deep Learning
@@ -45,6 +45,10 @@ The FFN stores factual knowledge learned during training. Intermediate represent
 **See also:** [Attention Mechanisms in Neural Networks](</en/ai/attention-mechanisms.html>), [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>)
 
 **See also:** [Attention Mechanisms in Neural Networks](</en/ai/attention-mechanisms.html>), [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>)
+
+**See also:** [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>)
+
+**See also:** [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>)
 
 **See also:** [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>)
 

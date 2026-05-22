@@ -3,7 +3,7 @@ title: "Technical Writing Income Guide"
 description: "A comprehensive guide to earning income through technical writing and documentation."
 date: 2025-12-08
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/technical-writing.html
+url: https://aidev.fit/en/sidehustle/technical-writing.html
 ---
 
 # Technical Writing Income Guide
@@ -182,6 +182,10 @@ Technical writing is a viable side hustle that leverages your development skills
 **See also:** [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>)
 
 **See also:** [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>)
+
+**See also:** [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Product Hunt Launch Guide](</en/sidehustle/product-hunt-launch.html>)
+
+**See also:** [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Product Hunt Launch Guide](</en/sidehustle/product-hunt-launch.html>)
 
 **See also:** [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Product Hunt Launch Guide](</en/sidehustle/product-hunt-launch.html>)
 

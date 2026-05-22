@@ -3,7 +3,7 @@ title: "Building Multimodal AI Applications: Vision, Audio, and Text Combined (2
 description: "Build applications that understand images, audio, and text together — GPT-4o, Gemini, and open source multimodal models with practical code examples."
 date: 2025-11-12
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/multimodal-ai-guide.html
+url: https://aidev.fit/en/ai/multimodal-ai-guide.html
 ---
 
 # Building Multimodal AI Applications: Vision, Audio, and Text Combined (2026)

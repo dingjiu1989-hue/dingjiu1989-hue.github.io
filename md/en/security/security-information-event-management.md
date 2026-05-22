@@ -3,7 +3,7 @@ title: "SIEM: Security Information and Event Management"
 description: "SIEM systems for security monitoring: log collection, correlation rules, threat detection, and incident response workflows."
 date: 2026-03-23
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/security-information-event-management.html
+url: https://aidev.fit/en/security/security-information-event-management.html
 ---
 
 # SIEM: Security Information and Event Management
@@ -53,6 +53,10 @@ Tune rules to reduce false positives. Start with broad rules and narrow them bas
 **See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Endpoint Security](</en/security/endpoint-security.html>)
 
 **See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Endpoint Security](</en/security/endpoint-security.html>)
+
+**See also:** [Container Runtime Security](</en/security/container-runtime-security.html>), [SOC 2 Technical Controls](</en/security/soc2-technical.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
+
+**See also:** [Container Runtime Security](</en/security/container-runtime-security.html>), [SOC 2 Technical Controls](</en/security/soc2-technical.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
 
 **See also:** [Container Runtime Security](</en/security/container-runtime-security.html>), [SOC 2 Technical Controls](</en/security/soc2-technical.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
 

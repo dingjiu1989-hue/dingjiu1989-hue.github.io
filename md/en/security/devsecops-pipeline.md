@@ -3,7 +3,7 @@ title: "DevSecOps: Integrating Security into CI/CD"
 description: "Integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your CI/CD pipeline for shift-left security."
 date: 2026-03-04
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/devsecops-pipeline.html
+url: https://aidev.fit/en/security/devsecops-pipeline.html
 ---
 
 # DevSecOps: Integrating Security into CI/CD
@@ -398,6 +398,10 @@ DevSecOps shifts security from a final gate to an integrated part of the develop
 **See also:** [Secure Software Development Lifecycle](</en/security/secure-sdlc.html>), [Container Security Best Practices](</en/security/container-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 
 **See also:** [Secure Software Development Lifecycle](</en/security/secure-sdlc.html>), [Container Security Best Practices](</en/security/container-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [Security Log Management](</en/security/log-management-security.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>)
+
+**See also:** [Security Log Management](</en/security/log-management-security.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>)
 
 **See also:** [Security Log Management](</en/security/log-management-security.html>), [OAuth 2.0 and PKCE Explained](</en/security/oauth2-pkce.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>)
 

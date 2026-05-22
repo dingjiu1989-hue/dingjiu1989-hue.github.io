@@ -3,7 +3,7 @@ title: "Database Migration Version Control Strategies"
 description: "Best practices for version-controlling database schema migrations across development, staging, and production."
 date: 2026-04-15
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-migration-version-control.html
+url: https://aidev.fit/en/database/database-migration-version-control.html
 ---
 
 # Database Migration Version Control Strategies
@@ -49,6 +49,10 @@ Maintain a migration status document for major schema changes. Describe the chan
 **See also:** [Database Schema Migration: Version Control, Rollback, and Zero-Downtime](</en/database/database-schema-migration-strategies.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 
 **See also:** [Database Schema Migration: Version Control, Rollback, and Zero-Downtime](</en/database/database-schema-migration-strategies.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Connection Pooling: Tuning, Best Practices, and Pitfalls](</en/database/database-connection-pooling.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [Connection Pooling: Tuning, Best Practices, and Pitfalls](</en/database/database-connection-pooling.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 
 **See also:** [Connection Pooling: Tuning, Best Practices, and Pitfalls](</en/database/database-connection-pooling.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 

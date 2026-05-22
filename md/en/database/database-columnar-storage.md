@@ -3,7 +3,7 @@ title: "Columnar Storage: Compression, Encoding, and Analytical Performance"
 description: "Understand columnar storage formats: row vs column orientation, encoding techniques, and analytical query optimization."
 date: 2026-04-14
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-columnar-storage.html
+url: https://aidev.fit/en/database/database-columnar-storage.html
 ---
 
 # Columnar Storage: Compression, Encoding, and Analytical Performance
@@ -53,6 +53,10 @@ Use columnar storage for data warehousing, business intelligence dashboards, tim
 **See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>)
 
 **See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>)
+
+**See also:** [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Materialized Views](</en/database/materialized-views.html>)
+
+**See also:** [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Materialized Views](</en/database/materialized-views.html>)
 
 **See also:** [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Materialized Views](</en/database/materialized-views.html>)
 

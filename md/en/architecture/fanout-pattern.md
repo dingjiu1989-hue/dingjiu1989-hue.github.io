@@ -3,7 +3,7 @@ title: "Fanout Pattern for Event Distribution"
 description: "The fanout pattern explained: distributing events to multiple consumers for parallel processing in event-driven systems."
 date: 2026-05-07
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/fanout-pattern.html
+url: https://aidev.fit/en/architecture/fanout-pattern.html
 ---
 
 # Fanout Pattern for Event Distribution
@@ -45,6 +45,10 @@ Filtered subscriptions reduce unnecessary processing. Not every consumer needs e
 **See also:** [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
 
 **See also:** [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
+
+**See also:** [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
+
+**See also:** [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
 
 **See also:** [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
 

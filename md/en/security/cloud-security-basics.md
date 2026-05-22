@@ -3,7 +3,7 @@ title: "Cloud Security Basics: Shared Responsibility Model Explained"
 description: "Understand the AWS/GCP/Azure shared responsibility model, IAM policies, network security groups, and key cloud security services."
 date: 2026-03-03
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/cloud-security-basics.html
+url: https://aidev.fit/en/security/cloud-security-basics.html
 ---
 
 # Cloud Security Basics: Shared Responsibility Model Explained
@@ -149,6 +149,10 @@ Cloud security starts with understanding the shared responsibility model. From t
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Network Security Fundamentals](</en/security/network-security.html>)
 
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Network Security Fundamentals](</en/security/network-security.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)
 
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)
 

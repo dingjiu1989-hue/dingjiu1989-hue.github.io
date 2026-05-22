@@ -3,7 +3,7 @@ title: "AI Content Generation Workflows"
 description: "Build production-ready AI content generation workflows with quality control, multi-stage pipelines, and human-in-the-loop review."
 date: 2025-12-11
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-content-generation.html
+url: https://aidev.fit/en/ai/ai-content-generation.html
 ---
 
 # AI Content Generation Workflows
@@ -196,6 +196,10 @@ Production AI content generation requires a structured, multi-stage workflow wit
 **See also:** [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>)
 
 **See also:** [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>)
+
+**See also:** [Building Custom AI Agents with LangGraph: A Practical Guide](</en/ai/langgraph-agent-workflows.html>), [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>)
+
+**See also:** [Building Custom AI Agents with LangGraph: A Practical Guide](</en/ai/langgraph-agent-workflows.html>), [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>)
 
 **See also:** [Building Custom AI Agents with LangGraph: A Practical Guide](</en/ai/langgraph-agent-workflows.html>), [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>)
 

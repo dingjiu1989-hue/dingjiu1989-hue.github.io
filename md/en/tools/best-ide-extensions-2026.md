@@ -3,7 +3,7 @@ title: "Best IDE Extensions 2026"
 description: "Curated list of essential IDE extensions for VS Code, JetBrains, and Zed to boost developer productivity in 2026."
 date: 2025-12-09
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-ide-extensions-2026.html
+url: https://aidev.fit/en/tools/best-ide-extensions-2026.html
 ---
 
 # Best IDE Extensions 2026
@@ -165,6 +165,10 @@ The most impactful IDE extensions in 2026 are AI assistants (Copilot, Cursor), c
 **See also:** [Text Editors Compared](</en/tools/text-editors-compared.html>), [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>), [Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq](</en/tools/best-note-taking-apps-developers.html>)
 
 **See also:** [Text Editors Compared](</en/tools/text-editors-compared.html>), [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>), [Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq](</en/tools/best-note-taking-apps-developers.html>)
+
+**See also:** [Best Code Snippet Managers 2026: Raycast Snippets vs Pieces vs massCode vs Espanso](</en/tools/best-code-snippet-tools.html>), [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>)
+
+**See also:** [Best Code Snippet Managers 2026: Raycast Snippets vs Pieces vs massCode vs Espanso](</en/tools/best-code-snippet-tools.html>), [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>)
 
 **See also:** [Best Code Snippet Managers 2026: Raycast Snippets vs Pieces vs massCode vs Espanso](</en/tools/best-code-snippet-tools.html>), [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>)
 

@@ -3,7 +3,7 @@ title: "Personal Finance for Software Engineers: Investing, Equity, and Wealth B
 description: "Financial guide for developers — RSU strategy, tax optimization, index fund investing, geographic arbitrage, and avoiding common money mistakes."
 date: 2025-10-26
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/developer-investing-finance.html
+url: https://aidev.fit/en/sidehustle/developer-investing-finance.html
 ---
 
 # Personal Finance for Software Engineers: Investing, Equity, and Wealth Building

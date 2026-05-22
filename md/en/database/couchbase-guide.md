@@ -3,7 +3,7 @@ title: "Couchbase Guide: N1QL, Document Model, Clustering, and Caching"
 description: "Comprehensive guide to Couchbase: N1QL query language, document data model, clustering architecture, integrated caching, and real-world use cases."
 date: 2026-03-31
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/couchbase-guide.html
+url: https://aidev.fit/en/database/couchbase-guide.html
 ---
 
 # Couchbase Guide: N1QL, Document Model, Clustering, and Caching
@@ -339,6 +339,10 @@ Couchbase fills a unique niche: a document database with SQL querying and built-
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>)
 
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>)
+
+**See also:** [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
+
+**See also:** [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
 
 **See also:** [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
 

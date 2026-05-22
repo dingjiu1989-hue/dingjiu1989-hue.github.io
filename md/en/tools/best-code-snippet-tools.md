@@ -3,7 +3,7 @@ title: "Best Code Snippet Managers 2026: Raycast Snippets vs Pieces vs massCode 
 description: "Compare code snippet managers and text expanders that save developers hours — cloud sync, IDE integration, team sharing, and AI features."
 date: 2025-11-03
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-code-snippet-tools.html
+url: https://aidev.fit/en/tools/best-code-snippet-tools.html
 ---
 
 # Best Code Snippet Managers 2026: Raycast Snippets vs Pieces vs massCode vs Espanso

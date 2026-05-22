@@ -3,7 +3,7 @@ title: "Developer Portal"
 description: "Explore developer portals: Backstage, documentation hubs, API catalogs, service catalogs, and platform engineering"
 date: 2026-01-06
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/developer-portal.html
+url: https://aidev.fit/en/tech/developer-portal.html
 ---
 
 # Developer Portal
@@ -77,6 +77,10 @@ A well-designed developer portal transforms the developer experience. It reduces
 **See also:** [API Documentation](</en/tech/api-documentation.html>), [Platform Engineering](</en/tech/platform-engineering.html>), [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>)
 
 **See also:** [API Documentation](</en/tech/api-documentation.html>), [Platform Engineering](</en/tech/platform-engineering.html>), [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>)
+
+**See also:** [Infrastructure Composability](</en/tech/infrastructure-composability.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Log Management](</en/tech/log-management.html>)
+
+**See also:** [Infrastructure Composability](</en/tech/infrastructure-composability.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Log Management](</en/tech/log-management.html>)
 
 **See also:** [Infrastructure Composability](</en/tech/infrastructure-composability.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Log Management](</en/tech/log-management.html>)
 

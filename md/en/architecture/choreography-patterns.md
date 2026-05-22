@@ -3,7 +3,7 @@ title: "Choreography Patterns"
 description: "Learn choreography patterns: event contracts, monitoring, saga coordination, and decentralized workflow management"
 date: 2026-05-02
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/choreography-patterns.html
+url: https://aidev.fit/en/architecture/choreography-patterns.html
 ---
 
 # Choreography Patterns
@@ -61,6 +61,10 @@ Many organizations use a hybrid approach: choreography for simple, stable workfl
 **See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>)
 
 **See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>)
+
+**See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
 
 **See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
 

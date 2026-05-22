@@ -3,7 +3,7 @@ title: "Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Compari
 description: "In-depth analysis of multi-cloud architecture covering decision frameworks, abstraction layers, data gravity considerations, and cost comparison across major providers."
 date: 2026-01-02
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/multi-cloud-strategy.html
+url: https://aidev.fit/en/tech/multi-cloud-strategy.html
 ---
 
 # Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison
@@ -71,6 +71,10 @@ Multi-cloud is a tactical architectural decision, not a strategic imperative. Or
 **See also:** [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [Docker Compose vs Kubernetes: When to Use Each and Migration Path](</en/tech/docker-compose-vs-kubernetes.html>), [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>)
 
 **See also:** [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [Docker Compose vs Kubernetes: When to Use Each and Migration Path](</en/tech/docker-compose-vs-kubernetes.html>), [GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC](</en/tech/gcp-networking.html>)
+
+**See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Monorepo vs Multirepo: Repository Strategy Comparison](</en/tech/monorepo-vs-multirepo.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>)
+
+**See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Monorepo vs Multirepo: Repository Strategy Comparison](</en/tech/monorepo-vs-multirepo.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>)
 
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Monorepo vs Multirepo: Repository Strategy Comparison](</en/tech/monorepo-vs-multirepo.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>)
 

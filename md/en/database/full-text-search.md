@@ -3,7 +3,7 @@ title: "Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)"
 description: "Compare Elasticsearch, Meilisearch, and Typesense for full-text search capabilities, performance, ease of use, and deployment models."
 date: 2025-12-23
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/full-text-search.html
+url: https://aidev.fit/en/database/full-text-search.html
 ---
 
 # Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
@@ -417,6 +417,10 @@ Full-text search engines are essential for applications that need more than simp
 **See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>)
 
 **See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>)
+
+**See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Data Consistency Models Explained](</en/database/data-consistency-models.html>)
+
+**See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Data Consistency Models Explained](</en/database/data-consistency-models.html>)
 
 **See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Data Consistency Models Explained](</en/database/data-consistency-models.html>)
 

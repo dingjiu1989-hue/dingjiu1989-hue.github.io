@@ -3,7 +3,7 @@ title: "Note-Taking and Knowledge Management Tools"
 description: "Compare note-taking apps for developers: Obsidian, Notion, Logseq, and Roam Research for knowledge management."
 date: 2026-02-09
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/note-taking-apps.html
+url: https://aidev.fit/en/tools/note-taking-apps.html
 ---
 
 # Note-Taking and Knowledge Management Tools
@@ -49,6 +49,10 @@ Use Obsidian for local-first, future-proof notes with maximum customization. Use
 **See also:** [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
 
 **See also:** [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
+
+**See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
+
+**See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
 
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
 

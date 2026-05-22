@@ -3,7 +3,7 @@ title: "Secure Code Review"
 description: "A systematic approach to secure code review with checklists, automation, SAST integration, and common findings."
 date: 2026-03-19
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/secure-code-review.html
+url: https://aidev.fit/en/security/secure-code-review.html
 ---
 
 # Secure Code Review
@@ -205,6 +205,10 @@ Effective secure code review combines automated SAST scanning with manual review
 **See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Compliance Automation](</en/security/compliance-automation.html>), [SSO Architecture](</en/security/sso-architecture.html>)
 
 **See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Compliance Automation](</en/security/compliance-automation.html>), [SSO Architecture](</en/security/sso-architecture.html>)
+
+**See also:** [Data Masking and Redaction](</en/security/data-masking.html>), [DNS Security](</en/security/dns-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
+
+**See also:** [Data Masking and Redaction](</en/security/data-masking.html>), [DNS Security](</en/security/dns-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
 
 **See also:** [Data Masking and Redaction](</en/security/data-masking.html>), [DNS Security](</en/security/dns-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
 

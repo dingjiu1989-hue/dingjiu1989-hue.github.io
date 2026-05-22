@@ -18,7 +18,7 @@ EN_FEED_XML = ROOT / 'en' / 'feed.xml'
 HEALTH_LOG = ROOT / 'health.json'
 TODAY = date.today().isoformat()
 
-BASE_URL = 'https://dingjiu1989-hue.github.io'
+BASE_URL = 'https://aidev.fit'
 
 # ── Pages that get fresh lastmod every run ──────────────────────────
 ALWAYS_FRESH = [

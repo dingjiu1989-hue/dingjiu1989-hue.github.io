@@ -3,7 +3,7 @@ title: "Best Mobile Frameworks 2026: React Native vs Flutter vs SwiftUI vs Expo 
 description: "Compare cross-platform and native mobile frameworks — code sharing, performance, learning curve, and which to choose for your app type and team background."
 date: 2025-11-27
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/mobile-frameworks-comparison.html
+url: https://aidev.fit/en/compare/mobile-frameworks-comparison.html
 ---
 
 # Best Mobile Frameworks 2026: React Native vs Flutter vs SwiftUI vs Expo vs Tauri Mobile

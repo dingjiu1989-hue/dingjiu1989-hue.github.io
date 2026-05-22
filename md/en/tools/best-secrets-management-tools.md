@@ -3,7 +3,7 @@ title: "Best Secrets Management Tools 2026: Infisical vs Doppler vs Vault vs SOP
 description: "Compare secrets management platforms — from developer-friendly Infisical to enterprise Vault to git-native SOPS. Stop putting secrets in .env files."
 date: 2025-11-04
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-secrets-management-tools.html
+url: https://aidev.fit/en/tools/best-secrets-management-tools.html
 ---
 
 # Best Secrets Management Tools 2026: Infisical vs Doppler vs Vault vs SOPS vs 1Password

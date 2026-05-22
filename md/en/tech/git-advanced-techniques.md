@@ -3,7 +3,7 @@ title: "Advanced Git Techniques for Developers"
 description: "Master advanced Git: interactive rebase, bisect, worktree, submodules, and reflog for complex workflows."
 date: 2026-01-13
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/git-advanced-techniques.html
+url: https://aidev.fit/en/tech/git-advanced-techniques.html
 ---
 
 # Advanced Git Techniques for Developers
@@ -33,6 +33,10 @@ Automate bisect with git bisect run
 **See also:** [Git Workflows](</en/tech/git-workflows.html>), [CSS Grid and Flexbox: Modern Layout Guide](</en/tech/css-grid-flexbox.html>), [Advanced TypeScript Types for Better Code](</en/tech/typescript-advanced-types.html>)
 
 **See also:** [Git Workflows](</en/tech/git-workflows.html>), [CSS Grid and Flexbox: Modern Layout Guide](</en/tech/css-grid-flexbox.html>), [Advanced TypeScript Types for Better Code](</en/tech/typescript-advanced-types.html>)
+
+**See also:** [GitHub Actions Workflows: Advanced Patterns](</en/tech/github-actions-workflows.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
+
+**See also:** [GitHub Actions Workflows: Advanced Patterns](</en/tech/github-actions-workflows.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
 
 **See also:** [GitHub Actions Workflows: Advanced Patterns](</en/tech/github-actions-workflows.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
 

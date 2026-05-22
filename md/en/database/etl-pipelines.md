@@ -3,7 +3,7 @@ title: "Building ETL Pipelines: A Practical Guide"
 description: "Practical ETL guide covering batch vs streaming, Airflow, dbt, Fivetran, data quality checks, incremental loads, and idempotency."
 date: 2026-03-28
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/etl-pipelines.html
+url: https://aidev.fit/en/database/etl-pipelines.html
 ---
 
 # Building ETL Pipelines: A Practical Guide
@@ -87,6 +87,10 @@ Choose batch for simplicity and streaming for real-time needs. Use Airflow for o
 **See also:** [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [Database Indexing Strategies](</en/database/database-indexing.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>)
 
 **See also:** [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [Database Indexing Strategies](</en/database/database-indexing.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>)
+
+**See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
+
+**See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
 
 **See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
 

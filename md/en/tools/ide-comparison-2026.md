@@ -3,7 +3,7 @@ title: "IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and
 description: "Compare VS Code, JetBrains IDEs, Zed, and Cursor for development performance, language support, AI features, startup time, memory usage, and extensibility in 20"
 date: 2026-02-03
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/ide-comparison-2026.html
+url: https://aidev.fit/en/tools/ide-comparison-2026.html
 ---
 
 # IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
@@ -182,6 +182,10 @@ Consider using multiple editors for different tasks. Many developers use VS Code
 **See also:** [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>)
 
 **See also:** [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)
 
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)
 

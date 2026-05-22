@@ -3,7 +3,7 @@ title: "Midjourney Prompt Guide: From Basics to Pro-Level Images"
 description: "Master Midjourney prompt structure, parameters, and style references. Includes 10 battle-tested prompt templates for portraits, logos, product shots, and more."
 date: 2025-10-01
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/midjourney-prompts.html
+url: https://aidev.fit/en/ai/midjourney-prompts.html
 ---
 
 # Midjourney Prompt Guide: From Basics to Pro-Level Images

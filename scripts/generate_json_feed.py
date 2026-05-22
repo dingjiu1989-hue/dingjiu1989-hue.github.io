@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 ROOT = Path(__file__).resolve().parent.parent
 EN_ARTICLES = ROOT / 'en' / 'articles.json'
 CN_ARTICLES = ROOT / 'articles.json'
-SITE_URL = 'https://dingjiu1989-hue.github.io'
+SITE_URL = 'https://aidev.fit'
 
 
 def get_body(slug, board_id):

@@ -3,7 +3,7 @@ title: "Event Sourcing Pattern"
 description: "Learn the event sourcing pattern for capturing state changes as immutable events."
 date: 2025-12-26
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/event-sourcing.html
+url: https://aidev.fit/en/architecture/event-sourcing.html
 ---
 
 # Event Sourcing Pattern
@@ -47,6 +47,10 @@ Event sourcing is a powerful pattern that provides unmatched auditability and te
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
 
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
+
+**See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>)
+
+**See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>)
 
 **See also:** [Database per Service Pattern](</en/architecture/database-per-service.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>)
 

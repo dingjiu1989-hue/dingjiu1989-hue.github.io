@@ -3,7 +3,7 @@ title: "Graceful Shutdown Patterns"
 description: "Signal handling, connection draining, processing in-flight requests, and best practices for graceful service shutdown"
 date: 2026-04-25
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/graceful-shutdown.html
+url: https://aidev.fit/en/architecture/graceful-shutdown.html
 ---
 
 # Graceful Shutdown Patterns
@@ -41,6 +41,10 @@ Stateful services require additional consideration. Services that own data or ma
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 
 **See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 

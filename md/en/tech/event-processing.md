@@ -3,7 +3,7 @@ title: "Event Processing"
 description: "Explore event processing: stream processing, complex event processing, Kafka Streams, and real-time data pipelines"
 date: 2026-01-07
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/event-processing.html
+url: https://aidev.fit/en/tech/event-processing.html
 ---
 
 # Event Processing
@@ -69,6 +69,10 @@ Event processing enables real-time responsiveness that batch processing cannot m
 **See also:** [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>), [Build Optimization](</en/tech/build-optimization.html>), [Developer Portal](</en/tech/developer-portal.html>)
 
 **See also:** [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>), [Build Optimization](</en/tech/build-optimization.html>), [Developer Portal](</en/tech/developer-portal.html>)
+
+**See also:** [Log Management](</en/tech/log-management.html>), [Next.js App Router](</en/tech/nextjs-app-router.html>), [Node.js Streams](</en/tech/nodejs-streams.html>)
+
+**See also:** [Log Management](</en/tech/log-management.html>), [Next.js App Router](</en/tech/nextjs-app-router.html>), [Node.js Streams](</en/tech/nodejs-streams.html>)
 
 **See also:** [Log Management](</en/tech/log-management.html>), [Next.js App Router](</en/tech/nextjs-app-router.html>), [Node.js Streams](</en/tech/nodejs-streams.html>)
 

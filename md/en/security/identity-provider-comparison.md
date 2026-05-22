@@ -3,7 +3,7 @@ title: "Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth"
 description: "Compare identity providers: Auth0, Okta, Keycloak, Firebase Auth for authentication and user management."
 date: 2026-03-23
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/identity-provider-comparison.html
+url: https://aidev.fit/en/security/identity-provider-comparison.html
 ---
 
 # Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth
@@ -41,6 +41,10 @@ Use Auth0 for general-purpose web and mobile apps. Use Okta for enterprise SSO a
 **See also:** [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>), [GDPR Technical Controls](</en/security/gdpr-technical.html>), [SOC 2 Technical Controls](</en/security/soc2-technical.html>)
 
 **See also:** [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>), [GDPR Technical Controls](</en/security/gdpr-technical.html>), [SOC 2 Technical Controls](</en/security/soc2-technical.html>)
+
+**See also:** [Security Testing Tools: SAST, DAST, IAST, and RASP Compared](</en/security/security-testing-tools.html>), [WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai](</en/security/waf-comparison.html>), [API Authentication Methods](</en/security/api-authentication.html>)
+
+**See also:** [Security Testing Tools: SAST, DAST, IAST, and RASP Compared](</en/security/security-testing-tools.html>), [WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai](</en/security/waf-comparison.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 
 **See also:** [Security Testing Tools: SAST, DAST, IAST, and RASP Compared](</en/security/security-testing-tools.html>), [WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai](</en/security/waf-comparison.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 

@@ -3,7 +3,7 @@ title: "Database Migration Tools and Strategies"
 description: "Learn database migration tools and strategies including schema evolution, zero-downtime migrations, rollback plans, and testing."
 date: 2025-12-22
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-migration.html
+url: https://aidev.fit/en/database/database-migration.html
 ---
 
 # Database Migration Tools and Strategies
@@ -299,6 +299,10 @@ Database migrations bring the same version control discipline to schema changes 
 **See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>)
 
 **See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>)
+
+**See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Normalization Explained](</en/database/database-normalization.html>)
+
+**See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Normalization Explained](</en/database/database-normalization.html>)
 
 **See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Normalization Explained](</en/database/database-normalization.html>)
 

@@ -3,7 +3,7 @@ title: "How to Build and Sell APIs: A Developer's Guide to API-as-a-Service"
 description: "Turn your code into recurring revenue. How to build, document, price, and sell APIs — from idea to first paying customer. Includes real examples making $5K+/mo."
 date: 2025-10-20
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/build-and-sell-api.html
+url: https://aidev.fit/en/sidehustle/build-and-sell-api.html
 ---
 
 # How to Build and Sell APIs: A Developer's Guide to API-as-a-Service

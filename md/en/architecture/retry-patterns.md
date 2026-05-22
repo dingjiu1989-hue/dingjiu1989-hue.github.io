@@ -3,7 +3,7 @@ title: "Retry Patterns"
 description: "Learn retry strategies: exponential backoff, jitter, retry budgets, and circuit breaker integration for resilient systems"
 date: 2026-05-04
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/retry-patterns.html
+url: https://aidev.fit/en/architecture/retry-patterns.html
 ---
 
 # Retry Patterns
@@ -57,6 +57,10 @@ Retries are a powerful tool, but they are not a substitute for addressing underl
 **See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 
 **See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 
 **See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 

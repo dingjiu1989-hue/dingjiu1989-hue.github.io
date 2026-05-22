@@ -3,7 +3,7 @@ title: "Compliance Automation"
 description: "Automating compliance with CIS benchmarks, automated scanning, reporting, and continuous monitoring."
 date: 2026-03-16
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/compliance-automation.html
+url: https://aidev.fit/en/security/compliance-automation.html
 ---
 
 # Compliance Automation
@@ -295,6 +295,10 @@ Automate compliance with CIS benchmark scanning, remediation, reporting, and mon
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>)
 
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>)
+
+**See also:** [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Data Classification](</en/security/data-classification.html>), [SBOM Management](</en/security/sbom-management.html>)
+
+**See also:** [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Data Classification](</en/security/data-classification.html>), [SBOM Management](</en/security/sbom-management.html>)
 
 **See also:** [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Data Classification](</en/security/data-classification.html>), [SBOM Management](</en/security/sbom-management.html>)
 

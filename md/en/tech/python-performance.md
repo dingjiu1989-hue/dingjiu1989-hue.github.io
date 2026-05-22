@@ -3,7 +3,7 @@ title: "Python Performance Optimization"
 description: "Explore Python performance: PyPy, Cython, Numba, async programming, profiling tools, and optimization strategies"
 date: 2026-01-12
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/python-performance.html
+url: https://aidev.fit/en/tech/python-performance.html
 ---
 
 # Python Performance Optimization
@@ -65,6 +65,10 @@ Python's performance is rarely a problem for applications that are designed corr
 **See also:** [Build Optimization](</en/tech/build-optimization.html>), [Node.js Performance Optimization Guide](</en/tech/nodejs-performance.html>), [Web Performance Optimization Techniques 2026](</en/tech/web-performance-optimization.html>)
 
 **See also:** [Build Optimization](</en/tech/build-optimization.html>), [Node.js Performance Optimization Guide](</en/tech/nodejs-performance.html>), [Web Performance Optimization Techniques 2026](</en/tech/web-performance-optimization.html>)
+
+**See also:** [Log Management](</en/tech/log-management.html>), [Performance Testing](</en/tech/performance-testing.html>), [Python Package Management: pip, Poetry, uv, Conda](</en/tech/python-package-management.html>)
+
+**See also:** [Log Management](</en/tech/log-management.html>), [Performance Testing](</en/tech/performance-testing.html>), [Python Package Management: pip, Poetry, uv, Conda](</en/tech/python-package-management.html>)
 
 **See also:** [Log Management](</en/tech/log-management.html>), [Performance Testing](</en/tech/performance-testing.html>), [Python Package Management: pip, Poetry, uv, Conda](</en/tech/python-package-management.html>)
 

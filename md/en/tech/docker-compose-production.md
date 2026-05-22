@@ -3,7 +3,7 @@ title: "Docker Compose for Production: Multi-Service Deployments Done Right"
 description: "Beyond docker-compose up: production-ready Compose files with health checks, resource limits, secrets management, logging drivers, and zero-downtime rolling updates. Compare with Swarm and Kubernetes."
 date: 2025-10-15
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/docker-compose-production.html
+url: https://aidev.fit/en/tech/docker-compose-production.html
 ---
 
 # Docker Compose for Production: Multi-Service Deployments Done Right

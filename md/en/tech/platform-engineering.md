@@ -3,7 +3,7 @@ title: "Platform Engineering"
 description: "Master platform engineering: Internal Developer Platforms, golden paths, developer experience, and building effective IDPs"
 date: 2026-01-11
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/platform-engineering.html
+url: https://aidev.fit/en/tech/platform-engineering.html
 ---
 
 # Platform Engineering
@@ -79,6 +79,10 @@ Platform engineering is a strategic investment in developer productivity and org
 **See also:** [Developer Portal](</en/tech/developer-portal.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [API Documentation](</en/tech/api-documentation.html>)
 
 **See also:** [Developer Portal](</en/tech/developer-portal.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [API Documentation](</en/tech/api-documentation.html>)
+
+**See also:** [Error Handling Patterns](</en/tech/error-handling-patterns.html>), [Metric Collection](</en/tech/metric-collection.html>), [Node.js Streams](</en/tech/nodejs-streams.html>)
+
+**See also:** [Error Handling Patterns](</en/tech/error-handling-patterns.html>), [Metric Collection](</en/tech/metric-collection.html>), [Node.js Streams](</en/tech/nodejs-streams.html>)
 
 **See also:** [Error Handling Patterns](</en/tech/error-handling-patterns.html>), [Metric Collection](</en/tech/metric-collection.html>), [Node.js Streams](</en/tech/nodejs-streams.html>)
 

@@ -3,7 +3,7 @@ title: "Health Check Patterns"
 description: "Liveness vs readiness probes, custom health checks, dependency health, graceful degradation, and production practices"
 date: 2026-04-27
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/health-check-patterns.html
+url: https://aidev.fit/en/architecture/health-check-patterns.html
 ---
 
 # Health Check Patterns
@@ -39,6 +39,10 @@ Platform-specific implementations vary. Kubernetes supports HTTP, TCP, and comma
 **See also:** [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
 
 **See also:** [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
 

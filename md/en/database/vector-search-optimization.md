@@ -3,7 +3,7 @@ title: "Vector Search Optimization Techniques"
 description: "Optimize vector search with HNSW tuning, quantization (PQ, scalar), IVF parameters, filtered search performance, and multi-vector indexing."
 date: 2026-03-29
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/vector-search-optimization.html
+url: https://aidev.fit/en/database/vector-search-optimization.html
 ---
 
 # Vector Search Optimization Techniques
@@ -79,6 +79,10 @@ Tune HNSW parameters for your data distribution. Use quantization to reduce memo
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
 
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
+
+**See also:** [Database Indexing Strategies](</en/database/database-indexing.html>), [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>)
+
+**See also:** [Database Indexing Strategies](</en/database/database-indexing.html>), [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>)
 
 **See also:** [Database Indexing Strategies](</en/database/database-indexing.html>), [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>)
 

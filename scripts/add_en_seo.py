@@ -9,7 +9,7 @@ ARTICLES_JSON = ROOT / 'articles.json'
 EN_ARTICLES_JSON = ROOT / 'en' / 'articles.json'
 SITEMAP = ROOT / 'sitemap.xml'
 TODAY = date.today().isoformat()
-BASE = 'https://dingjiu1989-hue.github.io'
+BASE = 'https://aidev.fit'
 
 # ── 1. Update sitemap.xml ──────────────────────────────────────────────
 

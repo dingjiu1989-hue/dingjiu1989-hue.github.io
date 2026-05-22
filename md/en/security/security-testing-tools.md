@@ -3,7 +3,7 @@ title: "Security Testing Tools: SAST, DAST, IAST, and RASP Compared"
 description: "Compare application security testing approaches: SAST, DAST, IAST, RASP tools and integration strategies."
 date: 2026-03-24
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/security-testing-tools.html
+url: https://aidev.fit/en/security/security-testing-tools.html
 ---
 
 # Security Testing Tools: SAST, DAST, IAST, and RASP Compared
@@ -45,6 +45,10 @@ Use SAST in the IDE for early feedback. Run SAST in CI/CD for every commit. Sche
 **See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>), [DNS Security](</en/security/dns-security.html>)
 
 **See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>), [DNS Security](</en/security/dns-security.html>)
+
+**See also:** [Secure Code Review](</en/security/secure-code-review.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>), [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>)
+
+**See also:** [Secure Code Review](</en/security/secure-code-review.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>), [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>)
 
 **See also:** [Secure Code Review](</en/security/secure-code-review.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>), [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>)
 

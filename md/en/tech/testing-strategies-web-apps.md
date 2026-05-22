@@ -3,7 +3,7 @@ title: "Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use
 description: "Stop guessing which tests to write. A practical guide to the testing trophy model — unit, integration, and e2e test strategies with real code examples."
 date: 2025-10-08
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/testing-strategies-web-apps.html
+url: https://aidev.fit/en/tech/testing-strategies-web-apps.html
 ---
 
 # Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each

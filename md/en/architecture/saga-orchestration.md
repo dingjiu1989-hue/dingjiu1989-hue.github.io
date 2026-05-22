@@ -3,7 +3,7 @@ title: "Saga Orchestration Pattern"
 description: "Coordinator pattern for distributed transactions, compensation strategies, state machines, and Temporal workflows"
 date: 2026-04-29
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/saga-orchestration.html
+url: https://aidev.fit/en/architecture/saga-orchestration.html
 ---
 
 # Saga Orchestration Pattern
@@ -39,6 +39,10 @@ Saga orchestration is the preferred pattern when workflows involve many particip
 **See also:** [Orchestration Patterns](</en/architecture/orchestration-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
 
 **See also:** [Orchestration Patterns](</en/architecture/orchestration-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)
 

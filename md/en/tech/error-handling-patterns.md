@@ -3,7 +3,7 @@ title: "Error Handling Patterns"
 description: "Master error handling patterns: Result types, exceptions, error boundaries, resilience strategies, and recovery approaches"
 date: 2026-01-07
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/error-handling-patterns.html
+url: https://aidev.fit/en/tech/error-handling-patterns.html
 ---
 
 # Error Handling Patterns
@@ -67,6 +67,10 @@ The most robust error handling strategies combine multiple patterns. Use Result 
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>)
 
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>)
+
+**See also:** [React Server Components](</en/tech/react-server-components.html>), [Testing Strategies](</en/tech/testing-strategies.html>), [API Versioning Strategies: REST vs GraphQL Approaches](</en/tech/api-versioning-rest-graphql.html>)
+
+**See also:** [React Server Components](</en/tech/react-server-components.html>), [Testing Strategies](</en/tech/testing-strategies.html>), [API Versioning Strategies: REST vs GraphQL Approaches](</en/tech/api-versioning-rest-graphql.html>)
 
 **See also:** [React Server Components](</en/tech/react-server-components.html>), [Testing Strategies](</en/tech/testing-strategies.html>), [API Versioning Strategies: REST vs GraphQL Approaches](</en/tech/api-versioning-rest-graphql.html>)
 

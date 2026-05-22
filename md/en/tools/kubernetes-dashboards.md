@@ -3,7 +3,7 @@ title: "Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compare
 description: "Comparative guide to Kubernetes UI dashboards covering Lens, Octant, K9s, OpenLens, and Headlamp with features, installation methods, and workflow integration."
 date: 2026-01-30
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/kubernetes-dashboards.html
+url: https://aidev.fit/en/tools/kubernetes-dashboards.html
 ---
 
 # Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared
@@ -135,6 +135,10 @@ Kubernetes dashboards are not one-size-fits-all tools. Lens and OpenLens provide
 **See also:** [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>)
 
 **See also:** [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>)
+
+**See also:** [CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics](</en/tools/ci-cd-observability.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
+
+**See also:** [CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics](</en/tools/ci-cd-observability.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
 
 **See also:** [CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics](</en/tools/ci-cd-observability.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
 

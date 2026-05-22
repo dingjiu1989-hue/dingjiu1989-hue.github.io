@@ -3,7 +3,7 @@ title: "Solo Developer Productivity: Time Management, Automation, Outsourcing, a
 description: "Maximize productivity as a solo developer: time management techniques, automation strategies, smart outsourcing, and ruthless scope control."
 date: 2026-01-20
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/solo-dev-productivity.html
+url: https://aidev.fit/en/sidehustle/solo-dev-productivity.html
 ---
 
 # Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control
@@ -75,6 +75,10 @@ The solo developer advantage is autonomy. Use it wisely. Build systems that prot
 **See also:** [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>)
 
 **See also:** [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>)
+
+**See also:** [LinkedIn Personal Brand for Technical Founders](</en/sidehustle/linkedin-personal-brand.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>)
+
+**See also:** [LinkedIn Personal Brand for Technical Founders](</en/sidehustle/linkedin-personal-brand.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>)
 
 **See also:** [LinkedIn Personal Brand for Technical Founders](</en/sidehustle/linkedin-personal-brand.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>), [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>)
 

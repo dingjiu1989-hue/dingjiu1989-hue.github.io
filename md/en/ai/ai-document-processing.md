@@ -3,7 +3,7 @@ title: "AI Document Processing"
 description: "Build AI-powered document processing pipelines for extraction, classification, summarization, and data entry from PDFs, images, and scanned documents."
 date: 2025-12-11
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-document-processing.html
+url: https://aidev.fit/en/ai/ai-document-processing.html
 ---
 
 # AI Document Processing
@@ -324,6 +324,10 @@ AI document processing transforms document-heavy workflows from hours of manual 
 **See also:** [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>)
 
 **See also:** [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>)
+
+**See also:** [Multimodal AI Applications in 2026](</en/ai/multimodal-ai.html>), [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>)
+
+**See also:** [Multimodal AI Applications in 2026](</en/ai/multimodal-ai.html>), [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>)
 
 **See also:** [Multimodal AI Applications in 2026](</en/ai/multimodal-ai.html>), [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>)
 

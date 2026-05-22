@@ -3,7 +3,7 @@ title: "Database Schema Migration: Version Control, Rollback, and Zero-Downtime"
 description: "Database migration strategies for production: version-controlled schemas, rollback planning, and zero-downtime deploys."
 date: 2026-04-16
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-schema-migration-strategies.html
+url: https://aidev.fit/en/database/database-schema-migration-strategies.html
 ---
 
 # Database Schema Migration: Version Control, Rollback, and Zero-Downtime
@@ -49,6 +49,10 @@ Review migration SQL for locking behavior. Check disk space—ALTER TABLE can do
 **See also:** [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Migration Strategies](</en/database/database-migration-strategies.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
 
 **See also:** [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Migration Strategies](</en/database/database-migration-strategies.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Scalability](</en/database/database-scalability.html>)
+
+**See also:** [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Scalability](</en/database/database-scalability.html>)
 
 **See also:** [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Scalability](</en/database/database-scalability.html>)
 

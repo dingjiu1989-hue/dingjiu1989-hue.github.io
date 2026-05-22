@@ -3,7 +3,7 @@ title: "Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, an
 description: "Technical exploration of advanced Git features covering interactive rebase, git bisect for debugging, worktree management, submodule strategies, and hook automation."
 date: 2026-01-29
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/git-advanced-tools.html
+url: https://aidev.fit/en/tools/git-advanced-tools.html
 ---
 
 # Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks
@@ -195,6 +195,10 @@ Advanced Git tools significantly improve development workflows. Interactive reba
 **See also:** [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>)
 
 **See also:** [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>)
+
+**See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>)
+
+**See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>)
 
 **See also:** [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>)
 

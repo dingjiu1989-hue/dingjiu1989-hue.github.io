@@ -3,7 +3,7 @@ title: "Incident Response Plan"
 description: "Building an incident response plan using the NIST framework with tabletop exercises and communication strategies."
 date: 2026-03-18
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/incident-response-plan.html
+url: https://aidev.fit/en/security/incident-response-plan.html
 ---
 
 # Incident Response Plan
@@ -237,6 +237,10 @@ A well-rehearsed incident response plan reduces breach impact by 50% or more. In
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Endpoint Security](</en/security/endpoint-security.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Endpoint Security](</en/security/endpoint-security.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>)
+
+**See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [Security Awareness Training](</en/security/security-awareness.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>)
+
+**See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [Security Awareness Training](</en/security/security-awareness.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>)
 
 **See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [Security Awareness Training](</en/security/security-awareness.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>)
 

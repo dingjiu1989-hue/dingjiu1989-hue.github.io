@@ -3,7 +3,7 @@ title: "Data Modeling Best Practices"
 description: "Learn data modeling best practices including entity-relationship diagrams, normalization, patterns for SQL and NoSQL, and schema design."
 date: 2025-12-22
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/data-modeling.html
+url: https://aidev.fit/en/database/data-modeling.html
 ---
 
 # Data Modeling Best Practices
@@ -84,6 +84,10 @@ Start with 3NF for data integrity. Denormalize for performance when needed. For 
 **See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>)
 
 **See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>)
+
+**See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Data Consistency Models Explained](</en/database/data-consistency-models.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)
+
+**See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Data Consistency Models Explained](</en/database/data-consistency-models.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)
 
 **See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Data Consistency Models Explained](</en/database/data-consistency-models.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)
 

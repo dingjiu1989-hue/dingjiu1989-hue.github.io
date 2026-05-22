@@ -3,7 +3,7 @@ title: "Security Log Management"
 description: "Best practices for security log management including centralized logging, SIEM integration, log retention, and audit trail implementation."
 date: 2025-12-18
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/log-management-security.html
+url: https://aidev.fit/en/security/log-management-security.html
 ---
 
 # Security Log Management
@@ -324,6 +324,10 @@ Implement structured JSON logging for all security-relevant events, centralize l
 **See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Container Security Best Practices](</en/security/container-security.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
 
 **See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Container Security Best Practices](</en/security/container-security.html>), [Secrets Management for Developers](</en/security/secrets-management.html>)
+
+**See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
+
+**See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
 
 **See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
 

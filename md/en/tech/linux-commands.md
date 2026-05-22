@@ -3,7 +3,7 @@ title: "Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know"
 description: "A practical Linux command reference organized by task — file operations, process management, networking, permissions, and text processing. Bookmark this."
 date: 2025-10-03
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/linux-commands.html
+url: https://aidev.fit/en/tech/linux-commands.html
 ---
 
 # Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know

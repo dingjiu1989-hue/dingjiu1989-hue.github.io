@@ -3,7 +3,7 @@ title: "Multi-Tenancy Architecture"
 description: "Isolation levels, database per tenant, schema per tenant, shared database, routing, and pricing models"
 date: 2026-04-29
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/multi-tenancy.html
+url: https://aidev.fit/en/architecture/multi-tenancy.html
 ---
 
 # Multi-Tenancy Architecture
@@ -39,6 +39,10 @@ Migrating between isolation levels is a common lifecycle pattern. Startups often
 **See also:** [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)
 
 **See also:** [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)
 
 **See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Distributed ID Generation](</en/architecture/distributed-id.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)
 

@@ -3,7 +3,7 @@ title: "Redis Caching Patterns"
 description: "Redis caching patterns including cache-aside, read-through, write-through, and cache invalidation strategies."
 date: 2026-04-13
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/redis-caching-patterns.html
+url: https://aidev.fit/en/database/redis-caching-patterns.html
 ---
 
 # Redis Caching Patterns
@@ -93,6 +93,10 @@ Use cache-aside as the default pattern. Always set TTLs to prevent memory exhaus
 **See also:** [Database Caching](</en/database/database-caching.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Scalability](</en/database/database-scalability.html>)
 
 **See also:** [Database Caching](</en/database/database-caching.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Scalability](</en/database/database-scalability.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>)
 
 **See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>)
 

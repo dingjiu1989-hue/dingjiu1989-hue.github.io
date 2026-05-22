@@ -3,7 +3,7 @@ title: "Open Source Business Models: Sponsorship, Dual License, Hosted"
 description: "Monetize open source projects with sponsorship, dual licensing, hosted versions, and sustainable business models."
 date: 2026-01-22
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/open-source-business.html
+url: https://aidev.fit/en/sidehustle/open-source-business.html
 ---
 
 # Open Source Business Models: Sponsorship, Dual License, Hosted
@@ -63,6 +63,10 @@ Building a sustainable open source business requires aligning your monetization 
 **See also:** [Newsletter Monetization: From Zero to Revenue](</en/sidehustle/newsletter-monetization.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>)
 
 **See also:** [Newsletter Monetization: From Zero to Revenue](</en/sidehustle/newsletter-monetization.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>)
+
+**See also:** [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [Email Marketing for Developers: Mailchimp, ConvertKit, Automation](</en/sidehustle/email-marketing-dev.html>), [SaaS Exit Strategies: Acquisition, IPO, Lifestyle, Acqui-Hire](</en/sidehustle/exit-strategies.html>)
+
+**See also:** [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [Email Marketing for Developers: Mailchimp, ConvertKit, Automation](</en/sidehustle/email-marketing-dev.html>), [SaaS Exit Strategies: Acquisition, IPO, Lifestyle, Acqui-Hire](</en/sidehustle/exit-strategies.html>)
 
 **See also:** [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [Email Marketing for Developers: Mailchimp, ConvertKit, Automation](</en/sidehustle/email-marketing-dev.html>), [SaaS Exit Strategies: Acquisition, IPO, Lifestyle, Acqui-Hire](</en/sidehustle/exit-strategies.html>)
 

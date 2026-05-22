@@ -3,7 +3,7 @@ title: "Best Web Performance Tools 2026: Lighthouse vs WebPageTest vs Sentry vs 
 description: "Compare tools for Core Web Vitals monitoring, synthetic testing, RUM, and error tracking. Build a complete performance monitoring stack for your web app."
 date: 2025-10-28
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-web-performance-tools.html
+url: https://aidev.fit/en/tools/best-web-performance-tools.html
 ---
 
 # Best Web Performance Tools 2026: Lighthouse vs WebPageTest vs Sentry vs Checkly

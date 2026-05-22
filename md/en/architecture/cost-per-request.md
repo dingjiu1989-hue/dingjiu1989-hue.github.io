@@ -3,7 +3,7 @@ title: "Cost Per Request Modeling"
 description: "Compute, storage, network, database per-request cost modeling, and optimization strategies"
 date: 2026-04-22
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/cost-per-request.html
+url: https://aidev.fit/en/architecture/cost-per-request.html
 ---
 
 # Cost Per Request Modeling
@@ -39,6 +39,10 @@ Right-sizing infrastructure is the fundamental cost optimization. Over-provision
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
 
 **See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
 

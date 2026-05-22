@@ -3,7 +3,7 @@ title: "AI Daily Digest — May 20, 2026: Gemini 3.5 Flash Agents, Alexa Shoppin
 description: "Top 10 AI news: Google Gemini 3.5 Flash bets on agents, Gmail voice control, Genie simulates real streets, Amazon Alexa for Shopping launches, Musk trial reveal"
 date: 2026-05-20
 board: daily
-url: https://dingjiu1989-hue.github.io/en/daily/ai-daily-news-2026-05-20.html
+url: https://aidev.fit/en/daily/ai-daily-news-2026-05-20.html
 ---
 
 # AI Daily Digest — May 20, 2026: Gemini 3.5 Flash Agents, Alexa Shopping, Genie Street View
@@ -85,5 +85,9 @@ _AI Daily Digest is compiled from trusted technology news sources. For correctio
 **See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)
 
 **See also:** [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>)
+
+**See also:** [Supabase vs Firebase](</en/compare/supabase-vs-firebase.html>), [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>)
+
+**See also:** [Supabase vs Firebase](</en/compare/supabase-vs-firebase.html>), [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>)
 
 **See also:** [Supabase vs Firebase](</en/compare/supabase-vs-firebase.html>), [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>)

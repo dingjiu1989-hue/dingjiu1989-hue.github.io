@@ -3,7 +3,7 @@ title: "Infrastructure Testing with Terratest and Other Tools"
 description: "Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources, compliance validation, and CI pipeline automation."
 date: 2025-12-31
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/infrastructure-testing.html
+url: https://aidev.fit/en/tech/infrastructure-testing.html
 ---
 
 # Infrastructure Testing with Terratest and Other Tools
@@ -390,6 +390,10 @@ A comprehensive infrastructure testing strategy combines static analysis for fas
 **See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
 
 **See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
+
+**See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Testing Strategies](</en/tech/testing-strategies.html>)
+
+**See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Testing Strategies](</en/tech/testing-strategies.html>)
 
 **See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Testing Strategies](</en/tech/testing-strategies.html>)
 

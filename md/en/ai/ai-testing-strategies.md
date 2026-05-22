@@ -3,7 +3,7 @@ title: "Testing Strategies for AI Applications"
 description: "Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucination detection, prompt testing, and performance benchmarking."
 date: 2026-02-10
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-testing-strategies.html
+url: https://aidev.fit/en/ai/ai-testing-strategies.html
 ---
 
 # Testing Strategies for AI Applications
@@ -597,6 +597,10 @@ A mature AI testing pipeline runs golden set regression on every PR, A/B evaluat
 **See also:** [Responsible AI Development Practices](</en/ai/responsible-ai.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
 
 **See also:** [Responsible AI Development Practices](</en/ai/responsible-ai.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
+
+**See also:** [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Multimodal AI Applications in 2026](</en/ai/multimodal-ai.html>)
+
+**See also:** [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Multimodal AI Applications in 2026](</en/ai/multimodal-ai.html>)
 
 **See also:** [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Multimodal AI Applications in 2026](</en/ai/multimodal-ai.html>)
 

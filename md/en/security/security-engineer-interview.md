@@ -3,7 +3,7 @@ title: "Security Engineer Interview"
 description: "Key topics, system design questions, and practical exercises for security engineer interviews."
 date: 2026-03-19
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/security-engineer-interview.html
+url: https://aidev.fit/en/security/security-engineer-interview.html
 ---
 
 # Security Engineer Interview
@@ -218,6 +218,10 @@ Study these areas in depth: OWASP Top 10, cloud security (AWS/GCP/Azure), networ
 **See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Microservice Security](</en/security/microservice-security.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
 
 **See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [Microservice Security](</en/security/microservice-security.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
+
+**See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)
 
 **See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)
 

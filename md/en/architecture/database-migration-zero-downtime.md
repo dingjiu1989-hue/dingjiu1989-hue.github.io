@@ -3,7 +3,7 @@ title: "Zero-Downtime Database Migrations"
 description: "Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and production practices"
 date: 2026-04-23
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/database-migration-zero-downtime.html
+url: https://aidev.fit/en/architecture/database-migration-zero-downtime.html
 ---
 
 # Zero-Downtime Database Migrations
@@ -43,6 +43,10 @@ Testing migrations against production data volume is essential. Synthetic migrat
 **See also:** [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>)
 
 **See also:** [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
 
 **See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
 

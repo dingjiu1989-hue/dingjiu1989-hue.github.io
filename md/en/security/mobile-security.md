@@ -3,7 +3,7 @@ title: "Mobile Application Security Guide"
 description: "Mobile app security covering OWASP Mobile Top 10, code obfuscation, certificate pinning, secure storage, and runtime protection."
 date: 2026-03-04
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/mobile-security.html
+url: https://aidev.fit/en/security/mobile-security.html
 ---
 
 # Mobile Application Security Guide
@@ -405,6 +405,10 @@ Mobile security requires defense in depth. Obfuscate your code to slow down reve
 **See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
 
 **See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
+
+**See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Secure Software Development Lifecycle](</en/security/secure-sdlc.html>)
+
+**See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Secure Software Development Lifecycle](</en/security/secure-sdlc.html>)
 
 **See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Secure Software Development Lifecycle](</en/security/secure-sdlc.html>)
 

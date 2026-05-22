@@ -3,7 +3,7 @@ title: "TypeScript vs JavaScript in 2026: Is JavaScript Still Worth Using?"
 description: "Honest comparison of TypeScript and JavaScript for modern web development. Type safety, developer experience, performance, ecosystem, and when plain JS still makes sense."
 date: 2026-05-19
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/typescript-vs-javascript.html
+url: https://aidev.fit/en/compare/typescript-vs-javascript.html
 ---
 
 # TypeScript vs JavaScript in 2026: Is JavaScript Still Worth Using?

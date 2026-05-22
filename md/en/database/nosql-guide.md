@@ -3,7 +3,7 @@ title: "NoSQL Databases Guide"
 description: "A guide to NoSQL database types: document, key-value, wide-column, graph, and time-series with use cases."
 date: 2026-04-10
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/nosql-guide.html
+url: https://aidev.fit/en/database/nosql-guide.html
 ---
 
 # NoSQL Databases Guide
@@ -75,6 +75,10 @@ Match the NoSQL type to your data model. Document for nested data, key-value for
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
 
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
+
+**See also:** [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>)
+
+**See also:** [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>)
 
 **See also:** [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>)
 

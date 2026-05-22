@@ -3,7 +3,7 @@ title: "Orchestration Patterns"
 description: "Explore orchestration patterns: workflow engines, Temporal, state machines, and centralized workflow coordination"
 date: 2026-05-04
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/orchestration-patterns.html
+url: https://aidev.fit/en/architecture/orchestration-patterns.html
 ---
 
 # Orchestration Patterns
@@ -59,6 +59,10 @@ In practice, many organizations use a hybrid approach: orchestration for complex
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
 

@@ -3,7 +3,7 @@ title: "Cloud Security Posture Management"
 description: "Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift detection, and remediation across cloud environments."
 date: 2026-03-08
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/cloud-security-posture.html
+url: https://aidev.fit/en/security/cloud-security-posture.html
 ---
 
 # Cloud Security Posture Management
@@ -371,6 +371,10 @@ CSPM is essential for maintaining secure cloud configurations at scale. Deploy C
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Certificate Management](</en/security/certificate-management.html>), [Secure Configuration Management](</en/security/secure-configuration.html>)
 
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Certificate Management](</en/security/certificate-management.html>), [Secure Configuration Management](</en/security/secure-configuration.html>)
+
+**See also:** [Audit Logging Best Practices](</en/security/audit-logging.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Container Image Security](</en/security/container-image-security.html>)
+
+**See also:** [Audit Logging Best Practices](</en/security/audit-logging.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Container Image Security](</en/security/container-image-security.html>)
 
 **See also:** [Audit Logging Best Practices](</en/security/audit-logging.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Container Image Security](</en/security/container-image-security.html>)
 

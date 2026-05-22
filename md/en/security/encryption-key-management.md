@@ -3,7 +3,7 @@ title: "Encryption Key Management Best Practices"
 description: "Encryption key management: key lifecycle, HSM, KMS, key rotation, and secure key storage for production systems."
 date: 2026-03-23
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/encryption-key-management.html
+url: https://aidev.fit/en/security/encryption-key-management.html
 ---
 
 # Encryption Key Management Best Practices
@@ -55,6 +55,10 @@ Log all key management operations: creation, rotation, revocation, and access. C
 **See also:** [Key Management Systems](</en/security/key-management.html>), [Session Management Security](</en/security/session-management.html>), [Database Encryption](</en/security/database-encryption.html>)
 
 **See also:** [Key Management Systems](</en/security/key-management.html>), [Session Management Security](</en/security/session-management.html>), [Database Encryption](</en/security/database-encryption.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure Configuration Management](</en/security/secure-configuration.html>), [GDPR Technical Controls](</en/security/gdpr-technical.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure Configuration Management](</en/security/secure-configuration.html>), [GDPR Technical Controls](</en/security/gdpr-technical.html>)
 
 **See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure Configuration Management](</en/security/secure-configuration.html>), [GDPR Technical Controls](</en/security/gdpr-technical.html>)
 

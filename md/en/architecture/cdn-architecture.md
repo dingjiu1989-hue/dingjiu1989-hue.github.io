@@ -3,7 +3,7 @@ title: "CDN Architecture"
 description: "Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content delivery networks"
 date: 2026-04-22
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/cdn-architecture.html
+url: https://aidev.fit/en/architecture/cdn-architecture.html
 ---
 
 # CDN Architecture
@@ -41,6 +41,10 @@ Performance monitoring includes cache hit ratio, time to first byte (TTFB), and 
 **See also:** [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 
 **See also:** [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 

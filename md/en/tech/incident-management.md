@@ -3,7 +3,7 @@ title: "Incident Management: Severity Levels, Response Process, and Postmortems"
 description: "Practical guide to incident management covering severity classification, response processes, communication templates, and blameless postmortem culture."
 date: 2026-01-02
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/incident-management.html
+url: https://aidev.fit/en/tech/incident-management.html
 ---
 
 # Incident Management: Severity Levels, Response Process, and Postmortems
@@ -92,6 +92,10 @@ Incident management is a discipline requiring preparation, practice, and continu
 **See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>)
 
 **See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>)
+
+**See also:** [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Node.js Performance Optimization Guide](</en/tech/nodejs-performance.html>)
+
+**See also:** [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Node.js Performance Optimization Guide](</en/tech/nodejs-performance.html>)
 
 **See also:** [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Node.js Performance Optimization Guide](</en/tech/nodejs-performance.html>)
 

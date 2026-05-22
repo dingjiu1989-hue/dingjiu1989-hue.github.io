@@ -3,7 +3,7 @@ title: "SaaS Analytics Setup: PostHog, Plausible, and Umami"
 description: "Set up SaaS analytics with self-hosted PostHog, Plausible, and Umami for product insights and user behavior tracking."
 date: 2026-01-22
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-analytics-setup.html
+url: https://aidev.fit/en/sidehustle/saas-analytics-setup.html
 ---
 
 # SaaS Analytics Setup: PostHog, Plausible, and Umami
@@ -71,6 +71,10 @@ Privacy-focused analytics tools provide better performance, data ownership, and 
 **See also:** [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
 
 **See also:** [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
+
+**See also:** [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>)
+
+**See also:** [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>)
 
 **See also:** [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>)
 

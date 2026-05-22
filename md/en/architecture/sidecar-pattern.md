@@ -3,7 +3,7 @@ title: "Sidecar Pattern in Microservices Architecture"
 description: "Learn the sidecar pattern for microservices: how to deploy helper components alongside your main service without tight coupling."
 date: 2026-05-10
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/sidecar-pattern.html
+url: https://aidev.fit/en/architecture/sidecar-pattern.html
 ---
 
 # Sidecar Pattern in Microservices Architecture
@@ -43,6 +43,10 @@ Use the sidecar pattern for genuinely cross-cutting concerns that apply to most 
 **See also:** [Ambassador Pattern for Service Communication](</en/architecture/ambassador-pattern.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Contract Testing for Microservices](</en/architecture/contract-testing.html>)
 
 **See also:** [Ambassador Pattern for Service Communication](</en/architecture/ambassador-pattern.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Contract Testing for Microservices](</en/architecture/contract-testing.html>)
+
+**See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Claim Check Pattern](</en/architecture/claim-check.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>)
+
+**See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Claim Check Pattern](</en/architecture/claim-check.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>)
 
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Claim Check Pattern](</en/architecture/claim-check.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>)
 

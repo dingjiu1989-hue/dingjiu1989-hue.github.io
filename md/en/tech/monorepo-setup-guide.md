@@ -3,7 +3,7 @@ title: "Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes"
 description: "Set up a production-ready monorepo with shared packages, TypeScript configs, and parallel builds. Step-by-step from scratch with Turborepo best practices."
 date: 2025-10-09
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/monorepo-setup-guide.html
+url: https://aidev.fit/en/tech/monorepo-setup-guide.html
 ---
 
 # Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes

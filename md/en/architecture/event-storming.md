@@ -3,7 +3,7 @@ title: "Event Storming"
 description: "Learn event storming: big picture, process modeling, and design workshop techniques for domain exploration"
 date: 2026-05-04
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/event-storming.html
+url: https://aidev.fit/en/architecture/event-storming.html
 ---
 
 # Event Storming
@@ -59,6 +59,10 @@ Event Storming produces several valuable outcomes: a shared understanding of the
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)
+
+**See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
+
+**See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
 
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
 

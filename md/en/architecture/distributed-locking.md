@@ -3,7 +3,7 @@ title: "Distributed Locking Mechanisms"
 description: "Redis Redlock, ZooKeeper locks, lease mechanisms, fencing tokens, and consensus-based distributed locking patterns"
 date: 2026-04-23
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/distributed-locking.html
+url: https://aidev.fit/en/architecture/distributed-locking.html
 ---
 
 # Distributed Locking Mechanisms
@@ -39,6 +39,10 @@ Optimistic concurrency is an alternative worth considering. Rather than acquirin
 **See also:** [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)
 
 **See also:** [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
 
 **See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
 

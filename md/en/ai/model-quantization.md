@@ -3,7 +3,7 @@ title: "Model Quantization: Making LLMs Smaller and Faster"
 description: "Quantize LLMs for efficient deployment: GPTQ, AWQ, bitsandbytes, and GGUF for running models on consumer hardware."
 date: 2026-02-20
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/model-quantization.html
+url: https://aidev.fit/en/ai/model-quantization.html
 ---
 
 # Model Quantization: Making LLMs Smaller and Faster
@@ -51,6 +51,10 @@ Use INT4 quantization for memory-constrained environments (consumer GPUs with 8-
 **See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>)
 
 **See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>)
+
+**See also:** [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>), [Prompt Engineering Guide for LLMs](</en/ai/prompt-engineering-guide.html>)
+
+**See also:** [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>), [Prompt Engineering Guide for LLMs](</en/ai/prompt-engineering-guide.html>)
 
 **See also:** [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>), [Prompt Engineering Guide for LLMs](</en/ai/prompt-engineering-guide.html>)
 

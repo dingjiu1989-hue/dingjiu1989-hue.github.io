@@ -3,7 +3,7 @@ title: "MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI 
 description: "How MCP works, architecture deep-dive, building MCP servers and clients, and why it is the USB-C moment for AI integrations — with full code examples."
 date: 2025-12-10
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/mcp-complete-guide.html
+url: https://aidev.fit/en/ai/mcp-complete-guide.html
 ---
 
 # MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools
@@ -750,6 +750,10 @@ MCP is to AI integrations what HTTP is to web APIs — a universal standard that
 **See also:** [Building AI-Powered CLI Tools: A Complete Guide for Developers](</en/tools/ai-cli-tools-guide.html>), [LLM Function Calling: Complete Developer Guide with Code Examples](</en/ai/function-calling-guide.html>), [How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide](</en/ai/run-local-ai-models.html>)
 
 **See also:** [Building AI-Powered CLI Tools: A Complete Guide for Developers](</en/tools/ai-cli-tools-guide.html>), [LLM Function Calling: Complete Developer Guide with Code Examples](</en/ai/function-calling-guide.html>), [How to Run AI Models Locally: Ollama, LM Studio, and llama.cpp Guide](</en/ai/run-local-ai-models.html>)
+
+**See also:** [RAG Best Practices 2026: Building Production-Ready Retrieval Systems](</en/ai/rag-best-practices.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>)
+
+**See also:** [RAG Best Practices 2026: Building Production-Ready Retrieval Systems](</en/ai/rag-best-practices.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>)
 
 **See also:** [RAG Best Practices 2026: Building Production-Ready Retrieval Systems](</en/ai/rag-best-practices.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>)
 

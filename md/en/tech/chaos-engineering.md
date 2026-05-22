@@ -3,7 +3,7 @@ title: "Chaos Engineering: Principles and Practical Tools"
 description: "Learn chaos engineering principles with Chaos Monkey, LitmusChaos, and Gremlin, covering steady-state hypotheses, blast radius control, and game day planning."
 date: 2025-12-30
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/chaos-engineering.html
+url: https://aidev.fit/en/tech/chaos-engineering.html
 ---
 
 # Chaos Engineering: Principles and Practical Tools
@@ -446,6 +446,10 @@ Chaos engineering transforms the way teams think about reliability. Instead of h
 **See also:** [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
 
 **See also:** [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
+
+**See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>)
+
+**See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>)
 
 **See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>)
 

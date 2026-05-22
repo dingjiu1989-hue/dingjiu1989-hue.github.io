@@ -3,7 +3,7 @@ title: "Shell Frameworks: zsh, fish, bash Customization"
 description: "Compare shell frameworks and prompt tools: Oh My Zsh, Starship, fish shell, and Powerlevel10k for productivity."
 date: 2026-02-09
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/shell-frameworks.html
+url: https://aidev.fit/en/tools/shell-frameworks.html
 ---
 
 # Shell Frameworks: zsh, fish, bash Customization
@@ -49,6 +49,10 @@ Use Oh My Zsh + Powerlevel10k for maximum Zsh customization and speed. Use Stars
 **See also:** [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>)
 
 **See also:** [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
+
+**See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
 
 **See also:** [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Documentation Tools for Developers 2026](</en/tools/documentation-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
 

@@ -3,7 +3,7 @@ title: "Git Commands Cheat Sheet: The Only Reference You Need"
 description: "A comprehensive Git cheat sheet covering branches, undo operations, staging, commits, and remote collaboration. Bookmark this for quick lookups."
 date: 2025-10-01
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/git-cheatsheet.html
+url: https://aidev.fit/en/tech/git-cheatsheet.html
 ---
 
 # Git Commands Cheat Sheet: The Only Reference You Need

@@ -3,7 +3,7 @@ title: "Bug Bounty Guide"
 description: "Practical guide to bug bounty hunting including vulnerability discovery techniques, report writing, and platform-specific tips for HackerOne and Bugcrowd."
 date: 2026-03-06
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/bug-bounty.html
+url: https://aidev.fit/en/security/bug-bounty.html
 ---
 
 # Bug Bounty Guide
@@ -229,6 +229,10 @@ Bug bounty hunting combines technical skill, persistence, and communication. Inv
 **See also:** [SOC Operations](</en/security/soc-operations.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Certificate Management](</en/security/certificate-management.html>)
 
 **See also:** [SOC Operations](</en/security/soc-operations.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [DNS Security](</en/security/dns-security.html>), [Input Validation Deep Dive](</en/security/input-validation.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>)
+
+**See also:** [DNS Security](</en/security/dns-security.html>), [Input Validation Deep Dive](</en/security/input-validation.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>)
 
 **See also:** [DNS Security](</en/security/dns-security.html>), [Input Validation Deep Dive](</en/security/input-validation.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>)
 

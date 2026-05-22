@@ -3,7 +3,7 @@ title: "API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026"
 description: "Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, Hoppscotch for lightweight web-based testing, Postman for co"
 date: 2026-01-30
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/api-testing-2026.html
+url: https://aidev.fit/en/tools/api-testing-2026.html
 ---
 
 # API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
@@ -330,6 +330,10 @@ The trend is toward local-first, git-integrated tools. Bruno represents this new
 **See also:** [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>)
 
 **See also:** [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>)
+
+**See also:** [Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop](</en/tools/git-gui-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
+
+**See also:** [Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop](</en/tools/git-gui-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
 
 **See also:** [Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop](</en/tools/git-gui-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
 

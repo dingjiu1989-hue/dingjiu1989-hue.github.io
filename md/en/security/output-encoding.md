@@ -3,7 +3,7 @@ title: "Output Encoding"
 description: "Guide to output encoding covering context-sensitive encoding, XSS prevention, template engine auto-escaping, and common encoding pitfalls."
 date: 2026-03-12
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/output-encoding.html
+url: https://aidev.fit/en/security/output-encoding.html
 ---
 
 # Output Encoding
@@ -69,6 +69,10 @@ Data inserted into JavaScript requires JSON encoding or hex entity encoding. Nev
 **See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [CORS Security](</en/security/cors-security.html>), [Session Management Security](</en/security/session-management.html>)
 
 **See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [CORS Security](</en/security/cors-security.html>), [Session Management Security](</en/security/session-management.html>)
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
 
 **See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
 

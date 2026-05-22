@@ -3,7 +3,7 @@ title: "Building an AI Customer Service Chatbot: Complete Technical Guide (2026)
 description: "Step-by-step guide to building an AI chatbot with RAG, function calling, and multi-turn conversation handling for customer support."
 date: 2025-11-11
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-chatbot-build-guide.html
+url: https://aidev.fit/en/ai/ai-chatbot-build-guide.html
 ---
 
 # Building an AI Customer Service Chatbot: Complete Technical Guide (2026)

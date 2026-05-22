@@ -3,7 +3,7 @@ title: "AI Agents: Architecture and Implementation"
 description: "Design and build AI agents: tool use, planning, memory, and multi-agent coordination for autonomous task completion."
 date: 2026-02-19
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-agents-overview.html
+url: https://aidev.fit/en/ai/ai-agents-overview.html
 ---
 
 # AI Agents: Architecture and Implementation
@@ -49,6 +49,10 @@ Implement guardrails for agent actions. Validate tool arguments before execution
 **See also:** [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>), [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection](</en/ai/agent-planning.html>)
 
 **See also:** [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>), [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection](</en/ai/agent-planning.html>)
+
+**See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>)
+
+**See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>)
 
 **See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>)
 

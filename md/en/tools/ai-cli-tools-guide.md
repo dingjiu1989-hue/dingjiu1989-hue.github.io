@@ -3,7 +3,7 @@ title: "Building AI-Powered CLI Tools: A Complete Guide for Developers"
 description: "How to build command-line tools that leverage LLMs — from simple wrappers to intelligent agents that automate workflows, with Python and Node.js examples."
 date: 2025-12-09
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/ai-cli-tools-guide.html
+url: https://aidev.fit/en/tools/ai-cli-tools-guide.html
 ---
 
 # Building AI-Powered CLI Tools: A Complete Guide for Developers
@@ -1009,6 +1009,10 @@ See also: [Click vs Typer vs argparse](<>), [Best Terminal Emulators 2026](<>), 
 **See also:** [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>), [AI for DevOps in 2026: Best Tools and Practical Use Cases](</en/ai/ai-devops-tools.html>)
 
 **See also:** [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>), [AI for DevOps in 2026: Best Tools and Practical Use Cases](</en/ai/ai-devops-tools.html>)
+
+**See also:** [Best Job Scheduling and Cron Tools 2026: Inngest vs Trigger.dev vs QStash vs Airflow](</en/tools/best-scheduling-cron-tools.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [Best Git GUI Clients 2026: GitKraken vs Sourcetree vs Fork vs GitFiend](</en/tools/best-git-gui-clients.html>)
+
+**See also:** [Best Job Scheduling and Cron Tools 2026: Inngest vs Trigger.dev vs QStash vs Airflow](</en/tools/best-scheduling-cron-tools.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [Best Git GUI Clients 2026: GitKraken vs Sourcetree vs Fork vs GitFiend](</en/tools/best-git-gui-clients.html>)
 
 **See also:** [Best Job Scheduling and Cron Tools 2026: Inngest vs Trigger.dev vs QStash vs Airflow](</en/tools/best-scheduling-cron-tools.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>), [Best Git GUI Clients 2026: GitKraken vs Sourcetree vs Fork vs GitFiend](</en/tools/best-git-gui-clients.html>)
 

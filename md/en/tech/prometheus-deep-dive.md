@@ -3,7 +3,7 @@ title: "Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability"
 description: "A comprehensive look at Prometheus monitoring covering metrics collection, PromQL queries, recording rules, alertmanager setup, and high availability architecture."
 date: 2026-01-02
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/prometheus-deep-dive.html
+url: https://aidev.fit/en/tech/prometheus-deep-dive.html
 ---
 
 # Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability
@@ -114,6 +114,10 @@ Prometheus fundamentally changed how teams approach monitoring. Its pull model, 
 **See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
 
 **See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
+
+**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>), [React Server Components](</en/tech/react-server-components.html>)
+
+**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>), [React Server Components](</en/tech/react-server-components.html>)
 
 **See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>), [React Server Components](</en/tech/react-server-components.html>)
 

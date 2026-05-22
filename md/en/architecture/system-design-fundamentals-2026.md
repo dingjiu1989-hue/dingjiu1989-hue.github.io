@@ -3,7 +3,7 @@ title: "System Design Fundamentals 2026: A Developer Guide to Scalable Applicati
 description: "System design concepts every developer should know — microservices vs monolith, CQRS, event-driven architecture, database scaling, caching, and real-world trade-offs."
 date: 2025-12-25
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/system-design-fundamentals-2026.html
+url: https://aidev.fit/en/architecture/system-design-fundamentals-2026.html
 ---
 
 # System Design Fundamentals 2026: A Developer Guide to Scalable Applications
@@ -1312,6 +1312,10 @@ The best system design is the one that solves today's problem without creating t
 **See also:** [Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared](</en/tech/event-driven-architecture-guide.html>), [Domain-Driven Design Fundamentals](</en/architecture/ddd-guide.html>), [System Design Interview Prep: Complete Developer Guide (2026)](</en/tech/system-design-interview-guide.html>)
 
 **See also:** [Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared](</en/tech/event-driven-architecture-guide.html>), [Domain-Driven Design Fundamentals](</en/architecture/ddd-guide.html>), [System Design Interview Prep: Complete Developer Guide (2026)](</en/tech/system-design-interview-guide.html>)
+
+**See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)
+
+**See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)
 
 **See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)
 

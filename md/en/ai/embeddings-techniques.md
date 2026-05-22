@@ -3,7 +3,7 @@ title: "Embeddings: Techniques and Best Practices"
 description: "Learn embeddings techniques for semantic search, clustering, and similarity matching with vector databases."
 date: 2026-02-19
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/embeddings-techniques.html
+url: https://aidev.fit/en/ai/embeddings-techniques.html
 ---
 
 # Embeddings: Techniques and Best Practices
@@ -49,6 +49,10 @@ Clean text before embedding. Remove HTML tags, normalize unicode, standardize wh
 **See also:** [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>), [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search](</en/ai/vector-database-tuning.html>)
 
 **See also:** [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>), [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search](</en/ai/vector-database-tuning.html>)
+
+**See also:** [AI Code Generation: Tools, Workflows, and Best Practices](</en/ai/ai-code-generation-tools.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)
+
+**See also:** [AI Code Generation: Tools, Workflows, and Best Practices](</en/ai/ai-code-generation-tools.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)
 
 **See also:** [AI Code Generation: Tools, Workflows, and Best Practices](</en/ai/ai-code-generation-tools.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)
 

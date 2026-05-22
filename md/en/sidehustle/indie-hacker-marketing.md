@@ -3,7 +3,7 @@ title: "Indie Hacker Marketing on a Zero Budget"
 description: "Marketing strategies for indie hackers: building in public, content marketing, community engagement, and organic growth."
 date: 2026-01-25
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/indie-hacker-marketing.html
+url: https://aidev.fit/en/sidehustle/indie-hacker-marketing.html
 ---
 
 # Indie Hacker Marketing on a Zero Budget
@@ -49,6 +49,10 @@ Track what works. Measure traffic sources, conversion rates, customer acquisitio
 **See also:** [SEO for SaaS: Technical SEO, Content Clusters, Link Building](</en/sidehustle/seo-for-saas.html>), [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>)
 
 **See also:** [SEO for SaaS: Technical SEO, Content Clusters, Link Building](</en/sidehustle/seo-for-saas.html>), [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>)
+
+**See also:** [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
+
+**See also:** [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
 
 **See also:** [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
 

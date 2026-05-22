@@ -3,7 +3,7 @@ title: "Database Migration Tools: Alembic, Flyway, Liquibase, Versioning"
 description: "Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategies, rollback patterns, and best practices for schema changes."
 date: 2026-04-02
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-migration-tools.html
+url: https://aidev.fit/en/database/database-migration-tools.html
 ---
 
 # Database Migration Tools: Alembic, Flyway, Liquibase, Versioning
@@ -272,6 +272,10 @@ Database migrations bring schema changes into the software development lifecycle
 **See also:** [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Schema Migration: Version Control, Rollback, and Zero-Downtime](</en/database/database-schema-migration-strategies.html>)
 
 **See also:** [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Schema Migration: Version Control, Rollback, and Zero-Downtime](</en/database/database-schema-migration-strategies.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>)
 
 **See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>)
 

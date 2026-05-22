@@ -3,7 +3,7 @@ title: "LLM Context Window Management"
 description: "Best practices for managing LLM context windows effectively including sliding windows, summarization, and retrieval strategies."
 date: 2025-12-12
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/llm-context-window.html
+url: https://aidev.fit/en/ai/llm-context-window.html
 ---
 
 # LLM Context Window Management
@@ -246,6 +246,10 @@ Effective context management is essential for building reliable LLM applications
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
 
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
+
+**See also:** [AI Document Processing](</en/ai/ai-document-processing.html>), [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>), [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>)
+
+**See also:** [AI Document Processing](</en/ai/ai-document-processing.html>), [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>), [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>)
 
 **See also:** [AI Document Processing](</en/ai/ai-document-processing.html>), [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>), [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>)
 

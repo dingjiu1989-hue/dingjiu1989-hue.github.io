@@ -3,7 +3,7 @@ title: "Consumer-Driven Contracts in Microservices"
 description: "Learn consumer-driven contract testing to ensure microservice compatibility without brittle integration tests."
 date: 2026-05-06
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/consumer-driven-contracts.html
+url: https://aidev.fit/en/architecture/consumer-driven-contracts.html
 ---
 
 # Consumer-Driven Contracts in Microservices
@@ -45,6 +45,10 @@ Contracts can become large and brittle if consumers test too many scenarios. Foc
 **See also:** [Contract Testing for Microservices](</en/architecture/contract-testing.html>), [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>)
 
 **See also:** [Contract Testing for Microservices](</en/architecture/contract-testing.html>), [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>)
 
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>)
 

@@ -3,7 +3,7 @@ title: "Secret Management"
 description: "Learn secret management: Vault, AWS Secrets Manager, SOPS, encryption approaches, rotation policies, and best practices"
 date: 2026-01-12
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/secret-management.html
+url: https://aidev.fit/en/tech/secret-management.html
 ---
 
 # Secret Management
@@ -77,6 +77,10 @@ Secret management is a foundational security practice. The investment in robust 
 **See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [API Documentation](</en/tech/api-documentation.html>), [Artifact Management](</en/tech/artifact-management.html>)
 
 **See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [API Documentation](</en/tech/api-documentation.html>), [Artifact Management](</en/tech/artifact-management.html>)
+
+**See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>)
+
+**See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>)
 
 **See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>)
 

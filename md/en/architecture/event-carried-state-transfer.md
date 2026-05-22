@@ -3,7 +3,7 @@ title: "Event-Carried State Transfer Pattern"
 description: "Learn the event-carried state transfer pattern for reducing service dependencies in event-driven architectures."
 date: 2026-05-07
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/event-carried-state-transfer.html
+url: https://aidev.fit/en/architecture/event-carried-state-transfer.html
 ---
 
 # Event-Carried State Transfer Pattern
@@ -47,6 +47,10 @@ Include only the state that consumers need, not the producer's entire internal m
 **See also:** [Event Notification vs Event-Carried State Transfer](</en/architecture/event-notification-vs-event-carrying.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>)
 
 **See also:** [Event Notification vs Event-Carried State Transfer](</en/architecture/event-notification-vs-event-carrying.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>)
+
+**See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
+
+**See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
 
 **See also:** [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>)
 

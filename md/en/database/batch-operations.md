@@ -3,7 +3,7 @@ title: "Batch Operations: Bulk Insert, COPY, and Batch Size Tuning"
 description: "Master batch operations in PostgreSQL: bulk insert patterns, the COPY command, batch updates, optimal batch sizes, and error handling for large datasets."
 date: 2026-03-30
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/batch-operations.html
+url: https://aidev.fit/en/database/batch-operations.html
 ---
 
 # Batch Operations: Bulk Insert, COPY, and Batch Size Tuning
@@ -344,6 +344,10 @@ Batch operations are essential for ETL pipelines, data migrations, and any workf
 **See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
 
 **See also:** [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
+
+**See also:** [PostgreSQL Vacuuming: Maintenance, Tuning, and Automation](</en/database/database-vacuuming-maintenance.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [PostgreSQL Vacuuming: Maintenance, Tuning, and Automation](</en/database/database-vacuuming-maintenance.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 
 **See also:** [PostgreSQL Vacuuming: Maintenance, Tuning, and Automation](</en/database/database-vacuuming-maintenance.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 

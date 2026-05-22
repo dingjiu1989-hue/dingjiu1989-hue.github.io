@@ -3,7 +3,7 @@ title: "Consensus Algorithms: Paxos, Raft, Zab"
 description: "Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices for distributed systems"
 date: 2026-04-22
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/consensus-algorithms.html
+url: https://aidev.fit/en/architecture/consensus-algorithms.html
 ---
 
 # Consensus Algorithms: Paxos, Raft, Zab
@@ -39,6 +39,10 @@ Choosing between algorithms is less important than choosing a mature implementat
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
 
 **See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
 

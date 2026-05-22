@@ -3,7 +3,7 @@ title: "Artifact Management"
 description: "Learn artifact management: Docker registries, package registries, versioning strategies, and lifecycle policies"
 date: 2026-01-05
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/artifact-management.html
+url: https://aidev.fit/en/tech/artifact-management.html
 ---
 
 # Artifact Management
@@ -73,6 +73,10 @@ Artifact management is a critical but often overlooked component of the software
 **See also:** [Dependency Management](</en/tech/dependency-management.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Log Management](</en/tech/log-management.html>)
 
 **See also:** [Dependency Management](</en/tech/dependency-management.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Log Management](</en/tech/log-management.html>)
+
+**See also:** [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
+
+**See also:** [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
 
 **See also:** [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
 

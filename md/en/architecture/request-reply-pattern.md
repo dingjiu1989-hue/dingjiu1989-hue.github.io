@@ -3,7 +3,7 @@ title: "Request-Reply Pattern for Asynchronous Communication"
 description: "Implement the request-reply pattern with message queues for asynchronous request-response messaging."
 date: 2026-05-08
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/request-reply-pattern.html
+url: https://aidev.fit/en/architecture/request-reply-pattern.html
 ---
 
 # Request-Reply Pattern for Asynchronous Communication
@@ -49,6 +49,10 @@ Dead letter queues for request queues capture requests that cannot be processed.
 **See also:** [Priority Queue Pattern for Message Processing](</en/architecture/priority-queue.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>)
 
 **See also:** [Priority Queue Pattern for Message Processing](</en/architecture/priority-queue.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Claim Check Pattern](</en/architecture/claim-check.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Claim Check Pattern](</en/architecture/claim-check.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Claim Check Pattern](</en/architecture/claim-check.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
 

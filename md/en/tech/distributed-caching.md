@@ -3,7 +3,7 @@ title: "Distributed Caching"
 description: "Explore distributed caching: Redis cluster, Memcached, CDN integration, cache invalidation, and consistency patterns"
 date: 2026-01-07
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/distributed-caching.html
+url: https://aidev.fit/en/tech/distributed-caching.html
 ---
 
 # Distributed Caching
@@ -75,6 +75,10 @@ Distributed caching is a powerful performance optimization when applied judiciou
 **See also:** [Build Optimization](</en/tech/build-optimization.html>), [Infrastructure Composability](</en/tech/infrastructure-composability.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>)
 
 **See also:** [Build Optimization](</en/tech/build-optimization.html>), [Infrastructure Composability](</en/tech/infrastructure-composability.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>)
+
+**See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
+
+**See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
 
 **See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
 

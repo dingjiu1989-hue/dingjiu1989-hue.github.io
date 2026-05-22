@@ -3,7 +3,7 @@ title: "Digital Forensics Guide"
 description: "Comprehensive guide to digital forensics covering evidence acquisition, analysis methodologies, chain of custody, and forensic tools."
 date: 2026-03-10
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/forensics-guide.html
+url: https://aidev.fit/en/security/forensics-guide.html
 ---
 
 # Digital Forensics Guide
@@ -195,6 +195,10 @@ Digital forensics demands rigorous methodology above all else. Preserve evidence
 **See also:** [Supply Chain Security](</en/security/supply-chain-security.html>), [API Authentication Methods](</en/security/api-authentication.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>)
 
 **See also:** [Supply Chain Security](</en/security/supply-chain-security.html>), [API Authentication Methods](</en/security/api-authentication.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>)
+
+**See also:** [Threat Hunting](</en/security/threat-hunting.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [Threat Hunting](</en/security/threat-hunting.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>), [Certificate Management](</en/security/certificate-management.html>)
 
 **See also:** [Threat Hunting](</en/security/threat-hunting.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>), [Certificate Management](</en/security/certificate-management.html>)
 

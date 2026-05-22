@@ -3,7 +3,7 @@ title: "Modular Monolith Architecture"
 description: "Module boundaries, in-process communication, and future extraction paths in modular monolith design"
 date: 2026-05-15
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/modular-monolith.html
+url: https://aidev.fit/en/architecture/modular-monolith.html
 ---
 
 # Modular Monolith Architecture
@@ -35,6 +35,10 @@ The modular monolith is not a permanent state — it is a starting position. As 
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)
 
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
 

@@ -3,7 +3,7 @@ title: "Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools"
 description: "Automate security compliance: compliance frameworks, evidence collection, monitoring, and audit preparation tools."
 date: 2026-03-23
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/security-compliance-tools.html
+url: https://aidev.fit/en/security/security-compliance-tools.html
 ---
 
 # Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools
@@ -37,6 +37,10 @@ Map controls to framework requirements. Configure integrations with infrastructu
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Compliance Automation](</en/security/compliance-automation.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>)
 
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Compliance Automation](</en/security/compliance-automation.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>)
+
+**See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [SOC Operations](</en/security/soc-operations.html>), [Kubernetes Security](</en/security/kubernetes-security.html>)
+
+**See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [SOC Operations](</en/security/soc-operations.html>), [Kubernetes Security](</en/security/kubernetes-security.html>)
 
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [SOC Operations](</en/security/soc-operations.html>), [Kubernetes Security](</en/security/kubernetes-security.html>)
 

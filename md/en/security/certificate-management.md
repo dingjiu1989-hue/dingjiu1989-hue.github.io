@@ -3,7 +3,7 @@ title: "Certificate Management"
 description: "Practical guide to TLS certificate management covering Let's Encrypt, ACME protocol, automated renewal, and certificate monitoring."
 date: 2026-03-08
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/certificate-management.html
+url: https://aidev.fit/en/security/certificate-management.html
 ---
 
 # Certificate Management
@@ -341,6 +341,10 @@ Modern certificate management means automation. Use Let's Encrypt with Certbot f
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
 
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>), [Infrastructure as Code Security](</en/security/iac-security.html>)
+
+**See also:** [Serverless Security](</en/security/serverless-security.html>), [Session Management Security](</en/security/session-management.html>), [API Authentication Methods](</en/security/api-authentication.html>)
+
+**See also:** [Serverless Security](</en/security/serverless-security.html>), [Session Management Security](</en/security/session-management.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 
 **See also:** [Serverless Security](</en/security/serverless-security.html>), [Session Management Security](</en/security/session-management.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 

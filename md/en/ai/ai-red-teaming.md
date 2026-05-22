@@ -3,7 +3,7 @@ title: "AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluati
 description: "Conduct AI red teaming to identify vulnerabilities: adversarial testing methodologies, jailbreak detection, safety evaluation, and automated testing tools."
 date: 2026-02-11
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-red-teaming.html
+url: https://aidev.fit/en/ai/ai-red-teaming.html
 ---
 
 # AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
@@ -87,6 +87,10 @@ AI red teaming is a practice, not a project. Attack techniques evolve continuous
 **See also:** [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>)
 
 **See also:** [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>)
+
+**See also:** [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [AI Data Privacy: PII Detection, Data Anonymization, Local Processing](</en/ai/ai-data-privacy.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>)
+
+**See also:** [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [AI Data Privacy: PII Detection, Data Anonymization, Local Processing](</en/ai/ai-data-privacy.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>)
 
 **See also:** [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [AI Data Privacy: PII Detection, Data Anonymization, Local Processing](</en/ai/ai-data-privacy.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>)
 

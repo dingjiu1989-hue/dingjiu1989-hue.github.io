@@ -3,7 +3,7 @@ title: "Penetration Testing Methodology"
 description: "Complete penetration testing methodology covering reconnaissance, scanning, exploitation, reporting, and the PTES standard framework."
 date: 2026-03-12
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/penetration-testing.html
+url: https://aidev.fit/en/security/penetration-testing.html
 ---
 
 # Penetration Testing Methodology
@@ -233,6 +233,10 @@ Effective penetration testing follows a disciplined methodology. PTES provides c
 **See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>), [Supply Chain Security](</en/security/supply-chain-security.html>)
 
 **See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>), [Supply Chain Security](</en/security/supply-chain-security.html>)
+
+**See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Secure Configuration Management](</en/security/secure-configuration.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
+
+**See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Secure Configuration Management](</en/security/secure-configuration.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
 
 **See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Secure Configuration Management](</en/security/secure-configuration.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
 

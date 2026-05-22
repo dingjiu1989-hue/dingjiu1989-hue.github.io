@@ -3,7 +3,7 @@ title: "Best CSS Frameworks 2026: Tailwind CSS vs UnoCSS vs Panda CSS vs Vanilla
 description: "Compare modern CSS frameworks that generate atomic CSS at build time with zero runtime — from Tailwind's ecosystem dominance to Panda's type-safe recipes."
 date: 2025-11-04
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-css-frameworks-2026.html
+url: https://aidev.fit/en/tools/best-css-frameworks-2026.html
 ---
 
 # Best CSS Frameworks 2026: Tailwind CSS vs UnoCSS vs Panda CSS vs Vanilla Extract vs Open Props

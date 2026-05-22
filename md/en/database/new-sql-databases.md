@@ -3,7 +3,7 @@ title: "NewSQL Databases: Combining SQL with Horizontal Scaling"
 description: "NewSQL databases offer ACID transactions and SQL queries with horizontal scalability. Compare CockroachDB, YugabyteDB, and Spanner."
 date: 2026-04-17
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/new-sql-databases.html
+url: https://aidev.fit/en/database/new-sql-databases.html
 ---
 
 # NewSQL Databases: Combining SQL with Horizontal Scaling
@@ -51,6 +51,10 @@ NewSQL databases require more operational expertise than traditional databases. 
 **See also:** [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>)
 
 **See also:** [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>)
+
+**See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 

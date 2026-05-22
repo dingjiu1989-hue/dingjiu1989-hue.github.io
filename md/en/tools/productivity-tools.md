@@ -3,7 +3,7 @@ title: "Developer Productivity Tools: Essential Toolkit for 2026"
 description: "Essential developer productivity tools: time tracking, knowledge management, focus tools, and workflow automation."
 date: 2026-02-09
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/productivity-tools.html
+url: https://aidev.fit/en/tools/productivity-tools.html
 ---
 
 # Developer Productivity Tools: Essential Toolkit for 2026
@@ -37,6 +37,10 @@ Alfred (macOS) and PowerToys (Windows) provide launcher shortcuts. Keyboard Maes
 **See also:** [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
 
 **See also:** [Developer Productivity Tracking Tools](</en/tools/productivity-tracking.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
+
+**See also:** [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
+
+**See also:** [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
 
 **See also:** [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>)
 

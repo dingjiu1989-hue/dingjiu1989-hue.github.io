@@ -3,7 +3,7 @@ title: "Go vs Rust: Systems Programming Comparison"
 description: "Compare Go and Rust for systems programming: performance, memory management, concurrency, and ecosystem."
 date: 2026-02-28
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/go-vs-rust.html
+url: https://aidev.fit/en/compare/go-vs-rust.html
 ---
 
 # Go vs Rust: Systems Programming Comparison
@@ -49,6 +49,10 @@ Choose Go for network services, API servers, CLI tools, and infrastructure softw
 **See also:** [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>), [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>)
 
 **See also:** [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>), [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>), [Flask vs FastAPI 2026: Python Web Frameworks Compared](</en/compare/flask-vs-fastapi-2026.html>)
+
+**See also:** [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options](</en/compare/datadog-vs-grafana-cloud.html>)
+
+**See also:** [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options](</en/compare/datadog-vs-grafana-cloud.html>)
 
 **See also:** [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options](</en/compare/datadog-vs-grafana-cloud.html>)
 

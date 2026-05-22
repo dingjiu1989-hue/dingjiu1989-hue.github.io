@@ -3,7 +3,7 @@ title: "Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys"
 description: "Production-ready auth guide: JWT vs session tokens, OAuth 2.1 flows, WebAuthn/Passkeys implementation, refresh token rotation, CSRF protection, and RBAC patterns. Code examples in Node.js and Python."
 date: 2025-10-14
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/authentication-best-practices-2026.html
+url: https://aidev.fit/en/tech/authentication-best-practices-2026.html
 ---
 
 # Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys

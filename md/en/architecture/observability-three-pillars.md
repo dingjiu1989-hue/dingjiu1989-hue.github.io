@@ -3,7 +3,7 @@ title: "Observability: Logs, Metrics, and Traces"
 description: "Logs, metrics, traces correlation, cardinality, sampling, storage costs, and the three pillars of observability"
 date: 2026-04-29
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/observability-three-pillars.html
+url: https://aidev.fit/en/architecture/observability-three-pillars.html
 ---
 
 # Observability: Logs, Metrics, and Traces
@@ -39,6 +39,10 @@ Choosing an observability backend depends on scale and budget. Self-hosted optio
 **See also:** [Metrics Types and Monitoring Methodologies](</en/architecture/metrics-types.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
 
 **See also:** [Metrics Types and Monitoring Methodologies](</en/architecture/metrics-types.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>)
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>)
 
 **See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>)
 

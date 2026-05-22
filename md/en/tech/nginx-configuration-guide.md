@@ -3,7 +3,7 @@ title: "Nginx Configuration Guide"
 description: "Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting, and load balancing."
 date: 2025-12-02
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/nginx-configuration-guide.html
+url: https://aidev.fit/en/tech/nginx-configuration-guide.html
 ---
 
 # Nginx Configuration Guide
@@ -319,6 +319,10 @@ Nginx is a versatile tool that serves as web server, reverse proxy, load balance
 **See also:** [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>), [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
 
 **See also:** [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>), [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
+
+**See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)
+
+**See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)
 
 **See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)
 

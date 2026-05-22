@@ -3,7 +3,7 @@ title: "Endpoint Security"
 description: "Deep dive into endpoint security comparing EDR, XDR, and antivirus solutions, detection techniques, and automated incident response."
 date: 2026-05-11
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/endpoint-security.html
+url: https://aidev.fit/en/security/endpoint-security.html
 ---
 
 # Endpoint Security
@@ -182,6 +182,10 @@ Modern endpoint protection demands more than antivirus. EDR provides deep visibi
 **See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
 
 **See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
+
+**See also:** [Key Management Systems](</en/security/key-management.html>), [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)
+
+**See also:** [Key Management Systems](</en/security/key-management.html>), [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)
 
 **See also:** [Key Management Systems](</en/security/key-management.html>), [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)
 

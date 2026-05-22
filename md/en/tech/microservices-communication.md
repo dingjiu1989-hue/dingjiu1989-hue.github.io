@@ -3,7 +3,7 @@ title: "Microservices Communication Patterns"
 description: "Compare synchronous and asynchronous communication patterns for microservices, with practical implementation guidance."
 date: 2025-12-02
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/microservices-communication.html
+url: https://aidev.fit/en/tech/microservices-communication.html
 ---
 
 # Microservices Communication Patterns
@@ -245,6 +245,10 @@ There is no single best microservices communication pattern. REST provides simpl
 **See also:** [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>)
 
 **See also:** [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>)
+
+**See also:** [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)
+
+**See also:** [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)
 
 **See also:** [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>)
 

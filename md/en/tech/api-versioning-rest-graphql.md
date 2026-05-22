@@ -3,7 +3,7 @@ title: "API Versioning Strategies: REST vs GraphQL Approaches"
 description: "Compare API versioning strategies for REST and GraphQL: URL versioning, header versioning, schema evolution."
 date: 2026-01-13
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/api-versioning-rest-graphql.html
+url: https://aidev.fit/en/tech/api-versioning-rest-graphql.html
 ---
 
 # API Versioning Strategies: REST vs GraphQL Approaches
@@ -39,6 +39,10 @@ For REST, use URL versioning for simple APIs and header versioning for API-first
 **See also:** [Git Workflows](</en/tech/git-workflows.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
 
 **See also:** [Git Workflows](</en/tech/git-workflows.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
+
+**See also:** [Dependency Management](</en/tech/dependency-management.html>), [Error Handling Patterns](</en/tech/error-handling-patterns.html>), [Log Management](</en/tech/log-management.html>)
+
+**See also:** [Dependency Management](</en/tech/dependency-management.html>), [Error Handling Patterns](</en/tech/error-handling-patterns.html>), [Log Management](</en/tech/log-management.html>)
 
 **See also:** [Dependency Management](</en/tech/dependency-management.html>), [Error Handling Patterns](</en/tech/error-handling-patterns.html>), [Log Management](</en/tech/log-management.html>)
 

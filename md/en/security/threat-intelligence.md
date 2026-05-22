@@ -3,7 +3,7 @@ title: "Threat Intelligence: Gathering and Applying Intel"
 description: "Practical guide to threat intelligence including OSINT, threat feeds, MITRE ATT&CK, IoC sharing, and STIX/TAXII standards."
 date: 2026-03-05
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/threat-intelligence.html
+url: https://aidev.fit/en/security/threat-intelligence.html
 ---
 
 # Threat Intelligence: Gathering and Applying Intel
@@ -336,6 +336,10 @@ Threat intelligence turns raw data into defensive action. Invest in OSINT collec
 **See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>)
 
 **See also:** [API Gateway Security Patterns](</en/security/api-gateway-security.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>)
+
+**See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
+
+**See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
 
 **See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
 

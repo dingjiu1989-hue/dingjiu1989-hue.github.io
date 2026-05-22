@@ -3,7 +3,7 @@ title: "Hexagonal Architecture (Ports and Adapters)"
 description: "Learn hexagonal architecture for building maintainable, testable applications — ports and adapters, dependency inversion, domain isolation, and migrating legacy code to hexagonal structure."
 date: 2025-12-27
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/hexagonal-architecture.html
+url: https://aidev.fit/en/architecture/hexagonal-architecture.html
 ---
 
 # Hexagonal Architecture (Ports and Adapters)
@@ -59,6 +59,10 @@ Hexagonal Architecture pairs well with Domain-Driven Design, where the core cont
 **See also:** [Clean Architecture Explained](</en/architecture/clean-architecture.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
 
 **See also:** [Clean Architecture Explained](</en/architecture/clean-architecture.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
+
+**See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>), [Event Storming](</en/architecture/event-storming.html>)
+
+**See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>), [Event Storming](</en/architecture/event-storming.html>)
 
 **See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>), [Event Storming](</en/architecture/event-storming.html>)
 

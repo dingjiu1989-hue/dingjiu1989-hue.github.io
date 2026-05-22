@@ -3,7 +3,7 @@ title: "Blob Storage: S3, GCS, Azure Blob, MinIO"
 description: "Compare blob storage solutions: AWS S3, Google Cloud Storage, Azure Blob, and self-hosted MinIO."
 date: 2026-04-13
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/blob-storage.html
+url: https://aidev.fit/en/database/blob-storage.html
 ---
 
 # Blob Storage: S3, GCS, Azure Blob, MinIO
@@ -51,6 +51,10 @@ Evaluate egress costs carefully. Cloud blob storage charges for data transfer, w
 **See also:** [Database Backup Strategies to Object Storage](</en/database/database-backup-to-s3.html>), [Document Databases: MongoDB, CouchDB, Firestore](</en/database/document-databases.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 
 **See also:** [Database Backup Strategies to Object Storage](</en/database/database-backup-to-s3.html>), [Document Databases: MongoDB, CouchDB, Firestore](</en/database/document-databases.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>)
+
+**See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>)
 
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE](</en/database/graph-queries.html>), [JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations](</en/database/json-in-postgresql.html>)
 

@@ -3,7 +3,7 @@ title: "Natural Language to SQL with LLMs"
 description: "Build systems that convert natural language questions into SQL queries using LLMs, with schema context, query validation, and safety guards."
 date: 2025-12-11
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-database-query.html
+url: https://aidev.fit/en/ai/ai-database-query.html
 ---
 
 # Natural Language to SQL with LLMs
@@ -346,6 +346,10 @@ Natural language to SQL with LLMs is production-ready for analytical queries. Th
 **See also:** [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [Responsible AI Development Practices](</en/ai/responsible-ai.html>)
 
 **See also:** [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [Responsible AI Development Practices](</en/ai/responsible-ai.html>)
+
+**See also:** [AI Document Processing](</en/ai/ai-document-processing.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)
+
+**See also:** [AI Document Processing](</en/ai/ai-document-processing.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)
 
 **See also:** [AI Document Processing](</en/ai/ai-document-processing.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)
 

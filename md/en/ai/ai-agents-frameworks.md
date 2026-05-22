@@ -3,7 +3,7 @@ title: "AI Agent Frameworks Compared"
 description: "Compare leading AI agent frameworks including LangGraph, CrewAI, AutoGen, and OpenAI Assistants API for building autonomous agents."
 date: 2025-12-11
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-agents-frameworks.html
+url: https://aidev.fit/en/ai/ai-agents-frameworks.html
 ---
 
 # AI Agent Frameworks Compared
@@ -252,6 +252,10 @@ The right agent framework depends on your application's complexity and deploymen
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
 
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
+
+**See also:** [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [AI Document Processing](</en/ai/ai-document-processing.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>)
+
+**See also:** [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [AI Document Processing](</en/ai/ai-document-processing.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>)
 
 **See also:** [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [AI Document Processing](</en/ai/ai-document-processing.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>)
 

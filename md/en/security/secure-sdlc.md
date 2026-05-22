@@ -3,7 +3,7 @@ title: "Secure Software Development Lifecycle"
 description: "Integrating security into every phase of the SDLC: threat modeling, secure coding, SAST, DAST, dependency scanning, and security reviews."
 date: 2026-05-20
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/secure-sdlc.html
+url: https://aidev.fit/en/security/secure-sdlc.html
 ---
 
 # Secure Software Development Lifecycle
@@ -331,6 +331,10 @@ A mature Secure SDLC integrates security activities into every phase of developm
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
+
+**See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
 
 **See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
 

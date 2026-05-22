@@ -3,7 +3,7 @@ title: "DNS Security"
 description: "Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filtering strategies, and common attack vectors."
 date: 2026-03-09
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/dns-security.html
+url: https://aidev.fit/en/security/dns-security.html
 ---
 
 # DNS Security
@@ -195,6 +195,10 @@ Securing DNS requires a layered approach: DNSSEC for integrity, encrypted transp
 **See also:** [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>), [Input Validation Deep Dive](</en/security/input-validation.html>)
 
 **See also:** [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>), [Input Validation Deep Dive](</en/security/input-validation.html>)
+
+**See also:** [Supply Chain Security](</en/security/supply-chain-security.html>), [Threat Hunting](</en/security/threat-hunting.html>), [API Authentication Methods](</en/security/api-authentication.html>)
+
+**See also:** [Supply Chain Security](</en/security/supply-chain-security.html>), [Threat Hunting](</en/security/threat-hunting.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 
 **See also:** [Supply Chain Security](</en/security/supply-chain-security.html>), [Threat Hunting](</en/security/threat-hunting.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 

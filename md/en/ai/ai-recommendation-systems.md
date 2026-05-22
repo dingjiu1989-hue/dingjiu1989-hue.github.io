@@ -3,7 +3,7 @@ title: "AI Recommendation Systems: From Embeddings to Production"
 description: "Build production-ready recommendation systems using embeddings, vector search, hybrid filtering, and LLM-powered personalization."
 date: 2026-05-13
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-recommendation-systems.html
+url: https://aidev.fit/en/ai/ai-recommendation-systems.html
 ---
 
 # AI Recommendation Systems: From Embeddings to Production
@@ -113,6 +113,10 @@ Modern recommendation systems combine embeddings for semantic understanding, vec
 **See also:** [Vector Database Comparison 2026: Pinecone vs Weaviate vs Qdrant vs Milvus vs pgvector](</en/ai/vector-database-comparison.html>), [Semantic Search Implementation Guide: Embeddings, Vector Databases, and Reranking](</en/ai/semantic-search-implementation.html>), [AI Code Review: Best Tools, Setup Guide, and ROI Analysis](</en/ai/ai-code-review-tools.html>)
 
 **See also:** [Vector Database Comparison 2026: Pinecone vs Weaviate vs Qdrant vs Milvus vs pgvector](</en/ai/vector-database-comparison.html>), [Semantic Search Implementation Guide: Embeddings, Vector Databases, and Reranking](</en/ai/semantic-search-implementation.html>), [AI Code Review: Best Tools, Setup Guide, and ROI Analysis](</en/ai/ai-code-review-tools.html>)
+
+**See also:** [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>), [Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search](</en/ai/vector-database-tuning.html>), [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>)
+
+**See also:** [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>), [Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search](</en/ai/vector-database-tuning.html>), [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>)
 
 **See also:** [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>), [Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search](</en/ai/vector-database-tuning.html>), [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>)
 

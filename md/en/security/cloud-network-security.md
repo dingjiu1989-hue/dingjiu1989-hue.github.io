@@ -3,7 +3,7 @@ title: "Cloud Network Security"
 description: "Designing cloud network security with security groups, NACLs, firewall rules, and traffic inspection."
 date: 2026-03-16
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/cloud-network-security.html
+url: https://aidev.fit/en/security/cloud-network-security.html
 ---
 
 # Cloud Network Security
@@ -239,6 +239,10 @@ Cloud network security requires layered controls. Use security groups for instan
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Kubernetes Security](</en/security/kubernetes-security.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Kubernetes Security](</en/security/kubernetes-security.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
+
+**See also:** [Container Runtime Security](</en/security/container-runtime-security.html>), [DDoS Mitigation](</en/security/ddos-mitigation.html>), [Helm Security](</en/security/helm-security.html>)
+
+**See also:** [Container Runtime Security](</en/security/container-runtime-security.html>), [DDoS Mitigation](</en/security/ddos-mitigation.html>), [Helm Security](</en/security/helm-security.html>)
 
 **See also:** [Container Runtime Security](</en/security/container-runtime-security.html>), [DDoS Mitigation](</en/security/ddos-mitigation.html>), [Helm Security](</en/security/helm-security.html>)
 

@@ -3,7 +3,7 @@ title: "Monitoring Tools: Grafana vs Datadog vs New Relic"
 description: "Compare Grafana, Datadog, and New Relic for dashboarding, alerting, APM, log integration, pricing, and self-hosted versus SaaS deployment options."
 date: 2026-01-27
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/monitoring-tools.html
+url: https://aidev.fit/en/tools/monitoring-tools.html
 ---
 
 # Monitoring Tools: Grafana vs Datadog vs New Relic
@@ -372,6 +372,10 @@ For startups and small teams, Grafana self-hosted provides the best balance of c
 **See also:** [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>), [Logging Tools: ELK Stack vs Loki vs Splunk](</en/tools/logging-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>)
 
 **See also:** [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>), [Logging Tools: ELK Stack vs Loki vs Splunk](</en/tools/logging-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>)
+
+**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>)
+
+**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>)
 
 **See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>)
 

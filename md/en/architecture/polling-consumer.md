@@ -3,7 +3,7 @@ title: "Polling Consumer vs Event-Driven Consumer"
 description: "Compare polling and event-driven consumer patterns: when to poll, when to push, and hybrid approaches."
 date: 2026-05-07
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/polling-consumer.html
+url: https://aidev.fit/en/architecture/polling-consumer.html
 ---
 
 # Polling Consumer vs Event-Driven Consumer
@@ -45,6 +45,10 @@ Implementation complexity is often lower with polling libraries and frameworks, 
 **See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>)
 
 **See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>)
+
+**See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
+
+**See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
 
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
 

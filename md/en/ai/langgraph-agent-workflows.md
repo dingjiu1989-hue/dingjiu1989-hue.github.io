@@ -3,7 +3,7 @@ title: "Building Custom AI Agents with LangGraph: A Practical Guide"
 description: "Learn to build stateful, multi-step agent workflows with LangGraph: graph-based orchestration, persistent memory, human-in-the-loop, and conditional routing."
 date: 2026-05-13
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/langgraph-agent-workflows.html
+url: https://aidev.fit/en/ai/langgraph-agent-workflows.html
 ---
 
 # Building Custom AI Agents with LangGraph: A Practical Guide
@@ -159,6 +159,10 @@ LangGraph transforms agent building from fragile linear chains into robust state
 **See also:** [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>), [Building an AI Customer Service Chatbot: Complete Technical Guide (2026)](</en/ai/ai-chatbot-build-guide.html>), [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>)
 
 **See also:** [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>), [Building an AI Customer Service Chatbot: Complete Technical Guide (2026)](</en/ai/ai-chatbot-build-guide.html>), [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>)
+
+**See also:** [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [Building AI Voice Agents: Complete Technical Guide (2026)](</en/ai/ai-voice-agents.html>)
+
+**See also:** [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [Building AI Voice Agents: Complete Technical Guide (2026)](</en/ai/ai-voice-agents.html>)
 
 **See also:** [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>), [Building AI Voice Agents: Complete Technical Guide (2026)](</en/ai/ai-voice-agents.html>)
 

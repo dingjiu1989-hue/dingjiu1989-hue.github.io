@@ -3,7 +3,7 @@ title: "RBAC Authorization Implementation"
 description: "A practical guide to implementing Role-Based Access Control with roles, permissions, policies, and middleware in Node.js and Python."
 date: 2025-12-19
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/rbac-authorization.html
+url: https://aidev.fit/en/security/rbac-authorization.html
 ---
 
 # RBAC Authorization Implementation
@@ -428,6 +428,10 @@ RBAC simplifies authorization by grouping permissions into roles and assigning r
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>)
 
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>)
+
+**See also:** [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>)
+
+**See also:** [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>)
 
 **See also:** [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>), [Zero Trust Architecture for Startups](</en/security/zero-trust-architecture.html>)
 

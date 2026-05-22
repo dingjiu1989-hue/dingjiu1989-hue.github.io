@@ -3,7 +3,7 @@ title: "API Gateway Patterns"
 description: "Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementation strategies"
 date: 2026-05-01
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/api-gateway-patterns.html
+url: https://aidev.fit/en/architecture/api-gateway-patterns.html
 ---
 
 # API Gateway Patterns
@@ -67,6 +67,10 @@ API gateway patterns are essential for microservice architectures, providing cen
 **See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 
 **See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
+
+**See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
 
 **See also:** [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
 

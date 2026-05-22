@@ -3,7 +3,7 @@ title: "Advanced TypeScript Types for Better Code"
 description: "Master advanced TypeScript types: generics, conditional types, mapped types, template literals, and utility types."
 date: 2026-01-15
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/typescript-advanced-types.html
+url: https://aidev.fit/en/tech/typescript-advanced-types.html
 ---
 
 # Advanced TypeScript Types for Better Code
@@ -51,6 +51,10 @@ Learn built-in utility types: Partial, Required, Readonly, Record, Pick, Omit, E
 **See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Advanced Git Techniques for Developers](</en/tech/git-advanced-techniques.html>), [Code Generation](</en/tech/code-generation.html>)
 
 **See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Advanced Git Techniques for Developers](</en/tech/git-advanced-techniques.html>), [Code Generation](</en/tech/code-generation.html>)
+
+**See also:** [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
+
+**See also:** [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
 
 **See also:** [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
 

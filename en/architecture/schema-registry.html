@@ -18,28 +18,28 @@
     </script>
     <meta property="og:title" content="Schema Registry">
     <meta property="og:description" content="Learn schema registry principles: Avro, Protobuf, JSON Schema, compatibility checks, and evolution strategies">
-    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html">
+    <meta property="og:url" content="https://aidev.fit/en/architecture/schema-registry.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/schema-registry.png">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/schema-registry.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Schema Registry">
     <meta name="twitter:description" content="Learn schema registry principles: Avro, Protobuf, JSON Schema, compatibility checks, and evolution strategies">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/schema-registry.png">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/architecture/schema-registry.png">
     <meta property="article:published_time" content="2026-05-05">
     <meta property="article:modified_time" content="2026-05-19">
     <meta property="article:tag" content="Architecture, System Design, Backend">
-    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/schema-registry.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/schema-registry.webp" type="image/webp" fetchpriority="high">
     <title>Schema Registry — SourceHub</title>
     <meta name="description" content="Learn schema registry principles: Avro, Protobuf, JSON Schema, compatibility checks, and evolution strategies">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html">
-    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html">
-    <link rel="prev" href="https://dingjiu1989-hue.github.io/en/architecture/architecture-decision-records.html">
-    <link rel="next" href="https://dingjiu1989-hue.github.io/en/architecture/event-storming.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/schema-registry.html">
+    <link rel="canonical" href="https://aidev.fit/en/architecture/schema-registry.html">
+    <link rel="prev" href="https://aidev.fit/en/architecture/architecture-decision-records.html">
+    <link rel="next" href="https://aidev.fit/en/architecture/event-storming.html">
     <meta name="robots" content="index, follow">
     <script type="application/ld+json">
     {
@@ -47,18 +47,18 @@
       "@type": "Article",
       "headline": "Schema Registry",
       "description": "Learn schema registry principles: Avro, Protobuf, JSON Schema, compatibility checks, and evolution strategies",
-      "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/schema-registry.png",
+      "image": "https://aidev.fit/images/covers/en/architecture/schema-registry.png",
       "datePublished": "2026-05-05",
       "dateModified": "2026-05-19",
-      "wordCount": "1285",
+      "wordCount": "1319",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
       "isAccessibleForFree": true,
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/schema-registry.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/schema-registry-do7"
       ],
@@ -70,8 +70,8 @@
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
-        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://aidev.fit/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://aidev.fit/en/architecture/"},
         {"@type": "ListItem", "position": 3, "name": "Schema Registry"}
       ]
     }
@@ -100,9 +100,9 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Schema Registry</h1>
-      <div class="article-meta">Published 2026-05-05 · Last active 2026-05-19 · 0 views · 0 replies</div>
-      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/schema-registry.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/schema-registry.png" alt="Schema Registry" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>A schema registry is a centralized service that stores, validates, and manages schemas for data in event-driven and message-based systems. As organizations adopt event-driven architectures with asynchronous communication, managing data formats across producers and consumers becomes critical. The schema registry solves the problem of data contract evolution by enforcing compatibility rules and providing a single source of truth for schema definitions. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/schema-registry.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/schema-registry.png" alt="Schema Registry" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+      <div class="article-meta">Published 2026-05-05 · Last active 2026-05-19 · 0 views · 0 replies · 6 min read</div>
+      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/schema-registry.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/schema-registry.png" alt="Schema Registry" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>A schema registry is a centralized service that stores, validates, and manages schemas for data in event-driven and message-based systems. As organizations adopt event-driven architectures with asynchronous communication, managing data formats across producers and consumers becomes critical. The schema registry solves the problem of data contract evolution by enforcing compatibility rules and providing a single source of truth for schema definitions. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/schema-registry.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/schema-registry.png" alt="Schema Registry" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The Problem Schema Registries Solve </p>
 <p>In any system where services exchange data, the producer and consumer must agree on the data format. Without a schema registry, this agreement is implicit and fragile. A producer changes a field name, and consumers break without warning. Different consumers may expect different versions. Debugging data format issues becomes a serialization nightmare. </p>
 <p>A schema registry makes data contracts explicit and enforceable. Producers register their schema before publishing data. Consumers discover schemas and validate their expectations. The registry enforces compatibility rules that prevent breaking changes while allowing controlled evolution. </p>
@@ -142,6 +142,8 @@
 <p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -154,8 +156,8 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Schema%20Registry&url=https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://dingjiu1989-hue.github.io/en/architecture/schema-registry.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Schema%20Registry&url=https://aidev.fit/en/architecture/schema-registry.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/architecture/schema-registry.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
     </div>
     <section class="related">
       <h3>Related Articles</h3>

@@ -3,7 +3,7 @@ title: "Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrat
 description: "Compare Linear, Jira, and GitHub Issues for project management: workflows, integrations, team size fit, performance, and pricing."
 date: 2026-02-25
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/linear-vs-jira.html
+url: https://aidev.fit/en/compare/linear-vs-jira.html
 ---
 
 # Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit
@@ -89,6 +89,10 @@ The best project management tool is the one your team actually uses. A powerful 
 **See also:** [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options](</en/compare/datadog-vs-grafana-cloud.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>)
 
 **See also:** [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options](</en/compare/datadog-vs-grafana-cloud.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>)
+
+**See also:** [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Linear vs Jira vs Notion: Best Project Management Tool for Developers (2026)](</en/compare/linear-vs-jira-vs-notion.html>), [Stripe vs Paddle vs Lemon Squeezy: Payment Processing, Subscriptions, Tax Handling, and Global Reach](</en/compare/stripe-vs-paddle.html>)
+
+**See also:** [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Linear vs Jira vs Notion: Best Project Management Tool for Developers (2026)](</en/compare/linear-vs-jira-vs-notion.html>), [Stripe vs Paddle vs Lemon Squeezy: Payment Processing, Subscriptions, Tax Handling, and Global Reach](</en/compare/stripe-vs-paddle.html>)
 
 **See also:** [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Linear vs Jira vs Notion: Best Project Management Tool for Developers (2026)](</en/compare/linear-vs-jira-vs-notion.html>), [Stripe vs Paddle vs Lemon Squeezy: Payment Processing, Subscriptions, Tax Handling, and Global Reach](</en/compare/stripe-vs-paddle.html>)
 

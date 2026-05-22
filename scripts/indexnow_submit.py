@@ -4,7 +4,7 @@
 IndexNow is supported by Bing, Yandex, Seznam, and Naver.
 Bing's index feeds ChatGPT, DuckDuckGo, Copilot, and other AI search products.
 
-Key file: https://dingjiu1989-hue.github.io/KEY.txt
+Key file: https://aidev.fit/KEY.txt
 API: POST https://api.indexnow.org/indexnow
 """
 
@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITEMAP = ROOT / 'sitemap.xml'
 TRACKING = ROOT / 'data' / 'indexnow-submitted.json'
 KEY = 'bca1280e3258b853e5cc15ec3151fb9f'
-HOST = 'dingjiu1989-hue.github.io'
+HOST = 'aidev.fit'
 
 ENDPOINTS = [
     'https://api.indexnow.org/indexnow',

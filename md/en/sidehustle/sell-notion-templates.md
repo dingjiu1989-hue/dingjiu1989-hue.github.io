@@ -3,7 +3,7 @@ title: "How to Sell Notion Templates as a Developer — $5K/Month Passive Income
 description: "Step-by-step guide to creating and selling Notion templates: finding profitable niches, designing for developers, pricing strategy, marketing on Gumroad and Etsy."
 date: 2025-10-21
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/sell-notion-templates.html
+url: https://aidev.fit/en/sidehustle/sell-notion-templates.html
 ---
 
 # How to Sell Notion Templates as a Developer — $5K/Month Passive Income

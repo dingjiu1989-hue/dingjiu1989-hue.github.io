@@ -3,7 +3,7 @@ title: "Messaging Patterns: Pub/Sub and Request/Reply"
 description: "Explore messaging patterns including publish-subscribe and request-reply for distributed systems."
 date: 2025-12-29
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/messaging-patterns.html
+url: https://aidev.fit/en/architecture/messaging-patterns.html
 ---
 
 # Messaging Patterns: Pub/Sub and Request/Reply
@@ -184,6 +184,10 @@ Pub/Sub and Request-Reply serve different purposes. Use Pub/Sub when you need to
 **See also:** [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>)
 
 **See also:** [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
 

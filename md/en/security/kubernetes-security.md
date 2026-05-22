@@ -3,7 +3,7 @@ title: "Kubernetes Security"
 description: "Securing Kubernetes with RBAC, Pod Security Standards, network policies, and audit logging."
 date: 2026-03-18
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/kubernetes-security.html
+url: https://aidev.fit/en/security/kubernetes-security.html
 ---
 
 # Kubernetes Security
@@ -307,6 +307,10 @@ Kubernetes security requires a layered approach. Lock down RBAC with least privi
 **See also:** [Audit Logging Best Practices](</en/security/audit-logging.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>), [Cloud Network Security](</en/security/cloud-network-security.html>)
 
 **See also:** [Audit Logging Best Practices](</en/security/audit-logging.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>), [Cloud Network Security](</en/security/cloud-network-security.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [IAM Audit](</en/security/iam-audit.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [IAM Audit](</en/security/iam-audit.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [IAM Audit](</en/security/iam-audit.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>)
 

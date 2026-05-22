@@ -3,7 +3,7 @@ title: "Contract Testing"
 description: "Master contract testing: Pact, consumer-driven contracts, provider verification, and CI/CD integration"
 date: 2026-01-06
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/contract-testing.html
+url: https://aidev.fit/en/tech/contract-testing.html
 ---
 
 # Contract Testing
@@ -69,6 +69,10 @@ Contract testing provides a practical mechanism for managing service dependencie
 **See also:** [Testing Strategies](</en/tech/testing-strategies.html>), [API Documentation](</en/tech/api-documentation.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>)
 
 **See also:** [Testing Strategies](</en/tech/testing-strategies.html>), [API Documentation](</en/tech/api-documentation.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>)
+
+**See also:** [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Metric Collection](</en/tech/metric-collection.html>), [Node.js Streams](</en/tech/nodejs-streams.html>)
+
+**See also:** [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Metric Collection](</en/tech/metric-collection.html>), [Node.js Streams](</en/tech/nodejs-streams.html>)
 
 **See also:** [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Metric Collection](</en/tech/metric-collection.html>), [Node.js Streams](</en/tech/nodejs-streams.html>)
 

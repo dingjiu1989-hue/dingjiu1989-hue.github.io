@@ -3,7 +3,7 @@ title: "Best Terminal Emulators 2026"
 description: "Compare the best terminal emulators for developers including iTerm2, Warp, Alacritty, Kitty, and Windows Terminal."
 date: 2025-12-10
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/terminal-emulators.html
+url: https://aidev.fit/en/tools/terminal-emulators.html
 ---
 
 # Best Terminal Emulators 2026
@@ -344,6 +344,10 @@ The terminal emulator landscape in 2026 offers options for every preference. iTe
 **See also:** [Warp vs iTerm2 vs Kitty: Best Terminal Emulator for Developers (2026)](</en/compare/warp-vs-iterm2-vs-kitty.html>), [Best Database GUI Clients](</en/tools/database-clients.html>), [Best Terminal Emulators for Developers 2026: Warp vs iTerm2 vs Kitty vs WezTerm](</en/tools/best-terminal-emulators.html>)
 
 **See also:** [Warp vs iTerm2 vs Kitty: Best Terminal Emulator for Developers (2026)](</en/compare/warp-vs-iterm2-vs-kitty.html>), [Best Database GUI Clients](</en/tools/database-clients.html>), [Best Terminal Emulators for Developers 2026: Warp vs iTerm2 vs Kitty vs WezTerm](</en/tools/best-terminal-emulators.html>)
+
+**See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
+
+**See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
 
 **See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
 

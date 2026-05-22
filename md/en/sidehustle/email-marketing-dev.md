@@ -3,7 +3,7 @@ title: "Email Marketing for Developers: Mailchimp, ConvertKit, Automation"
 description: "Email marketing strategies for developers using Mailchimp, ConvertKit, and automation tools to engage and monetize audiences."
 date: 2026-01-21
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/email-marketing-dev.html
+url: https://aidev.fit/en/sidehustle/email-marketing-dev.html
 ---
 
 # Email Marketing for Developers: Mailchimp, ConvertKit, Automation
@@ -65,6 +65,10 @@ Email marketing for developers combines technical substance with strategic autom
 **See also:** [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>), [Affiliate Marketing for Developer Products](</en/sidehustle/affiliate-marketing-tech.html>), [Indie Hacker Marketing on a Zero Budget](</en/sidehustle/indie-hacker-marketing.html>)
 
 **See also:** [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>), [Affiliate Marketing for Developer Products](</en/sidehustle/affiliate-marketing-tech.html>), [Indie Hacker Marketing on a Zero Budget](</en/sidehustle/indie-hacker-marketing.html>)
+
+**See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>)
+
+**See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>)
 
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>)
 

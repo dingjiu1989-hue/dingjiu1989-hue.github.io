@@ -3,7 +3,7 @@ title: "Best Code Editors 2026: VS Code vs Cursor vs JetBrains vs Zed vs Neovim"
 description: "Compare professional code editors with a focus on AI integration, performance, language intelligence, and ecosystem — from Cursor's AI-native UX to Zed's GPU rendering."
 date: 2025-11-27
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/code-editors-comparison-2026.html
+url: https://aidev.fit/en/compare/code-editors-comparison-2026.html
 ---
 
 # Best Code Editors 2026: VS Code vs Cursor vs JetBrains vs Zed vs Neovim

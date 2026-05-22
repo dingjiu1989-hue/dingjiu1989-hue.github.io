@@ -3,7 +3,7 @@ title: "Developer Newsletter Monetization: From Side Project to Full-Time Income
 description: "How dev-focused newsletters grow to $10K-50K/month. Covers platform choice, growth tactics, sponsor sourcing, and paid tier strategies with real newsletter examples."
 date: 2025-10-21
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/newsletter-monetization-guide.html
+url: https://aidev.fit/en/sidehustle/newsletter-monetization-guide.html
 ---
 
 # Developer Newsletter Monetization: From Side Project to Full-Time Income

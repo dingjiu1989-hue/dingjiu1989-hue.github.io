@@ -3,7 +3,7 @@ title: "Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and Mo
 description: "Comparative analysis of database management tools covering DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass with features, performance, and workflow integration."
 date: 2026-01-28
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/database-management-tools.html
+url: https://aidev.fit/en/tools/database-management-tools.html
 ---
 
 # Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
@@ -168,6 +168,10 @@ The best tool depends on database types, team workflow, and budget. DBeaver prov
 **See also:** [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared](</en/tools/kubernetes-dashboards.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
 
 **See also:** [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared](</en/tools/kubernetes-dashboards.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
+
+**See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces](</en/tools/devcontainer-setup.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)
+
+**See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces](</en/tools/devcontainer-setup.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)
 
 **See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces](</en/tools/devcontainer-setup.html>), [Redis Tools: RedisInsight, Redis CLI, Redis Commander](</en/tools/redis-tools.html>)
 

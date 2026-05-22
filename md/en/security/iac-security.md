@@ -3,7 +3,7 @@ title: "Infrastructure as Code Security"
 description: "Guide to Infrastructure as Code security covering Terraform security scanning, policy as code, drift detection, and automated compliance enforcement."
 date: 2026-03-10
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/iac-security.html
+url: https://aidev.fit/en/security/iac-security.html
 ---
 
 # Infrastructure as Code Security
@@ -373,6 +373,10 @@ IaC security shifts security left by catching misconfigurations before infrastru
 **See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Container Image Security](</en/security/container-image-security.html>)
 
 **See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Container Image Security](</en/security/container-image-security.html>)
+
+**See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [CORS Security](</en/security/cors-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
+
+**See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [CORS Security](</en/security/cors-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
 
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [CORS Security](</en/security/cors-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
 

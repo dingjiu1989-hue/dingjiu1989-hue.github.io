@@ -3,7 +3,7 @@ title: "RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testin
 description: "A practical guide to evaluating RAG systems: retrieval metrics, generation quality assessment, end-to-end testing frameworks, and benchmark datasets."
 date: 2026-02-12
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/rag-evaluation.html
+url: https://aidev.fit/en/ai/rag-evaluation.html
 ---
 
 # RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
@@ -69,6 +69,10 @@ The most important lesson about RAG evaluation is that it requires ongoing inves
 **See also:** [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>), [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>)
 
 **See also:** [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>), [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>)
+
+**See also:** [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>)
+
+**See also:** [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>)
 
 **See also:** [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>)
 

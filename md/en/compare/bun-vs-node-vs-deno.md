@@ -3,7 +3,7 @@ title: "Bun vs Node.js vs Deno (2026): Best JavaScript Runtime?"
 description: "Performance benchmarks, package management, TypeScript support, and ecosystem maturity compared. Pick the right JS runtime for your next project."
 date: 2025-11-18
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/bun-vs-node-vs-deno.html
+url: https://aidev.fit/en/compare/bun-vs-node-vs-deno.html
 ---
 
 # Bun vs Node.js vs Deno (2026): Best JavaScript Runtime?

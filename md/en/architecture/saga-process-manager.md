@@ -3,7 +3,7 @@ title: "Saga vs Process Manager: Orchestration Patterns Compared"
 description: "Compare saga orchestration with process manager patterns for distributed transaction management."
 date: 2026-05-09
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/saga-process-manager.html
+url: https://aidev.fit/en/architecture/saga-process-manager.html
 ---
 
 # Saga vs Process Manager: Orchestration Patterns Compared
@@ -39,6 +39,10 @@ Use sagas for compensating transactions where eventual consistency is acceptable
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)
 
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)
+
+**See also:** [Event Notification vs Event-Carried State Transfer](</en/architecture/event-notification-vs-event-carrying.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>)
+
+**See also:** [Event Notification vs Event-Carried State Transfer](</en/architecture/event-notification-vs-event-carrying.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>)
 
 **See also:** [Event Notification vs Event-Carried State Transfer](</en/architecture/event-notification-vs-event-carrying.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>)
 

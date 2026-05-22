@@ -3,7 +3,7 @@ title: "Node.js Streams: Complete Guide to Efficient Data Processing"
 description: "Master Node.js streams: Readable, Writable, Transform, and Duplex. Real-world examples for file processing, HTTP streaming, CSV parsing, and backpressure handling. Avoid memory issues at scale."
 date: 2026-05-20
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/nodejs-streams-guide.html
+url: https://aidev.fit/en/tech/nodejs-streams-guide.html
 ---
 
 # Node.js Streams: Complete Guide to Efficient Data Processing

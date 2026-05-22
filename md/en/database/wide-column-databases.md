@@ -3,7 +3,7 @@ title: "Wide-Column Databases: Cassandra, HBase, ScyllaDB"
 description: "Explore wide-column databases: Cassandra for high-throughput writes, HBase for Hadoop ecosystems, and ScyllaDB."
 date: 2026-04-20
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/wide-column-databases.html
+url: https://aidev.fit/en/database/wide-column-databases.html
 ---
 
 # Wide-Column Databases: Cassandra, HBase, ScyllaDB
@@ -49,6 +49,10 @@ Use Cassandra or ScyllaDB for high-throughput write workloads, multi-region depl
 **See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB](</en/database/key-value-stores.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
 
 **See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB](</en/database/key-value-stores.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>)
+
+**See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Document Databases: MongoDB, CouchDB, Firestore](</en/database/document-databases.html>)
+
+**See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Document Databases: MongoDB, CouchDB, Firestore](</en/database/document-databases.html>)
 
 **See also:** [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Document Databases: MongoDB, CouchDB, Firestore](</en/database/document-databases.html>)
 

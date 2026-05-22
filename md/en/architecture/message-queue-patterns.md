@@ -3,7 +3,7 @@ title: "Message Queue Patterns"
 description: "Learn message queue patterns: competing consumers, pub/sub, dead letter queues, and reliability guarantees"
 date: 2026-05-04
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/message-queue-patterns.html
+url: https://aidev.fit/en/architecture/message-queue-patterns.html
 ---
 
 # Message Queue Patterns
@@ -63,6 +63,10 @@ Message queue patterns form the backbone of reliable asynchronous communication 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
+
+**See also:** [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
+
+**See also:** [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
 
 **See also:** [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
 

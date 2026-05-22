@@ -3,7 +3,7 @@ title: "Pub-Sub Patterns: Event-Driven Communication"
 description: "A deep dive into publish-subscribe patterns for decoupled service communication in distributed systems."
 date: 2026-05-14
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/pub-sub-patterns.html
+url: https://aidev.fit/en/architecture/pub-sub-patterns.html
 ---
 
 # Pub-Sub Patterns: Event-Driven Communication
@@ -45,6 +45,10 @@ Design event schemas for backward compatibility. Use schema registries to manage
 **See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
 
 **See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>)
+
+**See also:** [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
+
+**See also:** [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
 
 **See also:** [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>)
 

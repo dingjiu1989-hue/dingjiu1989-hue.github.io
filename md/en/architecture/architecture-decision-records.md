@@ -3,7 +3,7 @@ title: "Architecture Decision Records: Documenting Technical Decisions"
 description: "Capture and manage architecture decisions with ADRs: templates, workflows, and team adoption strategies."
 date: 2026-05-05
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/architecture-decision-records.html
+url: https://aidev.fit/en/architecture/architecture-decision-records.html
 ---
 
 # Architecture Decision Records: Documenting Technical Decisions
@@ -35,6 +35,10 @@ Start documenting decisions during design discussions. Write the ADR when the de
 **See also:** [HTTP Caching Architecture](</en/architecture/caching-http.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>), [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>)
 
 **See also:** [HTTP Caching Architecture](</en/architecture/caching-http.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>), [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>)
+
+**See also:** [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 
 **See also:** [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 

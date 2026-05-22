@@ -3,7 +3,7 @@ title: "SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Reve
 description: "Master the essential SaaS metrics every founder needs to track: MRR, ARR, LTV, CAC, payback period, and net revenue retention."
 date: 2026-01-19
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-metrics.html
+url: https://aidev.fit/en/sidehustle/saas-metrics.html
 ---
 
 # SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Revenue Retention
@@ -57,6 +57,10 @@ One metric in isolation is dangerous. Low CAC with high churn is not efficient, 
 **See also:** [SaaS Pricing Experiments: A/B Testing and Value Metrics](</en/sidehustle/pricing-experiments.html>), [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
 
 **See also:** [SaaS Pricing Experiments: A/B Testing and Value Metrics](</en/sidehustle/pricing-experiments.html>), [Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring](</en/sidehustle/indie-hackers-tools.html>), [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>)
+
+**See also:** [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>)
+
+**See also:** [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>)
 
 **See also:** [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>)
 

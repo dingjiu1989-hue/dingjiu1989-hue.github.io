@@ -3,7 +3,7 @@ title: "Database Backup Strategies to Object Storage"
 description: "Automate database backups to S3/GCS: incremental backups, point-in-time recovery, and retention policies."
 date: 2026-04-14
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-backup-to-s3.html
+url: https://aidev.fit/en/database/database-backup-to-s3.html
 ---
 
 # Database Backup Strategies to Object Storage
@@ -55,6 +55,10 @@ A backup is only as good as its restoration. Test full restoration regularly—a
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>)
+
+**See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>)
 
 **See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>)
 

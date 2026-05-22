@@ -3,7 +3,7 @@ title: "RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformat
 description: "Optimize RAG retrieval with hybrid search combining dense and sparse methods, cross-encoder re-ranking, and query transformation techniques for better results."
 date: 2026-02-19
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/rag-retrieval-optimization.html
+url: https://aidev.fit/en/ai/rag-retrieval-optimization.html
 ---
 
 # RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
@@ -255,6 +255,10 @@ Optimize RAG retrieval in three layers. First, implement hybrid search combining
 **See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search](</en/ai/vector-database-tuning.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>)
 
 **See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search](</en/ai/vector-database-tuning.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>)
+
+**See also:** [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)
+
+**See also:** [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)
 
 **See also:** [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)
 

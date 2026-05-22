@@ -3,7 +3,7 @@ title: "Webhook Implementation: Design, Security, and Best Practices (2026)"
 description: "Complete guide to building webhook systems: event design, retry strategies (exponential backoff), idempotency, signature verification (HMAC), payload versioning, and monitoring. Code examples in Node.js and Python."
 date: 2025-10-16
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/webhook-implementation-guide.html
+url: https://aidev.fit/en/tech/webhook-implementation-guide.html
 ---
 
 # Webhook Implementation: Design, Security, and Best Practices (2026)

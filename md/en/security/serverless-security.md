@@ -3,7 +3,7 @@ title: "Serverless Security"
 description: "Guide to serverless security covering function permissions, event validation, cold start risks, dependency management, and defense in depth."
 date: 2026-03-13
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/serverless-security.html
+url: https://aidev.fit/en/security/serverless-security.html
 ---
 
 # Serverless Security
@@ -367,6 +367,10 @@ Serverless security requires adapting traditional security principles to a new e
 **See also:** [CORS Security](</en/security/cors-security.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
 
 **See also:** [CORS Security](</en/security/cors-security.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
+
+**See also:** [Session Management Security](</en/security/session-management.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [Session Management Security](</en/security/session-management.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Certificate Management](</en/security/certificate-management.html>)
 
 **See also:** [Session Management Security](</en/security/session-management.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Certificate Management](</en/security/certificate-management.html>)
 

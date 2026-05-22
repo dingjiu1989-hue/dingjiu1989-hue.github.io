@@ -3,7 +3,7 @@ title: "Kubernetes Network Policies"
 description: "In-depth guide to Kubernetes network policies covering ingress/egress rules, Cilium, Calico, and zero-trust networking for pods."
 date: 2026-03-10
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/kubernetes-network-policies.html
+url: https://aidev.fit/en/security/kubernetes-network-policies.html
 ---
 
 # Kubernetes Network Policies
@@ -411,6 +411,10 @@ Kubernetes network policies are essential for cluster security. Start with defau
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Serverless Security](</en/security/serverless-security.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Serverless Security](</en/security/serverless-security.html>)
 
 **See also:** [Microservice Security](</en/security/microservice-security.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Serverless Security](</en/security/serverless-security.html>)
 

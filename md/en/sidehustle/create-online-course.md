@@ -3,7 +3,7 @@ title: "How to Create and Sell an Online Coding Course That Makes $10K+"
 description: "End-to-end guide: topic selection, curriculum design, recording setup, editing, platform comparison (Udemy vs Teachable vs Podia), pricing, and launch strategy for developer courses."
 date: 2025-10-21
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/create-online-course.html
+url: https://aidev.fit/en/sidehustle/create-online-course.html
 ---
 
 # How to Create and Sell an Online Coding Course That Makes $10K+

@@ -3,7 +3,7 @@ title: "AI Agents Memory Patterns: Working, Episodic, Semantic, and Reflective M
 description: "Production memory patterns for AI agents — summarization, vector-backed episodic memory, knowledge graphs, and self-improving reflection loops."
 date: 2025-11-13
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-agents-memory-patterns.html
+url: https://aidev.fit/en/ai/ai-agents-memory-patterns.html
 ---
 
 # AI Agents Memory Patterns: Working, Episodic, Semantic, and Reflective Memory

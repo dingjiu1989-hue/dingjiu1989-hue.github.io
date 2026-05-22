@@ -3,7 +3,7 @@ title: "OLTP vs OLAP: Workload Optimization"
 description: "Compare OLTP and OLAP workloads: row vs column store, indexing strategies, query patterns, hybrid approaches, and HTAP databases."
 date: 2026-03-29
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/oltp-vs-olap.html
+url: https://aidev.fit/en/database/oltp-vs-olap.html
 ---
 
 # OLTP vs OLAP: Workload Optimization
@@ -420,6 +420,10 @@ OLTP and OLAP have fundamentally different requirements. OLTP needs fast point q
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Indexing Strategies](</en/database/database-indexing.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>)
 
 **See also:** [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Database Indexing Strategies](</en/database/database-indexing.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>)
+
+**See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Vector Search Optimization Techniques](</en/database/vector-search-optimization.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
+
+**See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Vector Search Optimization Techniques](</en/database/vector-search-optimization.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
 
 **See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Vector Search Optimization Techniques](</en/database/vector-search-optimization.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
 

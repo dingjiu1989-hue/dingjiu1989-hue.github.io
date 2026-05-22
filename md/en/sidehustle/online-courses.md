@@ -3,7 +3,7 @@ title: "Creating Technical Courses"
 description: "Learn how to create and sell profitable technical courses online — course structure, recording tools, platform selection, pricing tiers, and marketing strategies for developer education."
 date: 2025-12-06
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/online-courses.html
+url: https://aidev.fit/en/sidehustle/online-courses.html
 ---
 
 # Creating Technical Courses
@@ -213,6 +213,10 @@ Technical courses offer exceptional income potential for developers. Choose a to
 **See also:** [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Selling Digital Products as a Developer](</en/sidehustle/digital-products.html>)
 
 **See also:** [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Selling Digital Products as a Developer](</en/sidehustle/digital-products.html>)
+
+**See also:** [Monetizing APIs](</en/sidehustle/api-monetization.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>), [SaaS Pricing Strategies](</en/sidehustle/saas-pricing.html>)
+
+**See also:** [Monetizing APIs](</en/sidehustle/api-monetization.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>), [SaaS Pricing Strategies](</en/sidehustle/saas-pricing.html>)
 
 **See also:** [Monetizing APIs](</en/sidehustle/api-monetization.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>), [SaaS Pricing Strategies](</en/sidehustle/saas-pricing.html>)
 

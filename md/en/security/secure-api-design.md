@@ -3,7 +3,7 @@ title: "Secure API Design Principles"
 description: "Guide to secure API design covering input validation, rate limiting, idempotency, error handling, and defense-in-depth strategies."
 date: 2026-03-12
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/secure-api-design.html
+url: https://aidev.fit/en/security/secure-api-design.html
 ---
 
 # Secure API Design Principles
@@ -379,6 +379,10 @@ Secure API design integrates security into every layer: validate and sanitize al
 **See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [CORS Security](</en/security/cors-security.html>), [Serverless Security](</en/security/serverless-security.html>)
 
 **See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [CORS Security](</en/security/cors-security.html>), [Serverless Security](</en/security/serverless-security.html>)
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Session Management Security](</en/security/session-management.html>), [API Authentication Methods](</en/security/api-authentication.html>)
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Session Management Security](</en/security/session-management.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 
 **See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Session Management Security](</en/security/session-management.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 

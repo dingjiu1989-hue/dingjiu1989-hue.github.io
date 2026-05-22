@@ -3,7 +3,7 @@ title: "Dependency Management"
 description: "Learn dependency management: lock files, vulnerability scanning, semantic versioning, update strategies, and governance"
 date: 2026-01-06
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/dependency-management.html
+url: https://aidev.fit/en/tech/dependency-management.html
 ---
 
 # Dependency Management
@@ -67,6 +67,10 @@ Dependency management requires ongoing attention. Neglected dependencies accumul
 **See also:** [Artifact Management](</en/tech/artifact-management.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
 
 **See also:** [Artifact Management](</en/tech/artifact-management.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
+
+**See also:** [Performance Testing](</en/tech/performance-testing.html>), [Secret Management](</en/tech/secret-management.html>), [Testing Strategies](</en/tech/testing-strategies.html>)
+
+**See also:** [Performance Testing](</en/tech/performance-testing.html>), [Secret Management](</en/tech/secret-management.html>), [Testing Strategies](</en/tech/testing-strategies.html>)
 
 **See also:** [Performance Testing](</en/tech/performance-testing.html>), [Secret Management](</en/tech/secret-management.html>), [Testing Strategies](</en/tech/testing-strategies.html>)
 

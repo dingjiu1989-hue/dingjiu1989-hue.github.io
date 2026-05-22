@@ -3,7 +3,7 @@ title: "Dotfile Management: chezmoi, GNU Stow, Bare Git Repos"
 description: "Manage dotfiles across multiple machines with chezmoi, GNU Stow, and bare git repos. Compare approaches for versioning, templating, and secret management."
 date: 2026-02-03
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/dotfile-management.html
+url: https://aidev.fit/en/tools/dotfile-management.html
 ---
 
 # Dotfile Management: chezmoi, GNU Stow, Bare Git Repos
@@ -224,6 +224,10 @@ Choose chezmoi if you have more than two machines or need secret management. Cho
 **See also:** [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
 
 **See also:** [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
+
+**See also:** [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
+
+**See also:** [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
 
 **See also:** [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
 

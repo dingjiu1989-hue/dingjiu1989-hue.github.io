@@ -3,7 +3,7 @@ title: "Zero Trust Architecture for Startups"
 description: "Implement zero trust architecture for startups: microsegmentation, identity-based access, continuous verification, and least privilege."
 date: 2025-12-20
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/zero-trust-architecture.html
+url: https://aidev.fit/en/security/zero-trust-architecture.html
 ---
 
 # Zero Trust Architecture for Startups
@@ -370,6 +370,10 @@ Zero Trust replaces implicit trust with explicit, continuous verification. For s
 **See also:** [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
 
 **See also:** [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
+
+**See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>)
+
+**See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>)
 
 **See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>)
 

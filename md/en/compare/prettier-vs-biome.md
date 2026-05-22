@@ -3,7 +3,7 @@ title: "Prettier vs Biome (2026): Best Code Formatter for Modern JavaScript?"
 description: "Speed, configurability, and language support compared. Prettier's ecosystem dominance vs Biome's 10x performance and all-in-one linting+formatting approach."
 date: 2025-11-21
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/prettier-vs-biome.html
+url: https://aidev.fit/en/compare/prettier-vs-biome.html
 ---
 
 # Prettier vs Biome (2026): Best Code Formatter for Modern JavaScript?

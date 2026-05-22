@@ -3,7 +3,7 @@ title: "Database Security Hardening Guide"
 description: "Database security best practices: encryption at rest and in transit, row-level security, audit logging, network isolation, and secret rotation."
 date: 2026-05-14
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-security-best-practices.html
+url: https://aidev.fit/en/database/database-security-best-practices.html
 ---
 
 # Database Security Hardening Guide
@@ -501,6 +501,10 @@ Database security requires defense in depth. Encrypt data at rest and in transit
 **See also:** [Database Security Hardening](</en/database/database-security-hardening.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>)
 
 **See also:** [Database Security Hardening](</en/database/database-security-hardening.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>)
+
+**See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>)
+
+**See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>)
 
 **See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>)
 

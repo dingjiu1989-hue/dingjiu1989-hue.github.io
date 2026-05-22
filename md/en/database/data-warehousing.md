@@ -3,7 +3,7 @@ title: "Data Warehousing Concepts and Modern Tools"
 description: "Understand star schema vs snowflake, ETL/ELT, and modern data warehouses including Snowflake, BigQuery, Redshift, and materialized views."
 date: 2026-03-26
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/data-warehousing.html
+url: https://aidev.fit/en/database/data-warehousing.html
 ---
 
 # Data Warehousing Concepts and Modern Tools
@@ -91,6 +91,10 @@ Design with star schema for performance. Build resilient ETL pipelines. Leverage
 **See also:** [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
 
 **See also:** [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
+
+**See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)
+
+**See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)
 
 **See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>)
 

@@ -3,7 +3,7 @@ title: "Domain Event Implementation: Publishing, Handling, and Testing"
 description: "Implement domain events in DDD: event definitions, publishing patterns, handlers, and testing strategies."
 date: 2026-05-07
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/domain-event-implementation.html
+url: https://aidev.fit/en/architecture/domain-event-implementation.html
 ---
 
 # Domain Event Implementation: Publishing, Handling, and Testing
@@ -31,6 +31,10 @@ Transactional outbox ensures events are published reliably. The outbox stores ev
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [DDD Tactical Patterns](</en/architecture/ddd-tactical.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [DDD Tactical Patterns](</en/architecture/ddd-tactical.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
+
+**See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
 
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>)
 

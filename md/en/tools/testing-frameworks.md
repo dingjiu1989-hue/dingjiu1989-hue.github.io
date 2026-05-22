@@ -3,7 +3,7 @@ title: "Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest"
 description: "Compare testing frameworks in 2026: Vitest for modern JS testing, Jest for stability, Playwright and Cypress for browser testing, and pytest for Python."
 date: 2026-02-06
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/testing-frameworks.html
+url: https://aidev.fit/en/tools/testing-frameworks.html
 ---
 
 # Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
@@ -346,6 +346,10 @@ The ideal testing stack in 2026: Vitest for unit tests, Playwright for E2E tests
 **See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Linter and Formatter: ESLint, Prettier, Biome, Ruff](</en/tools/linter-formatter.html>)
 
 **See also:** [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Linter and Formatter: ESLint, Prettier, Biome, Ruff](</en/tools/linter-formatter.html>)
+
+**See also:** [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
+
+**See also:** [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
 
 **See also:** [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
 

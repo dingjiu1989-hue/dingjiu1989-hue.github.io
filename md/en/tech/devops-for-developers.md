@@ -3,7 +3,7 @@ title: "DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practica
 description: "The DevOps skills every developer needs in 2026. CI/CD pipelines, Docker containers, Infrastructure as Code (Terraform), and monitoring. Hands-on, not theoretical."
 date: 2025-10-09
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/devops-for-developers.html
+url: https://aidev.fit/en/tech/devops-for-developers.html
 ---
 
 # DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide

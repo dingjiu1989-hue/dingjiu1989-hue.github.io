@@ -3,7 +3,7 @@ title: "Service Discovery in Microservices"
 description: "Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, including health checking and blue-green deployment strategies."
 date: 2025-12-31
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/service-discovery.html
+url: https://aidev.fit/en/tech/service-discovery.html
 ---
 
 # Service Discovery in Microservices
@@ -69,6 +69,10 @@ Service discovery is foundational to distributed system reliability. Combined wi
 **See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>)
 
 **See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>)
+
+**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>)
+
+**See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>)
 
 **See also:** [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>)
 

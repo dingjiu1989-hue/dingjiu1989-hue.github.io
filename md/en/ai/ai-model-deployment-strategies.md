@@ -3,7 +3,7 @@ title: "AI Model Deployment: Strategies for Production LLM Serving"
 description: "Deploy LLMs to production: serving infrastructure, batching, caching, load balancing, and cost optimization."
 date: 2026-02-19
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-model-deployment-strategies.html
+url: https://aidev.fit/en/ai/ai-model-deployment-strategies.html
 ---
 
 # AI Model Deployment: Strategies for Production LLM Serving
@@ -43,6 +43,10 @@ Track latency (TTFT and TPOT), throughput (tokens/second), error rates, and cost
 **See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>)
 
 **See also:** [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>)
+
+**See also:** [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>)
+
+**See also:** [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>)
 
 **See also:** [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>)
 

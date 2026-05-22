@@ -3,7 +3,7 @@ title: "API Security: Protecting Your REST and GraphQL APIs"
 description: "API security best practices: authentication, authorization, rate limiting, input validation, and OWASP API Top 10."
 date: 2026-03-20
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/api-security-guide.html
+url: https://aidev.fit/en/security/api-security-guide.html
 ---
 
 # API Security: Protecting Your REST and GraphQL APIs
@@ -51,6 +51,10 @@ Address each risk systematically. Start with authorization testing—this is the
 **See also:** [Secure API Design Principles](</en/security/secure-api-design.html>), [Helm Security](</en/security/helm-security.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>)
 
 **See also:** [Secure API Design Principles](</en/security/secure-api-design.html>), [Helm Security](</en/security/helm-security.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>)
+
+**See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [Microservice Security](</en/security/microservice-security.html>), [Serverless Security](</en/security/serverless-security.html>)
+
+**See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [Microservice Security](</en/security/microservice-security.html>), [Serverless Security](</en/security/serverless-security.html>)
 
 **See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [Microservice Security](</en/security/microservice-security.html>), [Serverless Security](</en/security/serverless-security.html>)
 

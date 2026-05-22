@@ -3,7 +3,7 @@ title: "Transactional Inbox Pattern for Reliable Messaging"
 description: "The transactional inbox pattern ensures reliable message processing by storing incoming messages before handling them."
 date: 2026-05-11
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/transactional-inbox.html
+url: https://aidev.fit/en/architecture/transactional-inbox.html
 ---
 
 # Transactional Inbox Pattern for Reliable Messaging
@@ -47,6 +47,10 @@ For REST API consumers, idempotency keys serve a similar purpose. The client gen
 **See also:** [Priority Queue Pattern for Message Processing](</en/architecture/priority-queue.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 
 **See also:** [Priority Queue Pattern for Message Processing](</en/architecture/priority-queue.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
+
+**See also:** [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
+
+**See also:** [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
 
 **See also:** [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>)
 

@@ -3,7 +3,7 @@ title: "Canary Deployments for Safe Releases"
 description: "Learn canary deployment: rolling out changes to a subset of users first to reduce deployment risk."
 date: 2026-05-06
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/canary-deployment.html
+url: https://aidev.fit/en/architecture/canary-deployment.html
 ---
 
 # Canary Deployments for Safe Releases
@@ -43,6 +43,10 @@ Kubernetes-native tools like Flagger and Argo Rollouts automate canary deploymen
 **See also:** [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>), [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
 
 **See also:** [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>), [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>)
 
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>)
 

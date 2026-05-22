@@ -3,7 +3,7 @@ title: "SSO Architecture"
 description: "Designing SSO architecture with SAML, OIDC, session management, and identity provider integration."
 date: 2026-03-19
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/sso-architecture.html
+url: https://aidev.fit/en/security/sso-architecture.html
 ---
 
 # SSO Architecture
@@ -193,6 +193,10 @@ SSO centralizes authentication and improves both security and user experience. C
 **See also:** [Session Management Security](</en/security/session-management.html>), [Cloud Network Security](</en/security/cloud-network-security.html>), [Database Encryption](</en/security/database-encryption.html>)
 
 **See also:** [Session Management Security](</en/security/session-management.html>), [Cloud Network Security](</en/security/cloud-network-security.html>), [Database Encryption](</en/security/database-encryption.html>)
+
+**See also:** [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>)
+
+**See also:** [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>)
 
 **See also:** [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>)
 

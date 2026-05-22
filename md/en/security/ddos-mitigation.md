@@ -3,7 +3,7 @@ title: "DDoS Mitigation"
 description: "Implementing DDoS mitigation with detection, traffic scrubbing, rate limiting, and CDN-based protection."
 date: 2026-03-17
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/ddos-mitigation.html
+url: https://aidev.fit/en/security/ddos-mitigation.html
 ---
 
 # DDoS Mitigation
@@ -63,6 +63,10 @@ Cloud providers offer DDoS protection services: AWS Shield Standard (included) a
 **See also:** [Secure API Design Principles](</en/security/secure-api-design.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Cloud Network Security](</en/security/cloud-network-security.html>)
 
 **See also:** [Secure API Design Principles](</en/security/secure-api-design.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Cloud Network Security](</en/security/cloud-network-security.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [IAM Audit](</en/security/iam-audit.html>), [MFA Implementation](</en/security/mfa-implementation.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [IAM Audit](</en/security/iam-audit.html>), [MFA Implementation](</en/security/mfa-implementation.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [IAM Audit](</en/security/iam-audit.html>), [MFA Implementation](</en/security/mfa-implementation.html>)
 

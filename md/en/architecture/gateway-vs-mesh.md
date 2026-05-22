@@ -3,7 +3,7 @@ title: "API Gateway vs Service Mesh"
 description: "Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and Kong examples"
 date: 2026-04-24
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/gateway-vs-mesh.html
+url: https://aidev.fit/en/architecture/gateway-vs-mesh.html
 ---
 
 # API Gateway vs Service Mesh
@@ -35,6 +35,10 @@ Operational complexity is the primary cost. Operating both systems requires expe
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>)
 
 **See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>)
 

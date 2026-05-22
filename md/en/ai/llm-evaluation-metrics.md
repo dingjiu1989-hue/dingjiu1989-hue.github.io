@@ -3,7 +3,7 @@ title: "LLM Evaluation Metrics"
 description: "A comprehensive overview of LLM evaluation metrics including accuracy, perplexity, BLEU, ROUGE, and human evaluation frameworks."
 date: 2025-12-12
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/llm-evaluation-metrics.html
+url: https://aidev.fit/en/ai/llm-evaluation-metrics.html
 ---
 
 # LLM Evaluation Metrics
@@ -175,6 +175,10 @@ No single metric captures LLM quality. Effective evaluation combines automated m
 **See also:** [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
 
 **See also:** [AI Agent Frameworks Compared](</en/ai/ai-agents-frameworks.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
+
+**See also:** [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [Responsible AI Development Practices](</en/ai/responsible-ai.html>)
+
+**See also:** [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [Responsible AI Development Practices](</en/ai/responsible-ai.html>)
 
 **See also:** [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [Responsible AI Development Practices](</en/ai/responsible-ai.html>)
 

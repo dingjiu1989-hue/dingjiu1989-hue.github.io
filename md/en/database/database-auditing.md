@@ -3,7 +3,7 @@ title: "Database Auditing: Tracking Data Changes"
 description: "Implement database auditing to track who changed what and when for compliance, security, and debugging."
 date: 2026-04-13
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-auditing.html
+url: https://aidev.fit/en/database/database-auditing.html
 ---
 
 # Database Auditing: Tracking Data Changes
@@ -47,6 +47,10 @@ Many regulations require audit trails. GDPR requires tracking personal data acce
 **See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Database Audit Triggers: Automatic Change Tracking](</en/database/database-audit-triggers.html>), [Database Encryption: Data at Rest and in Transit](</en/database/database-encryption.html>)
 
 **See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Database Audit Triggers: Automatic Change Tracking](</en/database/database-audit-triggers.html>), [Database Encryption: Data at Rest and in Transit](</en/database/database-encryption.html>)
+
+**See also:** [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>)
+
+**See also:** [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>)
 
 **See also:** [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries](</en/database/geospatial-data.html>)
 

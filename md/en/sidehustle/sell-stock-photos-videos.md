@@ -3,7 +3,7 @@ title: "Selling Stock Photos, Videos, and Digital Media as a Developer"
 description: "Turn your camera and technical skills into passive income by selling stock photos, videos, 3D assets, and digital media online."
 date: 2025-10-24
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/sell-stock-photos-videos.html
+url: https://aidev.fit/en/sidehustle/sell-stock-photos-videos.html
 ---
 
 # Selling Stock Photos, Videos, and Digital Media as a Developer

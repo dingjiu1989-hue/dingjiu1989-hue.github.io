@@ -3,7 +3,7 @@ title: "Developer Environment Setup Guide"
 description: "Comprehensive guide to setting up a productive developer environment with tools, configuration, and automation."
 date: 2025-12-02
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/dev-environment-setup.html
+url: https://aidev.fit/en/tech/dev-environment-setup.html
 ---
 
 # Developer Environment Setup Guide
@@ -326,6 +326,10 @@ A productive developer environment is personal, but some investments benefit eve
 **See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>)
 
 **See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>)
+
+**See also:** [SSH Security Hardening](</en/tech/ssh-security-hardening.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>)
+
+**See also:** [SSH Security Hardening](</en/tech/ssh-security-hardening.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>)
 
 **See also:** [SSH Security Hardening](</en/tech/ssh-security-hardening.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>)
 

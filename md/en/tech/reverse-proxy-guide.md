@@ -3,7 +3,7 @@ title: "Reverse Proxy Guide"
 description: "Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load balancing."
 date: 2025-12-03
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/reverse-proxy-guide.html
+url: https://aidev.fit/en/tech/reverse-proxy-guide.html
 ---
 
 # Reverse Proxy Guide
@@ -306,6 +306,10 @@ Nginx and Caddy are both excellent reverse proxies. Nginx offers unmatched flexi
 **See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
 
 **See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Nginx Configuration: Performance and Security](</en/tech/nginx-configuration.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
+
+**See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>)
+
+**See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>)
 
 **See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>)
 

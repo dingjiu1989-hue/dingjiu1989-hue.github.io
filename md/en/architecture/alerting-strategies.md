@@ -3,7 +3,7 @@ title: "Alerting Strategies for Production Systems"
 description: "Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design"
 date: 2026-04-21
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/alerting-strategies.html
+url: https://aidev.fit/en/architecture/alerting-strategies.html
 ---
 
 # Alerting Strategies for Production Systems
@@ -41,6 +41,10 @@ Silencing rules provide controlled noise reduction. Scheduled maintenance window
 **See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
 
 **See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
+
+**See also:** [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 
 **See also:** [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 

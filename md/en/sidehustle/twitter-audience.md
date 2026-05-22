@@ -3,7 +3,7 @@ title: "Building a Twitter/X Audience as a Developer"
 description: "Build your Twitter/X audience with content strategy, engagement tactics, networking, and growth techniques for developers."
 date: 2026-01-24
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/twitter-audience.html
+url: https://aidev.fit/en/sidehustle/twitter-audience.html
 ---
 
 # Building a Twitter/X Audience as a Developer
@@ -59,6 +59,10 @@ Building a developer audience on X is a long-term investment in professional inf
 **See also:** [Newsletter Growth: Content Strategy, SEO, and Monetization](</en/sidehustle/newsletter-growth.html>), [LinkedIn Personal Brand for Technical Founders](</en/sidehustle/linkedin-personal-brand.html>), [Indie Hacker Marketing on a Zero Budget](</en/sidehustle/indie-hacker-marketing.html>)
 
 **See also:** [Newsletter Growth: Content Strategy, SEO, and Monetization](</en/sidehustle/newsletter-growth.html>), [LinkedIn Personal Brand for Technical Founders](</en/sidehustle/linkedin-personal-brand.html>), [Indie Hacker Marketing on a Zero Budget](</en/sidehustle/indie-hacker-marketing.html>)
+
+**See also:** [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SEO for SaaS: Technical SEO, Content Clusters, Link Building](</en/sidehustle/seo-for-saas.html>), [Freelancing Platforms: Strategy for Developers](</en/sidehustle/freelance-platform-strategy.html>)
+
+**See also:** [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SEO for SaaS: Technical SEO, Content Clusters, Link Building](</en/sidehustle/seo-for-saas.html>), [Freelancing Platforms: Strategy for Developers](</en/sidehustle/freelance-platform-strategy.html>)
 
 **See also:** [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SEO for SaaS: Technical SEO, Content Clusters, Link Building](</en/sidehustle/seo-for-saas.html>), [Freelancing Platforms: Strategy for Developers](</en/sidehustle/freelance-platform-strategy.html>)
 

@@ -3,7 +3,7 @@ title: "CORS Security"
 description: "In-depth guide to CORS security covering proper origin validation, preflight handling, common misconfigurations, and real-world exploit scenarios."
 date: 2026-03-09
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/cors-security.html
+url: https://aidev.fit/en/security/cors-security.html
 ---
 
 # CORS Security
@@ -231,6 +231,10 @@ CORS misconfigurations remain a top web vulnerability. Never reflect origins dyn
 **See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Serverless Security](</en/security/serverless-security.html>)
 
 **See also:** [Input Validation Deep Dive](</en/security/input-validation.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [Serverless Security](</en/security/serverless-security.html>)
+
+**See also:** [Content Security Policy](</en/security/content-security-policy.html>), [DNS Security](</en/security/dns-security.html>), [Email Security](</en/security/email-security.html>)
+
+**See also:** [Content Security Policy](</en/security/content-security-policy.html>), [DNS Security](</en/security/dns-security.html>), [Email Security](</en/security/email-security.html>)
 
 **See also:** [Content Security Policy](</en/security/content-security-policy.html>), [DNS Security](</en/security/dns-security.html>), [Email Security](</en/security/email-security.html>)
 

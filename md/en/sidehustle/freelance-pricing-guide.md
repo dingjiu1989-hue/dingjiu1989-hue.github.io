@@ -3,7 +3,7 @@ title: "Freelance Pricing Guide for Developers: How to Charge What You're Worth"
 description: "Stop undercharging. Practical pricing models, rate benchmarks by skill and region, project scoping, and how to negotiate rates without losing clients."
 date: 2025-10-20
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/freelance-pricing-guide.html
+url: https://aidev.fit/en/sidehustle/freelance-pricing-guide.html
 ---
 
 # Freelance Pricing Guide for Developers: How to Charge What You're Worth

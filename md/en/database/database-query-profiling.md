@@ -3,7 +3,7 @@ title: "Database Query Profiling: Finding and Fixing Performance Bottlenecks"
 description: "Profile database queries to identify bottlenecks: execution plans, wait events, and systematic optimization."
 date: 2026-04-15
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-query-profiling.html
+url: https://aidev.fit/en/database/database-query-profiling.html
 ---
 
 # Database Query Profiling: Finding and Fixing Performance Bottlenecks
@@ -35,6 +35,10 @@ Identify slow queries via monitoring. Profile with EXPLAIN ANALYZE. Check for se
 **See also:** [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [ORM Performance](</en/database/orm-performance.html>)
 
 **See also:** [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [ORM Performance](</en/database/orm-performance.html>)
+
+**See also:** [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>)
+
+**See also:** [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>)
 
 **See also:** [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>)
 

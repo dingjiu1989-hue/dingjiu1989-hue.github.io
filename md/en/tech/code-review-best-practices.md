@@ -3,7 +3,7 @@ title: "Code Review Best Practices: How to Give and Receive Feedback That Actual
 description: "Learn how to give useful code review feedback, write better PRs, and build a healthy review culture. Specific techniques for reviewers and authors."
 date: 2025-11-27
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/code-review-best-practices.html
+url: https://aidev.fit/en/tech/code-review-best-practices.html
 ---
 
 # Code Review Best Practices: How to Give and Receive Feedback That Actually Improves Code

@@ -3,7 +3,7 @@ title: "Kubernetes Security Best Practices"
 description: "Essential Kubernetes security practices for pod security, network policies, RBAC, and secrets management."
 date: 2025-12-02
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/kubernetes-services-security.html
+url: https://aidev.fit/en/tech/kubernetes-services-security.html
 ---
 
 # Kubernetes Security Best Practices
@@ -392,6 +392,10 @@ Kubernetes security requires defense in depth: Pod Security Admission for pod ha
 **See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)
 
 **See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)
+
+**See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
+
+**See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
 
 **See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
 

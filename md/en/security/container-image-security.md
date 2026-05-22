@@ -3,7 +3,7 @@ title: "Container Image Security"
 description: "Guide to container image security covering minimal base images, multi-stage builds, vulnerability scanning, and image signing with cosign."
 date: 2026-03-09
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/container-image-security.html
+url: https://aidev.fit/en/security/container-image-security.html
 ---
 
 # Container Image Security
@@ -307,6 +307,10 @@ Container image security requires a layered approach: use minimal base images an
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Software Signing](</en/security/software-signing.html>), [Container Scanning Tools: Securing Images in CI/CD](</en/security/container-scanning-tools.html>)
 
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Software Signing](</en/security/software-signing.html>), [Container Scanning Tools: Securing Images in CI/CD](</en/security/container-scanning-tools.html>)
+
+**See also:** [CORS Security](</en/security/cors-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>), [Email Security](</en/security/email-security.html>)
+
+**See also:** [CORS Security](</en/security/cors-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>), [Email Security](</en/security/email-security.html>)
 
 **See also:** [CORS Security](</en/security/cors-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>), [Email Security](</en/security/email-security.html>)
 

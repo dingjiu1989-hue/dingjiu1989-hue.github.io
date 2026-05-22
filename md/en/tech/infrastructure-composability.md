@@ -3,7 +3,7 @@ title: "Infrastructure Composability"
 description: "Explore infrastructure composability: reusable modules, Terraform patterns, component design, and environment management"
 date: 2026-05-12
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/infrastructure-composability.html
+url: https://aidev.fit/en/tech/infrastructure-composability.html
 ---
 
 # Infrastructure Composability
@@ -71,6 +71,10 @@ Infrastructure composability transforms infrastructure management from an art in
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>)
 
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>)
+
+**See also:** [Configuration Management](</en/tech/configuration-management.html>), [Distributed Caching](</en/tech/distributed-caching.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>)
+
+**See also:** [Configuration Management](</en/tech/configuration-management.html>), [Distributed Caching](</en/tech/distributed-caching.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>)
 
 **See also:** [Configuration Management](</en/tech/configuration-management.html>), [Distributed Caching](</en/tech/distributed-caching.html>), [Load Testing Strategies](</en/tech/load-testing-strategies.html>)
 

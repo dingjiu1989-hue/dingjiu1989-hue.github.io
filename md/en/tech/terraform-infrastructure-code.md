@@ -3,7 +3,7 @@ title: "Terraform Infrastructure as Code"
 description: "Master Terraform for managing cloud infrastructure with state management, modules, and production best practices."
 date: 2025-12-03
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/terraform-infrastructure-code.html
+url: https://aidev.fit/en/tech/terraform-infrastructure-code.html
 ---
 
 # Terraform Infrastructure as Code
@@ -366,6 +366,10 @@ Terraform brings software engineering practices to infrastructure. Use remote st
 **See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>)
 
 **See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>)
+
+**See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>)
+
+**See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>)
 
 **See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Helm Charts: Kubernetes Package Management](</en/tech/helm-kubernetes-package-management.html>), [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>)
 

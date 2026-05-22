@@ -3,7 +3,7 @@ title: "Clickjacking Protection"
 description: "Complete guide to clickjacking defense covering X-Frame-Options, CSP frame-ancestors, framebusting techniques, and testing tools."
 date: 2026-03-08
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/clickjacking-protection.html
+url: https://aidev.fit/en/security/clickjacking-protection.html
 ---
 
 # Clickjacking Protection
@@ -250,6 +250,10 @@ Clickjacking is one of the easiest vulnerabilities to prevent but remains surpri
 **See also:** [Email Security](</en/security/email-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
 
 **See also:** [Email Security](</en/security/email-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
+
+**See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
+
+**See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
 
 **See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
 

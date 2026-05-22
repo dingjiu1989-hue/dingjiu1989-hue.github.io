@@ -3,7 +3,7 @@ title: "Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing"
 description: "Implement multi-tenant SaaS architecture: isolation strategies, tenant routing, and pricing models for B2B applications."
 date: 2026-01-22
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/multi-tenant-implementation.html
+url: https://aidev.fit/en/sidehustle/multi-tenant-implementation.html
 ---
 
 # Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
@@ -67,6 +67,10 @@ Multi-tenant architecture choices have long-term implications for your SaaS. Sta
 **See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
 
 **See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
+
+**See also:** [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>), [Affiliate Marketing for Developer Products](</en/sidehustle/affiliate-marketing-tech.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>)
+
+**See also:** [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>), [Affiliate Marketing for Developer Products](</en/sidehustle/affiliate-marketing-tech.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>)
 
 **See also:** [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>), [Affiliate Marketing for Developer Products](</en/sidehustle/affiliate-marketing-tech.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>)
 

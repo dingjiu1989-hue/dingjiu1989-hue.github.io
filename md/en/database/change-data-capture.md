@@ -3,7 +3,7 @@ title: "Change Data Capture (CDC): Debezium, Logical Replication, and Stream Pro
 description: "Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream processing integration. Real-time data pipelines without performance overhead."
 date: 2026-03-30
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/change-data-capture.html
+url: https://aidev.fit/en/database/change-data-capture.html
 ---
 
 # Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
@@ -220,6 +220,10 @@ CDC is the most robust approach for keeping secondary systems synchronized with 
 **See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 
 **See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
+
+**See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
 
 **See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>)
 

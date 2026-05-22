@@ -3,7 +3,7 @@ title: "Build Optimization"
 description: "Explore build optimization: caching, parallelism, incremental builds, distcc, and strategies for faster compilation"
 date: 2026-01-05
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/build-optimization.html
+url: https://aidev.fit/en/tech/build-optimization.html
 ---
 
 # Build Optimization
@@ -69,6 +69,10 @@ Build optimization is an ongoing investment. As projects grow, build systems tha
 **See also:** [Log Management](</en/tech/log-management.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>)
 
 **See also:** [Log Management](</en/tech/log-management.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>)
+
+**See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Distributed Caching](</en/tech/distributed-caching.html>), [Git Workflows](</en/tech/git-workflows.html>)
+
+**See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Distributed Caching](</en/tech/distributed-caching.html>), [Git Workflows](</en/tech/git-workflows.html>)
 
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Distributed Caching](</en/tech/distributed-caching.html>), [Git Workflows](</en/tech/git-workflows.html>)
 

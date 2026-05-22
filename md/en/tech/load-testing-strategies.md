@@ -3,7 +3,7 @@ title: "Load Testing Strategies"
 description: "Explore load testing strategies: ramp-up patterns, steady state, spike testing, soak testing, and tool selection guidance"
 date: 2026-01-08
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/load-testing-strategies.html
+url: https://aidev.fit/en/tech/load-testing-strategies.html
 ---
 
 # Load Testing Strategies
@@ -69,6 +69,10 @@ Load testing should be a regular practice, not a one-time activity. Changes to c
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Testing Strategies](</en/tech/testing-strategies.html>), [Build Optimization](</en/tech/build-optimization.html>)
 
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Testing Strategies](</en/tech/testing-strategies.html>), [Build Optimization](</en/tech/build-optimization.html>)
+
+**See also:** [Log Management](</en/tech/log-management.html>), [Performance Testing](</en/tech/performance-testing.html>), [Python Performance Optimization](</en/tech/python-performance.html>)
+
+**See also:** [Log Management](</en/tech/log-management.html>), [Performance Testing](</en/tech/performance-testing.html>), [Python Performance Optimization](</en/tech/python-performance.html>)
 
 **See also:** [Log Management](</en/tech/log-management.html>), [Performance Testing](</en/tech/performance-testing.html>), [Python Performance Optimization](</en/tech/python-performance.html>)
 

@@ -3,7 +3,7 @@ title: "Selling API Access: Build and Monetize a Developer API Business in 2026"
 description: "How to build, price, and sell API access — the business model powering Stripe, Twilio, and OpenAI. Covers API product design, pricing tiers, and documentation."
 date: 2025-10-24
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/selling-api-access.html
+url: https://aidev.fit/en/sidehustle/selling-api-access.html
 ---
 
 # Selling API Access: Build and Monetize a Developer API Business in 2026

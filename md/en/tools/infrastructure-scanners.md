@@ -3,7 +3,7 @@ title: "Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compar
 description: "Comparative analysis of infrastructure and container vulnerability scanners covering Trivy, Grype, Snyk, and OWASP Dependency-Check for CI/CD integration and SBOM generation."
 date: 2026-01-30
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/infrastructure-scanners.html
+url: https://aidev.fit/en/tools/infrastructure-scanners.html
 ---
 
 # Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
@@ -101,6 +101,10 @@ For most teams, Trivy offers the best balance of coverage, speed, and cost. Its 
 **See also:** [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
 
 **See also:** [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
+
+**See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces](</en/tools/devcontainer-setup.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
+
+**See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces](</en/tools/devcontainer-setup.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
 
 **See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces](</en/tools/devcontainer-setup.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
 

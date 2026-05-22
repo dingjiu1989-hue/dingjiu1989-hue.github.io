@@ -3,7 +3,7 @@ title: "API Gateway Security Patterns"
 description: "Security patterns for API gateways including authentication, rate limiting, IP blocking, request validation, and threat detection."
 date: 2025-12-17
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/api-gateway-security.html
+url: https://aidev.fit/en/security/api-gateway-security.html
 ---
 
 # API Gateway Security Patterns
@@ -431,6 +431,10 @@ The API gateway is the ideal location to centralize security controls: authentic
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Security Log Management](</en/security/log-management-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>)
 
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Security Log Management](</en/security/log-management-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>)
+
+**See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)
+
+**See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)
 
 **See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)
 

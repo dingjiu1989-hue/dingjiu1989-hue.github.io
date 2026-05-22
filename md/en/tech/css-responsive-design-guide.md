@@ -3,7 +3,7 @@ title: "Responsive CSS in 2026: Container Queries, Grid, and Modern Layout Patte
 description: "Modern CSS responsive design beyond media queries. Container queries, CSS Grid, subgrid, clamp() for fluid typography, and the layout patterns that replace frameworks."
 date: 2026-05-15
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/css-responsive-design-guide.html
+url: https://aidev.fit/en/tech/css-responsive-design-guide.html
 ---
 
 # Responsive CSS in 2026: Container Queries, Grid, and Modern Layout Patterns

@@ -3,7 +3,7 @@ title: "Caching Strategies and Patterns in Distributed Systems"
 description: "Caching patterns: cache-aside, write-through, write-behind, eviction policies, distributed caching with Redis, CDN caching, and invalidation."
 date: 2026-04-20
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/caching-strategies.html
+url: https://aidev.fit/en/architecture/caching-strategies.html
 ---
 
 # Caching Strategies and Patterns in Distributed Systems
@@ -549,6 +549,10 @@ Choose cache-aside for most general-purpose caching. Use write-through when read
 **See also:** [Caching Strategies](</en/architecture/cache-strategies.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 
 **See also:** [Caching Strategies](</en/architecture/cache-strategies.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
+
+**See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
 
 **See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
 

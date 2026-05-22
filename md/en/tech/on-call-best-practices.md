@@ -3,7 +3,7 @@ title: "On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigu
 description: "Technical guide to on-call practices covering rotation models, escalation policies, runbook creation, alert fatigue prevention, and tools for effective incident response."
 date: 2026-01-02
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/on-call-best-practices.html
+url: https://aidev.fit/en/tech/on-call-best-practices.html
 ---
 
 # On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention
@@ -120,6 +120,10 @@ Effective on-call practices combine thoughtful rotation design, clear escalation
 **See also:** [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
 
 **See also:** [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting](</en/tech/docker-networking.html>)
+
+**See also:** [Rust vs Go: A Practical Comparison](</en/tech/rust-vs-go-practical.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>), [Kubernetes Pod Design: Patterns and Best Practices](</en/tech/kubernetes-pod-design.html>)
+
+**See also:** [Rust vs Go: A Practical Comparison](</en/tech/rust-vs-go-practical.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>), [Kubernetes Pod Design: Patterns and Best Practices](</en/tech/kubernetes-pod-design.html>)
 
 **See also:** [Rust vs Go: A Practical Comparison](</en/tech/rust-vs-go-practical.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>), [Kubernetes Pod Design: Patterns and Best Practices](</en/tech/kubernetes-pod-design.html>)
 

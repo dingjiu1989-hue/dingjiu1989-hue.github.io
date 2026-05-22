@@ -3,7 +3,7 @@ title: "LLM Function Calling: Complete Developer Guide with Code Examples"
 description: "How to implement function calling / tool use with OpenAI, Anthropic, and Gemini APIs. Schema design, parallel calls, error handling, and chaining multiple function calls. Working examples in Python and TypeScript."
 date: 2025-11-10
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/function-calling-guide.html
+url: https://aidev.fit/en/ai/function-calling-guide.html
 ---
 
 # LLM Function Calling: Complete Developer Guide with Code Examples

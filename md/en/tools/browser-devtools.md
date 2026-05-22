@@ -3,7 +3,7 @@ title: "Browser DevTools: Advanced Debugging Techniques"
 description: "Master browser DevTools: performance profiling, network analysis, memory debugging, and CSS inspection."
 date: 2026-02-07
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/browser-devtools.html
+url: https://aidev.fit/en/tools/browser-devtools.html
 ---
 
 # Browser DevTools: Advanced Debugging Techniques
@@ -49,6 +49,10 @@ CSS Grid and Flexbox inspectors visualize layout. Hover on grid/flex display to 
 **See also:** [Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling](</en/tools/memory-analysis.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
 
 **See also:** [Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling](</en/tools/memory-analysis.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>)
+
+**See also:** [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>)
+
+**See also:** [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>)
 
 **See also:** [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>)
 

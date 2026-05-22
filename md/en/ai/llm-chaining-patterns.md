@@ -3,7 +3,7 @@ title: "LLM Chaining and Pipeline Patterns"
 description: "Explore LLM chaining patterns including sequential chains, parallel processing, map-reduce, routing, and branching for complex AI workflows."
 date: 2025-12-12
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/llm-chaining-patterns.html
+url: https://aidev.fit/en/ai/llm-chaining-patterns.html
 ---
 
 # LLM Chaining and Pipeline Patterns
@@ -294,6 +294,10 @@ LLM chaining transforms unreliable single-shot generation into reliable multi-st
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)
 
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>)
+
+**See also:** [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>)
+
+**See also:** [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>)
 
 **See also:** [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>)
 

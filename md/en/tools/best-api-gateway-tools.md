@@ -3,7 +3,7 @@ title: "Best API Gateway Tools 2026: Kong vs Apache APISIX vs Tyk vs AWS API Gat
 description: "Compare open source and managed API gateways for microservices — routing, rate limiting, auth, plugins, and performance benchmarks."
 date: 2025-11-03
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-api-gateway-tools.html
+url: https://aidev.fit/en/tools/best-api-gateway-tools.html
 ---
 
 # Best API Gateway Tools 2026: Kong vs Apache APISIX vs Tyk vs AWS API Gateway

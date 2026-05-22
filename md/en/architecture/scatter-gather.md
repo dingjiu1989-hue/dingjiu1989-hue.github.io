@@ -3,7 +3,7 @@ title: "Scatter-Gather Pattern for Parallel Processing"
 description: "The scatter-gather pattern: broadcast requests to multiple recipients and aggregate responses for comprehensive results."
 date: 2026-05-09
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/scatter-gather.html
+url: https://aidev.fit/en/architecture/scatter-gather.html
 ---
 
 # Scatter-Gather Pattern for Parallel Processing
@@ -49,6 +49,10 @@ Identify and isolate slow recipients. Implement circuit breakers for recipients 
 **See also:** [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
 
 **See also:** [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
+
+**See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)
+
+**See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)
 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)
 

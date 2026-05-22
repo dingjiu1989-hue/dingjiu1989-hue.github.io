@@ -3,7 +3,7 @@ title: "CI/CD Pipeline Complete Guide 2026: From Git Push to Production"
 description: "End-to-end CI/CD guide: linting, testing, building, security scanning, and deploying. GitHub Actions vs GitLab CI vs CircleCI comparison. Includes monorepo strategies, cache optimization, and deployment patterns (blue-green, canary)."
 date: 2025-10-16
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/ci-cd-pipeline-guide.html
+url: https://aidev.fit/en/tech/ci-cd-pipeline-guide.html
 ---
 
 # CI/CD Pipeline Complete Guide 2026: From Git Push to Production

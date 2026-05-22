@@ -3,7 +3,7 @@ title: "Bootstrapping a SaaS: From Idea to First Paying Customer"
 description: "Complete roadmap for solo developers building a SaaS product. Idea validation, MVP tech stack, launch strategy, and pricing — everything you need to ship and charge."
 date: 2025-10-05
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-bootstrapping-guide.html
+url: https://aidev.fit/en/sidehustle/saas-bootstrapping-guide.html
 ---
 
 # Bootstrapping a SaaS: From Idea to First Paying Customer

@@ -3,7 +3,7 @@ title: "Database Encryption"
 description: "Implementing database encryption with TDE, column-level encryption, application-level encryption, and key management."
 date: 2026-03-17
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/database-encryption.html
+url: https://aidev.fit/en/security/database-encryption.html
 ---
 
 # Database Encryption
@@ -259,6 +259,10 @@ Layer your database encryption strategy. Use TDE for bulk encryption with minima
 **See also:** [Key Management Systems](</en/security/key-management.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
 
 **See also:** [Key Management Systems](</en/security/key-management.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
+
+**See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [Helm Security](</en/security/helm-security.html>), [MFA Implementation](</en/security/mfa-implementation.html>)
+
+**See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [Helm Security](</en/security/helm-security.html>), [MFA Implementation](</en/security/mfa-implementation.html>)
 
 **See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [Helm Security](</en/security/helm-security.html>), [MFA Implementation](</en/security/mfa-implementation.html>)
 

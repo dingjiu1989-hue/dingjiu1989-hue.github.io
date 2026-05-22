@@ -3,7 +3,7 @@ title: "Zero Trust Implementation"
 description: "A practical guide to implementing Zero Trust architecture with micro-segmentation, least privilege, and continuous verification."
 date: 2026-05-14
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/zero-trust-implementation.html
+url: https://aidev.fit/en/security/zero-trust-implementation.html
 ---
 
 # Zero Trust Implementation
@@ -183,6 +183,10 @@ Zero Trust is an architectural shift, not a product. Start with a single applica
 **See also:** [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 
 **See also:** [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
+
+**See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
 
 **See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
 

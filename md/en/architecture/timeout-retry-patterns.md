@@ -3,7 +3,7 @@ title: "Timeout and Retry Patterns"
 description: "Deadline propagation, exponential backoff, jitter, circuit breaker integration, and retry best practices"
 date: 2026-04-30
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/timeout-retry-patterns.html
+url: https://aidev.fit/en/architecture/timeout-retry-patterns.html
 ---
 
 # Timeout and Retry Patterns
@@ -41,6 +41,10 @@ Consistent configuration across services is essential but elusive. Timeout and r
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>)
 
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>)
+
+**See also:** [Health Check Patterns](</en/architecture/health-check-patterns.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [Structured Logging](</en/architecture/structured-logging.html>)
+
+**See also:** [Health Check Patterns](</en/architecture/health-check-patterns.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [Structured Logging](</en/architecture/structured-logging.html>)
 
 **See also:** [Health Check Patterns](</en/architecture/health-check-patterns.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [Structured Logging](</en/architecture/structured-logging.html>)
 

@@ -3,7 +3,7 @@ title: "Environment Variables: The Complete Guide for Developers"
 description: "How to manage .env files, secrets, and configs across local dev, CI/CD, and production. Covers .env.local, Doppler, Infisical, and production security."
 date: 2025-10-10
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/environment-variables-guide.html
+url: https://aidev.fit/en/tech/environment-variables-guide.html
 ---
 
 # Environment Variables: The Complete Guide for Developers

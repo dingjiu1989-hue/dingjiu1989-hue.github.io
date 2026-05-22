@@ -3,7 +3,7 @@ title: "B-Tree, Hash, GiST, GIN: Index Type Selection Guide"
 description: "Choose the right database index type: B-Tree for general use, Hash for equality, GiST/GIN for full-text and JSON."
 date: 2026-04-15
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-index-types.html
+url: https://aidev.fit/en/database/database-index-types.html
 ---
 
 # B-Tree, Hash, GiST, GIN: Index Type Selection Guide
@@ -57,6 +57,10 @@ Start with B-Tree. If B-Tree does not support your query type, evaluate GiST or 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 
 **See also:** [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>)
+
+**See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>)
 
 **See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>)
 

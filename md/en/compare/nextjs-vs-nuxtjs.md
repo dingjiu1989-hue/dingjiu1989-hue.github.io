@@ -3,7 +3,7 @@ title: "Next.js vs Nuxt.js: Meta-Framework Comparison"
 description: "Compare Next.js (React) and Nuxt.js (Vue) meta-frameworks for SSR, SSG, routing, and developer experience."
 date: 2026-05-14
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/nextjs-vs-nuxtjs.html
+url: https://aidev.fit/en/compare/nextjs-vs-nuxtjs.html
 ---
 
 # Next.js vs Nuxt.js: Meta-Framework Comparison
@@ -49,6 +49,10 @@ Choose Next.js for React applications needing SSR, ISR, or static generation. Ve
 **See also:** [Next.js vs Remix 2026: React Frameworks Compared](</en/compare/nextjs-vs-remix-2026.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>), [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>)
 
 **See also:** [Next.js vs Remix 2026: React Frameworks Compared](</en/compare/nextjs-vs-remix-2026.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>), [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>)
+
+**See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [React vs Vue vs Svelte in 2026](</en/compare/react-vs-vue-2026.html>), [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>)
+
+**See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [React vs Vue vs Svelte in 2026](</en/compare/react-vs-vue-2026.html>), [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>)
 
 **See also:** [Flask vs FastAPI: Python Web Framework Comparison 2026](</en/compare/flask-vs-fastapi.html>), [React vs Vue vs Svelte in 2026](</en/compare/react-vs-vue-2026.html>), [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>)
 

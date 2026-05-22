@@ -3,7 +3,7 @@ title: "Bootstrapping Essentials: Building a Startup Without VC Funding"
 description: "Practical guide to bootstrapping a SaaS startup: lean operations, revenue-first growth, and sustainable scaling."
 date: 2026-01-24
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/bootstrapping-essentials.html
+url: https://aidev.fit/en/sidehustle/bootstrapping-essentials.html
 ---
 
 # Bootstrapping Essentials: Building a Startup Without VC Funding
@@ -37,6 +37,10 @@ Grow within your revenue constraints. Avoid premature scaling. Invest in automat
 **See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>)
 
 **See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>)
+
+**See also:** [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>), [SaaS Pricing Experiments: A/B Testing and Value Metrics](</en/sidehustle/pricing-experiments.html>)
+
+**See also:** [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>), [SaaS Pricing Experiments: A/B Testing and Value Metrics](</en/sidehustle/pricing-experiments.html>)
 
 **See also:** [SaaS Churn Reduction: Retention Strategies for Growth](</en/sidehustle/churn-reduction.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>), [SaaS Pricing Experiments: A/B Testing and Value Metrics](</en/sidehustle/pricing-experiments.html>)
 

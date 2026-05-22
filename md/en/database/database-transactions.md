@@ -3,7 +3,7 @@ title: "Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints"
 description: "Master database transactions with a deep dive into ACID properties, isolation levels, nested transactions, savepoints, and PostgreSQL-specific transaction semantics."
 date: 2026-04-03
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-transactions.html
+url: https://aidev.fit/en/database/database-transactions.html
 ---
 
 # Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
@@ -204,6 +204,10 @@ Transactions are not just a SQL feature; they are a correctness contract between
 **See also:** [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
 
 **See also:** [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
+
+**See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
+
+**See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
 
 **See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
 

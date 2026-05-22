@@ -3,7 +3,7 @@ title: "EDR: Endpoint Detection and Response Solutions"
 description: "EDR systems for endpoint security: threat detection, behavioral analysis, automated response, and incident investigation."
 date: 2026-03-23
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/endpoint-detection-response.html
+url: https://aidev.fit/en/security/endpoint-detection-response.html
 ---
 
 # EDR: Endpoint Detection and Response Solutions
@@ -53,6 +53,10 @@ Step 1: Alert triage—determine if the alert represents a genuine threat. Step 
 **See also:** [Endpoint Security](</en/security/endpoint-security.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
 
 **See also:** [Endpoint Security](</en/security/endpoint-security.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Threat Hunting](</en/security/threat-hunting.html>), [IAM Audit](</en/security/iam-audit.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Threat Hunting](</en/security/threat-hunting.html>), [IAM Audit](</en/security/iam-audit.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Threat Hunting](</en/security/threat-hunting.html>), [IAM Audit](</en/security/iam-audit.html>)
 

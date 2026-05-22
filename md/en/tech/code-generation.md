@@ -3,7 +3,7 @@ title: "Code Generation"
 description: "Learn code generation: scaffolding tools, OpenAPI codegen, GraphQL codegen, template engines, and productivity patterns"
 date: 2026-01-06
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/code-generation.html
+url: https://aidev.fit/en/tech/code-generation.html
 ---
 
 # Code Generation
@@ -63,6 +63,10 @@ Code generation is a powerful productivity tool, but it should be used thoughtfu
 **See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [API Documentation](</en/tech/api-documentation.html>), [Task Queues](</en/tech/task-queues.html>)
 
 **See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [API Documentation](</en/tech/api-documentation.html>), [Task Queues](</en/tech/task-queues.html>)
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Artifact Management](</en/tech/artifact-management.html>)
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Artifact Management](</en/tech/artifact-management.html>)
 
 **See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Artifact Management](</en/tech/artifact-management.html>)
 

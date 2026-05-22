@@ -3,7 +3,7 @@ title: "10 Developer Side Hustles That Actually Make Money in 2026"
 description: "From freelancing to SaaS to API monetization — 10 proven side hustles for software developers ranked by effort and earning potential."
 date: 2025-10-04
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/developer-side-hustles-2026.html
+url: https://aidev.fit/en/sidehustle/developer-side-hustles-2026.html
 ---
 
 # 10 Developer Side Hustles That Actually Make Money in 2026

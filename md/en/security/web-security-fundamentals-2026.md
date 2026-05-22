@@ -3,7 +3,7 @@ title: "Web Security Fundamentals 2026: A Developer Complete Guide"
 description: "Everything developers need to know about web security in 2026 — OWASP Top 10, authentication, encryption, CSP, and production security patterns."
 date: 2025-12-17
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/web-security-fundamentals-2026.html
+url: https://aidev.fit/en/security/web-security-fundamentals-2026.html
 ---
 
 # Web Security Fundamentals 2026: A Developer Complete Guide
@@ -478,6 +478,10 @@ _Last updated: May 2026_
 **See also:** [AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026](</en/ai/ai-security-complete-guide.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys](</en/tech/authentication-best-practices-2026.html>)
 
 **See also:** [AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026](</en/ai/ai-security-complete-guide.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys](</en/tech/authentication-best-practices-2026.html>)
+
+**See also:** [Content Security Policy](</en/security/content-security-policy.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Content Security Policy](</en/security/content-security-policy.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 
 **See also:** [Content Security Policy](</en/security/content-security-policy.html>), [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 

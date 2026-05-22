@@ -3,7 +3,7 @@ title: "Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval"
 description: "Build multi-modal RAG systems that handle images, tables, and documents. Learn chunking strategies, embedding approaches, and retrieval fusion for different dat"
 date: 2026-02-17
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/multi-modal-rag.html
+url: https://aidev.fit/en/ai/multi-modal-rag.html
 ---
 
 # Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
@@ -315,6 +315,10 @@ Multi-modal RAG extends retrieval to images, tables, and other visual content. T
 **See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>), [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>)
 
 **See also:** [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>), [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>)
+
+**See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)
+
+**See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)
 
 **See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>)
 

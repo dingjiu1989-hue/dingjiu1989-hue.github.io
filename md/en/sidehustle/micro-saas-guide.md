@@ -3,7 +3,7 @@ title: "Building a Micro-SaaS in 2026"
 description: "A practical guide to building and launching a profitable micro-SaaS business in 2026 — idea validation, MVP scope, pricing strategy, distribution channels, and customer acquisition."
 date: 2025-12-06
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/micro-saas-guide.html
+url: https://aidev.fit/en/sidehustle/micro-saas-guide.html
 ---
 
 # Building a Micro-SaaS in 2026
@@ -162,6 +162,10 @@ Micro-SaaS in 2026 is more accessible than ever. Find a narrow, painful problem 
 **See also:** [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>), [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
 
 **See also:** [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>), [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
+
+**See also:** [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [No-Code and Low-Code Business Opportunities](</en/sidehustle/no-code-business.html>), [Monetizing APIs](</en/sidehustle/api-monetization.html>)
+
+**See also:** [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [No-Code and Low-Code Business Opportunities](</en/sidehustle/no-code-business.html>), [Monetizing APIs](</en/sidehustle/api-monetization.html>)
 
 **See also:** [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [No-Code and Low-Code Business Opportunities](</en/sidehustle/no-code-business.html>), [Monetizing APIs](</en/sidehustle/api-monetization.html>)
 

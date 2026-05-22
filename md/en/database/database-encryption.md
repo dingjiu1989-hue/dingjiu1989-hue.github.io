@@ -3,7 +3,7 @@ title: "Database Encryption: Data at Rest and in Transit"
 description: "Implement database encryption at rest and in transit to protect sensitive data and meet compliance requirements."
 date: 2026-04-14
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-encryption.html
+url: https://aidev.fit/en/database/database-encryption.html
 ---
 
 # Database Encryption: Data at Rest and in Transit
@@ -51,6 +51,10 @@ Encryption is required by most compliance frameworks. GDPR, HIPAA, PCI-DSS, and 
 **See also:** [Database Auditing: Tracking Data Changes](</en/database/database-auditing.html>), [Database Audit Triggers: Automatic Change Tracking](</en/database/database-audit-triggers.html>), [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>)
 
 **See also:** [Database Auditing: Tracking Data Changes](</en/database/database-auditing.html>), [Database Audit Triggers: Automatic Change Tracking](</en/database/database-audit-triggers.html>), [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>)
+
+**See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
+
+**See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 
 **See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 

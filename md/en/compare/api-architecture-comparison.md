@@ -3,7 +3,7 @@ title: "API Architecture Comparison 2026: REST vs GraphQL vs tRPC vs gRPC vs Web
 description: "Compare six API architectures for different use cases — public APIs, microservices, real-time apps, and TypeScript monorepos. When each wins and when each fails."
 date: 2025-11-27
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/api-architecture-comparison.html
+url: https://aidev.fit/en/compare/api-architecture-comparison.html
 ---
 
 # API Architecture Comparison 2026: REST vs GraphQL vs tRPC vs gRPC vs WebSocket vs SSE

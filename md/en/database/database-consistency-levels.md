@@ -3,7 +3,7 @@ title: "Database Consistency Levels Explained"
 description: "Understanding database consistency: strong consistency, eventual consistency, and tunable consistency in distributed systems."
 date: 2026-04-14
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-consistency-levels.html
+url: https://aidev.fit/en/database/database-consistency-levels.html
 ---
 
 # Database Consistency Levels Explained
@@ -49,6 +49,10 @@ Use strong consistency for financial transactions, inventory management, and use
 **See also:** [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)
 
 **See also:** [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)
+
+**See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>)
+
+**See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>)
 
 **See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>)
 

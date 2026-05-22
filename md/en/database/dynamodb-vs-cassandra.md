@@ -3,7 +3,7 @@ title: "DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost"
 description: "In-depth comparison of DynamoDB vs Cassandra covering data model, consistency levels, scaling strategies, query patterns, and cost considerations."
 date: 2026-04-05
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/dynamodb-vs-cassandra.html
+url: https://aidev.fit/en/database/dynamodb-vs-cassandra.html
 ---
 
 # DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
@@ -308,6 +308,10 @@ DynamoDB and Cassandra are both excellent at what they do: high-throughput, scal
 **See also:** [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
 
 **See also:** [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
+
+**See also:** [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
+
+**See also:** [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
 
 **See also:** [Databases in Containers: StatefulSets, Persistent Volumes, and Backup](</en/database/database-containerization.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
 

@@ -3,7 +3,7 @@ title: "Is ChatGPT Plus Worth It? Free vs Plus vs Pro Compared (2026)"
 description: "An honest comparison of ChatGPT's three pricing tiers: Free, Plus ($20/mo), and Pro ($200/mo). Who should pay, who shouldn't, and how to get the most value."
 date: 2025-10-08
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/chatgpt-plus-worth.html
+url: https://aidev.fit/en/ai/chatgpt-plus-worth.html
 ---
 
 # Is ChatGPT Plus Worth It? Free vs Plus vs Pro Compared (2026)

@@ -3,7 +3,7 @@ title: "Semantic Search Implementation Guide: Embeddings, Vector Databases, and 
 description: "Step-by-step guide to building semantic search — embedding models comparison, chunking strategies, pgvector setup, and production architecture."
 date: 2025-11-12
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/semantic-search-implementation.html
+url: https://aidev.fit/en/ai/semantic-search-implementation.html
 ---
 
 # Semantic Search Implementation Guide: Embeddings, Vector Databases, and Reranking

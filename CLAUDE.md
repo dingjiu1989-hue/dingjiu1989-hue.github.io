@@ -1,7 +1,7 @@
 # AI Study Room (gh-pages-demo)
 
 GitHub Pages static site: 850 EN + 150 ZH bilingual tech articles.
-Live: https://dingjiu1989-hue.github.io
+Live: https://aidev.fit (via ghost domain dingjiu1989-hue.github.io)
 
 ## Key Paths
 
@@ -46,7 +46,7 @@ python3 scripts/indexnow_submit.py
 ## Conventions
 
 - **All site content is auto-generated** from `en/articles.json` and `articles.json` (CN). Never edit HTML files directly.
-- **Canonical URLs** point to `https://dingjiu1989-hue.github.io` for all syndicated copies.
+- **Canonical URLs** point to `https://aidev.fit` for all syndicated copies.
 - **html2text global instance** — always create a fresh instance per function; the shared global at module level corrupts after ~500 articles.
 - **Images** live in `images/covers/en/{board}/{slug}.png` (1200×630, auto-generated).
 - **Risk controls**: 3 articles/run, 120s between posts, circuit breaker at 2 failures, 200/day global cap.
@@ -55,6 +55,6 @@ python3 scripts/indexnow_submit.py
 
 - `gen_en_site.py` reads `en/articles.json` → generates `/en/{board}/{slug}.html` + homepage + sitemap + search index
 - Boards: tech, sidehustle, tools, ai, compare, architecture, database, security (EN) + same 5 in ZH
-- AI crawlers explicitly welcomed in `robots.txt` (16 crawler rules)
+- AI crawlers explicitly welcomed in `robots.txt` (23 crawler rules)
 - JSON-LD structured data on every article page
 - No framework, no build tool — raw HTML/CSS/JS, no dependencies beyond Python stdlib + Pillow + html2text

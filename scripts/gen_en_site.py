@@ -3,12 +3,13 @@
 import json, re, html as html_mod, urllib.parse
 from pathlib import Path
 from datetime import date
+from scripts.site_config import BASE_URL, SITE_DOMAIN, SITE_NAME
 
 ROOT = Path(__file__).resolve().parent.parent
 EN_DIR = ROOT / 'en'
 ARTICLES_JSON = EN_DIR / 'articles.json'
 TODAY = date.today().isoformat()
-BASE = 'https://dingjiu1989-hue.github.io'
+BASE = BASE_URL
 
 def md_to_html(md_text):
     """Convert markdown to HTML. Strips the first H1 (article title)
@@ -13159,9 +13160,9 @@ BODIES['ai-coding-tools-90-days'] = '''
 </ol>
 
 <h2>Further Reading</h2>
-<p>For a more detailed feature-by-feature comparison of Cursor vs Copilot vs Claude Code, see my <a href="https://dingjiu1989-hue.github.io/en/compare/cursor-vs-copilot-vs-claude-code.html">full comparison article</a>. For benchmark data on LLM coding performance across more models, check the <a href="https://dingjiu1989-hue.github.io/en/ai/best-llms-for-coding-2026.html">LLM for coding guide</a>.</p>
+<p>For a more detailed feature-by-feature comparison of Cursor vs Copilot vs Claude Code, see my <a href="{BASE}/en/compare/cursor-vs-copilot-vs-claude-code.html">full comparison article</a>. For benchmark data on LLM coding performance across more models, check the <a href="{BASE}/en/ai/best-llms-for-coding-2026.html">LLM for coding guide</a>.</p>
 
-<p><em>This article was originally published on <a href="https://dingjiu1989-hue.github.io/en/ai/ai-coding-tools-90-days.html">SourceHub</a>.</em></p>
+<p><em>This article was originally published on <a href="{BASE}/en/ai/ai-coding-tools-90-days.html">SourceHub</a>.</em></p>
 '''
 
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
@@ -13366,8 +13367,8 @@ def make_article_html(art, board_id, board_name, all_posts):
     cn_hreflang = f'    <link rel="alternate" hreflang="zh-CN" href="{cn_url}">\n' if cn_path.exists() else ''
 
     # Cover image for social sharing + article hero
-    cover_url = f'https://dingjiu1989-hue.github.io/images/covers/en/{board_id}/{slug}.png'
-    cover_webp = f'https://dingjiu1989-hue.github.io/images/covers/en/{board_id}/{slug}.webp'
+    cover_url = f'{BASE}/images/covers/en/{board_id}/{slug}.png'
+    cover_webp = f'{BASE}/images/covers/en/{board_id}/{slug}.webp'
     tags_str = ', '.join(art.get('tags', []))
     # "about" structured topics for AI crawlers
     about_entries = ', '.join(f'{{"@type": "Thing", "name": "{t}"}}' for t in art.get('tags', [])[:5])
@@ -13482,6 +13483,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     body_text = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', body_html)).strip()
     body_text_len = len(body_text)
     word_est = max(300, body_text_len // 5)
+    read_time = max(1, word_est // 200)
 
     # Thin content guard: noindex articles under 2K chars plain text to protect site quality
     robots_meta = 'noindex, follow' if body_text_len < 2000 else 'index, follow'
@@ -13627,7 +13629,7 @@ def make_article_html(art, board_id, board_name, all_posts):
       "isAccessibleForFree": true,
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {{"@type": "Person", "name": "SourceHub"}},
-      "publisher": {{"@type": "Organization", "name": "SourceHub", "logo": {{"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}}}},
+      "publisher": {{"@type": "Organization", "name": "SourceHub", "logo": {{"@type": "ImageObject", "url": "{BASE}/images/logo.png"}}}},
       "mainEntityOfPage": {{"@type": "WebPage", "@id": "{art_url}"}}{sameas_json},
       "articleBody": {body_json}
     }}
@@ -13637,8 +13639,8 @@ def make_article_html(art, board_id, board_name, all_posts):
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"}},
-        {{"@type": "ListItem", "position": 2, "name": "{board_name}", "item": "https://dingjiu1989-hue.github.io/en/{board_id}/"}},
+        {{"@type": "ListItem", "position": 1, "name": "Home", "item": "{BASE}/en/"}},
+        {{"@type": "ListItem", "position": 2, "name": "{board_name}", "item": "{BASE}/en/{board_id}/"}},
         {{"@type": "ListItem", "position": 3, "name": "{art['title']}"}}
       ]
     }}
@@ -13665,7 +13667,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     <article>
       <div class="article-tags">{pin_h}{tags_h}</div>
       <h1 class="article-title">{art['title']}</h1>
-      <div class="article-meta">Published {art['date']}{' · Last active ' + art['lastActive'] if art.get('lastActive') and art['lastActive'] != art['date'] else ''} · {art['replies'] * 120} views · {art['replies']} replies</div>
+      <div class="article-meta">Published {art['date']}{' · Last active ' + art['lastActive'] if art.get('lastActive') and art['lastActive'] != art['date'] else ''} · {art['replies'] * 120} views · {art['replies']} replies · {read_time} min read</div>
       <picture><source srcset="{cover_webp}" type="image/webp"><img class="article-cover" src="{cover_url}" alt="{art['title']}" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
       <div class="article-body">{body_raw}{see_also}</div>
     </article>
@@ -13748,38 +13750,38 @@ def make_homepage(data):
     </script>
     <meta property="og:title" content="SourceHub — {site['tagline']}">
     <meta property="og:description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
-    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/">
+    <meta property="og:url" content="{BASE}/en/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image" content="{BASE}/images/logo.png">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="SourceHub — {site['tagline']}">
     <meta name="twitter:description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="{BASE}/images/logo.png">
     <title>SourceHub — {site['tagline']}</title>
     <meta name="description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" type="application/rss+xml" title="SourceHub RSS" href="/en/feed.xml">
-    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/">
-    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/">
-    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/">
+    <link rel="alternate" hreflang="zh-CN" href="{BASE}/">
+    <link rel="alternate" hreflang="en" href="{BASE}/en/">
+    <link rel="canonical" href="{BASE}/en/">
     <meta name="robots" content="index, follow">
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "SourceHub",
-      "url": "https://dingjiu1989-hue.github.io/en/",
+      "url": "{BASE}/en/",
       "description": "{site['tagline']}",
-      "acquireLicensePage": "https://dingjiu1989-hue.github.io/en/about.html",
+      "acquireLicensePage": "{BASE}/en/about.html",
       "potentialAction": {{
         "@type": "SearchAction",
         "target": {{
           "@type": "EntryPoint",
-          "urlTemplate": "https://dingjiu1989-hue.github.io/en/?search={{search_term_string}}"
+          "urlTemplate": "{BASE}/en/?search={{search_term_string}}"
         }},
         "query-input": "required name=search_term_string"
       }}
@@ -13790,8 +13792,8 @@ def make_homepage(data):
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "SourceHub",
-      "url": "https://dingjiu1989-hue.github.io/en/",
-      "logo": "https://dingjiu1989-hue.github.io/images/logo.png"
+      "url": "{BASE}/en/",
+      "logo": "{BASE}/images/logo.png"
     }}
     </script>
     <script>
@@ -13920,13 +13922,13 @@ def make_category(data, board_id):
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta property="og:image" content="{BASE}/images/logo.png">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{title} — SourceHub">
     <meta name="twitter:description" content="{board_descs[board_id]}">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/logo.png">
+    <meta name="twitter:image" content="{BASE}/images/logo.png">
     <title>{title} — SourceHub</title>
     <meta name="description" content="{board_descs[board_id]}">
     <link rel="stylesheet" href="/css/style.css">
@@ -13947,7 +13949,7 @@ def make_category(data, board_id):
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"}},
+        {{"@type": "ListItem", "position": 1, "name": "Home", "item": "{BASE}/en/"}},
         {{"@type": "ListItem", "position": 2, "name": "{title}", "item": "{en_url}"}}
       ]
     }}
@@ -14022,31 +14024,31 @@ def make_all_html(data):
     <title>All {total} Articles — SourceHub</title>
     <meta name="description" content="Complete index of {total} developer articles across {len(data['boards'])} topic boards: tech tutorials, AI guides, tool comparisons, side hustle, security, database, and architecture.">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/all.html">
-    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/all.html">
-    <link rel="alternate" hreflang="zh-CN" href="https://dingjiu1989-hue.github.io/all.html">
+    <link rel="canonical" href="{BASE}/en/all.html">
+    <link rel="alternate" hreflang="en" href="{BASE}/en/all.html">
+    <link rel="alternate" hreflang="zh-CN" href="{BASE}/all.html">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="All {total} Articles — SourceHub">
     <meta property="og:description" content="Complete index of {total} developer articles across {len(data['boards'])} topic boards.">
-    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/all.html">
+    <meta property="og:url" content="{BASE}/en/all.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="SourceHub">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/og-default.jpg">
+    <meta property="og:image" content="{BASE}/images/og-default.jpg">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="All {total} Articles — SourceHub">
     <meta name="twitter:description" content="Complete developer article index: {total} articles across {len(data['boards'])} topic boards.">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/og-default.jpg">
+    <meta name="twitter:image" content="{BASE}/images/og-default.jpg">
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",
       "@type": "CollectionPage",
       "name": "All Articles — SourceHub",
       "description": "Complete index of {total} developer articles across {len(data['boards'])} topic boards.",
-      "url": "https://dingjiu1989-hue.github.io/en/all.html",
+      "url": "{BASE}/en/all.html",
       "isAccessibleForFree": true,
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "about": {{"@type": "WebSite", "name": "SourceHub", "url": "https://dingjiu1989-hue.github.io/en/"}}
+      "about": {{"@type": "WebSite", "name": "SourceHub", "url": "{BASE}/en/"}}
     }}
     </script>
 </head>

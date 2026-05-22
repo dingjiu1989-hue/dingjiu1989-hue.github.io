@@ -3,7 +3,7 @@ title: "AI Data Privacy: PII Detection, Data Anonymization, Local Processing"
 description: "Protect user privacy in AI applications with PII detection and redaction, data anonymization techniques, and local processing strategies for sensitive data."
 date: 2026-02-14
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-data-privacy.html
+url: https://aidev.fit/en/ai/ai-data-privacy.html
 ---
 
 # AI Data Privacy: PII Detection, Data Anonymization, Local Processing
@@ -319,6 +319,10 @@ AI data privacy requires proactive protection rather than reactive compliance. D
 **See also:** [AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection](</en/ai/ai-monitoring-alerting.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>)
 
 **See also:** [AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection](</en/ai/ai-monitoring-alerting.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>)
+
+**See also:** [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
+
+**See also:** [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
 
 **See also:** [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
 

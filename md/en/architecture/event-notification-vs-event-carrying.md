@@ -3,7 +3,7 @@ title: "Event Notification vs Event-Carried State Transfer"
 description: "Compare event notification and event-carried state transfer patterns for microservices communication."
 date: 2026-05-07
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/event-notification-vs-event-carrying.html
+url: https://aidev.fit/en/architecture/event-notification-vs-event-carrying.html
 ---
 
 # Event Notification vs Event-Carried State Transfer
@@ -37,6 +37,10 @@ Use event notification when the consumer always needs fresh data or the event's 
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>)
 
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>)
+
+**See also:** [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
+
+**See also:** [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
 
 **See also:** [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
 

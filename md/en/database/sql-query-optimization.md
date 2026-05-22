@@ -3,7 +3,7 @@ title: "SQL Query Optimization"
 description: "Master SQL query optimization with EXPLAIN plans, indexing strategies, JOIN optimization, and common performance anti-patterns."
 date: 2025-12-24
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/sql-query-optimization.html
+url: https://aidev.fit/en/database/sql-query-optimization.html
 ---
 
 # SQL Query Optimization
@@ -251,6 +251,10 @@ SQL query optimization starts with understanding the query plan through EXPLAIN 
 **See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
 
 **See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
+
+**See also:** [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
+
+**See also:** [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
 
 **See also:** [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
 

@@ -3,7 +3,7 @@ title: "API Composition and Aggregation"
 description: "API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation strategies"
 date: 2026-04-21
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/api-composition.html
+url: https://aidev.fit/en/architecture/api-composition.html
 ---
 
 # API Composition and Aggregation
@@ -35,6 +35,10 @@ The choice between these patterns depends on client diversity, team structure, a
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
+
+**See also:** [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
 
 **See also:** [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
 

@@ -3,7 +3,7 @@ title: "Git Advanced: Interactive Rebase, Cherry-Pick, Bisect, and More"
 description: "Master the Git commands that separate senior developers from juniors. Interactive rebase, cherry-pick, bisect, reflog recovery, and custom Git hooks."
 date: 2025-10-03
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/git-advanced.html
+url: https://aidev.fit/en/tech/git-advanced.html
 ---
 
 # Git Advanced: Interactive Rebase, Cherry-Pick, Bisect, and More

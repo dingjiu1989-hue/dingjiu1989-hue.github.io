@@ -3,7 +3,7 @@ title: "Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridg
 description: "Design event-driven systems with practical patterns — event sourcing, CQRS, sagas, and choosing the right message broker."
 date: 2025-10-17
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/event-driven-architecture-guide.html
+url: https://aidev.fit/en/tech/event-driven-architecture-guide.html
 ---
 
 # Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared

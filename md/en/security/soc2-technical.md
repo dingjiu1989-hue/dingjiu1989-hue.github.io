@@ -3,7 +3,7 @@ title: "SOC 2 Technical Controls"
 description: "Implementing SOC 2 technical controls for logging, monitoring, access review, and change management."
 date: 2026-03-19
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/soc2-technical.html
+url: https://aidev.fit/en/security/soc2-technical.html
 ---
 
 # SOC 2 Technical Controls
@@ -307,6 +307,10 @@ SOC 2 technical controls require systematic implementation across logging, acces
 **See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)
 
 **See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)
+
+**See also:** [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>)
+
+**See also:** [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>)
 
 **See also:** [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>)
 

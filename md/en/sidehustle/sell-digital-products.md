@@ -3,7 +3,7 @@ title: "How to Create and Sell Digital Products: A Developer's Complete Guide"
 description: "Code templates, ebooks, Notion dashboards, component libraries — everything developers can build once and sell infinitely. Includes pricing, platforms, and launch strategy."
 date: 2025-10-20
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/sell-digital-products.html
+url: https://aidev.fit/en/sidehustle/sell-digital-products.html
 ---
 
 # How to Create and Sell Digital Products: A Developer's Complete Guide

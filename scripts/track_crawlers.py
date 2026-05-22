@@ -17,7 +17,7 @@ from pathlib import Path
 from datetime import date, datetime, timedelta
 
 ROOT = Path(__file__).resolve().parent.parent
-BASE = "https://dingjiu1989-hue.github.io"
+BASE = "https://aidev.fit"
 DATA_DIR = ROOT / "data"
 STATS_FILE = DATA_DIR / "crawl-stats.json"
 
@@ -206,7 +206,7 @@ def pull_gsc_crawl_data():
         try:
             sites = service.sites().list().execute()
             for s in sites.get("siteEntry", []):
-                if "dingjiu1989-hue.github.io" in s.get("siteUrl", ""):
+                if "dingjiu1989-hue.github.io" in s.get("siteUrl", "") or "aidev.fit" in s.get("siteUrl", ""):
                     site_url = s["siteUrl"]
                     break
         except Exception:

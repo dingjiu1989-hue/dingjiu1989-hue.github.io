@@ -3,7 +3,7 @@ title: "Best Static Site Generators 2026: Astro vs Hugo vs 11ty vs Jekyll"
 description: "Compare the top static site generators on build speed, templating, CMS support, and developer experience. Pick the right SSG for your blog, docs, or portfolio."
 date: 2025-10-27
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-static-site-generators-2026.html
+url: https://aidev.fit/en/tools/best-static-site-generators-2026.html
 ---
 
 # Best Static Site Generators 2026: Astro vs Hugo vs 11ty vs Jekyll

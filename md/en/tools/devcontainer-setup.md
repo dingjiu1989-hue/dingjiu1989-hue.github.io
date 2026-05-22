@@ -3,7 +3,7 @@ title: "Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codesp
 description: "Technical guide to development containers covering devcontainer.json configuration, features, dotfiles integration, remote development workflows, and GitHub Codespaces."
 date: 2026-01-29
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/devcontainer-setup.html
+url: https://aidev.fit/en/tools/devcontainer-setup.html
 ---
 
 # Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
@@ -203,6 +203,10 @@ Dev containers transform development environment management. devcontainer.json d
 **See also:** [Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared](</en/tools/kubernetes-dashboards.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics](</en/tools/ci-cd-observability.html>)
 
 **See also:** [Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared](</en/tools/kubernetes-dashboards.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics](</en/tools/ci-cd-observability.html>)
+
+**See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>), [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>)
+
+**See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>), [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>)
 
 **See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features](</en/tools/ide-comparison-2026.html>), [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>)
 

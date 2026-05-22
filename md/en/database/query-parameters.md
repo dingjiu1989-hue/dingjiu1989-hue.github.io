@@ -3,7 +3,7 @@ title: "Query Parameterization: Bind Parameters, Prepared Statements, and SQL In
 description: "Learn query parameterization in PostgreSQL: bind parameters, prepared statements, plan caching, and protection against SQL injection attacks."
 date: 2026-04-08
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/query-parameters.html
+url: https://aidev.fit/en/database/query-parameters.html
 ---
 
 # Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
@@ -291,6 +291,10 @@ Parameterization is the single most impactful practice for database security and
 **See also:** [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
 
 **See also:** [Stored Procedures vs Functions: When to Use, Languages, Security](</en/database/stored-procedures.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>)
+
+**See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
+
+**See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
 
 **See also:** [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
 

@@ -3,7 +3,7 @@ title: "Vector Database Tuning: Index Parameters, Search Configuration, and Hybr
 description: "Optimize vector database performance: index parameter tuning, search configuration for speed and accuracy, and hybrid search implementation."
 date: 2026-02-12
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/vector-database-tuning.html
+url: https://aidev.fit/en/ai/vector-database-tuning.html
 ---
 
 # Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
@@ -81,6 +81,10 @@ Vector database tuning is iterative. Start with defaults, benchmark your recall 
 **See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>)
 
 **See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>)
+
+**See also:** [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>)
+
+**See also:** [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>)
 
 **See also:** [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>)
 

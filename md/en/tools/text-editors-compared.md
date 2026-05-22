@@ -3,7 +3,7 @@ title: "Text Editors Compared"
 description: "In-depth comparison of VS Code, NeoVim, Zed, and JetBrains IDEs for modern development workflows."
 date: 2025-12-10
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/text-editors-compared.html
+url: https://aidev.fit/en/tools/text-editors-compared.html
 ---
 
 # Text Editors Compared
@@ -322,6 +322,10 @@ There is no single best editor. VS Code offers the best ecosystem and accessibil
 **See also:** [Container Runtimes Compared](</en/tools/container-runtimes-compared.html>), [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>)
 
 **See also:** [Container Runtimes Compared](</en/tools/container-runtimes-compared.html>), [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>)
+
+**See also:** [Best Code Formatters and Linters](</en/tools/code-formatters-linters.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Best Markdown Editors](</en/tools/markdown-editors.html>)
+
+**See also:** [Best Code Formatters and Linters](</en/tools/code-formatters-linters.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Best Markdown Editors](</en/tools/markdown-editors.html>)
 
 **See also:** [Best Code Formatters and Linters](</en/tools/code-formatters-linters.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Best Markdown Editors](</en/tools/markdown-editors.html>)
 

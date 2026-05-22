@@ -3,7 +3,7 @@ title: "AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026"
 description: "Compare AWS Lambda and Google Cloud Functions on cold starts, pricing, ecosystem, and developer experience."
 date: 2026-02-26
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/aws-lambda-vs-gcp-functions.html
+url: https://aidev.fit/en/compare/aws-lambda-vs-gcp-functions.html
 ---
 
 # AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026
@@ -57,6 +57,10 @@ Both platforms deliver reliable serverless compute. Lambda offers broader ecosys
 **See also:** [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [AWS vs Azure vs GCP 2026](</en/compare/aws-vs-azure-vs-gcp-2026.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>)
 
 **See also:** [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [AWS vs Azure vs GCP 2026](</en/compare/aws-vs-azure-vs-gcp-2026.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>)
+
+**See also:** [Next.js vs Nuxt.js: Meta-Framework Comparison](</en/compare/nextjs-vs-nuxtjs.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>)
+
+**See also:** [Next.js vs Nuxt.js: Meta-Framework Comparison](</en/compare/nextjs-vs-nuxtjs.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>)
 
 **See also:** [Next.js vs Nuxt.js: Meta-Framework Comparison](</en/compare/nextjs-vs-nuxtjs.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>), [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>)
 

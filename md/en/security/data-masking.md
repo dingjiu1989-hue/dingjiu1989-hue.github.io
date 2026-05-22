@@ -3,7 +3,7 @@ title: "Data Masking and Redaction"
 description: "Guide to data masking and redaction covering dynamic masking, static masking, tokenization, and compliance with GDPR and data privacy regulations."
 date: 2026-03-09
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/data-masking.html
+url: https://aidev.fit/en/security/data-masking.html
 ---
 
 # Data Masking and Redaction
@@ -433,6 +433,10 @@ Data masking is essential for privacy compliance and reducing the risk of data e
 **See also:** [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 
 **See also:** [Malware Analysis Fundamentals](</en/security/malware-analysis.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [Threat Hunting](</en/security/threat-hunting.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>), [API Authentication Methods](</en/security/api-authentication.html>)
+
+**See also:** [Threat Hunting](</en/security/threat-hunting.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 
 **See also:** [Threat Hunting](</en/security/threat-hunting.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 

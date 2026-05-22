@@ -3,7 +3,7 @@ title: "Databases in Containers: StatefulSets, Persistent Volumes, and Backup"
 description: "Running databases in containers: Kubernetes StatefulSets, PersistentVolumes, backup strategies, performance considerations, and production best practices."
 date: 2026-04-02
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-containerization.html
+url: https://aidev.fit/en/database/database-containerization.html
 ---
 
 # Databases in Containers: StatefulSets, Persistent Volumes, and Backup
@@ -394,6 +394,10 @@ Databases in containers are production-viable with the right operator, storage c
 **See also:** [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
 
 **See also:** [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>)
+
+**See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>)
+
+**See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>)
 
 **See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>)
 

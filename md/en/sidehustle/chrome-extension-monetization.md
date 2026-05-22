@@ -3,7 +3,7 @@ title: "How to Make Money with Chrome Extensions in 2026: Complete Guide"
 description: "Step-by-step guide to building and monetizing Chrome extensions: finding profitable niches, pricing models (one-time, subscription, freemium), Chrome Web Store SEO, and real revenue case studies ($500-$50K/month)."
 date: 2025-10-22
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/chrome-extension-monetization.html
+url: https://aidev.fit/en/sidehustle/chrome-extension-monetization.html
 ---
 
 # How to Make Money with Chrome Extensions in 2026: Complete Guide

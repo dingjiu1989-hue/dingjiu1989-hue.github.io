@@ -3,7 +3,7 @@ title: "Multi-Agent Systems: Coordination, Communication, Consensus"
 description: "Design multi-agent systems with LLM-powered agents: coordination patterns, inter-agent communication protocols, consensus mechanisms, and conflict resolution st"
 date: 2026-02-17
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/multi-agent-systems.html
+url: https://aidev.fit/en/ai/multi-agent-systems.html
 ---
 
 # Multi-Agent Systems: Coordination, Communication, Consensus
@@ -371,6 +371,10 @@ Multi-agent systems distribute intelligence across specialized agents. Sequentia
 **See also:** [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)
 
 **See also:** [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)
+
+**See also:** [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
+
+**See also:** [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
 
 **See also:** [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
 

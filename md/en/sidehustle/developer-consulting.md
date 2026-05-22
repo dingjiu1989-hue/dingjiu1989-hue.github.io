@@ -3,7 +3,7 @@ title: "Developer Consulting Guide"
 description: "A practical guide to starting and scaling a developer consulting business — finding clients, setting rates, contracts, project management, and building a consulting brand."
 date: 2025-12-05
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/developer-consulting.html
+url: https://aidev.fit/en/sidehustle/developer-consulting.html
 ---
 
 # Developer Consulting Guide
@@ -156,6 +156,10 @@ Developer consulting offers excellent income potential for experienced engineers
 **See also:** [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
 
 **See also:** [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
+
+**See also:** [Starting a Developer YouTube Channel](</en/sidehustle/youtube-dev-channel.html>), [No-Code and Low-Code Business Opportunities](</en/sidehustle/no-code-business.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>)
+
+**See also:** [Starting a Developer YouTube Channel](</en/sidehustle/youtube-dev-channel.html>), [No-Code and Low-Code Business Opportunities](</en/sidehustle/no-code-business.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>)
 
 **See also:** [Starting a Developer YouTube Channel](</en/sidehustle/youtube-dev-channel.html>), [No-Code and Low-Code Business Opportunities](</en/sidehustle/no-code-business.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>)
 

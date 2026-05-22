@@ -3,7 +3,7 @@ title: "Database Audit Triggers: Automatic Change Tracking"
 description: "Implement database audit logging with triggers: audit tables, trigger functions, and compliance reporting."
 date: 2026-04-13
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-audit-triggers.html
+url: https://aidev.fit/en/database/database-audit-triggers.html
 ---
 
 # Database Audit Triggers: Automatic Change Tracking
@@ -37,6 +37,10 @@ Audit logs support SOX, HIPAA, PCI-DSS, and SOC 2 compliance. They provide evide
 **See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Security Hardening](</en/database/database-security-hardening.html>)
 
 **See also:** [Change Data Capture: Tracking Database Changes in Real-Time](</en/database/database-change-tracking-cdc.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Security Hardening](</en/database/database-security-hardening.html>)
+
+**See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>)
+
+**See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>)
 
 **See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>)
 

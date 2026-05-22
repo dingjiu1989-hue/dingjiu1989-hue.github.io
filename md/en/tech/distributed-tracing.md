@@ -3,7 +3,7 @@ title: "Distributed Tracing with OpenTelemetry"
 description: "Implement distributed tracing with OpenTelemetry covering spans, context propagation, sampling strategies, Jaeger/Zipkin visualization, and log/metric correlation."
 date: 2025-12-30
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/distributed-tracing.html
+url: https://aidev.fit/en/tech/distributed-tracing.html
 ---
 
 # Distributed Tracing with OpenTelemetry
@@ -425,6 +425,10 @@ Instrumentation should be additive and never break business logic. Start with cr
 **See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
 
 **See also:** [Chaos Engineering: Principles and Practical Tools](</en/tech/chaos-engineering.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
+
+**See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>)
+
+**See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>)
 
 **See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>)
 

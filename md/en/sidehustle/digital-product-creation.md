@@ -3,7 +3,7 @@ title: "Creating and Selling Digital Products as a Developer"
 description: "Create and sell digital products: templates, themes, courses, ebooks, and developer tools for passive income."
 date: 2026-01-24
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/digital-product-creation.html
+url: https://aidev.fit/en/sidehustle/digital-product-creation.html
 ---
 
 # Creating and Selling Digital Products as a Developer
@@ -47,6 +47,10 @@ Affiliate programs for your product recruit promoters. Offer 30-50% commission t
 **See also:** [Affiliate Marketing for Developer Products](</en/sidehustle/affiliate-marketing-tech.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>)
 
 **See also:** [Affiliate Marketing for Developer Products](</en/sidehustle/affiliate-marketing-tech.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>)
+
+**See also:** [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>), [Freelancing Platforms: Strategy for Developers](</en/sidehustle/freelance-platform-strategy.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>)
+
+**See also:** [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>), [Freelancing Platforms: Strategy for Developers](</en/sidehustle/freelance-platform-strategy.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>)
 
 **See also:** [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>), [Freelancing Platforms: Strategy for Developers](</en/sidehustle/freelance-platform-strategy.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>)
 

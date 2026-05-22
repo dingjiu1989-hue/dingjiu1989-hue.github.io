@@ -3,7 +3,7 @@ title: "API Documentation"
 description: "Learn API documentation: OpenAPI, Swagger UI, Redoc, developer portal integration, and documentation best practices"
 date: 2026-01-04
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/api-documentation.html
+url: https://aidev.fit/en/tech/api-documentation.html
 ---
 
 # API Documentation
@@ -75,6 +75,10 @@ Effective API documentation reduces support burden, accelerates integration, and
 **See also:** [Developer Portal](</en/tech/developer-portal.html>), [Secret Management](</en/tech/secret-management.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>)
 
 **See also:** [Developer Portal](</en/tech/developer-portal.html>), [Secret Management](</en/tech/secret-management.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>)
+
+**See also:** [Configuration Management](</en/tech/configuration-management.html>), [Testing Strategies](</en/tech/testing-strategies.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>)
+
+**See also:** [Configuration Management](</en/tech/configuration-management.html>), [Testing Strategies](</en/tech/testing-strategies.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>)
 
 **See also:** [Configuration Management](</en/tech/configuration-management.html>), [Testing Strategies](</en/tech/testing-strategies.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>)
 

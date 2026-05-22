@@ -3,7 +3,7 @@ title: "TLS Configuration Guide"
 description: "Practical TLS configuration guide covering cipher suites, HSTS, certificate pinning, TLS 1.3, and testing with SSL Labs."
 date: 2026-03-15
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/tls-configuration.html
+url: https://aidev.fit/en/security/tls-configuration.html
 ---
 
 # TLS Configuration Guide
@@ -225,6 +225,10 @@ A proper TLS configuration requires modern protocol versions (TLS 1.2 and 1.3), 
 **See also:** [Certificate Management](</en/security/certificate-management.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Container Image Security](</en/security/container-image-security.html>)
 
 **See also:** [Certificate Management](</en/security/certificate-management.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Container Image Security](</en/security/container-image-security.html>)
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
 
 **See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
 

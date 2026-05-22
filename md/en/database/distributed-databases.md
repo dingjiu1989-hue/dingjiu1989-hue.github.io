@@ -3,7 +3,7 @@ title: "Distributed Databases: Concepts and Implementation"
 description: "Explore Raft/Paxos consensus, gossip protocols, CRDTs, and the architectures behind Amazon Dynamo and Google Spanner."
 date: 2026-03-28
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/distributed-databases.html
+url: https://aidev.fit/en/database/distributed-databases.html
 ---
 
 # Distributed Databases: Concepts and Implementation
@@ -89,6 +89,10 @@ Choose Dynamo-style (Cassandra, DynamoDB) for availability and tunable consisten
 **See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Redis Caching Patterns](</en/database/redis-caching.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>)
 
 **See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Redis Caching Patterns](</en/database/redis-caching.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>)
+
+**See also:** [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [Database Replication Patterns](</en/database/database-replication.html>)
+
+**See also:** [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [Database Replication Patterns](</en/database/database-replication.html>)
 
 **See also:** [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [Database Replication Patterns](</en/database/database-replication.html>)
 

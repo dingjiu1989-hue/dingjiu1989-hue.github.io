@@ -3,7 +3,7 @@ title: "Monetizing APIs"
 description: "Learn how to monetize APIs and build a revenue-generating API product — pricing models, developer experience, rate limiting, billing integration, and marketplace distribution."
 date: 2025-12-04
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/api-monetization.html
+url: https://aidev.fit/en/sidehustle/api-monetization.html
 ---
 
 # Monetizing APIs
@@ -69,6 +69,10 @@ API monetization aligns price with customer value. Usage-based pricing, credit s
 **See also:** [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>)
 
 **See also:** [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>)
+
+**See also:** [Selling Digital Products as a Developer](</en/sidehustle/digital-products.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>), [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>)
+
+**See also:** [Selling Digital Products as a Developer](</en/sidehustle/digital-products.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>), [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>)
 
 **See also:** [Selling Digital Products as a Developer](</en/sidehustle/digital-products.html>), [Email Marketing for Developers](</en/sidehustle/email-marketing.html>), [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>)
 

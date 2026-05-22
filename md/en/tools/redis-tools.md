@@ -3,7 +3,7 @@ title: "Redis Tools: RedisInsight, Redis CLI, Redis Commander"
 description: "Essential tools for Redis management: RedisInsight for GUI-based visualization and analysis, Redis CLI for command-line operations, and Redis Commander for web-"
 date: 2026-02-05
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/redis-tools.html
+url: https://aidev.fit/en/tools/redis-tools.html
 ---
 
 # Redis Tools: RedisInsight, Redis CLI, Redis Commander
@@ -318,6 +318,10 @@ The most effective setup combines the Redis CLI for scripting and automation wit
 **See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
 
 **See also:** [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>), [API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026](</en/tools/api-testing-2026.html>), [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>)
+
+**See also:** [Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja](</en/tools/reverse-engineering.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>)
+
+**See also:** [Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja](</en/tools/reverse-engineering.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>)
 
 **See also:** [Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja](</en/tools/reverse-engineering.html>), [Developer Productivity Tools: Essential Toolkit for 2026](</en/tools/productivity-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>)
 

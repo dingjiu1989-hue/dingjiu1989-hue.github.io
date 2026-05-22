@@ -3,7 +3,7 @@ title: "Security Metrics and Reporting"
 description: "Guide to security metrics covering KPIs and KRIs, dashboard design, board-level reporting, benchmarking, and measuring security program effectiveness."
 date: 2026-03-13
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/security-metrics.html
+url: https://aidev.fit/en/security/security-metrics.html
 ---
 
 # Security Metrics and Reporting
@@ -433,6 +433,10 @@ Security metrics must be meaningful, measurable, and actionable. Distinguish bet
 **See also:** [Content Security Policy](</en/security/content-security-policy.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Container Image Security](</en/security/container-image-security.html>)
 
 **See also:** [Content Security Policy](</en/security/content-security-policy.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Container Image Security](</en/security/container-image-security.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
+
+**See also:** [Microservice Security](</en/security/microservice-security.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
 
 **See also:** [Microservice Security](</en/security/microservice-security.html>), [Privacy Engineering](</en/security/privacy-engineering.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
 

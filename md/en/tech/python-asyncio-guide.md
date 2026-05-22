@@ -3,7 +3,7 @@ title: "Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops"
 description: "Master Python async programming: coroutines with async/await, Task groups in Python 3.11+, asyncio.gather vs as_completed, error handling in async code, and integrating async with sync libraries."
 date: 2025-10-15
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/python-asyncio-guide.html
+url: https://aidev.fit/en/tech/python-asyncio-guide.html
 ---
 
 # Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops

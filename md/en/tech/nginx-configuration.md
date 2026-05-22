@@ -3,7 +3,7 @@ title: "Nginx Configuration: Performance and Security"
 description: "Configure Nginx for production: reverse proxy, load balancing, caching, SSL termination, and security hardening."
 date: 2026-01-14
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/nginx-configuration.html
+url: https://aidev.fit/en/tech/nginx-configuration.html
 ---
 
 # Nginx Configuration: Performance and Security
@@ -51,6 +51,10 @@ Rate limiting protects against abuse. limit_req_zone defines rate zones. limit_r
 **See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>)
 
 **See also:** [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>)
+
+**See also:** [Build Optimization](</en/tech/build-optimization.html>), [Configuration Management](</en/tech/configuration-management.html>), [Log Management](</en/tech/log-management.html>)
+
+**See also:** [Build Optimization](</en/tech/build-optimization.html>), [Configuration Management](</en/tech/configuration-management.html>), [Log Management](</en/tech/log-management.html>)
 
 **See also:** [Build Optimization](</en/tech/build-optimization.html>), [Configuration Management](</en/tech/configuration-management.html>), [Log Management](</en/tech/log-management.html>)
 

@@ -3,7 +3,7 @@ title: "Performance Testing"
 description: "Learn performance testing with k6, Locust, and Gatling: test design, results interpretation, and practical strategies"
 date: 2026-01-11
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/performance-testing.html
+url: https://aidev.fit/en/tech/performance-testing.html
 ---
 
 # Performance Testing
@@ -69,6 +69,10 @@ Performance testing is an ongoing activity, not a one-time effort. As the system
 **See also:** [Testing Strategies](</en/tech/testing-strategies.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>)
 
 **See also:** [Testing Strategies](</en/tech/testing-strategies.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>)
+
+**See also:** [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Web Performance Optimization Techniques 2026](</en/tech/web-performance-optimization.html>)
+
+**See also:** [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Web Performance Optimization Techniques 2026](</en/tech/web-performance-optimization.html>)
 
 **See also:** [Load Testing Strategies](</en/tech/load-testing-strategies.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Web Performance Optimization Techniques 2026](</en/tech/web-performance-optimization.html>)
 

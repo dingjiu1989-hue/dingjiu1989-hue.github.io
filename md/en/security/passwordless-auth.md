@@ -3,7 +3,7 @@ title: "Passwordless Authentication"
 description: "Implementing passwordless authentication with WebAuthn, passkeys, magic links, and FIDO2 standards."
 date: 2026-03-18
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/passwordless-auth.html
+url: https://aidev.fit/en/security/passwordless-auth.html
 ---
 
 # Passwordless Authentication
@@ -265,6 +265,10 @@ Passwordless authentication improves both security and UX. Use WebAuthn with pla
 **See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Data Classification](</en/security/data-classification.html>)
 
 **See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Data Classification](</en/security/data-classification.html>)
+
+**See also:** [Kubernetes Security](</en/security/kubernetes-security.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
+
+**See also:** [Kubernetes Security](</en/security/kubernetes-security.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
 
 **See also:** [Kubernetes Security](</en/security/kubernetes-security.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
 

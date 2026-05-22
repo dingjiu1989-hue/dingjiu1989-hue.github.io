@@ -3,7 +3,7 @@ title: "Helm Charts: Kubernetes Package Management"
 description: "A comprehensive guide to Helm chart structure, templates, values management, dependency handling, and CI/CD integration for Kubernetes deployments."
 date: 2025-12-30
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/helm-kubernetes-package-management.html
+url: https://aidev.fit/en/tech/helm-kubernetes-package-management.html
 ---
 
 # Helm Charts: Kubernetes Package Management
@@ -422,6 +422,10 @@ Helm remains the most widely adopted packaging tool in the Kubernetes ecosystem,
 **See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
 
 **See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
+
+**See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Git Workflows for Teams](</en/tech/git-workflows-2026.html>)
+
+**See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Git Workflows for Teams](</en/tech/git-workflows-2026.html>)
 
 **See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Git Workflows for Teams](</en/tech/git-workflows-2026.html>)
 

@@ -3,7 +3,7 @@ title: "Online Coding Tutoring and Mentoring: Complete Developer Guide (2026)"
 description: "Start earning $30-$150/hour teaching code online — platform comparison, pricing strategies, and how to find your first students."
 date: 2025-10-24
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/online-coding-tutoring-guide.html
+url: https://aidev.fit/en/sidehustle/online-coding-tutoring-guide.html
 ---
 
 # Online Coding Tutoring and Mentoring: Complete Developer Guide (2026)

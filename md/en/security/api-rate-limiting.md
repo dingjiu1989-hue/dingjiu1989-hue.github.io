@@ -3,7 +3,7 @@ title: "API Rate Limiting Implementation"
 description: "A comprehensive guide to implementing API rate limiting with token bucket, leaky bucket, and sliding window algorithms."
 date: 2025-12-17
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/api-rate-limiting.html
+url: https://aidev.fit/en/security/api-rate-limiting.html
 ---
 
 # API Rate Limiting Implementation
@@ -213,6 +213,10 @@ Choose the right rate limiting algorithm for your use case. Token bucket works w
 **See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 
 **See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>)
+
+**See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>)
 
 **See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Password Hashing Algorithms Compared](</en/security/password-hashing.html>)
 

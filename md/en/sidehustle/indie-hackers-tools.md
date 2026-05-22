@@ -3,7 +3,7 @@ title: "Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monito
 description: "The complete indie hacker SaaS tool stack covering hosting, analytics, email, payments, and monitoring on a budget."
 date: 2026-01-19
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/indie-hackers-tools.html
+url: https://aidev.fit/en/sidehustle/indie-hackers-tools.html
 ---
 
 # Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
@@ -81,6 +81,10 @@ Start with free tiers, upgrade when pain points emerge, and never pay for a tool
 **See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Indie Hacker Marketing on a Zero Budget](</en/sidehustle/indie-hacker-marketing.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>)
 
 **See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Indie Hacker Marketing on a Zero Budget](</en/sidehustle/indie-hacker-marketing.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>)
+
+**See also:** [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
+
+**See also:** [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
 
 **See also:** [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
 

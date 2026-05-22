@@ -3,7 +3,7 @@ title: "Building AI Automation Workflows with n8n: A Practical Guide"
 description: "Build intelligent automation workflows combining n8n with AI models for data processing, content generation, and multi-step agent pipelines."
 date: 2026-05-19
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/n8n-ai-automation.html
+url: https://aidev.fit/en/ai/n8n-ai-automation.html
 ---
 
 # Building AI Automation Workflows with n8n: A Practical Guide
@@ -139,6 +139,10 @@ n8n transforms AI from a single API call into a programmable automation layer. S
 **See also:** [Building Custom AI Agents with LangGraph: A Practical Guide](</en/ai/langgraph-agent-workflows.html>), [Building AI-Powered CLI Tools: A Complete Guide for Developers](</en/tools/ai-cli-tools-guide.html>), [AI for DevOps in 2026: Best Tools and Practical Use Cases](</en/ai/ai-devops-tools.html>)
 
 **See also:** [Building Custom AI Agents with LangGraph: A Practical Guide](</en/ai/langgraph-agent-workflows.html>), [Building AI-Powered CLI Tools: A Complete Guide for Developers](</en/tools/ai-cli-tools-guide.html>), [AI for DevOps in 2026: Best Tools and Practical Use Cases](</en/ai/ai-devops-tools.html>)
+
+**See also:** [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>)
+
+**See also:** [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>)
 
 **See also:** [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>)
 

@@ -3,7 +3,7 @@ title: "Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based P
 description: "A practical guide to product-led growth for SaaS: freemium models, free trials, self-serve onboarding, and usage-based pricing strategies."
 date: 2026-01-19
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/product-led-growth.html
+url: https://aidev.fit/en/sidehustle/product-led-growth.html
 ---
 
 # Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing
@@ -65,6 +65,10 @@ PLG is not passive. You still need content marketing, SEO, and community to driv
 **See also:** [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>)
 
 **See also:** [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>)
+
+**See also:** [Bootstrapping Essentials: Building a Startup Without VC Funding](</en/sidehustle/bootstrapping-essentials.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
+
+**See also:** [Bootstrapping Essentials: Building a Startup Without VC Funding](</en/sidehustle/bootstrapping-essentials.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
 
 **See also:** [Bootstrapping Essentials: Building a Startup Without VC Funding](</en/sidehustle/bootstrapping-essentials.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
 

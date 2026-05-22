@@ -3,7 +3,7 @@ title: "How to Start a Profitable YouTube Channel as a Developer (2026 Guide)"
 description: "Complete guide to starting a developer YouTube channel: niche selection, equipment, content strategy, SEO, and monetization. Real examples from dev channels earning $1K-$50K/month."
 date: 2026-05-13
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/youtube-channel-developers.html
+url: https://aidev.fit/en/sidehustle/youtube-channel-developers.html
 ---
 
 # How to Start a Profitable YouTube Channel as a Developer (2026 Guide)

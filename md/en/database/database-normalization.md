@@ -3,7 +3,7 @@ title: "Database Normalization Explained"
 description: "Learn database normalization from 1NF to 5NF with practical examples, denormalization trade-offs, and real-world schema design."
 date: 2025-12-23
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-normalization.html
+url: https://aidev.fit/en/database/database-normalization.html
 ---
 
 # Database Normalization Explained
@@ -91,6 +91,10 @@ Normalize to 3NF for transactional integrity. Denormalize selectively for perfor
 **See also:** [Data Consistency Models Explained](</en/database/data-consistency-models.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
 
 **See also:** [Data Consistency Models Explained](</en/database/data-consistency-models.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
+
+**See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>)
+
+**See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>)
 
 **See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>)
 

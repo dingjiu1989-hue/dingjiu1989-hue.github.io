@@ -3,7 +3,7 @@ title: "AI Role Definition: System Prompts, Personas, Tone Guidelines, Constrain
 description: "Master AI role definition: craft effective system prompts, define personas, set tone guidelines, establish constraints, and provide examples."
 date: 2026-02-11
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-role-definition.html
+url: https://aidev.fit/en/ai/ai-role-definition.html
 ---
 
 # AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
@@ -91,6 +91,10 @@ A well-defined AI role is the foundation of a reliable AI application. Invest th
 **See also:** [Prompt Chaining: Decomposition, Parallel Execution, State Management](</en/ai/prompt-chaining.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>)
 
 **See also:** [Prompt Chaining: Decomposition, Parallel Execution, State Management](</en/ai/prompt-chaining.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting](</en/ai/rag-chunking-strategies.html>)
+
+**See also:** [AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing](</en/ai/ai-red-teaming.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>)
+
+**See also:** [AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing](</en/ai/ai-red-teaming.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>)
 
 **See also:** [AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing](</en/ai/ai-red-teaming.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>)
 

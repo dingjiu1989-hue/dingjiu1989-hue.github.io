@@ -3,7 +3,7 @@ title: "Ansible Automation: Playbooks, Roles, Inventory, and Vault"
 description: "Deep dive into Ansible automation covering playbooks, roles, inventory management, Ansible Vault, idempotency patterns, and a comparison with Terraform."
 date: 2025-12-31
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/ansible-automation.html
+url: https://aidev.fit/en/tech/ansible-automation.html
 ---
 
 # Ansible Automation: Playbooks, Roles, Inventory, and Vault
@@ -131,6 +131,10 @@ Ansible's simplicity and agentless architecture make it an excellent choice for 
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [React Server Components](</en/tech/react-server-components.html>), [Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability](</en/tech/prometheus-deep-dive.html>)
 
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [React Server Components](</en/tech/react-server-components.html>), [Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability](</en/tech/prometheus-deep-dive.html>)
+
+**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
+
+**See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
 
 **See also:** [Grafana Dashboards: Panels, Variables, Annotations, and Alerting](</en/tech/grafana-dashboards.html>), [Incident Management: Severity Levels, Response Process, and Postmortems](</en/tech/incident-management.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
 

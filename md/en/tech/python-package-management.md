@@ -3,7 +3,7 @@ title: "Python Package Management: pip, Poetry, uv, Conda"
 description: "Compare Python package management tools: pip, Poetry, uv, and Conda for dependency resolution and project management."
 date: 2026-01-15
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/python-package-management.html
+url: https://aidev.fit/en/tech/python-package-management.html
 ---
 
 # Python Package Management: pip, Poetry, uv, Conda
@@ -49,6 +49,10 @@ Use pip for simple projects and containers. Use Poetry for library development a
 **See also:** [Rust vs Go: A Practical Comparison](</en/tech/rust-vs-go-practical.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
 
 **See also:** [Rust vs Go: A Practical Comparison](</en/tech/rust-vs-go-practical.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
+
+**See also:** [Git Workflows](</en/tech/git-workflows.html>), [Log Management](</en/tech/log-management.html>), [Python Performance Optimization](</en/tech/python-performance.html>)
+
+**See also:** [Git Workflows](</en/tech/git-workflows.html>), [Log Management](</en/tech/log-management.html>), [Python Performance Optimization](</en/tech/python-performance.html>)
 
 **See also:** [Git Workflows](</en/tech/git-workflows.html>), [Log Management](</en/tech/log-management.html>), [Python Performance Optimization](</en/tech/python-performance.html>)
 

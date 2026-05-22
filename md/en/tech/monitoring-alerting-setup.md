@@ -3,7 +3,7 @@ title: "Monitoring and Alerting Setup"
 description: "Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting."
 date: 2025-12-02
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/monitoring-alerting-setup.html
+url: https://aidev.fit/en/tech/monitoring-alerting-setup.html
 ---
 
 # Monitoring and Alerting Setup
@@ -299,6 +299,10 @@ A complete monitoring stack requires metrics (Prometheus), logs (Loki), dashboar
 **See also:** [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
 
 **See also:** [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Distributed Tracing with OpenTelemetry](</en/tech/distributed-tracing.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
+
+**See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
+
+**See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
 
 **See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
 

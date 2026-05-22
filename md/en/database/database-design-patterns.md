@@ -3,7 +3,7 @@ title: "Database Design Patterns: Repository, Unit of Work, Query Objects, Table
 description: "Explore database design patterns for application development: Repository pattern, Unit of Work, Query Objects, and table inheritance strategies."
 date: 2026-04-02
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-design-patterns.html
+url: https://aidev.fit/en/database/database-design-patterns.html
 ---
 
 # Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance
@@ -507,6 +507,10 @@ These patterns are not prescriptive rules but tools. Use them when they simplify
 **See also:** [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
 
 **See also:** [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>), [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>)
+
+**See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>), [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>)
 
 **See also:** [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>), [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>)
 

@@ -3,7 +3,7 @@ title: "Starting a Developer YouTube Channel"
 description: "A complete guide to starting and growing a successful developer YouTube channel."
 date: 2025-12-09
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/youtube-dev-channel.html
+url: https://aidev.fit/en/sidehustle/youtube-dev-channel.html
 ---
 
 # Starting a Developer YouTube Channel
@@ -234,6 +234,10 @@ A developer YouTube channel is a powerful platform for building an audience, est
 **See also:** [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>), [How to Start a Profitable YouTube Channel as a Developer (2026 Guide)](</en/sidehustle/youtube-channel-developers.html>)
 
 **See also:** [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>), [How to Start a Profitable YouTube Channel as a Developer (2026 Guide)](</en/sidehustle/youtube-channel-developers.html>)
+
+**See also:** [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Monetizing APIs](</en/sidehustle/api-monetization.html>)
+
+**See also:** [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Monetizing APIs](</en/sidehustle/api-monetization.html>)
 
 **See also:** [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Monetizing APIs](</en/sidehustle/api-monetization.html>)
 

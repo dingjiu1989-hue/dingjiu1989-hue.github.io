@@ -3,7 +3,7 @@ title: "Remote Freelancing Guide: Finding Clients and Scaling Income"
 description: "Build a successful remote freelancing career: platforms, pricing, client management, and income scaling."
 date: 2026-01-26
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/remote-freelancing-guide.html
+url: https://aidev.fit/en/sidehustle/remote-freelancing-guide.html
 ---
 
 # Remote Freelancing Guide: Finding Clients and Scaling Income
@@ -35,6 +35,10 @@ Automate administrative tasks: invoicing, proposals, contracts. Use tools like H
 **See also:** [Freelancing Platforms: Strategy for Developers](</en/sidehustle/freelance-platform-strategy.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>)
 
 **See also:** [Freelancing Platforms: Strategy for Developers](</en/sidehustle/freelance-platform-strategy.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>)
+
+**See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>)
+
+**See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>)
 
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>)
 

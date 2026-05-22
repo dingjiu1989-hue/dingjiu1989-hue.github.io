@@ -3,7 +3,7 @@ title: "Attention Mechanisms in Neural Networks"
 description: "A comprehensive guide to attention mechanisms: from additive attention to multi-query attention and FlashAttention."
 date: 2026-02-19
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/attention-mechanisms.html
+url: https://aidev.fit/en/ai/attention-mechanisms.html
 ---
 
 # Attention Mechanisms in Neural Networks
@@ -49,6 +49,10 @@ Sparse attention patterns reduce computation by only attending to a subset of to
 **See also:** [Transformer Mechanisms in Deep Learning](</en/ai/transformer-mechanisms.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>)
 
 **See also:** [Transformer Mechanisms in Deep Learning](</en/ai/transformer-mechanisms.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>)
+
+**See also:** [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>)
+
+**See also:** [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>)
 
 **See also:** [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal](</en/ai/graph-rag.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>)
 

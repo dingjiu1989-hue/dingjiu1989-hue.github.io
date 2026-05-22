@@ -3,7 +3,7 @@ title: "SQL vs NoSQL Decision Guide"
 description: "Compare SQL and NoSQL databases across consistency, scalability, query flexibility, and development speed to choose the right database."
 date: 2025-12-24
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/sql-vs-nosql.html
+url: https://aidev.fit/en/database/sql-vs-nosql.html
 ---
 
 # SQL vs NoSQL Decision Guide
@@ -251,6 +251,10 @@ Choose SQL when you need complex queries, strong data integrity, and ACID transa
 **See also:** [Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip](</en/tools/best-database-gui-tools.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
 
 **See also:** [Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip](</en/tools/best-database-gui-tools.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>)
+
+**See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)
+
+**See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)
 
 **See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Database Security Hardening Guide](</en/database/database-security-best-practices.html>)
 

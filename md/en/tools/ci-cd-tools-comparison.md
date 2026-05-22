@@ -3,7 +3,7 @@ title: "CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins"
 description: "Compare GitHub Actions, GitLab CI, and Jenkins across pipeline syntax, plugin ecosystems, scalability, migration paths, and market share trends."
 date: 2026-01-26
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/ci-cd-tools-comparison.html
+url: https://aidev.fit/en/tools/ci-cd-tools-comparison.html
 ---
 
 # CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
@@ -398,6 +398,10 @@ No single CI/CD tool is perfect for every scenario. Evaluate based on your team'
 **See also:** [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>), [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
 
 **See also:** [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>), [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
+
+**See also:** [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>)
+
+**See also:** [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>)
 
 **See also:** [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Performance Testing Tools: k6 vs Locust vs JMeter](</en/tools/performance-testing-tools.html>), [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>)
 

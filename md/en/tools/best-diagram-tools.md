@@ -3,7 +3,7 @@ title: "Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Merma
 description: "Compare diagramming tools for system architecture, flowcharts, and technical documentation — handwritten feel vs UML precision vs code-generated."
 date: 2026-01-28
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-diagram-tools.html
+url: https://aidev.fit/en/tools/best-diagram-tools.html
 ---
 
 # Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser

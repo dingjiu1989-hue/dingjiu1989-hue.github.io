@@ -3,7 +3,7 @@ title: "Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and I
 description: "Master distributed transaction patterns for microservices — choreographed sagas, orchestrated sagas, 2PC, transactional outbox, and CDC."
 date: 2025-10-20
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/distributed-transactions-guide.html
+url: https://aidev.fit/en/tech/distributed-transactions-guide.html
 ---
 
 # Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency

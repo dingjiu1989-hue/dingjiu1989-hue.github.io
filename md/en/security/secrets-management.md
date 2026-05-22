@@ -3,7 +3,7 @@ title: "Secrets Management for Developers"
 description: "Best practices for managing API keys, database credentials, and other secrets across development, CI/CD, and production environments."
 date: 2025-12-19
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/secrets-management.html
+url: https://aidev.fit/en/security/secrets-management.html
 ---
 
 # Secrets Management for Developers
@@ -221,6 +221,10 @@ Treat secrets as the critical infrastructure they are. Use a dedicated secrets v
 **See also:** [Security Log Management](</en/security/log-management-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>)
 
 **See also:** [Security Log Management](</en/security/log-management-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>)
+
+**See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
+
+**See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
 
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
 

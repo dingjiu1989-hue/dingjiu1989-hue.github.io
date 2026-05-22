@@ -16,7 +16,7 @@ from pathlib import Path
 from datetime import date
 
 ROOT = Path(__file__).resolve().parent.parent
-BASE = "https://dingjiu1989-hue.github.io"
+BASE = "https://aidev.fit"
 EN_ARTICLES = ROOT / "en" / "articles.json"
 TRACK_FILE = ROOT / "data" / "hashnode-published.json"
 

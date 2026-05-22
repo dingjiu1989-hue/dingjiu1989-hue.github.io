@@ -3,7 +3,7 @@ title: "Redis vs Memcached vs Dragonfly (2026): In-Memory Data Store Comparison"
 description: "Compare Redis, Memcached, and the newer Dragonfly on throughput, persistence, data structures, clustering, and cost. Find the right caching layer for your stack."
 date: 2025-11-24
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/redis-vs-memcached-vs-dragonfly.html
+url: https://aidev.fit/en/compare/redis-vs-memcached-vs-dragonfly.html
 ---
 
 # Redis vs Memcached vs Dragonfly (2026): In-Memory Data Store Comparison

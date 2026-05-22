@@ -3,7 +3,7 @@ title: "Grafana vs Kibana: Dashboard and Visualization Comparison"
 description: "Compare Grafana and Kibana for data visualization, monitoring dashboards, and observability workflows."
 date: 2026-02-28
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/grafana-vs-kibana.html
+url: https://aidev.fit/en/compare/grafana-vs-kibana.html
 ---
 
 # Grafana vs Kibana: Dashboard and Visualization Comparison
@@ -49,6 +49,10 @@ Choose Grafana for multi-source dashboards, Prometheus-based monitoring, and the
 **See also:** [Prometheus vs Datadog: Monitoring Platform Comparison](</en/compare/prometheus-vs-datadog.html>), [Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options](</en/compare/datadog-vs-grafana-cloud.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>)
 
 **See also:** [Prometheus vs Datadog: Monitoring Platform Comparison](</en/compare/prometheus-vs-datadog.html>), [Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options](</en/compare/datadog-vs-grafana-cloud.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>)
+
+**See also:** [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>), [Next.js vs Nuxt.js: Meta-Framework Comparison](</en/compare/nextjs-vs-nuxtjs.html>)
+
+**See also:** [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>), [Next.js vs Nuxt.js: Meta-Framework Comparison](</en/compare/nextjs-vs-nuxtjs.html>)
 
 **See also:** [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>), [Next.js vs Nuxt.js: Meta-Framework Comparison](</en/compare/nextjs-vs-nuxtjs.html>)
 

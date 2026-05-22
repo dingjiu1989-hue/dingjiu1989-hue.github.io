@@ -3,7 +3,7 @@ title: "Freelancing Platforms: Strategy for Developers"
 description: "Strategy for developer freelancing on Upwork, Toptal, and Fiverr: profile optimization, proposals, pricing, and client management."
 date: 2026-01-25
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/freelance-platform-strategy.html
+url: https://aidev.fit/en/sidehustle/freelance-platform-strategy.html
 ---
 
 # Freelancing Platforms: Strategy for Developers
@@ -53,6 +53,10 @@ Deliver high-quality work consistently. Meet deadlines. Respond to messages with
 **See also:** [Remote Freelancing Guide: Finding Clients and Scaling Income](</en/sidehustle/remote-freelancing-guide.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>)
 
 **See also:** [Remote Freelancing Guide: Finding Clients and Scaling Income](</en/sidehustle/remote-freelancing-guide.html>), [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Building a Twitter/X Audience as a Developer](</en/sidehustle/twitter-audience.html>)
+
+**See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>)
+
+**See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>)
 
 **See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control](</en/sidehustle/solo-dev-productivity.html>), [Affiliate Marketing for Dev Tools: Programs, Content, Disclosure](</en/sidehustle/affiliate-marketing-dev.html>)
 

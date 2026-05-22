@@ -3,7 +3,7 @@ title: "Logging Tools: ELK Stack vs Loki vs Splunk"
 description: "Compare ELK Stack, Grafana Loki, and Splunk for log aggregation, structured logging, indexing strategies, retention policies, query capabilities, and cost."
 date: 2026-01-27
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/logging-tools.html
+url: https://aidev.fit/en/tools/logging-tools.html
 ---
 
 # Logging Tools: ELK Stack vs Loki vs Splunk
@@ -412,6 +412,10 @@ For most engineering teams, Loki paired with Grafana offers the best balance of 
 **See also:** [Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom](</en/tools/best-log-management-tools.html>), [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>)
 
 **See also:** [Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom](</en/tools/best-log-management-tools.html>), [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>), [Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith](</en/tools/feature-flag-tools.html>)
+
+**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>)
+
+**See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>)
 
 **See also:** [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>)
 

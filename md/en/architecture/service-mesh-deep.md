@@ -3,7 +3,7 @@ title: "Service Mesh Deep Dive"
 description: "Deep dive into service mesh: Istio vs Linkerd vs Consul, mTLS, traffic splitting, and operational considerations"
 date: 2026-05-05
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/service-mesh-deep.html
+url: https://aidev.fit/en/architecture/service-mesh-deep.html
 ---
 
 # Service Mesh Deep Dive
@@ -59,6 +59,10 @@ The choice depends on your requirements. Istio for maximum features and traffic 
 **See also:** [Service Mesh Patterns: Istio and Linkerd](</en/architecture/service-mesh.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
 
 **See also:** [Service Mesh Patterns: Istio and Linkerd](</en/architecture/service-mesh.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)
 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)
 

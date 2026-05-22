@@ -3,7 +3,7 @@ title: "Vitest vs Jest vs Bun Test (2026): JavaScript Test Runner Comparison"
 description: "Speed benchmarks, feature comparison, and migration guides for the three leading JS test runners. Vitest wins on Vite integration; Bun Test wins on raw speed; Jest has the largest ecosystem."
 date: 2025-11-24
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/vitest-vs-jest-vs-bun-test.html
+url: https://aidev.fit/en/compare/vitest-vs-jest-vs-bun-test.html
 ---
 
 # Vitest vs Jest vs Bun Test (2026): JavaScript Test Runner Comparison

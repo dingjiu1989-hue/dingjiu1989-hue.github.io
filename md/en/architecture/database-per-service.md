@@ -3,7 +3,7 @@ title: "Database per Service Pattern"
 description: "Learn the database per service pattern for microservices data management — data isolation, eventual consistency, cross-service queries, saga patterns, and trade-offs vs. shared databases."
 date: 2025-12-26
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/database-per-service.html
+url: https://aidev.fit/en/architecture/database-per-service.html
 ---
 
 # Database per Service Pattern
@@ -65,6 +65,10 @@ Database per service is a powerful pattern for achieving service autonomy and in
 **See also:** [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>)
 
 **See also:** [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>)
+
+**See also:** [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>)
+
+**See also:** [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>)
 
 **See also:** [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>)
 

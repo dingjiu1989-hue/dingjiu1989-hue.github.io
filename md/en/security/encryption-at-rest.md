@@ -3,7 +3,7 @@ title: "Encryption at Rest Guide"
 description: "A comprehensive guide to encryption at rest covering disk encryption, database encryption, key management, and AWS/GCP implementation."
 date: 2025-12-17
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/encryption-at-rest.html
+url: https://aidev.fit/en/security/encryption-at-rest.html
 ---
 
 # Encryption at Rest Guide
@@ -321,6 +321,10 @@ Encryption at rest is a non-negotiable security control for any application hand
 **See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
 
 **See also:** [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Secrets Management for Developers](</en/security/secrets-management.html>), [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Secrets Management for Developers](</en/security/secrets-management.html>), [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>)
 
 **See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Secrets Management for Developers](</en/security/secrets-management.html>), [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>)
 

@@ -3,7 +3,7 @@ title: "NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)"
 description: "A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and query patterns."
 date: 2025-12-23
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/nosql-databases-guide.html
+url: https://aidev.fit/en/database/nosql-databases-guide.html
 ---
 
 # NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
@@ -268,6 +268,10 @@ NoSQL databases excel at scale and flexibility but require different design thin
 **See also:** [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
 
 **See also:** [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>), [OLTP vs OLAP: Workload Optimization](</en/database/oltp-vs-olap.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
+
+**See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)
+
+**See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)
 
 **See also:** [Building ETL Pipelines: A Practical Guide](</en/database/etl-pipelines.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [Database Indexing Strategies](</en/database/database-indexing.html>)
 

@@ -3,7 +3,7 @@ title: "Slow Query Troubleshooting: Identification, Profiling, and Optimization"
 description: "Learn systematic slow query troubleshooting: identifying problematic queries, profiling with EXPLAIN ANALYZE, optimization workflow, and performance regression prevention."
 date: 2026-04-03
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-slow-query-fix.html
+url: https://aidev.fit/en/database/database-slow-query-fix.html
 ---
 
 # Slow Query Troubleshooting: Identification, Profiling, and Optimization
@@ -327,6 +327,10 @@ Most slow queries are fixed by adding the right index. When that is not enough, 
 **See also:** [Database Query Profiling: Finding and Fixing Performance Bottlenecks](</en/database/database-query-profiling.html>), [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
 
 **See also:** [Database Query Profiling: Finding and Fixing Performance Bottlenecks](</en/database/database-query-profiling.html>), [Slow Query Optimization: Analysis, Indexing, and Rewriting](</en/database/database-slow-query-optimization.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
+
+**See also:** [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>), [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>)
+
+**See also:** [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>), [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>)
 
 **See also:** [Materialized Views](</en/database/materialized-views.html>), [ORM Performance](</en/database/orm-performance.html>), [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>)
 

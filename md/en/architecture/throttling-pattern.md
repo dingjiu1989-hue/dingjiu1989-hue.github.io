@@ -3,7 +3,7 @@ title: "Throttling Pattern for System Protection"
 description: "Implement throttling to protect backend systems from overload and ensure fair resource allocation."
 date: 2026-05-11
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/throttling-pattern.html
+url: https://aidev.fit/en/architecture/throttling-pattern.html
 ---
 
 # Throttling Pattern for System Protection
@@ -47,6 +47,10 @@ Throttle when protecting external API dependencies with rate limits, when the sy
 **See also:** [Priority Queue Pattern for Message Processing](</en/architecture/priority-queue.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>)
 
 **See also:** [Priority Queue Pattern for Message Processing](</en/architecture/priority-queue.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Caching Strategies](</en/architecture/cache-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 

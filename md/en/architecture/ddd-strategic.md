@@ -3,7 +3,7 @@ title: "DDD Strategic Design"
 description: "Explore DDD strategic design: bounded context, context map, ubiquitous language, and domain integration patterns"
 date: 2026-05-02
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/ddd-strategic.html
+url: https://aidev.fit/en/architecture/ddd-strategic.html
 ---
 
 # DDD Strategic Design
@@ -53,6 +53,10 @@ The key insight of strategic DDD is that a single, unified model for an entire e
 **See also:** [DDD Tactical Patterns](</en/architecture/ddd-tactical.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 
 **See also:** [DDD Tactical Patterns](</en/architecture/ddd-tactical.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
+
+**See also:** [Event Storming](</en/architecture/event-storming.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Orchestration Patterns](</en/architecture/orchestration-patterns.html>)
+
+**See also:** [Event Storming](</en/architecture/event-storming.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Orchestration Patterns](</en/architecture/orchestration-patterns.html>)
 
 **See also:** [Event Storming](</en/architecture/event-storming.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Orchestration Patterns](</en/architecture/orchestration-patterns.html>)
 

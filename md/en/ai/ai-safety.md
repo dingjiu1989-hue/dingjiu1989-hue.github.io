@@ -3,7 +3,7 @@ title: "AI Safety: Responsible Development and Deployment"
 description: "AI safety principles: alignment, robustness, monitoring, and responsible deployment practices for production AI systems."
 date: 2026-02-19
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-safety.html
+url: https://aidev.fit/en/ai/ai-safety.html
 ---
 
 # AI Safety: Responsible Development and Deployment
@@ -49,6 +49,10 @@ Ensure model training data does not include PII (personally identifiable informa
 **See also:** [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>)
 
 **See also:** [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming](</en/ai/llm-safety.html>)
+
+**See also:** [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>), [AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection](</en/ai/ai-monitoring-alerting.html>)
+
+**See also:** [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>), [AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection](</en/ai/ai-monitoring-alerting.html>)
 
 **See also:** [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>), [AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection](</en/ai/ai-monitoring-alerting.html>)
 

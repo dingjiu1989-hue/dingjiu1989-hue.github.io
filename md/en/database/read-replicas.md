@@ -3,7 +3,7 @@ title: "Read Replicas: Scaling Reads, Replication Lag, and Failover"
 description: "Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, and best practices for PostgreSQL and MySQL."
 date: 2026-04-08
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/read-replicas.html
+url: https://aidev.fit/en/database/read-replicas.html
 ---
 
 # Read Replicas: Scaling Reads, Replication Lag, and Failover
@@ -279,6 +279,10 @@ Read replicas are a proven, low-risk approach to scaling reads. Combined with pr
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
 
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>)
 
 **See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>)
 

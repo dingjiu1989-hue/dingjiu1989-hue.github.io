@@ -3,7 +3,7 @@ title: "Building a Web Scraping Business: Technical and Legal Guide (2026)"
 description: "How to build a profitable web scraping service: tools (Playwright, Scrapy, Puppeteer), anti-bot bypass techniques, legal compliance (robots.txt, GDPR, CFAA), pricing, and client acquisition strategies."
 date: 2025-10-22
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/web-scraping-business.html
+url: https://aidev.fit/en/sidehustle/web-scraping-business.html
 ---
 
 # Building a Web Scraping Business: Technical and Legal Guide (2026)

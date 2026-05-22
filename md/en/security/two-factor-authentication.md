@@ -3,7 +3,7 @@ title: "Two-Factor Authentication Guide"
 description: "A comprehensive guide to implementing two-factor authentication with TOTP, SMS, backup codes, and WebAuthn passkeys."
 date: 2026-05-20
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/two-factor-authentication.html
+url: https://aidev.fit/en/security/two-factor-authentication.html
 ---
 
 # Two-Factor Authentication Guide
@@ -254,6 +254,10 @@ Implement TOTP as the primary 2FA method, supplement with backup codes for recov
 **See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>)
 
 **See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>)
+
+**See also:** [Passwordless Authentication](</en/security/passwordless-auth.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [Passwordless Authentication](</en/security/passwordless-auth.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 
 **See also:** [Passwordless Authentication](</en/security/passwordless-auth.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 

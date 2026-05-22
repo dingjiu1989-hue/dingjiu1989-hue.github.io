@@ -3,7 +3,7 @@ title: "Database Monitoring and Performance Alerting"
 description: "Monitor QPS, latency, connections, and cache hit ratio with Prometheus exporters, Grafana dashboards, and intelligent alert thresholds."
 date: 2026-03-26
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-monitoring.html
+url: https://aidev.fit/en/database/database-monitoring.html
 ---
 
 # Database Monitoring and Performance Alerting
@@ -81,6 +81,10 @@ Track QPS, latency, connections, cache hit ratio, and replication lag. Use Prome
 **See also:** [Connection Pooling Guide](</en/database/connection-pooling.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
 
 **See also:** [Connection Pooling Guide](</en/database/connection-pooling.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
+
+**See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
+
+**See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
 
 **See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [SQL Query Optimization](</en/database/sql-query-optimization.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
 

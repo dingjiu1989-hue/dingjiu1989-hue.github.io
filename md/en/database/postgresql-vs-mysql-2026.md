@@ -3,7 +3,7 @@ title: "PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Dev
 description: "Head-to-head comparison of PostgreSQL, MySQL, and SQLite for different use cases — performance benchmarks, features, ecosystem, and when to choose each."
 date: 2025-12-20
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/postgresql-vs-mysql-2026.html
+url: https://aidev.fit/en/database/postgresql-vs-mysql-2026.html
 ---
 
 # PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
@@ -533,6 +533,10 @@ _Benchmarks conducted May 2026 on AWS c6i.2xlarge instances with gp3 volumes. Re
 **See also:** [PostgreSQL vs MySQL vs SQLite (2026): Which Database Should You Use?](</en/compare/postgresql-vs-mysql-vs-sqlite.html>), [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared](</en/compare/duckdb-vs-sqlite.html>)
 
 **See also:** [PostgreSQL vs MySQL vs SQLite (2026): Which Database Should You Use?](</en/compare/postgresql-vs-mysql-vs-sqlite.html>), [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared](</en/compare/duckdb-vs-sqlite.html>)
+
+**See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
+
+**See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
 
 **See also:** [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>)
 

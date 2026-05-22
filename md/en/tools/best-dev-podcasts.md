@@ -3,7 +3,7 @@ title: "Best Developer Podcasts 2026: 15 Shows for Your Commute and Code Session
 description: "Handpicked developer podcasts covering web dev, DevOps, career growth, AI/ML, and software engineering culture. For your commute, workout, or background coding."
 date: 2025-10-30
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-dev-podcasts.html
+url: https://aidev.fit/en/tools/best-dev-podcasts.html
 ---
 
 # Best Developer Podcasts 2026: 15 Shows for Your Commute and Code Sessions

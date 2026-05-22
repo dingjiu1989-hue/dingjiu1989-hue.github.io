@@ -3,7 +3,7 @@ title: "Stateful vs Stateless Architecture Patterns"
 description: "Compare stateful and stateless architecture patterns: trade-offs for scalability, resilience, and implementation complexity."
 date: 2026-05-10
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/stateful-vs-stateless.html
+url: https://aidev.fit/en/architecture/stateful-vs-stateless.html
 ---
 
 # Stateful vs Stateless Architecture Patterns
@@ -51,6 +51,10 @@ Start stateless. Use external state stores when state is required. Only use stat
 **See also:** [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Event Notification vs Event-Carried State Transfer](</en/architecture/event-notification-vs-event-carrying.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
 
 **See also:** [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Event Notification vs Event-Carried State Transfer](</en/architecture/event-notification-vs-event-carrying.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
+
+**See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
+
+**See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
 
 **See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
 

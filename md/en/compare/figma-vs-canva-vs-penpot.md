@@ -3,7 +3,7 @@ title: "Figma vs Canva vs Penpot (2026): Best Design Tool for Developers"
 description: "Which design tool fits your workflow? Comparing UI/UX capabilities, developer handoff, open-source options, pricing, and learning curve."
 date: 2025-11-14
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/figma-vs-canva-vs-penpot.html
+url: https://aidev.fit/en/compare/figma-vs-canva-vs-penpot.html
 ---
 
 # Figma vs Canva vs Penpot (2026): Best Design Tool for Developers

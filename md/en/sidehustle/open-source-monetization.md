@@ -3,7 +3,7 @@ title: "Open Source Monetization"
 description: "Explore strategies for monetizing open source software projects sustainably — open-core model, SaaS hosting, sponsorship, enterprise support, and community-funded development."
 date: 2025-12-07
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/open-source-monetization.html
+url: https://aidev.fit/en/sidehustle/open-source-monetization.html
 ---
 
 # Open Source Monetization
@@ -208,6 +208,10 @@ Open source monetization is about finding the right balance between community co
 **See also:** [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Content Monetization Strategies for Developers](</en/sidehustle/content-monetization.html>), [10 Developer Side Hustles That Actually Make Money in 2026](</en/sidehustle/developer-side-hustles-2026.html>)
 
 **See also:** [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Content Monetization Strategies for Developers](</en/sidehustle/content-monetization.html>), [10 Developer Side Hustles That Actually Make Money in 2026](</en/sidehustle/developer-side-hustles-2026.html>)
+
+**See also:** [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Landing Page Conversion Optimization](</en/sidehustle/landing-page-conversion.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>)
+
+**See also:** [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Landing Page Conversion Optimization](</en/sidehustle/landing-page-conversion.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>)
 
 **See also:** [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Landing Page Conversion Optimization](</en/sidehustle/landing-page-conversion.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>)
 

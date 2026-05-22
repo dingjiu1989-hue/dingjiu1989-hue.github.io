@@ -3,7 +3,7 @@ title: "AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management
 description: "Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fallbacks, cost management, and centralized logging."
 date: 2026-02-11
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-gateway.html
+url: https://aidev.fit/en/ai/ai-gateway.html
 ---
 
 # AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging
@@ -81,6 +81,10 @@ Several open-source and commercial AI gateways exist: Portkey, Helicone, and Lit
 **See also:** [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>)
 
 **See also:** [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>)
+
+**See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
+
+**See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
 
 **See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>), [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>)
 

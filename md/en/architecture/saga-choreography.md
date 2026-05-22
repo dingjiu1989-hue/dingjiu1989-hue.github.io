@@ -3,7 +3,7 @@ title: "Saga Choreography Pattern"
 description: "Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose choreography"
 date: 2026-04-29
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/saga-choreography.html
+url: https://aidev.fit/en/architecture/saga-choreography.html
 ---
 
 # Saga Choreography Pattern
@@ -39,6 +39,10 @@ Production experience suggests starting with orchestration for critical workflow
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
 
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>)
 

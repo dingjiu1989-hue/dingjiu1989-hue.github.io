@@ -3,7 +3,7 @@ title: "Cloud Cost Optimization Tips"
 description: "Actionable strategies to reduce cloud infrastructure costs across AWS, GCP, and Azure without sacrificing performance."
 date: 2025-12-01
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/cloud-cost-optimization.html
+url: https://aidev.fit/en/tech/cloud-cost-optimization.html
 ---
 
 # Cloud Cost Optimization Tips
@@ -265,6 +265,10 @@ Cloud cost optimization is an ongoing process, not a one-time cleanup. Start wit
 **See also:** [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>)
 
 **See also:** [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>)
+
+**See also:** [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
+
+**See also:** [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
 
 **See also:** [Webpack vs Vite Comparison](</en/tech/webpack-vs-vite-bundlers.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>)
 

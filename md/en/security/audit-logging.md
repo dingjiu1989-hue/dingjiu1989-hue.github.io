@@ -3,7 +3,7 @@ title: "Audit Logging Best Practices"
 description: "Guide to audit logging covering immutable logs, log integrity verification, centralized logging architecture, retention policies, and compliance requirements."
 date: 2026-03-06
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/audit-logging.html
+url: https://aidev.fit/en/security/audit-logging.html
 ---
 
 # Audit Logging Best Practices
@@ -409,6 +409,10 @@ Audit logging is a critical security control that requires careful architectural
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
 
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
+
+**See also:** [Kubernetes Security](</en/security/kubernetes-security.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [API Authentication Methods](</en/security/api-authentication.html>)
+
+**See also:** [Kubernetes Security](</en/security/kubernetes-security.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 
 **See also:** [Kubernetes Security](</en/security/kubernetes-security.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [API Authentication Methods](</en/security/api-authentication.html>)
 

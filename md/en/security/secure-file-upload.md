@@ -3,7 +3,7 @@ title: "Secure File Upload Implementation"
 description: "Best practices for implementing secure file upload functionality including validation, storage, scanning, and access control."
 date: 2025-12-19
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/secure-file-upload.html
+url: https://aidev.fit/en/security/secure-file-upload.html
 ---
 
 # Secure File Upload Implementation
@@ -269,6 +269,10 @@ Secure file upload requires defense in depth. Validate extensions and MIME types
 **See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Security Log Management](</en/security/log-management-security.html>), [Container Security Best Practices](</en/security/container-security.html>)
 
 **See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Security Log Management](</en/security/log-management-security.html>), [Container Security Best Practices](</en/security/container-security.html>)
+
+**See also:** [Secrets Management for Developers](</en/security/secrets-management.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [Secrets Management for Developers](</en/security/secrets-management.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 
 **See also:** [Secrets Management for Developers](</en/security/secrets-management.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 

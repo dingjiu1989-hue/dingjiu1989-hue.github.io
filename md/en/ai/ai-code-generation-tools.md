@@ -3,7 +3,7 @@ title: "AI Code Generation: Tools, Workflows, and Best Practices"
 description: "Compare AI code generation tools: GitHub Copilot, Cursor, Claude Code. Best practices for AI-assisted development."
 date: 2026-02-19
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-code-generation-tools.html
+url: https://aidev.fit/en/ai/ai-code-generation-tools.html
 ---
 
 # AI Code Generation: Tools, Workflows, and Best Practices
@@ -41,6 +41,10 @@ AI tools may produce incorrect, insecure, or inefficient code. They lack busines
 **See also:** [Best LLMs for Coding in 2026: Claude vs GPT-4o vs Gemini vs DeepSeek vs CodeLlama](</en/ai/best-llms-for-coding-2026.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>)
 
 **See also:** [Best LLMs for Coding in 2026: Claude vs GPT-4o vs Gemini vs DeepSeek vs CodeLlama](</en/ai/best-llms-for-coding-2026.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [AI Safety: Responsible Development and Deployment](</en/ai/ai-safety.html>)
+
+**See also:** [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>)
+
+**See also:** [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>)
 
 **See also:** [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>)
 

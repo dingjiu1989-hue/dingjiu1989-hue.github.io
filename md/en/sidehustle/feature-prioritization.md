@@ -3,7 +3,7 @@ title: "Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring"
 description: "Prioritize features systematically using RICE scoring, MoSCoW method, and opportunity scoring for your SaaS product."
 date: 2026-01-21
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/feature-prioritization.html
+url: https://aidev.fit/en/sidehustle/feature-prioritization.html
 ---
 
 # Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
@@ -71,6 +71,10 @@ Systematic feature prioritization replaces guesswork with data-driven decision m
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>)
 
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>)
+
+**See also:** [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>), [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>)
+
+**See also:** [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>), [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>)
 
 **See also:** [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>), [Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings](</en/sidehustle/serverless-cost-saas.html>)
 

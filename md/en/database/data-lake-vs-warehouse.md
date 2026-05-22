@@ -3,7 +3,7 @@ title: "Data Lake vs Data Warehouse vs Lakehouse"
 description: "Compare data lake, data warehouse, and lakehouse architectures with Delta Lake, Iceberg, Hudi, and the medallion architecture."
 date: 2026-03-26
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/data-lake-vs-warehouse.html
+url: https://aidev.fit/en/database/data-lake-vs-warehouse.html
 ---
 
 # Data Lake vs Data Warehouse vs Lakehouse
@@ -317,6 +317,10 @@ Data warehouses remain essential for BI and reporting. Data lakes are ideal for 
 **See also:** [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>), [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>)
 
 **See also:** [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>), [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>)
+
+**See also:** [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
+
+**See also:** [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
 
 **See also:** [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>)
 

@@ -3,7 +3,7 @@ title: "Materialized View Pattern"
 description: "Explore the materialized view pattern: read models, caching strategies, CQRS integration, and efficient cross-service queries"
 date: 2026-05-04
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/materialized-view-pattern.html
+url: https://aidev.fit/en/architecture/materialized-view-pattern.html
 ---
 
 # Materialized View Pattern
@@ -65,6 +65,10 @@ A pragmatic approach is to use materialized views for the most important queries
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
+
+**See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
 
 **See also:** [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
 

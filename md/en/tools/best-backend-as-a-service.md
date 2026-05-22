@@ -3,7 +3,7 @@ title: "Best Backend-as-a-Service Platforms 2026: Supabase vs Appwrite vs Convex
 description: "Compare BaaS platforms that give frontend developers a complete backend — database, auth, storage, real-time, and serverless functions."
 date: 2025-11-03
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-backend-as-a-service.html
+url: https://aidev.fit/en/tools/best-backend-as-a-service.html
 ---
 
 # Best Backend-as-a-Service Platforms 2026: Supabase vs Appwrite vs Convex vs Firebase

@@ -3,7 +3,7 @@ title: "Embedding Models Comparison 2026: OpenAI vs Cohere vs BGE vs Jina for Se
 description: "Compare embedding models for RAG and semantic search — accuracy benchmarks, dimensions, cost, and self-hosted vs API trade-offs."
 date: 2025-11-11
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/embedding-models-comparison.html
+url: https://aidev.fit/en/ai/embedding-models-comparison.html
 ---
 
 # Embedding Models Comparison 2026: OpenAI vs Cohere vs BGE vs Jina for Semantic Search

@@ -3,7 +3,7 @@ title: "SBOM Management"
 description: "Managing Software Bill of Materials with generation, verification, vulnerability correlation, and compliance."
 date: 2026-03-18
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/sbom-management.html
+url: https://aidev.fit/en/security/sbom-management.html
 ---
 
 # SBOM Management
@@ -253,6 +253,10 @@ SBOMs are essential for supply chain security. Generate them automatically in yo
 **See also:** [Helm Security](</en/security/helm-security.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 
 **See also:** [Helm Security](</en/security/helm-security.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Compliance Automation](</en/security/compliance-automation.html>)
+
+**See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Compliance Automation](</en/security/compliance-automation.html>)
 
 **See also:** [Patching Strategy](</en/security/patching-strategy.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Compliance Automation](</en/security/compliance-automation.html>)
 

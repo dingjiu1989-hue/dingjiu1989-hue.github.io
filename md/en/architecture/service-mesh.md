@@ -3,7 +3,7 @@ title: "Service Mesh Patterns: Istio and Linkerd"
 description: "Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and when to use a mesh."
 date: 2026-04-20
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/service-mesh.html
+url: https://aidev.fit/en/architecture/service-mesh.html
 ---
 
 # Service Mesh Patterns: Istio and Linkerd
@@ -592,6 +592,10 @@ Service meshes extract networking, security, and observability from application 
 **See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 
 **See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
+
+**See also:** [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Two-Phase Commit (2PC) for Distributed Transactions](</en/architecture/two-phase-commit.html>)
+
+**See also:** [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Two-Phase Commit (2PC) for Distributed Transactions](</en/architecture/two-phase-commit.html>)
 
 **See also:** [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>), [Two-Phase Commit (2PC) for Distributed Transactions](</en/architecture/two-phase-commit.html>)
 

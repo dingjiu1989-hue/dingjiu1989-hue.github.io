@@ -3,7 +3,7 @@ title: "SQL Injection Prevention Guide"
 description: "Comprehensive guide to preventing SQL injection attacks with parameterized queries, ORM protections, input validation, and WAF rules."
 date: 2025-12-19
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/sql-injection-prevention.html
+url: https://aidev.fit/en/security/sql-injection-prevention.html
 ---
 
 # SQL Injection Prevention Guide
@@ -195,6 +195,10 @@ SQL injection is entirely preventable. Parameterized queries are the single most
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>)
 
 **See also:** [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 
 **See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 

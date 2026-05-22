@@ -3,7 +3,7 @@ title: "Best Diagram as Code Tools"
 description: "Compare diagram-as-code tools including Mermaid, PlantUML, Excalidraw, and Diagrams for creating technical diagrams."
 date: 2025-12-09
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/diagram-tools.html
+url: https://aidev.fit/en/tools/diagram-tools.html
 ---
 
 # Best Diagram as Code Tools
@@ -303,6 +303,10 @@ Diagram-as-code tools have made technical diagrams maintainable and version-cont
 **See also:** [Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser](</en/tools/best-diagram-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>)
 
 **See also:** [Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser](</en/tools/best-diagram-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>)
+
+**See also:** [Project Management Tools for Developers](</en/tools/project-management-tools.html>), [Best Terminal Emulators 2026](</en/tools/terminal-emulators.html>), [Developer Collaboration Tools: Slack vs Discord vs Linear](</en/tools/collaboration-tools.html>)
+
+**See also:** [Project Management Tools for Developers](</en/tools/project-management-tools.html>), [Best Terminal Emulators 2026](</en/tools/terminal-emulators.html>), [Developer Collaboration Tools: Slack vs Discord vs Linear](</en/tools/collaboration-tools.html>)
 
 **See also:** [Project Management Tools for Developers](</en/tools/project-management-tools.html>), [Best Terminal Emulators 2026](</en/tools/terminal-emulators.html>), [Developer Collaboration Tools: Slack vs Discord vs Linear](</en/tools/collaboration-tools.html>)
 

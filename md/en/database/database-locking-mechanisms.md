@@ -3,7 +3,7 @@ title: "Database Locking: Row Locks, Table Locks, and Deadlock Prevention"
 description: "Understand database locking mechanisms: shared/exclusive locks, row vs table locks, two-phase locking, and deadlock handling."
 date: 2026-04-15
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-locking-mechanisms.html
+url: https://aidev.fit/en/database/database-locking-mechanisms.html
 ---
 
 # Database Locking: Row Locks, Table Locks, and Deadlock Prevention
@@ -57,6 +57,10 @@ Query pg_locks in PostgreSQL or performance_schema.data_locks in MySQL to see cu
 **See also:** [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
 
 **See also:** [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>)
+
+**See also:** [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>)
+
+**See also:** [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>)
 
 **See also:** [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>)
 

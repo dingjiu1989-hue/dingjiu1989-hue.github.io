@@ -3,7 +3,7 @@ title: "Zero-Downtime Deployment Strategies"
 description: "Rolling, blue-green, canary deployments, feature flags, database migrations for zero-downtime releases"
 date: 2026-05-01
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/zero-downtime-deployment.html
+url: https://aidev.fit/en/architecture/zero-downtime-deployment.html
 ---
 
 # Zero-Downtime Deployment Strategies
@@ -39,6 +39,10 @@ The choice of deployment strategy depends on application architecture, team matu
 **See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Canary Deployments for Safe Releases](</en/architecture/canary-deployment.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
 
 **See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Canary Deployments for Safe Releases](</en/architecture/canary-deployment.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
+
+**See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 
 **See also:** [CDN Architecture](</en/architecture/cdn-architecture.html>), [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)
 

@@ -3,7 +3,7 @@ title: "OAuth2 Implementation"
 description: "Implementing OAuth2 with grant types, token handling, PKCE, and security best practices."
 date: 2026-03-18
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/oauth2-implementation.html
+url: https://aidev.fit/en/security/oauth2-implementation.html
 ---
 
 # OAuth2 Implementation
@@ -235,6 +235,10 @@ OAuth2 is complex but essential for modern authentication. PKCE makes authorizat
 **See also:** [Helm Security](</en/security/helm-security.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Data Classification](</en/security/data-classification.html>)
 
 **See also:** [Helm Security](</en/security/helm-security.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Data Classification](</en/security/data-classification.html>)
+
+**See also:** [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Authentication Methods](</en/security/api-authentication.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
+
+**See also:** [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Authentication Methods](</en/security/api-authentication.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 
 **See also:** [API Security: Protecting Your REST and GraphQL APIs](</en/security/api-security-guide.html>), [API Authentication Methods](</en/security/api-authentication.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 

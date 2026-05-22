@@ -3,7 +3,7 @@ title: "Distributed Tracing: Deep Dive"
 description: "Trace context propagation, sampling strategies, visualization, and implementation of distributed tracing"
 date: 2026-04-23
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/distributed-tracing-deep.html
+url: https://aidev.fit/en/architecture/distributed-tracing-deep.html
 ---
 
 # Distributed Tracing: Deep Dive
@@ -39,6 +39,10 @@ Correlation with logs completes the observability picture. Span IDs embedded in 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)
 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)
+
+**See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
+
+**See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
 
 **See also:** [Service Mesh Deep Dive](</en/architecture/service-mesh-deep.html>), [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
 

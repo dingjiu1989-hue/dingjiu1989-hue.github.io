@@ -3,7 +3,7 @@ title: "Best AI Video Generation Tools for Developers 2026: Runway vs Pika vs So
 description: "Comparison of AI video tools: text-to-video quality, API access, pricing, and developer use cases (demos, documentation, marketing). How to integrate AI video generation into your apps."
 date: 2025-11-10
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-video-generation-tools.html
+url: https://aidev.fit/en/ai/ai-video-generation-tools.html
 ---
 
 # Best AI Video Generation Tools for Developers 2026: Runway vs Pika vs Sora

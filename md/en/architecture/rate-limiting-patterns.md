@@ -3,7 +3,7 @@ title: "Rate Limiting Patterns"
 description: "Explore rate limiting patterns for protecting APIs and services from abuse — token bucket, sliding window, distributed rate limiting with Redis, and integration with API gateway and load balancer."
 date: 2025-12-29
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-patterns.html
+url: https://aidev.fit/en/architecture/rate-limiting-patterns.html
 ---
 
 # Rate Limiting Patterns
@@ -157,6 +157,10 @@ Rate limiting is essential for production APIs. Start with the token bucket algo
 **See also:** [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
 
 **See also:** [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>)
+
+**See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)
+
+**See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)
 
 **See also:** [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>)
 

@@ -3,7 +3,7 @@ title: "Blue-Green Deployment Strategy"
 description: "Master blue-green deployments for zero-downtime releases, rollback safety, and production traffic switching."
 date: 2026-05-06
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/blue-green-deployment.html
+url: https://aidev.fit/en/architecture/blue-green-deployment.html
 ---
 
 # Blue-Green Deployment Strategy
@@ -41,6 +41,10 @@ Automate the entire process from environment provisioning to traffic switching. 
 **See also:** [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Canary Deployments for Safe Releases](</en/architecture/canary-deployment.html>)
 
 **See also:** [Zero-Downtime Deployment Strategies](</en/architecture/zero-downtime-deployment.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Canary Deployments for Safe Releases](</en/architecture/canary-deployment.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
+
+**See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
 
 **See also:** [Chaos Engineering: Building Resilient Systems](</en/architecture/chaos-engineering.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [CDN Architecture](</en/architecture/cdn-architecture.html>)
 

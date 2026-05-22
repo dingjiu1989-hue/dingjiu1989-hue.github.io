@@ -3,7 +3,7 @@ title: "Monolith-First Strategy"
 description: "When to start monolithic, extraction patterns, and migration strategies to microservices with proven approaches"
 date: 2026-04-28
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/monolith-first-strategy.html
+url: https://aidev.fit/en/architecture/monolith-first-strategy.html
 ---
 
 # Monolith-First Strategy
@@ -35,6 +35,10 @@ When to avoid monolith-first: if the system is inherently distributed (IoT data 
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>)
 
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>)
+
+**See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)
+
+**See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)
 
 **See also:** [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>)
 

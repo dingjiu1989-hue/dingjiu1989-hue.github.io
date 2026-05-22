@@ -3,7 +3,7 @@ title: "Rate Limiting Architecture"
 description: "Token bucket, sliding window, distributed rate limiting, Redis-based implementation, and algorithm tradeoffs"
 date: 2026-04-29
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-architecture.html
+url: https://aidev.fit/en/architecture/rate-limiting-architecture.html
 ---
 
 # Rate Limiting Architecture
@@ -41,6 +41,10 @@ Client identification is the prerequisite for rate limiting. Simple identificati
 **See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
 
 **See also:** [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>)
+
+**See also:** [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
+
+**See also:** [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
 
 **See also:** [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
 

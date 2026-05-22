@@ -3,7 +3,7 @@ title: "Claim Check Pattern"
 description: "Learn the claim check pattern: store large payloads, pass references, and enable asynchronous processing"
 date: 2026-05-02
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/claim-check.html
+url: https://aidev.fit/en/architecture/claim-check.html
 ---
 
 # Claim Check Pattern
@@ -61,6 +61,10 @@ The claim check pattern is a simple, effective solution for handling large paylo
 **See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 
 **See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>)
+
+**See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>)
 
 **See also:** [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>)
 

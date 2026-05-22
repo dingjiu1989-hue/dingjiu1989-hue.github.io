@@ -7,7 +7,7 @@ from pathlib import Path
 from datetime import datetime, timezone as tz
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE = "https://dingjiu1989-hue.github.io"
+SITE = "https://aidev.fit"
 
 def run(cmd, desc):
     print(f"\n{'='*60}")

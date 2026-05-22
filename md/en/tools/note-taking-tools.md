@@ -3,7 +3,7 @@ title: "Developer Note Taking Tools"
 description: "Compare note-taking tools for developers including Notion, Obsidian, Logseq, and Dendron for knowledge management."
 date: 2025-12-10
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/note-taking-tools.html
+url: https://aidev.fit/en/tools/note-taking-tools.html
 ---
 
 # Developer Note Taking Tools
@@ -272,6 +272,10 @@ Developer note-taking has evolved from plain text files to rich knowledge manage
 **See also:** [Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq](</en/tools/best-note-taking-apps-developers.html>), [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
 
 **See also:** [Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq](</en/tools/best-note-taking-apps-developers.html>), [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
+
+**See also:** [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Database GUI Clients](</en/tools/database-clients.html>)
+
+**See also:** [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Database GUI Clients](</en/tools/database-clients.html>)
 
 **See also:** [Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler](</en/tools/secret-management-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best Database GUI Clients](</en/tools/database-clients.html>)
 

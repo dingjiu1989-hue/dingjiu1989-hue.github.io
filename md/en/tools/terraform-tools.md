@@ -3,7 +3,7 @@ title: "Terraform Tools: Terragrunt, terratest, tfsec, Infracost"
 description: "Essential Terraform ecosystem tools: Terragrunt for DRY configurations, terratest for infrastructure testing, tfsec for security scanning, and Infracost for cos"
 date: 2026-02-06
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/terraform-tools.html
+url: https://aidev.fit/en/tools/terraform-tools.html
 ---
 
 # Terraform Tools: Terragrunt, terratest, tfsec, Infracost
@@ -404,6 +404,10 @@ The ideal Terraform workflow combines all these tools: Terragrunt for structure,
 **See also:** [Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing](</en/tools/helm-tools.html>), [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
 
 **See also:** [Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing](</en/tools/helm-tools.html>), [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
+
+**See also:** [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench](</en/tools/infrastructure-scanners-2026.html>), [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>)
+
+**See also:** [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench](</en/tools/infrastructure-scanners-2026.html>), [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>)
 
 **See also:** [Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging](</en/tools/debugging-tools.html>), [Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench](</en/tools/infrastructure-scanners-2026.html>), [Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize](</en/tools/kubernetes-tools.html>)
 

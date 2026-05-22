@@ -3,7 +3,7 @@ title: "Data Loss Prevention Strategies"
 description: "Implementing DLP across network, endpoint, and cloud with effective policy design and incident response."
 date: 2026-03-17
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/dlp-strategies.html
+url: https://aidev.fit/en/security/dlp-strategies.html
 ---
 
 # Data Loss Prevention Strategies
@@ -229,6 +229,10 @@ Effective DLP requires coverage across network, endpoint, and cloud domains. Des
 **See also:** [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Incident Response Plan](</en/security/incident-response-plan.html>), [Endpoint Security](</en/security/endpoint-security.html>)
 
 **See also:** [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Incident Response Plan](</en/security/incident-response-plan.html>), [Endpoint Security](</en/security/endpoint-security.html>)
+
+**See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
+
+**See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
 
 **See also:** [Secrets Rotation](</en/security/secrets-rotation.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
 

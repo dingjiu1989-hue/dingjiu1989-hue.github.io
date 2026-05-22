@@ -3,7 +3,7 @@ title: "REST API Best Practices: The Complete Guide for 2026"
 description: "Design production-ready REST APIs with proper naming, versioning, pagination, error handling, and security. Includes OpenAPI documentation standards."
 date: 2025-10-03
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/rest-api-best-practices.html
+url: https://aidev.fit/en/tech/rest-api-best-practices.html
 ---
 
 # REST API Best Practices: The Complete Guide for 2026

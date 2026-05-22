@@ -18,28 +18,28 @@
     </script>
     <meta property="og:title" content="Claim Check Pattern">
     <meta property="og:description" content="Learn the claim check pattern: store large payloads, pass references, and enable asynchronous processing">
-    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/claim-check.html">
+    <meta property="og:url" content="https://aidev.fit/en/architecture/claim-check.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/claim-check.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Claim Check Pattern">
     <meta name="twitter:description" content="Learn the claim check pattern: store large payloads, pass references, and enable asynchronous processing">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/architecture/claim-check.png">
     <meta property="article:published_time" content="2026-05-02">
     <meta property="article:modified_time" content="2026-05-02">
     <meta property="article:tag" content="Architecture, System Design, Backend">
-    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/claim-check.webp" type="image/webp" fetchpriority="high">
     <title>Claim Check Pattern — SourceHub</title>
     <meta name="description" content="Learn the claim check pattern: store large payloads, pass references, and enable asynchronous processing">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/claim-check.html">
-    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/claim-check.html">
-    <link rel="prev" href="https://dingjiu1989-hue.github.io/en/architecture/ddd-tactical.html">
-    <link rel="next" href="https://dingjiu1989-hue.github.io/en/architecture/zero-downtime-deployment.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/claim-check.html">
+    <link rel="canonical" href="https://aidev.fit/en/architecture/claim-check.html">
+    <link rel="prev" href="https://aidev.fit/en/architecture/ddd-tactical.html">
+    <link rel="next" href="https://aidev.fit/en/architecture/zero-downtime-deployment.html">
     <meta name="robots" content="index, follow">
     <script type="application/ld+json">
     {
@@ -47,18 +47,18 @@
       "@type": "Article",
       "headline": "Claim Check Pattern",
       "description": "Learn the claim check pattern: store large payloads, pass references, and enable asynchronous processing",
-      "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png",
+      "image": "https://aidev.fit/images/covers/en/architecture/claim-check.png",
       "datePublished": "2026-05-02",
       "dateModified": "2026-05-02",
-      "wordCount": "1441",
+      "wordCount": "1497",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
       "isAccessibleForFree": true,
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/claim-check.html"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/claim-check.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/claim-check-pattern-2gpe"
       ],
@@ -70,8 +70,8 @@
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
-        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://aidev.fit/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://aidev.fit/en/architecture/"},
         {"@type": "ListItem", "position": 3, "name": "Claim Check Pattern"}
       ]
     }
@@ -100,9 +100,9 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Claim Check Pattern</h1>
-      <div class="article-meta">Published 2026-05-02 · 0 views · 0 replies</div>
-      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The claim check pattern is a messaging pattern that addresses the challenge of passing large payloads through a message broker. Instead of including the payload in the message, the producer stores the payload in a shared data store and sends a reference (claim check) in the message. The consumer retrieves the payload using the reference. This pattern is essential for systems where message size limits are a concern. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+      <div class="article-meta">Published 2026-05-02 · 0 views · 0 replies · 7 min read</div>
+      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/claim-check.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>The claim check pattern is a messaging pattern that addresses the challenge of passing large payloads through a message broker. Instead of including the payload in the message, the producer stores the payload in a shared data store and sends a reference (claim check) in the message. The consumer retrieves the payload using the reference. This pattern is essential for systems where message size limits are a concern. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/claim-check.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The Problem with Large Messages </p>
 <p>Message brokers impose size limits. Kafka has a default max message size of 1MB, though this can be increased. SQS has a 256KB limit. RabbitMQ can handle larger messages but performance degrades significantly. Even where limits can be increased, large messages cause problems: increased broker storage, slower serialization and deserialization, increased network transfer time, and memory pressure on consumers. </p>
 <p>A single high-resolution image, a large CSV file, or a JSON document with many nested objects can easily exceed these limits. The claim check pattern solves this problem without requiring changes to the message broker configuration. </p>
@@ -141,6 +141,8 @@
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -153,8 +155,8 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Claim%20Check%20Pattern&url=https://dingjiu1989-hue.github.io/en/architecture/claim-check.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://dingjiu1989-hue.github.io/en/architecture/claim-check.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Claim%20Check%20Pattern&url=https://aidev.fit/en/architecture/claim-check.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/architecture/claim-check.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
     </div>
     <section class="related">
       <h3>Related Articles</h3>

@@ -3,7 +3,7 @@ title: "Web Performance Optimization Techniques 2026"
 description: "Optimize web performance: Core Web Vitals, lazy loading, code splitting, CDN optimization, and caching strategies."
 date: 2026-01-15
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/web-performance-optimization.html
+url: https://aidev.fit/en/tech/web-performance-optimization.html
 ---
 
 # Web Performance Optimization Techniques 2026
@@ -45,6 +45,10 @@ Lab testing with Lighthouse provides actionable recommendations. Field data from
 **See also:** [Build Optimization](</en/tech/build-optimization.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Node.js Performance Optimization Guide](</en/tech/nodejs-performance.html>)
 
 **See also:** [Build Optimization](</en/tech/build-optimization.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Node.js Performance Optimization Guide](</en/tech/nodejs-performance.html>)
+
+**See also:** [Performance Testing](</en/tech/performance-testing.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>)
+
+**See also:** [Performance Testing](</en/tech/performance-testing.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>)
 
 **See also:** [Performance Testing](</en/tech/performance-testing.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>)
 

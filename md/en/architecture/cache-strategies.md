@@ -3,7 +3,7 @@ title: "Caching Strategies"
 description: "Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems"
 date: 2026-05-01
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/cache-strategies.html
+url: https://aidev.fit/en/architecture/cache-strategies.html
 ---
 
 # Caching Strategies
@@ -55,6 +55,10 @@ Modern caching systems like Redis, Memcached, and CDN platforms provide configur
 **See also:** [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>)
 
 **See also:** [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>)
+
+**See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
+
+**See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
 
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
 

@@ -3,7 +3,7 @@ title: "Session Management Security"
 description: "Guide to secure session management covering JWT vs opaque tokens, rotation strategies, secure cookies, and session fixation prevention."
 date: 2026-03-13
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/session-management.html
+url: https://aidev.fit/en/security/session-management.html
 ---
 
 # Session Management Security
@@ -311,6 +311,10 @@ Secure session management requires defense in depth. Use JWTs for stateless dist
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Content Security Policy](</en/security/content-security-policy.html>), [Key Management Systems](</en/security/key-management.html>)
 
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Content Security Policy](</en/security/content-security-policy.html>), [Key Management Systems](</en/security/key-management.html>)
+
+**See also:** [Certificate Management](</en/security/certificate-management.html>), [Container Image Security](</en/security/container-image-security.html>), [CORS Security](</en/security/cors-security.html>)
+
+**See also:** [Certificate Management](</en/security/certificate-management.html>), [Container Image Security](</en/security/container-image-security.html>), [CORS Security](</en/security/cors-security.html>)
 
 **See also:** [Certificate Management](</en/security/certificate-management.html>), [Container Image Security](</en/security/container-image-security.html>), [CORS Security](</en/security/cors-security.html>)
 

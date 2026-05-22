@@ -3,7 +3,7 @@ title: "Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory"
 description: "Design memory systems for AI agents inspired by cognitive architecture: short-term working memory, long-term storage, episodic experiences, and semantic knowled"
 date: 2026-02-13
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/agent-memory-systems.html
+url: https://aidev.fit/en/ai/agent-memory-systems.html
 ---
 
 # Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory
@@ -401,6 +401,10 @@ Agent memory systems mirror human cognitive architecture. Short-term memory main
 **See also:** [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>)
 
 **See also:** [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>)
+
+**See also:** [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)
+
+**See also:** [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)
 
 **See also:** [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>)
 

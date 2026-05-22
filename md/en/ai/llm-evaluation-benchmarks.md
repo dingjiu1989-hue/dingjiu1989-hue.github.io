@@ -3,7 +3,7 @@ title: "LLM Evaluation and Benchmarking Guide 2026: Beyond Simple Evals"
 description: "Comprehensive guide to evaluating LLM performance — MMLU, HumanEval, MT-Bench, custom evals, and building an evaluation pipeline."
 date: 2025-11-11
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/llm-evaluation-benchmarks.html
+url: https://aidev.fit/en/ai/llm-evaluation-benchmarks.html
 ---
 
 # LLM Evaluation and Benchmarking Guide 2026: Beyond Simple Evals

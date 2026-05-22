@@ -3,7 +3,7 @@ title: "Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
 description: "Compare fine-tuning and RAG for LLM applications: when to use each approach, hybrid fine-tuned RAG patterns, and detailed cost analysis for different scenarios."
 date: 2026-02-15
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/fine-tuning-vs-rag.html
+url: https://aidev.fit/en/ai/fine-tuning-vs-rag.html
 ---
 
 # Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
@@ -229,6 +229,10 @@ Fine-tuning and RAG are complementary, not competing, approaches. RAG handles fa
 **See also:** [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>)
 
 **See also:** [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>)
+
+**See also:** [Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search](</en/ai/vector-database-tuning.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>)
+
+**See also:** [Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search](</en/ai/vector-database-tuning.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>)
 
 **See also:** [Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search](</en/ai/vector-database-tuning.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>)
 

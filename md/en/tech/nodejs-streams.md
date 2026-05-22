@@ -3,7 +3,7 @@ title: "Node.js Streams"
 description: "Master Node.js streams: readable, writable, transform streams, backpressure handling, and the pipeline API"
 date: 2026-01-09
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/nodejs-streams.html
+url: https://aidev.fit/en/tech/nodejs-streams.html
 ---
 
 # Node.js Streams
@@ -79,6 +79,10 @@ Node.js streams are fundamental to building efficient, memory-conscious applicat
 **See also:** [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Error Handling Patterns](</en/tech/error-handling-patterns.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>)
 
 **See also:** [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Error Handling Patterns](</en/tech/error-handling-patterns.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>)
+
+**See also:** [Developer Portal](</en/tech/developer-portal.html>), [Event Processing](</en/tech/event-processing.html>), [Metric Collection](</en/tech/metric-collection.html>)
+
+**See also:** [Developer Portal](</en/tech/developer-portal.html>), [Event Processing](</en/tech/event-processing.html>), [Metric Collection](</en/tech/metric-collection.html>)
 
 **See also:** [Developer Portal](</en/tech/developer-portal.html>), [Event Processing](</en/tech/event-processing.html>), [Metric Collection](</en/tech/metric-collection.html>)
 

@@ -3,7 +3,7 @@ title: "Backend for Frontend (BFF) Pattern"
 description: "Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data aggregation, protocol translation, and when to use BFF vs. API Gateway in microservices."
 date: 2025-12-25
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/backend-for-frontend.html
+url: https://aidev.fit/en/architecture/backend-for-frontend.html
 ---
 
 # Backend for Frontend (BFF) Pattern
@@ -49,6 +49,10 @@ In practice, the BFF pattern has become a standard recommendation for microservi
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)
 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)
+
+**See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
+
+**See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
 
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Rate Limiting Patterns](</en/architecture/rate-limiting-patterns.html>), [REST API Design Best Practices](</en/architecture/rest-api-design.html>)
 

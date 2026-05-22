@@ -3,7 +3,7 @@ title: "Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP"
 description: "Compare cloud cost management tools: native tools, third-party platforms, and cost optimization strategies."
 date: 2026-02-07
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/cloud-cost-tools.html
+url: https://aidev.fit/en/tools/cloud-cost-tools.html
 ---
 
 # Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP
@@ -39,6 +39,10 @@ Right-size instances, use reserved instances, implement auto-scaling, clean up u
 **See also:** [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
 
 **See also:** [Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons](</en/tools/cloud-cli-tools.html>), [Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks](</en/tools/git-advanced-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
+
+**See also:** [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>)
+
+**See also:** [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>)
 
 **See also:** [Note-Taking and Knowledge Management Tools](</en/tools/note-taking-apps.html>), [Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared](</en/tools/container-orchestration-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>)
 

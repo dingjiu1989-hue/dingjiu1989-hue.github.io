@@ -3,7 +3,7 @@ title: "Git Workflows"
 description: "Compare Git workflows: trunk-based development, GitHub Flow, GitFlow, and monorepo strategies for different team sizes"
 date: 2026-01-07
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/git-workflows.html
+url: https://aidev.fit/en/tech/git-workflows.html
 ---
 
 # Git Workflows
@@ -67,6 +67,10 @@ Git workflows are tools, not rules. Adjust the workflow to fit your team's needs
 **See also:** [Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development](</en/tech/git-workflows-team-guide.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [Monorepo vs Multirepo: Repository Strategy Comparison](</en/tech/monorepo-vs-multirepo.html>)
 
 **See also:** [Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development](</en/tech/git-workflows-team-guide.html>), [Webpack vs Vite](</en/tech/webpack-vs-vite.html>), [Monorepo vs Multirepo: Repository Strategy Comparison](</en/tech/monorepo-vs-multirepo.html>)
+
+**See also:** [Build Optimization](</en/tech/build-optimization.html>), [Configuration Management](</en/tech/configuration-management.html>), [Log Management](</en/tech/log-management.html>)
+
+**See also:** [Build Optimization](</en/tech/build-optimization.html>), [Configuration Management](</en/tech/configuration-management.html>), [Log Management](</en/tech/log-management.html>)
 
 **See also:** [Build Optimization](</en/tech/build-optimization.html>), [Configuration Management](</en/tech/configuration-management.html>), [Log Management](</en/tech/log-management.html>)
 

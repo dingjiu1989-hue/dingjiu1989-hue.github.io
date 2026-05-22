@@ -3,7 +3,7 @@ title: "LangChain vs LlamaIndex vs Haystack (2026): AI Framework Comparison"
 description: "Three approaches to building LLM applications: LangChain (chains + agents), LlamaIndex (data indexing + RAG), and Haystack (NLP pipelines). Which framework for your AI project?"
 date: 2025-11-25
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/langchain-vs-llamaindex-vs-haystack.html
+url: https://aidev.fit/en/compare/langchain-vs-llamaindex-vs-haystack.html
 ---
 
 # LangChain vs LlamaIndex vs Haystack (2026): AI Framework Comparison

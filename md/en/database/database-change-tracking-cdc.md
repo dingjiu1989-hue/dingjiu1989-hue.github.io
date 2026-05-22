@@ -3,7 +3,7 @@ title: "Change Data Capture: Tracking Database Changes in Real-Time"
 description: "Implement change data capture (CDC) for real-time data synchronization, event streaming, and audit logging."
 date: 2026-04-14
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-change-tracking-cdc.html
+url: https://aidev.fit/en/database/database-change-tracking-cdc.html
 ---
 
 # Change Data Capture: Tracking Database Changes in Real-Time
@@ -37,6 +37,10 @@ CDC supports data warehouse synchronization, cache invalidation, search index up
 **See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Audit Triggers: Automatic Change Tracking](</en/database/database-audit-triggers.html>)
 
 **See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [Database Audit Triggers: Automatic Change Tracking](</en/database/database-audit-triggers.html>)
+
+**See also:** [Database Security Hardening](</en/database/database-security-hardening.html>), [Database Encryption: Data at Rest and in Transit](</en/database/database-encryption.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
+
+**See also:** [Database Security Hardening](</en/database/database-security-hardening.html>), [Database Encryption: Data at Rest and in Transit](</en/database/database-encryption.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
 
 **See also:** [Database Security Hardening](</en/database/database-security-hardening.html>), [Database Encryption: Data at Rest and in Transit](</en/database/database-encryption.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
 

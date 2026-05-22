@@ -3,7 +3,7 @@ title: "Vite vs Webpack vs Turbopack (2026): Best Frontend Build Tool?"
 description: "Speed, configurability, and ecosystem compared across the three leading bundlers. Real build times, plugin availability, and framework support analyzed."
 date: 2025-11-18
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/vite-vs-webpack-vs-turbopack.html
+url: https://aidev.fit/en/compare/vite-vs-webpack-vs-turbopack.html
 ---
 
 # Vite vs Webpack vs Turbopack (2026): Best Frontend Build Tool?

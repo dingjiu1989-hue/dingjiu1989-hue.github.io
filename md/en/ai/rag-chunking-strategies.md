@@ -3,7 +3,7 @@ title: "RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Split
 description: "Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategies for context preservation, and recursive splitting for hete"
 date: 2026-02-18
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/rag-chunking-strategies.html
+url: https://aidev.fit/en/ai/rag-chunking-strategies.html
 ---
 
 # RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting
@@ -195,6 +195,10 @@ Chunking strategy is one of the highest-leverage decisions in RAG system design.
 **See also:** [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>)
 
 **See also:** [Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval](</en/ai/multi-modal-rag.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>)
+
+**See also:** [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>)
+
+**See also:** [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>)
 
 **See also:** [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>), [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>)
 

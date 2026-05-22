@@ -3,7 +3,7 @@ title: "Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explaine
 description: "Go beyond CREATE INDEX with a deep dive into index types, when each excels, covering indexes, partial indexes, and how the query planner chooses."
 date: 2025-10-18
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/database-indexing-guide.html
+url: https://aidev.fit/en/tech/database-indexing-guide.html
 ---
 
 # Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained

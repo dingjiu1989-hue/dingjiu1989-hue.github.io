@@ -3,7 +3,7 @@ title: "Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Win
 description: "Honest head-to-head comparison of the 3 leading AI coding tools. Feature tables, pricing breakdown, and clear recommendations for every workflow."
 date: 2025-11-14
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/cursor-vs-copilot-vs-claude-code.html
+url: https://aidev.fit/en/compare/cursor-vs-copilot-vs-claude-code.html
 ---
 
 # Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?

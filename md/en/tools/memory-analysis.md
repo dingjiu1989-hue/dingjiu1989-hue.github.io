@@ -3,7 +3,7 @@ title: "Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling"
 description: "Comprehensive guide to memory analysis tools: Valgrind for memory error detection, heaptrack for Linux heap profiling, memray for Python memory analysis, and ge"
 date: 2026-02-04
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/memory-analysis.html
+url: https://aidev.fit/en/tools/memory-analysis.html
 ---
 
 # Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling
@@ -286,6 +286,10 @@ Start with the lowest-overhead tool for your language. For C/C++, use ASan durin
 **See also:** [Performance Profiling: perf, Flamegraphs, py-spy, pprof](</en/tools/performance-profiling.html>), [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)
 
 **See also:** [Performance Profiling: perf, Flamegraphs, py-spy, pprof](</en/tools/performance-profiling.html>), [Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide](</en/tools/networking-tools.html>), [Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit](</en/tools/command-line-productivity.html>)
+
+**See also:** [Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja](</en/tools/reverse-engineering.html>), [Browser DevTools: Advanced Debugging Techniques](</en/tools/browser-devtools.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>)
+
+**See also:** [Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja](</en/tools/reverse-engineering.html>), [Browser DevTools: Advanced Debugging Techniques](</en/tools/browser-devtools.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>)
 
 **See also:** [Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja](</en/tools/reverse-engineering.html>), [Browser DevTools: Advanced Debugging Techniques](</en/tools/browser-devtools.html>), [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>)
 

@@ -3,7 +3,7 @@ title: "Chaos Engineering: Building Resilient Systems"
 description: "Introduction to chaos engineering: principles, practices, and tools for testing system resilience in production."
 date: 2026-05-06
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/chaos-engineering.html
+url: https://aidev.fit/en/architecture/chaos-engineering.html
 ---
 
 # Chaos Engineering: Building Resilient Systems
@@ -45,6 +45,10 @@ Always define the blast radius before an experiment. Tools like Chaos Mesh allow
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Throttling Pattern for System Protection](</en/architecture/throttling-pattern.html>)
+
+**See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Health Check Patterns](</en/architecture/health-check-patterns.html>)
+
+**See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Health Check Patterns](</en/architecture/health-check-patterns.html>)
 
 **See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Health Check Patterns](</en/architecture/health-check-patterns.html>)
 

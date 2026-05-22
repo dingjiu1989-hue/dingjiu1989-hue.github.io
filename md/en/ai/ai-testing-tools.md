@@ -3,7 +3,7 @@ title: "AI-Powered Testing Tools 2026: Automate Test Generation, Maintenance, an
 description: "How AI is transforming software testing — AI-generated test cases, self-healing selectors, visual regression, and automated bug reporting."
 date: 2025-11-11
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-testing-tools.html
+url: https://aidev.fit/en/ai/ai-testing-tools.html
 ---
 
 # AI-Powered Testing Tools 2026: Automate Test Generation, Maintenance, and Bug Detection

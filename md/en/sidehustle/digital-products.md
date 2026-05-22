@@ -3,7 +3,7 @@ title: "Selling Digital Products as a Developer"
 description: "Learn how to create and sell digital products as a developer for passive income."
 date: 2025-12-05
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/digital-products.html
+url: https://aidev.fit/en/sidehustle/digital-products.html
 ---
 
 # Selling Digital Products as a Developer
@@ -69,6 +69,10 @@ Digital products for developers leverage your existing skills into scalable inco
 **See also:** [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
 
 **See also:** [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Creating Technical Courses](</en/sidehustle/online-courses.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
+
+**See also:** [Content Monetization Strategies for Developers](</en/sidehustle/content-monetization.html>), [No-Code and Low-Code Business Opportunities](</en/sidehustle/no-code-business.html>), [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>)
+
+**See also:** [Content Monetization Strategies for Developers](</en/sidehustle/content-monetization.html>), [No-Code and Low-Code Business Opportunities](</en/sidehustle/no-code-business.html>), [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>)
 
 **See also:** [Content Monetization Strategies for Developers](</en/sidehustle/content-monetization.html>), [No-Code and Low-Code Business Opportunities](</en/sidehustle/no-code-business.html>), [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>)
 

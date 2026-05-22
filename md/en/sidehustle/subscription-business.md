@@ -3,7 +3,7 @@ title: "Building a Subscription Business as a Developer"
 description: "Learn subscription business fundamentals including pricing tiers, churn reduction, Stripe billing integration, customer lifecycle, and key SaaS metrics."
 date: 2026-01-16
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/subscription-business.html
+url: https://aidev.fit/en/sidehustle/subscription-business.html
 ---
 
 # Building a Subscription Business as a Developer
@@ -474,6 +474,10 @@ Start with a simple pricing model (one paid tier), launch with Stripe's pre-buil
 **See also:** [Monetizing APIs](</en/sidehustle/api-monetization.html>), [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
 
 **See also:** [Monetizing APIs](</en/sidehustle/api-monetization.html>), [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
+
+**See also:** [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)
+
+**See also:** [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)
 
 **See also:** [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)
 

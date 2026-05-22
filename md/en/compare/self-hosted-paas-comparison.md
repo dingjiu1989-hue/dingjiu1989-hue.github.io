@@ -3,7 +3,7 @@ title: "Self-Hosted PaaS Comparison 2026: Coolify vs Dokploy vs CapRover vs Kama
 description: "Compare open-source Heroku/Vercel alternatives for deploying apps on your own server — web UIs, git push deploy, auto SSL, and Docker orchestration."
 date: 2025-12-01
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/self-hosted-paas-comparison.html
+url: https://aidev.fit/en/compare/self-hosted-paas-comparison.html
 ---
 
 # Self-Hosted PaaS Comparison 2026: Coolify vs Dokploy vs CapRover vs Kamal vs Dokku

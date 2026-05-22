@@ -3,7 +3,7 @@ title: "AI Daily Digest — May 19, 2026: Gemini 3, Anthropic M&A, Musk Defeated
 description: "Top 10 AI news: Google Gemini 3 + Antigravity IDE, Anthropic acquires dev-tools startup, Musk loses OpenAI lawsuit, Cerebras $5.5B IPO, NVIDIA H200 China deal, IBM analog AI chip, OpenAI safety models, Google warns of AI agent poisoning, Hugging Face malware, humanoid robots enter factories. Curated with source attribution."
 date: 2026-05-19
 board: daily
-url: https://dingjiu1989-hue.github.io/en/daily/ai-daily-news-2026-05-19.html
+url: https://aidev.fit/en/daily/ai-daily-news-2026-05-19.html
 ---
 
 # AI Daily Digest — May 19, 2026: Gemini 3, Anthropic M&A, Musk Defeated, Cerebras IPO
@@ -89,5 +89,9 @@ _AI Daily Digest is curated from trusted technology news sources. Last updated: 
 **See also:** [Prompt Injection Prevention: Securing Your LLM Applications (2026)](</en/ai/prompt-injection-prevention.html>), [Building Multimodal AI Applications: Vision, Audio, and Text Combined (2026)](</en/ai/multimodal-ai-guide.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)
 
 **See also:** [LLM Function Calling: Complete Developer Guide with Code Examples](</en/ai/function-calling-guide.html>), [Prompt Injection Prevention: Securing Your LLM Applications (2026)](</en/ai/prompt-injection-prevention.html>), [Building Multimodal AI Applications: Vision, Audio, and Text Combined (2026)](</en/ai/multimodal-ai-guide.html>)
+
+**See also:** [AI Agents for Developers: A Practical Guide to Building and Using Agents](</en/ai/ai-agents-guide.html>), [LLM Function Calling: Complete Developer Guide with Code Examples](</en/ai/function-calling-guide.html>), [Prompt Injection Prevention: Securing Your LLM Applications (2026)](</en/ai/prompt-injection-prevention.html>)
+
+**See also:** [AI Agents for Developers: A Practical Guide to Building and Using Agents](</en/ai/ai-agents-guide.html>), [LLM Function Calling: Complete Developer Guide with Code Examples](</en/ai/function-calling-guide.html>), [Prompt Injection Prevention: Securing Your LLM Applications (2026)](</en/ai/prompt-injection-prevention.html>)
 
 **See also:** [AI Agents for Developers: A Practical Guide to Building and Using Agents](</en/ai/ai-agents-guide.html>), [LLM Function Calling: Complete Developer Guide with Code Examples](</en/ai/function-calling-guide.html>), [Prompt Injection Prevention: Securing Your LLM Applications (2026)](</en/ai/prompt-injection-prevention.html>)

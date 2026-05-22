@@ -3,7 +3,7 @@ title: "Multimodal AI Applications in 2026"
 description: "Explore text+image+audio AI models, vision-language models, speech-to-text, document AI, multimodal RAG, and real-world use cases and limitations."
 date: 2026-02-10
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/multimodal-ai.html
+url: https://aidev.fit/en/ai/multimodal-ai.html
 ---
 
 # Multimodal AI Applications in 2026
@@ -499,6 +499,10 @@ Multimodal AI is rapidly maturing but still requires careful evaluation for each
 **See also:** [Multimodal AI Models: Vision, Audio, and Text](</en/ai/multimodal-models.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>)
 
 **See also:** [Multimodal AI Models: Vision, Audio, and Text](</en/ai/multimodal-models.html>), [Testing Strategies for AI Applications](</en/ai/ai-testing-strategies.html>), [Natural Language to SQL with LLMs](</en/ai/ai-database-query.html>)
+
+**See also:** [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)
+
+**See also:** [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)
 
 **See also:** [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)
 

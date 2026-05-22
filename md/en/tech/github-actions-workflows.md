@@ -3,7 +3,7 @@ title: "GitHub Actions Workflows: Advanced Patterns"
 description: "Advanced GitHub Actions patterns: matrix builds, reusable workflows, caching, environment protection, and custom actions."
 date: 2026-01-13
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/github-actions-workflows.html
+url: https://aidev.fit/en/tech/github-actions-workflows.html
 ---
 
 # GitHub Actions Workflows: Advanced Patterns
@@ -51,6 +51,10 @@ Inputs, outputs, and pre/post cleanup hooks make actions professional-grade. Tes
 **See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Infrastructure Composability](</en/tech/infrastructure-composability.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
 
 **See also:** [Advanced GitHub Actions Workflows](</en/tech/github-actions-advanced.html>), [Infrastructure Composability](</en/tech/infrastructure-composability.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
+
+**See also:** [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>), [Advanced Git Techniques for Developers](</en/tech/git-advanced-techniques.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>)
+
+**See also:** [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>), [Advanced Git Techniques for Developers](</en/tech/git-advanced-techniques.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>)
 
 **See also:** [Dockerfile Best Practices for Production](</en/tech/dockerfile-best-practices.html>), [Advanced Git Techniques for Developers](</en/tech/git-advanced-techniques.html>), [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>)
 

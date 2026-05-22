@@ -3,7 +3,7 @@ title: "Database Capacity Planning: Sizing, Growth Forecasting, and Scaling"
 description: "Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, and scaling strategies for PostgreSQL."
 date: 2026-05-15
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-capacity-planning.html
+url: https://aidev.fit/en/database/database-capacity-planning.html
 ---
 
 # Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
@@ -329,6 +329,10 @@ Capacity planning is not a one-time exercise. Review your database capacity mont
 **See also:** [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)
 
 **See also:** [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)
+
+**See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
+
+**See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
 
 **See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
 

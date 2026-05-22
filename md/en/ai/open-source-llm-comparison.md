@@ -3,7 +3,7 @@ title: "Open Source LLMs Compared 2026: Llama 3 vs Mistral vs Qwen vs Gemma"
 description: "Comprehensive comparison of leading open source LLMs: benchmarks, hardware requirements, fine-tuning ease, license implications, and which model is best for coding, writing, and RAG applications."
 date: 2025-11-08
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/open-source-llm-comparison.html
+url: https://aidev.fit/en/ai/open-source-llm-comparison.html
 ---
 
 # Open Source LLMs Compared 2026: Llama 3 vs Mistral vs Qwen vs Gemma

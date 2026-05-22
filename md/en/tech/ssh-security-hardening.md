@@ -3,7 +3,7 @@ title: "SSH Security Hardening"
 description: "Practical steps to secure SSH access including key management, configuration hardening, and fail2ban setup."
 date: 2025-12-03
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/ssh-security-hardening.html
+url: https://aidev.fit/en/tech/ssh-security-hardening.html
 ---
 
 # SSH Security Hardening
@@ -215,6 +215,10 @@ SSH hardening follows defense in depth: disable passwords, use Ed25519 keys, loc
 **See also:** [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>), [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>)
 
 **See also:** [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>), [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>)
+
+**See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Monitoring and Alerting Setup](</en/tech/monitoring-alerting-setup.html>), [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>)
+
+**See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Monitoring and Alerting Setup](</en/tech/monitoring-alerting-setup.html>), [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>)
 
 **See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Monitoring and Alerting Setup](</en/tech/monitoring-alerting-setup.html>), [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>)
 

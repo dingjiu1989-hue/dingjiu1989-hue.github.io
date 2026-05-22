@@ -18,28 +18,28 @@
     </script>
     <meta property="og:title" content="Graceful Shutdown Patterns">
     <meta property="og:description" content="Signal handling, connection draining, processing in-flight requests, and best practices for graceful service shutdown">
-    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/architecture/graceful-shutdown.html">
+    <meta property="og:url" content="https://aidev.fit/en/architecture/graceful-shutdown.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.png">
+    <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/graceful-shutdown.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Graceful Shutdown Patterns">
     <meta name="twitter:description" content="Signal handling, connection draining, processing in-flight requests, and best practices for graceful service shutdown">
-    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.png">
+    <meta name="twitter:image" content="https://aidev.fit/images/covers/en/architecture/graceful-shutdown.png">
     <meta property="article:published_time" content="2026-04-25">
     <meta property="article:modified_time" content="2026-05-14">
     <meta property="article:tag" content="Architecture, System Design, Backend">
-    <link rel="preload" as="image" href="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/graceful-shutdown.webp" type="image/webp" fetchpriority="high">
     <title>Graceful Shutdown Patterns — SourceHub</title>
     <meta name="description" content="Signal handling, connection draining, processing in-flight requests, and best practices for graceful service shutdown">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/architecture/graceful-shutdown.html">
-    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/architecture/graceful-shutdown.html">
-    <link rel="prev" href="https://dingjiu1989-hue.github.io/en/architecture/microservices-vs-monolith.html">
-    <link rel="next" href="https://dingjiu1989-hue.github.io/en/architecture/domain-events.html">
+    <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/graceful-shutdown.html">
+    <link rel="canonical" href="https://aidev.fit/en/architecture/graceful-shutdown.html">
+    <link rel="prev" href="https://aidev.fit/en/architecture/microservices-vs-monolith.html">
+    <link rel="next" href="https://aidev.fit/en/architecture/domain-events.html">
     <meta name="robots" content="index, follow">
     <script type="application/ld+json">
     {
@@ -47,18 +47,18 @@
       "@type": "Article",
       "headline": "Graceful Shutdown Patterns",
       "description": "Signal handling, connection draining, processing in-flight requests, and best practices for graceful service shutdown",
-      "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.png",
+      "image": "https://aidev.fit/images/covers/en/architecture/graceful-shutdown.png",
       "datePublished": "2026-04-25",
       "dateModified": "2026-05-14",
-      "wordCount": "1322",
+      "wordCount": "1369",
       "keywords": "Architecture, System Design, Backend",
       "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
       "inLanguage": "en",
       "isAccessibleForFree": true,
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
-      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/graceful-shutdown.html"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/graceful-shutdown.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/graceful-shutdown-patterns-5ejf"
       ],
@@ -70,8 +70,8 @@
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
-        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://aidev.fit/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://aidev.fit/en/architecture/"},
         {"@type": "ListItem", "position": 3, "name": "Graceful Shutdown Patterns"}
       ]
     }
@@ -100,9 +100,9 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Graceful Shutdown Patterns</h1>
-      <div class="article-meta">Published 2026-04-25 · Last active 2026-05-14 · 0 views · 0 replies</div>
-      <picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.webp" type="image/webp"><img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.png" alt="Graceful Shutdown Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Graceful shutdown ensures that when a service instance stops, it completes its in-flight work, closes connections cleanly, and leaves data in a consistent state. In distributed systems, where multiple instances provide resilience, graceful shutdown is essential for zero-downtime operations. Hard-killing processes leaves requests incomplete, connections half-open, and data potentially corrupted. </p><picture><source srcset="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.webp" type="image/webp"><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.png" alt="Graceful Shutdown Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+      <div class="article-meta">Published 2026-04-25 · Last active 2026-05-14 · 0 views · 0 replies · 6 min read</div>
+      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/graceful-shutdown.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/graceful-shutdown.png" alt="Graceful Shutdown Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+      <div class="article-body"><p>Graceful shutdown ensures that when a service instance stops, it completes its in-flight work, closes connections cleanly, and leaves data in a consistent state. In distributed systems, where multiple instances provide resilience, graceful shutdown is essential for zero-downtime operations. Hard-killing processes leaves requests incomplete, connections half-open, and data potentially corrupted. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/graceful-shutdown.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/graceful-shutdown.png" alt="Graceful Shutdown Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Signal handling is the foundation. The service should register handlers for SIGTERM (the standard termination signal from orchestration platforms) and SIGINT (interactive termination). When received, the signal handler initiates the shutdown sequence. The handler should not block indefinitely — it should set a deadline for graceful shutdown and force-terminate if exceeded. Kubernetes sends SIGTERM to pods and waits for the terminationGracePeriodSeconds before sending SIGKILL. </p>
 <p>The shutdown sequence follows a well-defined order. First, the service should stop accepting new requests. This means unregistering from the service discovery registry, failing readiness probes, closing listener sockets, and rejecting incoming connections. The service should not return to "accepting" state once shutdown begins, even if the signal was spurious. </p>
 <p>Second, the service drains in-flight requests. It waits for currently processing requests to complete, up to a configurable deadline. Long-running requests may need to be interrupted or saved for later resumption. The service should track in-flight requests and log any that are still active when the drain deadline expires. This information is invaluable for debugging why shutdown actually took the time it did. </p>
@@ -131,6 +131,8 @@
 <p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
+<p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -143,8 +145,8 @@
     </div>
     <div class="share-bar">
       <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Graceful%20Shutdown%20Patterns&url=https://dingjiu1989-hue.github.io/en/architecture/graceful-shutdown.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://dingjiu1989-hue.github.io/en/architecture/graceful-shutdown.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+      <a href="https://twitter.com/intent/tweet?text=Graceful%20Shutdown%20Patterns&url=https://aidev.fit/en/architecture/graceful-shutdown.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://aidev.fit/en/architecture/graceful-shutdown.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
     </div>
     <section class="related">
       <h3>Related Articles</h3>

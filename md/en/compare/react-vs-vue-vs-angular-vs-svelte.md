@@ -3,7 +3,7 @@ title: "React vs Vue vs Angular vs Svelte (2026): Best Frontend Framework?"
 description: "An honest head-to-head comparison of the 4 major frontend frameworks — performance, learning curve, ecosystem, job market, and real-world DX."
 date: 2025-11-16
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/react-vs-vue-vs-angular-vs-svelte.html
+url: https://aidev.fit/en/compare/react-vs-vue-vs-angular-vs-svelte.html
 ---
 
 # React vs Vue vs Angular vs Svelte (2026): Best Frontend Framework?

@@ -3,7 +3,7 @@ title: "Debugging Techniques"
 description: "Learn debugging techniques: logging, distributed tracing, profiling, interactive debuggers, and systematic problem-solving"
 date: 2026-01-06
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/debugging-techniques.html
+url: https://aidev.fit/en/tech/debugging-techniques.html
 ---
 
 # Debugging Techniques
@@ -65,6 +65,10 @@ Build a debugging toolkit over time. Maintain scripts for common debugging tasks
 **See also:** [Advanced Git Techniques for Developers](</en/tech/git-advanced-techniques.html>), [API Documentation](</en/tech/api-documentation.html>), [Artifact Management](</en/tech/artifact-management.html>)
 
 **See also:** [Advanced Git Techniques for Developers](</en/tech/git-advanced-techniques.html>), [API Documentation](</en/tech/api-documentation.html>), [Artifact Management](</en/tech/artifact-management.html>)
+
+**See also:** [Performance Testing](</en/tech/performance-testing.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Secret Management](</en/tech/secret-management.html>)
+
+**See also:** [Performance Testing](</en/tech/performance-testing.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Secret Management](</en/tech/secret-management.html>)
 
 **See also:** [Performance Testing](</en/tech/performance-testing.html>), [Python Performance Optimization](</en/tech/python-performance.html>), [Secret Management](</en/tech/secret-management.html>)
 

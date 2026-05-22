@@ -3,7 +3,7 @@ title: "Log Management"
 description: "Explore log management: collection, aggregation, storage, query strategies, and retention policies for production systems"
 date: 2026-01-08
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/log-management.html
+url: https://aidev.fit/en/tech/log-management.html
 ---
 
 # Log Management
@@ -77,6 +77,10 @@ Log management is a critical investment for any production system. Well-managed 
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Artifact Management](</en/tech/artifact-management.html>), [Build Optimization](</en/tech/build-optimization.html>)
 
 **See also:** [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>), [Artifact Management](</en/tech/artifact-management.html>), [Build Optimization](</en/tech/build-optimization.html>)
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Configuration Management](</en/tech/configuration-management.html>)
+
+**See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Configuration Management](</en/tech/configuration-management.html>)
 
 **See also:** [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Configuration Management](</en/tech/configuration-management.html>)
 

@@ -3,7 +3,7 @@ title: "Database Sharding: Strategies and Trade-offs"
 description: "Explore key-based, range-based, and directory-based sharding strategies with rebalancing challenges and tools like Vitess and Citus."
 date: 2026-03-27
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-sharding.html
+url: https://aidev.fit/en/database/database-sharding.html
 ---
 
 # Database Sharding: Strategies and Trade-offs
@@ -85,6 +85,10 @@ Choose key-based sharding for even distribution, range-based for time-series dat
 **See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Normalization Explained](</en/database/database-normalization.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
 
 **See also:** [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Normalization Explained](</en/database/database-normalization.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>)
+
+**See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>)
+
+**See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>)
 
 **See also:** [Database Monitoring and Performance Alerting](</en/database/database-monitoring.html>), [Connection Pooling Guide](</en/database/connection-pooling.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>)
 

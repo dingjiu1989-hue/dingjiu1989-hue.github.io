@@ -3,7 +3,7 @@ title: "API Product Strategy: API-First Design, Documentation, Pricing, and Deve
 description: "Build a successful API product: API-first design principles, great documentation, pricing models, and developer experience optimization."
 date: 2026-01-17
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/api-product-strategy.html
+url: https://aidev.fit/en/sidehustle/api-product-strategy.html
 ---
 
 # API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience
@@ -67,6 +67,10 @@ An API product is a long-term commitment. Developers integrate your API into the
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Freelancing Platforms: Strategy for Developers](</en/sidehustle/freelance-platform-strategy.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>)
 
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Freelancing Platforms: Strategy for Developers](</en/sidehustle/freelance-platform-strategy.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>)
+
+**See also:** [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SaaS Onboarding: Activation Flow and User Retention](</en/sidehustle/saas-onboarding.html>)
+
+**See also:** [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SaaS Onboarding: Activation Flow and User Retention](</en/sidehustle/saas-onboarding.html>)
 
 **See also:** [Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing](</en/sidehustle/multi-tenant-implementation.html>), [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SaaS Onboarding: Activation Flow and User Retention](</en/sidehustle/saas-onboarding.html>)
 

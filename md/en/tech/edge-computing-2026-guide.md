@@ -3,7 +3,7 @@ title: "Edge Computing in 2026: A Complete Guide for Developers"
 description: "What edge computing means in 2026 — Cloudflare Workers, AWS Lambda@Edge, Edge DB, WebAssembly at the edge, and when to move compute to the edge."
 date: 2025-12-01
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/edge-computing-2026-guide.html
+url: https://aidev.fit/en/tech/edge-computing-2026-guide.html
 ---
 
 # Edge Computing in 2026: A Complete Guide for Developers
@@ -824,6 +824,10 @@ The winning architectures of 2026 are **layered** : edge for the hot path (auth,
 **See also:** [Edge Computing Complete Guide 2026: Cloudflare Workers, Deno Deploy, and Vercel Edge](</en/tech/edge-computing-guide.html>), [WebAssembly Guide 2026: Running Native Code in the Browser with Rust and WASI](</en/tech/webassembly-guide.html>), [Cloudflare Workers vs AWS Lambda vs Deno Deploy (2026): Best Edge Functions?](</en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html>)
 
 **See also:** [Edge Computing Complete Guide 2026: Cloudflare Workers, Deno Deploy, and Vercel Edge](</en/tech/edge-computing-guide.html>), [WebAssembly Guide 2026: Running Native Code in the Browser with Rust and WASI](</en/tech/webassembly-guide.html>), [Cloudflare Workers vs AWS Lambda vs Deno Deploy (2026): Best Edge Functions?](</en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html>)
+
+**See also:** [DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide](</en/tech/devops-for-developers.html>), [How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)](</en/tech/deploy-nextjs-free.html>), [Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice](</en/tech/web-accessibility-guide.html>)
+
+**See also:** [DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide](</en/tech/devops-for-developers.html>), [How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)](</en/tech/deploy-nextjs-free.html>), [Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice](</en/tech/web-accessibility-guide.html>)
 
 **See also:** [DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide](</en/tech/devops-for-developers.html>), [How to Deploy a Next.js App for Free: Step-by-Step Guide (2026)](</en/tech/deploy-nextjs-free.html>), [Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice](</en/tech/web-accessibility-guide.html>)
 

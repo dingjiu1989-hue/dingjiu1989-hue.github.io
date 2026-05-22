@@ -3,7 +3,7 @@ title: "Kubernetes Pod Design: Patterns and Best Practices"
 description: "Design effective Kubernetes pods: init containers, sidecars, probes, resource limits, and pod lifecycle management."
 date: 2026-01-13
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/kubernetes-pod-design.html
+url: https://aidev.fit/en/tech/kubernetes-pod-design.html
 ---
 
 # Kubernetes Pod Design: Patterns and Best Practices
@@ -49,6 +49,10 @@ PDBs limit voluntary disruptions. Specify minAvailable or maxUnavailable to prot
 **See also:** [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Configuration Management](</en/tech/configuration-management.html>)
 
 **See also:** [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Configuration Management](</en/tech/configuration-management.html>)
+
+**See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>)
+
+**See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>)
 
 **See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization](</en/tech/elk-stack-setup.html>)
 

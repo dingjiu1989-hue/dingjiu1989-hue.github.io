@@ -3,7 +3,7 @@ title: "Prompt Chaining: Decomposition, Parallel Execution, State Management"
 description: "Master prompt chaining techniques: decompose complex tasks into steps, execute chains in parallel, manage state across calls, and handle errors gracefully."
 date: 2026-02-17
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/prompt-chaining.html
+url: https://aidev.fit/en/ai/prompt-chaining.html
 ---
 
 # Prompt Chaining: Decomposition, Parallel Execution, State Management
@@ -239,6 +239,10 @@ Prompt chaining transforms unreliable single-shot generation into reliable multi
 **See also:** [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection](</en/ai/agent-planning.html>)
 
 **See also:** [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [Prompt Management: Versioning, Testing, Collaboration, Deployment](</en/ai/prompt-management.html>), [Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection](</en/ai/agent-planning.html>)
+
+**See also:** [AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples](</en/ai/ai-role-definition.html>), [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>)
+
+**See also:** [AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples](</en/ai/ai-role-definition.html>), [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>)
 
 **See also:** [AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples](</en/ai/ai-role-definition.html>), [Prompt Injection Defense: Input Sanitization, Guardrails, Permissions, and Monitoring](</en/ai/prompt-injection-defense.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>)
 

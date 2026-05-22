@@ -3,7 +3,7 @@ title: "Monorepo vs Multirepo: Repository Strategy Comparison"
 description: "Compare monorepo and multirepo strategies: tooling, scaling, CI/CD, and team workflow implications."
 date: 2026-01-14
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/monorepo-vs-multirepo.html
+url: https://aidev.fit/en/tech/monorepo-vs-multirepo.html
 ---
 
 # Monorepo vs Multirepo: Repository Strategy Comparison
@@ -39,6 +39,10 @@ Start with a monorepo for small to medium teams (under 50 developers). Move to m
 **See also:** [Git Workflows](</en/tech/git-workflows.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
 
 **See also:** [Git Workflows](</en/tech/git-workflows.html>), [Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting](</en/tech/capacity-planning-cloud.html>), [Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison](</en/tech/multi-cloud-strategy.html>)
+
+**See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Compose vs Kubernetes: When to Use Each and Migration Path](</en/tech/docker-compose-vs-kubernetes.html>)
+
+**See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Compose vs Kubernetes: When to Use Each and Migration Path](</en/tech/docker-compose-vs-kubernetes.html>)
 
 **See also:** [Ansible Automation: Playbooks, Roles, Inventory, and Vault](</en/tech/ansible-automation.html>), [AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups](</en/tech/aws-vpc-design.html>), [Docker Compose vs Kubernetes: When to Use Each and Migration Path](</en/tech/docker-compose-vs-kubernetes.html>)
 

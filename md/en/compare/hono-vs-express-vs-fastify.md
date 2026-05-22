@@ -3,7 +3,7 @@ title: "Hono vs Express vs Fastify (2026): Best Node.js Backend Framework?"
 description: "Compare the top JavaScript server frameworks on performance, TypeScript support, middleware ecosystem, edge compatibility, and developer experience."
 date: 2025-11-20
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/hono-vs-express-vs-fastify.html
+url: https://aidev.fit/en/compare/hono-vs-express-vs-fastify.html
 ---
 
 # Hono vs Express vs Fastify (2026): Best Node.js Backend Framework?

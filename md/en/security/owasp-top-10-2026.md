@@ -3,7 +3,7 @@ title: "OWASP Top 10 2026"
 description: "Analyzing the OWASP Top 10 2026 with new entries, mitigations, and modern testing approaches."
 date: 2026-03-18
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/owasp-top-10-2026.html
+url: https://aidev.fit/en/security/owasp-top-10-2026.html
 ---
 
 # OWASP Top 10 2026
@@ -209,6 +209,10 @@ The OWASP Top 10 2026 reflects the maturing security landscape. Broken access co
 **See also:** [Penetration Testing Methodology](</en/security/penetration-testing.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>)
 
 **See also:** [Penetration Testing Methodology](</en/security/penetration-testing.html>), [TLS Configuration Guide](</en/security/tls-configuration.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>)
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Container Image Security](</en/security/container-image-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Container Image Security](</en/security/container-image-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
 
 **See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Container Image Security](</en/security/container-image-security.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
 

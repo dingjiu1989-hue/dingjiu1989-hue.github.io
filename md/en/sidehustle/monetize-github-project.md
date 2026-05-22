@@ -3,7 +3,7 @@ title: "How to Monetize Your Open Source GitHub Project in 2026"
 description: "6 proven ways to earn money from open source: GitHub Sponsors, paid licenses, SaaS hosting, consulting, priority support, and educational content. Includes real revenue numbers."
 date: 2025-10-21
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/monetize-github-project.html
+url: https://aidev.fit/en/sidehustle/monetize-github-project.html
 ---
 
 # How to Monetize Your Open Source GitHub Project in 2026

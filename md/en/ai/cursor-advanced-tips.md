@@ -3,7 +3,7 @@ title: "Cursor Advanced Tips: 15 Power User Techniques to 10x Your AI Coding"
 description: "Beyond basic autocomplete — Composer strategies, custom instructions, context management, keyboard shortcuts, and workflow patterns that make Cursor a superpower."
 date: 2025-11-06
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/cursor-advanced-tips.html
+url: https://aidev.fit/en/ai/cursor-advanced-tips.html
 ---
 
 # Cursor Advanced Tips: 15 Power User Techniques to 10x Your AI Coding

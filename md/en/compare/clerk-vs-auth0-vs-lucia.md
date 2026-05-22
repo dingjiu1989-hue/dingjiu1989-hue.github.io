@@ -3,7 +3,7 @@ title: "Clerk vs Auth0 vs Lucia Auth (2026): Authentication for Modern Apps"
 description: "Which auth solution fits your stack? Clerk (best DX, React-first), Auth0 (enterprise scale), Lucia (open source, lightweight). Compare features, pricing, and integration complexity."
 date: 2025-11-24
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/clerk-vs-auth0-vs-lucia.html
+url: https://aidev.fit/en/compare/clerk-vs-auth0-vs-lucia.html
 ---
 
 # Clerk vs Auth0 vs Lucia Auth (2026): Authentication for Modern Apps

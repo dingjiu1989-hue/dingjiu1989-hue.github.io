@@ -3,7 +3,7 @@ title: "Circuit Breaker vs Bulkhead Pattern"
 description: "Differences, when to use each, resilience patterns, and combined application of circuit breaker and bulkhead"
 date: 2026-05-19
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/circuit-breaker-vs-bulkhead.html
+url: https://aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html
 ---
 
 # Circuit Breaker vs Bulkhead Pattern
@@ -39,6 +39,10 @@ Configuration should be dynamic where possible. Circuit breaker thresholds and t
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
 
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>)
+
+**See also:** [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
+
+**See also:** [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 
 **See also:** [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [API Composition and Aggregation](</en/architecture/api-composition.html>)
 

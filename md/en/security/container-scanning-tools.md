@@ -3,7 +3,7 @@ title: "Container Scanning Tools: Securing Images in CI/CD"
 description: "Compare container image scanning tools: Trivy, Snyk, Clair, Docker Scout for vulnerability detection."
 date: 2026-03-21
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/container-scanning-tools.html
+url: https://aidev.fit/en/security/container-scanning-tools.html
 ---
 
 # Container Scanning Tools: Securing Images in CI/CD
@@ -39,6 +39,10 @@ Scan early and often. Use minimal base images (distroless, Alpine). Pin base ima
 **See also:** [Container Image Security](</en/security/container-image-security.html>), [Container Runtime Security](</en/security/container-runtime-security.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>)
 
 **See also:** [Container Image Security](</en/security/container-image-security.html>), [Container Runtime Security](</en/security/container-runtime-security.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>)
+
+**See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>)
+
+**See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>)
 
 **See also:** [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Identity Providers Compared: Auth0, Okta, Keycloak, Firebase Auth](</en/security/identity-provider-comparison.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>)
 

@@ -3,7 +3,7 @@ title: "Best Developer Marketplaces 2026: Gumroad vs LemonSqueezy vs Polar vs Pa
 description: "Compare platforms for selling digital products as a developer — SaaS boilerplates, courses, templates, and open-source monetization. Merchant of Record explained."
 date: 2025-11-05
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-developer-marketplaces-2026.html
+url: https://aidev.fit/en/tools/best-developer-marketplaces-2026.html
 ---
 
 # Best Developer Marketplaces 2026: Gumroad vs LemonSqueezy vs Polar vs Paddle

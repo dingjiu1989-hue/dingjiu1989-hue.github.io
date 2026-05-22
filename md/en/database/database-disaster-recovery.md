@@ -3,7 +3,7 @@ title: "Database Disaster Recovery: RPO, RTO, Cross-Region Replication"
 description: "Learn database disaster recovery planning: RPO and RPO definitions, cross-region replication strategies, backup testing, and DR drill execution."
 date: 2026-04-02
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-disaster-recovery.html
+url: https://aidev.fit/en/database/database-disaster-recovery.html
 ---
 
 # Database Disaster Recovery: RPO, RTO, Cross-Region Replication
@@ -273,6 +273,10 @@ Run DR drills quarterly at minimum. Document every drill outcome and update the 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
+
+**See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
+
+**See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
 
 **See also:** [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>)
 

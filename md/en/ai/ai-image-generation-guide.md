@@ -3,7 +3,7 @@ title: "AI Image Generation Guide: DALL-E 3 vs Midjourney vs Stable Diffusion vs
 description: "Compare AI image generators for developers — API availability, cost, quality, style control, and use cases. Which tool for which visual task."
 date: 2025-11-06
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-image-generation-guide.html
+url: https://aidev.fit/en/ai/ai-image-generation-guide.html
 ---
 
 # AI Image Generation Guide: DALL-E 3 vs Midjourney vs Stable Diffusion vs Firefly

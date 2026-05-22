@@ -3,7 +3,7 @@ title: "Connection Pooling: Tuning, Best Practices, and Pitfalls"
 description: "Master database connection pooling: pool sizing, timeout tuning, and common pitfalls in production."
 date: 2026-04-14
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/database-connection-pooling.html
+url: https://aidev.fit/en/database/database-connection-pooling.html
 ---
 
 # Connection Pooling: Tuning, Best Practices, and Pitfalls
@@ -49,6 +49,10 @@ Pool starvation occurs when connections are held longer than necessary. Long-run
 **See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [PostgreSQL Vacuuming: Maintenance, Tuning, and Automation](</en/database/database-vacuuming-maintenance.html>)
 
 **See also:** [Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning](</en/database/connection-management.html>), [Database Migration Version Control Strategies](</en/database/database-migration-version-control.html>), [PostgreSQL Vacuuming: Maintenance, Tuning, and Automation](</en/database/database-vacuuming-maintenance.html>)
+
+**See also:** [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>)
+
+**See also:** [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>)
 
 **See also:** [Batch Operations: Bulk Insert, COPY, and Batch Size Tuning](</en/database/batch-operations.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>)
 

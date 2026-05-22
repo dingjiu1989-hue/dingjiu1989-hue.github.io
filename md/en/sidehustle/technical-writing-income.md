@@ -3,7 +3,7 @@ title: "Technical Writing Income: How Developers Make Money Writing"
 description: "How much technical writers actually earn, where to find paid writing gigs, and how to build a portfolio that attracts high-paying clients. Writing is a developer superpower."
 date: 2025-10-20
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/technical-writing-income.html
+url: https://aidev.fit/en/sidehustle/technical-writing-income.html
 ---
 
 # Technical Writing Income: How Developers Make Money Writing

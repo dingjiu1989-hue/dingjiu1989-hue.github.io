@@ -3,7 +3,7 @@ title: "Supply Chain Security"
 description: "Comprehensive guide to software supply chain security covering SBOM, Sigstore, in-toto, dependency confusion, and the SLSA framework."
 date: 2026-03-14
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/supply-chain-security.html
+url: https://aidev.fit/en/security/supply-chain-security.html
 ---
 
 # Supply Chain Security
@@ -299,6 +299,10 @@ Supply chain security is no longer optional. Generate SBOMs for all artifacts, s
 **See also:** [Software Signing](</en/security/software-signing.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>), [Microservice Security](</en/security/microservice-security.html>)
 
 **See also:** [Software Signing](</en/security/software-signing.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>), [Microservice Security](</en/security/microservice-security.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)
 
 **See also:** [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)
 

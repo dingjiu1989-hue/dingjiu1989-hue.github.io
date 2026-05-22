@@ -3,7 +3,7 @@ title: "Terraform vs Pulumi: Infrastructure as Code Compared"
 description: "Compare Terraform and Pulumi for infrastructure as code: HCL vs real languages, state management, and multi-cloud."
 date: 2026-02-27
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/terraform-vs-pulumi.html
+url: https://aidev.fit/en/compare/terraform-vs-pulumi.html
 ---
 
 # Terraform vs Pulumi: Infrastructure as Code Compared
@@ -57,6 +57,10 @@ The Terraform vs Pulumi decision ultimately comes down to language preference an
 **See also:** [Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options](</en/compare/datadog-vs-grafana-cloud.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>)
 
 **See also:** [Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options](</en/compare/datadog-vs-grafana-cloud.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>)
+
+**See also:** [npm vs Yarn vs pnpm: Package Manager Comparison](</en/compare/npm-vs-yarn-vs-pnpm.html>), [Terraform vs Pulumi vs Crossplane (2026): Infrastructure as Code Comparison](</en/compare/terraform-vs-pulumi-vs-crossplane.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>)
+
+**See also:** [npm vs Yarn vs pnpm: Package Manager Comparison](</en/compare/npm-vs-yarn-vs-pnpm.html>), [Terraform vs Pulumi vs Crossplane (2026): Infrastructure as Code Comparison](</en/compare/terraform-vs-pulumi-vs-crossplane.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>)
 
 **See also:** [npm vs Yarn vs pnpm: Package Manager Comparison](</en/compare/npm-vs-yarn-vs-pnpm.html>), [Terraform vs Pulumi vs Crossplane (2026): Infrastructure as Code Comparison](</en/compare/terraform-vs-pulumi-vs-crossplane.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>)
 

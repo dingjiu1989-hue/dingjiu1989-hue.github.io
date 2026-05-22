@@ -3,7 +3,7 @@ title: "Priority Queue Pattern for Message Processing"
 description: "Implement priority queues to ensure critical messages are processed before lower-priority ones in distributed systems."
 date: 2026-05-07
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/priority-queue.html
+url: https://aidev.fit/en/architecture/priority-queue.html
 ---
 
 # Priority Queue Pattern for Message Processing
@@ -47,6 +47,10 @@ Priority queues are valuable for order processing (expedite orders first), incid
 **See also:** [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>)
 
 **See also:** [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Caching Strategies](</en/architecture/cache-strategies.html>)
+
+**See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Caching Strategies](</en/architecture/cache-strategies.html>)
 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Caching Strategies](</en/architecture/cache-strategies.html>)
 

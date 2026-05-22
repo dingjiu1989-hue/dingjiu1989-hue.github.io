@@ -3,7 +3,7 @@ title: "Container Security Best Practices"
 description: "Essential container security practices including image scanning, minimal base images, runtime security, and Kubernetes pod security."
 date: 2025-12-17
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/container-security.html
+url: https://aidev.fit/en/security/container-security.html
 ---
 
 # Container Security Best Practices
@@ -299,6 +299,10 @@ Container security requires attention at every stage of the lifecycle. Build min
 **See also:** [Security Log Management](</en/security/log-management-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Container Image Security](</en/security/container-image-security.html>)
 
 **See also:** [Security Log Management](</en/security/log-management-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Container Image Security](</en/security/container-image-security.html>)
+
+**See also:** [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
+
+**See also:** [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 
 **See also:** [Blockchain and Smart Contract Security](</en/security/blockchain-security.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 

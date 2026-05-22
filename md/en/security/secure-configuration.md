@@ -3,7 +3,7 @@ title: "Secure Configuration Management"
 description: "Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detection, configuration validation, and policy enforcement."
 date: 2026-03-13
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/secure-configuration.html
+url: https://aidev.fit/en/security/secure-configuration.html
 ---
 
 # Secure Configuration Management
@@ -317,6 +317,10 @@ Secure configuration management requires automation at every stage: scan IaC bef
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
 
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
+
+**See also:** [Certificate Management](</en/security/certificate-management.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Container Image Security](</en/security/container-image-security.html>)
+
+**See also:** [Certificate Management](</en/security/certificate-management.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Container Image Security](</en/security/container-image-security.html>)
 
 **See also:** [Certificate Management](</en/security/certificate-management.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Container Image Security](</en/security/container-image-security.html>)
 

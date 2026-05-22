@@ -3,7 +3,7 @@ title: "Best Database GUI Clients"
 description: "Compare the best database GUI clients for developers including TablePlus, DBeaver, DataGrip, and Beekeeper Studio."
 date: 2025-12-09
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/database-clients.html
+url: https://aidev.fit/en/tools/database-clients.html
 ---
 
 # Best Database GUI Clients
@@ -316,6 +316,10 @@ Database GUI clients have matured significantly. TablePlus offers the best balan
 **See also:** [Best Terminal Emulators 2026](</en/tools/terminal-emulators.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>)
 
 **See also:** [Best Terminal Emulators 2026](</en/tools/terminal-emulators.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>)
+
+**See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
+
+**See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
 
 **See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>)
 

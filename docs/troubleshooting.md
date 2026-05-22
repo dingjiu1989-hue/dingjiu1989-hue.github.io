@@ -387,6 +387,45 @@ data-mapping: "pathname"
 
 ---
 
+## Custom Domain Migration (github.io → aidev.fit)
+
+**Symptoms:** Site was served from `https://dingjiu1989-hue.github.io` but needed a custom domain (`aidev.fit`) for brand trust, SEO, and professional appearance.
+
+**Root cause:** Initial deployment used GitHub Pages default domain. As the site grew to 900+ articles, a custom domain was needed.
+
+**Migration steps (2026-05-22):**
+1. Registered `aidev.fit` at DNSPod
+2. Created `scripts/site_config.py` as single source of truth for `BASE_URL`, `SITE_DOMAIN`, `SITE_NAME`
+3. Updated all active scripts to import from `site_config.py` or sed-replace hardcoded URLs
+4. Created `CNAME` file at repo root with `aidev.fit`
+5. Added 2 A records in DNSPod: `185.199.108.153` and `185.199.109.153` (free tier limit)
+6. Rebuilt all generated files with new BASE_URL
+7. Updated static pages: about.html, privacy.html, articles.json (EN + CN)
+
+**Files modified:**
+- `scripts/site_config.py` (new) — centralized config
+- `scripts/gen_en_site.py` — import site_config, `{BASE}` in templates
+- `scripts/gen_ai_friendly.py` — import site_config, f-string robots.txt
+- `scripts/gen_rss.py`, `scripts/generate_json_feed.py` — sed replace
+- `scripts/maintenance.py` — sed replace + fix freshness bugs
+- `scripts/maintain.py` — sed replace
+- `scripts/indexnow_submit.py` — HOST change
+- `scripts/gen_daily_news.py` — User-Agent + frontmatter URLs
+- `scripts/syndicate_devto.py`, `syndicate_hashnode.py`, `syndicate_medium.py` — BASE URL
+- `scripts/track_crawlers.py` — BASE URL + GSC siteUrl check
+- `scripts/add_en_seo.py`, `scripts/gen_image_sitemap.py` — sed replace
+- `CNAME` (new) — aidev.fit
+- `CLAUDE.md` — updated domain reference
+- `en/about.html`, `en/privacy.html`, `en/articles.json`, `articles.json` — static URL updates
+
+**Pending:**
+- Register `https://aidev.fit` in Google Search Console
+- Resubmit sitemaps to GSC
+- DNS propagation may take minutes to hours
+- GitHub Pages will auto-detect CNAME and enable `aidev.fit` with HTTPS
+
+---
+
 ## Adding a New Issue
 
 When you discover a new problem:

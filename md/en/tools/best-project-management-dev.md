@@ -3,7 +3,7 @@ title: "Best Project Management Tools for Dev Teams 2026: Linear vs Jira vs Clic
 description: "Developer-focused PM tool comparison: GitHub integration, sprint planning, bug tracking, API access, and markdown support. Which tool fits your team size and workflow?"
 date: 2025-10-30
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-project-management-dev.html
+url: https://aidev.fit/en/tools/best-project-management-dev.html
 ---
 
 # Best Project Management Tools for Dev Teams 2026: Linear vs Jira vs ClickUp vs Notion

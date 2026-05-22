@@ -3,7 +3,7 @@ title: "pnpm vs npm vs Yarn (2026): Best Node.js Package Manager?"
 description: "Disk usage, install speed, monorepo support, and security compared across the three major Node.js package managers. Real benchmarks and migration guides."
 date: 2025-11-20
 board: compare
-url: https://dingjiu1989-hue.github.io/en/compare/pnpm-vs-npm-vs-yarn.html
+url: https://aidev.fit/en/compare/pnpm-vs-npm-vs-yarn.html
 ---
 
 # pnpm vs npm vs Yarn (2026): Best Node.js Package Manager?

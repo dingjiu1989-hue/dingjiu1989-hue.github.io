@@ -3,7 +3,7 @@ title: "IAM Audit"
 description: "Performing effective IAM audits with permission reviews, unused role detection, and privilege escalation path analysis."
 date: 2026-03-18
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/iam-audit.html
+url: https://aidev.fit/en/security/iam-audit.html
 ---
 
 # IAM Audit
@@ -261,6 +261,10 @@ Regular IAM audits are essential for maintaining least privilege. Automate permi
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Threat Hunting](</en/security/threat-hunting.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)
 
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Threat Hunting](</en/security/threat-hunting.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)
+
+**See also:** [Security Awareness Training](</en/security/security-awareness.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
+
+**See also:** [Security Awareness Training](</en/security/security-awareness.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
 
 **See also:** [Security Awareness Training](</en/security/security-awareness.html>), [Vulnerability Management](</en/security/vulnerability-management.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>)
 

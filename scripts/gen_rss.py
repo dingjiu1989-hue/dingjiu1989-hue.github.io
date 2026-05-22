@@ -12,7 +12,7 @@ from datetime import datetime, timezone as tz
 from email.utils import format_datetime
 
 ROOT = Path(__file__).resolve().parent.parent
-BASE = "https://dingjiu1989-hue.github.io"
+BASE = "https://aidev.fit"
 TODAY = datetime.now(tz.utc)
 
 def _rfc822(date_str):

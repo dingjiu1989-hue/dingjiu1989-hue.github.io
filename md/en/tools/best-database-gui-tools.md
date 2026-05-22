@@ -3,7 +3,7 @@ title: "Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataG
 description: "Compare the best SQL database GUIs on supported databases, query editing, data browsing, and pricing. Find the right DB client for your workflow."
 date: 2025-10-28
 board: tools
-url: https://dingjiu1989-hue.github.io/en/tools/best-database-gui-tools.html
+url: https://aidev.fit/en/tools/best-database-gui-tools.html
 ---
 
 # Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip

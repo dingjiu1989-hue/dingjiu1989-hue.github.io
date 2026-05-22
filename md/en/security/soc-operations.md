@@ -3,7 +3,7 @@ title: "SOC Operations"
 description: "Practical guide to Security Operations Center operations including tier model, SIEM tuning, playbooks, KPIs, and shift handoff procedures."
 date: 2026-03-13
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/soc-operations.html
+url: https://aidev.fit/en/security/soc-operations.html
 ---
 
 # SOC Operations
@@ -228,6 +228,10 @@ A well-structured SOC combines skilled personnel, documented processes, and appr
 **See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [DNS Security](</en/security/dns-security.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
 
 **See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [DNS Security](</en/security/dns-security.html>), [Security Metrics and Reporting](</en/security/security-metrics.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)
 
 **See also:** [Container Image Security](</en/security/container-image-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [CORS Security](</en/security/cors-security.html>)
 

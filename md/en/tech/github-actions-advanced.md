@@ -3,7 +3,7 @@ title: "Advanced GitHub Actions Workflows"
 description: "Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching strategies for production-grade CI/CD pipelines."
 date: 2025-12-30
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/github-actions-advanced.html
+url: https://aidev.fit/en/tech/github-actions-advanced.html
 ---
 
 # Advanced GitHub Actions Workflows
@@ -419,6 +419,10 @@ These patterns form the foundation of scalable, secure GitHub Actions usage in e
 **See also:** [GitHub Actions Workflows: Advanced Patterns](</en/tech/github-actions-workflows.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>)
 
 **See also:** [GitHub Actions Workflows: Advanced Patterns](</en/tech/github-actions-workflows.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>)
+
+**See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)
+
+**See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)
 
 **See also:** [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Bash Scripting Best Practices](</en/tech/bash-scripting-guide.html>)
 

@@ -3,7 +3,7 @@ title: "Database Backup Types: Full, Incremental, Differential, WAL Archiving"
 description: "Explore database backup strategies including full, incremental, differential backups, WAL archiving, and point-in-time recovery with PostgreSQL."
 date: 2026-03-30
 board: database
-url: https://dingjiu1989-hue.github.io/en/database/backup-types.html
+url: https://aidev.fit/en/database/backup-types.html
 ---
 
 # Database Backup Types: Full, Incremental, Differential, WAL Archiving
@@ -228,6 +228,10 @@ The 3-2-1 rule applies to databases: three copies of data, on two different medi
 **See also:** [Database Backup Strategies to Object Storage](</en/database/database-backup-to-s3.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
 
 **See also:** [Database Backup Strategies to Object Storage](</en/database/database-backup-to-s3.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>), [Database High Availability: Failover, Standby Types, Health Checks](</en/database/database-high-availability.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
+
+**See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
 
 **See also:** [Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR](</en/database/multi-master-replication.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
 

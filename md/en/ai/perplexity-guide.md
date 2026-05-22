@@ -3,7 +3,7 @@ title: "Perplexity Deep Dive: A Smarter Way to Search Than Google"
 description: "From basic search to Pro Search deep research. Master Collections, Focus, and Pages — Perplexity's three killer features — with real query examples and Google comparisons."
 date: 2025-10-08
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/perplexity-guide.html
+url: https://aidev.fit/en/ai/perplexity-guide.html
 ---
 
 # Perplexity Deep Dive: A Smarter Way to Search Than Google

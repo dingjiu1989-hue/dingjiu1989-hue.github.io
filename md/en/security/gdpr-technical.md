@@ -3,7 +3,7 @@ title: "GDPR Technical Controls"
 description: "Implementing GDPR technical controls for data mapping, consent management, right to deletion, and PIA."
 date: 2026-03-17
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/gdpr-technical.html
+url: https://aidev.fit/en/security/gdpr-technical.html
 ---
 
 # GDPR Technical Controls
@@ -351,6 +351,10 @@ GDPR technical controls require systematic implementation. Maintain detailed dat
 **See also:** [Privacy Engineering](</en/security/privacy-engineering.html>), [SOC 2 Technical Controls](</en/security/soc2-technical.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
 
 **See also:** [Privacy Engineering](</en/security/privacy-engineering.html>), [SOC 2 Technical Controls](</en/security/soc2-technical.html>), [Data Masking and Redaction](</en/security/data-masking.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Software Signing](</en/security/software-signing.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Software Signing](</en/security/software-signing.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Software Signing](</en/security/software-signing.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
 

@@ -3,7 +3,7 @@ title: "Transactional Outbox Pattern"
 description: "Master reliable message publishing with the transactional outbox: polling publisher, transaction log tailing, and idempotency"
 date: 2026-05-05
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/transaction-outbox-reliable.html
+url: https://aidev.fit/en/architecture/transaction-outbox-reliable.html
 ---
 
 # Transactional Outbox Pattern
@@ -65,6 +65,10 @@ The transactional outbox pattern is a reliable, battle-tested solution for atomi
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Transactional Inbox Pattern for Reliable Messaging](</en/architecture/transactional-inbox.html>)
+
+**See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>)
+
+**See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>)
 
 **See also:** [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Routing Slip Pattern for Dynamic Message Processing](</en/architecture/routing-slip.html>), [Scatter-Gather Pattern for Parallel Processing](</en/architecture/scatter-gather.html>)
 

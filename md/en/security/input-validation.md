@@ -3,7 +3,7 @@ title: "Input Validation Deep Dive"
 description: "In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniques, encoding strategies, and common bypass methods."
 date: 2026-03-10
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/input-validation.html
+url: https://aidev.fit/en/security/input-validation.html
 ---
 
 # Input Validation Deep Dive
@@ -75,6 +75,10 @@ blocklist = ['
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [CORS Security](</en/security/cors-security.html>)
 
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Secure API Design Principles](</en/security/secure-api-design.html>), [CORS Security](</en/security/cors-security.html>)
+
+**See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>)
+
+**See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>)
 
 **See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>)
 

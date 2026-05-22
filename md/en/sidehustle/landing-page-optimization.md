@@ -3,7 +3,7 @@ title: "Landing Page Optimization for Developer Products: CRO Guide for Technica
 description: "Conversion rate optimization for developer tools and SaaS — technical founders' guide to headlines, CTAs, social proof, and A/B testing landing pages."
 date: 2025-10-24
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/landing-page-optimization.html
+url: https://aidev.fit/en/sidehustle/landing-page-optimization.html
 ---
 
 # Landing Page Optimization for Developer Products: CRO Guide for Technical Founders

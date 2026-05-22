@@ -3,7 +3,7 @@ title: "Prompt Chaining: Building Multi-Step LLM Workflows"
 description: "Design prompt chains for complex LLM tasks: chain types, state management, error handling, and performance optimization."
 date: 2026-02-19
 board: ai
-url: https://dingjiu1989-hue.github.io/en/ai/ai-prompt-chaining.html
+url: https://aidev.fit/en/ai/ai-prompt-chaining.html
 ---
 
 # Prompt Chaining: Building Multi-Step LLM Workflows
@@ -41,6 +41,10 @@ Minimize chain length. Each step adds latency and cost. Combine related tasks in
 **See also:** [Prompt Chaining: Decomposition, Parallel Execution, State Management](</en/ai/prompt-chaining.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>)
 
 **See also:** [Prompt Chaining: Decomposition, Parallel Execution, State Management](</en/ai/prompt-chaining.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>)
+
+**See also:** [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>)
+
+**See also:** [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>)
 
 **See also:** [Multi-Agent Systems: Coordination, Communication, Consensus](</en/ai/multi-agent-systems.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>)
 

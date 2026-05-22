@@ -3,7 +3,7 @@ title: "Event-Driven Architecture: Patterns and Practice"
 description: "Event-driven architecture with event sourcing, pub/sub, Kafka streaming, event schemas, idempotent consumers, and exactly-once processing."
 date: 2026-04-20
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/event-driven-architecture.html
+url: https://aidev.fit/en/architecture/event-driven-architecture.html
 ---
 
 # Event-Driven Architecture: Patterns and Practice
@@ -570,6 +570,10 @@ Event-driven architecture decouples services through asynchronous event communic
 **See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
 
 **See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
+
+**See also:** [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
+
+**See also:** [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
 
 **See also:** [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)
 

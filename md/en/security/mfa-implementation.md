@@ -3,7 +3,7 @@ title: "MFA Implementation"
 description: "Implementing multi-factor authentication with TOTP, SMS, push notifications, and backup codes."
 date: 2026-03-18
 board: security
-url: https://dingjiu1989-hue.github.io/en/security/mfa-implementation.html
+url: https://aidev.fit/en/security/mfa-implementation.html
 ---
 
 # MFA Implementation
@@ -247,6 +247,10 @@ MFA is essential but must be implemented thoughtfully. TOTP offers the best bala
 **See also:** [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Passwordless Authentication](</en/security/passwordless-auth.html>)
 
 **See also:** [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Passwordless Authentication](</en/security/passwordless-auth.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Data Classification](</en/security/data-classification.html>), [Database Encryption](</en/security/database-encryption.html>)
+
+**See also:** [Container Image Security](</en/security/container-image-security.html>), [Data Classification](</en/security/data-classification.html>), [Database Encryption](</en/security/database-encryption.html>)
 
 **See also:** [Container Image Security](</en/security/container-image-security.html>), [Data Classification](</en/security/data-classification.html>), [Database Encryption](</en/security/database-encryption.html>)
 

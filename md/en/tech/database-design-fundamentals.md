@@ -3,7 +3,7 @@ title: "Database Design Fundamentals: Normalization, Indexing, and Schema Design
 description: "Design databases that don't haunt you later. Covers normalization (1NF to 3NF), indexing strategies, relationship types, and common schema design mistakes."
 date: 2025-10-08
 board: tech
-url: https://dingjiu1989-hue.github.io/en/tech/database-design-fundamentals.html
+url: https://aidev.fit/en/tech/database-design-fundamentals.html
 ---
 
 # Database Design Fundamentals: Normalization, Indexing, and Schema Design

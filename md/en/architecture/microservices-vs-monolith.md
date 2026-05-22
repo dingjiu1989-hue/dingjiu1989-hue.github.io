@@ -3,7 +3,7 @@ title: "Microservices vs Monolith: Decision Guide"
 description: "Guide to choosing between microservices and monoliths, including when to start with a monolith, Conway's Law, module boundaries, and testing."
 date: 2026-04-27
 board: architecture
-url: https://dingjiu1989-hue.github.io/en/architecture/microservices-vs-monolith.html
+url: https://aidev.fit/en/architecture/microservices-vs-monolith.html
 ---
 
 # Microservices vs Monolith: Decision Guide

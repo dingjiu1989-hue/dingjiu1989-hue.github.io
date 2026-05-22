@@ -3,7 +3,7 @@ title: "Developer Community Building: Discord, GitHub, Documentation, and Open S
 description: "Learn how to build and grow a developer community around your SaaS product using Discord, GitHub, documentation, and open-source strategies."
 date: 2026-01-19
 board: sidehustle
-url: https://dingjiu1989-hue.github.io/en/sidehustle/dev-community-building.html
+url: https://aidev.fit/en/sidehustle/dev-community-building.html
 ---
 
 # Developer Community Building: Discord, GitHub, Documentation, and Open Source
@@ -69,6 +69,10 @@ Building a developer community takes months, not weeks. Consistency matters more
 **See also:** [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring](</en/sidehustle/feature-prioritization.html>), [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>)
 
 **See also:** [API Product Strategy: API-First Design, Documentation, Pricing, and Developer Experience](</en/sidehustle/api-product-strategy.html>), [Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring](</en/sidehustle/feature-prioritization.html>), [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>)
+
+**See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>)
+
+**See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>)
 
 **See also:** [Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG](</en/sidehustle/customer-acquisition.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>)
 
