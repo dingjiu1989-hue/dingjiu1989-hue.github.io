@@ -13884,6 +13884,15 @@ def make_category(data, board_id):
     cn_url = f'{BASE}/{board_id}/'
     cn_hreflang = f'    <link rel="alternate" hreflang="zh-CN" href="{cn_url}">\n' if cn_path.exists() else ''
 
+    # Generate actual article list items for CollectionPage schema
+    item_list = ', '.join(
+        '{{"@type": "ListItem", "position": {i}, "url": "{url}"}}'.format(
+            i=i+1,
+            url=f'{BASE}/en/{board_id}/{art["slug"]}.html'
+        )
+        for i, art in enumerate(board['posts'])
+    )
+
     board_titles = {
         'daily': 'AI Daily Digest',
         'tech': 'Tech Tutorials',
@@ -13996,9 +14005,7 @@ def make_category(data, board_id):
       "inLanguage": "en",
       "isAccessibleForFree": true,
       "about": {{"@type": "Thing", "name": "{title}"}},
-      "mainEntity": {{"@type": "ItemList", "itemListElement": [
-        {{"@type": "ListItem", "position": 1, "url": "{en_url}"}}
-      ]}}
+      "mainEntity": {{"@type": "ItemList", "itemListElement": [{item_list}]}}
     }}
     </script>
     <script type="application/ld+json">
