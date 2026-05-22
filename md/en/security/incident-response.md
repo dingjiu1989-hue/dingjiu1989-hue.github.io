@@ -279,3 +279,5 @@ A well-practiced incident response process turns a potential disaster into a man
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)
 
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Security Auditing and Compliance Frameworks](</en/security/security-auditing.html>), [Threat Intelligence: Gathering and Applying Intel](</en/security/threat-intelligence.html>)

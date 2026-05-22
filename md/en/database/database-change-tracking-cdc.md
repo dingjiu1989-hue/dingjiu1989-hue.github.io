@@ -71,3 +71,5 @@ CDC supports data warehouse synchronization, cache invalidation, search index up
 **See also:** [Database Security Hardening](</en/database/database-security-hardening.html>), [Database Encryption: Data at Rest and in Transit](</en/database/database-encryption.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
 
 **See also:** [Database Security Hardening](</en/database/database-security-hardening.html>), [Database Encryption: Data at Rest and in Transit](</en/database/database-encryption.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
+
+**See also:** [Database Security Hardening](</en/database/database-security-hardening.html>), [Database Encryption: Data at Rest and in Transit](</en/database/database-encryption.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)

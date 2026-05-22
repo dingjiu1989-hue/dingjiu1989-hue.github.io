@@ -91,3 +91,5 @@ In 2026, both React and Vue are excellent choices. React dominates market share 
 **See also:** [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>)
 
 **See also:** [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>)
+
+**See also:** [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>)

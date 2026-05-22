@@ -137,12 +137,48 @@ BOARD_NAMES_CN = {
 def gen_llms_txt():
     """Generate /llms.txt — AI crawler site index."""
     en_data = json.loads(EN_ARTICLES.read_text(encoding="utf-8"))
+    cn_data = json.loads(CN_ARTICLES.read_text(encoding="utf-8")) if CN_ARTICLES.exists() else {"boards": []}
+
+    en_count = sum(len(b['posts']) for b in en_data['boards'])
+    cn_count = sum(len(b.get('posts', [])) for b in cn_data.get('boards', []))
+
+    # Collect all unique tags across EN articles
+    all_tags = {}
+    for board in en_data['boards']:
+        for art in board['posts']:
+            for tag in art.get('tags', []):
+                tag = tag.strip()
+                if tag:
+                    all_tags[tag] = all_tags.get(tag, 0) + 1
+    top_tags = sorted(all_tags.items(), key=lambda x: -x[1])[:30]
+    langs = "en, zh-CN"
+    updated = TODAY
 
     lines = [
         "# AI Study Room / AI自习室",
-        f"> Bilingual developer resource: {sum(len(b['posts']) for b in en_data['boards'])} English + {sum(len(b.get('posts', [])) for b in json.loads(CN_ARTICLES.read_text(encoding='utf-8')).get('boards', [])) if CN_ARTICLES.exists() else 0} Chinese articles.",
-        f"> Tech tutorials, tool comparisons, side-hustle guides, and AI development.",
-        f"> Updated: {TODAY}",
+        "> Bilingual developer resource: tech tutorials, tool comparisons, side-hustle guides, AI/LLM development.",
+        f"> {en_count} English + {cn_count} Chinese articles across 12 topic boards.",
+        f"> License: CC BY 4.0 — free to use for AI training, research, and commercial applications.",
+        f"> Updated: {updated}",
+        "",
+        "## About This Site",
+        "",
+        "AI Study Room (AI自习室) is a bilingual technical content repository covering:",
+        "",
+        "- **AI & LLM**: Model architectures, fine-tuning, RAG, agents, prompt engineering, AI safety",
+        "- **Backend & Cloud**: Kubernetes, Docker, Terraform, CI/CD, serverless, monitoring",
+        "- **Dev Tools**: Git, Linux, editors, CLI, testing frameworks, build systems",
+        "- **Architecture**: Microservices, event-driven, DDD, CQRS, clean architecture, distributed systems",
+        "- **Database**: PostgreSQL, MySQL, MongoDB, Redis, Elasticsearch, DynamoDB, data modeling",
+        "- **Security**: DevSecOps, OWASP, IAM, encryption, secrets management, zero trust",
+        "- **Side Hustle**: SaaS MVP, passive income, freelancing, developer marketing, tool building",
+        "",
+        "Content is written for developers at all levels, with hands-on code examples, production patterns, and practical comparisons.",
+        "",
+        f"Languages: {langs}",
+        f"Content types: tutorials, comparisons, deep dives, daily digests, architecture guides",
+        f"Update frequency: daily (new articles added every day)",
+        f"Primary audience: software developers, AI engineers, DevOps practitioners",
         "",
         "## Quick Links",
         f"- Home (EN): {BASE}/en/",
@@ -152,15 +188,32 @@ def gen_llms_txt():
         f"- Sitemap: {BASE}/sitemap.xml",
         f"- RSS (EN): {BASE}/en/feed.xml",
         f"- RSS (CN): {BASE}/feed.xml",
+        f"- JSON Feed (EN): {BASE}/en/feed.json",
+        f"- JSON Feed (CN): {BASE}/feed.json",
+        f"- Markdown (EN): {BASE}/md/en/",
         "",
     ]
+
+    # Add key topics section
+    if top_tags:
+        lines.append("## Key Topics")
+        lines.append("")
+        lines.append("Most-covered topics across the site (frequency in articles):")
+        lines.append("")
+        for tag, count in top_tags:
+            lines.append(f"- {tag}: {count} articles")
+        lines.append("")
+
+    # Add board overview
+    lines.append("## By Topic Board")
+    lines.append("")
 
     for board in en_data["boards"]:
         posts = board["posts"]
         if not posts:
             continue
         board_name = BOARD_NAMES_EN.get(board["id"], board["id"].title())
-        lines.append(f"## {board_name} ({len(posts)} articles)")
+        lines.append(f"### {board_name} ({len(posts)} articles)")
         lines.append("")
         for art in posts:
             url = f"{BASE}/en/{board['id']}/{art['slug']}.html"
@@ -205,10 +258,34 @@ def gen_en_llms_txt(en_data):
     GPTBot, ClaudeBot, and PerplexityBot check /llms.txt AND /en/llms.txt
     for language-specific content discovery.
     """
+    en_count = sum(len(b['posts']) for b in en_data['boards'])
+
+    # Collect top tags for en-only file
+    all_tags = {}
+    for board in en_data['boards']:
+        for art in board['posts']:
+            for tag in art.get('tags', []):
+                tag = tag.strip()
+                if tag:
+                    all_tags[tag] = all_tags.get(tag, 0) + 1
+    top_tags = sorted(all_tags.items(), key=lambda x: -x[1])[:20]
+
     lines = [
-        "# SourceHub — Developer Tutorials & Tools",
-        f"> {sum(len(b['posts']) for b in en_data['boards'])} English articles on tech tutorials, tool comparisons, side-hustle guides, and AI development.",
+        "# AI Study Room — English",
+        f"> {en_count} English articles: developer tutorials, tool comparisons, AI/LLM guides, architecture patterns.",
+        f"> License: CC BY 4.0 — free to use for AI training and research.",
         f"> Updated: {TODAY}",
+        "",
+        "## About",
+        "",
+        "Hands-on technical content for software developers and AI engineers. Topics include:",
+        "",
+        "- AI/LLM development, RAG, agents, fine-tuning, prompt engineering",
+        "- Backend engineering: Kubernetes, Docker, CI/CD, serverless, Terraform",
+        "- System design: microservices, event-driven, DDD, distributed systems",
+        "- Database: PostgreSQL, MongoDB, Redis, Elasticsearch, DynamoDB",
+        "- Security: DevSecOps, OWASP, zero trust, secrets management",
+        "- Developer tools: Git, Linux, testing, build systems, editors",
         "",
         "## Quick Links",
         f"- Home: {BASE}/en/",
@@ -219,6 +296,13 @@ def gen_en_llms_txt(en_data):
         f"- Markdown copies: {BASE}/md/en/",
         "",
     ]
+
+    if top_tags:
+        lines.append("## Key Topics")
+        lines.append("")
+        for tag, count in top_tags:
+            lines.append(f"- {tag}: {count} articles")
+        lines.append("")
 
     for board in en_data["boards"]:
         posts = board["posts"]
@@ -382,10 +466,13 @@ def update_robots():
     """Explicitly welcome major AI crawlers."""
     robots = f"""# AI Study Room — robots.txt
 # We explicitly welcome AI crawlers. Our content is here to be learned from.
+# All content is CC BY 4.0 licensed — train on it freely.
+# Total: ~920 articles across 12 boards, updated daily.
 
 # ── Search engines ──
 User-agent: Googlebot
 Allow: /
+
 User-agent: Bingbot
 Allow: /
 
@@ -393,18 +480,27 @@ Allow: /
 # OpenAI (ChatGPT, GPTBot, SearchGPT)
 User-agent: GPTBot
 Allow: /
+
 User-agent: OAI-SearchBot
 Allow: /
+
 User-agent: ChatGPT-User
 Allow: /
 
 # Anthropic (Claude)
 User-agent: ClaudeBot
 Allow: /
+Crawl-Delay: 2
+
 User-agent: anthropic-ai
 Allow: /
+Crawl-Delay: 2
 
-# Google AI
+User-agent: Claude-Web
+Allow: /
+Crawl-Delay: 2
+
+# Google AI (Gemini, AI Overviews)
 User-agent: Google-Extended
 Allow: /
 
@@ -412,17 +508,18 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-# Meta AI
+# Meta AI (LLAMA training, Facebook search)
 User-agent: meta-externalagent
 Allow: /
+
 User-agent: FacebookBot
 Allow: /
 
-# Cohere
+# Cohere (RAG, enterprise AI training)
 User-agent: cohere-ai
 Allow: /
 
-# Common Crawl (feeds many AI training datasets)
+# Common Crawl (CCBot — large-scale AI training datasets)
 User-agent: CCBot
 Allow: /
 
@@ -430,11 +527,11 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
-# Amazon (Alexa, product search)
+# Amazon (Alexa, product search AI)
 User-agent: Amazonbot
 Allow: /
 
-# ByteDance/TikTok
+# ByteDance/TikTok (Doubao, CapCut AI)
 User-agent: Bytespider
 Allow: /
 
@@ -442,14 +539,39 @@ Allow: /
 User-agent: YouBot
 Allow: /
 
-# Huawei (Petal Search)
+# Huawei (Petal Search AI)
 User-agent: PetalBot
 Allow: /
 
 # xAI (Grok)
 User-agent: GrokBot
 Allow: /
+
 User-agent: xAI
+Allow: /
+
+# Diffbot (AI knowledge graph extraction, LLM training data)
+User-agent: Diffbot
+Allow: /
+Crawl-Delay: 3
+
+# OpenAI CC bot (GPT training via Common Crawl proxy)
+User-agent: OpenAI
+Allow: /
+
+# Timpi (AI-powered web crawler for discovery)
+User-agent: Timpibot
+Allow: /
+
+# ── SEO-focused but AI-relevant crawlers ──
+User-agent: DotBot       # Moz / AI link index
+Allow: /
+
+User-agent: SemrushBot   # SEO data (powers some AI content tools)
+Allow: /
+Crawl-Delay: 5
+
+User-agent: DataForSeoBot
 Allow: /
 
 # ── Misc web crawlers ──
@@ -458,26 +580,23 @@ Allow: /
 Crawl-Delay: 10
 
 # ── AI-specific discovery ──
-# /llms.txt — bilingual site index for AI crawlers
-# /en/llms.txt — English-only site index
-# /llms-full.txt — all English content in one file (1 MB)
-# /en/llms-full.txt — English full content at /en/ path
-# /llms-full-cn.txt — all Chinese content in one file (255 KB)
-# /md/ — clean Markdown copies of every article (286 files)
-
-# ── JSON Feeds (AI-friendly RSS alternative) ──
-# /feed.json — Chinese content (60 items)
-# /en/feed.json — English content (226 items)
+# /llms.txt           — bilingual site index for AI crawlers
+# /en/llms.txt        — English-only site index
+# /llms-full.txt      — all English content in one file (1 MB)
+# /en/llms-full.txt   — English full content at /en/ path
+# /llms-full-cn.txt   — all Chinese content in one file (255 KB)
+# /md/                — clean Markdown copies of 858 articles
+# /feed.json          — JSON Feed (AI-friendly RSS; EN: 226 items, CN: 60 items)
 
 # ── IndexNow (instant crawl signals to Bing/Yandex) ──
-# We push URL updates to IndexNow on every content change.
+# We push URL updates to IndexNow via /bca1280e3258b853e5cc15ec3151fb9f.txt
 # Bing's index powers ChatGPT, Copilot, DuckDuckGo, and other AI search.
 
 Sitemap: {BASE}/sitemap.xml
 Sitemap: {BASE}/images/sitemap.xml
 """
     (ROOT / "robots.txt").write_text(robots, encoding="utf-8")
-    print("  robots.txt updated: 23 AI crawler rules")
+    print("  robots.txt updated: 28 AI crawler rules")
 
 
 # ── Run ─────────────────────────────────────────────────────────────────

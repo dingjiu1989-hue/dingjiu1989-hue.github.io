@@ -92,6 +92,7 @@ def build_feed(articles_json, base_path, title, description, lang, homepage):
     <language>{lang}</language>
     <lastBuildDate>{now_rfc}</lastBuildDate>
     <atom:link href="{homepage.rstrip('/')}/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link rel="hub" href="https://pubsubhubbub.appspot.com/"/>
 {chr(10).join(items)}
   </channel>
 </rss>"""

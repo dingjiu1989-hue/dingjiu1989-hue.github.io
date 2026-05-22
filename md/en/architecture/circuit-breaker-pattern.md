@@ -555,3 +555,5 @@ The circuit breaker pattern prevents cascading failures by detecting when a remo
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)

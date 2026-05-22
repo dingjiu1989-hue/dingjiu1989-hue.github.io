@@ -85,3 +85,5 @@ _AI Daily Digest is compiled from trusted technology news sources. For correctio
 **See also:** [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>), [MySQL vs MariaDB: The Complete Comparison](</en/compare/mysql-vs-mariadb.html>)
 
 **See also:** [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>), [MySQL vs MariaDB: The Complete Comparison](</en/compare/mysql-vs-mariadb.html>)
+
+**See also:** [Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization](</en/tools/mock-tools.html>), [Issue Tracking Tools: Jira, Linear, GitHub Issues, and More](</en/tools/issue-tracking-tools.html>), [MySQL vs MariaDB: The Complete Comparison](</en/compare/mysql-vs-mariadb.html>)

@@ -69,3 +69,5 @@ Neither approach is universally superior. SOA's mature governance and integratio
 **See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [DDD Tactical Patterns](</en/architecture/ddd-tactical.html>)
 
 **See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [DDD Tactical Patterns](</en/architecture/ddd-tactical.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [DDD Tactical Patterns](</en/architecture/ddd-tactical.html>)

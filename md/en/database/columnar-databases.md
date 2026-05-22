@@ -99,3 +99,5 @@ Use columnar databases for analytical workloads scanning many rows but few colum
 **See also:** [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
 
 **See also:** [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)
+
+**See also:** [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [Query Performance Tuning Tools](</en/database/query-performance-tuning.html>)

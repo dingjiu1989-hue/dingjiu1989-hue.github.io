@@ -69,3 +69,5 @@ Operational complexity is the primary cost. Operating both systems requires expe
 **See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>)
 
 **See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>)
+
+**See also:** [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>)

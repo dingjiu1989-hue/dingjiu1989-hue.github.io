@@ -93,3 +93,5 @@ Hexagonal Architecture pairs well with Domain-Driven Design, where the core cont
 **See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>), [Event Storming](</en/architecture/event-storming.html>)
 
 **See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>), [Event Storming](</en/architecture/event-storming.html>)
+
+**See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>), [Event Storming](</en/architecture/event-storming.html>)

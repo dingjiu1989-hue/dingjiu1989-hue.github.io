@@ -79,3 +79,5 @@ Always define the blast radius before an experiment. Tools like Chaos Mesh allow
 **See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Health Check Patterns](</en/architecture/health-check-patterns.html>)
 
 **See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Health Check Patterns](</en/architecture/health-check-patterns.html>)
+
+**See also:** [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Health Check Patterns](</en/architecture/health-check-patterns.html>)

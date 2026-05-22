@@ -533,3 +533,5 @@ Multimodal AI is rapidly maturing but still requires careful evaluation for each
 **See also:** [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)
 
 **See also:** [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)
+
+**See also:** [LLM Chaining and Pipeline Patterns](</en/ai/llm-chaining-patterns.html>), [RAG Architecture Guide](</en/ai/rag-architecture-guide.html>), [Deploying AI Agents to Production](</en/ai/ai-agents-production.html>)

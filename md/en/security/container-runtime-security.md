@@ -327,3 +327,5 @@ Container runtime security requires multiple layers. Use seccomp to restrict sys
 **See also:** [Endpoint Security](</en/security/endpoint-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Threat Hunting](</en/security/threat-hunting.html>)
 
 **See also:** [Endpoint Security](</en/security/endpoint-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Threat Hunting](</en/security/threat-hunting.html>)
+
+**See also:** [Endpoint Security](</en/security/endpoint-security.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Threat Hunting](</en/security/threat-hunting.html>)

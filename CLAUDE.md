@@ -16,6 +16,7 @@ Live: https://aidev.fit (via ghost domain dingjiu1989-hue.github.io)
 | `scripts/generate_json_feed.py` | Generate JSON Feed (AI-friendly RSS) |
 | `scripts/indexnow_submit.py` | Push URL changes to IndexNow (Bing) |
 | `scripts/register_new_articles.py` | Register new articles into sitemap + feeds |
+| `scripts/ping_search_engines.py` | Ping Google/Bing/WebSub/IndexNow after builds |
 | `scripts/maintain.py` | Full rebuild: site + AI files + RSS + feeds + covers |
 | `.github/workflows/maintenance.yml` | Hourly rebuild via GitHub Actions |
 | `.github/workflows/devto-syndicate.yml` | Dev.to syndication every 3h |
@@ -55,6 +56,6 @@ python3 scripts/indexnow_submit.py
 
 - `gen_en_site.py` reads `en/articles.json` → generates `/en/{board}/{slug}.html` + homepage + sitemap + search index
 - Boards: tech, sidehustle, tools, ai, compare, architecture, database, security (EN) + same 5 in ZH
-- AI crawlers explicitly welcomed in `robots.txt` (23 crawler rules)
+- AI crawlers explicitly welcomed in `robots.txt` (28 crawler rules)
 - JSON-LD structured data on every article page
 - No framework, no build tool — raw HTML/CSS/JS, no dependencies beyond Python stdlib + Pillow + html2text

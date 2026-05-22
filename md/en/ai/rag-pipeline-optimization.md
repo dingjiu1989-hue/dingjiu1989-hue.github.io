@@ -79,3 +79,5 @@ Optimization is iterative. Test chunk size, embedding model, top-k, and prompt t
 **See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>)
 
 **See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>)
+
+**See also:** [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization](</en/ai/model-deployment.html>), [RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval](</en/ai/rag-agent-patterns.html>)

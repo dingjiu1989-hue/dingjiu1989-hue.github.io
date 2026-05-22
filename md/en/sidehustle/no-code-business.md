@@ -387,3 +387,5 @@ Each transition should be triggered by measurable friction (performance, cost, o
 **See also:** [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>)
 
 **See also:** [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>)
+
+**See also:** [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>)

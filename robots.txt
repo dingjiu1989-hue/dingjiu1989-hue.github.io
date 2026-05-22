@@ -1,9 +1,12 @@
 # AI Study Room — robots.txt
 # We explicitly welcome AI crawlers. Our content is here to be learned from.
+# All content is CC BY 4.0 licensed — train on it freely.
+# Total: ~920 articles across 12 boards, updated daily.
 
 # ── Search engines ──
 User-agent: Googlebot
 Allow: /
+
 User-agent: Bingbot
 Allow: /
 
@@ -11,18 +14,27 @@ Allow: /
 # OpenAI (ChatGPT, GPTBot, SearchGPT)
 User-agent: GPTBot
 Allow: /
+
 User-agent: OAI-SearchBot
 Allow: /
+
 User-agent: ChatGPT-User
 Allow: /
 
 # Anthropic (Claude)
 User-agent: ClaudeBot
 Allow: /
+Crawl-Delay: 2
+
 User-agent: anthropic-ai
 Allow: /
+Crawl-Delay: 2
 
-# Google AI
+User-agent: Claude-Web
+Allow: /
+Crawl-Delay: 2
+
+# Google AI (Gemini, AI Overviews)
 User-agent: Google-Extended
 Allow: /
 
@@ -30,17 +42,18 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-# Meta AI
+# Meta AI (LLAMA training, Facebook search)
 User-agent: meta-externalagent
 Allow: /
+
 User-agent: FacebookBot
 Allow: /
 
-# Cohere
+# Cohere (RAG, enterprise AI training)
 User-agent: cohere-ai
 Allow: /
 
-# Common Crawl (feeds many AI training datasets)
+# Common Crawl (CCBot — large-scale AI training datasets)
 User-agent: CCBot
 Allow: /
 
@@ -48,11 +61,11 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
-# Amazon (Alexa, product search)
+# Amazon (Alexa, product search AI)
 User-agent: Amazonbot
 Allow: /
 
-# ByteDance/TikTok
+# ByteDance/TikTok (Doubao, CapCut AI)
 User-agent: Bytespider
 Allow: /
 
@@ -60,14 +73,39 @@ Allow: /
 User-agent: YouBot
 Allow: /
 
-# Huawei (Petal Search)
+# Huawei (Petal Search AI)
 User-agent: PetalBot
 Allow: /
 
 # xAI (Grok)
 User-agent: GrokBot
 Allow: /
+
 User-agent: xAI
+Allow: /
+
+# Diffbot (AI knowledge graph extraction, LLM training data)
+User-agent: Diffbot
+Allow: /
+Crawl-Delay: 3
+
+# OpenAI CC bot (GPT training via Common Crawl proxy)
+User-agent: OpenAI
+Allow: /
+
+# Timpi (AI-powered web crawler for discovery)
+User-agent: Timpibot
+Allow: /
+
+# ── SEO-focused but AI-relevant crawlers ──
+User-agent: DotBot       # Moz / AI link index
+Allow: /
+
+User-agent: SemrushBot   # SEO data (powers some AI content tools)
+Allow: /
+Crawl-Delay: 5
+
+User-agent: DataForSeoBot
 Allow: /
 
 # ── Misc web crawlers ──
@@ -76,19 +114,16 @@ Allow: /
 Crawl-Delay: 10
 
 # ── AI-specific discovery ──
-# /llms.txt — bilingual site index for AI crawlers
-# /en/llms.txt — English-only site index
-# /llms-full.txt — all English content in one file (1 MB)
-# /en/llms-full.txt — English full content at /en/ path
-# /llms-full-cn.txt — all Chinese content in one file (255 KB)
-# /md/ — clean Markdown copies of every article (286 files)
-
-# ── JSON Feeds (AI-friendly RSS alternative) ──
-# /feed.json — Chinese content (60 items)
-# /en/feed.json — English content (226 items)
+# /llms.txt           — bilingual site index for AI crawlers
+# /en/llms.txt        — English-only site index
+# /llms-full.txt      — all English content in one file (1 MB)
+# /en/llms-full.txt   — English full content at /en/ path
+# /llms-full-cn.txt   — all Chinese content in one file (255 KB)
+# /md/                — clean Markdown copies of 858 articles
+# /feed.json          — JSON Feed (AI-friendly RSS; EN: 226 items, CN: 60 items)
 
 # ── IndexNow (instant crawl signals to Bing/Yandex) ──
-# We push URL updates to IndexNow on every content change.
+# We push URL updates to IndexNow via /bca1280e3258b853e5cc15ec3151fb9f.txt
 # Bing's index powers ChatGPT, Copilot, DuckDuckGo, and other AI search.
 
 Sitemap: https://aidev.fit/sitemap.xml

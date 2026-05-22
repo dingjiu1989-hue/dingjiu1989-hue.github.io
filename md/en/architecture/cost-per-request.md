@@ -73,3 +73,5 @@ Right-sizing infrastructure is the fundamental cost optimization. Over-provision
 **See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
 
 **See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
+
+**See also:** [Distributed ID Generation](</en/architecture/distributed-id.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)

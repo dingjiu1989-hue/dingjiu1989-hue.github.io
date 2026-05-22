@@ -13607,6 +13607,12 @@ def make_article_html(art, board_id, board_name, all_posts):
     <meta name="base-path" content="/en">
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -13666,6 +13672,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     }}
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+    <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
 <div id="nav-placeholder"></div>
@@ -13750,6 +13757,12 @@ def make_homepage(data):
     <meta name="base-path" content="/en">
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -13775,6 +13788,7 @@ def make_homepage(data):
     <meta name="description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" type="application/rss+xml" title="SourceHub RSS" href="/en/feed.xml">
+    <link rel="hub" href="https://pubsubhubbub.appspot.com/">
     <link rel="alternate" hreflang="zh-CN" href="{BASE}/">
     <link rel="alternate" hreflang="en" href="{BASE}/en/">
     <link rel="canonical" href="{BASE}/en/">
@@ -13820,6 +13834,7 @@ def make_homepage(data):
     }})();
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+    <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
 
@@ -13936,6 +13951,12 @@ def make_category(data, board_id):
     <meta name="base-path" content="/en">
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
     <script>
@@ -13991,6 +14012,7 @@ def make_category(data, board_id):
     }}
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+    <link rel="hub" href="https://pubsubhubbub.appspot.com/">
 </head>
 <body>
 
@@ -14009,7 +14031,8 @@ def make_category(data, board_id):
         <h1>{board['icon']} {title}</h1>
         <p class="board-description">{board_descs[board_id]} ({count} articles)</p>
       </div>
-      <select class="sort-select" disabled>
+      <label for="sort-select" class="sr-only">Sort articles by</label>
+      <select id="sort-select" class="sort-select" disabled>
         <option>Sort: Newest ↓</option>
       </select>
     </div>
