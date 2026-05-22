@@ -13880,6 +13880,7 @@ def make_category(data, board_id):
         'database': 'Database',
         'architecture': 'Architecture',
     }
+    # Board descriptions (extended for SEO)
     board_descs = {
         'daily': 'Daily curated top 10 AI news with source attribution. Bilingual EN/CN.',
         'tech': 'Programming tutorials, developer tools, and productivity guides.',
@@ -13890,6 +13891,17 @@ def make_category(data, board_id):
         'security': 'Cybersecurity guides, secure coding, and infrastructure protection.',
         'database': 'Database design, SQL optimization, and data storage best practices.',
         'architecture': 'System design patterns, distributed systems, and software architecture.',
+    }
+    board_keywords = {
+        'daily': 'AI news, artificial intelligence, tech news, AI updates',
+        'tech': 'programming tutorials, developer tools, software engineering, coding guides',
+        'sidehustle': 'freelancing, remote work, side income, developer business',
+        'tools': 'developer tools, productivity tools, software recommendations, tech stack',
+        'ai': 'AI tools, LLM, prompt engineering, machine learning, artificial intelligence guides',
+        'compare': 'tool comparisons, software reviews, feature comparison, pricing compare',
+        'security': 'cybersecurity, secure coding, network security, data protection',
+        'database': 'database design, SQL, NoSQL, database optimization, data storage',
+        'architecture': 'system design, software architecture, distributed systems, design patterns',
     }
     title = board_titles[board_id]
 
@@ -13947,6 +13959,7 @@ def make_category(data, board_id):
     <meta name="twitter:image" content="{BASE}/images/logo.png">
     <title>{title} — SourceHub</title>
     <meta name="description" content="{board_descs[board_id]}">
+    <meta name="keywords" content="{board_keywords[board_id]}">
     <link rel="stylesheet" href="/css/style.css">
 {cn_hreflang}    <link rel="alternate" hreflang="en" href="{en_url}">
     <link rel="canonical" href="{en_url}">
@@ -13957,7 +13970,14 @@ def make_category(data, board_id):
       "@type": "CollectionPage",
       "name": "{title}",
       "url": "{en_url}",
-      "description": "{board['desc']}"
+      "description": "{board_descs[board_id]}",
+      "numberOfItems": {count},
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "about": {{"@type": "Thing", "name": "{title}"}},
+      "mainEntity": {{"@type": "ItemList", "itemListElement": [
+        {{"@type": "ListItem", "position": 1, "url": "{en_url}"}}
+      ]}}
     }}
     </script>
     <script type="application/ld+json">
@@ -13986,8 +14006,8 @@ def make_category(data, board_id):
 
     <div class="page-header">
       <div>
-        <h2>{board['icon']} {title}</h2>
-        <span class="post-count">{board['desc']}({count} articles)</span>
+        <h1>{board['icon']} {title}</h1>
+        <p class="board-description">{board_descs[board_id]} ({count} articles)</p>
       </div>
       <select class="sort-select" disabled>
         <option>Sort: Newest ↓</option>

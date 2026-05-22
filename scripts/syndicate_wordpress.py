@@ -20,7 +20,7 @@ from datetime import datetime, timezone
 ROOT = Path(__file__).resolve().parent.parent
 TRACKING = ROOT / 'data' / 'wp-published.json'
 EN_JSON = ROOT / 'en' / 'articles.json'
-BASE = 'https://dingjiu1989-hue.github.io'
+BASE = 'https://aidev.fit'
 WP_API = 'https://public-api.wordpress.com/rest/v1.1'
 
 # Try to get token from env var, then from local file
