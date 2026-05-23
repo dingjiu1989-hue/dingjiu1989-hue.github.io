@@ -13165,6 +13165,10 @@ BODIES['ai-coding-tools-90-days'] = '''
 <p><em>This article was originally published on <a href="{BASE}/en/ai/ai-coding-tools-90-days.html">SourceHub</a>.</em></p>
 '''
 
+# Helper: escape a string for safe interpolation into JSON string values
+def _js(s):
+    return s.replace('\\', '\\\\').replace('"', '\\"')
+
 # FAQ data for FAQPage schema (slug → list of q/a dicts)
 FAQS = {
     'chatgpt-plus-worth': [
@@ -13371,7 +13375,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     cover_webp = f'{BASE}/images/covers/en/{board_id}/{slug}.webp'
     tags_str = ', '.join(art.get('tags', []))
     # "about" structured topics for AI crawlers
-    about_entries = ', '.join(f'{{"@type": "Thing", "name": "{t}"}}' for t in art.get('tags', [])[:5])
+    about_entries = ', '.join(f'{{"@type": "Thing", "name": "{_js(t)}"}}' for t in art.get('tags', [])[:5])
     about_json = about_entries if about_entries else '{"@type": "Thing", "name": "Technology"}'
 
     og_tags = f'''    <meta property="og:title" content="{art['title']}">
@@ -13409,8 +13413,8 @@ def make_article_html(art, board_id, board_name, all_posts):
         faq_items = ',\n'.join(
             f'''      {{
         "@type": "Question",
-        "name": "{q['q']}",
-        "acceptedAnswer": {{"@type": "Answer", "text": "{q['a']}"}}
+        "name": "{_js(q['q'])}",
+        "acceptedAnswer": {{"@type": "Answer", "text": "{_js(q['a'])}"}}
       }}''' for q in faq_data
         )
         faq_schema = f'''
@@ -13434,12 +13438,12 @@ def make_article_html(art, board_id, board_name, all_posts):
         parts = re.split(r'<h[34][^>]*>\s*\d+[\.\:\)]\s*[^<]+</h[34]>', body_html)
         steps = []
         for i, (num, name) in enumerate(step_headings[:10]):  # max 10 steps
-            name_clean = name.strip().replace('"', '\\"')
+            name_clean = _js(name.strip())
             # Grab text after this heading until next heading
             step_body = parts[i + 1] if i + 1 < len(parts) else ''
             step_text = re.sub(r'<[^>]+>', ' ', step_body)
             step_text = re.sub(r'\s+', ' ', step_text).strip()[:300]
-            step_text = step_text.replace('"', '\\"')
+            step_text = _js(step_text)
             steps.append(f'''      {{
         "@type": "HowToStep",
         "position": "{num}",
@@ -13452,8 +13456,8 @@ def make_article_html(art, board_id, board_name, all_posts):
     {{
       "@context": "https://schema.org",
       "@type": "HowTo",
-      "name": "{art['title']}",
-      "description": "{art['description']}",
+      "name": "{_js(art['title'])}",
+      "description": "{_js(art['description'])}",
       "step": [
     {howto_steps_json}
       ]
@@ -13468,10 +13472,10 @@ def make_article_html(art, board_id, board_name, all_posts):
     {{
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "{art['title']}",
+      "name": "{_js(art['title'])}",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Web, Linux, Mac, Windows",
-      "description": "{art['description']}",
+      "description": "{_js(art['description'])}",
       "offers": {{"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
     }}
     </script>'''
@@ -13676,13 +13680,13 @@ def make_article_html(art, board_id, board_name, all_posts):
     {{
       "@context": "https://schema.org",
       "@type": "{article_type}",
-      "headline": "{art['title']}",
-      "description": "{art['description']}",
+      "headline": "{_js(art['title'])}",
+      "description": "{_js(art['description'])}",
       "image": "{cover_url}",
       "datePublished": "{art['date']}",
       "dateModified": "{art.get('lastActive', art['date'])}",
       "wordCount": "{word_est}",
-      "keywords": "{tags_str}",
+      "keywords": "{_js(tags_str)}",
       "about": [{about_json}],
       "inLanguage": "en",
       "isAccessibleForFree": true{proficiency},
@@ -13700,7 +13704,7 @@ def make_article_html(art, board_id, board_name, all_posts):
       "itemListElement": [
         {{"@type": "ListItem", "position": 1, "name": "Home", "item": "{BASE}/en/"}},
         {{"@type": "ListItem", "position": 2, "name": "{board_name}", "item": "{BASE}/en/{board_id}/"}},
-        {{"@type": "ListItem", "position": 3, "name": "{art['title']}"}}
+        {{"@type": "ListItem", "position": 3, "name": "{_js(art['title'])}"}}
       ]
     }}
     </script>{faq_schema}{howto_schema}{softapp_schema}
