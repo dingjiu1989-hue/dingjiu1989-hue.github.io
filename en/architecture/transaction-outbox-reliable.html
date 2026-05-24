@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Transactional Outbox Pattern
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Transactional Outbox Pattern</h1>
-      <div class="article-meta"><time datetime="2026-05-05">Published 2026-05-05</time> · <time datetime="2026-05-08">Last active 2026-05-08</time> · 235 views · 0 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/transaction-outbox-reliable.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/transaction-outbox-reliable.png" alt="Transactional Outbox Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The transactional outbox pattern solves a fundamental problem in event-driven microservices: how to reliably publish messages as part of a database transaction. When a service updates its database and publishes an event, these two operations must be atomic. If the database update succeeds but the message publish fails, the system is inconsistent. The outbox pattern uses a local database table as a temporary message store, ensuring reliable publication through the same transaction that updates business data. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/transaction-outbox-reliable.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/transaction-outbox-reliable.png" alt="Transactional Outbox Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Transactional Outbox Pattern</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-05">2026-05-05</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>235 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/transaction-outbox-reliable.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/transaction-outbox-reliable.png" alt="Transactional Outbox Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>The transactional outbox pattern solves a fundamental problem in event-driven microservices: how to reliably publish messages as part of a database transaction. When a service updates its database and publishes an event, these two operations must be atomic. If the database update succeeds but the message publish fails, the system is inconsistent. The outbox pattern uses a local database table as a temporary message store, ensuring reliable publication through the same transaction that updates business data. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/transaction-outbox-reliable.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/transaction-outbox-reliable.png" alt="Transactional Outbox Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The Dual-Write Problem </p>
 <p>The dual-write problem occurs when a service must atomically update a database and publish a message. In a typical order service, placing an order involves inserting into the orders table and publishing an "OrderPlaced" event. If the database insert succeeds but the message publish fails, the event is lost. If the database insert fails but the message publishes, a phantom event is emitted. </p>
 <p>Standard solutions like distributed transactions (2PC) are too heavyweight and not supported by most message brokers. The transactional outbox pattern solves this with only a local database transaction. </p>
@@ -134,14 +142,8 @@
 <p>The outbox table should include the message type, payload, creation timestamp, and publication status. A retry count column tracks how many times publication has been attempted. Messages exceeding the maximum retry count are moved to a dead-letter table for manual inspection. </p>
 <p>Monitor the outbox depth (number of unpublished messages) and publication latency. Growing outbox depth indicates a problem with the publisher. Old unpublished messages indicate the publisher has stalled. </p>
 <p>Clean up published records regularly. A background job can delete records that have been published for more than a threshold period. Partition the outbox table by creation date to make cleanup efficient. </p>
-<p>The transactional outbox pattern is a reliable, battle-tested solution for atomic message publication. Combined with idempotent consumers and careful monitoring, it ensures no messages are lost and no duplicate messages cause problems.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>The transactional outbox pattern is a reliable, battle-tested solution for atomic message publication. Combined with idempotent consumers and careful monitoring, it ensures no messages are lost and no duplicate messages cause problems.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></li><li><a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a></li><li><a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -149,29 +151,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Transactional%20Outbox%20Pattern&url=https%3A//aidev.fit/en/architecture/transaction-outbox-reliable.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/transaction-outbox-reliable.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Transactional%20Outbox%20Pattern&url=https%3A//aidev.fit/en/architecture/transaction-outbox-reliable.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Transactional%20Outbox%20Pattern&u=https%3A//aidev.fit/en/architecture/transaction-outbox-reliable.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Transactional%20Outbox%20Pattern&body=https%3A//aidev.fit/en/architecture/transaction-outbox-reliable.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/transaction-outbox-reliable.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Transactional%20Outbox%20Pattern&url=https%3A//aidev.fit/en/architecture/transaction-outbox-reliable.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/transaction-outbox-reliable.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Transactional%20Outbox%20Pattern&url=https%3A//aidev.fit/en/architecture/transaction-outbox-reliable.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Transactional%20Outbox%20Pattern&u=https%3A//aidev.fit/en/architecture/transaction-outbox-reliable.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Transactional%20Outbox%20Pattern&body=https%3A//aidev.fit/en/architecture/transaction-outbox-reliable.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/transaction-outbox-reliable.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/architecture-decision-records.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Architecture Decision Records: Documenting Technical Decisions</span></a><a href="/en/architecture/event-storming.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Event Storming</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/domain-events.html" class="related-card"><span class="rc-title">Domain Events: Design and Implementation</span><span class="rc-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery</span></a><a href="/en/architecture/transaction-outbox.html" class="related-card"><span class="rc-title">Transactional Outbox Pattern</span><span class="rc-desc">Reliable event publishing with transactional outbox: implementations, idempotent consumers, dual-write resolution</span></a><a href="/en/architecture/transactional-inbox.html" class="related-card"><span class="rc-title">Transactional Inbox Pattern for Reliable Messaging</span><span class="rc-desc">The transactional inbox pattern ensures reliable message processing by storing incoming messages before handling them.</span></a><a href="/en/architecture/request-reply-pattern.html" class="related-card"><span class="rc-title">Request-Reply Pattern for Asynchronous Communication</span><span class="rc-desc">Implement the request-reply pattern with message queues for asynchronous request-response messaging.</span></a><a href="/en/architecture/claim-check.html" class="related-card"><span class="rc-title">Claim Check Pattern</span><span class="rc-desc">Learn the claim check pattern: store large payloads, pass references, and enable asynchronous processing</span></a><a href="/en/architecture/materialized-view-pattern.html" class="related-card"><span class="rc-title">Materialized View Pattern</span><span class="rc-desc">Explore the materialized view pattern: read models, caching strategies, CQRS integration, and efficient cross-service qu</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/architecture-decision-records.html" class="prev-next-btn prev-link">← Architecture Decision Records: Documenting Technical Decisions</a><a href="/en/architecture/event-storming.html" class="prev-next-btn next-link">Event Storming →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/transaction-outbox.html" class="related-card"><span class="related-card-title">Transactional Outbox Pattern</span><span class="related-card-desc">Reliable event publishing with transactional outbox: implementations, idempotent consumers, dual-wri</span></a><a href="/en/architecture/transactional-inbox.html" class="related-card"><span class="related-card-title">Transactional Inbox Pattern for Reliable Messaging</span><span class="related-card-desc">The transactional inbox pattern ensures reliable message processing by storing incoming messages bef</span></a><a href="/en/architecture/request-reply-pattern.html" class="related-card"><span class="related-card-title">Request-Reply Pattern for Asynchronous Communication</span><span class="related-card-desc">Implement the request-reply pattern with message queues for asynchronous request-response messaging.</span></a><a href="/en/architecture/claim-check.html" class="related-card"><span class="related-card-title">Claim Check Pattern</span><span class="related-card-desc">Learn the claim check pattern: store large payloads, pass references, and enable asynchronous proces</span></a><a href="/en/architecture/materialized-view-pattern.html" class="related-card"><span class="related-card-title">Materialized View Pattern</span><span class="related-card-desc">Explore the materialized view pattern: read models, caching strategies, CQRS integration, and effici</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

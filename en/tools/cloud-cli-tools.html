@@ -111,18 +111,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">DevTools</span>
         <span class="tag-cat">Productivity</span></div>
-      <h1 class="article-title">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h1>
-      <div class="article-meta"><time datetime="2026-01-30">Published 2026-01-30</time> · <time datetime="2026-05-02">Last active 2026-05-02</time> · 148 views · 0 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tools/cloud-cli-tools.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/cloud-cli-tools.png" alt="Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</h1>
+        <div class="article-meta">
+          <time datetime="2026-01-30">2026-01-30</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>148 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tools/cloud-cli-tools.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/cloud-cli-tools.png" alt="Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (37)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#aws-cli">AWS CLI</a></li><li><a href="#installation">Installation</a></li><li><a href="#or-via-brew">Or via brew</a></li><li><a href="#configuration">Configuration</a></li><li><a href="#profile-management">Profile management</a></li><li><a href="#common-operations">Common operations</a></li><li><a href="#with-jmespath-filtering">With JMESPath filtering</a></li><li><a href="#zshrc">~/.zshrc</a></li><li><a href="#gcloud-google-cloud-cli">gcloud (Google Cloud CLI)</a></li><li><a href="#installation">Installation</a></li><li><a href="#or-via-curl">Or via curl</a></li><li><a href="#authentication">Authentication</a></li><li><a href="#common-operations">Common operations</a></li><li><a href="#configuration-management">Configuration management</a></li><li><a href="#azure-cli-az">Azure CLI (az)</a></li><li><a href="#installation">Installation</a></li><li><a href="#authentication">Authentication</a></li><li><a href="#common-operations">Common operations</a></li><li><a href="#jmespath-queries">JMESPath queries</a></li><li><a href="#s5cmd">s5cmd</a></li><li><a href="#installation">Installation</a></li><li><a href="#configuration-reuses-aws-cli-credentials">Configuration (reuses AWS CLI credentials)</a></li><li><a href="#just-set-awsprofile-or-awsaccesskeyidawssecretaccesskey">Just set AWS_PROFILE or AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY</a></li><li><a href="#speed-comparison">Speed comparison</a></li><li><a href="#copy-10000-files">Copy 10,000 files:</a></li><li><a href="#operations">Operations</a></li><li><a href="#batch-operations-from-file">Batch operations from file</a></li><li><a href="#run-commands-in-parallel">Run commands in parallel</a></li><li><a href="#dry-run">Dry run</a></li><li><a href="#multi-cloud-tools">Multi-Cloud Tools</a></li><li><a href="#cloud-specific-environment-management">Cloud-specific environment management</a></li><li><a href="#aws-vault--secure-aws-credential-management">aws-vault — secure AWS credential management</a></li><li><a href="#aws-sso-helper">AWS SSO helper</a></li><li><a href="#cloud-comparison-commands">Cloud comparison commands</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>Cloud provider CLIs are essential for infrastructure management, automation, and day-to-day operations. Each major cloud provider has its own CLI with unique features and syntax. This article covers the primary CLIs (aws-cli, gcloud, az) plus s5cmd for high-performance S3 operations, with practical examples and productivity patterns.</p><picture><source srcset="https://aidev.fit/images/covers/en/tools/cloud-cli-tools.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tools/cloud-cli-tools.png" alt="Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>AWS CLI</h2>
 <p>The most mature cloud CLI, now at version 2:</p>
@@ -264,14 +272,8 @@
 <li>
 <p><strong>Scripting</strong> : All three CLIs support JSON output with JMESPath for programmatic use.</p>
 </li>
-</ul></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a>, <a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a>, <a href="/en/tools/database-gui.html">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (37)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#aws-cli">AWS CLI</a></li><li><a href="#installation">Installation</a></li><li><a href="#or-via-brew">Or via brew</a></li><li><a href="#configuration">Configuration</a></li><li><a href="#profile-management">Profile management</a></li><li><a href="#common-operations">Common operations</a></li><li><a href="#with-jmespath-filtering">With JMESPath filtering</a></li><li><a href="#~-.zshrc">~/.zshrc</a></li><li><a href="#gcloud-(google-cloud-cli)">gcloud (Google Cloud CLI)</a></li><li><a href="#installation">Installation</a></li><li><a href="#or-via-curl">Or via curl</a></li><li><a href="#authentication">Authentication</a></li><li><a href="#common-operations">Common operations</a></li><li><a href="#configuration-management">Configuration management</a></li><li><a href="#azure-cli-(az)">Azure CLI (az)</a></li><li><a href="#installation">Installation</a></li><li><a href="#authentication">Authentication</a></li><li><a href="#common-operations">Common operations</a></li><li><a href="#jmespath-queries">JMESPath queries</a></li><li><a href="#s5cmd">s5cmd</a></li><li><a href="#installation">Installation</a></li><li><a href="#configuration-(reuses-aws-cli-credentials)">Configuration (reuses AWS CLI credentials)</a></li><li><a href="#just-set-aws_profile-or-aws_access_key_id-aws_secret_access_key">Just set AWS_PROFILE or AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY</a></li><li><a href="#speed-comparison">Speed comparison</a></li><li><a href="#copy-10,000-files:">Copy 10,000 files:</a></li><li><a href="#operations">Operations</a></li><li><a href="#batch-operations-from-file">Batch operations from file</a></li><li><a href="#run-commands-in-parallel">Run commands in parallel</a></li><li><a href="#dry-run">Dry run</a></li><li><a href="#multi-cloud-tools">Multi-Cloud Tools</a></li><li><a href="#cloud-specific-environment-management">Cloud-specific environment management</a></li><li><a href="#aws-vault-—-secure-aws-credential-management">aws-vault — secure AWS credential management</a></li><li><a href="#aws-sso-helper">AWS SSO helper</a></li><li><a href="#cloud-comparison-commands">Cloud comparison commands</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+</ul></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tools/build-tools.html">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a></li><li><a href="/en/tools/code-editor-plugins.html">Code Editor Plugins: Must-Have Extensions for Productivity</a></li><li><a href="/en/tools/database-gui.html">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -279,29 +281,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Cloud%20CLI%20Tools%3A%20aws-cli%2C%20gcloud%2C%20az%2C%20s5cmd%2C%20Cloud%20Comparisons&url=https%3A//aidev.fit/en/tools/cloud-cli-tools.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tools/cloud-cli-tools.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Cloud%20CLI%20Tools%3A%20aws-cli%2C%20gcloud%2C%20az%2C%20s5cmd%2C%20Cloud%20Comparisons&url=https%3A//aidev.fit/en/tools/cloud-cli-tools.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Cloud%20CLI%20Tools%3A%20aws-cli%2C%20gcloud%2C%20az%2C%20s5cmd%2C%20Cloud%20Comparisons&u=https%3A//aidev.fit/en/tools/cloud-cli-tools.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Cloud%20CLI%20Tools%3A%20aws-cli%2C%20gcloud%2C%20az%2C%20s5cmd%2C%20Cloud%20Comparisons&body=https%3A//aidev.fit/en/tools/cloud-cli-tools.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tools/cloud-cli-tools.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Cloud%20CLI%20Tools%3A%20aws-cli%2C%20gcloud%2C%20az%2C%20s5cmd%2C%20Cloud%20Comparisons&url=https%3A//aidev.fit/en/tools/cloud-cli-tools.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tools/cloud-cli-tools.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Cloud%20CLI%20Tools%3A%20aws-cli%2C%20gcloud%2C%20az%2C%20s5cmd%2C%20Cloud%20Comparisons&url=https%3A//aidev.fit/en/tools/cloud-cli-tools.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Cloud%20CLI%20Tools%3A%20aws-cli%2C%20gcloud%2C%20az%2C%20s5cmd%2C%20Cloud%20Comparisons&u=https%3A//aidev.fit/en/tools/cloud-cli-tools.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Cloud%20CLI%20Tools%3A%20aws-cli%2C%20gcloud%2C%20az%2C%20s5cmd%2C%20Cloud%20Comparisons&body=https%3A//aidev.fit/en/tools/cloud-cli-tools.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tools/cloud-cli-tools.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tools/build-tools.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</span></a><a href="/en/tools/devcontainer-setup.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tools/cloud-cost-tools.html" class="related-card"><span class="rc-title">Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP</span><span class="rc-desc">Compare cloud cost management tools: native tools, third-party platforms, and cost optimization strategies.</span></a><a href="/en/tools/productivity-tracking.html" class="related-card"><span class="rc-title">Developer Productivity Tracking Tools</span><span class="rc-desc">Compare WakaTime, CodeTime, ActivityWatch and other tools for tracking developer productivity and coding habits.</span></a><a href="/en/tools/redis-tools.html" class="related-card"><span class="rc-title">Redis Tools: RedisInsight, Redis CLI, Redis Commander</span><span class="rc-desc">Essential tools for Redis management: RedisInsight for GUI-based visualization and analysis, Redis CLI for command-line </span></a><a href="/en/tools/shell-frameworks.html" class="related-card"><span class="rc-title">Shell Frameworks: zsh, fish, bash Customization</span><span class="rc-desc">Compare shell frameworks and prompt tools: Oh My Zsh, Starship, fish shell, and Powerlevel10k for productivity.</span></a><a href="/en/tools/command-line-productivity.html" class="related-card"><span class="rc-title">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</span><span class="rc-desc">Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code search, jq for JSON </span></a><a href="/en/tools/api-testing-2026.html" class="related-card"><span class="rc-title">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</span><span class="rc-desc">Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, Hoppscotch for light</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tools/build-tools.html" class="prev-next-btn prev-link">← Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</a><a href="/en/tools/devcontainer-setup.html" class="prev-next-btn next-link">Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/cloud-cost-tools.html" class="related-card"><span class="related-card-title">Cloud Cost Management Tools: Saving Money on AWS, Azure, GCP</span><span class="related-card-desc">Compare cloud cost management tools: native tools, third-party platforms, and cost optimization stra</span></a><a href="/en/tools/productivity-tracking.html" class="related-card"><span class="related-card-title">Developer Productivity Tracking Tools</span><span class="related-card-desc">Compare WakaTime, CodeTime, ActivityWatch and other tools for tracking developer productivity and co</span></a><a href="/en/tools/redis-tools.html" class="related-card"><span class="related-card-title">Redis Tools: RedisInsight, Redis CLI, Redis Commander</span><span class="related-card-desc">Essential tools for Redis management: RedisInsight for GUI-based visualization and analysis, Redis C</span></a><a href="/en/tools/shell-frameworks.html" class="related-card"><span class="related-card-title">Shell Frameworks: zsh, fish, bash Customization</span><span class="related-card-desc">Compare shell frameworks and prompt tools: Oh My Zsh, Starship, fish shell, and Powerlevel10k for pr</span></a><a href="/en/tools/command-line-productivity.html" class="related-card"><span class="related-card-title">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</span><span class="related-card-desc">Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code </span></a><a href="/en/tools/api-testing-2026.html" class="related-card"><span class="related-card-title">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</span><span class="related-card-desc">Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, </span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#aws-cli">AWS CLI</a></li><li><a href="#installation">Installation</a></li><li><a href="#or-via-brew">Or via brew</a></li><li><a href="#configuration">Configuration</a></li><li><a href="#profile-management">Profile management</a></li><li><a href="#common-operations">Common operations</a></li><li><a href="#with-jmespath-filtering">With JMESPath filtering</a></li><li><a href="#zshrc">~/.zshrc</a></li><li><a href="#gcloud-google-cloud-cli">gcloud (Google Cloud CLI)</a></li><li><a href="#installation">Installation</a></li><li><a href="#or-via-curl">Or via curl</a></li><li><a href="#authentication">Authentication</a></li><li><a href="#common-operations">Common operations</a></li><li><a href="#configuration-management">Configuration management</a></li><li><a href="#azure-cli-az">Azure CLI (az)</a></li><li><a href="#installation">Installation</a></li><li><a href="#authentication">Authentication</a></li><li><a href="#common-operations">Common operations</a></li><li><a href="#jmespath-queries">JMESPath queries</a></li><li><a href="#s5cmd">s5cmd</a></li><li><a href="#installation">Installation</a></li><li><a href="#configuration-reuses-aws-cli-credentials">Configuration (reuses AWS CLI credentials)</a></li><li><a href="#just-set-awsprofile-or-awsaccesskeyidawssecretaccesskey">Just set AWS_PROFILE or AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY</a></li><li><a href="#speed-comparison">Speed comparison</a></li><li><a href="#copy-10000-files">Copy 10,000 files:</a></li><li><a href="#operations">Operations</a></li><li><a href="#batch-operations-from-file">Batch operations from file</a></li><li><a href="#run-commands-in-parallel">Run commands in parallel</a></li><li><a href="#dry-run">Dry run</a></li><li><a href="#multi-cloud-tools">Multi-Cloud Tools</a></li><li><a href="#cloud-specific-environment-management">Cloud-specific environment management</a></li><li><a href="#aws-vault--secure-aws-credential-management">aws-vault — secure AWS credential management</a></li><li><a href="#aws-sso-helper">AWS SSO helper</a></li><li><a href="#cloud-comparison-commands">Cloud comparison commands</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

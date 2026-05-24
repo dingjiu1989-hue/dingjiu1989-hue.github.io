@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › API Composition Pattern
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">API Composition Pattern</h1>
-      <div class="article-meta"><time datetime="2026-05-01">Published 2026-05-01</time> · <time datetime="2026-05-04">Last active 2026-05-04</time> · 224 views · 0 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/api-composition-pattern.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/api-composition-pattern.png" alt="API Composition Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The API composition pattern is a technique for retrieving data that spans multiple services in a microservice architecture. A composer (which could be an API gateway, a dedicated service, or the client itself) calls multiple services and combines their responses into a single, aggregated result. This pattern is the simplest approach to cross-service queries, but it requires careful handling of performance, error, and consistency concerns. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/api-composition-pattern.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/api-composition-pattern.png" alt="API Composition Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">API Composition Pattern</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-01">2026-05-01</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>224 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/api-composition-pattern.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/api-composition-pattern.png" alt="API Composition Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>The API composition pattern is a technique for retrieving data that spans multiple services in a microservice architecture. A composer (which could be an API gateway, a dedicated service, or the client itself) calls multiple services and combines their responses into a single, aggregated result. This pattern is the simplest approach to cross-service queries, but it requires careful handling of performance, error, and consistency concerns. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/api-composition-pattern.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/api-composition-pattern.png" alt="API Composition Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>How API Composition Works </p>
 <p>The composer receives a request that requires data from multiple services. It identifies which services have the needed data, determines whether calls can be parallelized, and makes the necessary requests. As responses arrive, the composer combines them into the requested format and returns the result. </p>
 <p>For example, to display an order detail page, the composer might call the Order service for order data, the Payment service for payment status, the Shipping service for tracking information, and the Product service for product details. It combines these responses into a single view model for the client. </p>
@@ -133,14 +141,8 @@
 <p>API composition is appropriate for simple aggregations where the relationships between data sources are straightforward and performance requirements are moderate. It is the simplest cross-service query pattern and the easiest to implement and understand. </p>
 <p>Composition becomes problematic when aggregations are complex, involve large datasets, or require joins that cannot be efficiently performed in memory. For these cases, the CQRS or materialized view patterns are more appropriate. </p>
 <p>Implementation considerations include the location of the composer. API gateways often handle simple composition. Dedicated composition services handle more complex logic. Client-side composition works for simple cases but couples the client to multiple services. </p>
-<p>API composition is a fundamental pattern in microservice architectures. It provides a straightforward way to serve data from multiple services without the complexity of event-driven synchronization or dedicated query services. When performance and error handling are carefully managed, composition is an effective tool for cross-service data retrieval.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>API composition is a fundamental pattern in microservice architectures. It provides a straightforward way to serve data from multiple services without the complexity of event-driven synchronization or dedicated query services. When performance and error handling are carefully managed, composition is an effective tool for cross-service data retrieval.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></li><li><a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></li><li><a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -148,29 +150,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=API%20Composition%20Pattern&url=https%3A//aidev.fit/en/architecture/api-composition-pattern.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/api-composition-pattern.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=API%20Composition%20Pattern&url=https%3A//aidev.fit/en/architecture/api-composition-pattern.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=API%20Composition%20Pattern&u=https%3A//aidev.fit/en/architecture/api-composition-pattern.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=API%20Composition%20Pattern&body=https%3A//aidev.fit/en/architecture/api-composition-pattern.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/api-composition-pattern.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=API%20Composition%20Pattern&url=https%3A//aidev.fit/en/architecture/api-composition-pattern.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/api-composition-pattern.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=API%20Composition%20Pattern&url=https%3A//aidev.fit/en/architecture/api-composition-pattern.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=API%20Composition%20Pattern&u=https%3A//aidev.fit/en/architecture/api-composition-pattern.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=API%20Composition%20Pattern&body=https%3A//aidev.fit/en/architecture/api-composition-pattern.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/api-composition-pattern.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/cache-strategies.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Caching Strategies</span></a><a href="/en/architecture/soa-vs-microservices.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">SOA vs Microservices</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/api-composition.html" class="related-card"><span class="rc-title">API Composition and Aggregation</span><span class="rc-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation strategies</span></a><a href="/en/architecture/materialized-view-pattern.html" class="related-card"><span class="rc-title">Materialized View Pattern</span><span class="rc-desc">Explore the materialized view pattern: read models, caching strategies, CQRS integration, and efficient cross-service qu</span></a><a href="/en/architecture/backend-for-frontend.html" class="related-card"><span class="rc-title">Backend for Frontend (BFF) Pattern</span><span class="rc-desc">Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data aggregation, protocol t</span></a><a href="/en/architecture/api-gateway-patterns.html" class="related-card"><span class="rc-title">API Gateway Patterns</span><span class="rc-desc">Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementation strategies</span></a><a href="/en/architecture/scheduler-supervisor.html" class="related-card"><span class="rc-title">Scheduler Supervisor Pattern</span><span class="rc-desc">Learn the scheduler supervisor pattern: job scheduling, failure handling, retry policies, and distributed job management</span></a><a href="/en/architecture/database-per-service.html" class="related-card"><span class="rc-title">Database per Service Pattern</span><span class="rc-desc">Learn the database per service pattern for microservices data management — data isolation, eventual consistency, cross-s</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/cache-strategies.html" class="prev-next-btn prev-link">← Caching Strategies</a><a href="/en/architecture/soa-vs-microservices.html" class="prev-next-btn next-link">SOA vs Microservices →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a><a href="/en/architecture/materialized-view-pattern.html" class="related-card"><span class="related-card-title">Materialized View Pattern</span><span class="related-card-desc">Explore the materialized view pattern: read models, caching strategies, CQRS integration, and effici</span></a><a href="/en/architecture/backend-for-frontend.html" class="related-card"><span class="related-card-title">Backend for Frontend (BFF) Pattern</span><span class="related-card-desc">Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data agg</span></a><a href="/en/architecture/api-gateway-patterns.html" class="related-card"><span class="related-card-title">API Gateway Patterns</span><span class="related-card-desc">Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementatio</span></a><a href="/en/architecture/scheduler-supervisor.html" class="related-card"><span class="related-card-title">Scheduler Supervisor Pattern</span><span class="related-card-desc">Learn the scheduler supervisor pattern: job scheduling, failure handling, retry policies, and distri</span></a><a href="/en/architecture/database-per-service.html" class="related-card"><span class="related-card-title">Database per Service Pattern</span><span class="related-card-desc">Learn the database per service pattern for microservices data management — data isolation, eventual </span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

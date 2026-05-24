@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Task Queues
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
-      <h1 class="article-title">Task Queues</h1>
-      <div class="article-meta"><time datetime="2026-01-12">Published 2026-01-12</time> · <time datetime="2026-04-21">Last active 2026-04-21</time> · 194 views · 0 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/task-queues.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/task-queues.png" alt="Task Queues" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Task queues enable asynchronous processing of work outside the main application request-response cycle. They handle email sending, image processing, report generation, data synchronization, and any other work that does not need to complete before the user receives a response. This article compares the leading task queue systems and covers design patterns.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/task-queues.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/task-queues.png" alt="Task Queues" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Task Queues</h1>
+        <div class="article-meta">
+          <time datetime="2026-01-12">2026-01-12</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>194 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/task-queues.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/task-queues.png" alt="Task Queues" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#why-task-queues">Why Task Queues</a></li><li><a href="#celery">Celery</a></li><li><a href="#bull">Bull</a></li><li><a href="#sidekiq">Sidekiq</a></li><li><a href="#job-design-patterns">Job Design Patterns</a></li><li><a href="#prioritization">Prioritization</a></li><li><a href="#monitoring-and-management">Monitoring and Management</a></li></ol></details>
+        <div class="article-body"><p>Task queues enable asynchronous processing of work outside the main application request-response cycle. They handle email sending, image processing, report generation, data synchronization, and any other work that does not need to complete before the user receives a response. This article compares the leading task queue systems and covers design patterns.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/task-queues.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/task-queues.png" alt="Task Queues" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Why Task Queues</h2>
 <p>Synchronous request processing keeps users waiting. If every request waits for email sending, image resizing, and report generation, response times become unacceptable. Task queues move this work to background workers, allowing the request to return immediately while the work completes asynchronously.</p>
 <p>Task queues also provide reliability. If a worker crashes while processing a task, the task can be retried on another worker. If the system is under heavy load, tasks queue up rather than being dropped. Workers can be scaled independently based on queue depth.</p>
@@ -139,14 +147,8 @@
 <p>Task queue monitoring tracks queue depth, processing rate, failure rate, and worker utilization. Dashboard visibility into these metrics supports capacity planning and problem detection.</p>
 <p>Alerting should trigger when queues grow beyond thresholds (indicating insufficient workers), when failure rates spike (indicating a bug or infrastructure issue), and when tasks age beyond acceptable limits (indicating processing stalls).</p>
 <p>Dead letter queues collect tasks that have exhausted their retry attempts. Operations teams review dead letter queues, fix underlying issues, and manually retry tasks. Automated dead letter handling prevents infinite retry loops.</p>
-<p>Task queues are essential for building responsive, reliable applications. They decouple work distribution from work execution, providing fault tolerance, scalability, and flexibility in how background work is processed.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/debugging-techniques.html">Debugging Techniques</a>, <a href="/en/tech/dependency-management.html">Dependency Management</a>, <a href="/en/tech/distributed-caching.html">Distributed Caching</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (7)</summary><ol><li><a href="#why-task-queues">Why Task Queues</a></li><li><a href="#celery">Celery</a></li><li><a href="#bull">Bull</a></li><li><a href="#sidekiq">Sidekiq</a></li><li><a href="#job-design-patterns">Job Design Patterns</a></li><li><a href="#prioritization">Prioritization</a></li><li><a href="#monitoring-and-management">Monitoring and Management</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Task queues are essential for building responsive, reliable applications. They decouple work distribution from work execution, providing fault tolerance, scalability, and flexibility in how background work is processed.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/debugging-techniques.html">Debugging Techniques</a></li><li><a href="/en/tech/dependency-management.html">Dependency Management</a></li><li><a href="/en/tech/distributed-caching.html">Distributed Caching</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -154,29 +156,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Task%20Queues&url=https%3A//aidev.fit/en/tech/task-queues.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/task-queues.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Task%20Queues&url=https%3A//aidev.fit/en/tech/task-queues.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Task%20Queues&u=https%3A//aidev.fit/en/tech/task-queues.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Task%20Queues&body=https%3A//aidev.fit/en/tech/task-queues.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/task-queues.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Task%20Queues&url=https%3A//aidev.fit/en/tech/task-queues.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/task-queues.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Task%20Queues&url=https%3A//aidev.fit/en/tech/task-queues.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Task%20Queues&u=https%3A//aidev.fit/en/tech/task-queues.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Task%20Queues&body=https%3A//aidev.fit/en/tech/task-queues.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/task-queues.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/webpack-vs-vite.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Webpack vs Vite</span></a><a href="/en/tech/performance-testing.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Performance Testing</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/code-generation.html" class="related-card"><span class="rc-title">Code Generation</span><span class="rc-desc">Learn code generation: scaffolding tools, OpenAPI codegen, GraphQL codegen, template engines, and productivity patterns</span></a><a href="/en/tech/testing-strategies.html" class="related-card"><span class="rc-title">Testing Strategies</span><span class="rc-desc">Learn comprehensive testing strategies: unit, integration, e2e tests, test pyramid principles, and test double patterns</span></a><a href="/en/tech/ansible-automation.html" class="related-card"><span class="rc-title">Ansible Automation: Playbooks, Roles, Inventory, and Vault</span><span class="rc-desc">Deep dive into Ansible automation covering playbooks, roles, inventory management, Ansible Vault, idempotency patterns, </span></a><a href="/en/tech/terraform-state-management.html" class="related-card"><span class="rc-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</span><span class="rc-desc">Deep dive into Terraform state management covering remote backends, state locking, migration strategies, workspace patte</span></a><a href="/en/tech/api-documentation.html" class="related-card"><span class="rc-title">API Documentation</span><span class="rc-desc">Learn API documentation: OpenAPI, Swagger UI, Redoc, developer portal integration, and documentation best practices</span></a><a href="/en/tech/artifact-management.html" class="related-card"><span class="rc-title">Artifact Management</span><span class="rc-desc">Learn artifact management: Docker registries, package registries, versioning strategies, and lifecycle policies</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/webpack-vs-vite.html" class="prev-next-btn prev-link">← Webpack vs Vite</a><a href="/en/tech/performance-testing.html" class="prev-next-btn next-link">Performance Testing →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/code-generation.html" class="related-card"><span class="related-card-title">Code Generation</span><span class="related-card-desc">Learn code generation: scaffolding tools, OpenAPI codegen, GraphQL codegen, template engines, and pr</span></a><a href="/en/tech/testing-strategies.html" class="related-card"><span class="related-card-title">Testing Strategies</span><span class="related-card-desc">Learn comprehensive testing strategies: unit, integration, e2e tests, test pyramid principles, and t</span></a><a href="/en/tech/ansible-automation.html" class="related-card"><span class="related-card-title">Ansible Automation: Playbooks, Roles, Inventory, and Vault</span><span class="related-card-desc">Deep dive into Ansible automation covering playbooks, roles, inventory management, Ansible Vault, id</span></a><a href="/en/tech/terraform-state-management.html" class="related-card"><span class="related-card-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</span><span class="related-card-desc">Deep dive into Terraform state management covering remote backends, state locking, migration strateg</span></a><a href="/en/tech/api-documentation.html" class="related-card"><span class="related-card-title">API Documentation</span><span class="related-card-desc">Learn API documentation: OpenAPI, Swagger UI, Redoc, developer portal integration, and documentation</span></a><a href="/en/tech/artifact-management.html" class="related-card"><span class="related-card-title">Artifact Management</span><span class="related-card-desc">Learn artifact management: Docker registries, package registries, versioning strategies, and lifecyc</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#why-task-queues">Why Task Queues</a></li><li><a href="#celery">Celery</a></li><li><a href="#bull">Bull</a></li><li><a href="#sidekiq">Sidekiq</a></li><li><a href="#job-design-patterns">Job Design Patterns</a></li><li><a href="#prioritization">Prioritization</a></li><li><a href="#monitoring-and-management">Monitoring and Management</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

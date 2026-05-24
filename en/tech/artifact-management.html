@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Artifact Management
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
-      <h1 class="article-title">Artifact Management</h1>
-      <div class="article-meta"><time datetime="2026-01-05">Published 2026-01-05</time> · <time datetime="2026-05-11">Last active 2026-05-11</time> · 554 views · 3 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/artifact-management.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/artifact-management.png" alt="Artifact Management" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Artifact management is the practice of storing, versioning, and distributing build outputs. Artifacts include compiled binaries, container images, library packages, deployment configurations, and any other output from the build process. Effective artifact management is essential for reproducible deployments, dependency management, and auditability.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/artifact-management.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/artifact-management.png" alt="Artifact Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Artifact Management</h1>
+        <div class="article-meta">
+          <time datetime="2026-01-05">2026-01-05</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>554 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/artifact-management.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/artifact-management.png" alt="Artifact Management" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#what-is-an-artifact">What Is an Artifact?</a></li><li><a href="#docker-registries">Docker Registries</a></li><li><a href="#package-registries">Package Registries</a></li><li><a href="#versioning-strategies">Versioning Strategies</a></li><li><a href="#lifecycle-policies">Lifecycle Policies</a></li><li><a href="#artifact-repositories">Artifact Repositories</a></li><li><a href="#best-practices">Best Practices</a></li></ol></details>
+        <div class="article-body"><p>Artifact management is the practice of storing, versioning, and distributing build outputs. Artifacts include compiled binaries, container images, library packages, deployment configurations, and any other output from the build process. Effective artifact management is essential for reproducible deployments, dependency management, and auditability.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/artifact-management.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/artifact-management.png" alt="Artifact Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>What Is an Artifact?</h2>
 <p>An artifact is any file produced during the build process that is needed for deployment or consumed by other builds. Common artifact types include Docker images, JAR/WAR files, npm packages, Python wheels, compiled binaries, and Terraform plan files.</p>
 <p>Artifacts should be immutable—once published, they should never be modified. An immutable artifact deployed to staging is identical to the one deployed to production. This eliminates "works on staging but not production" issues caused by different builds. Versioning provides a unique identifier for each artifact, tying it back to the source code and build configuration.</p>
@@ -138,14 +146,8 @@
 <h2>Best Practices</h2>
 <p>Use immutable artifacts with unique versions. Tag artifacts with build metadata (commit SHA, build number, build date). Store artifacts in a registry with access controls and audit logging. Implement retention policies to manage storage costs. Use an artifact repository for caching and unified management.</p>
 <p>Verify artifact integrity with checksums. Automate artifact promotion through CI/CD pipelines. Monitor registry usage for anomalies. Clean up unused artifacts regularly. Maintain artifact provenance—the ability to trace an artifact back to its source code and build configuration.</p>
-<p>Artifact management is a critical but often overlooked component of the software development lifecycle. Well-managed artifacts enable reliable deployments, reproducible builds, and audit-ready compliance.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (7)</summary><ol><li><a href="#what-is-an-artifact">What Is an Artifact?</a></li><li><a href="#docker-registries">Docker Registries</a></li><li><a href="#package-registries">Package Registries</a></li><li><a href="#versioning-strategies">Versioning Strategies</a></li><li><a href="#lifecycle-policies">Lifecycle Policies</a></li><li><a href="#artifact-repositories">Artifact Repositories</a></li><li><a href="#best-practices">Best Practices</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Artifact management is a critical but often overlooked component of the software development lifecycle. Well-managed artifacts enable reliable deployments, reproducible builds, and audit-ready compliance.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></li><li><a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></li><li><a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -153,29 +155,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Artifact%20Management&url=https%3A//aidev.fit/en/tech/artifact-management.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/artifact-management.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Artifact%20Management&url=https%3A//aidev.fit/en/tech/artifact-management.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Artifact%20Management&u=https%3A//aidev.fit/en/tech/artifact-management.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Artifact%20Management&body=https%3A//aidev.fit/en/tech/artifact-management.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/artifact-management.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Artifact%20Management&url=https%3A//aidev.fit/en/tech/artifact-management.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/artifact-management.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Artifact%20Management&url=https%3A//aidev.fit/en/tech/artifact-management.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Artifact%20Management&u=https%3A//aidev.fit/en/tech/artifact-management.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Artifact%20Management&body=https%3A//aidev.fit/en/tech/artifact-management.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/artifact-management.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/ci-cd-best-practices.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">CI/CD Best Practices</span></a><a href="/en/tech/terraform-state-management.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Terraform State Management: Remote State, Locking, Migration, and</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/dependency-management.html" class="related-card"><span class="rc-title">Dependency Management</span><span class="rc-desc">Learn dependency management: lock files, vulnerability scanning, semantic versioning, update strategies, and governance</span></a><a href="/en/tech/ci-cd-best-practices.html" class="related-card"><span class="rc-title">CI/CD Best Practices</span><span class="rc-desc">Master CI/CD best practices: pipeline design, artifact management, environment promotion, and deployment strategies</span></a><a href="/en/tech/log-management.html" class="related-card"><span class="rc-title">Log Management</span><span class="rc-desc">Explore log management: collection, aggregation, storage, query strategies, and retention policies for production system</span></a><a href="/en/tech/secret-management.html" class="related-card"><span class="rc-title">Secret Management</span><span class="rc-desc">Learn secret management: Vault, AWS Secrets Manager, SOPS, encryption approaches, rotation policies, and best practices</span></a><a href="/en/tech/capacity-planning-cloud.html" class="related-card"><span class="rc-title">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</span><span class="rc-desc">Technical exploration of cloud capacity planning covering auto-scaling strategies, reserved and spot instance optimizati</span></a><a href="/en/tech/docker-compose-vs-kubernetes.html" class="related-card"><span class="rc-title">Docker Compose vs Kubernetes: When to Use Each and Migration Path</span><span class="rc-desc">Comparative analysis of Docker Compose and Kubernetes covering use cases, when Compose is sufficient, lightweight altern</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/ci-cd-best-practices.html" class="prev-next-btn prev-link">← CI/CD Best Practices</a><a href="/en/tech/terraform-state-management.html" class="prev-next-btn next-link">Terraform State Management: Remote State, Locking, Migration, and Workspaces →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/dependency-management.html" class="related-card"><span class="related-card-title">Dependency Management</span><span class="related-card-desc">Learn dependency management: lock files, vulnerability scanning, semantic versioning, update strateg</span></a><a href="/en/tech/ci-cd-best-practices.html" class="related-card"><span class="related-card-title">CI/CD Best Practices</span><span class="related-card-desc">Master CI/CD best practices: pipeline design, artifact management, environment promotion, and deploy</span></a><a href="/en/tech/log-management.html" class="related-card"><span class="related-card-title">Log Management</span><span class="related-card-desc">Explore log management: collection, aggregation, storage, query strategies, and retention policies f</span></a><a href="/en/tech/secret-management.html" class="related-card"><span class="related-card-title">Secret Management</span><span class="related-card-desc">Learn secret management: Vault, AWS Secrets Manager, SOPS, encryption approaches, rotation policies,</span></a><a href="/en/tech/capacity-planning-cloud.html" class="related-card"><span class="related-card-title">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</span><span class="related-card-desc">Technical exploration of cloud capacity planning covering auto-scaling strategies, reserved and spot</span></a><a href="/en/tech/docker-compose-vs-kubernetes.html" class="related-card"><span class="related-card-title">Docker Compose vs Kubernetes: When to Use Each and Migration Path</span><span class="related-card-desc">Comparative analysis of Docker Compose and Kubernetes covering use cases, when Compose is sufficient</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#what-is-an-artifact">What Is an Artifact?</a></li><li><a href="#docker-registries">Docker Registries</a></li><li><a href="#package-registries">Package Registries</a></li><li><a href="#versioning-strategies">Versioning Strategies</a></li><li><a href="#lifecycle-policies">Lifecycle Policies</a></li><li><a href="#artifact-repositories">Artifact Repositories</a></li><li><a href="#best-practices">Best Practices</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

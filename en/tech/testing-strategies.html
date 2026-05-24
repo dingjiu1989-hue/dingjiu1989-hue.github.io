@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Testing Strategies
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
-      <h1 class="article-title">Testing Strategies</h1>
-      <div class="article-meta"><time datetime="2026-01-12">Published 2026-01-12</time> · <time datetime="2026-04-14">Last active 2026-04-14</time> · 144 views · 0 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/testing-strategies.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/testing-strategies.png" alt="Testing Strategies" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>A robust testing strategy is essential for maintaining software quality as codebases grow. This article examines the testing landscape—unit tests, integration tests, end-to-end tests, the test pyramid, and test double patterns—providing practical guidance for building effective test suites.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/testing-strategies.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/testing-strategies.png" alt="Testing Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Testing Strategies</h1>
+        <div class="article-meta">
+          <time datetime="2026-01-12">2026-01-12</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>144 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/testing-strategies.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/testing-strategies.png" alt="Testing Strategies" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (6)</summary><ol><li><a href="#the-test-pyramid">The Test Pyramid</a></li><li><a href="#unit-tests">Unit Tests</a></li><li><a href="#integration-tests">Integration Tests</a></li><li><a href="#end-to-end-tests">End-to-End Tests</a></li><li><a href="#test-doubles">Test Doubles</a></li><li><a href="#testing-best-practices">Testing Best Practices</a></li></ol></details>
+        <div class="article-body"><p>A robust testing strategy is essential for maintaining software quality as codebases grow. This article examines the testing landscape—unit tests, integration tests, end-to-end tests, the test pyramid, and test double patterns—providing practical guidance for building effective test suites.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/testing-strategies.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/testing-strategies.png" alt="Testing Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>The Test Pyramid</h2>
 <p>The test pyramid, popularized by Mike Cohn, describes the ideal distribution of tests. At the base are unit tests—fast, numerous, and focused on small units of code. In the middle are integration tests that verify interactions between components. At the top are end-to-end tests that validate complete user workflows.</p>
 <p>The pyramid shape is intentional. Unit tests should form the largest portion of your test suite because they execute quickly, pinpoint failures precisely, and are cheap to maintain. Integration tests verify that components work together but are slower and more expensive. End-to-end tests provide the highest confidence but are the slowest, most fragile, and most expensive to maintain.</p>
@@ -131,14 +139,8 @@
 <h2>Testing Best Practices</h2>
 <p>Write tests before or alongside code. Tests should be independent—each test should set up its own data and not depend on other tests' state. Tests should have clear, descriptive names that explain the scenario and expected outcome. Each test should verify one behavior, making failures easier to diagnose.</p>
 <p>Test coverage is a useful metric but not a goal in itself. 100% coverage does not guarantee a bug-free application. Focus on testing behavior rather than implementation details. Test the public API of each component, not its internal methods. Tests that verify internal implementation break when code is refactored, even when behavior remains correct.</p>
-<p>A well-structured test suite provides fast feedback, catches regressions, and documents expected behavior. It is an investment that pays continuous dividends throughout the software lifecycle. The key is finding the right balance of test types and test thoroughness for your specific context.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/code-generation.html">Code Generation</a>, <a href="/en/tech/contract-testing.html">Contract Testing</a>, <a href="/en/tech/dependency-management.html">Dependency Management</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (6)</summary><ol><li><a href="#the-test-pyramid">The Test Pyramid</a></li><li><a href="#unit-tests">Unit Tests</a></li><li><a href="#integration-tests">Integration Tests</a></li><li><a href="#end-to-end-tests">End-to-End Tests</a></li><li><a href="#test-doubles">Test Doubles</a></li><li><a href="#testing-best-practices">Testing Best Practices</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>A well-structured test suite provides fast feedback, catches regressions, and documents expected behavior. It is an investment that pays continuous dividends throughout the software lifecycle. The key is finding the right balance of test types and test thoroughness for your specific context.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/code-generation.html">Code Generation</a></li><li><a href="/en/tech/contract-testing.html">Contract Testing</a></li><li><a href="/en/tech/dependency-management.html">Dependency Management</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -146,29 +148,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Testing%20Strategies&url=https%3A//aidev.fit/en/tech/testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Testing%20Strategies&url=https%3A//aidev.fit/en/tech/testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Testing%20Strategies&u=https%3A//aidev.fit/en/tech/testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Testing%20Strategies&body=https%3A//aidev.fit/en/tech/testing-strategies.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/testing-strategies.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Testing%20Strategies&url=https%3A//aidev.fit/en/tech/testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Testing%20Strategies&url=https%3A//aidev.fit/en/tech/testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Testing%20Strategies&u=https%3A//aidev.fit/en/tech/testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Testing%20Strategies&body=https%3A//aidev.fit/en/tech/testing-strategies.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/testing-strategies.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/webpack-vs-vite.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Webpack vs Vite</span></a><a href="/en/tech/performance-testing.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Performance Testing</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/performance-testing.html" class="related-card"><span class="rc-title">Performance Testing</span><span class="rc-desc">Learn performance testing with k6, Locust, and Gatling: test design, results interpretation, and practical strategies</span></a><a href="/en/tech/load-testing-strategies.html" class="related-card"><span class="rc-title">Load Testing Strategies</span><span class="rc-desc">Explore load testing strategies: ramp-up patterns, steady state, spike testing, soak testing, and tool selection guidanc</span></a><a href="/en/tech/infrastructure-testing.html" class="related-card"><span class="rc-title">Infrastructure Testing with Terratest and Other Tools</span><span class="rc-desc">Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources, compliance validat</span></a><a href="/en/tech/terraform-state-management.html" class="related-card"><span class="rc-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</span><span class="rc-desc">Deep dive into Terraform state management covering remote backends, state locking, migration strategies, workspace patte</span></a><a href="/en/tech/api-documentation.html" class="related-card"><span class="rc-title">API Documentation</span><span class="rc-desc">Learn API documentation: OpenAPI, Swagger UI, Redoc, developer portal integration, and documentation best practices</span></a><a href="/en/tech/artifact-management.html" class="related-card"><span class="rc-title">Artifact Management</span><span class="rc-desc">Learn artifact management: Docker registries, package registries, versioning strategies, and lifecycle policies</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/webpack-vs-vite.html" class="prev-next-btn prev-link">← Webpack vs Vite</a><a href="/en/tech/performance-testing.html" class="prev-next-btn next-link">Performance Testing →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/performance-testing.html" class="related-card"><span class="related-card-title">Performance Testing</span><span class="related-card-desc">Learn performance testing with k6, Locust, and Gatling: test design, results interpretation, and pra</span></a><a href="/en/tech/load-testing-strategies.html" class="related-card"><span class="related-card-title">Load Testing Strategies</span><span class="related-card-desc">Explore load testing strategies: ramp-up patterns, steady state, spike testing, soak testing, and to</span></a><a href="/en/tech/infrastructure-testing.html" class="related-card"><span class="related-card-title">Infrastructure Testing with Terratest and Other Tools</span><span class="related-card-desc">Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources</span></a><a href="/en/tech/terraform-state-management.html" class="related-card"><span class="related-card-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</span><span class="related-card-desc">Deep dive into Terraform state management covering remote backends, state locking, migration strateg</span></a><a href="/en/tech/api-documentation.html" class="related-card"><span class="related-card-title">API Documentation</span><span class="related-card-desc">Learn API documentation: OpenAPI, Swagger UI, Redoc, developer portal integration, and documentation</span></a><a href="/en/tech/artifact-management.html" class="related-card"><span class="related-card-title">Artifact Management</span><span class="related-card-desc">Learn artifact management: Docker registries, package registries, versioning strategies, and lifecyc</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#the-test-pyramid">The Test Pyramid</a></li><li><a href="#unit-tests">Unit Tests</a></li><li><a href="#integration-tests">Integration Tests</a></li><li><a href="#end-to-end-tests">End-to-End Tests</a></li><li><a href="#test-doubles">Test Doubles</a></li><li><a href="#testing-best-practices">Testing Best Practices</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

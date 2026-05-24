@@ -101,17 +101,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Deploying AI Agents to Production
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
         <span class="tag-cat">Machine Learning</span></div>
-      <h1 class="article-title">Deploying AI Agents to Production</h1>
-      <div class="article-meta"><time datetime="2026-02-10">Published 2026-02-10</time> · <time datetime="2026-04-12">Last active 2026-04-12</time> · 79 views · 0 replies · 7 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-agents-production.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-agents-production.png" alt="Deploying AI Agents to Production" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">Deploying AI Agents to Production</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-10">2026-02-10</time>
+          <span class="meta-sep">·</span>
+          <span>7 min read</span>
+          <span class="meta-sep">·</span>
+          <span>79 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-agents-production.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-agents-production.png" alt="Deploying AI Agents to Production" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (20)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#agent-orchestration">Agent Orchestration</a></li><li><a href="#1-think-decide-next-action">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Think: decide next action</a></li><li><a href="#2-act-execute-tool-or-respond">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Act: execute tool or respond</a></li><li><a href="#3-observe-store-result">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Observe: store result</a></li><li><a href="#4-cost-tracking">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cost tracking</a></li><li><a href="#handle-tool-failures-with-retry">Handle tool failures with retry</a></li><li><a href="#catch-all-for-unexpected-errors">Catch-all for unexpected errors</a></li><li><a href="#error-handling-and-retry-logic">Error Handling and Retry Logic</a></li><li><a href="#human-in-the-loop">Human-in-the-Loop</a></li><li><a href="#determine-if-approval-is-needed">Determine if approval is needed</a></li><li><a href="#notify-human-reviewer">Notify human reviewer</a></li><li><a href="#wait-for-approval-with-timeout">Wait for approval (with timeout)</a></li><li><a href="#monitoring-agent-behavior">Monitoring Agent Behavior</a></li><li><a href="#looping-detection">Looping detection</a></li><li><a href="#cost-anomaly">Cost anomaly</a></li><li><a href="#token-usage">Token usage</a></li><li><a href="#cost-tracking-and-rate-limiting">Cost Tracking and Rate Limiting</a></li><li><a href="#reset-daily-counter">Reset daily counter</a></li><li><a href="#observability">Observability</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>AI agents that autonomously execute multi-step tasks are transitioning from experimental prototypes to production systems. Unlike traditional API calls, agents make decisions, use tools, and interact with external systems--introducing new challenges around reliability, cost, safety, and observability. This article covers the patterns and practices needed to deploy AI agents safely and efficiently.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-agents-production.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/ai-agents-production.png" alt="Deploying AI Agents to Production" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Agent Orchestration</h2>
 <p>Production agents typically follow a structured execution loop:</p>
@@ -330,14 +338,8 @@
 <p>},</p>
 <p>"warnings": []</p>
 <p>}</p>
-<p>Deploy agents incrementally: start with read-only tools, add human-in-the-loop for destructive actions, and only move to fully autonomous mode after extensive monitoring and failure mode analysis.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/llm-chaining-patterns.html">LLM Chaining and Pipeline Patterns</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (20)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#agent-orchestration">Agent Orchestration</a></li><li><a href="#1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-think:-decide-next-action">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Think: decide next action</a></li><li><a href="#2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-act:-execute-tool-or-respond">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Act: execute tool or respond</a></li><li><a href="#3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-observe:-store-result">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Observe: store result</a></li><li><a href="#4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-cost-tracking">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cost tracking</a></li><li><a href="#handle-tool-failures-with-retry">Handle tool failures with retry</a></li><li><a href="#catch-all-for-unexpected-errors">Catch-all for unexpected errors</a></li><li><a href="#error-handling-and-retry-logic">Error Handling and Retry Logic</a></li><li><a href="#human-in-the-loop">Human-in-the-Loop</a></li><li><a href="#determine-if-approval-is-needed">Determine if approval is needed</a></li><li><a href="#notify-human-reviewer">Notify human reviewer</a></li><li><a href="#wait-for-approval-(with-timeout)">Wait for approval (with timeout)</a></li><li><a href="#monitoring-agent-behavior">Monitoring Agent Behavior</a></li><li><a href="#looping-detection">Looping detection</a></li><li><a href="#cost-anomaly">Cost anomaly</a></li><li><a href="#token-usage">Token usage</a></li><li><a href="#cost-tracking-and-rate-limiting">Cost Tracking and Rate Limiting</a></li><li><a href="#reset-daily-counter">Reset daily counter</a></li><li><a href="#observability">Observability</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Deploy agents incrementally: start with read-only tools, add human-in-the-loop for destructive actions, and only move to fully autonomous mode after extensive monitoring and failure mode analysis.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></li><li><a href="/en/ai/llm-chaining-patterns.html">LLM Chaining and Pipeline Patterns</a></li><li><a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -345,34 +347,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Deploying%20AI%20Agents%20to%20Production&url=https%3A//aidev.fit/en/ai/ai-agents-production.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/ai-agents-production.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Deploying%20AI%20Agents%20to%20Production&url=https%3A//aidev.fit/en/ai/ai-agents-production.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Deploying%20AI%20Agents%20to%20Production&u=https%3A//aidev.fit/en/ai/ai-agents-production.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Deploying%20AI%20Agents%20to%20Production&body=https%3A//aidev.fit/en/ai/ai-agents-production.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/ai-agents-production.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-caching-strategies.html" class="prev-next-btn prev-link">← AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a><a href="/en/ai/rag-architecture-guide.html" class="prev-next-btn next-link">RAG Architecture Guide →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-content-generation.html" class="related-card"><span class="related-card-title">AI Content Generation Workflows</span><span class="related-card-desc">Build production-ready AI content generation workflows with quality control, multi-stage pipelines, </span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="related-card-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="related-card-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handli</span></a><a href="/en/ai/ai-agents-frameworks.html" class="related-card"><span class="related-card-title">AI Agent Frameworks Compared</span><span class="related-card-desc">Compare leading AI agent frameworks including LangGraph, CrewAI, AutoGen, and OpenAI Assistants API </span></a><a href="/en/ai/ai-api-cost-optimization.html" class="related-card"><span class="related-card-title">AI API Cost Optimization</span><span class="related-card-desc">Strategies for reducing LLM API costs including prompt compression, caching, model selection, batchi</span></a><a href="/en/ai/llm-observability.html" class="related-card"><span class="related-card-title">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</span><span class="related-card-desc">Implement LLM observability for production AI applications: distributed tracing, token usage trackin</span></a><a href="/en/ai/langgraph-agent-workflows.html" class="related-card"><span class="related-card-title">Building Custom AI Agents with LangGraph: A Practical Guide</span><span class="related-card-desc">Learn to build stateful, multi-step agent workflows with LangGraph: graph-based orchestration, persi</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Deploying%20AI%20Agents%20to%20Production&url=https%3A//aidev.fit/en/ai/ai-agents-production.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/ai-agents-production.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Deploying%20AI%20Agents%20to%20Production&url=https%3A//aidev.fit/en/ai/ai-agents-production.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Deploying%20AI%20Agents%20to%20Production&u=https%3A//aidev.fit/en/ai/ai-agents-production.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Deploying%20AI%20Agents%20to%20Production&body=https%3A//aidev.fit/en/ai/ai-agents-production.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/ai-agents-production.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-caching-strategies.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost</span></a><a href="/en/ai/rag-architecture-guide.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">RAG Architecture Guide</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/ai-content-generation.html" class="related-card"><span class="rc-title">AI Content Generation Workflows</span><span class="rc-desc">Build production-ready AI content generation workflows with quality control, multi-stage pipelines, and human-in-the-loo</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="rc-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="rc-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rat</span></a><a href="/en/ai/ai-agents-frameworks.html" class="related-card"><span class="rc-title">AI Agent Frameworks Compared</span><span class="rc-desc">Compare leading AI agent frameworks including LangGraph, CrewAI, AutoGen, and OpenAI Assistants API for building autonom</span></a><a href="/en/ai/ai-api-cost-optimization.html" class="related-card"><span class="rc-title">AI API Cost Optimization</span><span class="rc-desc">Strategies for reducing LLM API costs including prompt compression, caching, model selection, batching, and token budget</span></a><a href="/en/ai/llm-observability.html" class="related-card"><span class="rc-title">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</span><span class="rc-desc">Implement LLM observability for production AI applications: distributed tracing, token usage tracking, latency monitorin</span></a><a href="/en/ai/langgraph-agent-workflows.html" class="related-card"><span class="rc-title">Building Custom AI Agents with LangGraph: A Practical Guide</span><span class="rc-desc">Learn to build stateful, multi-step agent workflows with LangGraph: graph-based orchestration, persistent memory, human-</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#agent-orchestration">Agent Orchestration</a></li><li><a href="#1-think-decide-next-action">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Think: decide next action</a></li><li><a href="#2-act-execute-tool-or-respond">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Act: execute tool or respond</a></li><li><a href="#3-observe-store-result">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Observe: store result</a></li><li><a href="#4-cost-tracking">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cost tracking</a></li><li><a href="#handle-tool-failures-with-retry">Handle tool failures with retry</a></li><li><a href="#catch-all-for-unexpected-errors">Catch-all for unexpected errors</a></li><li><a href="#error-handling-and-retry-logic">Error Handling and Retry Logic</a></li><li><a href="#human-in-the-loop">Human-in-the-Loop</a></li><li><a href="#determine-if-approval-is-needed">Determine if approval is needed</a></li><li><a href="#notify-human-reviewer">Notify human reviewer</a></li><li><a href="#wait-for-approval-with-timeout">Wait for approval (with timeout)</a></li><li><a href="#monitoring-agent-behavior">Monitoring Agent Behavior</a></li><li><a href="#looping-detection">Looping detection</a></li><li><a href="#cost-anomaly">Cost anomaly</a></li><li><a href="#token-usage">Token usage</a></li><li><a href="#cost-tracking-and-rate-limiting">Cost Tracking and Rate Limiting</a></li><li><a href="#reset-daily-counter">Reset daily counter</a></li><li><a href="#observability">Observability</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

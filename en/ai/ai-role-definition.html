@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">AI</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">AI</span>
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
-      <h1 class="article-title">AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples</h1>
-      <div class="article-meta"><time datetime="2026-02-11">Published 2026-02-11</time> · <time datetime="2026-05-06">Last active 2026-05-06</time> · 241 views · 0 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-role-definition.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-role-definition.png" alt="AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The difference between a generic AI assistant and a high-performing one is the role definition. A well-defined role shapes every response the model produces. Here is how to define AI roles that consistently deliver the behavior you need.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-role-definition.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/ai-role-definition.png" alt="AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-11">2026-02-11</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>241 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-role-definition.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-role-definition.png" alt="AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#why-role-definition-matters">Why Role Definition Matters</a></li><li><a href="#system-prompts">System Prompts</a></li><li><a href="#persona-definition">Persona Definition</a></li><li><a href="#tone-guidelines">Tone Guidelines</a></li><li><a href="#constraints">Constraints</a></li><li><a href="#examples">Examples</a></li><li><a href="#testing-and-iteration">Testing and Iteration</a></li></ol></details>
+        <div class="article-body"><p>The difference between a generic AI assistant and a high-performing one is the role definition. A well-defined role shapes every response the model produces. Here is how to define AI roles that consistently deliver the behavior you need.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-role-definition.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/ai-role-definition.png" alt="AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Why Role Definition Matters</h2>
 <p>Language models are generalists by default. Without a role, they default to neutral, cautious, and generic responses. A role definition constrains the model to behave consistently within your desired boundaries.</p>
 <p>A good role definition improves response quality, consistency, and safety. It reduces the likelihood of off-topic responses, inappropriate content, and inconsistent tone. It also reduces prompt engineering effort because the role handles many implicit decisions.</p>
@@ -147,14 +155,8 @@
 <p>Write test cases for your role definition. Each test case is a user input with an expected response characteristic. "User asks about pricing" should produce a response that includes pricing information and a link to the pricing page. "User asks for medical advice" should produce a polite decline.</p>
 <p>Run these test cases whenever you modify the role definition. Automated testing with LLM-as-judge can verify that responses meet criteria. Manual review catches subtle issues that automated checks miss.</p>
 <p>Iterate based on production observations. If users frequently rephrase questions, your role may not be setting clear expectations. If the model is too verbose, tighten conciseness guidelines. If the model is too cautious, relax constraints slightly.</p>
-<p>A well-defined AI role is the foundation of a reliable AI application. Invest the time to define it precisely, test it thoroughly, and iterate based on real usage. The effort pays for itself in reduced moderation, fewer bad responses, and more consistent user experiences.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/model-evaluation-harness.html">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (7)</summary><ol><li><a href="#why-role-definition-matters">Why Role Definition Matters</a></li><li><a href="#system-prompts">System Prompts</a></li><li><a href="#persona-definition">Persona Definition</a></li><li><a href="#tone-guidelines">Tone Guidelines</a></li><li><a href="#constraints">Constraints</a></li><li><a href="#examples">Examples</a></li><li><a href="#testing-and-iteration">Testing and Iteration</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>A well-defined AI role is the foundation of a reliable AI application. Invest the time to define it precisely, test it thoroughly, and iterate based on real usage. The effort pays for itself in reduced moderation, fewer bad responses, and more consistent user experiences.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a></li><li><a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a></li><li><a href="/en/ai/model-evaluation-harness.html">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -162,34 +164,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=AI%20Role%20Definition%3A%20System%20Prompts%2C%20Personas%2C%20Tone%20Guidelines%2C%20Constraints%2C%20and%20Examples&url=https%3A//aidev.fit/en/ai/ai-role-definition.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/ai-role-definition.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=AI%20Role%20Definition%3A%20System%20Prompts%2C%20Personas%2C%20Tone%20Guidelines%2C%20Constraints%2C%20and%20Examples&url=https%3A//aidev.fit/en/ai/ai-role-definition.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=AI%20Role%20Definition%3A%20System%20Prompts%2C%20Personas%2C%20Tone%20Guidelines%2C%20Constraints%2C%20and%20Examples&u=https%3A//aidev.fit/en/ai/ai-role-definition.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=AI%20Role%20Definition%3A%20System%20Prompts%2C%20Personas%2C%20Tone%20Guidelines%2C%20Constraints%2C%20and%20Examples&body=https%3A//aidev.fit/en/ai/ai-role-definition.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/ai-role-definition.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-red-teaming.html" class="prev-next-btn prev-link">← AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a><a href="/en/ai/ai-agents-production.html" class="prev-next-btn next-link">Deploying AI Agents to Production →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/prompt-chaining.html" class="related-card"><span class="related-card-title">Prompt Chaining: Decomposition, Parallel Execution, State Management</span><span class="related-card-desc">Master prompt chaining techniques: decompose complex tasks into steps, execute chains in parallel, m</span></a><a href="/en/ai/prompt-management.html" class="related-card"><span class="related-card-title">Prompt Management: Versioning, Testing, Collaboration, Deployment</span><span class="related-card-desc">Manage prompts like code: version control, automated testing, team collaboration workflows, staging </span></a><a href="/en/ai/rag-chunking-strategies.html" class="related-card"><span class="related-card-title">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</span><span class="related-card-desc">Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategie</span></a><a href="/en/ai/prompt-engineering-guide.html" class="related-card"><span class="related-card-title">Prompt Engineering Guide for LLMs</span><span class="related-card-desc">Master prompt engineering: zero-shot, few-shot, chain-of-thought, and structured prompting for LLMs.</span></a><a href="/en/ai/ai-caching-strategies.html" class="related-card"><span class="related-card-title">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</span><span class="related-card-desc">Reduce LLM API costs and latency with AI caching strategies: semantic caching, intelligent invalidat</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="related-card-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="related-card-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fa</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=AI%20Role%20Definition%3A%20System%20Prompts%2C%20Personas%2C%20Tone%20Guidelines%2C%20Constraints%2C%20and%20Examples&url=https%3A//aidev.fit/en/ai/ai-role-definition.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/ai-role-definition.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=AI%20Role%20Definition%3A%20System%20Prompts%2C%20Personas%2C%20Tone%20Guidelines%2C%20Constraints%2C%20and%20Examples&url=https%3A//aidev.fit/en/ai/ai-role-definition.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=AI%20Role%20Definition%3A%20System%20Prompts%2C%20Personas%2C%20Tone%20Guidelines%2C%20Constraints%2C%20and%20Examples&u=https%3A//aidev.fit/en/ai/ai-role-definition.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=AI%20Role%20Definition%3A%20System%20Prompts%2C%20Personas%2C%20Tone%20Guidelines%2C%20Constraints%2C%20and%20Examples&body=https%3A//aidev.fit/en/ai/ai-role-definition.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/ai-role-definition.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-red-teaming.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety E</span></a><a href="/en/ai/ai-agents-production.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Deploying AI Agents to Production</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/prompt-chaining.html" class="related-card"><span class="rc-title">Prompt Chaining: Decomposition, Parallel Execution, State Management</span><span class="rc-desc">Master prompt chaining techniques: decompose complex tasks into steps, execute chains in parallel, manage state across c</span></a><a href="/en/ai/prompt-management.html" class="related-card"><span class="rc-title">Prompt Management: Versioning, Testing, Collaboration, Deployment</span><span class="rc-desc">Manage prompts like code: version control, automated testing, team collaboration workflows, staging environments, and CI</span></a><a href="/en/ai/rag-chunking-strategies.html" class="related-card"><span class="rc-title">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</span><span class="rc-desc">Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategies for context preser</span></a><a href="/en/ai/prompt-engineering-guide.html" class="related-card"><span class="rc-title">Prompt Engineering Guide for LLMs</span><span class="rc-desc">Master prompt engineering: zero-shot, few-shot, chain-of-thought, and structured prompting for LLMs.</span></a><a href="/en/ai/ai-caching-strategies.html" class="related-card"><span class="rc-title">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</span><span class="rc-desc">Reduce LLM API costs and latency with AI caching strategies: semantic caching, intelligent invalidation, and cost-optimi</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="rc-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="rc-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fallbacks, cost manage</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#why-role-definition-matters">Why Role Definition Matters</a></li><li><a href="#system-prompts">System Prompts</a></li><li><a href="#persona-definition">Persona Definition</a></li><li><a href="#tone-guidelines">Tone Guidelines</a></li><li><a href="#constraints">Constraints</a></li><li><a href="#examples">Examples</a></li><li><a href="#testing-and-iteration">Testing and Iteration</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

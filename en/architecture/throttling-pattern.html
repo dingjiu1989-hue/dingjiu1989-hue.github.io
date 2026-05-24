@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Throttling Pattern for System Protection
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Throttling Pattern for System Protection</h1>
-      <div class="article-meta"><time datetime="2026-05-11">Published 2026-05-11</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 164 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/throttling-pattern.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/throttling-pattern.png" alt="Throttling Pattern for System Protection" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Throttling controls the rate at which requests are processed to protect backend systems from overload. When request volume exceeds capacity, throttling rejects or delays excess requests instead of allowing the system to fail under load.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/throttling-pattern.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/throttling-pattern.png" alt="Throttling Pattern for System Protection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Throttling Pattern for System Protection</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-11">2026-05-11</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>164 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/throttling-pattern.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/throttling-pattern.png" alt="Throttling Pattern for System Protection" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#throttling-vs-rate-limiting">Throttling vs Rate Limiting</a></li><li><a href="#implementation-approaches">Implementation Approaches</a></li><li><a href="#throttling-responses">Throttling Responses</a></li><li><a href="#distributed-throttling">Distributed Throttling</a></li><li><a href="#when-to-throttle">When to Throttle</a></li></ol></details>
+        <div class="article-body"><p>Throttling controls the rate at which requests are processed to protect backend systems from overload. When request volume exceeds capacity, throttling rejects or delays excess requests instead of allowing the system to fail under load.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/throttling-pattern.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/throttling-pattern.png" alt="Throttling Pattern for System Protection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Throttling vs Rate Limiting</h2>
 <p>Rate limiting controls how many requests a client can make within a time window. Throttling controls the overall processing rate of the system, regardless of client distribution. Rate limiting is typically client-specific. Throttling is system-wide.</p>
 <p>Both patterns protect systems, but they operate at different levels. Rate limiting prevents abusive clients from monopolizing resources. Throttling prevents the system from exceeding its processing capacity.</p>
@@ -125,14 +133,8 @@
 <h2>Distributed Throttling</h2>
 <p>In distributed systems, throttling requires shared state. Redis is commonly used for distributed rate counters. Use atomic operations (INCR, EXPIRE) for correctness. Consider performance impact of cross-network throttling calls.</p>
 <h2>When to Throttle</h2>
-<p>Throttle when protecting external API dependencies with rate limits, when the system has hard capacity limits (database connections, thread pools), and during traffic spikes to maintain system stability. Monitor throttled request rates—sustained throttling indicates capacity issues.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#throttling-vs-rate-limiting">Throttling vs Rate Limiting</a></li><li><a href="#implementation-approaches">Implementation Approaches</a></li><li><a href="#throttling-responses">Throttling Responses</a></li><li><a href="#distributed-throttling">Distributed Throttling</a></li><li><a href="#when-to-throttle">When to Throttle</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Throttle when protecting external API dependencies with rate limits, when the system has hard capacity limits (database connections, thread pools), and during traffic spikes to maintain system stability. Monitor throttled request rates—sustained throttling indicates capacity issues.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></li><li><a href="/en/architecture/cache-strategies.html">Caching Strategies</a></li><li><a href="/en/architecture/retry-patterns.html">Retry Patterns</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -140,29 +142,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Throttling%20Pattern%20for%20System%20Protection&url=https%3A//aidev.fit/en/architecture/throttling-pattern.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/throttling-pattern.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Throttling%20Pattern%20for%20System%20Protection&url=https%3A//aidev.fit/en/architecture/throttling-pattern.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Throttling%20Pattern%20for%20System%20Protection&u=https%3A//aidev.fit/en/architecture/throttling-pattern.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Throttling%20Pattern%20for%20System%20Protection&body=https%3A//aidev.fit/en/architecture/throttling-pattern.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/throttling-pattern.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Throttling%20Pattern%20for%20System%20Protection&url=https%3A//aidev.fit/en/architecture/throttling-pattern.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/throttling-pattern.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Throttling%20Pattern%20for%20System%20Protection&url=https%3A//aidev.fit/en/architecture/throttling-pattern.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Throttling%20Pattern%20for%20System%20Protection&u=https%3A//aidev.fit/en/architecture/throttling-pattern.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Throttling%20Pattern%20for%20System%20Protection&body=https%3A//aidev.fit/en/architecture/throttling-pattern.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/throttling-pattern.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/transactional-inbox.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Transactional Inbox Pattern for Reliable Messaging</span></a><a href="/en/architecture/sidecar-pattern.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Sidecar Pattern in Microservices Architecture</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/priority-queue.html" class="related-card"><span class="rc-title">Priority Queue Pattern for Message Processing</span><span class="rc-desc">Implement priority queues to ensure critical messages are processed before lower-priority ones in distributed systems.</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="rc-title">API Composition and Aggregation</span><span class="rc-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation strategies</span></a><a href="/en/architecture/chaos-engineering.html" class="related-card"><span class="rc-title">Chaos Engineering: Building Resilient Systems</span><span class="rc-desc">Introduction to chaos engineering: principles, practices, and tools for testing system resilience in production.</span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="rc-title">Alerting Strategies for Production Systems</span><span class="rc-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="rc-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="rc-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices for distributed sys</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="rc-title">Domain Events: Design and Implementation</span><span class="rc-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/transactional-inbox.html" class="prev-next-btn prev-link">← Transactional Inbox Pattern for Reliable Messaging</a><a href="/en/architecture/sidecar-pattern.html" class="prev-next-btn next-link">Sidecar Pattern in Microservices Architecture →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/priority-queue.html" class="related-card"><span class="related-card-title">Priority Queue Pattern for Message Processing</span><span class="related-card-desc">Implement priority queues to ensure critical messages are processed before lower-priority ones in di</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a><a href="/en/architecture/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Building Resilient Systems</span><span class="related-card-desc">Introduction to chaos engineering: principles, practices, and tools for testing system resilience in</span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="related-card-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="related-card-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#throttling-vs-rate-limiting">Throttling vs Rate Limiting</a></li><li><a href="#implementation-approaches">Implementation Approaches</a></li><li><a href="#throttling-responses">Throttling Responses</a></li><li><a href="#distributed-throttling">Distributed Throttling</a></li><li><a href="#when-to-throttle">When to Throttle</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

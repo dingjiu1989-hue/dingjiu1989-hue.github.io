@@ -112,17 +112,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › SQL vs NoSQL Decision Guide
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">SQL</span></div>
-      <h1 class="article-title">SQL vs NoSQL Decision Guide</h1>
-      <div class="article-meta"><time datetime="2025-12-24">Published 2025-12-24</time> · <time datetime="2026-04-05">Last active 2026-04-05</time> · 66 views · 0 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/sql-vs-nosql.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/sql-vs-nosql.png" alt="SQL vs NoSQL Decision Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The Great Database Debate </p><picture><source srcset="https://aidev.fit/images/covers/en/database/sql-vs-nosql.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/sql-vs-nosql.png" alt="SQL vs NoSQL Decision Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">SQL vs NoSQL Decision Guide</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-24">2025-12-24</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>66 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/sql-vs-nosql.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/sql-vs-nosql.png" alt="SQL vs NoSQL Decision Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#mongodb-sharding">MongoDB sharding</a></li><li><a href="#cassandra-auto-sharding-no-manual-setup">Cassandra auto-sharding (no manual setup)</a></li><li><a href="#just-add-nodes-to-the-cluster">Just add nodes to the cluster</a></li><li><a href="#example-sql-for-transactions-nosql-for-reads">Example: SQL for transactions, NoSQL for reads</a></li><li><a href="#write-to-postgresql-acid-guarantee">Write to PostgreSQL (ACID guarantee)</a></li><li><a href="#update-redis-cache-for-fast-reads">Update Redis cache for fast reads</a></li><li><a href="#update-elasticsearch-for-search">Update Elasticsearch for search</a></li></ol></details>
+        <div class="article-body"><p>The Great Database Debate </p><picture><source srcset="https://aidev.fit/images/covers/en/database/sql-vs-nosql.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/sql-vs-nosql.png" alt="SQL vs NoSQL Decision Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The choice between SQL and NoSQL is one of the most consequential architectural decisions you will make. Neither is universally better; each excels in different scenarios. The key is understanding the trade-offs and matching them to your requirements. </p>
 <p>Core Differences </p>
 <p>| Dimension | SQL | NoSQL | |-----------|-----|-------| | Data model | Relational (tables, rows, columns) | Document, key-value, graph, column-family | | Schema | Fixed, enforced | Flexible, dynamic | | Query language | SQL (standardized) | Vendor-specific APIs | | ACID support | Strong ACID | Varies (BASE or configurable ACID) | | Scalability | Vertical (primary) | Horizontal (native) | | Consistency | Strong consistency | Eventual to strong (configurable) | | Relationships | JOINs, foreign keys | Embedding, references, or denormalization | </p>
@@ -258,14 +266,8 @@
 <p>Migration Paths </p>
 <p>| Starting Point | Problem | Target | Strategy | |----------------|---------|--------|----------| | SQL | Scaling writes | NoSQL | Dual-write, then cut over | | NoSQL | Complex queries | SQL | Define schema, migrate data | | NoSQL | Data integrity issues | SQL | Add constraints, enforce at app level first | | SQL | Flexible schema needed | NoSQL | Start with embedded docs for polymorphic data | </p>
 <p>Summary </p>
-<p>Choose SQL when you need complex queries, strong data integrity, and ACID transactions. Choose NoSQL when you need flexible schemas, horizontal scaling, and high write throughput. For complex applications, a polyglot persistence approach that uses the right database for each workload often provides the best results. Start with SQL (PostgreSQL) as the default and add NoSQL databases specifically for workloads where SQL is limiting.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/columnar-databases.html">Columnar Databases: When and How to Use Them</a>, <a href="/en/database/data-lake-vs-warehouse.html">Data Lake vs Data Warehouse vs Lakehouse</a>, <a href="/en/database/database-security-best-practices.html">Database Security Hardening Guide</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (7)</summary><ol><li><a href="#mongodb-sharding">MongoDB sharding</a></li><li><a href="#cassandra-auto-sharding-(no-manual-setup)">Cassandra auto-sharding (no manual setup)</a></li><li><a href="#just-add-nodes-to-the-cluster">Just add nodes to the cluster</a></li><li><a href="#example:-sql-for-transactions,-nosql-for-reads">Example: SQL for transactions, NoSQL for reads</a></li><li><a href="#write-to-postgresql-(acid-guarantee)">Write to PostgreSQL (ACID guarantee)</a></li><li><a href="#update-redis-cache-for-fast-reads">Update Redis cache for fast reads</a></li><li><a href="#update-elasticsearch-for-search">Update Elasticsearch for search</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Choose SQL when you need complex queries, strong data integrity, and ACID transactions. Choose NoSQL when you need flexible schemas, horizontal scaling, and high write throughput. For complex applications, a polyglot persistence approach that uses the right database for each workload often provides the best results. Start with SQL (PostgreSQL) as the default and add NoSQL databases specifically for workloads where SQL is limiting.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/columnar-databases.html">Columnar Databases: When and How to Use Them</a></li><li><a href="/en/database/data-lake-vs-warehouse.html">Data Lake vs Data Warehouse vs Lakehouse</a></li><li><a href="/en/database/database-security-best-practices.html">Database Security Hardening Guide</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -273,29 +275,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=SQL%20vs%20NoSQL%20Decision%20Guide&url=https%3A//aidev.fit/en/database/sql-vs-nosql.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/sql-vs-nosql.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=SQL%20vs%20NoSQL%20Decision%20Guide&url=https%3A//aidev.fit/en/database/sql-vs-nosql.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=SQL%20vs%20NoSQL%20Decision%20Guide&u=https%3A//aidev.fit/en/database/sql-vs-nosql.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=SQL%20vs%20NoSQL%20Decision%20Guide&body=https%3A//aidev.fit/en/database/sql-vs-nosql.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/sql-vs-nosql.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=SQL%20vs%20NoSQL%20Decision%20Guide&url=https%3A//aidev.fit/en/database/sql-vs-nosql.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/sql-vs-nosql.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=SQL%20vs%20NoSQL%20Decision%20Guide&url=https%3A//aidev.fit/en/database/sql-vs-nosql.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=SQL%20vs%20NoSQL%20Decision%20Guide&u=https%3A//aidev.fit/en/database/sql-vs-nosql.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=SQL%20vs%20NoSQL%20Decision%20Guide&body=https%3A//aidev.fit/en/database/sql-vs-nosql.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/sql-vs-nosql.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/time-series-databases.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</span></a><a href="/en/database/database-normalization.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Database Normalization Explained</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tools/best-database-gui-tools.html" class="related-card"><span class="rc-title">Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip</span><span class="rc-desc">Compare the best SQL database GUIs on supported databases, query editing, data browsing, and pricing. Find the right DB </span></a><a href="/en/database/nosql-databases-guide.html" class="related-card"><span class="rc-title">NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</span><span class="rc-desc">A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and q</span></a><a href="/en/database/oltp-vs-olap.html" class="related-card"><span class="rc-title">OLTP vs OLAP: Workload Optimization</span><span class="rc-desc">Compare OLTP and OLAP workloads: row vs column store, indexing strategies, query patterns, hybrid approaches, and HTAP d</span></a><a href="/en/database/postgresql-vs-mysql-2026.html" class="related-card"><span class="rc-title">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</span><span class="rc-desc">Head-to-head comparison of PostgreSQL, MySQL, and SQLite for different use cases — performance benchmarks, features, eco</span></a><a href="/en/database/acid-vs-base.html" class="related-card"><span class="rc-title">ACID vs BASE Transactions</span><span class="rc-desc">Compare ACID and BASE transaction models, when to use each, and how modern databases balance consistency, availability, </span></a><a href="/en/database/database-indexing.html" class="related-card"><span class="rc-title">Database Indexing Strategies</span><span class="rc-desc">A comprehensive guide to database indexing covering B-tree, hash, GiST, GIN indexes, composite indexes, and query optimi</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/time-series-databases.html" class="prev-next-btn prev-link">← Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</a><a href="/en/database/database-normalization.html" class="prev-next-btn next-link">Database Normalization Explained →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/best-database-gui-tools.html" class="related-card"><span class="related-card-title">Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip</span><span class="related-card-desc">Compare the best SQL database GUIs on supported databases, query editing, data browsing, and pricing</span></a><a href="/en/database/nosql-databases-guide.html" class="related-card"><span class="related-card-title">NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</span><span class="related-card-desc">A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage</span></a><a href="/en/database/oltp-vs-olap.html" class="related-card"><span class="related-card-title">OLTP vs OLAP: Workload Optimization</span><span class="related-card-desc">Compare OLTP and OLAP workloads: row vs column store, indexing strategies, query patterns, hybrid ap</span></a><a href="/en/database/postgresql-vs-mysql-2026.html" class="related-card"><span class="related-card-title">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</span><span class="related-card-desc">Head-to-head comparison of PostgreSQL, MySQL, and SQLite for different use cases — performance bench</span></a><a href="/en/database/acid-vs-base.html" class="related-card"><span class="related-card-title">ACID vs BASE Transactions</span><span class="related-card-desc">Compare ACID and BASE transaction models, when to use each, and how modern databases balance consist</span></a><a href="/en/database/database-indexing.html" class="related-card"><span class="related-card-title">Database Indexing Strategies</span><span class="related-card-desc">A comprehensive guide to database indexing covering B-tree, hash, GiST, GIN indexes, composite index</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#mongodb-sharding">MongoDB sharding</a></li><li><a href="#cassandra-auto-sharding-no-manual-setup">Cassandra auto-sharding (no manual setup)</a></li><li><a href="#just-add-nodes-to-the-cluster">Just add nodes to the cluster</a></li><li><a href="#example-sql-for-transactions-nosql-for-reads">Example: SQL for transactions, NoSQL for reads</a></li><li><a href="#write-to-postgresql-acid-guarantee">Write to PostgreSQL (ACID guarantee)</a></li><li><a href="#update-redis-cache-for-fast-reads">Update Redis cache for fast reads</a></li><li><a href="#update-elasticsearch-for-search">Update Elasticsearch for search</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

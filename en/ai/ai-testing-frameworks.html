@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">AI</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">AI</span>
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
-      <h1 class="article-title">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h1>
-      <div class="article-meta"><time datetime="2026-02-14">Published 2026-02-14</time> · <time datetime="2026-04-18">Last active 2026-04-18</time> · 197 views · 0 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-testing-frameworks.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-testing-frameworks.png" alt="AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-14">2026-02-14</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>197 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-testing-frameworks.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-testing-frameworks.png" alt="AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (21)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#deepeval">DeepEval</a></li><li><a href="#run-tests-deepeval-test-run-testaipy">Run tests: deepeval test run test_ai.py</a></li><li><a href="#ragas">Ragas</a></li><li><a href="#prepare-evaluation-dataset">Prepare evaluation dataset</a></li><li><a href="#compute-rag-metrics">Compute RAG metrics</a></li><li><a href="#">{</a></li><li><a href="#faithfulness-092">"faithfulness": 0.92,</a></li><li><a href="#answerrelevancy-088">"answer_relevancy": 0.88,</a></li><li><a href="#contextprecision-095">"context_precision": 0.95,</a></li><li><a href="#contextrecall-085">"context_recall": 0.85</a></li><li><a href="#">}</a></li><li><a href="#langsmith">LangSmith</a></li><li><a href="#define-a-custom-evaluator">Define a custom evaluator</a></li><li><a href="#compare-model-output-against-expected-output">Compare model output against expected output</a></li><li><a href="#use-llm-as-judge-for-evaluation">Use LLM-as-judge for evaluation</a></li><li><a href="#run-evaluation-on-a-dataset">Run evaluation on a dataset</a></li><li><a href="#view-results-in-langsmith-dashboard">View results in LangSmith dashboard</a></li><li><a href="#ci-integration">CI Integration</a></li><li><a href="#githubworkflowsai-testsyml">.github/workflows/ai-tests.yml</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>Testing AI applications is fundamentally different from testing traditional software. LLM outputs are non-deterministic, there is no single correct answer, and failures manifest as subtle quality degradations rather than crashes. Dedicated AI testing frameworks address these challenges with automated evaluation metrics, test case generation, and regression detection.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-testing-frameworks.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/ai-testing-frameworks.png" alt="AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>DeepEval</h2>
 <p>DeepEval is an open-source testing framework designed for LLM applications:</p>
@@ -246,14 +254,8 @@
 <p>deepeval metrics --min-threshold 0.7</p>
 <p>Set a quality gate that blocks merges when metrics fall below thresholds. This prevents gradual quality degradation that is invisible in traditional tests.</p>
 <h2>Conclusion</h2>
-<p>AI testing requires specialized frameworks that understand non-deterministic outputs. Use DeepEval for unit-test-style evaluation with configurable metrics. Use Ragas for end-to-end RAG pipeline evaluation. Use LangSmith for trace-level debugging and comparison across experiments. Integrate all three into CI pipelines with automated quality gates to maintain production AI quality over time.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a>, <a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (21)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#deepeval">DeepEval</a></li><li><a href="#run-tests:-deepeval-test-run-test_ai.py">Run tests: deepeval test run test_ai.py</a></li><li><a href="#ragas">Ragas</a></li><li><a href="#prepare-evaluation-dataset">Prepare evaluation dataset</a></li><li><a href="#compute-rag-metrics">Compute RAG metrics</a></li><li><a href="#{">{</a></li><li><a href="#"faithfulness":-0.92,">"faithfulness": 0.92,</a></li><li><a href="#"answer_relevancy":-0.88,">"answer_relevancy": 0.88,</a></li><li><a href="#"context_precision":-0.95,">"context_precision": 0.95,</a></li><li><a href="#"context_recall":-0.85">"context_recall": 0.85</a></li><li><a href="#}">}</a></li><li><a href="#langsmith">LangSmith</a></li><li><a href="#define-a-custom-evaluator">Define a custom evaluator</a></li><li><a href="#compare-model-output-against-expected-output">Compare model output against expected output</a></li><li><a href="#use-llm-as-judge-for-evaluation">Use LLM-as-judge for evaluation</a></li><li><a href="#run-evaluation-on-a-dataset">Run evaluation on a dataset</a></li><li><a href="#view-results-in-langsmith-dashboard">View results in LangSmith dashboard</a></li><li><a href="#ci-integration">CI Integration</a></li><li><a href="#.github-workflows-ai-tests.yml">.github/workflows/ai-tests.yml</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>AI testing requires specialized frameworks that understand non-deterministic outputs. Use DeepEval for unit-test-style evaluation with configurable metrics. Use Ragas for end-to-end RAG pipeline evaluation. Use LangSmith for trace-level debugging and comparison across experiments. Integrate all three into CI pipelines with automated quality gates to maintain production AI quality over time.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a></li><li><a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a></li><li><a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -261,34 +263,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=AI%20Testing%20Frameworks%3A%20DeepEval%2C%20Ragas%2C%20LangSmith%2C%20CI%20Integration&url=https%3A//aidev.fit/en/ai/ai-testing-frameworks.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/ai-testing-frameworks.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=AI%20Testing%20Frameworks%3A%20DeepEval%2C%20Ragas%2C%20LangSmith%2C%20CI%20Integration&url=https%3A//aidev.fit/en/ai/ai-testing-frameworks.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=AI%20Testing%20Frameworks%3A%20DeepEval%2C%20Ragas%2C%20LangSmith%2C%20CI%20Integration&u=https%3A//aidev.fit/en/ai/ai-testing-frameworks.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=AI%20Testing%20Frameworks%3A%20DeepEval%2C%20Ragas%2C%20LangSmith%2C%20CI%20Integration&body=https%3A//aidev.fit/en/ai/ai-testing-frameworks.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/ai-testing-frameworks.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-monitoring-alerting.html" class="prev-next-btn prev-link">← AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a><a href="/en/ai/agent-memory-systems.html" class="prev-next-btn next-link">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/llm-safety.html" class="related-card"><span class="related-card-title">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</span><span class="related-card-desc">Comprehensive guide to LLM safety: RLHF training, Constitutional AI principles, automated content fi</span></a><a href="/en/ai/llm-version-management.html" class="related-card"><span class="related-card-title">LLM Version Management: Model Registry, A/B Testing, Rollback</span><span class="related-card-desc">Manage LLM versions in production with model registries, A/B testing frameworks, gradual rollouts, a</span></a><a href="/en/ai/llm-observability.html" class="related-card"><span class="related-card-title">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</span><span class="related-card-desc">Implement LLM observability for production AI applications: distributed tracing, token usage trackin</span></a><a href="/en/ai/model-evaluation-harness.html" class="related-card"><span class="related-card-title">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</span><span class="related-card-desc">Evaluate LLM models systematically using benchmarks, human evaluation, LLM-as-judge frameworks, and </span></a><a href="/en/ai/rag-evaluation.html" class="related-card"><span class="related-card-title">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</span><span class="related-card-desc">A practical guide to evaluating RAG systems: retrieval metrics, generation quality assessment, end-t</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="related-card-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="related-card-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fa</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=AI%20Testing%20Frameworks%3A%20DeepEval%2C%20Ragas%2C%20LangSmith%2C%20CI%20Integration&url=https%3A//aidev.fit/en/ai/ai-testing-frameworks.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/ai-testing-frameworks.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=AI%20Testing%20Frameworks%3A%20DeepEval%2C%20Ragas%2C%20LangSmith%2C%20CI%20Integration&url=https%3A//aidev.fit/en/ai/ai-testing-frameworks.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=AI%20Testing%20Frameworks%3A%20DeepEval%2C%20Ragas%2C%20LangSmith%2C%20CI%20Integration&u=https%3A//aidev.fit/en/ai/ai-testing-frameworks.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=AI%20Testing%20Frameworks%3A%20DeepEval%2C%20Ragas%2C%20LangSmith%2C%20CI%20Integration&body=https%3A//aidev.fit/en/ai/ai-testing-frameworks.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/ai-testing-frameworks.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-monitoring-alerting.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Dr</span></a><a href="/en/ai/agent-memory-systems.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic M</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/llm-safety.html" class="related-card"><span class="rc-title">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</span><span class="rc-desc">Comprehensive guide to LLM safety: RLHF training, Constitutional AI principles, automated content filtering, and red tea</span></a><a href="/en/ai/llm-version-management.html" class="related-card"><span class="rc-title">LLM Version Management: Model Registry, A/B Testing, Rollback</span><span class="rc-desc">Manage LLM versions in production with model registries, A/B testing frameworks, gradual rollouts, automated evaluation </span></a><a href="/en/ai/llm-observability.html" class="related-card"><span class="rc-title">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</span><span class="rc-desc">Implement LLM observability for production AI applications: distributed tracing, token usage tracking, latency monitorin</span></a><a href="/en/ai/model-evaluation-harness.html" class="related-card"><span class="rc-title">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</span><span class="rc-desc">Evaluate LLM models systematically using benchmarks, human evaluation, LLM-as-judge frameworks, and production A/B testi</span></a><a href="/en/ai/rag-evaluation.html" class="related-card"><span class="rc-title">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</span><span class="rc-desc">A practical guide to evaluating RAG systems: retrieval metrics, generation quality assessment, end-to-end testing framew</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="rc-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="rc-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fallbacks, cost manage</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#deepeval">DeepEval</a></li><li><a href="#run-tests-deepeval-test-run-testaipy">Run tests: deepeval test run test_ai.py</a></li><li><a href="#ragas">Ragas</a></li><li><a href="#prepare-evaluation-dataset">Prepare evaluation dataset</a></li><li><a href="#compute-rag-metrics">Compute RAG metrics</a></li><li><a href="#">{</a></li><li><a href="#faithfulness-092">"faithfulness": 0.92,</a></li><li><a href="#answerrelevancy-088">"answer_relevancy": 0.88,</a></li><li><a href="#contextprecision-095">"context_precision": 0.95,</a></li><li><a href="#contextrecall-085">"context_recall": 0.85</a></li><li><a href="#">}</a></li><li><a href="#langsmith">LangSmith</a></li><li><a href="#define-a-custom-evaluator">Define a custom evaluator</a></li><li><a href="#compare-model-output-against-expected-output">Compare model output against expected output</a></li><li><a href="#use-llm-as-judge-for-evaluation">Use LLM-as-judge for evaluation</a></li><li><a href="#run-evaluation-on-a-dataset">Run evaluation on a dataset</a></li><li><a href="#view-results-in-langsmith-dashboard">View results in LangSmith dashboard</a></li><li><a href="#ci-integration">CI Integration</a></li><li><a href="#githubworkflowsai-testsyml">.github/workflows/ai-tests.yml</a></li><li><a href="#conclusion">Conclusion</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

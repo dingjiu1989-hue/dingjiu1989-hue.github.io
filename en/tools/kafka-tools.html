@@ -111,18 +111,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">DevTools</span>
         <span class="tag-cat">Productivity</span></div>
-      <h1 class="article-title">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</h1>
-      <div class="article-meta"><time datetime="2026-02-03">Published 2026-02-03</time> · <time datetime="2026-04-30">Last active 2026-04-30</time> · 166 views · 0 replies · 8 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tools/kafka-tools.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/kafka-tools.png" alt="Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-03">2026-02-03</time>
+          <span class="meta-sep">·</span>
+          <span>8 min read</span>
+          <span class="meta-sep">·</span>
+          <span>166 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tools/kafka-tools.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/kafka-tools.png" alt="Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (23)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#akhq-formerly-kafkahq">AKHQ (formerly KafkaHQ)</a></li><li><a href="#docker-composeyml">docker-compose.yml</a></li><li><a href="#akhq-advanced-configuration">AKHQ advanced configuration</a></li><li><a href="#kafka-ui-by-provectus">Kafka UI (by Provectus)</a></li><li><a href="#docker-composeyml">docker-compose.yml</a></li><li><a href="#multi-cluster-configuration">Multi-cluster configuration</a></li><li><a href="#kowl-now-redpanda-console">Kowl (now Redpanda Console)</a></li><li><a href="#docker-composeyml">docker-compose.yml</a></li><li><a href="#data-masking-configuration">Data masking configuration</a></li><li><a href="#message-search-predicate-examples">Message search predicate examples</a></li><li><a href="#find-messages-with-specific-json-field">Find messages with specific JSON field:</a></li><li><a href="#useremail--testexamplecom">$.user.email == "test@example.com"</a></li><li><a href="#ordertotal-gt-1000">$.order.total &gt; 100.0</a></li><li><a href="#status-in-pending-processing">$.status in ["pending", "processing"]</a></li><li><a href="#offset-explorer-formerly-kafka-tool">Offset Explorer (formerly Kafka Tool)</a></li><li><a href="#cli-tools">CLI Tools</a></li><li><a href="#topic-management">Topic management</a></li><li><a href="#consumer-group-monitoring">Consumer group monitoring</a></li><li><a href="#message-inspection">Message inspection</a></li><li><a href="#performance-testing">Performance testing</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>Apache Kafka's distributed architecture makes it powerful but complex to manage. The right tooling is essential for monitoring consumer lag, inspecting messages, managing topics, and debugging production issues. This article covers four Kafka management tools: AKHQ, Kafka UI, Kowl, and Offset Explorer.</p><picture><source srcset="https://aidev.fit/images/covers/en/tools/kafka-tools.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tools/kafka-tools.png" alt="Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>AKHQ (formerly KafkaHQ)</h2>
 <p>A comprehensive Kafka web UI with topic management, consumer group monitoring, and schema registry support:</p>
@@ -349,14 +357,8 @@
 <p><strong>Scripting</strong> : Kafka CLI tools for automation and CI/CD tasks.</p>
 </li>
 </ul>
-<p>For development and staging environments, Kafka UI or Kowl provide excellent web-based management with minimal setup. For production, AKHQ offers the most comprehensive feature set, while Redpanda Console provides the best message debugging experience.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/git-advanced-tools.html">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a>, <a href="/en/tools/database-gui.html">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (23)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#akhq-(formerly-kafkahq)">AKHQ (formerly KafkaHQ)</a></li><li><a href="#docker-compose.yml">docker-compose.yml</a></li><li><a href="#akhq-advanced-configuration">AKHQ advanced configuration</a></li><li><a href="#kafka-ui-(by-provectus)">Kafka UI (by Provectus)</a></li><li><a href="#docker-compose.yml">docker-compose.yml</a></li><li><a href="#multi-cluster-configuration">Multi-cluster configuration</a></li><li><a href="#kowl-(now-redpanda-console)">Kowl (now Redpanda Console)</a></li><li><a href="#docker-compose.yml">docker-compose.yml</a></li><li><a href="#data-masking-configuration">Data masking configuration</a></li><li><a href="#message-search-predicate-examples">Message search predicate examples</a></li><li><a href="#find-messages-with-specific-json-field:">Find messages with specific JSON field:</a></li><li><a href="#$.user.email-==-"test@example.com"">$.user.email == "test@example.com"</a></li><li><a href="#$.order.total-&gt;-100.0">$.order.total &gt; 100.0</a></li><li><a href="#$.status-in-["pending",-"processing"]">$.status in ["pending", "processing"]</a></li><li><a href="#offset-explorer-(formerly-kafka-tool)">Offset Explorer (formerly Kafka Tool)</a></li><li><a href="#cli-tools">CLI Tools</a></li><li><a href="#topic-management">Topic management</a></li><li><a href="#consumer-group-monitoring">Consumer group monitoring</a></li><li><a href="#message-inspection">Message inspection</a></li><li><a href="#performance-testing">Performance testing</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>For development and staging environments, Kafka UI or Kowl provide excellent web-based management with minimal setup. For production, AKHQ offers the most comprehensive feature set, while Redpanda Console provides the best message debugging experience.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tools/git-advanced-tools.html">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</a></li><li><a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></li><li><a href="/en/tools/database-gui.html">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -364,29 +366,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Kafka%20Tools%3A%20AKHQ%2C%20Kafka%20UI%2C%20Kowl%2C%20Offset%20Explorer&url=https%3A//aidev.fit/en/tools/kafka-tools.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tools/kafka-tools.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Kafka%20Tools%3A%20AKHQ%2C%20Kafka%20UI%2C%20Kowl%2C%20Offset%20Explorer&url=https%3A//aidev.fit/en/tools/kafka-tools.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Kafka%20Tools%3A%20AKHQ%2C%20Kafka%20UI%2C%20Kowl%2C%20Offset%20Explorer&u=https%3A//aidev.fit/en/tools/kafka-tools.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Kafka%20Tools%3A%20AKHQ%2C%20Kafka%20UI%2C%20Kowl%2C%20Offset%20Explorer&body=https%3A//aidev.fit/en/tools/kafka-tools.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tools/kafka-tools.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Kafka%20Tools%3A%20AKHQ%2C%20Kafka%20UI%2C%20Kowl%2C%20Offset%20Explorer&url=https%3A//aidev.fit/en/tools/kafka-tools.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tools/kafka-tools.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Kafka%20Tools%3A%20AKHQ%2C%20Kafka%20UI%2C%20Kowl%2C%20Offset%20Explorer&url=https%3A//aidev.fit/en/tools/kafka-tools.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Kafka%20Tools%3A%20AKHQ%2C%20Kafka%20UI%2C%20Kowl%2C%20Offset%20Explorer&u=https%3A//aidev.fit/en/tools/kafka-tools.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Kafka%20Tools%3A%20AKHQ%2C%20Kafka%20UI%2C%20Kowl%2C%20Offset%20Explorer&body=https%3A//aidev.fit/en/tools/kafka-tools.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tools/kafka-tools.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tools/kubernetes-tools.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</span></a><a href="/en/tools/database-gui.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tools/api-testing-2026.html" class="related-card"><span class="rc-title">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</span><span class="rc-desc">Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, Hoppscotch for light</span></a><a href="/en/tools/kubernetes-tools.html" class="related-card"><span class="rc-title">Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</span><span class="rc-desc">Essential Kubernetes tools for cluster management: kubectl plugins and aliases, k9s terminal UI, Lens desktop IDE, and K</span></a><a href="/en/tools/productivity-tracking.html" class="related-card"><span class="rc-title">Developer Productivity Tracking Tools</span><span class="rc-desc">Compare WakaTime, CodeTime, ActivityWatch and other tools for tracking developer productivity and coding habits.</span></a><a href="/en/tools/issue-tracking-tools.html" class="related-card"><span class="rc-title">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</span><span class="rc-desc">Compare issue tracking and project management tools for software teams of all sizes.</span></a><a href="/en/tools/note-taking-apps.html" class="related-card"><span class="rc-title">Note-Taking and Knowledge Management Tools</span><span class="rc-desc">Compare note-taking apps for developers: Obsidian, Notion, Logseq, and Roam Research for knowledge management.</span></a><a href="/en/tools/productivity-tools.html" class="related-card"><span class="rc-title">Developer Productivity Tools: Essential Toolkit for 2026</span><span class="rc-desc">Essential developer productivity tools: time tracking, knowledge management, focus tools, and workflow automation.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tools/kubernetes-tools.html" class="prev-next-btn prev-link">← Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</a><a href="/en/tools/database-gui.html" class="prev-next-btn next-link">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/api-testing-2026.html" class="related-card"><span class="related-card-title">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</span><span class="related-card-desc">Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, </span></a><a href="/en/tools/kubernetes-tools.html" class="related-card"><span class="related-card-title">Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</span><span class="related-card-desc">Essential Kubernetes tools for cluster management: kubectl plugins and aliases, k9s terminal UI, Len</span></a><a href="/en/tools/productivity-tracking.html" class="related-card"><span class="related-card-title">Developer Productivity Tracking Tools</span><span class="related-card-desc">Compare WakaTime, CodeTime, ActivityWatch and other tools for tracking developer productivity and co</span></a><a href="/en/tools/issue-tracking-tools.html" class="related-card"><span class="related-card-title">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</span><span class="related-card-desc">Compare issue tracking and project management tools for software teams of all sizes.</span></a><a href="/en/tools/note-taking-apps.html" class="related-card"><span class="related-card-title">Note-Taking and Knowledge Management Tools</span><span class="related-card-desc">Compare note-taking apps for developers: Obsidian, Notion, Logseq, and Roam Research for knowledge m</span></a><a href="/en/tools/productivity-tools.html" class="related-card"><span class="related-card-title">Developer Productivity Tools: Essential Toolkit for 2026</span><span class="related-card-desc">Essential developer productivity tools: time tracking, knowledge management, focus tools, and workfl</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#akhq-formerly-kafkahq">AKHQ (formerly KafkaHQ)</a></li><li><a href="#docker-composeyml">docker-compose.yml</a></li><li><a href="#akhq-advanced-configuration">AKHQ advanced configuration</a></li><li><a href="#kafka-ui-by-provectus">Kafka UI (by Provectus)</a></li><li><a href="#docker-composeyml">docker-compose.yml</a></li><li><a href="#multi-cluster-configuration">Multi-cluster configuration</a></li><li><a href="#kowl-now-redpanda-console">Kowl (now Redpanda Console)</a></li><li><a href="#docker-composeyml">docker-compose.yml</a></li><li><a href="#data-masking-configuration">Data masking configuration</a></li><li><a href="#message-search-predicate-examples">Message search predicate examples</a></li><li><a href="#find-messages-with-specific-json-field">Find messages with specific JSON field:</a></li><li><a href="#useremail--testexamplecom">$.user.email == "test@example.com"</a></li><li><a href="#ordertotal-gt-1000">$.order.total &gt; 100.0</a></li><li><a href="#status-in-pending-processing">$.status in ["pending", "processing"]</a></li><li><a href="#offset-explorer-formerly-kafka-tool">Offset Explorer (formerly Kafka Tool)</a></li><li><a href="#cli-tools">CLI Tools</a></li><li><a href="#topic-management">Topic management</a></li><li><a href="#consumer-group-monitoring">Consumer group monitoring</a></li><li><a href="#message-inspection">Message inspection</a></li><li><a href="#performance-testing">Performance testing</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

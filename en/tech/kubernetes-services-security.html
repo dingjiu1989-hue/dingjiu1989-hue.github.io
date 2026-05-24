@@ -112,18 +112,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Kubernetes Security Best Practices
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">Programming</span>
         <span class="tag-cat">DevOps</span></div>
-      <h1 class="article-title">Kubernetes Security Best Practices</h1>
-      <div class="article-meta"><time datetime="2025-12-02">Published 2025-12-02</time> · <time datetime="2026-05-08">Last active 2026-05-08</time> · 176 views · 0 replies · 18 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/kubernetes-services-security.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/kubernetes-services-security.png" alt="Kubernetes Security Best Practices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Kubernetes security is complex because the attack surface spans multiple layers: containers, clusters, networks, and cloud infrastructure. This guide covers the most impactful security practices for production Kubernetes deployments.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/kubernetes-services-security.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/kubernetes-services-security.png" alt="Kubernetes Security Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Kubernetes Security Best Practices</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-02">2025-12-02</time>
+          <span class="meta-sep">·</span>
+          <span>18 min read</span>
+          <span class="meta-sep">·</span>
+          <span>176 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/kubernetes-services-security.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/kubernetes-services-security.png" alt="Kubernetes Security Best Practices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (13)</summary><ol><li><a href="#pod-security-standards">Pod Security Standards</a></li><li><a href="#running-containers-as-non-root">Running Containers as Non-Root</a></li><li><a href="#network-policies">Network Policies</a></li><li><a href="#role-based-access-control-rbac">Role-Based Access Control (RBAC)</a></li><li><a href="#secrets-management">Secrets Management</a></li><li><a href="#create-encryption-config">Create encryption config</a></li><li><a href="#image-security">Image Security</a></li><li><a href="#scan-container-images-before-deployment">Scan container images before deployment</a></li><li><a href="#resource-limits">Resource Limits</a></li><li><a href="#runtime-security">Runtime Security</a></li><li><a href="#audit-logging">Audit Logging</a></li><li><a href="#kube-apiserver-configuration">kube-apiserver configuration</a></li><li><a href="#summary">Summary</a></li></ol></details>
+        <div class="article-body"><p>Kubernetes security is complex because the attack surface spans multiple layers: containers, clusters, networks, and cloud infrastructure. This guide covers the most impactful security practices for production Kubernetes deployments.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/kubernetes-services-security.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/kubernetes-services-security.png" alt="Kubernetes Security Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Pod Security Standards</h2>
 <p>Kubernetes deprecated PodSecurityPolicies in favor of Pod Security Admission (PSA), which enforces three security levels:</p>
 <ul>
@@ -315,14 +323,8 @@
 <p>resources: ["pods", "deployments"]</p>
 <p>Ship audit logs to a SIEM for analysis. Monitor for unauthorized API access attempts.</p>
 <h2>Summary</h2>
-<p>Kubernetes security requires defense in depth: Pod Security Admission for pod hardening, network policies for segmentation, RBAC for access control, external secrets for sensitive data, and runtime security for threat detection. Start with pod security -- run containers as non-root, drop capabilities, and enable seccomp. Add network policies for isolation. Finally, implement RBAC and secrets management. Most Kubernetes compromises exploit misconfigurations rather than software vulnerabilities -- hardening these configurations is the highest-impact security investment.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (13)</summary><ol><li><a href="#pod-security-standards">Pod Security Standards</a></li><li><a href="#running-containers-as-non-root">Running Containers as Non-Root</a></li><li><a href="#network-policies">Network Policies</a></li><li><a href="#role-based-access-control-(rbac)">Role-Based Access Control (RBAC)</a></li><li><a href="#secrets-management">Secrets Management</a></li><li><a href="#create-encryption-config">Create encryption config</a></li><li><a href="#image-security">Image Security</a></li><li><a href="#scan-container-images-before-deployment">Scan container images before deployment</a></li><li><a href="#resource-limits">Resource Limits</a></li><li><a href="#runtime-security">Runtime Security</a></li><li><a href="#audit-logging">Audit Logging</a></li><li><a href="#kube-apiserver-configuration">kube-apiserver configuration</a></li><li><a href="#summary">Summary</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Kubernetes security requires defense in depth: Pod Security Admission for pod hardening, network policies for segmentation, RBAC for access control, external secrets for sensitive data, and runtime security for threat detection. Start with pod security -- run containers as non-root, drop capabilities, and enable seccomp. Add network policies for isolation. Finally, implement RBAC and secrets management. Most Kubernetes compromises exploit misconfigurations rather than software vulnerabilities -- hardening these configurations is the highest-impact security investment.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></li><li><a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a></li><li><a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -330,29 +332,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Kubernetes%20Security%20Best%20Practices&url=https%3A//aidev.fit/en/tech/kubernetes-services-security.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/kubernetes-services-security.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Kubernetes%20Security%20Best%20Practices&url=https%3A//aidev.fit/en/tech/kubernetes-services-security.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Kubernetes%20Security%20Best%20Practices&u=https%3A//aidev.fit/en/tech/kubernetes-services-security.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Kubernetes%20Security%20Best%20Practices&body=https%3A//aidev.fit/en/tech/kubernetes-services-security.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/kubernetes-services-security.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Kubernetes%20Security%20Best%20Practices&url=https%3A//aidev.fit/en/tech/kubernetes-services-security.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/kubernetes-services-security.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Kubernetes%20Security%20Best%20Practices&url=https%3A//aidev.fit/en/tech/kubernetes-services-security.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Kubernetes%20Security%20Best%20Practices&u=https%3A//aidev.fit/en/tech/kubernetes-services-security.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Kubernetes%20Security%20Best%20Practices&body=https%3A//aidev.fit/en/tech/kubernetes-services-security.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/kubernetes-services-security.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/nginx-configuration-guide.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Nginx Configuration Guide</span></a><a href="/en/tech/edge-computing-2026-guide.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Edge Computing in 2026: A Complete Guide for Developers</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/terraform-infrastructure-code.html" class="related-card"><span class="rc-title">Terraform Infrastructure as Code</span><span class="rc-desc">Master Terraform for managing cloud infrastructure with state management, modules, and production best practices.</span></a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card"><span class="rc-title">Helm Charts: Kubernetes Package Management</span><span class="rc-desc">A comprehensive guide to Helm chart structure, templates, values management, dependency handling, and CI/CD integration </span></a><a href="/en/tech/bash-scripting-guide.html" class="related-card"><span class="rc-title">Bash Scripting Best Practices</span><span class="rc-desc">Essential patterns for writing reliable, maintainable shell scripts in production environments.</span></a><a href="/en/tech/ssh-security-hardening.html" class="related-card"><span class="rc-title">SSH Security Hardening</span><span class="rc-desc">Practical steps to secure SSH access including key management, configuration hardening, and fail2ban setup.</span></a><a href="/en/tech/secret-management.html" class="related-card"><span class="rc-title">Secret Management</span><span class="rc-desc">Learn secret management: Vault, AWS Secrets Manager, SOPS, encryption approaches, rotation policies, and best practices</span></a><a href="/en/tech/kubernetes-pod-design.html" class="related-card"><span class="rc-title">Kubernetes Pod Design: Patterns and Best Practices</span><span class="rc-desc">Design effective Kubernetes pods: init containers, sidecars, probes, resource limits, and pod lifecycle management.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/nginx-configuration-guide.html" class="prev-next-btn prev-link">← Nginx Configuration Guide</a><a href="/en/tech/edge-computing-2026-guide.html" class="prev-next-btn next-link">Edge Computing in 2026: A Complete Guide for Developers →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/terraform-infrastructure-code.html" class="related-card"><span class="related-card-title">Terraform Infrastructure as Code</span><span class="related-card-desc">Master Terraform for managing cloud infrastructure with state management, modules, and production be</span></a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card"><span class="related-card-title">Helm Charts: Kubernetes Package Management</span><span class="related-card-desc">A comprehensive guide to Helm chart structure, templates, values management, dependency handling, an</span></a><a href="/en/tech/bash-scripting-guide.html" class="related-card"><span class="related-card-title">Bash Scripting Best Practices</span><span class="related-card-desc">Essential patterns for writing reliable, maintainable shell scripts in production environments.</span></a><a href="/en/tech/ssh-security-hardening.html" class="related-card"><span class="related-card-title">SSH Security Hardening</span><span class="related-card-desc">Practical steps to secure SSH access including key management, configuration hardening, and fail2ban</span></a><a href="/en/tech/secret-management.html" class="related-card"><span class="related-card-title">Secret Management</span><span class="related-card-desc">Learn secret management: Vault, AWS Secrets Manager, SOPS, encryption approaches, rotation policies,</span></a><a href="/en/tech/kubernetes-pod-design.html" class="related-card"><span class="related-card-title">Kubernetes Pod Design: Patterns and Best Practices</span><span class="related-card-desc">Design effective Kubernetes pods: init containers, sidecars, probes, resource limits, and pod lifecy</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#pod-security-standards">Pod Security Standards</a></li><li><a href="#running-containers-as-non-root">Running Containers as Non-Root</a></li><li><a href="#network-policies">Network Policies</a></li><li><a href="#role-based-access-control-rbac">Role-Based Access Control (RBAC)</a></li><li><a href="#secrets-management">Secrets Management</a></li><li><a href="#create-encryption-config">Create encryption config</a></li><li><a href="#image-security">Image Security</a></li><li><a href="#scan-container-images-before-deployment">Scan container images before deployment</a></li><li><a href="#resource-limits">Resource Limits</a></li><li><a href="#runtime-security">Runtime Security</a></li><li><a href="#audit-logging">Audit Logging</a></li><li><a href="#kube-apiserver-configuration">kube-apiserver configuration</a></li><li><a href="#summary">Summary</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

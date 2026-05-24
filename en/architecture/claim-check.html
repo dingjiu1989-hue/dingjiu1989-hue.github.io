@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Claim Check Pattern
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Claim Check Pattern</h1>
-      <div class="article-meta"><time datetime="2026-05-02">Published 2026-05-02</time> · 123 views · 0 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/claim-check.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The claim check pattern is a messaging pattern that addresses the challenge of passing large payloads through a message broker. Instead of including the payload in the message, the producer stores the payload in a shared data store and sends a reference (claim check) in the message. The consumer retrieves the payload using the reference. This pattern is essential for systems where message size limits are a concern. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/claim-check.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Claim Check Pattern</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-02">2026-05-02</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>123 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/claim-check.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>The claim check pattern is a messaging pattern that addresses the challenge of passing large payloads through a message broker. Instead of including the payload in the message, the producer stores the payload in a shared data store and sends a reference (claim check) in the message. The consumer retrieves the payload using the reference. This pattern is essential for systems where message size limits are a concern. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/claim-check.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/claim-check.png" alt="Claim Check Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The Problem with Large Messages </p>
 <p>Message brokers impose size limits. Kafka has a default max message size of 1MB, though this can be increased. SQS has a 256KB limit. RabbitMQ can handle larger messages but performance degrades significantly. Even where limits can be increased, large messages cause problems: increased broker storage, slower serialization and deserialization, increased network transfer time, and memory pressure on consumers. </p>
 <p>A single high-resolution image, a large CSV file, or a JSON document with many nested objects can easily exceed these limits. The claim check pattern solves this problem without requiring changes to the message broker configuration. </p>
@@ -132,14 +140,8 @@
 <p>Splitting payloads introduces complexity around reassembly and ordering. Dedicated large-message channels require separate infrastructure and routing logic. The claim check pattern is generally the cleanest solution because it separates concerns: the message broker handles state changes, and the data store handles payload storage. </p>
 <p>Best Practices </p>
 <p>Use the claim check pattern when payloads regularly exceed 80% of the broker's message size limit. Store payloads with a TTL or retention period to prevent orphaned data. Include a checksum in the reference to validate payload integrity. Log claim check retrieval failures separately from general message processing failures. Monitor the size of stored payloads and the number of unclaimed references to detect processing issues. </p>
-<p>The claim check pattern is a simple, effective solution for handling large payloads in message-based systems. It preserves the benefits of asynchronous messaging while avoiding the performance and reliability problems of large messages.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>The claim check pattern is a simple, effective solution for handling large payloads in message-based systems. It preserves the benefits of asynchronous messaging while avoiding the performance and reliability problems of large messages.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></li><li><a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></li><li><a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -147,29 +149,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Claim%20Check%20Pattern&url=https%3A//aidev.fit/en/architecture/claim-check.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/claim-check.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Claim%20Check%20Pattern&url=https%3A//aidev.fit/en/architecture/claim-check.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Claim%20Check%20Pattern&u=https%3A//aidev.fit/en/architecture/claim-check.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Claim%20Check%20Pattern&body=https%3A//aidev.fit/en/architecture/claim-check.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/claim-check.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Claim%20Check%20Pattern&url=https%3A//aidev.fit/en/architecture/claim-check.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/claim-check.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Claim%20Check%20Pattern&url=https%3A//aidev.fit/en/architecture/claim-check.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Claim%20Check%20Pattern&u=https%3A//aidev.fit/en/architecture/claim-check.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Claim%20Check%20Pattern&body=https%3A//aidev.fit/en/architecture/claim-check.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/claim-check.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/ddd-tactical.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">DDD Tactical Patterns</span></a><a href="/en/architecture/zero-downtime-deployment.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Zero-Downtime Deployment Strategies</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/scheduler-supervisor.html" class="related-card"><span class="rc-title">Scheduler Supervisor Pattern</span><span class="rc-desc">Learn the scheduler supervisor pattern: job scheduling, failure handling, retry policies, and distributed job management</span></a><a href="/en/architecture/scatter-gather.html" class="related-card"><span class="rc-title">Scatter-Gather Pattern for Parallel Processing</span><span class="rc-desc">The scatter-gather pattern: broadcast requests to multiple recipients and aggregate responses for comprehensive results.</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="rc-title">Domain Events: Design and Implementation</span><span class="rc-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery</span></a><a href="/en/architecture/api-composition-pattern.html" class="related-card"><span class="rc-title">API Composition Pattern</span><span class="rc-desc">Learn API composition: aggregation, parallel calls, error handling strategies, and cross-service data retrieval</span></a><a href="/en/architecture/materialized-view-pattern.html" class="related-card"><span class="rc-title">Materialized View Pattern</span><span class="rc-desc">Explore the materialized view pattern: read models, caching strategies, CQRS integration, and efficient cross-service qu</span></a><a href="/en/architecture/transaction-outbox-reliable.html" class="related-card"><span class="rc-title">Transactional Outbox Pattern</span><span class="rc-desc">Master reliable message publishing with the transactional outbox: polling publisher, transaction log tailing, and idempo</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/ddd-tactical.html" class="prev-next-btn prev-link">← DDD Tactical Patterns</a><a href="/en/architecture/zero-downtime-deployment.html" class="prev-next-btn next-link">Zero-Downtime Deployment Strategies →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/scheduler-supervisor.html" class="related-card"><span class="related-card-title">Scheduler Supervisor Pattern</span><span class="related-card-desc">Learn the scheduler supervisor pattern: job scheduling, failure handling, retry policies, and distri</span></a><a href="/en/architecture/scatter-gather.html" class="related-card"><span class="related-card-title">Scatter-Gather Pattern for Parallel Processing</span><span class="related-card-desc">The scatter-gather pattern: broadcast requests to multiple recipients and aggregate responses for co</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/api-composition-pattern.html" class="related-card"><span class="related-card-title">API Composition Pattern</span><span class="related-card-desc">Learn API composition: aggregation, parallel calls, error handling strategies, and cross-service dat</span></a><a href="/en/architecture/materialized-view-pattern.html" class="related-card"><span class="related-card-title">Materialized View Pattern</span><span class="related-card-desc">Explore the materialized view pattern: read models, caching strategies, CQRS integration, and effici</span></a><a href="/en/architecture/transaction-outbox-reliable.html" class="related-card"><span class="related-card-title">Transactional Outbox Pattern</span><span class="related-card-desc">Master reliable message publishing with the transactional outbox: polling publisher, transaction log</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

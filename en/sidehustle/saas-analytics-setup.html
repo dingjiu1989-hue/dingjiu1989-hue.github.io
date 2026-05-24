@@ -100,18 +100,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/sidehustle/">Side Hustle</a> › SaaS Analytics Setup: PostHog, Plausible, and Umami
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Business</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/sidehustle/">Side Hustle</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Business</span>
         <span class="tag-cat">Startup</span>
         <span class="tag-cat">SaaS</span></div>
-      <h1 class="article-title">SaaS Analytics Setup: PostHog, Plausible, and Umami</h1>
-      <div class="article-meta"><time datetime="2026-01-22">Published 2026-01-22</time> · <time datetime="2026-05-01">Last active 2026-05-01</time> · 93 views · 0 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/sidehustle/saas-analytics-setup.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/sidehustle/saas-analytics-setup.png" alt="SaaS Analytics Setup: PostHog, Plausible, and Umami" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>SaaS Analytics Setup: Privacy-Focused Tools</h2>
+        <h1 class="article-title">SaaS Analytics Setup: PostHog, Plausible, and Umami</h1>
+        <div class="article-meta">
+          <time datetime="2026-01-22">2026-01-22</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>93 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/sidehustle/saas-analytics-setup.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/sidehustle/saas-analytics-setup.png" alt="SaaS Analytics Setup: PostHog, Plausible, and Umami" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#saas-analytics-setup-privacy-focused-tools">SaaS Analytics Setup: Privacy-Focused Tools</a></li><li><a href="#posthog-product-analytics-platform">PostHog: Product Analytics Platform</a></li><li><a href="#plausible-lightweight-web-analytics">Plausible: Lightweight Web Analytics</a></li><li><a href="#umami-self-hosted-alternative">Umami: Self-Hosted Alternative</a></li><li><a href="#choosing-the-right-tool">Choosing the Right Tool</a></li><li><a href="#implementation-guide">Implementation Guide</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
+        <div class="article-body"><h2>SaaS Analytics Setup: Privacy-Focused Tools</h2>
 <p>Analytics are essential for SaaS decision-making, but traditional tools like Google Analytics are increasingly problematic — slow, privacy-invasive, and providing limited product insights. Modern privacy-focused alternatives offer better performance, data ownership, and actionable product metrics.</p><picture><source srcset="https://aidev.fit/images/covers/en/sidehustle/saas-analytics-setup.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/sidehustle/saas-analytics-setup.png" alt="SaaS Analytics Setup: PostHog, Plausible, and Umami" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>PostHog: Product Analytics Platform</h2>
 <p>PostHog is the most comprehensive open-source product analytics platform. It provides event tracking, session recording, feature flags, heatmaps, and experimentation tools in a single platform. Self-hosted on your infrastructure or use PostHog Cloud.</p>
@@ -136,14 +144,8 @@
 <p>Set up tracking infrastructure in three phases. Phase 1: deploy your analytics tool and instrument basic page views. Phase 2: add custom event tracking for key actions (signup, feature usage, upgrade). Phase 3: set up dashboards for the metrics that matter: activation rate, retention, and revenue.</p>
 <p>Use a data layer to separate analytics instrumentation from your application code. A single <code>analytics.track(event, properties)</code> function routes events to all configured providers. This prevents vendor lock-in and simplifies adding new analytics tools.</p>
 <h2>Conclusion</h2>
-<p>Privacy-focused analytics tools provide better performance, data ownership, and actionable insights than traditional analytics. PostHog serves comprehensive product analytics needs, Plausible provides lightweight web analytics, and Umami offers simple self-hosted analytics. Choose based on your data needs, privacy requirements, and infrastructure preferences.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/sidehustle/billing-integration.html">Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning</a>, <a href="/en/sidehustle/customer-acquisition.html">Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG</a>, <a href="/en/sidehustle/dev-community-building.html">Developer Community Building: Discord, GitHub, Documentation, and Open Source</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (7)</summary><ol><li><a href="#saas-analytics-setup:-privacy-focused-tools">SaaS Analytics Setup: Privacy-Focused Tools</a></li><li><a href="#posthog:-product-analytics-platform">PostHog: Product Analytics Platform</a></li><li><a href="#plausible:-lightweight-web-analytics">Plausible: Lightweight Web Analytics</a></li><li><a href="#umami:-self-hosted-alternative">Umami: Self-Hosted Alternative</a></li><li><a href="#choosing-the-right-tool">Choosing the Right Tool</a></li><li><a href="#implementation-guide">Implementation Guide</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Privacy-focused analytics tools provide better performance, data ownership, and actionable insights than traditional analytics. PostHog serves comprehensive product analytics needs, Plausible provides lightweight web analytics, and Umami offers simple self-hosted analytics. Choose based on your data needs, privacy requirements, and infrastructure preferences.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/sidehustle/billing-integration.html">Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning</a></li><li><a href="/en/sidehustle/customer-acquisition.html">Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG</a></li><li><a href="/en/sidehustle/dev-community-building.html">Developer Community Building: Discord, GitHub, Documentation, and Open Source</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -151,29 +153,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=SaaS%20Analytics%20Setup%3A%20PostHog%2C%20Plausible%2C%20and%20Umami&url=https%3A//aidev.fit/en/sidehustle/saas-analytics-setup.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/sidehustle/saas-analytics-setup.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=SaaS%20Analytics%20Setup%3A%20PostHog%2C%20Plausible%2C%20and%20Umami&url=https%3A//aidev.fit/en/sidehustle/saas-analytics-setup.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=SaaS%20Analytics%20Setup%3A%20PostHog%2C%20Plausible%2C%20and%20Umami&u=https%3A//aidev.fit/en/sidehustle/saas-analytics-setup.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=SaaS%20Analytics%20Setup%3A%20PostHog%2C%20Plausible%2C%20and%20Umami&body=https%3A//aidev.fit/en/sidehustle/saas-analytics-setup.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/sidehustle/saas-analytics-setup.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=SaaS%20Analytics%20Setup%3A%20PostHog%2C%20Plausible%2C%20and%20Umami&url=https%3A//aidev.fit/en/sidehustle/saas-analytics-setup.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/sidehustle/saas-analytics-setup.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=SaaS%20Analytics%20Setup%3A%20PostHog%2C%20Plausible%2C%20and%20Umami&url=https%3A//aidev.fit/en/sidehustle/saas-analytics-setup.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=SaaS%20Analytics%20Setup%3A%20PostHog%2C%20Plausible%2C%20and%20Umami&u=https%3A//aidev.fit/en/sidehustle/saas-analytics-setup.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=SaaS%20Analytics%20Setup%3A%20PostHog%2C%20Plausible%2C%20and%20Umami&body=https%3A//aidev.fit/en/sidehustle/saas-analytics-setup.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/sidehustle/saas-analytics-setup.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/sidehustle/product-announcement.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Product Launch Strategy: Product Hunt, Hacker News, Social Media</span></a><a href="/en/sidehustle/customer-support-scaling.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Scaling Customer Support as a Solo SaaS Developer</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/sidehustle/saas-analytics.html" class="related-card"><span class="rc-title">SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis</span><span class="rc-desc">Compare Mixpanel, Amplitude, and PostHog for SaaS analytics. Learn event tracking, funnel analysis, and actionable produ</span></a><a href="/en/sidehustle/product-led-growth.html" class="related-card"><span class="rc-title">Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing</span><span class="rc-desc">A practical guide to product-led growth for SaaS: freemium models, free trials, self-serve onboarding, and usage-based p</span></a><a href="/en/sidehustle/churn-reduction.html" class="related-card"><span class="rc-title">SaaS Churn Reduction: Retention Strategies for Growth</span><span class="rc-desc">Reduce SaaS churn with retention strategies, win-back campaigns, health scoring, and proactive customer success techniqu</span></a><a href="/en/sidehustle/feature-prioritization.html" class="related-card"><span class="rc-title">Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring</span><span class="rc-desc">Prioritize features systematically using RICE scoring, MoSCoW method, and opportunity scoring for your SaaS product.</span></a><a href="/en/sidehustle/product-announcement.html" class="related-card"><span class="rc-title">Product Launch Strategy: Product Hunt, Hacker News, Social Media</span><span class="rc-desc">Launch your SaaS product effectively on Product Hunt, Hacker News, and social media with proven strategies and tactics.</span></a><a href="/en/sidehustle/serverless-cost-saas.html" class="related-card"><span class="rc-title">Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings</span><span class="rc-desc">Optimize serverless costs for your SaaS with Lambda, DynamoDB, and API Gateway saving strategies.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/sidehustle/product-announcement.html" class="prev-next-btn prev-link">← Product Launch Strategy: Product Hunt, Hacker News, Social Media</a><a href="/en/sidehustle/customer-support-scaling.html" class="prev-next-btn next-link">Scaling Customer Support as a Solo SaaS Developer →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/sidehustle/saas-analytics.html" class="related-card"><span class="related-card-title">SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis</span><span class="related-card-desc">Compare Mixpanel, Amplitude, and PostHog for SaaS analytics. Learn event tracking, funnel analysis, </span></a><a href="/en/sidehustle/product-led-growth.html" class="related-card"><span class="related-card-title">Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing</span><span class="related-card-desc">A practical guide to product-led growth for SaaS: freemium models, free trials, self-serve onboardin</span></a><a href="/en/sidehustle/churn-reduction.html" class="related-card"><span class="related-card-title">SaaS Churn Reduction: Retention Strategies for Growth</span><span class="related-card-desc">Reduce SaaS churn with retention strategies, win-back campaigns, health scoring, and proactive custo</span></a><a href="/en/sidehustle/feature-prioritization.html" class="related-card"><span class="related-card-title">Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring</span><span class="related-card-desc">Prioritize features systematically using RICE scoring, MoSCoW method, and opportunity scoring for yo</span></a><a href="/en/sidehustle/product-announcement.html" class="related-card"><span class="related-card-title">Product Launch Strategy: Product Hunt, Hacker News, Social Media</span><span class="related-card-desc">Launch your SaaS product effectively on Product Hunt, Hacker News, and social media with proven stra</span></a><a href="/en/sidehustle/serverless-cost-saas.html" class="related-card"><span class="related-card-title">Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings</span><span class="related-card-desc">Optimize serverless costs for your SaaS with Lambda, DynamoDB, and API Gateway saving strategies.</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#saas-analytics-setup-privacy-focused-tools">SaaS Analytics Setup: Privacy-Focused Tools</a></li><li><a href="#posthog-product-analytics-platform">PostHog: Product Analytics Platform</a></li><li><a href="#plausible-lightweight-web-analytics">Plausible: Lightweight Web Analytics</a></li><li><a href="#umami-self-hosted-alternative">Umami: Self-Hosted Alternative</a></li><li><a href="#choosing-the-right-tool">Choosing the Right Tool</a></li><li><a href="#implementation-guide">Implementation Guide</a></li><li><a href="#conclusion">Conclusion</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

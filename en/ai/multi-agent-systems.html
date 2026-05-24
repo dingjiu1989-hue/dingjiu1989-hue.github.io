@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Multi-Agent Systems: Coordination, Communication, Consensus
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">AI</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">AI</span>
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
-      <h1 class="article-title">Multi-Agent Systems: Coordination, Communication, Consensus</h1>
-      <div class="article-meta"><time datetime="2026-02-17">Published 2026-02-17</time> · <time datetime="2026-05-23">Last active 2026-05-23</time> · 214 views · 0 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/multi-agent-systems.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/multi-agent-systems.png" alt="Multi-Agent Systems: Coordination, Communication, Consensus" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">Multi-Agent Systems: Coordination, Communication, Consensus</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-17">2026-02-17</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>214 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/multi-agent-systems.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/multi-agent-systems.png" alt="Multi-Agent Systems: Coordination, Communication, Consensus" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (17)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#agent-roles-and-specialization">Agent Roles and Specialization</a></li><li><a href="#define-specialized-agents">Define specialized agents</a></li><li><a href="#communication-protocols">Communication Protocols</a></li><li><a href="#orchestration-patterns">Orchestration Patterns</a></li><li><a href="#sequential-handoff">Sequential Handoff</a></li><li><a href="#debate-and-consensus">Debate and Consensus</a></li><li><a href="#share-positions">Share positions</a></li><li><a href="#each-agent-critiques-and-refines">Each agent critiques and refines</a></li><li><a href="#final-consensus">Final consensus</a></li><li><a href="#manager-worker-pattern">Manager-Worker Pattern</a></li><li><a href="#manager-creates-a-plan">Manager creates a plan</a></li><li><a href="#distribute-to-workers">Distribute to workers</a></li><li><a href="#collect-results">Collect results</a></li><li><a href="#manager-synthesizes-final-output">Manager synthesizes final output</a></li><li><a href="#consensus-with-voting">Consensus with Voting</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>A single LLM agent has limitations: finite context windows, single perspective bias, and vulnerability to cascading errors. Multi-agent systems address these by distributing work across specialized agents that communicate, coordinate, and reach consensus. This article covers the architectural patterns for building effective multi-agent systems.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/multi-agent-systems.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/multi-agent-systems.png" alt="Multi-Agent Systems: Coordination, Communication, Consensus" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Agent Roles and Specialization</h2>
 <p>Each agent should have a narrow, defined role:</p>
@@ -287,14 +295,8 @@
 <p>winner = max(vote_counts, key=vote_counts.get)</p>
 <p>return {"winner": winner, "confidence": vote_counts[winner] / sum(vote_counts.values())}</p>
 <h2>Conclusion</h2>
-<p>Multi-agent systems distribute intelligence across specialized agents. Sequential handoff is suitable for linear pipelines. Debate and consensus produces higher-quality answers by challenging assumptions. Manager-worker scales to complex tasks by decomposing and delegating. Choose your coordination pattern based on the task: sequential for well-defined steps, debate for decisions requiring multiple perspectives, and manager-worker for complex projects with parallelizable sub-tasks.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (17)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#agent-roles-and-specialization">Agent Roles and Specialization</a></li><li><a href="#define-specialized-agents">Define specialized agents</a></li><li><a href="#communication-protocols">Communication Protocols</a></li><li><a href="#orchestration-patterns">Orchestration Patterns</a></li><li><a href="#sequential-handoff">Sequential Handoff</a></li><li><a href="#debate-and-consensus">Debate and Consensus</a></li><li><a href="#share-positions">Share positions</a></li><li><a href="#each-agent-critiques-and-refines">Each agent critiques and refines</a></li><li><a href="#final-consensus">Final consensus</a></li><li><a href="#manager-worker-pattern">Manager-Worker Pattern</a></li><li><a href="#manager-creates-a-plan">Manager creates a plan</a></li><li><a href="#distribute-to-workers">Distribute to workers</a></li><li><a href="#collect-results">Collect results</a></li><li><a href="#manager-synthesizes-final-output">Manager synthesizes final output</a></li><li><a href="#consensus-with-voting">Consensus with Voting</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Multi-agent systems distribute intelligence across specialized agents. Sequential handoff is suitable for linear pipelines. Debate and consensus produces higher-quality answers by challenging assumptions. Manager-worker scales to complex tasks by decomposing and delegating. Choose your coordination pattern based on the task: sequential for well-defined steps, debate for decisions requiring multiple perspectives, and manager-worker for complex projects with parallelizable sub-tasks.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a></li><li><a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a></li><li><a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -302,34 +304,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Multi-Agent%20Systems%3A%20Coordination%2C%20Communication%2C%20Consensus&url=https%3A//aidev.fit/en/ai/multi-agent-systems.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/multi-agent-systems.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Multi-Agent%20Systems%3A%20Coordination%2C%20Communication%2C%20Consensus&url=https%3A//aidev.fit/en/ai/multi-agent-systems.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Multi-Agent%20Systems%3A%20Coordination%2C%20Communication%2C%20Consensus&u=https%3A//aidev.fit/en/ai/multi-agent-systems.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Multi-Agent%20Systems%3A%20Coordination%2C%20Communication%2C%20Consensus&body=https%3A//aidev.fit/en/ai/multi-agent-systems.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/multi-agent-systems.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/prompt-chaining.html" class="prev-next-btn prev-link">← Prompt Chaining: Decomposition, Parallel Execution, State Management</a><a href="/en/ai/graph-rag.html" class="prev-next-btn next-link">Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-workflow-automation.html" class="related-card"><span class="related-card-title">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</span><span class="related-card-desc">Build robust AI workflow automation with LangChain for LLM orchestration, Temporal for durable execu</span></a><a href="/en/ai/ai-agents-overview.html" class="related-card"><span class="related-card-title">AI Agents: Architecture and Implementation</span><span class="related-card-desc">Design and build AI agents: tool use, planning, memory, and multi-agent coordination for autonomous </span></a><a href="/en/ai/agent-memory-systems.html" class="related-card"><span class="related-card-title">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</span><span class="related-card-desc">Design memory systems for AI agents inspired by cognitive architecture: short-term working memory, l</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="related-card-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="related-card-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handli</span></a><a href="/en/ai/rag-agent-patterns.html" class="related-card"><span class="related-card-title">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</span><span class="related-card-desc">Explore RAG agent patterns that go beyond simple retrieval: self-querying agents, corrective RAG wit</span></a><a href="/en/ai/tool-use-patterns.html" class="related-card"><span class="related-card-title">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</span><span class="related-card-desc">Explore LLM tool use patterns including function calling, structured tool definitions, multi-step re</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Multi-Agent%20Systems%3A%20Coordination%2C%20Communication%2C%20Consensus&url=https%3A//aidev.fit/en/ai/multi-agent-systems.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/multi-agent-systems.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Multi-Agent%20Systems%3A%20Coordination%2C%20Communication%2C%20Consensus&url=https%3A//aidev.fit/en/ai/multi-agent-systems.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Multi-Agent%20Systems%3A%20Coordination%2C%20Communication%2C%20Consensus&u=https%3A//aidev.fit/en/ai/multi-agent-systems.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Multi-Agent%20Systems%3A%20Coordination%2C%20Communication%2C%20Consensus&body=https%3A//aidev.fit/en/ai/multi-agent-systems.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/multi-agent-systems.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/prompt-chaining.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Prompt Chaining: Decomposition, Parallel Execution, State Managem</span></a><a href="/en/ai/graph-rag.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Trav</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/ai-workflow-automation.html" class="related-card"><span class="rc-title">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</span><span class="rc-desc">Build robust AI workflow automation with LangChain for LLM orchestration, Temporal for durable execution, and event-driv</span></a><a href="/en/ai/ai-agents-overview.html" class="related-card"><span class="rc-title">AI Agents: Architecture and Implementation</span><span class="rc-desc">Design and build AI agents: tool use, planning, memory, and multi-agent coordination for autonomous task completion.</span></a><a href="/en/ai/agent-memory-systems.html" class="related-card"><span class="rc-title">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</span><span class="rc-desc">Design memory systems for AI agents inspired by cognitive architecture: short-term working memory, long-term storage, ep</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="rc-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="rc-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rat</span></a><a href="/en/ai/rag-agent-patterns.html" class="related-card"><span class="rc-title">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</span><span class="rc-desc">Explore RAG agent patterns that go beyond simple retrieval: self-querying agents, corrective RAG with verification, and </span></a><a href="/en/ai/tool-use-patterns.html" class="related-card"><span class="rc-title">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</span><span class="rc-desc">Explore LLM tool use patterns including function calling, structured tool definitions, multi-step reasoning with tool lo</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#agent-roles-and-specialization">Agent Roles and Specialization</a></li><li><a href="#define-specialized-agents">Define specialized agents</a></li><li><a href="#communication-protocols">Communication Protocols</a></li><li><a href="#orchestration-patterns">Orchestration Patterns</a></li><li><a href="#sequential-handoff">Sequential Handoff</a></li><li><a href="#debate-and-consensus">Debate and Consensus</a></li><li><a href="#share-positions">Share positions</a></li><li><a href="#each-agent-critiques-and-refines">Each agent critiques and refines</a></li><li><a href="#final-consensus">Final consensus</a></li><li><a href="#manager-worker-pattern">Manager-Worker Pattern</a></li><li><a href="#manager-creates-a-plan">Manager creates a plan</a></li><li><a href="#distribute-to-workers">Distribute to workers</a></li><li><a href="#collect-results">Collect results</a></li><li><a href="#manager-synthesizes-final-output">Manager synthesizes final output</a></li><li><a href="#consensus-with-voting">Consensus with Voting</a></li><li><a href="#conclusion">Conclusion</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

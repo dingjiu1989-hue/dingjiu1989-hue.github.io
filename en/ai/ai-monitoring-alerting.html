@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">AI</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">AI</span>
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
-      <h1 class="article-title">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h1>
-      <div class="article-meta"><time datetime="2026-02-14">Published 2026-02-14</time> · <time datetime="2026-04-10">Last active 2026-04-10</time> · 90 views · 0 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-monitoring-alerting.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-monitoring-alerting.png" alt="AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-14">2026-02-14</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>90 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-monitoring-alerting.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-monitoring-alerting.png" alt="AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (11)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#core-metrics">Core Metrics</a></li><li><a href="#token-usage-tracking">Token Usage Tracking</a></li><li><a href="#error-rate-monitoring">Error Rate Monitoring</a></li><li><a href="#drift-detection">Drift Detection</a></li><li><a href="#alerting-configuration">Alerting Configuration</a></li><li><a href="#latency-alerts">Latency alerts</a></li><li><a href="#error-rate-alerts">Error rate alerts</a></li><li><a href="#cost-anomaly-alerts">Cost anomaly alerts</a></li><li><a href="#drift-alerts">Drift alerts</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>AI applications introduce new monitoring dimensions beyond traditional infrastructure metrics. LLM responses can be slow, expensive, incorrect, or suddenly change behavior when providers update models. This article covers the metrics, tools, and alerting strategies for production AI monitoring, including drift detection that catches quality degradation before users complain.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-monitoring-alerting.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/ai-monitoring-alerting.png" alt="AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Core Metrics</h2>
 <p>Every AI application should track these foundational metrics:</p>
@@ -257,14 +265,8 @@
 <p>message=f"Drift score: {metrics.get('drift_score', 0):.3f}"))</p>
 <p>return alerts</p>
 <h2>Conclusion</h2>
-<p>AI monitoring extends traditional observability with LLM-specific metrics. Track latency percentiles (P50, P95, P99) to detect slowdowns. Monitor token usage and cost per user and feature to control spending. Categorize errors by type (rate limit, context window, content filter) to identify provider issues. Most importantly, implement drift detection to catch subtle quality changes when models are updated or system prompts are modified. Alert on all four dimensions and investigate any metric that deviates more than 20% from its baseline.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (11)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#core-metrics">Core Metrics</a></li><li><a href="#token-usage-tracking">Token Usage Tracking</a></li><li><a href="#error-rate-monitoring">Error Rate Monitoring</a></li><li><a href="#drift-detection">Drift Detection</a></li><li><a href="#alerting-configuration">Alerting Configuration</a></li><li><a href="#latency-alerts">Latency alerts</a></li><li><a href="#error-rate-alerts">Error rate alerts</a></li><li><a href="#cost-anomaly-alerts">Cost anomaly alerts</a></li><li><a href="#drift-alerts">Drift alerts</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>AI monitoring extends traditional observability with LLM-specific metrics. Track latency percentiles (P50, P95, P99) to detect slowdowns. Monitor token usage and cost per user and feature to control spending. Categorize errors by type (rate limit, context window, content filter) to identify provider issues. Most importantly, implement drift detection to catch subtle quality changes when models are updated or system prompts are modified. Alert on all four dimensions and investigate any metric that deviates more than 20% from its baseline.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a></li><li><a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a></li><li><a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -272,34 +274,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=AI%20Monitoring%20and%20Alerting%3A%20Latency%2C%20Token%20Usage%2C%20Error%20Rates%2C%20Drift%20Detection&url=https%3A//aidev.fit/en/ai/ai-monitoring-alerting.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/ai-monitoring-alerting.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=AI%20Monitoring%20and%20Alerting%3A%20Latency%2C%20Token%20Usage%2C%20Error%20Rates%2C%20Drift%20Detection&url=https%3A//aidev.fit/en/ai/ai-monitoring-alerting.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=AI%20Monitoring%20and%20Alerting%3A%20Latency%2C%20Token%20Usage%2C%20Error%20Rates%2C%20Drift%20Detection&u=https%3A//aidev.fit/en/ai/ai-monitoring-alerting.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=AI%20Monitoring%20and%20Alerting%3A%20Latency%2C%20Token%20Usage%2C%20Error%20Rates%2C%20Drift%20Detection&body=https%3A//aidev.fit/en/ai/ai-monitoring-alerting.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/ai-monitoring-alerting.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-testing-frameworks.html" class="prev-next-btn prev-link">← AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a><a href="/en/ai/agent-memory-systems.html" class="prev-next-btn next-link">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/llm-observability.html" class="related-card"><span class="related-card-title">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</span><span class="related-card-desc">Implement LLM observability for production AI applications: distributed tracing, token usage trackin</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="related-card-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="related-card-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handli</span></a><a href="/en/ai/llm-version-management.html" class="related-card"><span class="related-card-title">LLM Version Management: Model Registry, A/B Testing, Rollback</span><span class="related-card-desc">Manage LLM versions in production with model registries, A/B testing frameworks, gradual rollouts, a</span></a><a href="/en/ai/ai-caching-strategies.html" class="related-card"><span class="related-card-title">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</span><span class="related-card-desc">Reduce LLM API costs and latency with AI caching strategies: semantic caching, intelligent invalidat</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="related-card-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="related-card-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fa</span></a><a href="/en/ai/ai-data-privacy.html" class="related-card"><span class="related-card-title">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</span><span class="related-card-desc">Protect user privacy in AI applications with PII detection and redaction, data anonymization techniq</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=AI%20Monitoring%20and%20Alerting%3A%20Latency%2C%20Token%20Usage%2C%20Error%20Rates%2C%20Drift%20Detection&url=https%3A//aidev.fit/en/ai/ai-monitoring-alerting.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/ai-monitoring-alerting.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=AI%20Monitoring%20and%20Alerting%3A%20Latency%2C%20Token%20Usage%2C%20Error%20Rates%2C%20Drift%20Detection&url=https%3A//aidev.fit/en/ai/ai-monitoring-alerting.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=AI%20Monitoring%20and%20Alerting%3A%20Latency%2C%20Token%20Usage%2C%20Error%20Rates%2C%20Drift%20Detection&u=https%3A//aidev.fit/en/ai/ai-monitoring-alerting.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=AI%20Monitoring%20and%20Alerting%3A%20Latency%2C%20Token%20Usage%2C%20Error%20Rates%2C%20Drift%20Detection&body=https%3A//aidev.fit/en/ai/ai-monitoring-alerting.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/ai-monitoring-alerting.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-testing-frameworks.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</span></a><a href="/en/ai/agent-memory-systems.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic M</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/llm-observability.html" class="related-card"><span class="rc-title">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</span><span class="rc-desc">Implement LLM observability for production AI applications: distributed tracing, token usage tracking, latency monitorin</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="rc-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="rc-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rat</span></a><a href="/en/ai/llm-version-management.html" class="related-card"><span class="rc-title">LLM Version Management: Model Registry, A/B Testing, Rollback</span><span class="rc-desc">Manage LLM versions in production with model registries, A/B testing frameworks, gradual rollouts, automated evaluation </span></a><a href="/en/ai/ai-caching-strategies.html" class="related-card"><span class="rc-title">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</span><span class="rc-desc">Reduce LLM API costs and latency with AI caching strategies: semantic caching, intelligent invalidation, and cost-optimi</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="rc-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="rc-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fallbacks, cost manage</span></a><a href="/en/ai/ai-data-privacy.html" class="related-card"><span class="rc-title">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</span><span class="rc-desc">Protect user privacy in AI applications with PII detection and redaction, data anonymization techniques, and local proce</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#core-metrics">Core Metrics</a></li><li><a href="#token-usage-tracking">Token Usage Tracking</a></li><li><a href="#error-rate-monitoring">Error Rate Monitoring</a></li><li><a href="#drift-detection">Drift Detection</a></li><li><a href="#alerting-configuration">Alerting Configuration</a></li><li><a href="#latency-alerts">Latency alerts</a></li><li><a href="#error-rate-alerts">Error rate alerts</a></li><li><a href="#cost-anomaly-alerts">Cost anomaly alerts</a></li><li><a href="#drift-alerts">Drift alerts</a></li><li><a href="#conclusion">Conclusion</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

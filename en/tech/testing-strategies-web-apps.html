@@ -101,21 +101,29 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each
-    </div>
-    <article>
-      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
         <span class="tag-cat">Testing</span>
         <span class="tag-cat">Web Dev</span>
         <span class="tag-cat">Best Practices</span>
         <span class="tag-cat">Quality</span>
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
-      <h1 class="article-title">Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each</h1>
-      <div class="article-meta"><time datetime="2025-10-08">Published 2025-10-08</time> · <time datetime="2026-05-15">Last active 2026-05-15</time> · 4148 views · 33 replies · 3 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/testing-strategies-web-apps.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/testing-strategies-web-apps.png" alt="Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Testing is easy to get wrong. Too many unit tests give false confidence. Too few integration tests miss real bugs. Too many E2E tests make CI slow. Here's a practical guide to the Testing Trophy — the modern testing strategy that actually works.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/testing-strategies-web-apps.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/testing-strategies-web-apps.png" alt="Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each</h1>
+        <div class="article-meta">
+          <time datetime="2025-10-08">2025-10-08</time>
+          <span class="meta-sep">·</span>
+          <span>3 min read</span>
+          <span class="meta-sep">·</span>
+          <span>4148 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/testing-strategies-web-apps.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/testing-strategies-web-apps.png" alt="Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#the-testing-trophy-not-the-testing-pyramid">The Testing Trophy (Not the Testing Pyramid)</a></li><li><a href="#unit-tests--test-pure-logic-exhaustively">Unit Tests — Test Pure Logic Exhaustively</a></li><li><a href="#integration-tests--the-confidence-backbone">Integration Tests — The Confidence Backbone</a></li><li><a href="#e2e-tests--validate-critical-user-flows">E2E Tests — Validate Critical User Flows</a></li><li><a href="#testing-stack-recommendations">Testing Stack Recommendations</a></li></ol></details>
+        <div class="article-body"><p>Testing is easy to get wrong. Too many unit tests give false confidence. Too few integration tests miss real bugs. Too many E2E tests make CI slow. Here's a practical guide to the Testing Trophy — the modern testing strategy that actually works.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/testing-strategies-web-apps.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/testing-strategies-web-apps.png" alt="Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 
 <h2>The Testing Trophy (Not the Testing Pyramid)</h2>
 <p>The classic testing pyramid said "lots of unit, some integration, few E2E." The Testing Trophy inverts this: integration tests provide the most confidence per dollar, so write more of them.</p>
@@ -183,14 +191,8 @@ test("user can complete purchase", async ({ page }) => {
 <tr><td>Visual Regression</td><td>Chromatic / Percy</td><td>Design system components</td></tr>
 </table>
 
-<p><strong>Bottom line:</strong> Write mostly integration tests. They provide the best confidence-to-effort ratio. Unit test pure logic. E2E test only critical flows (max 20 scenarios). A slow CI pipeline is a broken one — keep E2E count low. See also: <a href="/en/compare/vite-vs-webpack-vs-turbopack.html">build tools</a> (Vitest is built on Vite) and <a href="/en/tools/best-cicd-tools-2026.html">CI/CD tools comparison</a>.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/load-testing-guide.html">Load Testing Guide 2026: k6 vs Artillery vs Locust vs wrk2 for Performance Testing</a>, <a href="/en/tech/authentication-best-practices-2026.html">Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys</a>, <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices: The Complete Guide for 2026</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#the-testing-trophy-(not-the-testing-pyramid)">The Testing Trophy (Not the Testing Pyramid)</a></li><li><a href="#unit-tests-—-test-pure-logic-exhaustively">Unit Tests — Test Pure Logic Exhaustively</a></li><li><a href="#integration-tests-—-the-confidence-backbone">Integration Tests — The Confidence Backbone</a></li><li><a href="#e2e-tests-—-validate-critical-user-flows">E2E Tests — Validate Critical User Flows</a></li><li><a href="#testing-stack-recommendations">Testing Stack Recommendations</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p><strong>Bottom line:</strong> Write mostly integration tests. They provide the best confidence-to-effort ratio. Unit test pure logic. E2E test only critical flows (max 20 scenarios). A slow CI pipeline is a broken one — keep E2E count low. See also: <a href="/en/compare/vite-vs-webpack-vs-turbopack.html">build tools</a> (Vitest is built on Vite) and <a href="/en/tools/best-cicd-tools-2026.html">CI/CD tools comparison</a>.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/load-testing-guide.html">Load Testing Guide 2026: k6 vs Artillery vs Locust vs wrk2 for Performance Testing</a></li><li><a href="/en/tech/authentication-best-practices-2026.html">Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys</a></li><li><a href="/en/tech/rest-api-best-practices.html">REST API Best Practices: The Complete Guide for 2026</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -198,29 +200,35 @@ test("user can complete purchase", async ({ page }) => {
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Testing%20Strategies%20for%20Web%20Apps%3A%20Unit%2C%20Integration%2C%20E2E%2C%20and%20When%20to%20Use%20Each&url=https%3A//aidev.fit/en/tech/testing-strategies-web-apps.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/testing-strategies-web-apps.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Testing%20Strategies%20for%20Web%20Apps%3A%20Unit%2C%20Integration%2C%20E2E%2C%20and%20When%20to%20Use%20Each&url=https%3A//aidev.fit/en/tech/testing-strategies-web-apps.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Testing%20Strategies%20for%20Web%20Apps%3A%20Unit%2C%20Integration%2C%20E2E%2C%20and%20When%20to%20Use%20Each&u=https%3A//aidev.fit/en/tech/testing-strategies-web-apps.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Testing%20Strategies%20for%20Web%20Apps%3A%20Unit%2C%20Integration%2C%20E2E%2C%20and%20When%20to%20Use%20Each&body=https%3A//aidev.fit/en/tech/testing-strategies-web-apps.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/testing-strategies-web-apps.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Testing%20Strategies%20for%20Web%20Apps%3A%20Unit%2C%20Integration%2C%20E2E%2C%20and%20When%20to%20Use%20Each&url=https%3A//aidev.fit/en/tech/testing-strategies-web-apps.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/testing-strategies-web-apps.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Testing%20Strategies%20for%20Web%20Apps%3A%20Unit%2C%20Integration%2C%20E2E%2C%20and%20When%20to%20Use%20Each&url=https%3A//aidev.fit/en/tech/testing-strategies-web-apps.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Testing%20Strategies%20for%20Web%20Apps%3A%20Unit%2C%20Integration%2C%20E2E%2C%20and%20When%20to%20Use%20Each&u=https%3A//aidev.fit/en/tech/testing-strategies-web-apps.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Testing%20Strategies%20for%20Web%20Apps%3A%20Unit%2C%20Integration%2C%20E2E%2C%20and%20When%20to%20Use%20Each&body=https%3A//aidev.fit/en/tech/testing-strategies-web-apps.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/testing-strategies-web-apps.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/git-workflows-team-guide.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development</span></a><a href="/en/tech/linux-commands.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Linux Commands Cheat Sheet: 50 Commands Every Developer Should Kn</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/websocket-vs-sse-vs-polling.html" class="related-card"><span class="rc-title">WebSocket vs SSE vs Polling: Real-Time Data Patterns for Web Apps</span><span class="rc-desc">Compare WebSocket, Server-Sent Events, long polling, and short polling for real-time features. When to use each, with co</span></a><a href="/en/tech/web-security-basics.html" class="related-card"><span class="rc-title">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</span><span class="rc-desc">Practical web security guide covering Cross-Site Scripting, CORS headers, Content Security Policy, SQL injection, and CS</span></a><a href="/en/tech/web-accessibility-guide.html" class="related-card"><span class="rc-title">Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice</span><span class="rc-desc">Practical accessibility guide for developers: semantic HTML, ARIA labels (when and when not to use), keyboard navigation</span></a><a href="/en/tech/webassembly-guide.html" class="related-card"><span class="rc-title">WebAssembly Guide 2026: Running Native Code in the Browser with Rust and WASI</span><span class="rc-desc">Practical guide to WebAssembly — when to use it, Rust to Wasm with wasm-pack, WASI for edge computing, and real-world pe</span></a><a href="/en/tech/infrastructure-testing.html" class="related-card"><span class="rc-title">Infrastructure Testing with Terratest and Other Tools</span><span class="rc-desc">Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources, compliance validat</span></a><a href="/en/tech/caching-strategies-web-apps.html" class="related-card"><span class="rc-title">Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching</span><span class="rc-desc">Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-while-revalidate, and c</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/git-workflows-team-guide.html" class="prev-next-btn prev-link">← Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development</a><a href="/en/tech/linux-commands.html" class="prev-next-btn next-link">Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/websocket-vs-sse-vs-polling.html" class="related-card"><span class="related-card-title">WebSocket vs SSE vs Polling: Real-Time Data Patterns for Web Apps</span><span class="related-card-desc">Compare WebSocket, Server-Sent Events, long polling, and short polling for real-time features. When </span></a><a href="/en/tech/web-security-basics.html" class="related-card"><span class="related-card-title">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</span><span class="related-card-desc">Practical web security guide covering Cross-Site Scripting, CORS headers, Content Security Policy, S</span></a><a href="/en/tech/web-accessibility-guide.html" class="related-card"><span class="related-card-title">Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice</span><span class="related-card-desc">Practical accessibility guide for developers: semantic HTML, ARIA labels (when and when not to use),</span></a><a href="/en/tech/webassembly-guide.html" class="related-card"><span class="related-card-title">WebAssembly Guide 2026: Running Native Code in the Browser with Rust and WASI</span><span class="related-card-desc">Practical guide to WebAssembly — when to use it, Rust to Wasm with wasm-pack, WASI for edge computin</span></a><a href="/en/tech/infrastructure-testing.html" class="related-card"><span class="related-card-title">Infrastructure Testing with Terratest and Other Tools</span><span class="related-card-desc">Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources</span></a><a href="/en/tech/caching-strategies-web-apps.html" class="related-card"><span class="related-card-title">Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching</span><span class="related-card-desc">Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-whi</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#the-testing-trophy-not-the-testing-pyramid">The Testing Trophy (Not the Testing Pyramid)</a></li><li><a href="#unit-tests--test-pure-logic-exhaustively">Unit Tests — Test Pure Logic Exhaustively</a></li><li><a href="#integration-tests--the-confidence-backbone">Integration Tests — The Confidence Backbone</a></li><li><a href="#e2e-tests--validate-critical-user-flows">E2E Tests — Validate Critical User Flows</a></li><li><a href="#testing-stack-recommendations">Testing Stack Recommendations</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

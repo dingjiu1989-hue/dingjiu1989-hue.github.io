@@ -101,17 +101,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › AI Embeddings Explained
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
         <span class="tag-cat">Machine Learning</span></div>
-      <h1 class="article-title">AI Embeddings Explained</h1>
-      <div class="article-meta"><time datetime="2025-12-11">Published 2025-12-11</time> · <time datetime="2026-04-03">Last active 2026-04-03</time> · 138 views · 0 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-embeddings-explained.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-embeddings-explained.png" alt="AI Embeddings Explained" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">AI Embeddings Explained</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-11">2025-12-11</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>138 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-embeddings-explained.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-embeddings-explained.png" alt="AI Embeddings Explained" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (13)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#what-are-embeddings">What Are Embeddings?</a></li><li><a href="#how-embeddings-are-generated">How Embeddings Are Generated</a></li><li><a href="#popular-embedding-models">Popular Embedding Models</a></li><li><a href="#using-embeddings-in-practice">Using Embeddings in Practice</a></li><li><a href="#generating-embeddings">Generating Embeddings</a></li><li><a href="#measuring-similarity">Measuring Similarity</a></li><li><a href="#dimensionality-reduction">Dimensionality Reduction</a></li><li><a href="#advanced-techniques">Advanced Techniques</a></li><li><a href="#multi-task-embeddings">Multi-Task Embeddings</a></li><li><a href="#matryoshka-embeddings">Matryoshka Embeddings</a></li><li><a href="#common-pitfalls">Common Pitfalls</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>Embeddings are the foundation of modern AI applications — powering semantic search, recommendation systems, clustering, and classification. At their core, embeddings convert text, images, or other data into dense vector representations that capture semantic meaning. This guide explains what embeddings are, how they work, and how to use them effectively.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-embeddings-explained.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/ai-embeddings-explained.png" alt="AI Embeddings Explained" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>What Are Embeddings?</h2>
 <p>An embedding is a numerical representation of data — typically a list of floating-point numbers — where the position in vector space encodes semantic meaning. Similar concepts cluster together, while dissimilar concepts are far apart.</p>
@@ -185,14 +193,8 @@
 <p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Ignoring domain mismatch</strong> : Embedding models trained on general web text may perform poorly on medical or legal text</p>
 <p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Fixed chunk sizes in RAG</strong> : Large chunks dilute meaning; small chunks lose context</p>
 <h2>Conclusion</h2>
-<p>Embeddings are a versatile and powerful tool in the AI practitioner's toolkit. They enable semantic search, document clustering, recommendation systems, and are the backbone of RAG architectures. Choosing the right model, normalizing properly, and understanding the trade-offs between dimension count and performance will determine the success of your embedding-based application.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (13)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#what-are-embeddings">What Are Embeddings?</a></li><li><a href="#how-embeddings-are-generated">How Embeddings Are Generated</a></li><li><a href="#popular-embedding-models">Popular Embedding Models</a></li><li><a href="#using-embeddings-in-practice">Using Embeddings in Practice</a></li><li><a href="#generating-embeddings">Generating Embeddings</a></li><li><a href="#measuring-similarity">Measuring Similarity</a></li><li><a href="#dimensionality-reduction">Dimensionality Reduction</a></li><li><a href="#advanced-techniques">Advanced Techniques</a></li><li><a href="#multi-task-embeddings">Multi-Task Embeddings</a></li><li><a href="#matryoshka-embeddings">Matryoshka Embeddings</a></li><li><a href="#common-pitfalls">Common Pitfalls</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Embeddings are a versatile and powerful tool in the AI practitioner's toolkit. They enable semantic search, document clustering, recommendation systems, and are the backbone of RAG architectures. Choosing the right model, normalizing properly, and understanding the trade-offs between dimension count and performance will determine the success of your embedding-based application.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a></li><li><a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a></li><li><a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -200,34 +202,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=AI%20Embeddings%20Explained&url=https%3A//aidev.fit/en/ai/ai-embeddings-explained.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/ai-embeddings-explained.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=AI%20Embeddings%20Explained&url=https%3A//aidev.fit/en/ai/ai-embeddings-explained.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=AI%20Embeddings%20Explained&u=https%3A//aidev.fit/en/ai/ai-embeddings-explained.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=AI%20Embeddings%20Explained&body=https%3A//aidev.fit/en/ai/ai-embeddings-explained.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/ai-embeddings-explained.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-document-processing.html" class="prev-next-btn prev-link">← AI Document Processing</a><a href="/en/ai/ai-security-complete-guide.html" class="prev-next-btn next-link">AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026 →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/llm-fine-tuning.html" class="related-card"><span class="related-card-title">LLM Fine-Tuning Guide</span><span class="related-card-desc">Learn how to fine-tune LLMs effectively using LoRA, QLoRA, and full fine-tuning techniques with prac</span></a><a href="/en/ai/ai-agents-guide.html" class="related-card"><span class="related-card-title">AI Agents for Developers: A Practical Guide to Building and Using Agents</span><span class="related-card-desc">What AI agents actually are, how they work (tools, memory, planning loops), and frameworks to build </span></a><a href="/en/ai/ai-document-processing.html" class="related-card"><span class="related-card-title">AI Document Processing</span><span class="related-card-desc">Build AI-powered document processing pipelines for extraction, classification, summarization, and da</span></a><a href="/en/ai/ai-testing-strategies.html" class="related-card"><span class="related-card-title">Testing Strategies for AI Applications</span><span class="related-card-desc">Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucinat</span></a><a href="/en/ai/multimodal-ai.html" class="related-card"><span class="related-card-title">Multimodal AI Applications in 2026</span><span class="related-card-desc">Explore text+image+audio AI models, vision-language models, speech-to-text, document AI, multimodal </span></a><a href="/en/ai/ai-agents-frameworks.html" class="related-card"><span class="related-card-title">AI Agent Frameworks Compared</span><span class="related-card-desc">Compare leading AI agent frameworks including LangGraph, CrewAI, AutoGen, and OpenAI Assistants API </span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=AI%20Embeddings%20Explained&url=https%3A//aidev.fit/en/ai/ai-embeddings-explained.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/ai-embeddings-explained.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=AI%20Embeddings%20Explained&url=https%3A//aidev.fit/en/ai/ai-embeddings-explained.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=AI%20Embeddings%20Explained&u=https%3A//aidev.fit/en/ai/ai-embeddings-explained.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=AI%20Embeddings%20Explained&body=https%3A//aidev.fit/en/ai/ai-embeddings-explained.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/ai-embeddings-explained.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-document-processing.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">AI Document Processing</span></a><a href="/en/ai/ai-security-complete-guide.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">AI Security Complete Guide: Prompt Injection, Guardrails, and Red</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/llm-fine-tuning.html" class="related-card"><span class="rc-title">LLM Fine-Tuning Guide</span><span class="rc-desc">Learn how to fine-tune LLMs effectively using LoRA, QLoRA, and full fine-tuning techniques with practical code examples.</span></a><a href="/en/ai/ai-agents-guide.html" class="related-card"><span class="rc-title">AI Agents for Developers: A Practical Guide to Building and Using Agents</span><span class="rc-desc">What AI agents actually are, how they work (tools, memory, planning loops), and frameworks to build them — LangChain, Cr</span></a><a href="/en/ai/ai-document-processing.html" class="related-card"><span class="rc-title">AI Document Processing</span><span class="rc-desc">Build AI-powered document processing pipelines for extraction, classification, summarization, and data entry from PDFs, </span></a><a href="/en/ai/ai-testing-strategies.html" class="related-card"><span class="rc-title">Testing Strategies for AI Applications</span><span class="rc-desc">Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucination detection, promp</span></a><a href="/en/ai/multimodal-ai.html" class="related-card"><span class="rc-title">Multimodal AI Applications in 2026</span><span class="rc-desc">Explore text+image+audio AI models, vision-language models, speech-to-text, document AI, multimodal RAG, and real-world </span></a><a href="/en/ai/ai-agents-frameworks.html" class="related-card"><span class="rc-title">AI Agent Frameworks Compared</span><span class="rc-desc">Compare leading AI agent frameworks including LangGraph, CrewAI, AutoGen, and OpenAI Assistants API for building autonom</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#what-are-embeddings">What Are Embeddings?</a></li><li><a href="#how-embeddings-are-generated">How Embeddings Are Generated</a></li><li><a href="#popular-embedding-models">Popular Embedding Models</a></li><li><a href="#using-embeddings-in-practice">Using Embeddings in Practice</a></li><li><a href="#generating-embeddings">Generating Embeddings</a></li><li><a href="#measuring-similarity">Measuring Similarity</a></li><li><a href="#dimensionality-reduction">Dimensionality Reduction</a></li><li><a href="#advanced-techniques">Advanced Techniques</a></li><li><a href="#multi-task-embeddings">Multi-Task Embeddings</a></li><li><a href="#matryoshka-embeddings">Matryoshka Embeddings</a></li><li><a href="#common-pitfalls">Common Pitfalls</a></li><li><a href="#conclusion">Conclusion</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

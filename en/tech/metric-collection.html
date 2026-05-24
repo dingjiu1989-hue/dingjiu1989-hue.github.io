@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Metric Collection
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
-      <h1 class="article-title">Metric Collection</h1>
-      <div class="article-meta"><time datetime="2026-01-08">Published 2026-01-08</time> · <time datetime="2026-04-15">Last active 2026-04-15</time> · 447 views · 2 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/metric-collection.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/metric-collection.png" alt="Metric Collection" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Metric collection is the practice of gathering numerical measurements from applications and infrastructure. Metrics provide insight into system health, performance, and usage patterns. This article covers the three main collection approaches—agent-based, pull-based, and push-based—along with cardinality management and best practices.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/metric-collection.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/metric-collection.png" alt="Metric Collection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Metric Collection</h1>
+        <div class="article-meta">
+          <time datetime="2026-01-08">2026-01-08</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>447 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/metric-collection.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/metric-collection.png" alt="Metric Collection" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#metric-types">Metric Types</a></li><li><a href="#agent-based-collection">Agent-Based Collection</a></li><li><a href="#pull-based-collection">Pull-Based Collection</a></li><li><a href="#push-based-collection">Push-Based Collection</a></li><li><a href="#cardinality-management">Cardinality Management</a></li><li><a href="#collection-frequency">Collection Frequency</a></li><li><a href="#best-practices">Best Practices</a></li></ol></details>
+        <div class="article-body"><p>Metric collection is the practice of gathering numerical measurements from applications and infrastructure. Metrics provide insight into system health, performance, and usage patterns. This article covers the three main collection approaches—agent-based, pull-based, and push-based—along with cardinality management and best practices.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/metric-collection.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/metric-collection.png" alt="Metric Collection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Metric Types</h2>
 <p>Metrics fall into several categories. System metrics measure infrastructure: CPU usage, memory consumption, disk I/O, network traffic. Application metrics measure software behavior: request rate, error rate, response time, queue depth. Business metrics measure business outcomes: orders per minute, active users, revenue.</p>
 <p>Each metric has a name, value, timestamp, and optional dimensions (labels or tags). Dimensions provide context: <code>http_requests_total{method="GET", path="/api/users", status="200"}</code>. Dimensions enable slicing and filtering of metric data.</p>
@@ -139,14 +147,8 @@
 <p>Use consistent metric naming conventions. Follow a hierarchical naming structure: <code>service.layer.operation.unit</code> (e.g., <code>orders.api.create.latency_seconds</code>). Include meaningful dimensions while avoiding cardinality explosion.</p>
 <p>Define metric types clearly. Counters increase monotonically (total requests). Gauges represent current values (active connections). Histograms track distributions (request latency). Summaries provide quantile estimates.</p>
 <p>Instrument all services from the start. Adding metrics after deployment is harder than building them in. Establish SLIs (Service Level Indicators) for each service and monitor them consistently. Correlate metrics with deployment events to identify performance regressions.</p>
-<p>Metric collection is the foundation of observability. Well-designed metrics enable rapid diagnosis, capacity planning, and performance optimization. Combined with structured logging and distributed tracing, metrics provide the visibility needed to operate complex distributed systems reliably.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>, <a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (7)</summary><ol><li><a href="#metric-types">Metric Types</a></li><li><a href="#agent-based-collection">Agent-Based Collection</a></li><li><a href="#pull-based-collection">Pull-Based Collection</a></li><li><a href="#push-based-collection">Push-Based Collection</a></li><li><a href="#cardinality-management">Cardinality Management</a></li><li><a href="#collection-frequency">Collection Frequency</a></li><li><a href="#best-practices">Best Practices</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Metric collection is the foundation of observability. Well-designed metrics enable rapid diagnosis, capacity planning, and performance optimization. Combined with structured logging and distributed tracing, metrics provide the visibility needed to operate complex distributed systems reliably.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a></li><li><a href="/en/tech/docker-networking.html">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a></li><li><a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -154,29 +156,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Metric%20Collection&url=https%3A//aidev.fit/en/tech/metric-collection.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/metric-collection.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Metric%20Collection&url=https%3A//aidev.fit/en/tech/metric-collection.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Metric%20Collection&u=https%3A//aidev.fit/en/tech/metric-collection.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Metric%20Collection&body=https%3A//aidev.fit/en/tech/metric-collection.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/metric-collection.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Metric%20Collection&url=https%3A//aidev.fit/en/tech/metric-collection.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/metric-collection.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Metric%20Collection&url=https%3A//aidev.fit/en/tech/metric-collection.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Metric%20Collection&u=https%3A//aidev.fit/en/tech/metric-collection.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Metric%20Collection&body=https%3A//aidev.fit/en/tech/metric-collection.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/metric-collection.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/log-management.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Log Management</span></a><a href="/en/tech/distributed-caching.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Distributed Caching</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/ci-cd-best-practices.html" class="related-card"><span class="rc-title">CI/CD Best Practices</span><span class="rc-desc">Master CI/CD best practices: pipeline design, artifact management, environment promotion, and deployment strategies</span></a><a href="/en/tech/configuration-management.html" class="related-card"><span class="rc-title">Configuration Management</span><span class="rc-desc">Master configuration management: environment variables, config files, feature flags, and best practices for different en</span></a><a href="/en/tech/error-handling-patterns.html" class="related-card"><span class="rc-title">Error Handling Patterns</span><span class="rc-desc">Master error handling patterns: Result types, exceptions, error boundaries, resilience strategies, and recovery approach</span></a><a href="/en/tech/log-management.html" class="related-card"><span class="rc-title">Log Management</span><span class="rc-desc">Explore log management: collection, aggregation, storage, query strategies, and retention policies for production system</span></a><a href="/en/tech/secret-management.html" class="related-card"><span class="rc-title">Secret Management</span><span class="rc-desc">Learn secret management: Vault, AWS Secrets Manager, SOPS, encryption approaches, rotation policies, and best practices</span></a><a href="/en/tech/ansible-automation.html" class="related-card"><span class="rc-title">Ansible Automation: Playbooks, Roles, Inventory, and Vault</span><span class="rc-desc">Deep dive into Ansible automation covering playbooks, roles, inventory management, Ansible Vault, idempotency patterns, </span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/log-management.html" class="prev-next-btn prev-link">← Log Management</a><a href="/en/tech/distributed-caching.html" class="prev-next-btn next-link">Distributed Caching →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/ci-cd-best-practices.html" class="related-card"><span class="related-card-title">CI/CD Best Practices</span><span class="related-card-desc">Master CI/CD best practices: pipeline design, artifact management, environment promotion, and deploy</span></a><a href="/en/tech/configuration-management.html" class="related-card"><span class="related-card-title">Configuration Management</span><span class="related-card-desc">Master configuration management: environment variables, config files, feature flags, and best practi</span></a><a href="/en/tech/error-handling-patterns.html" class="related-card"><span class="related-card-title">Error Handling Patterns</span><span class="related-card-desc">Master error handling patterns: Result types, exceptions, error boundaries, resilience strategies, a</span></a><a href="/en/tech/log-management.html" class="related-card"><span class="related-card-title">Log Management</span><span class="related-card-desc">Explore log management: collection, aggregation, storage, query strategies, and retention policies f</span></a><a href="/en/tech/secret-management.html" class="related-card"><span class="related-card-title">Secret Management</span><span class="related-card-desc">Learn secret management: Vault, AWS Secrets Manager, SOPS, encryption approaches, rotation policies,</span></a><a href="/en/tech/ansible-automation.html" class="related-card"><span class="related-card-title">Ansible Automation: Playbooks, Roles, Inventory, and Vault</span><span class="related-card-desc">Deep dive into Ansible automation covering playbooks, roles, inventory management, Ansible Vault, id</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#metric-types">Metric Types</a></li><li><a href="#agent-based-collection">Agent-Based Collection</a></li><li><a href="#pull-based-collection">Pull-Based Collection</a></li><li><a href="#push-based-collection">Push-Based Collection</a></li><li><a href="#cardinality-management">Cardinality Management</a></li><li><a href="#collection-frequency">Collection Frequency</a></li><li><a href="#best-practices">Best Practices</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

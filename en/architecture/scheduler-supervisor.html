@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Scheduler Supervisor Pattern
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Scheduler Supervisor Pattern</h1>
-      <div class="article-meta"><time datetime="2026-05-05">Published 2026-05-05</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 176 views · 0 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/scheduler-supervisor.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/scheduler-supervisor.png" alt="Scheduler Supervisor Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The scheduler supervisor pattern manages the execution of scheduled and background jobs in a distributed system. It separates the scheduling responsibility from the execution responsibility, using a supervisor to monitor job execution, handle failures, and manage retries. This pattern is essential for reliable background processing in production systems. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/scheduler-supervisor.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/scheduler-supervisor.png" alt="Scheduler Supervisor Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Scheduler Supervisor Pattern</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-05">2026-05-05</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>176 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/scheduler-supervisor.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/scheduler-supervisor.png" alt="Scheduler Supervisor Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>The scheduler supervisor pattern manages the execution of scheduled and background jobs in a distributed system. It separates the scheduling responsibility from the execution responsibility, using a supervisor to monitor job execution, handle failures, and manage retries. This pattern is essential for reliable background processing in production systems. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/scheduler-supervisor.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/scheduler-supervisor.png" alt="Scheduler Supervisor Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Core Concepts </p>
 <p>The scheduler supervisor pattern has three components: the scheduler, which determines when jobs should run based on schedules or triggers; the executor, which runs the job's business logic; and the supervisor, which monitors execution, handles failures, and enforces retry policies. </p>
 <p>This separation of concerns allows each component to be scaled and managed independently. The scheduler can handle thousands of schedules without being affected by job execution load. The executors can scale horizontally based on workload. The supervisor provides consistent failure handling across all jobs. </p>
@@ -136,14 +144,8 @@
 <p>Monitoring </p>
 <p>Monitoring scheduled job execution requires tracking several metrics: job execution time, success rate, failure rate by failure reason, time between scheduled and actual execution (scheduling delay), and dead-letter queue depth. Alerts should fire when failure rates exceed thresholds or when jobs are significantly delayed. </p>
 <p>Dashboard visibility into job execution history is essential for operations teams. Each job should show its last N executions, current status, next scheduled time, and execution statistics. Historical trends help identify degrading jobs before they fail completely. </p>
-<p>The scheduler supervisor pattern transforms unreliable background job execution into a manageable, observable system. By separating concerns and providing consistent failure handling, it ensures that scheduled jobs execute reliably even in distributed, failure-prone environments.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>The scheduler supervisor pattern transforms unreliable background job execution into a manageable, observable system. By separating concerns and providing consistent failure handling, it ensures that scheduled jobs execute reliably even in distributed, failure-prone environments.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a></li><li><a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a></li><li><a href="/en/architecture/retry-patterns.html">Retry Patterns</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -151,29 +153,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Scheduler%20Supervisor%20Pattern&url=https%3A//aidev.fit/en/architecture/scheduler-supervisor.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/scheduler-supervisor.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Scheduler%20Supervisor%20Pattern&url=https%3A//aidev.fit/en/architecture/scheduler-supervisor.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Scheduler%20Supervisor%20Pattern&u=https%3A//aidev.fit/en/architecture/scheduler-supervisor.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Scheduler%20Supervisor%20Pattern&body=https%3A//aidev.fit/en/architecture/scheduler-supervisor.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/scheduler-supervisor.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Scheduler%20Supervisor%20Pattern&url=https%3A//aidev.fit/en/architecture/scheduler-supervisor.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/scheduler-supervisor.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Scheduler%20Supervisor%20Pattern&url=https%3A//aidev.fit/en/architecture/scheduler-supervisor.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Scheduler%20Supervisor%20Pattern&u=https%3A//aidev.fit/en/architecture/scheduler-supervisor.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Scheduler%20Supervisor%20Pattern&body=https%3A//aidev.fit/en/architecture/scheduler-supervisor.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/scheduler-supervisor.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/architecture-decision-records.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Architecture Decision Records: Documenting Technical Decisions</span></a><a href="/en/architecture/event-storming.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Event Storming</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/domain-events.html" class="related-card"><span class="rc-title">Domain Events: Design and Implementation</span><span class="rc-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery</span></a><a href="/en/architecture/leader-election.html" class="related-card"><span class="rc-title">Leader Election in Distributed Systems</span><span class="rc-desc">Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best practices</span></a><a href="/en/architecture/api-composition-pattern.html" class="related-card"><span class="rc-title">API Composition Pattern</span><span class="rc-desc">Learn API composition: aggregation, parallel calls, error handling strategies, and cross-service data retrieval</span></a><a href="/en/architecture/claim-check.html" class="related-card"><span class="rc-title">Claim Check Pattern</span><span class="rc-desc">Learn the claim check pattern: store large payloads, pass references, and enable asynchronous processing</span></a><a href="/en/architecture/saga-choreography.html" class="related-card"><span class="rc-title">Saga Choreography Pattern</span><span class="rc-desc">Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose choreography</span></a><a href="/en/architecture/saga-orchestration.html" class="related-card"><span class="rc-title">Saga Orchestration Pattern</span><span class="rc-desc">Coordinator pattern for distributed transactions, compensation strategies, state machines, and Temporal workflows</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/architecture-decision-records.html" class="prev-next-btn prev-link">← Architecture Decision Records: Documenting Technical Decisions</a><a href="/en/architecture/event-storming.html" class="prev-next-btn next-link">Event Storming →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/leader-election.html" class="related-card"><span class="related-card-title">Leader Election in Distributed Systems</span><span class="related-card-desc">Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best </span></a><a href="/en/architecture/api-composition-pattern.html" class="related-card"><span class="related-card-title">API Composition Pattern</span><span class="related-card-desc">Learn API composition: aggregation, parallel calls, error handling strategies, and cross-service dat</span></a><a href="/en/architecture/claim-check.html" class="related-card"><span class="related-card-title">Claim Check Pattern</span><span class="related-card-desc">Learn the claim check pattern: store large payloads, pass references, and enable asynchronous proces</span></a><a href="/en/architecture/saga-choreography.html" class="related-card"><span class="related-card-title">Saga Choreography Pattern</span><span class="related-card-desc">Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose c</span></a><a href="/en/architecture/saga-orchestration.html" class="related-card"><span class="related-card-title">Saga Orchestration Pattern</span><span class="related-card-desc">Coordinator pattern for distributed transactions, compensation strategies, state machines, and Tempo</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

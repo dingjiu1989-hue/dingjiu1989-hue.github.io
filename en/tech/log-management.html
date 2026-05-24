@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Log Management
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
-      <h1 class="article-title">Log Management</h1>
-      <div class="article-meta"><time datetime="2026-01-08">Published 2026-01-08</time> · <time datetime="2026-05-21">Last active 2026-05-21</time> · 70 views · 0 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/log-management.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/log-management.png" alt="Log Management" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Log management is the practice of collecting, aggregating, storing, and analyzing log data from applications and infrastructure. Good log management provides visibility into system behavior, enables debugging, supports security analysis, and helps meet compliance requirements. This article covers the log lifecycle from collection through analysis.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/log-management.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/log-management.png" alt="Log Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Log Management</h1>
+        <div class="article-meta">
+          <time datetime="2026-01-08">2026-01-08</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>70 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/log-management.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/log-management.png" alt="Log Management" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#structured-logging">Structured Logging</a></li><li><a href="#log-collection">Log Collection</a></li><li><a href="#log-aggregation">Log Aggregation</a></li><li><a href="#storage-and-retention">Storage and Retention</a></li><li><a href="#query-and-analysis">Query and Analysis</a></li><li><a href="#best-practices">Best Practices</a></li><li><a href="#tool-selection">Tool Selection</a></li></ol></details>
+        <div class="article-body"><p>Log management is the practice of collecting, aggregating, storing, and analyzing log data from applications and infrastructure. Good log management provides visibility into system behavior, enables debugging, supports security analysis, and helps meet compliance requirements. This article covers the log lifecycle from collection through analysis.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/log-management.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/log-management.png" alt="Log Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Structured Logging</h2>
 <p>The foundation of log management is structured logging. Instead of writing free-form text messages, structured logging outputs logs as structured data—typically JSON. Each log entry has a consistent format with typed fields that can be queried and filtered.</p>
 <p>A structured log entry includes a timestamp, severity level, service name, request ID, and relevant context fields. The request ID correlates logs from multiple services for the same user request. Context fields capture business-specific data like user ID, order ID, or error details.</p>
@@ -140,14 +148,8 @@
 <h2>Tool Selection</h2>
 <p>The ELK stack is the most established log management solution, offering comprehensive features but significant operational overhead. Loki+Grafana is lighter weight and cost-effective for Kubernetes environments. Commercial solutions (Datadog, Splunk, Sumo Logic) provide managed log management with reduced operational burden.</p>
 <p>The choice depends on your scale, budget, and operational capabilities. ELK provides maximum control but requires dedicated operations expertise. Loki offers a good balance for container environments. Commercial solutions are easiest to operate but most expensive at scale.</p>
-<p>Log management is a critical investment for any production system. Well-managed logs reduce debugging time, improve system understanding, and support security and compliance requirements.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/configuration-management.html">Configuration Management</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (7)</summary><ol><li><a href="#structured-logging">Structured Logging</a></li><li><a href="#log-collection">Log Collection</a></li><li><a href="#log-aggregation">Log Aggregation</a></li><li><a href="#storage-and-retention">Storage and Retention</a></li><li><a href="#query-and-analysis">Query and Analysis</a></li><li><a href="#best-practices">Best Practices</a></li><li><a href="#tool-selection">Tool Selection</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Log management is a critical investment for any production system. Well-managed logs reduce debugging time, improve system understanding, and support security and compliance requirements.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a></li><li><a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a></li><li><a href="/en/tech/configuration-management.html">Configuration Management</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -155,29 +157,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Log%20Management&url=https%3A//aidev.fit/en/tech/log-management.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/log-management.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Log%20Management&url=https%3A//aidev.fit/en/tech/log-management.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Log%20Management&u=https%3A//aidev.fit/en/tech/log-management.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Log%20Management&body=https%3A//aidev.fit/en/tech/log-management.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/log-management.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Log%20Management&url=https%3A//aidev.fit/en/tech/log-management.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/log-management.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Log%20Management&url=https%3A//aidev.fit/en/tech/log-management.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Log%20Management&u=https%3A//aidev.fit/en/tech/log-management.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Log%20Management&body=https%3A//aidev.fit/en/tech/log-management.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/log-management.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/metric-collection.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Metric Collection</span></a><a href="/en/tech/distributed-caching.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Distributed Caching</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/terraform-state-management.html" class="related-card"><span class="rc-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</span><span class="rc-desc">Deep dive into Terraform state management covering remote backends, state locking, migration strategies, workspace patte</span></a><a href="/en/tech/artifact-management.html" class="related-card"><span class="rc-title">Artifact Management</span><span class="rc-desc">Learn artifact management: Docker registries, package registries, versioning strategies, and lifecycle policies</span></a><a href="/en/tech/build-optimization.html" class="related-card"><span class="rc-title">Build Optimization</span><span class="rc-desc">Explore build optimization: caching, parallelism, incremental builds, distcc, and strategies for faster compilation</span></a><a href="/en/tech/webpack-vs-vite.html" class="related-card"><span class="rc-title">Webpack vs Vite</span><span class="rc-desc">Compare Webpack and Vite: HMR speed, configuration, production builds, and migration strategies for modern web developme</span></a><a href="/en/tech/capacity-planning-cloud.html" class="related-card"><span class="rc-title">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</span><span class="rc-desc">Technical exploration of cloud capacity planning covering auto-scaling strategies, reserved and spot instance optimizati</span></a><a href="/en/tech/docker-networking.html" class="related-card"><span class="rc-title">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</span><span class="rc-desc">In-depth guide to Docker networking covering bridge networks, overlay networking for Swarm, host mode, macvlan drivers, </span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/metric-collection.html" class="prev-next-btn prev-link">← Metric Collection</a><a href="/en/tech/distributed-caching.html" class="prev-next-btn next-link">Distributed Caching →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/terraform-state-management.html" class="related-card"><span class="related-card-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</span><span class="related-card-desc">Deep dive into Terraform state management covering remote backends, state locking, migration strateg</span></a><a href="/en/tech/artifact-management.html" class="related-card"><span class="related-card-title">Artifact Management</span><span class="related-card-desc">Learn artifact management: Docker registries, package registries, versioning strategies, and lifecyc</span></a><a href="/en/tech/build-optimization.html" class="related-card"><span class="related-card-title">Build Optimization</span><span class="related-card-desc">Explore build optimization: caching, parallelism, incremental builds, distcc, and strategies for fas</span></a><a href="/en/tech/webpack-vs-vite.html" class="related-card"><span class="related-card-title">Webpack vs Vite</span><span class="related-card-desc">Compare Webpack and Vite: HMR speed, configuration, production builds, and migration strategies for </span></a><a href="/en/tech/capacity-planning-cloud.html" class="related-card"><span class="related-card-title">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</span><span class="related-card-desc">Technical exploration of cloud capacity planning covering auto-scaling strategies, reserved and spot</span></a><a href="/en/tech/docker-networking.html" class="related-card"><span class="related-card-title">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</span><span class="related-card-desc">In-depth guide to Docker networking covering bridge networks, overlay networking for Swarm, host mod</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#structured-logging">Structured Logging</a></li><li><a href="#log-collection">Log Collection</a></li><li><a href="#log-aggregation">Log Aggregation</a></li><li><a href="#storage-and-retention">Storage and Retention</a></li><li><a href="#query-and-analysis">Query and Analysis</a></li><li><a href="#best-practices">Best Practices</a></li><li><a href="#tool-selection">Tool Selection</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

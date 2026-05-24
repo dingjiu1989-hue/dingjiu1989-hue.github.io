@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Sidecar Pattern in Microservices Architecture
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Sidecar Pattern in Microservices Architecture</h1>
-      <div class="article-meta"><time datetime="2026-05-10">Published 2026-05-10</time> · <time datetime="2026-05-13">Last active 2026-05-13</time> · 432 views · 2 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/sidecar-pattern.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/sidecar-pattern.png" alt="Sidecar Pattern in Microservices Architecture" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The sidecar pattern is a microservices architectural pattern where a helper component (the sidecar) is deployed alongside a main service. The sidecar shares the same lifecycle as the parent service but operates as a separate process, providing supporting features such as logging, monitoring, networking, and service mesh functionality.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/sidecar-pattern.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/sidecar-pattern.png" alt="Sidecar Pattern in Microservices Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Sidecar Pattern in Microservices Architecture</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-10">2026-05-10</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>432 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/sidecar-pattern.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/sidecar-pattern.png" alt="Sidecar Pattern in Microservices Architecture" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (4)</summary><ol><li><a href="#how-the-sidecar-pattern-works">How the Sidecar Pattern Works</a></li><li><a href="#common-use-cases">Common Use Cases</a></li><li><a href="#benefits-and-drawbacks">Benefits and Drawbacks</a></li><li><a href="#best-practices">Best Practices</a></li></ol></details>
+        <div class="article-body"><p>The sidecar pattern is a microservices architectural pattern where a helper component (the sidecar) is deployed alongside a main service. The sidecar shares the same lifecycle as the parent service but operates as a separate process, providing supporting features such as logging, monitoring, networking, and service mesh functionality.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/sidecar-pattern.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/sidecar-pattern.png" alt="Sidecar Pattern in Microservices Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>How the Sidecar Pattern Works</h2>
 <p>In containerized environments, the sidecar runs in the same pod or deployment unit as the main application container. Both containers share the same network namespace and storage volumes, enabling the sidecar to intercept traffic, collect logs, and manage configuration without modification to the application code.</p>
 <p>The main service communicates with the sidecar through localhost, eliminating network latency and simplifying security. The sidecar can be updated independently, allowing teams to add cross-cutting concerns without redeploying the application.</p>
@@ -123,14 +131,8 @@
 <p>The sidecar pattern provides strong separation of concerns—application developers focus on business logic while infrastructure teams manage sidecars. It enables polyglot environments where each service uses its preferred language and framework while sharing common infrastructure.</p>
 <p>The main drawback is resource overhead. Each service instance requires additional CPU and memory for its sidecar. At scale, this adds significant cost. Debugging is also more complex since failures can originate in either the application or the sidecar.</p>
 <h2>Best Practices</h2>
-<p>Use the sidecar pattern for genuinely cross-cutting concerns that apply to most services. Avoid creating too many sidecars per pod—each additional container increases orchestration complexity. Keep sidecar resource usage predictable and well-documented. Monitor sidecar health independently from the application.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/claim-check.html">Claim Check Pattern</a>, <a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (4)</summary><ol><li><a href="#how-the-sidecar-pattern-works">How the Sidecar Pattern Works</a></li><li><a href="#common-use-cases">Common Use Cases</a></li><li><a href="#benefits-and-drawbacks">Benefits and Drawbacks</a></li><li><a href="#best-practices">Best Practices</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Use the sidecar pattern for genuinely cross-cutting concerns that apply to most services. Avoid creating too many sidecars per pod—each additional container increases orchestration complexity. Keep sidecar resource usage predictable and well-documented. Monitor sidecar health independently from the application.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a></li><li><a href="/en/architecture/claim-check.html">Claim Check Pattern</a></li><li><a href="/en/architecture/materialized-view-pattern.html">Materialized View Pattern</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -138,29 +140,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Sidecar%20Pattern%20in%20Microservices%20Architecture&url=https%3A//aidev.fit/en/architecture/sidecar-pattern.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/sidecar-pattern.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Sidecar%20Pattern%20in%20Microservices%20Architecture&url=https%3A//aidev.fit/en/architecture/sidecar-pattern.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Sidecar%20Pattern%20in%20Microservices%20Architecture&u=https%3A//aidev.fit/en/architecture/sidecar-pattern.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Sidecar%20Pattern%20in%20Microservices%20Architecture&body=https%3A//aidev.fit/en/architecture/sidecar-pattern.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/sidecar-pattern.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Sidecar%20Pattern%20in%20Microservices%20Architecture&url=https%3A//aidev.fit/en/architecture/sidecar-pattern.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/sidecar-pattern.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Sidecar%20Pattern%20in%20Microservices%20Architecture&url=https%3A//aidev.fit/en/architecture/sidecar-pattern.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Sidecar%20Pattern%20in%20Microservices%20Architecture&u=https%3A//aidev.fit/en/architecture/sidecar-pattern.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Sidecar%20Pattern%20in%20Microservices%20Architecture&body=https%3A//aidev.fit/en/architecture/sidecar-pattern.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/sidecar-pattern.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/stateful-vs-stateless.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Stateful vs Stateless Architecture Patterns</span></a><a href="/en/architecture/routing-slip.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Routing Slip Pattern for Dynamic Message Processing</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/ambassador-pattern.html" class="related-card"><span class="rc-title">Ambassador Pattern for Service Communication</span><span class="rc-desc">The ambassador pattern explained: how to offload network communication concerns to a proxy component.</span></a><a href="/en/architecture/event-carried-state-transfer.html" class="related-card"><span class="rc-title">Event-Carried State Transfer Pattern</span><span class="rc-desc">Learn the event-carried state transfer pattern for reducing service dependencies in event-driven architectures.</span></a><a href="/en/architecture/contract-testing.html" class="related-card"><span class="rc-title">Contract Testing for Microservices</span><span class="rc-desc">A practical guide to contract testing: ensuring service compatibility without slow end-to-end integration tests.</span></a><a href="/en/architecture/database-per-service.html" class="related-card"><span class="rc-title">Database per Service Pattern</span><span class="rc-desc">Learn the database per service pattern for microservices data management — data isolation, eventual consistency, cross-s</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="rc-title">API Composition and Aggregation</span><span class="rc-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation strategies</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="rc-title">Domain Events: Design and Implementation</span><span class="rc-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/stateful-vs-stateless.html" class="prev-next-btn prev-link">← Stateful vs Stateless Architecture Patterns</a><a href="/en/architecture/routing-slip.html" class="prev-next-btn next-link">Routing Slip Pattern for Dynamic Message Processing →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/ambassador-pattern.html" class="related-card"><span class="related-card-title">Ambassador Pattern for Service Communication</span><span class="related-card-desc">The ambassador pattern explained: how to offload network communication concerns to a proxy component</span></a><a href="/en/architecture/event-carried-state-transfer.html" class="related-card"><span class="related-card-title">Event-Carried State Transfer Pattern</span><span class="related-card-desc">Learn the event-carried state transfer pattern for reducing service dependencies in event-driven arc</span></a><a href="/en/architecture/contract-testing.html" class="related-card"><span class="related-card-title">Contract Testing for Microservices</span><span class="related-card-desc">A practical guide to contract testing: ensuring service compatibility without slow end-to-end integr</span></a><a href="/en/architecture/database-per-service.html" class="related-card"><span class="related-card-title">Database per Service Pattern</span><span class="related-card-desc">Learn the database per service pattern for microservices data management — data isolation, eventual </span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#how-the-sidecar-pattern-works">How the Sidecar Pattern Works</a></li><li><a href="#common-use-cases">Common Use Cases</a></li><li><a href="#benefits-and-drawbacks">Benefits and Drawbacks</a></li><li><a href="#best-practices">Best Practices</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

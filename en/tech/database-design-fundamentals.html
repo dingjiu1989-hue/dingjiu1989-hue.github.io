@@ -101,21 +101,29 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Database Design Fundamentals: Normalization, Indexing, and Schema Design
-    </div>
-    <article>
-      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
         <span class="tag-cat">Database</span>
         <span class="tag-cat">SQL</span>
         <span class="tag-cat">Schema Design</span>
         <span class="tag-cat">Backend</span>
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
-      <h1 class="article-title">Database Design Fundamentals: Normalization, Indexing, and Schema Design</h1>
-      <div class="article-meta"><time datetime="2025-10-08">Published 2025-10-08</time> · <time datetime="2026-04-27">Last active 2026-04-27</time> · 4277 views · 35 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/database-design-fundamentals.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/database-design-fundamentals.png" alt="Database Design Fundamentals: Normalization, Indexing, and Schema Design" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>A well-designed database makes every query simpler and faster. A poorly-designed one creates bugs, slow queries, and painful migrations forever. Here are the fundamentals every developer should know before creating tables.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/database-design-fundamentals.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/database-design-fundamentals.png" alt="Database Design Fundamentals: Normalization, Indexing, and Schema Design" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Database Design Fundamentals: Normalization, Indexing, and Schema Design</h1>
+        <div class="article-meta">
+          <time datetime="2025-10-08">2025-10-08</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>4277 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/database-design-fundamentals.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/database-design-fundamentals.png" alt="Database Design Fundamentals: Normalization, Indexing, and Schema Design" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (9)</summary><ol><li><a href="#1-normalization--reduce-redundancy">1. Normalization — Reduce Redundancy</a></li><li><a href="#1nf-atomic-values-no-repeating-groups">1NF: Atomic Values, No Repeating Groups</a></li><li><a href="#2nf-no-partial-dependencies">2NF: No Partial Dependencies</a></li><li><a href="#3nf-no-transitive-dependencies">3NF: No Transitive Dependencies</a></li><li><a href="#2-indexing--speed-up-queries">2. Indexing — Speed Up Queries</a></li><li><a href="#index-rules-of-thumb">Index Rules of Thumb</a></li><li><a href="#3-relationship-types">3. Relationship Types</a></li><li><a href="#4-common-schema-design-mistakes">4. Common Schema Design Mistakes</a></li><li><a href="#5-choosing-your-primary-key">5. Choosing Your Primary Key</a></li></ol></details>
+        <div class="article-body"><p>A well-designed database makes every query simpler and faster. A poorly-designed one creates bugs, slow queries, and painful migrations forever. Here are the fundamentals every developer should know before creating tables.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/database-design-fundamentals.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/database-design-fundamentals.png" alt="Database Design Fundamentals: Normalization, Indexing, and Schema Design" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 
 <h2>1. Normalization — Reduce Redundancy</h2>
 <p>Normalization eliminates duplicate data and prevents update anomalies. You need at least 3NF (Third Normal Form) for most applications.</p>
@@ -212,14 +220,8 @@ CREATE TABLE user_profiles (
 </table>
 <p><strong>Recommendation:</strong> UUID v7 for distributed systems and public-facing IDs. BIGINT for internal tables. Avoid exposing auto-increment IDs in URLs.</p>
 
-<p><strong>Bottom line:</strong> Normalize to 3NF, index every FK and query column, use appropriate data types, and always have foreign key constraints. A well-designed schema is cheaper to fix now than later. See also: <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">database comparison</a> and <a href="/en/compare/prisma-vs-drizzle-vs-typeorm.html">ORM comparison</a>.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/error-handling-best-practices.html">Error Handling Best Practices: From Try/Catch to Structured Errors</a>, <a href="/en/tech/graphql-api-design.html">GraphQL API Design: Schema Best Practices, Federation, and Performance</a>, <a href="/en/tech/database-sharding-strategies.html">Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (9)</summary><ol><li><a href="#1.-normalization-—-reduce-redundancy">1. Normalization — Reduce Redundancy</a></li><li><a href="#1nf:-atomic-values,-no-repeating-groups">1NF: Atomic Values, No Repeating Groups</a></li><li><a href="#2nf:-no-partial-dependencies">2NF: No Partial Dependencies</a></li><li><a href="#3nf:-no-transitive-dependencies">3NF: No Transitive Dependencies</a></li><li><a href="#2.-indexing-—-speed-up-queries">2. Indexing — Speed Up Queries</a></li><li><a href="#index-rules-of-thumb">Index Rules of Thumb</a></li><li><a href="#3.-relationship-types">3. Relationship Types</a></li><li><a href="#4.-common-schema-design-mistakes">4. Common Schema Design Mistakes</a></li><li><a href="#5.-choosing-your-primary-key">5. Choosing Your Primary Key</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p><strong>Bottom line:</strong> Normalize to 3NF, index every FK and query column, use appropriate data types, and always have foreign key constraints. A well-designed schema is cheaper to fix now than later. See also: <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">database comparison</a> and <a href="/en/compare/prisma-vs-drizzle-vs-typeorm.html">ORM comparison</a>.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/error-handling-best-practices.html">Error Handling Best Practices: From Try/Catch to Structured Errors</a></li><li><a href="/en/tech/graphql-api-design.html">GraphQL API Design: Schema Best Practices, Federation, and Performance</a></li><li><a href="/en/tech/database-sharding-strategies.html">Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -227,29 +229,35 @@ CREATE TABLE user_profiles (
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Database%20Design%20Fundamentals%3A%20Normalization%2C%20Indexing%2C%20and%20Schema%20Design&url=https%3A//aidev.fit/en/tech/database-design-fundamentals.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/database-design-fundamentals.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Database%20Design%20Fundamentals%3A%20Normalization%2C%20Indexing%2C%20and%20Schema%20Design&url=https%3A//aidev.fit/en/tech/database-design-fundamentals.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Database%20Design%20Fundamentals%3A%20Normalization%2C%20Indexing%2C%20and%20Schema%20Design&u=https%3A//aidev.fit/en/tech/database-design-fundamentals.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Database%20Design%20Fundamentals%3A%20Normalization%2C%20Indexing%2C%20and%20Schema%20Design&body=https%3A//aidev.fit/en/tech/database-design-fundamentals.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/database-design-fundamentals.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Database%20Design%20Fundamentals%3A%20Normalization%2C%20Indexing%2C%20and%20Schema%20Design&url=https%3A//aidev.fit/en/tech/database-design-fundamentals.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/database-design-fundamentals.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Database%20Design%20Fundamentals%3A%20Normalization%2C%20Indexing%2C%20and%20Schema%20Design&url=https%3A//aidev.fit/en/tech/database-design-fundamentals.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Database%20Design%20Fundamentals%3A%20Normalization%2C%20Indexing%2C%20and%20Schema%20Design&u=https%3A//aidev.fit/en/tech/database-design-fundamentals.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Database%20Design%20Fundamentals%3A%20Normalization%2C%20Indexing%2C%20and%20Schema%20Design&body=https%3A//aidev.fit/en/tech/database-design-fundamentals.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/database-design-fundamentals.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/git-workflows-team-guide.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development</span></a><a href="/en/tech/linux-commands.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Linux Commands Cheat Sheet: 50 Commands Every Developer Should Kn</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/postgresql-query-optimization.html" class="related-card"><span class="rc-title">PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds</span><span class="rc-desc">Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, BRIN), query plan ana</span></a><a href="/en/database/data-modeling.html" class="related-card"><span class="rc-title">Data Modeling Best Practices</span><span class="rc-desc">Learn data modeling best practices including entity-relationship diagrams, normalization, patterns for SQL and NoSQL, an</span></a><a href="/en/database/database-normalization.html" class="related-card"><span class="rc-title">Database Normalization Explained</span><span class="rc-desc">Learn database normalization from 1NF to 5NF with practical examples, denormalization trade-offs, and real-world schema </span></a><a href="/en/database/schema-design.html" class="related-card"><span class="rc-title">Schema Design Patterns: Normalization, Denormalization, Naming Conventions</span><span class="rc-desc">Explore database schema design patterns: normalization vs denormalization, naming conventions, timestamp handling, and p</span></a><a href="/en/tech/database-indexing-guide.html" class="related-card"><span class="rc-title">Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained</span><span class="rc-desc">Go beyond CREATE INDEX with a deep dive into index types, when each excels, covering indexes, partial indexes, and how t</span></a><a href="/en/database/oltp-vs-olap.html" class="related-card"><span class="rc-title">OLTP vs OLAP: Workload Optimization</span><span class="rc-desc">Compare OLTP and OLAP workloads: row vs column store, indexing strategies, query patterns, hybrid approaches, and HTAP d</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/git-workflows-team-guide.html" class="prev-next-btn prev-link">← Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development</a><a href="/en/tech/linux-commands.html" class="prev-next-btn next-link">Linux Commands Cheat Sheet: 50 Commands Every Developer Should Know →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/postgresql-query-optimization.html" class="related-card"><span class="related-card-title">PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds</span><span class="related-card-desc">Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, B</span></a><a href="/en/database/data-modeling.html" class="related-card"><span class="related-card-title">Data Modeling Best Practices</span><span class="related-card-desc">Learn data modeling best practices including entity-relationship diagrams, normalization, patterns f</span></a><a href="/en/database/database-normalization.html" class="related-card"><span class="related-card-title">Database Normalization Explained</span><span class="related-card-desc">Learn database normalization from 1NF to 5NF with practical examples, denormalization trade-offs, an</span></a><a href="/en/database/schema-design.html" class="related-card"><span class="related-card-title">Schema Design Patterns: Normalization, Denormalization, Naming Conventions</span><span class="related-card-desc">Explore database schema design patterns: normalization vs denormalization, naming conventions, times</span></a><a href="/en/tech/database-indexing-guide.html" class="related-card"><span class="related-card-title">Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained</span><span class="related-card-desc">Go beyond CREATE INDEX with a deep dive into index types, when each excels, covering indexes, partia</span></a><a href="/en/database/oltp-vs-olap.html" class="related-card"><span class="related-card-title">OLTP vs OLAP: Workload Optimization</span><span class="related-card-desc">Compare OLTP and OLAP workloads: row vs column store, indexing strategies, query patterns, hybrid ap</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#1-normalization--reduce-redundancy">1. Normalization — Reduce Redundancy</a></li><li><a href="#1nf-atomic-values-no-repeating-groups">1NF: Atomic Values, No Repeating Groups</a></li><li><a href="#2nf-no-partial-dependencies">2NF: No Partial Dependencies</a></li><li><a href="#3nf-no-transitive-dependencies">3NF: No Transitive Dependencies</a></li><li><a href="#2-indexing--speed-up-queries">2. Indexing — Speed Up Queries</a></li><li><a href="#index-rules-of-thumb">Index Rules of Thumb</a></li><li><a href="#3-relationship-types">3. Relationship Types</a></li><li><a href="#4-common-schema-design-mistakes">4. Common Schema Design Mistakes</a></li><li><a href="#5-choosing-your-primary-key">5. Choosing Your Primary Key</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

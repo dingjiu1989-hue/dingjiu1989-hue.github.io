@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › MLOps Pipeline: From Training to Production
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">AI</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">AI</span>
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
-      <h1 class="article-title">MLOps Pipeline: From Training to Production</h1>
-      <div class="article-meta"><time datetime="2026-05-20">Published 2026-05-20</time> · <time datetime="2026-05-18">Last active 2026-05-18</time> · 104 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/mlops-pipeline.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/mlops-pipeline.png" alt="MLOps Pipeline: From Training to Production" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>MLOps applies DevOps principles to machine learning. A robust MLOps pipeline automates the ML lifecycle from data preparation through production monitoring, ensuring reliable and reproducible model deployments.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/mlops-pipeline.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/mlops-pipeline.png" alt="MLOps Pipeline: From Training to Production" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">MLOps Pipeline: From Training to Production</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-20">2026-05-20</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>104 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/mlops-pipeline.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/mlops-pipeline.png" alt="MLOps Pipeline: From Training to Production" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (6)</summary><ol><li><a href="#pipeline-stages">Pipeline Stages</a></li><li><a href="#data-validation">Data Validation</a></li><li><a href="#experiment-tracking">Experiment Tracking</a></li><li><a href="#model-registry">Model Registry</a></li><li><a href="#deployment-strategies">Deployment Strategies</a></li><li><a href="#monitoring">Monitoring</a></li></ol></details>
+        <div class="article-body"><p>MLOps applies DevOps principles to machine learning. A robust MLOps pipeline automates the ML lifecycle from data preparation through production monitoring, ensuring reliable and reproducible model deployments.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/mlops-pipeline.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/mlops-pipeline.png" alt="MLOps Pipeline: From Training to Production" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Pipeline Stages</h2>
 <p>An MLOps pipeline includes: data ingestion (collect raw data), data validation (check schema, statistics, anomalies), feature engineering (transform raw data), model training (train with hyperparameter tuning), model evaluation (validate against test sets), model deployment (promote to production), and monitoring (track performance in production).</p>
 <p>Each stage produces artifacts that the next stage consumes. Artifact versioning enables reproducibility. Pipeline orchestration (Kubeflow, MLflow, Airflow) manages stage execution, retries, and failure handling.</p>
@@ -128,14 +136,8 @@
 <h2>Deployment Strategies</h2>
 <p>Deploy models as REST APIs (FastAPI, BentoML), streaming services (Kafka, Flink), or batch jobs (Spark, Dataflow). Containerize models with Docker for consistent environments. Use A/B testing for production validation. Shadow deployment sends traffic to new models without affecting user-facing responses.</p>
 <h2>Monitoring</h2>
-<p>Monitor prediction distributions, latency, error rates, and data drift. Alert on significant deviations from baseline. Log predictions for audit and retraining data. Implement automated retraining pipelines triggered by performance degradation or data drift.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (6)</summary><ol><li><a href="#pipeline-stages">Pipeline Stages</a></li><li><a href="#data-validation">Data Validation</a></li><li><a href="#experiment-tracking">Experiment Tracking</a></li><li><a href="#model-registry">Model Registry</a></li><li><a href="#deployment-strategies">Deployment Strategies</a></li><li><a href="#monitoring">Monitoring</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Monitor prediction distributions, latency, error rates, and data drift. Alert on significant deviations from baseline. Log predictions for audit and retraining data. Implement automated retraining pipelines triggered by performance degradation or data drift.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a></li><li><a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a></li><li><a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -143,34 +145,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=MLOps%20Pipeline%3A%20From%20Training%20to%20Production&url=https%3A//aidev.fit/en/ai/mlops-pipeline.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/mlops-pipeline.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=MLOps%20Pipeline%3A%20From%20Training%20to%20Production&url=https%3A//aidev.fit/en/ai/mlops-pipeline.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=MLOps%20Pipeline%3A%20From%20Training%20to%20Production&u=https%3A//aidev.fit/en/ai/mlops-pipeline.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=MLOps%20Pipeline%3A%20From%20Training%20to%20Production&body=https%3A//aidev.fit/en/ai/mlops-pipeline.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/mlops-pipeline.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/best-ai-tools-developers-2026.html" class="prev-next-btn prev-link">← 25 Best AI Tools for Developers in 2026: Code, Debug, Deploy</a><a href="/en/ai/n8n-ai-automation.html" class="prev-next-btn next-link">Building AI Automation Workflows with n8n: A Practical Guide →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-gateway.html" class="related-card"><span class="related-card-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="related-card-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fa</span></a><a href="/en/ai/ai-model-deployment-strategies.html" class="related-card"><span class="related-card-title">AI Model Deployment: Strategies for Production LLM Serving</span><span class="related-card-desc">Deploy LLMs to production: serving infrastructure, batching, caching, load balancing, and cost optim</span></a><a href="/en/ai/ai-safety.html" class="related-card"><span class="related-card-title">AI Safety: Responsible Development and Deployment</span><span class="related-card-desc">AI safety principles: alignment, robustness, monitoring, and responsible deployment practices for pr</span></a><a href="/en/ai/rag-pipeline-optimization.html" class="related-card"><span class="related-card-title">RAG Pipeline Optimization: Production Best Practices</span><span class="related-card-desc">Optimize Retrieval-Augmented Generation pipelines: chunking strategies, embedding selection, retriev</span></a><a href="/en/ai/llm-observability.html" class="related-card"><span class="related-card-title">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</span><span class="related-card-desc">Implement LLM observability for production AI applications: distributed tracing, token usage trackin</span></a><a href="/en/ai/model-evaluation-harness.html" class="related-card"><span class="related-card-title">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</span><span class="related-card-desc">Evaluate LLM models systematically using benchmarks, human evaluation, LLM-as-judge frameworks, and </span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=MLOps%20Pipeline%3A%20From%20Training%20to%20Production&url=https%3A//aidev.fit/en/ai/mlops-pipeline.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/mlops-pipeline.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=MLOps%20Pipeline%3A%20From%20Training%20to%20Production&url=https%3A//aidev.fit/en/ai/mlops-pipeline.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=MLOps%20Pipeline%3A%20From%20Training%20to%20Production&u=https%3A//aidev.fit/en/ai/mlops-pipeline.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=MLOps%20Pipeline%3A%20From%20Training%20to%20Production&body=https%3A//aidev.fit/en/ai/mlops-pipeline.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/mlops-pipeline.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/best-ai-tools-developers-2026.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">25 Best AI Tools for Developers in 2026: Code, Debug, Deploy</span></a><a href="/en/ai/n8n-ai-automation.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Building AI Automation Workflows with n8n: A Practical Guide</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/ai-gateway.html" class="related-card"><span class="rc-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="rc-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fallbacks, cost manage</span></a><a href="/en/ai/ai-model-deployment-strategies.html" class="related-card"><span class="rc-title">AI Model Deployment: Strategies for Production LLM Serving</span><span class="rc-desc">Deploy LLMs to production: serving infrastructure, batching, caching, load balancing, and cost optimization.</span></a><a href="/en/ai/ai-safety.html" class="related-card"><span class="rc-title">AI Safety: Responsible Development and Deployment</span><span class="rc-desc">AI safety principles: alignment, robustness, monitoring, and responsible deployment practices for production AI systems.</span></a><a href="/en/ai/rag-pipeline-optimization.html" class="related-card"><span class="rc-title">RAG Pipeline Optimization: Production Best Practices</span><span class="rc-desc">Optimize Retrieval-Augmented Generation pipelines: chunking strategies, embedding selection, retrieval tuning, and evalu</span></a><a href="/en/ai/llm-observability.html" class="related-card"><span class="rc-title">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</span><span class="rc-desc">Implement LLM observability for production AI applications: distributed tracing, token usage tracking, latency monitorin</span></a><a href="/en/ai/model-evaluation-harness.html" class="related-card"><span class="rc-title">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</span><span class="rc-desc">Evaluate LLM models systematically using benchmarks, human evaluation, LLM-as-judge frameworks, and production A/B testi</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#pipeline-stages">Pipeline Stages</a></li><li><a href="#data-validation">Data Validation</a></li><li><a href="#experiment-tracking">Experiment Tracking</a></li><li><a href="#model-registry">Model Registry</a></li><li><a href="#deployment-strategies">Deployment Strategies</a></li><li><a href="#monitoring">Monitoring</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

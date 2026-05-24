@@ -101,17 +101,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Connection Pooling Guide
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">SQL</span></div>
-      <h1 class="article-title">Connection Pooling Guide</h1>
-      <div class="article-meta"><time datetime="2025-12-22">Published 2025-12-22</time> · <time datetime="2026-05-18">Last active 2026-05-18</time> · 127 views · 0 replies · 1 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/connection-pooling.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/connection-pooling.png" alt="Connection Pooling Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Why Connection Pooling Matters </p><picture><source srcset="https://aidev.fit/images/covers/en/database/connection-pooling.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/connection-pooling.png" alt="Connection Pooling Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Connection Pooling Guide</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-22">2025-12-22</time>
+          <span class="meta-sep">·</span>
+          <span>1 min read</span>
+          <span class="meta-sep">·</span>
+          <span>127 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/connection-pooling.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/connection-pooling.png" alt="Connection Pooling Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>Why Connection Pooling Matters </p><picture><source srcset="https://aidev.fit/images/covers/en/database/connection-pooling.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/connection-pooling.png" alt="Connection Pooling Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Creating database connections is expensive: TCP handshake, SSL negotiation, and authentication add 7-35ms per connection. Connection pooling reuses established connections. </p>
 <p>How Pools Work </p>
 <p>A pool maintains a set of open connections. When a thread requests one, an idle connection is returned immediately. If all are busy, the thread waits. </p>
@@ -137,14 +145,8 @@
 <p>WHERE backend_type = 'client backend' GROUP BY state;</p>
 <p>Monitor for idle-in-transaction connections and pool exhaustion. </p>
 <p>Conclusion </p>
-<p>Size pools based on CPU cores, not concurrent users. Use PgBouncer for high-scale PostgreSQL deployments. Set timeouts and max lifetimes. Monitor pool usage and connection leaks.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/sql-query-optimization.html">SQL Query Optimization</a>, <a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>Size pools based on CPU cores, not concurrent users. Use PgBouncer for high-scale PostgreSQL deployments. Set timeouts and max lifetimes. Monitor pool usage and connection leaks.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a></li><li><a href="/en/database/sql-query-optimization.html">SQL Query Optimization</a></li><li><a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -152,29 +154,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Connection%20Pooling%20Guide&url=https%3A//aidev.fit/en/database/connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Connection%20Pooling%20Guide&url=https%3A//aidev.fit/en/database/connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Connection%20Pooling%20Guide&u=https%3A//aidev.fit/en/database/connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Connection%20Pooling%20Guide&body=https%3A//aidev.fit/en/database/connection-pooling.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/connection-pooling.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Connection%20Pooling%20Guide&url=https%3A//aidev.fit/en/database/connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Connection%20Pooling%20Guide&url=https%3A//aidev.fit/en/database/connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Connection%20Pooling%20Guide&u=https%3A//aidev.fit/en/database/connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Connection%20Pooling%20Guide&body=https%3A//aidev.fit/en/database/connection-pooling.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/connection-pooling.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-migration.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Database Migration Tools and Strategies</span></a><a href="/en/database/postgresql-vs-mysql-2026.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide </span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/postgresql-query-optimization.html" class="related-card"><span class="rc-title">PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds</span><span class="rc-desc">Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, BRIN), query plan ana</span></a><a href="/en/database/query-performance-tuning.html" class="related-card"><span class="rc-title">Query Performance Tuning Tools</span><span class="rc-desc">Master query performance tuning with EXPLAIN ANALYZE, pg_stat_statements, slow query logs, and database profiling tools.</span></a><a href="/en/database/connection-management.html" class="related-card"><span class="rc-title">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</span><span class="rc-desc">Comprehensive guide to database connection management. Learn connection pooling with PgBouncer and HikariCP, max connect</span></a><a href="/en/database/database-monitoring.html" class="related-card"><span class="rc-title">Database Monitoring and Performance Alerting</span><span class="rc-desc">Monitor QPS, latency, connections, and cache hit ratio with Prometheus exporters, Grafana dashboards, and intelligent al</span></a><a href="/en/database/database-security-best-practices.html" class="related-card"><span class="rc-title">Database Security Hardening Guide</span><span class="rc-desc">Database security best practices: encryption at rest and in transit, row-level security, audit logging, network isolatio</span></a><a href="/en/database/vector-search-optimization.html" class="related-card"><span class="rc-title">Vector Search Optimization Techniques</span><span class="rc-desc">Optimize vector search with HNSW tuning, quantization (PQ, scalar), IVF parameters, filtered search performance, and mul</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-migration.html" class="prev-next-btn prev-link">← Database Migration Tools and Strategies</a><a href="/en/database/postgresql-vs-mysql-2026.html" class="prev-next-btn next-link">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/postgresql-query-optimization.html" class="related-card"><span class="related-card-title">PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds</span><span class="related-card-desc">Practical PostgreSQL performance guide: EXPLAIN ANALYZE deep dive, index types (B-tree, GIN, GiST, B</span></a><a href="/en/database/query-performance-tuning.html" class="related-card"><span class="related-card-title">Query Performance Tuning Tools</span><span class="related-card-desc">Master query performance tuning with EXPLAIN ANALYZE, pg_stat_statements, slow query logs, and datab</span></a><a href="/en/database/connection-management.html" class="related-card"><span class="related-card-title">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</span><span class="related-card-desc">Comprehensive guide to database connection management. Learn connection pooling with PgBouncer and H</span></a><a href="/en/database/database-monitoring.html" class="related-card"><span class="related-card-title">Database Monitoring and Performance Alerting</span><span class="related-card-desc">Monitor QPS, latency, connections, and cache hit ratio with Prometheus exporters, Grafana dashboards</span></a><a href="/en/database/database-security-best-practices.html" class="related-card"><span class="related-card-title">Database Security Hardening Guide</span><span class="related-card-desc">Database security best practices: encryption at rest and in transit, row-level security, audit loggi</span></a><a href="/en/database/vector-search-optimization.html" class="related-card"><span class="related-card-title">Vector Search Optimization Techniques</span><span class="related-card-desc">Optimize vector search with HNSW tuning, quantization (PQ, scalar), IVF parameters, filtered search </span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

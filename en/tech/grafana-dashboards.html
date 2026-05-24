@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Grafana Dashboards: Panels, Variables, Annotations, and Alerting
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
-      <h1 class="article-title">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-      <div class="article-meta"><time datetime="2026-01-02">Published 2026-01-02</time> · <time datetime="2026-05-23">Last active 2026-05-23</time> · 66 views · 0 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/grafana-dashboards.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/grafana-dashboards.png" alt="Grafana Dashboards: Panels, Variables, Annotations, and Alerting" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
+        <div class="article-meta">
+          <time datetime="2026-01-02">2026-01-02</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>66 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/grafana-dashboards.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/grafana-dashboards.png" alt="Grafana Dashboards: Panels, Variables, Annotations, and Alerting" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#panel-types-and-visualization-options">Panel Types and Visualization Options</a></li><li><a href="#template-variables-dynamic-dashboards">Template Variables: Dynamic Dashboards</a></li><li><a href="#annotations-events-on-timelines">Annotations: Events on Timelines</a></li><li><a href="#alerting-in-grafana">Alerting in Grafana</a></li><li><a href="#provisioning-dashboards-as-code">Provisioning Dashboards as Code</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>Grafana has become the industry standard for observability dashboards, providing unified visualization across metrics, logs, traces, and other data sources. Its modular architecture supports Prometheus, Elasticsearch, InfluxDB, Loki, Tempo, and dozens of other backends. Beyond visualization, Grafana has evolved into a full observability platform with alerting, anomaly detection, and incident management capabilities.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/grafana-dashboards.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/grafana-dashboards.png" alt="Grafana Dashboards: Panels, Variables, Annotations, and Alerting" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>This article covers Grafana dashboard design in detail: panel types, template variables, annotations, alerting, and provisioning.</p>
 <h2>Panel Types and Visualization Options</h2>
@@ -168,14 +176,8 @@
 <p>path: /etc/grafana/provisioning/dashboards</p>
 <p>Dashboards are exported as JSON and version-controlled alongside application code. CI/CD pipelines deploy dashboard changes through Git workflows, enabling peer review and rollback.</p>
 <h2>Conclusion</h2>
-<p>Grafana's composable architecture — panels, variables, annotations, and alerting — makes it the central hub for observability. Provisioning dashboards as code ensures consistency across environments and enables GitOps workflows. As Grafana continues to add capabilities like explore mode, correlate metrics with logs and traces, and incident management, it solidifies its position as the primary interface for understanding system behavior.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (7)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#panel-types-and-visualization-options">Panel Types and Visualization Options</a></li><li><a href="#template-variables:-dynamic-dashboards">Template Variables: Dynamic Dashboards</a></li><li><a href="#annotations:-events-on-timelines">Annotations: Events on Timelines</a></li><li><a href="#alerting-in-grafana">Alerting in Grafana</a></li><li><a href="#provisioning-dashboards-as-code">Provisioning Dashboards as Code</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Grafana's composable architecture — panels, variables, annotations, and alerting — makes it the central hub for observability. Provisioning dashboards as code ensures consistency across environments and enables GitOps workflows. As Grafana continues to add capabilities like explore mode, correlate metrics with logs and traces, and incident management, it solidifies its position as the primary interface for understanding system behavior.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></li><li><a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a></li><li><a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -183,29 +185,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Grafana%20Dashboards%3A%20Panels%2C%20Variables%2C%20Annotations%2C%20and%20Alerting&url=https%3A//aidev.fit/en/tech/grafana-dashboards.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/grafana-dashboards.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Grafana%20Dashboards%3A%20Panels%2C%20Variables%2C%20Annotations%2C%20and%20Alerting&url=https%3A//aidev.fit/en/tech/grafana-dashboards.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Grafana%20Dashboards%3A%20Panels%2C%20Variables%2C%20Annotations%2C%20and%20Alerting&u=https%3A//aidev.fit/en/tech/grafana-dashboards.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Grafana%20Dashboards%3A%20Panels%2C%20Variables%2C%20Annotations%2C%20and%20Alerting&body=https%3A//aidev.fit/en/tech/grafana-dashboards.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/grafana-dashboards.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Grafana%20Dashboards%3A%20Panels%2C%20Variables%2C%20Annotations%2C%20and%20Alerting&url=https%3A//aidev.fit/en/tech/grafana-dashboards.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/grafana-dashboards.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Grafana%20Dashboards%3A%20Panels%2C%20Variables%2C%20Annotations%2C%20and%20Alerting&url=https%3A//aidev.fit/en/tech/grafana-dashboards.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Grafana%20Dashboards%3A%20Panels%2C%20Variables%2C%20Annotations%2C%20and%20Alerting&u=https%3A//aidev.fit/en/tech/grafana-dashboards.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Grafana%20Dashboards%3A%20Panels%2C%20Variables%2C%20Annotations%2C%20and%20Alerting&body=https%3A//aidev.fit/en/tech/grafana-dashboards.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/grafana-dashboards.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/prometheus-deep-dive.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availab</span></a><a href="/en/tech/aws-vpc-design.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Secur</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/gcp-networking.html" class="related-card"><span class="rc-title">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</span><span class="rc-desc">Technical exploration of Google Cloud networking covering VPC design, Cloud NAT configuration, Private Google Access, Sh</span></a><a href="/en/tech/capacity-planning-cloud.html" class="related-card"><span class="rc-title">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</span><span class="rc-desc">Technical exploration of cloud capacity planning covering auto-scaling strategies, reserved and spot instance optimizati</span></a><a href="/en/tech/sli-slo-error-budget.html" class="related-card"><span class="rc-title">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</span><span class="rc-desc">Technical guide to service level indicators and objectives covering SLI definition, SLO setting methodology, error budge</span></a><a href="/en/tech/typescript-advanced-types.html" class="related-card"><span class="rc-title">Advanced TypeScript Types for Better Code</span><span class="rc-desc">Master advanced TypeScript types: generics, conditional types, mapped types, template literals, and utility types.</span></a><a href="/en/tech/ansible-automation.html" class="related-card"><span class="rc-title">Ansible Automation: Playbooks, Roles, Inventory, and Vault</span><span class="rc-desc">Deep dive into Ansible automation covering playbooks, roles, inventory management, Ansible Vault, idempotency patterns, </span></a><a href="/en/tech/aws-vpc-design.html" class="related-card"><span class="rc-title">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</span><span class="rc-desc">Technical guide to AWS VPC design including subnet strategies, NAT gateways, VPC peering, Transit Gateway architecture, </span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/prometheus-deep-dive.html" class="prev-next-btn prev-link">← Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a><a href="/en/tech/aws-vpc-design.html" class="prev-next-btn next-link">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/gcp-networking.html" class="related-card"><span class="related-card-title">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</span><span class="related-card-desc">Technical exploration of Google Cloud networking covering VPC design, Cloud NAT configuration, Priva</span></a><a href="/en/tech/capacity-planning-cloud.html" class="related-card"><span class="related-card-title">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</span><span class="related-card-desc">Technical exploration of cloud capacity planning covering auto-scaling strategies, reserved and spot</span></a><a href="/en/tech/sli-slo-error-budget.html" class="related-card"><span class="related-card-title">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</span><span class="related-card-desc">Technical guide to service level indicators and objectives covering SLI definition, SLO setting meth</span></a><a href="/en/tech/typescript-advanced-types.html" class="related-card"><span class="related-card-title">Advanced TypeScript Types for Better Code</span><span class="related-card-desc">Master advanced TypeScript types: generics, conditional types, mapped types, template literals, and </span></a><a href="/en/tech/ansible-automation.html" class="related-card"><span class="related-card-title">Ansible Automation: Playbooks, Roles, Inventory, and Vault</span><span class="related-card-desc">Deep dive into Ansible automation covering playbooks, roles, inventory management, Ansible Vault, id</span></a><a href="/en/tech/aws-vpc-design.html" class="related-card"><span class="related-card-title">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</span><span class="related-card-desc">Technical guide to AWS VPC design including subnet strategies, NAT gateways, VPC peering, Transit Ga</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#panel-types-and-visualization-options">Panel Types and Visualization Options</a></li><li><a href="#template-variables-dynamic-dashboards">Template Variables: Dynamic Dashboards</a></li><li><a href="#annotations-events-on-timelines">Annotations: Events on Timelines</a></li><li><a href="#alerting-in-grafana">Alerting in Grafana</a></li><li><a href="#provisioning-dashboards-as-code">Provisioning Dashboards as Code</a></li><li><a href="#conclusion">Conclusion</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

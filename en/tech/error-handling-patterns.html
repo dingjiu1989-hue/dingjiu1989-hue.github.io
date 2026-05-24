@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Error Handling Patterns
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
-      <h1 class="article-title">Error Handling Patterns</h1>
-      <div class="article-meta"><time datetime="2026-01-07">Published 2026-01-07</time> · <time datetime="2026-05-15">Last active 2026-05-15</time> · 212 views · 0 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/error-handling-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/error-handling-patterns.png" alt="Error Handling Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Error handling is a cross-cutting concern that affects system reliability, debuggability, and user experience. Different languages and paradigms offer different error handling approaches: exceptions in Java and Python, Result types in Rust and Swift, and error boundaries in UI frameworks. This article examines these patterns and provides guidance for building resilient error handling.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/error-handling-patterns.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/error-handling-patterns.png" alt="Error Handling Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Error Handling Patterns</h1>
+        <div class="article-meta">
+          <time datetime="2026-01-07">2026-01-07</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>212 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/error-handling-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/error-handling-patterns.png" alt="Error Handling Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (6)</summary><ol><li><a href="#exceptions">Exceptions</a></li><li><a href="#result-types">Result Types</a></li><li><a href="#error-boundaries">Error Boundaries</a></li><li><a href="#resilience-patterns">Resilience Patterns</a></li><li><a href="#error-propagation">Error Propagation</a></li><li><a href="#error-recovery">Error Recovery</a></li></ol></details>
+        <div class="article-body"><p>Error handling is a cross-cutting concern that affects system reliability, debuggability, and user experience. Different languages and paradigms offer different error handling approaches: exceptions in Java and Python, Result types in Rust and Swift, and error boundaries in UI frameworks. This article examines these patterns and provides guidance for building resilient error handling.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/error-handling-patterns.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/error-handling-patterns.png" alt="Error Handling Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Exceptions</h2>
 <p>Exception-based error handling uses try/catch blocks to handle errors that occur in a different part of the call stack. When an error occurs, the code throws an exception that propagates up the call stack until a matching catch block handles it. Unhandled exceptions typically crash the program.</p>
 <p>Exceptions are appropriate for errors that cannot be handled at the point of occurrence and need to propagate to a higher level. A database connection failure, for example, may need to propagate to the request handler rather than being handled in the data access layer.</p>
@@ -135,14 +143,8 @@
 <h2>Error Recovery</h2>
 <p>Not all errors need to crash the program. Graceful degradation handles errors by providing reduced functionality rather than failing completely. A recommendation service that fails can be degraded to showing popular items. An image loading failure can show a placeholder.</p>
 <p>Error recovery follows the principle of graceful degradation: degrade functionality rather than denying service. The key is knowing which errors are recoverable (a failed recommendation call) and which are not (a failed authentication check).</p>
-<p>The most robust error handling strategies combine multiple patterns. Use Result types or exceptions for local error handling. Use error boundaries for UI resilience. Use circuit breakers for service resilience. Use structured logging and tracing for diagnosis. The combination of these patterns creates systems that fail gracefully and are debuggable when they do.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/react-server-components.html">React Server Components</a>, <a href="/en/tech/testing-strategies.html">Testing Strategies</a>, <a href="/en/tech/api-versioning-rest-graphql.html">API Versioning Strategies: REST vs GraphQL Approaches</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (6)</summary><ol><li><a href="#exceptions">Exceptions</a></li><li><a href="#result-types">Result Types</a></li><li><a href="#error-boundaries">Error Boundaries</a></li><li><a href="#resilience-patterns">Resilience Patterns</a></li><li><a href="#error-propagation">Error Propagation</a></li><li><a href="#error-recovery">Error Recovery</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>The most robust error handling strategies combine multiple patterns. Use Result types or exceptions for local error handling. Use error boundaries for UI resilience. Use circuit breakers for service resilience. Use structured logging and tracing for diagnosis. The combination of these patterns creates systems that fail gracefully and are debuggable when they do.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/react-server-components.html">React Server Components</a></li><li><a href="/en/tech/testing-strategies.html">Testing Strategies</a></li><li><a href="/en/tech/api-versioning-rest-graphql.html">API Versioning Strategies: REST vs GraphQL Approaches</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -150,29 +152,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Error%20Handling%20Patterns&url=https%3A//aidev.fit/en/tech/error-handling-patterns.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/error-handling-patterns.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Error%20Handling%20Patterns&url=https%3A//aidev.fit/en/tech/error-handling-patterns.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Error%20Handling%20Patterns&u=https%3A//aidev.fit/en/tech/error-handling-patterns.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Error%20Handling%20Patterns&body=https%3A//aidev.fit/en/tech/error-handling-patterns.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/error-handling-patterns.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Error%20Handling%20Patterns&url=https%3A//aidev.fit/en/tech/error-handling-patterns.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/error-handling-patterns.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Error%20Handling%20Patterns&url=https%3A//aidev.fit/en/tech/error-handling-patterns.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Error%20Handling%20Patterns&u=https%3A//aidev.fit/en/tech/error-handling-patterns.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Error%20Handling%20Patterns&body=https%3A//aidev.fit/en/tech/error-handling-patterns.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/error-handling-patterns.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/git-workflows.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Git Workflows</span></a><a href="/en/tech/code-generation.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Code Generation</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/terraform-state-management.html" class="related-card"><span class="rc-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</span><span class="rc-desc">Deep dive into Terraform state management covering remote backends, state locking, migration strategies, workspace patte</span></a><a href="/en/tech/ci-cd-best-practices.html" class="related-card"><span class="rc-title">CI/CD Best Practices</span><span class="rc-desc">Master CI/CD best practices: pipeline design, artifact management, environment promotion, and deployment strategies</span></a><a href="/en/tech/load-testing-strategies.html" class="related-card"><span class="rc-title">Load Testing Strategies</span><span class="rc-desc">Explore load testing strategies: ramp-up patterns, steady state, spike testing, soak testing, and tool selection guidanc</span></a><a href="/en/tech/metric-collection.html" class="related-card"><span class="rc-title">Metric Collection</span><span class="rc-desc">Master metric collection: agent-based, pull-based, and push-based approaches, cardinality management, and observability</span></a><a href="/en/tech/nextjs-app-router.html" class="related-card"><span class="rc-title">Next.js App Router</span><span class="rc-desc">Explore Next.js App Router: server components, layouts, loading states, error boundaries, and routing architecture</span></a><a href="/en/tech/nodejs-streams.html" class="related-card"><span class="rc-title">Node.js Streams</span><span class="rc-desc">Master Node.js streams: readable, writable, transform streams, backpressure handling, and the pipeline API</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/git-workflows.html" class="prev-next-btn prev-link">← Git Workflows</a><a href="/en/tech/code-generation.html" class="prev-next-btn next-link">Code Generation →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/terraform-state-management.html" class="related-card"><span class="related-card-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</span><span class="related-card-desc">Deep dive into Terraform state management covering remote backends, state locking, migration strateg</span></a><a href="/en/tech/ci-cd-best-practices.html" class="related-card"><span class="related-card-title">CI/CD Best Practices</span><span class="related-card-desc">Master CI/CD best practices: pipeline design, artifact management, environment promotion, and deploy</span></a><a href="/en/tech/load-testing-strategies.html" class="related-card"><span class="related-card-title">Load Testing Strategies</span><span class="related-card-desc">Explore load testing strategies: ramp-up patterns, steady state, spike testing, soak testing, and to</span></a><a href="/en/tech/metric-collection.html" class="related-card"><span class="related-card-title">Metric Collection</span><span class="related-card-desc">Master metric collection: agent-based, pull-based, and push-based approaches, cardinality management</span></a><a href="/en/tech/nextjs-app-router.html" class="related-card"><span class="related-card-title">Next.js App Router</span><span class="related-card-desc">Explore Next.js App Router: server components, layouts, loading states, error boundaries, and routin</span></a><a href="/en/tech/nodejs-streams.html" class="related-card"><span class="related-card-title">Node.js Streams</span><span class="related-card-desc">Master Node.js streams: readable, writable, transform streams, backpressure handling, and the pipeli</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#exceptions">Exceptions</a></li><li><a href="#result-types">Result Types</a></li><li><a href="#error-boundaries">Error Boundaries</a></li><li><a href="#resilience-patterns">Resilience Patterns</a></li><li><a href="#error-propagation">Error Propagation</a></li><li><a href="#error-recovery">Error Recovery</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

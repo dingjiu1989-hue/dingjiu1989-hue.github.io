@@ -13548,34 +13548,41 @@ def make_article_html(art, board_id, board_name, all_posts):
     related_html = ''
     for r in related:
         r_url = f"/en/{r['board_id']}/{r['slug']}.html"
-        r_desc = r.get('description', '')[:100]
-        related_html += f'<a href="{r_url}" class="related-card"><span class="related-card-title">{r["title"]}</span><span class="related-card-desc">{r_desc}</span></a>'
+        r_desc = r.get('description', '')[:120]
+        related_html += f'<a href="{r_url}" class="related-card"><span class="rc-title">{r["title"]}</span><span class="rc-desc">{r_desc}</span></a>'
 
-    # User-visible prev/next buttons
+    # User-visible prev/next buttons with titles
     prev_next_buttons = ''
     if idx > 0:
         prev_p = all_sorted[idx - 1]
-        prev_next_buttons += f'<a href="/en/{board_id}/{prev_p["slug"]}.html" class="prev-next-btn prev-link">← {prev_p["title"]}</a>'
+        prev_title = prev_p['title'][:65]
+        prev_next_buttons += f'<a href="/en/{board_id}/{prev_p["slug"]}.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">{prev_title}</span></a>'
     else:
-        prev_next_buttons += '<span class="prev-next-btn prev-link disabled">← Previous</span>'
+        prev_next_buttons += '<span class="prev-next-btn prev-link disabled"><span class="pn-label">← Previous</span><span class="pn-title">First article</span></span>'
     if idx < len(all_sorted) - 1:
         next_p = all_sorted[idx + 1]
-        prev_next_buttons += f'<a href="/en/{board_id}/{next_p["slug"]}.html" class="prev-next-btn next-link">{next_p["title"]} →</a>'
+        next_title = next_p['title'][:65]
+        prev_next_buttons += f'<a href="/en/{board_id}/{next_p["slug"]}.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">{next_title}</span></a>'
     else:
-        prev_next_buttons += '<span class="prev-next-btn next-link disabled">Next →</span>'
+        prev_next_buttons += '<span class="prev-next-btn next-link disabled"><span class="pn-label">Next →</span><span class="pn-title">Latest article</span></span>'
 
-    # Table of contents from h2/h3 headings
-    toc_html = ''
+    # Table of contents from h2/h3 headings (desktop sidebar + mobile inline)
+    toc_sidebar_html = ''
+    toc_inline_html = ''
     toc_headings = re.findall(r'<h2[^>]*>(.*?)</h2>|<h3[^>]*>(.*?)</h3>', body_html, re.DOTALL)
     if toc_headings:
         toc_items = []
         for h2, h3 in toc_headings:
             heading = h2 if h2 else h3
             clean = re.sub(r'<[^>]+>', '', heading).strip()
-            anchor = clean.lower().replace(' ', '-').replace('?', '').replace('/', '-')
+            anchor = re.sub(r'[^a-z0-9-]', '', clean.lower().replace(' ', '-')).strip('-')
             toc_items.append(f'<li><a href="#{anchor}">{clean}</a></li>')
         if len(toc_items) >= 3:
-            toc_html = f'<details class="article-toc"><summary>Table of Contents ({len(toc_items)})</summary><ol>{"".join(toc_items)}</ol></details>'
+            toc_sidebar_html = f'''<nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol>{"".join(toc_items)}</ol>
+    </nav>'''
+            toc_inline_html = f'<details class="article-toc-inline"><summary>Table of Contents ({len(toc_items)})</summary><ol>{"".join(toc_items)}</ol></details>'
 
     # Inline "See also" with diverse anchor text
     see_also = ''
@@ -13583,8 +13590,8 @@ def make_article_html(art, board_id, board_name, all_posts):
         links = []
         for r in see_also_pool:
             r_url = f"/en/{r['board_id']}/{r['slug']}.html"
-            links.append(f'<a href="{r_url}">{r["title"]}</a>')
-        see_also = f'<p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> {", ".join(links)}</p>'
+            links.append(f'<li><a href="{r_url}">{r["title"]}</a></li>')
+        see_also = f'<div class="see-also"><strong>See also</strong><ul>{"".join(links)}</ul></div>'
 
     # Insert cover image inline after first paragraph for visual engagement
     inline_img = f'<picture><source srcset="{cover_webp}" type="image/webp"><img src="{cover_url}" alt="{art["title"]}" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>'
@@ -13726,43 +13733,51 @@ def make_article_html(art, board_id, board_name, all_posts):
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/{board_id}/">{board_name}</a> › {art['title']}
-    </div>
-    <article>
-      <div class="article-tags">{pin_h}{tags_h}</div>
-      <h1 class="article-title">{art['title']}</h1>
-      <div class="article-meta"><time datetime="{art['date']}">Published {art['date']}</time>{' · <time datetime="' + art['lastActive'] + '">Last active ' + art['lastActive'] + '</time>' if art.get('lastActive') and art['lastActive'] != art['date'] else ''} · {article_views} views · {art['replies']} replies · {read_time} min read</div>
-      <picture><source srcset="{cover_webp}" type="image/webp"><img class="article-cover" src="{cover_url}" alt="{art['title']}" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body">{body_raw}</div>{see_also}
-    </article>
-    {comment_cta_inline}
-    {toc_html}
-    {ad_mid}
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="{share_twitter}" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="{share_linkedin}" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="{share_reddit}" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="{share_hn}" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="{share_email}" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="{art_url}" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation">{prev_next_buttons}</nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid">{related_html}</div>
-    </section>
-    {tools_html}
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/{board_id}/">{board_name}</a>
   </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">{pin_h}{tags_h}</div>
+        <h1 class="article-title">{art['title']}</h1>
+        <div class="article-meta">
+          <time datetime="{art['date']}">{art['date']}</time>
+          <span class="meta-sep">·</span>
+          <span>{read_time} min read</span>
+          <span class="meta-sep">·</span>
+          <span>{article_views} views</span>
+        </div>
+        <picture><source srcset="{cover_webp}" type="image/webp"><img class="article-cover" src="{cover_url}" alt="{art['title']}" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        {toc_inline_html}
+        <div class="article-body">{body_raw}</div>{see_also}
+        {ad_mid}
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="{share_twitter}" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="{share_linkedin}" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="{share_reddit}" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="{share_hn}" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="{share_email}" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="{art_url}" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation">{prev_next_buttons}</nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid">{related_html}</div>
+        </section>
+        {tools_html}
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      {toc_sidebar_html}
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

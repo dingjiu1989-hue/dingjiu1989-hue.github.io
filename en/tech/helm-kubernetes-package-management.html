@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Helm Charts: Kubernetes Package Management
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">Programming</span>
         <span class="tag-cat">DevOps</span></div>
-      <h1 class="article-title">Helm Charts: Kubernetes Package Management</h1>
-      <div class="article-meta"><time datetime="2025-12-30">Published 2025-12-30</time> · <time datetime="2026-04-16">Last active 2026-04-16</time> · 56 views · 0 replies · 14 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/helm-kubernetes-package-management.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/helm-kubernetes-package-management.png" alt="Helm Charts: Kubernetes Package Management" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">Helm Charts: Kubernetes Package Management</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-30">2025-12-30</time>
+          <span class="meta-sep">·</span>
+          <span>14 min read</span>
+          <span class="meta-sep">·</span>
+          <span>56 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/helm-kubernetes-package-management.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/helm-kubernetes-package-management.png" alt="Helm Charts: Kubernetes Package Management" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (14)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#chart-structure">Chart Structure</a></li><li><a href="#advanced-templating">Advanced Templating</a></li><li><a href="#values-management-and-validation">Values Management and Validation</a></li><li><a href="#valuesyaml-defaults">values.yaml (defaults)</a></li><li><a href="#values-stagingyaml">values-staging.yaml</a></li><li><a href="#values-productionyaml">values-production.yaml</a></li><li><a href="#dependency-management">Dependency Management</a></li><li><a href="#cicd-integration">CI/CD Integration</a></li><li><a href="#githubworkflowshelm-releaseyml">.github/workflows/helm-release.yml</a></li><li><a href="#chart-versioning-and-publishing">Chart Versioning and Publishing</a></li><li><a href="#login-and-push">Login and push</a></li><li><a href="#install-from-oci">Install from OCI</a></li><li><a href="#best-practices">Best Practices</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>Helm is the de facto package manager for Kubernetes, enabling developers to define, install, and upgrade complex applications through reusable chart packages. A single Helm chart can encapsulate dozens of Kubernetes resources into a versioned, configurable unit that can be deployed across multiple environments with minimal repetition.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/helm-kubernetes-package-management.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/helm-kubernetes-package-management.png" alt="Helm Charts: Kubernetes Package Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>This guide covers advanced Helm concepts including chart structure, templating, dependency management, CI/CD integration, and enterprise best practices.</p>
 <h2>Chart Structure</h2>
@@ -325,14 +333,8 @@
 <p><strong>Resource policy annotations</strong> : use <code>helm.sh/resource-policy: keep</code> sparingly and document its use.</p>
 </li>
 </ul>
-<p>Helm remains the most widely adopted packaging tool in the Kubernetes ecosystem, and mastering its advanced features is essential for operating production-grade workloads at scale.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a>, <a href="/en/tech/git-workflows-2026.html">Git Workflows for Teams</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (14)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#chart-structure">Chart Structure</a></li><li><a href="#advanced-templating">Advanced Templating</a></li><li><a href="#values-management-and-validation">Values Management and Validation</a></li><li><a href="#values.yaml-(defaults)">values.yaml (defaults)</a></li><li><a href="#values-staging.yaml">values-staging.yaml</a></li><li><a href="#values-production.yaml">values-production.yaml</a></li><li><a href="#dependency-management">Dependency Management</a></li><li><a href="#ci-cd-integration">CI/CD Integration</a></li><li><a href="#.github-workflows-helm-release.yml">.github/workflows/helm-release.yml</a></li><li><a href="#chart-versioning-and-publishing">Chart Versioning and Publishing</a></li><li><a href="#login-and-push">Login and push</a></li><li><a href="#install-from-oci">Install from OCI</a></li><li><a href="#best-practices">Best Practices</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Helm remains the most widely adopted packaging tool in the Kubernetes ecosystem, and mastering its advanced features is essential for operating production-grade workloads at scale.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></li><li><a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></li><li><a href="/en/tech/git-workflows-2026.html">Git Workflows for Teams</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -340,29 +342,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Helm%20Charts%3A%20Kubernetes%20Package%20Management&url=https%3A//aidev.fit/en/tech/helm-kubernetes-package-management.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/helm-kubernetes-package-management.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Helm%20Charts%3A%20Kubernetes%20Package%20Management&url=https%3A//aidev.fit/en/tech/helm-kubernetes-package-management.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Helm%20Charts%3A%20Kubernetes%20Package%20Management&u=https%3A//aidev.fit/en/tech/helm-kubernetes-package-management.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Helm%20Charts%3A%20Kubernetes%20Package%20Management&body=https%3A//aidev.fit/en/tech/helm-kubernetes-package-management.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/helm-kubernetes-package-management.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Helm%20Charts%3A%20Kubernetes%20Package%20Management&url=https%3A//aidev.fit/en/tech/helm-kubernetes-package-management.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/helm-kubernetes-package-management.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Helm%20Charts%3A%20Kubernetes%20Package%20Management&url=https%3A//aidev.fit/en/tech/helm-kubernetes-package-management.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Helm%20Charts%3A%20Kubernetes%20Package%20Management&u=https%3A//aidev.fit/en/tech/helm-kubernetes-package-management.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Helm%20Charts%3A%20Kubernetes%20Package%20Management&body=https%3A//aidev.fit/en/tech/helm-kubernetes-package-management.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/helm-kubernetes-package-management.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/github-actions-advanced.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Advanced GitHub Actions Workflows</span></a><a href="/en/tech/reverse-proxy-guide.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Reverse Proxy Guide</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/kubernetes-services-security.html" class="related-card"><span class="rc-title">Kubernetes Security Best Practices</span><span class="rc-desc">Essential Kubernetes security practices for pod security, network policies, RBAC, and secrets management.</span></a><a href="/en/tech/infrastructure-testing.html" class="related-card"><span class="rc-title">Infrastructure Testing with Terratest and Other Tools</span><span class="rc-desc">Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources, compliance validat</span></a><a href="/en/tech/dev-environment-setup.html" class="related-card"><span class="rc-title">Developer Environment Setup Guide</span><span class="rc-desc">Comprehensive guide to setting up a productive developer environment with tools, configuration, and automation.</span></a><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="rc-title">Nginx Configuration Guide</span><span class="rc-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting, and load balancing</span></a><a href="/en/tech/terraform-infrastructure-code.html" class="related-card"><span class="rc-title">Terraform Infrastructure as Code</span><span class="rc-desc">Master Terraform for managing cloud infrastructure with state management, modules, and production best practices.</span></a><a href="/en/tech/api-gateway-implementation.html" class="related-card"><span class="rc-title">API Gateway Implementation Guide</span><span class="rc-desc">Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformations, analytics, and </span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/github-actions-advanced.html" class="prev-next-btn prev-link">← Advanced GitHub Actions Workflows</a><a href="/en/tech/reverse-proxy-guide.html" class="prev-next-btn next-link">Reverse Proxy Guide →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/kubernetes-services-security.html" class="related-card"><span class="related-card-title">Kubernetes Security Best Practices</span><span class="related-card-desc">Essential Kubernetes security practices for pod security, network policies, RBAC, and secrets manage</span></a><a href="/en/tech/infrastructure-testing.html" class="related-card"><span class="related-card-title">Infrastructure Testing with Terratest and Other Tools</span><span class="related-card-desc">Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources</span></a><a href="/en/tech/dev-environment-setup.html" class="related-card"><span class="related-card-title">Developer Environment Setup Guide</span><span class="related-card-desc">Comprehensive guide to setting up a productive developer environment with tools, configuration, and </span></a><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="related-card-title">Nginx Configuration Guide</span><span class="related-card-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting</span></a><a href="/en/tech/terraform-infrastructure-code.html" class="related-card"><span class="related-card-title">Terraform Infrastructure as Code</span><span class="related-card-desc">Master Terraform for managing cloud infrastructure with state management, modules, and production be</span></a><a href="/en/tech/api-gateway-implementation.html" class="related-card"><span class="related-card-title">API Gateway Implementation Guide</span><span class="related-card-desc">Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformati</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#chart-structure">Chart Structure</a></li><li><a href="#advanced-templating">Advanced Templating</a></li><li><a href="#values-management-and-validation">Values Management and Validation</a></li><li><a href="#valuesyaml-defaults">values.yaml (defaults)</a></li><li><a href="#values-stagingyaml">values-staging.yaml</a></li><li><a href="#values-productionyaml">values-production.yaml</a></li><li><a href="#dependency-management">Dependency Management</a></li><li><a href="#cicd-integration">CI/CD Integration</a></li><li><a href="#githubworkflowshelm-releaseyml">.github/workflows/helm-release.yml</a></li><li><a href="#chart-versioning-and-publishing">Chart Versioning and Publishing</a></li><li><a href="#login-and-push">Login and push</a></li><li><a href="#install-from-oci">Install from OCI</a></li><li><a href="#best-practices">Best Practices</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

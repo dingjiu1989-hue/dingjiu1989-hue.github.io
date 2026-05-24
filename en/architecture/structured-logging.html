@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Structured Logging
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Structured Logging</h1>
-      <div class="article-meta"><time datetime="2026-04-30">Published 2026-04-30</time> · <time datetime="2026-05-07">Last active 2026-05-07</time> · 147 views · 0 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/structured-logging.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/structured-logging.png" alt="Structured Logging" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Structured logging is the practice of emitting logs as structured data — typically JSON — rather than free-form text strings. This transformation is foundational to observability. Structured logs can be parsed, filtered, and queried by machines without requiring fragile regular expressions. The initial investment in structured logging pays dividends in every incident investigation, deployment verification, and system analysis. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/structured-logging.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/structured-logging.png" alt="Structured Logging" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Structured Logging</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-30">2026-04-30</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>147 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/structured-logging.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/structured-logging.png" alt="Structured Logging" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>Structured logging is the practice of emitting logs as structured data — typically JSON — rather than free-form text strings. This transformation is foundational to observability. Structured logs can be parsed, filtered, and queried by machines without requiring fragile regular expressions. The initial investment in structured logging pays dividends in every incident investigation, deployment verification, and system analysis. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/structured-logging.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/structured-logging.png" alt="Structured Logging" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The JSON log format is the standard. Each log line is a JSON object with required fields: timestamp (ISO 8601 with timezone and microseconds), level, logger (source file or component), message (human-readable summary), and trace_id (correlation ID for request tracing). Optional fields include: service, version, environment, request details, error stack traces, and any business-specific context. Every field should be consistently named and typed across all services in the organization. </p>
 <p>Correlation IDs bridge logs across service boundaries. When a request enters the system, it is assigned a trace ID (UUID). This ID is propagated to all downstream services through HTTP headers or message metadata. Every log entry within that request's scope includes the trace ID. When investigating an issue, the trace ID ties together logs from the API gateway, the order service, the payment service, and the database — providing a unified view of what happened during that specific request. </p>
 <p>Log levels should be used consistently across services. DEBUG: detailed information for development and troubleshooting, typically not enabled in production. INFO: high-level events that track normal operation (request started, payment processed). WARN: unexpected events that do not affect normal operation (slow query, retry attempt, degraded dependency). ERROR: failures that affect the current operation but not the overall service (validation error, downstream timeout). FATAL: events that require immediate human intervention (data corruption, configuration error). </p>
@@ -121,14 +129,8 @@
 <p>Log aggregation infrastructure ingests and indexes logs for querying. The ELK stack (Elasticsearch, Logstash, Kibana) is the most common self-hosted option. Loki (Grafana's log aggregation system) indexes only metadata and relies on the log timestamp for ordering, reducing storage requirements. Cloud options include AWS OpenSearch, Google Cloud Logging, and Azure Monitor. The aggregation system should preserve the structured fields for querying — timestamps for time-range queries, levels for filtering, trace IDs for correlation. </p>
 <p>Log sampling reduces volume for high-traffic services. Sampling strategies include: logging every Nth request for INFO level, logging all ERROR level entries (sampling errors is almost always wrong), and using adaptive sampling that reduces rate as traffic increases. Important patterns that should never be sampled: errors, warnings, security events, audit events, and startup/shutdown sequences. </p>
 <p>Dynamic debugging with structured logging enables log-based metrics. If a log entry includes a response_time_ms field, the aggregation system can compute percentile latency metrics directly from logs without separate instrumentation. This is useful for ad-hoc analysis but should not replace purpose-built metrics for production alerting, as log-based metric computation is more expensive. </p>
-<p>Log retention policies balance debugging needs with storage costs. Typical retention: 7-14 days for production logs in hot storage, 30-90 days in warm storage, 12 months in cold archival storage. Compliance-required logs (audit trails, financial transactions) have longer retention with immutable storage. The retention policy should be per-service, as different services have different debugging windows and compliance requirements.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>Log retention policies balance debugging needs with storage costs. Typical retention: 7-14 days for production logs in hot storage, 30-90 days in warm storage, 12 months in cold archival storage. Compliance-required logs (audit trails, financial transactions) have longer retention with immutable storage. The retention policy should be per-service, as different services have different debugging windows and compliance requirements.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a></li><li><a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a></li><li><a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -136,29 +138,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Structured%20Logging&url=https%3A//aidev.fit/en/architecture/structured-logging.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/structured-logging.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Structured%20Logging&url=https%3A//aidev.fit/en/architecture/structured-logging.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Structured%20Logging&u=https%3A//aidev.fit/en/architecture/structured-logging.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Structured%20Logging&body=https%3A//aidev.fit/en/architecture/structured-logging.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/structured-logging.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Structured%20Logging&url=https%3A//aidev.fit/en/architecture/structured-logging.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/structured-logging.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Structured%20Logging&url=https%3A//aidev.fit/en/architecture/structured-logging.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Structured%20Logging&u=https%3A//aidev.fit/en/architecture/structured-logging.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Structured%20Logging&body=https%3A//aidev.fit/en/architecture/structured-logging.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/structured-logging.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/timeout-retry-patterns.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Timeout and Retry Patterns</span></a><a href="/en/architecture/multi-tenancy.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Multi-Tenancy Architecture</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="rc-title">Alerting Strategies for Production Systems</span><span class="rc-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/feature-flags-architecture.html" class="related-card"><span class="rc-title">Feature Flags Architecture</span><span class="rc-desc">Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feature flags</span></a><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="rc-title">Graceful Shutdown Patterns</span><span class="rc-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful service shutdown</span></a><a href="/en/architecture/leader-election.html" class="related-card"><span class="rc-title">Leader Election in Distributed Systems</span><span class="rc-desc">Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best practices</span></a><a href="/en/architecture/timeout-retry-patterns.html" class="related-card"><span class="rc-title">Timeout and Retry Patterns</span><span class="rc-desc">Deadline propagation, exponential backoff, jitter, circuit breaker integration, and retry best practices</span></a><a href="/en/architecture/api-versioning-strategies.html" class="related-card"><span class="rc-title">API Versioning Strategies</span><span class="rc-desc">Compare URI, header, and query parameter API versioning approaches with their trade-offs and best practices</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/timeout-retry-patterns.html" class="prev-next-btn prev-link">← Timeout and Retry Patterns</a><a href="/en/architecture/multi-tenancy.html" class="prev-next-btn next-link">Multi-Tenancy Architecture →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/feature-flags-architecture.html" class="related-card"><span class="related-card-title">Feature Flags Architecture</span><span class="related-card-desc">Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feat</span></a><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="related-card-title">Graceful Shutdown Patterns</span><span class="related-card-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful</span></a><a href="/en/architecture/leader-election.html" class="related-card"><span class="related-card-title">Leader Election in Distributed Systems</span><span class="related-card-desc">Leader election algorithms, ZooKeeper, etcd, Kubernetes leader election, failure handling, and best </span></a><a href="/en/architecture/timeout-retry-patterns.html" class="related-card"><span class="related-card-title">Timeout and Retry Patterns</span><span class="related-card-desc">Deadline propagation, exponential backoff, jitter, circuit breaker integration, and retry best pract</span></a><a href="/en/architecture/api-versioning-strategies.html" class="related-card"><span class="related-card-title">API Versioning Strategies</span><span class="related-card-desc">Compare URI, header, and query parameter API versioning approaches with their trade-offs and best pr</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

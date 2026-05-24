@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Global Traffic Routing
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Global Traffic Routing</h1>
-      <div class="article-meta"><time datetime="2026-04-24">Published 2026-04-24</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 76 views · 0 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/global-traffic-routing.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/global-traffic-routing.png" alt="Global Traffic Routing" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Global traffic routing directs user requests to the optimal backend location based on geography, latency, capacity, and availability. As applications scale to serve users worldwide, the routing infrastructure becomes a critical architectural component that determines latency, reliability, and operational flexibility. Multiple routing techniques — DNS-based, Anycast-based, and application-level — combine to provide comprehensive global traffic management. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/global-traffic-routing.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/global-traffic-routing.png" alt="Global Traffic Routing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Global Traffic Routing</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-24">2026-04-24</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>76 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/global-traffic-routing.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/global-traffic-routing.png" alt="Global Traffic Routing" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>Global traffic routing directs user requests to the optimal backend location based on geography, latency, capacity, and availability. As applications scale to serve users worldwide, the routing infrastructure becomes a critical architectural component that determines latency, reliability, and operational flexibility. Multiple routing techniques — DNS-based, Anycast-based, and application-level — combine to provide comprehensive global traffic management. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/global-traffic-routing.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/global-traffic-routing.png" alt="Global Traffic Routing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>DNS-based routing is the most common approach for directing traffic to the nearest data center. The authoritative DNS server for the domain returns different IP addresses based on the requesting resolver's geographic location or network latency. AWS Route 53, Google Cloud DNS, and Azure Traffic Manager implement latency-based routing by maintaining latency tables between DNS resolvers and application endpoints. When a user in Europe requests the domain, the DNS returns the IP of the European data center. </p>
 <p>Latency-based routing uses real-time measurements to direct users to the fastest endpoint. The DNS service continuously probes each endpoint from multiple vantage points and builds a latency map. When a DNS query arrives, the resolver's approximate location is determined (from its IP address or EDNS Client Subnet), and the lowest-latency endpoint is returned. The latency map updates as network conditions change — an endpoint that becomes degraded will gradually receive less traffic as its measured latency increases. </p>
 <p>Geo-proximity routing directs users based on physical distance rather than network latency. The DNS service calculates the distance between the user's resolver and each endpoint using geographic coordinates. The closest endpoint receives the traffic. Geo-proximity is simpler than latency-based routing but less accurate — physical proximity does not always correlate with network performance, especially in regions with circuitous internet routes. </p>
@@ -122,14 +130,8 @@
 <p>Active-active vs active-passive configurations determine capacity utilization. Active-active distributes traffic across all available regions, maximizing capacity and providing immediate failover capacity. Active-passive keeps one region in standby, accepting no traffic until the primary fails. Active-active requires application-level support — data must be replicated with conflict resolution, sessions must be shareable across regions, and deployments must be synchronized. Active-passive is simpler but wastes standby capacity. </p>
 <p>Sticky sessions complicate global routing. If user sessions are stored locally in one region, routing that user to another region breaks their session. Solutions include: centralized session stores (Redis global, database-backed sessions), client-side sessions (JWT tokens with all session data), or session migration (transfer session state between regions on routing change). The simplest approach is to avoid session locality — design services as stateless with all state in shared data stores. </p>
 <p>Regional failover testing should be regular and automated. Chaos engineering exercises should verify that global routing correctly detects regional failures and shifts traffic. The failover should be tested in both directions and at different times of day to verify capacity assumptions. DNS propagation delays (due to TTL and resolver caching) should be measured and accounted for in recovery time objectives. Automated failover with manual approval provides a balance between speed and safety. </p>
-<p>Multi-cloud routing adds another dimension of complexity. Traffic must be routed not just to the nearest data center but to the nearest data center in the optimal cloud provider. This introduces cloud provider selection based on pricing, available services, and contractual commitments. Multi-cloud routing typically uses DNS-based steering with cloud-specific health checks and capacity tracking. The routing policy should account for data transfer costs between clouds and regions, which can be significant.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>Multi-cloud routing adds another dimension of complexity. Traffic must be routed not just to the nearest data center but to the nearest data center in the optimal cloud provider. This introduces cloud provider selection based on pricing, available services, and contractual commitments. Multi-cloud routing typically uses DNS-based steering with cloud-specific health checks and capacity tracking. The routing policy should account for data transfer costs between clouds and regions, which can be significant.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a></li><li><a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></li><li><a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -137,29 +139,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Global%20Traffic%20Routing&url=https%3A//aidev.fit/en/architecture/global-traffic-routing.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/global-traffic-routing.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Global%20Traffic%20Routing&url=https%3A//aidev.fit/en/architecture/global-traffic-routing.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Global%20Traffic%20Routing&u=https%3A//aidev.fit/en/architecture/global-traffic-routing.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Global%20Traffic%20Routing&body=https%3A//aidev.fit/en/architecture/global-traffic-routing.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/global-traffic-routing.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Global%20Traffic%20Routing&url=https%3A//aidev.fit/en/architecture/global-traffic-routing.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/global-traffic-routing.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Global%20Traffic%20Routing&url=https%3A//aidev.fit/en/architecture/global-traffic-routing.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Global%20Traffic%20Routing&u=https%3A//aidev.fit/en/architecture/global-traffic-routing.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Global%20Traffic%20Routing&body=https%3A//aidev.fit/en/architecture/global-traffic-routing.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/global-traffic-routing.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/gateway-vs-mesh.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">API Gateway vs Service Mesh</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Zero-Downtime Database Migrations</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/multi-tenancy.html" class="related-card"><span class="rc-title">Multi-Tenancy Architecture</span><span class="rc-desc">Isolation levels, database per tenant, schema per tenant, shared database, routing, and pricing models</span></a><a href="/en/architecture/a-b-testing-infrastructure.html" class="related-card"><span class="rc-title">A/B Testing Infrastructure</span><span class="rc-desc">Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing at scale</span></a><a href="/en/architecture/distributed-locking.html" class="related-card"><span class="rc-title">Distributed Locking Mechanisms</span><span class="rc-desc">Redis Redlock, ZooKeeper locks, lease mechanisms, fencing tokens, and consensus-based distributed locking patterns</span></a><a href="/en/architecture/feature-flags-architecture.html" class="related-card"><span class="rc-title">Feature Flags Architecture</span><span class="rc-desc">Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feature flags</span></a><a href="/en/architecture/rate-limiting-architecture.html" class="related-card"><span class="rc-title">Rate Limiting Architecture</span><span class="rc-desc">Token bucket, sliding window, distributed rate limiting, Redis-based implementation, and algorithm tradeoffs</span></a><a href="/en/architecture/api-gateway-patterns.html" class="related-card"><span class="rc-title">API Gateway Patterns</span><span class="rc-desc">Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementation strategies</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/gateway-vs-mesh.html" class="prev-next-btn prev-link">← API Gateway vs Service Mesh</a><a href="/en/architecture/database-migration-zero-downtime.html" class="prev-next-btn next-link">Zero-Downtime Database Migrations →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/multi-tenancy.html" class="related-card"><span class="related-card-title">Multi-Tenancy Architecture</span><span class="related-card-desc">Isolation levels, database per tenant, schema per tenant, shared database, routing, and pricing mode</span></a><a href="/en/architecture/a-b-testing-infrastructure.html" class="related-card"><span class="related-card-title">A/B Testing Infrastructure</span><span class="related-card-desc">Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing </span></a><a href="/en/architecture/distributed-locking.html" class="related-card"><span class="related-card-title">Distributed Locking Mechanisms</span><span class="related-card-desc">Redis Redlock, ZooKeeper locks, lease mechanisms, fencing tokens, and consensus-based distributed lo</span></a><a href="/en/architecture/feature-flags-architecture.html" class="related-card"><span class="related-card-title">Feature Flags Architecture</span><span class="related-card-desc">Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feat</span></a><a href="/en/architecture/rate-limiting-architecture.html" class="related-card"><span class="related-card-title">Rate Limiting Architecture</span><span class="related-card-desc">Token bucket, sliding window, distributed rate limiting, Redis-based implementation, and algorithm t</span></a><a href="/en/architecture/api-gateway-patterns.html" class="related-card"><span class="related-card-title">API Gateway Patterns</span><span class="related-card-desc">Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementatio</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

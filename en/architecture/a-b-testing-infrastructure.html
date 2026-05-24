@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › A/B Testing Infrastructure
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">A/B Testing Infrastructure</h1>
-      <div class="article-meta"><time datetime="2026-04-21">Published 2026-04-21</time> · <time datetime="2026-05-18">Last active 2026-05-18</time> · 83 views · 0 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/a-b-testing-infrastructure.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/a-b-testing-infrastructure.png" alt="A/B Testing Infrastructure" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>A/B testing infrastructure enables organizations to make data-driven decisions by comparing user experiences against a control group. At its core, an A/B testing system must: consistently assign users to experiment groups, reliably track metrics for each group, perform statistical analysis to determine significance, and manage the lifecycle of experiments from creation to analysis. The infrastructure requirements scale with experiment volume, traffic, and statistical rigor. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/a-b-testing-infrastructure.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/a-b-testing-infrastructure.png" alt="A/B Testing Infrastructure" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">A/B Testing Infrastructure</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-21">2026-04-21</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>83 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/a-b-testing-infrastructure.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/a-b-testing-infrastructure.png" alt="A/B Testing Infrastructure" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>A/B testing infrastructure enables organizations to make data-driven decisions by comparing user experiences against a control group. At its core, an A/B testing system must: consistently assign users to experiment groups, reliably track metrics for each group, perform statistical analysis to determine significance, and manage the lifecycle of experiments from creation to analysis. The infrastructure requirements scale with experiment volume, traffic, and statistical rigor. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/a-b-testing-infrastructure.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/a-b-testing-infrastructure.png" alt="A/B Testing Infrastructure" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Experiment assignment uses deterministic bucketing. A consistent hash of the user identifier and experiment key determines which variant the user sees. This ensures the user remains in the same variant across sessions. The hash function must distribute users uniformly across variants. Common approaches include MD5 or SHA-256 hashed to a modulus, or using the MurmurHash for better distribution characteristics. The assignment function should produce the same result regardless of the order experiments are evaluated. </p>
 <p>The assignment infrastructure must handle overlapping experiments. Users may participate in multiple experiments simultaneously. Each experiment uses a unique salt or namespace in the hash computation, ensuring that participation in one experiment does not correlate with participation in another. This prevents interaction effects where users in variant A of experiment 1 are disproportionately likely to be in variant B of experiment 2. </p>
 <p>Metrics collection is a two-phase process. The first phase captures exposure events — recording which users were assigned to which variant at the moment of assignment. The second phase captures outcome events — purchases, clicks, signups — with their associated experiment context. Both events must carry the experiment ID, variant, and a consistent user identifier. The event pipeline must handle late-arriving events, out-of-order events, and event deduplication. </p>
@@ -121,14 +129,8 @@
 <p>Novelty effects and carryover effects require attention. Novelty effects cause users to behave differently simply because something is new — the effect diminishes over time. Carryover effects occur when a user's experience in one experiment affects their behavior in a subsequent experiment. Mitigations include: running experiments long enough for novelty to wear off, implementing washout periods between experiments for the same user, and cross-experiment randomization that accounts for history. </p>
 <p>Infrastructure must handle experiment lifecycle. Create: an experiment is defined with its variants, targeting rules, and metrics. Start: traffic begins flowing to the experiment. Analyze: data accumulates and statistical analysis runs. Conclude: the experiment is analyzed and a decision is made. Cleanup: variant-specific code and flag configurations are removed. The platform should automate cleanup reminders for experiments that have been running beyond their intended duration. </p>
 <p>Client-side experimentation introduces additional challenges. The experiment data must be available on the client for assignment, which exposes targeting rules and variant definitions. The assignment must happen before the user sees any content, making synchronous loading critical. Client-side events may be lost due to ad blockers, network failures, or page abandonment. Server-side supplementation provides a fallback for critical metrics. </p>
-<p>The experiment platform should provide self-service capabilities for product managers and data scientists without requiring engineering involvement for every experiment. The self-service interface should support: experiment definition through a UI, automated statistical analysis with guardrail metrics, and rollback of underperforming experiments with a single click. This democratizes experimentation and increases the velocity of data-driven decision-making.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>The experiment platform should provide self-service capabilities for product managers and data scientists without requiring engineering involvement for every experiment. The self-service interface should support: experiment definition through a UI, automated statistical analysis with guardrail metrics, and rollback of underperforming experiments with a single click. This democratizes experimentation and increases the velocity of data-driven decision-making.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></li><li><a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a></li><li><a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -136,29 +138,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=A/B%20Testing%20Infrastructure&url=https%3A//aidev.fit/en/architecture/a-b-testing-infrastructure.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/a-b-testing-infrastructure.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=A/B%20Testing%20Infrastructure&url=https%3A//aidev.fit/en/architecture/a-b-testing-infrastructure.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=A/B%20Testing%20Infrastructure&u=https%3A//aidev.fit/en/architecture/a-b-testing-infrastructure.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=A/B%20Testing%20Infrastructure&body=https%3A//aidev.fit/en/architecture/a-b-testing-infrastructure.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/a-b-testing-infrastructure.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=A/B%20Testing%20Infrastructure&url=https%3A//aidev.fit/en/architecture/a-b-testing-infrastructure.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/a-b-testing-infrastructure.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=A/B%20Testing%20Infrastructure&url=https%3A//aidev.fit/en/architecture/a-b-testing-infrastructure.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=A/B%20Testing%20Infrastructure&u=https%3A//aidev.fit/en/architecture/a-b-testing-infrastructure.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=A/B%20Testing%20Infrastructure&body=https%3A//aidev.fit/en/architecture/a-b-testing-infrastructure.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/a-b-testing-infrastructure.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/caching-http.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">HTTP Caching Architecture</span></a><a href="/en/architecture/caching-strategies.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Caching Strategies and Patterns in Distributed Systems</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/blue-green-deployment.html" class="related-card"><span class="rc-title">Blue-Green Deployment Strategy</span><span class="rc-desc">Master blue-green deployments for zero-downtime releases, rollback safety, and production traffic switching.</span></a><a href="/en/architecture/chaos-engineering.html" class="related-card"><span class="rc-title">Chaos Engineering: Building Resilient Systems</span><span class="rc-desc">Introduction to chaos engineering: principles, practices, and tools for testing system resilience in production.</span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="rc-title">Alerting Strategies for Production Systems</span><span class="rc-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="rc-title">API Composition and Aggregation</span><span class="rc-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation strategies</span></a><a href="/en/architecture/cdn-architecture.html" class="related-card"><span class="rc-title">CDN Architecture</span><span class="rc-desc">Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content delivery networks</span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="rc-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="rc-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices for distributed sys</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/caching-http.html" class="prev-next-btn prev-link">← HTTP Caching Architecture</a><a href="/en/architecture/caching-strategies.html" class="prev-next-btn next-link">Caching Strategies and Patterns in Distributed Systems →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/blue-green-deployment.html" class="related-card"><span class="related-card-title">Blue-Green Deployment Strategy</span><span class="related-card-desc">Master blue-green deployments for zero-downtime releases, rollback safety, and production traffic sw</span></a><a href="/en/architecture/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Building Resilient Systems</span><span class="related-card-desc">Introduction to chaos engineering: principles, practices, and tools for testing system resilience in</span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a><a href="/en/architecture/cdn-architecture.html" class="related-card"><span class="related-card-title">CDN Architecture</span><span class="related-card-desc">Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content deliv</span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="related-card-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="related-card-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Transactional Inbox Pattern for Reliable Messaging
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Transactional Inbox Pattern for Reliable Messaging</h1>
-      <div class="article-meta"><time datetime="2026-05-11">Published 2026-05-11</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 234 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/transactional-inbox.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/transactional-inbox.png" alt="Transactional Inbox Pattern for Reliable Messaging" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The transactional inbox pattern ensures reliable message processing by storing incoming messages in a persistent inbox before processing them. This guarantees at-least-once processing without duplicating work during retries.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/transactional-inbox.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/transactional-inbox.png" alt="Transactional Inbox Pattern for Reliable Messaging" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Transactional Inbox Pattern for Reliable Messaging</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-11">2026-05-11</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>234 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/transactional-inbox.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/transactional-inbox.png" alt="Transactional Inbox Pattern for Reliable Messaging" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (6)</summary><ol><li><a href="#the-problem">The Problem</a></li><li><a href="#how-it-works">How It Works</a></li><li><a href="#inbox-table-schema">Inbox Table Schema</a></li><li><a href="#relationship-to-transactional-outbox">Relationship to Transactional Outbox</a></li><li><a href="#implementation-considerations">Implementation Considerations</a></li><li><a href="#idempotency-keys">Idempotency Keys</a></li></ol></details>
+        <div class="article-body"><p>The transactional inbox pattern ensures reliable message processing by storing incoming messages in a persistent inbox before processing them. This guarantees at-least-once processing without duplicating work during retries.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/transactional-inbox.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/transactional-inbox.png" alt="Transactional Inbox Pattern for Reliable Messaging" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>The Problem</h2>
 <p>In distributed systems, messages can be delivered multiple times. Network failures, consumer crashes, and broker retries all cause duplicate deliveries without the producer knowing. Without the inbox pattern, duplicate messages cause duplicate side effects—charging a customer twice, creating duplicate records.</p>
 <h2>How It Works</h2>
@@ -125,14 +133,8 @@
 <h2>Implementation Considerations</h2>
 <p>Periodically clean up processed inbox records to prevent table growth. Archive after 7-30 days depending on reprocessing requirements. Monitor inbox table size and processing latency. Set up alerts for stuck messages (status=processing for too long).</p>
 <h2>Idempotency Keys</h2>
-<p>For REST API consumers, idempotency keys serve a similar purpose. The client generates a unique key for each request. The server stores processed keys to detect and reject duplicates. Stripe's idempotency key implementation is a well-known example of this pattern.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (6)</summary><ol><li><a href="#the-problem">The Problem</a></li><li><a href="#how-it-works">How It Works</a></li><li><a href="#inbox-table-schema">Inbox Table Schema</a></li><li><a href="#relationship-to-transactional-outbox">Relationship to Transactional Outbox</a></li><li><a href="#implementation-considerations">Implementation Considerations</a></li><li><a href="#idempotency-keys">Idempotency Keys</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>For REST API consumers, idempotency keys serve a similar purpose. The client generates a unique key for each request. The server stores processed keys to detect and reject duplicates. Stripe's idempotency key implementation is a well-known example of this pattern.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/scatter-gather.html">Scatter-Gather Pattern for Parallel Processing</a></li><li><a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></li><li><a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -140,29 +142,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Transactional%20Inbox%20Pattern%20for%20Reliable%20Messaging&url=https%3A//aidev.fit/en/architecture/transactional-inbox.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/transactional-inbox.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Transactional%20Inbox%20Pattern%20for%20Reliable%20Messaging&url=https%3A//aidev.fit/en/architecture/transactional-inbox.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Transactional%20Inbox%20Pattern%20for%20Reliable%20Messaging&u=https%3A//aidev.fit/en/architecture/transactional-inbox.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Transactional%20Inbox%20Pattern%20for%20Reliable%20Messaging&body=https%3A//aidev.fit/en/architecture/transactional-inbox.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/transactional-inbox.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Transactional%20Inbox%20Pattern%20for%20Reliable%20Messaging&url=https%3A//aidev.fit/en/architecture/transactional-inbox.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/transactional-inbox.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Transactional%20Inbox%20Pattern%20for%20Reliable%20Messaging&url=https%3A//aidev.fit/en/architecture/transactional-inbox.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Transactional%20Inbox%20Pattern%20for%20Reliable%20Messaging&u=https%3A//aidev.fit/en/architecture/transactional-inbox.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Transactional%20Inbox%20Pattern%20for%20Reliable%20Messaging&body=https%3A//aidev.fit/en/architecture/transactional-inbox.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/transactional-inbox.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/throttling-pattern.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Throttling Pattern for System Protection</span></a><a href="/en/architecture/sidecar-pattern.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Sidecar Pattern in Microservices Architecture</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/priority-queue.html" class="related-card"><span class="rc-title">Priority Queue Pattern for Message Processing</span><span class="rc-desc">Implement priority queues to ensure critical messages are processed before lower-priority ones in distributed systems.</span></a><a href="/en/architecture/routing-slip.html" class="related-card"><span class="rc-title">Routing Slip Pattern for Dynamic Message Processing</span><span class="rc-desc">Implement the routing slip pattern to process messages through a dynamic sequence of processing steps.</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="rc-title">Domain Events: Design and Implementation</span><span class="rc-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery</span></a><a href="/en/architecture/transaction-outbox-reliable.html" class="related-card"><span class="rc-title">Transactional Outbox Pattern</span><span class="rc-desc">Master reliable message publishing with the transactional outbox: polling publisher, transaction log tailing, and idempo</span></a><a href="/en/architecture/request-reply-pattern.html" class="related-card"><span class="rc-title">Request-Reply Pattern for Asynchronous Communication</span><span class="rc-desc">Implement the request-reply pattern with message queues for asynchronous request-response messaging.</span></a><a href="/en/architecture/fanout-pattern.html" class="related-card"><span class="rc-title">Fanout Pattern for Event Distribution</span><span class="rc-desc">The fanout pattern explained: distributing events to multiple consumers for parallel processing in event-driven systems.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/throttling-pattern.html" class="prev-next-btn prev-link">← Throttling Pattern for System Protection</a><a href="/en/architecture/sidecar-pattern.html" class="prev-next-btn next-link">Sidecar Pattern in Microservices Architecture →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/priority-queue.html" class="related-card"><span class="related-card-title">Priority Queue Pattern for Message Processing</span><span class="related-card-desc">Implement priority queues to ensure critical messages are processed before lower-priority ones in di</span></a><a href="/en/architecture/routing-slip.html" class="related-card"><span class="related-card-title">Routing Slip Pattern for Dynamic Message Processing</span><span class="related-card-desc">Implement the routing slip pattern to process messages through a dynamic sequence of processing step</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/transaction-outbox-reliable.html" class="related-card"><span class="related-card-title">Transactional Outbox Pattern</span><span class="related-card-desc">Master reliable message publishing with the transactional outbox: polling publisher, transaction log</span></a><a href="/en/architecture/request-reply-pattern.html" class="related-card"><span class="related-card-title">Request-Reply Pattern for Asynchronous Communication</span><span class="related-card-desc">Implement the request-reply pattern with message queues for asynchronous request-response messaging.</span></a><a href="/en/architecture/fanout-pattern.html" class="related-card"><span class="related-card-title">Fanout Pattern for Event Distribution</span><span class="related-card-desc">The fanout pattern explained: distributing events to multiple consumers for parallel processing in e</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#the-problem">The Problem</a></li><li><a href="#how-it-works">How It Works</a></li><li><a href="#inbox-table-schema">Inbox Table Schema</a></li><li><a href="#relationship-to-transactional-outbox">Relationship to Transactional Outbox</a></li><li><a href="#implementation-considerations">Implementation Considerations</a></li><li><a href="#idempotency-keys">Idempotency Keys</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

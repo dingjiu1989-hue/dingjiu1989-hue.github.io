@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › DDD Tactical Patterns
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">DDD Tactical Patterns</h1>
-      <div class="article-meta"><time datetime="2026-05-02">Published 2026-05-02</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 352 views · 1 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/ddd-tactical.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/ddd-tactical.png" alt="DDD Tactical Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Domain-Driven Design (DDD) tactical patterns provide concrete building blocks for implementing domain models. While strategic DDD focuses on boundaries and relationships between domains, tactical patterns guide the implementation of individual domain elements. This article explores the core tactical patterns: entities, value objects, aggregates, domain services, repositories, and domain events. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/ddd-tactical.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/ddd-tactical.png" alt="DDD Tactical Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">DDD Tactical Patterns</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-02">2026-05-02</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>352 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/ddd-tactical.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/ddd-tactical.png" alt="DDD Tactical Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>Domain-Driven Design (DDD) tactical patterns provide concrete building blocks for implementing domain models. While strategic DDD focuses on boundaries and relationships between domains, tactical patterns guide the implementation of individual domain elements. This article explores the core tactical patterns: entities, value objects, aggregates, domain services, repositories, and domain events. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/ddd-tactical.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/ddd-tactical.png" alt="DDD Tactical Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Entities </p>
 <p>An entity is an object that has a distinct identity that runs through time and across different states. Two entities with the same attributes but different identities are different objects. The identity is typically represented by a unique identifier—a UUID, a database-generated ID, or a business key. </p>
 <p>Entities are mutable and their state changes over time. An <code>Order</code> entity changes from "pending" to "shipped" as the business process progresses. The entity is responsible for maintaining its own invariants—an <code>Order</code> should not allow shipping before payment is confirmed. </p>
@@ -131,14 +139,8 @@
 <p>Repositories </p>
 <p>A repository provides a collection-like interface for accessing aggregates from persistent storage. Each aggregate root typically has its own repository. The repository mediates between the domain model and the data mapping layer, providing the illusion of an in-memory collection. </p>
 <p>Repositories should be defined as interfaces in the domain layer and implemented in the infrastructure layer. This follows the dependency inversion principle and keeps the domain model independent of persistence technology. </p>
-<p>Tactical patterns provide a shared vocabulary for implementation. When a team uses terms like "aggregate root" or "value object", they have precise, agreed-upon meanings. This shared understanding reduces communication overhead and leads to more consistent implementations.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>Tactical patterns provide a shared vocabulary for implementation. When a team uses terms like "aggregate root" or "value object", they have precise, agreed-upon meanings. This shared understanding reduces communication overhead and leads to more consistent implementations.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></li><li><a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a></li><li><a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -146,29 +148,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=DDD%20Tactical%20Patterns&url=https%3A//aidev.fit/en/architecture/ddd-tactical.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/ddd-tactical.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=DDD%20Tactical%20Patterns&url=https%3A//aidev.fit/en/architecture/ddd-tactical.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=DDD%20Tactical%20Patterns&u=https%3A//aidev.fit/en/architecture/ddd-tactical.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=DDD%20Tactical%20Patterns&body=https%3A//aidev.fit/en/architecture/ddd-tactical.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/ddd-tactical.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=DDD%20Tactical%20Patterns&url=https%3A//aidev.fit/en/architecture/ddd-tactical.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/ddd-tactical.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=DDD%20Tactical%20Patterns&url=https%3A//aidev.fit/en/architecture/ddd-tactical.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=DDD%20Tactical%20Patterns&u=https%3A//aidev.fit/en/architecture/ddd-tactical.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=DDD%20Tactical%20Patterns&body=https%3A//aidev.fit/en/architecture/ddd-tactical.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/ddd-tactical.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/ddd-strategic.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">DDD Strategic Design</span></a><a href="/en/architecture/zero-downtime-deployment.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Zero-Downtime Deployment Strategies</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/domain-event-implementation.html" class="related-card"><span class="rc-title">Domain Event Implementation: Publishing, Handling, and Testing</span><span class="rc-desc">Implement domain events in DDD: event definitions, publishing patterns, handlers, and testing strategies.</span></a><a href="/en/architecture/ddd-strategic.html" class="related-card"><span class="rc-title">DDD Strategic Design</span><span class="rc-desc">Explore DDD strategic design: bounded context, context map, ubiquitous language, and domain integration patterns</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="rc-title">Domain Events: Design and Implementation</span><span class="rc-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery</span></a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card"><span class="rc-title">API Gateway vs Service Mesh</span><span class="rc-desc">Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and Kong examples</span></a><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="rc-title">Graceful Shutdown Patterns</span><span class="rc-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful service shutdown</span></a><a href="/en/architecture/idempotency-patterns.html" class="related-card"><span class="rc-title">Idempotency Patterns in Distributed Systems</span><span class="rc-desc">Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/ddd-strategic.html" class="prev-next-btn prev-link">← DDD Strategic Design</a><a href="/en/architecture/zero-downtime-deployment.html" class="prev-next-btn next-link">Zero-Downtime Deployment Strategies →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/domain-event-implementation.html" class="related-card"><span class="related-card-title">Domain Event Implementation: Publishing, Handling, and Testing</span><span class="related-card-desc">Implement domain events in DDD: event definitions, publishing patterns, handlers, and testing strate</span></a><a href="/en/architecture/ddd-strategic.html" class="related-card"><span class="related-card-title">DDD Strategic Design</span><span class="related-card-desc">Explore DDD strategic design: bounded context, context map, ubiquitous language, and domain integrat</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card"><span class="related-card-title">API Gateway vs Service Mesh</span><span class="related-card-desc">Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and K</span></a><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="related-card-title">Graceful Shutdown Patterns</span><span class="related-card-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful</span></a><a href="/en/architecture/idempotency-patterns.html" class="related-card"><span class="related-card-title">Idempotency Patterns in Distributed Systems</span><span class="related-card-desc">Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation </span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

@@ -111,18 +111,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Terraform Tools: Terragrunt, terratest, tfsec, Infracost
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">DevTools</span>
         <span class="tag-cat">Productivity</span></div>
-      <h1 class="article-title">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h1>
-      <div class="article-meta"><time datetime="2026-02-06">Published 2026-02-06</time> · <time datetime="2026-04-04">Last active 2026-04-04</time> · 714 views · 4 replies · 7 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tools/terraform-tools.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/terraform-tools.png" alt="Terraform Tools: Terragrunt, terratest, tfsec, Infracost" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-06">2026-02-06</time>
+          <span class="meta-sep">·</span>
+          <span>7 min read</span>
+          <span class="meta-sep">·</span>
+          <span>714 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tools/terraform-tools.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/terraform-tools.png" alt="Terraform Tools: Terragrunt, terratest, tfsec, Infracost" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (29)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#terragrunt">Terragrunt</a></li><li><a href="#terragrunthcl-root-configuration">terragrunt.hcl (root configuration)</a></li><li><a href="#devvpcterragrunthcl">dev/vpc/terragrunt.hcl</a></li><li><a href="#apply-all-modules-in-dependency-order">Apply all modules in dependency order</a></li><li><a href="#plan-only-changed-modules">Plan only changed modules</a></li><li><a href="#output-dependency-graph">Output dependency graph</a></li><li><a href="#validate-all-configurations">Validate all configurations</a></li><li><a href="#destroy-with-confirmation">Destroy with confirmation</a></li><li><a href="#terratest">Terratest</a></li><li><a href="#tfsec-now-trivy">tfsec (now Trivy)</a></li><li><a href="#install-tfsec">Install tfsec</a></li><li><a href="#or-use-trivy-which-includes-tfsec-rules">Or use Trivy which includes tfsec rules</a></li><li><a href="#scan-terraform-files">Scan Terraform files</a></li><li><a href="#in-ci">In CI</a></li><li><a href="#trivy-equivalent">Trivy equivalent</a></li><li><a href="#bad-configuration-that-tfsec-catches">Bad configuration that tfsec catches</a></li><li><a href="#fixed-configuration">Fixed configuration</a></li><li><a href="#infracost">Infracost</a></li><li><a href="#install">Install</a></li><li><a href="#generate-cost-estimate-for-current-state">Generate cost estimate for current state</a></li><li><a href="#compare-with-previous-state">Compare with previous state</a></li><li><a href="#output-in-different-formats">Output in different formats</a></li><li><a href="#in-ci">In CI</a></li><li><a href="#infracostyml--usage-estimates">.infracost.yml — usage estimates</a></li><li><a href="#other-essential-tools">Other Essential Tools</a></li><li><a href="#pre-commit-configyaml">.pre-commit-config.yaml</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>Terraform has become the standard for infrastructure as code, but managing Terraform at scale requires additional tools. Terragrunt reduces configuration duplication. Terratest enables automated infrastructure testing. Tfsec scans configurations for security issues. Infracost provides cost estimates before deployment. This article covers each tool with practical examples.</p><picture><source srcset="https://aidev.fit/images/covers/en/tools/terraform-tools.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tools/terraform-tools.png" alt="Terraform Tools: Terragrunt, terratest, tfsec, Infracost" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Terragrunt</h2>
 <p>A thin wrapper that keeps Terraform configurations DRY:</p>
@@ -324,14 +332,8 @@
 <p><strong>Code quality</strong> : Set up pre-commit hooks for terraform fmt, validate, tflint, and docs.</p>
 </li>
 </ul>
-<p>The ideal Terraform workflow combines all these tools: Terragrunt for structure, pre-commit for quality, tfssec for security, Infracost for cost awareness, and Terratest for deployment validation.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a>, <a href="/en/tools/infrastructure-scanners-2026.html">Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench</a>, <a href="/en/tools/kubernetes-tools.html">Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (29)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#terragrunt">Terragrunt</a></li><li><a href="#terragrunt.hcl-(root-configuration)">terragrunt.hcl (root configuration)</a></li><li><a href="#dev-vpc-terragrunt.hcl">dev/vpc/terragrunt.hcl</a></li><li><a href="#apply-all-modules-in-dependency-order">Apply all modules in dependency order</a></li><li><a href="#plan-only-changed-modules">Plan only changed modules</a></li><li><a href="#output-dependency-graph">Output dependency graph</a></li><li><a href="#validate-all-configurations">Validate all configurations</a></li><li><a href="#destroy-with-confirmation">Destroy with confirmation</a></li><li><a href="#terratest">Terratest</a></li><li><a href="#tfsec-(now-trivy)">tfsec (now Trivy)</a></li><li><a href="#install-tfsec">Install tfsec</a></li><li><a href="#or-use-trivy-which-includes-tfsec-rules">Or use Trivy which includes tfsec rules</a></li><li><a href="#scan-terraform-files">Scan Terraform files</a></li><li><a href="#in-ci">In CI</a></li><li><a href="#trivy-equivalent">Trivy equivalent</a></li><li><a href="#bad-configuration-that-tfsec-catches">Bad configuration that tfsec catches</a></li><li><a href="#fixed-configuration">Fixed configuration</a></li><li><a href="#infracost">Infracost</a></li><li><a href="#install">Install</a></li><li><a href="#generate-cost-estimate-for-current-state">Generate cost estimate for current state</a></li><li><a href="#compare-with-previous-state">Compare with previous state</a></li><li><a href="#output-in-different-formats">Output in different formats</a></li><li><a href="#in-ci">In CI</a></li><li><a href="#.infracost.yml-—-usage-estimates">.infracost.yml — usage estimates</a></li><li><a href="#other-essential-tools">Other Essential Tools</a></li><li><a href="#.pre-commit-config.yaml">.pre-commit-config.yaml</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>The ideal Terraform workflow combines all these tools: Terragrunt for structure, pre-commit for quality, tfssec for security, Infracost for cost awareness, and Terratest for deployment validation.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a></li><li><a href="/en/tools/infrastructure-scanners-2026.html">Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench</a></li><li><a href="/en/tools/kubernetes-tools.html">Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -339,29 +341,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Terraform%20Tools%3A%20Terragrunt%2C%20terratest%2C%20tfsec%2C%20Infracost&url=https%3A//aidev.fit/en/tools/terraform-tools.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tools/terraform-tools.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Terraform%20Tools%3A%20Terragrunt%2C%20terratest%2C%20tfsec%2C%20Infracost&url=https%3A//aidev.fit/en/tools/terraform-tools.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Terraform%20Tools%3A%20Terragrunt%2C%20terratest%2C%20tfsec%2C%20Infracost&u=https%3A//aidev.fit/en/tools/terraform-tools.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Terraform%20Tools%3A%20Terragrunt%2C%20terratest%2C%20tfsec%2C%20Infracost&body=https%3A//aidev.fit/en/tools/terraform-tools.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tools/terraform-tools.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Terraform%20Tools%3A%20Terragrunt%2C%20terratest%2C%20tfsec%2C%20Infracost&url=https%3A//aidev.fit/en/tools/terraform-tools.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tools/terraform-tools.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Terraform%20Tools%3A%20Terragrunt%2C%20terratest%2C%20tfsec%2C%20Infracost&url=https%3A//aidev.fit/en/tools/terraform-tools.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Terraform%20Tools%3A%20Terragrunt%2C%20terratest%2C%20tfsec%2C%20Infracost&u=https%3A//aidev.fit/en/tools/terraform-tools.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Terraform%20Tools%3A%20Terragrunt%2C%20terratest%2C%20tfsec%2C%20Infracost&body=https%3A//aidev.fit/en/tools/terraform-tools.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tools/terraform-tools.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tools/testing-frameworks.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</span></a><a href="/en/tools/monorepo-tools.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tools/helm-tools.html" class="related-card"><span class="rc-title">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</span><span class="rc-desc">Essential Helm ecosystem tools: Helmfile for declarative chart management, helm-docs for documentation generation, helm-</span></a><a href="/en/tools/networking-tools.html" class="related-card"><span class="rc-title">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</span><span class="rc-desc">Practical guide to essential networking tools: mtr for path analysis, iperf for bandwidth testing, dig for DNS troublesh</span></a><a href="/en/tools/iac-tools-compared.html" class="related-card"><span class="rc-title">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</span><span class="rc-desc">In-depth comparison of infrastructure-as-code tools covering Terraform, Pulumi, AWS CDK, OpenTofu, and CloudFormation wi</span></a><a href="/en/tools/code-editor-plugins.html" class="related-card"><span class="rc-title">Code Editor Plugins: Must-Have Extensions for Productivity</span><span class="rc-desc">Essential code editor plugins for 2026: language support, AI assistants, theme plugins, git integration, testing tools, </span></a><a href="/en/tools/command-line-productivity.html" class="related-card"><span class="rc-title">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</span><span class="rc-desc">Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code search, jq for JSON </span></a><a href="/en/tools/api-testing-2026.html" class="related-card"><span class="rc-title">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</span><span class="rc-desc">Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, Hoppscotch for light</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tools/testing-frameworks.html" class="prev-next-btn prev-link">← Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest</a><a href="/en/tools/monorepo-tools.html" class="prev-next-btn next-link">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/helm-tools.html" class="related-card"><span class="related-card-title">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</span><span class="related-card-desc">Essential Helm ecosystem tools: Helmfile for declarative chart management, helm-docs for documentati</span></a><a href="/en/tools/networking-tools.html" class="related-card"><span class="related-card-title">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</span><span class="related-card-desc">Practical guide to essential networking tools: mtr for path analysis, iperf for bandwidth testing, d</span></a><a href="/en/tools/iac-tools-compared.html" class="related-card"><span class="related-card-title">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</span><span class="related-card-desc">In-depth comparison of infrastructure-as-code tools covering Terraform, Pulumi, AWS CDK, OpenTofu, a</span></a><a href="/en/tools/code-editor-plugins.html" class="related-card"><span class="related-card-title">Code Editor Plugins: Must-Have Extensions for Productivity</span><span class="related-card-desc">Essential code editor plugins for 2026: language support, AI assistants, theme plugins, git integrat</span></a><a href="/en/tools/command-line-productivity.html" class="related-card"><span class="related-card-title">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</span><span class="related-card-desc">Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code </span></a><a href="/en/tools/api-testing-2026.html" class="related-card"><span class="related-card-title">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</span><span class="related-card-desc">Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, </span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#terragrunt">Terragrunt</a></li><li><a href="#terragrunthcl-root-configuration">terragrunt.hcl (root configuration)</a></li><li><a href="#devvpcterragrunthcl">dev/vpc/terragrunt.hcl</a></li><li><a href="#apply-all-modules-in-dependency-order">Apply all modules in dependency order</a></li><li><a href="#plan-only-changed-modules">Plan only changed modules</a></li><li><a href="#output-dependency-graph">Output dependency graph</a></li><li><a href="#validate-all-configurations">Validate all configurations</a></li><li><a href="#destroy-with-confirmation">Destroy with confirmation</a></li><li><a href="#terratest">Terratest</a></li><li><a href="#tfsec-now-trivy">tfsec (now Trivy)</a></li><li><a href="#install-tfsec">Install tfsec</a></li><li><a href="#or-use-trivy-which-includes-tfsec-rules">Or use Trivy which includes tfsec rules</a></li><li><a href="#scan-terraform-files">Scan Terraform files</a></li><li><a href="#in-ci">In CI</a></li><li><a href="#trivy-equivalent">Trivy equivalent</a></li><li><a href="#bad-configuration-that-tfsec-catches">Bad configuration that tfsec catches</a></li><li><a href="#fixed-configuration">Fixed configuration</a></li><li><a href="#infracost">Infracost</a></li><li><a href="#install">Install</a></li><li><a href="#generate-cost-estimate-for-current-state">Generate cost estimate for current state</a></li><li><a href="#compare-with-previous-state">Compare with previous state</a></li><li><a href="#output-in-different-formats">Output in different formats</a></li><li><a href="#in-ci">In CI</a></li><li><a href="#infracostyml--usage-estimates">.infracost.yml — usage estimates</a></li><li><a href="#other-essential-tools">Other Essential Tools</a></li><li><a href="#pre-commit-configyaml">.pre-commit-config.yaml</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

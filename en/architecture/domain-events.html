@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Domain Events: Design and Implementation
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Domain Events: Design and Implementation</h1>
-      <div class="article-meta"><time datetime="2026-04-24">Published 2026-04-24</time> · <time datetime="2026-05-16">Last active 2026-05-16</time> · 188 views · 0 replies · 3 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/domain-events.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/domain-events.png" alt="Domain Events: Design and Implementation" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Domain events capture significant state changes within a bounded context. They are a tactical pattern from Domain-Driven Design that enables loose coupling between domain aggregates while maintaining consistency boundaries. A domain event represents something that happened in the past and is meaningful to domain experts: OrderSubmitted, PaymentReceived, InventoryDepleted. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/domain-events.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/domain-events.png" alt="Domain Events: Design and Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Domain Events: Design and Implementation</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-24">2026-04-24</time>
+          <span class="meta-sep">·</span>
+          <span>3 min read</span>
+          <span class="meta-sep">·</span>
+          <span>188 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/domain-events.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/domain-events.png" alt="Domain Events: Design and Implementation" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>Domain events capture significant state changes within a bounded context. They are a tactical pattern from Domain-Driven Design that enables loose coupling between domain aggregates while maintaining consistency boundaries. A domain event represents something that happened in the past and is meaningful to domain experts: OrderSubmitted, PaymentReceived, InventoryDepleted. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/domain-events.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/domain-events.png" alt="Domain Events: Design and Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Designing domain events requires careful consideration of what information to include. Each event should contain the aggregate identifier, a timestamp of when the event occurred, the event type, and the data relevant to the change. Crucially, domain events should not contain internal implementation details of the aggregate. The specific fields should represent what happened from the domain perspective, not what data structures changed internally. Event naming follows past-tense convention: OrderShipped rather than ShipOrder, which would be a command. </p>
 <p>The publishing lifecycle has distinct phases. First, the domain event is raised within the aggregate during a command execution. The aggregate appends the event to a collection of unpublished events. When the repository saves the aggregate, it persists both the aggregate state and publishes the events. This atomicity is critical — publishing events must be transactional with the state change to prevent inconsistencies between what the system recorded and what other services learned. </p>
 <p>In-process domain event handling occurs within the same transaction. Event handlers registered in the application layer execute immediately after the aggregate is saved. These handlers are appropriate for side effects that must be consistent with the transaction, such as sending notifications or invalidating caches. They execute synchronously, so they must be fast and reliable. </p>
@@ -120,14 +128,8 @@
 <p>Idempotency is non-negotiable for domain event handlers. The same event may be delivered multiple times due to network retries, broker redelivery, or consumer failures. Handlers must detect and ignore duplicate processing. Common strategies include storing processed event IDs in a database with a unique constraint, using idempotent operations (SET x = y rather than x = x + 1), or making handlers check the current state before acting. </p>
 <p>The transactional outbox pattern solves the dual-write problem: updating the database and publishing an event must be atomic. Writing both the aggregate change and the event to the database in a single transaction ensures consistency. A separate process reads unpublished events from the outbox table and publishes them to the message broker. After successful publication, it marks the events as published or deletes them. This guarantees at-least-once delivery without distributed transactions. </p>
 <p>Event versioning addresses schema evolution. Domain events are persistent contracts that may be consumed by services running different versions. Strategies include keeping past event classes in the codebase, using a schema registry with compatibility checks, and designing events with optional fields and sensible defaults. Forward compatibility — where new consumers can read old events and vice versa — requires disciplined schema evolution. </p>
-<p>Testing domain events requires verifying that the correct events are raised for each command, that event data contains the expected information, and that handlers produce the correct side effects. Unit tests validate event raising within aggregates, while integration tests verify the full publish-and-handle pipeline including the outbox pattern.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>Testing domain events requires verifying that the correct events are raised for each command, that event data contains the expected information, and that handlers produce the correct side effects. Unit tests validate event raising within aggregates, while integration tests verify the full publish-and-handle pipeline including the outbox pattern.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></li><li><a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></li><li><a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -135,29 +137,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Domain%20Events%3A%20Design%20and%20Implementation&url=https%3A//aidev.fit/en/architecture/domain-events.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/domain-events.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Domain%20Events%3A%20Design%20and%20Implementation&url=https%3A//aidev.fit/en/architecture/domain-events.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Domain%20Events%3A%20Design%20and%20Implementation&u=https%3A//aidev.fit/en/architecture/domain-events.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Domain%20Events%3A%20Design%20and%20Implementation&body=https%3A//aidev.fit/en/architecture/domain-events.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/domain-events.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Domain%20Events%3A%20Design%20and%20Implementation&url=https%3A//aidev.fit/en/architecture/domain-events.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/domain-events.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Domain%20Events%3A%20Design%20and%20Implementation&url=https%3A//aidev.fit/en/architecture/domain-events.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Domain%20Events%3A%20Design%20and%20Implementation&u=https%3A//aidev.fit/en/architecture/domain-events.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Domain%20Events%3A%20Design%20and%20Implementation&body=https%3A//aidev.fit/en/architecture/domain-events.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/domain-events.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/global-traffic-routing.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Global Traffic Routing</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Zero-Downtime Database Migrations</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/transaction-outbox-reliable.html" class="related-card"><span class="rc-title">Transactional Outbox Pattern</span><span class="rc-desc">Master reliable message publishing with the transactional outbox: polling publisher, transaction log tailing, and idempo</span></a><a href="/en/architecture/domain-event-implementation.html" class="related-card"><span class="rc-title">Domain Event Implementation: Publishing, Handling, and Testing</span><span class="rc-desc">Implement domain events in DDD: event definitions, publishing patterns, handlers, and testing strategies.</span></a><a href="/en/architecture/transaction-outbox.html" class="related-card"><span class="rc-title">Transactional Outbox Pattern</span><span class="rc-desc">Reliable event publishing with transactional outbox: implementations, idempotent consumers, dual-write resolution</span></a><a href="/en/architecture/event-storming.html" class="related-card"><span class="rc-title">Event Storming</span><span class="rc-desc">Learn event storming: big picture, process modeling, and design workshop techniques for domain exploration</span></a><a href="/en/architecture/fanout-pattern.html" class="related-card"><span class="rc-title">Fanout Pattern for Event Distribution</span><span class="rc-desc">The fanout pattern explained: distributing events to multiple consumers for parallel processing in event-driven systems.</span></a><a href="/en/architecture/transactional-inbox.html" class="related-card"><span class="rc-title">Transactional Inbox Pattern for Reliable Messaging</span><span class="rc-desc">The transactional inbox pattern ensures reliable message processing by storing incoming messages before handling them.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/global-traffic-routing.html" class="prev-next-btn prev-link">← Global Traffic Routing</a><a href="/en/architecture/database-migration-zero-downtime.html" class="prev-next-btn next-link">Zero-Downtime Database Migrations →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/transaction-outbox-reliable.html" class="related-card"><span class="related-card-title">Transactional Outbox Pattern</span><span class="related-card-desc">Master reliable message publishing with the transactional outbox: polling publisher, transaction log</span></a><a href="/en/architecture/domain-event-implementation.html" class="related-card"><span class="related-card-title">Domain Event Implementation: Publishing, Handling, and Testing</span><span class="related-card-desc">Implement domain events in DDD: event definitions, publishing patterns, handlers, and testing strate</span></a><a href="/en/architecture/transaction-outbox.html" class="related-card"><span class="related-card-title">Transactional Outbox Pattern</span><span class="related-card-desc">Reliable event publishing with transactional outbox: implementations, idempotent consumers, dual-wri</span></a><a href="/en/architecture/event-storming.html" class="related-card"><span class="related-card-title">Event Storming</span><span class="related-card-desc">Learn event storming: big picture, process modeling, and design workshop techniques for domain explo</span></a><a href="/en/architecture/fanout-pattern.html" class="related-card"><span class="related-card-title">Fanout Pattern for Event Distribution</span><span class="related-card-desc">The fanout pattern explained: distributing events to multiple consumers for parallel processing in e</span></a><a href="/en/architecture/transactional-inbox.html" class="related-card"><span class="related-card-title">Transactional Inbox Pattern for Reliable Messaging</span><span class="related-card-desc">The transactional inbox pattern ensures reliable message processing by storing incoming messages bef</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

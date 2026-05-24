@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Service Mesh Deep Dive
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Service Mesh Deep Dive</h1>
-      <div class="article-meta"><time datetime="2026-05-05">Published 2026-05-05</time> · <time datetime="2026-05-17">Last active 2026-05-17</time> · 136 views · 0 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/service-mesh-deep.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/service-mesh-deep.png" alt="Service Mesh Deep Dive" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>A service mesh is a dedicated infrastructure layer for handling service-to-service communication in a microservice architecture. It moves communication logic out of application code and into a proxy sidecar, providing observability, security, and reliability features without requiring changes to application code. This article compares the leading service mesh implementations and examines core capabilities. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/service-mesh-deep.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/service-mesh-deep.png" alt="Service Mesh Deep Dive" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Service Mesh Deep Dive</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-05">2026-05-05</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>136 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/service-mesh-deep.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/service-mesh-deep.png" alt="Service Mesh Deep Dive" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>A service mesh is a dedicated infrastructure layer for handling service-to-service communication in a microservice architecture. It moves communication logic out of application code and into a proxy sidecar, providing observability, security, and reliability features without requiring changes to application code. This article compares the leading service mesh implementations and examines core capabilities. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/service-mesh-deep.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/service-mesh-deep.png" alt="Service Mesh Deep Dive" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>How a Service Mesh Works </p>
 <p>A service mesh consists of two components: a data plane and a control plane. The data plane is composed of lightweight proxy sidecars deployed alongside each service instance. These proxies intercept all network traffic in and out of their service, enforcing routing rules, collecting metrics, and managing encryption. </p>
 <p>The control plane manages the configuration of the data plane proxies. It distributes routing rules, TLS certificates, and access policies to all proxies. The control plane also aggregates telemetry data from the proxies and provides a management API for operators. </p>
@@ -131,14 +139,8 @@
 <p>Traffic Splitting </p>
 <p>Traffic splitting allows operators to route a percentage of traffic to different service versions. This enables canary deployments, A/B testing, and gradual rollouts. The service mesh handles the split at the proxy level, and the split can be based on fixed percentages or request attributes (headers, cookies). Istio supports the most sophisticated traffic splitting, while Linkerd and Consul cover the common use cases. </p>
 <p>Choosing a Service Mesh </p>
-<p>The choice depends on your requirements. Istio for maximum features and traffic management capabilities. Linkerd for simplicity, performance, and ease of operation. Consul Connect for multi-platform environments. For teams new to service meshes, Linkerd offers the gentlest learning curve with the most immediate value. Regardless of choice, a service mesh is a significant operational investment that should be justified by concrete requirements for security, observability, or traffic management.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/global-traffic-routing.html">Global Traffic Routing</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>The choice depends on your requirements. Istio for maximum features and traffic management capabilities. Linkerd for simplicity, performance, and ease of operation. Consul Connect for multi-platform environments. For teams new to service meshes, Linkerd offers the gentlest learning curve with the most immediate value. Regardless of choice, a service mesh is a significant operational investment that should be justified by concrete requirements for security, observability, or traffic management.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></li><li><a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></li><li><a href="/en/architecture/global-traffic-routing.html">Global Traffic Routing</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -146,29 +148,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Service%20Mesh%20Deep%20Dive&url=https%3A//aidev.fit/en/architecture/service-mesh-deep.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/service-mesh-deep.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Service%20Mesh%20Deep%20Dive&url=https%3A//aidev.fit/en/architecture/service-mesh-deep.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Service%20Mesh%20Deep%20Dive&u=https%3A//aidev.fit/en/architecture/service-mesh-deep.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Service%20Mesh%20Deep%20Dive&body=https%3A//aidev.fit/en/architecture/service-mesh-deep.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/service-mesh-deep.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Service%20Mesh%20Deep%20Dive&url=https%3A//aidev.fit/en/architecture/service-mesh-deep.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/service-mesh-deep.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Service%20Mesh%20Deep%20Dive&url=https%3A//aidev.fit/en/architecture/service-mesh-deep.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Service%20Mesh%20Deep%20Dive&u=https%3A//aidev.fit/en/architecture/service-mesh-deep.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Service%20Mesh%20Deep%20Dive&body=https%3A//aidev.fit/en/architecture/service-mesh-deep.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/service-mesh-deep.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/architecture-decision-records.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Architecture Decision Records: Documenting Technical Decisions</span></a><a href="/en/architecture/event-storming.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Event Storming</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/service-mesh.html" class="related-card"><span class="rc-title">Service Mesh Patterns: Istio and Linkerd</span><span class="rc-desc">Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and when to use a mesh.</span></a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card"><span class="rc-title">API Gateway vs Service Mesh</span><span class="rc-desc">Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and Kong examples</span></a><a href="/en/architecture/pub-sub-patterns.html" class="related-card"><span class="rc-title">Pub-Sub Patterns: Event-Driven Communication</span><span class="rc-desc">A deep dive into publish-subscribe patterns for decoupled service communication in distributed systems.</span></a><a href="/en/architecture/distributed-tracing-deep.html" class="related-card"><span class="rc-title">Distributed Tracing: Deep Dive</span><span class="rc-desc">Trace context propagation, sampling strategies, visualization, and implementation of distributed tracing</span></a><a href="/en/architecture/a-b-testing-infrastructure.html" class="related-card"><span class="rc-title">A/B Testing Infrastructure</span><span class="rc-desc">Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing at scale</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="rc-title">API Composition and Aggregation</span><span class="rc-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation strategies</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/architecture-decision-records.html" class="prev-next-btn prev-link">← Architecture Decision Records: Documenting Technical Decisions</a><a href="/en/architecture/event-storming.html" class="prev-next-btn next-link">Event Storming →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/service-mesh.html" class="related-card"><span class="related-card-title">Service Mesh Patterns: Istio and Linkerd</span><span class="related-card-desc">Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and wh</span></a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card"><span class="related-card-title">API Gateway vs Service Mesh</span><span class="related-card-desc">Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and K</span></a><a href="/en/architecture/pub-sub-patterns.html" class="related-card"><span class="related-card-title">Pub-Sub Patterns: Event-Driven Communication</span><span class="related-card-desc">A deep dive into publish-subscribe patterns for decoupled service communication in distributed syste</span></a><a href="/en/architecture/distributed-tracing-deep.html" class="related-card"><span class="related-card-title">Distributed Tracing: Deep Dive</span><span class="related-card-desc">Trace context propagation, sampling strategies, visualization, and implementation of distributed tra</span></a><a href="/en/architecture/a-b-testing-infrastructure.html" class="related-card"><span class="related-card-title">A/B Testing Infrastructure</span><span class="related-card-desc">Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing </span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

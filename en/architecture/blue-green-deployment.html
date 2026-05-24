@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Blue-Green Deployment Strategy
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Blue-Green Deployment Strategy</h1>
-      <div class="article-meta"><time datetime="2026-05-06">Published 2026-05-06</time> · <time datetime="2026-05-15">Last active 2026-05-15</time> · 182 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/blue-green-deployment.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/blue-green-deployment.png" alt="Blue-Green Deployment Strategy" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Blue-green deployment is a release strategy that maintains two identical production environments—blue (current) and green (new)—and switches traffic between them. This approach eliminates downtime during deployments and provides instant rollback capability.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/blue-green-deployment.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/blue-green-deployment.png" alt="Blue-Green Deployment Strategy" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Blue-Green Deployment Strategy</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-06">2026-05-06</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>182 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/blue-green-deployment.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/blue-green-deployment.png" alt="Blue-Green Deployment Strategy" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (4)</summary><ol><li><a href="#how-blue-green-works">How Blue-Green Works</a></li><li><a href="#advantages">Advantages</a></li><li><a href="#challenges">Challenges</a></li><li><a href="#best-practices">Best Practices</a></li></ol></details>
+        <div class="article-body"><p>Blue-green deployment is a release strategy that maintains two identical production environments—blue (current) and green (new)—and switches traffic between them. This approach eliminates downtime during deployments and provides instant rollback capability.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/blue-green-deployment.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/blue-green-deployment.png" alt="Blue-Green Deployment Strategy" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>How Blue-Green Works</h2>
 <p>The blue environment runs the current production version. The green environment is provisioned with the new version and is fully tested. Once green passes all validation, a router or load balancer switches traffic from blue to green. If issues are detected, traffic can be instantly switched back to blue.</p>
 <p>This design requires the infrastructure to run both environments simultaneously. For cloud deployments, this means double the infrastructure cost during the transition period. Container orchestration platforms like Kubernetes can reduce this overhead by running both versions within the same cluster and switching service selectors.</p>
@@ -122,14 +130,8 @@
 <p>Database schema changes require careful handling. If the green deployment includes database migrations, both environments must be compatible with the schema during the transition. Techniques like backward-compatible migrations and phased rollouts address this issue.</p>
 <p>The doubled infrastructure cost can be significant for large deployments. Cloud auto-scaling and shorter overlap periods help manage costs. Some organizations use a single environment with blue-green deployment slots (like Azure Deployment Slots) to reduce infrastructure requirements.</p>
 <h2>Best Practices</h2>
-<p>Automate the entire process from environment provisioning to traffic switching. Use canary analysis during the switch—gradually shift traffic percentage and monitor error rates. Keep the overlap period short to minimize costs. Document the rollback procedure and test it regularly.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (4)</summary><ol><li><a href="#how-blue-green-works">How Blue-Green Works</a></li><li><a href="#advantages">Advantages</a></li><li><a href="#challenges">Challenges</a></li><li><a href="#best-practices">Best Practices</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Automate the entire process from environment provisioning to traffic switching. Use canary analysis during the switch—gradually shift traffic percentage and monitor error rates. Keep the overlap period short to minimize costs. Document the rollback procedure and test it regularly.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a></li><li><a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></li><li><a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -137,29 +139,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Blue-Green%20Deployment%20Strategy&url=https%3A//aidev.fit/en/architecture/blue-green-deployment.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/blue-green-deployment.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Blue-Green%20Deployment%20Strategy&url=https%3A//aidev.fit/en/architecture/blue-green-deployment.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Blue-Green%20Deployment%20Strategy&u=https%3A//aidev.fit/en/architecture/blue-green-deployment.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Blue-Green%20Deployment%20Strategy&body=https%3A//aidev.fit/en/architecture/blue-green-deployment.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/blue-green-deployment.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Blue-Green%20Deployment%20Strategy&url=https%3A//aidev.fit/en/architecture/blue-green-deployment.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/blue-green-deployment.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Blue-Green%20Deployment%20Strategy&url=https%3A//aidev.fit/en/architecture/blue-green-deployment.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Blue-Green%20Deployment%20Strategy&u=https%3A//aidev.fit/en/architecture/blue-green-deployment.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Blue-Green%20Deployment%20Strategy&body=https%3A//aidev.fit/en/architecture/blue-green-deployment.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/blue-green-deployment.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/contract-testing.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Contract Testing for Microservices</span></a><a href="/en/architecture/scheduler-supervisor.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Scheduler Supervisor Pattern</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/zero-downtime-deployment.html" class="related-card"><span class="rc-title">Zero-Downtime Deployment Strategies</span><span class="rc-desc">Rolling, blue-green, canary deployments, feature flags, database migrations for zero-downtime releases</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card"><span class="rc-title">Zero-Downtime Database Migrations</span><span class="rc-desc">Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and production practices</span></a><a href="/en/architecture/canary-deployment.html" class="related-card"><span class="rc-title">Canary Deployments for Safe Releases</span><span class="rc-desc">Learn canary deployment: rolling out changes to a subset of users first to reduce deployment risk.</span></a><a href="/en/architecture/a-b-testing-infrastructure.html" class="related-card"><span class="rc-title">A/B Testing Infrastructure</span><span class="rc-desc">Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing at scale</span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="rc-title">Alerting Strategies for Production Systems</span><span class="rc-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card"><span class="rc-title">API Gateway vs Service Mesh</span><span class="rc-desc">Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and Kong examples</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/contract-testing.html" class="prev-next-btn prev-link">← Contract Testing for Microservices</a><a href="/en/architecture/scheduler-supervisor.html" class="prev-next-btn next-link">Scheduler Supervisor Pattern →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/zero-downtime-deployment.html" class="related-card"><span class="related-card-title">Zero-Downtime Deployment Strategies</span><span class="related-card-desc">Rolling, blue-green, canary deployments, feature flags, database migrations for zero-downtime releas</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card"><span class="related-card-title">Zero-Downtime Database Migrations</span><span class="related-card-desc">Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and producti</span></a><a href="/en/architecture/canary-deployment.html" class="related-card"><span class="related-card-title">Canary Deployments for Safe Releases</span><span class="related-card-desc">Learn canary deployment: rolling out changes to a subset of users first to reduce deployment risk.</span></a><a href="/en/architecture/a-b-testing-infrastructure.html" class="related-card"><span class="related-card-title">A/B Testing Infrastructure</span><span class="related-card-desc">Experiment frameworks, traffic assignment, statistical analysis, and infrastructure for A/B testing </span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card"><span class="related-card-title">API Gateway vs Service Mesh</span><span class="related-card-desc">Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and K</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#how-blue-green-works">How Blue-Green Works</a></li><li><a href="#advantages">Advantages</a></li><li><a href="#challenges">Challenges</a></li><li><a href="#best-practices">Best Practices</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

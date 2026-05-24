@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Scatter-Gather Pattern for Parallel Processing
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Scatter-Gather Pattern for Parallel Processing</h1>
-      <div class="article-meta"><time datetime="2026-05-09">Published 2026-05-09</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 88 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/scatter-gather.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/scatter-gather.png" alt="Scatter-Gather Pattern for Parallel Processing" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The scatter-gather pattern sends a request to multiple recipients simultaneously, then aggregates their responses into a single result. This is useful when you need information from multiple sources or want to run parallel operations for fault tolerance.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/scatter-gather.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/scatter-gather.png" alt="Scatter-Gather Pattern for Parallel Processing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Scatter-Gather Pattern for Parallel Processing</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-09">2026-05-09</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>88 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/scatter-gather.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/scatter-gather.png" alt="Scatter-Gather Pattern for Parallel Processing" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#architecture">Architecture</a></li><li><a href="#scatter-mechanisms">Scatter Mechanisms</a></li><li><a href="#aggregation-strategies">Aggregation Strategies</a></li><li><a href="#when-to-use-scatter-gather">When to Use Scatter-Gather</a></li><li><a href="#performance-considerations">Performance Considerations</a></li></ol></details>
+        <div class="article-body"><p>The scatter-gather pattern sends a request to multiple recipients simultaneously, then aggregates their responses into a single result. This is useful when you need information from multiple sources or want to run parallel operations for fault tolerance.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/scatter-gather.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/scatter-gather.png" alt="Scatter-Gather Pattern for Parallel Processing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Architecture</h2>
 <p>A scatter-gather implementation has three phases. First, the scatter phase broadcasts the request to all recipients. Second, the recipients process the request in parallel. Third, the gather phase collects responses and combines them according to aggregation rules.</p>
 <h2>Scatter Mechanisms</h2>
@@ -126,14 +134,8 @@
 <p>Common applications include search engines querying multiple indexes, credit check systems querying multiple bureaus, and monitoring systems collecting health status from multiple services.</p>
 <h2>Performance Considerations</h2>
 <p>The total latency is determined by the slowest recipient. Set timeouts to bound worst-case latency. Consider caching responses from slower recipients. Use asynchronous processing where possible to avoid blocking on aggregation.</p>
-<p>Identify and isolate slow recipients. Implement circuit breakers for recipients that consistently exceed timeouts. Consider removing persistently slow recipients from the recipient list.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#architecture">Architecture</a></li><li><a href="#scatter-mechanisms">Scatter Mechanisms</a></li><li><a href="#aggregation-strategies">Aggregation Strategies</a></li><li><a href="#when-to-use-scatter-gather">When to Use Scatter-Gather</a></li><li><a href="#performance-considerations">Performance Considerations</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Identify and isolate slow recipients. Implement circuit breakers for recipients that consistently exceed timeouts. Consider removing persistently slow recipients from the recipient list.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></li><li><a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></li><li><a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -141,29 +143,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Scatter-Gather%20Pattern%20for%20Parallel%20Processing&url=https%3A//aidev.fit/en/architecture/scatter-gather.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/scatter-gather.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Scatter-Gather%20Pattern%20for%20Parallel%20Processing&url=https%3A//aidev.fit/en/architecture/scatter-gather.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Scatter-Gather%20Pattern%20for%20Parallel%20Processing&u=https%3A//aidev.fit/en/architecture/scatter-gather.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Scatter-Gather%20Pattern%20for%20Parallel%20Processing&body=https%3A//aidev.fit/en/architecture/scatter-gather.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/scatter-gather.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Scatter-Gather%20Pattern%20for%20Parallel%20Processing&url=https%3A//aidev.fit/en/architecture/scatter-gather.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/scatter-gather.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Scatter-Gather%20Pattern%20for%20Parallel%20Processing&url=https%3A//aidev.fit/en/architecture/scatter-gather.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Scatter-Gather%20Pattern%20for%20Parallel%20Processing&u=https%3A//aidev.fit/en/architecture/scatter-gather.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Scatter-Gather%20Pattern%20for%20Parallel%20Processing&body=https%3A//aidev.fit/en/architecture/scatter-gather.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/scatter-gather.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/saga-process-manager.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Saga vs Process Manager: Orchestration Patterns Compared</span></a><a href="/en/architecture/request-reply-pattern.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Request-Reply Pattern for Asynchronous Communication</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/fanout-pattern.html" class="related-card"><span class="rc-title">Fanout Pattern for Event Distribution</span><span class="rc-desc">The fanout pattern explained: distributing events to multiple consumers for parallel processing in event-driven systems.</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="rc-title">Domain Events: Design and Implementation</span><span class="rc-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery</span></a><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="rc-title">Graceful Shutdown Patterns</span><span class="rc-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful service shutdown</span></a><a href="/en/architecture/claim-check.html" class="related-card"><span class="rc-title">Claim Check Pattern</span><span class="rc-desc">Learn the claim check pattern: store large payloads, pass references, and enable asynchronous processing</span></a><a href="/en/architecture/routing-slip.html" class="related-card"><span class="rc-title">Routing Slip Pattern for Dynamic Message Processing</span><span class="rc-desc">Implement the routing slip pattern to process messages through a dynamic sequence of processing steps.</span></a><a href="/en/architecture/transactional-inbox.html" class="related-card"><span class="rc-title">Transactional Inbox Pattern for Reliable Messaging</span><span class="rc-desc">The transactional inbox pattern ensures reliable message processing by storing incoming messages before handling them.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/saga-process-manager.html" class="prev-next-btn prev-link">← Saga vs Process Manager: Orchestration Patterns Compared</a><a href="/en/architecture/request-reply-pattern.html" class="prev-next-btn next-link">Request-Reply Pattern for Asynchronous Communication →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/fanout-pattern.html" class="related-card"><span class="related-card-title">Fanout Pattern for Event Distribution</span><span class="related-card-desc">The fanout pattern explained: distributing events to multiple consumers for parallel processing in e</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="related-card-title">Graceful Shutdown Patterns</span><span class="related-card-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful</span></a><a href="/en/architecture/claim-check.html" class="related-card"><span class="related-card-title">Claim Check Pattern</span><span class="related-card-desc">Learn the claim check pattern: store large payloads, pass references, and enable asynchronous proces</span></a><a href="/en/architecture/routing-slip.html" class="related-card"><span class="related-card-title">Routing Slip Pattern for Dynamic Message Processing</span><span class="related-card-desc">Implement the routing slip pattern to process messages through a dynamic sequence of processing step</span></a><a href="/en/architecture/transactional-inbox.html" class="related-card"><span class="related-card-title">Transactional Inbox Pattern for Reliable Messaging</span><span class="related-card-desc">The transactional inbox pattern ensures reliable message processing by storing incoming messages bef</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#architecture">Architecture</a></li><li><a href="#scatter-mechanisms">Scatter Mechanisms</a></li><li><a href="#aggregation-strategies">Aggregation Strategies</a></li><li><a href="#when-to-use-scatter-gather">When to Use Scatter-Gather</a></li><li><a href="#performance-considerations">Performance Considerations</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

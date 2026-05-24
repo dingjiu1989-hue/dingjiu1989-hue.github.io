@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Choreography Patterns
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Choreography Patterns</h1>
-      <div class="article-meta"><time datetime="2026-05-02">Published 2026-05-02</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 67 views · 0 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/choreography-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/choreography-patterns.png" alt="Choreography Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Choreography is an architectural pattern for coordinating distributed workflows without a central coordinator. Unlike orchestration, where a central service directs all participants, choreography uses events to achieve coordination—each service performs its task and emits events that trigger the next steps. This decentralized approach offers scalability and loose coupling but introduces challenges in observability and error handling. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/choreography-patterns.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/choreography-patterns.png" alt="Choreography Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Choreography Patterns</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-02">2026-05-02</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>67 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/choreography-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/choreography-patterns.png" alt="Choreography Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>Choreography is an architectural pattern for coordinating distributed workflows without a central coordinator. Unlike orchestration, where a central service directs all participants, choreography uses events to achieve coordination—each service performs its task and emits events that trigger the next steps. This decentralized approach offers scalability and loose coupling but introduces challenges in observability and error handling. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/choreography-patterns.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/choreography-patterns.png" alt="Choreography Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>How Choreography Works </p>
 <p>In a choreographed workflow, there is no central controller. Each service knows its role and reacts to relevant events. When a service completes its work, it emits an event that other services consume to trigger their own work. The workflow emerges from the interaction of independent services. </p>
 <p>Consider an order fulfillment flow. The order service places an order and emits "Order Placed". The payment service receives this event, processes payment, and emits "Payment Received". The inventory service receives "Payment Received", reserves inventory, and emits "Inventory Reserved". The shipping service receives this and creates a shipment. Each service acts independently based on events. </p>
@@ -132,14 +140,8 @@
 <p>Timeout handling is another challenge. If a service does not emit its expected event within a time window, the workflow may be stuck. A timeout service or dead letter handling can detect and escalate these cases. Some teams implement a monitoring service that checks for stalled workflow instances without taking control of the coordination. </p>
 <p>When to Use Choreography </p>
 <p>Choreography is appropriate when workflows are relatively stable, events are naturally aligned with service boundaries, and the team has good observability infrastructure. It is less suitable for complex workflows with many conditional paths, strict timing requirements, or where end-to-end visibility is critical. </p>
-<p>Many organizations use a hybrid approach: choreography for simple, stable workflows and orchestration for complex, frequently changing ones. The key is matching the coordination pattern to the workflow's complexity and change rate.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>Many organizations use a hybrid approach: choreography for simple, stable workflows and orchestration for complex, frequently changing ones. The key is matching the coordination pattern to the workflow's complexity and change rate.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a></li><li><a href="/en/architecture/retry-patterns.html">Retry Patterns</a></li><li><a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -147,29 +149,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Choreography%20Patterns&url=https%3A//aidev.fit/en/architecture/choreography-patterns.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/choreography-patterns.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Choreography%20Patterns&url=https%3A//aidev.fit/en/architecture/choreography-patterns.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Choreography%20Patterns&u=https%3A//aidev.fit/en/architecture/choreography-patterns.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Choreography%20Patterns&body=https%3A//aidev.fit/en/architecture/choreography-patterns.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/choreography-patterns.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Choreography%20Patterns&url=https%3A//aidev.fit/en/architecture/choreography-patterns.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/choreography-patterns.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Choreography%20Patterns&url=https%3A//aidev.fit/en/architecture/choreography-patterns.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Choreography%20Patterns&u=https%3A//aidev.fit/en/architecture/choreography-patterns.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Choreography%20Patterns&body=https%3A//aidev.fit/en/architecture/choreography-patterns.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/choreography-patterns.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/ddd-tactical.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">DDD Tactical Patterns</span></a><a href="/en/architecture/zero-downtime-deployment.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Zero-Downtime Deployment Strategies</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/saga-choreography.html" class="related-card"><span class="rc-title">Saga Choreography Pattern</span><span class="rc-desc">Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose choreography</span></a><a href="/en/architecture/event-collaboration.html" class="related-card"><span class="rc-title">Event Collaboration: Choreography vs Orchestration</span><span class="rc-desc">Event-driven collaboration patterns, saga execution, choreography vs orchestration, error handling in distributed workfl</span></a><a href="/en/architecture/event-driven-arch.html" class="related-card"><span class="rc-title">Event-Driven Architecture</span><span class="rc-desc">Explore event-driven architecture: event bus, event schema management, versioning, and production patterns</span></a><a href="/en/architecture/orchestration-patterns.html" class="related-card"><span class="rc-title">Orchestration Patterns</span><span class="rc-desc">Explore orchestration patterns: workflow engines, Temporal, state machines, and centralized workflow coordination</span></a><a href="/en/architecture/asynchronous-communication.html" class="related-card"><span class="rc-title">Asynchronous Communication in Distributed Systems</span><span class="rc-desc">Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and patterns</span></a><a href="/en/architecture/event-storming.html" class="related-card"><span class="rc-title">Event Storming</span><span class="rc-desc">Learn event storming: big picture, process modeling, and design workshop techniques for domain exploration</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/ddd-tactical.html" class="prev-next-btn prev-link">← DDD Tactical Patterns</a><a href="/en/architecture/zero-downtime-deployment.html" class="prev-next-btn next-link">Zero-Downtime Deployment Strategies →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/saga-choreography.html" class="related-card"><span class="related-card-title">Saga Choreography Pattern</span><span class="related-card-desc">Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose c</span></a><a href="/en/architecture/event-collaboration.html" class="related-card"><span class="related-card-title">Event Collaboration: Choreography vs Orchestration</span><span class="related-card-desc">Event-driven collaboration patterns, saga execution, choreography vs orchestration, error handling i</span></a><a href="/en/architecture/event-driven-arch.html" class="related-card"><span class="related-card-title">Event-Driven Architecture</span><span class="related-card-desc">Explore event-driven architecture: event bus, event schema management, versioning, and production pa</span></a><a href="/en/architecture/orchestration-patterns.html" class="related-card"><span class="related-card-title">Orchestration Patterns</span><span class="related-card-desc">Explore orchestration patterns: workflow engines, Temporal, state machines, and centralized workflow</span></a><a href="/en/architecture/asynchronous-communication.html" class="related-card"><span class="related-card-title">Asynchronous Communication in Distributed Systems</span><span class="related-card-desc">Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and pattern</span></a><a href="/en/architecture/event-storming.html" class="related-card"><span class="related-card-title">Event Storming</span><span class="related-card-desc">Learn event storming: big picture, process modeling, and design workshop techniques for domain explo</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

@@ -111,17 +111,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Best Code Formatters and Linters
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Developer Tools</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Developer Tools</span>
         <span class="tag-cat">Productivity</span></div>
-      <h1 class="article-title">Best Code Formatters and Linters</h1>
-      <div class="article-meta"><time datetime="2025-12-09">Published 2025-12-09</time> · <time datetime="2026-05-08">Last active 2026-05-08</time> · 215 views · 0 replies · 8 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tools/code-formatters-linters.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/code-formatters-linters.png" alt="Best Code Formatters and Linters" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Code formatters and linters enforce consistent style and catch bugs before they reach production. Modern tools have evolved significantly, with Rust-based formatters offering dramatic speed improvements over earlier JavaScript-based tools.</p><picture><source srcset="https://aidev.fit/images/covers/en/tools/code-formatters-linters.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tools/code-formatters-linters.png" alt="Best Code Formatters and Linters" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Best Code Formatters and Linters</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-09">2025-12-09</time>
+          <span class="meta-sep">·</span>
+          <span>8 min read</span>
+          <span class="meta-sep">·</span>
+          <span>215 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tools/code-formatters-linters.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/code-formatters-linters.png" alt="Best Code Formatters and Linters" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (28)</summary><ol><li><a href="#the-modern-tooling-stack">The Modern Tooling Stack</a></li><li><a href="#javascripttypescript-biome">JavaScript/TypeScript: Biome</a></li><li><a href="#install">Install</a></li><li><a href="#initialize-configuration">Initialize configuration</a></li><li><a href="#check-code">Check code</a></li><li><a href="#format-code">Format code</a></li><li><a href="#fix-lint-violations">Fix lint violations</a></li><li><a href="#eslint-still-relevant">ESLint (Still Relevant)</a></li><li><a href="#python-ruff">Python: Ruff</a></li><li><a href="#pyprojecttoml">pyproject.toml</a></li><li><a href="#lint">Lint</a></li><li><a href="#format">Format</a></li><li><a href="#fix">Fix</a></li><li><a href="#rust-rustfmt-and-clippy">Rust: rustfmt and Clippy</a></li><li><a href="#format">Format</a></li><li><a href="#lint">Lint</a></li><li><a href="#clippy-with-strict-checks">Clippy with strict checks</a></li><li><a href="#rustfmttoml">rustfmt.toml</a></li><li><a href="#go-gofmt-and-staticcheck">Go: gofmt and Staticcheck</a></li><li><a href="#format-enforces-the-one-true-style">Format (enforces the one true style)</a></li><li><a href="#vet-for-suspicious-constructs">Vet for suspicious constructs</a></li><li><a href="#staticcheck-for-additional-linting">Staticcheck for additional linting</a></li><li><a href="#multi-language-pre-commit-hooks">Multi-Language: pre-commit Hooks</a></li><li><a href="#pre-commit-configyaml">.pre-commit-config.yaml</a></li><li><a href="#editor-integration">Editor Integration</a></li><li><a href="#ci-integration">CI Integration</a></li><li><a href="#githubworkflowslintyml">.github/workflows/lint.yml</a></li><li><a href="#summary">Summary</a></li></ol></details>
+        <div class="article-body"><p>Code formatters and linters enforce consistent style and catch bugs before they reach production. Modern tools have evolved significantly, with Rust-based formatters offering dramatic speed improvements over earlier JavaScript-based tools.</p><picture><source srcset="https://aidev.fit/images/covers/en/tools/code-formatters-linters.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tools/code-formatters-linters.png" alt="Best Code Formatters and Linters" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>The Modern Tooling Stack</h2>
 <p>In 2026, the landscape has shifted toward unified, fast tools that combine formatting and linting:</p>
 <p>JavaScript: ESLint → Biome (migration in progress)</p>
@@ -279,14 +287,8 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: npm ci</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: npx @biomejs/biome ci src/</p>
 <h2>Summary</h2>
-<p>The code quality tooling landscape in 2026 is defined by speed. Rust-based tools (Biome, Ruff) have displaced slower alternatives in the JavaScript and Python ecosystems. Go and Rust have official tooling that eliminates style debates. Use pre-commit hooks to enforce formatting locally and CI checks to prevent unformatted code from reaching the main branch. The key principle is automation -- manually policing code style is a waste of human attention. Let the tools handle formatting so code reviews can focus on architecture and logic.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a>, <a href="/en/tools/database-clients.html">Best Database GUI Clients</a>, <a href="/en/tools/markdown-editors.html">Best Markdown Editors</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (28)</summary><ol><li><a href="#the-modern-tooling-stack">The Modern Tooling Stack</a></li><li><a href="#javascript-typescript:-biome">JavaScript/TypeScript: Biome</a></li><li><a href="#install">Install</a></li><li><a href="#initialize-configuration">Initialize configuration</a></li><li><a href="#check-code">Check code</a></li><li><a href="#format-code">Format code</a></li><li><a href="#fix-lint-violations">Fix lint violations</a></li><li><a href="#eslint-(still-relevant)">ESLint (Still Relevant)</a></li><li><a href="#python:-ruff">Python: Ruff</a></li><li><a href="#pyproject.toml">pyproject.toml</a></li><li><a href="#lint">Lint</a></li><li><a href="#format">Format</a></li><li><a href="#fix">Fix</a></li><li><a href="#rust:-rustfmt-and-clippy">Rust: rustfmt and Clippy</a></li><li><a href="#format">Format</a></li><li><a href="#lint">Lint</a></li><li><a href="#clippy-with-strict-checks">Clippy with strict checks</a></li><li><a href="#rustfmt.toml">rustfmt.toml</a></li><li><a href="#go:-gofmt-and-staticcheck">Go: gofmt and Staticcheck</a></li><li><a href="#format-(enforces-the-one-true-style)">Format (enforces the one true style)</a></li><li><a href="#vet-for-suspicious-constructs">Vet for suspicious constructs</a></li><li><a href="#staticcheck-for-additional-linting">Staticcheck for additional linting</a></li><li><a href="#multi-language:-pre-commit-hooks">Multi-Language: pre-commit Hooks</a></li><li><a href="#.pre-commit-config.yaml">.pre-commit-config.yaml</a></li><li><a href="#editor-integration">Editor Integration</a></li><li><a href="#ci-integration">CI Integration</a></li><li><a href="#.github-workflows-lint.yml">.github/workflows/lint.yml</a></li><li><a href="#summary">Summary</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>The code quality tooling landscape in 2026 is defined by speed. Rust-based tools (Biome, Ruff) have displaced slower alternatives in the JavaScript and Python ecosystems. Go and Rust have official tooling that eliminates style debates. Use pre-commit hooks to enforce formatting locally and CI checks to prevent unformatted code from reaching the main branch. The key principle is automation -- manually policing code style is a waste of human attention. Let the tools handle formatting so code reviews can focus on architecture and logic.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tools/api-testing-tools.html">API Testing Tools Comparison</a></li><li><a href="/en/tools/database-clients.html">Best Database GUI Clients</a></li><li><a href="/en/tools/markdown-editors.html">Best Markdown Editors</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -294,29 +296,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Best%20Code%20Formatters%20and%20Linters&url=https%3A//aidev.fit/en/tools/code-formatters-linters.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tools/code-formatters-linters.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Best%20Code%20Formatters%20and%20Linters&url=https%3A//aidev.fit/en/tools/code-formatters-linters.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Best%20Code%20Formatters%20and%20Linters&u=https%3A//aidev.fit/en/tools/code-formatters-linters.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Best%20Code%20Formatters%20and%20Linters&body=https%3A//aidev.fit/en/tools/code-formatters-linters.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tools/code-formatters-linters.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Best%20Code%20Formatters%20and%20Linters&url=https%3A//aidev.fit/en/tools/code-formatters-linters.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tools/code-formatters-linters.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Best%20Code%20Formatters%20and%20Linters&url=https%3A//aidev.fit/en/tools/code-formatters-linters.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Best%20Code%20Formatters%20and%20Linters&u=https%3A//aidev.fit/en/tools/code-formatters-linters.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Best%20Code%20Formatters%20and%20Linters&body=https%3A//aidev.fit/en/tools/code-formatters-linters.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tools/code-formatters-linters.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tools/diagram-tools.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Best Diagram as Code Tools</span></a><a href="/en/tools/best-supply-chain-security-tools.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Best Software Supply Chain Security Tools 2026: Snyk vs Socket vs</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tools/best-ide-extensions-2026.html" class="related-card"><span class="rc-title">Best IDE Extensions 2026</span><span class="rc-desc">Curated list of essential IDE extensions for VS Code, JetBrains, and Zed to boost developer productivity in 2026.</span></a><a href="/en/tools/diagram-tools.html" class="related-card"><span class="rc-title">Best Diagram as Code Tools</span><span class="rc-desc">Compare diagram-as-code tools including Mermaid, PlantUML, Excalidraw, and Diagrams for creating technical diagrams.</span></a><a href="/en/tools/best-free-dev-tools-2026.html" class="related-card"><span class="rc-title">Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More</span><span class="rc-desc">A curated toolkit covering terminal emulators, Git GUIs, API clients, database browsers, diff tools, and code screenshot</span></a><a href="/en/tools/best-note-taking-apps-developers.html" class="related-card"><span class="rc-title">Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq</span><span class="rc-desc">Developer-focused comparison covering markdown support, code blocks, Git integration, graph views, and local-first vs cl</span></a><a href="/en/tools/linter-formatter.html" class="related-card"><span class="rc-title">Linter and Formatter: ESLint, Prettier, Biome, Ruff</span><span class="rc-desc">Compare linters and formatters in 2026: ESLint + Prettier for JavaScript, Biome as an all-in-one Rust alternative, and R</span></a><a href="/en/tools/code-review-tools.html" class="related-card"><span class="rc-title">Code Review Tools and Best Practices</span><span class="rc-desc">Explore code review tools and practices including GitHub pull requests, GitLab merge requests, automated review strategi</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tools/diagram-tools.html" class="prev-next-btn prev-link">← Best Diagram as Code Tools</a><a href="/en/tools/best-supply-chain-security-tools.html" class="prev-next-btn next-link">Best Software Supply Chain Security Tools 2026: Snyk vs Socket vs Chainguard vs Anchore vs Sigstore →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/best-ide-extensions-2026.html" class="related-card"><span class="related-card-title">Best IDE Extensions 2026</span><span class="related-card-desc">Curated list of essential IDE extensions for VS Code, JetBrains, and Zed to boost developer producti</span></a><a href="/en/tools/diagram-tools.html" class="related-card"><span class="related-card-title">Best Diagram as Code Tools</span><span class="related-card-desc">Compare diagram-as-code tools including Mermaid, PlantUML, Excalidraw, and Diagrams for creating tec</span></a><a href="/en/tools/best-free-dev-tools-2026.html" class="related-card"><span class="related-card-title">Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More</span><span class="related-card-desc">A curated toolkit covering terminal emulators, Git GUIs, API clients, database browsers, diff tools,</span></a><a href="/en/tools/best-note-taking-apps-developers.html" class="related-card"><span class="related-card-title">Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq</span><span class="related-card-desc">Developer-focused comparison covering markdown support, code blocks, Git integration, graph views, a</span></a><a href="/en/tools/linter-formatter.html" class="related-card"><span class="related-card-title">Linter and Formatter: ESLint, Prettier, Biome, Ruff</span><span class="related-card-desc">Compare linters and formatters in 2026: ESLint + Prettier for JavaScript, Biome as an all-in-one Rus</span></a><a href="/en/tools/code-review-tools.html" class="related-card"><span class="related-card-title">Code Review Tools and Best Practices</span><span class="related-card-desc">Explore code review tools and practices including GitHub pull requests, GitLab merge requests, autom</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#the-modern-tooling-stack">The Modern Tooling Stack</a></li><li><a href="#javascripttypescript-biome">JavaScript/TypeScript: Biome</a></li><li><a href="#install">Install</a></li><li><a href="#initialize-configuration">Initialize configuration</a></li><li><a href="#check-code">Check code</a></li><li><a href="#format-code">Format code</a></li><li><a href="#fix-lint-violations">Fix lint violations</a></li><li><a href="#eslint-still-relevant">ESLint (Still Relevant)</a></li><li><a href="#python-ruff">Python: Ruff</a></li><li><a href="#pyprojecttoml">pyproject.toml</a></li><li><a href="#lint">Lint</a></li><li><a href="#format">Format</a></li><li><a href="#fix">Fix</a></li><li><a href="#rust-rustfmt-and-clippy">Rust: rustfmt and Clippy</a></li><li><a href="#format">Format</a></li><li><a href="#lint">Lint</a></li><li><a href="#clippy-with-strict-checks">Clippy with strict checks</a></li><li><a href="#rustfmttoml">rustfmt.toml</a></li><li><a href="#go-gofmt-and-staticcheck">Go: gofmt and Staticcheck</a></li><li><a href="#format-enforces-the-one-true-style">Format (enforces the one true style)</a></li><li><a href="#vet-for-suspicious-constructs">Vet for suspicious constructs</a></li><li><a href="#staticcheck-for-additional-linting">Staticcheck for additional linting</a></li><li><a href="#multi-language-pre-commit-hooks">Multi-Language: pre-commit Hooks</a></li><li><a href="#pre-commit-configyaml">.pre-commit-config.yaml</a></li><li><a href="#editor-integration">Editor Integration</a></li><li><a href="#ci-integration">CI Integration</a></li><li><a href="#githubworkflowslintyml">.github/workflows/lint.yml</a></li><li><a href="#summary">Summary</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

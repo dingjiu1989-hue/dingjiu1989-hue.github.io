@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Patching Strategy
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Security</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/security/">Security</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Security</span>
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
-      <h1 class="article-title">Patching Strategy</h1>
-      <div class="article-meta"><time datetime="2026-03-12">Published 2026-03-12</time> · <time datetime="2026-05-01">Last active 2026-05-01</time> · 584 views · 3 replies · 10 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/security/patching-strategy.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/patching-strategy.png" alt="Patching Strategy" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Introduction </p><picture><source srcset="https://aidev.fit/images/covers/en/security/patching-strategy.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/security/patching-strategy.png" alt="Patching Strategy" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Patching Strategy</h1>
+        <div class="article-meta">
+          <time datetime="2026-03-12">2026-03-12</time>
+          <span class="meta-sep">·</span>
+          <span>10 min read</span>
+          <span class="meta-sep">·</span>
+          <span>584 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/security/patching-strategy.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/patching-strategy.png" alt="Patching Strategy" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (10)</summary><ol><li><a href="#asset-criticality-multiplier">Asset criticality multiplier</a></li><li><a href="#exploit-availability">Exploit availability</a></li><li><a href="#reachability">Reachability</a></li><li><a href="#binbash">!/bin/bash</a></li><li><a href="#automated-patch-testing-script">Automated patch testing script</a></li><li><a href="#apply-patch">Apply patch</a></li><li><a href="#run-validation">Run validation</a></li><li><a href="#monitor-for-issues">Monitor for issues</a></li><li><a href="#virtual-patching-via-waf-as-immediate-stopgap">Virtual patching via WAF as immediate stopgap</a></li><li><a href="#deploy-waf-rule-to-block-exploit-attempts">Deploy WAF rule to block exploit attempts</a></li></ol></details>
+        <div class="article-body"><p>Introduction </p><picture><source srcset="https://aidev.fit/images/covers/en/security/patching-strategy.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/security/patching-strategy.png" alt="Patching Strategy" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Patching is the most fundamental security practice, yet organizations consistently struggle with timely patch deployment. The challenge is balancing speed against stability — deploying patches too slowly leaves systems vulnerable, while deploying too quickly risks breaking critical applications. A mature patching strategy addresses both sides of this equation. </p>
 <p>Vulnerability Prioritization </p>
 <p>Not all vulnerabilities are equal. Prioritize based on exploitability, asset criticality, and threat intelligence. </p>
@@ -286,14 +294,8 @@
 <p>return False</p>
 <p>return True</p>
 <p>Conclusion </p>
-<p>A mature patching strategy prioritizes based on exploitability and asset criticality, tests patches in progressive environments, maintains emergency procedures for zero-day vulnerabilities, and always plans for rollback. Automate as much of the pipeline as possible — manual patching does not scale and is prone to error in high-pressure situations.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/serverless-security.html">Serverless Security</a>, <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (10)</summary><ol><li><a href="#asset-criticality-multiplier">Asset criticality multiplier</a></li><li><a href="#exploit-availability">Exploit availability</a></li><li><a href="#reachability">Reachability</a></li><li><a href="#!-bin-bash">!/bin/bash</a></li><li><a href="#automated-patch-testing-script">Automated patch testing script</a></li><li><a href="#apply-patch">Apply patch</a></li><li><a href="#run-validation">Run validation</a></li><li><a href="#monitor-for-issues">Monitor for issues</a></li><li><a href="#virtual-patching-via-waf-as-immediate-stopgap">Virtual patching via WAF as immediate stopgap</a></li><li><a href="#deploy-waf-rule-to-block-exploit-attempts">Deploy WAF rule to block exploit attempts</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>A mature patching strategy prioritizes based on exploitability and asset criticality, tests patches in progressive environments, maintains emergency procedures for zero-day vulnerabilities, and always plans for rollback. Automate as much of the pipeline as possible — manual patching does not scale and is prone to error in high-pressure situations.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/serverless-security.html">Serverless Security</a></li><li><a href="/en/security/session-management.html">Session Management Security</a></li><li><a href="/en/security/tls-configuration.html">TLS Configuration Guide</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -301,29 +303,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Patching%20Strategy&url=https%3A//aidev.fit/en/security/patching-strategy.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/security/patching-strategy.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Patching%20Strategy&url=https%3A//aidev.fit/en/security/patching-strategy.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Patching%20Strategy&u=https%3A//aidev.fit/en/security/patching-strategy.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Patching%20Strategy&body=https%3A//aidev.fit/en/security/patching-strategy.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/security/patching-strategy.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Patching%20Strategy&url=https%3A//aidev.fit/en/security/patching-strategy.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/security/patching-strategy.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Patching%20Strategy&url=https%3A//aidev.fit/en/security/patching-strategy.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Patching%20Strategy&u=https%3A//aidev.fit/en/security/patching-strategy.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Patching%20Strategy&body=https%3A//aidev.fit/en/security/patching-strategy.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/security/patching-strategy.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/security/secure-api-design.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Secure API Design Principles</span></a><a href="/en/security/malware-analysis.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Malware Analysis Fundamentals</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/security/certificate-management.html" class="related-card"><span class="rc-title">Certificate Management</span><span class="rc-desc">Practical guide to TLS certificate management covering Let's Encrypt, ACME protocol, automated renewal, and certificate </span></a><a href="/en/security/clickjacking-protection.html" class="related-card"><span class="rc-title">Clickjacking Protection</span><span class="rc-desc">Complete guide to clickjacking defense covering X-Frame-Options, CSP frame-ancestors, framebusting techniques, and testi</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="rc-title">Cloud Security Posture Management</span><span class="rc-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift detection, and remedia</span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="rc-title">Container Image Security</span><span class="rc-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability scanning, and image si</span></a><a href="/en/security/privacy-engineering.html" class="related-card"><span class="rc-title">Privacy Engineering</span><span class="rc-desc">Guide to privacy engineering covering privacy by design principles, data mapping, Privacy Impact Assessments (PIA), and </span></a><a href="/en/security/secure-configuration.html" class="related-card"><span class="rc-title">Secure Configuration Management</span><span class="rc-desc">Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detection, configuration val</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/security/secure-api-design.html" class="prev-next-btn prev-link">← Secure API Design Principles</a><a href="/en/security/malware-analysis.html" class="prev-next-btn next-link">Malware Analysis Fundamentals →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/certificate-management.html" class="related-card"><span class="related-card-title">Certificate Management</span><span class="related-card-desc">Practical guide to TLS certificate management covering Let's Encrypt, ACME protocol, automated renew</span></a><a href="/en/security/clickjacking-protection.html" class="related-card"><span class="related-card-title">Clickjacking Protection</span><span class="related-card-desc">Complete guide to clickjacking defense covering X-Frame-Options, CSP frame-ancestors, framebusting t</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="related-card-title">Container Image Security</span><span class="related-card-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability sc</span></a><a href="/en/security/privacy-engineering.html" class="related-card"><span class="related-card-title">Privacy Engineering</span><span class="related-card-desc">Guide to privacy engineering covering privacy by design principles, data mapping, Privacy Impact Ass</span></a><a href="/en/security/secure-configuration.html" class="related-card"><span class="related-card-title">Secure Configuration Management</span><span class="related-card-desc">Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detectio</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#asset-criticality-multiplier">Asset criticality multiplier</a></li><li><a href="#exploit-availability">Exploit availability</a></li><li><a href="#reachability">Reachability</a></li><li><a href="#binbash">!/bin/bash</a></li><li><a href="#automated-patch-testing-script">Automated patch testing script</a></li><li><a href="#apply-patch">Apply patch</a></li><li><a href="#run-validation">Run validation</a></li><li><a href="#monitor-for-issues">Monitor for issues</a></li><li><a href="#virtual-patching-via-waf-as-immediate-stopgap">Virtual patching via WAF as immediate stopgap</a></li><li><a href="#deploy-waf-rule-to-block-exploit-attempts">Deploy WAF rule to block exploit attempts</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

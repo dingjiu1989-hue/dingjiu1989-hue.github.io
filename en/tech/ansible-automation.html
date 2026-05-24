@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Ansible Automation: Playbooks, Roles, Inventory, and Vault
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
-      <h1 class="article-title">Ansible Automation: Playbooks, Roles, Inventory, and Vault</h1>
-      <div class="article-meta"><time datetime="2025-12-31">Published 2025-12-31</time> · <time datetime="2026-04-25">Last active 2026-04-25</time> · 238 views · 1 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/ansible-automation.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/ansible-automation.png" alt="Ansible Automation: Playbooks, Roles, Inventory, and Vault" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">Ansible Automation: Playbooks, Roles, Inventory, and Vault</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-31">2025-12-31</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>238 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/ansible-automation.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/ansible-automation.png" alt="Ansible Automation: Playbooks, Roles, Inventory, and Vault" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (8)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#playbooks-the-heart-of-automation">Playbooks: The Heart of Automation</a></li><li><a href="#roles-organizing-reusable-automation">Roles: Organizing Reusable Automation</a></li><li><a href="#inventory-management">Inventory Management</a></li><li><a href="#ansible-vault-secrets-management">Ansible Vault: Secrets Management</a></li><li><a href="#idempotency-in-ansible">Idempotency in Ansible</a></li><li><a href="#ansible-vs-terraform">Ansible vs. Terraform</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>Ansible has become one of the most widely adopted configuration management and automation tools in the DevOps ecosystem. Acquired by Red Hat in 2015, it stands out for its agentless architecture, YAML-based syntax, and push-based execution model. Unlike Puppet or Chef, which require agents installed on managed nodes, Ansible communicates over SSH or WinRM, making it trivial to get started with existing infrastructure.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/ansible-automation.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/ansible-automation.png" alt="Ansible Automation: Playbooks, Roles, Inventory, and Vault" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>This article provides a technical deep dive into Ansible's core components: playbooks, roles, inventory management, Ansible Vault, idempotency, and a comparison with Terraform for infrastructure provisioning.</p>
 <h2>Playbooks: The Heart of Automation</h2>
@@ -167,14 +175,8 @@
 <p>While both tools are essential in modern infrastructure, they serve different purposes. Terraform is declarative and focused on infrastructure provisioning — creating, modifying, and destroying cloud resources such as VPCs, load balancers, and databases. Ansible is procedural and focused on configuration management — installing software, configuring services, and deploying applications.</p>
 <p>Many teams use Terraform to provision infrastructure and Ansible to configure it. For example, Terraform creates EC2 instances and security groups, and the Terraform inventory plugin passes those instances to Ansible for configuration. When both tools cover the same use case, choose based on whether you need state management (choose Terraform) or agentless configuration (choose Ansible).</p>
 <h2>Conclusion</h2>
-<p>Ansible's simplicity and agentless architecture make it an excellent choice for configuration management and automation. Understanding playbooks, roles, dynamic inventory, and vault is essential for effective use. When combined with Terraform for provisioning, Ansible forms a complete infrastructure automation stack suitable for organizations of any size.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a>, <a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (8)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#playbooks:-the-heart-of-automation">Playbooks: The Heart of Automation</a></li><li><a href="#roles:-organizing-reusable-automation">Roles: Organizing Reusable Automation</a></li><li><a href="#inventory-management">Inventory Management</a></li><li><a href="#ansible-vault:-secrets-management">Ansible Vault: Secrets Management</a></li><li><a href="#idempotency-in-ansible">Idempotency in Ansible</a></li><li><a href="#ansible-vs.-terraform">Ansible vs. Terraform</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Ansible's simplicity and agentless architecture make it an excellent choice for configuration management and automation. Understanding playbooks, roles, dynamic inventory, and vault is essential for effective use. When combined with Terraform for provisioning, Ansible forms a complete infrastructure automation stack suitable for organizations of any size.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a></li><li><a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a></li><li><a href="/en/tech/multi-cloud-strategy.html">Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -182,29 +184,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Ansible%20Automation%3A%20Playbooks%2C%20Roles%2C%20Inventory%2C%20and%20Vault&url=https%3A//aidev.fit/en/tech/ansible-automation.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/ansible-automation.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Ansible%20Automation%3A%20Playbooks%2C%20Roles%2C%20Inventory%2C%20and%20Vault&url=https%3A//aidev.fit/en/tech/ansible-automation.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Ansible%20Automation%3A%20Playbooks%2C%20Roles%2C%20Inventory%2C%20and%20Vault&u=https%3A//aidev.fit/en/tech/ansible-automation.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Ansible%20Automation%3A%20Playbooks%2C%20Roles%2C%20Inventory%2C%20and%20Vault&body=https%3A//aidev.fit/en/tech/ansible-automation.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/ansible-automation.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Ansible%20Automation%3A%20Playbooks%2C%20Roles%2C%20Inventory%2C%20and%20Vault&url=https%3A//aidev.fit/en/tech/ansible-automation.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/ansible-automation.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Ansible%20Automation%3A%20Playbooks%2C%20Roles%2C%20Inventory%2C%20and%20Vault&url=https%3A//aidev.fit/en/tech/ansible-automation.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Ansible%20Automation%3A%20Playbooks%2C%20Roles%2C%20Inventory%2C%20and%20Vault&u=https%3A//aidev.fit/en/tech/ansible-automation.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Ansible%20Automation%3A%20Playbooks%2C%20Roles%2C%20Inventory%2C%20and%20Vault&body=https%3A//aidev.fit/en/tech/ansible-automation.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/ansible-automation.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/css-container-queries-guide.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">CSS Container Queries Guide: Component-Based Responsive Design Wi</span></a><a href="/en/tech/chaos-engineering.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Chaos Engineering: Principles and Practical Tools</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/terraform-state-management.html" class="related-card"><span class="rc-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</span><span class="rc-desc">Deep dive into Terraform state management covering remote backends, state locking, migration strategies, workspace patte</span></a><a href="/en/tech/react-server-components.html" class="related-card"><span class="rc-title">React Server Components</span><span class="rc-desc">Deep dive into React Server Components: streaming, data fetching patterns, client boundaries, and architectural benefits</span></a><a href="/en/tech/prometheus-deep-dive.html" class="related-card"><span class="rc-title">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</span><span class="rc-desc">A comprehensive look at Prometheus monitoring covering metrics collection, PromQL queries, recording rules, alertmanager</span></a><a href="/en/tech/infrastructure-composability.html" class="related-card"><span class="rc-title">Infrastructure Composability</span><span class="rc-desc">Explore infrastructure composability: reusable modules, Terraform patterns, component design, and environment management</span></a><a href="/en/tech/capacity-planning-cloud.html" class="related-card"><span class="rc-title">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</span><span class="rc-desc">Technical exploration of cloud capacity planning covering auto-scaling strategies, reserved and spot instance optimizati</span></a><a href="/en/tech/elk-stack-setup.html" class="related-card"><span class="rc-title">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</span><span class="rc-desc">Comprehensive guide to ELK Stack covering Elasticsearch cluster setup, Logstash pipeline configuration, Kibana visualiza</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/css-container-queries-guide.html" class="prev-next-btn prev-link">← CSS Container Queries Guide: Component-Based Responsive Design Without Media Queries</a><a href="/en/tech/chaos-engineering.html" class="prev-next-btn next-link">Chaos Engineering: Principles and Practical Tools →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/terraform-state-management.html" class="related-card"><span class="related-card-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</span><span class="related-card-desc">Deep dive into Terraform state management covering remote backends, state locking, migration strateg</span></a><a href="/en/tech/react-server-components.html" class="related-card"><span class="related-card-title">React Server Components</span><span class="related-card-desc">Deep dive into React Server Components: streaming, data fetching patterns, client boundaries, and ar</span></a><a href="/en/tech/prometheus-deep-dive.html" class="related-card"><span class="related-card-title">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</span><span class="related-card-desc">A comprehensive look at Prometheus monitoring covering metrics collection, PromQL queries, recording</span></a><a href="/en/tech/infrastructure-composability.html" class="related-card"><span class="related-card-title">Infrastructure Composability</span><span class="related-card-desc">Explore infrastructure composability: reusable modules, Terraform patterns, component design, and en</span></a><a href="/en/tech/capacity-planning-cloud.html" class="related-card"><span class="related-card-title">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</span><span class="related-card-desc">Technical exploration of cloud capacity planning covering auto-scaling strategies, reserved and spot</span></a><a href="/en/tech/elk-stack-setup.html" class="related-card"><span class="related-card-title">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</span><span class="related-card-desc">Comprehensive guide to ELK Stack covering Elasticsearch cluster setup, Logstash pipeline configurati</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#playbooks-the-heart-of-automation">Playbooks: The Heart of Automation</a></li><li><a href="#roles-organizing-reusable-automation">Roles: Organizing Reusable Automation</a></li><li><a href="#inventory-management">Inventory Management</a></li><li><a href="#ansible-vault-secrets-management">Ansible Vault: Secrets Management</a></li><li><a href="#idempotency-in-ansible">Idempotency in Ansible</a></li><li><a href="#ansible-vs-terraform">Ansible vs. Terraform</a></li><li><a href="#conclusion">Conclusion</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

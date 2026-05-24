@@ -129,20 +129,28 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Node.js Streams: Complete Guide to Efficient Data Processing
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Node.js</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Node.js</span>
         <span class="tag-cat">Streams</span>
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Performance</span>
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
-      <h1 class="article-title">Node.js Streams: Complete Guide to Efficient Data Processing</h1>
-      <div class="article-meta"><time datetime="2026-05-20">Published 2026-05-20</time> · <time datetime="2026-04-22">Last active 2026-04-22</time> · 5116 views · 42 replies · 3 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/nodejs-streams-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/nodejs-streams-guide.png" alt="Node.js Streams: Complete Guide to Efficient Data Processing" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Node.js Streams are one of the most powerful and underused features of the platform. They enable processing large amounts of data without loading everything into memory — critical for file uploads, data pipelines, and HTTP responses. Yet most Node.js developers avoid streams because the API (even the modern pipeline-based one) has non-obvious patterns. This guide covers streams from the ground up with practical examples you can use today.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/nodejs-streams-guide.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/nodejs-streams-guide.png" alt="Node.js Streams: Complete Guide to Efficient Data Processing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Node.js Streams: Complete Guide to Efficient Data Processing</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-20">2026-05-20</time>
+          <span class="meta-sep">·</span>
+          <span>3 min read</span>
+          <span class="meta-sep">·</span>
+          <span>5116 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/nodejs-streams-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/nodejs-streams-guide.png" alt="Node.js Streams: Complete Guide to Efficient Data Processing" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (6)</summary><ol><li><a href="#the-four-stream-types">The Four Stream Types</a></li><li><a href="#pipeline-api-modern-recommended">Pipeline API (Modern, Recommended)</a></li><li><a href="#real-world-use-cases">Real-World Use Cases</a></li><li><a href="#1-streaming-csv-processing-avoid-oom-on-large-files">1. Streaming CSV Processing (Avoid OOM on Large Files)</a></li><li><a href="#2-http-streaming-large-responses">2. HTTP Streaming Large Responses</a></li><li><a href="#3-handling-backpressure">3. Handling Backpressure</a></li></ol></details>
+        <div class="article-body"><p>Node.js Streams are one of the most powerful and underused features of the platform. They enable processing large amounts of data without loading everything into memory — critical for file uploads, data pipelines, and HTTP responses. Yet most Node.js developers avoid streams because the API (even the modern pipeline-based one) has non-obvious patterns. This guide covers streams from the ground up with practical examples you can use today.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/nodejs-streams-guide.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/nodejs-streams-guide.png" alt="Node.js Streams: Complete Guide to Efficient Data Processing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 
 <h2>The Four Stream Types</h2>
 <table>
@@ -221,14 +229,8 @@ readStream.on('data', (chunk) => {
 });
 // Note: pipeline() handles this automatically — prefer it over manual piping</code></pre>
 
-<p><strong>Bottom line:</strong> Streams are essential for processing data that exceeds memory limits. The pipeline() API should be your default — it handles backpressure, error propagation, and cleanup correctly. Avoid raw .pipe() and .on('data') patterns unless you have a specific reason. See also: <a href="/en/tech/caching-strategies-web-apps.html">Caching Strategies</a> and <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a>.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/webassembly-guide.html">WebAssembly Guide 2026: Running Native Code in the Browser with Rust and WASI</a>, <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices: The Complete Guide for 2026</a>, <a href="/en/tech/edge-computing-guide.html">Edge Computing Complete Guide 2026: Cloudflare Workers, Deno Deploy, and Vercel Edge</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (6)</summary><ol><li><a href="#the-four-stream-types">The Four Stream Types</a></li><li><a href="#pipeline-api-(modern,-recommended)">Pipeline API (Modern, Recommended)</a></li><li><a href="#real-world-use-cases">Real-World Use Cases</a></li><li><a href="#1.-streaming-csv-processing-(avoid-oom-on-large-files)">1. Streaming CSV Processing (Avoid OOM on Large Files)</a></li><li><a href="#2.-http-streaming-large-responses">2. HTTP Streaming Large Responses</a></li><li><a href="#3.-handling-backpressure">3. Handling Backpressure</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p><strong>Bottom line:</strong> Streams are essential for processing data that exceeds memory limits. The pipeline() API should be your default — it handles backpressure, error propagation, and cleanup correctly. Avoid raw .pipe() and .on('data') patterns unless you have a specific reason. See also: <a href="/en/tech/caching-strategies-web-apps.html">Caching Strategies</a> and <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a>.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/webassembly-guide.html">WebAssembly Guide 2026: Running Native Code in the Browser with Rust and WASI</a></li><li><a href="/en/tech/rest-api-best-practices.html">REST API Best Practices: The Complete Guide for 2026</a></li><li><a href="/en/tech/edge-computing-guide.html">Edge Computing Complete Guide 2026: Cloudflare Workers, Deno Deploy, and Vercel Edge</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -236,29 +238,35 @@ readStream.on('data', (chunk) => {
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Node.js%20Streams%3A%20Complete%20Guide%20to%20Efficient%20Data%20Processing&url=https%3A//aidev.fit/en/tech/nodejs-streams-guide.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/nodejs-streams-guide.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Node.js%20Streams%3A%20Complete%20Guide%20to%20Efficient%20Data%20Processing&url=https%3A//aidev.fit/en/tech/nodejs-streams-guide.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Node.js%20Streams%3A%20Complete%20Guide%20to%20Efficient%20Data%20Processing&u=https%3A//aidev.fit/en/tech/nodejs-streams-guide.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Node.js%20Streams%3A%20Complete%20Guide%20to%20Efficient%20Data%20Processing&body=https%3A//aidev.fit/en/tech/nodejs-streams-guide.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/nodejs-streams-guide.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Node.js%20Streams%3A%20Complete%20Guide%20to%20Efficient%20Data%20Processing&url=https%3A//aidev.fit/en/tech/nodejs-streams-guide.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/nodejs-streams-guide.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Node.js%20Streams%3A%20Complete%20Guide%20to%20Efficient%20Data%20Processing&url=https%3A//aidev.fit/en/tech/nodejs-streams-guide.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Node.js%20Streams%3A%20Complete%20Guide%20to%20Efficient%20Data%20Processing&u=https%3A//aidev.fit/en/tech/nodejs-streams-guide.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Node.js%20Streams%3A%20Complete%20Guide%20to%20Efficient%20Data%20Processing&body=https%3A//aidev.fit/en/tech/nodejs-streams-guide.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/nodejs-streams-guide.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/docker-networking.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Docker Networking: Bridge, Overlay, Host, Macvlan, and Troublesho</span></a><a href="/en/tech/api-design-patterns.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">API Design Patterns: Rate Limiting, Pagination, Idempotency, and </span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/python-asyncio-guide.html" class="related-card"><span class="rc-title">Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops</span><span class="rc-desc">Master Python async programming: coroutines with async/await, Task groups in Python 3.11+, asyncio.gather vs as_complete</span></a><a href="/en/tech/caching-strategies-web-apps.html" class="related-card"><span class="rc-title">Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching</span><span class="rc-desc">Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-while-revalidate, and c</span></a><a href="/en/tech/grpc-guide.html" class="related-card"><span class="rc-title">gRPC Complete Guide 2026: Protocol Buffers, Service Definitions, and Production Patterns</span><span class="rc-desc">Master gRPC for high-performance service-to-service communication — protobuf types, streaming, interceptors, and when to</span></a><a href="/en/tech/nodejs-streams.html" class="related-card"><span class="rc-title">Node.js Streams</span><span class="rc-desc">Master Node.js streams: readable, writable, transform streams, backpressure handling, and the pipeline API</span></a><a href="/en/tech/graphql-api-design.html" class="related-card"><span class="rc-title">GraphQL API Design: Schema Best Practices, Federation, and Performance</span><span class="rc-desc">Design production GraphQL APIs: schema-first design, N+1 query solutions (DataLoader), federation for microservices, err</span></a><a href="/en/tech/webhook-implementation-guide.html" class="related-card"><span class="rc-title">Webhook Implementation: Design, Security, and Best Practices (2026)</span><span class="rc-desc">Complete guide to building webhook systems: event design, retry strategies (exponential backoff), idempotency, signature</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/docker-networking.html" class="prev-next-btn prev-link">← Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting</a><a href="/en/tech/api-design-patterns.html" class="prev-next-btn next-link">API Design Patterns: Rate Limiting, Pagination, Idempotency, and More →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/python-asyncio-guide.html" class="related-card"><span class="related-card-title">Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops</span><span class="related-card-desc">Master Python async programming: coroutines with async/await, Task groups in Python 3.11+, asyncio.g</span></a><a href="/en/tech/caching-strategies-web-apps.html" class="related-card"><span class="related-card-title">Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching</span><span class="related-card-desc">Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-whi</span></a><a href="/en/tech/grpc-guide.html" class="related-card"><span class="related-card-title">gRPC Complete Guide 2026: Protocol Buffers, Service Definitions, and Production Patterns</span><span class="related-card-desc">Master gRPC for high-performance service-to-service communication — protobuf types, streaming, inter</span></a><a href="/en/tech/nodejs-streams.html" class="related-card"><span class="related-card-title">Node.js Streams</span><span class="related-card-desc">Master Node.js streams: readable, writable, transform streams, backpressure handling, and the pipeli</span></a><a href="/en/tech/graphql-api-design.html" class="related-card"><span class="related-card-title">GraphQL API Design: Schema Best Practices, Federation, and Performance</span><span class="related-card-desc">Design production GraphQL APIs: schema-first design, N+1 query solutions (DataLoader), federation fo</span></a><a href="/en/tech/webhook-implementation-guide.html" class="related-card"><span class="related-card-title">Webhook Implementation: Design, Security, and Best Practices (2026)</span><span class="related-card-desc">Complete guide to building webhook systems: event design, retry strategies (exponential backoff), id</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#the-four-stream-types">The Four Stream Types</a></li><li><a href="#pipeline-api-modern-recommended">Pipeline API (Modern, Recommended)</a></li><li><a href="#real-world-use-cases">Real-World Use Cases</a></li><li><a href="#1-streaming-csv-processing-avoid-oom-on-large-files">1. Streaming CSV Processing (Avoid OOM on Large Files)</a></li><li><a href="#2-http-streaming-large-responses">2. HTTP Streaming Large Responses</a></li><li><a href="#3-handling-backpressure">3. Handling Backpressure</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

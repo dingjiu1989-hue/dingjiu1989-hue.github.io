@@ -101,17 +101,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Security Hardening Guide
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">SQL</span></div>
-      <h1 class="article-title">Database Security Hardening Guide</h1>
-      <div class="article-meta"><time datetime="2026-05-14">Published 2026-05-14</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 82 views · 0 replies · 11 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/database-security-best-practices.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-security-best-practices.png" alt="Database Security Hardening Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Database security is a critical component of any organization's security posture. Databases store the most valuable data: customer records, financial data, intellectual property, and credentials. This guide covers the key security practices including encryption, access control, network isolation, and secret management. </p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-security-best-practices.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-security-best-practices.png" alt="Database Security Hardening Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Database Security Hardening Guide</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-14">2026-05-14</time>
+          <span class="meta-sep">·</span>
+          <span>11 min read</span>
+          <span class="meta-sep">·</span>
+          <span>82 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/database-security-best-practices.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-security-best-practices.png" alt="Database Security Hardening Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (11)</summary><ol><li><a href="#application-level-encryption-with-aws-kms">Application-level encryption with AWS KMS</a></li><li><a href="#generate-a-data-key-from-kms">Generate a data key from KMS</a></li><li><a href="#encrypt-the-data-with-the-data-key">Encrypt the data with the data key</a></li><li><a href="#require-tls-for-all-connections">Require TLS for all connections</a></li><li><a href="#mysql-require-tls">MySQL: Require TLS</a></li><li><a href="#filebeat-configuration-for-shipping-database-audit-logs">Filebeat configuration for shipping database audit logs</a></li><li><a href="#terraform-database-in-private-subnet">Terraform: Database in private subnet</a></li><li><a href="#vault-database-secrets-engine-configuration">Vault database secrets engine configuration</a></li><li><a href="#dynamic-database-credentials-with-vault">Dynamic database credentials with Vault</a></li><li><a href="#get-short-lived-database-credentials">Get short-lived database credentials</a></li><li><a href="#these-credentials-expire-in-1-hour">These credentials expire in 1 hour</a></li></ol></details>
+        <div class="article-body"><p>Database security is a critical component of any organization's security posture. Databases store the most valuable data: customer records, financial data, intellectual property, and credentials. This guide covers the key security practices including encryption, access control, network isolation, and secret management. </p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-security-best-practices.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-security-best-practices.png" alt="Database Security Hardening Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Encryption at Rest </p>
 <p>Encryption at rest protects data stored on disk. If an attacker gains access to the underlying storage, encrypted data remains unreadable without the encryption key. </p>
 <p>Transparent Data Encryption (TDE) </p>
@@ -422,14 +430,8 @@
 </li>
 </ul>
 <p>Conclusion </p>
-<p>Database security requires defense in depth. Encrypt data at rest and in transit. Isolate databases on private networks. Implement row-level security and audit logging. Follow least privilege for database roles. Automate secret rotation. A well-secured database makes it significantly harder for attackers to exfiltrate sensitive data, even if they breach other parts of the infrastructure.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-monitoring.html">Database Monitoring and Performance Alerting</a>, <a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a>, <a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (11)</summary><ol><li><a href="#application-level-encryption-with-aws-kms">Application-level encryption with AWS KMS</a></li><li><a href="#generate-a-data-key-from-kms">Generate a data key from KMS</a></li><li><a href="#encrypt-the-data-with-the-data-key">Encrypt the data with the data key</a></li><li><a href="#require-tls-for-all-connections">Require TLS for all connections</a></li><li><a href="#mysql:-require-tls">MySQL: Require TLS</a></li><li><a href="#filebeat-configuration-for-shipping-database-audit-logs">Filebeat configuration for shipping database audit logs</a></li><li><a href="#terraform:-database-in-private-subnet">Terraform: Database in private subnet</a></li><li><a href="#vault-database-secrets-engine-configuration">Vault database secrets engine configuration</a></li><li><a href="#dynamic-database-credentials-with-vault">Dynamic database credentials with Vault</a></li><li><a href="#get-short-lived-database-credentials">Get short-lived database credentials</a></li><li><a href="#these-credentials-expire-in-1-hour">These credentials expire in 1 hour</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Database security requires defense in depth. Encrypt data at rest and in transit. Isolate databases on private networks. Implement row-level security and audit logging. Follow least privilege for database roles. Automate secret rotation. A well-secured database makes it significantly harder for attackers to exfiltrate sensitive data, even if they breach other parts of the infrastructure.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-monitoring.html">Database Monitoring and Performance Alerting</a></li><li><a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a></li><li><a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -437,29 +439,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Database%20Security%20Hardening%20Guide&url=https%3A//aidev.fit/en/database/database-security-best-practices.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-security-best-practices.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Database%20Security%20Hardening%20Guide&url=https%3A//aidev.fit/en/database/database-security-best-practices.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Database%20Security%20Hardening%20Guide&u=https%3A//aidev.fit/en/database/database-security-best-practices.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Database%20Security%20Hardening%20Guide&body=https%3A//aidev.fit/en/database/database-security-best-practices.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-security-best-practices.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Database%20Security%20Hardening%20Guide&url=https%3A//aidev.fit/en/database/database-security-best-practices.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-security-best-practices.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Database%20Security%20Hardening%20Guide&url=https%3A//aidev.fit/en/database/database-security-best-practices.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Database%20Security%20Hardening%20Guide&u=https%3A//aidev.fit/en/database/database-security-best-practices.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Database%20Security%20Hardening%20Guide&body=https%3A//aidev.fit/en/database/database-security-best-practices.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-security-best-practices.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-high-availability.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Database High Availability: Failover, Standby Types, Health Check</span></a><a href="/en/database/database-isolation-levels.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Database Isolation Levels and Anomalies</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/database/database-security-hardening.html" class="related-card"><span class="rc-title">Database Security Hardening</span><span class="rc-desc">Hardening database security with encryption, audit logging, access control, and network isolation.</span></a><a href="/en/database/connection-pooling.html" class="related-card"><span class="rc-title">Connection Pooling Guide</span><span class="rc-desc">Master database connection pooling with PgBouncer, HikariCP, and application-level pools to optimize performance and res</span></a><a href="/en/database/postgresql-vs-mysql-2026.html" class="related-card"><span class="rc-title">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</span><span class="rc-desc">Head-to-head comparison of PostgreSQL, MySQL, and SQLite for different use cases — performance benchmarks, features, eco</span></a><a href="/en/database/data-modeling.html" class="related-card"><span class="rc-title">Data Modeling Best Practices</span><span class="rc-desc">Learn data modeling best practices including entity-relationship diagrams, normalization, patterns for SQL and NoSQL, an</span></a><a href="/en/database/database-indexing.html" class="related-card"><span class="rc-title">Database Indexing Strategies</span><span class="rc-desc">A comprehensive guide to database indexing covering B-tree, hash, GiST, GIN indexes, composite indexes, and query optimi</span></a><a href="/en/database/sql-vs-nosql.html" class="related-card"><span class="rc-title">SQL vs NoSQL Decision Guide</span><span class="rc-desc">Compare SQL and NoSQL databases across consistency, scalability, query flexibility, and development speed to choose the </span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-high-availability.html" class="prev-next-btn prev-link">← Database High Availability: Failover, Standby Types, Health Checks</a><a href="/en/database/database-isolation-levels.html" class="prev-next-btn next-link">Database Isolation Levels and Anomalies →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-security-hardening.html" class="related-card"><span class="related-card-title">Database Security Hardening</span><span class="related-card-desc">Hardening database security with encryption, audit logging, access control, and network isolation.</span></a><a href="/en/database/connection-pooling.html" class="related-card"><span class="related-card-title">Connection Pooling Guide</span><span class="related-card-desc">Master database connection pooling with PgBouncer, HikariCP, and application-level pools to optimize</span></a><a href="/en/database/postgresql-vs-mysql-2026.html" class="related-card"><span class="related-card-title">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</span><span class="related-card-desc">Head-to-head comparison of PostgreSQL, MySQL, and SQLite for different use cases — performance bench</span></a><a href="/en/database/data-modeling.html" class="related-card"><span class="related-card-title">Data Modeling Best Practices</span><span class="related-card-desc">Learn data modeling best practices including entity-relationship diagrams, normalization, patterns f</span></a><a href="/en/database/database-indexing.html" class="related-card"><span class="related-card-title">Database Indexing Strategies</span><span class="related-card-desc">A comprehensive guide to database indexing covering B-tree, hash, GiST, GIN indexes, composite index</span></a><a href="/en/database/sql-vs-nosql.html" class="related-card"><span class="related-card-title">SQL vs NoSQL Decision Guide</span><span class="related-card-desc">Compare SQL and NoSQL databases across consistency, scalability, query flexibility, and development </span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#application-level-encryption-with-aws-kms">Application-level encryption with AWS KMS</a></li><li><a href="#generate-a-data-key-from-kms">Generate a data key from KMS</a></li><li><a href="#encrypt-the-data-with-the-data-key">Encrypt the data with the data key</a></li><li><a href="#require-tls-for-all-connections">Require TLS for all connections</a></li><li><a href="#mysql-require-tls">MySQL: Require TLS</a></li><li><a href="#filebeat-configuration-for-shipping-database-audit-logs">Filebeat configuration for shipping database audit logs</a></li><li><a href="#terraform-database-in-private-subnet">Terraform: Database in private subnet</a></li><li><a href="#vault-database-secrets-engine-configuration">Vault database secrets engine configuration</a></li><li><a href="#dynamic-database-credentials-with-vault">Dynamic database credentials with Vault</a></li><li><a href="#get-short-lived-database-credentials">Get short-lived database credentials</a></li><li><a href="#these-credentials-expire-in-1-hour">These credentials expire in 1 hour</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

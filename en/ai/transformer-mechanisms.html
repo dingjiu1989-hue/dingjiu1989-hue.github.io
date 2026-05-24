@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Transformer Mechanisms in Deep Learning
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">AI</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">AI</span>
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
-      <h1 class="article-title">Transformer Mechanisms in Deep Learning</h1>
-      <div class="article-meta"><time datetime="2026-02-23">Published 2026-02-23</time> · <time datetime="2026-05-06">Last active 2026-05-06</time> · 162 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/transformer-mechanisms.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/transformer-mechanisms.png" alt="Transformer Mechanisms in Deep Learning" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The transformer architecture, introduced in "Attention Is All You Need" (Vaswani et al., 2017), revolutionized deep learning. Understanding its mechanisms is essential for working with modern LLMs.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/transformer-mechanisms.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/transformer-mechanisms.png" alt="Transformer Mechanisms in Deep Learning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Transformer Mechanisms in Deep Learning</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-23">2026-02-23</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>162 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/transformer-mechanisms.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/transformer-mechanisms.png" alt="Transformer Mechanisms in Deep Learning" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (4)</summary><ol><li><a href="#self-attention">Self-Attention</a></li><li><a href="#multi-head-attention">Multi-Head Attention</a></li><li><a href="#positional-encoding">Positional Encoding</a></li><li><a href="#feed-forward-networks">Feed-Forward Networks</a></li></ol></details>
+        <div class="article-body"><p>The transformer architecture, introduced in "Attention Is All You Need" (Vaswani et al., 2017), revolutionized deep learning. Understanding its mechanisms is essential for working with modern LLMs.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/transformer-mechanisms.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/transformer-mechanisms.png" alt="Transformer Mechanisms in Deep Learning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Self-Attention</h2>
 <p>Self-attention computes weighted representations of input sequences. Each input token generates Query (Q), Key (K), and Value (V) vectors through learned linear transformations. The attention score between tokens is computed as Q·K^T / sqrt(d_k), measuring how much each token should attend to others.</p>
 <p>The softmax function normalizes attention scores into a probability distribution over attended tokens. The weighted sum of Value vectors produces the attention output. Self-attention captures relationships between all token pairs regardless of distance—unlike RNNs which process sequentially.</p>
@@ -124,14 +132,8 @@
 <p>Rotary Position Embedding (RoPE) rotates query and key vectors based on position. RoPE provides relative position information—attention depends on token distance, not absolute position. RoPE is used in Llama, Mistral, and most modern LLMs. ALiBi (Attention with Linear Biases) adds position-based bias to attention scores.</p>
 <h2>Feed-Forward Networks</h2>
 <p>Each transformer layer includes a feed-forward network (FFN) after the attention sublayer. The FFN consists of two linear transformations with a non-linear activation (ReLU, GELU, SwiGLU). The hidden dimension is typically 2-4x the model dimension.</p>
-<p>The FFN stores factual knowledge learned during training. Intermediate representations at the FFN's wide layer capture complex patterns. The gating mechanism (SwiGLU, used in Llama 2/3) adds a learnable gate for improved expressiveness. Sparse MoE layers replace FFNs with multiple experts for efficient scaling.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a>, <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (4)</summary><ol><li><a href="#self-attention">Self-Attention</a></li><li><a href="#multi-head-attention">Multi-Head Attention</a></li><li><a href="#positional-encoding">Positional Encoding</a></li><li><a href="#feed-forward-networks">Feed-Forward Networks</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>The FFN stores factual knowledge learned during training. Intermediate representations at the FFN's wide layer capture complex patterns. The gating mechanism (SwiGLU, used in Llama 2/3) adds a learnable gate for improved expressiveness. Sparse MoE layers replace FFNs with multiple experts for efficient scaling.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-api-gateway.html">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</a></li><li><a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></li><li><a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -139,34 +141,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Transformer%20Mechanisms%20in%20Deep%20Learning&url=https%3A//aidev.fit/en/ai/transformer-mechanisms.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/transformer-mechanisms.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Transformer%20Mechanisms%20in%20Deep%20Learning&url=https%3A//aidev.fit/en/ai/transformer-mechanisms.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Transformer%20Mechanisms%20in%20Deep%20Learning&u=https%3A//aidev.fit/en/ai/transformer-mechanisms.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Transformer%20Mechanisms%20in%20Deep%20Learning&body=https%3A//aidev.fit/en/ai/transformer-mechanisms.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/transformer-mechanisms.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/rag-pipeline-optimization.html" class="prev-next-btn prev-link">← RAG Pipeline Optimization: Production Best Practices</a><a href="/en/ai/prompt-engineering-guide.html" class="prev-next-btn next-link">Prompt Engineering Guide for LLMs →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/attention-mechanisms.html" class="related-card"><span class="related-card-title">Attention Mechanisms in Neural Networks</span><span class="related-card-desc">A comprehensive guide to attention mechanisms: from additive attention to multi-query attention and </span></a><a href="/en/ai/multi-agent-systems.html" class="related-card"><span class="related-card-title">Multi-Agent Systems: Coordination, Communication, Consensus</span><span class="related-card-desc">Design multi-agent systems with LLM-powered agents: coordination patterns, inter-agent communication</span></a><a href="/en/ai/mlops-pipeline.html" class="related-card"><span class="related-card-title">MLOps Pipeline: From Training to Production</span><span class="related-card-desc">Build MLOps pipelines for machine learning: data validation, model training, evaluation, deployment,</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="related-card-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="related-card-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fa</span></a><a href="/en/ai/model-evaluation-harness.html" class="related-card"><span class="related-card-title">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</span><span class="related-card-desc">Evaluate LLM models systematically using benchmarks, human evaluation, LLM-as-judge frameworks, and </span></a><a href="/en/ai/agent-planning.html" class="related-card"><span class="related-card-title">Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</span><span class="related-card-desc">Explore agent planning frameworks: ReAct for reasoning and acting, Plan-and-Execute for task decompo</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Transformer%20Mechanisms%20in%20Deep%20Learning&url=https%3A//aidev.fit/en/ai/transformer-mechanisms.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/transformer-mechanisms.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Transformer%20Mechanisms%20in%20Deep%20Learning&url=https%3A//aidev.fit/en/ai/transformer-mechanisms.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Transformer%20Mechanisms%20in%20Deep%20Learning&u=https%3A//aidev.fit/en/ai/transformer-mechanisms.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Transformer%20Mechanisms%20in%20Deep%20Learning&body=https%3A//aidev.fit/en/ai/transformer-mechanisms.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/transformer-mechanisms.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/rag-pipeline-optimization.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">RAG Pipeline Optimization: Production Best Practices</span></a><a href="/en/ai/prompt-engineering-guide.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Prompt Engineering Guide for LLMs</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/attention-mechanisms.html" class="related-card"><span class="rc-title">Attention Mechanisms in Neural Networks</span><span class="rc-desc">A comprehensive guide to attention mechanisms: from additive attention to multi-query attention and FlashAttention.</span></a><a href="/en/ai/multi-agent-systems.html" class="related-card"><span class="rc-title">Multi-Agent Systems: Coordination, Communication, Consensus</span><span class="rc-desc">Design multi-agent systems with LLM-powered agents: coordination patterns, inter-agent communication protocols, consensu</span></a><a href="/en/ai/mlops-pipeline.html" class="related-card"><span class="rc-title">MLOps Pipeline: From Training to Production</span><span class="rc-desc">Build MLOps pipelines for machine learning: data validation, model training, evaluation, deployment, and monitoring.</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="rc-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="rc-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fallbacks, cost manage</span></a><a href="/en/ai/model-evaluation-harness.html" class="related-card"><span class="rc-title">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</span><span class="rc-desc">Evaluate LLM models systematically using benchmarks, human evaluation, LLM-as-judge frameworks, and production A/B testi</span></a><a href="/en/ai/agent-planning.html" class="related-card"><span class="rc-title">Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</span><span class="rc-desc">Explore agent planning frameworks: ReAct for reasoning and acting, Plan-and-Execute for task decomposition, Tree of Thou</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#self-attention">Self-Attention</a></li><li><a href="#multi-head-attention">Multi-Head Attention</a></li><li><a href="#positional-encoding">Positional Encoding</a></li><li><a href="#feed-forward-networks">Feed-Forward Networks</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

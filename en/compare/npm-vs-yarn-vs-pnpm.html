@@ -112,18 +112,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a> › npm vs Yarn vs pnpm: Package Manager Comparison
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/compare/">Comparisons</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">Comparison</span>
         <span class="tag-cat">Reviews</span></div>
-      <h1 class="article-title">npm vs Yarn vs pnpm: Package Manager Comparison</h1>
-      <div class="article-meta"><time datetime="2026-03-02">Published 2026-03-02</time> · <time datetime="2026-04-01">Last active 2026-04-01</time> · 112 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/compare/npm-vs-yarn-vs-pnpm.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/compare/npm-vs-yarn-vs-pnpm.png" alt="npm vs Yarn vs pnpm: Package Manager Comparison" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>JavaScript package managers have evolved significantly from the early npm days. Today, developers choose between npm (bundled with Node.js), Yarn (by Meta), and pnpm (performance-focused). Each offers distinct approaches to dependency resolution, disk usage, and workspace management.</p><picture><source srcset="https://aidev.fit/images/covers/en/compare/npm-vs-yarn-vs-pnpm.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/compare/npm-vs-yarn-vs-pnpm.png" alt="npm vs Yarn vs pnpm: Package Manager Comparison" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">npm vs Yarn vs pnpm: Package Manager Comparison</h1>
+        <div class="article-meta">
+          <time datetime="2026-03-02">2026-03-02</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>112 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/compare/npm-vs-yarn-vs-pnpm.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/compare/npm-vs-yarn-vs-pnpm.png" alt="npm vs Yarn vs pnpm: Package Manager Comparison" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#npm">npm</a></li><li><a href="#yarn">Yarn</a></li><li><a href="#pnpm">pnpm</a></li><li><a href="#performance-comparison">Performance Comparison</a></li><li><a href="#recommendation">Recommendation</a></li></ol></details>
+        <div class="article-body"><p>JavaScript package managers have evolved significantly from the early npm days. Today, developers choose between npm (bundled with Node.js), Yarn (by Meta), and pnpm (performance-focused). Each offers distinct approaches to dependency resolution, disk usage, and workspace management.</p><picture><source srcset="https://aidev.fit/images/covers/en/compare/npm-vs-yarn-vs-pnpm.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/compare/npm-vs-yarn-vs-pnpm.png" alt="npm vs Yarn vs pnpm: Package Manager Comparison" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>npm</h2>
 <p>npm is the default package manager for Node.js. npm 7+ introduced workspaces and improved dependency resolution. npm uses a flat node_modules structure with nested dependencies for conflicting versions.</p>
 <p>npm's lockfile (package-lock.json) ensures reproducible installs across environments. The npm registry is the largest package registry in the world with over 2 million packages. The npx command for running packages without installing them was an npm innovation.</p>
@@ -137,14 +145,8 @@
 <p>pnpm is generally the fastest for initial installs and updates. Yarn Berry with PnP is competitive and excels in CI environments. npm has improved significantly but is typically slower than alternatives.</p>
 <p>pnpm uses the least disk space. For monorepos with 10+ packages sharing common dependencies, savings are dramatic. npm uses the most disk space due to its flat structure and duplicate nested versions.</p>
 <h2>Recommendation</h2>
-<p>Use pnpm for monorepos, disk-constrained environments, and teams that value strict dependency resolution. Use Yarn Berry with PnP for teams wanting cutting-edge performance and monorepo tooling. Use npm for simpler projects where the default tool is sufficient and zero configuration is preferred.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/compare/vercel-vs-netlify.html">Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX</a>, <a href="/en/compare/auth0-vs-clerk.html">Auth0 vs Clerk: Authentication Platforms Compared</a>, <a href="/en/compare/terraform-vs-pulumi.html">Terraform vs Pulumi: Infrastructure as Code Compared</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#npm">npm</a></li><li><a href="#yarn">Yarn</a></li><li><a href="#pnpm">pnpm</a></li><li><a href="#performance-comparison">Performance Comparison</a></li><li><a href="#recommendation">Recommendation</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Use pnpm for monorepos, disk-constrained environments, and teams that value strict dependency resolution. Use Yarn Berry with PnP for teams wanting cutting-edge performance and monorepo tooling. Use npm for simpler projects where the default tool is sufficient and zero configuration is preferred.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/compare/vercel-vs-netlify.html">Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX</a></li><li><a href="/en/compare/auth0-vs-clerk.html">Auth0 vs Clerk: Authentication Platforms Compared</a></li><li><a href="/en/compare/terraform-vs-pulumi.html">Terraform vs Pulumi: Infrastructure as Code Compared</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -152,34 +154,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=npm%20vs%20Yarn%20vs%20pnpm%3A%20Package%20Manager%20Comparison&url=https%3A//aidev.fit/en/compare/npm-vs-yarn-vs-pnpm.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/compare/npm-vs-yarn-vs-pnpm.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=npm%20vs%20Yarn%20vs%20pnpm%3A%20Package%20Manager%20Comparison&url=https%3A//aidev.fit/en/compare/npm-vs-yarn-vs-pnpm.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=npm%20vs%20Yarn%20vs%20pnpm%3A%20Package%20Manager%20Comparison&u=https%3A//aidev.fit/en/compare/npm-vs-yarn-vs-pnpm.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=npm%20vs%20Yarn%20vs%20pnpm%3A%20Package%20Manager%20Comparison&body=https%3A//aidev.fit/en/compare/npm-vs-yarn-vs-pnpm.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/compare/npm-vs-yarn-vs-pnpm.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/compare/vue-vs-react-2026.html" class="prev-next-btn prev-link">← Vue vs React 2026: Which Frontend Framework to Choose?</a><a href="/en/compare/go-vs-rust.html" class="prev-next-btn next-link">Go vs Rust: Systems Programming Comparison →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/compare/jest-vs-vitest.html" class="related-card"><span class="related-card-title">Jest vs Vitest: Testing Framework Comparison</span><span class="related-card-desc">Compare Jest and Vitest for JavaScript testing: speed, configuration, compatibility, and developer e</span></a><a href="/en/compare/postgresql-vs-mysql-2026.html" class="related-card"><span class="related-card-title">PostgreSQL vs MySQL 2026: Relational Database Comparison</span><span class="related-card-desc">Compare PostgreSQL and MySQL in 2026: features, performance, ecosystem, and choosing the right datab</span></a><a href="/en/compare/go-vs-rust.html" class="related-card"><span class="related-card-title">Go vs Rust: Systems Programming Comparison</span><span class="related-card-desc">Compare Go and Rust for systems programming: performance, memory management, concurrency, and ecosys</span></a><a href="/en/compare/webpack-vs-vite.html" class="related-card"><span class="related-card-title">Webpack vs Vite: Build Tool Comparison</span><span class="related-card-desc">Compare Webpack and Vite for frontend builds: development speed, configuration, plugin ecosystems, a</span></a><a href="/en/compare/datadog-vs-grafana-cloud.html" class="related-card"><span class="related-card-title">Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options</span><span class="related-card-desc">Compare Datadog and Grafana Cloud for infrastructure monitoring, APM, log management, pricing, and s</span></a><a href="/en/compare/linear-vs-jira.html" class="related-card"><span class="related-card-title">Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit</span><span class="related-card-desc">Compare Linear, Jira, and GitHub Issues for project management: workflows, integrations, team size f</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=npm%20vs%20Yarn%20vs%20pnpm%3A%20Package%20Manager%20Comparison&url=https%3A//aidev.fit/en/compare/npm-vs-yarn-vs-pnpm.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/compare/npm-vs-yarn-vs-pnpm.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=npm%20vs%20Yarn%20vs%20pnpm%3A%20Package%20Manager%20Comparison&url=https%3A//aidev.fit/en/compare/npm-vs-yarn-vs-pnpm.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=npm%20vs%20Yarn%20vs%20pnpm%3A%20Package%20Manager%20Comparison&u=https%3A//aidev.fit/en/compare/npm-vs-yarn-vs-pnpm.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=npm%20vs%20Yarn%20vs%20pnpm%3A%20Package%20Manager%20Comparison&body=https%3A//aidev.fit/en/compare/npm-vs-yarn-vs-pnpm.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/compare/npm-vs-yarn-vs-pnpm.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/compare/vue-vs-react-2026.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Vue vs React 2026: Which Frontend Framework to Choose?</span></a><a href="/en/compare/go-vs-rust.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Go vs Rust: Systems Programming Comparison</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/compare/jest-vs-vitest.html" class="related-card"><span class="rc-title">Jest vs Vitest: Testing Framework Comparison</span><span class="rc-desc">Compare Jest and Vitest for JavaScript testing: speed, configuration, compatibility, and developer experience.</span></a><a href="/en/compare/postgresql-vs-mysql-2026.html" class="related-card"><span class="rc-title">PostgreSQL vs MySQL 2026: Relational Database Comparison</span><span class="rc-desc">Compare PostgreSQL and MySQL in 2026: features, performance, ecosystem, and choosing the right database for your project</span></a><a href="/en/compare/go-vs-rust.html" class="related-card"><span class="rc-title">Go vs Rust: Systems Programming Comparison</span><span class="rc-desc">Compare Go and Rust for systems programming: performance, memory management, concurrency, and ecosystem.</span></a><a href="/en/compare/webpack-vs-vite.html" class="related-card"><span class="rc-title">Webpack vs Vite: Build Tool Comparison</span><span class="rc-desc">Compare Webpack and Vite for frontend builds: development speed, configuration, plugin ecosystems, and production optimi</span></a><a href="/en/compare/datadog-vs-grafana-cloud.html" class="related-card"><span class="rc-title">Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options</span><span class="rc-desc">Compare Datadog and Grafana Cloud for infrastructure monitoring, APM, log management, pricing, and self-hosted alternati</span></a><a href="/en/compare/linear-vs-jira.html" class="related-card"><span class="rc-title">Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit</span><span class="rc-desc">Compare Linear, Jira, and GitHub Issues for project management: workflows, integrations, team size fit, performance, and</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#f0fdf4;border-radius:12px;border:1px solid #bbf7d0;">
       <h3 style="margin-top:0;font-size:1.1rem;">🧩 Which Framework Should You Use?</h3>
       <p style="margin:0.5rem 0;color:#475569;">Not sure which frontend framework fits your project? Answer 5 questions and get a data-driven recommendation.</p>
       <a href="/tools/framework-decision-wizard.html" style="display:inline-block;padding:0.5rem 1rem;background:#22c55e;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Try Decision Wizard →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#npm">npm</a></li><li><a href="#yarn">Yarn</a></li><li><a href="#pnpm">pnpm</a></li><li><a href="#performance-comparison">Performance Comparison</a></li><li><a href="#recommendation">Recommendation</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

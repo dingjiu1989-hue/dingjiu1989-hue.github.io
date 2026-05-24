@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Serverless Security
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Security</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/security/">Security</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Security</span>
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
-      <h1 class="article-title">Serverless Security</h1>
-      <div class="article-meta"><time datetime="2026-03-13">Published 2026-03-13</time> · <time datetime="2026-05-03">Last active 2026-05-03</time> · 85 views · 0 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/security/serverless-security.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/serverless-security.png" alt="Serverless Security" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Introduction </p><picture><source srcset="https://aidev.fit/images/covers/en/security/serverless-security.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/security/serverless-security.png" alt="Serverless Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Serverless Security</h1>
+        <div class="article-meta">
+          <time datetime="2026-03-13">2026-03-13</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>85 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/security/serverless-security.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/serverless-security.png" alt="Serverless Security" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (22)</summary><ol><li><a href="#aws-lambda-function-handler-with-minimal-permissions">AWS Lambda function handler with minimal permissions</a></li><li><a href="#the-function-iam-role-only-has-access-to-this-specific-table">The function IAM role only has access to this specific table</a></li><li><a href="#validate-s3-record-structure">Validate S3 record structure</a></li><li><a href="#validate-object-key-to-prevent-path-traversal">Validate object key to prevent path traversal</a></li><li><a href="#check-file-extension-whitelist">Check file extension whitelist</a></li><li><a href="#validate-http-method">Validate HTTP method</a></li><li><a href="#validate-path-parameters">Validate path parameters</a></li><li><a href="#validate-query-string-parameters">Validate query string parameters</a></li><li><a href="#vulnerability-scanner-for-cold-start">Vulnerability scanner for cold start</a></li><li><a href="#dependencies-pin-versions-and-scan-regularly">Dependencies: pin versions and scan regularly</a></li><li><a href="#requirementstxt">requirements.txt</a></li><li><a href="#npm-packagejson">npm package.json</a></li><li><a href="#defense-layer-1-input-validation-at-api-gateway">Defense layer 1: Input validation at API Gateway</a></li><li><a href="#use-request-validation-templates">Use request validation templates</a></li><li><a href="#api-gateway-json-schema-validation">API Gateway JSON Schema validation</a></li><li><a href="#defense-layer-2-function-level-validation">Defense layer 2: Function-level validation</a></li><li><a href="#validate-input-structure">Validate input structure</a></li><li><a href="#validate-data-types-and-ranges">Validate data types and ranges</a></li><li><a href="#defense-layer-3-principle-of-least-function-scope">Defense layer 3: Principle of least function scope</a></li><li><a href="#each-function-should-do-one-thing">Each function should do ONE thing</a></li><li><a href="#defense-layer-4-encryption-at-rest-and-in-transit">Defense layer 4: Encryption at rest and in transit</a></li><li><a href="#dont-log-sensitive-data">Don't log sensitive data</a></li></ol></details>
+        <div class="article-body"><p>Introduction </p><picture><source srcset="https://aidev.fit/images/covers/en/security/serverless-security.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/security/serverless-security.png" alt="Serverless Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Serverless computing shifts operational responsibility to the cloud provider but introduces unique security challenges. Functions have expanded attack surfaces through event sources, third-party dependencies, and IAM roles. Understanding the serverless shared responsibility model is the first step toward securing these architectures. </p>
 <p>Function Permissions </p>
 <p>Serverless functions operate under IAM roles that should follow least privilege. Overly permissive roles are the most common serverless security issue. </p>
@@ -285,14 +293,8 @@
 <p>self.logs.append(log_entry)</p>
 <p>print(json.dumps(log_entry))</p>
 <p>Conclusion </p>
-<p>Serverless security requires adapting traditional security principles to a new execution model. Enforce least privilege on function IAM roles, validate every event before processing, pin and scan dependencies, and implement defense in depth since traditional host-based controls are unavailable. Monitor function invocations and log appropriately, but never log sensitive data in function output.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/certificate-management.html">Certificate Management</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (22)</summary><ol><li><a href="#aws-lambda-function-handler-with-minimal-permissions">AWS Lambda function handler with minimal permissions</a></li><li><a href="#the-function-iam-role-only-has-access-to-this-specific-table">The function IAM role only has access to this specific table</a></li><li><a href="#validate-s3-record-structure">Validate S3 record structure</a></li><li><a href="#validate-object-key-to-prevent-path-traversal">Validate object key to prevent path traversal</a></li><li><a href="#check-file-extension-whitelist">Check file extension whitelist</a></li><li><a href="#validate-http-method">Validate HTTP method</a></li><li><a href="#validate-path-parameters">Validate path parameters</a></li><li><a href="#validate-query-string-parameters">Validate query string parameters</a></li><li><a href="#vulnerability-scanner-for-cold-start">Vulnerability scanner for cold start</a></li><li><a href="#dependencies:-pin-versions-and-scan-regularly">Dependencies: pin versions and scan regularly</a></li><li><a href="#requirements.txt">requirements.txt</a></li><li><a href="#npm-package.json">npm package.json</a></li><li><a href="#defense-layer-1:-input-validation-at-api-gateway">Defense layer 1: Input validation at API Gateway</a></li><li><a href="#use-request-validation-templates">Use request validation templates</a></li><li><a href="#api-gateway-json-schema-validation">API Gateway JSON Schema validation</a></li><li><a href="#defense-layer-2:-function-level-validation">Defense layer 2: Function-level validation</a></li><li><a href="#validate-input-structure">Validate input structure</a></li><li><a href="#validate-data-types-and-ranges">Validate data types and ranges</a></li><li><a href="#defense-layer-3:-principle-of-least-function-scope">Defense layer 3: Principle of least function scope</a></li><li><a href="#each-function-should-do-one-thing">Each function should do ONE thing</a></li><li><a href="#defense-layer-4:-encryption-at-rest-and-in-transit">Defense layer 4: Encryption at rest and in transit</a></li><li><a href="#don't-log-sensitive-data">Don't log sensitive data</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Serverless security requires adapting traditional security principles to a new execution model. Enforce least privilege on function IAM roles, validate every event before processing, pin and scan dependencies, and implement defense in depth since traditional host-based controls are unavailable. Monitor function invocations and log appropriately, but never log sensitive data in function output.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/session-management.html">Session Management Security</a></li><li><a href="/en/security/supply-chain-security.html">Supply Chain Security</a></li><li><a href="/en/security/certificate-management.html">Certificate Management</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -300,29 +302,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Serverless%20Security&url=https%3A//aidev.fit/en/security/serverless-security.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/security/serverless-security.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Serverless%20Security&url=https%3A//aidev.fit/en/security/serverless-security.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Serverless%20Security&u=https%3A//aidev.fit/en/security/serverless-security.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Serverless%20Security&body=https%3A//aidev.fit/en/security/serverless-security.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/security/serverless-security.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Serverless%20Security&url=https%3A//aidev.fit/en/security/serverless-security.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/security/serverless-security.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Serverless%20Security&url=https%3A//aidev.fit/en/security/serverless-security.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Serverless%20Security&u=https%3A//aidev.fit/en/security/serverless-security.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Serverless%20Security&body=https%3A//aidev.fit/en/security/serverless-security.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/security/serverless-security.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/security/soc-operations.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">SOC Operations</span></a><a href="/en/security/output-encoding.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Output Encoding</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/security/cors-security.html" class="related-card"><span class="rc-title">CORS Security</span><span class="rc-desc">In-depth guide to CORS security covering proper origin validation, preflight handling, common misconfigurations, and rea</span></a><a href="/en/security/secure-api-design.html" class="related-card"><span class="rc-title">Secure API Design Principles</span><span class="rc-desc">Guide to secure API design covering input validation, rate limiting, idempotency, error handling, and defense-in-depth s</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="rc-title">Cloud Security Posture Management</span><span class="rc-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift detection, and remedia</span></a><a href="/en/security/email-security.html" class="related-card"><span class="rc-title">Email Security</span><span class="rc-desc">Complete guide to email security covering SPF, DKIM, DMARC configuration, email gateway deployment, phishing protection,</span></a><a href="/en/security/input-validation.html" class="related-card"><span class="rc-title">Input Validation Deep Dive</span><span class="rc-desc">In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniques, encoding strateg</span></a><a href="/en/security/secure-configuration.html" class="related-card"><span class="rc-title">Secure Configuration Management</span><span class="rc-desc">Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detection, configuration val</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/security/soc-operations.html" class="prev-next-btn prev-link">← SOC Operations</a><a href="/en/security/output-encoding.html" class="prev-next-btn next-link">Output Encoding →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/cors-security.html" class="related-card"><span class="related-card-title">CORS Security</span><span class="related-card-desc">In-depth guide to CORS security covering proper origin validation, preflight handling, common miscon</span></a><a href="/en/security/secure-api-design.html" class="related-card"><span class="related-card-title">Secure API Design Principles</span><span class="related-card-desc">Guide to secure API design covering input validation, rate limiting, idempotency, error handling, an</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a><a href="/en/security/email-security.html" class="related-card"><span class="related-card-title">Email Security</span><span class="related-card-desc">Complete guide to email security covering SPF, DKIM, DMARC configuration, email gateway deployment, </span></a><a href="/en/security/input-validation.html" class="related-card"><span class="related-card-title">Input Validation Deep Dive</span><span class="related-card-desc">In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniqu</span></a><a href="/en/security/secure-configuration.html" class="related-card"><span class="related-card-title">Secure Configuration Management</span><span class="related-card-desc">Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detectio</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#aws-lambda-function-handler-with-minimal-permissions">AWS Lambda function handler with minimal permissions</a></li><li><a href="#the-function-iam-role-only-has-access-to-this-specific-table">The function IAM role only has access to this specific table</a></li><li><a href="#validate-s3-record-structure">Validate S3 record structure</a></li><li><a href="#validate-object-key-to-prevent-path-traversal">Validate object key to prevent path traversal</a></li><li><a href="#check-file-extension-whitelist">Check file extension whitelist</a></li><li><a href="#validate-http-method">Validate HTTP method</a></li><li><a href="#validate-path-parameters">Validate path parameters</a></li><li><a href="#validate-query-string-parameters">Validate query string parameters</a></li><li><a href="#vulnerability-scanner-for-cold-start">Vulnerability scanner for cold start</a></li><li><a href="#dependencies-pin-versions-and-scan-regularly">Dependencies: pin versions and scan regularly</a></li><li><a href="#requirementstxt">requirements.txt</a></li><li><a href="#npm-packagejson">npm package.json</a></li><li><a href="#defense-layer-1-input-validation-at-api-gateway">Defense layer 1: Input validation at API Gateway</a></li><li><a href="#use-request-validation-templates">Use request validation templates</a></li><li><a href="#api-gateway-json-schema-validation">API Gateway JSON Schema validation</a></li><li><a href="#defense-layer-2-function-level-validation">Defense layer 2: Function-level validation</a></li><li><a href="#validate-input-structure">Validate input structure</a></li><li><a href="#validate-data-types-and-ranges">Validate data types and ranges</a></li><li><a href="#defense-layer-3-principle-of-least-function-scope">Defense layer 3: Principle of least function scope</a></li><li><a href="#each-function-should-do-one-thing">Each function should do ONE thing</a></li><li><a href="#defense-layer-4-encryption-at-rest-and-in-transit">Defense layer 4: Encryption at rest and in transit</a></li><li><a href="#dont-log-sensitive-data">Don't log sensitive data</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

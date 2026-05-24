@@ -112,18 +112,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › RAG Pipeline Optimization: Production Best Practices
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">AI</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">AI</span>
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
-      <h1 class="article-title">RAG Pipeline Optimization: Production Best Practices</h1>
-      <div class="article-meta"><time datetime="2026-02-23">Published 2026-02-23</time> · <time datetime="2026-04-28">Last active 2026-04-28</time> · 227 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/rag-pipeline-optimization.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/rag-pipeline-optimization.png" alt="RAG Pipeline Optimization: Production Best Practices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Retrieval-Augmented Generation (RAG) combines information retrieval with LLM generation. Production RAG requires careful optimization of every pipeline stage.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/rag-pipeline-optimization.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/rag-pipeline-optimization.png" alt="RAG Pipeline Optimization: Production Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">RAG Pipeline Optimization: Production Best Practices</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-23">2026-02-23</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>227 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/rag-pipeline-optimization.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/rag-pipeline-optimization.png" alt="RAG Pipeline Optimization: Production Best Practices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (4)</summary><ol><li><a href="#chunking-strategies">Chunking Strategies</a></li><li><a href="#embedding-selection">Embedding Selection</a></li><li><a href="#retrieval-tuning">Retrieval Tuning</a></li><li><a href="#evaluation">Evaluation</a></li></ol></details>
+        <div class="article-body"><p>Retrieval-Augmented Generation (RAG) combines information retrieval with LLM generation. Production RAG requires careful optimization of every pipeline stage.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/rag-pipeline-optimization.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/rag-pipeline-optimization.png" alt="RAG Pipeline Optimization: Production Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Chunking Strategies</h2>
 <p>Document chunking determines what information is retrieved. Fixed-size chunking with overlap is simple but can split semantic units. Semantic chunking uses NLP to find natural boundaries (sentence, paragraph, section boundaries).</p>
 <p>Optimal chunk size depends on your retrieval task. 256-512 tokens works well for factual Q&amp;A.; Larger chunks (1000-2000 tokens) preserve context for summarization. Smaller chunks improve precision. Agentic chunking summarizes each chunk for improved retrieval relevance.</p>
@@ -135,14 +143,8 @@
 <p>Metadata filtering narrows retrieval scope. Filter by date, category, source, or document type. This improves relevance and reduces latency by limiting the search space. Pre-filtering (filter before search) is faster. Post-filtering (search then filter) is more accurate.</p>
 <h2>Evaluation</h2>
 <p>Evaluate RAG pipelines on retrieval metrics (hit rate, MRR, NDCG) and generation metrics (answer relevance, faithfulness, correctness). Use RAGAS framework for automated evaluation. Build golden QA datasets from real user queries. Monitor production performance with user feedback signals.</p>
-<p>Optimization is iterative. Test chunk size, embedding model, top-k, and prompt template combinations. Use A/B testing in production for significant changes.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/model-deployment.html">Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (4)</summary><ol><li><a href="#chunking-strategies">Chunking Strategies</a></li><li><a href="#embedding-selection">Embedding Selection</a></li><li><a href="#retrieval-tuning">Retrieval Tuning</a></li><li><a href="#evaluation">Evaluation</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Optimization is iterative. Test chunk size, embedding model, top-k, and prompt template combinations. Use A/B testing in production for significant changes.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></li><li><a href="/en/ai/model-deployment.html">Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization</a></li><li><a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -150,34 +152,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=RAG%20Pipeline%20Optimization%3A%20Production%20Best%20Practices&url=https%3A//aidev.fit/en/ai/rag-pipeline-optimization.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/rag-pipeline-optimization.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=RAG%20Pipeline%20Optimization%3A%20Production%20Best%20Practices&url=https%3A//aidev.fit/en/ai/rag-pipeline-optimization.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=RAG%20Pipeline%20Optimization%3A%20Production%20Best%20Practices&u=https%3A//aidev.fit/en/ai/rag-pipeline-optimization.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=RAG%20Pipeline%20Optimization%3A%20Production%20Best%20Practices&body=https%3A//aidev.fit/en/ai/rag-pipeline-optimization.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/rag-pipeline-optimization.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/transformer-mechanisms.html" class="prev-next-btn prev-link">← Transformer Mechanisms in Deep Learning</a><a href="/en/ai/prompt-engineering-guide.html" class="prev-next-btn next-link">Prompt Engineering Guide for LLMs →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/rag-best-practices.html" class="related-card"><span class="related-card-title">RAG Best Practices 2026: Building Production-Ready Retrieval Systems</span><span class="related-card-desc">Complete guide to retrieval-augmented generation: chunking strategies, embedding model selection, hy</span></a><a href="/en/ai/multi-modal-rag.html" class="related-card"><span class="related-card-title">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</span><span class="related-card-desc">Build multi-modal RAG systems that handle images, tables, and documents. Learn chunking strategies, </span></a><a href="/en/ai/rag-evaluation.html" class="related-card"><span class="related-card-title">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</span><span class="related-card-desc">A practical guide to evaluating RAG systems: retrieval metrics, generation quality assessment, end-t</span></a><a href="/en/ai/rag-chunking-strategies.html" class="related-card"><span class="related-card-title">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</span><span class="related-card-desc">Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategie</span></a><a href="/en/ai/rag-retrieval-optimization.html" class="related-card"><span class="related-card-title">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</span><span class="related-card-desc">Optimize RAG retrieval with hybrid search combining dense and sparse methods, cross-encoder re-ranki</span></a><a href="/en/ai/mlops-pipeline.html" class="related-card"><span class="related-card-title">MLOps Pipeline: From Training to Production</span><span class="related-card-desc">Build MLOps pipelines for machine learning: data validation, model training, evaluation, deployment,</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=RAG%20Pipeline%20Optimization%3A%20Production%20Best%20Practices&url=https%3A//aidev.fit/en/ai/rag-pipeline-optimization.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/rag-pipeline-optimization.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=RAG%20Pipeline%20Optimization%3A%20Production%20Best%20Practices&url=https%3A//aidev.fit/en/ai/rag-pipeline-optimization.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=RAG%20Pipeline%20Optimization%3A%20Production%20Best%20Practices&u=https%3A//aidev.fit/en/ai/rag-pipeline-optimization.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=RAG%20Pipeline%20Optimization%3A%20Production%20Best%20Practices&body=https%3A//aidev.fit/en/ai/rag-pipeline-optimization.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/rag-pipeline-optimization.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/transformer-mechanisms.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Transformer Mechanisms in Deep Learning</span></a><a href="/en/ai/prompt-engineering-guide.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Prompt Engineering Guide for LLMs</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/rag-best-practices.html" class="related-card"><span class="rc-title">RAG Best Practices 2026: Building Production-Ready Retrieval Systems</span><span class="rc-desc">Complete guide to retrieval-augmented generation: chunking strategies, embedding model selection, hybrid search (vector </span></a><a href="/en/ai/multi-modal-rag.html" class="related-card"><span class="rc-title">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</span><span class="rc-desc">Build multi-modal RAG systems that handle images, tables, and documents. Learn chunking strategies, embedding approaches</span></a><a href="/en/ai/rag-evaluation.html" class="related-card"><span class="rc-title">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</span><span class="rc-desc">A practical guide to evaluating RAG systems: retrieval metrics, generation quality assessment, end-to-end testing framew</span></a><a href="/en/ai/rag-chunking-strategies.html" class="related-card"><span class="rc-title">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</span><span class="rc-desc">Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategies for context preser</span></a><a href="/en/ai/rag-retrieval-optimization.html" class="related-card"><span class="rc-title">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</span><span class="rc-desc">Optimize RAG retrieval with hybrid search combining dense and sparse methods, cross-encoder re-ranking, and query transf</span></a><a href="/en/ai/mlops-pipeline.html" class="related-card"><span class="rc-title">MLOps Pipeline: From Training to Production</span><span class="rc-desc">Build MLOps pipelines for machine learning: data validation, model training, evaluation, deployment, and monitoring.</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#chunking-strategies">Chunking Strategies</a></li><li><a href="#embedding-selection">Embedding Selection</a></li><li><a href="#retrieval-tuning">Retrieval Tuning</a></li><li><a href="#evaluation">Evaluation</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Multi-Tenancy Architecture
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Multi-Tenancy Architecture</h1>
-      <div class="article-meta"><time datetime="2026-04-29">Published 2026-04-29</time> · <time datetime="2026-05-03">Last active 2026-05-03</time> · 204 views · 0 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/multi-tenancy.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/multi-tenancy.png" alt="Multi-Tenancy Architecture" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Multi-tenancy is the architectural pattern where a single instance of software serves multiple customer organizations (tenants). The design choices around tenant isolation — how much tenants share and how much is dedicated — determine the system's security, scalability, operational complexity, and cost structure. Three primary isolation levels form a spectrum with distinct tradeoffs. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/multi-tenancy.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/multi-tenancy.png" alt="Multi-Tenancy Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Multi-Tenancy Architecture</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-29">2026-04-29</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>204 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/multi-tenancy.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/multi-tenancy.png" alt="Multi-Tenancy Architecture" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>Multi-tenancy is the architectural pattern where a single instance of software serves multiple customer organizations (tenants). The design choices around tenant isolation — how much tenants share and how much is dedicated — determine the system's security, scalability, operational complexity, and cost structure. Three primary isolation levels form a spectrum with distinct tradeoffs. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/multi-tenancy.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/multi-tenancy.png" alt="Multi-Tenancy Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Database per tenant provides the strongest isolation. Each tenant gets its own database instance. This simplifies backup and restore (one tenant's data can be manipulated independently), provides natural resource limits (noisy neighbor containment), and makes data migration straightforward. The trade-off is operational cost: provisioning databases, managing connections, and running migration scripts for each tenant. At hundreds or thousands of tenants, the operational overhead becomes significant unless automated through infrastructure-as-code. </p>
 <p>Schema per tenant shares the database server but maintains separate schemas for each tenant. This provides moderate isolation — a schema is a namespace with its own tables and data. Connection pooling across schemas shares resources efficiently. Schema management becomes the challenge: each tenant's schema must be created and migrated independently. Tools can automate schema operations across all tenants, but schema divergence becomes a risk if tenants can have different schema versions. </p>
 <p>Shared database (all tenants in the same tables) is the most cost-efficient approach. All tenant data resides in the same tables, distinguished by a tenant_id column. This simplifies operations significantly — a single database, single schema, single set of migrations. The trade-offs are severe: any application bug can leak or corrupt data across tenants, resource contention (noisy neighbor) affects all tenants simultaneously, and backup/restore must handle all tenants at once. Strong security measures are essential: every query must include the tenant_id filter. </p>
@@ -121,14 +129,8 @@
 <p>Pricing models in multi-tenant systems typically distribute infrastructure costs according to tenant resource consumption. Per-tenant pricing requires metering: tracking CPU, storage, bandwidth, and request counts per tenant. Metering data should be aggregated in a reporting database and used for both billing and capacity planning. The pricing model should incentivize efficient resource usage — tenants that consume more should pay proportionally more. </p>
 <p>Data isolation testing is essential for shared-database multi-tenancy. Automated security tests should verify that tenant A cannot access tenant B's data through any API endpoint. Penetration testing should attempt tenant ID manipulation, SQL injection to switch tenant context, and access token replay across tenants. Compliance requirements (SOC 2, HIPAA, GDPR) often mandate specific isolation levels — the architecture must satisfy the strictest requirement across all tenants. </p>
 <p>Tenant feature flags enable per-tenant configuration. Different tenants may require different feature sets, integration configurations, or compliance configurations. A tenant-level feature flag system allows rolling out features to specific tenants, maintaining tenant-specific customizations, and gradually migrating tenants between infrastructure tiers as their needs grow. </p>
-<p>Migrating between isolation levels is a common lifecycle pattern. Startups often begin with a shared database for speed, migrate to schema-per-tenant as the customer base grows, and eventually offer database-per-tenant for premium enterprise customers. The migration path must be designed from the beginning — using tenant_id consistently even in shared databases, abstracting database access behind a routing layer, and ensuring that connection management is configurable without code changes.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a>, <a href="/en/architecture/distributed-id.html">Distributed ID Generation</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>Migrating between isolation levels is a common lifecycle pattern. Startups often begin with a shared database for speed, migrate to schema-per-tenant as the customer base grows, and eventually offer database-per-tenant for premium enterprise customers. The migration path must be designed from the beginning — using tenant_id consistently even in shared databases, abstracting database access behind a routing layer, and ensuring that connection management is configurable without code changes.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></li><li><a href="/en/architecture/distributed-id.html">Distributed ID Generation</a></li><li><a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -136,29 +138,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Multi-Tenancy%20Architecture&url=https%3A//aidev.fit/en/architecture/multi-tenancy.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/multi-tenancy.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Multi-Tenancy%20Architecture&url=https%3A//aidev.fit/en/architecture/multi-tenancy.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Multi-Tenancy%20Architecture&u=https%3A//aidev.fit/en/architecture/multi-tenancy.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Multi-Tenancy%20Architecture&body=https%3A//aidev.fit/en/architecture/multi-tenancy.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/multi-tenancy.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Multi-Tenancy%20Architecture&url=https%3A//aidev.fit/en/architecture/multi-tenancy.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/multi-tenancy.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Multi-Tenancy%20Architecture&url=https%3A//aidev.fit/en/architecture/multi-tenancy.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Multi-Tenancy%20Architecture&u=https%3A//aidev.fit/en/architecture/multi-tenancy.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Multi-Tenancy%20Architecture&body=https%3A//aidev.fit/en/architecture/multi-tenancy.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/multi-tenancy.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/saga-orchestration.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Saga Orchestration Pattern</span></a><a href="/en/architecture/monolith-first-strategy.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Monolith-First Strategy</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/cost-per-request.html" class="related-card"><span class="rc-title">Cost Per Request Modeling</span><span class="rc-desc">Compute, storage, network, database per-request cost modeling, and optimization strategies</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card"><span class="rc-title">Zero-Downtime Database Migrations</span><span class="rc-desc">Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and production practices</span></a><a href="/en/architecture/global-traffic-routing.html" class="related-card"><span class="rc-title">Global Traffic Routing</span><span class="rc-desc">DNS-based routing, Anycast, global load balancers, latency-based routing, and multi-region traffic management</span></a><a href="/en/architecture/event-driven-arch.html" class="related-card"><span class="rc-title">Event-Driven Architecture</span><span class="rc-desc">Explore event-driven architecture: event bus, event schema management, versioning, and production patterns</span></a><a href="/en/architecture/database-per-service.html" class="related-card"><span class="rc-title">Database per Service Pattern</span><span class="rc-desc">Learn the database per service pattern for microservices data management — data isolation, eventual consistency, cross-s</span></a><a href="/en/architecture/caching-http.html" class="related-card"><span class="rc-title">HTTP Caching Architecture</span><span class="rc-desc">Cache-Control, ETags, CDN caching, stale-while-revalidate, and cache invalidation strategies</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/saga-orchestration.html" class="prev-next-btn prev-link">← Saga Orchestration Pattern</a><a href="/en/architecture/monolith-first-strategy.html" class="prev-next-btn next-link">Monolith-First Strategy →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/cost-per-request.html" class="related-card"><span class="related-card-title">Cost Per Request Modeling</span><span class="related-card-desc">Compute, storage, network, database per-request cost modeling, and optimization strategies</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card"><span class="related-card-title">Zero-Downtime Database Migrations</span><span class="related-card-desc">Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and producti</span></a><a href="/en/architecture/global-traffic-routing.html" class="related-card"><span class="related-card-title">Global Traffic Routing</span><span class="related-card-desc">DNS-based routing, Anycast, global load balancers, latency-based routing, and multi-region traffic m</span></a><a href="/en/architecture/event-driven-arch.html" class="related-card"><span class="related-card-title">Event-Driven Architecture</span><span class="related-card-desc">Explore event-driven architecture: event bus, event schema management, versioning, and production pa</span></a><a href="/en/architecture/database-per-service.html" class="related-card"><span class="related-card-title">Database per Service Pattern</span><span class="related-card-desc">Learn the database per service pattern for microservices data management — data isolation, eventual </span></a><a href="/en/architecture/caching-http.html" class="related-card"><span class="related-card-title">HTTP Caching Architecture</span><span class="related-card-desc">Cache-Control, ETags, CDN caching, stale-while-revalidate, and cache invalidation strategies</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

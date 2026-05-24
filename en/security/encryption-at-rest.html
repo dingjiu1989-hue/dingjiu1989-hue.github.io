@@ -100,17 +100,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Encryption at Rest Guide
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Security</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/security/">Security</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Security</span>
         <span class="tag-cat">Cybersecurity</span></div>
-      <h1 class="article-title">Encryption at Rest Guide</h1>
-      <div class="article-meta"><time datetime="2025-12-17">Published 2025-12-17</time> · <time datetime="2026-04-20">Last active 2026-04-20</time> · 218 views · 1 replies · 15 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/security/encryption-at-rest.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/encryption-at-rest.png" alt="Encryption at Rest Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>What Is Encryption at Rest? </p><picture><source srcset="https://aidev.fit/images/covers/en/security/encryption-at-rest.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/security/encryption-at-rest.png" alt="Encryption at Rest Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Encryption at Rest Guide</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-17">2025-12-17</time>
+          <span class="meta-sep">·</span>
+          <span>15 min read</span>
+          <span class="meta-sep">·</span>
+          <span>218 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/security/encryption-at-rest.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/encryption-at-rest.png" alt="Encryption at Rest Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#encrypt-a-disk-with-luks">Encrypt a disk with LUKS</a></li><li><a href="#enable-default-ebs-encryption">Enable default EBS encryption</a></li><li><a href="#create-an-encrypted-volume-with-a-custom-kms-key">Create an encrypted volume with a custom KMS key</a></li><li><a href="#google-cloud-uses-aes-256-by-default-csek-for-customer-managed">Google Cloud uses AES-256 by default (CSEK for customer-managed)</a></li><li><a href="#create-and-apply-a-csek">Create and apply a CSEK</a></li><li><a href="#usage">Usage</a></li><li><a href="#store-userdata-in-database">Store user_data in database</a></li></ol></details>
+        <div class="article-body"><p>What Is Encryption at Rest? </p><picture><source srcset="https://aidev.fit/images/covers/en/security/encryption-at-rest.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/security/encryption-at-rest.png" alt="Encryption at Rest Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Encryption at rest protects data stored on disk or in databases by making it unreadable without the correct decryption key. If an attacker gains physical access to storage media or bypasses access controls, encrypted data remains confidential. This is a fundamental security control required by compliance frameworks including PCI DSS, HIPAA, SOC 2, and GDPR. </p>
 <p>Encryption Layers </p>
 <p>| Layer | What It Protects | When to Use | |-------|------------------|-------------| | Disk encryption | Entire storage volume | Always | | Database encryption | Specific tables or columns | Sensitive PII data | | File-level encryption | Individual files | Shared storage, backups | | Application-level encryption | Specific data fields | End-to-end data protection | | Backup encryption | Backup archives | All offsite storage | </p>
@@ -260,14 +268,8 @@
 <p>Compliance Requirements </p>
 <p>| Standard | Encryption Requirement | |----------|----------------------| | PCI DSS 4.0 | All cardholder data encrypted at rest | | HIPAA | ePHI encrypted at rest | | SOC 2 | Encryption controls for sensitive data | | GDPR | Appropriate technical measures (encryption) | | FedRAMP | FIPS 140-2 validated encryption | </p>
 <p>Summary </p>
-<p>Encryption at rest is a non-negotiable security control for any application handling sensitive data. Implement defense in depth: disk encryption for the entire volume, transparent database encryption for tables, column-level encryption for the most sensitive fields, and application-level encryption for end-to-end protection. Use AWS KMS or similar managed services for key management with automatic rotation, and always encrypt backups before storing them offsite.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a>, <a href="/en/security/secrets-management.html">Secrets Management for Developers</a>, <a href="/en/security/sql-injection-prevention.html">SQL Injection Prevention Guide</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (7)</summary><ol><li><a href="#encrypt-a-disk-with-luks">Encrypt a disk with LUKS</a></li><li><a href="#enable-default-ebs-encryption">Enable default EBS encryption</a></li><li><a href="#create-an-encrypted-volume-with-a-custom-kms-key">Create an encrypted volume with a custom KMS key</a></li><li><a href="#google-cloud-uses-aes-256-by-default-(csek-for-customer-managed)">Google Cloud uses AES-256 by default (CSEK for customer-managed)</a></li><li><a href="#create-and-apply-a-csek">Create and apply a CSEK</a></li><li><a href="#usage">Usage</a></li><li><a href="#store-user_data-in-database">Store user_data in database</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Encryption at rest is a non-negotiable security control for any application handling sensitive data. Implement defense in depth: disk encryption for the entire volume, transparent database encryption for tables, column-level encryption for the most sensitive fields, and application-level encryption for end-to-end protection. Use AWS KMS or similar managed services for key management with automatic rotation, and always encrypt backups before storing them offsite.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a></li><li><a href="/en/security/secrets-management.html">Secrets Management for Developers</a></li><li><a href="/en/security/sql-injection-prevention.html">SQL Injection Prevention Guide</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -275,29 +277,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Encryption%20at%20Rest%20Guide&url=https%3A//aidev.fit/en/security/encryption-at-rest.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/security/encryption-at-rest.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Encryption%20at%20Rest%20Guide&url=https%3A//aidev.fit/en/security/encryption-at-rest.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Encryption%20at%20Rest%20Guide&u=https%3A//aidev.fit/en/security/encryption-at-rest.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Encryption%20at%20Rest%20Guide&body=https%3A//aidev.fit/en/security/encryption-at-rest.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/security/encryption-at-rest.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Encryption%20at%20Rest%20Guide&url=https%3A//aidev.fit/en/security/encryption-at-rest.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/security/encryption-at-rest.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Encryption%20at%20Rest%20Guide&url=https%3A//aidev.fit/en/security/encryption-at-rest.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Encryption%20at%20Rest%20Guide&u=https%3A//aidev.fit/en/security/encryption-at-rest.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Encryption%20at%20Rest%20Guide&body=https%3A//aidev.fit/en/security/encryption-at-rest.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/security/encryption-at-rest.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/security/http-security-headers.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">HTTP Security Headers Checklist</span></a><span class="prev-next-btn next-link disabled"><span class="pn-label">Next →</span><span class="pn-title">Latest article</span></span></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/security/identity-management.html" class="related-card"><span class="rc-title">Identity and Access Management (IAM) Guide</span><span class="rc-desc">Comprehensive guide to IAM covering SSO, SAML, OIDC, SCIM provisioning, just-in-time access, and access reviews.</span></a><a href="/en/security/cloud-security-basics.html" class="related-card"><span class="rc-title">Cloud Security Basics: Shared Responsibility Model Explained</span><span class="rc-desc">Understand the AWS/GCP/Azure shared responsibility model, IAM policies, network security groups, and key cloud security </span></a><a href="/en/security/api-rate-limiting.html" class="related-card"><span class="rc-title">API Rate Limiting Implementation</span><span class="rc-desc">A comprehensive guide to implementing API rate limiting with token bucket, leaky bucket, and sliding window algorithms.</span></a><a href="/en/security/key-management.html" class="related-card"><span class="rc-title">Key Management Systems</span><span class="rc-desc">Deep dive into key management systems covering KMS, HSM, key rotation strategies, envelope encryption, and AWS KMS vs GC</span></a><a href="/en/security/mobile-security.html" class="related-card"><span class="rc-title">Mobile Application Security Guide</span><span class="rc-desc">Mobile app security covering OWASP Mobile Top 10, code obfuscation, certificate pinning, secure storage, and runtime pro</span></a><a href="/en/security/log-management-security.html" class="related-card"><span class="rc-title">Security Log Management</span><span class="rc-desc">Best practices for security log management including centralized logging, SIEM integration, log retention, and audit tra</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/security/http-security-headers.html" class="prev-next-btn prev-link">← HTTP Security Headers Checklist</a><span class="prev-next-btn next-link disabled">Next →</span></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/identity-management.html" class="related-card"><span class="related-card-title">Identity and Access Management (IAM) Guide</span><span class="related-card-desc">Comprehensive guide to IAM covering SSO, SAML, OIDC, SCIM provisioning, just-in-time access, and acc</span></a><a href="/en/security/cloud-security-basics.html" class="related-card"><span class="related-card-title">Cloud Security Basics: Shared Responsibility Model Explained</span><span class="related-card-desc">Understand the AWS/GCP/Azure shared responsibility model, IAM policies, network security groups, and</span></a><a href="/en/security/api-rate-limiting.html" class="related-card"><span class="related-card-title">API Rate Limiting Implementation</span><span class="related-card-desc">A comprehensive guide to implementing API rate limiting with token bucket, leaky bucket, and sliding</span></a><a href="/en/security/key-management.html" class="related-card"><span class="related-card-title">Key Management Systems</span><span class="related-card-desc">Deep dive into key management systems covering KMS, HSM, key rotation strategies, envelope encryptio</span></a><a href="/en/security/mobile-security.html" class="related-card"><span class="related-card-title">Mobile Application Security Guide</span><span class="related-card-desc">Mobile app security covering OWASP Mobile Top 10, code obfuscation, certificate pinning, secure stor</span></a><a href="/en/security/log-management-security.html" class="related-card"><span class="related-card-title">Security Log Management</span><span class="related-card-desc">Best practices for security log management including centralized logging, SIEM integration, log rete</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#encrypt-a-disk-with-luks">Encrypt a disk with LUKS</a></li><li><a href="#enable-default-ebs-encryption">Enable default EBS encryption</a></li><li><a href="#create-an-encrypted-volume-with-a-custom-kms-key">Create an encrypted volume with a custom KMS key</a></li><li><a href="#google-cloud-uses-aes-256-by-default-csek-for-customer-managed">Google Cloud uses AES-256 by default (CSEK for customer-managed)</a></li><li><a href="#create-and-apply-a-csek">Create and apply a CSEK</a></li><li><a href="#usage">Usage</a></li><li><a href="#store-userdata-in-database">Store user_data in database</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › EDR: Endpoint Detection and Response Solutions
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Security</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/security/">Security</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Security</span>
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
-      <h1 class="article-title">EDR: Endpoint Detection and Response Solutions</h1>
-      <div class="article-meta"><time datetime="2026-03-23">Published 2026-03-23</time> · <time datetime="2026-05-15">Last active 2026-05-15</time> · 243 views · 0 replies · 3 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/security/endpoint-detection-response.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/endpoint-detection-response.png" alt="EDR: Endpoint Detection and Response Solutions" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Endpoint Detection and Response (EDR) protects workstations, servers, and cloud instances from advanced threats. Unlike traditional antivirus that detects known malware signatures, EDR monitors behavioral patterns to detect novel and sophisticated attacks.</p><picture><source srcset="https://aidev.fit/images/covers/en/security/endpoint-detection-response.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/security/endpoint-detection-response.png" alt="EDR: Endpoint Detection and Response Solutions" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">EDR: Endpoint Detection and Response Solutions</h1>
+        <div class="article-meta">
+          <time datetime="2026-03-23">2026-03-23</time>
+          <span class="meta-sep">·</span>
+          <span>3 min read</span>
+          <span class="meta-sep">·</span>
+          <span>243 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/security/endpoint-detection-response.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/endpoint-detection-response.png" alt="EDR: Endpoint Detection and Response Solutions" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (6)</summary><ol><li><a href="#how-edr-works">How EDR Works</a></li><li><a href="#key-capabilities">Key Capabilities</a></li><li><a href="#edr-vs-antivirus">EDR vs Antivirus</a></li><li><a href="#top-edr-solutions">Top EDR Solutions</a></li><li><a href="#deployment-considerations">Deployment Considerations</a></li><li><a href="#incident-response-workflow">Incident Response Workflow</a></li></ol></details>
+        <div class="article-body"><p>Endpoint Detection and Response (EDR) protects workstations, servers, and cloud instances from advanced threats. Unlike traditional antivirus that detects known malware signatures, EDR monitors behavioral patterns to detect novel and sophisticated attacks.</p><picture><source srcset="https://aidev.fit/images/covers/en/security/endpoint-detection-response.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/security/endpoint-detection-response.png" alt="EDR: Endpoint Detection and Response Solutions" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>How EDR Works</h2>
 <p>EDR agents run on endpoints, collecting system events: process creation, file changes, registry modifications, network connections, and memory access. Event data is sent to a central analysis platform where behavioral analytics identify malicious patterns.</p>
 <p>When a threat is detected, EDR provides real-time alerting with context: what happened, which process was involved, what files were touched, and what network connections were made. Security teams investigate with timeline reconstruction and remote response capabilities.</p>
@@ -128,14 +136,8 @@
 <p>EDR requires continuous agent communication with the analysis platform. Network connectivity to the cloud or on-premises management server is essential for real-time detection. Test agent compatibility with your endpoint applications.</p>
 <p>Resource overhead varies by vendor and configuration. CPU and memory usage typically ranges from 1-5%. Test performance impact on production workloads before wide deployment. Exclude EDR from specific resource-intensive processes if needed.</p>
 <h2>Incident Response Workflow</h2>
-<p>Step 1: Alert triage—determine if the alert represents a genuine threat. Step 2: Containment—isolate affected endpoints from the network. Step 3: Investigation—analyze root cause and scope. Step 4: Remediation—remove threats and restore systems. Step 5: Recovery—return to normal operations with lessons learned.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/iam-audit.html">IAM Audit</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (6)</summary><ol><li><a href="#how-edr-works">How EDR Works</a></li><li><a href="#key-capabilities">Key Capabilities</a></li><li><a href="#edr-vs-antivirus">EDR vs Antivirus</a></li><li><a href="#top-edr-solutions">Top EDR Solutions</a></li><li><a href="#deployment-considerations">Deployment Considerations</a></li><li><a href="#incident-response-workflow">Incident Response Workflow</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Step 1: Alert triage—determine if the alert represents a genuine threat. Step 2: Containment—isolate affected endpoints from the network. Step 3: Investigation—analyze root cause and scope. Step 4: Remediation—remove threats and restore systems. Step 5: Recovery—return to normal operations with lessons learned.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a></li><li><a href="/en/security/threat-hunting.html">Threat Hunting</a></li><li><a href="/en/security/iam-audit.html">IAM Audit</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -143,29 +145,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=EDR%3A%20Endpoint%20Detection%20and%20Response%20Solutions&url=https%3A//aidev.fit/en/security/endpoint-detection-response.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/security/endpoint-detection-response.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=EDR%3A%20Endpoint%20Detection%20and%20Response%20Solutions&url=https%3A//aidev.fit/en/security/endpoint-detection-response.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=EDR%3A%20Endpoint%20Detection%20and%20Response%20Solutions&u=https%3A//aidev.fit/en/security/endpoint-detection-response.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=EDR%3A%20Endpoint%20Detection%20and%20Response%20Solutions&body=https%3A//aidev.fit/en/security/endpoint-detection-response.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/security/endpoint-detection-response.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=EDR%3A%20Endpoint%20Detection%20and%20Response%20Solutions&url=https%3A//aidev.fit/en/security/endpoint-detection-response.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/security/endpoint-detection-response.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=EDR%3A%20Endpoint%20Detection%20and%20Response%20Solutions&url=https%3A//aidev.fit/en/security/endpoint-detection-response.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=EDR%3A%20Endpoint%20Detection%20and%20Response%20Solutions&u=https%3A//aidev.fit/en/security/endpoint-detection-response.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=EDR%3A%20Endpoint%20Detection%20and%20Response%20Solutions&body=https%3A//aidev.fit/en/security/endpoint-detection-response.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/security/endpoint-detection-response.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/security/security-information-event-management.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">SIEM: Security Information and Event Management</span></a><a href="/en/security/container-scanning-tools.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Container Scanning Tools: Securing Images in CI/CD</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/security/endpoint-security.html" class="related-card"><span class="rc-title">Endpoint Security</span><span class="rc-desc">Deep dive into endpoint security comparing EDR, XDR, and antivirus solutions, detection techniques, and automated incide</span></a><a href="/en/security/security-information-event-management.html" class="related-card"><span class="rc-title">SIEM: Security Information and Event Management</span><span class="rc-desc">SIEM systems for security monitoring: log collection, correlation rules, threat detection, and incident response workflo</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="rc-title">Cloud Security Posture Management</span><span class="rc-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift detection, and remedia</span></a><a href="/en/security/iac-security.html" class="related-card"><span class="rc-title">Infrastructure as Code Security</span><span class="rc-desc">Guide to Infrastructure as Code security covering Terraform security scanning, policy as code, drift detection, and auto</span></a><a href="/en/security/microservice-security.html" class="related-card"><span class="rc-title">Microservice Security</span><span class="rc-desc">Comprehensive guide to microservice security covering service mesh mTLS, API gateways, secret distribution, and observab</span></a><a href="/en/security/container-runtime-security.html" class="related-card"><span class="rc-title">Container Runtime Security</span><span class="rc-desc">Securing container runtime with seccomp, AppArmor, SELinux, Falco, and runtime threat detection.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/security/security-information-event-management.html" class="prev-next-btn prev-link">← SIEM: Security Information and Event Management</a><a href="/en/security/container-scanning-tools.html" class="prev-next-btn next-link">Container Scanning Tools: Securing Images in CI/CD →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/endpoint-security.html" class="related-card"><span class="related-card-title">Endpoint Security</span><span class="related-card-desc">Deep dive into endpoint security comparing EDR, XDR, and antivirus solutions, detection techniques, </span></a><a href="/en/security/security-information-event-management.html" class="related-card"><span class="related-card-title">SIEM: Security Information and Event Management</span><span class="related-card-desc">SIEM systems for security monitoring: log collection, correlation rules, threat detection, and incid</span></a><a href="/en/security/cloud-security-posture.html" class="related-card"><span class="related-card-title">Cloud Security Posture Management</span><span class="related-card-desc">Guide to Cloud Security Posture Management (CSPM) covering automated compliance monitoring, drift de</span></a><a href="/en/security/iac-security.html" class="related-card"><span class="related-card-title">Infrastructure as Code Security</span><span class="related-card-desc">Guide to Infrastructure as Code security covering Terraform security scanning, policy as code, drift</span></a><a href="/en/security/microservice-security.html" class="related-card"><span class="related-card-title">Microservice Security</span><span class="related-card-desc">Comprehensive guide to microservice security covering service mesh mTLS, API gateways, secret distri</span></a><a href="/en/security/container-runtime-security.html" class="related-card"><span class="related-card-title">Container Runtime Security</span><span class="related-card-desc">Securing container runtime with seccomp, AppArmor, SELinux, Falco, and runtime threat detection.</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#how-edr-works">How EDR Works</a></li><li><a href="#key-capabilities">Key Capabilities</a></li><li><a href="#edr-vs-antivirus">EDR vs Antivirus</a></li><li><a href="#top-edr-solutions">Top EDR Solutions</a></li><li><a href="#deployment-considerations">Deployment Considerations</a></li><li><a href="#incident-response-workflow">Incident Response Workflow</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

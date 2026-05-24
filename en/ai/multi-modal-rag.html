@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">AI</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">AI</span>
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
-      <h1 class="article-title">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h1>
-      <div class="article-meta"><time datetime="2026-02-17">Published 2026-02-17</time> · <time datetime="2026-05-03">Last active 2026-05-03</time> · 134 views · 0 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/multi-modal-rag.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/multi-modal-rag.png" alt="Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-17">2026-02-17</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>134 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/multi-modal-rag.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/multi-modal-rag.png" alt="Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (19)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#strategies-for-multi-modal-rag">Strategies for Multi-Modal RAG</a></li><li><a href="#strategy-1-convert-everything-to-text-simplest">Strategy 1: Convert everything to text (simplest)</a></li><li><a href="#strategy-2-embed-images-alongside-text-moderate">Strategy 2: Embed images alongside text (moderate)</a></li><li><a href="#strategy-3-multi-modal-retrieval-with-specialized-models-most-powerful">Strategy 3: Multi-modal retrieval with specialized models (most powerful)</a></li><li><a href="#strategy-1-text-conversion">Strategy 1: Text Conversion</a></li><li><a href="#strategy-2-multi-vector-retriever">Strategy 2: Multi-Vector Retriever</a></li><li><a href="#store-text-summaries-alongside-raw-elements">Store text summaries alongside raw elements</a></li><li><a href="#for-each-document-element-text-image-table">For each document element (text, image, table):</a></li><li><a href="#1-generate-a-text-summary">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate a text summary</a></li><li><a href="#2-store-the-summary-in-the-vector-store">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the summary in the vector store</a></li><li><a href="#3-store-the-original-element-in-the-doc-store">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the original element in the doc store</a></li><li><a href="#4-link-them-with-a-shared-docid">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Link them with a shared doc_id</a></li><li><a href="#strategy-3-multi-modal-embeddings">Strategy 3: Multi-Modal Embeddings</a></li><li><a href="#chunking-strategies-for-multi-modal-data">Chunking Strategies for Multi-Modal Data</a></li><li><a href="#extract-text-blocks">Extract text blocks</a></li><li><a href="#retrieval-and-fusion">Retrieval and Fusion</a></li><li><a href="#fuse-results-with-type-aware-scoring">Fuse results with type-aware scoring</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>Real-world documents contain more than text: images, charts, tables, and diagrams carry critical information that text-only RAG systems cannot access. Multi-modal RAG extends retrieval to include visual content, enabling questions like "What does the Q3 revenue chart show?" or "What values are in the configuration table?" This article covers the architectures and techniques for building multi-modal RAG.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/multi-modal-rag.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/multi-modal-rag.png" alt="Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Strategies for Multi-Modal RAG</h2>
 <p>There are three main approaches to handling non-text content:</p>
@@ -259,14 +267,8 @@
 <p>all_results.sort(key=lambda x: x["score"], reverse=True)</p>
 <p>return all_results[:top_k * 2]</p>
 <h2>Conclusion</h2>
-<p>Multi-modal RAG extends retrieval to images, tables, and other visual content. The simplest approach converts non-text content to text descriptions using vision models. More sophisticated approaches use multi-vector retrievers or shared embedding spaces like CLIP. Choose your strategy based on the complexity of your visual content and the precision required for retrieval. Always evaluate retrieval quality separately for each modality.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/fine-tuning-strategies.html">LLM Fine-Tuning Strategies and Techniques</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (19)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#strategies-for-multi-modal-rag">Strategies for Multi-Modal RAG</a></li><li><a href="#strategy-1:-convert-everything-to-text-(simplest)">Strategy 1: Convert everything to text (simplest)</a></li><li><a href="#strategy-2:-embed-images-alongside-text-(moderate)">Strategy 2: Embed images alongside text (moderate)</a></li><li><a href="#strategy-3:-multi-modal-retrieval-with-specialized-models-(most-powerful)">Strategy 3: Multi-modal retrieval with specialized models (most powerful)</a></li><li><a href="#strategy-1:-text-conversion">Strategy 1: Text Conversion</a></li><li><a href="#strategy-2:-multi-vector-retriever">Strategy 2: Multi-Vector Retriever</a></li><li><a href="#store-text-summaries-alongside-raw-elements">Store text summaries alongside raw elements</a></li><li><a href="#for-each-document-element-(text,-image,-table):">For each document element (text, image, table):</a></li><li><a href="#1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-generate-a-text-summary">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate a text summary</a></li><li><a href="#2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-store-the-summary-in-the-vector-store">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the summary in the vector store</a></li><li><a href="#3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-store-the-original-element-in-the-doc-store">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the original element in the doc store</a></li><li><a href="#4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-link-them-with-a-shared-doc_id">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Link them with a shared doc_id</a></li><li><a href="#strategy-3:-multi-modal-embeddings">Strategy 3: Multi-Modal Embeddings</a></li><li><a href="#chunking-strategies-for-multi-modal-data">Chunking Strategies for Multi-Modal Data</a></li><li><a href="#extract-text-blocks">Extract text blocks</a></li><li><a href="#retrieval-and-fusion">Retrieval and Fusion</a></li><li><a href="#fuse-results-with-type-aware-scoring">Fuse results with type-aware scoring</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Multi-modal RAG extends retrieval to images, tables, and other visual content. The simplest approach converts non-text content to text descriptions using vision models. More sophisticated approaches use multi-vector retrievers or shared embedding spaces like CLIP. Choose your strategy based on the complexity of your visual content and the precision required for retrieval. Always evaluate retrieval quality separately for each modality.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/rag-retrieval-optimization.html">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation</a></li><li><a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a></li><li><a href="/en/ai/fine-tuning-strategies.html">LLM Fine-Tuning Strategies and Techniques</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -274,34 +276,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Multi-Modal%20RAG%3A%20Images%2C%20Tables%2C%20Documents%20%E2%80%94%20Chunking%20and%20Retrieval&url=https%3A//aidev.fit/en/ai/multi-modal-rag.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/multi-modal-rag.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Multi-Modal%20RAG%3A%20Images%2C%20Tables%2C%20Documents%20%E2%80%94%20Chunking%20and%20Retrieval&url=https%3A//aidev.fit/en/ai/multi-modal-rag.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Multi-Modal%20RAG%3A%20Images%2C%20Tables%2C%20Documents%20%E2%80%94%20Chunking%20and%20Retrieval&u=https%3A//aidev.fit/en/ai/multi-modal-rag.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Multi-Modal%20RAG%3A%20Images%2C%20Tables%2C%20Documents%20%E2%80%94%20Chunking%20and%20Retrieval&body=https%3A//aidev.fit/en/ai/multi-modal-rag.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/multi-modal-rag.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/prompt-chaining.html" class="prev-next-btn prev-link">← Prompt Chaining: Decomposition, Parallel Execution, State Management</a><a href="/en/ai/graph-rag.html" class="prev-next-btn next-link">Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/rag-agent-patterns.html" class="related-card"><span class="related-card-title">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</span><span class="related-card-desc">Explore RAG agent patterns that go beyond simple retrieval: self-querying agents, corrective RAG wit</span></a><a href="/en/ai/rag-pipeline-optimization.html" class="related-card"><span class="related-card-title">RAG Pipeline Optimization: Production Best Practices</span><span class="related-card-desc">Optimize Retrieval-Augmented Generation pipelines: chunking strategies, embedding selection, retriev</span></a><a href="/en/ai/fine-tuning-vs-rag.html" class="related-card"><span class="related-card-title">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</span><span class="related-card-desc">Compare fine-tuning and RAG for LLM applications: when to use each approach, hybrid fine-tuned RAG p</span></a><a href="/en/ai/rag-chunking-strategies.html" class="related-card"><span class="related-card-title">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</span><span class="related-card-desc">Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategie</span></a><a href="/en/ai/rag-evaluation.html" class="related-card"><span class="related-card-title">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</span><span class="related-card-desc">A practical guide to evaluating RAG systems: retrieval metrics, generation quality assessment, end-t</span></a><a href="/en/ai/graph-rag.html" class="related-card"><span class="related-card-title">Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</span><span class="related-card-desc">Implement Graph RAG using knowledge graphs: extract entities and relationships from documents, trave</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Multi-Modal%20RAG%3A%20Images%2C%20Tables%2C%20Documents%20%E2%80%94%20Chunking%20and%20Retrieval&url=https%3A//aidev.fit/en/ai/multi-modal-rag.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/multi-modal-rag.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Multi-Modal%20RAG%3A%20Images%2C%20Tables%2C%20Documents%20%E2%80%94%20Chunking%20and%20Retrieval&url=https%3A//aidev.fit/en/ai/multi-modal-rag.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Multi-Modal%20RAG%3A%20Images%2C%20Tables%2C%20Documents%20%E2%80%94%20Chunking%20and%20Retrieval&u=https%3A//aidev.fit/en/ai/multi-modal-rag.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Multi-Modal%20RAG%3A%20Images%2C%20Tables%2C%20Documents%20%E2%80%94%20Chunking%20and%20Retrieval&body=https%3A//aidev.fit/en/ai/multi-modal-rag.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/multi-modal-rag.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/prompt-chaining.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Prompt Chaining: Decomposition, Parallel Execution, State Managem</span></a><a href="/en/ai/graph-rag.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Trav</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/rag-agent-patterns.html" class="related-card"><span class="rc-title">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</span><span class="rc-desc">Explore RAG agent patterns that go beyond simple retrieval: self-querying agents, corrective RAG with verification, and </span></a><a href="/en/ai/rag-pipeline-optimization.html" class="related-card"><span class="rc-title">RAG Pipeline Optimization: Production Best Practices</span><span class="rc-desc">Optimize Retrieval-Augmented Generation pipelines: chunking strategies, embedding selection, retrieval tuning, and evalu</span></a><a href="/en/ai/fine-tuning-vs-rag.html" class="related-card"><span class="rc-title">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</span><span class="rc-desc">Compare fine-tuning and RAG for LLM applications: when to use each approach, hybrid fine-tuned RAG patterns, and detaile</span></a><a href="/en/ai/rag-chunking-strategies.html" class="related-card"><span class="rc-title">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</span><span class="rc-desc">Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategies for context preser</span></a><a href="/en/ai/rag-evaluation.html" class="related-card"><span class="rc-title">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</span><span class="rc-desc">A practical guide to evaluating RAG systems: retrieval metrics, generation quality assessment, end-to-end testing framew</span></a><a href="/en/ai/graph-rag.html" class="related-card"><span class="rc-title">Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal</span><span class="rc-desc">Implement Graph RAG using knowledge graphs: extract entities and relationships from documents, traverse graph connection</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#strategies-for-multi-modal-rag">Strategies for Multi-Modal RAG</a></li><li><a href="#strategy-1-convert-everything-to-text-simplest">Strategy 1: Convert everything to text (simplest)</a></li><li><a href="#strategy-2-embed-images-alongside-text-moderate">Strategy 2: Embed images alongside text (moderate)</a></li><li><a href="#strategy-3-multi-modal-retrieval-with-specialized-models-most-powerful">Strategy 3: Multi-modal retrieval with specialized models (most powerful)</a></li><li><a href="#strategy-1-text-conversion">Strategy 1: Text Conversion</a></li><li><a href="#strategy-2-multi-vector-retriever">Strategy 2: Multi-Vector Retriever</a></li><li><a href="#store-text-summaries-alongside-raw-elements">Store text summaries alongside raw elements</a></li><li><a href="#for-each-document-element-text-image-table">For each document element (text, image, table):</a></li><li><a href="#1-generate-a-text-summary">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate a text summary</a></li><li><a href="#2-store-the-summary-in-the-vector-store">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the summary in the vector store</a></li><li><a href="#3-store-the-original-element-in-the-doc-store">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the original element in the doc store</a></li><li><a href="#4-link-them-with-a-shared-docid">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Link them with a shared doc_id</a></li><li><a href="#strategy-3-multi-modal-embeddings">Strategy 3: Multi-Modal Embeddings</a></li><li><a href="#chunking-strategies-for-multi-modal-data">Chunking Strategies for Multi-Modal Data</a></li><li><a href="#extract-text-blocks">Extract text blocks</a></li><li><a href="#retrieval-and-fusion">Retrieval and Fusion</a></li><li><a href="#fuse-results-with-type-aware-scoring">Fuse results with type-aware scoring</a></li><li><a href="#conclusion">Conclusion</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Materialized View Pattern
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Materialized View Pattern</h1>
-      <div class="article-meta"><time datetime="2026-05-04">Published 2026-05-04</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 224 views · 0 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/materialized-view-pattern.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/materialized-view-pattern.png" alt="Materialized View Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The materialized view pattern creates pre-computed, denormalized read models that are optimized for specific query patterns. Instead of querying multiple services or performing expensive joins at query time, the system maintains a dedicated data store containing exactly the data needed for each query. This pattern is essential for read-heavy workloads and complex cross-service queries in microservice architectures. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/materialized-view-pattern.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/materialized-view-pattern.png" alt="Materialized View Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Materialized View Pattern</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-04">2026-05-04</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>224 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/materialized-view-pattern.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/materialized-view-pattern.png" alt="Materialized View Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>The materialized view pattern creates pre-computed, denormalized read models that are optimized for specific query patterns. Instead of querying multiple services or performing expensive joins at query time, the system maintains a dedicated data store containing exactly the data needed for each query. This pattern is essential for read-heavy workloads and complex cross-service queries in microservice architectures. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/materialized-view-pattern.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/materialized-view-pattern.png" alt="Materialized View Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The Problem </p>
 <p>In a microservice architecture, each service owns its database. A query that needs data from multiple services cannot use a simple database join. The alternatives—API composition (calling multiple services and combining results) or client-side joins—are slow, resource-intensive, and do not scale for complex queries. </p>
 <p>For example, a dashboard that shows "orders with customer names and product details" needs data from the Order, Customer, and Product services. A query-time join across these services would be slow and unreliable. The materialized view pattern solves this by maintaining a pre-joined read model. </p>
@@ -134,14 +142,8 @@
 <p>Write performance is also affected. Each source data change triggers a view update, adding latency to the write path. However, this is offset by the fact that the write is asynchronous and does not block the client. The trade-off is acceptable for most applications. </p>
 <p>When to Use </p>
 <p>Materialized views are appropriate when queries require data from multiple services, queries are read-heavy and performance-critical, source data changes are manageable (not too frequent), and eventual consistency is acceptable. They are not suitable for queries where the source data changes extremely frequently (thousands of changes per second for the same entity) or where strong consistency is required between reads and writes. </p>
-<p>A pragmatic approach is to use materialized views for the most important queries and API composition for less critical ones. Start with the patterns that cause the most performance problems and add materialized views incrementally. Over time, the system develops a set of optimized read models that cover the most common and performance-critical queries.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>A pragmatic approach is to use materialized views for the most important queries and API composition for less critical ones. Start with the patterns that cause the most performance problems and add materialized views incrementally. Over time, the system develops a set of optimized read models that cover the most common and performance-critical queries.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></li><li><a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></li><li><a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -149,29 +151,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Materialized%20View%20Pattern&url=https%3A//aidev.fit/en/architecture/materialized-view-pattern.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/materialized-view-pattern.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Materialized%20View%20Pattern&url=https%3A//aidev.fit/en/architecture/materialized-view-pattern.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Materialized%20View%20Pattern&u=https%3A//aidev.fit/en/architecture/materialized-view-pattern.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Materialized%20View%20Pattern&body=https%3A//aidev.fit/en/architecture/materialized-view-pattern.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/materialized-view-pattern.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Materialized%20View%20Pattern&url=https%3A//aidev.fit/en/architecture/materialized-view-pattern.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/materialized-view-pattern.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Materialized%20View%20Pattern&url=https%3A//aidev.fit/en/architecture/materialized-view-pattern.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Materialized%20View%20Pattern&u=https%3A//aidev.fit/en/architecture/materialized-view-pattern.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Materialized%20View%20Pattern&body=https%3A//aidev.fit/en/architecture/materialized-view-pattern.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/materialized-view-pattern.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/retry-patterns.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Retry Patterns</span></a><a href="/en/architecture/event-driven-arch.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Event-Driven Architecture</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/api-composition-pattern.html" class="related-card"><span class="rc-title">API Composition Pattern</span><span class="rc-desc">Learn API composition: aggregation, parallel calls, error handling strategies, and cross-service data retrieval</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="rc-title">API Composition and Aggregation</span><span class="rc-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation strategies</span></a><a href="/en/architecture/cqrs-pattern.html" class="related-card"><span class="rc-title">CQRS Pattern: Command Query Responsibility Segregation</span><span class="rc-desc">Learn CQRS pattern with read/write separation, event sourcing integration, materialized views, and guidance on when to u</span></a><a href="/en/architecture/database-per-service.html" class="related-card"><span class="rc-title">Database per Service Pattern</span><span class="rc-desc">Learn the database per service pattern for microservices data management — data isolation, eventual consistency, cross-s</span></a><a href="/en/architecture/caching-http.html" class="related-card"><span class="rc-title">HTTP Caching Architecture</span><span class="rc-desc">Cache-Control, ETags, CDN caching, stale-while-revalidate, and cache invalidation strategies</span></a><a href="/en/architecture/cdn-architecture.html" class="related-card"><span class="rc-title">CDN Architecture</span><span class="rc-desc">Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content delivery networks</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/retry-patterns.html" class="prev-next-btn prev-link">← Retry Patterns</a><a href="/en/architecture/event-driven-arch.html" class="prev-next-btn next-link">Event-Driven Architecture →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/api-composition-pattern.html" class="related-card"><span class="related-card-title">API Composition Pattern</span><span class="related-card-desc">Learn API composition: aggregation, parallel calls, error handling strategies, and cross-service dat</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a><a href="/en/architecture/cqrs-pattern.html" class="related-card"><span class="related-card-title">CQRS Pattern: Command Query Responsibility Segregation</span><span class="related-card-desc">Learn CQRS pattern with read/write separation, event sourcing integration, materialized views, and g</span></a><a href="/en/architecture/database-per-service.html" class="related-card"><span class="related-card-title">Database per Service Pattern</span><span class="related-card-desc">Learn the database per service pattern for microservices data management — data isolation, eventual </span></a><a href="/en/architecture/caching-http.html" class="related-card"><span class="related-card-title">HTTP Caching Architecture</span><span class="related-card-desc">Cache-Control, ETags, CDN caching, stale-while-revalidate, and cache invalidation strategies</span></a><a href="/en/architecture/cdn-architecture.html" class="related-card"><span class="related-card-title">CDN Architecture</span><span class="related-card-desc">Edge caching, origin shielding, dynamic content acceleration, and purge strategies for content deliv</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

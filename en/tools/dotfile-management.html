@@ -111,18 +111,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Dotfile Management: chezmoi, GNU Stow, Bare Git Repos
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">DevTools</span>
         <span class="tag-cat">Productivity</span></div>
-      <h1 class="article-title">Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h1>
-      <div class="article-meta"><time datetime="2026-02-03">Published 2026-02-03</time> · <time datetime="2026-04-25">Last active 2026-04-25</time> · 91 views · 0 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tools/dotfile-management.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/dotfile-management.png" alt="Dotfile Management: chezmoi, GNU Stow, Bare Git Repos" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-03">2026-02-03</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>91 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tools/dotfile-management.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/dotfile-management.png" alt="Dotfile Management: chezmoi, GNU Stow, Bare Git Repos" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (32)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#bare-git-repo">Bare Git Repo</a></li><li><a href="#initialize-a-bare-repository-in-your-home-directory">Initialize a bare repository in your home directory</a></li><li><a href="#create-an-alias-to-manage-it">Create an alias to manage it</a></li><li><a href="#add-the-alias-to-your-shell-config">Add the alias to your shell config</a></li><li><a href="#start-tracking-files">Start tracking files</a></li><li><a href="#on-a-new-machine">On a new machine:</a></li><li><a href="#gnu-stow">GNU Stow</a></li><li><a href="#directory-structure">Directory structure</a></li><li><a href="#install-all-packages">Install all packages</a></li><li><a href="#stow-creates-symlinks">Stow creates symlinks:</a></li><li><a href="#dotfileszshzshrc--gt-zshrc">~/dotfiles/zsh/.zshrc -&gt; ~/.zshrc</a></li><li><a href="#dotfilesgitgitconfig--gt-gitconfig">~/dotfiles/git/.gitconfig -&gt; ~/.gitconfig</a></li><li><a href="#uninstall-a-package">Uninstall a package</a></li><li><a href="#restow-update-symlinks-after-changes">Restow (update symlinks after changes)</a></li><li><a href="#chezmoi">chezmoi</a></li><li><a href="#install-chezmoi">Install chezmoi</a></li><li><a href="#initialize">Initialize</a></li><li><a href="#add-a-file">Add a file</a></li><li><a href="#edit-a-tracked-file">Edit a tracked file</a></li><li><a href="#see-what-would-change">See what would change</a></li><li><a href="#apply-changes">Apply changes</a></li><li><a href="#on-a-new-machine">On a new machine</a></li><li><a href="#templating-with-chezmoi">Templating with chezmoi</a></li><li><a href="#zshrctmpl--template-file">.zshrc.tmpl — template file</a></li><li><a href="#template-data-includes-os-hostname-architecture-username-and-custom-variables">Template data includes: OS, hostname, architecture, username, and custom variables</a></li><li><a href="#secret-management">Secret Management</a></li><li><a href="#store-secrets-in-your-password-manager">Store secrets in your password manager</a></li><li><a href="#use-in-templates">Use in templates</a></li><li><a href="#or-use-encrypted-files-with-agegpg">Or use encrypted files with age/gpg</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>Dotfiles — configuration files for your shell, editor, git, and other tools — are the backbone of your development environment. Properly managing them ensures consistency across machines, easy recovery after a crash, and collaboration with your team. This article compares the three main approaches: chezmoi, GNU Stow, and bare git repositories.</p><picture><source srcset="https://aidev.fit/images/covers/en/tools/dotfile-management.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tools/dotfile-management.png" alt="Dotfile Management: chezmoi, GNU Stow, Bare Git Repos" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Bare Git Repo</h2>
 <p>The simplest approach: use git directly without any additional tool:</p>
@@ -234,14 +242,8 @@
 <p><strong>Team dotfiles</strong> : chezmoi's robust apply/diff workflow supports collaboration safely.</p>
 </li>
 </ul>
-<p>Choose chezmoi if you have more than two machines or need secret management. Choose bare git for simplicity on single-machine setups. Choose Stow if you prefer Unix philosophy and have mostly identical machines.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/note-taking-apps.html">Note-Taking and Knowledge Management Tools</a>, <a href="/en/tools/database-management-tools.html">Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass</a>, <a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (32)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#bare-git-repo">Bare Git Repo</a></li><li><a href="#initialize-a-bare-repository-in-your-home-directory">Initialize a bare repository in your home directory</a></li><li><a href="#create-an-alias-to-manage-it">Create an alias to manage it</a></li><li><a href="#add-the-alias-to-your-shell-config">Add the alias to your shell config</a></li><li><a href="#start-tracking-files">Start tracking files</a></li><li><a href="#on-a-new-machine:">On a new machine:</a></li><li><a href="#gnu-stow">GNU Stow</a></li><li><a href="#directory-structure">Directory structure</a></li><li><a href="#install-all-packages">Install all packages</a></li><li><a href="#stow-creates-symlinks:">Stow creates symlinks:</a></li><li><a href="#~-dotfiles-zsh-.zshrc--&gt;-~-.zshrc">~/dotfiles/zsh/.zshrc -&gt; ~/.zshrc</a></li><li><a href="#~-dotfiles-git-.gitconfig--&gt;-~-.gitconfig">~/dotfiles/git/.gitconfig -&gt; ~/.gitconfig</a></li><li><a href="#uninstall-a-package">Uninstall a package</a></li><li><a href="#restow-(update-symlinks-after-changes)">Restow (update symlinks after changes)</a></li><li><a href="#chezmoi">chezmoi</a></li><li><a href="#install-chezmoi">Install chezmoi</a></li><li><a href="#initialize">Initialize</a></li><li><a href="#add-a-file">Add a file</a></li><li><a href="#edit-a-tracked-file">Edit a tracked file</a></li><li><a href="#see-what-would-change">See what would change</a></li><li><a href="#apply-changes">Apply changes</a></li><li><a href="#on-a-new-machine">On a new machine</a></li><li><a href="#templating-with-chezmoi">Templating with chezmoi</a></li><li><a href="#.zshrc.tmpl-—-template-file">.zshrc.tmpl — template file</a></li><li><a href="#template-data-includes:-os,-hostname,-architecture,-username,-and-custom-variables">Template data includes: OS, hostname, architecture, username, and custom variables</a></li><li><a href="#secret-management">Secret Management</a></li><li><a href="#store-secrets-in-your-password-manager">Store secrets in your password manager</a></li><li><a href="#use-in-templates">Use in templates</a></li><li><a href="#or-use-encrypted-files-with-age-gpg">Or use encrypted files with age/gpg</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Choose chezmoi if you have more than two machines or need secret management. Choose bare git for simplicity on single-machine setups. Choose Stow if you prefer Unix philosophy and have mostly identical machines.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tools/note-taking-apps.html">Note-Taking and Knowledge Management Tools</a></li><li><a href="/en/tools/database-management-tools.html">Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass</a></li><li><a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -249,29 +251,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Dotfile%20Management%3A%20chezmoi%2C%20GNU%20Stow%2C%20Bare%20Git%20Repos&url=https%3A//aidev.fit/en/tools/dotfile-management.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tools/dotfile-management.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Dotfile%20Management%3A%20chezmoi%2C%20GNU%20Stow%2C%20Bare%20Git%20Repos&url=https%3A//aidev.fit/en/tools/dotfile-management.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Dotfile%20Management%3A%20chezmoi%2C%20GNU%20Stow%2C%20Bare%20Git%20Repos&u=https%3A//aidev.fit/en/tools/dotfile-management.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Dotfile%20Management%3A%20chezmoi%2C%20GNU%20Stow%2C%20Bare%20Git%20Repos&body=https%3A//aidev.fit/en/tools/dotfile-management.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tools/dotfile-management.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Dotfile%20Management%3A%20chezmoi%2C%20GNU%20Stow%2C%20Bare%20Git%20Repos&url=https%3A//aidev.fit/en/tools/dotfile-management.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tools/dotfile-management.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Dotfile%20Management%3A%20chezmoi%2C%20GNU%20Stow%2C%20Bare%20Git%20Repos&url=https%3A//aidev.fit/en/tools/dotfile-management.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Dotfile%20Management%3A%20chezmoi%2C%20GNU%20Stow%2C%20Bare%20Git%20Repos&u=https%3A//aidev.fit/en/tools/dotfile-management.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Dotfile%20Management%3A%20chezmoi%2C%20GNU%20Stow%2C%20Bare%20Git%20Repos&body=https%3A//aidev.fit/en/tools/dotfile-management.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tools/dotfile-management.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tools/kubernetes-tools.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</span></a><a href="/en/tools/database-gui.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tools/git-advanced-tools.html" class="related-card"><span class="rc-title">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</span><span class="rc-desc">Technical exploration of advanced Git features covering interactive rebase, git bisect for debugging, worktree managemen</span></a><a href="/en/tools/api-testing-2026.html" class="related-card"><span class="rc-title">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</span><span class="rc-desc">Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, Hoppscotch for light</span></a><a href="/en/tools/kafka-tools.html" class="related-card"><span class="rc-title">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</span><span class="rc-desc">Compare Apache Kafka management and monitoring tools: AKHQ for comprehensive cluster management, Kafka UI for lightweigh</span></a><a href="/en/tools/monorepo-tools.html" class="related-card"><span class="rc-title">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</span><span class="rc-desc">Compare monorepo build tools: Turborepo for caching, Nx for extensibility, Bazel for correctness at scale, and Lage for </span></a><a href="/en/tools/git-gui-tools.html" class="related-card"><span class="rc-title">Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop</span><span class="rc-desc">Compare Git GUI tools for visual version control: GitKraken, Sourcetree, GitHub Desktop, and GitLens.</span></a><a href="/en/tools/issue-tracking-tools.html" class="related-card"><span class="rc-title">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</span><span class="rc-desc">Compare issue tracking and project management tools for software teams of all sizes.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tools/kubernetes-tools.html" class="prev-next-btn prev-link">← Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</a><a href="/en/tools/database-gui.html" class="prev-next-btn next-link">Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/git-advanced-tools.html" class="related-card"><span class="related-card-title">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</span><span class="related-card-desc">Technical exploration of advanced Git features covering interactive rebase, git bisect for debugging</span></a><a href="/en/tools/api-testing-2026.html" class="related-card"><span class="related-card-title">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</span><span class="related-card-desc">Compare API testing and development tools in 2026: Bruno for local-first Git-based API collections, </span></a><a href="/en/tools/kafka-tools.html" class="related-card"><span class="related-card-title">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</span><span class="related-card-desc">Compare Apache Kafka management and monitoring tools: AKHQ for comprehensive cluster management, Kaf</span></a><a href="/en/tools/monorepo-tools.html" class="related-card"><span class="related-card-title">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</span><span class="related-card-desc">Compare monorepo build tools: Turborepo for caching, Nx for extensibility, Bazel for correctness at </span></a><a href="/en/tools/git-gui-tools.html" class="related-card"><span class="related-card-title">Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop</span><span class="related-card-desc">Compare Git GUI tools for visual version control: GitKraken, Sourcetree, GitHub Desktop, and GitLens</span></a><a href="/en/tools/issue-tracking-tools.html" class="related-card"><span class="related-card-title">Issue Tracking Tools: Jira, Linear, GitHub Issues, and More</span><span class="related-card-desc">Compare issue tracking and project management tools for software teams of all sizes.</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#bare-git-repo">Bare Git Repo</a></li><li><a href="#initialize-a-bare-repository-in-your-home-directory">Initialize a bare repository in your home directory</a></li><li><a href="#create-an-alias-to-manage-it">Create an alias to manage it</a></li><li><a href="#add-the-alias-to-your-shell-config">Add the alias to your shell config</a></li><li><a href="#start-tracking-files">Start tracking files</a></li><li><a href="#on-a-new-machine">On a new machine:</a></li><li><a href="#gnu-stow">GNU Stow</a></li><li><a href="#directory-structure">Directory structure</a></li><li><a href="#install-all-packages">Install all packages</a></li><li><a href="#stow-creates-symlinks">Stow creates symlinks:</a></li><li><a href="#dotfileszshzshrc--gt-zshrc">~/dotfiles/zsh/.zshrc -&gt; ~/.zshrc</a></li><li><a href="#dotfilesgitgitconfig--gt-gitconfig">~/dotfiles/git/.gitconfig -&gt; ~/.gitconfig</a></li><li><a href="#uninstall-a-package">Uninstall a package</a></li><li><a href="#restow-update-symlinks-after-changes">Restow (update symlinks after changes)</a></li><li><a href="#chezmoi">chezmoi</a></li><li><a href="#install-chezmoi">Install chezmoi</a></li><li><a href="#initialize">Initialize</a></li><li><a href="#add-a-file">Add a file</a></li><li><a href="#edit-a-tracked-file">Edit a tracked file</a></li><li><a href="#see-what-would-change">See what would change</a></li><li><a href="#apply-changes">Apply changes</a></li><li><a href="#on-a-new-machine">On a new machine</a></li><li><a href="#templating-with-chezmoi">Templating with chezmoi</a></li><li><a href="#zshrctmpl--template-file">.zshrc.tmpl — template file</a></li><li><a href="#template-data-includes-os-hostname-architecture-username-and-custom-variables">Template data includes: OS, hostname, architecture, username, and custom variables</a></li><li><a href="#secret-management">Secret Management</a></li><li><a href="#store-secrets-in-your-password-manager">Store secrets in your password manager</a></li><li><a href="#use-in-templates">Use in templates</a></li><li><a href="#or-use-encrypted-files-with-agegpg">Or use encrypted files with age/gpg</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

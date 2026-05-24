@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Event-Carried State Transfer Pattern
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Event-Carried State Transfer Pattern</h1>
-      <div class="article-meta"><time datetime="2026-05-07">Published 2026-05-07</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 75 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/event-carried-state-transfer.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/event-carried-state-transfer.png" alt="Event-Carried State Transfer Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Event-carried state transfer is a messaging pattern where events include the full state needed by consumers, eliminating the need for consumers to query the producer for additional data. This reduces synchronous dependencies and improves system resilience.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/event-carried-state-transfer.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/event-carried-state-transfer.png" alt="Event-Carried State Transfer Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Event-Carried State Transfer Pattern</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-07">2026-05-07</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>75 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/event-carried-state-transfer.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/event-carried-state-transfer.png" alt="Event-Carried State Transfer Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#how-it-works">How It Works</a></li><li><a href="#benefits">Benefits</a></li><li><a href="#drawbacks">Drawbacks</a></li><li><a href="#when-to-use">When to Use</a></li><li><a href="#best-practices">Best Practices</a></li></ol></details>
+        <div class="article-body"><p>Event-carried state transfer is a messaging pattern where events include the full state needed by consumers, eliminating the need for consumers to query the producer for additional data. This reduces synchronous dependencies and improves system resilience.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/event-carried-state-transfer.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/event-carried-state-transfer.png" alt="Event-Carried State Transfer Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>How It Works</h2>
 <p>When a service publishes an event about a domain entity, it includes all relevant state in the event payload. A UserCreated event contains the user's name, email, role, and other attributes. The consumer that needs this information has it immediately without making an additional API call.</p>
 <p>This is a departure from traditional event design, where events contain only identifiers and consumers query the producer for details. That approach creates synchronous coupling and single points of failure.</p>
@@ -125,14 +133,8 @@
 <h2>When to Use</h2>
 <p>Use event-carried state transfer when consumer independence is a priority, when the producer is likely to experience high load from consumer queries, and when eventual consistency is acceptable. Avoid it when event payload size is constrained or when consumers need absolutely current data.</p>
 <h2>Best Practices</h2>
-<p>Include only the state that consumers need, not the producer's entire internal model. Version event schemas to manage payload evolution. Document which fields each consumer uses so producers understand the impact of changes.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-sourcing.html">Event Sourcing Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#how-it-works">How It Works</a></li><li><a href="#benefits">Benefits</a></li><li><a href="#drawbacks">Drawbacks</a></li><li><a href="#when-to-use">When to Use</a></li><li><a href="#best-practices">Best Practices</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Include only the state that consumers need, not the producer's entire internal model. Version event schemas to manage payload evolution. Document which fields each consumer uses so producers understand the impact of changes.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/event-sourcing.html">Event Sourcing Pattern</a></li><li><a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></li><li><a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -140,29 +142,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Event-Carried%20State%20Transfer%20Pattern&url=https%3A//aidev.fit/en/architecture/event-carried-state-transfer.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/event-carried-state-transfer.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Event-Carried%20State%20Transfer%20Pattern&url=https%3A//aidev.fit/en/architecture/event-carried-state-transfer.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Event-Carried%20State%20Transfer%20Pattern&u=https%3A//aidev.fit/en/architecture/event-carried-state-transfer.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Event-Carried%20State%20Transfer%20Pattern&body=https%3A//aidev.fit/en/architecture/event-carried-state-transfer.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/event-carried-state-transfer.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Event-Carried%20State%20Transfer%20Pattern&url=https%3A//aidev.fit/en/architecture/event-carried-state-transfer.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/event-carried-state-transfer.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Event-Carried%20State%20Transfer%20Pattern&url=https%3A//aidev.fit/en/architecture/event-carried-state-transfer.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Event-Carried%20State%20Transfer%20Pattern&u=https%3A//aidev.fit/en/architecture/event-carried-state-transfer.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Event-Carried%20State%20Transfer%20Pattern&body=https%3A//aidev.fit/en/architecture/event-carried-state-transfer.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/event-carried-state-transfer.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/priority-queue.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Priority Queue Pattern for Message Processing</span></a><a href="/en/architecture/blue-green-deployment.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Blue-Green Deployment Strategy</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/event-notification-vs-event-carrying.html" class="related-card"><span class="rc-title">Event Notification vs Event-Carried State Transfer</span><span class="rc-desc">Compare event notification and event-carried state transfer patterns for microservices communication.</span></a><a href="/en/architecture/fanout-pattern.html" class="related-card"><span class="rc-title">Fanout Pattern for Event Distribution</span><span class="rc-desc">The fanout pattern explained: distributing events to multiple consumers for parallel processing in event-driven systems.</span></a><a href="/en/architecture/sidecar-pattern.html" class="related-card"><span class="rc-title">Sidecar Pattern in Microservices Architecture</span><span class="rc-desc">Learn the sidecar pattern for microservices: how to deploy helper components alongside your main service without tight c</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="rc-title">Domain Events: Design and Implementation</span><span class="rc-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery</span></a><a href="/en/architecture/ambassador-pattern.html" class="related-card"><span class="rc-title">Ambassador Pattern for Service Communication</span><span class="rc-desc">The ambassador pattern explained: how to offload network communication concerns to a proxy component.</span></a><a href="/en/architecture/pub-sub-patterns.html" class="related-card"><span class="rc-title">Pub-Sub Patterns: Event-Driven Communication</span><span class="rc-desc">A deep dive into publish-subscribe patterns for decoupled service communication in distributed systems.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/priority-queue.html" class="prev-next-btn prev-link">← Priority Queue Pattern for Message Processing</a><a href="/en/architecture/blue-green-deployment.html" class="prev-next-btn next-link">Blue-Green Deployment Strategy →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/event-notification-vs-event-carrying.html" class="related-card"><span class="related-card-title">Event Notification vs Event-Carried State Transfer</span><span class="related-card-desc">Compare event notification and event-carried state transfer patterns for microservices communication</span></a><a href="/en/architecture/fanout-pattern.html" class="related-card"><span class="related-card-title">Fanout Pattern for Event Distribution</span><span class="related-card-desc">The fanout pattern explained: distributing events to multiple consumers for parallel processing in e</span></a><a href="/en/architecture/sidecar-pattern.html" class="related-card"><span class="related-card-title">Sidecar Pattern in Microservices Architecture</span><span class="related-card-desc">Learn the sidecar pattern for microservices: how to deploy helper components alongside your main ser</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/ambassador-pattern.html" class="related-card"><span class="related-card-title">Ambassador Pattern for Service Communication</span><span class="related-card-desc">The ambassador pattern explained: how to offload network communication concerns to a proxy component</span></a><a href="/en/architecture/pub-sub-patterns.html" class="related-card"><span class="related-card-title">Pub-Sub Patterns: Event-Driven Communication</span><span class="related-card-desc">A deep dive into publish-subscribe patterns for decoupled service communication in distributed syste</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#how-it-works">How It Works</a></li><li><a href="#benefits">Benefits</a></li><li><a href="#drawbacks">Drawbacks</a></li><li><a href="#when-to-use">When to Use</a></li><li><a href="#best-practices">Best Practices</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

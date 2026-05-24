@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › LLM Fine-Tuning Strategies and Techniques
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">AI</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">AI</span>
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
-      <h1 class="article-title">LLM Fine-Tuning Strategies and Techniques</h1>
-      <div class="article-meta"><time datetime="2026-02-19">Published 2026-02-19</time> · <time datetime="2026-04-11">Last active 2026-04-11</time> · 102 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/fine-tuning-strategies.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/fine-tuning-strategies.png" alt="LLM Fine-Tuning Strategies and Techniques" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Fine-tuning adapts a pre-trained language model to specific tasks or domains. Different fine-tuning approaches offer trade-offs between customization, cost, and performance.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/fine-tuning-strategies.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/fine-tuning-strategies.png" alt="LLM Fine-Tuning Strategies and Techniques" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">LLM Fine-Tuning Strategies and Techniques</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-19">2026-02-19</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>102 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/fine-tuning-strategies.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/fine-tuning-strategies.png" alt="LLM Fine-Tuning Strategies and Techniques" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#full-fine-tuning">Full Fine-Tuning</a></li><li><a href="#lora">LoRA</a></li><li><a href="#qlora">QLoRA</a></li><li><a href="#rlhf">RLHF</a></li><li><a href="#data-preparation">Data Preparation</a></li></ol></details>
+        <div class="article-body"><p>Fine-tuning adapts a pre-trained language model to specific tasks or domains. Different fine-tuning approaches offer trade-offs between customization, cost, and performance.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/fine-tuning-strategies.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/fine-tuning-strategies.png" alt="LLM Fine-Tuning Strategies and Techniques" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Full Fine-Tuning</h2>
 <p>Full fine-tuning updates all model parameters on domain-specific data. This achieves the highest task performance but requires significant computational resources. Full fine-tuning of a 7B parameter model requires 4-8 GPUs with 80GB memory each.</p>
 <p>Full fine-tuning is appropriate for domain adaptation (legal, medical, code) where broad knowledge transfer is needed. Training data should be 10,000-100,000 high-quality examples. The resulting model weights are 2x the original size (for AdamW optimizer states during training).</p>
@@ -126,14 +134,8 @@
 <p>Reinforcement Learning from Human Feedback aligns models with human preferences. The three-stage process: supervised fine-tuning on demonstrations, reward model training on human comparisons, and PPO training using the reward model.</p>
 <p>RLHF improves helpfulness, reduces harmful outputs, and follows instructions more accurately. The quality of preference data matters more than quantity. DPO (Direct Preference Optimization) simplifies RLHF by treating alignment as a classification problem.</p>
 <h2>Data Preparation</h2>
-<p>High-quality training data is the most important factor. Use 1000+ examples for noticeable improvement. Deduplicate, filter low-quality examples, and balance label distribution. Include adversarial examples for robustness. Test on held-out validation sets.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a>, <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#full-fine-tuning">Full Fine-Tuning</a></li><li><a href="#lora">LoRA</a></li><li><a href="#qlora">QLoRA</a></li><li><a href="#rlhf">RLHF</a></li><li><a href="#data-preparation">Data Preparation</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>High-quality training data is the most important factor. Use 1000+ examples for noticeable improvement. Deduplicate, filter low-quality examples, and balance label distribution. Include adversarial examples for robustness. Test on held-out validation sets.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></li><li><a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a></li><li><a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -141,34 +143,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=LLM%20Fine-Tuning%20Strategies%20and%20Techniques&url=https%3A//aidev.fit/en/ai/fine-tuning-strategies.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/fine-tuning-strategies.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=LLM%20Fine-Tuning%20Strategies%20and%20Techniques&url=https%3A//aidev.fit/en/ai/fine-tuning-strategies.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=LLM%20Fine-Tuning%20Strategies%20and%20Techniques&u=https%3A//aidev.fit/en/ai/fine-tuning-strategies.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=LLM%20Fine-Tuning%20Strategies%20and%20Techniques&body=https%3A//aidev.fit/en/ai/fine-tuning-strategies.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/fine-tuning-strategies.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/embeddings-techniques.html" class="prev-next-btn prev-link">← Embeddings: Techniques and Best Practices</a><a href="/en/ai/prompt-management.html" class="prev-next-btn next-link">Prompt Management: Versioning, Testing, Collaboration, Deployment →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/fine-tuning-vs-rag.html" class="related-card"><span class="related-card-title">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</span><span class="related-card-desc">Compare fine-tuning and RAG for LLM applications: when to use each approach, hybrid fine-tuned RAG p</span></a><a href="/en/ai/llm-safety.html" class="related-card"><span class="related-card-title">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</span><span class="related-card-desc">Comprehensive guide to LLM safety: RLHF training, Constitutional AI principles, automated content fi</span></a><a href="/en/ai/ai-data-privacy.html" class="related-card"><span class="related-card-title">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</span><span class="related-card-desc">Protect user privacy in AI applications with PII detection and redaction, data anonymization techniq</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="related-card-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="related-card-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handli</span></a><a href="/en/ai/llm-caching-deep.html" class="related-card"><span class="related-card-title">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</span><span class="related-card-desc">Deep dive into LLM caching strategies: semantic similarity caching, exact match caching, TTL-based e</span></a><a href="/en/ai/multi-modal-rag.html" class="related-card"><span class="related-card-title">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</span><span class="related-card-desc">Build multi-modal RAG systems that handle images, tables, and documents. Learn chunking strategies, </span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=LLM%20Fine-Tuning%20Strategies%20and%20Techniques&url=https%3A//aidev.fit/en/ai/fine-tuning-strategies.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/fine-tuning-strategies.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=LLM%20Fine-Tuning%20Strategies%20and%20Techniques&url=https%3A//aidev.fit/en/ai/fine-tuning-strategies.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=LLM%20Fine-Tuning%20Strategies%20and%20Techniques&u=https%3A//aidev.fit/en/ai/fine-tuning-strategies.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=LLM%20Fine-Tuning%20Strategies%20and%20Techniques&body=https%3A//aidev.fit/en/ai/fine-tuning-strategies.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/fine-tuning-strategies.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/embeddings-techniques.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Embeddings: Techniques and Best Practices</span></a><a href="/en/ai/prompt-management.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Prompt Management: Versioning, Testing, Collaboration, Deployment</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/fine-tuning-vs-rag.html" class="related-card"><span class="rc-title">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</span><span class="rc-desc">Compare fine-tuning and RAG for LLM applications: when to use each approach, hybrid fine-tuned RAG patterns, and detaile</span></a><a href="/en/ai/llm-safety.html" class="related-card"><span class="rc-title">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</span><span class="rc-desc">Comprehensive guide to LLM safety: RLHF training, Constitutional AI principles, automated content filtering, and red tea</span></a><a href="/en/ai/ai-data-privacy.html" class="related-card"><span class="rc-title">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</span><span class="rc-desc">Protect user privacy in AI applications with PII detection and redaction, data anonymization techniques, and local proce</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="rc-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="rc-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rat</span></a><a href="/en/ai/llm-caching-deep.html" class="related-card"><span class="rc-title">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</span><span class="rc-desc">Deep dive into LLM caching strategies: semantic similarity caching, exact match caching, TTL-based expiration, and cache</span></a><a href="/en/ai/multi-modal-rag.html" class="related-card"><span class="rc-title">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</span><span class="rc-desc">Build multi-modal RAG systems that handle images, tables, and documents. Learn chunking strategies, embedding approaches</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#full-fine-tuning">Full Fine-Tuning</a></li><li><a href="#lora">LoRA</a></li><li><a href="#qlora">QLoRA</a></li><li><a href="#rlhf">RLHF</a></li><li><a href="#data-preparation">Data Preparation</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

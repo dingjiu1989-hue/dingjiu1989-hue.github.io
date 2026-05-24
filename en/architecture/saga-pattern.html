@@ -101,17 +101,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Saga Pattern for Distributed Transactions
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span></div>
-      <h1 class="article-title">Saga Pattern for Distributed Transactions</h1>
-      <div class="article-meta"><time datetime="2025-12-30">Published 2025-12-30</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 433 views · 3 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/saga-pattern.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/saga-pattern.png" alt="Saga Pattern for Distributed Transactions" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The Saga pattern manages distributed transactions across multiple services without requiring two-phase commit. Instead of a single, atomic distributed transaction, a saga breaks the operation into a series of local transactions, each with a compensating action that can undo its effects if a subsequent step fails. This article examines the two saga implementation approaches, compensation design, and monitoring strategies. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/saga-pattern.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/saga-pattern.png" alt="Saga Pattern for Distributed Transactions" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Saga Pattern for Distributed Transactions</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-30">2025-12-30</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>433 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/saga-pattern.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/saga-pattern.png" alt="Saga Pattern for Distributed Transactions" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>The Saga pattern manages distributed transactions across multiple services without requiring two-phase commit. Instead of a single, atomic distributed transaction, a saga breaks the operation into a series of local transactions, each with a compensating action that can undo its effects if a subsequent step fails. This article examines the two saga implementation approaches, compensation design, and monitoring strategies. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/saga-pattern.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/saga-pattern.png" alt="Saga Pattern for Distributed Transactions" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The Need for Sagas </p>
 <p>In a microservice architecture, a single business operation often spans multiple services. An order placement might involve the order service, payment service, inventory service, and shipping service. Each service has its own database, so traditional database transactions cannot span all of them. </p>
 <p>Without distributed transaction coordination, a partial failure leaves the system in an inconsistent state. If payment succeeds but inventory reservation fails, the system has paid for an order that cannot be fulfilled. The Saga pattern ensures that either all steps complete successfully or compensating actions reverse the completed steps. </p>
@@ -134,14 +142,8 @@
 <p>Each saga step should be idempotent—processing the same command twice should have the same effect. This allows safe retries when responses are lost. Commands should include an idempotency key that the participant uses to detect duplicates. </p>
 <p>Saga orchestrators should persist their state to survive failures. If the orchestrator restarts, it should recover the state of all in-flight sagas and continue from where it left off. Workflow engines like Temporal handle this automatically. </p>
 <p>Saga timeouts should prevent steps from waiting indefinitely. Each step should have a timeout, and the orchestrator should handle timeout failures by initiating compensation. The overall saga should have a maximum duration to detect stalled instances. </p>
-<p>The Saga pattern is essential for maintaining data consistency in distributed systems without sacrificing the autonomy and scalability of individual services. When designed with careful compensation logic and robust monitoring, sagas provide reliable distributed transaction semantics with manageable complexity.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>The Saga pattern is essential for maintaining data consistency in distributed systems without sacrificing the autonomy and scalability of individual services. When designed with careful compensation logic and robust monitoring, sagas provide reliable distributed transaction semantics with manageable complexity.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a></li><li><a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></li><li><a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -149,29 +151,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Saga%20Pattern%20for%20Distributed%20Transactions&url=https%3A//aidev.fit/en/architecture/saga-pattern.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/saga-pattern.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Saga%20Pattern%20for%20Distributed%20Transactions&url=https%3A//aidev.fit/en/architecture/saga-pattern.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Saga%20Pattern%20for%20Distributed%20Transactions&u=https%3A//aidev.fit/en/architecture/saga-pattern.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Saga%20Pattern%20for%20Distributed%20Transactions&body=https%3A//aidev.fit/en/architecture/saga-pattern.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/saga-pattern.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Saga%20Pattern%20for%20Distributed%20Transactions&url=https%3A//aidev.fit/en/architecture/saga-pattern.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/saga-pattern.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Saga%20Pattern%20for%20Distributed%20Transactions&url=https%3A//aidev.fit/en/architecture/saga-pattern.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Saga%20Pattern%20for%20Distributed%20Transactions&u=https%3A//aidev.fit/en/architecture/saga-pattern.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Saga%20Pattern%20for%20Distributed%20Transactions&body=https%3A//aidev.fit/en/architecture/saga-pattern.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/saga-pattern.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/strangler-fig.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Strangler Fig Pattern for Legacy Migration</span></a><a href="/en/architecture/messaging-patterns.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Messaging Patterns: Pub/Sub and Request/Reply</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/database-per-service.html" class="related-card"><span class="rc-title">Database per Service Pattern</span><span class="rc-desc">Learn the database per service pattern for microservices data management — data isolation, eventual consistency, cross-s</span></a><a href="/en/architecture/backend-for-frontend.html" class="related-card"><span class="rc-title">Backend for Frontend (BFF) Pattern</span><span class="rc-desc">Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data aggregation, protocol t</span></a><a href="/en/architecture/bulkhead-pattern.html" class="related-card"><span class="rc-title">Bulkhead Pattern for Resilience</span><span class="rc-desc">Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, circuit breaker integr</span></a><a href="/en/architecture/saga-orchestration.html" class="related-card"><span class="rc-title">Saga Orchestration Pattern</span><span class="rc-desc">Coordinator pattern for distributed transactions, compensation strategies, state machines, and Temporal workflows</span></a><a href="/en/architecture/sidecar-pattern.html" class="related-card"><span class="rc-title">Sidecar Pattern in Microservices Architecture</span><span class="rc-desc">Learn the sidecar pattern for microservices: how to deploy helper components alongside your main service without tight c</span></a><a href="/en/architecture/event-sourcing.html" class="related-card"><span class="rc-title">Event Sourcing Pattern</span><span class="rc-desc">Learn the event sourcing pattern for capturing state changes as immutable events.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/strangler-fig.html" class="prev-next-btn prev-link">← Strangler Fig Pattern for Legacy Migration</a><a href="/en/architecture/messaging-patterns.html" class="prev-next-btn next-link">Messaging Patterns: Pub/Sub and Request/Reply →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/database-per-service.html" class="related-card"><span class="related-card-title">Database per Service Pattern</span><span class="related-card-desc">Learn the database per service pattern for microservices data management — data isolation, eventual </span></a><a href="/en/architecture/backend-for-frontend.html" class="related-card"><span class="related-card-title">Backend for Frontend (BFF) Pattern</span><span class="related-card-desc">Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data agg</span></a><a href="/en/architecture/bulkhead-pattern.html" class="related-card"><span class="related-card-title">Bulkhead Pattern for Resilience</span><span class="related-card-desc">Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, ci</span></a><a href="/en/architecture/saga-orchestration.html" class="related-card"><span class="related-card-title">Saga Orchestration Pattern</span><span class="related-card-desc">Coordinator pattern for distributed transactions, compensation strategies, state machines, and Tempo</span></a><a href="/en/architecture/sidecar-pattern.html" class="related-card"><span class="related-card-title">Sidecar Pattern in Microservices Architecture</span><span class="related-card-desc">Learn the sidecar pattern for microservices: how to deploy helper components alongside your main ser</span></a><a href="/en/architecture/event-sourcing.html" class="related-card"><span class="related-card-title">Event Sourcing Pattern</span><span class="related-card-desc">Learn the event sourcing pattern for capturing state changes as immutable events.</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Saga Choreography Pattern
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Saga Choreography Pattern</h1>
-      <div class="article-meta"><time datetime="2026-04-29">Published 2026-04-29</time> · <time datetime="2026-05-14">Last active 2026-05-14</time> · 198 views · 0 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/saga-choreography.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/saga-choreography.png" alt="Saga Choreography Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Saga choreography distributes saga execution across participating services through event-driven coordination. There is no central coordinator — each service performs its local transaction, publishes an event, and subscribes to events that trigger its next action. This decentralized approach maximizes autonomy and minimizes coupling, making it attractive for systems where team independence and service evolution are paramount. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/saga-choreography.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/saga-choreography.png" alt="Saga Choreography Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Saga Choreography Pattern</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-29">2026-04-29</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>198 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/saga-choreography.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/saga-choreography.png" alt="Saga Choreography Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>Saga choreography distributes saga execution across participating services through event-driven coordination. There is no central coordinator — each service performs its local transaction, publishes an event, and subscribes to events that trigger its next action. This decentralized approach maximizes autonomy and minimizes coupling, making it attractive for systems where team independence and service evolution are paramount. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/saga-choreography.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/saga-choreography.png" alt="Saga Choreography Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>In a choreographed saga, each service owns its part of the workflow. When the Order Service creates an order, it publishes OrderCreated. The Payment Service subscribes to OrderCreated, processes payment, and publishes PaymentProcessed. The Inventory Service subscribes to PaymentProcessed, reserves stock, and publishes InventoryReserved. The Shipping Service subscribes to InventoryReserved and schedules shipment. The workflow emerges from these chains of reactions. </p>
 <p>The strength of choreography is that each service only knows about its own domain events. New services can be added by subscribing to existing events and publishing new ones — no existing service needs to change. This makes choreography highly extensible and aligned with bounded context boundaries. Each team can evolve its service independently as long as event contracts remain compatible. </p>
 <p>Error handling in choreography is decentralized but nontrivial. If the Payment Service fails, it publishes PaymentFailed. The Inventory Service must subscribe to PaymentFailed and compensate by releasing the reserved stock. This means each service must know about and handle failure events for the services it depends on. The compensation logic is distributed across services rather than centralized, making it harder to verify correctness. </p>
@@ -121,14 +129,8 @@
 <p>Debugging failures requires correlating events across service boundaries. When a saga stalls — a step does not produce the expected event — the cause may be in any participating service. The monitoring team must trace through event logs to find the missing event. This is significantly harder than checking the orchestrator's state in an orchestrated saga. </p>
 <p>When should choreography be preferred over orchestration? Choreography suits sagas with few participants (two or three services), simple compensation logic, and mature event infrastructure. It is ideal when services are owned by independent teams that want to minimize cross-team coordination. It also works well for long-running sagas where the orchestrator would become a bottleneck or single point of failure. </p>
 <p>Domain characteristics matter. Sagas where each step is independently useful and compensatable lend themselves to choreography. Sagas that require conditional branching or complex coordination logic are better served by orchestration. A good rule of thumb: if you can describe the saga as a simple linear chain of events, choreography may suffice. If the saga requires any "or," "if," or "while" logic, orchestration is safer. </p>
-<p>Production experience suggests starting with orchestration for critical workflows and moving to choreography only when the team demonstrates mature event handling patterns and monitoring infrastructure. The implicit nature of choreographed workflows demands operational maturity that many teams underestimate.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>Production experience suggests starting with orchestration for critical workflows and moving to choreography only when the team demonstrates mature event handling patterns and monitoring infrastructure. The implicit nature of choreographed workflows demands operational maturity that many teams underestimate.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></li><li><a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></li><li><a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -136,29 +138,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Saga%20Choreography%20Pattern&url=https%3A//aidev.fit/en/architecture/saga-choreography.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/saga-choreography.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Saga%20Choreography%20Pattern&url=https%3A//aidev.fit/en/architecture/saga-choreography.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Saga%20Choreography%20Pattern&u=https%3A//aidev.fit/en/architecture/saga-choreography.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Saga%20Choreography%20Pattern&body=https%3A//aidev.fit/en/architecture/saga-choreography.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/saga-choreography.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Saga%20Choreography%20Pattern&url=https%3A//aidev.fit/en/architecture/saga-choreography.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/saga-choreography.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Saga%20Choreography%20Pattern&url=https%3A//aidev.fit/en/architecture/saga-choreography.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Saga%20Choreography%20Pattern&u=https%3A//aidev.fit/en/architecture/saga-choreography.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Saga%20Choreography%20Pattern&body=https%3A//aidev.fit/en/architecture/saga-choreography.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/saga-choreography.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/saga-orchestration.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Saga Orchestration Pattern</span></a><a href="/en/architecture/monolith-first-strategy.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Monolith-First Strategy</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/event-collaboration.html" class="related-card"><span class="rc-title">Event Collaboration: Choreography vs Orchestration</span><span class="rc-desc">Event-driven collaboration patterns, saga execution, choreography vs orchestration, error handling in distributed workfl</span></a><a href="/en/architecture/choreography-patterns.html" class="related-card"><span class="rc-title">Choreography Patterns</span><span class="rc-desc">Learn choreography patterns: event contracts, monitoring, saga coordination, and decentralized workflow management</span></a><a href="/en/architecture/saga-orchestration.html" class="related-card"><span class="rc-title">Saga Orchestration Pattern</span><span class="rc-desc">Coordinator pattern for distributed transactions, compensation strategies, state machines, and Temporal workflows</span></a><a href="/en/architecture/polling-consumer.html" class="related-card"><span class="rc-title">Polling Consumer vs Event-Driven Consumer</span><span class="rc-desc">Compare polling and event-driven consumer patterns: when to poll, when to push, and hybrid approaches.</span></a><a href="/en/architecture/asynchronous-communication.html" class="related-card"><span class="rc-title">Asynchronous Communication in Distributed Systems</span><span class="rc-desc">Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and patterns</span></a><a href="/en/architecture/circuit-breaker-vs-bulkhead.html" class="related-card"><span class="rc-title">Circuit Breaker vs Bulkhead Pattern</span><span class="rc-desc">Differences, when to use each, resilience patterns, and combined application of circuit breaker and bulkhead</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/saga-orchestration.html" class="prev-next-btn prev-link">← Saga Orchestration Pattern</a><a href="/en/architecture/monolith-first-strategy.html" class="prev-next-btn next-link">Monolith-First Strategy →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/event-collaboration.html" class="related-card"><span class="related-card-title">Event Collaboration: Choreography vs Orchestration</span><span class="related-card-desc">Event-driven collaboration patterns, saga execution, choreography vs orchestration, error handling i</span></a><a href="/en/architecture/choreography-patterns.html" class="related-card"><span class="related-card-title">Choreography Patterns</span><span class="related-card-desc">Learn choreography patterns: event contracts, monitoring, saga coordination, and decentralized workf</span></a><a href="/en/architecture/saga-orchestration.html" class="related-card"><span class="related-card-title">Saga Orchestration Pattern</span><span class="related-card-desc">Coordinator pattern for distributed transactions, compensation strategies, state machines, and Tempo</span></a><a href="/en/architecture/polling-consumer.html" class="related-card"><span class="related-card-title">Polling Consumer vs Event-Driven Consumer</span><span class="related-card-desc">Compare polling and event-driven consumer patterns: when to poll, when to push, and hybrid approache</span></a><a href="/en/architecture/asynchronous-communication.html" class="related-card"><span class="related-card-title">Asynchronous Communication in Distributed Systems</span><span class="related-card-desc">Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and pattern</span></a><a href="/en/architecture/circuit-breaker-vs-bulkhead.html" class="related-card"><span class="related-card-title">Circuit Breaker vs Bulkhead Pattern</span><span class="related-card-desc">Differences, when to use each, resilience patterns, and combined application of circuit breaker and </span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

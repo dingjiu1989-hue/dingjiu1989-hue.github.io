@@ -101,17 +101,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Secure File Upload Implementation
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Security</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/security/">Security</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Security</span>
         <span class="tag-cat">Cybersecurity</span></div>
-      <h1 class="article-title">Secure File Upload Implementation</h1>
-      <div class="article-meta"><time datetime="2025-12-19">Published 2025-12-19</time> · <time datetime="2026-04-19">Last active 2026-04-19</time> · 248 views · 0 replies · 11 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/security/secure-file-upload.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/secure-file-upload.png" alt="Secure File Upload Implementation" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The Risk of File Uploads </p><picture><source srcset="https://aidev.fit/images/covers/en/security/secure-file-upload.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/security/secure-file-upload.png" alt="Secure File Upload Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Secure File Upload Implementation</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-19">2025-12-19</time>
+          <span class="meta-sep">·</span>
+          <span>11 min read</span>
+          <span class="meta-sep">·</span>
+          <span>248 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/security/secure-file-upload.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/secure-file-upload.png" alt="Secure File Upload Implementation" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (9)</summary><ol><li><a href="#images">Images</a></li><li><a href="#documents">Documents</a></li><li><a href="#other">Other</a></li><li><a href="#convert-to-ensure-clean-output">Convert to ensure clean output</a></li><li><a href="#unsafe-stored-in-webroot">UNSAFE: Stored in webroot</a></li><li><a href="#safe-outside-webroot">SAFE: Outside webroot</a></li><li><a href="#nginx-configuration">Nginx configuration</a></li><li><a href="#only-serve-specific-file-types">Only serve specific file types</a></li><li><a href="#deny-everything-else">Deny everything else</a></li></ol></details>
+        <div class="article-body"><p>The Risk of File Uploads </p><picture><source srcset="https://aidev.fit/images/covers/en/security/secure-file-upload.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/security/secure-file-upload.png" alt="Secure File Upload Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>File upload functionality is one of the most dangerous features an application can expose. An unrestricted file upload can lead to remote code execution, malware distribution, data breaches, and server compromise. Every file upload endpoint must be treated as a critical attack surface. </p>
 <p>Threat Model </p>
 <p>| Attack | Description | |--------|-------------| | Malicious file upload | Attacker uploads a PHP shell or executable | | File size DoS | Huge files exhaust disk space or memory | | Path traversal | Filename manipulates directory traversal | | MIME type spoofing | File extension does not match content | | Malware distribution | Legitimate-looking files containing malware | | Zip bombs | Compressed archive that expands to enormous size | | SSRF via file processing | Server-side parsing of attacker-controlled files | </p>
@@ -235,14 +243,8 @@
 <p>}</p>
 <p>}</p>
 <p>Summary </p>
-<p>Secure file upload requires defense in depth. Validate extensions and MIME types server-side, sanitize images by re-encoding them, generate random filenames, store files outside the webroot or in object storage, enforce strict size limits at multiple layers, and scan for malware. Never trust client-provided metadata, and process uploaded files with minimal privileges in isolated environments.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/secrets-management.html">Secrets Management for Developers</a>, <a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (9)</summary><ol><li><a href="#images">Images</a></li><li><a href="#documents">Documents</a></li><li><a href="#other">Other</a></li><li><a href="#convert-to-ensure-clean-output">Convert to ensure clean output</a></li><li><a href="#unsafe:-stored-in-webroot">UNSAFE: Stored in webroot</a></li><li><a href="#safe:-outside-webroot">SAFE: Outside webroot</a></li><li><a href="#nginx-configuration">Nginx configuration</a></li><li><a href="#only-serve-specific-file-types">Only serve specific file types</a></li><li><a href="#deny-everything-else">Deny everything else</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Secure file upload requires defense in depth. Validate extensions and MIME types server-side, sanitize images by re-encoding them, generate random filenames, store files outside the webroot or in object storage, enforce strict size limits at multiple layers, and scan for malware. Never trust client-provided metadata, and process uploaded files with minimal privileges in isolated environments.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/secrets-management.html">Secrets Management for Developers</a></li><li><a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a></li><li><a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -250,29 +252,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Secure%20File%20Upload%20Implementation&url=https%3A//aidev.fit/en/security/secure-file-upload.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/security/secure-file-upload.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Secure%20File%20Upload%20Implementation&url=https%3A//aidev.fit/en/security/secure-file-upload.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Secure%20File%20Upload%20Implementation&u=https%3A//aidev.fit/en/security/secure-file-upload.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Secure%20File%20Upload%20Implementation&body=https%3A//aidev.fit/en/security/secure-file-upload.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/security/secure-file-upload.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Secure%20File%20Upload%20Implementation&url=https%3A//aidev.fit/en/security/secure-file-upload.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/security/secure-file-upload.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Secure%20File%20Upload%20Implementation&url=https%3A//aidev.fit/en/security/secure-file-upload.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Secure%20File%20Upload%20Implementation&u=https%3A//aidev.fit/en/security/secure-file-upload.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Secure%20File%20Upload%20Implementation&body=https%3A//aidev.fit/en/security/secure-file-upload.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/security/secure-file-upload.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/security/webhook-security.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Webhook Security Best Practices</span></a><a href="/en/security/jwt-authentication-guide.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">JWT Authentication Best Practices</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/security/jwt-authentication-guide.html" class="related-card"><span class="rc-title">JWT Authentication Best Practices</span><span class="rc-desc">Learn JWT authentication best practices including secure token storage, signature algorithms, expiration, and refresh to</span></a><a href="/en/security/log-management-security.html" class="related-card"><span class="rc-title">Security Log Management</span><span class="rc-desc">Best practices for security log management including centralized logging, SIEM integration, log retention, and audit tra</span></a><a href="/en/security/container-security.html" class="related-card"><span class="rc-title">Container Security Best Practices</span><span class="rc-desc">Essential container security practices including image scanning, minimal base images, runtime security, and Kubernetes p</span></a><a href="/en/security/rbac-authorization.html" class="related-card"><span class="rc-title">RBAC Authorization Implementation</span><span class="rc-desc">A practical guide to implementing Role-Based Access Control with roles, permissions, policies, and middleware in Node.js</span></a><a href="/en/security/webhook-security.html" class="related-card"><span class="rc-title">Webhook Security Best Practices</span><span class="rc-desc">Secure your webhook endpoints with signature verification, replay protection, IP allowlisting, idempotency, and payload </span></a><a href="/en/security/api-gateway-security.html" class="related-card"><span class="rc-title">API Gateway Security Patterns</span><span class="rc-desc">Security patterns for API gateways including authentication, rate limiting, IP blocking, request validation, and threat </span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/security/webhook-security.html" class="prev-next-btn prev-link">← Webhook Security Best Practices</a><a href="/en/security/jwt-authentication-guide.html" class="prev-next-btn next-link">JWT Authentication Best Practices →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/jwt-authentication-guide.html" class="related-card"><span class="related-card-title">JWT Authentication Best Practices</span><span class="related-card-desc">Learn JWT authentication best practices including secure token storage, signature algorithms, expira</span></a><a href="/en/security/log-management-security.html" class="related-card"><span class="related-card-title">Security Log Management</span><span class="related-card-desc">Best practices for security log management including centralized logging, SIEM integration, log rete</span></a><a href="/en/security/container-security.html" class="related-card"><span class="related-card-title">Container Security Best Practices</span><span class="related-card-desc">Essential container security practices including image scanning, minimal base images, runtime securi</span></a><a href="/en/security/rbac-authorization.html" class="related-card"><span class="related-card-title">RBAC Authorization Implementation</span><span class="related-card-desc">A practical guide to implementing Role-Based Access Control with roles, permissions, policies, and m</span></a><a href="/en/security/webhook-security.html" class="related-card"><span class="related-card-title">Webhook Security Best Practices</span><span class="related-card-desc">Secure your webhook endpoints with signature verification, replay protection, IP allowlisting, idemp</span></a><a href="/en/security/api-gateway-security.html" class="related-card"><span class="related-card-title">API Gateway Security Patterns</span><span class="related-card-desc">Security patterns for API gateways including authentication, rate limiting, IP blocking, request val</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#images">Images</a></li><li><a href="#documents">Documents</a></li><li><a href="#other">Other</a></li><li><a href="#convert-to-ensure-clean-output">Convert to ensure clean output</a></li><li><a href="#unsafe-stored-in-webroot">UNSAFE: Stored in webroot</a></li><li><a href="#safe-outside-webroot">SAFE: Outside webroot</a></li><li><a href="#nginx-configuration">Nginx configuration</a></li><li><a href="#only-serve-specific-file-types">Only serve specific file types</a></li><li><a href="#deny-everything-else">Deny everything else</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

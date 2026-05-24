@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/security/">Security</a> › Software Signing
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Security</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/security/">Security</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Security</span>
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
-      <h1 class="article-title">Software Signing</h1>
-      <div class="article-meta"><time datetime="2026-03-19">Published 2026-03-19</time> · <time datetime="2026-04-16">Last active 2026-04-16</time> · 121 views · 0 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/security/software-signing.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/software-signing.png" alt="Software Signing" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Why Sign Software? </p><picture><source srcset="https://aidev.fit/images/covers/en/security/software-signing.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/security/software-signing.png" alt="Software Signing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Software Signing</h1>
+        <div class="article-meta">
+          <time datetime="2026-03-19">2026-03-19</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>121 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/security/software-signing.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/software-signing.png" alt="Software Signing" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (11)</summary><ol><li><a href="#generate-gpg-key">Generate GPG key</a></li><li><a href="#sign-artifacts">Sign artifacts</a></li><li><a href="#sign-git-commits">Sign git commits</a></li><li><a href="#programmatic-gpg-verification">Programmatic GPG verification</a></li><li><a href="#keyless-signing-with-cosign">Keyless signing with cosign</a></li><li><a href="#sign-with-identity">Sign with identity</a></li><li><a href="#verify">Verify</a></li><li><a href="#cosign-in-ci-pipeline">Cosign in CI pipeline</a></li><li><a href="#create-in-toto-attestation">Create in-toto attestation</a></li><li><a href="#slsa-provenance-attestation">SLSA provenance attestation</a></li><li><a href="#signing-policyyaml">signing-policy.yaml</a></li></ol></details>
+        <div class="article-body"><p>Why Sign Software? </p><picture><source srcset="https://aidev.fit/images/covers/en/security/software-signing.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/security/software-signing.png" alt="Software Signing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Software signing verifies the origin and integrity of code. It ensures that artifacts haven't been tampered with and come from a trusted source. </p>
 <p>GPG Signing </p>
 <p>Traditional signing with PGP/GPG: </p>
@@ -234,14 +242,8 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- require_signed_commits: true</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- minimum_key_strength: 2048</p>
 <p>Conclusion </p>
-<p>Software signing is fundamental to supply chain security. GPG works well for traditional signing, but Sigstore and cosign offer easier keyless signing workflows. Use in-toto attestations for end-to-end provenance. Enforce signing policies in your CI/CD pipeline. Verify signatures at every consumption point: container registries, package managers, and deployment pipelines.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-network-security.html">Cloud Network Security</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a>, <a href="/en/security/data-classification.html">Data Classification</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (11)</summary><ol><li><a href="#generate-gpg-key">Generate GPG key</a></li><li><a href="#sign-artifacts">Sign artifacts</a></li><li><a href="#sign-git-commits">Sign git commits</a></li><li><a href="#programmatic-gpg-verification">Programmatic GPG verification</a></li><li><a href="#keyless-signing-with-cosign">Keyless signing with cosign</a></li><li><a href="#sign-with-identity">Sign with identity</a></li><li><a href="#verify">Verify</a></li><li><a href="#cosign-in-ci-pipeline">Cosign in CI pipeline</a></li><li><a href="#create-in-toto-attestation">Create in-toto attestation</a></li><li><a href="#slsa-provenance-attestation">SLSA provenance attestation</a></li><li><a href="#signing-policy.yaml">signing-policy.yaml</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Software signing is fundamental to supply chain security. GPG works well for traditional signing, but Sigstore and cosign offer easier keyless signing workflows. Use in-toto attestations for end-to-end provenance. Enforce signing policies in your CI/CD pipeline. Verify signatures at every consumption point: container registries, package managers, and deployment pipelines.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/cloud-network-security.html">Cloud Network Security</a></li><li><a href="/en/security/container-runtime-security.html">Container Runtime Security</a></li><li><a href="/en/security/data-classification.html">Data Classification</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -249,29 +251,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Software%20Signing&url=https%3A//aidev.fit/en/security/software-signing.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/security/software-signing.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Software%20Signing&url=https%3A//aidev.fit/en/security/software-signing.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Software%20Signing&u=https%3A//aidev.fit/en/security/software-signing.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Software%20Signing&body=https%3A//aidev.fit/en/security/software-signing.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/security/software-signing.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Software%20Signing&url=https%3A//aidev.fit/en/security/software-signing.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/security/software-signing.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Software%20Signing&url=https%3A//aidev.fit/en/security/software-signing.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Software%20Signing&u=https%3A//aidev.fit/en/security/software-signing.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Software%20Signing&body=https%3A//aidev.fit/en/security/software-signing.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/security/software-signing.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/security/threat-modeling.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Threat Modeling</span></a><a href="/en/security/iam-audit.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">IAM Audit</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/security/supply-chain-security.html" class="related-card"><span class="rc-title">Supply Chain Security</span><span class="rc-desc">Comprehensive guide to software supply chain security covering SBOM, Sigstore, in-toto, dependency confusion, and the SL</span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="rc-title">Container Image Security</span><span class="rc-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability scanning, and image si</span></a><a href="/en/security/helm-security.html" class="related-card"><span class="rc-title">Helm Security</span><span class="rc-desc">Securing Helm deployments with chart signing, provenance verification, secrets management, and best practices.</span></a><a href="/en/security/oauth2-implementation.html" class="related-card"><span class="rc-title">OAuth2 Implementation</span><span class="rc-desc">Implementing OAuth2 with grant types, token handling, PKCE, and security best practices.</span></a><a href="/en/security/microservice-security.html" class="related-card"><span class="rc-title">Microservice Security</span><span class="rc-desc">Comprehensive guide to microservice security covering service mesh mTLS, API gateways, secret distribution, and observab</span></a><a href="/en/security/waf-implementation.html" class="related-card"><span class="rc-title">Web Application Firewall Implementation</span><span class="rc-desc">Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuning, and performance </span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/security/threat-modeling.html" class="prev-next-btn prev-link">← Threat Modeling</a><a href="/en/security/iam-audit.html" class="prev-next-btn next-link">IAM Audit →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/security/supply-chain-security.html" class="related-card"><span class="related-card-title">Supply Chain Security</span><span class="related-card-desc">Comprehensive guide to software supply chain security covering SBOM, Sigstore, in-toto, dependency c</span></a><a href="/en/security/container-image-security.html" class="related-card"><span class="related-card-title">Container Image Security</span><span class="related-card-desc">Guide to container image security covering minimal base images, multi-stage builds, vulnerability sc</span></a><a href="/en/security/helm-security.html" class="related-card"><span class="related-card-title">Helm Security</span><span class="related-card-desc">Securing Helm deployments with chart signing, provenance verification, secrets management, and best </span></a><a href="/en/security/oauth2-implementation.html" class="related-card"><span class="related-card-title">OAuth2 Implementation</span><span class="related-card-desc">Implementing OAuth2 with grant types, token handling, PKCE, and security best practices.</span></a><a href="/en/security/microservice-security.html" class="related-card"><span class="related-card-title">Microservice Security</span><span class="related-card-desc">Comprehensive guide to microservice security covering service mesh mTLS, API gateways, secret distri</span></a><a href="/en/security/waf-implementation.html" class="related-card"><span class="related-card-title">Web Application Firewall Implementation</span><span class="related-card-desc">Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuni</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#generate-gpg-key">Generate GPG key</a></li><li><a href="#sign-artifacts">Sign artifacts</a></li><li><a href="#sign-git-commits">Sign git commits</a></li><li><a href="#programmatic-gpg-verification">Programmatic GPG verification</a></li><li><a href="#keyless-signing-with-cosign">Keyless signing with cosign</a></li><li><a href="#sign-with-identity">Sign with identity</a></li><li><a href="#verify">Verify</a></li><li><a href="#cosign-in-ci-pipeline">Cosign in CI pipeline</a></li><li><a href="#create-in-toto-attestation">Create in-toto attestation</a></li><li><a href="#slsa-provenance-attestation">SLSA provenance attestation</a></li><li><a href="#signing-policyyaml">signing-policy.yaml</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

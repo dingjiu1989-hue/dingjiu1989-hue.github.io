@@ -109,18 +109,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Circuit Breaker vs Bulkhead Pattern
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Circuit Breaker vs Bulkhead Pattern</h1>
-      <div class="article-meta"><time datetime="2026-05-19">Published 2026-05-19</time> · 137 views · 0 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/circuit-breaker-vs-bulkhead.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/circuit-breaker-vs-bulkhead.png" alt="Circuit Breaker vs Bulkhead Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Circuit breaker and bulkhead are two fundamental resilience patterns from the stability arsenal, but they solve different problems and are most effective when used together. The circuit breaker protects downstream services from cascading failures by failing fast when a dependency is unhealthy. The bulkhead isolates failure by limiting the resources a failing component can consume. Understanding when and how to apply each is essential for building resilient distributed systems. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/circuit-breaker-vs-bulkhead.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/circuit-breaker-vs-bulkhead.png" alt="Circuit Breaker vs Bulkhead Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Circuit Breaker vs Bulkhead Pattern</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-19">2026-05-19</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>137 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/circuit-breaker-vs-bulkhead.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/circuit-breaker-vs-bulkhead.png" alt="Circuit Breaker vs Bulkhead Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>Circuit breaker and bulkhead are two fundamental resilience patterns from the stability arsenal, but they solve different problems and are most effective when used together. The circuit breaker protects downstream services from cascading failures by failing fast when a dependency is unhealthy. The bulkhead isolates failure by limiting the resources a failing component can consume. Understanding when and how to apply each is essential for building resilient distributed systems. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/circuit-breaker-vs-bulkhead.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/circuit-breaker-vs-bulkhead.png" alt="Circuit Breaker vs Bulkhead Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The circuit breaker pattern monitors calls to a dependency. When failures exceed a threshold, the circuit breaker trips to the OPEN state, and subsequent calls return immediately with an error without actually invoking the failing dependency. After a timeout, the circuit enters HALF-OPEN state and allows a probe request. If the probe succeeds, the circuit resets to CLOSED. If it fails, it returns to OPEN. This prevents the calling service from wasting resources on a failing dependency and allows the dependency time to recover. </p>
 <p>The three circuit breaker states serve distinct purposes. CLOSED: normal operation, calls proceed with failure counting. OPEN: failures exceed threshold, calls fail fast without invoking the dependency. HALF-OPEN: recovery attempt, limited calls allowed to test if the dependency has recovered. The transition thresholds and timeout durations must be configured per dependency — a critical database may have a higher failure threshold and shorter timeout than a non-critical analytics service. </p>
 <p>The bulkhead pattern isolates failures by partitioning system resources into pools. The name comes from ship design — watertight compartments prevent a hull breach from sinking the entire ship. In software, bulkheads limit the number of concurrent calls to a dependency (semaphore bulkhead) or the size of a thread pool dedicated to a dependency (thread pool bulkhead). When one dependency fails and its calls start queuing, the bulkhead ensures that only the resources allocated to that dependency are consumed. </p>
@@ -129,14 +137,8 @@
 <p>When to use each: circuit breakers are the right choice when the downstream service is known to fail or degrade, recovery is expected, and failing fast is better than waiting. Bulkheads are the right choice when resource isolation is critical — when one dependency must not be allowed to consume resources needed by other parts of the system. In practice, both should be used. A bulkhead ensures a failing dependency does not exhaust threads, while a circuit breaker prevents repeated calls to that dependency once failure is confirmed. </p>
 <p>Combined usage provides layered resilience. The bulkhead limits concurrent calls to 10 for a given dependency. The circuit breaker monitors those calls: if 50% fail in a 30-second window, the circuit opens. During the open state, the circuit breaker rejects calls immediately without consuming bulkhead resources. After the timeout, the circuit half-opens and allows a limited number of calls through the bulkhead. The combination prevents both resource exhaustion (bulkhead) and wasted effort (circuit breaker). </p>
 <p>Implementation considerations include metric collection for both patterns. Track circuit breaker state transitions (total, time in each state). Track bulkhead queue depth and rejection counts. Alert on circuit breaker trips (indicates a problem) and bulkhead queue saturation (indicates a load problem). Historical metrics of circuit breaker activity help identify recurring dependency failure patterns and inform threshold tuning. </p>
-<p>Configuration should be dynamic where possible. Circuit breaker thresholds and timeouts may need adjustment during incidents. Bulkhead sizes may need adjustment based on traffic patterns. Feature flags or runtime configuration changes allow tuning without redeployment. The initial configuration should be conservative — circuit breakers trip quickly, bulkheads are sized generously — and tightened based on operational experience.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a>, <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>Configuration should be dynamic where possible. Circuit breaker thresholds and timeouts may need adjustment during incidents. Bulkhead sizes may need adjustment based on traffic patterns. Feature flags or runtime configuration changes allow tuning without redeployment. The initial configuration should be conservative — circuit breakers trip quickly, bulkheads are sized generously — and tightened based on operational experience.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/stateful-vs-stateless.html">Stateful vs Stateless Architecture Patterns</a></li><li><a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a></li><li><a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -144,29 +146,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Circuit%20Breaker%20vs%20Bulkhead%20Pattern&url=https%3A//aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Circuit%20Breaker%20vs%20Bulkhead%20Pattern&url=https%3A//aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Circuit%20Breaker%20vs%20Bulkhead%20Pattern&u=https%3A//aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Circuit%20Breaker%20vs%20Bulkhead%20Pattern&body=https%3A//aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Circuit%20Breaker%20vs%20Bulkhead%20Pattern&url=https%3A//aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Circuit%20Breaker%20vs%20Bulkhead%20Pattern&url=https%3A//aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Circuit%20Breaker%20vs%20Bulkhead%20Pattern&u=https%3A//aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Circuit%20Breaker%20vs%20Bulkhead%20Pattern&body=https%3A//aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/circuit-breaker-vs-bulkhead.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/microservices-vs-monolith-2026.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Microservices vs Monolith 2026</span></a><a href="/en/architecture/clean-architecture.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Clean Architecture Explained</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/bulkhead-pattern.html" class="related-card"><span class="rc-title">Bulkhead Pattern for Resilience</span><span class="rc-desc">Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, circuit breaker integr</span></a><a href="/en/architecture/timeout-retry-patterns.html" class="related-card"><span class="rc-title">Timeout and Retry Patterns</span><span class="rc-desc">Deadline propagation, exponential backoff, jitter, circuit breaker integration, and retry best practices</span></a><a href="/en/architecture/retry-patterns.html" class="related-card"><span class="rc-title">Retry Patterns</span><span class="rc-desc">Learn retry strategies: exponential backoff, jitter, retry budgets, and circuit breaker integration for resilient system</span></a><a href="/en/architecture/monolith-first-strategy.html" class="related-card"><span class="rc-title">Monolith-First Strategy</span><span class="rc-desc">When to start monolithic, extraction patterns, and migration strategies to microservices with proven approaches</span></a><a href="/en/architecture/saga-choreography.html" class="related-card"><span class="rc-title">Saga Choreography Pattern</span><span class="rc-desc">Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose choreography</span></a><a href="/en/architecture/polling-consumer.html" class="related-card"><span class="rc-title">Polling Consumer vs Event-Driven Consumer</span><span class="rc-desc">Compare polling and event-driven consumer patterns: when to poll, when to push, and hybrid approaches.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/microservices-vs-monolith-2026.html" class="prev-next-btn prev-link">← Microservices vs Monolith 2026</a><a href="/en/architecture/clean-architecture.html" class="prev-next-btn next-link">Clean Architecture Explained →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/bulkhead-pattern.html" class="related-card"><span class="related-card-title">Bulkhead Pattern for Resilience</span><span class="related-card-desc">Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, ci</span></a><a href="/en/architecture/timeout-retry-patterns.html" class="related-card"><span class="related-card-title">Timeout and Retry Patterns</span><span class="related-card-desc">Deadline propagation, exponential backoff, jitter, circuit breaker integration, and retry best pract</span></a><a href="/en/architecture/retry-patterns.html" class="related-card"><span class="related-card-title">Retry Patterns</span><span class="related-card-desc">Learn retry strategies: exponential backoff, jitter, retry budgets, and circuit breaker integration </span></a><a href="/en/architecture/monolith-first-strategy.html" class="related-card"><span class="related-card-title">Monolith-First Strategy</span><span class="related-card-desc">When to start monolithic, extraction patterns, and migration strategies to microservices with proven</span></a><a href="/en/architecture/saga-choreography.html" class="related-card"><span class="related-card-title">Saga Choreography Pattern</span><span class="related-card-desc">Event-driven saga execution, distributed responsibility, monitoring challenges, and when to choose c</span></a><a href="/en/architecture/polling-consumer.html" class="related-card"><span class="related-card-title">Polling Consumer vs Event-Driven Consumer</span><span class="related-card-desc">Compare polling and event-driven consumer patterns: when to poll, when to push, and hybrid approache</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

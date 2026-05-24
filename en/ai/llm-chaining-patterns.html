@@ -101,17 +101,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › LLM Chaining and Pipeline Patterns
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
         <span class="tag-cat">Machine Learning</span></div>
-      <h1 class="article-title">LLM Chaining and Pipeline Patterns</h1>
-      <div class="article-meta"><time datetime="2025-12-12">Published 2025-12-12</time> · <time datetime="2026-04-27">Last active 2026-04-27</time> · 179 views · 0 replies · 7 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/llm-chaining-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/llm-chaining-patterns.png" alt="LLM Chaining and Pipeline Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">LLM Chaining and Pipeline Patterns</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-12">2025-12-12</time>
+          <span class="meta-sep">·</span>
+          <span>7 min read</span>
+          <span class="meta-sep">·</span>
+          <span>179 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/llm-chaining-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/llm-chaining-patterns.png" alt="LLM Chaining and Pipeline Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (22)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#why-chain">Why Chain?</a></li><li><a href="#core-patterns">Core Patterns</a></li><li><a href="#sequential-chain">Sequential Chain</a></li><li><a href="#map-reduce-chain">Map-Reduce Chain</a></li><li><a href="#map-process-each-item-independently">Map: process each item independently</a></li><li><a href="#reduce-combine-all-intermediate-results">Reduce: combine all intermediate results</a></li><li><a href="#example-summarize-50-customer-reviews">Example: summarize 50 customer reviews</a></li><li><a href="#parallel-processing">Parallel Processing</a></li><li><a href="#routing-chain">Routing Chain</a></li><li><a href="#first-classify-the-query-type">First, classify the query type</a></li><li><a href="#route-to-specialized-handler">Route to specialized handler</a></li><li><a href="#branching-chain">Branching Chain</a></li><li><a href="#validation-chain">Validation Chain</a></li><li><a href="#validation-gate">Validation gate</a></li><li><a href="#re-validate">Re-validate</a></li><li><a href="#if-still-has-issues-after-revision-flag-for-human-review">If still has issues after revision, flag for human review</a></li><li><a href="#advanced-patterns">Advanced Patterns</a></li><li><a href="#recursive-chain">Recursive Chain</a></li><li><a href="#feedback-loop-chain">Feedback Loop Chain</a></li><li><a href="#production-considerations">Production Considerations</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>Single LLM calls are rarely sufficient for complex tasks. Chaining — connecting multiple LLM calls in a pipeline — enables sophisticated workflows where each step builds on or refines the output of the previous one. This guide covers the essential chaining patterns used in production AI systems.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/llm-chaining-patterns.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/llm-chaining-patterns.png" alt="LLM Chaining and Pipeline Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Why Chain?</h2>
 <p>A single LLM call has limitations:</p>
@@ -256,14 +264,8 @@
 <p><strong>Caching</strong> : Cache results of deterministic chain steps (classification, extraction) to avoid redundant LLM calls.</p>
 <p><strong>Human escalation</strong> : Design chains so that when confidence is low or validation fails, the task escalates to a human operator.</p>
 <h2>Conclusion</h2>
-<p>LLM chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Start with sequential chains for simple transformations, add map-reduce for batch processing, and incorporate routing and branching for complex workflows. The key principle: each step should do one thing well, with clear inputs, outputs, and validation criteria.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-evaluation-metrics.html">LLM Evaluation Metrics</a>, <a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (22)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#why-chain">Why Chain?</a></li><li><a href="#core-patterns">Core Patterns</a></li><li><a href="#sequential-chain">Sequential Chain</a></li><li><a href="#map-reduce-chain">Map-Reduce Chain</a></li><li><a href="#map:-process-each-item-independently">Map: process each item independently</a></li><li><a href="#reduce:-combine-all-intermediate-results">Reduce: combine all intermediate results</a></li><li><a href="#example:-summarize-50-customer-reviews">Example: summarize 50 customer reviews</a></li><li><a href="#parallel-processing">Parallel Processing</a></li><li><a href="#routing-chain">Routing Chain</a></li><li><a href="#first,-classify-the-query-type">First, classify the query type</a></li><li><a href="#route-to-specialized-handler">Route to specialized handler</a></li><li><a href="#branching-chain">Branching Chain</a></li><li><a href="#validation-chain">Validation Chain</a></li><li><a href="#validation-gate">Validation gate</a></li><li><a href="#re-validate">Re-validate</a></li><li><a href="#if-still-has-issues-after-revision,-flag-for-human-review">If still has issues after revision, flag for human review</a></li><li><a href="#advanced-patterns">Advanced Patterns</a></li><li><a href="#recursive-chain">Recursive Chain</a></li><li><a href="#feedback-loop-chain">Feedback Loop Chain</a></li><li><a href="#production-considerations">Production Considerations</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>LLM chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Start with sequential chains for simple transformations, add map-reduce for batch processing, and incorporate routing and branching for complex workflows. The key principle: each step should do one thing well, with clear inputs, outputs, and validation criteria.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/llm-evaluation-metrics.html">LLM Evaluation Metrics</a></li><li><a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a></li><li><a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -271,34 +273,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=LLM%20Chaining%20and%20Pipeline%20Patterns&url=https%3A//aidev.fit/en/ai/llm-chaining-patterns.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/llm-chaining-patterns.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=LLM%20Chaining%20and%20Pipeline%20Patterns&url=https%3A//aidev.fit/en/ai/llm-chaining-patterns.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=LLM%20Chaining%20and%20Pipeline%20Patterns&u=https%3A//aidev.fit/en/ai/llm-chaining-patterns.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=LLM%20Chaining%20and%20Pipeline%20Patterns&body=https%3A//aidev.fit/en/ai/llm-chaining-patterns.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/llm-chaining-patterns.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/local-llm-setup.html" class="prev-next-btn prev-link">← Running LLMs Locally</a><a href="/en/ai/ai-agents-frameworks.html" class="prev-next-btn next-link">AI Agent Frameworks Compared →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-api-cost-optimization.html" class="related-card"><span class="related-card-title">AI API Cost Optimization</span><span class="related-card-desc">Strategies for reducing LLM API costs including prompt compression, caching, model selection, batchi</span></a><a href="/en/ai/ai-prompt-engineering.html" class="related-card"><span class="related-card-title">Advanced Prompt Engineering Techniques</span><span class="related-card-desc">Master advanced prompt engineering techniques including chain-of-thought, few-shot, and structured p</span></a><a href="/en/ai/llm-context-window.html" class="related-card"><span class="related-card-title">LLM Context Window Management</span><span class="related-card-desc">Best practices for managing LLM context windows effectively including sliding windows, summarization</span></a><a href="/en/ai/ai-prompt-chaining.html" class="related-card"><span class="related-card-title">Prompt Chaining: Building Multi-Step LLM Workflows</span><span class="related-card-desc">Design prompt chains for complex LLM tasks: chain types, state management, error handling, and perfo</span></a><a href="/en/ai/ai-agents-frameworks.html" class="related-card"><span class="related-card-title">AI Agent Frameworks Compared</span><span class="related-card-desc">Compare leading AI agent frameworks including LangGraph, CrewAI, AutoGen, and OpenAI Assistants API </span></a><a href="/en/ai/ai-document-processing.html" class="related-card"><span class="related-card-title">AI Document Processing</span><span class="related-card-desc">Build AI-powered document processing pipelines for extraction, classification, summarization, and da</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=LLM%20Chaining%20and%20Pipeline%20Patterns&url=https%3A//aidev.fit/en/ai/llm-chaining-patterns.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/llm-chaining-patterns.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=LLM%20Chaining%20and%20Pipeline%20Patterns&url=https%3A//aidev.fit/en/ai/llm-chaining-patterns.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=LLM%20Chaining%20and%20Pipeline%20Patterns&u=https%3A//aidev.fit/en/ai/llm-chaining-patterns.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=LLM%20Chaining%20and%20Pipeline%20Patterns&body=https%3A//aidev.fit/en/ai/llm-chaining-patterns.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/llm-chaining-patterns.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/local-llm-setup.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Running LLMs Locally</span></a><a href="/en/ai/ai-agents-frameworks.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">AI Agent Frameworks Compared</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/ai-api-cost-optimization.html" class="related-card"><span class="rc-title">AI API Cost Optimization</span><span class="rc-desc">Strategies for reducing LLM API costs including prompt compression, caching, model selection, batching, and token budget</span></a><a href="/en/ai/ai-prompt-engineering.html" class="related-card"><span class="rc-title">Advanced Prompt Engineering Techniques</span><span class="rc-desc">Master advanced prompt engineering techniques including chain-of-thought, few-shot, and structured prompting for better </span></a><a href="/en/ai/llm-context-window.html" class="related-card"><span class="rc-title">LLM Context Window Management</span><span class="rc-desc">Best practices for managing LLM context windows effectively including sliding windows, summarization, and retrieval stra</span></a><a href="/en/ai/ai-prompt-chaining.html" class="related-card"><span class="rc-title">Prompt Chaining: Building Multi-Step LLM Workflows</span><span class="rc-desc">Design prompt chains for complex LLM tasks: chain types, state management, error handling, and performance optimization.</span></a><a href="/en/ai/ai-agents-frameworks.html" class="related-card"><span class="rc-title">AI Agent Frameworks Compared</span><span class="rc-desc">Compare leading AI agent frameworks including LangGraph, CrewAI, AutoGen, and OpenAI Assistants API for building autonom</span></a><a href="/en/ai/ai-document-processing.html" class="related-card"><span class="rc-title">AI Document Processing</span><span class="rc-desc">Build AI-powered document processing pipelines for extraction, classification, summarization, and data entry from PDFs, </span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#why-chain">Why Chain?</a></li><li><a href="#core-patterns">Core Patterns</a></li><li><a href="#sequential-chain">Sequential Chain</a></li><li><a href="#map-reduce-chain">Map-Reduce Chain</a></li><li><a href="#map-process-each-item-independently">Map: process each item independently</a></li><li><a href="#reduce-combine-all-intermediate-results">Reduce: combine all intermediate results</a></li><li><a href="#example-summarize-50-customer-reviews">Example: summarize 50 customer reviews</a></li><li><a href="#parallel-processing">Parallel Processing</a></li><li><a href="#routing-chain">Routing Chain</a></li><li><a href="#first-classify-the-query-type">First, classify the query type</a></li><li><a href="#route-to-specialized-handler">Route to specialized handler</a></li><li><a href="#branching-chain">Branching Chain</a></li><li><a href="#validation-chain">Validation Chain</a></li><li><a href="#validation-gate">Validation gate</a></li><li><a href="#re-validate">Re-validate</a></li><li><a href="#if-still-has-issues-after-revision-flag-for-human-review">If still has issues after revision, flag for human review</a></li><li><a href="#advanced-patterns">Advanced Patterns</a></li><li><a href="#recursive-chain">Recursive Chain</a></li><li><a href="#feedback-loop-chain">Feedback Loop Chain</a></li><li><a href="#production-considerations">Production Considerations</a></li><li><a href="#conclusion">Conclusion</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

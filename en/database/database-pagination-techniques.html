@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Pagination: Offset, Cursor, Keyset, and Seek Methods
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
-      <h1 class="article-title">Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h1>
-      <div class="article-meta"><time datetime="2026-04-15">Published 2026-04-15</time> · <time datetime="2026-04-18">Last active 2026-04-18</time> · 108 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/database-pagination-techniques.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-pagination-techniques.png" alt="Database Pagination: Offset, Cursor, Keyset, and Seek Methods" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Pagination divides large result sets into manageable pages. The choice of pagination method affects query performance, data consistency, and user experience. Different approaches suit different use cases.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-pagination-techniques.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-pagination-techniques.png" alt="Database Pagination: Offset, Cursor, Keyset, and Seek Methods" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Database Pagination: Offset, Cursor, Keyset, and Seek Methods</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-15">2026-04-15</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>108 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/database-pagination-techniques.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-pagination-techniques.png" alt="Database Pagination: Offset, Cursor, Keyset, and Seek Methods" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#offset-pagination">Offset Pagination</a></li><li><a href="#keyset-pagination">Keyset Pagination</a></li><li><a href="#cursor-based-pagination">Cursor-Based Pagination</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#hybrid-approach">Hybrid Approach</a></li></ol></details>
+        <div class="article-body"><p>Pagination divides large result sets into manageable pages. The choice of pagination method affects query performance, data consistency, and user experience. Different approaches suit different use cases.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-pagination-techniques.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-pagination-techniques.png" alt="Database Pagination: Offset, Cursor, Keyset, and Seek Methods" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Offset Pagination</h2>
 <p>OFFSET/LIMIT pagination is the simplest approach. SELECT * FROM orders ORDER BY id LIMIT 20 OFFSET 40 returns page 3 with 20 items per page. It is intuitive and easy to implement.</p>
 <p>Problems: OFFSET scans and discards skipped rows—OFFSET 100000 on a query scanning 100k rows still reads all of them. Performance degrades as page number increases. New rows inserted before the current page cause row shifts, and users may see duplicate or missing items.</p>
@@ -129,14 +137,8 @@
 <h2>Comparison</h2>
 <p>Offset is easiest but breaks at scale. Keyset is fast but requires exposing sort columns to client logic. Cursor offers the best API experience but requires more server-side encoding. Offset suits admin UIs and page-number navigation. Keyset and cursor suit API endpoints and infinite scroll.</p>
 <h2>Hybrid Approach</h2>
-<p>Some applications combine methods: cursor for forward pagination (infinite scroll), offset for backward pagination (page number jumps). The API returns both next_cursor and page_number in responses, letting the client choose.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/materialized-views.html">Materialized Views</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#offset-pagination">Offset Pagination</a></li><li><a href="#keyset-pagination">Keyset Pagination</a></li><li><a href="#cursor-based-pagination">Cursor-Based Pagination</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#hybrid-approach">Hybrid Approach</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Some applications combine methods: cursor for forward pagination (infinite scroll), offset for backward pagination (page number jumps). The API returns both next_cursor and page_number in responses, letting the client choose.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a></li><li><a href="/en/database/database-scalability.html">Database Scalability</a></li><li><a href="/en/database/materialized-views.html">Materialized Views</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -144,29 +146,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Database%20Pagination%3A%20Offset%2C%20Cursor%2C%20Keyset%2C%20and%20Seek%20Methods&url=https%3A//aidev.fit/en/database/database-pagination-techniques.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-pagination-techniques.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Database%20Pagination%3A%20Offset%2C%20Cursor%2C%20Keyset%2C%20and%20Seek%20Methods&url=https%3A//aidev.fit/en/database/database-pagination-techniques.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Database%20Pagination%3A%20Offset%2C%20Cursor%2C%20Keyset%2C%20and%20Seek%20Methods&u=https%3A//aidev.fit/en/database/database-pagination-techniques.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Database%20Pagination%3A%20Offset%2C%20Cursor%2C%20Keyset%2C%20and%20Seek%20Methods&body=https%3A//aidev.fit/en/database/database-pagination-techniques.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-pagination-techniques.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Database%20Pagination%3A%20Offset%2C%20Cursor%2C%20Keyset%2C%20and%20Seek%20Methods&url=https%3A//aidev.fit/en/database/database-pagination-techniques.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-pagination-techniques.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Database%20Pagination%3A%20Offset%2C%20Cursor%2C%20Keyset%2C%20and%20Seek%20Methods&url=https%3A//aidev.fit/en/database/database-pagination-techniques.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Database%20Pagination%3A%20Offset%2C%20Cursor%2C%20Keyset%2C%20and%20Seek%20Methods&u=https%3A//aidev.fit/en/database/database-pagination-techniques.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Database%20Pagination%3A%20Offset%2C%20Cursor%2C%20Keyset%2C%20and%20Seek%20Methods&body=https%3A//aidev.fit/en/database/database-pagination-techniques.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-pagination-techniques.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-query-profiling.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Database Query Profiling: Finding and Fixing Performance Bottlene</span></a><a href="/en/database/database-backup-to-s3.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Database Backup Strategies to Object Storage</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/database/database-partitioning.html" class="related-card"><span class="rc-title">Database Table Partitioning: Range, List, Hash</span><span class="rc-desc">Explore PostgreSQL table partitioning methods including range, list, and hash. Learn partition pruning, maintenance stra</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="rc-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="rc-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, a</span></a><a href="/en/database/database-design-patterns.html" class="related-card"><span class="rc-title">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</span><span class="rc-desc">Explore database design patterns for application development: Repository pattern, Unit of Work, Query Objects, and table</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="rc-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="rc-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategies, rollback pattern</span></a><a href="/en/database/index-types.html" class="related-card"><span class="rc-title">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</span><span class="rc-desc">Comprehensive guide to PostgreSQL index types: B-tree, Hash, GiST, GIN, SP-GiST, and BRIN. Learn when and why to use eac</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="rc-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="rc-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, a</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-query-profiling.html" class="prev-next-btn prev-link">← Database Query Profiling: Finding and Fixing Performance Bottlenecks</a><a href="/en/database/database-backup-to-s3.html" class="prev-next-btn next-link">Database Backup Strategies to Object Storage →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-partitioning.html" class="related-card"><span class="related-card-title">Database Table Partitioning: Range, List, Hash</span><span class="related-card-desc">Explore PostgreSQL table partitioning methods including range, list, and hash. Learn partition pruni</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="related-card-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="related-card-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monit</span></a><a href="/en/database/database-design-patterns.html" class="related-card"><span class="related-card-title">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</span><span class="related-card-desc">Explore database design patterns for application development: Repository pattern, Unit of Work, Quer</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="related-card-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="related-card-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategi</span></a><a href="/en/database/index-types.html" class="related-card"><span class="related-card-title">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</span><span class="related-card-desc">Comprehensive guide to PostgreSQL index types: B-tree, Hash, GiST, GIN, SP-GiST, and BRIN. Learn whe</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="related-card-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="related-card-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing str</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#offset-pagination">Offset Pagination</a></li><li><a href="#keyset-pagination">Keyset Pagination</a></li><li><a href="#cursor-based-pagination">Cursor-Based Pagination</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#hybrid-approach">Hybrid Approach</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

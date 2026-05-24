@@ -101,17 +101,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Multimodal AI Applications in 2026
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
         <span class="tag-cat">Machine Learning</span></div>
-      <h1 class="article-title">Multimodal AI Applications in 2026</h1>
-      <div class="article-meta"><time datetime="2026-02-10">Published 2026-02-10</time> · <time datetime="2026-05-09">Last active 2026-05-09</time> · 177 views · 0 replies · 12 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/multimodal-ai.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/multimodal-ai.png" alt="Multimodal AI Applications in 2026" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">Multimodal AI Applications in 2026</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-10">2026-02-10</time>
+          <span class="meta-sep">·</span>
+          <span>12 min read</span>
+          <span class="meta-sep">·</span>
+          <span>177 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/multimodal-ai.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/multimodal-ai.png" alt="Multimodal AI Applications in 2026" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (20)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#vision-language-models">Vision-Language Models</a></li><li><a href="#analyze-an-image-with-text-instructions">Analyze an image with text instructions</a></li><li><a href="#the-model-sees-the-image-and-processes-it-jointly-with-text">The model "sees" the image and processes it jointly with text</a></li><li><a href="#document-ai-and-ocr">Document AI and OCR</a></li><li><a href="#speech-to-text-and-audio-understanding">Speech-to-Text and Audio Understanding</a></li><li><a href="#multimodal-rag">Multimodal RAG</a></li><li><a href="#index-text-chunks">Index text chunks</a></li><li><a href="#index-images">Index images</a></li><li><a href="#index-with-metadata-about-modality">Index with metadata about modality</a></li><li><a href="#encode-query">Encode query</a></li><li><a href="#retrieve-across-all-modalities">Retrieve across all modalities</a></li><li><a href="#audio-transcription-and-analysis-pipeline">Audio Transcription and Analysis Pipeline</a></li><li><a href="#process-buffer">Process buffer</a></li><li><a href="#real-time-transcription--analysis">Real-time transcription + analysis</a></li><li><a href="#extract-action-items-sentiment-entities">Extract action items, sentiment, entities</a></li><li><a href="#keep-overlap-for-continuity">Keep overlap for continuity</a></li><li><a href="#use-cases-and-limitations">Use Cases and Limitations</a></li><li><a href="#production-considerations">Production Considerations</a></li><li><a href="#multimodal-model-selection-criteria">Multimodal model selection criteria</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>Multimodal AI models that understand and generate across text, images, audio, and video have moved from research papers to production APIs. By 2026, models like GPT-4o, Claude 3.5 Sonnet, Gemini 2.0, and open-source alternatives support native multimodal inputs, enabling applications that were impractical with separate unimodal pipelines. This article covers current capabilities, architectures, and production patterns for multimodal AI applications.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/multimodal-ai.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/multimodal-ai.png" alt="Multimodal AI Applications in 2026" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Vision-Language Models</h2>
 <p>Modern vision-language models (VLMs) accept images and text together in a single context window:</p>
@@ -350,14 +358,8 @@
 <p>OCR: "&gt;99% on printed, &gt;90% on handwriting"</p>
 <p>scene_description: "Good on common scenes, poor on niche domains"</p>
 <p>audio_transcription: "&gt;95% WER on clean speech, &gt;80% on accented"</p>
-<p>Multimodal AI is rapidly maturing but still requires careful evaluation for each use case. Start with well-scoped document processing or image analysis tasks before expanding to real-time audio or video pipelines.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-chaining-patterns.html">LLM Chaining and Pipeline Patterns</a>, <a href="/en/ai/rag-architecture-guide.html">RAG Architecture Guide</a>, <a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (20)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#vision-language-models">Vision-Language Models</a></li><li><a href="#analyze-an-image-with-text-instructions">Analyze an image with text instructions</a></li><li><a href="#the-model-"sees"-the-image-and-processes-it-jointly-with-text">The model "sees" the image and processes it jointly with text</a></li><li><a href="#document-ai-and-ocr">Document AI and OCR</a></li><li><a href="#speech-to-text-and-audio-understanding">Speech-to-Text and Audio Understanding</a></li><li><a href="#multimodal-rag">Multimodal RAG</a></li><li><a href="#index-text-chunks">Index text chunks</a></li><li><a href="#index-images">Index images</a></li><li><a href="#index-with-metadata-about-modality">Index with metadata about modality</a></li><li><a href="#encode-query">Encode query</a></li><li><a href="#retrieve-across-all-modalities">Retrieve across all modalities</a></li><li><a href="#audio-transcription-and-analysis-pipeline">Audio Transcription and Analysis Pipeline</a></li><li><a href="#process-buffer">Process buffer</a></li><li><a href="#real-time-transcription-+-analysis">Real-time transcription + analysis</a></li><li><a href="#extract-action-items,-sentiment,-entities">Extract action items, sentiment, entities</a></li><li><a href="#keep-overlap-for-continuity">Keep overlap for continuity</a></li><li><a href="#use-cases-and-limitations">Use Cases and Limitations</a></li><li><a href="#production-considerations">Production Considerations</a></li><li><a href="#multimodal-model-selection-criteria">Multimodal model selection criteria</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Multimodal AI is rapidly maturing but still requires careful evaluation for each use case. Start with well-scoped document processing or image analysis tasks before expanding to real-time audio or video pipelines.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/llm-chaining-patterns.html">LLM Chaining and Pipeline Patterns</a></li><li><a href="/en/ai/rag-architecture-guide.html">RAG Architecture Guide</a></li><li><a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -365,34 +367,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Multimodal%20AI%20Applications%20in%202026&url=https%3A//aidev.fit/en/ai/multimodal-ai.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/multimodal-ai.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Multimodal%20AI%20Applications%20in%202026&url=https%3A//aidev.fit/en/ai/multimodal-ai.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Multimodal%20AI%20Applications%20in%202026&u=https%3A//aidev.fit/en/ai/multimodal-ai.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Multimodal%20AI%20Applications%20in%202026&body=https%3A//aidev.fit/en/ai/multimodal-ai.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/multimodal-ai.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-caching-strategies.html" class="prev-next-btn prev-link">← AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a><a href="/en/ai/rag-architecture-guide.html" class="prev-next-btn next-link">RAG Architecture Guide →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/multimodal-models.html" class="related-card"><span class="related-card-title">Multimodal AI Models: Vision, Audio, and Text</span><span class="related-card-desc">Explore multimodal AI models combining text, images, audio, and video in unified architectures.</span></a><a href="/en/ai/ai-testing-strategies.html" class="related-card"><span class="related-card-title">Testing Strategies for AI Applications</span><span class="related-card-desc">Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucinat</span></a><a href="/en/ai/ai-database-query.html" class="related-card"><span class="related-card-title">Natural Language to SQL with LLMs</span><span class="related-card-desc">Build systems that convert natural language questions into SQL queries using LLMs, with schema conte</span></a><a href="/en/ai/ai-document-processing.html" class="related-card"><span class="related-card-title">AI Document Processing</span><span class="related-card-desc">Build AI-powered document processing pipelines for extraction, classification, summarization, and da</span></a><a href="/en/ai/ai-embeddings-explained.html" class="related-card"><span class="related-card-title">AI Embeddings Explained</span><span class="related-card-desc">A practical guide to AI embeddings — what they are, how they work, and how to use them for search, c</span></a><a href="/en/ai/ai-image-generation.html" class="related-card"><span class="related-card-title">AI Image Generation Guide</span><span class="related-card-desc">A comprehensive guide to AI image generation covering DALL-E, Midjourney, Stable Diffusion, prompt e</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Multimodal%20AI%20Applications%20in%202026&url=https%3A//aidev.fit/en/ai/multimodal-ai.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/multimodal-ai.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Multimodal%20AI%20Applications%20in%202026&url=https%3A//aidev.fit/en/ai/multimodal-ai.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Multimodal%20AI%20Applications%20in%202026&u=https%3A//aidev.fit/en/ai/multimodal-ai.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Multimodal%20AI%20Applications%20in%202026&body=https%3A//aidev.fit/en/ai/multimodal-ai.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/multimodal-ai.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-caching-strategies.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost</span></a><a href="/en/ai/rag-architecture-guide.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">RAG Architecture Guide</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/multimodal-models.html" class="related-card"><span class="rc-title">Multimodal AI Models: Vision, Audio, and Text</span><span class="rc-desc">Explore multimodal AI models combining text, images, audio, and video in unified architectures.</span></a><a href="/en/ai/ai-testing-strategies.html" class="related-card"><span class="rc-title">Testing Strategies for AI Applications</span><span class="rc-desc">Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucination detection, promp</span></a><a href="/en/ai/ai-database-query.html" class="related-card"><span class="rc-title">Natural Language to SQL with LLMs</span><span class="rc-desc">Build systems that convert natural language questions into SQL queries using LLMs, with schema context, query validation</span></a><a href="/en/ai/ai-document-processing.html" class="related-card"><span class="rc-title">AI Document Processing</span><span class="rc-desc">Build AI-powered document processing pipelines for extraction, classification, summarization, and data entry from PDFs, </span></a><a href="/en/ai/ai-embeddings-explained.html" class="related-card"><span class="rc-title">AI Embeddings Explained</span><span class="rc-desc">A practical guide to AI embeddings — what they are, how they work, and how to use them for search, clustering, and class</span></a><a href="/en/ai/ai-image-generation.html" class="related-card"><span class="rc-title">AI Image Generation Guide</span><span class="rc-desc">A comprehensive guide to AI image generation covering DALL-E, Midjourney, Stable Diffusion, prompt engineering, and work</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#vision-language-models">Vision-Language Models</a></li><li><a href="#analyze-an-image-with-text-instructions">Analyze an image with text instructions</a></li><li><a href="#the-model-sees-the-image-and-processes-it-jointly-with-text">The model "sees" the image and processes it jointly with text</a></li><li><a href="#document-ai-and-ocr">Document AI and OCR</a></li><li><a href="#speech-to-text-and-audio-understanding">Speech-to-Text and Audio Understanding</a></li><li><a href="#multimodal-rag">Multimodal RAG</a></li><li><a href="#index-text-chunks">Index text chunks</a></li><li><a href="#index-images">Index images</a></li><li><a href="#index-with-metadata-about-modality">Index with metadata about modality</a></li><li><a href="#encode-query">Encode query</a></li><li><a href="#retrieve-across-all-modalities">Retrieve across all modalities</a></li><li><a href="#audio-transcription-and-analysis-pipeline">Audio Transcription and Analysis Pipeline</a></li><li><a href="#process-buffer">Process buffer</a></li><li><a href="#real-time-transcription--analysis">Real-time transcription + analysis</a></li><li><a href="#extract-action-items-sentiment-entities">Extract action items, sentiment, entities</a></li><li><a href="#keep-overlap-for-continuity">Keep overlap for continuity</a></li><li><a href="#use-cases-and-limitations">Use Cases and Limitations</a></li><li><a href="#production-considerations">Production Considerations</a></li><li><a href="#multimodal-model-selection-criteria">Multimodal model selection criteria</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

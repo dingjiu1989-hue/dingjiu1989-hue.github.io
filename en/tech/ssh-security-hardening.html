@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › SSH Security Hardening
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">Programming</span>
         <span class="tag-cat">DevOps</span></div>
-      <h1 class="article-title">SSH Security Hardening</h1>
-      <div class="article-meta"><time datetime="2025-12-03">Published 2025-12-03</time> · <time datetime="2026-04-15">Last active 2026-04-15</time> · 106 views · 0 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/ssh-security-hardening.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/ssh-security-hardening.png" alt="SSH Security Hardening" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>SSH is the gateway to your infrastructure. A compromised SSH key or misconfigured daemon can lead to complete server takeover. Hardening SSH is one of the highest-impact security improvements you can make.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/ssh-security-hardening.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/ssh-security-hardening.png" alt="SSH Security Hardening" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">SSH Security Hardening</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-03">2025-12-03</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>106 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/ssh-security-hardening.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/ssh-security-hardening.png" alt="SSH Security Hardening" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (25)</summary><ol><li><a href="#disable-password-authentication">Disable Password Authentication</a></li><li><a href="#etcsshsshdconfig">/etc/ssh/sshd_config</a></li><li><a href="#use-ed25519-keys">Use Ed25519 Keys</a></li><li><a href="#restrict-key-usage">Restrict Key Usage</a></li><li><a href="#sshauthorizedkeys">~/.ssh/authorized_keys</a></li><li><a href="#disable-root-login">Disable Root Login</a></li><li><a href="#change-the-default-port">Change the Default Port</a></li><li><a href="#use-a-strong-cipher-configuration">Use a Strong Cipher Configuration</a></li><li><a href="#ssh-timeout-and-session-limits">SSH Timeout and Session Limits</a></li><li><a href="#fail2ban-integration">Fail2Ban Integration</a></li><li><a href="#etcfail2banjaillocal">/etc/fail2ban/jail.local</a></li><li><a href="#two-factor-authentication">Two-Factor Authentication</a></li><li><a href="#etcpamdsshd">/etc/pam.d/sshd</a></li><li><a href="#etcsshsshdconfig">/etc/ssh/sshd_config</a></li><li><a href="#ssh-agent-forwarding">SSH Agent Forwarding</a></li><li><a href="#instead-of-forwarding-your-agent-through-a-chain">Instead of forwarding your agent through a chain:</a></li><li><a href="#or-use-proxyjump-in-sshconfig">Or use ProxyJump in ~/.ssh/config:</a></li><li><a href="#key-rotation">Key Rotation</a></li><li><a href="#binbash">!/bin/bash</a></li><li><a href="#audit-ssh-keyssh">audit-ssh-keys.sh</a></li><li><a href="#monitor-ssh-access">Monitor SSH Access</a></li><li><a href="#watch-auth-log-for-ssh-activity">Watch auth log for SSH activity</a></li><li><a href="#audit-currently-logged-in-users">Audit currently logged-in users</a></li><li><a href="#last-login-times-for-all-users">Last login times for all users</a></li><li><a href="#summary">Summary</a></li></ol></details>
+        <div class="article-body"><p>SSH is the gateway to your infrastructure. A compromised SSH key or misconfigured daemon can lead to complete server takeover. Hardening SSH is one of the highest-impact security improvements you can make.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/ssh-security-hardening.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/ssh-security-hardening.png" alt="SSH Security Hardening" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Disable Password Authentication</h2>
 <p>Password authentication is susceptible to brute-force attacks. Disable it and use key-based authentication only:</p>
 <h2>/etc/ssh/sshd_config</h2>
@@ -209,14 +217,8 @@
 <p>lastlog</p>
 <p>Set up alerts for SSH logins from unexpected IP ranges or at unusual hours using log ingestion tools.</p>
 <h2>Summary</h2>
-<p>SSH hardening follows defense in depth: disable passwords, use Ed25519 keys, lock down the daemon configuration, and add Fail2Ban. For production systems, add two-factor authentication and eliminate agent forwarding in favor of jump hosts. Regularly audit authorized keys and rotate them. Most SSH compromises come from weak configurations, not zero-days -- hardening your SSH setup prevents the majority of attack vectors.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/monitoring-alerting-setup.html">Monitoring and Alerting Setup</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (25)</summary><ol><li><a href="#disable-password-authentication">Disable Password Authentication</a></li><li><a href="#-etc-ssh-sshd_config">/etc/ssh/sshd_config</a></li><li><a href="#use-ed25519-keys">Use Ed25519 Keys</a></li><li><a href="#restrict-key-usage">Restrict Key Usage</a></li><li><a href="#~-.ssh-authorized_keys">~/.ssh/authorized_keys</a></li><li><a href="#disable-root-login">Disable Root Login</a></li><li><a href="#change-the-default-port">Change the Default Port</a></li><li><a href="#use-a-strong-cipher-configuration">Use a Strong Cipher Configuration</a></li><li><a href="#ssh-timeout-and-session-limits">SSH Timeout and Session Limits</a></li><li><a href="#fail2ban-integration">Fail2Ban Integration</a></li><li><a href="#-etc-fail2ban-jail.local">/etc/fail2ban/jail.local</a></li><li><a href="#two-factor-authentication">Two-Factor Authentication</a></li><li><a href="#-etc-pam.d-sshd">/etc/pam.d/sshd</a></li><li><a href="#-etc-ssh-sshd_config">/etc/ssh/sshd_config</a></li><li><a href="#ssh-agent-forwarding">SSH Agent Forwarding</a></li><li><a href="#instead-of-forwarding-your-agent-through-a-chain:">Instead of forwarding your agent through a chain:</a></li><li><a href="#or-use-proxyjump-in-~-.ssh-config:">Or use ProxyJump in ~/.ssh/config:</a></li><li><a href="#key-rotation">Key Rotation</a></li><li><a href="#!-bin-bash">!/bin/bash</a></li><li><a href="#audit-ssh-keys.sh">audit-ssh-keys.sh</a></li><li><a href="#monitor-ssh-access">Monitor SSH Access</a></li><li><a href="#watch-auth-log-for-ssh-activity">Watch auth log for SSH activity</a></li><li><a href="#audit-currently-logged-in-users">Audit currently logged-in users</a></li><li><a href="#last-login-times-for-all-users">Last login times for all users</a></li><li><a href="#summary">Summary</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>SSH hardening follows defense in depth: disable passwords, use Ed25519 keys, lock down the daemon configuration, and add Fail2Ban. For production systems, add two-factor authentication and eliminate agent forwarding in favor of jump hosts. Regularly audit authorized keys and rotate them. Most SSH compromises come from weak configurations, not zero-days -- hardening your SSH setup prevents the majority of attack vectors.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a></li><li><a href="/en/tech/monitoring-alerting-setup.html">Monitoring and Alerting Setup</a></li><li><a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -224,29 +226,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=SSH%20Security%20Hardening&url=https%3A//aidev.fit/en/tech/ssh-security-hardening.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/ssh-security-hardening.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=SSH%20Security%20Hardening&url=https%3A//aidev.fit/en/tech/ssh-security-hardening.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=SSH%20Security%20Hardening&u=https%3A//aidev.fit/en/tech/ssh-security-hardening.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=SSH%20Security%20Hardening&body=https%3A//aidev.fit/en/tech/ssh-security-hardening.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/ssh-security-hardening.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=SSH%20Security%20Hardening&url=https%3A//aidev.fit/en/tech/ssh-security-hardening.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/ssh-security-hardening.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=SSH%20Security%20Hardening&url=https%3A//aidev.fit/en/tech/ssh-security-hardening.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=SSH%20Security%20Hardening&u=https%3A//aidev.fit/en/tech/ssh-security-hardening.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=SSH%20Security%20Hardening&body=https%3A//aidev.fit/en/tech/ssh-security-hardening.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/ssh-security-hardening.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/webpack-vs-vite-bundlers.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Webpack vs Vite Comparison</span></a><a href="/en/tech/dev-environment-setup.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Developer Environment Setup Guide</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/dev-environment-setup.html" class="related-card"><span class="rc-title">Developer Environment Setup Guide</span><span class="rc-desc">Comprehensive guide to setting up a productive developer environment with tools, configuration, and automation.</span></a><a href="/en/tech/kubernetes-services-security.html" class="related-card"><span class="rc-title">Kubernetes Security Best Practices</span><span class="rc-desc">Essential Kubernetes security practices for pod security, network policies, RBAC, and secrets management.</span></a><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="rc-title">Nginx Configuration Guide</span><span class="rc-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting, and load balancing</span></a><a href="/en/tech/chaos-engineering.html" class="related-card"><span class="rc-title">Chaos Engineering: Principles and Practical Tools</span><span class="rc-desc">Learn chaos engineering principles with Chaos Monkey, LitmusChaos, and Gremlin, covering steady-state hypotheses, blast </span></a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card"><span class="rc-title">Helm Charts: Kubernetes Package Management</span><span class="rc-desc">A comprehensive guide to Helm chart structure, templates, values management, dependency handling, and CI/CD integration </span></a><a href="/en/tech/service-discovery.html" class="related-card"><span class="rc-title">Service Discovery in Microservices</span><span class="rc-desc">Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, including health checking </span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/webpack-vs-vite-bundlers.html" class="prev-next-btn prev-link">← Webpack vs Vite Comparison</a><a href="/en/tech/dev-environment-setup.html" class="prev-next-btn next-link">Developer Environment Setup Guide →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/dev-environment-setup.html" class="related-card"><span class="related-card-title">Developer Environment Setup Guide</span><span class="related-card-desc">Comprehensive guide to setting up a productive developer environment with tools, configuration, and </span></a><a href="/en/tech/kubernetes-services-security.html" class="related-card"><span class="related-card-title">Kubernetes Security Best Practices</span><span class="related-card-desc">Essential Kubernetes security practices for pod security, network policies, RBAC, and secrets manage</span></a><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="related-card-title">Nginx Configuration Guide</span><span class="related-card-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting</span></a><a href="/en/tech/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Principles and Practical Tools</span><span class="related-card-desc">Learn chaos engineering principles with Chaos Monkey, LitmusChaos, and Gremlin, covering steady-stat</span></a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card"><span class="related-card-title">Helm Charts: Kubernetes Package Management</span><span class="related-card-desc">A comprehensive guide to Helm chart structure, templates, values management, dependency handling, an</span></a><a href="/en/tech/service-discovery.html" class="related-card"><span class="related-card-title">Service Discovery in Microservices</span><span class="related-card-desc">Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, includ</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#disable-password-authentication">Disable Password Authentication</a></li><li><a href="#etcsshsshdconfig">/etc/ssh/sshd_config</a></li><li><a href="#use-ed25519-keys">Use Ed25519 Keys</a></li><li><a href="#restrict-key-usage">Restrict Key Usage</a></li><li><a href="#sshauthorizedkeys">~/.ssh/authorized_keys</a></li><li><a href="#disable-root-login">Disable Root Login</a></li><li><a href="#change-the-default-port">Change the Default Port</a></li><li><a href="#use-a-strong-cipher-configuration">Use a Strong Cipher Configuration</a></li><li><a href="#ssh-timeout-and-session-limits">SSH Timeout and Session Limits</a></li><li><a href="#fail2ban-integration">Fail2Ban Integration</a></li><li><a href="#etcfail2banjaillocal">/etc/fail2ban/jail.local</a></li><li><a href="#two-factor-authentication">Two-Factor Authentication</a></li><li><a href="#etcpamdsshd">/etc/pam.d/sshd</a></li><li><a href="#etcsshsshdconfig">/etc/ssh/sshd_config</a></li><li><a href="#ssh-agent-forwarding">SSH Agent Forwarding</a></li><li><a href="#instead-of-forwarding-your-agent-through-a-chain">Instead of forwarding your agent through a chain:</a></li><li><a href="#or-use-proxyjump-in-sshconfig">Or use ProxyJump in ~/.ssh/config:</a></li><li><a href="#key-rotation">Key Rotation</a></li><li><a href="#binbash">!/bin/bash</a></li><li><a href="#audit-ssh-keyssh">audit-ssh-keys.sh</a></li><li><a href="#monitor-ssh-access">Monitor SSH Access</a></li><li><a href="#watch-auth-log-for-ssh-activity">Watch auth log for SSH activity</a></li><li><a href="#audit-currently-logged-in-users">Audit currently logged-in users</a></li><li><a href="#last-login-times-for-all-users">Last login times for all users</a></li><li><a href="#summary">Summary</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

@@ -111,18 +111,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a> › Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tools/">Tool Recommendations</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">DevTools</span>
         <span class="tag-cat">Productivity</span></div>
-      <h1 class="article-title">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h1>
-      <div class="article-meta"><time datetime="2026-02-05">Published 2026-02-05</time> · <time datetime="2026-05-16">Last active 2026-05-16</time> · 152 views · 0 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tools/networking-tools.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/networking-tools.png" alt="Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-05">2026-02-05</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>152 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tools/networking-tools.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/networking-tools.png" alt="Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (35)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#mtr-my-traceroute">mtr (My Traceroute)</a></li><li><a href="#basic-usage">Basic usage</a></li><li><a href="#useful-flags">Useful flags</a></li><li><a href="#for-continuous-monitoring">For continuous monitoring</a></li><li><a href="#iperf3">iperf3</a></li><li><a href="#start-server-on-receiving-end">Start server (on receiving end)</a></li><li><a href="#start-client-on-sending-end">Start client (on sending end)</a></li><li><a href="#advanced-tests">Advanced tests</a></li><li><a href="#bidirectional-test">Bidirectional test</a></li><li><a href="#json-output-for-automation">JSON output for automation</a></li><li><a href="#test-specific-tcp-window-size">Test specific TCP window size</a></li><li><a href="#dig-dns-lookup">dig (DNS Lookup)</a></li><li><a href="#basic-lookup">Basic lookup</a></li><li><a href="#query-specific-record-types">Query specific record types</a></li><li><a href="#advanced-queries">Advanced queries</a></li><li><a href="#batch-queries-from-file">Batch queries from file</a></li><li><a href="#check-propagation">Check propagation</a></li><li><a href="#nmap-network-mapper">nmap (Network Mapper)</a></li><li><a href="#basic-scans">Basic scans</a></li><li><a href="#port-specification">Port specification</a></li><li><a href="#service-detection">Service detection</a></li><li><a href="#network-discovery">Network discovery</a></li><li><a href="#scripts">Scripts</a></li><li><a href="#output-formats">Output formats</a></li><li><a href="#wireshark--tshark">Wireshark / tshark</a></li><li><a href="#tshark-cli-version-of-wireshark">tshark (CLI version of Wireshark)</a></li><li><a href="#capture-on-interface">Capture on interface</a></li><li><a href="#capture-filters-bpf-syntax">Capture filters (BPF syntax)</a></li><li><a href="#display-filters-more-powerful">Display filters (more powerful)</a></li><li><a href="#follow-streams">Follow streams</a></li><li><a href="#statistics">Statistics</a></li><li><a href="#save-filtered-output">Save filtered output</a></li><li><a href="#quick-reference">Quick Reference</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>Network troubleshooting is a fundamental skill for developers and operations engineers. Whether diagnosing slow connections, DNS resolution failures, or firewall issues, the right tools make the difference between hours of frustration and minutes of focused debugging. This practical guide covers five essential networking tools: mtr, iperf, dig, nmap, and Wireshark.</p><picture><source srcset="https://aidev.fit/images/covers/en/tools/networking-tools.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tools/networking-tools.png" alt="Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>mtr (My Traceroute)</h2>
 <p>Combines traceroute and ping in a single tool for continuous network path analysis:</p>
@@ -261,14 +269,8 @@
 <p><strong>Protocol issues</strong> : <code>tshark -Y</code> display filters to inspect application-layer behavior.</p>
 </li>
 </ul>
-<p>Mastering these five tools covers 95% of network troubleshooting scenarios. Start with mtr for path issues, dig for DNS, nmap for connectivity, iperf for performance, and Wireshark for deep protocol analysis.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/redis-tools.html">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a>, <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (35)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#mtr-(my-traceroute)">mtr (My Traceroute)</a></li><li><a href="#basic-usage">Basic usage</a></li><li><a href="#useful-flags">Useful flags</a></li><li><a href="#for-continuous-monitoring">For continuous monitoring</a></li><li><a href="#iperf3">iperf3</a></li><li><a href="#start-server-(on-receiving-end)">Start server (on receiving end)</a></li><li><a href="#start-client-(on-sending-end)">Start client (on sending end)</a></li><li><a href="#advanced-tests">Advanced tests</a></li><li><a href="#bidirectional-test">Bidirectional test</a></li><li><a href="#json-output-for-automation">JSON output for automation</a></li><li><a href="#test-specific-tcp-window-size">Test specific TCP window size</a></li><li><a href="#dig-(dns-lookup)">dig (DNS Lookup)</a></li><li><a href="#basic-lookup">Basic lookup</a></li><li><a href="#query-specific-record-types">Query specific record types</a></li><li><a href="#advanced-queries">Advanced queries</a></li><li><a href="#batch-queries-from-file">Batch queries from file</a></li><li><a href="#check-propagation">Check propagation</a></li><li><a href="#nmap-(network-mapper)">nmap (Network Mapper)</a></li><li><a href="#basic-scans">Basic scans</a></li><li><a href="#port-specification">Port specification</a></li><li><a href="#service-detection">Service detection</a></li><li><a href="#network-discovery">Network discovery</a></li><li><a href="#scripts">Scripts</a></li><li><a href="#output-formats">Output formats</a></li><li><a href="#wireshark---tshark">Wireshark / tshark</a></li><li><a href="#tshark-(cli-version-of-wireshark)">tshark (CLI version of Wireshark)</a></li><li><a href="#capture-on-interface">Capture on interface</a></li><li><a href="#capture-filters-(bpf-syntax)">Capture filters (BPF syntax)</a></li><li><a href="#display-filters-(more-powerful)">Display filters (more powerful)</a></li><li><a href="#follow-streams">Follow streams</a></li><li><a href="#statistics">Statistics</a></li><li><a href="#save-filtered-output">Save filtered output</a></li><li><a href="#quick-reference">Quick Reference</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Mastering these five tools covers 95% of network troubleshooting scenarios. Start with mtr for path issues, dig for DNS, nmap for connectivity, iperf for performance, and Wireshark for deep protocol analysis.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tools/redis-tools.html">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a></li><li><a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a></li><li><a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -276,29 +278,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Networking%20Tools%3A%20mtr%2C%20iperf%2C%20dig%2C%20nmap%2C%20Wireshark%20Practical%20Guide&url=https%3A//aidev.fit/en/tools/networking-tools.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tools/networking-tools.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Networking%20Tools%3A%20mtr%2C%20iperf%2C%20dig%2C%20nmap%2C%20Wireshark%20Practical%20Guide&url=https%3A//aidev.fit/en/tools/networking-tools.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Networking%20Tools%3A%20mtr%2C%20iperf%2C%20dig%2C%20nmap%2C%20Wireshark%20Practical%20Guide&u=https%3A//aidev.fit/en/tools/networking-tools.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Networking%20Tools%3A%20mtr%2C%20iperf%2C%20dig%2C%20nmap%2C%20Wireshark%20Practical%20Guide&body=https%3A//aidev.fit/en/tools/networking-tools.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tools/networking-tools.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Networking%20Tools%3A%20mtr%2C%20iperf%2C%20dig%2C%20nmap%2C%20Wireshark%20Practical%20Guide&url=https%3A//aidev.fit/en/tools/networking-tools.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tools/networking-tools.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Networking%20Tools%3A%20mtr%2C%20iperf%2C%20dig%2C%20nmap%2C%20Wireshark%20Practical%20Guide&url=https%3A//aidev.fit/en/tools/networking-tools.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Networking%20Tools%3A%20mtr%2C%20iperf%2C%20dig%2C%20nmap%2C%20Wireshark%20Practical%20Guide&u=https%3A//aidev.fit/en/tools/networking-tools.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Networking%20Tools%3A%20mtr%2C%20iperf%2C%20dig%2C%20nmap%2C%20Wireshark%20Practical%20Guide&body=https%3A//aidev.fit/en/tools/networking-tools.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tools/networking-tools.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tools/reverse-engineering.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninj</span></a><a href="/en/tools/linter-formatter.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Linter and Formatter: ESLint, Prettier, Biome, Ruff</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tools/terraform-tools.html" class="related-card"><span class="rc-title">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</span><span class="rc-desc">Essential Terraform ecosystem tools: Terragrunt for DRY configurations, terratest for infrastructure testing, tfsec for </span></a><a href="/en/tools/command-line-productivity.html" class="related-card"><span class="rc-title">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</span><span class="rc-desc">Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code search, jq for JSON </span></a><a href="/en/tools/code-editor-plugins.html" class="related-card"><span class="rc-title">Code Editor Plugins: Must-Have Extensions for Productivity</span><span class="rc-desc">Essential code editor plugins for 2026: language support, AI assistants, theme plugins, git integration, testing tools, </span></a><a href="/en/tools/helm-tools.html" class="related-card"><span class="rc-title">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</span><span class="rc-desc">Essential Helm ecosystem tools: Helmfile for declarative chart management, helm-docs for documentation generation, helm-</span></a><a href="/en/tools/memory-analysis.html" class="related-card"><span class="rc-title">Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling</span><span class="rc-desc">Comprehensive guide to memory analysis tools: Valgrind for memory error detection, heaptrack for Linux heap profiling, m</span></a><a href="/en/tools/performance-profiling.html" class="related-card"><span class="rc-title">Performance Profiling: perf, Flamegraphs, py-spy, pprof</span><span class="rc-desc">Practical guide to performance profiling tools: perf for Linux kernel profiling, flamegraphs for visualization, py-spy f</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tools/reverse-engineering.html" class="prev-next-btn prev-link">← Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja</a><a href="/en/tools/linter-formatter.html" class="prev-next-btn next-link">Linter and Formatter: ESLint, Prettier, Biome, Ruff →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tools/terraform-tools.html" class="related-card"><span class="related-card-title">Terraform Tools: Terragrunt, terratest, tfsec, Infracost</span><span class="related-card-desc">Essential Terraform ecosystem tools: Terragrunt for DRY configurations, terratest for infrastructure</span></a><a href="/en/tools/command-line-productivity.html" class="related-card"><span class="related-card-title">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</span><span class="related-card-desc">Guide to essential command-line productivity tools covering fzf for fuzzy finding, ripgrep for code </span></a><a href="/en/tools/code-editor-plugins.html" class="related-card"><span class="related-card-title">Code Editor Plugins: Must-Have Extensions for Productivity</span><span class="related-card-desc">Essential code editor plugins for 2026: language support, AI assistants, theme plugins, git integrat</span></a><a href="/en/tools/helm-tools.html" class="related-card"><span class="related-card-title">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</span><span class="related-card-desc">Essential Helm ecosystem tools: Helmfile for declarative chart management, helm-docs for documentati</span></a><a href="/en/tools/memory-analysis.html" class="related-card"><span class="related-card-title">Memory Analysis: Valgrind, heaptrack, memray, Heap Profiling</span><span class="related-card-desc">Comprehensive guide to memory analysis tools: Valgrind for memory error detection, heaptrack for Lin</span></a><a href="/en/tools/performance-profiling.html" class="related-card"><span class="related-card-title">Performance Profiling: perf, Flamegraphs, py-spy, pprof</span><span class="related-card-desc">Practical guide to performance profiling tools: perf for Linux kernel profiling, flamegraphs for vis</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#mtr-my-traceroute">mtr (My Traceroute)</a></li><li><a href="#basic-usage">Basic usage</a></li><li><a href="#useful-flags">Useful flags</a></li><li><a href="#for-continuous-monitoring">For continuous monitoring</a></li><li><a href="#iperf3">iperf3</a></li><li><a href="#start-server-on-receiving-end">Start server (on receiving end)</a></li><li><a href="#start-client-on-sending-end">Start client (on sending end)</a></li><li><a href="#advanced-tests">Advanced tests</a></li><li><a href="#bidirectional-test">Bidirectional test</a></li><li><a href="#json-output-for-automation">JSON output for automation</a></li><li><a href="#test-specific-tcp-window-size">Test specific TCP window size</a></li><li><a href="#dig-dns-lookup">dig (DNS Lookup)</a></li><li><a href="#basic-lookup">Basic lookup</a></li><li><a href="#query-specific-record-types">Query specific record types</a></li><li><a href="#advanced-queries">Advanced queries</a></li><li><a href="#batch-queries-from-file">Batch queries from file</a></li><li><a href="#check-propagation">Check propagation</a></li><li><a href="#nmap-network-mapper">nmap (Network Mapper)</a></li><li><a href="#basic-scans">Basic scans</a></li><li><a href="#port-specification">Port specification</a></li><li><a href="#service-detection">Service detection</a></li><li><a href="#network-discovery">Network discovery</a></li><li><a href="#scripts">Scripts</a></li><li><a href="#output-formats">Output formats</a></li><li><a href="#wireshark--tshark">Wireshark / tshark</a></li><li><a href="#tshark-cli-version-of-wireshark">tshark (CLI version of Wireshark)</a></li><li><a href="#capture-on-interface">Capture on interface</a></li><li><a href="#capture-filters-bpf-syntax">Capture filters (BPF syntax)</a></li><li><a href="#display-filters-more-powerful">Display filters (more powerful)</a></li><li><a href="#follow-streams">Follow streams</a></li><li><a href="#statistics">Statistics</a></li><li><a href="#save-filtered-output">Save filtered output</a></li><li><a href="#quick-reference">Quick Reference</a></li><li><a href="#recommendations">Recommendations</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

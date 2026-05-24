@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Disaster Recovery: RPO, RTO, Cross-Region Replication
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
-      <h1 class="article-title">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h1>
-      <div class="article-meta"><time datetime="2026-04-02">Published 2026-04-02</time> · <time datetime="2026-05-16">Last active 2026-05-16</time> · 103 views · 0 replies · 8 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/database-disaster-recovery.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-disaster-recovery.png" alt="Database Disaster Recovery: RPO, RTO, Cross-Region Replication" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Database Disaster Recovery: RPO, RTO, Cross-Region Replication </p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-disaster-recovery.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-disaster-recovery.png" alt="Database Disaster Recovery: RPO, RTO, Cross-Region Replication" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-02">2026-04-02</time>
+          <span class="meta-sep">·</span>
+          <span>8 min read</span>
+          <span class="meta-sep">·</span>
+          <span>103 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/database-disaster-recovery.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-disaster-recovery.png" alt="Database Disaster Recovery: RPO, RTO, Cross-Region Replication" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (23)</summary><ol><li><a href="#create-cross-region-read-replica">Create cross-region read replica</a></li><li><a href="#promote-to-standalone-for-dr">Promote to standalone for DR</a></li><li><a href="#dr-site-configuration">DR site configuration</a></li><li><a href="#separate-dcs-for-dr-isolation">Separate DCS for DR isolation</a></li><li><a href="#continuous-wal-archiving-to-cross-region-s3-bucket">Continuous WAL archiving to cross-region S3 bucket</a></li><li><a href="#dr-restore-procedure">DR restore procedure</a></li><li><a href="#binbash">!/bin/bash</a></li><li><a href="#dr-restore-to-us-west-2">Dr: restore to us-west-2</a></li><li><a href="#1-restore-latest-full-backup">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore latest full backup</a></li><li><a href="#2-set-recovery-target">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set recovery target</a></li><li><a href="#3-start-and-recover">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Start and recover</a></li><li><a href="#4-verify-data-integrity">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify data integrity</a></li><li><a href="#binbash">!/bin/bash</a></li><li><a href="#weekly-restore-test">Weekly restore test</a></li><li><a href="#full-restore">Full restore</a></li><li><a href="#start-database">Start database</a></li><li><a href="#verify">Verify</a></li><li><a href="#cleanup">Cleanup</a></li><li><a href="#simulate-region-failure-block-traffic-to-primary">Simulate region failure: block traffic to primary</a></li><li><a href="#trigger-dr-failover-script">Trigger DR failover script</a></li><li><a href="#verify-applications-work-from-dr-region">Verify applications work from DR region</a></li><li><a href="#fail-back">Fail back</a></li><li><a href="#clean-up">Clean up</a></li></ol></details>
+        <div class="article-body"><p>Database Disaster Recovery: RPO, RTO, Cross-Region Replication </p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-disaster-recovery.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-disaster-recovery.png" alt="Database Disaster Recovery: RPO, RTO, Cross-Region Replication" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Disaster recovery (DR) ensures your database can survive catastrophic events: region outages, data corruption, accidental deletions, or ransomware attacks. Unlike high availability, which handles component failures, DR addresses large-scale disasters. </p>
 <p>RPO and RTO </p>
 <p>Two metrics define DR requirements: </p>
@@ -239,14 +247,8 @@
 <p>./dr_failback.sh --target us-east-1</p>
 <h2>Clean up</h2>
 <p>iptables -D INPUT -s dr-test-region -j DROP</p>
-<p>Run DR drills quarterly at minimum. Document every drill outcome and update the runbook with lessons learned. A DR plan that has never been tested is not a plan; it is a hope.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (23)</summary><ol><li><a href="#create-cross-region-read-replica">Create cross-region read replica</a></li><li><a href="#promote-to-standalone-for-dr">Promote to standalone for DR</a></li><li><a href="#dr-site-configuration">DR site configuration</a></li><li><a href="#separate-dcs-for-dr-isolation">Separate DCS for DR isolation</a></li><li><a href="#continuous-wal-archiving-to-cross-region-s3-bucket">Continuous WAL archiving to cross-region S3 bucket</a></li><li><a href="#dr-restore-procedure">DR restore procedure</a></li><li><a href="#!-bin-bash">!/bin/bash</a></li><li><a href="#dr:-restore-to-us-west-2">Dr: restore to us-west-2</a></li><li><a href="#1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-restore-latest-full-backup">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore latest full backup</a></li><li><a href="#2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-set-recovery-target">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set recovery target</a></li><li><a href="#3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-start-and-recover">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Start and recover</a></li><li><a href="#4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-verify-data-integrity">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify data integrity</a></li><li><a href="#!-bin-bash">!/bin/bash</a></li><li><a href="#weekly-restore-test">Weekly restore test</a></li><li><a href="#full-restore">Full restore</a></li><li><a href="#start-database">Start database</a></li><li><a href="#verify">Verify</a></li><li><a href="#cleanup">Cleanup</a></li><li><a href="#simulate-region-failure:-block-traffic-to-primary">Simulate region failure: block traffic to primary</a></li><li><a href="#trigger-dr-failover-script">Trigger DR failover script</a></li><li><a href="#verify-applications-work-from-dr-region">Verify applications work from DR region</a></li><li><a href="#fail-back">Fail back</a></li><li><a href="#clean-up">Clean up</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Run DR drills quarterly at minimum. Document every drill outcome and update the runbook with lessons learned. A DR plan that has never been tested is not a plan; it is a hope.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a></li><li><a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a></li><li><a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -254,29 +256,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Database%20Disaster%20Recovery%3A%20RPO%2C%20RTO%2C%20Cross-Region%20Replication&url=https%3A//aidev.fit/en/database/database-disaster-recovery.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-disaster-recovery.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Database%20Disaster%20Recovery%3A%20RPO%2C%20RTO%2C%20Cross-Region%20Replication&url=https%3A//aidev.fit/en/database/database-disaster-recovery.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Database%20Disaster%20Recovery%3A%20RPO%2C%20RTO%2C%20Cross-Region%20Replication&u=https%3A//aidev.fit/en/database/database-disaster-recovery.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Database%20Disaster%20Recovery%3A%20RPO%2C%20RTO%2C%20Cross-Region%20Replication&body=https%3A//aidev.fit/en/database/database-disaster-recovery.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-disaster-recovery.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Database%20Disaster%20Recovery%3A%20RPO%2C%20RTO%2C%20Cross-Region%20Replication&url=https%3A//aidev.fit/en/database/database-disaster-recovery.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-disaster-recovery.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Database%20Disaster%20Recovery%3A%20RPO%2C%20RTO%2C%20Cross-Region%20Replication&url=https%3A//aidev.fit/en/database/database-disaster-recovery.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Database%20Disaster%20Recovery%3A%20RPO%2C%20RTO%2C%20Cross-Region%20Replication&u=https%3A//aidev.fit/en/database/database-disaster-recovery.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Database%20Disaster%20Recovery%3A%20RPO%2C%20RTO%2C%20Cross-Region%20Replication&body=https%3A//aidev.fit/en/database/database-disaster-recovery.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-disaster-recovery.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-migration-tools.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span></a><a href="/en/database/database-concurrency.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Database Concurrency Control: MVCC, Locking, and Deadlocks</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/database/backup-types.html" class="related-card"><span class="rc-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</span><span class="rc-desc">Explore database backup strategies including full, incremental, differential backups, WAL archiving, and point-in-time r</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="rc-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="rc-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, a</span></a><a href="/en/database/database-high-availability.html" class="related-card"><span class="rc-title">Database High Availability: Failover, Standby Types, Health Checks</span><span class="rc-desc">Learn database high availability patterns: failover strategies, standby types (hot, warm, cold), health checks, automate</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="rc-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="rc-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, a</span></a><a href="/en/database/database-migration-strategies.html" class="related-card"><span class="rc-title">Database Migration Strategies</span><span class="rc-desc">Zero-downtime database migration strategies with rollback planning, testing, and CI/CD integration.</span></a><a href="/en/database/database-backup-to-s3.html" class="related-card"><span class="rc-title">Database Backup Strategies to Object Storage</span><span class="rc-desc">Automate database backups to S3/GCS: incremental backups, point-in-time recovery, and retention policies.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-migration-tools.html" class="prev-next-btn prev-link">← Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a><a href="/en/database/database-concurrency.html" class="prev-next-btn next-link">Database Concurrency Control: MVCC, Locking, and Deadlocks →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/backup-types.html" class="related-card"><span class="related-card-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</span><span class="related-card-desc">Explore database backup strategies including full, incremental, differential backups, WAL archiving,</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="related-card-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="related-card-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monit</span></a><a href="/en/database/database-high-availability.html" class="related-card"><span class="related-card-title">Database High Availability: Failover, Standby Types, Health Checks</span><span class="related-card-desc">Learn database high availability patterns: failover strategies, standby types (hot, warm, cold), hea</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="related-card-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="related-card-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing str</span></a><a href="/en/database/database-migration-strategies.html" class="related-card"><span class="related-card-title">Database Migration Strategies</span><span class="related-card-desc">Zero-downtime database migration strategies with rollback planning, testing, and CI/CD integration.</span></a><a href="/en/database/database-backup-to-s3.html" class="related-card"><span class="related-card-title">Database Backup Strategies to Object Storage</span><span class="related-card-desc">Automate database backups to S3/GCS: incremental backups, point-in-time recovery, and retention poli</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#create-cross-region-read-replica">Create cross-region read replica</a></li><li><a href="#promote-to-standalone-for-dr">Promote to standalone for DR</a></li><li><a href="#dr-site-configuration">DR site configuration</a></li><li><a href="#separate-dcs-for-dr-isolation">Separate DCS for DR isolation</a></li><li><a href="#continuous-wal-archiving-to-cross-region-s3-bucket">Continuous WAL archiving to cross-region S3 bucket</a></li><li><a href="#dr-restore-procedure">DR restore procedure</a></li><li><a href="#binbash">!/bin/bash</a></li><li><a href="#dr-restore-to-us-west-2">Dr: restore to us-west-2</a></li><li><a href="#1-restore-latest-full-backup">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore latest full backup</a></li><li><a href="#2-set-recovery-target">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set recovery target</a></li><li><a href="#3-start-and-recover">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Start and recover</a></li><li><a href="#4-verify-data-integrity">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify data integrity</a></li><li><a href="#binbash">!/bin/bash</a></li><li><a href="#weekly-restore-test">Weekly restore test</a></li><li><a href="#full-restore">Full restore</a></li><li><a href="#start-database">Start database</a></li><li><a href="#verify">Verify</a></li><li><a href="#cleanup">Cleanup</a></li><li><a href="#simulate-region-failure-block-traffic-to-primary">Simulate region failure: block traffic to primary</a></li><li><a href="#trigger-dr-failover-script">Trigger DR failover script</a></li><li><a href="#verify-applications-work-from-dr-region">Verify applications work from DR region</a></li><li><a href="#fail-back">Fail back</a></li><li><a href="#clean-up">Clean up</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

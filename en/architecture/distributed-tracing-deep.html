@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Distributed Tracing: Deep Dive
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Distributed Tracing: Deep Dive</h1>
-      <div class="article-meta"><time datetime="2026-04-23">Published 2026-04-23</time> · <time datetime="2026-05-18">Last active 2026-05-18</time> · 205 views · 1 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.png" alt="Distributed Tracing: Deep Dive" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Distributed tracing reconstructs the path of a single request as it traverses multiple services, databases, and queues. Without tracing, understanding the performance of a distributed system requires correlating logs and metrics manually — a process that breaks down under complexity. Tracing provides an end-to-end view: which services were called, in what order, for how long, and whether they succeeded. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.png" alt="Distributed Tracing: Deep Dive" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Distributed Tracing: Deep Dive</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-23">2026-04-23</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>205 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.png" alt="Distributed Tracing: Deep Dive" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>Distributed tracing reconstructs the path of a single request as it traverses multiple services, databases, and queues. Without tracing, understanding the performance of a distributed system requires correlating logs and metrics manually — a process that breaks down under complexity. Tracing provides an end-to-end view: which services were called, in what order, for how long, and whether they succeeded. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.png" alt="Distributed Tracing: Deep Dive" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Trace context propagation is the mechanism that connects spans across service boundaries. When Service A calls Service B, it must pass trace context — trace ID, parent span ID, and any sampling decision — through the request. For HTTP, this is typically done through W3C Trace-Context headers (traceparent and tracestate). For messaging, the context is embedded in the message headers. For gRPC, it rides on metadata. The library or framework should propagate context automatically; manual propagation is error-prone and leads to broken traces. </p>
 <p>Span attributes enrich individual spans with domain-specific information. Standard attributes include: HTTP method and URL, database query text (sanitized), message queue topic, and error details. Custom attributes add business context: customer tier, product category, payment amount. Every attribute increases storage cost, so attributes should be chosen carefully. The OpenTelemetry semantic conventions provide a standardized attribute namespace, ensuring consistent querying across different services and languages. </p>
 <p>The W3C Trace-Context specification standardizes trace propagation. It defines two headers: traceparent (trace ID, parent span ID, trace flags) and tracestate (vendor-specific data). The trace ID is a 16-byte random value. The span ID is an 8-byte random value for each span. The trace flags byte indicates whether the trace should be recorded (sampled). Standardization ensures that different observability systems can participate in the same trace — crucial for heterogeneous environments using multiple tracing vendors. </p>
@@ -121,14 +129,8 @@
 <p>Distributed context propagation enables more than tracing. The baggage pattern carries arbitrary key-value pairs through the trace context (baggage header). This allows service-level configuration that follows the request: A/B test assignments, user region, request priority. Baggage items propagate automatically to all downstream services, enabling context-aware behavior without explicit parameter passing. The danger is accidentally propagating high-cardinality data, which multiplies storage costs across all observability pipelines. </p>
 <p>Visualization tools make traces actionable. Trace views show the waterfall diagram of spans with duration bars, allowing quick identification of the slowest span. Service graphs show aggregated topology — which services call which other services, with latency and error rate annotations. Flame graphs show the call hierarchy within a single service. All visualization should support filtering by trace attributes, error status, and latency thresholds. </p>
 <p>Tracing infrastructure components collect and process trace data. OpenTelemetry SDKs instrument the application and export spans. The OpenTelemetry Collector receives spans, processes them (sampling, attribute enrichment, batching), and exports to a backend. The backend (Jaeger, Tempo, Datadog) stores and indexes spans for querying. Each component must handle backpressure gracefully — if the backend is slow, the collector should buffer and retry rather than drop spans or slow down the application. </p>
-<p>Correlation with logs completes the observability picture. Span IDs embedded in log entries enable cross-referencing: find a slow trace, view the span details, and jump to the associated logs for that span. The OpenTelemetry approach generates all signals from the same instrumentation context, ensuring that trace IDs flow naturally into log records and metric labels. This unified context is the foundation of effective observability in distributed systems.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a>, <a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>Correlation with logs completes the observability picture. Span IDs embedded in log entries enable cross-referencing: find a slow trace, view the span details, and jump to the associated logs for that span. The OpenTelemetry approach generates all signals from the same instrumentation context, ensuring that trace IDs flow naturally into log records and metric labels. This unified context is the foundation of effective observability in distributed systems.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a></li><li><a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a></li><li><a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -136,29 +138,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Distributed%20Tracing%3A%20Deep%20Dive&url=https%3A//aidev.fit/en/architecture/distributed-tracing-deep.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/distributed-tracing-deep.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Distributed%20Tracing%3A%20Deep%20Dive&url=https%3A//aidev.fit/en/architecture/distributed-tracing-deep.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Distributed%20Tracing%3A%20Deep%20Dive&u=https%3A//aidev.fit/en/architecture/distributed-tracing-deep.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Distributed%20Tracing%3A%20Deep%20Dive&body=https%3A//aidev.fit/en/architecture/distributed-tracing-deep.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/distributed-tracing-deep.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Distributed%20Tracing%3A%20Deep%20Dive&url=https%3A//aidev.fit/en/architecture/distributed-tracing-deep.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/distributed-tracing-deep.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Distributed%20Tracing%3A%20Deep%20Dive&url=https%3A//aidev.fit/en/architecture/distributed-tracing-deep.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Distributed%20Tracing%3A%20Deep%20Dive&u=https%3A//aidev.fit/en/architecture/distributed-tracing-deep.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Distributed%20Tracing%3A%20Deep%20Dive&body=https%3A//aidev.fit/en/architecture/distributed-tracing-deep.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/distributed-tracing-deep.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/distributed-locking.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Distributed Locking Mechanisms</span></a><a href="/en/architecture/cdn-architecture.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">CDN Architecture</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="rc-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="rc-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices for distributed sys</span></a><a href="/en/architecture/idempotency-patterns.html" class="related-card"><span class="rc-title">Idempotency Patterns in Distributed Systems</span><span class="rc-desc">Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns</span></a><a href="/en/architecture/rate-limiting-architecture.html" class="related-card"><span class="rc-title">Rate Limiting Architecture</span><span class="rc-desc">Token bucket, sliding window, distributed rate limiting, Redis-based implementation, and algorithm tradeoffs</span></a><a href="/en/architecture/saga-orchestration.html" class="related-card"><span class="rc-title">Saga Orchestration Pattern</span><span class="rc-desc">Coordinator pattern for distributed transactions, compensation strategies, state machines, and Temporal workflows</span></a><a href="/en/architecture/api-gateway-patterns.html" class="related-card"><span class="rc-title">API Gateway Patterns</span><span class="rc-desc">Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementation strategies</span></a><a href="/en/architecture/cache-strategies.html" class="related-card"><span class="rc-title">Caching Strategies</span><span class="rc-desc">Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/distributed-locking.html" class="prev-next-btn prev-link">← Distributed Locking Mechanisms</a><a href="/en/architecture/cdn-architecture.html" class="prev-next-btn next-link">CDN Architecture →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="related-card-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="related-card-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices</span></a><a href="/en/architecture/idempotency-patterns.html" class="related-card"><span class="related-card-title">Idempotency Patterns in Distributed Systems</span><span class="related-card-desc">Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation </span></a><a href="/en/architecture/rate-limiting-architecture.html" class="related-card"><span class="related-card-title">Rate Limiting Architecture</span><span class="related-card-desc">Token bucket, sliding window, distributed rate limiting, Redis-based implementation, and algorithm t</span></a><a href="/en/architecture/saga-orchestration.html" class="related-card"><span class="related-card-title">Saga Orchestration Pattern</span><span class="related-card-desc">Coordinator pattern for distributed transactions, compensation strategies, state machines, and Tempo</span></a><a href="/en/architecture/api-gateway-patterns.html" class="related-card"><span class="related-card-title">API Gateway Patterns</span><span class="related-card-desc">Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementatio</span></a><a href="/en/architecture/cache-strategies.html" class="related-card"><span class="related-card-title">Caching Strategies</span><span class="related-card-desc">Compare write-through, write-around, write-back caching and invalidation strategies for distributed </span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

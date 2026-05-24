@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Event-Driven Architecture
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">Event-Driven Architecture</h1>
-      <div class="article-meta"><time datetime="2026-05-03">Published 2026-05-03</time> · <time datetime="2026-05-19">Last active 2026-05-19</time> · 148 views · 0 replies · 4 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/event-driven-arch.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/event-driven-arch.png" alt="Event-Driven Architecture" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Event-driven architecture (EDA) is an architectural style in which services communicate through the production, detection, and consumption of events. Unlike request-driven architectures where a service explicitly calls another, EDA enables services to react to state changes throughout the system. This decoupling provides scalability, flexibility, and resilience that are difficult to achieve with synchronous communication. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/event-driven-arch.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/event-driven-arch.png" alt="Event-Driven Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Event-Driven Architecture</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-03">2026-05-03</time>
+          <span class="meta-sep">·</span>
+          <span>4 min read</span>
+          <span class="meta-sep">·</span>
+          <span>148 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/event-driven-arch.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/event-driven-arch.png" alt="Event-Driven Architecture" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>Event-driven architecture (EDA) is an architectural style in which services communicate through the production, detection, and consumption of events. Unlike request-driven architectures where a service explicitly calls another, EDA enables services to react to state changes throughout the system. This decoupling provides scalability, flexibility, and resilience that are difficult to achieve with synchronous communication. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/event-driven-arch.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/event-driven-arch.png" alt="Event-Driven Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Core Concepts </p>
 <p>An event is a record of something that happened in the system: "Order Placed", "Payment Received", "Inventory Updated". Events are immutable facts—they describe what occurred, not what to do. Services produce events when their state changes, and other services consume events they are interested in. </p>
 <p>The event bus (or event broker) is the infrastructure that transports events from producers to consumers. Kafka, EventBridge, RabbitMQ, and Pulsar are common event bus implementations. The event bus provides durability, ordering guarantees, and delivery semantics that determine how events travel from producers to consumers. </p>
@@ -132,14 +140,8 @@
 <p>Event ordering across partitions is not guaranteed without careful design. Event duplication is possible with at-least-once delivery. Idempotent event handlers are essential to handle duplicates safely. </p>
 <p>When to Use EDA </p>
 <p>Event-driven architecture excels in systems with many loosely coupled services, complex workflows spanning multiple services, real-time processing requirements, and polyglot persistence. It is less suitable for simple CRUD applications, systems requiring strict consistency guarantees, or scenarios where request-response semantics are natural. </p>
-<p>The decision to adopt EDA should be driven by concrete requirements for decoupling, scalability, or real-time processing. For many systems, a hybrid approach—using events for specific workflows while keeping request-response for others—provides the right balance of decoupling and simplicity.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>The decision to adopt EDA should be driven by concrete requirements for decoupling, scalability, or real-time processing. For many systems, a hybrid approach—using events for specific workflows while keeping request-response for others—provides the right balance of decoupling and simplicity.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a></li><li><a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a></li><li><a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -147,29 +149,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Event-Driven%20Architecture&url=https%3A//aidev.fit/en/architecture/event-driven-arch.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/event-driven-arch.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Event-Driven%20Architecture&url=https%3A//aidev.fit/en/architecture/event-driven-arch.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Event-Driven%20Architecture&u=https%3A//aidev.fit/en/architecture/event-driven-arch.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Event-Driven%20Architecture&body=https%3A//aidev.fit/en/architecture/event-driven-arch.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/event-driven-arch.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Event-Driven%20Architecture&url=https%3A//aidev.fit/en/architecture/event-driven-arch.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/event-driven-arch.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Event-Driven%20Architecture&url=https%3A//aidev.fit/en/architecture/event-driven-arch.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Event-Driven%20Architecture&u=https%3A//aidev.fit/en/architecture/event-driven-arch.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Event-Driven%20Architecture&body=https%3A//aidev.fit/en/architecture/event-driven-arch.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/event-driven-arch.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/retry-patterns.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Retry Patterns</span></a><a href="/en/architecture/choreography-patterns.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Choreography Patterns</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/choreography-patterns.html" class="related-card"><span class="rc-title">Choreography Patterns</span><span class="rc-desc">Learn choreography patterns: event contracts, monitoring, saga coordination, and decentralized workflow management</span></a><a href="/en/architecture/polling-consumer.html" class="related-card"><span class="rc-title">Polling Consumer vs Event-Driven Consumer</span><span class="rc-desc">Compare polling and event-driven consumer patterns: when to poll, when to push, and hybrid approaches.</span></a><a href="/en/architecture/asynchronous-communication.html" class="related-card"><span class="rc-title">Asynchronous Communication in Distributed Systems</span><span class="rc-desc">Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and patterns</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card"><span class="rc-title">Zero-Downtime Database Migrations</span><span class="rc-desc">Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and production practices</span></a><a href="/en/architecture/event-collaboration.html" class="related-card"><span class="rc-title">Event Collaboration: Choreography vs Orchestration</span><span class="rc-desc">Event-driven collaboration patterns, saga execution, choreography vs orchestration, error handling in distributed workfl</span></a><a href="/en/architecture/feature-flags-architecture.html" class="related-card"><span class="rc-title">Feature Flags Architecture</span><span class="rc-desc">Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feature flags</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/retry-patterns.html" class="prev-next-btn prev-link">← Retry Patterns</a><a href="/en/architecture/choreography-patterns.html" class="prev-next-btn next-link">Choreography Patterns →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/choreography-patterns.html" class="related-card"><span class="related-card-title">Choreography Patterns</span><span class="related-card-desc">Learn choreography patterns: event contracts, monitoring, saga coordination, and decentralized workf</span></a><a href="/en/architecture/polling-consumer.html" class="related-card"><span class="related-card-title">Polling Consumer vs Event-Driven Consumer</span><span class="related-card-desc">Compare polling and event-driven consumer patterns: when to poll, when to push, and hybrid approache</span></a><a href="/en/architecture/asynchronous-communication.html" class="related-card"><span class="related-card-title">Asynchronous Communication in Distributed Systems</span><span class="related-card-desc">Message queues, event buses, broker vs brokerless architectures, reliability guarantees, and pattern</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card"><span class="related-card-title">Zero-Downtime Database Migrations</span><span class="related-card-desc">Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and producti</span></a><a href="/en/architecture/event-collaboration.html" class="related-card"><span class="related-card-title">Event Collaboration: Choreography vs Orchestration</span><span class="related-card-desc">Event-driven collaboration patterns, saga execution, choreography vs orchestration, error handling i</span></a><a href="/en/architecture/feature-flags-architecture.html" class="related-card"><span class="related-card-title">Feature Flags Architecture</span><span class="related-card-desc">Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feat</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

@@ -101,17 +101,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Testing Strategies for AI Applications
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
         <span class="tag-cat">Machine Learning</span></div>
-      <h1 class="article-title">Testing Strategies for AI Applications</h1>
-      <div class="article-meta"><time datetime="2026-02-10">Published 2026-02-10</time> · <time datetime="2026-05-21">Last active 2026-05-21</time> · 191 views · 0 replies · 8 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-testing-strategies.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-testing-strategies.png" alt="Testing Strategies for AI Applications" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Introduction</h2>
+        <h1 class="article-title">Testing Strategies for AI Applications</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-10">2026-02-10</time>
+          <span class="meta-sep">·</span>
+          <span>8 min read</span>
+          <span class="meta-sep">·</span>
+          <span>191 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-testing-strategies.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-testing-strategies.png" alt="Testing Strategies for AI Applications" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (16)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#evaluation-datasets">Evaluation Datasets</a></li><li><a href="#for-non-deterministic-evaluation">For non-deterministic evaluation</a></li><li><a href="#regression-testing">Regression Testing</a></li><li><a href="#evaluate-against-all-criteria">Evaluate against all criteria</a></li><li><a href="#compare-with-previous-run">Compare with previous run</a></li><li><a href="#ab-evaluation">A/B Evaluation</a></li><li><a href="#aggregate-across-criteria">Aggregate across criteria</a></li><li><a href="#hallucination-detection">Hallucination Detection</a></li><li><a href="#1-extract-atomic-claims">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract atomic claims</a></li><li><a href="#2-search-knowledge-base">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Search knowledge base</a></li><li><a href="#3-verify-claim-against-evidence">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify claim against evidence</a></li><li><a href="#prompt-testing">Prompt Testing</a></li><li><a href="#render-template-with-test-inputs">Render template with test inputs</a></li><li><a href="#run-tests">Run tests</a></li><li><a href="#performance-testing">Performance Testing</a></li></ol></details>
+        <div class="article-body"><h2>Introduction</h2>
 <p>Testing AI applications differs fundamentally from testing deterministic software. Model outputs are probabilistic, edge cases are infinite, and a passing unit test does not guarantee correct behavior in production. A comprehensive AI testing strategy combines traditional software testing with AI-specific evaluation methodologies to catch regressions, hallucinations, and performance degradations before they reach users.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-testing-strategies.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/ai-testing-strategies.png" alt="Testing Strategies for AI Applications" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Evaluation Datasets</h2>
 <p>Curate high-quality evaluation datasets that reflect real-world usage:</p>
@@ -399,14 +407,8 @@
 <p>"throughput": requests / sum(latencies),</p>
 <p>"total_cost": self._calculate_cost(model, requests),</p>
 <p>}</p>
-<p>A mature AI testing pipeline runs golden set regression on every PR, A/B evaluations before model upgrades, hallucination detection on every production response, and performance benchmarks weekly. No single metric captures model quality; combine automated tests with human evaluation for production releases.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a>, <a href="/en/ai/multimodal-ai.html">Multimodal AI Applications in 2026</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (16)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#evaluation-datasets">Evaluation Datasets</a></li><li><a href="#for-non-deterministic-evaluation">For non-deterministic evaluation</a></li><li><a href="#regression-testing">Regression Testing</a></li><li><a href="#evaluate-against-all-criteria">Evaluate against all criteria</a></li><li><a href="#compare-with-previous-run">Compare with previous run</a></li><li><a href="#a-b-evaluation">A/B Evaluation</a></li><li><a href="#aggregate-across-criteria">Aggregate across criteria</a></li><li><a href="#hallucination-detection">Hallucination Detection</a></li><li><a href="#1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-extract-atomic-claims">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract atomic claims</a></li><li><a href="#2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-search-knowledge-base">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Search knowledge base</a></li><li><a href="#3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.-verify-claim-against-evidence">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify claim against evidence</a></li><li><a href="#prompt-testing">Prompt Testing</a></li><li><a href="#render-template-with-test-inputs">Render template with test inputs</a></li><li><a href="#run-tests">Run tests</a></li><li><a href="#performance-testing">Performance Testing</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>A mature AI testing pipeline runs golden set regression on every PR, A/B evaluations before model upgrades, hallucination detection on every production response, and performance benchmarks weekly. No single metric captures model quality; combine automated tests with human evaluation for production releases.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a></li><li><a href="/en/ai/ai-agents-production.html">Deploying AI Agents to Production</a></li><li><a href="/en/ai/multimodal-ai.html">Multimodal AI Applications in 2026</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -414,34 +416,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Testing%20Strategies%20for%20AI%20Applications&url=https%3A//aidev.fit/en/ai/ai-testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/ai-testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Testing%20Strategies%20for%20AI%20Applications&url=https%3A//aidev.fit/en/ai/ai-testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Testing%20Strategies%20for%20AI%20Applications&u=https%3A//aidev.fit/en/ai/ai-testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Testing%20Strategies%20for%20AI%20Applications&body=https%3A//aidev.fit/en/ai/ai-testing-strategies.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/ai-testing-strategies.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-caching-strategies.html" class="prev-next-btn prev-link">← AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a><a href="/en/ai/rag-architecture-guide.html" class="prev-next-btn next-link">RAG Architecture Guide →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/responsible-ai.html" class="related-card"><span class="related-card-title">Responsible AI Development Practices</span><span class="related-card-desc">Implement bias detection, fairness metrics, explainability with SHAP and LIME, transparency document</span></a><a href="/en/ai/ai-api-cost-optimization.html" class="related-card"><span class="related-card-title">AI API Cost Optimization</span><span class="related-card-desc">Strategies for reducing LLM API costs including prompt compression, caching, model selection, batchi</span></a><a href="/en/ai/ai-prompt-engineering.html" class="related-card"><span class="related-card-title">Advanced Prompt Engineering Techniques</span><span class="related-card-desc">Master advanced prompt engineering techniques including chain-of-thought, few-shot, and structured p</span></a><a href="/en/ai/llm-context-window.html" class="related-card"><span class="related-card-title">LLM Context Window Management</span><span class="related-card-desc">Best practices for managing LLM context windows effectively including sliding windows, summarization</span></a><a href="/en/ai/local-llm-setup.html" class="related-card"><span class="related-card-title">Running LLMs Locally</span><span class="related-card-desc">Step-by-step guide to running LLMs locally using Ollama and LM Studio with setup instructions, model</span></a><a href="/en/ai/ai-data-privacy.html" class="related-card"><span class="related-card-title">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</span><span class="related-card-desc">Protect user privacy in AI applications with PII detection and redaction, data anonymization techniq</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Testing%20Strategies%20for%20AI%20Applications&url=https%3A//aidev.fit/en/ai/ai-testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/ai-testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Testing%20Strategies%20for%20AI%20Applications&url=https%3A//aidev.fit/en/ai/ai-testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Testing%20Strategies%20for%20AI%20Applications&u=https%3A//aidev.fit/en/ai/ai-testing-strategies.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Testing%20Strategies%20for%20AI%20Applications&body=https%3A//aidev.fit/en/ai/ai-testing-strategies.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/ai-testing-strategies.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-caching-strategies.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost</span></a><a href="/en/ai/rag-architecture-guide.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">RAG Architecture Guide</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/responsible-ai.html" class="related-card"><span class="rc-title">Responsible AI Development Practices</span><span class="rc-desc">Implement bias detection, fairness metrics, explainability with SHAP and LIME, transparency documentation, regulatory co</span></a><a href="/en/ai/ai-api-cost-optimization.html" class="related-card"><span class="rc-title">AI API Cost Optimization</span><span class="rc-desc">Strategies for reducing LLM API costs including prompt compression, caching, model selection, batching, and token budget</span></a><a href="/en/ai/ai-prompt-engineering.html" class="related-card"><span class="rc-title">Advanced Prompt Engineering Techniques</span><span class="rc-desc">Master advanced prompt engineering techniques including chain-of-thought, few-shot, and structured prompting for better </span></a><a href="/en/ai/llm-context-window.html" class="related-card"><span class="rc-title">LLM Context Window Management</span><span class="rc-desc">Best practices for managing LLM context windows effectively including sliding windows, summarization, and retrieval stra</span></a><a href="/en/ai/local-llm-setup.html" class="related-card"><span class="rc-title">Running LLMs Locally</span><span class="rc-desc">Step-by-step guide to running LLMs locally using Ollama and LM Studio with setup instructions, model selection, and perf</span></a><a href="/en/ai/ai-data-privacy.html" class="related-card"><span class="rc-title">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</span><span class="rc-desc">Protect user privacy in AI applications with PII detection and redaction, data anonymization techniques, and local proce</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#introduction">Introduction</a></li><li><a href="#evaluation-datasets">Evaluation Datasets</a></li><li><a href="#for-non-deterministic-evaluation">For non-deterministic evaluation</a></li><li><a href="#regression-testing">Regression Testing</a></li><li><a href="#evaluate-against-all-criteria">Evaluate against all criteria</a></li><li><a href="#compare-with-previous-run">Compare with previous run</a></li><li><a href="#ab-evaluation">A/B Evaluation</a></li><li><a href="#aggregate-across-criteria">Aggregate across criteria</a></li><li><a href="#hallucination-detection">Hallucination Detection</a></li><li><a href="#1-extract-atomic-claims">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract atomic claims</a></li><li><a href="#2-search-knowledge-base">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Search knowledge base</a></li><li><a href="#3-verify-claim-against-evidence">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify claim against evidence</a></li><li><a href="#prompt-testing">Prompt Testing</a></li><li><a href="#render-template-with-test-inputs">Render template with test inputs</a></li><li><a href="#run-tests">Run tests</a></li><li><a href="#performance-testing">Performance Testing</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

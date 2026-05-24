@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Microservices Communication Patterns
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">Programming</span>
         <span class="tag-cat">DevOps</span></div>
-      <h1 class="article-title">Microservices Communication Patterns</h1>
-      <div class="article-meta"><time datetime="2025-12-02">Published 2025-12-02</time> · <time datetime="2026-04-03">Last active 2026-04-03</time> · 99 views · 0 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/microservices-communication.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/microservices-communication.png" alt="Microservices Communication Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Microservices must communicate with each other to fulfill user requests. Choosing the right communication pattern is one of the most consequential architectural decisions. This guide covers the major patterns with their trade-offs and implementation strategies.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/microservices-communication.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/microservices-communication.png" alt="Microservices Communication Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Microservices Communication Patterns</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-02">2025-12-02</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>99 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/microservices-communication.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/microservices-communication.png" alt="Microservices Communication Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (14)</summary><ol><li><a href="#synchronous-vs-asynchronous-communication">Synchronous vs Asynchronous Communication</a></li><li><a href="#pattern-1-httprest">Pattern 1: HTTP/REST</a></li><li><a href="#service-a-calls-service-b-via-rest">Service A calls Service B via REST</a></li><li><a href="#pattern-2-grpc">Pattern 2: gRPC</a></li><li><a href="#client-code">Client code</a></li><li><a href="#pattern-3-message-queues">Pattern 3: Message Queues</a></li><li><a href="#order-service-publishes-an-event">Order Service publishes an event</a></li><li><a href="#notification-service-consumes-the-event">Notification Service consumes the event</a></li><li><a href="#pattern-4-event-sourcing-and-cqrs">Pattern 4: Event Sourcing and CQRS</a></li><li><a href="#event-sourced-aggregate">Event sourced aggregate</a></li><li><a href="#pattern-5-saga-pattern">Pattern 5: Saga Pattern</a></li><li><a href="#choosing-the-right-pattern">Choosing the Right Pattern</a></li><li><a href="#practical-guidance">Practical Guidance</a></li><li><a href="#summary">Summary</a></li></ol></details>
+        <div class="article-body"><p>Microservices must communicate with each other to fulfill user requests. Choosing the right communication pattern is one of the most consequential architectural decisions. This guide covers the major patterns with their trade-offs and implementation strategies.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/microservices-communication.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/microservices-communication.png" alt="Microservices Communication Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Synchronous vs Asynchronous Communication</h2>
 <p>The foundational decision is whether services communicate synchronously (blocking, request-response) or asynchronously (event-driven, fire-and-forget).</p>
 <p><strong>Synchronous patterns</strong> are simpler to implement and debug. A service sends a request and waits for a response. These work well for read operations and workflows that need immediate confirmation.</p>
@@ -224,14 +232,8 @@
 <p>Start with HTTP/REST for simple services and migrate to gRPC when performance matters. Add message queues for cross-cutting concerns (notifications, audit, analytics). Use event sourcing only when you need an audit trail. Implement sagas for multi-service transactions.</p>
 <p>Most systems use a mix: synchronous calls for reads and queries, asynchronous events for updates and side effects. The key is ensuring that synchronous dependencies don't create a fragile system -- use timeouts, circuit breakers, and fallbacks to contain failures.</p>
 <h2>Summary</h2>
-<p>There is no single best microservices communication pattern. REST provides simplicity, gRPC delivers performance, message queues offer resilience, and event sourcing gives auditability. The right mix depends on your throughput requirements, consistency needs, and team expertise. Pattern choices should evolve with your system -- start simple with synchronous calls for straightforward operations and introduce asynchronous patterns when the coupling becomes a bottleneck.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a>, <a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (14)</summary><ol><li><a href="#synchronous-vs-asynchronous-communication">Synchronous vs Asynchronous Communication</a></li><li><a href="#pattern-1:-http-rest">Pattern 1: HTTP/REST</a></li><li><a href="#service-a-calls-service-b-via-rest">Service A calls Service B via REST</a></li><li><a href="#pattern-2:-grpc">Pattern 2: gRPC</a></li><li><a href="#client-code">Client code</a></li><li><a href="#pattern-3:-message-queues">Pattern 3: Message Queues</a></li><li><a href="#order-service-publishes-an-event">Order Service publishes an event</a></li><li><a href="#notification-service-consumes-the-event">Notification Service consumes the event</a></li><li><a href="#pattern-4:-event-sourcing-and-cqrs">Pattern 4: Event Sourcing and CQRS</a></li><li><a href="#event-sourced-aggregate">Event sourced aggregate</a></li><li><a href="#pattern-5:-saga-pattern">Pattern 5: Saga Pattern</a></li><li><a href="#choosing-the-right-pattern">Choosing the Right Pattern</a></li><li><a href="#practical-guidance">Practical Guidance</a></li><li><a href="#summary">Summary</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>There is no single best microservices communication pattern. REST provides simplicity, gRPC delivers performance, message queues offer resilience, and event sourcing gives auditability. The right mix depends on your throughput requirements, consistency needs, and team expertise. Pattern choices should evolve with your system -- start simple with synchronous calls for straightforward operations and introduce asynchronous patterns when the coupling becomes a bottleneck.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></li><li><a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></li><li><a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -239,29 +241,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Microservices%20Communication%20Patterns&url=https%3A//aidev.fit/en/tech/microservices-communication.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/microservices-communication.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Microservices%20Communication%20Patterns&url=https%3A//aidev.fit/en/tech/microservices-communication.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Microservices%20Communication%20Patterns&u=https%3A//aidev.fit/en/tech/microservices-communication.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Microservices%20Communication%20Patterns&body=https%3A//aidev.fit/en/tech/microservices-communication.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/microservices-communication.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Microservices%20Communication%20Patterns&url=https%3A//aidev.fit/en/tech/microservices-communication.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/microservices-communication.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Microservices%20Communication%20Patterns&url=https%3A//aidev.fit/en/tech/microservices-communication.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Microservices%20Communication%20Patterns&u=https%3A//aidev.fit/en/tech/microservices-communication.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Microservices%20Communication%20Patterns&body=https%3A//aidev.fit/en/tech/microservices-communication.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/microservices-communication.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/nginx-configuration-guide.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Nginx Configuration Guide</span></a><a href="/en/tech/edge-computing-2026-guide.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Edge Computing in 2026: A Complete Guide for Developers</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card"><span class="rc-title">API Gateway Implementation Guide</span><span class="rc-desc">Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformations, analytics, and </span></a><a href="/en/tech/service-discovery.html" class="related-card"><span class="rc-title">Service Discovery in Microservices</span><span class="rc-desc">Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, including health checking </span></a><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="rc-title">Nginx Configuration Guide</span><span class="rc-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting, and load balancing</span></a><a href="/en/tech/chaos-engineering.html" class="related-card"><span class="rc-title">Chaos Engineering: Principles and Practical Tools</span><span class="rc-desc">Learn chaos engineering principles with Chaos Monkey, LitmusChaos, and Gremlin, covering steady-state hypotheses, blast </span></a><a href="/en/tech/infrastructure-testing.html" class="related-card"><span class="rc-title">Infrastructure Testing with Terratest and Other Tools</span><span class="rc-desc">Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources, compliance validat</span></a><a href="/en/tech/terraform-infrastructure-code.html" class="related-card"><span class="rc-title">Terraform Infrastructure as Code</span><span class="rc-desc">Master Terraform for managing cloud infrastructure with state management, modules, and production best practices.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/nginx-configuration-guide.html" class="prev-next-btn prev-link">← Nginx Configuration Guide</a><a href="/en/tech/edge-computing-2026-guide.html" class="prev-next-btn next-link">Edge Computing in 2026: A Complete Guide for Developers →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card"><span class="related-card-title">API Gateway Implementation Guide</span><span class="related-card-desc">Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformati</span></a><a href="/en/tech/service-discovery.html" class="related-card"><span class="related-card-title">Service Discovery in Microservices</span><span class="related-card-desc">Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, includ</span></a><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="related-card-title">Nginx Configuration Guide</span><span class="related-card-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting</span></a><a href="/en/tech/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Principles and Practical Tools</span><span class="related-card-desc">Learn chaos engineering principles with Chaos Monkey, LitmusChaos, and Gremlin, covering steady-stat</span></a><a href="/en/tech/infrastructure-testing.html" class="related-card"><span class="related-card-title">Infrastructure Testing with Terratest and Other Tools</span><span class="related-card-desc">Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources</span></a><a href="/en/tech/terraform-infrastructure-code.html" class="related-card"><span class="related-card-title">Terraform Infrastructure as Code</span><span class="related-card-desc">Master Terraform for managing cloud infrastructure with state management, modules, and production be</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#synchronous-vs-asynchronous-communication">Synchronous vs Asynchronous Communication</a></li><li><a href="#pattern-1-httprest">Pattern 1: HTTP/REST</a></li><li><a href="#service-a-calls-service-b-via-rest">Service A calls Service B via REST</a></li><li><a href="#pattern-2-grpc">Pattern 2: gRPC</a></li><li><a href="#client-code">Client code</a></li><li><a href="#pattern-3-message-queues">Pattern 3: Message Queues</a></li><li><a href="#order-service-publishes-an-event">Order Service publishes an event</a></li><li><a href="#notification-service-consumes-the-event">Notification Service consumes the event</a></li><li><a href="#pattern-4-event-sourcing-and-cqrs">Pattern 4: Event Sourcing and CQRS</a></li><li><a href="#event-sourced-aggregate">Event sourced aggregate</a></li><li><a href="#pattern-5-saga-pattern">Pattern 5: Saga Pattern</a></li><li><a href="#choosing-the-right-pattern">Choosing the Right Pattern</a></li><li><a href="#practical-guidance">Practical Guidance</a></li><li><a href="#summary">Summary</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

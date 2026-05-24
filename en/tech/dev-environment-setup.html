@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Developer Environment Setup Guide
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">Programming</span>
         <span class="tag-cat">DevOps</span></div>
-      <h1 class="article-title">Developer Environment Setup Guide</h1>
-      <div class="article-meta"><time datetime="2025-12-02">Published 2025-12-02</time> · <time datetime="2026-05-05">Last active 2026-05-05</time> · 225 views · 0 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/dev-environment-setup.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/dev-environment-setup.png" alt="Developer Environment Setup Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>A well-configured developer environment is the foundation of productivity. Investing time in setting up your shell, editor, and tooling pays dividends every single day. This guide covers a complete development environment setup that works across platforms.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/dev-environment-setup.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/dev-environment-setup.png" alt="Developer Environment Setup Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Developer Environment Setup Guide</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-02">2025-12-02</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>225 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/dev-environment-setup.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/dev-environment-setup.png" alt="Developer Environment Setup Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (21)</summary><ol><li><a href="#operating-system-choice">Operating System Choice</a></li><li><a href="#shell-configuration">Shell Configuration</a></li><li><a href="#install-zsh-and-oh-my-zsh">Install Zsh and Oh My Zsh</a></li><li><a href="#zshrc">~/.zshrc</a></li><li><a href="#git-configuration">Git Configuration</a></li><li><a href="#gitignoreglobal">~/.gitignore_global</a></li><li><a href="#package-managers">Package Managers</a></li><li><a href="#nodejs-via-nvm-for-version-management">Node.js (via nvm for version management)</a></li><li><a href="#python">Python</a></li><li><a href="#rust">Rust</a></li><li><a href="#go">Go</a></li><li><a href="#editor-setup">Editor Setup</a></li><li><a href="#install-via-cli">Install via CLI</a></li><li><a href="#docker-setup">Docker Setup</a></li><li><a href="#ubuntu">Ubuntu</a></li><li><a href="#macos">macOS</a></li><li><a href="#dev-dependenciesyml">dev-dependencies.yml</a></li><li><a href="#local-https-with-mkcert">Local HTTPS with mkcert</a></li><li><a href="#dotfiles-management">Dotfiles Management</a></li><li><a href="#containerized-development-with-dev-containers">Containerized Development with Dev Containers</a></li><li><a href="#summary">Summary</a></li></ol></details>
+        <div class="article-body"><p>A well-configured developer environment is the foundation of productivity. Investing time in setting up your shell, editor, and tooling pays dividends every single day. This guide covers a complete development environment setup that works across platforms.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/dev-environment-setup.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/dev-environment-setup.png" alt="Developer Environment Setup Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Operating System Choice</h2>
 <p>Choose an operating system that supports the tools you need:</p>
 <ul>
@@ -271,14 +279,8 @@
 <p>}</p>
 <p>Every developer gets identical tools regardless of their host OS.</p>
 <h2>Summary</h2>
-<p>A productive developer environment is personal, but some investments benefit everyone: a modern shell with autosuggestions, a well-configured editor with formatting on save, Docker for reproducible dependencies, and dotfiles versioned in Git. The initial setup takes an afternoon, but the time saved over a career is immense. Start with the basics -- shell, Git, editor, and Docker -- then add specialized tools as your workflow requires them.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/ssh-security-hardening.html">SSH Security Hardening</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (21)</summary><ol><li><a href="#operating-system-choice">Operating System Choice</a></li><li><a href="#shell-configuration">Shell Configuration</a></li><li><a href="#install-zsh-and-oh-my-zsh">Install Zsh and Oh My Zsh</a></li><li><a href="#~-.zshrc">~/.zshrc</a></li><li><a href="#git-configuration">Git Configuration</a></li><li><a href="#~-.gitignore_global">~/.gitignore_global</a></li><li><a href="#package-managers">Package Managers</a></li><li><a href="#node.js-(via-nvm-for-version-management)">Node.js (via nvm for version management)</a></li><li><a href="#python">Python</a></li><li><a href="#rust">Rust</a></li><li><a href="#go">Go</a></li><li><a href="#editor-setup">Editor Setup</a></li><li><a href="#install-via-cli">Install via CLI</a></li><li><a href="#docker-setup">Docker Setup</a></li><li><a href="#ubuntu">Ubuntu</a></li><li><a href="#macos">macOS</a></li><li><a href="#dev-dependencies.yml">dev-dependencies.yml</a></li><li><a href="#local-https-with-mkcert">Local HTTPS with mkcert</a></li><li><a href="#dotfiles-management">Dotfiles Management</a></li><li><a href="#containerized-development-with-dev-containers">Containerized Development with Dev Containers</a></li><li><a href="#summary">Summary</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>A productive developer environment is personal, but some investments benefit everyone: a modern shell with autosuggestions, a well-configured editor with formatting on save, Docker for reproducible dependencies, and dotfiles versioned in Git. The initial setup takes an afternoon, but the time saved over a career is immense. Start with the basics -- shell, Git, editor, and Docker -- then add specialized tools as your workflow requires them.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/ssh-security-hardening.html">SSH Security Hardening</a></li><li><a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a></li><li><a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -286,29 +288,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Developer%20Environment%20Setup%20Guide&url=https%3A//aidev.fit/en/tech/dev-environment-setup.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/dev-environment-setup.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Developer%20Environment%20Setup%20Guide&url=https%3A//aidev.fit/en/tech/dev-environment-setup.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Developer%20Environment%20Setup%20Guide&u=https%3A//aidev.fit/en/tech/dev-environment-setup.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Developer%20Environment%20Setup%20Guide&body=https%3A//aidev.fit/en/tech/dev-environment-setup.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/dev-environment-setup.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Developer%20Environment%20Setup%20Guide&url=https%3A//aidev.fit/en/tech/dev-environment-setup.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/dev-environment-setup.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Developer%20Environment%20Setup%20Guide&url=https%3A//aidev.fit/en/tech/dev-environment-setup.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Developer%20Environment%20Setup%20Guide&u=https%3A//aidev.fit/en/tech/dev-environment-setup.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Developer%20Environment%20Setup%20Guide&body=https%3A//aidev.fit/en/tech/dev-environment-setup.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/dev-environment-setup.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/nginx-configuration-guide.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Nginx Configuration Guide</span></a><a href="/en/tech/edge-computing-2026-guide.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Edge Computing in 2026: A Complete Guide for Developers</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/infrastructure-testing.html" class="related-card"><span class="rc-title">Infrastructure Testing with Terratest and Other Tools</span><span class="rc-desc">Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources, compliance validat</span></a><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="rc-title">Nginx Configuration Guide</span><span class="rc-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting, and load balancing</span></a><a href="/en/tech/reverse-proxy-guide.html" class="related-card"><span class="rc-title">Reverse Proxy Guide</span><span class="rc-desc">Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load balancing.</span></a><a href="/en/tech/chaos-engineering.html" class="related-card"><span class="rc-title">Chaos Engineering: Principles and Practical Tools</span><span class="rc-desc">Learn chaos engineering principles with Chaos Monkey, LitmusChaos, and Gremlin, covering steady-state hypotheses, blast </span></a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card"><span class="rc-title">Helm Charts: Kubernetes Package Management</span><span class="rc-desc">A comprehensive guide to Helm chart structure, templates, values management, dependency handling, and CI/CD integration </span></a><a href="/en/tech/monitoring-alerting-setup.html" class="related-card"><span class="rc-title">Monitoring and Alerting Setup</span><span class="rc-desc">Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/nginx-configuration-guide.html" class="prev-next-btn prev-link">← Nginx Configuration Guide</a><a href="/en/tech/edge-computing-2026-guide.html" class="prev-next-btn next-link">Edge Computing in 2026: A Complete Guide for Developers →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/infrastructure-testing.html" class="related-card"><span class="related-card-title">Infrastructure Testing with Terratest and Other Tools</span><span class="related-card-desc">Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources</span></a><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="related-card-title">Nginx Configuration Guide</span><span class="related-card-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting</span></a><a href="/en/tech/reverse-proxy-guide.html" class="related-card"><span class="related-card-title">Reverse Proxy Guide</span><span class="related-card-desc">Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load </span></a><a href="/en/tech/chaos-engineering.html" class="related-card"><span class="related-card-title">Chaos Engineering: Principles and Practical Tools</span><span class="related-card-desc">Learn chaos engineering principles with Chaos Monkey, LitmusChaos, and Gremlin, covering steady-stat</span></a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card"><span class="related-card-title">Helm Charts: Kubernetes Package Management</span><span class="related-card-desc">A comprehensive guide to Helm chart structure, templates, values management, dependency handling, an</span></a><a href="/en/tech/monitoring-alerting-setup.html" class="related-card"><span class="related-card-title">Monitoring and Alerting Setup</span><span class="related-card-desc">Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerti</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#operating-system-choice">Operating System Choice</a></li><li><a href="#shell-configuration">Shell Configuration</a></li><li><a href="#install-zsh-and-oh-my-zsh">Install Zsh and Oh My Zsh</a></li><li><a href="#zshrc">~/.zshrc</a></li><li><a href="#git-configuration">Git Configuration</a></li><li><a href="#gitignoreglobal">~/.gitignore_global</a></li><li><a href="#package-managers">Package Managers</a></li><li><a href="#nodejs-via-nvm-for-version-management">Node.js (via nvm for version management)</a></li><li><a href="#python">Python</a></li><li><a href="#rust">Rust</a></li><li><a href="#go">Go</a></li><li><a href="#editor-setup">Editor Setup</a></li><li><a href="#install-via-cli">Install via CLI</a></li><li><a href="#docker-setup">Docker Setup</a></li><li><a href="#ubuntu">Ubuntu</a></li><li><a href="#macos">macOS</a></li><li><a href="#dev-dependenciesyml">dev-dependencies.yml</a></li><li><a href="#local-https-with-mkcert">Local HTTPS with mkcert</a></li><li><a href="#dotfiles-management">Dotfiles Management</a></li><li><a href="#containerized-development-with-dev-containers">Containerized Development with Dev Containers</a></li><li><a href="#summary">Summary</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

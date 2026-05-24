@@ -101,19 +101,27 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Horizontal Scaling Strategies
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span>
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
-      <h1 class="article-title">Database Horizontal Scaling Strategies</h1>
-      <div class="article-meta"><time datetime="2026-04-15">Published 2026-04-15</time> · <time datetime="2026-05-05">Last active 2026-05-05</time> · 916 views · 6 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/database-horizontal-scaling.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-horizontal-scaling.png" alt="Database Horizontal Scaling Strategies" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Horizontal scaling distributes database load across multiple machines. Unlike vertical scaling (upgrading to a bigger server), horizontal scaling adds more servers to handle increased load. This approach provides near-linear scalability but adds architectural complexity.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-horizontal-scaling.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-horizontal-scaling.png" alt="Database Horizontal Scaling Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Database Horizontal Scaling Strategies</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-15">2026-04-15</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>916 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/database-horizontal-scaling.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-horizontal-scaling.png" alt="Database Horizontal Scaling Strategies" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#sharding">Sharding</a></li><li><a href="#read-replicas">Read Replicas</a></li><li><a href="#database-federation">Database Federation</a></li><li><a href="#distributed-sql">Distributed SQL</a></li><li><a href="#choosing-a-strategy">Choosing a Strategy</a></li></ol></details>
+        <div class="article-body"><p>Horizontal scaling distributes database load across multiple machines. Unlike vertical scaling (upgrading to a bigger server), horizontal scaling adds more servers to handle increased load. This approach provides near-linear scalability but adds architectural complexity.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-horizontal-scaling.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-horizontal-scaling.png" alt="Database Horizontal Scaling Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Sharding</h2>
 <p>Sharding splits data across multiple database instances based on a shard key. Each shard holds a subset of the data. Sharding distributes both read and write load, making it suitable for write-heavy workloads.</p>
 <p>Choosing the right shard key is critical. A good shard key evenly distributes data and queries. Common strategies include hash-based sharding (shard key % N), range-based sharding (user IDs 1-10000 on shard A, 10001-20000 on shard B), and geographic sharding (US customers on one shard, EU on another).</p>
@@ -127,14 +135,8 @@
 <p>Modern distributed SQL databases (CockroachDB, YugabyteDB, Google Spanner) provide horizontal scaling with SQL semantics. They automatically distribute and replicate data across nodes. Applications use standard SQL without sharding logic.</p>
 <p>Distributed SQL databases offer the scalability of NoSQL with the consistency and query capabilities of SQL. The trade-off is higher latency for distributed transactions and higher resource overhead.</p>
 <h2>Choosing a Strategy</h2>
-<p>Use read replicas when reads far exceed writes and eventual consistency is acceptable. Use sharding when write throughput exceeds a single node's capacity. Use federation when different data domains have different scaling requirements. Consider distributed SQL for greenfield applications that anticipate massive scale.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#sharding">Sharding</a></li><li><a href="#read-replicas">Read Replicas</a></li><li><a href="#database-federation">Database Federation</a></li><li><a href="#distributed-sql">Distributed SQL</a></li><li><a href="#choosing-a-strategy">Choosing a Strategy</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Use read replicas when reads far exceed writes and eventual consistency is acceptable. Use sharding when write throughput exceeds a single node's capacity. Use federation when different data domains have different scaling requirements. Consider distributed SQL for greenfield applications that anticipate massive scale.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></li><li><a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></li><li><a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -142,29 +144,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Database%20Horizontal%20Scaling%20Strategies&url=https%3A//aidev.fit/en/database/database-horizontal-scaling.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-horizontal-scaling.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Database%20Horizontal%20Scaling%20Strategies&url=https%3A//aidev.fit/en/database/database-horizontal-scaling.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Database%20Horizontal%20Scaling%20Strategies&u=https%3A//aidev.fit/en/database/database-horizontal-scaling.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Database%20Horizontal%20Scaling%20Strategies&body=https%3A//aidev.fit/en/database/database-horizontal-scaling.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-horizontal-scaling.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Database%20Horizontal%20Scaling%20Strategies&url=https%3A//aidev.fit/en/database/database-horizontal-scaling.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-horizontal-scaling.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Database%20Horizontal%20Scaling%20Strategies&url=https%3A//aidev.fit/en/database/database-horizontal-scaling.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Database%20Horizontal%20Scaling%20Strategies&u=https%3A//aidev.fit/en/database/database-horizontal-scaling.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Database%20Horizontal%20Scaling%20Strategies&body=https%3A//aidev.fit/en/database/database-horizontal-scaling.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-horizontal-scaling.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-query-profiling.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Database Query Profiling: Finding and Fixing Performance Bottlene</span></a><a href="/en/database/database-backup-to-s3.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Database Backup Strategies to Object Storage</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/database/read-replicas.html" class="related-card"><span class="rc-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="rc-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, a</span></a><a href="/en/database/database-scalability.html" class="related-card"><span class="rc-title">Database Scalability</span><span class="rc-desc">Strategies for database scalability: vertical scaling, horizontal scaling, read replicas, and caching.</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="rc-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="rc-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, a</span></a><a href="/en/database/database-cost-optimization.html" class="related-card"><span class="rc-title">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</span><span class="rc-desc">Learn database cost optimization strategies: right-sizing instances, reserved instances, storage tiering, serverless dat</span></a><a href="/en/database/database-disaster-recovery.html" class="related-card"><span class="rc-title">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</span><span class="rc-desc">Learn database disaster recovery planning: RPO and RPO definitions, cross-region replication strategies, backup testing,</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="rc-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="rc-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategies, rollback pattern</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-query-profiling.html" class="prev-next-btn prev-link">← Database Query Profiling: Finding and Fixing Performance Bottlenecks</a><a href="/en/database/database-backup-to-s3.html" class="prev-next-btn next-link">Database Backup Strategies to Object Storage →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/read-replicas.html" class="related-card"><span class="related-card-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="related-card-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing str</span></a><a href="/en/database/database-scalability.html" class="related-card"><span class="related-card-title">Database Scalability</span><span class="related-card-desc">Strategies for database scalability: vertical scaling, horizontal scaling, read replicas, and cachin</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="related-card-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="related-card-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monit</span></a><a href="/en/database/database-cost-optimization.html" class="related-card"><span class="related-card-title">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</span><span class="related-card-desc">Learn database cost optimization strategies: right-sizing instances, reserved instances, storage tie</span></a><a href="/en/database/database-disaster-recovery.html" class="related-card"><span class="related-card-title">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</span><span class="related-card-desc">Learn database disaster recovery planning: RPO and RPO definitions, cross-region replication strateg</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="related-card-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="related-card-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategi</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#sharding">Sharding</a></li><li><a href="#read-replicas">Read Replicas</a></li><li><a href="#database-federation">Database Federation</a></li><li><a href="#distributed-sql">Distributed SQL</a></li><li><a href="#choosing-a-strategy">Choosing a Strategy</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

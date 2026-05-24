@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
-      <h1 class="article-title">Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h1>
-      <div class="article-meta"><time datetime="2026-04-08">Published 2026-04-08</time> · <time datetime="2026-05-01">Last active 2026-05-01</time> · 137 views · 0 replies · 8 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/query-parameters.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/query-parameters.png" alt="Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection </p><picture><source srcset="https://aidev.fit/images/covers/en/database/query-parameters.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/query-parameters.png" alt="Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-08">2026-04-08</time>
+          <span class="meta-sep">·</span>
+          <span>8 min read</span>
+          <span class="meta-sep">·</span>
+          <span>137 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/query-parameters.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/query-parameters.png" alt="Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (11)</summary><ol><li><a href="#dangerous-never-do-this">DANGEROUS: Never do this</a></li><li><a href="#safe-use-parameterized-query">SAFE: Use parameterized query</a></li><li><a href="#psycopg2-automatically-caches-prepared-statements-per-connection">psycopg2 automatically caches prepared statements per connection</a></li><li><a href="#first-call-prepares-and-executes">First call: prepares and executes</a></li><li><a href="#second-call-reuses-cached-prepared-statement">Second call: reuses cached prepared statement</a></li><li><a href="#without-parameterization-type-conversion-issues">Without parameterization: type conversion issues</a></li><li><a href="#f-string-produces--where-createdat--2026-05-12-subtraction">f-string produces: ... WHERE created_at = 2026-05-12 (subtraction!)</a></li><li><a href="#with-parameterization-driver-handles-quoting">With parameterization: driver handles quoting</a></li><li><a href="#good">Good</a></li><li><a href="#bad-f-string-or-string-concatenation">Bad: f-string or string concatenation</a></li><li><a href="#uses-server-side-prepared-statement-for-all-rows">Uses server-side prepared statement for all rows</a></li></ol></details>
+        <div class="article-body"><p>Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection </p><picture><source srcset="https://aidev.fit/images/covers/en/database/query-parameters.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/query-parameters.png" alt="Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Parameterized queries are simultaneously the most important security practice and a significant performance optimization. This article explains how bind parameters work, how PostgreSQL caches query plans, and why parameterization is non-negotiable. </p>
 <p>SQL Injection: The Problem </p>
 <p>Without parameterization, user input is concatenated into SQL strings: </p>
@@ -250,14 +258,8 @@
 <li><strong>Escaping is not parameterization</strong> : <code>escape_string()</code> or <code>quote_ident()</code> are error-prone. Use bind parameters.</li>
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Dynamic identifiers cannot be parameterized</strong> : Table/column names must be validated separately: <code>python # Column name cannot be a bind parameter! cursor.execute("SELECT %s FROM users", ("email",)) # Always validate dynamic identifiers against a whitelist allowed_columns = {'email', 'name', 'age'} if column not in allowed_columns: raise ValueError(f"Invalid column: {column}")</code> 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Stored procedures still need parameterization</strong> : Do not concatenate input inside procedures. </p>
-<p>Parameterization is the single most impactful practice for database security and performance. It is supported by every modern database driver and should be used for every query that includes any data from outside the SQL text.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (11)</summary><ol><li><a href="#dangerous:-never-do-this">DANGEROUS: Never do this</a></li><li><a href="#safe:-use-parameterized-query">SAFE: Use parameterized query</a></li><li><a href="#psycopg2-automatically-caches-prepared-statements-per-connection">psycopg2 automatically caches prepared statements per connection</a></li><li><a href="#first-call:-prepares-and-executes">First call: prepares and executes</a></li><li><a href="#second-call:-reuses-cached-prepared-statement">Second call: reuses cached prepared statement</a></li><li><a href="#without-parameterization:-type-conversion-issues">Without parameterization: type conversion issues</a></li><li><a href="#f-string-produces:-...-where-created_at-=-2026-05-12-(subtraction!)">f-string produces: ... WHERE created_at = 2026-05-12 (subtraction!)</a></li><li><a href="#with-parameterization:-driver-handles-quoting">With parameterization: driver handles quoting</a></li><li><a href="#good">Good</a></li><li><a href="#bad:-f-string-or-string-concatenation">Bad: f-string or string concatenation</a></li><li><a href="#uses-server-side-prepared-statement-for-all-rows">Uses server-side prepared statement for all rows</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Parameterization is the single most impactful practice for database security and performance. It is supported by every modern database driver and should be used for every query that includes any data from outside the SQL text.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a></li><li><a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></li><li><a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -265,29 +267,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Query%20Parameterization%3A%20Bind%20Parameters%2C%20Prepared%20Statements%2C%20and%20SQL%20Injection&url=https%3A//aidev.fit/en/database/query-parameters.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/query-parameters.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Query%20Parameterization%3A%20Bind%20Parameters%2C%20Prepared%20Statements%2C%20and%20SQL%20Injection&url=https%3A//aidev.fit/en/database/query-parameters.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Query%20Parameterization%3A%20Bind%20Parameters%2C%20Prepared%20Statements%2C%20and%20SQL%20Injection&u=https%3A//aidev.fit/en/database/query-parameters.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Query%20Parameterization%3A%20Bind%20Parameters%2C%20Prepared%20Statements%2C%20and%20SQL%20Injection&body=https%3A//aidev.fit/en/database/query-parameters.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/query-parameters.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Query%20Parameterization%3A%20Bind%20Parameters%2C%20Prepared%20Statements%2C%20and%20SQL%20Injection&url=https%3A//aidev.fit/en/database/query-parameters.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/query-parameters.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Query%20Parameterization%3A%20Bind%20Parameters%2C%20Prepared%20Statements%2C%20and%20SQL%20Injection&url=https%3A//aidev.fit/en/database/query-parameters.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Query%20Parameterization%3A%20Bind%20Parameters%2C%20Prepared%20Statements%2C%20and%20SQL%20Injection&u=https%3A//aidev.fit/en/database/query-parameters.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Query%20Parameterization%3A%20Bind%20Parameters%2C%20Prepared%20Statements%2C%20and%20SQL%20Injection&body=https%3A//aidev.fit/en/database/query-parameters.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/query-parameters.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/schema-design.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Schema Design Patterns: Normalization, Denormalization, Naming Co</span></a><a href="/en/database/index-maintenance.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/database/stored-procedures.html" class="related-card"><span class="rc-title">Stored Procedures vs Functions: When to Use, Languages, Security</span><span class="rc-desc">An in-depth guide to stored procedures and functions in PostgreSQL and SQL Server. Learn language options, security cons</span></a><a href="/en/database/time-series-postgresql.html" class="related-card"><span class="rc-title">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</span><span class="rc-desc">Learn time-series data management with PostgreSQL and TimescaleDB. Hypertables, continuous aggregates, data retention, a</span></a><a href="/en/database/change-data-capture.html" class="related-card"><span class="rc-title">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</span><span class="rc-desc">Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream processing integration. Rea</span></a><a href="/en/database/composite-indexes.html" class="related-card"><span class="rc-title">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</span><span class="rc-desc">Master composite indexes in PostgreSQL: column order optimization, covering indexes, partial indexes, and index-only sca</span></a><a href="/en/database/couchbase-guide.html" class="related-card"><span class="rc-title">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</span><span class="rc-desc">Comprehensive guide to Couchbase: N1QL query language, document data model, clustering architecture, integrated caching,</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="rc-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="rc-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, a</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/schema-design.html" class="prev-next-btn prev-link">← Schema Design Patterns: Normalization, Denormalization, Naming Conventions</a><a href="/en/database/index-maintenance.html" class="prev-next-btn next-link">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/stored-procedures.html" class="related-card"><span class="related-card-title">Stored Procedures vs Functions: When to Use, Languages, Security</span><span class="related-card-desc">An in-depth guide to stored procedures and functions in PostgreSQL and SQL Server. Learn language op</span></a><a href="/en/database/time-series-postgresql.html" class="related-card"><span class="related-card-title">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</span><span class="related-card-desc">Learn time-series data management with PostgreSQL and TimescaleDB. Hypertables, continuous aggregate</span></a><a href="/en/database/change-data-capture.html" class="related-card"><span class="related-card-title">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</span><span class="related-card-desc">Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream process</span></a><a href="/en/database/composite-indexes.html" class="related-card"><span class="related-card-title">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</span><span class="related-card-desc">Master composite indexes in PostgreSQL: column order optimization, covering indexes, partial indexes</span></a><a href="/en/database/couchbase-guide.html" class="related-card"><span class="related-card-title">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</span><span class="related-card-desc">Comprehensive guide to Couchbase: N1QL query language, document data model, clustering architecture,</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="related-card-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="related-card-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monit</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#dangerous-never-do-this">DANGEROUS: Never do this</a></li><li><a href="#safe-use-parameterized-query">SAFE: Use parameterized query</a></li><li><a href="#psycopg2-automatically-caches-prepared-statements-per-connection">psycopg2 automatically caches prepared statements per connection</a></li><li><a href="#first-call-prepares-and-executes">First call: prepares and executes</a></li><li><a href="#second-call-reuses-cached-prepared-statement">Second call: reuses cached prepared statement</a></li><li><a href="#without-parameterization-type-conversion-issues">Without parameterization: type conversion issues</a></li><li><a href="#f-string-produces--where-createdat--2026-05-12-subtraction">f-string produces: ... WHERE created_at = 2026-05-12 (subtraction!)</a></li><li><a href="#with-parameterization-driver-handles-quoting">With parameterization: driver handles quoting</a></li><li><a href="#good">Good</a></li><li><a href="#bad-f-string-or-string-concatenation">Bad: f-string or string concatenation</a></li><li><a href="#uses-server-side-prepared-statement-for-all-rows">Uses server-side prepared statement for all rows</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

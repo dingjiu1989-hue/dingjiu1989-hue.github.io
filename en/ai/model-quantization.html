@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Model Quantization: Making LLMs Smaller and Faster
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">AI</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">AI</span>
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
-      <h1 class="article-title">Model Quantization: Making LLMs Smaller and Faster</h1>
-      <div class="article-meta"><time datetime="2026-02-20">Published 2026-02-20</time> · <time datetime="2026-04-29">Last active 2026-04-29</time> · 143 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/model-quantization.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/model-quantization.png" alt="Model Quantization: Making LLMs Smaller and Faster" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Model quantization reduces the precision of neural network weights, making models smaller and faster with minimal accuracy loss. This enables running large language models on consumer hardware, edge devices, and cost-effective inference servers.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/model-quantization.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/model-quantization.png" alt="Model Quantization: Making LLMs Smaller and Faster" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Model Quantization: Making LLMs Smaller and Faster</h1>
+        <div class="article-meta">
+          <time datetime="2026-02-20">2026-02-20</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>143 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/model-quantization.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/model-quantization.png" alt="Model Quantization: Making LLMs Smaller and Faster" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#quantization-fundamentals">Quantization Fundamentals</a></li><li><a href="#post-training-quantization">Post-Training Quantization</a></li><li><a href="#gguf-and-llamacpp">GGUF and llama.cpp</a></li><li><a href="#quantization-aware-training">Quantization-Aware Training</a></li><li><a href="#deployment-decisions">Deployment Decisions</a></li></ol></details>
+        <div class="article-body"><p>Model quantization reduces the precision of neural network weights, making models smaller and faster with minimal accuracy loss. This enables running large language models on consumer hardware, edge devices, and cost-effective inference servers.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/model-quantization.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/model-quantization.png" alt="Model Quantization: Making LLMs Smaller and Faster" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Quantization Fundamentals</h2>
 <p>Models are typically trained in FP32 (32-bit floating point) or BF16 (16-bit bfloat). Quantization converts weights to lower precision: INT8 (8-bit), INT4 (4-bit), or even 2-bit. Weight size decreases proportionally—INT4 uses 1/8 the memory of FP32.</p>
 <p>Quantization introduces quantization error. The trade-off is between compression ratio and accuracy. Most models retain 95-99% of their accuracy at INT4. Some models handle quantization better than others—larger models tend to quantize better.</p>
@@ -127,14 +135,8 @@
 <p>QAT (Quantization-Aware Training) simulates quantization during training, producing models that maintain higher accuracy after quantization. The training process inserts fake quantization operations that model the quantization error.</p>
 <p>QAT requires full training infrastructure and access to the original training data. It is more effective than PTQ for very low-bit quantization (2-bit, 3-bit) and for quantizing specific layers that are sensitive to precision loss.</p>
 <h2>Deployment Decisions</h2>
-<p>Use INT4 quantization for memory-constrained environments (consumer GPUs with 8-16GB VRAM, mobile devices). Use INT8 for latency-sensitive serving (faster than FP16 with similar quality). Use FP16/BF16 when accuracy is critical and hardware supports it (A100, H100). Always evaluate accuracy on your specific task before deploying quantized models.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/prompt-management.html">Prompt Management: Versioning, Testing, Collaboration, Deployment</a>, <a href="/en/ai/ai-safety.html">AI Safety: Responsible Development and Deployment</a>, <a href="/en/ai/prompt-engineering-guide.html">Prompt Engineering Guide for LLMs</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#quantization-fundamentals">Quantization Fundamentals</a></li><li><a href="#post-training-quantization">Post-Training Quantization</a></li><li><a href="#gguf-and-llama.cpp">GGUF and llama.cpp</a></li><li><a href="#quantization-aware-training">Quantization-Aware Training</a></li><li><a href="#deployment-decisions">Deployment Decisions</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Use INT4 quantization for memory-constrained environments (consumer GPUs with 8-16GB VRAM, mobile devices). Use INT8 for latency-sensitive serving (faster than FP16 with similar quality). Use FP16/BF16 when accuracy is critical and hardware supports it (A100, H100). Always evaluate accuracy on your specific task before deploying quantized models.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/prompt-management.html">Prompt Management: Versioning, Testing, Collaboration, Deployment</a></li><li><a href="/en/ai/ai-safety.html">AI Safety: Responsible Development and Deployment</a></li><li><a href="/en/ai/prompt-engineering-guide.html">Prompt Engineering Guide for LLMs</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -142,34 +144,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Model%20Quantization%3A%20Making%20LLMs%20Smaller%20and%20Faster&url=https%3A//aidev.fit/en/ai/model-quantization.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/model-quantization.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Model%20Quantization%3A%20Making%20LLMs%20Smaller%20and%20Faster&url=https%3A//aidev.fit/en/ai/model-quantization.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Model%20Quantization%3A%20Making%20LLMs%20Smaller%20and%20Faster&u=https%3A//aidev.fit/en/ai/model-quantization.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Model%20Quantization%3A%20Making%20LLMs%20Smaller%20and%20Faster&body=https%3A//aidev.fit/en/ai/model-quantization.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/model-quantization.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/multimodal-models.html" class="prev-next-btn prev-link">← Multimodal AI Models: Vision, Audio, and Text</a><a href="/en/ai/rag-retrieval-optimization.html" class="prev-next-btn next-link">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/model-deployment.html" class="related-card"><span class="related-card-title">Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization</span><span class="related-card-desc">Deploy LLMs in production with vLLM, Hugging Face TGI, and ONNX Runtime. Learn quantization techniqu</span></a><a href="/en/ai/ai-model-deployment-strategies.html" class="related-card"><span class="related-card-title">AI Model Deployment: Strategies for Production LLM Serving</span><span class="related-card-desc">Deploy LLMs to production: serving infrastructure, batching, caching, load balancing, and cost optim</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="related-card-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="related-card-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fa</span></a><a href="/en/ai/mlops-pipeline.html" class="related-card"><span class="related-card-title">MLOps Pipeline: From Training to Production</span><span class="related-card-desc">Build MLOps pipelines for machine learning: data validation, model training, evaluation, deployment,</span></a><a href="/en/ai/model-evaluation-harness.html" class="related-card"><span class="related-card-title">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</span><span class="related-card-desc">Evaluate LLM models systematically using benchmarks, human evaluation, LLM-as-judge frameworks, and </span></a><a href="/en/ai/ai-api-gateway.html" class="related-card"><span class="related-card-title">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</span><span class="related-card-desc">Design an AI API gateway for multi-provider LLM access: load balancing across models, automatic fall</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Model%20Quantization%3A%20Making%20LLMs%20Smaller%20and%20Faster&url=https%3A//aidev.fit/en/ai/model-quantization.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/model-quantization.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Model%20Quantization%3A%20Making%20LLMs%20Smaller%20and%20Faster&url=https%3A//aidev.fit/en/ai/model-quantization.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Model%20Quantization%3A%20Making%20LLMs%20Smaller%20and%20Faster&u=https%3A//aidev.fit/en/ai/model-quantization.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Model%20Quantization%3A%20Making%20LLMs%20Smaller%20and%20Faster&body=https%3A//aidev.fit/en/ai/model-quantization.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/model-quantization.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/multimodal-models.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Multimodal AI Models: Vision, Audio, and Text</span></a><a href="/en/ai/rag-retrieval-optimization.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Tran</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/model-deployment.html" class="related-card"><span class="rc-title">Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization</span><span class="rc-desc">Deploy LLMs in production with vLLM, Hugging Face TGI, and ONNX Runtime. Learn quantization techniques, GPU memory optim</span></a><a href="/en/ai/ai-model-deployment-strategies.html" class="related-card"><span class="rc-title">AI Model Deployment: Strategies for Production LLM Serving</span><span class="rc-desc">Deploy LLMs to production: serving infrastructure, batching, caching, load balancing, and cost optimization.</span></a><a href="/en/ai/ai-gateway.html" class="related-card"><span class="rc-title">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</span><span class="rc-desc">Build and deploy an AI gateway for production LLM applications: API routing, rate limiting, model fallbacks, cost manage</span></a><a href="/en/ai/mlops-pipeline.html" class="related-card"><span class="rc-title">MLOps Pipeline: From Training to Production</span><span class="rc-desc">Build MLOps pipelines for machine learning: data validation, model training, evaluation, deployment, and monitoring.</span></a><a href="/en/ai/model-evaluation-harness.html" class="related-card"><span class="rc-title">Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production</span><span class="rc-desc">Evaluate LLM models systematically using benchmarks, human evaluation, LLM-as-judge frameworks, and production A/B testi</span></a><a href="/en/ai/ai-api-gateway.html" class="related-card"><span class="rc-title">AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability</span><span class="rc-desc">Design an AI API gateway for multi-provider LLM access: load balancing across models, automatic fallback on failures, co</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#quantization-fundamentals">Quantization Fundamentals</a></li><li><a href="#post-training-quantization">Post-Training Quantization</a></li><li><a href="#gguf-and-llamacpp">GGUF and llama.cpp</a></li><li><a href="#quantization-aware-training">Quantization-Aware Training</a></li><li><a href="#deployment-decisions">Deployment Decisions</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

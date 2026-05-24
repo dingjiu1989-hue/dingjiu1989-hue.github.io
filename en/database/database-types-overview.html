@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
-      <h1 class="article-title">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</h1>
-      <div class="article-meta"><time datetime="2026-04-03">Published 2026-04-03</time> · <time datetime="2026-04-30">Last active 2026-04-30</time> · 213 views · 0 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/database-types-overview.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-types-overview.png" alt="Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector </p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-types-overview.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-types-overview.png" alt="Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-03">2026-04-03</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>213 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/database-types-overview.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-types-overview.png" alt="Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector </p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-types-overview.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-types-overview.png" alt="Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Choosing the right database type is one of the most consequential architectural decisions. Each type optimizes for different access patterns, consistency guarantees, and scalability requirements. This article surveys the major database types and their ideal use cases. </p>
 <p>Relational Databases (PostgreSQL, MySQL, SQL Server) </p>
 <p>Relational databases organize data into tables with predefined schemas, linked by foreign keys. They provide ACID transactions and powerful querying via SQL. </p>
@@ -345,14 +353,8 @@
 <p>Many modern databases support multiple models. PostgreSQL is the best example: with JSONB, PostGIS, pgvector, and extensions, it handles relational, document, geospatial, and vector workloads in a single system. </p>
 <p>Choosing the Right Database </p>
 <p>| If you need... | Consider... | |----------------|-------------| | Strong consistency, complex joins | PostgreSQL, MySQL | | Flexible schemas, rapid development | MongoDB | | Sub-millisecond lookups, caching | Redis | | Relationship-heavy traversal | Neo4j | | High-volume time-series | TimescaleDB, InfluxDB | | Semantic similarity search | pgvector, Pinecone, Milvus | | All of the above | PostgreSQL with extensions | </p>
-<p>The polyglot persistence approach uses multiple databases for different workloads. Start with a general-purpose database for most needs, and add specialized databases only when your requirements exceed what your primary database can provide.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>The polyglot persistence approach uses multiple databases for different workloads. Start with a general-purpose database for most needs, and add specialized databases only when your requirements exceed what your primary database can provide.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a></li><li><a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></li><li><a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -360,29 +362,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Database%20Types%20Overview%3A%20Relational%2C%20Document%2C%20Key-Value%2C%20Graph%2C%20Time-Series%2C%20Vector&url=https%3A//aidev.fit/en/database/database-types-overview.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-types-overview.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Database%20Types%20Overview%3A%20Relational%2C%20Document%2C%20Key-Value%2C%20Graph%2C%20Time-Series%2C%20Vector&url=https%3A//aidev.fit/en/database/database-types-overview.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Database%20Types%20Overview%3A%20Relational%2C%20Document%2C%20Key-Value%2C%20Graph%2C%20Time-Series%2C%20Vector&u=https%3A//aidev.fit/en/database/database-types-overview.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Database%20Types%20Overview%3A%20Relational%2C%20Document%2C%20Key-Value%2C%20Graph%2C%20Time-Series%2C%20Vector&body=https%3A//aidev.fit/en/database/database-types-overview.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-types-overview.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Database%20Types%20Overview%3A%20Relational%2C%20Document%2C%20Key-Value%2C%20Graph%2C%20Time-Series%2C%20Vector&url=https%3A//aidev.fit/en/database/database-types-overview.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-types-overview.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Database%20Types%20Overview%3A%20Relational%2C%20Document%2C%20Key-Value%2C%20Graph%2C%20Time-Series%2C%20Vector&url=https%3A//aidev.fit/en/database/database-types-overview.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Database%20Types%20Overview%3A%20Relational%2C%20Document%2C%20Key-Value%2C%20Graph%2C%20Time-Series%2C%20Vector&u=https%3A//aidev.fit/en/database/database-types-overview.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Database%20Types%20Overview%3A%20Relational%2C%20Document%2C%20Key-Value%2C%20Graph%2C%20Time-Series%2C%20Vector&body=https%3A//aidev.fit/en/database/database-types-overview.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-types-overview.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-transactions.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoin</span></a><a href="/en/database/database-containerization.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Databases in Containers: StatefulSets, Persistent Volumes, and Ba</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/database/nosql-guide.html" class="related-card"><span class="rc-title">NoSQL Databases Guide</span><span class="rc-desc">A guide to NoSQL database types: document, key-value, wide-column, graph, and time-series with use cases.</span></a><a href="/en/database/couchbase-guide.html" class="related-card"><span class="rc-title">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</span><span class="rc-desc">Comprehensive guide to Couchbase: N1QL query language, document data model, clustering architecture, integrated caching,</span></a><a href="/en/database/index-types.html" class="related-card"><span class="rc-title">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</span><span class="rc-desc">Comprehensive guide to PostgreSQL index types: B-tree, Hash, GiST, GIN, SP-GiST, and BRIN. Learn when and why to use eac</span></a><a href="/en/database/sql-vs-nosql-2026.html" class="related-card"><span class="rc-title">SQL vs NoSQL in 2026</span><span class="rc-desc">Comparing SQL and NoSQL databases in 2026 with NewSQL revival, document DB maturity, and use cases.</span></a><a href="/en/database/backup-types.html" class="related-card"><span class="rc-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</span><span class="rc-desc">Explore database backup strategies including full, incremental, differential backups, WAL archiving, and point-in-time r</span></a><a href="/en/database/database-views.html" class="related-card"><span class="rc-title">Database Views: Simple, Materialized, and Updateable Views</span><span class="rc-desc">Learn about database views including simple views, materialized views, updateable views, and the performance trade-offs </span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-transactions.html" class="prev-next-btn prev-link">← Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a><a href="/en/database/database-containerization.html" class="prev-next-btn next-link">Databases in Containers: StatefulSets, Persistent Volumes, and Backup →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/nosql-guide.html" class="related-card"><span class="related-card-title">NoSQL Databases Guide</span><span class="related-card-desc">A guide to NoSQL database types: document, key-value, wide-column, graph, and time-series with use c</span></a><a href="/en/database/couchbase-guide.html" class="related-card"><span class="related-card-title">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</span><span class="related-card-desc">Comprehensive guide to Couchbase: N1QL query language, document data model, clustering architecture,</span></a><a href="/en/database/index-types.html" class="related-card"><span class="related-card-title">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</span><span class="related-card-desc">Comprehensive guide to PostgreSQL index types: B-tree, Hash, GiST, GIN, SP-GiST, and BRIN. Learn whe</span></a><a href="/en/database/sql-vs-nosql-2026.html" class="related-card"><span class="related-card-title">SQL vs NoSQL in 2026</span><span class="related-card-desc">Comparing SQL and NoSQL databases in 2026 with NewSQL revival, document DB maturity, and use cases.</span></a><a href="/en/database/backup-types.html" class="related-card"><span class="related-card-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</span><span class="related-card-desc">Explore database backup strategies including full, incremental, differential backups, WAL archiving,</span></a><a href="/en/database/database-views.html" class="related-card"><span class="related-card-title">Database Views: Simple, Materialized, and Updateable Views</span><span class="related-card-desc">Learn about database views including simple views, materialized views, updateable views, and the per</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

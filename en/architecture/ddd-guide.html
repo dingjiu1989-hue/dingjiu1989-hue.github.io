@@ -101,17 +101,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Domain-Driven Design Fundamentals
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span></div>
-      <h1 class="article-title">Domain-Driven Design Fundamentals</h1>
-      <div class="article-meta"><time datetime="2025-12-26">Published 2025-12-26</time> · <time datetime="2026-04-04">Last active 2026-04-04</time> · 121 views · 0 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/ddd-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/ddd-guide.png" alt="Domain-Driven Design Fundamentals" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Domain-Driven Design (DDD) is a software development approach introduced by Eric Evans in his seminal 2003 book. It emphasizes building software that reflects a deep understanding of the business domain, using a shared language between developers and domain experts. This article covers the fundamental concepts of DDD and how to apply them in practice. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/ddd-guide.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/ddd-guide.png" alt="Domain-Driven Design Fundamentals" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Domain-Driven Design Fundamentals</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-26">2025-12-26</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>121 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/ddd-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/ddd-guide.png" alt="Domain-Driven Design Fundamentals" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>Domain-Driven Design (DDD) is a software development approach introduced by Eric Evans in his seminal 2003 book. It emphasizes building software that reflects a deep understanding of the business domain, using a shared language between developers and domain experts. This article covers the fundamental concepts of DDD and how to apply them in practice. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/ddd-guide.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/ddd-guide.png" alt="Domain-Driven Design Fundamentals" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Ubiquitous Language </p>
 <p>The cornerstone of DDD is the ubiquitous language -- a common vocabulary shared by developers, domain experts, product managers, and other stakeholders. This language is used in code, documentation, conversations, and specifications. </p>
 <p>If the business calls it "Order Cancellation," then your code should have a <code>OrderCancellation</code> class, not <code>DeleteOrderRequest</code>. The ubiquitous language eliminates translation layers between business concepts and technical implementation. </p>
@@ -233,14 +241,8 @@
 <p>Start small. Pick one bounded context and implement it using DDD tactical patterns (entities, value objects, aggregates, repositories). Work closely with domain experts to develop the ubiquitous language. Use event storming workshops to discover domain events and aggregates. </p>
 <p>Avoid over-engineering. Not every class needs to be a domain entity, not every concept needs an aggregate. DDD is a tool for managing complexity, not for adding it. </p>
 <p>Summary </p>
-<p>DDD provides a powerful toolkit for building software that deeply models the business domain. Use bounded contexts to manage complexity, entities and value objects to model domain concepts, and aggregates to enforce invariants. The ubiquitous language bridges the gap between business and technology, creating software that is easier to understand, maintain, and evolve.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>, <a href="/en/architecture/ddd-strategic.html">DDD Strategic Design</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>DDD provides a powerful toolkit for building software that deeply models the business domain. Use bounded contexts to manage complexity, entities and value objects to model domain concepts, and aggregates to enforce invariants. The ubiquitous language bridges the gap between business and technology, creating software that is easier to understand, maintain, and evolve.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></li><li><a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></li><li><a href="/en/architecture/ddd-strategic.html">DDD Strategic Design</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -248,29 +250,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Domain-Driven%20Design%20Fundamentals&url=https%3A//aidev.fit/en/architecture/ddd-guide.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/ddd-guide.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Domain-Driven%20Design%20Fundamentals&url=https%3A//aidev.fit/en/architecture/ddd-guide.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Domain-Driven%20Design%20Fundamentals&u=https%3A//aidev.fit/en/architecture/ddd-guide.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Domain-Driven%20Design%20Fundamentals&body=https%3A//aidev.fit/en/architecture/ddd-guide.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/ddd-guide.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Domain-Driven%20Design%20Fundamentals&url=https%3A//aidev.fit/en/architecture/ddd-guide.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/ddd-guide.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Domain-Driven%20Design%20Fundamentals&url=https%3A//aidev.fit/en/architecture/ddd-guide.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Domain-Driven%20Design%20Fundamentals&u=https%3A//aidev.fit/en/architecture/ddd-guide.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Domain-Driven%20Design%20Fundamentals&body=https%3A//aidev.fit/en/architecture/ddd-guide.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/ddd-guide.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/event-sourcing.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Event Sourcing Pattern</span></a><a href="/en/architecture/system-design-fundamentals-2026.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">System Design Fundamentals 2026: A Developer Guide to Scalable Ap</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/system-design-fundamentals-2026.html" class="related-card"><span class="rc-title">System Design Fundamentals 2026: A Developer Guide to Scalable Applications</span><span class="rc-desc">System design concepts every developer should know — microservices vs monolith, CQRS, event-driven architecture, databas</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="rc-title">Domain Events: Design and Implementation</span><span class="rc-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable delivery</span></a><a href="/en/architecture/domain-event-implementation.html" class="related-card"><span class="rc-title">Domain Event Implementation: Publishing, Handling, and Testing</span><span class="rc-desc">Implement domain events in DDD: event definitions, publishing patterns, handlers, and testing strategies.</span></a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card"><span class="rc-title">Circuit Breaker Pattern: Building Resilient Systems</span><span class="rc-desc">Circuit breaker state machine (closed/open/half-open), implementation with Resilience4j, monitoring, and recovery strate</span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="rc-title">Alerting Strategies for Production Systems</span><span class="rc-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="rc-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="rc-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices for distributed sys</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/event-sourcing.html" class="prev-next-btn prev-link">← Event Sourcing Pattern</a><a href="/en/architecture/system-design-fundamentals-2026.html" class="prev-next-btn next-link">System Design Fundamentals 2026: A Developer Guide to Scalable Applications →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/system-design-fundamentals-2026.html" class="related-card"><span class="related-card-title">System Design Fundamentals 2026: A Developer Guide to Scalable Applications</span><span class="related-card-desc">System design concepts every developer should know — microservices vs monolith, CQRS, event-driven a</span></a><a href="/en/architecture/domain-events.html" class="related-card"><span class="related-card-title">Domain Events: Design and Implementation</span><span class="related-card-desc">Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for re</span></a><a href="/en/architecture/domain-event-implementation.html" class="related-card"><span class="related-card-title">Domain Event Implementation: Publishing, Handling, and Testing</span><span class="related-card-desc">Implement domain events in DDD: event definitions, publishing patterns, handlers, and testing strate</span></a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card"><span class="related-card-title">Circuit Breaker Pattern: Building Resilient Systems</span><span class="related-card-desc">Circuit breaker state machine (closed/open/half-open), implementation with Resilience4j, monitoring,</span></a><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/consensus-algorithms.html" class="related-card"><span class="related-card-title">Consensus Algorithms: Paxos, Raft, Zab</span><span class="related-card-desc">Paxos, Raft, Zab consensus algorithms compared, practical considerations, and implementation choices</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

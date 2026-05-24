@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Encryption: Data at Rest and in Transit
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
-      <h1 class="article-title">Database Encryption: Data at Rest and in Transit</h1>
-      <div class="article-meta"><time datetime="2026-04-14">Published 2026-04-14</time> · <time datetime="2026-04-30">Last active 2026-04-30</time> · 335 views · 1 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/database-encryption.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-encryption.png" alt="Database Encryption: Data at Rest and in Transit" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Database encryption protects data from unauthorized access at multiple levels: encryption at rest protects stored data from physical theft or unauthorized disk access, and encryption in transit protects data during network transmission.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-encryption.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-encryption.png" alt="Database Encryption: Data at Rest and in Transit" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Database Encryption: Data at Rest and in Transit</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-14">2026-04-14</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>335 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/database-encryption.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-encryption.png" alt="Database Encryption: Data at Rest and in Transit" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#encryption-at-rest">Encryption at Rest</a></li><li><a href="#key-management">Key Management</a></li><li><a href="#encryption-in-transit">Encryption in Transit</a></li><li><a href="#performance-impact">Performance Impact</a></li><li><a href="#compliance">Compliance</a></li></ol></details>
+        <div class="article-body"><p>Database encryption protects data from unauthorized access at multiple levels: encryption at rest protects stored data from physical theft or unauthorized disk access, and encryption in transit protects data during network transmission.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-encryption.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-encryption.png" alt="Database Encryption: Data at Rest and in Transit" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Encryption at Rest</h2>
 <p>Transparent Data Encryption (TDE) is available in most commercial databases (SQL Server, Oracle, MySQL Enterprise). The database automatically encrypts data files and backups. Encryption is transparent to applications—no code changes needed.</p>
 <p>Application-level encryption encrypts sensitive fields before they reach the database. Values are encrypted in the application, stored as binary or encrypted text, and decrypted when read. This protects data even from database administrators but complicates searches and indexing.</p>
@@ -127,14 +135,8 @@
 <p>Encryption adds CPU overhead for encryption and decryption operations. TDE typically adds 3-5% overhead. Application-level encryption can add more depending on the amount of encrypted data. Test encryption performance with production-like workloads.</p>
 <p>Querying encrypted columns prevents standard indexing. Searchable encryption techniques (deterministic encryption, order-preserving encryption) trade security for functionality. Evaluate whether the security benefits justify the performance cost.</p>
 <h2>Compliance</h2>
-<p>Encryption is required by most compliance frameworks. GDPR, HIPAA, PCI-DSS, and SOC 2 all mandate encryption at rest and in transit. Document your encryption architecture and key management procedures for auditors.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#encryption-at-rest">Encryption at Rest</a></li><li><a href="#key-management">Key Management</a></li><li><a href="#encryption-in-transit">Encryption in Transit</a></li><li><a href="#performance-impact">Performance Impact</a></li><li><a href="#compliance">Compliance</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Encryption is required by most compliance frameworks. GDPR, HIPAA, PCI-DSS, and SOC 2 all mandate encryption at rest and in transit. Document your encryption architecture and key management procedures for auditors.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a></li><li><a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a></li><li><a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -142,29 +144,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Database%20Encryption%3A%20Data%20at%20Rest%20and%20in%20Transit&url=https%3A//aidev.fit/en/database/database-encryption.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-encryption.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Database%20Encryption%3A%20Data%20at%20Rest%20and%20in%20Transit&url=https%3A//aidev.fit/en/database/database-encryption.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Database%20Encryption%3A%20Data%20at%20Rest%20and%20in%20Transit&u=https%3A//aidev.fit/en/database/database-encryption.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Database%20Encryption%3A%20Data%20at%20Rest%20and%20in%20Transit&body=https%3A//aidev.fit/en/database/database-encryption.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-encryption.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Database%20Encryption%3A%20Data%20at%20Rest%20and%20in%20Transit&url=https%3A//aidev.fit/en/database/database-encryption.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-encryption.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Database%20Encryption%3A%20Data%20at%20Rest%20and%20in%20Transit&url=https%3A//aidev.fit/en/database/database-encryption.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Database%20Encryption%3A%20Data%20at%20Rest%20and%20in%20Transit&u=https%3A//aidev.fit/en/database/database-encryption.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Database%20Encryption%3A%20Data%20at%20Rest%20and%20in%20Transit&body=https%3A//aidev.fit/en/database/database-encryption.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-encryption.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-foreign-key-constraints.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Foreign Key Constraints: Referential Integrity in Practice</span></a><a href="/en/database/redis-caching-patterns.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Redis Caching Patterns</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/database/database-auditing.html" class="related-card"><span class="rc-title">Database Auditing: Tracking Data Changes</span><span class="rc-desc">Implement database auditing to track who changed what and when for compliance, security, and debugging.</span></a><a href="/en/database/database-audit-triggers.html" class="related-card"><span class="rc-title">Database Audit Triggers: Automatic Change Tracking</span><span class="rc-desc">Implement database audit logging with triggers: audit tables, trigger functions, and compliance reporting.</span></a><a href="/en/database/database-change-tracking-cdc.html" class="related-card"><span class="rc-title">Change Data Capture: Tracking Database Changes in Real-Time</span><span class="rc-desc">Implement change data capture (CDC) for real-time data synchronization, event streaming, and audit logging.</span></a><a href="/en/database/database-security-hardening.html" class="related-card"><span class="rc-title">Database Security Hardening</span><span class="rc-desc">Hardening database security with encryption, audit logging, access control, and network isolation.</span></a><a href="/en/database/backup-types.html" class="related-card"><span class="rc-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</span><span class="rc-desc">Explore database backup strategies including full, incremental, differential backups, WAL archiving, and point-in-time r</span></a><a href="/en/database/change-data-capture.html" class="related-card"><span class="rc-title">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</span><span class="rc-desc">Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream processing integration. Rea</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-foreign-key-constraints.html" class="prev-next-btn prev-link">← Foreign Key Constraints: Referential Integrity in Practice</a><a href="/en/database/redis-caching-patterns.html" class="prev-next-btn next-link">Redis Caching Patterns →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-auditing.html" class="related-card"><span class="related-card-title">Database Auditing: Tracking Data Changes</span><span class="related-card-desc">Implement database auditing to track who changed what and when for compliance, security, and debuggi</span></a><a href="/en/database/database-audit-triggers.html" class="related-card"><span class="related-card-title">Database Audit Triggers: Automatic Change Tracking</span><span class="related-card-desc">Implement database audit logging with triggers: audit tables, trigger functions, and compliance repo</span></a><a href="/en/database/database-change-tracking-cdc.html" class="related-card"><span class="related-card-title">Change Data Capture: Tracking Database Changes in Real-Time</span><span class="related-card-desc">Implement change data capture (CDC) for real-time data synchronization, event streaming, and audit l</span></a><a href="/en/database/database-security-hardening.html" class="related-card"><span class="related-card-title">Database Security Hardening</span><span class="related-card-desc">Hardening database security with encryption, audit logging, access control, and network isolation.</span></a><a href="/en/database/backup-types.html" class="related-card"><span class="related-card-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</span><span class="related-card-desc">Explore database backup strategies including full, incremental, differential backups, WAL archiving,</span></a><a href="/en/database/change-data-capture.html" class="related-card"><span class="related-card-title">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</span><span class="related-card-desc">Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream process</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#encryption-at-rest">Encryption at Rest</a></li><li><a href="#key-management">Key Management</a></li><li><a href="#encryption-in-transit">Encryption in Transit</a></li><li><a href="#performance-impact">Performance Impact</a></li><li><a href="#compliance">Compliance</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

@@ -101,17 +101,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">SQL</span></div>
-      <h1 class="article-title">Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h1>
-      <div class="article-meta"><time datetime="2025-12-23">Published 2025-12-23</time> · <time datetime="2026-04-18">Last active 2026-04-18</time> · 58 views · 0 replies · 6 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/full-text-search.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/full-text-search.png" alt="Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The Need for Full-Text Search </p><picture><source srcset="https://aidev.fit/images/covers/en/database/full-text-search.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/full-text-search.png" alt="Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-23">2025-12-23</time>
+          <span class="meta-sep">·</span>
+          <span>6 min read</span>
+          <span class="meta-sep">·</span>
+          <span>58 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/full-text-search.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/full-text-search.png" alt="Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#facet-results">Facet results</a></li><li><a href="#docker-composeyml">docker-compose.yml</a></li><li><a href="#create-collection-schema">Create collection (schema)</a></li><li><a href="#index-documents">Index documents</a></li><li><a href="#search">Search</a></li></ol></details>
+        <div class="article-body"><p>The Need for Full-Text Search </p><picture><source srcset="https://aidev.fit/images/covers/en/database/full-text-search.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/full-text-search.png" alt="Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Standard database <code>LIKE</code> queries do not scale. They require full table scans, do not understand relevance ranking, and cannot handle typo tolerance, stemming, or faceted search. Dedicated search engines solve these problems with inverted indexes, relevance scoring, and specialized query parsing. </p>
 <p>How Search Engines Work </p>
 <p>An inverted index maps terms to the documents containing them: </p>
@@ -309,14 +317,8 @@
 <p>When to Use Which </p>
 <p>| Scenario | Recommended | |----------|-------------| | Complex analytics with search | Elasticsearch | | Simple, fast search out of the box | Meilisearch | | Low-latency search on limited hardware | Typesense | | Log analysis and observability | Elasticsearch (ELK stack) | | E-commerce product search | Meilisearch or Typesense | | Geo-search and aggregations | Elasticsearch | | Typo-tolerant search for user-facing features | Meilisearch | | Large-scale (100M+ documents) | Elasticsearch | </p>
 <p>Summary </p>
-<p>Full-text search engines are essential for applications that need more than simple SQL LIKE queries. Elasticsearch offers the most features and scalability at the cost of operational complexity. Meilisearch provides the best developer experience with instant typo tolerance and sensible defaults. Typesense offers excellent performance with minimal resource usage. Choose based on your scale, feature requirements, and operational capacity: start with Meilisearch or Typesense for typical web applications and move to Elasticsearch when you need advanced analytics or larger scale.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/time-series-databases.html">Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a>, <a href="/en/database/data-consistency-models.html">Data Consistency Models Explained</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#facet-results">Facet results</a></li><li><a href="#docker-compose.yml">docker-compose.yml</a></li><li><a href="#create-collection-(schema)">Create collection (schema)</a></li><li><a href="#index-documents">Index documents</a></li><li><a href="#search">Search</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Full-text search engines are essential for applications that need more than simple SQL LIKE queries. Elasticsearch offers the most features and scalability at the cost of operational complexity. Meilisearch provides the best developer experience with instant typo tolerance and sensible defaults. Typesense offers excellent performance with minimal resource usage. Choose based on your scale, feature requirements, and operational capacity: start with Meilisearch or Typesense for typical web applications and move to Elasticsearch when you need advanced analytics or larger scale.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/time-series-databases.html">Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</a></li><li><a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></li><li><a href="/en/database/data-consistency-models.html">Data Consistency Models Explained</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -324,29 +326,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Full-Text%20Search%20Engines%20%28Elasticsearch%2C%20Meilisearch%2C%20Typesense%29&url=https%3A//aidev.fit/en/database/full-text-search.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/full-text-search.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Full-Text%20Search%20Engines%20%28Elasticsearch%2C%20Meilisearch%2C%20Typesense%29&url=https%3A//aidev.fit/en/database/full-text-search.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Full-Text%20Search%20Engines%20%28Elasticsearch%2C%20Meilisearch%2C%20Typesense%29&u=https%3A//aidev.fit/en/database/full-text-search.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Full-Text%20Search%20Engines%20%28Elasticsearch%2C%20Meilisearch%2C%20Typesense%29&body=https%3A//aidev.fit/en/database/full-text-search.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/full-text-search.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Full-Text%20Search%20Engines%20%28Elasticsearch%2C%20Meilisearch%2C%20Typesense%29&url=https%3A//aidev.fit/en/database/full-text-search.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/full-text-search.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Full-Text%20Search%20Engines%20%28Elasticsearch%2C%20Meilisearch%2C%20Typesense%29&url=https%3A//aidev.fit/en/database/full-text-search.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Full-Text%20Search%20Engines%20%28Elasticsearch%2C%20Meilisearch%2C%20Typesense%29&u=https%3A//aidev.fit/en/database/full-text-search.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Full-Text%20Search%20Engines%20%28Elasticsearch%2C%20Meilisearch%2C%20Typesense%29&body=https%3A//aidev.fit/en/database/full-text-search.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/full-text-search.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/query-performance-tuning.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Query Performance Tuning Tools</span></a><a href="/en/database/connection-pooling.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Connection Pooling Guide</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/database/postgresql-vs-mysql-2026.html" class="related-card"><span class="rc-title">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</span><span class="rc-desc">Head-to-head comparison of PostgreSQL, MySQL, and SQLite for different use cases — performance benchmarks, features, eco</span></a><a href="/en/database/acid-vs-base.html" class="related-card"><span class="rc-title">ACID vs BASE Transactions</span><span class="rc-desc">Compare ACID and BASE transaction models, when to use each, and how modern databases balance consistency, availability, </span></a><a href="/en/database/graph-databases.html" class="related-card"><span class="rc-title">Graph Databases (Neo4j, Dgraph, ArangoDB)</span><span class="rc-desc">Compare Neo4j, Dgraph, and ArangoDB graph databases for connected data, recommendation engines, social networks, and kno</span></a><a href="/en/database/columnar-databases.html" class="related-card"><span class="rc-title">Columnar Databases: When and How to Use Them</span><span class="rc-desc">Columnar databases like ClickHouse, Redshift, and BigQuery, their compression techniques, query performance advantages, </span></a><a href="/en/database/vector-search-optimization.html" class="related-card"><span class="rc-title">Vector Search Optimization Techniques</span><span class="rc-desc">Optimize vector search with HNSW tuning, quantization (PQ, scalar), IVF parameters, filtered search performance, and mul</span></a><a href="/en/database/mongodb-vs-postgresql.html" class="related-card"><span class="rc-title">MongoDB vs PostgreSQL</span><span class="rc-desc">An in-depth comparison of MongoDB and PostgreSQL covering performance, features, use cases, and migration strategies.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/query-performance-tuning.html" class="prev-next-btn prev-link">← Query Performance Tuning Tools</a><a href="/en/database/connection-pooling.html" class="prev-next-btn next-link">Connection Pooling Guide →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/postgresql-vs-mysql-2026.html" class="related-card"><span class="related-card-title">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</span><span class="related-card-desc">Head-to-head comparison of PostgreSQL, MySQL, and SQLite for different use cases — performance bench</span></a><a href="/en/database/acid-vs-base.html" class="related-card"><span class="related-card-title">ACID vs BASE Transactions</span><span class="related-card-desc">Compare ACID and BASE transaction models, when to use each, and how modern databases balance consist</span></a><a href="/en/database/graph-databases.html" class="related-card"><span class="related-card-title">Graph Databases (Neo4j, Dgraph, ArangoDB)</span><span class="related-card-desc">Compare Neo4j, Dgraph, and ArangoDB graph databases for connected data, recommendation engines, soci</span></a><a href="/en/database/columnar-databases.html" class="related-card"><span class="related-card-title">Columnar Databases: When and How to Use Them</span><span class="related-card-desc">Columnar databases like ClickHouse, Redshift, and BigQuery, their compression techniques, query perf</span></a><a href="/en/database/vector-search-optimization.html" class="related-card"><span class="related-card-title">Vector Search Optimization Techniques</span><span class="related-card-desc">Optimize vector search with HNSW tuning, quantization (PQ, scalar), IVF parameters, filtered search </span></a><a href="/en/database/mongodb-vs-postgresql.html" class="related-card"><span class="related-card-title">MongoDB vs PostgreSQL</span><span class="related-card-desc">An in-depth comparison of MongoDB and PostgreSQL covering performance, features, use cases, and migr</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#facet-results">Facet results</a></li><li><a href="#docker-composeyml">docker-compose.yml</a></li><li><a href="#create-collection-schema">Create collection (schema)</a></li><li><a href="#index-documents">Index documents</a></li><li><a href="#search">Search</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

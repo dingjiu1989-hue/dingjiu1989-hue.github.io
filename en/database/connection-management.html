@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
-      <h1 class="article-title">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h1>
-      <div class="article-meta"><time datetime="2026-03-31">Published 2026-03-31</time> · <time datetime="2026-05-24">Last active 2026-05-24</time> · 220 views · 0 replies · 9 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/connection-management.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning </p><picture><source srcset="https://aidev.fit/images/covers/en/database/connection-management.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h1>
+        <div class="article-meta">
+          <time datetime="2026-03-31">2026-03-31</time>
+          <span class="meta-sep">·</span>
+          <span>9 min read</span>
+          <span class="meta-sep">·</span>
+          <span>220 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/connection-management.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (8)</summary><ol><li><a href="#pgbouncerini">pgbouncer.ini</a></li><li><a href="#connect-to-pgbouncer-port-not-postgresql-directly">Connect to PgBouncer port, not PostgreSQL directly</a></li><li><a href="#applicationyml">application.yml</a></li><li><a href="#postgresqlconf">postgresql.conf</a></li><li><a href="#bad-connection-not-returned-to-pool">Bad: connection not returned to pool</a></li><li><a href="#missing-poolputconnconn">Missing: pool.putconn(conn)</a></li><li><a href="#good-always-use-tryfinally-or-context-manager">Good: always use try/finally or context manager</a></li><li><a href="#after-5-seconds-throw-sqlexception-instead-of-hanging-forever">After 5 seconds, throw SQLException instead of hanging forever</a></li></ol></details>
+        <div class="article-body"><p>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning </p><picture><source srcset="https://aidev.fit/images/covers/en/database/connection-management.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Every database connection consumes memory, file descriptors, and CPU. Connection management directly impacts database performance and application scalability. This article covers pooling strategies, popular poolers, and tuning guidelines. </p>
 <p>Why Connection Pooling Matters </p>
 <p>Each PostgreSQL backend process consumes approximately 5-10 MB of RAM, even when idle. A server with 500 connections uses 2.5-5 GB just for connection overhead. Beyond memory, connection creation is expensive: a new connection requires a TCP handshake, SSL negotiation, authentication, and backend forking. </p>
@@ -267,14 +275,8 @@
 <li><strong>Always use a pooler</strong> : Direct connections from every application instance are not sustainable.</li>
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Set pool size to CPU*2+disk</strong> : More connections than that add latency, not throughput. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Use PgBouncer in transaction mode</strong> : Best balance for web applications. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Set connection timeouts</strong> : Prevent applications from hanging indefinitely. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Monitor and alert</strong> on connection utilization trends. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Use prepared statement caching</strong> : Reduces query planning overhead. 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Separate pools for OLTP and analytics</strong> : Different pool sizes and timeout values for different workloads. </p>
-<p>Connection management is invisible when done correctly and catastrophic when done poorly. A well-tuned pool keeps your database responsive under load and your applications free from connection-related failures.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (8)</summary><ol><li><a href="#pgbouncer.ini">pgbouncer.ini</a></li><li><a href="#connect-to-pgbouncer-port,-not-postgresql-directly">Connect to PgBouncer port, not PostgreSQL directly</a></li><li><a href="#application.yml">application.yml</a></li><li><a href="#postgresql.conf">postgresql.conf</a></li><li><a href="#bad:-connection-not-returned-to-pool">Bad: connection not returned to pool</a></li><li><a href="#missing:-pool.putconn(conn)">Missing: pool.putconn(conn)</a></li><li><a href="#good:-always-use-try-finally-or-context-manager">Good: always use try/finally or context manager</a></li><li><a href="#after-5-seconds,-throw-sqlexception-instead-of-hanging-forever">After 5 seconds, throw SQLException instead of hanging forever</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Connection management is invisible when done correctly and catastrophic when done poorly. A well-tuned pool keeps your database responsive under load and your applications free from connection-related failures.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a></li><li><a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a></li><li><a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -282,29 +284,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Database%20Connection%20Management%3A%20Pooling%2C%20PgBouncer%2C%20HikariCP%2C%20and%20Tuning&url=https%3A//aidev.fit/en/database/connection-management.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/connection-management.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Database%20Connection%20Management%3A%20Pooling%2C%20PgBouncer%2C%20HikariCP%2C%20and%20Tuning&url=https%3A//aidev.fit/en/database/connection-management.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Database%20Connection%20Management%3A%20Pooling%2C%20PgBouncer%2C%20HikariCP%2C%20and%20Tuning&u=https%3A//aidev.fit/en/database/connection-management.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Database%20Connection%20Management%3A%20Pooling%2C%20PgBouncer%2C%20HikariCP%2C%20and%20Tuning&body=https%3A//aidev.fit/en/database/connection-management.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/connection-management.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Database%20Connection%20Management%3A%20Pooling%2C%20PgBouncer%2C%20HikariCP%2C%20and%20Tuning&url=https%3A//aidev.fit/en/database/connection-management.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/connection-management.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Database%20Connection%20Management%3A%20Pooling%2C%20PgBouncer%2C%20HikariCP%2C%20and%20Tuning&url=https%3A//aidev.fit/en/database/connection-management.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Database%20Connection%20Management%3A%20Pooling%2C%20PgBouncer%2C%20HikariCP%2C%20and%20Tuning&u=https%3A//aidev.fit/en/database/connection-management.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Database%20Connection%20Management%3A%20Pooling%2C%20PgBouncer%2C%20HikariCP%2C%20and%20Tuning&body=https%3A//aidev.fit/en/database/connection-management.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/connection-management.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-compression.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAS</span></a><a href="/en/database/backup-types.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Database Backup Types: Full, Incremental, Differential, WAL Archi</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/database/database-connection-pooling.html" class="related-card"><span class="rc-title">Connection Pooling: Tuning, Best Practices, and Pitfalls</span><span class="rc-desc">Master database connection pooling: pool sizing, timeout tuning, and common pitfalls in production.</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="rc-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="rc-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, a</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="rc-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="rc-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategies, rollback pattern</span></a><a href="/en/database/index-types.html" class="related-card"><span class="rc-title">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</span><span class="rc-desc">Comprehensive guide to PostgreSQL index types: B-tree, Hash, GiST, GIN, SP-GiST, and BRIN. Learn when and why to use eac</span></a><a href="/en/database/stored-procedures.html" class="related-card"><span class="rc-title">Stored Procedures vs Functions: When to Use, Languages, Security</span><span class="rc-desc">An in-depth guide to stored procedures and functions in PostgreSQL and SQL Server. Learn language options, security cons</span></a><a href="/en/database/geospatial-data.html" class="related-card"><span class="rc-title">Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries</span><span class="rc-desc">Comprehensive guide to geospatial data with PostGIS. Understand geometry vs geography types, spatial indexes, and common</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-compression.html" class="prev-next-btn prev-link">← Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a><a href="/en/database/backup-types.html" class="prev-next-btn next-link">Database Backup Types: Full, Incremental, Differential, WAL Archiving →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-connection-pooling.html" class="related-card"><span class="related-card-title">Connection Pooling: Tuning, Best Practices, and Pitfalls</span><span class="related-card-desc">Master database connection pooling: pool sizing, timeout tuning, and common pitfalls in production.</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="related-card-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="related-card-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing str</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="related-card-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="related-card-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategi</span></a><a href="/en/database/index-types.html" class="related-card"><span class="related-card-title">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</span><span class="related-card-desc">Comprehensive guide to PostgreSQL index types: B-tree, Hash, GiST, GIN, SP-GiST, and BRIN. Learn whe</span></a><a href="/en/database/stored-procedures.html" class="related-card"><span class="related-card-title">Stored Procedures vs Functions: When to Use, Languages, Security</span><span class="related-card-desc">An in-depth guide to stored procedures and functions in PostgreSQL and SQL Server. Learn language op</span></a><a href="/en/database/geospatial-data.html" class="related-card"><span class="related-card-title">Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries</span><span class="related-card-desc">Comprehensive guide to geospatial data with PostGIS. Understand geometry vs geography types, spatial</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#pgbouncerini">pgbouncer.ini</a></li><li><a href="#connect-to-pgbouncer-port-not-postgresql-directly">Connect to PgBouncer port, not PostgreSQL directly</a></li><li><a href="#applicationyml">application.yml</a></li><li><a href="#postgresqlconf">postgresql.conf</a></li><li><a href="#bad-connection-not-returned-to-pool">Bad: connection not returned to pool</a></li><li><a href="#missing-poolputconnconn">Missing: pool.putconn(conn)</a></li><li><a href="#good-always-use-tryfinally-or-context-manager">Good: always use try/finally or context manager</a></li><li><a href="#after-5-seconds-throw-sqlexception-instead-of-hanging-forever">After 5 seconds, throw SQLException instead of hanging forever</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

@@ -101,32 +101,34 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › API Composition and Aggregation
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">API Composition and Aggregation</h1>
-      <div class="article-meta"><time datetime="2026-04-21">Published 2026-04-21</time> · <time datetime="2026-04-29">Last active 2026-04-29</time> · 213 views · 0 replies · 3 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/api-composition.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/api-composition.png" alt="API Composition and Aggregation" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>API composition addresses a fundamental challenge in distributed architectures: how to aggregate data from multiple backend services into a single, efficient client response. In a monolithic application, the database can join tables across domains with a single query. In a microservice architecture, each service owns its data, and aggregation must happen at the application layer. Three primary patterns address this: the API composition layer, GraphQL federation, and the Backend for Frontend (BFF) pattern. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/api-composition.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/api-composition.png" alt="API Composition and Aggregation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">API Composition and Aggregation</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-21">2026-04-21</time>
+          <span class="meta-sep">·</span>
+          <span>3 min read</span>
+          <span class="meta-sep">·</span>
+          <span>213 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/api-composition.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/api-composition.png" alt="API Composition and Aggregation" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>API composition addresses a fundamental challenge in distributed architectures: how to aggregate data from multiple backend services into a single, efficient client response. In a monolithic application, the database can join tables across domains with a single query. In a microservice architecture, each service owns its data, and aggregation must happen at the application layer. Three primary patterns address this: the API composition layer, GraphQL federation, and the Backend for Frontend (BFF) pattern. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/api-composition.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/api-composition.png" alt="API Composition and Aggregation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The API composition layer is a dedicated service that orchestrates calls to downstream services, aggregates results, and returns a unified response. It is conceptually simple: the composer receives a request, calls the relevant services in parallel where possible, merges the data, and responds. The challenge lies in handling partial failures. If one of five downstream services fails, does the entire request fail, or does the composer return partial data? Strategies include timeout handling with fallback responses, circuit breaker integration, and return of partial results with error indicators. </p>
 <p>The N+1 query problem manifests in API composition when the composer fetches a list from one service, then iterates over each item to fetch details from another. Batch endpoints or GraphQL DataLoader patterns mitigate this by collecting keys and making batched requests. For example, instead of fetching each order's customer details individually, the composer collects all customer IDs and makes a single batch request to the customer service. </p>
 <p>GraphQL federation provides an alternative approach where multiple services expose their own GraphQL schemas, and a federation gateway merges them into a unified graph. Each service contributes types and fields to the global schema. The gateway resolves queries by delegating field resolution to the appropriate service. Apollo Federation and Netflix's DGS framework are popular implementations. Federation eliminates the need for a separate aggregation service while providing typed, flexible queries that clients can tailor to their needs. The trade-off is increased complexity in schema management and the challenge of distributed field resolution performance. </p>
 <p>The Backend for Frontend (BFF) pattern creates dedicated backend services for each client type. A mobile BFF might return a coarser payload optimized for bandwidth, while a web BFF returns a richer payload suitable for desktop browsers. Each BFF owns its aggregation logic, reducing the risk of breaking one client's experience when optimizing for another. The BFF pattern often incorporates API composition as one of its responsibilities, but extends it to include client-specific concerns like data transformation, caching strategy, and authentication. </p>
 <p>Data consistency challenges arise in all composition patterns. When the composer aggregates data from multiple services, the data may be from different points in time. A product name fetched from the catalog service may have been updated milliseconds after the price was fetched from the pricing service. The composer must decide whether eventual consistency is acceptable or whether causal consistency guarantees are needed, which significantly complicates the architecture. </p>
 <p>Caching at the composition layer can dramatically improve performance and reduce downstream load. The composer can cache aggregated responses or its individual downstream calls. Cache invalidation becomes complex when data changes affect multiple cached responses — a product price change may invalidate cache entries in the product detail, search results, and order history compositions. </p>
-<p>The choice between these patterns depends on client diversity, team structure, and performance requirements. API composition suits homogeneous clients and simpler architectures. GraphQL federation excels when clients need flexible data shapes. BFF shines with diverse client platforms and independent team ownership of client experiences.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/throttling-pattern.html">Throttling Pattern for System Protection</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>The choice between these patterns depends on client diversity, team structure, and performance requirements. API composition suits homogeneous clients and simpler architectures. GraphQL federation excels when clients need flexible data shapes. BFF shines with diverse client platforms and independent team ownership of client experiences.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/throttling-pattern.html">Throttling Pattern for System Protection</a></li><li><a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></li><li><a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -134,29 +136,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=API%20Composition%20and%20Aggregation&url=https%3A//aidev.fit/en/architecture/api-composition.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/api-composition.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=API%20Composition%20and%20Aggregation&url=https%3A//aidev.fit/en/architecture/api-composition.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=API%20Composition%20and%20Aggregation&u=https%3A//aidev.fit/en/architecture/api-composition.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=API%20Composition%20and%20Aggregation&body=https%3A//aidev.fit/en/architecture/api-composition.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/api-composition.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=API%20Composition%20and%20Aggregation&url=https%3A//aidev.fit/en/architecture/api-composition.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/api-composition.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=API%20Composition%20and%20Aggregation&url=https%3A//aidev.fit/en/architecture/api-composition.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=API%20Composition%20and%20Aggregation&u=https%3A//aidev.fit/en/architecture/api-composition.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=API%20Composition%20and%20Aggregation&body=https%3A//aidev.fit/en/architecture/api-composition.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/api-composition.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/caching-http.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">HTTP Caching Architecture</span></a><a href="/en/architecture/caching-strategies.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Caching Strategies and Patterns in Distributed Systems</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/api-composition-pattern.html" class="related-card"><span class="rc-title">API Composition Pattern</span><span class="rc-desc">Learn API composition: aggregation, parallel calls, error handling strategies, and cross-service data retrieval</span></a><a href="/en/architecture/backend-for-frontend.html" class="related-card"><span class="rc-title">Backend for Frontend (BFF) Pattern</span><span class="rc-desc">Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data aggregation, protocol t</span></a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card"><span class="rc-title">API Gateway vs Service Mesh</span><span class="rc-desc">Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and Kong examples</span></a><a href="/en/architecture/saga-orchestration.html" class="related-card"><span class="rc-title">Saga Orchestration Pattern</span><span class="rc-desc">Coordinator pattern for distributed transactions, compensation strategies, state machines, and Temporal workflows</span></a><a href="/en/architecture/api-gateway-patterns.html" class="related-card"><span class="rc-title">API Gateway Patterns</span><span class="rc-desc">Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementation strategies</span></a><a href="/en/architecture/materialized-view-pattern.html" class="related-card"><span class="rc-title">Materialized View Pattern</span><span class="rc-desc">Explore the materialized view pattern: read models, caching strategies, CQRS integration, and efficient cross-service qu</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/caching-http.html" class="prev-next-btn prev-link">← HTTP Caching Architecture</a><a href="/en/architecture/caching-strategies.html" class="prev-next-btn next-link">Caching Strategies and Patterns in Distributed Systems →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/api-composition-pattern.html" class="related-card"><span class="related-card-title">API Composition Pattern</span><span class="related-card-desc">Learn API composition: aggregation, parallel calls, error handling strategies, and cross-service dat</span></a><a href="/en/architecture/backend-for-frontend.html" class="related-card"><span class="related-card-title">Backend for Frontend (BFF) Pattern</span><span class="related-card-desc">Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data agg</span></a><a href="/en/architecture/gateway-vs-mesh.html" class="related-card"><span class="related-card-title">API Gateway vs Service Mesh</span><span class="related-card-desc">Responsibilities, overlap, and deployment patterns for API Gateway and Service Mesh with Istio and K</span></a><a href="/en/architecture/saga-orchestration.html" class="related-card"><span class="related-card-title">Saga Orchestration Pattern</span><span class="related-card-desc">Coordinator pattern for distributed transactions, compensation strategies, state machines, and Tempo</span></a><a href="/en/architecture/api-gateway-patterns.html" class="related-card"><span class="related-card-title">API Gateway Patterns</span><span class="related-card-desc">Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementatio</span></a><a href="/en/architecture/materialized-view-pattern.html" class="related-card"><span class="related-card-title">Materialized View Pattern</span><span class="related-card-desc">Explore the materialized view pattern: read models, caching strategies, CQRS integration, and effici</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

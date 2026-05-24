@@ -101,22 +101,30 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › AI Agents Memory Patterns: Working, Episodic, Semantic, and Reflective Memory
-    </div>
-    <article>
-      <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags"><span class="tag-pin">📌 Pinned</span>
         <span class="tag-cat">AI Agents</span>
         <span class="tag-cat">Memory</span>
         <span class="tag-cat">LLM</span>
         <span class="tag-cat">Context Management</span>
         <span class="tag-cat">Agent Architecture</span>
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
-      <h1 class="article-title">AI Agents Memory Patterns: Working, Episodic, Semantic, and Reflective Memory</h1>
-      <div class="article-meta"><time datetime="2025-11-13">Published 2025-11-13</time> · <time datetime="2026-04-19">Last active 2026-04-19</time> · 8335 views · 68 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-agents-memory-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-agents-memory-patterns.png" alt="AI Agents Memory Patterns: Working, Episodic, Semantic, and Reflective Memory" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><h2>Why Memory Matters for AI Agents</h2>
+        <h1 class="article-title">AI Agents Memory Patterns: Working, Episodic, Semantic, and Reflective Memory</h1>
+        <div class="article-meta">
+          <time datetime="2025-11-13">2025-11-13</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>8335 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-agents-memory-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-agents-memory-patterns.png" alt="AI Agents Memory Patterns: Working, Episodic, Semantic, and Reflective Memory" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#why-memory-matters-for-ai-agents">Why Memory Matters for AI Agents</a></li><li><a href="#memory-hierarchy">Memory Hierarchy</a></li><li><a href="#pattern-1-summarization--sliding-window-basic">Pattern 1: Summarization + Sliding Window (Basic)</a></li><li><a href="#pattern-2-vector-backed-episodic-memory-intermediate">Pattern 2: Vector-Backed Episodic Memory (Intermediate)</a></li><li><a href="#pattern-3-structured-knowledge-graph-advanced">Pattern 3: Structured Knowledge Graph (Advanced)</a></li><li><a href="#pattern-4-reflection-and-self-improvement">Pattern 4: Reflection and Self-Improvement</a></li><li><a href="#production-considerations">Production Considerations</a></li></ol></details>
+        <div class="article-body"><h2>Why Memory Matters for AI Agents</h2>
 <p>An AI agent without memory is like a developer who forgets everything after each function call — you can only work with what's in front of you. Memory is what turns a stateless LLM call into a coherent agent that learns from past interactions, maintains context across sessions, and builds up knowledge over time. In 2026, several memory patterns have proven themselves in production. Here's what works.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-agents-memory-patterns.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/ai-agents-memory-patterns.png" alt="AI Agents Memory Patterns: Working, Episodic, Semantic, and Reflective Memory" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 
 <h2>Memory Hierarchy</h2>
@@ -151,14 +159,8 @@
 <tr><td>Latency (retrieval takes time)</td><td>Cache recent memories in-process. Async retrieval for non-critical context. Two-stage: fast vector search → rerank.</td></tr>
 </table>
 
-<p><strong>Starting point for 2026:</strong> Implement Pattern 1 (summarization + sliding window) first — it solves the immediate problem of context limits and handles most use cases. Add Pattern 2 (vector episodic memory) when users say "you don't remember our previous conversations." Add Pattern 3 (knowledge graph) when you need precise fact recall about entities. Add Pattern 4 (reflection) when you want the agent to improve over time. Don't over-engineer memory — a simple summary + sliding window beats a complex multi-tier memory system that's buggy and slow. See also: <a href="/en/ai/ai-agents-guide.html">AI Agents Guide</a> and <a href="/en/ai/function-calling-guide.html">Function Calling Guide</a>.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/embeddings-techniques.html">Embeddings: Techniques and Best Practices</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (7)</summary><ol><li><a href="#why-memory-matters-for-ai-agents">Why Memory Matters for AI Agents</a></li><li><a href="#memory-hierarchy">Memory Hierarchy</a></li><li><a href="#pattern-1:-summarization-+-sliding-window-(basic)">Pattern 1: Summarization + Sliding Window (Basic)</a></li><li><a href="#pattern-2:-vector-backed-episodic-memory-(intermediate)">Pattern 2: Vector-Backed Episodic Memory (Intermediate)</a></li><li><a href="#pattern-3:-structured-knowledge-graph-(advanced)">Pattern 3: Structured Knowledge Graph (Advanced)</a></li><li><a href="#pattern-4:-reflection-and-self-improvement">Pattern 4: Reflection and Self-Improvement</a></li><li><a href="#production-considerations">Production Considerations</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p><strong>Starting point for 2026:</strong> Implement Pattern 1 (summarization + sliding window) first — it solves the immediate problem of context limits and handles most use cases. Add Pattern 2 (vector episodic memory) when users say "you don't remember our previous conversations." Add Pattern 3 (knowledge graph) when you need precise fact recall about entities. Add Pattern 4 (reflection) when you want the agent to improve over time. Don't over-engineer memory — a simple summary + sliding window beats a complex multi-tier memory system that's buggy and slow. See also: <a href="/en/ai/ai-agents-guide.html">AI Agents Guide</a> and <a href="/en/ai/function-calling-guide.html">Function Calling Guide</a>.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></li><li><a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a></li><li><a href="/en/ai/embeddings-techniques.html">Embeddings: Techniques and Best Practices</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -166,34 +168,40 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=AI%20Agents%20Memory%20Patterns%3A%20Working%2C%20Episodic%2C%20Semantic%2C%20and%20Reflective%20Memory&url=https%3A//aidev.fit/en/ai/ai-agents-memory-patterns.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/ai-agents-memory-patterns.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=AI%20Agents%20Memory%20Patterns%3A%20Working%2C%20Episodic%2C%20Semantic%2C%20and%20Reflective%20Memory&url=https%3A//aidev.fit/en/ai/ai-agents-memory-patterns.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=AI%20Agents%20Memory%20Patterns%3A%20Working%2C%20Episodic%2C%20Semantic%2C%20and%20Reflective%20Memory&u=https%3A//aidev.fit/en/ai/ai-agents-memory-patterns.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=AI%20Agents%20Memory%20Patterns%3A%20Working%2C%20Episodic%2C%20Semantic%2C%20and%20Reflective%20Memory&body=https%3A//aidev.fit/en/ai/ai-agents-memory-patterns.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/ai-agents-memory-patterns.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-powered-code-migration.html" class="prev-next-btn prev-link">← AI-Powered Code Migration Guide: Framework Upgrades, Language Transitions, and Refactoring</a><a href="/en/ai/multimodal-ai-guide.html" class="prev-next-btn next-link">Building Multimodal AI Applications: Vision, Audio, and Text Combined (2026) →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/agent-memory-systems.html" class="related-card"><span class="related-card-title">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</span><span class="related-card-desc">Design memory systems for AI agents inspired by cognitive architecture: short-term working memory, l</span></a><a href="/en/ai/ai-agents-guide.html" class="related-card"><span class="related-card-title">AI Agents for Developers: A Practical Guide to Building and Using Agents</span><span class="related-card-desc">What AI agents actually are, how they work (tools, memory, planning loops), and frameworks to build </span></a><a href="/en/ai/rag-agent-patterns.html" class="related-card"><span class="related-card-title">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</span><span class="related-card-desc">Explore RAG agent patterns that go beyond simple retrieval: self-querying agents, corrective RAG wit</span></a><a href="/en/ai/agent-planning.html" class="related-card"><span class="related-card-title">Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</span><span class="related-card-desc">Explore agent planning frameworks: ReAct for reasoning and acting, Plan-and-Execute for task decompo</span></a><a href="/en/ai/ai-workflow-automation.html" class="related-card"><span class="related-card-title">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</span><span class="related-card-desc">Build robust AI workflow automation with LangChain for LLM orchestration, Temporal for durable execu</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="related-card-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="related-card-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handli</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=AI%20Agents%20Memory%20Patterns%3A%20Working%2C%20Episodic%2C%20Semantic%2C%20and%20Reflective%20Memory&url=https%3A//aidev.fit/en/ai/ai-agents-memory-patterns.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/ai-agents-memory-patterns.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=AI%20Agents%20Memory%20Patterns%3A%20Working%2C%20Episodic%2C%20Semantic%2C%20and%20Reflective%20Memory&url=https%3A//aidev.fit/en/ai/ai-agents-memory-patterns.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=AI%20Agents%20Memory%20Patterns%3A%20Working%2C%20Episodic%2C%20Semantic%2C%20and%20Reflective%20Memory&u=https%3A//aidev.fit/en/ai/ai-agents-memory-patterns.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=AI%20Agents%20Memory%20Patterns%3A%20Working%2C%20Episodic%2C%20Semantic%2C%20and%20Reflective%20Memory&body=https%3A//aidev.fit/en/ai/ai-agents-memory-patterns.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/ai-agents-memory-patterns.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-powered-code-migration.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">AI-Powered Code Migration Guide: Framework Upgrades, Language Tra</span></a><a href="/en/ai/multimodal-ai-guide.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Building Multimodal AI Applications: Vision, Audio, and Text Comb</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/agent-memory-systems.html" class="related-card"><span class="rc-title">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</span><span class="rc-desc">Design memory systems for AI agents inspired by cognitive architecture: short-term working memory, long-term storage, ep</span></a><a href="/en/ai/ai-agents-guide.html" class="related-card"><span class="rc-title">AI Agents for Developers: A Practical Guide to Building and Using Agents</span><span class="rc-desc">What AI agents actually are, how they work (tools, memory, planning loops), and frameworks to build them — LangChain, Cr</span></a><a href="/en/ai/rag-agent-patterns.html" class="related-card"><span class="rc-title">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</span><span class="rc-desc">Explore RAG agent patterns that go beyond simple retrieval: self-querying agents, corrective RAG with verification, and </span></a><a href="/en/ai/agent-planning.html" class="related-card"><span class="rc-title">Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</span><span class="rc-desc">Explore agent planning frameworks: ReAct for reasoning and acting, Plan-and-Execute for task decomposition, Tree of Thou</span></a><a href="/en/ai/ai-workflow-automation.html" class="related-card"><span class="rc-title">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</span><span class="rc-desc">Build robust AI workflow automation with LangChain for LLM orchestration, Temporal for durable execution, and event-driv</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="rc-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="rc-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rat</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#why-memory-matters-for-ai-agents">Why Memory Matters for AI Agents</a></li><li><a href="#memory-hierarchy">Memory Hierarchy</a></li><li><a href="#pattern-1-summarization--sliding-window-basic">Pattern 1: Summarization + Sliding Window (Basic)</a></li><li><a href="#pattern-2-vector-backed-episodic-memory-intermediate">Pattern 2: Vector-Backed Episodic Memory (Intermediate)</a></li><li><a href="#pattern-3-structured-knowledge-graph-advanced">Pattern 3: Structured Knowledge Graph (Advanced)</a></li><li><a href="#pattern-4-reflection-and-self-improvement">Pattern 4: Reflection and Self-Improvement</a></li><li><a href="#production-considerations">Production Considerations</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

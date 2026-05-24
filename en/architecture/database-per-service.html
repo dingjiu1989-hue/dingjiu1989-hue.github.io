@@ -101,17 +101,25 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › Database per Service Pattern
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span></div>
-      <h1 class="article-title">Database per Service Pattern</h1>
-      <div class="article-meta"><time datetime="2025-12-26">Published 2025-12-26</time> · <time datetime="2026-05-05">Last active 2026-05-05</time> · 241 views · 0 replies · 5 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/database-per-service.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/database-per-service.png" alt="Database per Service Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>The database per service pattern is a fundamental principle of microservice architecture: each service owns its data exclusively and no other service can directly access its database. This pattern ensures loose coupling between services, allowing them to evolve independently, choose appropriate storage technologies, and scale autonomously. However, it introduces significant challenges for queries that span multiple services. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/database-per-service.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/database-per-service.png" alt="Database per Service Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Database per Service Pattern</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-26">2025-12-26</time>
+          <span class="meta-sep">·</span>
+          <span>5 min read</span>
+          <span class="meta-sep">·</span>
+          <span>241 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/database-per-service.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/database-per-service.png" alt="Database per Service Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>The database per service pattern is a fundamental principle of microservice architecture: each service owns its data exclusively and no other service can directly access its database. This pattern ensures loose coupling between services, allowing them to evolve independently, choose appropriate storage technologies, and scale autonomously. However, it introduces significant challenges for queries that span multiple services. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/database-per-service.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/database-per-service.png" alt="Database per Service Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Data Ownership </p>
 <p>In the database per service pattern, each service has complete ownership of its data schema, storage technology, and access patterns. No other service can read or write to the database directly—all data access must go through the owning service's API. </p>
 <p>This ownership is essential for independent evolution. A service can change its database schema, migrate to a different database technology, or refactor its data model without coordinating with other services. The API is the contract, and as long as the API remains backward compatible, the service is free to change its internal implementation. </p>
@@ -133,14 +141,8 @@
 <p>Practical Implementation </p>
 <p>Organizations adopting database per service should start by identifying service boundaries that align with data ownership. Each service should own data that naturally belongs to its domain. Cross-service data should be analyzed to identify whether the service boundaries are correct or whether data synchronization is needed. </p>
 <p>The pattern is most effective when combined with event-driven communication. Services publish events when their data changes, and other services consume events to update their cached or duplicated data. This reduces the need for synchronous cross-service queries. </p>
-<p>Database per service is a powerful pattern for achieving service autonomy and independent scalability, but it requires disciplined data management, investment in cross-service query patterns, and acceptance of eventual consistency. For teams that make this investment, the pattern enables truly independent service evolution.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/system-design-fundamentals-2026.html">System Design Fundamentals 2026: A Developer Guide to Scalable Applications</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>Database per service is a powerful pattern for achieving service autonomy and independent scalability, but it requires disciplined data management, investment in cross-service query patterns, and acceptance of eventual consistency. For teams that make this investment, the pattern enables truly independent service evolution.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a></li><li><a href="/en/architecture/system-design-fundamentals-2026.html">System Design Fundamentals 2026: A Developer Guide to Scalable Applications</a></li><li><a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -148,29 +150,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Database%20per%20Service%20Pattern&url=https%3A//aidev.fit/en/architecture/database-per-service.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/database-per-service.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Database%20per%20Service%20Pattern&url=https%3A//aidev.fit/en/architecture/database-per-service.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Database%20per%20Service%20Pattern&u=https%3A//aidev.fit/en/architecture/database-per-service.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Database%20per%20Service%20Pattern&body=https%3A//aidev.fit/en/architecture/database-per-service.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/database-per-service.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Database%20per%20Service%20Pattern&url=https%3A//aidev.fit/en/architecture/database-per-service.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/database-per-service.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Database%20per%20Service%20Pattern&url=https%3A//aidev.fit/en/architecture/database-per-service.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Database%20per%20Service%20Pattern&u=https%3A//aidev.fit/en/architecture/database-per-service.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Database%20per%20Service%20Pattern&body=https%3A//aidev.fit/en/architecture/database-per-service.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/database-per-service.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/event-sourcing.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Event Sourcing Pattern</span></a><a href="/en/architecture/system-design-fundamentals-2026.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">System Design Fundamentals 2026: A Developer Guide to Scalable Ap</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/backend-for-frontend.html" class="related-card"><span class="rc-title">Backend for Frontend (BFF) Pattern</span><span class="rc-desc">Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data aggregation, protocol t</span></a><a href="/en/architecture/bulkhead-pattern.html" class="related-card"><span class="rc-title">Bulkhead Pattern for Resilience</span><span class="rc-desc">Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, circuit breaker integr</span></a><a href="/en/architecture/strangler-fig.html" class="related-card"><span class="rc-title">Strangler Fig Pattern for Legacy Migration</span><span class="rc-desc">Learn the strangler fig pattern for incrementally migrating legacy systems — proxy routing, feature parity, data synchro</span></a><a href="/en/architecture/saga-pattern.html" class="related-card"><span class="rc-title">Saga Pattern for Distributed Transactions</span><span class="rc-desc">Learn the saga pattern for managing distributed transactions across microservices.</span></a><a href="/en/architecture/api-composition-pattern.html" class="related-card"><span class="rc-title">API Composition Pattern</span><span class="rc-desc">Learn API composition: aggregation, parallel calls, error handling strategies, and cross-service data retrieval</span></a><a href="/en/architecture/materialized-view-pattern.html" class="related-card"><span class="rc-title">Materialized View Pattern</span><span class="rc-desc">Explore the materialized view pattern: read models, caching strategies, CQRS integration, and efficient cross-service qu</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/event-sourcing.html" class="prev-next-btn prev-link">← Event Sourcing Pattern</a><a href="/en/architecture/system-design-fundamentals-2026.html" class="prev-next-btn next-link">System Design Fundamentals 2026: A Developer Guide to Scalable Applications →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/backend-for-frontend.html" class="related-card"><span class="related-card-title">Backend for Frontend (BFF) Pattern</span><span class="related-card-desc">Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data agg</span></a><a href="/en/architecture/bulkhead-pattern.html" class="related-card"><span class="related-card-title">Bulkhead Pattern for Resilience</span><span class="related-card-desc">Learn the bulkhead pattern for isolating failures in distributed systems — thread pool isolation, ci</span></a><a href="/en/architecture/strangler-fig.html" class="related-card"><span class="related-card-title">Strangler Fig Pattern for Legacy Migration</span><span class="related-card-desc">Learn the strangler fig pattern for incrementally migrating legacy systems — proxy routing, feature </span></a><a href="/en/architecture/saga-pattern.html" class="related-card"><span class="related-card-title">Saga Pattern for Distributed Transactions</span><span class="related-card-desc">Learn the saga pattern for managing distributed transactions across microservices.</span></a><a href="/en/architecture/api-composition-pattern.html" class="related-card"><span class="related-card-title">API Composition Pattern</span><span class="related-card-desc">Learn API composition: aggregation, parallel calls, error handling strategies, and cross-service dat</span></a><a href="/en/architecture/materialized-view-pattern.html" class="related-card"><span class="related-card-title">Materialized View Pattern</span><span class="related-card-desc">Explore the materialized view pattern: read models, caching strategies, CQRS integration, and effici</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

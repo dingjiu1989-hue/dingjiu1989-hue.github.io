@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › ORM Performance
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
-      <h1 class="article-title">ORM Performance</h1>
-      <div class="article-meta"><time datetime="2026-05-19">Published 2026-05-19</time> · <time datetime="2026-05-02">Last active 2026-05-02</time> · 199 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/orm-performance.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/orm-performance.png" alt="ORM Performance" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>ORM Performance Challenges </p><picture><source srcset="https://aidev.fit/images/covers/en/database/orm-performance.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/orm-performance.png" alt="ORM Performance" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">ORM Performance</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-19">2026-05-19</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>199 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/orm-performance.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/orm-performance.png" alt="ORM Performance" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (11)</summary><ol><li><a href="#n1-one-query-for-users-then-n-queries-for-orders">N+1: One query for users, then N queries for orders</a></li><li><a href="#solution-2-queries-total">Solution: 2 queries total</a></li><li><a href="#sqlalchemy-configure-relationship-loading">SQLAlchemy: configure relationship loading</a></li><li><a href="#bad-fetch-all-columns-when-only-one-is-needed">BAD: Fetch all columns when only one is needed</a></li><li><a href="#good-fetch-only-needed-columns">GOOD: Fetch only needed columns</a></li><li><a href="#bad-loading-entire-objects">BAD: Loading entire objects</a></li><li><a href="#good-bulk-update">GOOD: Bulk update</a></li><li><a href="#sqlalchemy-see-the-query">SQLAlchemy: see the query</a></li><li><a href="#select-usersid-usersemail-usersname-from-users-where-usersemail">SELECT users.id, users.email, users.name FROM users WHERE users.email = ?</a></li><li><a href="#bad-individual-inserts">BAD: Individual inserts</a></li><li><a href="#good-bulk-insert">GOOD: Bulk insert</a></li></ol></details>
+        <div class="article-body"><p>ORM Performance Challenges </p><picture><source srcset="https://aidev.fit/images/covers/en/database/orm-performance.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/orm-performance.png" alt="ORM Performance" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>Object-Relational Mappers (ORMs) simplify database access but introduce performance pitfalls. Understanding these issues is essential for production applications. </p>
 <p>The N+1 Query Problem </p>
 <p>The most common ORM performance issue: </p>
@@ -164,14 +172,8 @@
 <p>session.bulk_insert_mappings(User, [u.<strong>dict</strong> for u in users])</p>
 <p>session.commit() # Single batch INSERT</p>
 <p>Conclusion </p>
-<p>Profile your ORM queries in production. Fix N+1 with eager loading. Select only needed columns. Use bulk operations for batch processing. Monitor the SQL your ORM generates. The ORM is a tool, not a magic black box.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (11)</summary><ol><li><a href="#n+1:-one-query-for-users,-then-n-queries-for-orders">N+1: One query for users, then N queries for orders</a></li><li><a href="#solution:-2-queries-total">Solution: 2 queries total</a></li><li><a href="#sqlalchemy:-configure-relationship-loading">SQLAlchemy: configure relationship loading</a></li><li><a href="#bad:-fetch-all-columns-when-only-one-is-needed">BAD: Fetch all columns when only one is needed</a></li><li><a href="#good:-fetch-only-needed-columns">GOOD: Fetch only needed columns</a></li><li><a href="#bad:-loading-entire-objects">BAD: Loading entire objects</a></li><li><a href="#good:-bulk-update">GOOD: Bulk update</a></li><li><a href="#sqlalchemy:-see-the-query">SQLAlchemy: see the query</a></li><li><a href="#select-users.id,-users.email,-users.name-from-users-where-users.email-=-">SELECT users.id, users.email, users.name FROM users WHERE users.email = ?</a></li><li><a href="#bad:-individual-inserts">BAD: Individual inserts</a></li><li><a href="#good:-bulk-insert">GOOD: Bulk insert</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Profile your ORM queries in production. Fix N+1 with eager loading. Select only needed columns. Use bulk operations for batch processing. Monitor the SQL your ORM generates. The ORM is a tool, not a magic black box.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></li><li><a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a></li><li><a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -179,29 +181,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=ORM%20Performance&url=https%3A//aidev.fit/en/database/orm-performance.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/orm-performance.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=ORM%20Performance&url=https%3A//aidev.fit/en/database/orm-performance.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=ORM%20Performance&u=https%3A//aidev.fit/en/database/orm-performance.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=ORM%20Performance&body=https%3A//aidev.fit/en/database/orm-performance.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/orm-performance.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=ORM%20Performance&url=https%3A//aidev.fit/en/database/orm-performance.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/orm-performance.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=ORM%20Performance&url=https%3A//aidev.fit/en/database/orm-performance.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=ORM%20Performance&u=https%3A//aidev.fit/en/database/orm-performance.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=ORM%20Performance&body=https%3A//aidev.fit/en/database/orm-performance.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/orm-performance.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/graph-queries.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH R</span></a><a href="/en/database/database-capacity-planning.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scali</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/database/database-query-profiling.html" class="related-card"><span class="rc-title">Database Query Profiling: Finding and Fixing Performance Bottlenecks</span><span class="rc-desc">Profile database queries to identify bottlenecks: execution plans, wait events, and systematic optimization.</span></a><a href="/en/database/database-slow-query-fix.html" class="related-card"><span class="rc-title">Slow Query Troubleshooting: Identification, Profiling, and Optimization</span><span class="rc-desc">Learn systematic slow query troubleshooting: identifying problematic queries, profiling with EXPLAIN ANALYZE, optimizati</span></a><a href="/en/database/database-slow-query-optimization.html" class="related-card"><span class="rc-title">Slow Query Optimization: Analysis, Indexing, and Rewriting</span><span class="rc-desc">Systematic approach to finding and fixing slow database queries: EXPLAIN plans, index strategies, and SQL rewriting.</span></a><a href="/en/database/composite-indexes.html" class="related-card"><span class="rc-title">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</span><span class="rc-desc">Master composite indexes in PostgreSQL: column order optimization, covering indexes, partial indexes, and index-only sca</span></a><a href="/en/database/database-columnar-storage.html" class="related-card"><span class="rc-title">Columnar Storage: Compression, Encoding, and Analytical Performance</span><span class="rc-desc">Understand columnar storage formats: row vs column orientation, encoding techniques, and analytical query optimization.</span></a><a href="/en/database/batch-operations.html" class="related-card"><span class="rc-title">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</span><span class="rc-desc">Master batch operations in PostgreSQL: bulk insert patterns, the COPY command, batch updates, optimal batch sizes, and e</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/graph-queries.html" class="prev-next-btn prev-link">← Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a><a href="/en/database/database-capacity-planning.html" class="prev-next-btn next-link">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/database-query-profiling.html" class="related-card"><span class="related-card-title">Database Query Profiling: Finding and Fixing Performance Bottlenecks</span><span class="related-card-desc">Profile database queries to identify bottlenecks: execution plans, wait events, and systematic optim</span></a><a href="/en/database/database-slow-query-fix.html" class="related-card"><span class="related-card-title">Slow Query Troubleshooting: Identification, Profiling, and Optimization</span><span class="related-card-desc">Learn systematic slow query troubleshooting: identifying problematic queries, profiling with EXPLAIN</span></a><a href="/en/database/database-slow-query-optimization.html" class="related-card"><span class="related-card-title">Slow Query Optimization: Analysis, Indexing, and Rewriting</span><span class="related-card-desc">Systematic approach to finding and fixing slow database queries: EXPLAIN plans, index strategies, an</span></a><a href="/en/database/composite-indexes.html" class="related-card"><span class="related-card-title">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</span><span class="related-card-desc">Master composite indexes in PostgreSQL: column order optimization, covering indexes, partial indexes</span></a><a href="/en/database/database-columnar-storage.html" class="related-card"><span class="related-card-title">Columnar Storage: Compression, Encoding, and Analytical Performance</span><span class="related-card-desc">Understand columnar storage formats: row vs column orientation, encoding techniques, and analytical </span></a><a href="/en/database/batch-operations.html" class="related-card"><span class="related-card-title">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</span><span class="related-card-desc">Master batch operations in PostgreSQL: bulk insert patterns, the COPY command, batch updates, optima</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#n1-one-query-for-users-then-n-queries-for-orders">N+1: One query for users, then N queries for orders</a></li><li><a href="#solution-2-queries-total">Solution: 2 queries total</a></li><li><a href="#sqlalchemy-configure-relationship-loading">SQLAlchemy: configure relationship loading</a></li><li><a href="#bad-fetch-all-columns-when-only-one-is-needed">BAD: Fetch all columns when only one is needed</a></li><li><a href="#good-fetch-only-needed-columns">GOOD: Fetch only needed columns</a></li><li><a href="#bad-loading-entire-objects">BAD: Loading entire objects</a></li><li><a href="#good-bulk-update">GOOD: Bulk update</a></li><li><a href="#sqlalchemy-see-the-query">SQLAlchemy: see the query</a></li><li><a href="#select-usersid-usersemail-usersname-from-users-where-usersemail">SELECT users.id, users.email, users.name FROM users WHERE users.email = ?</a></li><li><a href="#bad-individual-inserts">BAD: Individual inserts</a></li><li><a href="#good-bulk-insert">GOOD: Bulk insert</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

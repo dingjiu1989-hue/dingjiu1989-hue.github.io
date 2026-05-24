@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › API Versioning Strategies
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">API Versioning Strategies</h1>
-      <div class="article-meta"><time datetime="2026-05-01">Published 2026-05-01</time> · <time datetime="2026-05-12">Last active 2026-05-12</time> · 469 views · 2 replies · 3 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/api-versioning-strategies.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/api-versioning-strategies.png" alt="API Versioning Strategies" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>API versioning is one of those decisions that seems trivial — "just add /v2/" — until you have 50 clients on v1, 30 on v2, and a breaking change you need to roll out. The versioning strategy you choose affects every client integration, every SDK, and every internal team that depends on your API. This guide compares every major API versioning approach and helps you pick the least painful one.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/api-versioning-strategies.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/api-versioning-strategies.png" alt="API Versioning Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">API Versioning Strategies</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-01">2026-05-01</time>
+          <span class="meta-sep">·</span>
+          <span>3 min read</span>
+          <span class="meta-sep">·</span>
+          <span>469 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/api-versioning-strategies.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/api-versioning-strategies.png" alt="API Versioning Strategies" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (4)</summary><ol><li><a href="#api-versioning-strategies-compared">API Versioning Strategies Compared</a></li><li><a href="#date-based-vs-semantic-versioning">Date-Based vs Semantic Versioning</a></li><li><a href="#stripes-versioning-model-the-gold-standard">Stripe's Versioning Model (The Gold Standard)</a></li><li><a href="#how-to-deprecate-an-api-version-without-making-enemies">How to Deprecate an API Version Without Making Enemies</a></li></ol></details>
+        <div class="article-body"><p>API versioning is one of those decisions that seems trivial — "just add /v2/" — until you have 50 clients on v1, 30 on v2, and a breaking change you need to roll out. The versioning strategy you choose affects every client integration, every SDK, and every internal team that depends on your API. This guide compares every major API versioning approach and helps you pick the least painful one.</p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/api-versioning-strategies.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/api-versioning-strategies.png" alt="API Versioning Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 
 <h2>API Versioning Strategies Compared</h2>
 <table>
@@ -159,14 +167,8 @@
 <tr><td>5. Shut Down</td><td>Return 410 Gone with clear error message + upgrade link</td><td>After announced date</td></tr>
 </table>
 
-<p><strong>Bottom line:</strong> For public REST APIs, URI path versioning (/v2/) is the most practical — it is visible, easy to test, and works with all HTTP tooling. For developer-focused APIs, date-based versioning (Stripe model) is more elegant but requires more infrastructure. The key is not the format — it is maintaining backward compatibility and giving clients 6-12 months to migrate when you do break things. See also: <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a> and <a href="/en/tech/api-design-patterns.html">API Design Patterns</a>.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (4)</summary><ol><li><a href="#api-versioning-strategies-compared">API Versioning Strategies Compared</a></li><li><a href="#date-based-vs-semantic-versioning">Date-Based vs Semantic Versioning</a></li><li><a href="#stripe's-versioning-model-(the-gold-standard)">Stripe's Versioning Model (The Gold Standard)</a></li><li><a href="#how-to-deprecate-an-api-version-without-making-enemies">How to Deprecate an API Version Without Making Enemies</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p><strong>Bottom line:</strong> For public REST APIs, URI path versioning (/v2/) is the most practical — it is visible, easy to test, and works with all HTTP tooling. For developer-focused APIs, date-based versioning (Stripe model) is more elegant but requires more infrastructure. The key is not the format — it is maintaining backward compatibility and giving clients 6-12 months to migrate when you do break things. See also: <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a> and <a href="/en/tech/api-design-patterns.html">API Design Patterns</a>.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></li><li><a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></li><li><a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -174,29 +176,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=API%20Versioning%20Strategies&url=https%3A//aidev.fit/en/architecture/api-versioning-strategies.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/api-versioning-strategies.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=API%20Versioning%20Strategies&url=https%3A//aidev.fit/en/architecture/api-versioning-strategies.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=API%20Versioning%20Strategies&u=https%3A//aidev.fit/en/architecture/api-versioning-strategies.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=API%20Versioning%20Strategies&body=https%3A//aidev.fit/en/architecture/api-versioning-strategies.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/api-versioning-strategies.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=API%20Versioning%20Strategies&url=https%3A//aidev.fit/en/architecture/api-versioning-strategies.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/api-versioning-strategies.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=API%20Versioning%20Strategies&url=https%3A//aidev.fit/en/architecture/api-versioning-strategies.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=API%20Versioning%20Strategies&u=https%3A//aidev.fit/en/architecture/api-versioning-strategies.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=API%20Versioning%20Strategies&body=https%3A//aidev.fit/en/architecture/api-versioning-strategies.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/api-versioning-strategies.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/cache-strategies.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Caching Strategies</span></a><a href="/en/architecture/soa-vs-microservices.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">SOA vs Microservices</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="rc-title">Alerting Strategies for Production Systems</span><span class="rc-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/monolith-first-strategy.html" class="related-card"><span class="rc-title">Monolith-First Strategy</span><span class="rc-desc">When to start monolithic, extraction patterns, and migration strategies to microservices with proven approaches</span></a><a href="/en/architecture/stateful-vs-stateless.html" class="related-card"><span class="rc-title">Stateful vs Stateless Architecture Patterns</span><span class="rc-desc">Compare stateful and stateless architecture patterns: trade-offs for scalability, resilience, and implementation complex</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="rc-title">API Composition and Aggregation</span><span class="rc-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation strategies</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card"><span class="rc-title">Zero-Downtime Database Migrations</span><span class="rc-desc">Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and production practices</span></a><a href="/en/architecture/feature-flags-architecture.html" class="related-card"><span class="rc-title">Feature Flags Architecture</span><span class="rc-desc">Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feature flags</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/cache-strategies.html" class="prev-next-btn prev-link">← Caching Strategies</a><a href="/en/architecture/soa-vs-microservices.html" class="prev-next-btn next-link">SOA vs Microservices →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/alerting-strategies.html" class="related-card"><span class="related-card-title">Alerting Strategies for Production Systems</span><span class="related-card-desc">Alert fatigue, threshold tuning, pager rotation, on-call best practices, and effective alert design</span></a><a href="/en/architecture/monolith-first-strategy.html" class="related-card"><span class="related-card-title">Monolith-First Strategy</span><span class="related-card-desc">When to start monolithic, extraction patterns, and migration strategies to microservices with proven</span></a><a href="/en/architecture/stateful-vs-stateless.html" class="related-card"><span class="related-card-title">Stateful vs Stateless Architecture Patterns</span><span class="related-card-desc">Compare stateful and stateless architecture patterns: trade-offs for scalability, resilience, and im</span></a><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="related-card"><span class="related-card-title">Zero-Downtime Database Migrations</span><span class="related-card-desc">Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and producti</span></a><a href="/en/architecture/feature-flags-architecture.html" class="related-card"><span class="related-card-title">Feature Flags Architecture</span><span class="related-card-desc">Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feat</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#api-versioning-strategies-compared">API Versioning Strategies Compared</a></li><li><a href="#date-based-vs-semantic-versioning">Date-Based vs Semantic Versioning</a></li><li><a href="#stripes-versioning-model-the-gold-standard">Stripe's Versioning Model (The Gold Standard)</a></li><li><a href="#how-to-deprecate-an-api-version-without-making-enemies">How to Deprecate an API Version Without Making Enemies</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

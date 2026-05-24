@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Database Backup Strategies to Object Storage
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
-      <h1 class="article-title">Database Backup Strategies to Object Storage</h1>
-      <div class="article-meta"><time datetime="2026-04-14">Published 2026-04-14</time> · <time datetime="2026-05-13">Last active 2026-05-13</time> · 229 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/database-backup-to-s3.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-backup-to-s3.png" alt="Database Backup Strategies to Object Storage" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Backing up databases to object storage (S3, GCS, Azure Blob) provides durable, cost-effective, and scalable backup storage. Object storage's built-in replication and lifecycle management simplify backup retention.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-backup-to-s3.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-backup-to-s3.png" alt="Database Backup Strategies to Object Storage" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Database Backup Strategies to Object Storage</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-14">2026-04-14</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>229 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/database-backup-to-s3.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-backup-to-s3.png" alt="Database Backup Strategies to Object Storage" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (6)</summary><ol><li><a href="#backup-types">Backup Types</a></li><li><a href="#object-storage-backup-tools">Object Storage Backup Tools</a></li><li><a href="#point-in-time-recovery">Point-in-Time Recovery</a></li><li><a href="#retention-policies">Retention Policies</a></li><li><a href="#encryption">Encryption</a></li><li><a href="#testing-backups">Testing Backups</a></li></ol></details>
+        <div class="article-body"><p>Backing up databases to object storage (S3, GCS, Azure Blob) provides durable, cost-effective, and scalable backup storage. Object storage's built-in replication and lifecycle management simplify backup retention.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-backup-to-s3.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-backup-to-s3.png" alt="Database Backup Strategies to Object Storage" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Backup Types</h2>
 <p>Full backups capture the entire database. They are the foundation of any backup strategy but are slow and space-intensive for large databases. Frequency depends on data change rate—typically daily for most databases.</p>
 <p>Incremental backups capture only data changed since the last full or incremental backup. They are faster and smaller but require the full backup chain for restoration. Recommended interval is minutes to hours.</p>
@@ -129,14 +137,8 @@
 <h2>Encryption</h2>
 <p>Encrypt backups before uploading. Use server-side encryption (SSE-S3) or client-side encryption with your own keys. The backup encryption key must be stored separately from the backup—losing the key means losing the backup.</p>
 <h2>Testing Backups</h2>
-<p>A backup is only as good as its restoration. Test full restoration regularly—at least monthly for production databases. Measure restore time and document the procedure. Automate restore testing with infrastructure-as-code templates.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-containerization.html">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (6)</summary><ol><li><a href="#backup-types">Backup Types</a></li><li><a href="#object-storage-backup-tools">Object Storage Backup Tools</a></li><li><a href="#point-in-time-recovery">Point-in-Time Recovery</a></li><li><a href="#retention-policies">Retention Policies</a></li><li><a href="#encryption">Encryption</a></li><li><a href="#testing-backups">Testing Backups</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>A backup is only as good as its restoration. Test full restoration regularly—at least monthly for production databases. Measure restore time and document the procedure. Automate restore testing with infrastructure-as-code templates.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a></li><li><a href="/en/database/database-containerization.html">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</a></li><li><a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -144,29 +146,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Database%20Backup%20Strategies%20to%20Object%20Storage&url=https%3A//aidev.fit/en/database/database-backup-to-s3.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-backup-to-s3.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Database%20Backup%20Strategies%20to%20Object%20Storage&url=https%3A//aidev.fit/en/database/database-backup-to-s3.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Database%20Backup%20Strategies%20to%20Object%20Storage&u=https%3A//aidev.fit/en/database/database-backup-to-s3.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Database%20Backup%20Strategies%20to%20Object%20Storage&body=https%3A//aidev.fit/en/database/database-backup-to-s3.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-backup-to-s3.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Database%20Backup%20Strategies%20to%20Object%20Storage&url=https%3A//aidev.fit/en/database/database-backup-to-s3.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-backup-to-s3.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Database%20Backup%20Strategies%20to%20Object%20Storage&url=https%3A//aidev.fit/en/database/database-backup-to-s3.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Database%20Backup%20Strategies%20to%20Object%20Storage&u=https%3A//aidev.fit/en/database/database-backup-to-s3.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Database%20Backup%20Strategies%20to%20Object%20Storage&body=https%3A//aidev.fit/en/database/database-backup-to-s3.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-backup-to-s3.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-foreign-key-constraints.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Foreign Key Constraints: Referential Integrity in Practice</span></a><a href="/en/database/redis-caching-patterns.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Redis Caching Patterns</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/database/backup-types.html" class="related-card"><span class="rc-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</span><span class="rc-desc">Explore database backup strategies including full, incremental, differential backups, WAL archiving, and point-in-time r</span></a><a href="/en/database/database-disaster-recovery.html" class="related-card"><span class="rc-title">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</span><span class="rc-desc">Learn database disaster recovery planning: RPO and RPO definitions, cross-region replication strategies, backup testing,</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="rc-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="rc-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, a</span></a><a href="/en/database/database-cost-optimization.html" class="related-card"><span class="rc-title">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</span><span class="rc-desc">Learn database cost optimization strategies: right-sizing instances, reserved instances, storage tiering, serverless dat</span></a><a href="/en/database/database-high-availability.html" class="related-card"><span class="rc-title">Database High Availability: Failover, Standby Types, Health Checks</span><span class="rc-desc">Learn database high availability patterns: failover strategies, standby types (hot, warm, cold), health checks, automate</span></a><a href="/en/database/database-backup-strategies.html" class="related-card"><span class="rc-title">Database Backup and Recovery Strategies</span><span class="rc-desc">Learn database backup strategies including full, incremental, and differential backups, point-in-time recovery, and disa</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-foreign-key-constraints.html" class="prev-next-btn prev-link">← Foreign Key Constraints: Referential Integrity in Practice</a><a href="/en/database/redis-caching-patterns.html" class="prev-next-btn next-link">Redis Caching Patterns →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/backup-types.html" class="related-card"><span class="related-card-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</span><span class="related-card-desc">Explore database backup strategies including full, incremental, differential backups, WAL archiving,</span></a><a href="/en/database/database-disaster-recovery.html" class="related-card"><span class="related-card-title">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</span><span class="related-card-desc">Learn database disaster recovery planning: RPO and RPO definitions, cross-region replication strateg</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="related-card-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="related-card-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monit</span></a><a href="/en/database/database-cost-optimization.html" class="related-card"><span class="related-card-title">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</span><span class="related-card-desc">Learn database cost optimization strategies: right-sizing instances, reserved instances, storage tie</span></a><a href="/en/database/database-high-availability.html" class="related-card"><span class="related-card-title">Database High Availability: Failover, Standby Types, Health Checks</span><span class="related-card-desc">Learn database high availability patterns: failover strategies, standby types (hot, warm, cold), hea</span></a><a href="/en/database/database-backup-strategies.html" class="related-card"><span class="related-card-title">Database Backup and Recovery Strategies</span><span class="related-card-desc">Learn database backup strategies including full, incremental, and differential backups, point-in-tim</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#backup-types">Backup Types</a></li><li><a href="#object-storage-backup-tools">Object Storage Backup Tools</a></li><li><a href="#point-in-time-recovery">Point-in-Time Recovery</a></li><li><a href="#retention-policies">Retention Policies</a></li><li><a href="#encryption">Encryption</a></li><li><a href="#testing-backups">Testing Backups</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

@@ -101,20 +101,28 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › LLM Function Calling: Complete Developer Guide with Code Examples
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">LLM</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">LLM</span>
         <span class="tag-cat">Function Calling</span>
         <span class="tag-cat">API</span>
         <span class="tag-cat">AI Development</span>
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
-      <h1 class="article-title">LLM Function Calling: Complete Developer Guide with Code Examples</h1>
-      <div class="article-meta"><time datetime="2025-11-10">Published 2025-11-10</time> · <time datetime="2026-05-10">Last active 2026-05-10</time> · 4626 views · 38 replies · 3 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/ai/function-calling-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/function-calling-guide.png" alt="LLM Function Calling: Complete Developer Guide with Code Examples" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Function calling (or "tool use") transforms an LLM from a chatbot into an agent that can take actions: query databases, send emails, create tickets, call APIs. Every major LLM provider now supports it, but the implementation details differ significantly. This guide covers how to design function schemas, handle errors, and implement reliable tool-use workflows across OpenAI, Anthropic, and Gemini.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/function-calling-guide.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/function-calling-guide.png" alt="LLM Function Calling: Complete Developer Guide with Code Examples" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">LLM Function Calling: Complete Developer Guide with Code Examples</h1>
+        <div class="article-meta">
+          <time datetime="2025-11-10">2025-11-10</time>
+          <span class="meta-sep">·</span>
+          <span>3 min read</span>
+          <span class="meta-sep">·</span>
+          <span>4626 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/ai/function-calling-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/function-calling-guide.png" alt="LLM Function Calling: Complete Developer Guide with Code Examples" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#how-function-calling-works">How Function Calling Works</a></li><li><a href="#function-schema-design-best-practices">Function Schema Design: Best Practices</a></li><li><a href="#parallel-vs-sequential-function-calls">Parallel vs Sequential Function Calls</a></li><li><a href="#error-handling-patterns">Error Handling Patterns</a></li><li><a href="#provider-specific-implementation">Provider-Specific Implementation</a></li></ol></details>
+        <div class="article-body"><p>Function calling (or "tool use") transforms an LLM from a chatbot into an agent that can take actions: query databases, send emails, create tickets, call APIs. Every major LLM provider now supports it, but the implementation details differ significantly. This guide covers how to design function schemas, handle errors, and implement reliable tool-use workflows across OpenAI, Anthropic, and Gemini.</p><picture><source srcset="https://aidev.fit/images/covers/en/ai/function-calling-guide.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/ai/function-calling-guide.png" alt="LLM Function Calling: Complete Developer Guide with Code Examples" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 
 <h2>How Function Calling Works</h2>
 <pre><code>1. You define functions (name, description, parameters JSON Schema)
@@ -163,14 +171,8 @@ def get_customer(email: str):
 <tr><td>Google Gemini</td><td>tools: [{functionDeclarations: [{name, description, parameters}]}]</td><td>Automatic function calling mode available (Gemini executes)</td></tr>
 </table>
 
-<p><strong>Bottom line:</strong> Function calling is the bridge between LLMs and real-world actions. Invest time in schema design (clear descriptions, typed parameters, enums) — the quality of your function definitions directly determines reliability. Start with 2-3 functions and test extensively before adding more. See also: <a href="/en/ai/ai-agents-guide.html">AI Agents Guide</a> and <a href="/en/ai/ai-api-integration-guide.html">AI API Integration Guide</a>.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/rag-best-practices.html">RAG Best Practices 2026: Building Production-Ready Retrieval Systems</a>, <a href="/en/ai/multimodal-ai-guide.html">Building Multimodal AI Applications: Vision, Audio, and Text Combined (2026)</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#how-function-calling-works">How Function Calling Works</a></li><li><a href="#function-schema-design:-best-practices">Function Schema Design: Best Practices</a></li><li><a href="#parallel-vs-sequential-function-calls">Parallel vs Sequential Function Calls</a></li><li><a href="#error-handling-patterns">Error Handling Patterns</a></li><li><a href="#provider-specific-implementation">Provider-Specific Implementation</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p><strong>Bottom line:</strong> Function calling is the bridge between LLMs and real-world actions. Invest time in schema design (clear descriptions, typed parameters, enums) — the quality of your function definitions directly determines reliability. Start with 2-3 functions and test extensively before adding more. See also: <a href="/en/ai/ai-agents-guide.html">AI Agents Guide</a> and <a href="/en/ai/ai-api-integration-guide.html">AI API Integration Guide</a>.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a></li><li><a href="/en/ai/rag-best-practices.html">RAG Best Practices 2026: Building Production-Ready Retrieval Systems</a></li><li><a href="/en/ai/multimodal-ai-guide.html">Building Multimodal AI Applications: Vision, Audio, and Text Combined (2026)</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -178,34 +180,40 @@ def get_customer(email: str):
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=LLM%20Function%20Calling%3A%20Complete%20Developer%20Guide%20with%20Code%20Examples&url=https%3A//aidev.fit/en/ai/function-calling-guide.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/function-calling-guide.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=LLM%20Function%20Calling%3A%20Complete%20Developer%20Guide%20with%20Code%20Examples&url=https%3A//aidev.fit/en/ai/function-calling-guide.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=LLM%20Function%20Calling%3A%20Complete%20Developer%20Guide%20with%20Code%20Examples&u=https%3A//aidev.fit/en/ai/function-calling-guide.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=LLM%20Function%20Calling%3A%20Complete%20Developer%20Guide%20with%20Code%20Examples&body=https%3A//aidev.fit/en/ai/function-calling-guide.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/function-calling-guide.html" aria-label="Copy link">Copy</button>
-    </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-voice-agents.html" class="prev-next-btn prev-link">← Building AI Voice Agents: Complete Technical Guide (2026)</a><a href="/en/ai/ai-code-review-tools.html" class="prev-next-btn next-link">AI Code Review: Best Tools, Setup Guide, and ROI Analysis →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/mcp-complete-guide.html" class="related-card"><span class="related-card-title">MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</span><span class="related-card-desc">How MCP works, architecture deep-dive, building MCP servers and clients, and why it is the USB-C mom</span></a><a href="/en/ai/build-chatgpt-plugin.html" class="related-card"><span class="related-card-title">How to Build a Custom GPT Plugin: Complete Developer Guide</span><span class="related-card-desc">Step-by-step tutorial: setting up the manifest, creating API endpoints, authentication, testing in C</span></a><a href="/en/ai/prompt-engineering-advanced.html" class="related-card"><span class="related-card-title">Advanced Prompt Engineering: Techniques That Actually Work for Developers</span><span class="related-card-desc">Beyond basic prompting: chain-of-thought, few-shot with examples, XML tagging, system prompt design,</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="related-card-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="related-card-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handli</span></a><a href="/en/ai/tool-use-patterns.html" class="related-card"><span class="related-card-title">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</span><span class="related-card-desc">Explore LLM tool use patterns including function calling, structured tool definitions, multi-step re</span></a><a href="/en/ai/fine-tune-open-source-llm.html" class="related-card"><span class="related-card-title">Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)</span><span class="related-card-desc">How to fine-tune Llama, Mistral, and other open models: data preparation with JSONL, LoRA vs full fi</span></a></div>
-    </section>
-    
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=LLM%20Function%20Calling%3A%20Complete%20Developer%20Guide%20with%20Code%20Examples&url=https%3A//aidev.fit/en/ai/function-calling-guide.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/ai/function-calling-guide.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=LLM%20Function%20Calling%3A%20Complete%20Developer%20Guide%20with%20Code%20Examples&url=https%3A//aidev.fit/en/ai/function-calling-guide.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=LLM%20Function%20Calling%3A%20Complete%20Developer%20Guide%20with%20Code%20Examples&u=https%3A//aidev.fit/en/ai/function-calling-guide.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=LLM%20Function%20Calling%3A%20Complete%20Developer%20Guide%20with%20Code%20Examples&body=https%3A//aidev.fit/en/ai/function-calling-guide.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/ai/function-calling-guide.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/ai/ai-voice-agents.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Building AI Voice Agents: Complete Technical Guide (2026)</span></a><a href="/en/ai/ai-code-review-tools.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">AI Code Review: Best Tools, Setup Guide, and ROI Analysis</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/ai/mcp-complete-guide.html" class="related-card"><span class="rc-title">MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</span><span class="rc-desc">How MCP works, architecture deep-dive, building MCP servers and clients, and why it is the USB-C moment for AI integrati</span></a><a href="/en/ai/build-chatgpt-plugin.html" class="related-card"><span class="rc-title">How to Build a Custom GPT Plugin: Complete Developer Guide</span><span class="rc-desc">Step-by-step tutorial: setting up the manifest, creating API endpoints, authentication, testing in ChatGPT, and publishi</span></a><a href="/en/ai/prompt-engineering-advanced.html" class="related-card"><span class="rc-title">Advanced Prompt Engineering: Techniques That Actually Work for Developers</span><span class="rc-desc">Beyond basic prompting: chain-of-thought, few-shot with examples, XML tagging, system prompt design, and multi-turn stra</span></a><a href="/en/ai/llm-api-design.html" class="related-card"><span class="rc-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</span><span class="rc-desc">Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rat</span></a><a href="/en/ai/tool-use-patterns.html" class="related-card"><span class="rc-title">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</span><span class="rc-desc">Explore LLM tool use patterns including function calling, structured tool definitions, multi-step reasoning with tool lo</span></a><a href="/en/ai/fine-tune-open-source-llm.html" class="related-card"><span class="rc-title">Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)</span><span class="rc-desc">How to fine-tune Llama, Mistral, and other open models: data preparation with JSONL, LoRA vs full fine-tuning, cost comp</span></a></div>
+        </section>
+        
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
       <h3 style="margin-top:0;font-size:1.1rem;">🤖 AI Model Cost Calculator</h3>
       <p style="margin:0.5rem 0;color:#475569;">Compare Claude, GPT, Gemini, and DeepSeek API costs in real time. Adjust your token volume to see which model saves you the most.</p>
       <a href="/tools/ai-model-cost-calculator.html" style="display:inline-block;padding:0.5rem 1rem;background:#6366f1;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;">Open Calculator →</a>
     </section>
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#how-function-calling-works">How Function Calling Works</a></li><li><a href="#function-schema-design-best-practices">Function Schema Design: Best Practices</a></li><li><a href="#parallel-vs-sequential-function-calls">Parallel vs Sequential Function Calls</a></li><li><a href="#error-handling-patterns">Error Handling Patterns</a></li><li><a href="#provider-specific-implementation">Provider-Specific Implementation</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

@@ -112,18 +112,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Dockerfile Best Practices for Production
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
-      <h1 class="article-title">Dockerfile Best Practices for Production</h1>
-      <div class="article-meta"><time datetime="2026-05-19">Published 2026-05-19</time> · 176 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/dockerfile-best-practices.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/dockerfile-best-practices.png" alt="Dockerfile Best Practices for Production" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Writing efficient Dockerfiles reduces image size, improves build speed, and enhances security. These best practices apply to production container builds.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/dockerfile-best-practices.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/dockerfile-best-practices.png" alt="Dockerfile Best Practices for Production" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Dockerfile Best Practices for Production</h1>
+        <div class="article-meta">
+          <time datetime="2026-05-19">2026-05-19</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>176 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/dockerfile-best-practices.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/dockerfile-best-practices.png" alt="Dockerfile Best Practices for Production" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#multi-stage-builds">Multi-Stage Builds</a></li><li><a href="#layer-caching">Layer Caching</a></li><li><a href="#security-best-practices">Security Best Practices</a></li><li><a href="#minimal-images">Minimal Images</a></li><li><a href="#dockerignore">Dockerignore</a></li></ol></details>
+        <div class="article-body"><p>Writing efficient Dockerfiles reduces image size, improves build speed, and enhances security. These best practices apply to production container builds.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/dockerfile-best-practices.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/dockerfile-best-practices.png" alt="Dockerfile Best Practices for Production" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Multi-Stage Builds</h2>
 <p>Multi-stage builds separate build and runtime environments. Use one stage with all build tools (compilers, package managers) and a second minimal stage for the runtime. The resulting image contains only the application binary and its runtime dependencies.</p>
 <p>Multi-stage builds dramatically reduce image size. A Go application might go from 1GB (with golang:1.21) to 20MB (with scratch). Python applications benefit from using slim base images in final stages.</p>
@@ -137,14 +145,8 @@
 <p>Use distroless or Alpine base images. Distroless images contain only the application and runtime libraries—no shell, package manager, or utilities. This reduces attack surface and image size.</p>
 <p>Alpine-based images are small (5MB base) but use musl libc instead of glibc. Test thoroughly—some Python packages have musl compatibility issues.</p>
 <h2>Dockerignore</h2>
-<p>Use .dockerignore to exclude unnecessary files from the build context. Exclude .git, node_modules, tests, documentation, and CI configuration. Smaller build contexts mean faster builds, especially in CI environments.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (5)</summary><ol><li><a href="#multi-stage-builds">Multi-Stage Builds</a></li><li><a href="#layer-caching">Layer Caching</a></li><li><a href="#security-best-practices">Security Best Practices</a></li><li><a href="#minimal-images">Minimal Images</a></li><li><a href="#dockerignore">Dockerignore</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Use .dockerignore to exclude unnecessary files from the build context. Exclude .git, node_modules, tests, documentation, and CI configuration. Smaller build contexts mean faster builds, especially in CI environments.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></li><li><a href="/en/tech/api-documentation.html">API Documentation</a></li><li><a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -152,29 +154,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Dockerfile%20Best%20Practices%20for%20Production&url=https%3A//aidev.fit/en/tech/dockerfile-best-practices.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/dockerfile-best-practices.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Dockerfile%20Best%20Practices%20for%20Production&url=https%3A//aidev.fit/en/tech/dockerfile-best-practices.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Dockerfile%20Best%20Practices%20for%20Production&u=https%3A//aidev.fit/en/tech/dockerfile-best-practices.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Dockerfile%20Best%20Practices%20for%20Production&body=https%3A//aidev.fit/en/tech/dockerfile-best-practices.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/dockerfile-best-practices.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Dockerfile%20Best%20Practices%20for%20Production&url=https%3A//aidev.fit/en/tech/dockerfile-best-practices.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/dockerfile-best-practices.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Dockerfile%20Best%20Practices%20for%20Production&url=https%3A//aidev.fit/en/tech/dockerfile-best-practices.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Dockerfile%20Best%20Practices%20for%20Production&u=https%3A//aidev.fit/en/tech/dockerfile-best-practices.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Dockerfile%20Best%20Practices%20for%20Production&body=https%3A//aidev.fit/en/tech/dockerfile-best-practices.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/dockerfile-best-practices.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/api-design-patterns.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">API Design Patterns: Rate Limiting, Pagination, Idempotency, and </span></a><a href="/en/tech/css-responsive-design-guide.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Responsive CSS in 2026: Container Queries, Grid, and Modern Layou</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/nginx-configuration.html" class="related-card"><span class="rc-title">Nginx Configuration: Performance and Security</span><span class="rc-desc">Configure Nginx for production: reverse proxy, load balancing, caching, SSL termination, and security hardening.</span></a><a href="/en/tech/azure-networking.html" class="related-card"><span class="rc-title">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</span><span class="rc-desc">Comprehensive guide to Azure networking covering Virtual Networks, VNet peering, Azure Firewall, Load Balancer, Applicat</span></a><a href="/en/tech/on-call-best-practices.html" class="related-card"><span class="rc-title">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</span><span class="rc-desc">Technical guide to on-call practices covering rotation models, escalation policies, runbook creation, alert fatigue prev</span></a><a href="/en/tech/build-optimization.html" class="related-card"><span class="rc-title">Build Optimization</span><span class="rc-desc">Explore build optimization: caching, parallelism, incremental builds, distcc, and strategies for faster compilation</span></a><a href="/en/tech/configuration-management.html" class="related-card"><span class="rc-title">Configuration Management</span><span class="rc-desc">Master configuration management: environment variables, config files, feature flags, and best practices for different en</span></a><a href="/en/tech/webpack-vs-vite.html" class="related-card"><span class="rc-title">Webpack vs Vite</span><span class="rc-desc">Compare Webpack and Vite: HMR speed, configuration, production builds, and migration strategies for modern web developme</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/api-design-patterns.html" class="prev-next-btn prev-link">← API Design Patterns: Rate Limiting, Pagination, Idempotency, and More</a><a href="/en/tech/css-responsive-design-guide.html" class="prev-next-btn next-link">Responsive CSS in 2026: Container Queries, Grid, and Modern Layout Patterns →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/nginx-configuration.html" class="related-card"><span class="related-card-title">Nginx Configuration: Performance and Security</span><span class="related-card-desc">Configure Nginx for production: reverse proxy, load balancing, caching, SSL termination, and securit</span></a><a href="/en/tech/azure-networking.html" class="related-card"><span class="related-card-title">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</span><span class="related-card-desc">Comprehensive guide to Azure networking covering Virtual Networks, VNet peering, Azure Firewall, Loa</span></a><a href="/en/tech/on-call-best-practices.html" class="related-card"><span class="related-card-title">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</span><span class="related-card-desc">Technical guide to on-call practices covering rotation models, escalation policies, runbook creation</span></a><a href="/en/tech/build-optimization.html" class="related-card"><span class="related-card-title">Build Optimization</span><span class="related-card-desc">Explore build optimization: caching, parallelism, incremental builds, distcc, and strategies for fas</span></a><a href="/en/tech/configuration-management.html" class="related-card"><span class="related-card-title">Configuration Management</span><span class="related-card-desc">Master configuration management: environment variables, config files, feature flags, and best practi</span></a><a href="/en/tech/webpack-vs-vite.html" class="related-card"><span class="related-card-title">Webpack vs Vite</span><span class="related-card-desc">Compare Webpack and Vite: HMR speed, configuration, production builds, and migration strategies for </span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#multi-stage-builds">Multi-Stage Builds</a></li><li><a href="#layer-caching">Layer Caching</a></li><li><a href="#security-best-practices">Security Best Practices</a></li><li><a href="#minimal-images">Minimal Images</a></li><li><a href="#dockerignore">Dockerignore</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

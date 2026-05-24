@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Change Data Capture: Tracking Database Changes in Real-Time
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
-      <h1 class="article-title">Change Data Capture: Tracking Database Changes in Real-Time</h1>
-      <div class="article-meta"><time datetime="2026-04-14">Published 2026-04-14</time> · <time datetime="2026-05-14">Last active 2026-05-14</time> · 169 views · 0 replies · 1 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/database-change-tracking-cdc.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-change-tracking-cdc.png" alt="Change Data Capture: Tracking Database Changes in Real-Time" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Change Data Capture (CDC) tracks row-level changes in a database and streams them to other systems. CDC captures inserts, updates, and deletes without application-level instrumentation. It is the foundation for event-driven architectures and real-time data pipelines.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-change-tracking-cdc.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-change-tracking-cdc.png" alt="Change Data Capture: Tracking Database Changes in Real-Time" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Change Data Capture: Tracking Database Changes in Real-Time</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-14">2026-04-14</time>
+          <span class="meta-sep">·</span>
+          <span>1 min read</span>
+          <span class="meta-sep">·</span>
+          <span>169 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/database-change-tracking-cdc.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-change-tracking-cdc.png" alt="Change Data Capture: Tracking Database Changes in Real-Time" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (3)</summary><ol><li><a href="#cdc-methods">CDC Methods</a></li><li><a href="#tools">Tools</a></li><li><a href="#use-cases">Use Cases</a></li></ol></details>
+        <div class="article-body"><p>Change Data Capture (CDC) tracks row-level changes in a database and streams them to other systems. CDC captures inserts, updates, and deletes without application-level instrumentation. It is the foundation for event-driven architectures and real-time data pipelines.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-change-tracking-cdc.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-change-tracking-cdc.png" alt="Change Data Capture: Tracking Database Changes in Real-Time" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>CDC Methods</h2>
 <p>Log-based CDC reads the database transaction log (WAL in PostgreSQL, binlog in MySQL). It captures all changes with minimal database impact. Log-based CDC is the preferred method because it does not require schema changes and has low overhead.</p>
 <p>Trigger-based CDC uses database triggers to capture changes. It provides more control over what is captured but adds overhead to every write. Trigger-based CDC is suitable when log-based capture is not available.</p>
@@ -120,14 +128,8 @@
 <h2>Tools</h2>
 <p>Debezium is the most popular CDC platform. It connects to database transaction logs and streams changes to Apache Kafka. Debezium supports PostgreSQL, MySQL, MongoDB, SQL Server, and Oracle.</p>
 <h2>Use Cases</h2>
-<p>CDC supports data warehouse synchronization, cache invalidation, search index updates, event streams for microservices, and real-time analytics. It reduces coupling between operational and analytical systems.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-security-hardening.html">Database Security Hardening</a>, <a href="/en/database/database-encryption.html">Database Encryption: Data at Rest and in Transit</a>, <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (3)</summary><ol><li><a href="#cdc-methods">CDC Methods</a></li><li><a href="#tools">Tools</a></li><li><a href="#use-cases">Use Cases</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>CDC supports data warehouse synchronization, cache invalidation, search index updates, event streams for microservices, and real-time analytics. It reduces coupling between operational and analytical systems.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-security-hardening.html">Database Security Hardening</a></li><li><a href="/en/database/database-encryption.html">Database Encryption: Data at Rest and in Transit</a></li><li><a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -135,29 +137,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Change%20Data%20Capture%3A%20Tracking%20Database%20Changes%20in%20Real-Time&url=https%3A//aidev.fit/en/database/database-change-tracking-cdc.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-change-tracking-cdc.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Change%20Data%20Capture%3A%20Tracking%20Database%20Changes%20in%20Real-Time&url=https%3A//aidev.fit/en/database/database-change-tracking-cdc.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Change%20Data%20Capture%3A%20Tracking%20Database%20Changes%20in%20Real-Time&u=https%3A//aidev.fit/en/database/database-change-tracking-cdc.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Change%20Data%20Capture%3A%20Tracking%20Database%20Changes%20in%20Real-Time&body=https%3A//aidev.fit/en/database/database-change-tracking-cdc.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-change-tracking-cdc.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Change%20Data%20Capture%3A%20Tracking%20Database%20Changes%20in%20Real-Time&url=https%3A//aidev.fit/en/database/database-change-tracking-cdc.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-change-tracking-cdc.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Change%20Data%20Capture%3A%20Tracking%20Database%20Changes%20in%20Real-Time&url=https%3A//aidev.fit/en/database/database-change-tracking-cdc.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Change%20Data%20Capture%3A%20Tracking%20Database%20Changes%20in%20Real-Time&u=https%3A//aidev.fit/en/database/database-change-tracking-cdc.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Change%20Data%20Capture%3A%20Tracking%20Database%20Changes%20in%20Real-Time&body=https%3A//aidev.fit/en/database/database-change-tracking-cdc.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-change-tracking-cdc.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-foreign-key-constraints.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Foreign Key Constraints: Referential Integrity in Practice</span></a><a href="/en/database/redis-caching-patterns.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Redis Caching Patterns</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/database/change-data-capture.html" class="related-card"><span class="rc-title">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</span><span class="rc-desc">Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream processing integration. Rea</span></a><a href="/en/database/triggers-patterns.html" class="related-card"><span class="rc-title">Database Triggers: Use Cases, Performance Costs, and Alternatives</span><span class="rc-desc">Explore database triggers for audit logging, validation, and synchronization. Understand performance costs, debugging ch</span></a><a href="/en/database/database-audit-triggers.html" class="related-card"><span class="rc-title">Database Audit Triggers: Automatic Change Tracking</span><span class="rc-desc">Implement database audit logging with triggers: audit tables, trigger functions, and compliance reporting.</span></a><a href="/en/database/database-auditing.html" class="related-card"><span class="rc-title">Database Auditing: Tracking Data Changes</span><span class="rc-desc">Implement database auditing to track who changed what and when for compliance, security, and debugging.</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="rc-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="rc-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategies, rollback pattern</span></a><a href="/en/database/time-series-postgresql.html" class="related-card"><span class="rc-title">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</span><span class="rc-desc">Learn time-series data management with PostgreSQL and TimescaleDB. Hypertables, continuous aggregates, data retention, a</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-foreign-key-constraints.html" class="prev-next-btn prev-link">← Foreign Key Constraints: Referential Integrity in Practice</a><a href="/en/database/redis-caching-patterns.html" class="prev-next-btn next-link">Redis Caching Patterns →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/change-data-capture.html" class="related-card"><span class="related-card-title">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</span><span class="related-card-desc">Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream process</span></a><a href="/en/database/triggers-patterns.html" class="related-card"><span class="related-card-title">Database Triggers: Use Cases, Performance Costs, and Alternatives</span><span class="related-card-desc">Explore database triggers for audit logging, validation, and synchronization. Understand performance</span></a><a href="/en/database/database-audit-triggers.html" class="related-card"><span class="related-card-title">Database Audit Triggers: Automatic Change Tracking</span><span class="related-card-desc">Implement database audit logging with triggers: audit tables, trigger functions, and compliance repo</span></a><a href="/en/database/database-auditing.html" class="related-card"><span class="related-card-title">Database Auditing: Tracking Data Changes</span><span class="related-card-desc">Implement database auditing to track who changed what and when for compliance, security, and debuggi</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="related-card-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="related-card-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategi</span></a><a href="/en/database/time-series-postgresql.html" class="related-card"><span class="related-card-title">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</span><span class="related-card-desc">Learn time-series data management with PostgreSQL and TimescaleDB. Hypertables, continuous aggregate</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#cdc-methods">CDC Methods</a></li><li><a href="#tools">Tools</a></li><li><a href="#use-cases">Use Cases</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

@@ -112,32 +112,34 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a> › API Gateway vs Service Mesh
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Architecture</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/architecture/">Architecture</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
-      <h1 class="article-title">API Gateway vs Service Mesh</h1>
-      <div class="article-meta"><time datetime="2026-04-24">Published 2026-04-24</time> · <time datetime="2026-05-13">Last active 2026-05-13</time> · 156 views · 0 replies · 3 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/architecture/gateway-vs-mesh.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/gateway-vs-mesh.png" alt="API Gateway vs Service Mesh" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>API Gateway and Service Mesh solve different problems but operate in overlapping territory, creating confusion about where each belongs. The API Gateway manages north-south traffic (client to service), while the Service Mesh manages east-west traffic (service to service). Understanding their distinct responsibilities, overlap, and coexistence patterns is essential for a well-architected system. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/gateway-vs-mesh.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/gateway-vs-mesh.png" alt="API Gateway vs Service Mesh" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">API Gateway vs Service Mesh</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-24">2026-04-24</time>
+          <span class="meta-sep">·</span>
+          <span>3 min read</span>
+          <span class="meta-sep">·</span>
+          <span>156 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/architecture/gateway-vs-mesh.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/gateway-vs-mesh.png" alt="API Gateway vs Service Mesh" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        
+        <div class="article-body"><p>API Gateway and Service Mesh solve different problems but operate in overlapping territory, creating confusion about where each belongs. The API Gateway manages north-south traffic (client to service), while the Service Mesh manages east-west traffic (service to service). Understanding their distinct responsibilities, overlap, and coexistence patterns is essential for a well-architected system. </p><picture><source srcset="https://aidev.fit/images/covers/en/architecture/gateway-vs-mesh.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/architecture/gateway-vs-mesh.png" alt="API Gateway vs Service Mesh" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <p>The API Gateway is the single entry point for external clients. It handles cross-cutting concerns that belong at the edge of the system: authentication, TLS termination, rate limiting, request validation, response transformation, and API versioning. Kong, Apigee, and AWS API Gateway are common implementations. The gateway may also implement routing, load balancing, and caching for external traffic. It is explicitly part of your application architecture — it knows about your services, routes, and business-level concerns like rate limits per customer plan. </p>
 <p>The Service Mesh operates transparently within the service mesh. It injects sidecar proxies (typically Envoy) alongside each service instance. The sidecar intercepts all network traffic and handles service-level concerns: mTLS between services, fine-grained traffic routing (canary, blue-green), circuit breaking, retries, telemetry collection, and access policies. Istio, Linkerd, and Consul Connect are leading implementations. The mesh is infrastructure-level — services are generally unaware of its existence. </p>
 <p>Overlap occurs in several areas. Both can perform load balancing, traffic routing, retry logic, and telemetry. The key distinction is scope: the gateway manages external traffic with business-aware policies, while the mesh manages internal traffic with infrastructure-level policies. When both are present, decisions about where to place a given function must consider whether it applies to all traffic or only external traffic. </p>
 <p>Practical coexistence patterns have emerged. In the most common deployment, the API Gateway sits at the edge and forwards requests to an ingress gateway (part of the mesh), which then routes to the appropriate service through sidecar proxies. The gateway handles authentication, rate limiting, and request validation. The mesh handles service-to-service mTLS, traffic splitting, and telemetry. This separation of concerns avoids duplicating logic while ensuring each layer handles its appropriate responsibilities. </p>
 <p>A common mistake is treating the Service Mesh as a replacement for the API Gateway. The mesh lacks business-context awareness — it cannot apply rate limits per API key or transform request formats for different client versions. Conversely, using the gateway for internal service-to-service communication creates a central bottleneck that defeats the purpose of microservice autonomy. </p>
 <p>Observability benefits significantly from using both. The gateway provides client-facing metrics: request rates per endpoint, error rates per API key, latency percentiles by client type. The mesh provides service-level metrics: dependency call graphs, error rates per service pair, detailed latency breakdowns including time spent in the proxy. Combined, these give complete visibility from client to database. </p>
-<p>Operational complexity is the primary cost. Operating both systems requires expertise in each. Many teams start with just an API Gateway and add a Service Mesh only when they need advanced traffic management patterns or organization-wide security policies. The decision should be driven by concrete needs — canary deployments across services, zero-trust security requirements, or observability gaps — rather than architectural fashion.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    
-    <div style="margin:2rem 0;text-align:center;">
+<p>Operational complexity is the primary cost. Operating both systems requires expertise in each. Many teams start with just an API Gateway and add a Service Mesh only when they need advanced traffic management patterns or organization-wide security policies. The decision should be driven by concrete needs — canary deployments across services, zero-trust security requirements, or observability gaps — rather than architectural fashion.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a></li><li><a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a></li><li><a href="/en/architecture/api-versioning-strategies.html">API Versioning Strategies</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -145,29 +147,32 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=API%20Gateway%20vs%20Service%20Mesh&url=https%3A//aidev.fit/en/architecture/gateway-vs-mesh.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/gateway-vs-mesh.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=API%20Gateway%20vs%20Service%20Mesh&url=https%3A//aidev.fit/en/architecture/gateway-vs-mesh.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=API%20Gateway%20vs%20Service%20Mesh&u=https%3A//aidev.fit/en/architecture/gateway-vs-mesh.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=API%20Gateway%20vs%20Service%20Mesh&body=https%3A//aidev.fit/en/architecture/gateway-vs-mesh.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/gateway-vs-mesh.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=API%20Gateway%20vs%20Service%20Mesh&url=https%3A//aidev.fit/en/architecture/gateway-vs-mesh.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/architecture/gateway-vs-mesh.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=API%20Gateway%20vs%20Service%20Mesh&url=https%3A//aidev.fit/en/architecture/gateway-vs-mesh.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=API%20Gateway%20vs%20Service%20Mesh&u=https%3A//aidev.fit/en/architecture/gateway-vs-mesh.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=API%20Gateway%20vs%20Service%20Mesh&body=https%3A//aidev.fit/en/architecture/gateway-vs-mesh.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/architecture/gateway-vs-mesh.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/global-traffic-routing.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Global Traffic Routing</span></a><a href="/en/architecture/database-migration-zero-downtime.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Zero-Downtime Database Migrations</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/architecture/api-composition.html" class="related-card"><span class="rc-title">API Composition and Aggregation</span><span class="rc-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation strategies</span></a><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="rc-title">Graceful Shutdown Patterns</span><span class="rc-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful service shutdown</span></a><a href="/en/architecture/api-gateway-patterns.html" class="related-card"><span class="rc-title">API Gateway Patterns</span><span class="rc-desc">Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementation strategies</span></a><a href="/en/architecture/service-mesh-deep.html" class="related-card"><span class="rc-title">Service Mesh Deep Dive</span><span class="rc-desc">Deep dive into service mesh: Istio vs Linkerd vs Consul, mTLS, traffic splitting, and operational considerations</span></a><a href="/en/architecture/service-mesh.html" class="related-card"><span class="rc-title">Service Mesh Patterns: Istio and Linkerd</span><span class="rc-desc">Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and when to use a mesh.</span></a><a href="/en/architecture/rate-limiting-patterns.html" class="related-card"><span class="rc-title">Rate Limiting Patterns</span><span class="rc-desc">Explore rate limiting patterns for protecting APIs and services from abuse — token bucket, sliding window, distributed r</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/architecture/global-traffic-routing.html" class="prev-next-btn prev-link">← Global Traffic Routing</a><a href="/en/architecture/database-migration-zero-downtime.html" class="prev-next-btn next-link">Zero-Downtime Database Migrations →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/api-composition.html" class="related-card"><span class="related-card-title">API Composition and Aggregation</span><span class="related-card-desc">API aggregation layer, GraphQL federation, Backend for Frontend pattern, and service aggregation str</span></a><a href="/en/architecture/graceful-shutdown.html" class="related-card"><span class="related-card-title">Graceful Shutdown Patterns</span><span class="related-card-desc">Signal handling, connection draining, processing in-flight requests, and best practices for graceful</span></a><a href="/en/architecture/api-gateway-patterns.html" class="related-card"><span class="related-card-title">API Gateway Patterns</span><span class="related-card-desc">Explore API Gateway patterns: routing, aggregation, authentication, rate limiting, and implementatio</span></a><a href="/en/architecture/service-mesh-deep.html" class="related-card"><span class="related-card-title">Service Mesh Deep Dive</span><span class="related-card-desc">Deep dive into service mesh: Istio vs Linkerd vs Consul, mTLS, traffic splitting, and operational co</span></a><a href="/en/architecture/service-mesh.html" class="related-card"><span class="related-card-title">Service Mesh Patterns: Istio and Linkerd</span><span class="related-card-desc">Service mesh with sidecar proxy, traffic management, mTLS, observability, canary deployments, and wh</span></a><a href="/en/architecture/rate-limiting-patterns.html" class="related-card"><span class="related-card-title">Rate Limiting Patterns</span><span class="related-card-desc">Explore rate limiting patterns for protecting APIs and services from abuse — token bucket, sliding w</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

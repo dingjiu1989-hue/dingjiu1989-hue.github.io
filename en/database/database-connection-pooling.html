@@ -112,18 +112,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Connection Pooling: Tuning, Best Practices, and Pitfalls
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
-      <h1 class="article-title">Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
-      <div class="article-meta"><time datetime="2026-04-14">Published 2026-04-14</time> · <time datetime="2026-05-17">Last active 2026-05-17</time> · 193 views · 0 replies · 2 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/database-connection-pooling.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-connection-pooling.png" alt="Connection Pooling: Tuning, Best Practices, and Pitfalls" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Connection pooling reuses database connections to avoid the overhead of establishing new connections for every request. Opening a database connection involves TCP handshake, SSL negotiation, and authentication—typically 10-50ms of overhead. Pooling eliminates this latency by maintaining a cache of established connections.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-connection-pooling.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-connection-pooling.png" alt="Connection Pooling: Tuning, Best Practices, and Pitfalls" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-14">2026-04-14</time>
+          <span class="meta-sep">·</span>
+          <span>2 min read</span>
+          <span class="meta-sep">·</span>
+          <span>193 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/database-connection-pooling.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-connection-pooling.png" alt="Connection Pooling: Tuning, Best Practices, and Pitfalls" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (4)</summary><ol><li><a href="#pool-size-tuning">Pool Size Tuning</a></li><li><a href="#connection-validation">Connection Validation</a></li><li><a href="#timeout-configuration">Timeout Configuration</a></li><li><a href="#common-pitfalls">Common Pitfalls</a></li></ol></details>
+        <div class="article-body"><p>Connection pooling reuses database connections to avoid the overhead of establishing new connections for every request. Opening a database connection involves TCP handshake, SSL negotiation, and authentication—typically 10-50ms of overhead. Pooling eliminates this latency by maintaining a cache of established connections.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-connection-pooling.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-connection-pooling.png" alt="Connection Pooling: Tuning, Best Practices, and Pitfalls" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Pool Size Tuning</h2>
 <p>The optimal pool size depends on your database's capability. PostgreSQL handles connections with one process per connection. Each idle connection consumes roughly 5-10 MB of memory. A pool of 100 connections uses 500 MB to 1 GB of memory even when idle.</p>
 <p>The HikariCP formula provides guidance: pool_size = (core_count * 2) + effective_spindle_count. For a typical 8-core server with SSDs, this gives about 20 connections. More connections do not mean more throughput—they increase context switching and contention.</p>
@@ -137,14 +145,8 @@
 <h2>Common Pitfalls</h2>
 <p>Connection leaks are the most common pooling issue. Every connection obtained from the pool must be returned. Use try-with-resources (Java) or context managers (Python) to guarantee release.</p>
 <p>Stale connections cause mysterious failures. A connection opened before a database restart becomes invalid. Always validate connections before use, not just when creating them.</p>
-<p>Pool starvation occurs when connections are held longer than necessary. Long-running queries, slow transactions, and connection-holding during external API calls all consume pool capacity. Keep transactions short and avoid holding connections during I/O waits.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (4)</summary><ol><li><a href="#pool-size-tuning">Pool Size Tuning</a></li><li><a href="#connection-validation">Connection Validation</a></li><li><a href="#timeout-configuration">Timeout Configuration</a></li><li><a href="#common-pitfalls">Common Pitfalls</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Pool starvation occurs when connections are held longer than necessary. Long-running queries, slow transactions, and connection-holding during external API calls all consume pool capacity. Keep transactions short and avoid holding connections during I/O waits.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a></li><li><a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></li><li><a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -152,29 +154,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Connection%20Pooling%3A%20Tuning%2C%20Best%20Practices%2C%20and%20Pitfalls&url=https%3A//aidev.fit/en/database/database-connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Connection%20Pooling%3A%20Tuning%2C%20Best%20Practices%2C%20and%20Pitfalls&url=https%3A//aidev.fit/en/database/database-connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Connection%20Pooling%3A%20Tuning%2C%20Best%20Practices%2C%20and%20Pitfalls&u=https%3A//aidev.fit/en/database/database-connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Connection%20Pooling%3A%20Tuning%2C%20Best%20Practices%2C%20and%20Pitfalls&body=https%3A//aidev.fit/en/database/database-connection-pooling.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-connection-pooling.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Connection%20Pooling%3A%20Tuning%2C%20Best%20Practices%2C%20and%20Pitfalls&url=https%3A//aidev.fit/en/database/database-connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Connection%20Pooling%3A%20Tuning%2C%20Best%20Practices%2C%20and%20Pitfalls&url=https%3A//aidev.fit/en/database/database-connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Connection%20Pooling%3A%20Tuning%2C%20Best%20Practices%2C%20and%20Pitfalls&u=https%3A//aidev.fit/en/database/database-connection-pooling.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Connection%20Pooling%3A%20Tuning%2C%20Best%20Practices%2C%20and%20Pitfalls&body=https%3A//aidev.fit/en/database/database-connection-pooling.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-connection-pooling.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-foreign-key-constraints.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Foreign Key Constraints: Referential Integrity in Practice</span></a><a href="/en/database/redis-caching-patterns.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Redis Caching Patterns</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/database/connection-management.html" class="related-card"><span class="rc-title">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</span><span class="rc-desc">Comprehensive guide to database connection management. Learn connection pooling with PgBouncer and HikariCP, max connect</span></a><a href="/en/database/database-migration-version-control.html" class="related-card"><span class="rc-title">Database Migration Version Control Strategies</span><span class="rc-desc">Best practices for version-controlling database schema migrations across development, staging, and production.</span></a><a href="/en/database/database-vacuuming-maintenance.html" class="related-card"><span class="rc-title">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</span><span class="rc-desc">Master PostgreSQL VACUUM: autovacuum tuning, bloat prevention, and maintenance best practices.</span></a><a href="/en/database/database-containerization.html" class="related-card"><span class="rc-title">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</span><span class="rc-desc">Running databases in containers: Kubernetes StatefulSets, PersistentVolumes, backup strategies, performance consideratio</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="rc-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="rc-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategies, rollback pattern</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="rc-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="rc-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, a</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-foreign-key-constraints.html" class="prev-next-btn prev-link">← Foreign Key Constraints: Referential Integrity in Practice</a><a href="/en/database/redis-caching-patterns.html" class="prev-next-btn next-link">Redis Caching Patterns →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/connection-management.html" class="related-card"><span class="related-card-title">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</span><span class="related-card-desc">Comprehensive guide to database connection management. Learn connection pooling with PgBouncer and H</span></a><a href="/en/database/database-migration-version-control.html" class="related-card"><span class="related-card-title">Database Migration Version Control Strategies</span><span class="related-card-desc">Best practices for version-controlling database schema migrations across development, staging, and p</span></a><a href="/en/database/database-vacuuming-maintenance.html" class="related-card"><span class="related-card-title">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</span><span class="related-card-desc">Master PostgreSQL VACUUM: autovacuum tuning, bloat prevention, and maintenance best practices.</span></a><a href="/en/database/database-containerization.html" class="related-card"><span class="related-card-title">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</span><span class="related-card-desc">Running databases in containers: Kubernetes StatefulSets, PersistentVolumes, backup strategies, perf</span></a><a href="/en/database/database-migration-tools.html" class="related-card"><span class="related-card-title">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</span><span class="related-card-desc">Compare database migration tools including Alembic, Flyway, and Liquibase. Learn versioning strategi</span></a><a href="/en/database/read-replicas.html" class="related-card"><span class="related-card-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</span><span class="related-card-desc">Learn how to scale database reads with read replicas. Understand replication lag, load balancing str</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#pool-size-tuning">Pool Size Tuning</a></li><li><a href="#connection-validation">Connection Validation</a></li><li><a href="#timeout-configuration">Timeout Configuration</a></li><li><a href="#common-pitfalls">Common Pitfalls</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

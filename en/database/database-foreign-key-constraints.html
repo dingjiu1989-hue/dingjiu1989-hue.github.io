@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/database/">Database</a> › Foreign Key Constraints: Referential Integrity in Practice
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Database</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/database/">Database</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
-      <h1 class="article-title">Foreign Key Constraints: Referential Integrity in Practice</h1>
-      <div class="article-meta"><time datetime="2026-04-14">Published 2026-04-14</time> · <time datetime="2026-05-04">Last active 2026-05-04</time> · 89 views · 0 replies · 1 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/database/database-foreign-key-constraints.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-foreign-key-constraints.png" alt="Foreign Key Constraints: Referential Integrity in Practice" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Foreign key constraints enforce referential integrity between related tables. They guarantee that a value in one table has a corresponding value in another. Without foreign keys, applications must enforce relationships, which is error-prone.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-foreign-key-constraints.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-foreign-key-constraints.png" alt="Foreign Key Constraints: Referential Integrity in Practice" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Foreign Key Constraints: Referential Integrity in Practice</h1>
+        <div class="article-meta">
+          <time datetime="2026-04-14">2026-04-14</time>
+          <span class="meta-sep">·</span>
+          <span>1 min read</span>
+          <span class="meta-sep">·</span>
+          <span>89 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/database/database-foreign-key-constraints.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-foreign-key-constraints.png" alt="Foreign Key Constraints: Referential Integrity in Practice" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (3)</summary><ol><li><a href="#referential-actions">Referential Actions</a></li><li><a href="#performance">Performance</a></li><li><a href="#practical-guidelines">Practical Guidelines</a></li></ol></details>
+        <div class="article-body"><p>Foreign key constraints enforce referential integrity between related tables. They guarantee that a value in one table has a corresponding value in another. Without foreign keys, applications must enforce relationships, which is error-prone.</p><picture><source srcset="https://aidev.fit/images/covers/en/database/database-foreign-key-constraints.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/database/database-foreign-key-constraints.png" alt="Foreign Key Constraints: Referential Integrity in Practice" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Referential Actions</h2>
 <p>ON DELETE CASCADE automatically deletes related rows when the parent row is deleted. Use when child rows have no meaning without the parent. Be careful with cascading deletes in deep relationship chains.</p>
 <p>ON DELETE SET NULL sets the foreign key column to NULL when the parent is deleted. Use when the relationship is optional and child rows should survive parent deletion.</p>
@@ -121,14 +129,8 @@
 <p>Foreign keys add overhead to INSERT, UPDATE, and DELETE operations. Each write validates that referenced rows exist. The overhead is typically small but matters for bulk operations.</p>
 <p>Indexes on foreign key columns are essential. Without indexes, each write to the parent table triggers a full table scan on the child table. PostgreSQL does not automatically index foreign keys; MySQL InnoDB does.</p>
 <h2>Practical Guidelines</h2>
-<p>Use foreign keys to enforce relationships that are business rules. Skip them for high-volume logging tables where referential integrity is not critical. Always index foreign key columns. Consider deferrable constraints for bulk load operations.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-containerization.html">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</a>, <a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (3)</summary><ol><li><a href="#referential-actions">Referential Actions</a></li><li><a href="#performance">Performance</a></li><li><a href="#practical-guidelines">Practical Guidelines</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>Use foreign keys to enforce relationships that are business rules. Skip them for high-volume logging tables where referential integrity is not critical. Always index foreign key columns. Consider deferrable constraints for bulk load operations.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-containerization.html">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</a></li><li><a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></li><li><a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -136,29 +138,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Foreign%20Key%20Constraints%3A%20Referential%20Integrity%20in%20Practice&url=https%3A//aidev.fit/en/database/database-foreign-key-constraints.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-foreign-key-constraints.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Foreign%20Key%20Constraints%3A%20Referential%20Integrity%20in%20Practice&url=https%3A//aidev.fit/en/database/database-foreign-key-constraints.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Foreign%20Key%20Constraints%3A%20Referential%20Integrity%20in%20Practice&u=https%3A//aidev.fit/en/database/database-foreign-key-constraints.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Foreign%20Key%20Constraints%3A%20Referential%20Integrity%20in%20Practice&body=https%3A//aidev.fit/en/database/database-foreign-key-constraints.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-foreign-key-constraints.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Foreign%20Key%20Constraints%3A%20Referential%20Integrity%20in%20Practice&url=https%3A//aidev.fit/en/database/database-foreign-key-constraints.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/database/database-foreign-key-constraints.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Foreign%20Key%20Constraints%3A%20Referential%20Integrity%20in%20Practice&url=https%3A//aidev.fit/en/database/database-foreign-key-constraints.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Foreign%20Key%20Constraints%3A%20Referential%20Integrity%20in%20Practice&u=https%3A//aidev.fit/en/database/database-foreign-key-constraints.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Foreign%20Key%20Constraints%3A%20Referential%20Integrity%20in%20Practice&body=https%3A//aidev.fit/en/database/database-foreign-key-constraints.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/database/database-foreign-key-constraints.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-encryption.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Database Encryption: Data at Rest and in Transit</span></a><a href="/en/database/redis-caching-patterns.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Redis Caching Patterns</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/database/change-data-capture.html" class="related-card"><span class="rc-title">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</span><span class="rc-desc">Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream processing integration. Rea</span></a><a href="/en/database/batch-operations.html" class="related-card"><span class="rc-title">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</span><span class="rc-desc">Master batch operations in PostgreSQL: bulk insert patterns, the COPY command, batch updates, optimal batch sizes, and e</span></a><a href="/en/database/composite-indexes.html" class="related-card"><span class="rc-title">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</span><span class="rc-desc">Master composite indexes in PostgreSQL: column order optimization, covering indexes, partial indexes, and index-only sca</span></a><a href="/en/database/couchbase-guide.html" class="related-card"><span class="rc-title">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</span><span class="rc-desc">Comprehensive guide to Couchbase: N1QL query language, document data model, clustering architecture, integrated caching,</span></a><a href="/en/database/database-compression.html" class="related-card"><span class="rc-title">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</span><span class="rc-desc">Explore database compression techniques including page-level, tuple-level, and columnar compression. Learn about Postgre</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="rc-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="rc-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, a</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/database/database-encryption.html" class="prev-next-btn prev-link">← Database Encryption: Data at Rest and in Transit</a><a href="/en/database/redis-caching-patterns.html" class="prev-next-btn next-link">Redis Caching Patterns →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/change-data-capture.html" class="related-card"><span class="related-card-title">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</span><span class="related-card-desc">Learn Change Data Capture patterns with Debezium, PostgreSQL logical replication, and stream process</span></a><a href="/en/database/batch-operations.html" class="related-card"><span class="related-card-title">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</span><span class="related-card-desc">Master batch operations in PostgreSQL: bulk insert patterns, the COPY command, batch updates, optima</span></a><a href="/en/database/composite-indexes.html" class="related-card"><span class="related-card-title">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</span><span class="related-card-desc">Master composite indexes in PostgreSQL: column order optimization, covering indexes, partial indexes</span></a><a href="/en/database/couchbase-guide.html" class="related-card"><span class="related-card-title">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</span><span class="related-card-desc">Comprehensive guide to Couchbase: N1QL query language, document data model, clustering architecture,</span></a><a href="/en/database/database-compression.html" class="related-card"><span class="related-card-title">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</span><span class="related-card-desc">Explore database compression techniques including page-level, tuple-level, and columnar compression.</span></a><a href="/en/database/database-capacity-planning.html" class="related-card"><span class="related-card-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</span><span class="related-card-desc">Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monit</span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#referential-actions">Referential Actions</a></li><li><a href="#performance">Performance</a></li><li><a href="#practical-guidelines">Practical Guidelines</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>

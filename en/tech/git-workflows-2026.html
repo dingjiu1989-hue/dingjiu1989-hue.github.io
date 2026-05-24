@@ -101,18 +101,26 @@
 <div id="reading-progress-container"><div id="reading-progress-bar"></div></div>
 <div id="nav-placeholder"></div>
 <main>
-  <div class="container article-container">
-    <div class="breadcrumb">
-      <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a> › Git Workflows for Teams
-    </div>
-    <article>
-      <div class="article-tags">        <span class="tag-cat">Technology</span>
+  <div class="breadcrumb container">
+    <a href="/en/">Home</a> › <a href="/en/tech/">Tech Tutorials</a>
+  </div>
+  <div class="article-layout">
+    <div class="article-main">
+      <article>
+        <div class="article-tags">        <span class="tag-cat">Technology</span>
         <span class="tag-cat">Programming</span>
         <span class="tag-cat">DevOps</span></div>
-      <h1 class="article-title">Git Workflows for Teams</h1>
-      <div class="article-meta"><time datetime="2025-12-02">Published 2025-12-02</time> · <time datetime="2026-05-21">Last active 2026-05-21</time> · 72 views · 0 replies · 7 min read</div>
-      <picture><source srcset="https://aidev.fit/images/covers/en/tech/git-workflows-2026.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/git-workflows-2026.png" alt="Git Workflows for Teams" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
-      <div class="article-body"><p>Git workflows define how teams collaborate on code. Choosing the right workflow impacts productivity, release cadence, and code quality. In 2026, several mature patterns dominate, each suited to different team structures and deployment strategies.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/git-workflows-2026.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/git-workflows-2026.png" alt="Git Workflows for Teams" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
+        <h1 class="article-title">Git Workflows for Teams</h1>
+        <div class="article-meta">
+          <time datetime="2025-12-02">2025-12-02</time>
+          <span class="meta-sep">·</span>
+          <span>7 min read</span>
+          <span class="meta-sep">·</span>
+          <span>72 views</span>
+        </div>
+        <picture><source srcset="https://aidev.fit/images/covers/en/tech/git-workflows-2026.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/git-workflows-2026.png" alt="Git Workflows for Teams" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
+        <details class="article-toc-inline"><summary>Table of Contents (17)</summary><ol><li><a href="#trunk-based-development">Trunk-Based Development</a></li><li><a href="#github-flow">GitHub Flow</a></li><li><a href="#gitflow">GitFlow</a></li><li><a href="#pull-request-best-practices">Pull Request Best Practices</a></li><li><a href="#rebase-vs-merge">Rebase vs Merge</a></li><li><a href="#rebase-feature-branch-onto-main">Rebase feature branch onto main</a></li><li><a href="#merge-with---no-ff-for-pull-requests">Merge with --no-ff for pull requests</a></li><li><a href="#commit-message-conventions">Commit Message Conventions</a></li><li><a href="#branch-naming-conventions">Branch Naming Conventions</a></li><li><a href="#code-review-automation">Code Review Automation</a></li><li><a href="#handling-merge-conflicts">Handling Merge Conflicts</a></li><li><a href="#update-your-branch-first">Update your branch first</a></li><li><a href="#resolve-conflicts-in-your-editor">Resolve conflicts in your editor</a></li><li><a href="#git-hooks-and-automation">Git Hooks and Automation</a></li><li><a href="#binsh">!/bin/sh</a></li><li><a href="#githookspre-commit">.git/hooks/pre-commit</a></li><li><a href="#summary">Summary</a></li></ol></details>
+        <div class="article-body"><p>Git workflows define how teams collaborate on code. Choosing the right workflow impacts productivity, release cadence, and code quality. In 2026, several mature patterns dominate, each suited to different team structures and deployment strategies.</p><picture><source srcset="https://aidev.fit/images/covers/en/tech/git-workflows-2026.webp" type="image/webp"><img src="https://aidev.fit/images/covers/en/tech/git-workflows-2026.png" alt="Git Workflows for Teams" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;"></picture>
 <h2>Trunk-Based Development</h2>
 <p>Trunk-based development has become the default for teams practicing continuous deployment. Developers work on short-lived feature branches (hours to a couple of days) and merge directly into <code>main</code> multiple times per day.</p>
 <p>Key practices:</p>
@@ -230,14 +238,8 @@
 <p>npm run lint &amp;&amp; npm run typecheck</p>
 <p>Team-wide hooks can be managed with <code>husky</code> (JavaScript) or <code>lefthook</code> (multi-language). Server-side hooks in CI prevent non-compliant commits from being merged.</p>
 <h2>Summary</h2>
-<p>The best Git workflow is the one your team consistently follows. Start simple -- GitHub Flow or trunk-based development -- and adopt more structure only when the team's scale demands it. Combine clear branching policies, small PRs, automated checks, and Conventional Commits to build a workflow that keeps your team shipping quality code.</p></div><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/git-workflows.html">Git Workflows</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a></p>
-    </article>
-    <div class="comment-cta-inline">
-      <p><strong>Enjoy this article?</strong> Share your thoughts, questions, or experiences in the comments below — your insights help other readers too.</p>
-      <a href="#giscus-section">Join the discussion ↓</a>
-    </div>
-    <details class="article-toc"><summary>Table of Contents (17)</summary><ol><li><a href="#trunk-based-development">Trunk-Based Development</a></li><li><a href="#github-flow">GitHub Flow</a></li><li><a href="#gitflow">GitFlow</a></li><li><a href="#pull-request-best-practices">Pull Request Best Practices</a></li><li><a href="#rebase-vs-merge">Rebase vs Merge</a></li><li><a href="#rebase-feature-branch-onto-main">Rebase feature branch onto main</a></li><li><a href="#merge-with---no-ff-for-pull-requests">Merge with --no-ff for pull requests</a></li><li><a href="#commit-message-conventions">Commit Message Conventions</a></li><li><a href="#branch-naming-conventions">Branch Naming Conventions</a></li><li><a href="#code-review-automation">Code Review Automation</a></li><li><a href="#handling-merge-conflicts">Handling Merge Conflicts</a></li><li><a href="#update-your-branch-first">Update your branch first</a></li><li><a href="#resolve-conflicts-in-your-editor">Resolve conflicts in your editor</a></li><li><a href="#git-hooks-and-automation">Git Hooks and Automation</a></li><li><a href="#!-bin-sh">!/bin/sh</a></li><li><a href="#.git-hooks-pre-commit">.git/hooks/pre-commit</a></li><li><a href="#summary">Summary</a></li></ol></details>
-    <div style="margin:2rem 0;text-align:center;">
+<p>The best Git workflow is the one your team consistently follows. Start simple -- GitHub Flow or trunk-based development -- and adopt more structure only when the team's scale demands it. Combine clear branching policies, small PRs, automated checks, and Conventional Commits to build a workflow that keeps your team shipping quality code.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a></li><li><a href="/en/tech/git-workflows.html">Git Workflows</a></li><li><a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a></li></ul></div>
+        <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -245,29 +247,35 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-    <div class="share-bar">
-      <span>Share:</span>
-      <a href="https://twitter.com/intent/tweet?text=Git%20Workflows%20for%20Teams&url=https%3A//aidev.fit/en/tech/git-workflows-2026.html" target="_blank" rel="noopener" aria-label="Share on Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/git-workflows-2026.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
-      <a href="https://www.reddit.com/submit?title=Git%20Workflows%20for%20Teams&url=https%3A//aidev.fit/en/tech/git-workflows-2026.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
-      <a href="https://news.ycombinator.com/submitlink?t=Git%20Workflows%20for%20Teams&u=https%3A//aidev.fit/en/tech/git-workflows-2026.html" target="_blank" rel="noopener" aria-label="Share on Hacker News">HN</a>
-      <a href="mailto:?subject=Git%20Workflows%20for%20Teams&body=https%3A//aidev.fit/en/tech/git-workflows-2026.html" aria-label="Share via Email">Email</a>
-      <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/git-workflows-2026.html" aria-label="Copy link">Copy</button>
+        <div class="share-bar">
+          <span>Share</span>
+          <a href="https://twitter.com/intent/tweet?text=Git%20Workflows%20for%20Teams&url=https%3A//aidev.fit/en/tech/git-workflows-2026.html" target="_blank" rel="noopener" aria-label="Share on X">𝕏</a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//aidev.fit/en/tech/git-workflows-2026.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">in</a>
+          <a href="https://www.reddit.com/submit?title=Git%20Workflows%20for%20Teams&url=https%3A//aidev.fit/en/tech/git-workflows-2026.html" target="_blank" rel="noopener" aria-label="Share on Reddit">Reddit</a>
+          <a href="https://news.ycombinator.com/submitlink?t=Git%20Workflows%20for%20Teams&u=https%3A//aidev.fit/en/tech/git-workflows-2026.html" target="_blank" rel="noopener" aria-label="Share on HN">HN</a>
+          <a href="mailto:?subject=Git%20Workflows%20for%20Teams&body=https%3A//aidev.fit/en/tech/git-workflows-2026.html" aria-label="Share via Email">Email</a>
+          <button class="copy-link-btn" data-url="https://aidev.fit/en/tech/git-workflows-2026.html" aria-label="Copy link">Copy</button>
+        </div>
+        <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/nginx-configuration-guide.html" class="prev-next-btn prev-link" rel="prev"><span class="pn-label">← Previous</span><span class="pn-title">Nginx Configuration Guide</span></a><a href="/en/tech/edge-computing-2026-guide.html" class="prev-next-btn next-link" rel="next"><span class="pn-label">Next →</span><span class="pn-title">Edge Computing in 2026: A Complete Guide for Developers</span></a></nav>
+        <section class="related">
+          <div class="related-heading">Related Articles</div>
+          <div class="related-grid"><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="rc-title">Nginx Configuration Guide</span><span class="rc-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting, and load balancing</span></a><a href="/en/tech/webpack-vs-vite-bundlers.html" class="related-card"><span class="rc-title">Webpack vs Vite Comparison</span><span class="rc-desc">In-depth comparison of Webpack and Vite for modern frontend development, covering performance, features, and use cases.</span></a><a href="/en/tech/github-actions-advanced.html" class="related-card"><span class="rc-title">Advanced GitHub Actions Workflows</span><span class="rc-desc">Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching strategies for produ</span></a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card"><span class="rc-title">Helm Charts: Kubernetes Package Management</span><span class="rc-desc">A comprehensive guide to Helm chart structure, templates, values management, dependency handling, and CI/CD integration </span></a><a href="/en/tech/serverless-framework.html" class="related-card"><span class="rc-title">Serverless Framework: From Zero to Production</span><span class="rc-desc">Deploy AWS Lambda functions with infrastructure as code, local development workflows, monitoring, cold start optimizatio</span></a><a href="/en/tech/linux-performance-tuning.html" class="related-card"><span class="rc-title">Linux Performance Tuning</span><span class="rc-desc">Practical techniques for optimizing Linux system performance, from kernel parameters to storage I/O tuning.</span></a></div>
+        </section>
+        
+      </article>
+      <div class="discussion-cta">
+        <p>Join the Discussion</p>
+        <p>Have thoughts, questions, or feedback? Leave a comment below — your insights help other readers.</p>
+        <a href="#giscus-section">Leave a comment</a>
+      </div>
+      <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <nav class="prev-next-nav" aria-label="Article navigation"><a href="/en/tech/nginx-configuration-guide.html" class="prev-next-btn prev-link">← Nginx Configuration Guide</a><a href="/en/tech/edge-computing-2026-guide.html" class="prev-next-btn next-link">Edge Computing in 2026: A Complete Guide for Developers →</a></nav>
-    <section class="related">
-      <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/nginx-configuration-guide.html" class="related-card"><span class="related-card-title">Nginx Configuration Guide</span><span class="related-card-desc">Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting</span></a><a href="/en/tech/webpack-vs-vite-bundlers.html" class="related-card"><span class="related-card-title">Webpack vs Vite Comparison</span><span class="related-card-desc">In-depth comparison of Webpack and Vite for modern frontend development, covering performance, featu</span></a><a href="/en/tech/github-actions-advanced.html" class="related-card"><span class="related-card-title">Advanced GitHub Actions Workflows</span><span class="related-card-desc">Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching </span></a><a href="/en/tech/helm-kubernetes-package-management.html" class="related-card"><span class="related-card-title">Helm Charts: Kubernetes Package Management</span><span class="related-card-desc">A comprehensive guide to Helm chart structure, templates, values management, dependency handling, an</span></a><a href="/en/tech/serverless-framework.html" class="related-card"><span class="related-card-title">Serverless Framework: From Zero to Production</span><span class="related-card-desc">Deploy AWS Lambda functions with infrastructure as code, local development workflows, monitoring, co</span></a><a href="/en/tech/linux-performance-tuning.html" class="related-card"><span class="related-card-title">Linux Performance Tuning</span><span class="related-card-desc">Practical techniques for optimizing Linux system performance, from kernel parameters to storage I/O </span></a></div>
-    </section>
-    
-  </div>
-  <div class="container" style="max-width:750px;">
-    <div class="discussion-cta">
-      <p><strong>Join the Discussion</strong></p>
-      <p>Have thoughts on this article? Found it helpful? Disagree? Leave a comment below — your insights help other readers too.</p>
-      <a href="#giscus-section">Leave a comment</a>
-    </div>
-    <div id="giscus-section" data-giscus-loaded="false"></div>
+    <aside class="article-sidebar">
+      <nav class="toc-sidebar" aria-label="Table of Contents">
+      <div class="toc-title">On this page</div>
+      <ol><li><a href="#trunk-based-development">Trunk-Based Development</a></li><li><a href="#github-flow">GitHub Flow</a></li><li><a href="#gitflow">GitFlow</a></li><li><a href="#pull-request-best-practices">Pull Request Best Practices</a></li><li><a href="#rebase-vs-merge">Rebase vs Merge</a></li><li><a href="#rebase-feature-branch-onto-main">Rebase feature branch onto main</a></li><li><a href="#merge-with---no-ff-for-pull-requests">Merge with --no-ff for pull requests</a></li><li><a href="#commit-message-conventions">Commit Message Conventions</a></li><li><a href="#branch-naming-conventions">Branch Naming Conventions</a></li><li><a href="#code-review-automation">Code Review Automation</a></li><li><a href="#handling-merge-conflicts">Handling Merge Conflicts</a></li><li><a href="#update-your-branch-first">Update your branch first</a></li><li><a href="#resolve-conflicts-in-your-editor">Resolve conflicts in your editor</a></li><li><a href="#git-hooks-and-automation">Git Hooks and Automation</a></li><li><a href="#binsh">!/bin/sh</a></li><li><a href="#githookspre-commit">.git/hooks/pre-commit</a></li><li><a href="#summary">Summary</a></li></ol>
+    </nav>
+    </aside>
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
