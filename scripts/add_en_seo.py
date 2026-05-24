@@ -303,7 +303,7 @@ def regenerate_sitemap():
                 freq = 'weekly'
             else:
                 priority = '0.7'
-                freq = 'monthly'
+                freq = 'weekly'
 
             # Hreflang
             hreflangs = [f'<xhtml:link rel="alternate" hreflang="en" href="{art_en}"/>']
@@ -347,7 +347,7 @@ def regenerate_sitemap():
                     freq = 'weekly'
                 else:
                     priority = '0.7'
-                    freq = 'monthly'
+                    freq = 'weekly'
 
                 lastmod = art.get('lastActive', art.get('date', TODAY))
 

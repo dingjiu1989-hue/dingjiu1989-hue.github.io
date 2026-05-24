@@ -13374,12 +13374,36 @@ def make_article_html(art, board_id, board_name, all_posts):
     cover_url = f'{BASE}/images/covers/en/{board_id}/{slug}.png'
     cover_webp = f'{BASE}/images/covers/en/{board_id}/{slug}.webp'
     tags_str = ', '.join(art.get('tags', []))
+
+    # Enrich short meta descriptions for better search CTR
+    meta_desc = art['description']
+    if len(meta_desc) < 120:
+        board_suffixes = {
+            'ai': ' — in-depth AI guide with practical examples on SourceHub.',
+            'tech': ' — comprehensive developer tutorial on SourceHub.',
+            'tools': ' — detailed tool review and comparison on SourceHub.',
+            'architecture': ' — software architecture deep-dive on SourceHub.',
+            'database': ' — database engineering guide on SourceHub.',
+            'security': ' — security best practices guide on SourceHub.',
+            'compare': ' — unbiased tool comparison on SourceHub.',
+            'sidehustle': ' — developer business and monetization guide on SourceHub.',
+            'daily': ' — AI news digest curated on SourceHub.',
+        }
+        suffix = board_suffixes.get(board_id, ' — developer guide on SourceHub.')
+        # Ensure total ≤ 160 chars, cutting at word boundary
+        max_original = 160 - len(suffix)
+        if len(meta_desc) > max_original:
+            cut = meta_desc.rfind(' ', 0, max_original)
+            meta_desc = meta_desc[:cut if cut > 0 else max_original] + suffix
+        else:
+            meta_desc = meta_desc + suffix
+
     # "about" structured topics for AI crawlers
     about_entries = ', '.join(f'{{"@type": "Thing", "name": "{_js(t)}"}}' for t in art.get('tags', [])[:5])
     about_json = about_entries if about_entries else '{"@type": "Thing", "name": "Technology"}'
 
     og_tags = f'''    <meta property="og:title" content="{art['title']}">
-    <meta property="og:description" content="{art['description']}">
+    <meta property="og:description" content="{meta_desc}">
     <meta property="og:url" content="{art_url}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="SourceHub">
@@ -13389,10 +13413,11 @@ def make_article_html(art, board_id, board_name, all_posts):
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{art['title']}">
-    <meta name="twitter:description" content="{art['description']}">
+    <meta name="twitter:description" content="{meta_desc}">
     <meta name="twitter:image" content="{cover_url}">
     <meta property="article:published_time" content="{art['date']}">
     <meta property="article:modified_time" content="{art.get('lastActive', art['date'])}">
+    <meta property="article:section" content="{board_name}">
     <meta property="article:tag" content="{tags_str}">'''
 
     # sameAs cross-platform identity for AI crawlers
@@ -13679,7 +13704,7 @@ def make_article_html(art, board_id, board_name, all_posts):
 {og_tags}
     <link rel="preload" as="image" href="{cover_webp}" type="image/webp" fetchpriority="high">
     <title>{art['title']} — SourceHub</title>
-    <meta name="description" content="{art['description']}">
+    <meta name="description" content="{meta_desc}">
     <meta name="keywords" content="{tags_str}">
 {cn_hreflang}    <link rel="alternate" hreflang="en" href="{en_url}">
     <link rel="canonical" href="{art_url}">{prev_next}
