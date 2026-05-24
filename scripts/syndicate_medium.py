@@ -138,13 +138,24 @@ def make_content(art, board_id):
 
     original_url = f'{BASE}/en/{board_id}/{art["slug"]}.html'
     tags = parse_tags(art.get('tags', ''))
+    home_url = f'{BASE}/en/?utm_source=medium&utm_medium=syndication&utm_campaign=ai-daily-digest'
+    track_url = original_url + '?utm_source=medium&utm_medium=syndication&utm_campaign=ai-daily-digest'
 
-    # Add attribution header pointing to original
+    # Attribution header — canonical source notice
     preamble = (
-        f'> *Originally published on [AI Study Room]({original_url}).*\n'
-        f'> *Check the original for the most up-to-date version.*\n\n'
+        f'> *Originally published on [AI Study Room]({track_url}).*\n'
+        f'> *Check the original for the most up-to-date version and related articles.*\n\n'
     )
-    return preamble + md_content
+
+    # Signature footer — site branding + tracking link
+    sig = (
+        f'\n\n---\n\n'
+        f'*This post is part of the [AI Study Room]({home_url}) — '
+        f'a curated library of 900+ articles on AI tools, programming, '
+        f'and developer resources. '
+        f'Explore more at [aidev.fit]({home_url}).*\n'
+    )
+    return preamble + md_content + sig
 
 
 def main():
