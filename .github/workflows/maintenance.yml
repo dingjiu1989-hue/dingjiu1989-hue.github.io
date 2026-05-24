@@ -20,7 +20,31 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run maintenance script
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate daily AI news (EN+CN)
+        run: python3 scripts/gen_daily_news.py
+
+      - name: Register new articles
+        run: |
+          python3 scripts/register_new_articles.py
+
+      - name: Rebuild site (AI-friendly files + sitemap + feeds)
+        run: |
+          PYTHONPATH=. python3 scripts/gen_en_site.py
+          PYTHONPATH=. python3 scripts/gen_ai_friendly.py
+          python3 scripts/add_en_seo.py
+          python3 scripts/gen_rss.py
+          python3 scripts/generate_json_feed.py
+
+      - name: Generate cover images for new articles
+        run: |
+          pip install Pillow
+          python3 scripts/gen_covers.py
+
+      - name: Run maintenance
         run: python3 scripts/maintenance.py
 
       - name: Ping search engines
