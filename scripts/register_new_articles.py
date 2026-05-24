@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parent.parent
 EN_MD = ROOT / 'md' / 'en'
 ZH_MD = ROOT / 'md' / 'zh'
 EN_JSON = ROOT / 'en' / 'articles.json'
-ZH_JSON = ROOT / 'zh' / 'articles.json'
+ZH_JSON = ROOT / 'articles.json'  # root-level, not zh/
 
 BOARD_TAGS = {
     'tech': ['Technology','DevOps','Cloud'],
@@ -78,7 +78,11 @@ def register_new(lang, md_dir, json_path):
                 'replies': 0,
             }
 
-            board = next(b for b in data['boards'] if b['id'] == board_id)
+            match = [b for b in data['boards'] if b['id'] == board_id]
+            if not match:
+                print(f"  SKIP: no board '{board_id}' in articles.json")
+                continue
+            board = match[0]
             board['posts'].append(entry)
             existing[(board_id, slug)] = True
             added += 1
