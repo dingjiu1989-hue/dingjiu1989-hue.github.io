@@ -220,8 +220,9 @@ def gen_llms_txt():
         for art in posts:
             url = f"{BASE}/en/{board['id']}/{art['slug']}.html"
             md_url = f"{BASE}/md/en/{board['id']}/{art['slug']}.md"
+            date = art.get('lastActive', art.get('date', ''))
             desc = art.get("description", "")[:120]
-            lines.append(f"- [{art['title']}]({url}) — [md]({md_url})")
+            lines.append(f"- [{art['title']}]({url}) — [md]({md_url}) — {date}")
             if desc:
                 lines.append(f"  {desc}")
         lines.append("")
@@ -241,8 +242,9 @@ def gen_llms_txt():
             for art in posts:
                 url = f"{BASE}/{board['id']}/{art['slug']}.html"
                 md_url = f"{BASE}/md/zh/{board['id']}/{art['slug']}.md"
+                date = art.get('lastActive', art.get('date', ''))
                 desc = art.get("description", "")[:120]
-                lines.append(f"- [{art['title']}]({url}) — [md]({md_url})")
+                lines.append(f"- [{art['title']}]({url}) — [md]({md_url}) — {date}")
                 if desc:
                     lines.append(f"  {desc}")
             lines.append("")
@@ -316,8 +318,9 @@ def gen_en_llms_txt(en_data):
         for art in posts:
             url = f"{BASE}/en/{board['id']}/{art['slug']}.html"
             md_url = f"{BASE}/md/en/{board['id']}/{art['slug']}.md"
+            date = art.get('lastActive', art.get('date', ''))
             desc = art.get("description", "")[:120]
-            lines.append(f"- [{art['title']}]({url}) — [md]({md_url})")
+            lines.append(f"- [{art['title']}]({url}) — [md]({md_url}) — {date}")
             if desc:
                 lines.append(f"  {desc}")
         lines.append("")
@@ -567,6 +570,39 @@ Allow: /
 User-agent: Timpibot
 Allow: /
 
+# Mistral (Le Chat, Codestral)
+User-agent: MistralBot
+Allow: /
+
+# NVIDIA (NeMo, Megatron — enterprise AI training data)
+User-agent: NVBot
+Allow: /
+Crawl-Delay: 5
+
+# Brave (Leo AI, Brave Search AI)
+User-agent: Bravebot
+Allow: /
+
+# Exa (AI search API — powers LLM web retrieval)
+User-agent: Exabot
+Allow: /
+
+# Andi (AI search engine)
+User-agent: AndiBot
+Allow: /
+
+# Phind (AI developer search)
+User-agent: PhindBot
+Allow: /
+
+# Vantage Discovery (retail AI search)
+User-agent: VantageBot
+Allow: /
+
+# Imagesift (AI visual search)
+User-agent: ImagesiftBot
+Allow: /
+
 # ── SEO-focused but AI-relevant crawlers ──
 User-agent: DotBot       # Moz / AI link index
 Allow: /
@@ -600,7 +636,7 @@ Sitemap: {BASE}/sitemap.xml
 Sitemap: {BASE}/images/sitemap.xml
 """
     (ROOT / "robots.txt").write_text(robots, encoding="utf-8")
-    print("  robots.txt updated: 28 AI crawler rules")
+    print("  robots.txt updated: 36 AI crawler rules")
 
 
 # ── Run ─────────────────────────────────────────────────────────────────
