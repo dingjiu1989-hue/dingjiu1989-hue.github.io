@@ -13668,6 +13668,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     gtag('js', new Date());
     gtag('config', 'G-XGFYGQE9NS');
     </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
 {og_tags}
     <link rel="preload" as="image" href="{cover_webp}" type="image/webp" fetchpriority="high">
     <title>{art['title']} — SourceHub</title>
@@ -13809,6 +13810,7 @@ def make_homepage(data):
     gtag('js', new Date());
     gtag('config', 'G-XGFYGQE9NS');
     </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="SourceHub — {site['tagline']}">
     <meta property="og:description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
     <meta property="og:url" content="{BASE}/en/">
@@ -14012,6 +14014,7 @@ def make_category(data, board_id):
     gtag('js', new Date());
     gtag('config', 'G-XGFYGQE9NS');
     </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="{title} — SourceHub">
     <meta property="og:description" content="{board_descs[board_id]}">
     <meta property="og:url" content="{en_url}">
