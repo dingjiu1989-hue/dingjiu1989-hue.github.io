@@ -65,9 +65,9 @@ def main():
     ok &= run("python3 scripts/gen_rss.py", "Refresh RSS feeds")
     ok &= run("PYTHONPATH=. python3 scripts/gen_ai_friendly.py", "AI-friendly artifacts (llms.txt + MD + robots.txt)")
     ok &= run("python3 scripts/gen_image_sitemap.py", "Image sitemap")
-    ok &= run("python3 scripts/bing_sync.py", "Bing Webmaster sync")
+    run("python3 scripts/bing_sync.py", "Bing Webmaster sync")  # non-blocking
     ok &= run("python3 scripts/monitor_seo.py", "SEO health check")
-    ok &= resubmit_sitemaps()
+    resubmit_sitemaps()  # non-blocking: GSC OAuth may fail on CI
 
     # Read latest health report for summary
     health_file = ROOT / "data" / "seo-health.json"
