@@ -27,7 +27,7 @@
     <meta property="og:description" content="Comprehensive guide to LLM safety: RLHF training, Constitutional AI principles, automated content filtering, and red teaming strategies for identifying vulnerab">
     <meta property="og:url" content="https://aidev.fit/en/ai/llm-safety.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/llm-safety.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="AI Tutorials">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/llm-safety.webp" type="image/webp" fetchpriority="high">
-    <title>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming — SourceHub</title>
+    <title>LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming — AI Study Room</title>
     <meta name="description" content="Comprehensive guide to LLM safety: RLHF training, Constitutional AI principles, automated content filtering, and red teaming strategies for identifying vulnerab">
     <meta name="keywords" content="AI, Machine Learning, LLM">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/llm-safety.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/ai/llm-safety.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/llm-safety-rlhf-constitutional-ai-content-filtering-red-teaming-4pk"
@@ -113,11 +124,15 @@
         <span class="tag-cat">LLM</span></div>
         <h1 class="article-title">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-02-16">2026-02-16</time>
           <span class="meta-sep">·</span>
           <span>6 min read</span>
           <span class="meta-sep">·</span>
           <span>72 views</span>
+          <span class="meta-sep">·</span>
+          <span>1361 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/llm-safety.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/llm-safety.png" alt="LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (15)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#rlhf-reinforcement-learning-from-human-feedback">RLHF (Reinforcement Learning from Human Feedback)</a></li><li><a href="#rlhf-training-pipeline-simplified">RLHF training pipeline (simplified)</a></li><li><a href="#step-1-supervised-fine-tuning-on-demonstration-data">Step 1: Supervised fine-tuning on demonstration data</a></li><li><a href="#step-2-train-a-reward-model-on-human-preference-comparisons">Step 2: Train a reward model on human preference comparisons</a></li><li><a href="#training-a-reward-model">Training a reward model</a></li><li><a href="#step-3-optimize-the-policy-using-ppo">Step 3: Optimize the policy using PPO</a></li><li><a href="#the-model-generates-responses-the-reward-model-scores-them">The model generates responses, the reward model scores them,</a></li><li><a href="#and-ppo-updates-the-model-weights-toward-higher-scoring-responses">and PPO updates the model weights toward higher-scoring responses</a></li><li><a href="#constitutional-ai">Constitutional AI</a></li><li><a href="#content-filtering">Content Filtering</a></li><li><a href="#use-a-classifier-model-for-semantic-content-filtering">Use a classifier model for semantic content filtering</a></li><li><a href="#pattern-based-pii-detection">Pattern-based PII detection</a></li><li><a href="#red-teaming">Red Teaming</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -247,7 +262,8 @@
 <p>return not any(pattern in response.lower() for pattern in refusal_patterns)</p>
 <h2>Conclusion</h2>
 <p>LLM safety requires defense in depth. RLHF and Constitutional AI align the model during training. Content filters provide runtime safety independent of the model's reliability. Red teaming identifies vulnerabilities before they are exploited in production. Establish a continuous safety pipeline: train with alignment techniques, filter inputs and outputs, run automated red-teaming on every model update, and maintain a vulnerability disclosure process for external reporters.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></li><li><a href="/en/ai/ai-safety.html">AI Safety: Responsible Development and Deployment</a></li><li><a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -295,5 +311,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

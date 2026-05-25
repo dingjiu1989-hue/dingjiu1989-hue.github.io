@@ -27,7 +27,7 @@
     <meta property="og:description" content="Learn database migration tools and strategies including schema evolution, zero-downtime migrations, rollback plans, and testing.">
     <meta property="og:url" content="https://aidev.fit/en/database/database-migration.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/database-migration.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, SQL">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/database-migration.webp" type="image/webp" fetchpriority="high">
-    <title>Database Migration Tools and Strategies — SourceHub</title>
+    <title>Database Migration Tools and Strategies — AI Study Room</title>
     <meta name="description" content="Learn database migration tools and strategies including schema evolution, zero-downtime migrations, rollback plans, and testing.">
     <meta name="keywords" content="Database, SQL">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/database-migration.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/database-migration.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/database-migration-tools-and-strategies-4jo4"
@@ -112,11 +123,15 @@
         <span class="tag-cat">SQL</span></div>
         <h1 class="article-title">Database Migration Tools and Strategies</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-22">2025-12-22</time>
           <span class="meta-sep">·</span>
           <span>6 min read</span>
           <span class="meta-sep">·</span>
           <span>86 views</span>
+          <span class="meta-sep">·</span>
+          <span>1338 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/database-migration.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-migration.png" alt="Database Migration Tools and Strategies" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (16)</summary><ol><li><a href="#alembicenvpy">alembic/env.py</a></li><li><a href="#auto-generate-migration">Auto-generate migration</a></li><li><a href="#apply-migrations">Apply migrations</a></li><li><a href="#rollback">Rollback</a></li><li><a href="#migration-naming-convention">Migration naming convention:</a></li><li><a href="#v1createuserssql">V1__create_users.sql</a></li><li><a href="#v2addemailcolumnsql">V2__add_email_column.sql</a></li><li><a href="#v3createorderstablesql">V3__create_orders_table.sql</a></li><li><a href="#apply-migrations">Apply migrations</a></li><li><a href="#check-status">Check status</a></li><li><a href="#repair-checksums">Repair checksums</a></li><li><a href="#application-reads-from-new-column-still-writes-to-both">Application reads from new column, still writes to both</a></li><li><a href="#deploy-application-update">Deploy application update</a></li><li><a href="#for-mysql-without-downtime">For MySQL without downtime</a></li><li><a href="#test-upgrade-and-downgrade">Test upgrade and downgrade</a></li><li><a href="#githubworkflowsmigrateyml">.github/workflows/migrate.yml</a></li></ol></details>
@@ -260,7 +275,8 @@
 <p>| Mistake | Consequence | Prevention | |---------|-------------|------------| | No rollback plan | Cannot undo failed migration | Always write downgrade | | Long-running locks | Table locked, queries fail | Use batch/online migrations | | Missing default values | NULL violations in existing rows | Add with default or nullable first | | Schema drift | Environments out of sync | Automate migrations, check in CI | | No data migration | New columns are empty | Backfill after schema change | </p>
 <p>Summary </p>
 <p>Database migrations bring the same version control discipline to schema changes that Git brings to code. Use tools like Alembic or Flyway, always write reversible migrations with upgrade and downgrade paths, adopt the expand-contract pattern for zero-downtime changes, batch large table modifications, and integrate migrations into your CI/CD pipeline. Test every migration against a copy of production data before deploying to production.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a></li><li><a href="/en/database/data-modeling.html">Data Modeling Best Practices</a></li><li><a href="/en/database/database-normalization.html">Database Normalization Explained</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -303,5 +319,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

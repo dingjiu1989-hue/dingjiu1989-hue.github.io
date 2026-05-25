@@ -27,7 +27,7 @@
     <meta property="og:description" content="Caching patterns: cache-aside, write-through, write-behind, eviction policies, distributed caching with Redis, CDN caching, and invalidation.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/caching-strategies.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/caching-strategies.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/caching-strategies.webp" type="image/webp" fetchpriority="high">
-    <title>Caching Strategies and Patterns in Distributed Systems — SourceHub</title>
+    <title>Caching Strategies and Patterns in Distributed Systems — AI Study Room</title>
     <meta name="description" content="Caching patterns: cache-aside, write-through, write-behind, eviction policies, distributed caching with Redis, CDN caching, and invalidation.">
     <meta name="keywords" content="Architecture, System Design">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/caching-strategies.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/caching-strategies.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/caching-strategies-and-patterns-in-distributed-systems-49i3"
@@ -112,11 +123,15 @@
         <span class="tag-cat">System Design</span></div>
         <h1 class="article-title">Caching Strategies and Patterns in Distributed Systems</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-04-20">2026-04-20</time>
           <span class="meta-sep">·</span>
           <span>11 min read</span>
           <span class="meta-sep">·</span>
           <span>95 views</span>
+          <span class="meta-sep">·</span>
+          <span>2249 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/caching-strategies.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/caching-strategies.png" alt="Caching Strategies and Patterns in Distributed Systems" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (23)</summary><ol><li><a href="#1-try-cache-first">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache first</a></li><li><a href="#2-cache-miss-read-from-database">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss: read from database</a></li><li><a href="#3-populate-cache-for-next-time">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache for next time</a></li><li><a href="#1-update-database">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database</a></li><li><a href="#2-invalidate-cache-not-update">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Invalidate cache (not update!)</a></li><li><a href="#1-update-database">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database</a></li><li><a href="#2-update-cache-synchronously">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache synchronously</a></li><li><a href="#batch-writes-and-flush-periodically">Batch writes and flush periodically</a></li><li><a href="#1-update-cache-immediately">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache immediately</a></li><li><a href="#2-queue-database-update">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Queue database update</a></li><li><a href="#check-if-we-should-refresh">Check if we should refresh</a></li><li><a href="#asynchronously-refresh-in-background">Asynchronously refresh in background</a></li><li><a href="#docker-composeyml-for-redis-cluster">docker-compose.yml for Redis Cluster</a></li><li><a href="#nginx-static-asset-caching-headers">Nginx: Static asset caching headers</a></li><li><a href="#dynamic-content-shorter-cache">Dynamic content: shorter cache</a></li><li><a href="#private-content-no-cdn-caching">Private content: no CDN caching</a></li><li><a href="#cloudfront-invalidate-specific-paths">CloudFront: Invalidate specific paths</a></li><li><a href="#fastly-purge-by-key">Fastly: Purge by key</a></li><li><a href="#event-driven-invalidation">Event-driven invalidation</a></li><li><a href="#subscribe-to-invalidation-events">Subscribe to invalidation events</a></li><li><a href="#update-database">Update database</a></li><li><a href="#invalidate-cache-in-same-transaction-if-possible">Invalidate cache in same transaction if possible</a></li><li><a href="#publish-invalidation-for-other-cache-nodes">Publish invalidation for other cache nodes</a></li></ol></details>
@@ -424,7 +439,8 @@
 <p>message_bus.publish("cache.invalidate", {"key": f"product:{product_id}"})</p>
 <p>Conclusion </p>
 <p>Choose cache-aside for most general-purpose caching. Use write-through when read consistency is critical. Use write-behind when write performance is paramount. Use refresh-ahead for predictable access patterns. Set appropriate TTLs as a safety net. Use Redis for distributed caching with proper cluster configuration. Use CDNs for content delivery to global users. Remember that cache invalidation is hard: prefer TTLs over complex invalidation logic, use event-driven invalidation when TTLs are insufficient, and always have a fallback to the original data source.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a></li><li><a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a></li><li><a href="/en/architecture/cdn-architecture.html">CDN Architecture</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -467,5 +483,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

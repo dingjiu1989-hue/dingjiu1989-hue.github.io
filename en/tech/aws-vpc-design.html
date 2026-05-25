@@ -27,7 +27,7 @@
     <meta property="og:description" content="Technical guide to AWS VPC design including subnet strategies, NAT gateways, VPC peering, Transit Gateway architecture, security groups, and network ACLs.">
     <meta property="og:url" content="https://aidev.fit/en/tech/aws-vpc-design.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/aws-vpc-design.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/aws-vpc-design.webp" type="image/webp" fetchpriority="high">
-    <title>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups — SourceHub</title>
+    <title>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups — AI Study Room</title>
     <meta name="description" content="Technical guide to AWS VPC design including subnet strategies, NAT gateways, VPC peering, Transit Gateway architecture, security groups, and network ACLs.">
     <meta name="keywords" content="Technology, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/aws-vpc-design.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/aws-vpc-design.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/aws-vpc-design-subnets-nat-peering-transit-gateway-and-security-groups-53cb"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-01-01">2026-01-01</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>234 views</span>
+          <span class="meta-sep">·</span>
+          <span>895 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/aws-vpc-design.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/aws-vpc-design.png" alt="AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#vpc-and-subnet-design">VPC and Subnet Design</a></li><li><a href="#nat-gateways-and-internet-connectivity">NAT Gateways and Internet Connectivity</a></li><li><a href="#vpc-peering">VPC Peering</a></li><li><a href="#aws-transit-gateway">AWS Transit Gateway</a></li><li><a href="#security-groups-vs-network-acls">Security Groups vs. Network ACLs</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -158,7 +173,8 @@
 <p>Defense in depth combines both: security groups for traffic control between logical application tiers, and NACLs for broad traffic filtering such as blocking known malicious IP ranges at the subnet boundary.</p>
 <h2>Conclusion</h2>
 <p>AWS VPC design requires careful planning of CIDR allocation, subnet layout, and connectivity strategies. Transit Gateway simplifies multi-VPC networking at scale, while security groups and NACLs provide layered defense. The most successful VPC designs are those that plan for growth, maintain isolation between environments, and implement connectivity in alignment with organizational security requirements.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a></li><li><a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a></li><li><a href="/en/tech/performance-testing.html">Performance Testing</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -201,5 +217,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

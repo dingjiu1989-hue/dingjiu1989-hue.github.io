@@ -27,7 +27,7 @@
     <meta property="og:description" content="Guide to Infrastructure as Code security covering Terraform security scanning, policy as code, drift detection, and automated compliance enforcement.">
     <meta property="og:url" content="https://aidev.fit/en/security/iac-security.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/iac-security.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/iac-security.webp" type="image/webp" fetchpriority="high">
-    <title>Infrastructure as Code Security — SourceHub</title>
+    <title>Infrastructure as Code Security — AI Study Room</title>
     <meta name="description" content="Guide to Infrastructure as Code security covering Terraform security scanning, policy as code, drift detection, and automated compliance enforcement.">
     <meta name="keywords" content="Security, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/iac-security.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/iac-security.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/infrastructure-as-code-security-478b"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Infrastructure as Code Security</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-10">2026-03-10</time>
           <span class="meta-sep">·</span>
           <span>17 min read</span>
           <span class="meta-sep">·</span>
           <span>84 views</span>
+          <span class="meta-sep">·</span>
+          <span>3496 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/iac-security.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/iac-security.png" alt="Infrastructure as Code Security" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (24)</summary><ol><li><a href="#basic-scan">Basic scan</a></li><li><a href="#scan-with-specific-framework">Scan with specific framework</a></li><li><a href="#output-in-multiple-formats">Output in multiple formats</a></li><li><a href="#run-in-cicd-with-threshold">Run in CI/CD with threshold</a></li><li><a href="#custom-checkov-policy-for-terraform">Custom Checkov policy for Terraform</a></li><li><a href="#check-if-storageencrypted-is-set-to-true">Check if storage_encrypted is set to true</a></li><li><a href="#basic-scan">Basic scan</a></li><li><a href="#scan-with-custom-configuration">Scan with custom configuration</a></li><li><a href="#generate-sarif-output-for-github-code-scanning">Generate SARIF output for GitHub Code Scanning</a></li><li><a href="#ignore-specific-checks">Ignore specific checks</a></li><li><a href="#tfsecyaml">tfsec.yaml</a></li><li><a href="#opa-policy-for-terraform">OPA policy for Terraform</a></li><li><a href="#all-resources-must-have-tags">All resources must have tags</a></li><li><a href="#s3-buckets-must-be-private">S3 buckets must be private</a></li><li><a href="#security-groups-must-not-have-wide-open-ingress">Security groups must not have wide open ingress</a></li><li><a href="#evaluate-opa-policy-against-terraform-plan">Evaluate OPA policy against Terraform plan</a></li><li><a href="#sentinelhcl">sentinel.hcl</a></li><li><a href="#restrict-instance-typesentinel">restrict-instance-type.sentinel</a></li><li><a href="#get-all-ec2-instances">Get all EC2 instances</a></li><li><a href="#check-each-instance">Check each instance</a></li><li><a href="#gitlab-ci-pipeline-for-iac-security">GitLab CI pipeline for IaC security</a></li><li><a href="#terraform-drift-detection-with-aws-config">Terraform drift detection with AWS Config</a></li><li><a href="#automated-drift-detection">Automated drift detection</a></li><li><a href="#binbash">!/bin/bash</a></li></ol></details>
@@ -298,7 +313,8 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--output json</p>
 <p>Conclusion </p>
 <p>IaC security shifts security left by catching misconfigurations before infrastructure is provisioned. Use tools like Checkov and tfsec for automated scanning, OPA or Sentinel for policy enforcement, integrate scans into CI/CD pipelines, and continuously monitor for drift in deployed infrastructure. Remember that IaC security is an ongoing practice — new resources, providers, and attack patterns require continuous policy updates.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></li><li><a href="/en/security/cors-security.html">CORS Security</a></li><li><a href="/en/security/data-masking.html">Data Masking and Redaction</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -341,5 +357,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

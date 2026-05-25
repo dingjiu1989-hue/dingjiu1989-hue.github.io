@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Database Backup Strategies to Object Storage">
-    <meta property="og:description" content="Automate database backups to S3/GCS: incremental backups, point-in-time recovery, and retention policies. — database engineering guide on SourceHub.">
+    <meta property="og:description" content="Automate database backups to S3/GCS: incremental backups, point-in-time recovery, and retention policies. — database engineering guide on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/database/database-backup-to-s3.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/database-backup-to-s3.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Database Backup Strategies to Object Storage">
-    <meta name="twitter:description" content="Automate database backups to S3/GCS: incremental backups, point-in-time recovery, and retention policies. — database engineering guide on SourceHub.">
+    <meta name="twitter:description" content="Automate database backups to S3/GCS: incremental backups, point-in-time recovery, and retention policies. — database engineering guide on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/database/database-backup-to-s3.png">
     <meta property="article:published_time" content="2026-04-14">
     <meta property="article:modified_time" content="2026-05-13">
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, Backend, Data">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/database-backup-to-s3.webp" type="image/webp" fetchpriority="high">
-    <title>Database Backup Strategies to Object Storage — SourceHub</title>
-    <meta name="description" content="Automate database backups to S3/GCS: incremental backups, point-in-time recovery, and retention policies. — database engineering guide on SourceHub.">
+    <title>Database Backup Strategies to Object Storage — AI Study Room</title>
+    <meta name="description" content="Automate database backups to S3/GCS: incremental backups, point-in-time recovery, and retention policies. — database engineering guide on AI Study Room.">
     <meta name="keywords" content="Database, Backend, Data">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/database-backup-to-s3.html">
     <link rel="canonical" href="https://aidev.fit/en/database/database-backup-to-s3.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/database-backup-to-s3.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/database-backup-strategies-to-object-storage-1omf"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Data</span></div>
         <h1 class="article-title">Database Backup Strategies to Object Storage</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-04-14">2026-04-14</time>
           <span class="meta-sep">·</span>
           <span>2 min read</span>
           <span class="meta-sep">·</span>
           <span>229 views</span>
+          <span class="meta-sep">·</span>
+          <span>507 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/database-backup-to-s3.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-backup-to-s3.png" alt="Database Backup Strategies to Object Storage" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (6)</summary><ol><li><a href="#backup-types">Backup Types</a></li><li><a href="#object-storage-backup-tools">Object Storage Backup Tools</a></li><li><a href="#point-in-time-recovery">Point-in-Time Recovery</a></li><li><a href="#retention-policies">Retention Policies</a></li><li><a href="#encryption">Encryption</a></li><li><a href="#testing-backups">Testing Backups</a></li></ol></details>
@@ -139,7 +154,8 @@
 <p>Encrypt backups before uploading. Use server-side encryption (SSE-S3) or client-side encryption with your own keys. The backup encryption key must be stored separately from the backup—losing the key means losing the backup.</p>
 <h2>Testing Backups</h2>
 <p>A backup is only as good as its restoration. Test full restoration regularly—at least monthly for production databases. Measure restore time and document the procedure. Automate restore testing with infrastructure-as-code templates.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a></li><li><a href="/en/database/database-containerization.html">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</a></li><li><a href="/en/database/database-design-patterns.html">Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -182,5 +198,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Domain Events: Design and Implementation">
-    <meta property="og:description" content="Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable — software architecture deep-dive on SourceHub.">
+    <meta property="og:description" content="Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable — software architecture deep-dive on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/domain-events.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/domain-events.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Domain Events: Design and Implementation">
-    <meta name="twitter:description" content="Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable — software architecture deep-dive on SourceHub.">
+    <meta name="twitter:description" content="Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable — software architecture deep-dive on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/architecture/domain-events.png">
     <meta property="article:published_time" content="2026-04-24">
     <meta property="article:modified_time" content="2026-05-16">
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/domain-events.webp" type="image/webp" fetchpriority="high">
-    <title>Domain Events: Design and Implementation — SourceHub</title>
-    <meta name="description" content="Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable — software architecture deep-dive on SourceHub.">
+    <title>Domain Events: Design and Implementation — AI Study Room</title>
+    <meta name="description" content="Domain event design, publishing, handling, idempotency considerations, and the outbox pattern for reliable — software architecture deep-dive on AI Study Room.">
     <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/domain-events.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/domain-events.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/domain-events.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/domain-events-design-and-implementation-26hf"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Backend</span></div>
         <h1 class="article-title">Domain Events: Design and Implementation</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-04-24">2026-04-24</time>
           <span class="meta-sep">·</span>
           <span>3 min read</span>
           <span class="meta-sep">·</span>
           <span>188 views</span>
+          <span class="meta-sep">·</span>
+          <span>788 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/domain-events.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/domain-events.png" alt="Domain Events: Design and Implementation" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -130,7 +145,8 @@
 <p>The transactional outbox pattern solves the dual-write problem: updating the database and publishing an event must be atomic. Writing both the aggregate change and the event to the database in a single transaction ensures consistency. A separate process reads unpublished events from the outbox table and publishes them to the message broker. After successful publication, it marks the events as published or deletes them. This guarantees at-least-once delivery without distributed transactions. </p>
 <p>Event versioning addresses schema evolution. Domain events are persistent contracts that may be consumed by services running different versions. Strategies include keeping past event classes in the codebase, using a schema registry with compatibility checks, and designing events with optional fields and sensible defaults. Forward compatibility — where new consumers can read old events and vice versa — requires disciplined schema evolution. </p>
 <p>Testing domain events requires verifying that the correct events are raised for each command, that event data contains the expected information, and that handlers produce the correct side effects. Unit tests validate event raising within aggregates, while integration tests verify the full publish-and-handle pipeline including the outbox pattern.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></li><li><a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></li><li><a href="/en/architecture/scheduler-supervisor.html">Scheduler Supervisor Pattern</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -170,5 +186,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Feature Flags Architecture">
-    <meta property="og:description" content="Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feature flags — software architecture deep-dive on SourceHub.">
+    <meta property="og:description" content="Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feature — software architecture deep-dive on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/feature-flags-architecture.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Feature Flags Architecture">
-    <meta name="twitter:description" content="Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feature flags — software architecture deep-dive on SourceHub.">
+    <meta name="twitter:description" content="Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feature — software architecture deep-dive on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.png">
     <meta property="article:published_time" content="2026-04-24">
     <meta property="article:modified_time" content="2026-05-04">
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.webp" type="image/webp" fetchpriority="high">
-    <title>Feature Flags Architecture — SourceHub</title>
-    <meta name="description" content="Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feature flags — software architecture deep-dive on SourceHub.">
+    <title>Feature Flags Architecture — AI Study Room</title>
+    <meta name="description" content="Flag evaluation, targeting rules, SDK design, flag management platforms, and best practices for feature — software architecture deep-dive on AI Study Room.">
     <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/feature-flags-architecture.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/feature-flags-architecture.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/feature-flags-architecture.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/feature-flags-architecture-505k"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Backend</span></div>
         <h1 class="article-title">Feature Flags Architecture</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-04-24">2026-04-24</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>96 views</span>
+          <span class="meta-sep">·</span>
+          <span>918 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/feature-flags-architecture.png" alt="Feature Flags Architecture" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -131,7 +146,8 @@
 <p>Testing with feature flags requires special consideration. Tests should verify behavior for each flag variant. Parameterized tests that run the same test with each flag configuration catch regressions that only manifest under specific flag states. More importantly, tests should verify that removing the flag (when it is eventually retired) produces the expected behavior — the code should assume the flag-enabled state is the final state. </p>
 <p>Security implications of feature flags are significant. Flags that control security-sensitive behavior — authentication flows, authorization rules, payment processing — must be protected from unauthorized modification. Approval workflows, audit logs, and access controls on flag changes are essential. The flag management platform should enforce separation of duties: the developer who creates a flag should not be the one who approves its production rollout. </p>
 <p>Operational concerns include flag evaluation metrics. Track flag evaluation counts, cache hit rates, and evaluation latency. Monitor for unexpected flag evaluation errors — incorrectly cached or missing flag configurations can cause widespread failures. Implement a kill switch flag that disables all non-critical flags simultaneously in emergency scenarios, providing a circuit breaker for flag-induced issues.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a></li><li><a href="/en/architecture/timeout-retry-patterns.html">Timeout and Retry Patterns</a></li><li><a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -171,5 +187,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

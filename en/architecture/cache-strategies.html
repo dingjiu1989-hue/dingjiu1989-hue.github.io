@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Caching Strategies">
-    <meta property="og:description" content="Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems — software architecture deep-dive on SourceHub.">
+    <meta property="og:description" content="Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems — software architecture deep-dive on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/cache-strategies.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/cache-strategies.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Caching Strategies">
-    <meta name="twitter:description" content="Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems — software architecture deep-dive on SourceHub.">
+    <meta name="twitter:description" content="Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems — software architecture deep-dive on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/architecture/cache-strategies.png">
     <meta property="article:published_time" content="2026-05-01">
     <meta property="article:modified_time" content="2026-05-02">
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/cache-strategies.webp" type="image/webp" fetchpriority="high">
-    <title>Caching Strategies — SourceHub</title>
-    <meta name="description" content="Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems — software architecture deep-dive on SourceHub.">
+    <title>Caching Strategies — AI Study Room</title>
+    <meta name="description" content="Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems — software architecture deep-dive on AI Study Room.">
     <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/cache-strategies.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/cache-strategies.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/cache-strategies.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/caching-strategies-5hf7"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Backend</span></div>
         <h1 class="article-title">Caching Strategies</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-05-01">2026-05-01</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>78 views</span>
+          <span class="meta-sep">·</span>
+          <span>874 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/cache-strategies.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/cache-strategies.png" alt="Caching Strategies" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -139,7 +154,8 @@
 <p>Choosing a Strategy </p>
 <p>The optimal strategy depends on your access patterns. Read-heavy workloads with strong consistency needs favor write-through. Write-heavy workloads benefit from write-around or write-back. Applications tolerant of eventual consistency can use write-back for maximum write performance. Many production systems combine strategies: write-through for critical data, write-around for reference data, and write-back for high-volume transient data. </p>
 <p>Modern caching systems like Redis, Memcached, and CDN platforms provide configurable support for these strategies. The key is measuring your actual access patterns and choosing the strategy that aligns with your consistency, latency, and throughput requirements.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/retry-patterns.html">Retry Patterns</a></li><li><a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></li><li><a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -179,5 +195,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

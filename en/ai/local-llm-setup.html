@@ -27,7 +27,7 @@
     <meta property="og:description" content="Step-by-step guide to running LLMs locally using Ollama and LM Studio with setup instructions, model selection, and performance tips.">
     <meta property="og:url" content="https://aidev.fit/en/ai/local-llm-setup.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/local-llm-setup.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="AI Tutorials">
     <meta property="article:tag" content="Artificial Intelligence, Machine Learning">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/local-llm-setup.webp" type="image/webp" fetchpriority="high">
-    <title>Running LLMs Locally — SourceHub</title>
+    <title>Running LLMs Locally — AI Study Room</title>
     <meta name="description" content="Step-by-step guide to running LLMs locally using Ollama and LM Studio with setup instructions, model selection, and performance tips.">
     <meta name="keywords" content="Artificial Intelligence, Machine Learning">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/local-llm-setup.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/ai/local-llm-setup.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/running-llms-locally-1hkg"
@@ -112,11 +123,15 @@
         <span class="tag-cat">Machine Learning</span></div>
         <h1 class="article-title">Running LLMs Locally</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-12">2025-12-12</time>
           <span class="meta-sep">·</span>
           <span>6 min read</span>
           <span class="meta-sep">·</span>
           <span>149 views</span>
+          <span class="meta-sep">·</span>
+          <span>1308 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/local-llm-setup.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/local-llm-setup.png" alt="Running LLMs Locally" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (29)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#ollama">Ollama</a></li><li><a href="#installation">Installation</a></li><li><a href="#macos">macOS</a></li><li><a href="#linux">Linux</a></li><li><a href="#windows">Windows</a></li><li><a href="#download-from-httpsollamaaidownload">Download from https://ollama.ai/download</a></li><li><a href="#getting-started">Getting Started</a></li><li><a href="#pull-and-run-a-model">Pull and run a model</a></li><li><a href="#list-available-models">List available models</a></li><li><a href="#pull-a-specific-model-without-running">Pull a specific model without running</a></li><li><a href="#popular-models-for-ollama">Popular Models for Ollama</a></li><li><a href="#using-ollama-programmatically">Using Ollama Programmatically</a></li><li><a href="#custom-modelfiles">Custom Modelfiles</a></li><li><a href="#set-system-prompt">Set system prompt</a></li><li><a href="#configure-parameters">Configure parameters</a></li><li><a href="#lm-studio">LM Studio</a></li><li><a href="#key-features">Key Features</a></li><li><a href="#setup">Setup</a></li><li><a href="#api-server">API Server</a></li><li><a href="#performance-optimization">Performance Optimization</a></li><li><a href="#quantization-levels">Quantization Levels</a></li><li><a href="#gpu-acceleration">GPU Acceleration</a></li><li><a href="#ollama-uses-metal-automatically-on-apple-silicon">Ollama uses Metal automatically on Apple Silicon</a></li><li><a href="#for-nvidia-install-cuda-and-ollama-detects-it">For NVIDIA, install CUDA and Ollama detects it</a></li><li><a href="#check-which-device-is-being-used">Check which device is being used</a></li><li><a href="#context-window">Context Window</a></li><li><a href="#use-cases-for-local-llms">Use Cases for Local LLMs</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -271,7 +286,8 @@
 </ul>
 <h2>Conclusion</h2>
 <p>Running LLMs locally is easier than ever with Ollama and LM Studio. Ollama offers command-line simplicity and a rich set of pre-built models. LM Studio provides a polished GUI and OpenAI-compatible API. Start with a 7B model at Q4_K_M quantization on a machine with 8-16 GB of RAM, and scale up as your needs grow. Local LLMs won't replace cloud APIs for every use case, but they are an essential tool in the AI practitioner's toolkit.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-embeddings-explained.html">AI Embeddings Explained</a></li><li><a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a></li><li><a href="/en/ai/rag-architecture-guide.html">RAG Architecture Guide</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -319,5 +335,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="Learn retry and backoff strategies for building resilient distributed systems — exponential backoff, jitter, idempotency keys, circuit breaker combination, and avoiding thundering herd problems.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/retry-backoff.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/retry-backoff.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/retry-backoff.webp" type="image/webp" fetchpriority="high">
-    <title>Retry and Backoff Strategies — SourceHub</title>
+    <title>Retry and Backoff Strategies — AI Study Room</title>
     <meta name="description" content="Learn retry and backoff strategies for building resilient distributed systems — exponential backoff, jitter, idempotency keys, circuit breaker combination, and avoiding thundering herd problems.">
     <meta name="keywords" content="Architecture, System Design">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/retry-backoff.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/retry-backoff.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/retry-and-backoff-strategies-44bd"
@@ -112,11 +123,15 @@
         <span class="tag-cat">System Design</span></div>
         <h1 class="article-title">Retry and Backoff Strategies</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-29">2025-12-29</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>177 views</span>
+          <span class="meta-sep">·</span>
+          <span>1176 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/retry-backoff.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/retry-backoff.png" alt="Retry and Backoff Strategies" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -198,7 +213,8 @@
 <p>delay = response.headers.get('Retry-After', default_delay)</p>
 <p>Summary </p>
 <p>Effective retry strategies are essential for distributed system resilience. Always combine retries with idempotency keys to prevent duplicate operations. Use exponential backoff with jitter to spread retries and prevent thundering herds. Integrate with circuit breakers for long-term failure handling. Set strict retry limits and time budgets to fail fast when recovery is not imminent.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a></li><li><a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a></li><li><a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -238,5 +254,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

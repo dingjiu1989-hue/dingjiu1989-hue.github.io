@@ -27,7 +27,7 @@
     <meta property="og:description" content="Complete guide to clickjacking defense covering X-Frame-Options, CSP frame-ancestors, framebusting techniques, and testing tools.">
     <meta property="og:url" content="https://aidev.fit/en/security/clickjacking-protection.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/clickjacking-protection.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/clickjacking-protection.webp" type="image/webp" fetchpriority="high">
-    <title>Clickjacking Protection — SourceHub</title>
+    <title>Clickjacking Protection — AI Study Room</title>
     <meta name="description" content="Complete guide to clickjacking defense covering X-Frame-Options, CSP frame-ancestors, framebusting techniques, and testing tools.">
     <meta name="keywords" content="Security, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/clickjacking-protection.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/clickjacking-protection.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/clickjacking-protection-503p"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Clickjacking Protection</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-08">2026-03-08</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>235 views</span>
+          <span class="meta-sep">·</span>
+          <span>1024 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/clickjacking-protection.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/clickjacking-protection.png" alt="Clickjacking Protection" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (17)</summary><ol><li><a href="#deny-all-framing">Deny all framing</a></li><li><a href="#allow-only-same-origin-framing">Allow only same-origin framing</a></li><li><a href="#flask-example-set-x-frame-options">Flask example: set X-Frame-Options</a></li><li><a href="#for-sensitive-pages-banking-admin-panels-use-deny">For sensitive pages (banking, admin panels), use DENY</a></li><li><a href="#allow-only-same-origin">Allow only same-origin</a></li><li><a href="#allow-specific-origins">Allow specific origins</a></li><li><a href="#allow-none-equivalent-to-deny">Allow none (equivalent to DENY)</a></li><li><a href="#allow-multiple-specific-origins">Allow multiple specific origins</a></li><li><a href="#pythonflask-csp-middleware">Python/Flask CSP middleware</a></li><li><a href="#test-with-curl">Test with curl</a></li><li><a href="#check-for-frame-ancestors-specifically">Check for frame-ancestors specifically</a></li><li><a href="#python-automated-check">Python automated check</a></li><li><a href="#nginx-full-clickjacking-protection">Nginx: full clickjacking protection</a></li><li><a href="#x-frame-options-as-fallback">X-Frame-Options as fallback</a></li><li><a href="#csp-frame-ancestors-as-modern-replacement">CSP frame-ancestors as modern replacement</a></li><li><a href="#stricter-for-sensitive-areas">Stricter for sensitive areas</a></li><li><a href="#apis-should-never-be-framed">APIs should never be framed</a></li></ol></details>
@@ -243,7 +258,8 @@
 <p>}</p>
 <p>Conclusion </p>
 <p>Clickjacking is one of the easiest vulnerabilities to prevent but remains surprisingly common. Set <code>X-Frame-Options: DENY</code> or <code>SAMEORIGIN</code> on every response, and use CSP <code>frame-ancestors</code> for fine-grained control. For the strongest protection, deploy both headers, and always test new pages before deployment.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/patching-strategy.html">Patching Strategy</a></li><li><a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a></li><li><a href="/en/security/secure-api-design.html">Secure API Design Principles</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -286,5 +302,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

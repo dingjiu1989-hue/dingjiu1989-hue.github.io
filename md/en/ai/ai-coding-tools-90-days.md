@@ -164,4 +164,4 @@ My current setup: **Copilot Free** for inline completions, **Claude Pro** for co
 
 For a more detailed feature-by-feature comparison of Cursor vs Copilot vs Claude Code, see my [full comparison article](<{BASE}/en/compare/cursor-vs-copilot-vs-claude-code.html>). For benchmark data on LLM coding performance across more models, check the [LLM for coding guide](<{BASE}/en/ai/best-llms-for-coding-2026.html>).
 
-_This article was originally published on[SourceHub](<{BASE}/en/ai/ai-coding-tools-90-days.html>)._
+_This article was originally published on[AI Study Room](<{BASE}/en/ai/ai-coding-tools-90-days.html>)._

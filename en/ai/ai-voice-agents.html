@@ -27,7 +27,7 @@
     <meta property="og:description" content="How to build real-time AI voice agents: STT (Whisper) + LLM (GPT-4o/Claude) + TTS (ElevenLabs). Covers WebRTC streaming, latency optimization, voice activity detection, and interruption handling.">
     <meta property="og:url" content="https://aidev.fit/en/ai/ai-voice-agents.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/ai-voice-agents.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="AI Tutorials">
     <meta property="article:tag" content="AI, Voice, Real-Time, WebRTC">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/ai-voice-agents.webp" type="image/webp" fetchpriority="high">
-    <title>Building AI Voice Agents: Complete Technical Guide (2026) — SourceHub</title>
+    <title>Building AI Voice Agents: Complete Technical Guide (2026) — AI Study Room</title>
     <meta name="description" content="How to build real-time AI voice agents: STT (Whisper) + LLM (GPT-4o/Claude) + TTS (ElevenLabs). Covers WebRTC streaming, latency optimization, voice activity detection, and interruption handling.">
     <meta name="keywords" content="AI, Voice, Real-Time, WebRTC">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/ai-voice-agents.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/ai/ai-voice-agents.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/building-ai-voice-agents-complete-technical-guide-2026-2945"
@@ -115,11 +126,15 @@
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
         <h1 class="article-title">Building AI Voice Agents: Complete Technical Guide (2026)</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-11-10">2025-11-10</time>
           <span class="meta-sep">·</span>
           <span>3 min read</span>
           <span class="meta-sep">·</span>
           <span>5038 views</span>
+          <span class="meta-sep">·</span>
+          <span>686 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-voice-agents.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-voice-agents.png" alt="Building AI Voice Agents: Complete Technical Guide (2026)" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (4)</summary><ol><li><a href="#the-voice-agent-pipeline">The Voice Agent Pipeline</a></li><li><a href="#voice-agent-architecture">Voice Agent Architecture</a></li><li><a href="#stt-llm-and-tts-breaking-down-the-stack">STT, LLM, and TTS: Breaking Down the Stack</a></li><li><a href="#interruption-handling-barge-in">Interruption Handling (Barge-In)</a></li></ol></details>
@@ -182,7 +197,8 @@ async def voice_agent():
 <p><strong>Critical feature:</strong> Users need to be able to interrupt the AI mid-response (like a human conversation). Implementation: monitor microphone audio level during AI playback. If sustained audio above threshold, immediately stop TTS playback, flush the LLM's partial response, and start listening for the new input. Without interruption handling, the voice agent feels robotic and frustrating.</p>
 
 <p><strong>Bottom line:</strong> The OpenAI Realtime API is the fastest path to a working voice agent — it bundles STT + LLM + TTS into one low-latency WebSocket. For production, consider Deepgram (STT) + your preferred LLM + ElevenLabs (TTS) for more control over each component. Target under 1 second end-to-end latency for a natural conversation feel. See also: <a href="/en/ai/ai-agents-guide.html">AI Agents Guide</a> and <a href="/en/ai/function-calling-guide.html">Function Calling Guide</a>.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a></li><li><a href="/en/ai/n8n-ai-automation.html">Building AI Automation Workflows with n8n: A Practical Guide</a></li><li><a href="/en/ai/ai-coding-tools-90-days.html">6 AI Coding Tools, 90 Days, 30 Tasks: My Honest Comparison</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -230,5 +246,13 @@ async def voice_agent():
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="In-depth comparison of DynamoDB vs Cassandra covering data model, consistency levels, scaling strategies, query patterns, and cost considerations.">
     <meta property="og:url" content="https://aidev.fit/en/database/dynamodb-vs-cassandra.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/dynamodb-vs-cassandra.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, Backend, Data">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/dynamodb-vs-cassandra.webp" type="image/webp" fetchpriority="high">
-    <title>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost — SourceHub</title>
+    <title>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost — AI Study Room</title>
     <meta name="description" content="In-depth comparison of DynamoDB vs Cassandra covering data model, consistency levels, scaling strategies, query patterns, and cost considerations.">
     <meta name="keywords" content="Database, Backend, Data">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/dynamodb-vs-cassandra.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/dynamodb-vs-cassandra.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/dynamodb-vs-cassandra-data-model-consistency-scaling-and-cost-3m6a"
@@ -124,11 +135,15 @@
         <span class="tag-cat">Data</span></div>
         <h1 class="article-title">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-04-05">2026-04-05</time>
           <span class="meta-sep">·</span>
           <span>6 min read</span>
           <span class="meta-sep">·</span>
           <span>163 views</span>
+          <span class="meta-sep">·</span>
+          <span>1282 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/dynamodb-vs-cassandra.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/dynamodb-vs-cassandra.png" alt="DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (10)</summary><ol><li><a href="#dynamodb-query">DynamoDB query</a></li><li><a href="#cassandra-query">Cassandra query</a></li><li><a href="#eventually-consistent-read-cheaper">Eventually consistent read (cheaper)</a></li><li><a href="#strongly-consistent-read">Strongly consistent read</a></li><li><a href="#configure-auto-scaling">Configure auto-scaling</a></li><li><a href="#or-use-on-demand-mode-pay-per-request">Or use on-demand mode (pay-per-request)</a></li><li><a href="#no-capacity-planning-needed-but-higher-per-request-cost">No capacity planning needed, but higher per-request cost</a></li><li><a href="#cassandrayaml">cassandra.yaml</a></li><li><a href="#add-node-to-cluster">Add node to cluster</a></li><li><a href="#rebalance-data">Rebalance data</a></li></ol></details>
@@ -319,7 +334,8 @@
 </li>
 </ul>
 <p>DynamoDB and Cassandra are both excellent at what they do: high-throughput, scalable key-value and wide-column workloads. The choice depends on your operational preferences, cloud strategy, and cost sensitivity. For most applications starting out, a relational database with read replicas is the simpler and more flexible choice.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-containerization.html">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</a></li><li><a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a></li><li><a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -362,5 +378,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

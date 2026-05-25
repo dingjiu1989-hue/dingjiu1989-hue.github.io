@@ -27,7 +27,7 @@
     <meta property="og:description" content="System design concepts every developer should know — microservices vs monolith, CQRS, event-driven architecture, database scaling, caching, and real-world trade-offs.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/system-design-fundamentals-2026.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/system-design-fundamentals-2026.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="System Design, Microservices, Architecture, CQRS, Event-Driven, Caching, CAP Theorem, Scalability">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/system-design-fundamentals-2026.webp" type="image/webp" fetchpriority="high">
-    <title>System Design Fundamentals 2026: A Developer Guide to Scalable Applications — SourceHub</title>
+    <title>System Design Fundamentals 2026: A Developer Guide to Scalable Applications — AI Study Room</title>
     <meta name="description" content="System design concepts every developer should know — microservices vs monolith, CQRS, event-driven architecture, database scaling, caching, and real-world trade-offs.">
     <meta name="keywords" content="System Design, Microservices, Architecture, CQRS, Event-Driven, Caching, CAP Theorem, Scalability">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/system-design-fundamentals-2026.html">
@@ -64,8 +64,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/system-design-fundamentals-2026.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/system-design-fundamentals-2026-a-developer-guide-to-scalable-applications-1jho"
@@ -118,11 +129,15 @@
         <span class="tag-cat">Scalability</span></div>
         <h1 class="article-title">System Design Fundamentals 2026: A Developer Guide to Scalable Applications</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-25">2025-12-25</time>
           <span class="meta-sep">·</span>
           <span>38 min read</span>
           <span class="meta-sep">·</span>
           <span>180 views</span>
+          <span class="meta-sep">·</span>
+          <span>7744 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/system-design-fundamentals-2026.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/system-design-fundamentals-2026.png" alt="System Design Fundamentals 2026: A Developer Guide to Scalable Applications" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (53)</summary><ol><li><a href="#command-side-writes">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--- Command Side (Writes) ---</a></li><li><a href="#validate-business-rules">Validate business rules</a></li><li><a href="#query-side-reads">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--- Query Side (Reads) ---</a></li><li><a href="#read-from-denormalized-read-model-could-be-a-different-db">Read from denormalized read model (could be a different DB)</a></li><li><a href="#producer--emit-click-events">Producer — emit click events</a></li><li><a href="#consumer-1--real-time-analytics-eg-update-redis-counters">Consumer 1 — real-time analytics (e.g., update Redis counters)</a></li><li><a href="#consumer-2--store-raw-clicks-in-data-warehouse">Consumer 2 — store raw clicks in data warehouse</a></li><li><a href="#events-immutable-facts">Events (immutable facts)</a></li><li><a href="#derive-current-state-by-replaying-events">Derive current state by replaying events</a></li><li><a href="#using-readwrite-separation-in-code">Using read/write separation in code</a></li><li><a href="#round-robin-across-replicas">Round-robin across replicas</a></li><li><a href="#read-after-write-force-this-read-to-the-primary">Read-after-write: force this read to the primary</a></li><li><a href="#consistent-hashing--minimizes-re-sharding">Consistent hashing — minimizes re-sharding</a></li><li><a href="#1-try-cache">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache</a></li><li><a href="#2-cache-miss--load-from-database">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss — load from database</a></li><li><a href="#3-populate-cache-with-ttl">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache with TTL</a></li><li><a href="#1-write-to-database">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Write to database</a></li><li><a href="#2-invalidate-cache-dont-update-it--let-next-read-re-populate">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Invalidate cache (don't update it — let next read re-populate)</a></li><li><a href="#batch-writer-process--runs-every-5-seconds">Batch writer process — runs every 5 seconds</a></li><li><a href="#start-background-flusher">Start background flusher</a></li><li><a href="#ap-choice--accept-stale-reads-for-availability">AP choice — accept stale reads for availability</a></li><li><a href="#read-from-nearest-replica-may-be-stale">Read from nearest replica, may be stale</a></li><li><a href="#cp-choice--accept-slower-reads-for-consistency">CP choice — accept slower reads for consistency</a></li><li><a href="#read-from-primary-always-latest">Read from primary, always latest</a></li><li><a href="#round-robin--predictable-but-doesnt-handle-different-load-sizes">Round Robin — predictable, but doesn't handle different load sizes</a></li><li><a href="#least-connections--better-for-variable-request-durations">Least Connections — better for variable request durations</a></li><li><a href="#ip-hash--session-persistence-without-cookies">IP Hash — session persistence without cookies</a></li><li><a href="#healthz-endpoint">/healthz endpoint</a></li><li><a href="#check-critical-dependencies">Check critical dependencies</a></li><li><a href="#before-gateway--each-service-handles-auth">Before gateway — each service handles auth</a></li><li><a href="#after-gateway--auth-is-centralized">After gateway — auth is centralized</a></li><li><a href="#service-code-is-simpler">Service code is simpler:</a></li><li><a href="#usage">Usage</a></li><li><a href="#retry-with-exponential-backoff-and-jitter">Retry with exponential backoff and jitter</a></li><li><a href="#example-7-chars-of-base62--627--35-trillion-unique-urls">Example: 7 chars of base62 = 62^7 ≈ 3.5 trillion unique URLs</a></li><li><a href="#1-check-if-url-already-shortened-optimization">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Check if URL already shortened (optimization)</a></li><li><a href="#2-generate-unique-code">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate unique code</a></li><li><a href="#3-store-in-db">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store in DB</a></li><li><a href="#4-warm-the-cache">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Warm the cache</a></li><li><a href="#1-try-cache-99-hit-rate-with-24h-ttl">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache (99% hit rate with 24h TTL)</a></li><li><a href="#2-cache-miss--hit-db">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss — hit DB</a></li><li><a href="#3-populate-cache-with-ttl">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache with TTL</a></li><li><a href="#4-log-click-asynchronously-dont-block-the-redirect">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Log click asynchronously (don't block the redirect)</a></li><li><a href="#fire-and-forget--queue-to-kafka">Fire and forget — queue to Kafka</a></li><li><a href="#5-redirect-301-for-permanent-302-for-analytics">5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Redirect (301 for permanent, 302 for analytics)</a></li><li><a href="#validate-request">Validate request</a></li><li><a href="#queue-the-work--dont-wait">Queue the work — don't wait</a></li><li><a href="#return-immediately">Return immediately</a></li><li><a href="#generate-report">... generate report ...</a></li><li><a href="#notify-caller">Notify caller</a></li><li><a href="#anti-pattern-n1-queries">Anti-pattern: N+1 queries</a></li><li><a href="#one-query-per-order--terrible">One query PER order — terrible!</a></li><li><a href="#fix-single-query-with-join">Fix: single query with JOIN</a></li></ol></details>
@@ -812,7 +827,8 @@
 <p>Summary: Key Decisions for 2026 </p>
 <p>| Decision | Default Choice | Upgrade When | |---|---|---| | <strong>Architecture</strong> | Modular monolith | Team &gt;15 or clear independent scale need | | <strong>Database</strong> | PostgreSQL | Read replicas at 10k reads/s, sharding at 100k | | <strong>Cache</strong> | Redis (cache aside) | Write-behind for high-throughput writes | | <strong>Queue</strong> | SQS (serverless) → RabbitMQ (control) → Kafka (streaming) | Scale-dependent | | <strong>Async</strong> | Fire and forget for non-critical | Polling → Webhooks as needs grow | | <strong>API Gateway</strong> | NGINX / Traefik | Envoy / Kong for advanced routing | | <strong>Resilience</strong> | Circuit breaker + timeout | Bulkhead + rate limiting at scale | </p>
 <p>The best system design is the one that solves today's problem without creating tomorrow's nightmare. Start simple, measure everything, extract with surgical precision, and never optimize for a scale you haven't reached.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a></li><li><a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></li><li><a href="/en/architecture/microservices-vs-monolith-2026.html">Microservices vs Monolith 2026</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -855,5 +871,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

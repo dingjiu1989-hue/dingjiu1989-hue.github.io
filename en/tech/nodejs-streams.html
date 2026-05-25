@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Node.js Streams">
-    <meta property="og:description" content="Master Node.js streams: readable, writable, transform streams, backpressure handling, and the pipeline API — comprehensive developer tutorial on SourceHub.">
+    <meta property="og:description" content="Master Node.js streams: readable, writable, transform streams, backpressure handling, and the pipeline API — comprehensive developer tutorial on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/tech/nodejs-streams.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/nodejs-streams.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Node.js Streams">
-    <meta name="twitter:description" content="Master Node.js streams: readable, writable, transform streams, backpressure handling, and the pipeline API — comprehensive developer tutorial on SourceHub.">
+    <meta name="twitter:description" content="Master Node.js streams: readable, writable, transform streams, backpressure handling, and the pipeline API — comprehensive developer tutorial on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/nodejs-streams.png">
     <meta property="article:published_time" content="2026-01-09">
     <meta property="article:modified_time" content="2026-04-21">
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/nodejs-streams.webp" type="image/webp" fetchpriority="high">
-    <title>Node.js Streams — SourceHub</title>
-    <meta name="description" content="Master Node.js streams: readable, writable, transform streams, backpressure handling, and the pipeline API — comprehensive developer tutorial on SourceHub.">
+    <title>Node.js Streams — AI Study Room</title>
+    <meta name="description" content="Master Node.js streams: readable, writable, transform streams, backpressure handling, and the pipeline API — comprehensive developer tutorial on AI Study Room.">
     <meta name="keywords" content="Technology, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/nodejs-streams.html">
     <link rel="canonical" href="https://aidev.fit/en/tech/nodejs-streams.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/nodejs-streams.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/nodejs-streams-5hfk"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Node.js Streams</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-01-09">2026-01-09</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>105 views</span>
+          <span class="meta-sep">·</span>
+          <span>924 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/nodejs-streams.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/nodejs-streams.png" alt="Node.js Streams" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#stream-types">Stream Types</a></li><li><a href="#reading-from-streams">Reading from Streams</a></li><li><a href="#writing-to-streams">Writing to Streams</a></li><li><a href="#transform-streams">Transform Streams</a></li><li><a href="#backpressure">Backpressure</a></li><li><a href="#the-pipeline-api">The Pipeline API</a></li><li><a href="#error-handling">Error Handling</a></li></ol></details>
@@ -151,7 +166,8 @@
 <p>Stream errors must be handled explicitly. An unhandled <code>'error'</code> event on a stream crashes the process. The pipeline API handles errors from all chained streams, but when using streams directly, every stream needs an error handler.</p>
 <p>Streams also emit <code>'close'</code> when the stream and its underlying resources are closed. The <code>'close'</code> event is guaranteed to fire even if an error occurred, making it suitable for cleanup logic. The <code>destroyed</code> property indicates whether the stream has been destroyed.</p>
 <p>Node.js streams are fundamental to building efficient, memory-conscious applications. Whether processing large files, handling HTTP requests, or building data transformation pipelines, understanding streams enables scalable data processing with predictable memory usage.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/developer-portal.html">Developer Portal</a></li><li><a href="/en/tech/event-processing.html">Event Processing</a></li><li><a href="/en/tech/metric-collection.html">Metric Collection</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -194,5 +210,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

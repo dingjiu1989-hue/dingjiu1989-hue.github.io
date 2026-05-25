@@ -27,7 +27,7 @@
     <meta property="og:description" content="A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and query patterns.">
     <meta property="og:url" content="https://aidev.fit/en/database/nosql-databases-guide.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/nosql-databases-guide.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, SQL">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/nosql-databases-guide.webp" type="image/webp" fetchpriority="high">
-    <title>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore) — SourceHub</title>
+    <title>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore) — AI Study Room</title>
     <meta name="description" content="A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and query patterns.">
     <meta name="keywords" content="Database, SQL">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/nosql-databases-guide.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/nosql-databases-guide.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/nosql-databases-guide-mongodb-dynamodb-firestore-3kn8"
@@ -112,11 +123,15 @@
         <span class="tag-cat">SQL</span></div>
         <h1 class="article-title">NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-23">2025-12-23</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>159 views</span>
+          <span class="meta-sep">·</span>
+          <span>1031 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/nosql-databases-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/nosql-databases-guide.png" alt="NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (3)</summary><ol><li><a href="#document-reference">Document reference</a></li><li><a href="#subcollection-for-hierarchical-data">Subcollection for hierarchical data</a></li><li><a href="#real-time-listener">Real-time listener</a></li></ol></details>
@@ -268,7 +283,8 @@
 <p>| Factor | MongoDB | DynamoDB | Firestore | |--------|---------|----------|-----------| | Query flexibility | Excellent | Limited to key/GSI | Moderate | | Scalability | Manual sharding | Automatic | Automatic | | Consistency | Configurable | Eventual (default) | Strong | | Hosting | Self-managed or Atlas | AWS-managed | GCP-managed | | Real-time | Change streams | DynamoDB Streams | Native real-time | | Offline support | Limited | Limited | Excellent | | Pricing | Instance-based | Pay per request | Pay per read/write | </p>
 <p>Summary </p>
 <p>NoSQL databases excel at scale and flexibility but require different design thinking than relational databases. MongoDB offers the most flexible querying with embedded documents, DynamoDB provides unparalleled scalability with single-table design, and Firestore offers the best real-time and offline support. Choose based on your access patterns, scalability needs, and cloud ecosystem rather than treating NoSQL as a one-size-fits-all solution.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/etl-pipelines.html">Building ETL Pipelines: A Practical Guide</a></li><li><a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a></li><li><a href="/en/database/database-indexing.html">Database Indexing Strategies</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -311,5 +327,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

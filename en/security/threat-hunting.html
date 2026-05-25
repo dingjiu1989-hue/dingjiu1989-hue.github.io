@@ -27,7 +27,7 @@
     <meta property="og:description" content="Comprehensive guide to hypothesis-driven threat hunting with MITRE ATT&CK mapping, tooling strategies, and data source analysis.">
     <meta property="og:url" content="https://aidev.fit/en/security/threat-hunting.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/threat-hunting.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/threat-hunting.webp" type="image/webp" fetchpriority="high">
-    <title>Threat Hunting — SourceHub</title>
+    <title>Threat Hunting — AI Study Room</title>
     <meta name="description" content="Comprehensive guide to hypothesis-driven threat hunting with MITRE ATT&CK mapping, tooling strategies, and data source analysis.">
     <meta name="keywords" content="Security, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/threat-hunting.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/threat-hunting.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/threat-hunting-36e9"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Threat Hunting</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-14">2026-03-14</time>
           <span class="meta-sep">·</span>
           <span>7 min read</span>
           <span class="meta-sep">·</span>
           <span>108 views</span>
+          <span class="meta-sep">·</span>
+          <span>1588 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/threat-hunting.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/threat-hunting.png" alt="Threat Hunting" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (6)</summary><ol><li><a href="#hypothesis-an-adversary-is-using-powershell-for-c2-communication">Hypothesis: An adversary is using PowerShell for C2 communication</a></li><li><a href="#test-find-powershell-processes-making-outbound-connections">Test: Find PowerShell processes making outbound connections</a></li><li><a href="#velociraptor-collect-process-listing-across-fleet">Velociraptor: collect process listing across fleet</a></li><li><a href="#zeek-analyze-dns-logs-for-dga-patterns">Zeek: analyze DNS logs for DGA patterns</a></li><li><a href="#kql-hunting-in-microsoft-365-defender">KQL: hunting in Microsoft 365 Defender</a></li><li><a href="#stack-counting-for-anomaly-detection">Stack counting for anomaly detection</a></li></ol></details>
@@ -225,7 +240,8 @@
 <p>yield Anomaly(field, value, ratio, baseline)</p>
 <p>Conclusion </p>
 <p>Threat hunting transforms security operations from reactive to proactive. Start with structured hypotheses based on threat intelligence, map hunts to MITRE ATT&CK; techniques, ensure comprehensive data collection, and iterate based on findings. Mature hunting programs progressively automate successful hunt patterns into detection rules.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/bug-bounty.html">Bug Bounty Guide</a></li><li><a href="/en/security/container-image-security.html">Container Image Security</a></li><li><a href="/en/security/content-security-policy.html">Content Security Policy</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -268,5 +284,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

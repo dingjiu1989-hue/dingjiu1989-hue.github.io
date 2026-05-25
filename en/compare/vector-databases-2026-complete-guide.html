@@ -27,7 +27,7 @@
     <meta property="og:description" content="How vector databases work, when to use them, and a head-to-head comparison of Pinecone, Chroma, Weaviate, Qdrant, Milvus, and pgvector with production benchmarks.">
     <meta property="og:url" content="https://aidev.fit/en/compare/vector-databases-2026-complete-guide.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/compare/vector-databases-2026-complete-guide.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Comparisons">
     <meta property="article:tag" content="Vector Database, Pinecone, Qdrant, Weaviate, Milvus, pgvector, AI, RAG, Semantic Search">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/compare/vector-databases-2026-complete-guide.webp" type="image/webp" fetchpriority="high">
-    <title>Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide — SourceHub</title>
+    <title>Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide — AI Study Room</title>
     <meta name="description" content="How vector databases work, when to use them, and a head-to-head comparison of Pinecone, Chroma, Weaviate, Qdrant, Milvus, and pgvector with production benchmarks.">
     <meta name="keywords" content="Vector Database, Pinecone, Qdrant, Weaviate, Milvus, pgvector, AI, RAG, Semantic Search">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/compare/vector-databases-2026-complete-guide.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/compare/vector-databases-2026-complete-guide.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/vector-databases-in-2026-pinecone-vs-chroma-vs-weaviate-vs-qdrant-complete-guide-5hmf"
@@ -131,11 +142,15 @@
         <span class="tag-cat">Semantic Search</span></div>
         <h1 class="article-title">Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-13">2025-12-13</time>
           <span class="meta-sep">·</span>
           <span>20 min read</span>
           <span class="meta-sep">·</span>
           <span>210 views</span>
+          <span class="meta-sep">·</span>
+          <span>4075 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/compare/vector-databases-2026-complete-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/compare/vector-databases-2026-complete-guide.png" alt="Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (32)</summary><ol><li><a href="#what-is-a-vector-database">What Is a Vector Database?</a></li><li><a href="#why-you-need-one-in-2026">Why You Need One in 2026</a></li><li><a href="#how-vector-search-works">How Vector Search Works</a></li><li><a href="#algorithms-what-you-need-to-know">Algorithms (what you need to know)</a></li><li><a href="#similarity-metrics">Similarity Metrics</a></li><li><a href="#the-contenders">The Contenders</a></li><li><a href="#1-pinecone">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Pinecone</a></li><li><a href="#upsert-vectors">Upsert vectors</a></li><li><a href="#query">Query</a></li><li><a href="#2-chroma">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Chroma</a></li><li><a href="#3-weaviate">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Weaviate</a></li><li><a href="#auto-schema-from-data">Auto-schema from data</a></li><li><a href="#auto-embeds-on-insert">Auto-embeds on insert</a></li><li><a href="#hybrid-search">Hybrid search</a></li><li><a href="#4-qdrant">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Qdrant</a></li><li><a href="#5-milvus">5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Milvus</a></li><li><a href="#6-pgvector">6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. pgvector</a></li><li><a href="#performance-benchmarks">Performance Benchmarks</a></li><li><a href="#when-to-use-what">When to Use What</a></li><li><a href="#use-pinecone-if">✅ Use Pinecone if:</a></li><li><a href="#use-chroma-if">✅ Use Chroma if:</a></li><li><a href="#use-weaviate-if">✅ Use Weaviate if:</a></li><li><a href="#use-qdrant-if">✅ Use Qdrant if:</a></li><li><a href="#use-milvus-if">✅ Use Milvus if:</a></li><li><a href="#use-pgvector-if">✅ Use pgvector if:</a></li><li><a href="#production-checklist">Production Checklist</a></li><li><a href="#sample-architecture-rag-pipeline">Sample Architecture: RAG Pipeline</a></li><li><a href="#1-embed-the-question">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Embed the question</a></li><li><a href="#2-retrieve-relevant-context">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Retrieve relevant context</a></li><li><a href="#3-generate-answer-with-context">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate answer with context</a></li><li><a href="#quick-decision-flowchart">Quick Decision Flowchart</a></li><li><a href="#summary">Summary</a></li></ol></details>
@@ -489,7 +504,8 @@
 <p>| Enterprise scale | <strong>Milvus</strong> |</p>
 <p>| No new infra (Postgres) | <strong>pgvector</strong> |</p>
 <p>The best vector database is the one you actually deploy. Start simple (pgvector or Chroma), validate your use case, then migrate to Qdrant or Weaviate when you need the advanced features. Don't over-engineer — most applications work perfectly well with pgvector through the first million vectors.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/compare/mysql-vs-mariadb.html">MySQL vs MariaDB: The Complete Comparison</a></li><li><a href="/en/compare/rust-go-zig-comparison.html">Rust vs Go vs Zig in 2026: A Complete Comparison for Systems Programming</a></li><li><a href="/en/compare/duckdb-vs-sqlite.html">DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -537,5 +553,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

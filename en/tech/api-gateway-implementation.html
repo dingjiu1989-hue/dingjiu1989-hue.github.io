@@ -27,7 +27,7 @@
     <meta property="og:description" content="Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformations, analytics, and deployment patterns.">
     <meta property="og:url" content="https://aidev.fit/en/tech/api-gateway-implementation.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/api-gateway-implementation.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/api-gateway-implementation.webp" type="image/webp" fetchpriority="high">
-    <title>API Gateway Implementation Guide — SourceHub</title>
+    <title>API Gateway Implementation Guide — AI Study Room</title>
     <meta name="description" content="Compare Kong, Tyk, and APISIX gateways covering routing, rate limiting, authentication, transformations, analytics, and deployment patterns.">
     <meta name="keywords" content="Technology, Programming, DevOps">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/api-gateway-implementation.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/api-gateway-implementation.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/api-gateway-implementation-guide-4ja3"
@@ -113,11 +124,15 @@
         <span class="tag-cat">DevOps</span></div>
         <h1 class="article-title">API Gateway Implementation Guide</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-05-14">2026-05-14</time>
           <span class="meta-sep">·</span>
           <span>16 min read</span>
           <span class="meta-sep">·</span>
           <span>478 views</span>
+          <span class="meta-sep">·</span>
+          <span>3323 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/api-gateway-implementation.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/api-gateway-implementation.png" alt="API Gateway Implementation Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (16)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#gateway-comparison">Gateway Comparison</a></li><li><a href="#kong-gateway">Kong Gateway</a></li><li><a href="#kong-declarative-config-kongyml">Kong declarative config (kong.yml)</a></li><li><a href="#apache-apisix">Apache APISIX</a></li><li><a href="#apisix-admin-api">APISIX Admin API</a></li><li><a href="#tyk">Tyk</a></li><li><a href="#routing-strategies">Routing Strategies</a></li><li><a href="#rate-limiting-and-throttling">Rate Limiting and Throttling</a></li><li><a href="#authentication-plugin-integration">Authentication Plugin Integration</a></li><li><a href="#requestresponse-transformation">Request/Response Transformation</a></li><li><a href="#analytics-and-observability">Analytics and Observability</a></li><li><a href="#apisix-prometheus-and-logging">APISIX: Prometheus and logging</a></li><li><a href="#deployment-patterns">Deployment Patterns</a></li><li><a href="#sidecar-pattern">Sidecar Pattern</a></li><li><a href="#centralized-pattern">Centralized Pattern</a></li></ol></details>
@@ -338,7 +353,8 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- serviceName: aggregator-svc</p>
 <p>servicePort: 80</p>
 <p>Select the centralized pattern for simpler operations and the sidecar pattern for strict traffic isolation in multi-tenant environments. Whichever gateway you choose, invest in declarative configuration management and CI/CD integration from day one to avoid configuration drift at scale.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a></li><li><a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></li><li><a href="/en/tech/webpack-vs-vite-bundlers.html">Webpack vs Vite Comparison</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -381,5 +397,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

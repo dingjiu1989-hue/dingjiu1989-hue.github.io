@@ -27,7 +27,7 @@
     <meta property="og:description" content="Compare distributed tracing tools: Jaeger for end-to-end tracing, Zipkin for lineage-based tracing, Grafana Tempo for cost-effective object storage-backed trace">
     <meta property="og:url" content="https://aidev.fit/en/tools/tracing-tools.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tools/tracing-tools.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tool Recommendations">
     <meta property="article:tag" content="Technology, DevTools, Productivity">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tools/tracing-tools.webp" type="image/webp" fetchpriority="high">
-    <title>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector — SourceHub</title>
+    <title>Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector — AI Study Room</title>
     <meta name="description" content="Compare distributed tracing tools: Jaeger for end-to-end tracing, Zipkin for lineage-based tracing, Grafana Tempo for cost-effective object storage-backed trace">
     <meta name="keywords" content="Technology, DevTools, Productivity">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tools/tracing-tools.html">
@@ -64,8 +64,19 @@
       "inLanguage": "en",
       "isAccessibleForFree": true,
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tools/tracing-tools.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/tracing-tools-jaeger-zipkin-tempo-opentelemetry-collector-31m6"
@@ -123,11 +134,15 @@
         <span class="tag-cat">Productivity</span></div>
         <h1 class="article-title">Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-02-07">2026-02-07</time>
           <span class="meta-sep">·</span>
           <span>7 min read</span>
           <span class="meta-sep">·</span>
           <span>200 views</span>
+          <span class="meta-sep">·</span>
+          <span>1568 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tools/tracing-tools.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/tracing-tools.png" alt="Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (24)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#opentelemetry-collector">OpenTelemetry Collector</a></li><li><a href="#otel-collector-configyaml">otel-collector-config.yaml</a></li><li><a href="#sampling-for-cost-control">Sampling for cost control</a></li><li><a href="#run-the-collector">Run the collector</a></li><li><a href="#run-as-docker">Run as Docker</a></li><li><a href="#jaeger">Jaeger</a></li><li><a href="#docker-composeyml">docker-compose.yml</a></li><li><a href="#python-instrumentation-with-opentelemetry">Python instrumentation with OpenTelemetry</a></li><li><a href="#set-up-tracing">Set up tracing</a></li><li><a href="#auto-instrument-libraries">Auto-instrument libraries</a></li><li><a href="#manual-instrumentation">Manual instrumentation</a></li><li><a href="#tempo-grafana-tempo">Tempo (Grafana Tempo)</a></li><li><a href="#tempo-configyaml">tempo-config.yaml</a></li><li><a href="#run-tempo">Run Tempo</a></li><li><a href="#query-via-grafana">Query via Grafana</a></li><li><a href="#grafana-datasource-tempo">Grafana datasource: Tempo</a></li><li><a href="#traceql-query">TraceQL query:</a></li><li><a href="#resourceservicename--payment-service-ampamp-spanhttpstatuscode-gt-500">{ resource.service.name = "payment-service" &amp;&amp; span.http.status_code &gt;= 500 }</a></li><li><a href="#zipkin">Zipkin</a></li><li><a href="#docker-composeyml">docker-compose.yml</a></li><li><a href="#zipkin-with-opentelemetry">Zipkin with OpenTelemetry</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
@@ -312,7 +327,8 @@
 </li>
 </ul>
 <p>The OpenTelemetry Collector should be the first component in any tracing infrastructure. It receives traces from instrumented services, applies sampling and enrichment, and forwards to the backend of your choice (Jaeger, Tempo, or both). This decouples instrumentation from storage decisions.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tools/kafka-tools.html">Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer</a></li><li><a href="/en/tools/mock-tools.html">Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</a></li><li><a href="/en/tools/monorepo-tools.html">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -355,5 +371,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

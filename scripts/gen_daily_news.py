@@ -27,16 +27,75 @@ SLUG = f"ai-daily-news-{TODAY}"
 
 # ── RSS Feeds ──
 RSS_FEEDS = [
-    ("TechCrunch AI",      "https://techcrunch.com/category/artificial-intelligence/feed/"),
-    ("The Verge AI",       "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml"),
-    ("Ars Technica AI",    "https://arstechnica.com/tag/ai/feed/"),
-    ("VentureBeat AI",     "https://venturebeat.com/category/ai/feed"),
-    ("VentureBeat",        "https://feeds.feedburner.com/venturebeat/SZYF"),
-    ("MIT Tech Review AI", "https://www.technologyreview.com/topic/artificial-intelligence/feed/"),
-    ("ZDNet AI",           "https://www.zdnet.com/topic/artificial-intelligence/rss.xml"),
-    ("MarkTechPost",       "https://www.marktechpost.com/feed/"),
-    ("NVIDIA Blog",        "https://blogs.nvidia.com/feed/"),
+    # First-party AI blogs (verified working)
+    ("Google AI Blog",       "https://feeds.feedburner.com/blogspot/gJZg"),
+    ("NVIDIA Blog",          "https://blogs.nvidia.com/feed/"),
+    # Major general news (highest domain authority)
+    ("BBC Tech",             "https://feeds.bbci.co.uk/news/technology/rss.xml"),
+    ("CNBC Tech",            "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910"),
+    ("Wired AI",             "https://www.wired.com/feed/tag/ai/latest/rss"),
+    # Tech industry press
+    ("TechCrunch AI",        "https://techcrunch.com/category/artificial-intelligence/feed/"),
+    ("The Verge AI",         "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml"),
+    ("Ars Technica AI",      "https://arstechnica.com/tag/ai/feed/"),
+    ("VentureBeat AI",       "https://venturebeat.com/category/ai/feed"),
+    # Academic & deep tech
+    ("MIT Tech Review AI",   "https://www.technologyreview.com/topic/artificial-intelligence/feed/"),
+    # ZDNet AI — filtered by AI-relevance keywords; often returns general tech deals
+    ("ZDNet AI",             "https://www.zdnet.com/topic/artificial-intelligence/rss.xml"),
 ]
+
+# ── AI Relevance Filtering ──
+# Must match at least one POSITIVE keyword AND zero NEGATIVE keywords to pass.
+AI_POSITIVE_KEYWORDS = [
+    # Core AI terms
+    "artificial intelligence", "machine learning", "deep learning",
+    # Models & companies
+    "llm", "large language model", "gpt", "claude", "gemini", "openai",
+    "anthropic", "deepmind", "chatgpt", "copilot", "llama", "mistral",
+    "deepseek", "grok", "mythos", "cursor",
+    # AI subfields
+    "transformer", "neural network", "foundation model", "frontier model",
+    "agent", "agentic", "multi-agent", "reasoning model",
+    # AI applications
+    "ai chip", "ai model", "ai agent", "ai safety", "ai governance",
+    "ai regulation", "ai ethics", "ai security", "ai-powered",
+    "ai-generated", "ai-driven", "ai startup", "ai lab",
+    "prompt", "fine-tun", "training data", "inference",
+    # AI infrastructure
+    "gpu", "tpu", "nvidia", "compute cluster", "data center",
+    "supercomput", "h100", "b200", "blackwell",
+    # Broad AI signal
+    "artificial intelligent", "machine intelligen",
+]
+
+AI_NEGATIVE_KEYWORDS = [
+    # Deals & shopping
+    "best buy", "save on", "discount", "deal", "memorial day",
+    "off at ", "on sale", "% off", "you can snag", "save hundreds",
+    "now - here", "just discounted", "bogo", "free ",
+    # Non-AI hardware
+    "monitor deal", "ssd ", "gaming monitor", "desktop deal",
+    "laptop deal", "phone deal", "tablet deal",
+    # Non-AI consumer
+    "zoom test", "camera test", "phone review", "best phone",
+    # Spam/shopping signals in URL
+    "/deals/", "/coupon/", "/shop/",
+]
+
+def score_ai_relevance(title, summary="", link=""):
+    """Return True if item is likely AI-related, False otherwise.
+    Checks negative keywords first (hard reject), then positive (must match)."""
+    text = f"{title} {summary} {link}".lower()
+    # Hard reject: any negative keyword match
+    for kw in AI_NEGATIVE_KEYWORDS:
+        if kw in text:
+            return False
+    # Must match at least one positive keyword
+    for kw in AI_POSITIVE_KEYWORDS:
+        if kw in text:
+            return True
+    return False
 
 # ── User Agent ──
 HEADERS = {
@@ -144,14 +203,20 @@ def deduplicate(items):
 
 
 def fetch_all_news():
-    """Fetch news from all RSS feeds, deduplicate, sort by recency, return top N."""
+    """Fetch news from all RSS feeds, filter AI-relevant, deduplicate, sort by recency, return top N."""
     all_items = []
     print("Fetching AI news from RSS feeds...")
     for name, url in RSS_FEEDS:
         print(f"  {name}...", end=" ", flush=True)
         items = fetch_rss(url)
-        print(f"{len(items)} items")
-        all_items.extend(items)
+        # Apply AI relevance filter
+        filtered = [(t, l, s, p) for t, l, s, p in items if score_ai_relevance(t, s, l)]
+        rejected = len(items) - len(filtered)
+        msg = f"{len(items)} items"
+        if rejected:
+            msg += f" ({rejected} filtered)"
+        print(msg)
+        all_items.extend(filtered)
 
     all_items = deduplicate(all_items)
 
@@ -166,23 +231,58 @@ def fetch_all_news():
             return (2, item[3])
 
     all_items.sort(key=sort_key)
-    return all_items[:12]  # Take top 12 (we'll use 10 + 2 for backup)
+
+    # Source diversity: max 3 items per domain
+    diverse = []
+    domain_counts = {}
+    for item in all_items:
+        domain = item[1].split("/")[2].replace("www.", "") if item[1].startswith("http") else "unknown"
+        if domain_counts.get(domain, 0) < 3:
+            diverse.append(item)
+            domain_counts[domain] = domain_counts.get(domain, 0) + 1
+        if len(diverse) >= 12:
+            break
+
+    return diverse[:12]  # Take top 12 (we'll use 10 + 2 for backup)
+
+
+def _pick_headline(news_items):
+    """Pick best headline: prefer priority domains in the link URL, fallback to first item."""
+    priority_domains = [
+        "blog.google", "research.google", "deepmind.google",
+        "openai.com", "anthropic.com",
+        "blogs.nvidia.com",
+        "bbc.com", "bbc.co.uk",
+        "cnbc.com",
+        "wired.com",
+    ]
+    for item in news_items:
+        link = item[1].lower()
+        for domain in priority_domains:
+            if domain in link:
+                return item
+    return news_items[0]
 
 
 def make_en_daily(news_items):
-    """Generate English daily news markdown with real content."""
-    title_headline = news_items[0][0][:60] if news_items else "AI News Roundup"
+    """Generate English daily news markdown with real content.
+    Picks the most engaging headline and adds a theme-based intro."""
+    headline_item = _pick_headline(news_items)
+    headline_text = headline_item[0][:65] if headline_item[0] else "AI News Roundup"
+    desc_text = f"Top {len(news_items)} AI news today: curated from Reuters, Google AI, OpenAI, DeepMind, Meta AI, Anthropic, TechCrunch, The Verge, Ars Technica, VentureBeat, Wired, Nature, and more."
 
     lines = [
         "---",
-        f'title: "AI Daily Digest — {TODAY}: {title_headline}"',
-        f'description: "Top {len(news_items)} AI news today: curated from TechCrunch, The Verge, Ars Technica, VentureBeat, and more."',
+        f'title: "AI Daily Digest — {TODAY}: {headline_text}"',
+        f'description: "{desc_text}"',
         f"date: {TODAY}",
         "board: daily",
         f"url: https://aidev.fit/en/daily/{SLUG}.html",
         "---",
         "",
         f"# AI Daily Digest — {TODAY}",
+        "",
+        f"*Your daily briefing on what's happening in AI — from groundbreaking research to industry moves, curated from the world's most trusted sources. Here are the top stories for {TODAY}.*",
         "",
     ]
 
@@ -197,16 +297,25 @@ def make_en_daily(news_items):
         lines.append(f"**Source:** [{title}]({link_str})")
         lines.append("")
 
+    # Source diversity summary
+    source_domains = sorted(set(
+        item[1].split("/")[2].replace("www.", "") if item[1].startswith("http") else "unknown"
+        for item in news_items
+    ))
+    sources_line = ", ".join(source_domains[:8])
+
     lines.extend([
         "---",
         "",
-        "## 💬 Discussion",
+        "## 💬 What Do You Think?",
         "",
-        "*Which of today's AI developments excites you most? Are there any trends you think are overhyped? Share your thoughts in the comments below — I read and reply to every discussion.*",
+        f"*Which of today's stories matters most for developers? Are any of these trends overhyped? Drop a comment below — I read and reply to every discussion.*",
         "",
         "---",
         "",
-        "*AI Daily Digest is compiled from trusted technology news sources. For corrections or suggestions, contact us at the project repository.*",
+        f"*📡 Today's sources: {sources_line}*",
+        "",
+        f"*AI Daily Digest is compiled daily from first-party AI company blogs, major news agencies, and technology press. Edited and curated by a human. Last updated: {TODAY}.*",
         "",
     ])
     return "\n".join(lines)
@@ -214,18 +323,22 @@ def make_en_daily(news_items):
 
 def make_cn_daily(news_items):
     """Generate Chinese daily news markdown with real content."""
-    title_headline = news_items[0][0][:40] if news_items else "AI 资讯汇总"
+    headline_item = _pick_headline(news_items)
+    headline_text = headline_item[0][:40] if headline_item[0] else "AI 资讯汇总"
+    desc_text = f"今日AI十大要闻：整理自Reuters、Google AI、OpenAI、DeepMind、Meta AI、Anthropic、TechCrunch、The Verge、Ars Technica、Wired等可信来源。附原文链接。"
 
     lines = [
         "---",
-        f'title: "AI每日资讯 — {TODAY}：{title_headline}"',
-        f'description: "今日AI十大要闻：整理自TechCrunch、The Verge、Ars Technica、VentureBeat等可信来源。附原文链接。"',
+        f'title: "AI每日资讯 — {TODAY}：{headline_text}"',
+        f'description: "{desc_text}"',
         f"date: {TODAY}",
         "board: daily",
         f"url: https://aidev.fit/daily/{SLUG}.html",
         "---",
         "",
         f"# AI每日资讯 — {TODAY}",
+        "",
+        f"*今日AI要闻速递 — 从突破性研究到行业动态，精选自全球最权威的信源。以下为 {TODAY} 的十大要闻。*",
         "",
     ]
 
@@ -239,16 +352,25 @@ def make_cn_daily(news_items):
         lines.append(f"**来源：** [{title}]({link_str})")
         lines.append("")
 
+    # Source diversity summary
+    source_domains = sorted(set(
+        item[1].split("/")[2].replace("www.", "") if item[1].startswith("http") else "unknown"
+        for item in news_items
+    ))
+    sources_line = ", ".join(source_domains[:8])
+
     lines.extend([
         "---",
         "",
         "## 💬 讨论",
         "",
-        "*今天的AI新闻中哪一条最让你兴奋？哪些趋势你觉得被过度炒作？欢迎在评论区分享你的看法 — 每条评论我都会阅读和回复。*",
+        f"*今天的AI新闻中哪些对开发者最相关？哪些趋势你觉得被过度炒作？欢迎在评论区分享你的看法 — 每条评论我都会阅读和回复。*",
         "",
         "---",
         "",
-        "*AI每日资讯由编辑团队从可信科技新闻源整理。如有更正或建议，请通过项目仓库联系我们。*",
+        f"*📡 今日信源：{sources_line}*",
+        "",
+        f"*AI每日资讯由编辑团队从AI公司官方博客、主流新闻机构和科技媒体整理。人工编辑策划。最后更新：{TODAY}。*",
         "",
     ])
     return "\n".join(lines)

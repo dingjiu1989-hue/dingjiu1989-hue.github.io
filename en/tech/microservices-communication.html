@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Microservices Communication Patterns">
-    <meta property="og:description" content="Compare synchronous and asynchronous communication patterns for microservices, with practical implementation — comprehensive developer tutorial on SourceHub.">
+    <meta property="og:description" content="Compare synchronous and asynchronous communication patterns for microservices, with practical — comprehensive developer tutorial on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/tech/microservices-communication.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/microservices-communication.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Microservices Communication Patterns">
-    <meta name="twitter:description" content="Compare synchronous and asynchronous communication patterns for microservices, with practical implementation — comprehensive developer tutorial on SourceHub.">
+    <meta name="twitter:description" content="Compare synchronous and asynchronous communication patterns for microservices, with practical — comprehensive developer tutorial on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/microservices-communication.png">
     <meta property="article:published_time" content="2025-12-02">
     <meta property="article:modified_time" content="2026-04-03">
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/microservices-communication.webp" type="image/webp" fetchpriority="high">
-    <title>Microservices Communication Patterns — SourceHub</title>
-    <meta name="description" content="Compare synchronous and asynchronous communication patterns for microservices, with practical implementation — comprehensive developer tutorial on SourceHub.">
+    <title>Microservices Communication Patterns — AI Study Room</title>
+    <meta name="description" content="Compare synchronous and asynchronous communication patterns for microservices, with practical — comprehensive developer tutorial on AI Study Room.">
     <meta name="keywords" content="Technology, Programming, DevOps">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/microservices-communication.html">
     <link rel="canonical" href="https://aidev.fit/en/tech/microservices-communication.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/microservices-communication.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/microservices-communication-patterns-51be"
@@ -113,11 +124,15 @@
         <span class="tag-cat">DevOps</span></div>
         <h1 class="article-title">Microservices Communication Patterns</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-02">2025-12-02</time>
           <span class="meta-sep">·</span>
           <span>6 min read</span>
           <span class="meta-sep">·</span>
           <span>99 views</span>
+          <span class="meta-sep">·</span>
+          <span>1363 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/microservices-communication.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/microservices-communication.png" alt="Microservices Communication Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (14)</summary><ol><li><a href="#synchronous-vs-asynchronous-communication">Synchronous vs Asynchronous Communication</a></li><li><a href="#pattern-1-httprest">Pattern 1: HTTP/REST</a></li><li><a href="#service-a-calls-service-b-via-rest">Service A calls Service B via REST</a></li><li><a href="#pattern-2-grpc">Pattern 2: gRPC</a></li><li><a href="#client-code">Client code</a></li><li><a href="#pattern-3-message-queues">Pattern 3: Message Queues</a></li><li><a href="#order-service-publishes-an-event">Order Service publishes an event</a></li><li><a href="#notification-service-consumes-the-event">Notification Service consumes the event</a></li><li><a href="#pattern-4-event-sourcing-and-cqrs">Pattern 4: Event Sourcing and CQRS</a></li><li><a href="#event-sourced-aggregate">Event sourced aggregate</a></li><li><a href="#pattern-5-saga-pattern">Pattern 5: Saga Pattern</a></li><li><a href="#choosing-the-right-pattern">Choosing the Right Pattern</a></li><li><a href="#practical-guidance">Practical Guidance</a></li><li><a href="#summary">Summary</a></li></ol></details>
@@ -234,7 +249,8 @@
 <p>Most systems use a mix: synchronous calls for reads and queries, asynchronous events for updates and side effects. The key is ensuring that synchronous dependencies don't create a fragile system -- use timeouts, circuit breakers, and fallbacks to contain failures.</p>
 <h2>Summary</h2>
 <p>There is no single best microservices communication pattern. REST provides simplicity, gRPC delivers performance, message queues offer resilience, and event sourcing gives auditability. The right mix depends on your throughput requirements, consistency needs, and team expertise. Pattern choices should evolve with your system -- start simple with synchronous calls for straightforward operations and introduce asynchronous patterns when the coupling becomes a bottleneck.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></li><li><a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></li><li><a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -277,5 +293,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="Master Node.js streams: Readable, Writable, Transform, and Duplex. Real-world examples for file processing, HTTP streaming, CSV parsing, and backpressure handling. Avoid memory issues at scale.">
     <meta property="og:url" content="https://aidev.fit/en/tech/nodejs-streams-guide.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/nodejs-streams-guide.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Node.js, Streams, Backend, Performance">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/nodejs-streams-guide.webp" type="image/webp" fetchpriority="high">
-    <title>Node.js Streams: Complete Guide to Efficient Data Processing — SourceHub</title>
+    <title>Node.js Streams: Complete Guide to Efficient Data Processing — AI Study Room</title>
     <meta name="description" content="Master Node.js streams: Readable, Writable, Transform, and Duplex. Real-world examples for file processing, HTTP streaming, CSV parsing, and backpressure handling. Avoid memory issues at scale.">
     <meta name="keywords" content="Node.js, Streams, Backend, Performance">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/nodejs-streams-guide.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Advanced",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/nodejs-streams-guide.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/nodejs-streams-complete-guide-to-efficient-data-processing-39in"
@@ -143,11 +154,15 @@
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
         <h1 class="article-title">Node.js Streams: Complete Guide to Efficient Data Processing</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-05-20">2026-05-20</time>
           <span class="meta-sep">·</span>
           <span>3 min read</span>
           <span class="meta-sep">·</span>
           <span>5116 views</span>
+          <span class="meta-sep">·</span>
+          <span>730 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/nodejs-streams-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/nodejs-streams-guide.png" alt="Node.js Streams: Complete Guide to Efficient Data Processing" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (6)</summary><ol><li><a href="#the-four-stream-types">The Four Stream Types</a></li><li><a href="#pipeline-api-modern-recommended">Pipeline API (Modern, Recommended)</a></li><li><a href="#real-world-use-cases">Real-World Use Cases</a></li><li><a href="#1-streaming-csv-processing-avoid-oom-on-large-files">1. Streaming CSV Processing (Avoid OOM on Large Files)</a></li><li><a href="#2-http-streaming-large-responses">2. HTTP Streaming Large Responses</a></li><li><a href="#3-handling-backpressure">3. Handling Backpressure</a></li></ol></details>
@@ -231,7 +246,8 @@ readStream.on('data', (chunk) => {
 // Note: pipeline() handles this automatically — prefer it over manual piping</code></pre>
 
 <p><strong>Bottom line:</strong> Streams are essential for processing data that exceeds memory limits. The pipeline() API should be your default — it handles backpressure, error propagation, and cleanup correctly. Avoid raw .pipe() and .on('data') patterns unless you have a specific reason. See also: <a href="/en/tech/caching-strategies-web-apps.html">Caching Strategies</a> and <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a>.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/webassembly-guide.html">WebAssembly Guide 2026: Running Native Code in the Browser with Rust and WASI</a></li><li><a href="/en/tech/rest-api-best-practices.html">REST API Best Practices: The Complete Guide for 2026</a></li><li><a href="/en/tech/edge-computing-guide.html">Edge Computing Complete Guide 2026: Cloudflare Workers, Deno Deploy, and Vercel Edge</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -274,5 +290,13 @@ readStream.on('data', (chunk) => {
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

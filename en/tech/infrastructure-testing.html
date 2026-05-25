@@ -27,7 +27,7 @@
     <meta property="og:description" content="Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources, compliance validation, and CI pipeline automation.">
     <meta property="og:url" content="https://aidev.fit/en/tech/infrastructure-testing.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/infrastructure-testing.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/infrastructure-testing.webp" type="image/webp" fetchpriority="high">
-    <title>Infrastructure Testing with Terratest and Other Tools — SourceHub</title>
+    <title>Infrastructure Testing with Terratest and Other Tools — AI Study Room</title>
     <meta name="description" content="Test your infrastructure code with unit tests for Terraform, integration testing for cloud resources, compliance validation, and CI pipeline automation.">
     <meta name="keywords" content="Technology, Programming, DevOps">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/infrastructure-testing.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/infrastructure-testing.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/infrastructure-testing-with-terratest-and-other-tools-1lal"
@@ -113,11 +124,15 @@
         <span class="tag-cat">DevOps</span></div>
         <h1 class="article-title">Infrastructure Testing with Terratest and Other Tools</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-31">2025-12-31</time>
           <span class="meta-sep">·</span>
           <span>13 min read</span>
           <span class="meta-sep">·</span>
           <span>198 views</span>
+          <span class="meta-sep">·</span>
+          <span>2626 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/infrastructure-testing.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/infrastructure-testing.png" alt="Infrastructure Testing with Terratest and Other Tools" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (13)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#unit-testing-terraform-with-terratest">Unit Testing Terraform with Terratest</a></li><li><a href="#integration-testing-cloud-resources">Integration Testing Cloud Resources</a></li><li><a href="#compliance-testing-with-opa-and-sentinel">Compliance Testing with OPA and Sentinel</a></li><li><a href="#policiesterraformrestrictpublics3rego">policies/terraform/restrict_public_s3.rego</a></li><li><a href="#generate-a-plan-json">Generate a plan JSON</a></li><li><a href="#evaluate-policies">Evaluate policies</a></li><li><a href="#static-analysis-with-tflint-and-tfsec">Static Analysis with tflint and tfsec</a></li><li><a href="#githubworkflowsterraform-lintyml">.github/workflows/terraform-lint.yml</a></li><li><a href="#tflinthcl">.tflint.hcl</a></li><li><a href="#testing-terragrunt-configurations">Testing Terragrunt Configurations</a></li><li><a href="#test-validation-pipeline">Test Validation Pipeline</a></li><li><a href="#best-practices">Best Practices</a></li></ol></details>
@@ -319,7 +334,8 @@
 </li>
 </ul>
 <p>A comprehensive infrastructure testing strategy combines static analysis for fast feedback, unit tests for module validation, integration tests for real resource behavior, and policy-as-code for compliance. The upfront investment pays dividends when a test catches a misconfiguration before it reaches production.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a></li><li><a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></li><li><a href="/en/tech/testing-strategies.html">Testing Strategies</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -362,5 +378,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

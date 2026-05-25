@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Monitoring and Alerting Setup">
-    <meta property="og:description" content="Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting. — comprehensive developer tutorial on SourceHub.">
+    <meta property="og:description" content="Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting. — comprehensive developer tutorial on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/tech/monitoring-alerting-setup.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/monitoring-alerting-setup.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Monitoring and Alerting Setup">
-    <meta name="twitter:description" content="Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting. — comprehensive developer tutorial on SourceHub.">
+    <meta name="twitter:description" content="Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting. — comprehensive developer tutorial on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/monitoring-alerting-setup.png">
     <meta property="article:published_time" content="2025-12-02">
     <meta property="article:modified_time" content="2026-04-02">
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/monitoring-alerting-setup.webp" type="image/webp" fetchpriority="high">
-    <title>Monitoring and Alerting Setup — SourceHub</title>
-    <meta name="description" content="Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting. — comprehensive developer tutorial on SourceHub.">
+    <title>Monitoring and Alerting Setup — AI Study Room</title>
+    <meta name="description" content="Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting. — comprehensive developer tutorial on AI Study Room.">
     <meta name="keywords" content="Technology, Programming, DevOps">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/monitoring-alerting-setup.html">
     <link rel="canonical" href="https://aidev.fit/en/tech/monitoring-alerting-setup.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/monitoring-alerting-setup.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/monitoring-and-alerting-setup-4knk"
@@ -113,11 +124,15 @@
         <span class="tag-cat">DevOps</span></div>
         <h1 class="article-title">Monitoring and Alerting Setup</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-02">2025-12-02</time>
           <span class="meta-sep">·</span>
           <span>16 min read</span>
           <span class="meta-sep">·</span>
           <span>489 views</span>
+          <span class="meta-sep">·</span>
+          <span>3210 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/monitoring-alerting-setup.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/monitoring-alerting-setup.png" alt="Monitoring and Alerting Setup" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (15)</summary><ol><li><a href="#the-four-golden-signals">The Four Golden Signals</a></li><li><a href="#metrics-collection-stack">Metrics Collection Stack</a></li><li><a href="#prometheusyml">prometheus.yml</a></li><li><a href="#application-instrumentation">Application Instrumentation</a></li><li><a href="#centralized-logging">Centralized Logging</a></li><li><a href="#docker-compose-for-loki--promtail">docker-compose for Loki + Promtail</a></li><li><a href="#effective-alerting-rules">Effective Alerting Rules</a></li><li><a href="#prometheus-alertsyml">prometheus-alerts.yml</a></li><li><a href="#alert-design-principles">Alert Design Principles</a></li><li><a href="#notification-channels">Notification Channels</a></li><li><a href="#alertmanageryml">alertmanager.yml</a></li><li><a href="#dashboard-best-practices">Dashboard Best Practices</a></li><li><a href="#synthetic-monitoring">Synthetic Monitoring</a></li><li><a href="#blackbox-exporter-targets">blackbox-exporter targets</a></li><li><a href="#summary">Summary</a></li></ol></details>
@@ -279,7 +294,8 @@
 <p>Run synthetic checks from multiple geographic locations to detect regional outages.</p>
 <h2>Summary</h2>
 <p>A complete monitoring stack requires metrics (Prometheus), logs (Loki), dashboards (Grafana), and alerting (Alertmanager). Instrument your applications with the four golden signals, design alerts that fire on symptoms not causes, and ensure every alert has a clear path to resolution. Start simple with Prometheus and Grafana, then add log aggregation and synthetic monitoring as your infrastructure grows.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></li><li><a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a></li><li><a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -322,5 +338,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

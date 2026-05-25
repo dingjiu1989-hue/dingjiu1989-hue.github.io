@@ -27,7 +27,7 @@
     <meta property="og:description" content="Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filtering strategies, and common attack vectors.">
     <meta property="og:url" content="https://aidev.fit/en/security/dns-security.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/dns-security.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/dns-security.webp" type="image/webp" fetchpriority="high">
-    <title>DNS Security — SourceHub</title>
+    <title>DNS Security — AI Study Room</title>
     <meta name="description" content="Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filtering strategies, and common attack vectors.">
     <meta name="keywords" content="Security, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/dns-security.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/dns-security.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/dns-security-1ba0"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">DNS Security</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-09">2026-03-09</time>
           <span class="meta-sep">·</span>
           <span>7 min read</span>
           <span class="meta-sep">·</span>
           <span>108 views</span>
+          <span class="meta-sep">·</span>
+          <span>1461 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/dns-security.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/dns-security.png" alt="DNS Security" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (10)</summary><ol><li><a href="#checking-dnssec-validation-with-dig">Checking DNSSEC validation with dig</a></li><li><a href="#verify-dnssec-chain">Verify DNSSEC chain</a></li><li><a href="#check-if-a-domain-is-dnssec-signed">Check if a domain is DNSSEC-signed</a></li><li><a href="#bind-dnssec-configuration-example">BIND DNSSEC configuration example</a></li><li><a href="#nginx-doh-proxy-configuration">Nginx DoH proxy configuration</a></li><li><a href="#unbound-configuration-with-dot-forwarder">unbound configuration with DoT forwarder</a></li><li><a href="#bind-split-horizon-configuration">BIND split-horizon configuration</a></li><li><a href="#simple-dns-filter-using-dnspython">Simple DNS filter using dnspython</a></li><li><a href="#download-and-parse-threat-intelligence-feed">Download and parse threat intelligence feed</a></li><li><a href="#response-rate-limiting-in-bind">Response Rate Limiting in BIND</a></li></ol></details>
@@ -223,7 +238,8 @@
 <p>};</p>
 <p>Conclusion </p>
 <p>Securing DNS requires a layered approach: DNSSEC for integrity, encrypted transports for confidentiality, split-horizon for network segmentation, and threat intelligence for proactive blocking. Regular monitoring and logging of DNS traffic is essential for detecting anomalous behavior indicative of compromise.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/supply-chain-security.html">Supply Chain Security</a></li><li><a href="/en/security/threat-hunting.html">Threat Hunting</a></li><li><a href="/en/security/api-authentication.html">API Authentication Methods</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -266,5 +282,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

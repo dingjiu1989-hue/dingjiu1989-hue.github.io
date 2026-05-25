@@ -27,7 +27,7 @@
     <meta property="og:description" content="A comprehensive guide to database indexing covering B-tree, hash, GiST, GIN indexes, composite indexes, and query optimization.">
     <meta property="og:url" content="https://aidev.fit/en/database/database-indexing.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/database-indexing.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, SQL">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/database-indexing.webp" type="image/webp" fetchpriority="high">
-    <title>Database Indexing Strategies — SourceHub</title>
+    <title>Database Indexing Strategies — AI Study Room</title>
     <meta name="description" content="A comprehensive guide to database indexing covering B-tree, hash, GiST, GIN indexes, composite indexes, and query optimization.">
     <meta name="keywords" content="Database, SQL">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/database-indexing.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/database-indexing.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/database-indexing-strategies-36ao"
@@ -112,11 +123,15 @@
         <span class="tag-cat">SQL</span></div>
         <h1 class="article-title">Database Indexing Strategies</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-22">2025-12-22</time>
           <span class="meta-sep">·</span>
           <span>7 min read</span>
           <span class="meta-sep">·</span>
           <span>170 views</span>
+          <span class="meta-sep">·</span>
+          <span>1495 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/database-indexing.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-indexing.png" alt="Database Indexing Strategies" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -207,7 +222,8 @@
 <p>| Anti-Pattern | Why It Hurts | |--------------|--------------| | Indexing every column | Writes become slow, storage bloats | | Forgetting composite indexes | Query uses multiple single-column indexes inefficiently | | Indexing boolean columns | Very low cardinality, rarely useful | | Not indexing foreign keys | JOIN queries perform sequential scans | | Over-indexing small tables | Tables under 1000 rows are faster to scan sequentially | </p>
 <p>Summary </p>
 <p>Indexes are the most impactful performance optimization for database queries. Use B-tree indexes as the default for most workloads, composite indexes with carefully ordered columns for multi-condition queries, and specialized types (GIN, GiST, BRIN) for specific use cases. Monitor index usage and remove unused indexes to keep write performance optimal. Always run queries through EXPLAIN ANALYZE to verify the planner is using your indexes effectively.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-index-types.html">B-Tree, Hash, GiST, GIN: Index Type Selection Guide</a></li><li><a href="/en/database/database-security-best-practices.html">Database Security Hardening Guide</a></li><li><a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -247,5 +263,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

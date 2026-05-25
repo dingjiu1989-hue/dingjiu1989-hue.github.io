@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Kubernetes Pod Design: Patterns and Best Practices">
-    <meta property="og:description" content="Design effective Kubernetes pods: init containers, sidecars, probes, resource limits, and pod lifecycle — comprehensive developer tutorial on SourceHub.">
+    <meta property="og:description" content="Design effective Kubernetes pods: init containers, sidecars, probes, resource limits, and pod lifecycle — comprehensive developer tutorial on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/tech/kubernetes-pod-design.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/kubernetes-pod-design.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Kubernetes Pod Design: Patterns and Best Practices">
-    <meta name="twitter:description" content="Design effective Kubernetes pods: init containers, sidecars, probes, resource limits, and pod lifecycle — comprehensive developer tutorial on SourceHub.">
+    <meta name="twitter:description" content="Design effective Kubernetes pods: init containers, sidecars, probes, resource limits, and pod lifecycle — comprehensive developer tutorial on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/kubernetes-pod-design.png">
     <meta property="article:published_time" content="2026-01-13">
     <meta property="article:modified_time" content="2026-04-09">
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/kubernetes-pod-design.webp" type="image/webp" fetchpriority="high">
-    <title>Kubernetes Pod Design: Patterns and Best Practices — SourceHub</title>
-    <meta name="description" content="Design effective Kubernetes pods: init containers, sidecars, probes, resource limits, and pod lifecycle — comprehensive developer tutorial on SourceHub.">
+    <title>Kubernetes Pod Design: Patterns and Best Practices — AI Study Room</title>
+    <meta name="description" content="Design effective Kubernetes pods: init containers, sidecars, probes, resource limits, and pod lifecycle — comprehensive developer tutorial on AI Study Room.">
     <meta name="keywords" content="Technology, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/kubernetes-pod-design.html">
     <link rel="canonical" href="https://aidev.fit/en/tech/kubernetes-pod-design.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/kubernetes-pod-design.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/kubernetes-pod-design-patterns-and-best-practices-54aa"
@@ -124,11 +135,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Kubernetes Pod Design: Patterns and Best Practices</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-01-13">2026-01-13</time>
           <span class="meta-sep">·</span>
           <span>2 min read</span>
           <span class="meta-sep">·</span>
           <span>177 views</span>
+          <span class="meta-sep">·</span>
+          <span>474 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/kubernetes-pod-design.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/kubernetes-pod-design.png" alt="Kubernetes Pod Design: Patterns and Best Practices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#init-containers">Init Containers</a></li><li><a href="#container-probes">Container Probes</a></li><li><a href="#resource-limits">Resource Limits</a></li><li><a href="#pod-lifecycle">Pod Lifecycle</a></li><li><a href="#pod-disruption-budgets">Pod Disruption Budgets</a></li></ol></details>
@@ -147,7 +162,8 @@
 <p>Pod lifecycle hooks: PostStart (runs after container creation—not guaranteed to run before ENTRYPOINT) and PreStop (runs before container termination—use for graceful shutdown). PreStop hooks are blocking—Kubernetes waits for completion or the terminationGracePeriodSeconds timeout.</p>
 <h2>Pod Disruption Budgets</h2>
 <p>PDBs limit voluntary disruptions. Specify minAvailable or maxUnavailable to protect application availability during node maintenance or cluster upgrades. Without PDBs, cluster operations can take down all replicas simultaneously.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a></li><li><a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a></li><li><a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -190,5 +206,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

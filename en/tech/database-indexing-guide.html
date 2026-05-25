@@ -27,7 +27,7 @@
     <meta property="og:description" content="Go beyond CREATE INDEX with a deep dive into index types, when each excels, covering indexes, partial indexes, and how the query planner chooses.">
     <meta property="og:url" content="https://aidev.fit/en/tech/database-indexing-guide.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/database-indexing-guide.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Database, Indexing, PostgreSQL, Performance">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/database-indexing-guide.webp" type="image/webp" fetchpriority="high">
-    <title>Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained — SourceHub</title>
+    <title>Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained — AI Study Room</title>
     <meta name="description" content="Go beyond CREATE INDEX with a deep dive into index types, when each excels, covering indexes, partial indexes, and how the query planner chooses.">
     <meta name="keywords" content="Database, Indexing, PostgreSQL, Performance">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/database-indexing-guide.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Advanced",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/database-indexing-guide.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/database-indexing-strategies-b-tree-hash-gin-gist-and-brin-explained-4jdl"
@@ -116,11 +127,15 @@
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
         <h1 class="article-title">Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-10-18">2025-10-18</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>9981 views</span>
+          <span class="meta-sep">·</span>
+          <span>890 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/database-indexing-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/database-indexing-guide.png" alt="Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (4)</summary><ol><li><a href="#index-types-complete-reference">Index Types: Complete Reference</a></li><li><a href="#advanced-index-patterns">Advanced Index Patterns</a></li><li><a href="#how-to-verify-your-index-is-working">How to Verify Your Index Is Working</a></li><li><a href="#the-5-minute-indexing-checklist">The 5-Minute Indexing Checklist</a></li></ol></details>
@@ -182,7 +197,8 @@ ORDER BY seq_tup_read DESC;</code></pre>
 </ol>
 
 <p><strong>Bottom line:</strong> B-Tree indexes solve 90% of indexing needs — they handle =, range, sorting, and prefix matching. GIN is essential for JSONB and full-text search workloads. The most common indexing mistakes: (1) indexing columns that are never queried, (2) missing composite indexes for multi-column WHERE clauses, and (3) not using covering indexes (INCLUDE) to enable Index-Only Scans. Run the unused index query above quarterly — dropping unused indexes speeds up every INSERT/UPDATE. See also: <a href="/en/tech/postgresql-query-optimization.html">PostgreSQL Query Optimization</a> and <a href="/en/tech/database-design-fundamentals.html">Database Design Fundamentals</a>.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/database-design-fundamentals.html">Database Design Fundamentals: Normalization, Indexing, and Schema Design</a></li><li><a href="/en/tech/caching-strategies-web-apps.html">Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching</a></li><li><a href="/en/tech/rate-limiting-strategies.html">Rate Limiting Strategies for APIs: Token Bucket, Sliding Window, and Beyond</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -225,5 +241,13 @@ ORDER BY seq_tup_read DESC;</code></pre>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

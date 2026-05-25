@@ -27,7 +27,7 @@
     <meta property="og:description" content="Compare Redis and Memcached across data structures, persistence, clustering, memory efficiency, and use cases for caching, sessions, and message queuing.">
     <meta property="og:url" content="https://aidev.fit/en/compare/redis-vs-memcached.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/compare/redis-vs-memcached.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Comparisons">
     <meta property="article:tag" content="Comparison, Technology">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/compare/redis-vs-memcached.webp" type="image/webp" fetchpriority="high">
-    <title>Redis vs Memcached: Caching Solution Comparison — SourceHub</title>
+    <title>Redis vs Memcached: Caching Solution Comparison — AI Study Room</title>
     <meta name="description" content="Compare Redis and Memcached across data structures, persistence, clustering, memory efficiency, and use cases for caching, sessions, and message queuing.">
     <meta name="keywords" content="Comparison, Technology">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/compare/redis-vs-memcached.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/compare/redis-vs-memcached.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/redis-vs-memcached-caching-solution-comparison-hgj"
@@ -123,11 +134,15 @@
         <span class="tag-cat">Technology</span></div>
         <h1 class="article-title">Redis vs Memcached: Caching Solution Comparison</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-02-24">2026-02-24</time>
           <span class="meta-sep">·</span>
           <span>7 min read</span>
           <span class="meta-sep">·</span>
           <span>227 views</span>
+          <span class="meta-sep">·</span>
+          <span>1437 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/compare/redis-vs-memcached.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/compare/redis-vs-memcached.png" alt="Redis vs Memcached: Caching Solution Comparison" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (59)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#data-structure-support">Data Structure Support</a></li><li><a href="#redis-rich-data-types">Redis: Rich Data Types</a></li><li><a href="#strings-basic-key-value">Strings (basic key-value)</a></li><li><a href="#lists-ordered-collection-great-for-queues">Lists (ordered collection, great for queues)</a></li><li><a href="#sets-unique-members-set-operations">Sets (unique members, set operations)</a></li><li><a href="#returns-editor-viewer">Returns: {'editor', 'viewer'}</a></li><li><a href="#sorted-sets-leaderboards-rate-limiting">Sorted Sets (leaderboards, rate limiting)</a></li><li><a href="#hashes-objects">Hashes (objects)</a></li><li><a href="#bitmaps-analytics-feature-flags">Bitmaps (analytics, feature flags)</a></li><li><a href="#streams-event-log-message-queue">Streams (event log, message queue)</a></li><li><a href="#memcached-simple-key-value">Memcached: Simple Key-Value</a></li><li><a href="#basic-getset">Basic get/set</a></li><li><a href="#multi-get-for-batch-operations">Multi-get for batch operations</a></li><li><a href="#atomic-operations">Atomic operations</a></li><li><a href="#incrementdecrement">Increment/Decrement</a></li><li><a href="#persistence-and-durability">Persistence and Durability</a></li><li><a href="#redisconf">redis.conf</a></li><li><a href="#rdb-snapshot-point-in-time">RDB snapshot (point-in-time)</a></li><li><a href="#aof-append-only-log">AOF (append-only log)</a></li><li><a href="#hybrid-persistence-redis-7">Hybrid persistence (Redis 7+)</a></li><li><a href="#memory-efficiency-and-eviction">Memory Efficiency and Eviction</a></li><li><a href="#memcached-slab-allocation">Memcached: Slab Allocation</a></li><li><a href="#memcached-slab-configuration">Memcached slab configuration</a></li><li><a href="#memory-is-divided-into-slabs-of-various-chunk-sizes">Memory is divided into slabs of various chunk sizes</a></li><li><a href="#items-are-stored-in-the-smallest-slab-that-fits">Items are stored in the smallest slab that fits</a></li><li><a href="#stat-slabreassignrescues-0">STAT slab_reassign_rescues 0</a></li><li><a href="#stat-slabreassignevictionsnomem-0">STAT slab_reassign_evictions_nomem 0</a></li><li><a href="#stat-slabreassigninlinereclaim-0">STAT slab_reassign_inline_reclaim 0</a></li><li><a href="#stat-slabreassignbusyitems-0">STAT slab_reassign_busy_items 0</a></li><li><a href="#eviction-lru-only">Eviction: LRU only</a></li><li><a href="#redis-multiple-eviction-policies">Redis: Multiple Eviction Policies</a></li><li><a href="#redisconf-eviction-policies">redis.conf eviction policies</a></li><li><a href="#available-policies">Available policies:</a></li><li><a href="#noeviction-return-errors-on-writes-when-memory-full">noeviction: Return errors on writes when memory full</a></li><li><a href="#allkeys-lru-evict-lru-keys-most-common">allkeys-lru: Evict LRU keys (most common)</a></li><li><a href="#allkeys-lfu-evict-least-frequently-used">allkeys-lfu: Evict least frequently used</a></li><li><a href="#volatile-lru-evict-lru-among-keys-with-ttl">volatile-lru: Evict LRU among keys with TTL</a></li><li><a href="#volatile-lfu-evict-lfu-among-keys-with-ttl">volatile-lfu: Evict LFU among keys with TTL</a></li><li><a href="#allkeys-random-evict-random-keys">allkeys-random: Evict random keys</a></li><li><a href="#volatile-random-evict-random-keys-with-ttl">volatile-random: Evict random keys with TTL</a></li><li><a href="#volatile-ttl-evict-keys-with-shortest-ttl">volatile-ttl: Evict keys with shortest TTL</a></li><li><a href="#redis-50-bytes-overhead-per-key--value-size">Redis: ~50 bytes overhead per key + value size</a></li><li><a href="#example-1m-keys-with-100-byte-values">Example: 1M keys with 100-byte values</a></li><li><a href="#memcached-56-bytes-overhead-per-key--value-size--slab-fragmentation">Memcached: ~56 bytes overhead per key + value size + slab fragmentation</a></li><li><a href="#example-1m-keys-with-100-byte-values">Example: 1M keys with 100-byte values</a></li><li><a href="#clustering-and-high-availability">Clustering and High Availability</a></li><li><a href="#redis-cluster">Redis Cluster</a></li><li><a href="#redis-clusterconf-per-node">redis-cluster.conf (per node)</a></li><li><a href="#3-master-3-replica-production-minimum">3 master, 3 replica (production minimum)</a></li><li><a href="#redis-cluster-client">Redis Cluster client</a></li><li><a href="#automatic-sharding-keys-are-distributed-across-16384-slots">Automatic sharding: keys are distributed across 16384 slots</a></li><li><a href="#slot--crc16key--16384">slot = CRC16(key) % 16384</a></li><li><a href="#cross-slot-operations-require-tags">Cross-slot operations require tags</a></li><li><a href="#memcached-no-built-in-clustering">Memcached: No Built-in Clustering</a></li><li><a href="#client-side-consistent-hashing">Client-side consistent hashing</a></li><li><a href="#consistent-hashing-minimizes-cache-misses-when-nodes-change">Consistent hashing minimizes cache misses when nodes change</a></li><li><a href="#use-case-comparison">Use Case Comparison</a></li><li><a href="#when-to-use-which">When to Use Which</a></li></ol></details>
@@ -302,7 +317,8 @@
 </li>
 </ul>
 <p>For most modern applications, Redis is the better default due to its versatility. Reserve Memcached for specific high-throughput caching scenarios where Redis's overhead and feature set are unnecessary.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/compare/sqlite-vs-duckdb.html">SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics</a></li><li><a href="/en/compare/flask-vs-fastapi.html">Flask vs FastAPI: Python Web Framework Comparison 2026</a></li><li><a href="/en/compare/go-vs-rust.html">Go vs Rust: Systems Programming Comparison</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -350,5 +366,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

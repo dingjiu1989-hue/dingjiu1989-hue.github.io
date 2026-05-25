@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Terraform Infrastructure as Code">
-    <meta property="og:description" content="Master Terraform for managing cloud infrastructure with state management, modules, and production best — comprehensive developer tutorial on SourceHub.">
+    <meta property="og:description" content="Master Terraform for managing cloud infrastructure with state management, modules, and production best — comprehensive developer tutorial on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/tech/terraform-infrastructure-code.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/terraform-infrastructure-code.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Terraform Infrastructure as Code">
-    <meta name="twitter:description" content="Master Terraform for managing cloud infrastructure with state management, modules, and production best — comprehensive developer tutorial on SourceHub.">
+    <meta name="twitter:description" content="Master Terraform for managing cloud infrastructure with state management, modules, and production best — comprehensive developer tutorial on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/terraform-infrastructure-code.png">
     <meta property="article:published_time" content="2025-12-03">
     <meta property="article:modified_time" content="2026-05-03">
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/terraform-infrastructure-code.webp" type="image/webp" fetchpriority="high">
-    <title>Terraform Infrastructure as Code — SourceHub</title>
-    <meta name="description" content="Master Terraform for managing cloud infrastructure with state management, modules, and production best — comprehensive developer tutorial on SourceHub.">
+    <title>Terraform Infrastructure as Code — AI Study Room</title>
+    <meta name="description" content="Master Terraform for managing cloud infrastructure with state management, modules, and production best — comprehensive developer tutorial on AI Study Room.">
     <meta name="keywords" content="Technology, Programming, DevOps">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/terraform-infrastructure-code.html">
     <link rel="canonical" href="https://aidev.fit/en/tech/terraform-infrastructure-code.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/terraform-infrastructure-code.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/terraform-infrastructure-as-code-4ja"
@@ -113,11 +124,15 @@
         <span class="tag-cat">DevOps</span></div>
         <h1 class="article-title">Terraform Infrastructure as Code</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-03">2025-12-03</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>66 views</span>
+          <span class="meta-sep">·</span>
+          <span>1176 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/terraform-infrastructure-code.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/terraform-infrastructure-code.png" alt="Terraform Infrastructure as Code" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (26)</summary><ol><li><a href="#core-concepts">Core Concepts</a></li><li><a href="#maintf">main.tf</a></li><li><a href="#state-management">State Management</a></li><li><a href="#remote-state-backend">Remote State Backend</a></li><li><a href="#backend-configuration-during-init-terraform-init--backend-configbackendhcl">backend configuration during init: terraform init -backend-config=backend.hcl</a></li><li><a href="#state-access-for-other-configurations">State Access for Other Configurations</a></li><li><a href="#module-design">Module Design</a></li><li><a href="#modulesvpcmaintf">modules/vpc/main.tf</a></li><li><a href="#workspace-and-environment-management">Workspace and Environment Management</a></li><li><a href="#directory-structure">Directory structure:</a></li><li><a href="#terraform-plan-and-apply-workflow">Terraform Plan and Apply Workflow</a></li><li><a href="#initialize-with-backend">Initialize with backend</a></li><li><a href="#format-and-validate">Format and validate</a></li><li><a href="#plan">Plan</a></li><li><a href="#apply-typically-in-ci-with-approval-gate">Apply (typically in CI with approval gate)</a></li><li><a href="#managing-secrets">Managing Secrets</a></li><li><a href="#testing-terraform-code">Testing Terraform Code</a></li><li><a href="#terraform-plan-as-a-test">terraform plan as a Test</a></li><li><a href="#exit-code-0-no-changes">Exit code 0: no changes</a></li><li><a href="#exit-code-1-error">Exit code 1: error</a></li><li><a href="#exit-code-2-changes-needed">Exit code 2: changes needed</a></li><li><a href="#terratest-for-integration-tests">Terratest for Integration Tests</a></li><li><a href="#common-pitfalls">Common Pitfalls</a></li><li><a href="#sentinel-and-policy-as-code">Sentinel and Policy as Code</a></li><li><a href="#deny-public-s3-buckets">Deny public S3 buckets</a></li><li><a href="#summary">Summary</a></li></ol></details>
@@ -302,7 +317,8 @@
 <p>}</p>
 <h2>Summary</h2>
 <p>Terraform brings software engineering practices to infrastructure. Use remote state with locking, compose resources into modules, separate environments, and integrate planning into CI/CD. Never hardcode secrets, always validate configurations, and protect critical resources from accidental destruction. With these practices, Terraform enables infrastructure that is versioned, reviewable, reproducible, and auditable.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a></li><li><a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a></li><li><a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -345,5 +361,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

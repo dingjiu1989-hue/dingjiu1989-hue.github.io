@@ -27,7 +27,7 @@
     <meta property="og:description" content="Guide to secure session management covering JWT vs opaque tokens, rotation strategies, secure cookies, and session fixation prevention.">
     <meta property="og:url" content="https://aidev.fit/en/security/session-management.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/session-management.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/session-management.webp" type="image/webp" fetchpriority="high">
-    <title>Session Management Security — SourceHub</title>
+    <title>Session Management Security — AI Study Room</title>
     <meta name="description" content="Guide to secure session management covering JWT vs opaque tokens, rotation strategies, secure cookies, and session fixation prevention.">
     <meta name="keywords" content="Security, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/session-management.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/session-management.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/session-management-security-1k3o"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Session Management Security</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-13">2026-03-13</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>120 views</span>
+          <span class="meta-sep">·</span>
+          <span>1197 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/session-management.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/session-management.png" alt="Session Management Security" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (16)</summary><ol><li><a href="#generate-a-jwt-access-token">Generate a JWT access token</a></li><li><a href="#generate-a-refresh-token">Generate a refresh token</a></li><li><a href="#verify-and-decode">Verify and decode</a></li><li><a href="#check-if-token-is-revoked-check-jti-against-blocklist">Check if token is revoked (check jti against blocklist)</a></li><li><a href="#update-last-activity">Update last activity</a></li><li><a href="#pattern-based-revocation">Pattern-based revocation</a></li><li><a href="#refresh-token-rotation">Refresh token rotation</a></li><li><a href="#revoke-old-refresh-token">Revoke old refresh token</a></li><li><a href="#issue-new-tokens">Issue new tokens</a></li><li><a href="#modern-recommended-cookie-configuration">Modern recommended cookie configuration</a></li><li><a href="#host--prefix-for-cookie-name-ensures-path-and-no-domain-attribute">__Host- prefix for cookie name ensures path=/ and no domain attribute</a></li><li><a href="#regenerate-session-id-after-successful-login">Regenerate session ID after successful login</a></li><li><a href="#copy-relevant-data-and-invalidate-old-session">Copy relevant data and invalidate old session</a></li><li><a href="#invalidate-old-session-in-store">Invalidate old session in store</a></li><li><a href="#idle-timeout">Idle timeout</a></li><li><a href="#absolute-timeout">Absolute timeout</a></li></ol></details>
@@ -267,7 +282,8 @@
 <p>return {'expired': False}</p>
 <p>Conclusion </p>
 <p>Secure session management requires defense in depth. Use JWTs for stateless distributed systems with short expiration times, or opaque tokens for server-side control with instant revocation. Always use <code>HttpOnly</code>, <code>Secure</code>, and <code>SameSite</code> attributes on session cookies, regenerate session IDs after login, enforce idle and absolute timeouts, and implement proper token rotation for refresh flows.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/certificate-management.html">Certificate Management</a></li><li><a href="/en/security/container-image-security.html">Container Image Security</a></li><li><a href="/en/security/cors-security.html">CORS Security</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -310,5 +326,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

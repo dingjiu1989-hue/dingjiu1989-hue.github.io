@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Distributed Tracing: Deep Dive">
-    <meta property="og:description" content="Trace context propagation, sampling strategies, visualization, and implementation of distributed tracing — software architecture deep-dive on SourceHub.">
+    <meta property="og:description" content="Trace context propagation, sampling strategies, visualization, and implementation of distributed tracing — software architecture deep-dive on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/distributed-tracing-deep.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Distributed Tracing: Deep Dive">
-    <meta name="twitter:description" content="Trace context propagation, sampling strategies, visualization, and implementation of distributed tracing — software architecture deep-dive on SourceHub.">
+    <meta name="twitter:description" content="Trace context propagation, sampling strategies, visualization, and implementation of distributed tracing — software architecture deep-dive on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.png">
     <meta property="article:published_time" content="2026-04-23">
     <meta property="article:modified_time" content="2026-05-18">
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.webp" type="image/webp" fetchpriority="high">
-    <title>Distributed Tracing: Deep Dive — SourceHub</title>
-    <meta name="description" content="Trace context propagation, sampling strategies, visualization, and implementation of distributed tracing — software architecture deep-dive on SourceHub.">
+    <title>Distributed Tracing: Deep Dive — AI Study Room</title>
+    <meta name="description" content="Trace context propagation, sampling strategies, visualization, and implementation of distributed tracing — software architecture deep-dive on AI Study Room.">
     <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/distributed-tracing-deep.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/distributed-tracing-deep.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/distributed-tracing-deep.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/distributed-tracing-deep-dive-cob"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Backend</span></div>
         <h1 class="article-title">Distributed Tracing: Deep Dive</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-04-23">2026-04-23</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>205 views</span>
+          <span class="meta-sep">·</span>
+          <span>1010 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/distributed-tracing-deep.png" alt="Distributed Tracing: Deep Dive" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -131,7 +146,8 @@
 <p>Visualization tools make traces actionable. Trace views show the waterfall diagram of spans with duration bars, allowing quick identification of the slowest span. Service graphs show aggregated topology — which services call which other services, with latency and error rate annotations. Flame graphs show the call hierarchy within a single service. All visualization should support filtering by trace attributes, error status, and latency thresholds. </p>
 <p>Tracing infrastructure components collect and process trace data. OpenTelemetry SDKs instrument the application and export spans. The OpenTelemetry Collector receives spans, processes them (sampling, attribute enrichment, batching), and exports to a backend. The backend (Jaeger, Tempo, Datadog) stores and indexes spans for querying. Each component must handle backpressure gracefully — if the backend is slow, the collector should buffer and retry rather than drop spans or slow down the application. </p>
 <p>Correlation with logs completes the observability picture. Span IDs embedded in log entries enable cross-referencing: find a slow trace, view the span details, and jump to the associated logs for that span. The OpenTelemetry approach generates all signals from the same instrumentation context, ensuring that trace IDs flow naturally into log records and metric labels. This unified context is the foundation of effective observability in distributed systems.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a></li><li><a href="/en/architecture/domain-event-implementation.html">Domain Event Implementation: Publishing, Handling, and Testing</a></li><li><a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -171,5 +187,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data aggregation, protocol translation, and when to use BFF vs. API Gateway in microservices.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/backend-for-frontend.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/backend-for-frontend.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/backend-for-frontend.webp" type="image/webp" fetchpriority="high">
-    <title>Backend for Frontend (BFF) Pattern — SourceHub</title>
+    <title>Backend for Frontend (BFF) Pattern — AI Study Room</title>
     <meta name="description" content="Learn the Backend for Frontend pattern for building client-specific APIs — API composition, data aggregation, protocol translation, and when to use BFF vs. API Gateway in microservices.">
     <meta name="keywords" content="Architecture, System Design">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/backend-for-frontend.html">
@@ -64,8 +64,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/backend-for-frontend.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/backend-for-frontend-bff-pattern-5d3n"
@@ -111,11 +122,15 @@
         <span class="tag-cat">System Design</span></div>
         <h1 class="article-title">Backend for Frontend (BFF) Pattern</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-25">2025-12-25</time>
           <span class="meta-sep">·</span>
           <span>3 min read</span>
           <span class="meta-sep">·</span>
           <span>243 views</span>
+          <span class="meta-sep">·</span>
+          <span>668 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/backend-for-frontend.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/backend-for-frontend.png" alt="Backend for Frontend (BFF) Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -134,7 +149,8 @@
 <p>Implementation Considerations </p>
 <p>Each BFF should be owned by the same team that owns the frontend, fostering shared responsibility. BFFs should be thin—they orchestrate and transform, but should not contain business logic. Business logic belongs in downstream domain services. BFFs should also be independently deployable and scalable, since mobile and web traffic patterns differ significantly. </p>
 <p>In practice, the BFF pattern has become a standard recommendation for microservice architectures serving multiple client types, and is a key building block in modern platform engineering initiatives.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a></li><li><a href="/en/architecture/rate-limiting-patterns.html">Rate Limiting Patterns</a></li><li><a href="/en/architecture/rest-api-design.html">REST API Design Best Practices</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -174,5 +190,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

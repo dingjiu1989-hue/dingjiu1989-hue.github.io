@@ -27,7 +27,7 @@
     <meta property="og:description" content="The scatter-gather pattern: broadcast requests to multiple recipients and aggregate responses for comprehensive results.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/scatter-gather.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/scatter-gather.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/scatter-gather.webp" type="image/webp" fetchpriority="high">
-    <title>Scatter-Gather Pattern for Parallel Processing — SourceHub</title>
+    <title>Scatter-Gather Pattern for Parallel Processing — AI Study Room</title>
     <meta name="description" content="The scatter-gather pattern: broadcast requests to multiple recipients and aggregate responses for comprehensive results.">
     <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/scatter-gather.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/scatter-gather.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/scatter-gather-pattern-for-parallel-processing-3i43"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Backend</span></div>
         <h1 class="article-title">Scatter-Gather Pattern for Parallel Processing</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-05-09">2026-05-09</time>
           <span class="meta-sep">·</span>
           <span>2 min read</span>
           <span class="meta-sep">·</span>
           <span>88 views</span>
+          <span class="meta-sep">·</span>
+          <span>488 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/scatter-gather.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/scatter-gather.png" alt="Scatter-Gather Pattern for Parallel Processing" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#architecture">Architecture</a></li><li><a href="#scatter-mechanisms">Scatter Mechanisms</a></li><li><a href="#aggregation-strategies">Aggregation Strategies</a></li><li><a href="#when-to-use-scatter-gather">When to Use Scatter-Gather</a></li><li><a href="#performance-considerations">Performance Considerations</a></li></ol></details>
@@ -136,7 +151,8 @@
 <h2>Performance Considerations</h2>
 <p>The total latency is determined by the slowest recipient. Set timeouts to bound worst-case latency. Consider caching responses from slower recipients. Use asynchronous processing where possible to avoid blocking on aggregation.</p>
 <p>Identify and isolate slow recipients. Implement circuit breakers for recipients that consistently exceed timeouts. Consider removing persistently slow recipients from the recipient list.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/api-composition.html">API Composition and Aggregation</a></li><li><a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></li><li><a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -179,5 +195,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

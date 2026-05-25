@@ -27,7 +27,7 @@
     <meta property="og:description" content="Essential Kubernetes tools for cluster management: kubectl plugins and aliases, k9s terminal UI, Lens desktop IDE, and Kustomize for configuration management.">
     <meta property="og:url" content="https://aidev.fit/en/tools/kubernetes-tools.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tools/kubernetes-tools.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tool Recommendations">
     <meta property="article:tag" content="Technology, DevTools, Productivity">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tools/kubernetes-tools.webp" type="image/webp" fetchpriority="high">
-    <title>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize — SourceHub</title>
+    <title>Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize — AI Study Room</title>
     <meta name="description" content="Essential Kubernetes tools for cluster management: kubectl plugins and aliases, k9s terminal UI, Lens desktop IDE, and Kustomize for configuration management.">
     <meta name="keywords" content="Technology, DevTools, Productivity">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tools/kubernetes-tools.html">
@@ -64,8 +64,19 @@
       "inLanguage": "en",
       "isAccessibleForFree": true,
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tools/kubernetes-tools.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/kubernetes-tools-kubectl-plugins-k9s-lens-kustomize-1hi7"
@@ -123,11 +134,15 @@
         <span class="tag-cat">Productivity</span></div>
         <h1 class="article-title">Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-02-03">2026-02-03</time>
           <span class="meta-sep">·</span>
           <span>11 min read</span>
           <span class="meta-sep">·</span>
           <span>136 views</span>
+          <span class="meta-sep">·</span>
+          <span>2264 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tools/kubernetes-tools.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/kubernetes-tools.png" alt="Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (38)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#kubectl-plugins">kubectl Plugins</a></li><li><a href="#install-krew-plugin-manager">Install krew (plugin manager)</a></li><li><a href="#essential-plugins">Essential plugins</a></li><li><a href="#usage-examples">Usage examples</a></li><li><a href="#zshrc">~/.zshrc</a></li><li><a href="#get-pod-with-most-cpu-usage">Get pod with most CPU usage</a></li><li><a href="#watch-resources">Watch resources</a></li><li><a href="#exec-into-pod">Exec into pod</a></li><li><a href="#resource-usage">Resource usage</a></li><li><a href="#k9s">k9s</a></li><li><a href="#install-k9s">Install k9s</a></li><li><a href="#or-download-from-github-releases">Or download from GitHub releases</a></li><li><a href="#start-k9s">Start k9s</a></li><li><a href="#k9sconfigyml">~/.k9s/config.yml</a></li><li><a href="#key-bindings">Key bindings:</a></li><li><a href="#0-9-switch-namespace">0-9: Switch namespace</a></li><li><a href="#searchfilter-resources">/: Search/filter resources</a></li><li><a href="#d-describe-resource">d: Describe resource</a></li><li><a href="#l-view-logs">l: View logs</a></li><li><a href="#y-view-yaml">y: View YAML</a></li><li><a href="#e-edit-resource">e: Edit resource</a></li><li><a href="#s-shell-into-pod">s: Shell into pod</a></li><li><a href="#ctrl-d-delete-resource">ctrl-d: Delete resource</a></li><li><a href="#help">?: Help</a></li><li><a href="#k9spluginyml">~/.k9s/plugin.yml</a></li><li><a href="#restart-deployment">Restart deployment</a></li><li><a href="#open-pod-logs-in-less">Open pod logs in less</a></li><li><a href="#lens">Lens</a></li><li><a href="#install-lens-download-from-httpsk8slensdev">Install Lens (download from https://k8slens.dev)</a></li><li><a href="#or-via-package-manager">Or via package manager</a></li><li><a href="#kustomize">Kustomize</a></li><li><a href="#basekustomizationyaml">base/kustomization.yaml</a></li><li><a href="#overlaysproductionkustomizationyaml">overlays/production/kustomization.yaml</a></li><li><a href="#build-and-apply">Build and apply</a></li><li><a href="#diff-between-environments">Diff between environments</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
@@ -349,7 +364,8 @@
 <p><strong>Production operations</strong> : Combine k9s for day-to-day with kubectl plugins for advanced operations.</p>
 </li>
 </ul></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tools/git-advanced-tools.html">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</a></li><li><a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a></li><li><a href="/en/tools/networking-tools.html">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -392,5 +408,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

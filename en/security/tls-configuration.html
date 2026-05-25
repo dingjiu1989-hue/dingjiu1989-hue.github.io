@@ -27,7 +27,7 @@
     <meta property="og:description" content="Practical TLS configuration guide covering cipher suites, HSTS, certificate pinning, TLS 1.3, and testing with SSL Labs.">
     <meta property="og:url" content="https://aidev.fit/en/security/tls-configuration.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/tls-configuration.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/tls-configuration.webp" type="image/webp" fetchpriority="high">
-    <title>TLS Configuration Guide — SourceHub</title>
+    <title>TLS Configuration Guide — AI Study Room</title>
     <meta name="description" content="Practical TLS configuration guide covering cipher suites, HSTS, certificate pinning, TLS 1.3, and testing with SSL Labs.">
     <meta name="keywords" content="Security, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/tls-configuration.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/tls-configuration.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/tls-configuration-guide-2jc1"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">TLS Configuration Guide</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-15">2026-03-15</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>234 views</span>
+          <span class="meta-sep">·</span>
+          <span>957 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/tls-configuration.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/tls-configuration.png" alt="TLS Configuration Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (21)</summary><ol><li><a href="#modern-nginx-tls-configuration">Modern Nginx TLS configuration</a></li><li><a href="#modern-cipher-suite-selection">Modern cipher suite selection</a></li><li><a href="#modern-key-exchange">Modern key exchange</a></li><li><a href="#ocsp-stapling">OCSP stapling</a></li><li><a href="#never-use-these">NEVER use these</a></li><li><a href="#strict-hsts-for-production">Strict HSTS for production</a></li><li><a href="#explanation">Explanation:</a></li><li><a href="#max-age63072000---2-years-in-seconds">max-age=63072000 - 2 years in seconds</a></li><li><a href="#includesubdomains---applies-to-all-subdomains">includeSubDomains - Applies to all subdomains</a></li><li><a href="#preload---allow-inclusion-in-browser-preload-lists">preload - Allow inclusion in browser preload lists</a></li><li><a href="#flask-hsts-implementation">Flask HSTS implementation</a></li><li><a href="#tls-fingerprint-validation-alternative-to-deprecated-hpkp">TLS fingerprint validation (alternative to deprecated HPKP)</a></li><li><a href="#calculate-sha-256-fingerprint">Calculate SHA-256 fingerprint</a></li><li><a href="#usage-pin-to-expected-fingerprint">Usage: pin to expected fingerprint</a></li><li><a href="#test-tls-13-support">Test TLS 1.3 support</a></li><li><a href="#using-ssllabs-scan">Using ssllabs-scan</a></li><li><a href="#using-testsslsh">Using testssl.sh</a></li><li><a href="#quick-curl-based-check">Quick curl-based check</a></li><li><a href="#etcnginxconfdsslconf---hardened-tls">/etc/nginx/conf.d/ssl.conf - hardened TLS</a></li><li><a href="#ocsp-stapling">OCSP Stapling</a></li><li><a href="#security-headers">Security Headers</a></li></ol></details>
@@ -224,7 +239,8 @@
 <p>add_header X-Frame-Options DENY always;</p>
 <p>Conclusion </p>
 <p>A proper TLS configuration requires modern protocol versions (TLS 1.2 and 1.3), forward-secrecy cipher suites, HSTS enforcement, and regular testing with tools like SSL Labs and testssl.sh. Disable all legacy protocols and ciphers, enable OCSP stapling for performance, and consider certificate pinning for high-security APIs.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/secure-configuration.html">Secure Configuration Management</a></li><li><a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a></li><li><a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -267,5 +283,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

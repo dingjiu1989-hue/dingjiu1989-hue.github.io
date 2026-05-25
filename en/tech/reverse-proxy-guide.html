@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Reverse Proxy Guide">
-    <meta property="og:description" content="Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load balancing. — comprehensive developer tutorial on SourceHub.">
+    <meta property="og:description" content="Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load — comprehensive developer tutorial on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/tech/reverse-proxy-guide.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/reverse-proxy-guide.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Reverse Proxy Guide">
-    <meta name="twitter:description" content="Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load balancing. — comprehensive developer tutorial on SourceHub.">
+    <meta name="twitter:description" content="Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load — comprehensive developer tutorial on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/reverse-proxy-guide.png">
     <meta property="article:published_time" content="2025-12-03">
     <meta property="article:modified_time" content="2026-04-14">
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/reverse-proxy-guide.webp" type="image/webp" fetchpriority="high">
-    <title>Reverse Proxy Guide — SourceHub</title>
-    <meta name="description" content="Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load balancing. — comprehensive developer tutorial on SourceHub.">
+    <title>Reverse Proxy Guide — AI Study Room</title>
+    <meta name="description" content="Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load — comprehensive developer tutorial on AI Study Room.">
     <meta name="keywords" content="Technology, Programming, DevOps">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/reverse-proxy-guide.html">
     <link rel="canonical" href="https://aidev.fit/en/tech/reverse-proxy-guide.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/reverse-proxy-guide.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/reverse-proxy-guide-2n9g"
@@ -113,11 +124,15 @@
         <span class="tag-cat">DevOps</span></div>
         <h1 class="article-title">Reverse Proxy Guide</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-03">2025-12-03</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>208 views</span>
+          <span class="meta-sep">·</span>
+          <span>1141 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/reverse-proxy-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/reverse-proxy-guide.png" alt="Reverse Proxy Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (18)</summary><ol><li><a href="#why-use-a-reverse-proxy">Why Use a Reverse Proxy</a></li><li><a href="#nginx-reverse-proxy">Nginx Reverse Proxy</a></li><li><a href="#basic-reverse-proxy-configuration">Basic Reverse Proxy Configuration</a></li><li><a href="#websocket-support">WebSocket Support</a></li><li><a href="#load-balancing">Load Balancing</a></li><li><a href="#caching">Caching</a></li><li><a href="#caddy-reverse-proxy">Caddy Reverse Proxy</a></li><li><a href="#basic-reverse-proxy">Basic Reverse Proxy</a></li><li><a href="#caddyfile">Caddyfile</a></li><li><a href="#multiple-backends-with-load-balancing">Multiple Backends with Load Balancing</a></li><li><a href="#path-based-routing">Path-Based Routing</a></li><li><a href="#request-manipulation">Request Manipulation</a></li><li><a href="#add-security-headers">Add security headers</a></li><li><a href="#nginx-vs-caddy-comparison">Nginx vs Caddy: Comparison</a></li><li><a href="#security-headers">Security Headers</a></li><li><a href="#rate-limiting">Rate Limiting</a></li><li><a href="#health-checks">Health Checks</a></li><li><a href="#summary">Summary</a></li></ol></details>
@@ -275,7 +290,8 @@
 <p>Nginx health checks require the Plus version or are handled externally (e.g., via Docker health checks). Caddy includes built-in active health checks that mark unhealthy backends as down and stop routing traffic to them.</p>
 <h2>Summary</h2>
 <p>Nginx and Caddy are both excellent reverse proxies. Nginx offers unmatched flexibility and performance for complex deployments. Caddy provides automatic TLS and simpler configuration, making it ideal for smaller teams or simpler setups. For TLS-heavy deployments, Caddy's automatic certificates save significant operational overhead. For high-traffic scenarios requiring fine-grained control, Nginx remains the standard. Both can route traffic, terminate TLS, add security headers, and cache responses -- choose based on your team's expertise and operational complexity tolerance.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></li><li><a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a></li><li><a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -318,5 +334,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="Essential Helm ecosystem tools: Helmfile for declarative chart management, helm-docs for documentation generation, helm-secrets for encrypted values, and chart-">
     <meta property="og:url" content="https://aidev.fit/en/tools/helm-tools.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tools/helm-tools.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tool Recommendations">
     <meta property="article:tag" content="Technology, DevTools, Productivity">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tools/helm-tools.webp" type="image/webp" fetchpriority="high">
-    <title>Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing — SourceHub</title>
+    <title>Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing — AI Study Room</title>
     <meta name="description" content="Essential Helm ecosystem tools: Helmfile for declarative chart management, helm-docs for documentation generation, helm-secrets for encrypted values, and chart-">
     <meta name="keywords" content="Technology, DevTools, Productivity">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tools/helm-tools.html">
@@ -64,8 +64,19 @@
       "inLanguage": "en",
       "isAccessibleForFree": true,
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tools/helm-tools.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/helm-tools-helmfile-helm-docs-helm-secrets-chart-testing-4811"
@@ -123,11 +134,15 @@
         <span class="tag-cat">Productivity</span></div>
         <h1 class="article-title">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-02-03">2026-02-03</time>
           <span class="meta-sep">·</span>
           <span>14 min read</span>
           <span class="meta-sep">·</span>
           <span>78 views</span>
+          <span class="meta-sep">·</span>
+          <span>2823 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tools/helm-tools.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/helm-tools.png" alt="Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (46)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#helmfile">Helmfile</a></li><li><a href="#helmfileyaml">helmfile.yaml</a></li><li><a href="#core-infrastructure">Core infrastructure</a></li><li><a href="#application-charts">Application charts</a></li><li><a href="#apply-environment">Apply environment</a></li><li><a href="#diff-changes-before-applying">Diff changes before applying</a></li><li><a href="#sync-specific-releases">Sync specific releases</a></li><li><a href="#destroy-releases">Destroy releases</a></li><li><a href="#helm-docs">helm-docs</a></li><li><a href="#install">Install</a></li><li><a href="#generate-readme-for-all-charts-in-repo">Generate README for all charts in repo</a></li><li><a href="#or-for-a-specific-chart">Or for a specific chart</a></li><li><a href="#chartsmy-appvaluesyaml">charts/my-app/values.yaml</a></li><li><a href="#number-of-replicas-to-run">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Number of replicas to run</a></li><li><a href="#container-image-repository">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Container image repository</a></li><li><a href="#image-tag">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Image tag</a></li><li><a href="#image-pull-policy">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Image pull policy</a></li><li><a href="#resource-limits-and-requests">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Resource limits and requests</a></li><li><a href="#cpu-limit">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- CPU limit</a></li><li><a href="#memory-limit">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Memory limit</a></li><li><a href="#name">{{ .Name }}</a></li><li><a href="#installation">Installation</a></li><li><a href="#parameters">Parameters</a></li><li><a href="#helm-secrets">helm-secrets</a></li><li><a href="#install">Install</a></li><li><a href="#encrypt-values-file">Encrypt values file</a></li><li><a href="#decrypt-and-use-with-helm">Decrypt and use with Helm</a></li><li><a href="#with-helmfile">With helmfile</a></li><li><a href="#helmfileyaml-references-secretsencyaml">helmfile.yaml references secrets.enc.yaml</a></li><li><a href="#sopsyaml--sops-configuration">.sops.yaml — SOPS configuration</a></li><li><a href="#chart-testing-ct">Chart Testing (ct)</a></li><li><a href="#ctyaml--chart-testing-configuration">ct.yaml — chart testing configuration</a></li><li><a href="#linting-options">Linting options</a></li><li><a href="#test-installation">Test installation</a></li><li><a href="#ct-install---charts-chartsmy-app">ct install --charts charts/my-app</a></li><li><a href="#githubworkflowshelm-ciyml">.github/workflows/helm-ci.yml</a></li><li><a href="#essential-helm-cli-tips">Essential Helm CLI Tips</a></li><li><a href="#template-rendering-debugging">Template rendering (debugging)</a></li><li><a href="#dry-run-install">Dry-run install</a></li><li><a href="#rollback">Rollback</a></li><li><a href="#get-notes">Get notes</a></li><li><a href="#view-release-history">View release history</a></li><li><a href="#plugin-management">Plugin management</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
@@ -323,7 +338,8 @@
 </li>
 </ul>
 <p>The most complete Helm workflow combines all these tools: Helmfile for release management, helm-secrets for secure values, helm-docs for documentation, chart-testing for CI validation, and helm-diff for change preview.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tools/command-line-productivity.html">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a></li><li><a href="/en/tools/git-advanced-tools.html">Git Advanced Tools: Interactive Rebase, Bisect, Worktree, Submodules, and Hooks</a></li><li><a href="/en/tools/iac-tools-compared.html">IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -366,5 +382,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

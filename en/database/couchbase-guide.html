@@ -27,7 +27,7 @@
     <meta property="og:description" content="Comprehensive guide to Couchbase: N1QL query language, document data model, clustering architecture, integrated caching, and real-world use cases.">
     <meta property="og:url" content="https://aidev.fit/en/database/couchbase-guide.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/couchbase-guide.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, Backend, Data">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/couchbase-guide.webp" type="image/webp" fetchpriority="high">
-    <title>Couchbase Guide: N1QL, Document Model, Clustering, and Caching — SourceHub</title>
+    <title>Couchbase Guide: N1QL, Document Model, Clustering, and Caching — AI Study Room</title>
     <meta name="description" content="Comprehensive guide to Couchbase: N1QL query language, document data model, clustering architecture, integrated caching, and real-world use cases.">
     <meta name="keywords" content="Database, Backend, Data">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/couchbase-guide.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/couchbase-guide.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/couchbase-guide-n1ql-document-model-clustering-and-caching-4kki"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Data</span></div>
         <h1 class="article-title">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-31">2026-03-31</time>
           <span class="meta-sep">·</span>
           <span>9 min read</span>
           <span class="meta-sep">·</span>
           <span>162 views</span>
+          <span class="meta-sep">·</span>
+          <span>1866 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/couchbase-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/couchbase-guide.png" alt="Couchbase Guide: N1QL, Document Model, Clustering, and Caching" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (10)</summary><ol><li><a href="#createupdate">Create/Update</a></li><li><a href="#read">Read</a></li><li><a href="#cas-compare-and-swap-for-optimistic-locking">CAS (Compare-And-Swap) for optimistic locking</a></li><li><a href="#initialize-cluster">Initialize cluster</a></li><li><a href="#add-node">Add node</a></li><li><a href="#rebalance">Rebalance</a></li><li><a href="#set-bucket-memory-quota-important-tuning-parameter">Set bucket memory quota (important tuning parameter)</a></li><li><a href="#wait-for-replication-to-n-nodes-before-acknowledging">Wait for replication to N nodes before acknowledging</a></li><li><a href="#or-use-observe-based-durability">Or use observe-based durability</a></li><li><a href="#set-session-with-ttl-24-hours">Set session with TTL (24 hours)</a></li></ol></details>
@@ -294,7 +309,8 @@
 <p>Couchbase vs Alternatives </p>
 <p>| Feature | Couchbase | MongoDB | Redis | |---------|-----------|---------|-------| | Query language | N1QL (SQL-like) | MQL (JSON-based) | Command-based | | Caching | Built-in (cache-first) | WiredTiger cache | Pure in-memory | | Durability | Tunable (async to sync) | Journal + replication | AOF/RDB persistence | | Cross-datacenter | XDCR (bidirectional) | Replica sets | Active-Active | | Full-text search | Built-in (Bleve) | Built-in (Atlas Search) | RediSearch module | </p>
 <p>Couchbase fills a unique niche: a document database with SQL querying and built-in caching. It is a strong choice when you need low-latency document access combined with ad-hoc query capabilities, and when you want to simplify your architecture by avoiding a separate cache layer.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/stored-procedures.html">Stored Procedures vs Functions: When to Use, Languages, Security</a></li><li><a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a></li><li><a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -337,5 +353,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="Protect user privacy in AI applications with PII detection and redaction, data anonymization techniques, and local processing strategies for sensitive data.">
     <meta property="og:url" content="https://aidev.fit/en/ai/ai-data-privacy.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/ai-data-privacy.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="AI Tutorials">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/ai-data-privacy.webp" type="image/webp" fetchpriority="high">
-    <title>AI Data Privacy: PII Detection, Data Anonymization, Local Processing — SourceHub</title>
+    <title>AI Data Privacy: PII Detection, Data Anonymization, Local Processing — AI Study Room</title>
     <meta name="description" content="Protect user privacy in AI applications with PII detection and redaction, data anonymization techniques, and local processing strategies for sensitive data.">
     <meta name="keywords" content="AI, Machine Learning, LLM">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/ai-data-privacy.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/ai/ai-data-privacy.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/ai-data-privacy-pii-detection-data-anonymization-local-processing-2373"
@@ -113,11 +124,15 @@
         <span class="tag-cat">LLM</span></div>
         <h1 class="article-title">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-02-14">2026-02-14</time>
           <span class="meta-sep">·</span>
           <span>10 min read</span>
           <span class="meta-sep">·</span>
           <span>118 views</span>
+          <span class="meta-sep">·</span>
+          <span>2020 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-data-privacy.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-data-privacy.png" alt="AI Data Privacy: PII Detection, Data Anonymization, Local Processing" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (20)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#pii-detection">PII Detection</a></li><li><a href="#initialize-presidio-analyzers">Initialize Presidio analyzers</a></li><li><a href="#data-anonymization">Data Anonymization</a></li><li><a href="#tokenization-stable-pseudonym-via-hashing">Tokenization: stable pseudonym via hashing</a></li><li><a href="#differential-privacy-add-calibrated-noise">Differential privacy: add calibrated noise</a></li><li><a href="#anonymization-strategies">Anonymization Strategies</a></li><li><a href="#local-processing">Local Processing</a></li><li><a href="#load-small-models-for-local-inference">Load small models for local inference</a></li><li><a href="#all-processing-happens-locally-nothing-leaves-this-machine">All processing happens locally; nothing leaves this machine</a></li><li><a href="#hybrid-approach">Hybrid Approach</a></li><li><a href="#step-1-detect-and-redact-pii">Step 1: Detect and redact PII</a></li><li><a href="#store-pii-mapping-for-later-restoration">Store PII mapping for later restoration</a></li><li><a href="#step-2-send-redacted-text-to-llm">Step 2: Send redacted text to LLM</a></li><li><a href="#step-3-the-response-should-use-placeholders-not-real-data">Step 3: The response should use placeholders, not real data</a></li><li><a href="#no-restoration-needed-if-the-llm-just-processes-the-structure">No restoration needed if the LLM just processes the structure</a></li><li><a href="#for-cases-where-pii-must-be-restored">For cases where PII must be restored:</a></li><li><a href="#the-llm-response-should-reference-pii-generically">The LLM response should reference PII generically</a></li><li><a href="#compliance-checklist">Compliance Checklist</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -271,7 +286,8 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Maintain processing records for audits</p>
 <h2>Conclusion</h2>
 <p>AI data privacy requires proactive protection rather than reactive compliance. Detect and redact PII before any external API call. Use local models for sensitive processing when possible. Implement a hybrid approach for complex tasks: strip PII before cloud LLM inference, and never log raw user data. Regular privacy audits ensure that your protection measures stay effective as your application evolves.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/embeddings-techniques.html">Embeddings: Techniques and Best Practices</a></li><li><a href="/en/ai/fine-tuning-strategies.html">LLM Fine-Tuning Strategies and Techniques</a></li><li><a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -319,5 +335,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

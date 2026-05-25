@@ -27,7 +27,7 @@
     <meta property="og:description" content="A curated collection of 30 APIs with generous free tiers, covering weather, translation, AI, data, and images. Each entry includes usage examples and rate limits.">
     <meta property="og:url" content="https://aidev.fit/en/tools/free-api-collection.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tools/free-api-collection.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tool Recommendations">
     <meta property="article:tag" content="API, Free, Developer Resources">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tools/free-api-collection.webp" type="image/webp" fetchpriority="high">
-    <title>30 Free and Useful APIs Every Developer Should Know — SourceHub</title>
+    <title>30 Free and Useful APIs Every Developer Should Know — AI Study Room</title>
     <meta name="description" content="A curated collection of 30 APIs with generous free tiers, covering weather, translation, AI, data, and images. Each entry includes usage examples and rate limits.">
     <meta name="keywords" content="API, Free, Developer Resources">
     <link rel="alternate" hreflang="zh-CN" href="https://aidev.fit/tools/free-api-collection.html">
@@ -65,8 +65,19 @@
       "inLanguage": "en",
       "isAccessibleForFree": true,
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tools/free-api-collection.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/30-free-and-useful-apis-every-developer-should-know-2j0d"
@@ -148,11 +159,15 @@
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
         <h1 class="article-title">30 Free and Useful APIs Every Developer Should Know</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-11-30">2025-11-30</time>
           <span class="meta-sep">·</span>
           <span>3 min read</span>
           <span class="meta-sep">·</span>
           <span>5900 views</span>
+          <span class="meta-sep">·</span>
+          <span>602 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tools/free-api-collection.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/free-api-collection.png" alt="30 Free and Useful APIs Every Developer Should Know" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (8)</summary><ol><li><a href="#weather">Weather</a></li><li><a href="#ai--machine-learning">AI & Machine Learning</a></li><li><a href="#translation--text">Translation & Text</a></li><li><a href="#data--knowledge">Data & Knowledge</a></li><li><a href="#images--media">Images & Media</a></li><li><a href="#dev--infrastructure">Dev & Infrastructure</a></li><li><a href="#fun--niche">Fun & Niche</a></li><li><a href="#api-design-tips">API Design Tips</a></li></ol></details>
@@ -226,7 +241,8 @@ curl "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&curr
 <li><strong>Keep keys out of your repo</strong> — Use environment variables. Even for free API keys.</li>
 <li><strong>Fallback gracefully</strong> — Free APIs can go down. Your app should still work if the dog picture API is having a bad day.</li>
 </ul></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tools/best-programming-books.html">Best Programming Books 2026: 15 Books Every Developer Should Read</a></li><li><a href="/en/tools/best-headless-cms-platforms.html">Best Headless CMS Platforms 2026: Strapi vs Sanity vs Contentful vs Payload</a></li><li><a href="/en/tools/best-api-testing-tools.html">Best API Testing Tools 2026: Postman vs Insomnia vs Bruno vs Hurl</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -269,5 +285,13 @@ curl "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&curr
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

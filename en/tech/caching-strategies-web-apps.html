@@ -27,7 +27,7 @@
     <meta property="og:description" content="Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-while-revalidate, and cache invalidation strategies.">
     <meta property="og:url" content="https://aidev.fit/en/tech/caching-strategies-web-apps.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/caching-strategies-web-apps.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Caching, Performance, Web Dev, Backend">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/caching-strategies-web-apps.webp" type="image/webp" fetchpriority="high">
-    <title>Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching — SourceHub</title>
+    <title>Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching — AI Study Room</title>
     <meta name="description" content="Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-while-revalidate, and cache invalidation strategies.">
     <meta name="keywords" content="Caching, Performance, Web Dev, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/caching-strategies-web-apps.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Advanced",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/caching-strategies-web-apps.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/caching-strategies-for-web-apps-cdn-redis-browser-and-api-caching-hi6"
@@ -115,11 +126,15 @@
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
         <h1 class="article-title">Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-10-12">2025-10-12</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>3859 views</span>
+          <span class="meta-sep">·</span>
+          <span>815 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/caching-strategies-web-apps.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/caching-strategies-web-apps.png" alt="Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (6)</summary><ol><li><a href="#the-caching-layers">The Caching Layers</a></li><li><a href="#1-browser--cdn-cache-control-headers">1. Browser & CDN: Cache-Control Headers</a></li><li><a href="#2-application-cache-redis">2. Application Cache: Redis</a></li><li><a href="#3-nextjs-caching-app-router">3. Next.js Caching (App Router)</a></li><li><a href="#when-not-to-cache">When NOT to Cache</a></li><li><a href="#cache-invalidation-strategies">Cache Invalidation Strategies</a></li></ol></details>
@@ -219,7 +234,8 @@ export async function POST(request: Request) {
 </table>
 
 <p><strong>Bottom line:</strong> Cache at the CDN first (biggest win, simplest). Add Redis when you have specific slow queries. Use Next.js built-in caching for data fetching. Invalidate on write, not on a timer, for user-facing data. See also: <a href="/en/tools/best-web-performance-tools.html">Web Performance Tools</a> and <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">Database Comparison</a>.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/web-security-basics.html">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</a></li><li><a href="/en/tech/python-asyncio-guide.html">Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops</a></li><li><a href="/en/tech/database-indexing-guide.html">Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -262,5 +278,13 @@ export async function POST(request: Request) {
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="Compare stateful and stateless architecture patterns: trade-offs for scalability, resilience, and implementation complexity.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/stateful-vs-stateless.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/stateful-vs-stateless.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/stateful-vs-stateless.webp" type="image/webp" fetchpriority="high">
-    <title>Stateful vs Stateless Architecture Patterns — SourceHub</title>
+    <title>Stateful vs Stateless Architecture Patterns — AI Study Room</title>
     <meta name="description" content="Compare stateful and stateless architecture patterns: trade-offs for scalability, resilience, and implementation complexity.">
     <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/stateful-vs-stateless.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/stateful-vs-stateless.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/stateful-vs-stateless-architecture-patterns-37ni"
@@ -124,11 +135,15 @@
         <span class="tag-cat">Backend</span></div>
         <h1 class="article-title">Stateful vs Stateless Architecture Patterns</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-05-10">2026-05-10</time>
           <span class="meta-sep">·</span>
           <span>2 min read</span>
           <span class="meta-sep">·</span>
           <span>229 views</span>
+          <span class="meta-sep">·</span>
+          <span>534 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/stateful-vs-stateless.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/stateful-vs-stateless.png" alt="Stateful vs Stateless Architecture Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#stateless-architecture">Stateless Architecture</a></li><li><a href="#stateful-architecture">Stateful Architecture</a></li><li><a href="#externalizing-state">Externalizing State</a></li><li><a href="#session-management">Session Management</a></li><li><a href="#choosing-the-right-approach">Choosing the Right Approach</a></li></ol></details>
@@ -148,7 +163,8 @@
 <p>Stateful session management stores session data in a server-side store (Redis). Sessions can be large, can be invalidated immediately, and persist across service restarts. Requires managing the session store's availability and capacity.</p>
 <h2>Choosing the Right Approach</h2>
 <p>Start stateless. Use external state stores when state is required. Only use stateful services when the workload demands it (high-performance caching, real-time streams, database workloads). Consider the operational cost of stateful infrastructure before committing.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a></li><li><a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></li><li><a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -191,5 +207,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

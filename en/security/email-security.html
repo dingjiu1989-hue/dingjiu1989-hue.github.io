@@ -27,7 +27,7 @@
     <meta property="og:description" content="Complete guide to email security covering SPF, DKIM, DMARC configuration, email gateway deployment, phishing protection, and BEC defense.">
     <meta property="og:url" content="https://aidev.fit/en/security/email-security.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/email-security.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/email-security.webp" type="image/webp" fetchpriority="high">
-    <title>Email Security — SourceHub</title>
+    <title>Email Security — AI Study Room</title>
     <meta name="description" content="Complete guide to email security covering SPF, DKIM, DMARC configuration, email gateway deployment, phishing protection, and BEC defense.">
     <meta name="keywords" content="Security, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/email-security.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/email-security.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/email-security-2oem"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Email Security</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-10">2026-03-10</time>
           <span class="meta-sep">·</span>
           <span>9 min read</span>
           <span class="meta-sep">·</span>
           <span>103 views</span>
+          <span class="meta-sep">·</span>
+          <span>1822 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/email-security.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/email-security.png" alt="Email Security" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (8)</summary><ol><li><a href="#generate-dkim-key-pair-with-openssl">Generate DKIM key pair with OpenSSL</a></li><li><a href="#extract-public-key-for-dns-record">Extract public key for DNS record</a></li><li><a href="#sample-gateway-filtering-policy">Sample gateway filtering policy</a></li><li><a href="#simple-lookalike-domain-detection">Simple lookalike domain detection</a></li><li><a href="#check-for-typosquatting">Check for typosquatting</a></li><li><a href="#levenshtein-distance-check">Levenshtein distance check</a></li><li><a href="#homoglyph-check">Homoglyph check</a></li><li><a href="#bec-detection-rule">BEC detection rule</a></li></ol></details>
@@ -213,7 +228,8 @@
 <p>return flags</p>
 <p>Conclusion </p>
 <p>Email security requires defense in depth: authentication protocols prevent spoofing, gateways filter threats, and user awareness addresses the human element. Regular DMARC reporting analysis helps identify unauthorized sending sources and configuration issues.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/cors-security.html">CORS Security</a></li><li><a href="/en/security/iac-security.html">Infrastructure as Code Security</a></li><li><a href="/en/security/microservice-security.html">Microservice Security</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -256,5 +272,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

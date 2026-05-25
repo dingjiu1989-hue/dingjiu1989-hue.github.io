@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Git Workflows for Teams">
-    <meta property="og:description" content="A practical guide to modern Git workflows for collaborative team development in 2026. — comprehensive developer tutorial on SourceHub.">
+    <meta property="og:description" content="A practical guide to modern Git workflows for collaborative team development in 2026. — comprehensive developer tutorial on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/tech/git-workflows-2026.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/git-workflows-2026.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Git Workflows for Teams">
-    <meta name="twitter:description" content="A practical guide to modern Git workflows for collaborative team development in 2026. — comprehensive developer tutorial on SourceHub.">
+    <meta name="twitter:description" content="A practical guide to modern Git workflows for collaborative team development in 2026. — comprehensive developer tutorial on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/git-workflows-2026.png">
     <meta property="article:published_time" content="2025-12-02">
     <meta property="article:modified_time" content="2026-05-21">
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/git-workflows-2026.webp" type="image/webp" fetchpriority="high">
-    <title>Git Workflows for Teams — SourceHub</title>
-    <meta name="description" content="A practical guide to modern Git workflows for collaborative team development in 2026. — comprehensive developer tutorial on SourceHub.">
+    <title>Git Workflows for Teams — AI Study Room</title>
+    <meta name="description" content="A practical guide to modern Git workflows for collaborative team development in 2026. — comprehensive developer tutorial on AI Study Room.">
     <meta name="keywords" content="Technology, Programming, DevOps">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/git-workflows-2026.html">
     <link rel="canonical" href="https://aidev.fit/en/tech/git-workflows-2026.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/git-workflows-2026.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/git-workflows-for-teams-34mn"
@@ -113,11 +124,15 @@
         <span class="tag-cat">DevOps</span></div>
         <h1 class="article-title">Git Workflows for Teams</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-02">2025-12-02</time>
           <span class="meta-sep">·</span>
           <span>7 min read</span>
           <span class="meta-sep">·</span>
           <span>72 views</span>
+          <span class="meta-sep">·</span>
+          <span>1596 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/git-workflows-2026.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/git-workflows-2026.png" alt="Git Workflows for Teams" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (17)</summary><ol><li><a href="#trunk-based-development">Trunk-Based Development</a></li><li><a href="#github-flow">GitHub Flow</a></li><li><a href="#gitflow">GitFlow</a></li><li><a href="#pull-request-best-practices">Pull Request Best Practices</a></li><li><a href="#rebase-vs-merge">Rebase vs Merge</a></li><li><a href="#rebase-feature-branch-onto-main">Rebase feature branch onto main</a></li><li><a href="#merge-with---no-ff-for-pull-requests">Merge with --no-ff for pull requests</a></li><li><a href="#commit-message-conventions">Commit Message Conventions</a></li><li><a href="#branch-naming-conventions">Branch Naming Conventions</a></li><li><a href="#code-review-automation">Code Review Automation</a></li><li><a href="#handling-merge-conflicts">Handling Merge Conflicts</a></li><li><a href="#update-your-branch-first">Update your branch first</a></li><li><a href="#resolve-conflicts-in-your-editor">Resolve conflicts in your editor</a></li><li><a href="#git-hooks-and-automation">Git Hooks and Automation</a></li><li><a href="#binsh">!/bin/sh</a></li><li><a href="#githookspre-commit">.git/hooks/pre-commit</a></li><li><a href="#summary">Summary</a></li></ol></details>
@@ -240,7 +255,8 @@
 <p>Team-wide hooks can be managed with <code>husky</code> (JavaScript) or <code>lefthook</code> (multi-language). Server-side hooks in CI prevent non-compliant commits from being merged.</p>
 <h2>Summary</h2>
 <p>The best Git workflow is the one your team consistently follows. Start simple -- GitHub Flow or trunk-based development -- and adopt more structure only when the team's scale demands it. Combine clear branching policies, small PRs, automated checks, and Conventional Commits to build a workflow that keeps your team shipping quality code.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a></li><li><a href="/en/tech/git-workflows.html">Git Workflows</a></li><li><a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -283,5 +299,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

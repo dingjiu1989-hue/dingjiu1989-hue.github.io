@@ -27,7 +27,7 @@
     <meta property="og:description" content="Comprehensive guide to digital forensics covering evidence acquisition, analysis methodologies, chain of custody, and forensic tools.">
     <meta property="og:url" content="https://aidev.fit/en/security/forensics-guide.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/forensics-guide.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/forensics-guide.webp" type="image/webp" fetchpriority="high">
-    <title>Digital Forensics Guide — SourceHub</title>
+    <title>Digital Forensics Guide — AI Study Room</title>
     <meta name="description" content="Comprehensive guide to digital forensics covering evidence acquisition, analysis methodologies, chain of custody, and forensic tools.">
     <meta name="keywords" content="Security, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/forensics-guide.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/forensics-guide.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/digital-forensics-guide-1goc"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Digital Forensics Guide</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-10">2026-03-10</time>
           <span class="meta-sep">·</span>
           <span>12 min read</span>
           <span class="meta-sep">·</span>
           <span>193 views</span>
+          <span class="meta-sep">·</span>
+          <span>2403 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/forensics-guide.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/forensics-guide.png" alt="Digital Forensics Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (16)</summary><ol><li><a href="#memory-acquisition-with-lime-on-linux">Memory acquisition with LiME on Linux</a></li><li><a href="#memory-acquisition-with-winpmem-on-windows">Memory acquisition with WinPmem on Windows</a></li><li><a href="#capture-running-processes">Capture running processes</a></li><li><a href="#create-a-forensic-image-with-dd">Create a forensic image with dd</a></li><li><a href="#verify-image-integrity-with-hash">Verify image integrity with hash</a></li><li><a href="#logical-acquisition-with-forensic-container-affewf">Logical acquisition with forensic container (AFF/EWF)</a></li><li><a href="#autopsy-python-module-for-custom-analysis">Autopsy Python module for custom analysis</a></li><li><a href="#check-for-known-malware-hashes">Check for known malware hashes</a></li><li><a href="#ftk-command-line-ftk-imager">FTK Command Line (FTK Imager)</a></li><li><a href="#ftk-loader-for-processing">FTK Loader for processing</a></li><li><a href="#foremost-carve-files-by-headers">Foremost: carve files by headers</a></li><li><a href="#scalpel-configuration-based-carving">Scalpel: configuration-based carving</a></li><li><a href="#bulk-extractor-parallelized-data-extraction">Bulk Extractor: parallelized data extraction</a></li><li><a href="#create-body-file-with-fls">Create body file with fls</a></li><li><a href="#generate-timeline-from-sleuth-kit">Generate timeline from Sleuth Kit</a></li><li><a href="#plaso-log2timeline-for-advanced-timeline-generation">Plaso (log2timeline) for advanced timeline generation</a></li></ol></details>
@@ -210,7 +225,8 @@
 <p>psort.py -o dynamic -w /evidence/timeline.csv /evidence/timeline.plaso</p>
 <p>Conclusion </p>
 <p>Digital forensics demands rigorous methodology above all else. Preserve evidence according to the order of volatility, maintain an unbroken chain of custody, use write-blockers during acquisition, verify hashes at every stage, and document everything. The technical skills to use Autopsy, FTK, and command-line tools are essential — but they are useless without proper forensic process.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/threat-hunting.html">Threat Hunting</a></li><li><a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></li><li><a href="/en/security/certificate-management.html">Certificate Management</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -253,5 +269,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

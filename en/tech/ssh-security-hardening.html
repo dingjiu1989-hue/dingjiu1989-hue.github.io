@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="SSH Security Hardening">
-    <meta property="og:description" content="Practical steps to secure SSH access including key management, configuration hardening, and fail2ban setup. — comprehensive developer tutorial on SourceHub.">
+    <meta property="og:description" content="Practical steps to secure SSH access including key management, configuration hardening, and fail2ban setup. — comprehensive developer tutorial on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/tech/ssh-security-hardening.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/ssh-security-hardening.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="SSH Security Hardening">
-    <meta name="twitter:description" content="Practical steps to secure SSH access including key management, configuration hardening, and fail2ban setup. — comprehensive developer tutorial on SourceHub.">
+    <meta name="twitter:description" content="Practical steps to secure SSH access including key management, configuration hardening, and fail2ban setup. — comprehensive developer tutorial on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/tech/ssh-security-hardening.png">
     <meta property="article:published_time" content="2025-12-03">
     <meta property="article:modified_time" content="2026-04-15">
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/ssh-security-hardening.webp" type="image/webp" fetchpriority="high">
-    <title>SSH Security Hardening — SourceHub</title>
-    <meta name="description" content="Practical steps to secure SSH access including key management, configuration hardening, and fail2ban setup. — comprehensive developer tutorial on SourceHub.">
+    <title>SSH Security Hardening — AI Study Room</title>
+    <meta name="description" content="Practical steps to secure SSH access including key management, configuration hardening, and fail2ban setup. — comprehensive developer tutorial on AI Study Room.">
     <meta name="keywords" content="Technology, Programming, DevOps">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/ssh-security-hardening.html">
     <link rel="canonical" href="https://aidev.fit/en/tech/ssh-security-hardening.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/ssh-security-hardening.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/ssh-security-hardening-2apo"
@@ -113,11 +124,15 @@
         <span class="tag-cat">DevOps</span></div>
         <h1 class="article-title">SSH Security Hardening</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-03">2025-12-03</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>106 views</span>
+          <span class="meta-sep">·</span>
+          <span>1032 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/ssh-security-hardening.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/ssh-security-hardening.png" alt="SSH Security Hardening" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (25)</summary><ol><li><a href="#disable-password-authentication">Disable Password Authentication</a></li><li><a href="#etcsshsshdconfig">/etc/ssh/sshd_config</a></li><li><a href="#use-ed25519-keys">Use Ed25519 Keys</a></li><li><a href="#restrict-key-usage">Restrict Key Usage</a></li><li><a href="#sshauthorizedkeys">~/.ssh/authorized_keys</a></li><li><a href="#disable-root-login">Disable Root Login</a></li><li><a href="#change-the-default-port">Change the Default Port</a></li><li><a href="#use-a-strong-cipher-configuration">Use a Strong Cipher Configuration</a></li><li><a href="#ssh-timeout-and-session-limits">SSH Timeout and Session Limits</a></li><li><a href="#fail2ban-integration">Fail2Ban Integration</a></li><li><a href="#etcfail2banjaillocal">/etc/fail2ban/jail.local</a></li><li><a href="#two-factor-authentication">Two-Factor Authentication</a></li><li><a href="#etcpamdsshd">/etc/pam.d/sshd</a></li><li><a href="#etcsshsshdconfig">/etc/ssh/sshd_config</a></li><li><a href="#ssh-agent-forwarding">SSH Agent Forwarding</a></li><li><a href="#instead-of-forwarding-your-agent-through-a-chain">Instead of forwarding your agent through a chain:</a></li><li><a href="#or-use-proxyjump-in-sshconfig">Or use ProxyJump in ~/.ssh/config:</a></li><li><a href="#key-rotation">Key Rotation</a></li><li><a href="#binbash">!/bin/bash</a></li><li><a href="#audit-ssh-keyssh">audit-ssh-keys.sh</a></li><li><a href="#monitor-ssh-access">Monitor SSH Access</a></li><li><a href="#watch-auth-log-for-ssh-activity">Watch auth log for SSH activity</a></li><li><a href="#audit-currently-logged-in-users">Audit currently logged-in users</a></li><li><a href="#last-login-times-for-all-users">Last login times for all users</a></li><li><a href="#summary">Summary</a></li></ol></details>
@@ -219,7 +234,8 @@
 <p>Set up alerts for SSH logins from unexpected IP ranges or at unusual hours using log ingestion tools.</p>
 <h2>Summary</h2>
 <p>SSH hardening follows defense in depth: disable passwords, use Ed25519 keys, lock down the daemon configuration, and add Fail2Ban. For production systems, add two-factor authentication and eliminate agent forwarding in favor of jump hosts. Regularly audit authorized keys and rotate them. Most SSH compromises come from weak configurations, not zero-days -- hardening your SSH setup prevents the majority of attack vectors.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a></li><li><a href="/en/tech/monitoring-alerting-setup.html">Monitoring and Alerting Setup</a></li><li><a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -262,5 +278,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="Deploy AWS Lambda functions with infrastructure as code, local development workflows, monitoring, cold start optimization, and cost analysis strategies.">
     <meta property="og:url" content="https://aidev.fit/en/tech/serverless-framework.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/serverless-framework.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/serverless-framework.webp" type="image/webp" fetchpriority="high">
-    <title>Serverless Framework: From Zero to Production — SourceHub</title>
+    <title>Serverless Framework: From Zero to Production — AI Study Room</title>
     <meta name="description" content="Deploy AWS Lambda functions with infrastructure as code, local development workflows, monitoring, cold start optimization, and cost analysis strategies.">
     <meta name="keywords" content="Technology, Programming, DevOps">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/serverless-framework.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/serverless-framework.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/serverless-framework-from-zero-to-production-2j3h"
@@ -113,11 +124,15 @@
         <span class="tag-cat">DevOps</span></div>
         <h1 class="article-title">Serverless Framework: From Zero to Production</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-31">2025-12-31</time>
           <span class="meta-sep">·</span>
           <span>14 min read</span>
           <span class="meta-sep">·</span>
           <span>171 views</span>
+          <span class="meta-sep">·</span>
+          <span>2876 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/serverless-framework.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/serverless-framework.png" alt="Serverless Framework: From Zero to Production" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (25)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#project-setup-and-structure">Project Setup and Structure</a></li><li><a href="#serverlessyml">serverless.yml</a></li><li><a href="#infrastructure-as-code">Infrastructure as Code</a></li><li><a href="#lambda-handler-implementation">Lambda Handler Implementation</a></li><li><a href="#local-development">Local Development</a></li><li><a href="#start-local-api-gateway-emulator">Start local API Gateway emulator</a></li><li><a href="#invoke-a-function-directly">Invoke a function directly</a></li><li><a href="#run-with-warm-container-simulation">Run with warm container simulation</a></li><li><a href="#cold-start-optimization">Cold Start Optimization</a></li><li><a href="#optimize-for-cold-starts">Optimize for cold starts</a></li><li><a href="#use-aws-graviton-for-better-priceperformance">Use AWS Graviton for better price/performance</a></li><li><a href="#increase-memory-speeds-up-cpu-allocation">Increase memory speeds up CPU allocation</a></li><li><a href="#and-proportionally-reduces-cold-start-time">(and proportionally reduces cold start time)</a></li><li><a href="#provisioned-concurrency-for-critical-paths">Provisioned concurrency for critical paths</a></li><li><a href="#reserve-concurrency-to-prevent-throttling">Reserve concurrency to prevent throttling</a></li><li><a href="#monitoring-and-observability">Monitoring and Observability</a></li><li><a href="#cost-analysis">Cost Analysis</a></li><li><a href="#calculate-monthly-cost-estimate">Calculate monthly cost estimate</a></li><li><a href="#invocations-10mmonth">Invocations: 10M/month</a></li><li><a href="#avg-duration-200ms">Avg duration: 200ms</a></li><li><a href="#memory-1024mb">Memory: 1024MB</a></li><li><a href="#cost--10m--02s--1000ms--1gb--000001667gb-second">Cost = 10M * (0.2s / 1000ms) * 1GB * $0.00001667/GB-second</a></li><li><a href="#10m--02--000001667">= 10M * 0.2 * 0.00001667</a></li><li><a href="#3334month">= ~$33.34/month</a></li></ol></details>
@@ -334,7 +349,8 @@
 <p>automatic: true</p>
 <p>number: 3 # Keep only 3 latest versions</p>
 <p>For high-throughput workloads, compare Lambda cost against ECS Fargate at sustained traffic levels. Lambda often wins for variable, low-volume traffic but becomes expensive at steady-state high throughput. Use these patterns to build production-grade serverless applications that are cost-effective, observable, and performant from day one.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></li><li><a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a></li><li><a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -377,5 +393,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

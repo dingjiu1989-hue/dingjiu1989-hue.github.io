@@ -27,7 +27,7 @@
     <meta property="og:description" content="Guide to privacy engineering covering privacy by design principles, data mapping, Privacy Impact Assessments (PIA), and consent management.">
     <meta property="og:url" content="https://aidev.fit/en/security/privacy-engineering.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/privacy-engineering.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/privacy-engineering.webp" type="image/webp" fetchpriority="high">
-    <title>Privacy Engineering — SourceHub</title>
+    <title>Privacy Engineering — AI Study Room</title>
     <meta name="description" content="Guide to privacy engineering covering privacy by design principles, data mapping, Privacy Impact Assessments (PIA), and consent management.">
     <meta name="keywords" content="Security, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/privacy-engineering.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/privacy-engineering.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/privacy-engineering-1ea8"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Privacy Engineering</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-12">2026-03-12</time>
           <span class="meta-sep">·</span>
           <span>8 min read</span>
           <span class="meta-sep">·</span>
           <span>224 views</span>
+          <span class="meta-sep">·</span>
+          <span>1761 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/privacy-engineering.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/privacy-engineering.png" alt="Privacy Engineering" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (4)</summary><ol><li><a href="#privacy-by-design-data-minimization-example">Privacy by design: data minimization example</a></li><li><a href="#dont-collect-phone-address-birthday-etc">Don't collect: phone, address, birthday, etc.</a></li><li><a href="#necessity-check">Necessity check</a></li><li><a href="#minimization-check">Minimization check</a></li></ol></details>
@@ -309,7 +324,8 @@
 <p>self.storage.store(f"consent:{user_id}", record)</p>
 <p>Conclusion </p>
 <p>Privacy engineering requires embedding privacy controls into the design and architecture of systems, not layering them on afterward. Implement data mapping to understand data flows, conduct PIAs for high-risk processing, build consent management that respects user choice, and apply data minimization as a default. Privacy is a engineering discipline — treat it with the same rigor as security or performance engineering.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/malware-analysis.html">Malware Analysis Fundamentals</a></li><li><a href="/en/security/patching-strategy.html">Patching Strategy</a></li><li><a href="/en/security/secure-configuration.html">Secure Configuration Management</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -352,5 +368,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

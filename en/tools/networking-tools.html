@@ -27,7 +27,7 @@
     <meta property="og:description" content="Practical guide to essential networking tools: mtr for path analysis, iperf for bandwidth testing, dig for DNS troubleshooting, nmap for port scanning, and Wire">
     <meta property="og:url" content="https://aidev.fit/en/tools/networking-tools.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tools/networking-tools.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tool Recommendations">
     <meta property="article:tag" content="Technology, DevTools, Productivity">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tools/networking-tools.webp" type="image/webp" fetchpriority="high">
-    <title>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide — SourceHub</title>
+    <title>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide — AI Study Room</title>
     <meta name="description" content="Practical guide to essential networking tools: mtr for path analysis, iperf for bandwidth testing, dig for DNS troubleshooting, nmap for port scanning, and Wire">
     <meta name="keywords" content="Technology, DevTools, Productivity">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tools/networking-tools.html">
@@ -64,8 +64,19 @@
       "inLanguage": "en",
       "isAccessibleForFree": true,
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tools/networking-tools.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/networking-tools-mtr-iperf-dig-nmap-wireshark-practical-guide-13ec"
@@ -123,11 +134,15 @@
         <span class="tag-cat">Productivity</span></div>
         <h1 class="article-title">Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-02-05">2026-02-05</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>152 views</span>
+          <span class="meta-sep">·</span>
+          <span>1190 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tools/networking-tools.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/networking-tools.png" alt="Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (35)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#mtr-my-traceroute">mtr (My Traceroute)</a></li><li><a href="#basic-usage">Basic usage</a></li><li><a href="#useful-flags">Useful flags</a></li><li><a href="#for-continuous-monitoring">For continuous monitoring</a></li><li><a href="#iperf3">iperf3</a></li><li><a href="#start-server-on-receiving-end">Start server (on receiving end)</a></li><li><a href="#start-client-on-sending-end">Start client (on sending end)</a></li><li><a href="#advanced-tests">Advanced tests</a></li><li><a href="#bidirectional-test">Bidirectional test</a></li><li><a href="#json-output-for-automation">JSON output for automation</a></li><li><a href="#test-specific-tcp-window-size">Test specific TCP window size</a></li><li><a href="#dig-dns-lookup">dig (DNS Lookup)</a></li><li><a href="#basic-lookup">Basic lookup</a></li><li><a href="#query-specific-record-types">Query specific record types</a></li><li><a href="#advanced-queries">Advanced queries</a></li><li><a href="#batch-queries-from-file">Batch queries from file</a></li><li><a href="#check-propagation">Check propagation</a></li><li><a href="#nmap-network-mapper">nmap (Network Mapper)</a></li><li><a href="#basic-scans">Basic scans</a></li><li><a href="#port-specification">Port specification</a></li><li><a href="#service-detection">Service detection</a></li><li><a href="#network-discovery">Network discovery</a></li><li><a href="#scripts">Scripts</a></li><li><a href="#output-formats">Output formats</a></li><li><a href="#wireshark--tshark">Wireshark / tshark</a></li><li><a href="#tshark-cli-version-of-wireshark">tshark (CLI version of Wireshark)</a></li><li><a href="#capture-on-interface">Capture on interface</a></li><li><a href="#capture-filters-bpf-syntax">Capture filters (BPF syntax)</a></li><li><a href="#display-filters-more-powerful">Display filters (more powerful)</a></li><li><a href="#follow-streams">Follow streams</a></li><li><a href="#statistics">Statistics</a></li><li><a href="#save-filtered-output">Save filtered output</a></li><li><a href="#quick-reference">Quick Reference</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
@@ -271,7 +286,8 @@
 </li>
 </ul>
 <p>Mastering these five tools covers 95% of network troubleshooting scenarios. Start with mtr for path issues, dig for DNS, nmap for connectivity, iperf for performance, and Wireshark for deep protocol analysis.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tools/redis-tools.html">Redis Tools: RedisInsight, Redis CLI, Redis Commander</a></li><li><a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a></li><li><a href="/en/tools/debugging-tools.html">Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -314,5 +330,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

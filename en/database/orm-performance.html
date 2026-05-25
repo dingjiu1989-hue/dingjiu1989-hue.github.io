@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="ORM Performance">
-    <meta property="og:description" content="Optimizing ORM performance by fixing N+1 queries, managing lazy loading, and tuning query generation. — database engineering guide on SourceHub.">
+    <meta property="og:description" content="Optimizing ORM performance by fixing N+1 queries, managing lazy loading, and tuning query generation. — database engineering guide on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/database/orm-performance.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/orm-performance.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="ORM Performance">
-    <meta name="twitter:description" content="Optimizing ORM performance by fixing N+1 queries, managing lazy loading, and tuning query generation. — database engineering guide on SourceHub.">
+    <meta name="twitter:description" content="Optimizing ORM performance by fixing N+1 queries, managing lazy loading, and tuning query generation. — database engineering guide on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/database/orm-performance.png">
     <meta property="article:published_time" content="2026-05-19">
     <meta property="article:modified_time" content="2026-05-02">
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, Backend, Data">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/orm-performance.webp" type="image/webp" fetchpriority="high">
-    <title>ORM Performance — SourceHub</title>
-    <meta name="description" content="Optimizing ORM performance by fixing N+1 queries, managing lazy loading, and tuning query generation. — database engineering guide on SourceHub.">
+    <title>ORM Performance — AI Study Room</title>
+    <meta name="description" content="Optimizing ORM performance by fixing N+1 queries, managing lazy loading, and tuning query generation. — database engineering guide on AI Study Room.">
     <meta name="keywords" content="Database, Backend, Data">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/orm-performance.html">
     <link rel="canonical" href="https://aidev.fit/en/database/orm-performance.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/orm-performance.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/orm-performance-1eg"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Data</span></div>
         <h1 class="article-title">ORM Performance</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-05-19">2026-05-19</time>
           <span class="meta-sep">·</span>
           <span>2 min read</span>
           <span class="meta-sep">·</span>
           <span>199 views</span>
+          <span class="meta-sep">·</span>
+          <span>469 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/orm-performance.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/orm-performance.png" alt="ORM Performance" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (11)</summary><ol><li><a href="#n1-one-query-for-users-then-n-queries-for-orders">N+1: One query for users, then N queries for orders</a></li><li><a href="#solution-2-queries-total">Solution: 2 queries total</a></li><li><a href="#sqlalchemy-configure-relationship-loading">SQLAlchemy: configure relationship loading</a></li><li><a href="#bad-fetch-all-columns-when-only-one-is-needed">BAD: Fetch all columns when only one is needed</a></li><li><a href="#good-fetch-only-needed-columns">GOOD: Fetch only needed columns</a></li><li><a href="#bad-loading-entire-objects">BAD: Loading entire objects</a></li><li><a href="#good-bulk-update">GOOD: Bulk update</a></li><li><a href="#sqlalchemy-see-the-query">SQLAlchemy: see the query</a></li><li><a href="#select-usersid-usersemail-usersname-from-users-where-usersemail">SELECT users.id, users.email, users.name FROM users WHERE users.email = ?</a></li><li><a href="#bad-individual-inserts">BAD: Individual inserts</a></li><li><a href="#good-bulk-insert">GOOD: Bulk insert</a></li></ol></details>
@@ -174,7 +189,8 @@
 <p>session.commit() # Single batch INSERT</p>
 <p>Conclusion </p>
 <p>Profile your ORM queries in production. Fix N+1 with eager loading. Select only needed columns. Use bulk operations for batch processing. Monitor the SQL your ORM generates. The ORM is a tool, not a magic black box.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a></li><li><a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a></li><li><a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -217,5 +233,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

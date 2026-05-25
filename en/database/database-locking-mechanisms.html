@@ -27,7 +27,7 @@
     <meta property="og:description" content="Understand database locking mechanisms: shared/exclusive locks, row vs table locks, two-phase locking, and deadlock handling.">
     <meta property="og:url" content="https://aidev.fit/en/database/database-locking-mechanisms.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/database-locking-mechanisms.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, Backend, Data">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/database-locking-mechanisms.webp" type="image/webp" fetchpriority="high">
-    <title>Database Locking: Row Locks, Table Locks, and Deadlock Prevention — SourceHub</title>
+    <title>Database Locking: Row Locks, Table Locks, and Deadlock Prevention — AI Study Room</title>
     <meta name="description" content="Understand database locking mechanisms: shared/exclusive locks, row vs table locks, two-phase locking, and deadlock handling.">
     <meta name="keywords" content="Database, Backend, Data">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/database-locking-mechanisms.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/database-locking-mechanisms.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/database-locking-row-locks-table-locks-and-deadlock-prevention-21n4"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Data</span></div>
         <h1 class="article-title">Database Locking: Row Locks, Table Locks, and Deadlock Prevention</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-04-15">2026-04-15</time>
           <span class="meta-sep">·</span>
           <span>3 min read</span>
           <span class="meta-sep">·</span>
           <span>168 views</span>
+          <span class="meta-sep">·</span>
+          <span>638 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/database-locking-mechanisms.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-locking-mechanisms.png" alt="Database Locking: Row Locks, Table Locks, and Deadlock Prevention" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#lock-modes">Lock Modes</a></li><li><a href="#lock-granularity">Lock Granularity</a></li><li><a href="#deadlocks">Deadlocks</a></li><li><a href="#two-phase-locking">Two-Phase Locking</a></li><li><a href="#monitoring-locks">Monitoring Locks</a></li></ol></details>
@@ -140,7 +155,8 @@
 <p>Strict 2PL releases all locks at transaction commit time. This is the most common implementation and prevents cascading aborts. If a transaction aborts, other transactions did not read its uncommitted writes.</p>
 <h2>Monitoring Locks</h2>
 <p>Query pg_locks in PostgreSQL or performance_schema.data_locks in MySQL to see current locks. Look for transactions holding locks for extended periods. Long lock waits indicate contention. Long-running transactions are the most common cause of blocking.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-columnar-storage.html">Columnar Storage: Compression, Encoding, and Analytical Performance</a></li><li><a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a></li><li><a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -183,5 +199,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

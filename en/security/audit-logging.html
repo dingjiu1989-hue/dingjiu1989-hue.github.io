@@ -27,7 +27,7 @@
     <meta property="og:description" content="Guide to audit logging covering immutable logs, log integrity verification, centralized logging architecture, retention policies, and compliance requirements.">
     <meta property="og:url" content="https://aidev.fit/en/security/audit-logging.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/audit-logging.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/audit-logging.webp" type="image/webp" fetchpriority="high">
-    <title>Audit Logging Best Practices — SourceHub</title>
+    <title>Audit Logging Best Practices — AI Study Room</title>
     <meta name="description" content="Guide to audit logging covering immutable logs, log integrity verification, centralized logging architecture, retention policies, and compliance requirements.">
     <meta name="keywords" content="Security, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/audit-logging.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/audit-logging.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/audit-logging-best-practices-fbg"
@@ -124,11 +135,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Audit Logging Best Practices</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-06">2026-03-06</time>
           <span class="meta-sep">·</span>
           <span>15 min read</span>
           <span class="meta-sep">·</span>
           <span>173 views</span>
+          <span class="meta-sep">·</span>
+          <span>3198 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/audit-logging.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/audit-logging.png" alt="Audit Logging Best Practices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (24)</summary><ol><li><a href="#create-log-entry-with-metadata">Create log entry with metadata</a></li><li><a href="#add-hash-of-previous-entry-blockchain-style-chain">Add hash of previous entry (blockchain-style chain)</a></li><li><a href="#calculate-hash-of-this-entry">Calculate hash of this entry</a></li><li><a href="#hmac-sign-the-hash">HMAC sign the hash</a></li><li><a href="#write-to-worm-storage">Write to WORM storage</a></li><li><a href="#verify-hash">Verify hash</a></li><li><a href="#verify-chain-link">Verify chain link</a></li><li><a href="#verify-hmac">Verify HMAC</a></li><li><a href="#linux-auditd-configuration-for-immutable-logs">Linux auditd configuration for immutable logs</a></li><li><a href="#etcauditrulesdauditrules">/etc/audit/rules.d/audit.rules</a></li><li><a href="#make-audit-log-immutable">Make audit log immutable</a></li><li><a href="#log-all-administrative-commands">Log all administrative commands</a></li><li><a href="#log-critical-file-access">Log critical file access</a></li><li><a href="#log-system-calls-for-process-creation">Log system calls for process creation</a></li><li><a href="#log-network-configuration-changes">Log network configuration changes</a></li><li><a href="#set-log-file-permissions">Set log file permissions</a></li><li><a href="#forward-logs-to-remote-syslog-server-prevents-local-tampering">Forward logs to remote syslog server (prevents local tampering)</a></li><li><a href="#etcrsyslogdremote-loggingconf">/etc/rsyslog.d/remote-logging.conf</a></li><li><a href="#use-logstashfilebeat-for-shipping">Use Logstash/Filebeat for shipping</a></li><li><a href="#lokipromtail-centralized-logging-configuration">Loki/Promtail centralized logging configuration</a></li><li><a href="#automated-log-rotation-and-archival">Automated log rotation and archival</a></li><li><a href="#compress">Compress</a></li><li><a href="#upload-to-cold-storage">Upload to cold storage</a></li><li><a href="#delete-local-copy">Delete local copy</a></li></ol></details>
@@ -327,7 +342,8 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "Document data retention periods"</p>
 <p>Conclusion </p>
 <p>Audit logging is a critical security control that requires careful architectural planning. Implement chain-of-hash verification for tamper evidence, write to immutable WORM storage, centralize logs for unified access, enforce retention policies aligned with compliance requirements, and protect log integrity throughout the lifecycle. The most sophisticated detection capabilities are useless if logs can be silently altered or deleted.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/kubernetes-security.html">Kubernetes Security</a></li><li><a href="/en/security/zero-trust-implementation.html">Zero Trust Implementation</a></li><li><a href="/en/security/api-authentication.html">API Authentication Methods</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -370,5 +386,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

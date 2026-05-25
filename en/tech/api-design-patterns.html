@@ -27,7 +27,7 @@
     <meta property="og:description" content="Production-proven API patterns every backend developer needs. Rate limiting strategies, cursor vs offset pagination, idempotency keys, bulk operations, and webhook design.">
     <meta property="og:url" content="https://aidev.fit/en/tech/api-design-patterns.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/api-design-patterns.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="API, Backend, Design Patterns, Best Practices">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/api-design-patterns.webp" type="image/webp" fetchpriority="high">
-    <title>API Design Patterns: Rate Limiting, Pagination, Idempotency, and More — SourceHub</title>
+    <title>API Design Patterns: Rate Limiting, Pagination, Idempotency, and More — AI Study Room</title>
     <meta name="description" content="Production-proven API patterns every backend developer needs. Rate limiting strategies, cursor vs offset pagination, idempotency keys, bulk operations, and webhook design.">
     <meta name="keywords" content="API, Backend, Design Patterns, Best Practices">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/api-design-patterns.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/api-design-patterns.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/api-design-patterns-rate-limiting-pagination-idempotency-and-more-3fca"
@@ -116,11 +127,15 @@
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
         <h1 class="article-title">API Design Patterns: Rate Limiting, Pagination, Idempotency, and More</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-05-19">2026-05-19</time>
           <span class="meta-sep">·</span>
           <span>3 min read</span>
           <span class="meta-sep">·</span>
           <span>4609 views</span>
+          <span class="meta-sep">·</span>
+          <span>733 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/api-design-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/api-design-patterns.png" alt="API Design Patterns: Rate Limiting, Pagination, Idempotency, and More" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (6)</summary><ol><li><a href="#1-rate-limiting">1. Rate Limiting</a></li><li><a href="#2-pagination--cursor-vs-offset">2. Pagination — Cursor vs Offset</a></li><li><a href="#3-idempotency-keys">3. Idempotency Keys</a></li><li><a href="#4-bulk-operations">4. Bulk Operations</a></li><li><a href="#5-webhooks--reliable-event-delivery">5. Webhooks — Reliable Event Delivery</a></li><li><a href="#quick-checklist">Quick Checklist</a></li></ol></details>
@@ -200,7 +215,8 @@ POST /api/tags/bulk-delete
 </ul>
 
 <p><strong>Bottom line:</strong> These five patterns separate a prototype API from a production API. Implement them before you need them — retrofitting idempotency is much harder than building it in from day one. See also: <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a> and <a href="/en/compare/trpc-vs-graphql-vs-rest.html">API architecture comparison</a>.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/web-security-basics.html">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</a></li><li><a href="/en/tech/database-design-fundamentals.html">Database Design Fundamentals: Normalization, Indexing, and Schema Design</a></li><li><a href="/en/tech/caching-strategies-web-apps.html">Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -243,5 +259,13 @@ POST /api/tags/bulk-delete
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

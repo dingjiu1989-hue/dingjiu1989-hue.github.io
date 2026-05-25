@@ -27,7 +27,7 @@
     <meta property="og:description" content="Event-driven architecture with event sourcing, pub/sub, Kafka streaming, event schemas, idempotent consumers, and exactly-once processing.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/event-driven-architecture.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/event-driven-architecture.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/event-driven-architecture.webp" type="image/webp" fetchpriority="high">
-    <title>Event-Driven Architecture: Patterns and Practice — SourceHub</title>
+    <title>Event-Driven Architecture: Patterns and Practice — AI Study Room</title>
     <meta name="description" content="Event-driven architecture with event sourcing, pub/sub, Kafka streaming, event schemas, idempotent consumers, and exactly-once processing.">
     <meta name="keywords" content="Architecture, System Design">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/event-driven-architecture.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/event-driven-architecture.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/event-driven-architecture-patterns-and-practice-oh5"
@@ -112,11 +123,15 @@
         <span class="tag-cat">System Design</span></div>
         <h1 class="article-title">Event-Driven Architecture: Patterns and Practice</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-04-20">2026-04-20</time>
           <span class="meta-sep">·</span>
           <span>11 min read</span>
           <span class="meta-sep">·</span>
           <span>217 views</span>
+          <span class="meta-sep">·</span>
+          <span>2213 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/event-driven-architecture.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/event-driven-architecture.png" alt="Event-Driven Architecture: Patterns and Practice" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (25)</summary><ol><li><a href="#rebuild-current-state">Rebuild current state</a></li><li><a href="#validate-business-rules">Validate business rules</a></li><li><a href="#store-the-new-event">Store the new event</a></li><li><a href="#pubsub-using-redis">Pub/sub using Redis</a></li><li><a href="#producer">Producer</a></li><li><a href="#publish-an-event">Publish an event</a></li><li><a href="#consumer">Consumer</a></li><li><a href="#offset-is-committed-automatically-or-manually-after-processing">Offset is committed automatically or manually after processing</a></li><li><a href="#good-partition-key-customerid-entities-are-naturally-scoped">Good partition key: customer_id (entities are naturally scoped)</a></li><li><a href="#bad-partition-key-timestamp-all-events-go-to-one-partition-if-in-the-same-second">Bad partition key: timestamp (all events go to one partition if in the same second)</a></li><li><a href="#check-if-already-processed">Check if already processed</a></li><li><a href="#process-event">Process event</a></li><li><a href="#record-as-processed-in-same-transaction-if-possible">Record as processed (in same transaction if possible)</a></li><li><a href="#deterministic-setting-status-is-idempotent">Deterministic: setting status is idempotent</a></li><li><a href="#running-this-twice-sets-shipped-twice--same-result">Running this twice sets "shipped" twice — same result.</a></li><li><a href="#if-already-processed-the-where-clause-prevents-double-application">If already processed, the WHERE clause prevents double application.</a></li><li><a href="#transactional-producer">Transactional producer</a></li><li><a href="#read-from-source-topic">Read from source topic</a></li><li><a href="#process-and-produce-to-multiple-topics">Process and produce to multiple topics</a></li><li><a href="#transactional-outbox">Transactional outbox</a></li><li><a href="#1-write-to-database">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Write to database</a></li><li><a href="#2-write-event-to-outbox-table-same-database-same-transaction">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Write event to outbox table (same database, same transaction)</a></li><li><a href="#3-outbox-relay-picks-up-and-publishes">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Outbox relay picks up and publishes</a></li><li><a href="#this-runs-after-the-transaction-commits">This runs after the transaction commits</a></li><li><a href="#send-to-dlq">Send to DLQ</a></li></ol></details>
@@ -451,7 +466,8 @@
 <p>dlq.send(raw_event_content, error=str(e), original_topic="orders")</p>
 <p>Conclusion </p>
 <p>Event-driven architecture decouples services through asynchronous event communication. Event sourcing provides a complete audit trail. Pub/sub enables flexible integration. Kafka provides durable, scalable event streaming. Schema management ensures compatible evolution. Idempotent consumers and exactly-once processing guarantee reliability. Use EDA when you need real-time processing, loose coupling, and multiple consumers of the same events. Start simple with pub/sub and event streaming, and add event sourcing only when the complexity is justified by the benefits.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a></li><li><a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a></li><li><a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -494,5 +510,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="Explore rate limiting patterns for protecting APIs and services from abuse — token bucket, sliding window, distributed rate limiting with Redis, and integration with API gateway and load balancer.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/rate-limiting-patterns.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/rate-limiting-patterns.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/rate-limiting-patterns.webp" type="image/webp" fetchpriority="high">
-    <title>Rate Limiting Patterns — SourceHub</title>
+    <title>Rate Limiting Patterns — AI Study Room</title>
     <meta name="description" content="Explore rate limiting patterns for protecting APIs and services from abuse — token bucket, sliding window, distributed rate limiting with Redis, and integration with API gateway and load balancer.">
     <meta name="keywords" content="Architecture, System Design">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/rate-limiting-patterns.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/rate-limiting-patterns.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/rate-limiting-patterns-1h5d"
@@ -112,11 +123,15 @@
         <span class="tag-cat">System Design</span></div>
         <h1 class="article-title">Rate Limiting Patterns</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-29">2025-12-29</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>110 views</span>
+          <span class="meta-sep">·</span>
+          <span>1139 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/rate-limiting-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/rate-limiting-patterns.png" alt="Rate Limiting Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -208,7 +223,8 @@
 </ul>
 <p>Summary </p>
 <p>Rate limiting is essential for production APIs. Start with the token bucket algorithm for general-purpose rate limiting. Use Redis for distributed scenarios. Always return descriptive headers so clients can adjust their behavior. Monitor your rate limiting effectiveness and adjust thresholds based on real traffic patterns.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a></li><li><a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></li><li><a href="/en/architecture/ddd-strategic.html">DDD Strategic Design</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -248,5 +264,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

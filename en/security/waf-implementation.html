@@ -27,7 +27,7 @@
     <meta property="og:description" content="Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuning, and performance optimization.">
     <meta property="og:url" content="https://aidev.fit/en/security/waf-implementation.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/waf-implementation.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/waf-implementation.webp" type="image/webp" fetchpriority="high">
-    <title>Web Application Firewall Implementation — SourceHub</title>
+    <title>Web Application Firewall Implementation — AI Study Room</title>
     <meta name="description" content="Practical guide to implementing ModSecurity with OWASP CRS, custom rule writing, false positive tuning, and performance optimization.">
     <meta name="keywords" content="Security, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/waf-implementation.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/waf-implementation.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/web-application-firewall-implementation-372f"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Web Application Firewall Implementation</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-15">2026-03-15</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>123 views</span>
+          <span class="meta-sep">·</span>
+          <span>897 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/waf-implementation.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/waf-implementation.png" alt="Web Application Firewall Implementation" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (9)</summary><ol><li><a href="#basic-modsecurity-configuration">Basic ModSecurity configuration</a></li><li><a href="#include-owasp-crs">Include OWASP CRS</a></li><li><a href="#custom-rule-block-requests-with-suspicious-user-agent">Custom rule: block requests with suspicious User-Agent</a></li><li><a href="#custom-rule-protect-apicheckout-from-parameter-tampering">Custom rule: protect /api/checkout from parameter tampering</a></li><li><a href="#rate-limiting-per-ip">Rate limiting per IP</a></li><li><a href="#set-crs-paranoia-level-1-4-higher--stricter">Set CRS paranoia level (1-4, higher = stricter)</a></li><li><a href="#remove-a-specific-rule-for-a-specific-uri">Remove a specific rule for a specific URI</a></li><li><a href="#this-removes-the-rule-globally-better-to-scope-it">This removes the rule globally; better to scope it:</a></li><li><a href="#skip-waf-for-static-files">Skip WAF for static files</a></li></ol></details>
@@ -192,7 +207,8 @@
 <p>Benchmarking shows ModSecurity with CRS at paranoia level 2 adds approximately 1-3ms per request on modern hardware. Full inspection at paranoia level 4 can add 10-20ms. </p>
 <p>Conclusion </p>
 <p>A properly tuned WAF is a critical defense layer. Start with CRS in detection mode, monitor logs aggressively, tune false positives before enforcing, and always be aware of the performance trade-offs at each paranoia level.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a></li><li><a href="/en/security/waf-comparison.html">WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai</a></li><li><a href="/en/security/api-authentication.html">API Authentication Methods</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -235,5 +251,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

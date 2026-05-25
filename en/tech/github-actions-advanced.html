@@ -27,7 +27,7 @@
     <meta property="og:description" content="Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching strategies for production-grade CI/CD pipelines.">
     <meta property="og:url" content="https://aidev.fit/en/tech/github-actions-advanced.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/github-actions-advanced.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/github-actions-advanced.webp" type="image/webp" fetchpriority="high">
-    <title>Advanced GitHub Actions Workflows — SourceHub</title>
+    <title>Advanced GitHub Actions Workflows — AI Study Room</title>
     <meta name="description" content="Master reusable workflows, matrix builds, composite actions, OIDC, self-hosted runners, and caching strategies for production-grade CI/CD pipelines.">
     <meta name="keywords" content="Technology, Programming, DevOps">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/github-actions-advanced.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/github-actions-advanced.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/advanced-github-actions-workflows-57e6"
@@ -113,11 +124,15 @@
         <span class="tag-cat">DevOps</span></div>
         <h1 class="article-title">Advanced GitHub Actions Workflows</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-30">2025-12-30</time>
           <span class="meta-sep">·</span>
           <span>20 min read</span>
           <span class="meta-sep">·</span>
           <span>518 views</span>
+          <span class="meta-sep">·</span>
+          <span>4159 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/github-actions-advanced.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/github-actions-advanced.png" alt="Advanced GitHub Actions Workflows" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (12)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#reusable-workflows">Reusable Workflows</a></li><li><a href="#githubworkflowsdeploy-sharedyml">.github/workflows/deploy-shared.yml</a></li><li><a href="#actual-deployment-logic-here">Actual deployment logic here</a></li><li><a href="#githubworkflowsreleaseyml">.github/workflows/release.yml</a></li><li><a href="#matrix-builds">Matrix Builds</a></li><li><a href="#composite-actions">Composite Actions</a></li><li><a href="#githubactionssetup-node-envactionyml">.github/actions/setup-node-env/action.yml</a></li><li><a href="#oidc-and-cloud-authentication">OIDC and Cloud Authentication</a></li><li><a href="#environment-protection-rules">Environment Protection Rules</a></li><li><a href="#self-hosted-runners">Self-Hosted Runners</a></li><li><a href="#caching-strategies">Caching Strategies</a></li></ol></details>
@@ -321,7 +336,8 @@
 <p>path: packages/*/node_modules/.cache</p>
 <p>key: ${{ runner.os }}-${{ github.workflow }}-${{ hashFiles('packages/*/package-lock.json') }}</p>
 <p>These patterns form the foundation of scalable, secure GitHub Actions usage in enterprise environments. Start with reusable workflows and matrix builds, then layer on OIDC and self-hosted runners as your infrastructure grows.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a></li><li><a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></li><li><a href="/en/tech/bash-scripting-guide.html">Bash Scripting Best Practices</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -364,5 +380,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

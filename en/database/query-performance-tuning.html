@@ -27,7 +27,7 @@
     <meta property="og:description" content="Master query performance tuning with EXPLAIN ANALYZE, pg_stat_statements, slow query logs, and database profiling tools.">
     <meta property="og:url" content="https://aidev.fit/en/database/query-performance-tuning.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/query-performance-tuning.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, SQL">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/query-performance-tuning.webp" type="image/webp" fetchpriority="high">
-    <title>Query Performance Tuning Tools — SourceHub</title>
+    <title>Query Performance Tuning Tools — AI Study Room</title>
     <meta name="description" content="Master query performance tuning with EXPLAIN ANALYZE, pg_stat_statements, slow query logs, and database profiling tools.">
     <meta name="keywords" content="Database, SQL">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/query-performance-tuning.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/query-performance-tuning.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/query-performance-tuning-tools-4o28"
@@ -112,11 +123,15 @@
         <span class="tag-cat">SQL</span></div>
         <h1 class="article-title">Query Performance Tuning Tools</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-23">2025-12-23</time>
           <span class="meta-sep">·</span>
           <span>11 min read</span>
           <span class="meta-sep">·</span>
           <span>137 views</span>
+          <span class="meta-sep">·</span>
+          <span>2249 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/query-performance-tuning.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/query-performance-tuning.png" alt="Query Performance Tuning Tools" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (13)</summary><ol><li><a href="#postgresqlconf">postgresql.conf</a></li><li><a href="#mycnf">my.cnf</a></li><li><a href="#analyze-slow-query-log">Analyze slow query log</a></li><li><a href="#output-includes">Output includes:</a></li><li><a href="#worst-queries-by-execution-time">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Worst queries by execution time</a></li><li><a href="#worst-queries-by-frequency">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Worst queries by frequency</a></li><li><a href="#query-patterns-and-response-time-distribution">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Query patterns and response time distribution</a></li><li><a href="#generate-a-visual-report-with-pgbadger">Generate a visual report with pgBadger</a></li><li><a href="#analyze-the-report-for">Analyze the report for:</a></li><li><a href="#most-time-consuming-queries">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Most time-consuming queries</a></li><li><a href="#temporary-file-usage">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Temporary file usage</a></li><li><a href="#lock-wait-events">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Lock wait events</a></li><li><a href="#checkpoint-frequency">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Checkpoint frequency</a></li></ol></details>
@@ -310,7 +325,8 @@
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Identify bottlenecks</strong> : Use pg_stat_statements, slow query log, or APM tools. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Analyze specific queries</strong> : Run EXPLAIN ANALYZE with buffers enabled. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Create targeted index</strong> : Add or modify indexes based on the plan. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Test the fix</strong> : Re-run the query and compare execution time. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Verify no regressions</strong> : Check that other queries did not get slower. 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Repeat</strong> : Continue with the next slowest query. </p>
 <p>Summary </p>
 <p>Performance tuning is a data-driven process. Start with the slow query log or pg_stat_statements to identify problematic queries, use EXPLAIN ANALYZE to understand execution plans, monitor locks and contention, and track index usage. Focus on queries with the highest total execution time, not just the slowest individual queries. Always measure before and after making changes, and automate monitoring with tools like pgBadger for continuous visibility into query performance.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/vector-search-optimization.html">Vector Search Optimization Techniques</a></li><li><a href="/en/database/columnar-databases.html">Columnar Databases: When and How to Use Them</a></li><li><a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -353,5 +369,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

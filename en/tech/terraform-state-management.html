@@ -27,7 +27,7 @@
     <meta property="og:description" content="Deep dive into Terraform state management covering remote backends, state locking, migration strategies, workspace patterns, and Terragrunt for multi-environment orchestration.">
     <meta property="og:url" content="https://aidev.fit/en/tech/terraform-state-management.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/terraform-state-management.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/terraform-state-management.webp" type="image/webp" fetchpriority="high">
-    <title>Terraform State Management: Remote State, Locking, Migration, and Workspaces — SourceHub</title>
+    <title>Terraform State Management: Remote State, Locking, Migration, and Workspaces — AI Study Room</title>
     <meta name="description" content="Deep dive into Terraform state management covering remote backends, state locking, migration strategies, workspace patterns, and Terragrunt for multi-environment orchestration.">
     <meta name="keywords" content="Technology, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/terraform-state-management.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/terraform-state-management.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/terraform-state-management-remote-state-locking-migration-and-workspaces-56dh"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Terraform State Management: Remote State, Locking, Migration, and Workspaces</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-01-04">2026-01-04</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>116 views</span>
+          <span class="meta-sep">·</span>
+          <span>1061 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/terraform-state-management.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/terraform-state-management.png" alt="Terraform State Management: Remote State, Locking, Migration, and Workspaces" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (9)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#the-purpose-of-terraform-state">The Purpose of Terraform State</a></li><li><a href="#remote-state-backends">Remote State Backends</a></li><li><a href="#state-locking-and-consistency">State Locking and Consistency</a></li><li><a href="#state-migration">State Migration</a></li><li><a href="#workspaces-and-environment-management">Workspaces and Environment Management</a></li><li><a href="#terragrunt-orchestrating-multiple-terraform-configurations">Terragrunt: Orchestrating Multiple Terraform Configurations</a></li><li><a href="#terragrunthcl">terragrunt.hcl</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -168,7 +183,8 @@
 <p>Terragrunt's <code>dependency</code> blocks define module relationships, ensuring infrastructure is provisioned in the correct order. Its <code>run-all</code> command applies changes across multiple directories, simplifying large-scale deployments.</p>
 <h2>Conclusion</h2>
 <p>Terraform state management is not optional infrastructure — it is the foundation of reliable IaC. Remote backends with locking, careful migration procedures, and appropriate environment isolation are essential practices. For organizations managing many environments, Terragrunt provides the abstraction needed to maintain DRY configuration while enforcing consistency across deployments.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a></li><li><a href="/en/tech/configuration-management.html">Configuration Management</a></li><li><a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -211,5 +227,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

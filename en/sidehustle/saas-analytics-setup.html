@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="SaaS Analytics Setup: PostHog, Plausible, and Umami">
-    <meta property="og:description" content="Set up SaaS analytics with self-hosted PostHog, Plausible, and Umami for product insights and user — developer business and monetization guide on SourceHub.">
+    <meta property="og:description" content="Set up SaaS analytics with self-hosted PostHog, Plausible, and Umami for product insights and — developer business and monetization guide on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/sidehustle/saas-analytics-setup.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/sidehustle/saas-analytics-setup.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="SaaS Analytics Setup: PostHog, Plausible, and Umami">
-    <meta name="twitter:description" content="Set up SaaS analytics with self-hosted PostHog, Plausible, and Umami for product insights and user — developer business and monetization guide on SourceHub.">
+    <meta name="twitter:description" content="Set up SaaS analytics with self-hosted PostHog, Plausible, and Umami for product insights and — developer business and monetization guide on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/sidehustle/saas-analytics-setup.png">
     <meta property="article:published_time" content="2026-01-22">
     <meta property="article:modified_time" content="2026-05-01">
     <meta property="article:section" content="Side Hustle">
     <meta property="article:tag" content="Business, Startup, SaaS">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/sidehustle/saas-analytics-setup.webp" type="image/webp" fetchpriority="high">
-    <title>SaaS Analytics Setup: PostHog, Plausible, and Umami — SourceHub</title>
-    <meta name="description" content="Set up SaaS analytics with self-hosted PostHog, Plausible, and Umami for product insights and user — developer business and monetization guide on SourceHub.">
+    <title>SaaS Analytics Setup: PostHog, Plausible, and Umami — AI Study Room</title>
+    <meta name="description" content="Set up SaaS analytics with self-hosted PostHog, Plausible, and Umami for product insights and — developer business and monetization guide on AI Study Room.">
     <meta name="keywords" content="Business, Startup, SaaS">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/sidehustle/saas-analytics-setup.html">
     <link rel="canonical" href="https://aidev.fit/en/sidehustle/saas-analytics-setup.html">
@@ -64,8 +64,19 @@
       "inLanguage": "en",
       "isAccessibleForFree": true,
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/sidehustle/saas-analytics-setup.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/saas-analytics-setup-posthog-plausible-and-umami-16oe"
@@ -112,11 +123,15 @@
         <span class="tag-cat">SaaS</span></div>
         <h1 class="article-title">SaaS Analytics Setup: PostHog, Plausible, and Umami</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-01-22">2026-01-22</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>93 views</span>
+          <span class="meta-sep">·</span>
+          <span>992 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/sidehustle/saas-analytics-setup.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/sidehustle/saas-analytics-setup.png" alt="SaaS Analytics Setup: PostHog, Plausible, and Umami" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#saas-analytics-setup-privacy-focused-tools">SaaS Analytics Setup: Privacy-Focused Tools</a></li><li><a href="#posthog-product-analytics-platform">PostHog: Product Analytics Platform</a></li><li><a href="#plausible-lightweight-web-analytics">Plausible: Lightweight Web Analytics</a></li><li><a href="#umami-self-hosted-alternative">Umami: Self-Hosted Alternative</a></li><li><a href="#choosing-the-right-tool">Choosing the Right Tool</a></li><li><a href="#implementation-guide">Implementation Guide</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -146,7 +161,8 @@
 <p>Use a data layer to separate analytics instrumentation from your application code. A single <code>analytics.track(event, properties)</code> function routes events to all configured providers. This prevents vendor lock-in and simplifies adding new analytics tools.</p>
 <h2>Conclusion</h2>
 <p>Privacy-focused analytics tools provide better performance, data ownership, and actionable insights than traditional analytics. PostHog serves comprehensive product analytics needs, Plausible provides lightweight web analytics, and Umami offers simple self-hosted analytics. Choose based on your data needs, privacy requirements, and infrastructure preferences.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/sidehustle/billing-integration.html">Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning</a></li><li><a href="/en/sidehustle/customer-acquisition.html">Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG</a></li><li><a href="/en/sidehustle/dev-community-building.html">Developer Community Building: Discord, GitHub, Documentation, and Open Source</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -189,5 +205,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

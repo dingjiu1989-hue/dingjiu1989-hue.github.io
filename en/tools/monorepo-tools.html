@@ -27,7 +27,7 @@
     <meta property="og:description" content="Compare monorepo build tools: Turborepo for caching, Nx for extensibility, Bazel for correctness at scale, and Lage for simplicity with Microsoft-ecosystem inte">
     <meta property="og:url" content="https://aidev.fit/en/tools/monorepo-tools.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tools/monorepo-tools.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tool Recommendations">
     <meta property="article:tag" content="Technology, DevTools, Productivity">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tools/monorepo-tools.webp" type="image/webp" fetchpriority="high">
-    <title>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison — SourceHub</title>
+    <title>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison — AI Study Room</title>
     <meta name="description" content="Compare monorepo build tools: Turborepo for caching, Nx for extensibility, Bazel for correctness at scale, and Lage for simplicity with Microsoft-ecosystem inte">
     <meta name="keywords" content="Technology, DevTools, Productivity">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tools/monorepo-tools.html">
@@ -64,8 +64,19 @@
       "inLanguage": "en",
       "isAccessibleForFree": true,
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tools/monorepo-tools.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/monorepo-tools-turborepo-nx-bazel-lage-comparison-bk"
@@ -123,11 +134,15 @@
         <span class="tag-cat">Productivity</span></div>
         <h1 class="article-title">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-02-05">2026-02-05</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>135 views</span>
+          <span class="meta-sep">·</span>
+          <span>1014 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tools/monorepo-tools.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tools/monorepo-tools.png" alt="Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (27)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#turborepo">Turborepo</a></li><li><a href="#run-builds-across-all-workspaces-in-dependency-order">Run builds across all workspaces in dependency order</a></li><li><a href="#run-with-parallel-execution-default-cpu-count">Run with parallel execution (default: CPU count)</a></li><li><a href="#dry-run-to-see-execution-plan">Dry run to see execution plan</a></li><li><a href="#filter-specific-packages">Filter specific packages</a></li><li><a href="#remote-caching-vercel">Remote caching (Vercel)</a></li><li><a href="#nx">Nx</a></li><li><a href="#create-an-nx-workspace">Create an Nx workspace</a></li><li><a href="#add-capabilities">Add capabilities</a></li><li><a href="#run-tasks">Run tasks</a></li><li><a href="#visualize-dependencies">Visualize dependencies</a></li><li><a href="#affected-commands-only-run-what-changed">Affected commands (only run what changed)</a></li><li><a href="#bazel">Bazel</a></li><li><a href="#buildbazel">BUILD.bazel</a></li><li><a href="#pythonbinary-for-a-data-science-component">python_binary for a data science component</a></li><li><a href="#build-with-caching-and-parallelism">Build with caching and parallelism</a></li><li><a href="#run-tests">Run tests</a></li><li><a href="#query-dependency-graph">Query dependency graph</a></li><li><a href="#remote-execution">Remote execution</a></li><li><a href="#lage">Lage</a></li><li><a href="#run-the-build-pipeline">Run the build pipeline</a></li><li><a href="#run-tests">Run tests</a></li><li><a href="#show-execution-plan">Show execution plan</a></li><li><a href="#filter-by-scope">Filter by scope</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#recommendations">Recommendations</a></li></ol></details>
@@ -294,7 +309,8 @@
 <p><strong>Simple needs within Microsoft ecosystem</strong> : Lage for lightweight orchestration.</p>
 </li>
 </ul></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tools/documentation-tools.html">Documentation Tools for Developers 2026</a></li><li><a href="/en/tools/dotfile-management.html">Dotfile Management: chezmoi, GNU Stow, Bare Git Repos</a></li><li><a href="/en/tools/helm-tools.html">Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -337,5 +353,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

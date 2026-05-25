@@ -27,7 +27,7 @@
     <meta property="og:description" content="Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, and best practices for PostgreSQL and MySQL.">
     <meta property="og:url" content="https://aidev.fit/en/database/read-replicas.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/read-replicas.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, Backend, Data">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/read-replicas.webp" type="image/webp" fetchpriority="high">
-    <title>Read Replicas: Scaling Reads, Replication Lag, and Failover — SourceHub</title>
+    <title>Read Replicas: Scaling Reads, Replication Lag, and Failover — AI Study Room</title>
     <meta name="description" content="Learn how to scale database reads with read replicas. Understand replication lag, load balancing strategies, failover, and best practices for PostgreSQL and MySQL.">
     <meta name="keywords" content="Database, Backend, Data">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/read-replicas.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/read-replicas.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/read-replicas-scaling-reads-replication-lag-and-failover-3dm1"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Data</span></div>
         <h1 class="article-title">Read Replicas: Scaling Reads, Replication Lag, and Failover</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-04-08">2026-04-08</time>
           <span class="meta-sep">·</span>
           <span>6 min read</span>
           <span class="meta-sep">·</span>
           <span>158 views</span>
+          <span class="meta-sep">·</span>
+          <span>1206 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/read-replicas.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/read-replicas.png" alt="Read Replicas: Scaling Reads, Replication Lag, and Failover" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (8)</summary><ol><li><a href="#postgresqlconf">postgresql.conf</a></li><li><a href="#mycnf-on-primary">my.cnf on primary</a></li><li><a href="#proxysql-query-rules">ProxySQL query rules</a></li><li><a href="#orders-updated-within-the-last-30-seconds-route-to-primary">Orders updated within the last 30 seconds route to primary</a></li><li><a href="#query-primary">Query primary</a></li><li><a href="#promote-a-replica-to-primary">Promote a replica to primary</a></li><li><a href="#after-promotion-rewind-old-primary-to-follow-new-primary">After promotion, rewind old primary to follow new primary</a></li><li><a href="#patroniyml">patroni.yml</a></li></ol></details>
@@ -272,7 +287,8 @@
 </li>
 </ul>
 <p>Read replicas are a proven, low-risk approach to scaling reads. Combined with proper monitoring and automated failover, they form the foundation of a highly available database architecture.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/multi-master-replication.html">Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR</a></li><li><a href="/en/database/query-optimization-explain.html">EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types</a></li><li><a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -315,5 +331,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="Comprehensive guide to geospatial data with PostGIS. Understand geometry vs geography types, spatial indexes, and common geospatial queries for GIS applications.">
     <meta property="og:url" content="https://aidev.fit/en/database/geospatial-data.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/geospatial-data.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, Backend, Data">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/geospatial-data.webp" type="image/webp" fetchpriority="high">
-    <title>Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries — SourceHub</title>
+    <title>Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries — AI Study Room</title>
     <meta name="description" content="Comprehensive guide to geospatial data with PostGIS. Understand geometry vs geography types, spatial indexes, and common geospatial queries for GIS applications.">
     <meta name="keywords" content="Database, Backend, Data">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/geospatial-data.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/geospatial-data.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/geospatial-data-with-postgis-geometry-geography-and-spatial-queries-106f"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Data</span></div>
         <h1 class="article-title">Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-04-06">2026-04-06</time>
           <span class="meta-sep">·</span>
           <span>7 min read</span>
           <span class="meta-sep">·</span>
           <span>170 views</span>
+          <span class="meta-sep">·</span>
+          <span>1463 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/geospatial-data.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/geospatial-data.png" alt="Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -254,7 +269,8 @@
 <p>PostGIS vs Other Tools </p>
 <p>| Feature | PostGIS | MongoDB 2dsphere | Elasticsearch Geo | |---------|---------|------------------|-------------------| | CRS support | 5000+ SRIDs | WGS84 only | WGS84 only | | Spatial functions | 400+ | 30+ | 20+ | | Topology | Full support | None | None | | Raster support | Yes (PostGIS raster) | No | No | | Routing | pgRouting extension | No | No | </p>
 <p>PostGIS is the most complete open-source spatial database. Use it as the system of record for all geospatial data, and only replicate to specialized tools (map rendering engines, geocoding services) when necessary. Start with geography types for global datasets and geometry for local projections, and always verify index usage in EXPLAIN plans for spatial queries.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></li><li><a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a></li><li><a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -294,5 +310,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="Practical guide to bug bounty hunting including vulnerability discovery techniques, report writing, and platform-specific tips for HackerOne and Bugcrowd.">
     <meta property="og:url" content="https://aidev.fit/en/security/bug-bounty.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/bug-bounty.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/bug-bounty.webp" type="image/webp" fetchpriority="high">
-    <title>Bug Bounty Guide — SourceHub</title>
+    <title>Bug Bounty Guide — AI Study Room</title>
     <meta name="description" content="Practical guide to bug bounty hunting including vulnerability discovery techniques, report writing, and platform-specific tips for HackerOne and Bugcrowd.">
     <meta name="keywords" content="Security, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/bug-bounty.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/bug-bounty.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/bug-bounty-guide-4ilm"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Bug Bounty Guide</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-06">2026-03-06</time>
           <span class="meta-sep">·</span>
           <span>9 min read</span>
           <span class="meta-sep">·</span>
           <span>86 views</span>
+          <span class="meta-sep">·</span>
+          <span>1804 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/bug-bounty.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/bug-bounty.png" alt="Bug Bounty Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (14)</summary><ol><li><a href="#subdomain-enumeration-pipeline">Subdomain enumeration pipeline</a></li><li><a href="#deduplicate-and-validate">Deduplicate and validate</a></li><li><a href="#technology-fingerprinting-on-discovered-subdomains">Technology fingerprinting on discovered subdomains</a></li><li><a href="#directory-brute-forcing">Directory brute-forcing</a></li><li><a href="#automated-xss-discovery">Automated XSS discovery</a></li><li><a href="#extract-all-forms">Extract all forms</a></li><li><a href="#parse-and-find-all-forms-inputs">Parse and find all forms, inputs</a></li><li><a href="#check-if-payload-rendered-unescaped">Check if payload rendered unescaped</a></li><li><a href="#idor-detection-with-autorize-burp-extension">IDOR detection with autorize (Burp extension)</a></li><li><a href="#1-record-authenticated-session-cookies">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Record authenticated session cookies</a></li><li><a href="#2-enable-autorize-with-victim-cookie">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Enable Autorize with victim cookie</a></li><li><a href="#3-browse-application-as-victim-user">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Browse application as victim user</a></li><li><a href="#4-monitor-bapp-output-for-unauthorized-access">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Monitor BApp output for unauthorized access</a></li><li><a href="#graphql-introspection-for-api-discovery">GraphQL introspection for API discovery</a></li></ol></details>
@@ -241,7 +256,8 @@
 </ul>
 <p>Conclusion </p>
 <p>Bug bounty hunting combines technical skill, persistence, and communication. Invest heavily in recon, develop methodical testing approaches, write clear reports with reproducible steps, and understand each platform's nuances. Quality always outperforms quantity — one critical bug well reported is worth more than dozens of duplicates.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/dns-security.html">DNS Security</a></li><li><a href="/en/security/input-validation.html">Input Validation Deep Dive</a></li><li><a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -284,5 +300,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

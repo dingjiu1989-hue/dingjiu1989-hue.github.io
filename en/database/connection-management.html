@@ -27,7 +27,7 @@
     <meta property="og:description" content="Comprehensive guide to database connection management. Learn connection pooling with PgBouncer and HikariCP, max connections tuning, and best practices.">
     <meta property="og:url" content="https://aidev.fit/en/database/connection-management.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/connection-management.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, Backend, Data">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/connection-management.webp" type="image/webp" fetchpriority="high">
-    <title>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning — SourceHub</title>
+    <title>Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning — AI Study Room</title>
     <meta name="description" content="Comprehensive guide to database connection management. Learn connection pooling with PgBouncer and HikariCP, max connections tuning, and best practices.">
     <meta name="keywords" content="Database, Backend, Data">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/connection-management.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/connection-management.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/database-connection-management-pooling-pgbouncer-hikaricp-and-tuning-211n"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Data</span></div>
         <h1 class="article-title">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-31">2026-03-31</time>
           <span class="meta-sep">·</span>
           <span>9 min read</span>
           <span class="meta-sep">·</span>
           <span>220 views</span>
+          <span class="meta-sep">·</span>
+          <span>1923 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/connection-management.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/connection-management.png" alt="Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (8)</summary><ol><li><a href="#pgbouncerini">pgbouncer.ini</a></li><li><a href="#connect-to-pgbouncer-port-not-postgresql-directly">Connect to PgBouncer port, not PostgreSQL directly</a></li><li><a href="#applicationyml">application.yml</a></li><li><a href="#postgresqlconf">postgresql.conf</a></li><li><a href="#bad-connection-not-returned-to-pool">Bad: connection not returned to pool</a></li><li><a href="#missing-poolputconnconn">Missing: pool.putconn(conn)</a></li><li><a href="#good-always-use-tryfinally-or-context-manager">Good: always use try/finally or context manager</a></li><li><a href="#after-5-seconds-throw-sqlexception-instead-of-hanging-forever">After 5 seconds, throw SQLException instead of hanging forever</a></li></ol></details>
@@ -277,7 +292,8 @@
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Set pool size to CPU*2+disk</strong> : More connections than that add latency, not throughput. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Use PgBouncer in transaction mode</strong> : Best balance for web applications. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Set connection timeouts</strong> : Prevent applications from hanging indefinitely. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Monitor and alert</strong> on connection utilization trends. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Use prepared statement caching</strong> : Reduces query planning overhead. 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Separate pools for OLTP and analytics</strong> : Different pool sizes and timeout values for different workloads. </p>
 <p>Connection management is invisible when done correctly and catastrophic when done poorly. A well-tuned pool keeps your database responsive under load and your applications free from connection-related failures.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a></li><li><a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a></li><li><a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -320,5 +336,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

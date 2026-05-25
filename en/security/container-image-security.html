@@ -27,7 +27,7 @@
     <meta property="og:description" content="Guide to container image security covering minimal base images, multi-stage builds, vulnerability scanning, and image signing with cosign.">
     <meta property="og:url" content="https://aidev.fit/en/security/container-image-security.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/container-image-security.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/container-image-security.webp" type="image/webp" fetchpriority="high">
-    <title>Container Image Security — SourceHub</title>
+    <title>Container Image Security — AI Study Room</title>
     <meta name="description" content="Guide to container image security covering minimal base images, multi-stage builds, vulnerability scanning, and image signing with cosign.">
     <meta name="keywords" content="Security, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/container-image-security.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/container-image-security.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/container-image-security-11pn"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Container Image Security</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-09">2026-03-09</time>
           <span class="meta-sep">·</span>
           <span>9 min read</span>
           <span class="meta-sep">·</span>
           <span>106 views</span>
+          <span class="meta-sep">·</span>
+          <span>1998 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/container-image-security.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/container-image-security.png" alt="Container Image Security" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (35)</summary><ol><li><a href="#bad-large-base-image-with-unnecessary-tools">BAD: Large base image with unnecessary tools</a></li><li><a href="#good-minimal-python-image">GOOD: Minimal Python image</a></li><li><a href="#better-distroless--no-package-manager-no-shell">BETTER: Distroless — no package manager, no shell</a></li><li><a href="#best-scratch--completely-empty-only-your-binary">BEST: Scratch — completely empty, only your binary</a></li><li><a href="#compare-image-sizes">Compare image sizes</a></li><li><a href="#ubuntu2204--77mb">ubuntu:22.04 → 77MB</a></li><li><a href="#python312--10gb">python:3.12 → 1.0GB</a></li><li><a href="#python312-slim--130mb">python:3.12-slim → 130MB</a></li><li><a href="#gcriodistrolesspython3--90mb">gcr.io/distroless/python3 → 90MB</a></li><li><a href="#install-only-whats-needed">Install only what's needed</a></li><li><a href="#remove-apk-cache">Remove apk cache</a></li><li><a href="#build-stage">Build stage</a></li><li><a href="#runtime-stage">Runtime stage</a></li><li><a href="#python-multi-stage-build">Python multi-stage build</a></li><li><a href="#trivy-scan">Trivy scan</a></li><li><a href="#trivy-with-output-formats">Trivy with output formats</a></li><li><a href="#grype-scan">Grype scan</a></li><li><a href="#scan-within-cicd">Scan within CI/CD</a></li><li><a href="#trivyignore--exclude-accepted-risks">.trivyignore — exclude accepted risks</a></li><li><a href="#cve-2023-1234--accepted-no-exploit-available-will-fix-in-next-sprint">CVE-2023-1234 — accepted, no exploit available, will fix in next sprint</a></li><li><a href="#cve-2023-5678--false-positive-in-this-context">CVE-2023-5678 — false positive in this context</a></li><li><a href="#cicd-gate-block-deployment-if-critical-vulnerabilities-found">CI/CD gate: block deployment if critical vulnerabilities found</a></li><li><a href="#generate-a-key-pair">Generate a key pair</a></li><li><a href="#sign-an-image">Sign an image</a></li><li><a href="#verify-a-signed-image">Verify a signed image</a></li><li><a href="#keyless-signing-with-oidc">Keyless signing with OIDC</a></li><li><a href="#verify-keyless-signature">Verify keyless signature</a></li><li><a href="#kubernetes-admission-controller-to-verify-signatures">Kubernetes admission controller to verify signatures</a></li><li><a href="#enforce-in-cicd-pipeline">Enforce in CI/CD pipeline</a></li><li><a href="#1-use-specific-tags-never-latest">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use specific tags, never :latest</a></li><li><a href="#2-run-as-non-root">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Run as non-root</a></li><li><a href="#3-set-filesystem-read-only">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set filesystem read-only</a></li><li><a href="#4-drop-capabilities-in-composekubernetes">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Drop capabilities in compose/kubernetes</a></li><li><a href="#in-kubernetes">In Kubernetes:</a></li><li><a href="#5-healthcheck-instruction">5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. HEALTHCHECK instruction</a></li></ol></details>
@@ -265,7 +280,8 @@
 <p>HEALTHCHECK --interval=30s --timeout=3s CMD curl -f http://localhost:8080/health || exit 1</p>
 <p>Conclusion </p>
 <p>Container image security requires a layered approach: use minimal base images and distroless for production, implement multi-stage builds to exclude build tools, scan images for vulnerabilities before every deployment, and sign images with cosign to ensure integrity. Enforce these practices in CI/CD pipelines and at admission control time in Kubernetes.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/cors-security.html">CORS Security</a></li><li><a href="/en/security/data-masking.html">Data Masking and Redaction</a></li><li><a href="/en/security/email-security.html">Email Security</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -308,5 +324,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

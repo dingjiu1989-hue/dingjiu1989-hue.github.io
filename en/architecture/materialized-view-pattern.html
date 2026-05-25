@@ -27,7 +27,7 @@
     <meta property="og:description" content="Explore the materialized view pattern: read models, caching strategies, CQRS integration, and efficient cross-service queries">
     <meta property="og:url" content="https://aidev.fit/en/architecture/materialized-view-pattern.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/materialized-view-pattern.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/materialized-view-pattern.webp" type="image/webp" fetchpriority="high">
-    <title>Materialized View Pattern — SourceHub</title>
+    <title>Materialized View Pattern — AI Study Room</title>
     <meta name="description" content="Explore the materialized view pattern: read models, caching strategies, CQRS integration, and efficient cross-service queries">
     <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/materialized-view-pattern.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/materialized-view-pattern.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/materialized-view-pattern-3c81"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Backend</span></div>
         <h1 class="article-title">Materialized View Pattern</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-05-04">2026-05-04</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>224 views</span>
+          <span class="meta-sep">·</span>
+          <span>1005 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/materialized-view-pattern.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/materialized-view-pattern.png" alt="Materialized View Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -144,7 +159,8 @@
 <p>When to Use </p>
 <p>Materialized views are appropriate when queries require data from multiple services, queries are read-heavy and performance-critical, source data changes are manageable (not too frequent), and eventual consistency is acceptable. They are not suitable for queries where the source data changes extremely frequently (thousands of changes per second for the same entity) or where strong consistency is required between reads and writes. </p>
 <p>A pragmatic approach is to use materialized views for the most important queries and API composition for less critical ones. Start with the patterns that cause the most performance problems and add materialized views incrementally. Over time, the system develops a set of optimized read models that cover the most common and performance-critical queries.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></li><li><a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></li><li><a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -184,5 +200,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

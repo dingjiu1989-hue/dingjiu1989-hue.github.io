@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Transactional Outbox Pattern">
-    <meta property="og:description" content="Reliable event publishing with transactional outbox: implementations, idempotent consumers, dual-write — software architecture deep-dive on SourceHub.">
+    <meta property="og:description" content="Reliable event publishing with transactional outbox: implementations, idempotent consumers, dual-write — software architecture deep-dive on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/transaction-outbox.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/transaction-outbox.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Transactional Outbox Pattern">
-    <meta name="twitter:description" content="Reliable event publishing with transactional outbox: implementations, idempotent consumers, dual-write — software architecture deep-dive on SourceHub.">
+    <meta name="twitter:description" content="Reliable event publishing with transactional outbox: implementations, idempotent consumers, dual-write — software architecture deep-dive on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/architecture/transaction-outbox.png">
     <meta property="article:published_time" content="2026-05-12">
     <meta property="article:modified_time" content="2026-05-19">
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/transaction-outbox.webp" type="image/webp" fetchpriority="high">
-    <title>Transactional Outbox Pattern — SourceHub</title>
-    <meta name="description" content="Reliable event publishing with transactional outbox: implementations, idempotent consumers, dual-write — software architecture deep-dive on SourceHub.">
+    <title>Transactional Outbox Pattern — AI Study Room</title>
+    <meta name="description" content="Reliable event publishing with transactional outbox: implementations, idempotent consumers, dual-write — software architecture deep-dive on AI Study Room.">
     <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/transaction-outbox.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/transaction-outbox.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/transaction-outbox.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/transactional-outbox-pattern-bl3"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Backend</span></div>
         <h1 class="article-title">Transactional Outbox Pattern</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>398 views</span>
+          <span class="meta-sep">·</span>
+          <span>837 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/transaction-outbox.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/transaction-outbox.png" alt="Transactional Outbox Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -131,7 +146,8 @@
 <p>The outbox pattern also solves the inverse dual-write problem: reliably consuming messages. The transactional inbox pattern stores incoming messages in an inbox table within the consumer's database. The consumer processes the message and marks it as processed, all within a single local transaction. This prevents the "at-most-once" processing scenario where the message is consumed successfully but the business operation fails. </p>
 <p>Performance considerations include outbox table cleanup. Over time, the outbox table accumulates processed events that are no longer needed. A background cleanup job should delete processed events that are older than a retention threshold. Partitioning the outbox table by date enables efficient bulk deletion. </p>
 <p>The transactional outbox pattern is production-proven across organizations handling billions of events daily. It is the foundation of reliable event-driven architectures and a prerequisite for systems that require data consistency guarantees exceeding eventual consistency.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></li><li><a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></li><li><a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -171,5 +187,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

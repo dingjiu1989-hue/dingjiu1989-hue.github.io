@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Health Check Patterns">
-    <meta property="og:description" content="Liveness vs readiness probes, custom health checks, dependency health, graceful degradation, and production — software architecture deep-dive on SourceHub.">
+    <meta property="og:description" content="Liveness vs readiness probes, custom health checks, dependency health, graceful degradation, and production — software architecture deep-dive on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/health-check-patterns.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/health-check-patterns.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Health Check Patterns">
-    <meta name="twitter:description" content="Liveness vs readiness probes, custom health checks, dependency health, graceful degradation, and production — software architecture deep-dive on SourceHub.">
+    <meta name="twitter:description" content="Liveness vs readiness probes, custom health checks, dependency health, graceful degradation, and production — software architecture deep-dive on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/architecture/health-check-patterns.png">
     <meta property="article:published_time" content="2026-04-27">
     <meta property="article:modified_time" content="2026-05-14">
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/health-check-patterns.webp" type="image/webp" fetchpriority="high">
-    <title>Health Check Patterns — SourceHub</title>
-    <meta name="description" content="Liveness vs readiness probes, custom health checks, dependency health, graceful degradation, and production — software architecture deep-dive on SourceHub.">
+    <title>Health Check Patterns — AI Study Room</title>
+    <meta name="description" content="Liveness vs readiness probes, custom health checks, dependency health, graceful degradation, and production — software architecture deep-dive on AI Study Room.">
     <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/health-check-patterns.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/health-check-patterns.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/health-check-patterns.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/health-check-patterns-4ppn"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Backend</span></div>
         <h1 class="article-title">Health Check Patterns</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-04-27">2026-04-27</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>161 views</span>
+          <span class="meta-sep">·</span>
+          <span>911 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/health-check-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/health-check-patterns.png" alt="Health Check Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -131,7 +146,8 @@
 <p>Deployment health checks follow a specific sequence. During startup, the liveness probe should be delayed to allow the application to initialize. The readiness probe should become active only after initialization is complete. During shutdown, the readiness probe should immediately fail to remove the instance from service, then the application drains connections, and finally the liveness probe should reflect termination signal reception. </p>
 <p>Observability integration enriches health checks. Log each health state transition. Expose health check results as metrics (up/down per dependency). Alert on health state changes, not just complete failures. A dependency that is flapping between healthy and unhealthy indicates a more subtle problem than a dependency that is simply up or down — it suggests degraded performance or intermittent connectivity issues. </p>
 <p>Platform-specific implementations vary. Kubernetes supports HTTP, TCP, and command-based probes with configurable initial delay, period, timeout, success threshold, and failure threshold. AWS ALB health checks are simpler but support custom paths and codes. The application should implement a consistent health check endpoint regardless of platform, allowing platform-agnostic health assessment and easier migration between orchestration systems.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a></li><li><a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></li><li><a href="/en/architecture/distributed-locking.html">Distributed Locking Mechanisms</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -171,5 +187,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

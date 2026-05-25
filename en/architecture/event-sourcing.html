@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Event Sourcing Pattern">
-    <meta property="og:description" content="Learn the event sourcing pattern for capturing state changes as immutable events. — software architecture deep-dive on SourceHub.">
+    <meta property="og:description" content="Learn the event sourcing pattern for capturing state changes as immutable events. — software architecture deep-dive on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/event-sourcing.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/event-sourcing.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Event Sourcing Pattern">
-    <meta name="twitter:description" content="Learn the event sourcing pattern for capturing state changes as immutable events. — software architecture deep-dive on SourceHub.">
+    <meta name="twitter:description" content="Learn the event sourcing pattern for capturing state changes as immutable events. — software architecture deep-dive on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/architecture/event-sourcing.png">
     <meta property="article:published_time" content="2025-12-26">
     <meta property="article:modified_time" content="2026-04-23">
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/event-sourcing.webp" type="image/webp" fetchpriority="high">
-    <title>Event Sourcing Pattern — SourceHub</title>
-    <meta name="description" content="Learn the event sourcing pattern for capturing state changes as immutable events. — software architecture deep-dive on SourceHub.">
+    <title>Event Sourcing Pattern — AI Study Room</title>
+    <meta name="description" content="Learn the event sourcing pattern for capturing state changes as immutable events. — software architecture deep-dive on AI Study Room.">
     <meta name="keywords" content="Architecture, System Design">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/event-sourcing.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/event-sourcing.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/event-sourcing.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/event-sourcing-pattern-3igh"
@@ -112,11 +123,15 @@
         <span class="tag-cat">System Design</span></div>
         <h1 class="article-title">Event Sourcing Pattern</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-26">2025-12-26</time>
           <span class="meta-sep">·</span>
           <span>3 min read</span>
           <span class="meta-sep">·</span>
           <span>115 views</span>
+          <span class="meta-sep">·</span>
+          <span>706 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/event-sourcing.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/event-sourcing.png" alt="Event Sourcing Pattern" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -134,7 +149,8 @@
 <p>Events are data structures, and data structures evolve over time. When an event schema changes, older stored events may no longer match the current code. Event versioning strategies address this. Common approaches include using a schema registry (Avro, Protobuf), applying upcasting (transforming old events to the current version during replay), or maintaining backward compatibility through optional fields. </p>
 <p>The principle is that old events must always be readable. Deleting or destructively modifying events violates the immutability guarantee central to event sourcing. Instead, new versions are introduced through new event types or versioned fields, and old events are migrated via upcasting during projection. </p>
 <p>Event sourcing is a powerful pattern that provides unmatched auditability and temporal querying, but it requires careful design of event schemas, projection infrastructure, and operational tooling. When applied appropriately, it creates systems that are remarkably resilient to change.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/database-per-service.html">Database per Service Pattern</a></li><li><a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a></li><li><a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -174,5 +190,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, including health checking and blue-green deployment strategies.">
     <meta property="og:url" content="https://aidev.fit/en/tech/service-discovery.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/service-discovery.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/service-discovery.webp" type="image/webp" fetchpriority="high">
-    <title>Service Discovery in Microservices — SourceHub</title>
+    <title>Service Discovery in Microservices — AI Study Room</title>
     <meta name="description" content="Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, including health checking and blue-green deployment strategies.">
     <meta name="keywords" content="Technology, Programming, DevOps">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/service-discovery.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/service-discovery.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/service-discovery-in-microservices-4chp"
@@ -113,11 +124,15 @@
         <span class="tag-cat">DevOps</span></div>
         <h1 class="article-title">Service Discovery in Microservices</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-31">2025-12-31</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>232 views</span>
+          <span class="meta-sep">·</span>
+          <span>985 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/service-discovery.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/service-discovery.png" alt="Service Discovery in Microservices" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#the-service-discovery-problem">The Service Discovery Problem</a></li><li><a href="#dns-based-discovery">DNS-Based Discovery</a></li><li><a href="#consul">Consul</a></li><li><a href="#kubernetes-service-discovery">Kubernetes Service Discovery</a></li><li><a href="#client-side-vs-server-side-discovery">Client-Side vs Server-Side Discovery</a></li><li><a href="#health-checking">Health Checking</a></li><li><a href="#when-to-use-each-approach">When to Use Each Approach</a></li></ol></details>
@@ -146,7 +161,8 @@
 <h2>When to Use Each Approach</h2>
 <p>Kubernetes environments should use Kubernetes-native discovery through Services. Non-Kubernetes environments can use Consul for comprehensive discovery with health checking. Simple environments with few services can use DNS-based discovery with health-checked records.</p>
 <p>Service discovery is foundational to distributed system reliability. Combined with health checking and load balancing, it enables resilient, self-healing systems that adapt to changing conditions automatically.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/helm-kubernetes-package-management.html">Helm Charts: Kubernetes Package Management</a></li><li><a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a></li><li><a href="/en/tech/cloud-cost-optimization.html">Cloud Cost Optimization Tips</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -189,5 +205,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

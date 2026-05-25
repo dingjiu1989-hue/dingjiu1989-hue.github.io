@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Security Engineer Interview">
-    <meta property="og:description" content="Key topics, system design questions, and practical exercises for security engineer interviews. — security best practices guide on SourceHub.">
+    <meta property="og:description" content="Key topics, system design questions, and practical exercises for security engineer interviews. — security best practices guide on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/security/security-engineer-interview.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/security-engineer-interview.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Security Engineer Interview">
-    <meta name="twitter:description" content="Key topics, system design questions, and practical exercises for security engineer interviews. — security best practices guide on SourceHub.">
+    <meta name="twitter:description" content="Key topics, system design questions, and practical exercises for security engineer interviews. — security best practices guide on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/security/security-engineer-interview.png">
     <meta property="article:published_time" content="2026-03-19">
     <meta property="article:modified_time" content="2026-05-02">
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/security-engineer-interview.webp" type="image/webp" fetchpriority="high">
-    <title>Security Engineer Interview — SourceHub</title>
-    <meta name="description" content="Key topics, system design questions, and practical exercises for security engineer interviews. — security best practices guide on SourceHub.">
+    <title>Security Engineer Interview — AI Study Room</title>
+    <meta name="description" content="Key topics, system design questions, and practical exercises for security engineer interviews. — security best practices guide on AI Study Room.">
     <meta name="keywords" content="Security, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/security-engineer-interview.html">
     <link rel="canonical" href="https://aidev.fit/en/security/security-engineer-interview.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/security-engineer-interview.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/security-engineer-interview-3ac0"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Security Engineer Interview</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-03-19">2026-03-19</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>302 views</span>
+          <span class="meta-sep">·</span>
+          <span>1195 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/security-engineer-interview.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/security-engineer-interview.png" alt="Security Engineer Interview" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (22)</summary><ol><li><a href="#interview-question-implement-a-secure-password-hasher">Interview question: Implement a secure password hasher</a></li><li><a href="#follow-up-why-not-sha-256">Follow-up: Why not SHA-256?</a></li><li><a href="#answer-sha-256-is-fast-making-brute-force-feasible">Answer: SHA-256 is fast, making brute-force feasible.</a></li><li><a href="#bcryptargon2-are-deliberately-slow-and-include-salt">bcrypt/argon2 are deliberately slow and include salt.</a></li><li><a href="#follow-up-what-about-md5">Follow-up: What about MD5?</a></li><li><a href="#answer-md5-is-broken-for-collision-resistance-never-use">Answer: MD5 is broken for collision resistance. Never use.</a></li><li><a href="#interview-question-implement-a-simple-port-scanner">Interview question: Implement a simple port scanner</a></li><li><a href="#follow-up-how-would-you-scan-without-being-detected">Follow-up: How would you scan without being detected?</a></li><li><a href="#answer-use-syn-scan-stealth-scan-randomize-port-order">Answer: Use SYN scan (stealth scan), randomize port order,</a></li><li><a href="#and-introduce-delays-between-probes">and introduce delays between probes.</a></li><li><a href="#high-level-design">High-level design</a></li><li><a href="#exercise-security-incident-investigation">Exercise: Security incident investigation</a></li><li><a href="#questions">Questions:</a></li><li><a href="#1-what-indicators-of-compromise-do-you-see">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What indicators of compromise do you see?</a></li><li><a href="#2-what-is-the-likely-attack-vector">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What is the likely attack vector?</a></li><li><a href="#3-what-immediate-containment-actions">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What immediate containment actions?</a></li><li><a href="#4-what-forensic-data-would-you-collect">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What forensic data would you collect?</a></li><li><a href="#analysis">Analysis:</a></li><li><a href="#ip-change-19216811-corp--gt-10005-internal">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- IP change: 192.168.1.1 (corp) -&gt; 10.0.0.5 (internal)</a></li><li><a href="#brute-force-pattern-4-failed-logins">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Brute force pattern: 4 failed logins</a></li><li><a href="#suspicious-actions-after-login-data-export--log-deletion">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Suspicious actions after login: data export + log deletion</a></li><li><a href="#likely-credential-stuffing--gt-account-takeover--gt-data-exfiltration">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Likely: credential stuffing -&gt; account takeover -&gt; data exfiltration</a></li></ol></details>
@@ -231,7 +246,8 @@
 </ul>
 <p>Resources for Preparation </p>
 <p>Study these areas in depth: OWASP Top 10, cloud security (AWS/GCP/Azure), network protocols, cryptography fundamentals, and compliance frameworks. Practice with hands-on labs and capture-the-flag challenges. Be ready to whiteboard system designs and discuss real-world threat scenarios.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a></li><li><a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a></li><li><a href="/en/security/certificate-management.html">Certificate Management</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -274,5 +290,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="Guide to choosing between microservices and monoliths, including when to start with a monolith, Conway's Law, module boundaries, and testing.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/microservices-vs-monolith.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/microservices-vs-monolith.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/microservices-vs-monolith.webp" type="image/webp" fetchpriority="high">
-    <title>Microservices vs Monolith: Decision Guide — SourceHub</title>
+    <title>Microservices vs Monolith: Decision Guide — AI Study Room</title>
     <meta name="description" content="Guide to choosing between microservices and monoliths, including when to start with a monolith, Conway's Law, module boundaries, and testing.">
     <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/microservices-vs-monolith.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/microservices-vs-monolith.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/microservices-vs-monolith-2026-making-the-right-architectural-choice-1ndc"
@@ -124,11 +135,15 @@
         <span class="tag-cat">Backend</span></div>
         <h1 class="article-title">Microservices vs Monolith: Decision Guide</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-04-27">2026-04-27</time>
           <span class="meta-sep">·</span>
           <span>3 min read</span>
           <span class="meta-sep">·</span>
           <span>53 views</span>
+          <span class="meta-sep">·</span>
+          <span>764 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/microservices-vs-monolith.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/microservices-vs-monolith.png" alt="Microservices vs Monolith: Decision Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#quick-comparison">Quick Comparison</a></li><li><a href="#the-case-for-monoliths">The Case for Monoliths</a></li><li><a href="#the-case-for-microservices">The Case for Microservices</a></li><li><a href="#the-modular-monolith--best-of-both-worlds">The Modular Monolith — Best of Both Worlds</a></li><li><a href="#decision-framework">Decision Framework</a></li></ol></details>
@@ -175,7 +190,8 @@
 </table>
 
 <p><strong>Bottom line:</strong> Start with a modular monolith. Extract microservices only when you have a clear reason: independent scaling, team autonomy, or polyglot persistence. Premature microservices are the #1 cause of unnecessary complexity in software projects. See also: <a href="/en/compare/trpc-vs-graphql-vs-rest.html">API architecture comparison</a> and <a href="/en/tech/api-design-patterns.html">API design patterns</a>.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/a-b-testing-infrastructure.html">A/B Testing Infrastructure</a></li><li><a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></li><li><a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -218,5 +234,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="Compare Elasticsearch, Meilisearch, and Typesense for full-text search capabilities, performance, ease of use, and deployment models.">
     <meta property="og:url" content="https://aidev.fit/en/database/full-text-search.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/full-text-search.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, SQL">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/full-text-search.webp" type="image/webp" fetchpriority="high">
-    <title>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense) — SourceHub</title>
+    <title>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense) — AI Study Room</title>
     <meta name="description" content="Compare Elasticsearch, Meilisearch, and Typesense for full-text search capabilities, performance, ease of use, and deployment models.">
     <meta name="keywords" content="Database, SQL">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/full-text-search.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/full-text-search.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/full-text-search-engines-elasticsearch-meilisearch-typesense-3fhd"
@@ -112,11 +123,15 @@
         <span class="tag-cat">SQL</span></div>
         <h1 class="article-title">Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-23">2025-12-23</time>
           <span class="meta-sep">·</span>
           <span>6 min read</span>
           <span class="meta-sep">·</span>
           <span>58 views</span>
+          <span class="meta-sep">·</span>
+          <span>1376 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/full-text-search.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/full-text-search.png" alt="Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (5)</summary><ol><li><a href="#facet-results">Facet results</a></li><li><a href="#docker-composeyml">docker-compose.yml</a></li><li><a href="#create-collection-schema">Create collection (schema)</a></li><li><a href="#index-documents">Index documents</a></li><li><a href="#search">Search</a></li></ol></details>
@@ -319,7 +334,8 @@
 <p>| Scenario | Recommended | |----------|-------------| | Complex analytics with search | Elasticsearch | | Simple, fast search out of the box | Meilisearch | | Low-latency search on limited hardware | Typesense | | Log analysis and observability | Elasticsearch (ELK stack) | | E-commerce product search | Meilisearch or Typesense | | Geo-search and aggregations | Elasticsearch | | Typo-tolerant search for user-facing features | Meilisearch | | Large-scale (100M+ documents) | Elasticsearch | </p>
 <p>Summary </p>
 <p>Full-text search engines are essential for applications that need more than simple SQL LIKE queries. Elasticsearch offers the most features and scalability at the cost of operational complexity. Meilisearch provides the best developer experience with instant typo tolerance and sensible defaults. Typesense offers excellent performance with minimal resource usage. Choose based on your scale, feature requirements, and operational capacity: start with Meilisearch or Typesense for typical web applications and move to Elasticsearch when you need advanced analytics or larger scale.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/time-series-databases.html">Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</a></li><li><a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></li><li><a href="/en/database/data-consistency-models.html">Data Consistency Models Explained</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -362,5 +378,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

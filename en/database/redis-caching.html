@@ -27,7 +27,7 @@
     <meta property="og:description" content="Explore Redis caching patterns including cache-aside, write-through, lazy loading, distributed locking, session storage, and rate limiting.">
     <meta property="og:url" content="https://aidev.fit/en/database/redis-caching.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/redis-caching.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, SQL">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/redis-caching.webp" type="image/webp" fetchpriority="high">
-    <title>Redis Caching Patterns — SourceHub</title>
+    <title>Redis Caching Patterns — AI Study Room</title>
     <meta name="description" content="Explore Redis caching patterns including cache-aside, write-through, lazy loading, distributed locking, session storage, and rate limiting.">
     <meta name="keywords" content="Database, SQL">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/redis-caching.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/redis-caching.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/redis-caching-patterns-pj7"
@@ -112,11 +123,15 @@
         <span class="tag-cat">SQL</span></div>
         <h1 class="article-title">Redis Caching Patterns</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-24">2025-12-24</time>
           <span class="meta-sep">·</span>
           <span>5 min read</span>
           <span class="meta-sep">·</span>
           <span>147 views</span>
+          <span class="meta-sep">·</span>
+          <span>1194 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/redis-caching.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/redis-caching.png" alt="Redis Caching Patterns" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (20)</summary><ol><li><a href="#try-cache-first">Try cache first</a></li><li><a href="#cache-miss-load-from-database">Cache miss: load from database</a></li><li><a href="#populate-cache-with-ttl">Populate cache with TTL</a></li><li><a href="#write-to-cache-first">Write to cache first</a></li><li><a href="#then-write-to-database">Then write to database</a></li><li><a href="#write-to-cache-immediately">Write to cache immediately</a></li><li><a href="#queue-database-write-for-batch-processing">Queue database write for batch processing</a></li><li><a href="#use-lua-script-for-atomic-release">Use Lua script for atomic release</a></li><li><a href="#remove-old-entries">Remove old entries</a></li><li><a href="#count-current-requests">Count current requests</a></li><li><a href="#add-current-request">Add current request</a></li><li><a href="#store-session-with-hash">Store session with hash</a></li><li><a href="#reuse-connections-across-requests">Reuse connections across requests</a></li><li><a href="#batch-operations-to-reduce-round-trips">Batch operations to reduce round trips</a></li><li><a href="#redis-cli-monitoring">Redis CLI monitoring</a></li><li><a href="#key-metrics-to-watch">Key metrics to watch</a></li><li><a href="#hitrate-keyspacehits--keyspacehits--keyspacemisses">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- hit_rate: keyspace_hits / (keyspace_hits + keyspace_misses)</a></li><li><a href="#evictedkeys-keys-evicted-due-to-maxmemory">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- evicted_keys: keys evicted due to maxmemory</a></li><li><a href="#maxmemory-configured-memory-limit">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- maxmemory: configured memory limit</a></li><li><a href="#connectedclients-active-connections">\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- connected_clients: active connections</a></li></ol></details>
@@ -251,7 +266,8 @@
 <p>| Pitfall | Consequence | Fix | |---------|-------------|-----| | No TTL | Memory exhaustion | Always set TTL | | Cache stampede | Overload database on miss | Use mutex locking | | Too-large values | Memory waste, slow serialization | Compress or split | | Hot keys | Single key becomes bottleneck | Shard or replicate | | Cache-aside without TTL | Stale data lives forever | Always set TTL | </p>
 <p>Summary </p>
 <p>Redis caching can dramatically improve application performance when the right pattern is applied. Use cache-aside as the default pattern with appropriate TTLs, implement write-through for consistency-critical data, use distributed locking for race conditions, and sorted sets for rate limiting. Monitor hit rates and eviction counts, and always set TTLs to prevent memory exhaustion.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-monitoring.html">Database Monitoring and Performance Alerting</a></li><li><a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a></li><li><a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -294,5 +310,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

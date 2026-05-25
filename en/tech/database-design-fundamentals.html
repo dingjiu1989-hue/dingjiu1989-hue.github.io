@@ -27,7 +27,7 @@
     <meta property="og:description" content="Design databases that don't haunt you later. Covers normalization (1NF to 3NF), indexing strategies, relationship types, and common schema design mistakes.">
     <meta property="og:url" content="https://aidev.fit/en/tech/database-design-fundamentals.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/database-design-fundamentals.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Database, SQL, Schema Design, Backend">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/database-design-fundamentals.webp" type="image/webp" fetchpriority="high">
-    <title>Database Design Fundamentals: Normalization, Indexing, and Schema Design — SourceHub</title>
+    <title>Database Design Fundamentals: Normalization, Indexing, and Schema Design — AI Study Room</title>
     <meta name="description" content="Design databases that don't haunt you later. Covers normalization (1NF to 3NF), indexing strategies, relationship types, and common schema design mistakes.">
     <meta name="keywords" content="Database, SQL, Schema Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/database-design-fundamentals.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/database-design-fundamentals.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/database-design-fundamentals-normalization-indexing-and-schema-design-3ag5"
@@ -116,11 +127,15 @@
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
         <h1 class="article-title">Database Design Fundamentals: Normalization, Indexing, and Schema Design</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-10-08">2025-10-08</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>4277 views</span>
+          <span class="meta-sep">·</span>
+          <span>830 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/database-design-fundamentals.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/database-design-fundamentals.png" alt="Database Design Fundamentals: Normalization, Indexing, and Schema Design" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (9)</summary><ol><li><a href="#1-normalization--reduce-redundancy">1. Normalization — Reduce Redundancy</a></li><li><a href="#1nf-atomic-values-no-repeating-groups">1NF: Atomic Values, No Repeating Groups</a></li><li><a href="#2nf-no-partial-dependencies">2NF: No Partial Dependencies</a></li><li><a href="#3nf-no-transitive-dependencies">3NF: No Transitive Dependencies</a></li><li><a href="#2-indexing--speed-up-queries">2. Indexing — Speed Up Queries</a></li><li><a href="#index-rules-of-thumb">Index Rules of Thumb</a></li><li><a href="#3-relationship-types">3. Relationship Types</a></li><li><a href="#4-common-schema-design-mistakes">4. Common Schema Design Mistakes</a></li><li><a href="#5-choosing-your-primary-key">5. Choosing Your Primary Key</a></li></ol></details>
@@ -222,7 +237,8 @@ CREATE TABLE user_profiles (
 <p><strong>Recommendation:</strong> UUID v7 for distributed systems and public-facing IDs. BIGINT for internal tables. Avoid exposing auto-increment IDs in URLs.</p>
 
 <p><strong>Bottom line:</strong> Normalize to 3NF, index every FK and query column, use appropriate data types, and always have foreign key constraints. A well-designed schema is cheaper to fix now than later. See also: <a href="/en/compare/postgresql-vs-mysql-vs-sqlite.html">database comparison</a> and <a href="/en/compare/prisma-vs-drizzle-vs-typeorm.html">ORM comparison</a>.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/error-handling-best-practices.html">Error Handling Best Practices: From Try/Catch to Structured Errors</a></li><li><a href="/en/tech/graphql-api-design.html">GraphQL API Design: Schema Best Practices, Federation, and Performance</a></li><li><a href="/en/tech/database-sharding-strategies.html">Database Sharding Strategies: Partitioning, Consistent Hashing, and Real-World Patterns</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -265,5 +281,13 @@ CREATE TABLE user_profiles (
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -27,7 +27,7 @@
     <meta property="og:description" content="Technical exploration of Grafana dashboard design covering panel types, template variables, annotations, alerting configuration, and provisioning with infrastructure as code.">
     <meta property="og:url" content="https://aidev.fit/en/tech/grafana-dashboards.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/tech/grafana-dashboards.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Tech Tutorials">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/tech/grafana-dashboards.webp" type="image/webp" fetchpriority="high">
-    <title>Grafana Dashboards: Panels, Variables, Annotations, and Alerting — SourceHub</title>
+    <title>Grafana Dashboards: Panels, Variables, Annotations, and Alerting — AI Study Room</title>
     <meta name="description" content="Technical exploration of Grafana dashboard design covering panel types, template variables, annotations, alerting configuration, and provisioning with infrastructure as code.">
     <meta name="keywords" content="Technology, DevOps, Cloud">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/tech/grafana-dashboards.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/tech/grafana-dashboards.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/grafana-dashboards-panels-variables-annotations-and-alerting-3n0f"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Cloud</span></div>
         <h1 class="article-title">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-01-02">2026-01-02</time>
           <span class="meta-sep">·</span>
           <span>6 min read</span>
           <span class="meta-sep">·</span>
           <span>66 views</span>
+          <span class="meta-sep">·</span>
+          <span>1381 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/grafana-dashboards.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/grafana-dashboards.png" alt="Grafana Dashboards: Panels, Variables, Annotations, and Alerting" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (7)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#panel-types-and-visualization-options">Panel Types and Visualization Options</a></li><li><a href="#template-variables-dynamic-dashboards">Template Variables: Dynamic Dashboards</a></li><li><a href="#annotations-events-on-timelines">Annotations: Events on Timelines</a></li><li><a href="#alerting-in-grafana">Alerting in Grafana</a></li><li><a href="#provisioning-dashboards-as-code">Provisioning Dashboards as Code</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -178,7 +193,8 @@
 <p>Dashboards are exported as JSON and version-controlled alongside application code. CI/CD pipelines deploy dashboard changes through Git workflows, enabling peer review and rollback.</p>
 <h2>Conclusion</h2>
 <p>Grafana's composable architecture — panels, variables, annotations, and alerting — makes it the central hub for observability. Provisioning dashboards as code ensures consistency across environments and enables GitOps workflows. As Grafana continues to add capabilities like explore mode, correlate metrics with logs and traces, and incident management, it solidifies its position as the primary interface for understanding system behavior.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a></li><li><a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a></li><li><a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -221,5 +237,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

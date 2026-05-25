@@ -27,7 +27,7 @@
     <meta property="og:description" content="Best practices for implementing secure file upload functionality including validation, storage, scanning, and access control.">
     <meta property="og:url" content="https://aidev.fit/en/security/secure-file-upload.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/security/secure-file-upload.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Security">
     <meta property="article:tag" content="Security, Cybersecurity">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/security/secure-file-upload.webp" type="image/webp" fetchpriority="high">
-    <title>Secure File Upload Implementation — SourceHub</title>
+    <title>Secure File Upload Implementation — AI Study Room</title>
     <meta name="description" content="Best practices for implementing secure file upload functionality including validation, storage, scanning, and access control.">
     <meta name="keywords" content="Security, Cybersecurity">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/security/secure-file-upload.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/security/secure-file-upload.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/secure-file-upload-implementation-3ecd"
@@ -112,11 +123,15 @@
         <span class="tag-cat">Cybersecurity</span></div>
         <h1 class="article-title">Secure File Upload Implementation</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2025-12-19">2025-12-19</time>
           <span class="meta-sep">·</span>
           <span>11 min read</span>
           <span class="meta-sep">·</span>
           <span>248 views</span>
+          <span class="meta-sep">·</span>
+          <span>2224 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/security/secure-file-upload.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/security/secure-file-upload.png" alt="Secure File Upload Implementation" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (9)</summary><ol><li><a href="#images">Images</a></li><li><a href="#documents">Documents</a></li><li><a href="#other">Other</a></li><li><a href="#convert-to-ensure-clean-output">Convert to ensure clean output</a></li><li><a href="#unsafe-stored-in-webroot">UNSAFE: Stored in webroot</a></li><li><a href="#safe-outside-webroot">SAFE: Outside webroot</a></li><li><a href="#nginx-configuration">Nginx configuration</a></li><li><a href="#only-serve-specific-file-types">Only serve specific file types</a></li><li><a href="#deny-everything-else">Deny everything else</a></li></ol></details>
@@ -245,7 +260,8 @@
 <p>}</p>
 <p>Summary </p>
 <p>Secure file upload requires defense in depth. Validate extensions and MIME types server-side, sanitize images by re-encoding them, generate random filenames, store files outside the webroot or in object storage, enforce strict size limits at multiple layers, and scan for malware. Never trust client-provided metadata, and process uploaded files with minimal privileges in isolated environments.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/security/secrets-management.html">Secrets Management for Developers</a></li><li><a href="/en/security/devsecops-pipeline.html">DevSecOps: Integrating Security into CI/CD</a></li><li><a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -288,5 +304,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

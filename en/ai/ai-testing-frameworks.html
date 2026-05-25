@@ -27,7 +27,7 @@
     <meta property="og:description" content="Comprehensive guide to AI testing frameworks including DeepEval, Ragas, and LangSmith. Implement automated evaluation in CI pipelines for LLM applications.">
     <meta property="og:url" content="https://aidev.fit/en/ai/ai-testing-frameworks.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/ai-testing-frameworks.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="AI Tutorials">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/ai-testing-frameworks.webp" type="image/webp" fetchpriority="high">
-    <title>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration — SourceHub</title>
+    <title>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration — AI Study Room</title>
     <meta name="description" content="Comprehensive guide to AI testing frameworks including DeepEval, Ragas, and LangSmith. Implement automated evaluation in CI pipelines for LLM applications.">
     <meta name="keywords" content="AI, Machine Learning, LLM">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/ai-testing-frameworks.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/ai/ai-testing-frameworks.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/ai-testing-frameworks-deepeval-ragas-langsmith-ci-integration-1f84"
@@ -113,11 +124,15 @@
         <span class="tag-cat">LLM</span></div>
         <h1 class="article-title">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-02-14">2026-02-14</time>
           <span class="meta-sep">·</span>
           <span>6 min read</span>
           <span class="meta-sep">·</span>
           <span>197 views</span>
+          <span class="meta-sep">·</span>
+          <span>1286 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-testing-frameworks.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-testing-frameworks.png" alt="AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (21)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#deepeval">DeepEval</a></li><li><a href="#run-tests-deepeval-test-run-testaipy">Run tests: deepeval test run test_ai.py</a></li><li><a href="#ragas">Ragas</a></li><li><a href="#prepare-evaluation-dataset">Prepare evaluation dataset</a></li><li><a href="#compute-rag-metrics">Compute RAG metrics</a></li><li><a href="#">{</a></li><li><a href="#faithfulness-092">"faithfulness": 0.92,</a></li><li><a href="#answerrelevancy-088">"answer_relevancy": 0.88,</a></li><li><a href="#contextprecision-095">"context_precision": 0.95,</a></li><li><a href="#contextrecall-085">"context_recall": 0.85</a></li><li><a href="#">}</a></li><li><a href="#langsmith">LangSmith</a></li><li><a href="#define-a-custom-evaluator">Define a custom evaluator</a></li><li><a href="#compare-model-output-against-expected-output">Compare model output against expected output</a></li><li><a href="#use-llm-as-judge-for-evaluation">Use LLM-as-judge for evaluation</a></li><li><a href="#run-evaluation-on-a-dataset">Run evaluation on a dataset</a></li><li><a href="#view-results-in-langsmith-dashboard">View results in LangSmith dashboard</a></li><li><a href="#ci-integration">CI Integration</a></li><li><a href="#githubworkflowsai-testsyml">.github/workflows/ai-tests.yml</a></li><li><a href="#conclusion">Conclusion</a></li></ol></details>
@@ -256,7 +271,8 @@
 <p>Set a quality gate that blocks merges when metrics fall below thresholds. This prevents gradual quality degradation that is invisible in traditional tests.</p>
 <h2>Conclusion</h2>
 <p>AI testing requires specialized frameworks that understand non-deterministic outputs. Use DeepEval for unit-test-style evaluation with configurable metrics. Use Ragas for end-to-end RAG pipeline evaluation. Use LangSmith for trace-level debugging and comparison across experiments. Integrate all three into CI pipelines with automated quality gates to maintain production AI quality over time.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-red-teaming.html">AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing</a></li><li><a href="/en/ai/ai-monitoring-alerting.html">AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</a></li><li><a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -304,5 +320,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

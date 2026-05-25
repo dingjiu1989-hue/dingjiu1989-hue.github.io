@@ -27,7 +27,7 @@
     <meta property="og:description" content="Implement LLM observability for production AI applications: distributed tracing, token usage tracking, latency monitoring, and cost attribution.">
     <meta property="og:url" content="https://aidev.fit/en/ai/llm-observability.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/llm-observability.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="AI Tutorials">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/llm-observability.webp" type="image/webp" fetchpriority="high">
-    <title>LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution — SourceHub</title>
+    <title>LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution — AI Study Room</title>
     <meta name="description" content="Implement LLM observability for production AI applications: distributed tracing, token usage tracking, latency monitoring, and cost attribution.">
     <meta name="keywords" content="AI, Machine Learning, LLM">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/llm-observability.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/ai/llm-observability.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/llm-observability-tracing-token-tracking-latency-monitoring-and-cost-attribution-cg3"
@@ -113,11 +124,15 @@
         <span class="tag-cat">LLM</span></div>
         <h1 class="article-title">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-02-12">2026-02-12</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>227 views</span>
+          <span class="meta-sep">·</span>
+          <span>999 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/llm-observability.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/llm-observability.png" alt="LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (6)</summary><ol><li><a href="#why-llm-observability-is-different">Why LLM Observability Is Different</a></li><li><a href="#tracing-llm-calls">Tracing LLM Calls</a></li><li><a href="#token-tracking">Token Tracking</a></li><li><a href="#latency-monitoring">Latency Monitoring</a></li><li><a href="#cost-attribution">Cost Attribution</a></li><li><a href="#alerting-and-incident-response">Alerting and Incident Response</a></li></ol></details>
@@ -151,7 +166,8 @@
 <p>When an alert fires, the trace data should let you identify the problematic request, reproduce it, and understand what went wrong. Without traces, you know something is broken but cannot diagnose it.</p>
 <p>Build runbooks for common LLM failures. Model down: failover to a fallback model. High latency: reduce max_tokens or switch to a smaller model. Cost spike: identify the source and apply rate limits.</p>
 <p>LLM observability is not optional for production applications. Start with basic token and latency tracking, add tracing for critical paths, and expand gradually. The cost of observability is a fraction of the cost of undetected LLM failures.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-caching-strategies.html">AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</a></li><li><a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a></li><li><a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -199,5 +215,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

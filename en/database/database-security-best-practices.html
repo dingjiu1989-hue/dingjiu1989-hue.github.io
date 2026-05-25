@@ -27,7 +27,7 @@
     <meta property="og:description" content="Database security best practices: encryption at rest and in transit, row-level security, audit logging, network isolation, and secret rotation.">
     <meta property="og:url" content="https://aidev.fit/en/database/database-security-best-practices.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/database-security-best-practices.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, SQL">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/database-security-best-practices.webp" type="image/webp" fetchpriority="high">
-    <title>Database Security Hardening Guide — SourceHub</title>
+    <title>Database Security Hardening Guide — AI Study Room</title>
     <meta name="description" content="Database security best practices: encryption at rest and in transit, row-level security, audit logging, network isolation, and secret rotation.">
     <meta name="keywords" content="Database, SQL">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/database-security-best-practices.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/database-security-best-practices.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/database-security-hardening-guide-1mle"
@@ -112,11 +123,15 @@
         <span class="tag-cat">SQL</span></div>
         <h1 class="article-title">Database Security Hardening Guide</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-05-14">2026-05-14</time>
           <span class="meta-sep">·</span>
           <span>11 min read</span>
           <span class="meta-sep">·</span>
           <span>82 views</span>
+          <span class="meta-sep">·</span>
+          <span>2368 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/database-security-best-practices.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-security-best-practices.png" alt="Database Security Hardening Guide" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (11)</summary><ol><li><a href="#application-level-encryption-with-aws-kms">Application-level encryption with AWS KMS</a></li><li><a href="#generate-a-data-key-from-kms">Generate a data key from KMS</a></li><li><a href="#encrypt-the-data-with-the-data-key">Encrypt the data with the data key</a></li><li><a href="#require-tls-for-all-connections">Require TLS for all connections</a></li><li><a href="#mysql-require-tls">MySQL: Require TLS</a></li><li><a href="#filebeat-configuration-for-shipping-database-audit-logs">Filebeat configuration for shipping database audit logs</a></li><li><a href="#terraform-database-in-private-subnet">Terraform: Database in private subnet</a></li><li><a href="#vault-database-secrets-engine-configuration">Vault database secrets engine configuration</a></li><li><a href="#dynamic-database-credentials-with-vault">Dynamic database credentials with Vault</a></li><li><a href="#get-short-lived-database-credentials">Get short-lived database credentials</a></li><li><a href="#these-credentials-expire-in-1-hour">These credentials expire in 1 hour</a></li></ol></details>
@@ -432,7 +447,8 @@
 </ul>
 <p>Conclusion </p>
 <p>Database security requires defense in depth. Encrypt data at rest and in transit. Isolate databases on private networks. Implement row-level security and audit logging. Follow least privilege for database roles. Automate secret rotation. A well-secured database makes it significantly harder for attackers to exfiltrate sensitive data, even if they breach other parts of the infrastructure.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-monitoring.html">Database Monitoring and Performance Alerting</a></li><li><a href="/en/database/database-sharding.html">Database Sharding: Strategies and Trade-offs</a></li><li><a href="/en/database/database-testing.html">Database Testing Strategies for Developers</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -475,5 +491,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

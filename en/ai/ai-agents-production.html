@@ -27,7 +27,7 @@
     <meta property="og:description" content="Learn agent orchestration, error handling, human-in-the-loop patterns, monitoring agent behavior, cost tracking, rate limiting, and observability strategies.">
     <meta property="og:url" content="https://aidev.fit/en/ai/ai-agents-production.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/ai/ai-agents-production.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="AI Tutorials">
     <meta property="article:tag" content="Artificial Intelligence, Machine Learning">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/ai/ai-agents-production.webp" type="image/webp" fetchpriority="high">
-    <title>Deploying AI Agents to Production — SourceHub</title>
+    <title>Deploying AI Agents to Production — AI Study Room</title>
     <meta name="description" content="Learn agent orchestration, error handling, human-in-the-loop patterns, monitoring agent behavior, cost tracking, rate limiting, and observability strategies.">
     <meta name="keywords" content="Artificial Intelligence, Machine Learning">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/ai/ai-agents-production.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/ai/ai-agents-production.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/deploying-ai-agents-to-production-3p3b"
@@ -112,11 +123,15 @@
         <span class="tag-cat">Machine Learning</span></div>
         <h1 class="article-title">Deploying AI Agents to Production</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-02-10">2026-02-10</time>
           <span class="meta-sep">·</span>
           <span>7 min read</span>
           <span class="meta-sep">·</span>
           <span>79 views</span>
+          <span class="meta-sep">·</span>
+          <span>1581 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/ai-agents-production.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/ai-agents-production.png" alt="Deploying AI Agents to Production" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (20)</summary><ol><li><a href="#introduction">Introduction</a></li><li><a href="#agent-orchestration">Agent Orchestration</a></li><li><a href="#1-think-decide-next-action">1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Think: decide next action</a></li><li><a href="#2-act-execute-tool-or-respond">2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Act: execute tool or respond</a></li><li><a href="#3-observe-store-result">3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Observe: store result</a></li><li><a href="#4-cost-tracking">4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cost tracking</a></li><li><a href="#handle-tool-failures-with-retry">Handle tool failures with retry</a></li><li><a href="#catch-all-for-unexpected-errors">Catch-all for unexpected errors</a></li><li><a href="#error-handling-and-retry-logic">Error Handling and Retry Logic</a></li><li><a href="#human-in-the-loop">Human-in-the-Loop</a></li><li><a href="#determine-if-approval-is-needed">Determine if approval is needed</a></li><li><a href="#notify-human-reviewer">Notify human reviewer</a></li><li><a href="#wait-for-approval-with-timeout">Wait for approval (with timeout)</a></li><li><a href="#monitoring-agent-behavior">Monitoring Agent Behavior</a></li><li><a href="#looping-detection">Looping detection</a></li><li><a href="#cost-anomaly">Cost anomaly</a></li><li><a href="#token-usage">Token usage</a></li><li><a href="#cost-tracking-and-rate-limiting">Cost Tracking and Rate Limiting</a></li><li><a href="#reset-daily-counter">Reset daily counter</a></li><li><a href="#observability">Observability</a></li></ol></details>
@@ -340,7 +355,8 @@
 <p>"warnings": []</p>
 <p>}</p>
 <p>Deploy agents incrementally: start with read-only tools, add human-in-the-loop for destructive actions, and only move to fully autonomous mode after extensive monitoring and failure mode analysis.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a></li><li><a href="/en/ai/llm-chaining-patterns.html">LLM Chaining and Pipeline Patterns</a></li><li><a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -388,5 +404,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

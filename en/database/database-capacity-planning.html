@@ -27,7 +27,7 @@
     <meta property="og:description" content="Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, and scaling strategies for PostgreSQL.">
     <meta property="og:url" content="https://aidev.fit/en/database/database-capacity-planning.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/database/database-capacity-planning.png">
     <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
     <meta property="article:section" content="Database">
     <meta property="article:tag" content="Database, Backend, Data">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/database/database-capacity-planning.webp" type="image/webp" fetchpriority="high">
-    <title>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling — SourceHub</title>
+    <title>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling — AI Study Room</title>
     <meta name="description" content="Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, and scaling strategies for PostgreSQL.">
     <meta name="keywords" content="Database, Backend, Data">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/database/database-capacity-planning.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/database/database-capacity-planning.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/database-capacity-planning-sizing-growth-forecasting-and-scaling-35f0"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Data</span></div>
         <h1 class="article-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-05-15">2026-05-15</time>
           <span class="meta-sep">·</span>
           <span>9 min read</span>
           <span class="meta-sep">·</span>
           <span>62 views</span>
+          <span class="meta-sep">·</span>
+          <span>1973 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/database/database-capacity-planning.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/database/database-capacity-planning.png" alt="Database Capacity Planning: Sizing, Growth Forecasting, and Scaling" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>Table of Contents (13)</summary><ol><li><a href="#get-daily-row-counts-for-last-90-days">Get daily row counts for last 90 days</a></li><li><a href="#linear-regression">Linear regression</a></li><li><a href="#forecast-90-days-out">Forecast: 90 days out</a></li><li><a href="#aws-rds">AWS RDS</a></li><li><a href="#or-via-terraform">Or via Terraform</a></li><li><a href="#add-read-replica">Add read replica</a></li><li><a href="#automatic-scaling-based-on-load">Automatic scaling based on load</a></li><li><a href="#enable-storage-autoscaling-on-rds">Enable storage autoscaling on RDS</a></li><li><a href="#example-black-friday-capacity-plan">Example: Black Friday capacity plan</a></li><li><a href="#normal-4-vcpu-16-gb-ram-1000-connections">Normal: 4 vCPU, 16 GB RAM, 1000 connections</a></li><li><a href="#black-friday-16-vcpu-64-gb-ram-5000-connections">Black Friday: 16 vCPU, 64 GB RAM, 5000 connections</a></li><li><a href="#pre-scale-2-weeks-before">Pre-scale 2 weeks before</a></li><li><a href="#post-scale-1-week-after">Post-scale 1 week after</a></li></ol></details>
@@ -277,7 +292,8 @@
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Analyze</strong> : Identify trends and anomalies. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Forecast</strong> : Project future resource needs. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Plan</strong> : Schedule scaling or optimization. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Execute</strong> : Apply changes during maintenance windows. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Review</strong> : Validate that changes had the expected effect. </p>
 <p>Capacity planning is not a one-time exercise. Review your database capacity monthly, adjust forecasts quarterly, and always maintain headroom for unexpected traffic spikes. Over-provision by 20-30% for production databases to absorb traffic surges without degradation.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a></li><li><a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a></li><li><a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -320,5 +336,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -24,25 +24,25 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
     <meta property="og:title" content="Idempotency Patterns in Distributed Systems">
-    <meta property="og:description" content="Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns — software architecture deep-dive on SourceHub.">
+    <meta property="og:description" content="Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns — software architecture deep-dive on AI Study Room.">
     <meta property="og:url" content="https://aidev.fit/en/architecture/idempotency-patterns.html">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aidev.fit/images/covers/en/architecture/idempotency-patterns.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Idempotency Patterns in Distributed Systems">
-    <meta name="twitter:description" content="Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns — software architecture deep-dive on SourceHub.">
+    <meta name="twitter:description" content="Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns — software architecture deep-dive on AI Study Room.">
     <meta name="twitter:image" content="https://aidev.fit/images/covers/en/architecture/idempotency-patterns.png">
     <meta property="article:published_time" content="2026-05-20">
     <meta property="article:modified_time" content="2026-05-10">
     <meta property="article:section" content="Architecture">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <link rel="preload" as="image" href="https://aidev.fit/images/covers/en/architecture/idempotency-patterns.webp" type="image/webp" fetchpriority="high">
-    <title>Idempotency Patterns in Distributed Systems — SourceHub</title>
-    <meta name="description" content="Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns — software architecture deep-dive on SourceHub.">
+    <title>Idempotency Patterns in Distributed Systems — AI Study Room</title>
+    <meta name="description" content="Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns — software architecture deep-dive on AI Study Room.">
     <meta name="keywords" content="Architecture, System Design, Backend">
     <link rel="alternate" hreflang="en" href="https://aidev.fit/en/architecture/idempotency-patterns.html">
     <link rel="canonical" href="https://aidev.fit/en/architecture/idempotency-patterns.html">
@@ -65,8 +65,19 @@
       "isAccessibleForFree": true,
       "proficiencyLevel": "Intermediate",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {"@type": "Person", "name": "SourceHub"},
-      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"}},
+      "author": {"@type": "Person", "name": "AI Study Room"},
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "https://aidev.fit/en/",
+        "logo": {"@type": "ImageObject", "url": "https://aidev.fit/images/logo.png"},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "https://aidev.fit/en/corrections.html",
+        "ethicsPolicy": "https://aidev.fit/en/ethics.html",
+        "diversityPolicy": "https://aidev.fit/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "https://aidev.fit/en/about.html",
+        "foundingDate": "2025"
+      },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/en/architecture/idempotency-patterns.html"},
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/idempotency-patterns-in-distributed-systems-2bn5"
@@ -113,11 +124,15 @@
         <span class="tag-cat">Backend</span></div>
         <h1 class="article-title">Idempotency Patterns in Distributed Systems</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="2026-05-20">2026-05-20</time>
           <span class="meta-sep">·</span>
           <span>4 min read</span>
           <span class="meta-sep">·</span>
           <span>161 views</span>
+          <span class="meta-sep">·</span>
+          <span>867 words</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/architecture/idempotency-patterns.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/architecture/idempotency-patterns.png" alt="Idempotency Patterns in Distributed Systems" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         
@@ -131,7 +146,8 @@
 <p>State-based idempotency offers an alternative to key-based deduplication. Instead of tracking operation IDs, the system checks the current state before performing state-changing operations. For example, before processing a payment, check that the invoice is in "unpaid" state. If the invoice is already "paid," skip the payment. This works well when operations map to clear state transitions but requires careful handling of race conditions. </p>
 <p>Uniqueness constraints are the most reliable idempotency mechanism. A database unique constraint on business keys (order ID, payment reference) guarantees that duplicate operations fail atomically at the database level. This is the foundation of idempotent inserts. The constraint handles concurrent requests correctly — only the first insert succeeds, and subsequent attempts fail with a unique constraint violation that the application can handle gracefully. </p>
 <p>Idempotency should be designed into every external-facing API and every event handler from the start. Retrofitting idempotency after data corruption incidents is painful. The upfront cost of adding idempotency keys and deduplication logic is minimal compared to the cost of debugging duplicate processing in production.</p></div><div class="see-also"><strong>See also</strong><ul><li><a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a></li><li><a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a></li><li><a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></li></ul></div>
-        <div style="margin:2rem 0;text-align:center;">
+        <div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -171,5 +187,13 @@
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>
