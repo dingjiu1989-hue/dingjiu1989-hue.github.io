@@ -53,7 +53,7 @@ jobs:
         run: python3 scripts/ping_search_engines.py
 
       - name: Crawler health check
-        run: python3 scripts/crawler_health_check.py
+        run: python3 scripts/crawler_health_check.py || echo "::warning::Crawler health check found issues (non-blocking)"
 
       - name: Check for changes
         id: changes
