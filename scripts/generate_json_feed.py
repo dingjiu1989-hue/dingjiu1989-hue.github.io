@@ -17,9 +17,9 @@ CN_ARTICLES = ROOT / 'articles.json'
 SITE_URL = 'https://aidev.fit'
 
 
-def get_body(slug, board_id):
+def get_body(slug, board_id, lang="en"):
     """Read article body from md file, fall back to 'Content coming soon.'"""
-    md_path = ROOT / 'md' / 'en' / board_id / f'{slug}.md'
+    md_path = ROOT / 'md' / lang / board_id / f'{slug}.md'
     if md_path.exists():
         content = md_path.read_text(encoding='utf-8')
         if content.startswith('---'):
@@ -36,14 +36,15 @@ def get_body(slug, board_id):
     return '<p>Content coming soon.</p>'
 
 
-def build_feed(articles_path, title, language, output_path, feed_url_slug):
+def build_feed(articles_path, title, language, output_path, feed_url_slug, url_prefix='en'):
     """Build a JSON Feed v1.1 file with full article content."""
     data = json.loads(articles_path.read_text(encoding='utf-8'))
 
     items = []
     for board in data['boards']:
         for art in board['posts']:
-            body_html = get_body(art['slug'], board['id'])
+            md_lang = 'zh' if language == 'zh-CN' else 'en'
+            body_html = get_body(art['slug'], board['id'], md_lang)
             body_text = re.sub(r'<[^>]+>', ' ', body_html)
             body_text = re.sub(r'\s+', ' ', body_text).strip()
 
@@ -54,7 +55,10 @@ def build_feed(articles_path, title, language, output_path, feed_url_slug):
                 r'<h[12][^>]*>' + re.escape(art['title']) + r'</h[12]>', '', body_html, count=1
             )
 
-            art_url = f"{SITE_URL}/en/{board['id']}/{art['slug']}.html"
+            if url_prefix:
+                art_url = f"{SITE_URL}/{url_prefix}/{board['id']}/{art['slug']}.html"
+            else:
+                art_url = f"{SITE_URL}/{board['id']}/{art['slug']}.html"
             entry = {
                 'id': art_url,
                 'url': art_url,
@@ -100,7 +104,7 @@ def main():
 
     if CN_ARTICLES.exists():
         n = build_feed(CN_ARTICLES, 'AI自习室 (中文)', 'zh-CN',
-                       ROOT / 'feed.json', 'feed.json')
+                       ROOT / 'feed.json', 'feed.json', url_prefix='')
         results['feed.json'] = n
 
     print('JSON Feed generation complete (full content):')

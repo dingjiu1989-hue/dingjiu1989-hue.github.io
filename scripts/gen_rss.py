@@ -21,9 +21,9 @@ def _rfc822(date_str):
     return format_datetime(dt, usegmt=True)
 
 
-def get_body_html(slug, board_id):
+def get_body_html(slug, board_id, lang="en"):
     """Read article body from md file, convert to HTML."""
-    md_path = ROOT / 'md' / 'en' / board_id / f'{slug}.md'
+    md_path = ROOT / 'md' / lang / board_id / f'{slug}.md'
     if md_path.exists():
         content = md_path.read_text(encoding='utf-8')
         if content.startswith('---'):
@@ -59,13 +59,14 @@ def build_feed(articles_json, base_path, title, description, lang, homepage):
 
     items = []
     for i, p in enumerate(posts):
-        url = f'{BASE}/{base_path}/{p["board"]}/{p["slug"]}.html'
+        url = f'{BASE}/{base_path}/{p["board"]}/{p["slug"]}.html' if base_path else f'{BASE}/{p["board"]}/{p["slug"]}.html'
 
         # Full content for most recent 50
         content_encoded = ''
         if i < 50:
             try:
-                body = get_body_html(p['slug'], p['board'])
+                md_lang = 'zh' if lang == 'zh-CN' else 'en'
+                body = get_body_html(p['slug'], p['board'], md_lang)
                 # Strip H1 title duplicate from body
                 body = re.sub(r'<h[12][^>]*>' + re.escape(p['title']) + r'</h[12]>', '', body, count=1)
                 content_encoded = f'\n      <content:encoded>{cdata(body)}</content:encoded>'
