@@ -24,6 +24,7 @@ from urllib.error import URLError, HTTPError
 ROOT = Path(__file__).resolve().parent.parent
 TODAY = date.today().isoformat()
 SLUG = f"ai-daily-news-{TODAY}"
+CURATED_PATH = ROOT / "data" / f"curated-news-{TODAY}.json"
 
 # ── RSS Feeds ──
 RSS_FEEDS = [
@@ -384,6 +385,27 @@ def main():
 
     en_path = en_md_dir / f"{SLUG}.md"
     cn_path = cn_md_dir / f"{SLUG}.md"
+
+    # ── Check for web-curated news first ──
+    if CURATED_PATH.exists():
+        print(f"Loading web-curated news from {CURATED_PATH}...")
+        curated = json.loads(CURATED_PATH.read_text(encoding="utf-8"))
+        top_items = []
+        for item in curated:
+            top_items.append((
+                item["title"], item.get("link", ""),
+                item.get("summary", ""), item.get("source", ""),
+            ))
+        if len(top_items) >= 3:
+            print(f"Using {len(top_items[:10])} web-curated items (primary source).")
+            en_content = make_en_daily(top_items[:10])
+            cn_content = make_cn_daily(top_items[:10])
+            en_path.write_text(en_content, encoding="utf-8")
+            cn_path.write_text(cn_content, encoding="utf-8")
+            print(f"\nDaily AI news generated for {TODAY} (web-curated):")
+            print(f"  EN: {en_path}")
+            print(f"  CN: {cn_path}")
+            return
 
     if en_path.exists() or cn_path.exists():
         print(f"Daily news for {TODAY} already exists. Skipping.")
