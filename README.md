@@ -2,7 +2,7 @@
 
 > Curated tools & tutorials for developers
 
-**850 bilingual technical articles** — English & Chinese — covering AI, web development, DevOps, tools, and side hustles.
+**860 bilingual technical articles** — English & Chinese — covering AI, web development, DevOps, tools, and side hustles.
 
 🌐 **Website:** [https://dingjiu1989-hue.github.io](https://dingjiu1989-hue.github.io/en/)
 🤖 **AI-friendly index:** [`/en/llms.txt`](https://dingjiu1989-hue.github.io/en/llms.txt)
@@ -11,18 +11,19 @@
 
 ## 📊 Stats
 
-- **Total articles:** 850
-- **Categories:** 8
+- **Total articles:** 860
+- **Categories:** 9
 - **AI crawler optimized:** Yes (llms.txt, structured data, sitemap)
 
 ## 📚 Content by Category
 
 | Category | Articles | Link |
 |----------|----------|------|
+| 📰 AI Daily Digest | 6 | [Browse](https://dingjiu1989-hue.github.io/en/daily/) |
 | 💻 Tech Tutorials | 130 | [Browse](https://dingjiu1989-hue.github.io/en/tech/) |
 | 💰 Side Hustle | 100 | [Browse](https://dingjiu1989-hue.github.io/en/sidehustle/) |
 | 🛠️ Tool Recommendations | 115 | [Browse](https://dingjiu1989-hue.github.io/en/tools/) |
-| 🤖 AI Tutorials | 105 | [Browse](https://dingjiu1989-hue.github.io/en/ai/) |
+| 🤖 AI Tutorials | 109 | [Browse](https://dingjiu1989-hue.github.io/en/ai/) |
 | ⚖️ Comparisons | 95 | [Browse](https://dingjiu1989-hue.github.io/en/compare/) |
 | 🔒 Security | 106 | [Browse](https://dingjiu1989-hue.github.io/en/security/) |
 | 🗄️ Database | 99 | [Browse](https://dingjiu1989-hue.github.io/en/database/) |
@@ -30,7 +31,7 @@
 
 ## 🔗 Cross-Platform
 
-- [Dev.to](https://dev.to/dingjiu1989) — 225 articles with canonical URLs
+- [Dev.to](https://dev.to/dingjiu1989) — 844 articles with canonical URLs
 - [Hashnode](https://aisourcehub.hashnode.dev) — syndicated articles
 
 ---
