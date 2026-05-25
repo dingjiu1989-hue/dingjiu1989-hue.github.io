@@ -13666,7 +13666,12 @@ def make_article_html(art, board_id, board_name, all_posts):
     else:
         tools_html = ''
 
-    article_type = "TechArticle" if board_id in ("tech", "ai", "compare", "database", "security", "architecture") else "Article"
+    if board_id == "daily":
+        article_type = "NewsArticle"
+    elif board_id in ("tech", "ai", "compare", "database", "security", "architecture"):
+        article_type = "TechArticle"
+    else:
+        article_type = "Article"
     # Determine proficiency level from tags
     art_tags = [t.lower() for t in art.get('tags', [])] if isinstance(art.get('tags', []), list) else []
     if any(w in art_tags for w in ['advanced', 'expert', 'production', 'optimization', 'scaling', 'performance']):

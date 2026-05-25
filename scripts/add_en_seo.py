@@ -294,16 +294,21 @@ def regenerate_sitemap():
                 continue
 
             # Determine priority from file size (proxy for content depth)
-            fsize = html_path.stat().st_size
-            if fsize > 18000:
+            # Daily articles get highest priority — fresh content needs faster crawl
+            if board['id'] == 'daily':
                 priority = '0.9'
-                freq = 'weekly'
-            elif fsize > 12000:
-                priority = '0.8'
-                freq = 'weekly'
+                freq = 'daily'
             else:
-                priority = '0.7'
-                freq = 'weekly'
+                fsize = html_path.stat().st_size
+                if fsize > 18000:
+                    priority = '0.9'
+                    freq = 'weekly'
+                elif fsize > 12000:
+                    priority = '0.8'
+                    freq = 'weekly'
+                else:
+                    priority = '0.7'
+                    freq = 'weekly'
 
             # Hreflang
             hreflangs = [f'<xhtml:link rel="alternate" hreflang="en" href="{art_en}"/>']
@@ -338,16 +343,20 @@ def regenerate_sitemap():
                 if 'noindex' in html and '<meta name="robots" content="noindex' in html:
                     continue
 
-                fsize = html_path.stat().st_size
-                if fsize > 18000:
+                if board['id'] == 'daily':
                     priority = '0.9'
-                    freq = 'weekly'
-                elif fsize > 12000:
-                    priority = '0.8'
-                    freq = 'weekly'
+                    freq = 'daily'
                 else:
-                    priority = '0.7'
-                    freq = 'weekly'
+                    fsize = html_path.stat().st_size
+                    if fsize > 18000:
+                        priority = '0.9'
+                        freq = 'weekly'
+                    elif fsize > 12000:
+                        priority = '0.8'
+                        freq = 'weekly'
+                    else:
+                        priority = '0.7'
+                        freq = 'weekly'
 
                 lastmod = art.get('lastActive', art.get('date', TODAY))
 

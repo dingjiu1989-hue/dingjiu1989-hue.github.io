@@ -28,12 +28,18 @@ ALWAYS_FRESH = [
     f'{BASE_URL}/sidehustle/',
     f'{BASE_URL}/tools/',
     f'{BASE_URL}/ai/',
+    f'{BASE_URL}/daily/',   # daily index = fresh news
     # English pages
     f'{BASE_URL}/en/',
     f'{BASE_URL}/en/tech/',
     f'{BASE_URL}/en/sidehustle/',
     f'{BASE_URL}/en/tools/',
     f'{BASE_URL}/en/ai/',
+    f'{BASE_URL}/en/daily/',
+    f'{BASE_URL}/en/compare/',
+    f'{BASE_URL}/en/security/',
+    f'{BASE_URL}/en/database/',
+    f'{BASE_URL}/en/architecture/',
 ]
 
 # ── Helpers ─────────────────────────────────────────────────────────
@@ -47,6 +53,17 @@ def log(msg):
 def update_sitemap():
     content = SITEMAP.read_text(encoding='utf-8')
     changed = False
+    # Refresh all daily article URLs' lastmod to today
+    daily_pattern = re.compile(
+        r'(<loc>https://aidev\.fit/(?:en/)?daily/ai-daily-news-[^<]*\.html</loc>\s*<changefreq>[^<]*</changefreq>\s*'
+        r'<priority>[^<]*</priority>\s*<lastmod>)[^<]*(</lastmod>)'
+    )
+    new_content, n = daily_pattern.subn(rf'\g<1>{TODAY}\g<2>', content)
+    if n:
+        content = new_content
+        changed = True
+        log(f'Daily article lastmod refreshed ({n} URLs)')
+
     for url in ALWAYS_FRESH:
         escaped = re.escape(url)
         pattern = re.compile(

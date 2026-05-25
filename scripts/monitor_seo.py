@@ -18,8 +18,9 @@ from datetime import date, datetime
 from collections import defaultdict
 
 ROOT = Path(__file__).resolve().parent.parent
-SITEMAP_URL = "https://dingjiu1989-hue.github.io/sitemap.xml"
-BASE = "https://dingjiu1989-hue.github.io"
+SITE = "https://aidev.fit"
+SITEMAP_URL = f"{SITE}/sitemap.xml"
+BASE = SITE
 DATA_DIR = ROOT / "data"
 HEALTH_FILE = DATA_DIR / "seo-health.json"
 
@@ -343,8 +344,8 @@ def check_ai_friendly_files():
         sitemaps = re.findall(r'^Sitemap: (.+)$', robots, re.MULTILINE)
         results["robots_txt"]["sitemaps"] = sitemaps
         expected_sitemaps = [
-            "https://dingjiu1989-hue.github.io/sitemap.xml",
-            "https://dingjiu1989-hue.github.io/images/sitemap.xml",
+            f"{SITE}/sitemap.xml",
+            f"{SITE}/images/sitemap.xml",
         ]
         for expected in expected_sitemaps:
             if expected not in sitemaps:
@@ -507,13 +508,19 @@ def pull_gsc_data():
         try:
             sites = service.sites().list().execute()
             for s in sites.get("siteEntry", []):
-                if "dingjiu1989-hue.github.io" in s.get("siteUrl", ""):
+                if SITE in s.get("siteUrl", ""):
                     site_url = s["siteUrl"]
                     break
+            # Fallback: try github.io property for backward compat
+            if not site_url:
+                for s in sites.get("siteEntry", []):
+                    if "dingjiu1989-hue.github.io" in s.get("siteUrl", ""):
+                        site_url = s["siteUrl"]
+                        break
         except Exception:
             pass
         if not site_url:
-            site_url = "https://dingjiu1989-hue.github.io/"
+            site_url = f"{SITE}/"
 
         print(f"  Connected to GSC: {site_url}")
 
