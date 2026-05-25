@@ -21,7 +21,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install google-api-python-client google-auth google-auth-oauthlib requests beautifulsoup4 html2text
+        run: pip install google-api-python-client google-auth google-auth-oauthlib requests beautifulsoup4 html2text markdown Pillow
 
       - name: Run maintenance
         env:
@@ -53,7 +53,7 @@ jobs:
         run: python3 scripts/generate_json_feed.py
 
       - name: Generate AI-friendly artifacts
-        run: python3 scripts/gen_ai_friendly.py
+        run: PYTHONPATH=. python3 scripts/gen_ai_friendly.py
 
       - name: Generate README
         run: python3 scripts/gen_readme.py

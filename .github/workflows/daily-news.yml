@@ -11,10 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install Pillow html2text markdown
 
       - name: Generate daily AI news from RSS feeds
         run: python3 scripts/gen_daily_news.py
@@ -23,18 +32,18 @@ jobs:
         run: python3 scripts/register_new_articles.py
 
       - name: Rebuild full site
-        run: python3 scripts/gen_en_site.py
+        run: PYTHONPATH=. python3 scripts/gen_en_site.py
 
       - name: Generate AI-friendly files
-        run: python3 scripts/gen_ai_friendly.py
+        run: PYTHONPATH=. python3 scripts/gen_ai_friendly.py
 
       - name: Update RSS feeds and JSON feeds
         run: |
-          python3 scripts/gen_rss.py
-          python3 scripts/generate_json_feed.py
+          PYTHONPATH=. python3 scripts/gen_rss.py
+          PYTHONPATH=. python3 scripts/generate_json_feed.py
 
       - name: Submit URLs to IndexNow
-        run: python3 scripts/indexnow_submit.py
+        run: PYTHONPATH=. python3 scripts/indexnow_submit.py
 
       - name: Check for changes
         id: changes
