@@ -529,6 +529,41 @@ body_html = get_body(art['slug'], board['id'], md_lang)
 
 ---
 
+## Duplicate RSS Generation: maintenance.py Overwrites gen_rss.py Output
+
+**Symptoms:** Remote RSS feeds have correct URLs but zero `content:encoded` elements. XML structure is simpler than expected — missing `xmlns:content` namespace, no `<category>` tags, different `<lastBuildDate>` format. Feeds generated locally via `gen_rss.py` look correct, but the deployed version on `aidev.fit` is different.
+
+**Root cause:** `scripts/maintenance.py` had its own `generate_rss()` function (lines 179–213, now removed) that was completely independent of `scripts/gen_rss.py`. In the maintenance workflow, `gen_rss.py` ran first in the "Rebuild site" step (producing full-content feeds), then `maintenance.py` ran in the "Run maintenance" step and **overwrote** both `feed.xml` and `en/feed.xml` with metadata-only versions.
+
+The duplicate had zero overlap with `gen_rss.py`:
+- No `xmlns:content` namespace → no `<content:encoded>` elements
+- No markdown body reading → description-only, no full article text
+- No date sorting — boards iterated in JSON order
+- No WebSub hub link
+- No `content:encoded` CDATA blocks
+
+**Fix (2026-05-25):** Removed `generate_rss()` function and its calls from `maintenance.py:main()`. RSS feed generation is now handled exclusively by `gen_rss.py`, which is called in the "Rebuild site" step before `maintenance.py` runs.
+
+**Before (in maintenance.py `main()`):**
+```python
+print('[3/6] Chinese RSS feed')
+generate_rss(data, FEED_XML, 'zh')
+...
+print('[5/6] English RSS feed')
+if en_data:
+    generate_rss(en_data, EN_FEED_XML, 'en')
+```
+
+**After:** These steps removed. The workflow already runs `python3 scripts/gen_rss.py` in the "Rebuild site" step, which produces full-content feeds with `content:encoded`.
+
+**Files involved:**
+- `scripts/maintenance.py` — deleted `generate_rss()` function (~35 lines) and 2 call sites in `main()`
+- `scripts/gen_rss.py` — canonical RSS generator (unchanged, now not overwritten)
+
+**Lesson:** When a workflow calls multiple scripts that touch the same output files, check whether later steps silently overwrite earlier ones. The `gen_rss.py` → `maintenance.py` ordering was the correct intent (full RSS → rest of maintenance), but the overwrite made the ordering harmful.
+
+---
+
 ## Adding a New Issue
 
 When you discover a new problem:
