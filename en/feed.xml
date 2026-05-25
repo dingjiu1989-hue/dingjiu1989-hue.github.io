@@ -5,7 +5,7 @@
     <link>https://aidev.fit/en/</link>
     <description>Developer tutorials, comparisons, side-hustle guides, and AI insights.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 25 May 2026 13:44:27 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 25 May 2026 13:48:53 GMT</lastBuildDate>
     <atom:link href="https://aidev.fit/en/feed.xml" rel="self" type="application/rss+xml"/>
     <atom:link rel="hub" href="https://pubsubhubbub.appspot.com/"/>
     <item>
@@ -13,7 +13,7 @@
       <link>https://aidev.fit/en/daily/ai-daily-news-2026-05-25.html</link>
       <guid isPermaLink="true">https://aidev.fit/en/daily/ai-daily-news-2026-05-25.html</guid>
       <description><![CDATA[Top 10 AI news today: OpenAI cracks Erdős problem, Pope issues first AI encyclical, Anthropic posts first profit, White House $9B classified AI budget, US-China AI dialogue begins, and more.]]></description>
-      <content:encoded><![CDATA[<h1>AI Daily Digest — 2026-05-25</h1>
+      <content:encoded><![CDATA[
 <p><em>Your daily briefing on what's happening in AI — from groundbreaking research to industry moves, curated from the world's most trusted sources. Here are the top stories for 2026-05-25.</em></p>
 <h2>1. OpenAI's AI autonomously solves 80-year-old Erdős math problem</h2>
 <p>OpenAI revealed that one of its advanced reasoning models independently solved the Erdős unit distance problem — a famous open conjecture in discrete geometry unsolved since 1946. External mathematicians verified the proof, marking the first time an AI autonomously produced a verifiable, novel scientific discovery without being specifically trained for theorem proving. Fields Medalist Timothy Gowers separately reported that GPT-5.5 Pro solved multiple open problems from a recent additive number theory paper in about an hour.</p>
@@ -49,7 +49,7 @@
 <h2>💬 What Do You Think?</h2>
 <p><em>Which of today's stories matters most for developers? Is AI solving math problems a breakthrough or an overhyped benchmark? Drop a comment below — I read and reply to every discussion.</em></p>
 <hr />
-<p><em>📡 Today's sources: WION, Sunday Examiner, The AI Citizen, eWeek, VAR India, MacRumors, R&amp;D World</em></p>
+<p><em>📡 Today's sources: WION, Sunday Examiner, The AI Citizen, eWeek, VAR India, MacRumors, R &amp;D World</em></p>
 <p><em>AI Daily Digest is compiled daily from first-party AI company blogs, major news agencies, technology press, and web research. Edited and curated by a human. Last updated: 2026-05-25.</em></p>]]></content:encoded>
       <pubDate>Mon, 25 May 2026 00:00:00 GMT</pubDate>
     </item>
@@ -271,74 +271,74 @@
 </table>
 <h2>Pipeline API (Modern, Recommended)</h2>
 <p><strong>Best for:</strong> Any time you connect streams together. pipeline() handles cleanup and error propagation automatically — raw .pipe() does not.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">pipeline</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;node:stream/promises&#39;</span><span class="p">);</span>
-<span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">createReadStream</span><span class="p">,</span><span class="w"> </span><span class="n">createWriteStream</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;node:fs&#39;</span><span class="p">);</span>
-<span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">createGzip</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;node:zlib&#39;</span><span class="p">);</span>
+<pre class="codehilite"><code>const { pipeline } = require('node:stream/promises');
+const { createReadStream, createWriteStream } = require('node:fs');
+const { createGzip } = require('node:zlib');
 
-<span class="n">await</span><span class="w"> </span><span class="n">pipeline</span><span class="p">(</span>
-<span class="w">  </span><span class="n">createReadStream</span><span class="p">(</span><span class="s1">&#39;input.json&#39;</span><span class="p">),</span>
-<span class="w">  </span><span class="n">createGzip</span><span class="p">(),</span>
-<span class="w">  </span><span class="n">createWriteStream</span><span class="p">(</span><span class="s1">&#39;input.json.gz&#39;</span><span class="p">),</span>
-<span class="p">);</span>
-<span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Pipeline succeeded — file compressed&#39;</span><span class="p">);</span>
-</code></pre></div>
+await pipeline(
+  createReadStream('input.json'),
+  createGzip(),
+  createWriteStream('input.json.gz'),
+);
+console.log('Pipeline succeeded — file compressed');
+</code></pre>
 
 <h2>Real-World Use Cases</h2>
 <h3>1. Streaming CSV Processing (Avoid OOM on Large Files)</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">createReadStream</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;node:fs&#39;</span><span class="p">);</span>
-<span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">parse</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;csv-parse&#39;</span><span class="p">);</span>
-<span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb nb-Type">Transform</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;node:stream&#39;</span><span class="p">);</span>
+<pre class="codehilite"><code>const { createReadStream } = require('node:fs');
+const { parse } = require('csv-parse');
+const { Transform } = require('node:stream');
 
-<span class="o">//</span><span class="w"> </span><span class="n">Process</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="mi">5</span><span class="n">GB</span><span class="w"> </span><span class="n">CSV</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">constant</span><span class="w"> </span><span class="n">memory</span><span class="w"> </span><span class="p">(</span><span class="o">~</span><span class="mi">50</span><span class="n">MB</span><span class="p">)</span>
-<span class="k">const</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
-<span class="n">createReadStream</span><span class="p">(</span><span class="s1">&#39;massive-file.csv&#39;</span><span class="p">)</span>
-<span class="w">  </span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">parse</span><span class="p">({</span><span class="w"> </span><span class="n">columns</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="w"> </span><span class="p">}))</span>
-<span class="w">  </span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">new</span><span class="w"> </span><span class="nb nb-Type">Transform</span><span class="p">({</span>
-<span class="w">    </span><span class="n">objectMode</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span>
-<span class="w">    </span><span class="n">transform</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">encoding</span><span class="p">,</span><span class="w"> </span><span class="n">callback</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="o">//</span><span class="w"> </span><span class="n">Process</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">optionally</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">row</span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">status</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;active&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">this</span><span class="o">.</span><span class="n">push</span><span class="p">({</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="p">});</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">      </span><span class="n">callback</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}))</span>
-<span class="w">  </span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">results</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
-<span class="w">  </span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="err">`</span><span class="n">Processed</span><span class="w"> </span><span class="o">$</span><span class="p">{</span><span class="n">results</span><span class="o">.</span><span class="n">length</span><span class="p">}</span><span class="w"> </span><span class="n">rows</span><span class="err">`</span><span class="p">));</span>
-</code></pre></div>
+// Process a 5GB CSV file with constant memory (~50MB)
+const results = [];
+createReadStream('massive-file.csv')
+  .pipe(parse({ columns: true }))
+  .pipe(new Transform({
+    objectMode: true,
+    transform(row, encoding, callback) {
+      // Process and optionally filter each row
+      if (row.status === 'active') {
+        this.push({ id: row.id, name: row.name });
+      }
+      callback();
+    }
+  }))
+  .on('data', (row) =&gt; results.push(row))
+  .on('end', () =&gt; console.log(`Processed ${results.length} rows`));
+</code></pre>
 
 <h3>2. HTTP Streaming Large Responses</h3>
-<div class="codehilite"><pre><span></span><code><span class="o">//</span><span class="w"> </span><span class="n">Instead</span><span class="w"> </span><span class="n">of</span><span class="p">:</span><span class="w"> </span><span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">allData</span><span class="p">)</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="n">loads</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">memory</span>
-<span class="o">//</span><span class="w"> </span><span class="n">Use</span><span class="p">:</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">produce</span><span class="w"> </span><span class="n">it</span>
-<span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/api/export&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">async</span><span class="w"> </span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">res</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">res</span><span class="o">.</span><span class="n">setHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span><span class="p">);</span>
-<span class="w">  </span><span class="n">res</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">);</span>
-<span class="w">  </span><span class="n">let</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">true</span><span class="p">;</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">cursor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">.</span><span class="n">collection</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">()</span><span class="o">.</span><span class="n">stream</span><span class="p">();</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">await</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">doc</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">cursor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">first</span><span class="p">)</span><span class="w"> </span><span class="n">res</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">res</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">doc</span><span class="p">));</span>
-<span class="w">    </span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">false</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="w">  </span><span class="n">res</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">);</span>
-<span class="w">  </span><span class="n">res</span><span class="o">.</span><span class="n">end</span><span class="p">();</span>
-<span class="p">});</span>
-</code></pre></div>
+<pre class="codehilite"><code>// Instead of: res.json(allData) — loads all data into memory
+// Use: stream data to client as you produce it
+app.get('/api/export', async (req, res) =&gt; {
+  res.setHeader('Content-Type', 'application/json');
+  res.write('[');
+  let first = true;
+  const cursor = db.collection('events').find().stream();
+  for await (const doc of cursor) {
+    if (!first) res.write(',');
+    res.write(JSON.stringify(doc));
+    first = false;
+  }
+  res.write(']');
+  res.end();
+});
+</code></pre>
 
 <h3>3. Handling Backpressure</h3>
 <p><strong>Best practice:</strong> Respect the return value of write(). When write() returns false, the writable stream's internal buffer is full — pause reading until the drain event fires.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="n">readStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createReadStream</span><span class="p">(</span><span class="s1">&#39;huge-file.bin&#39;</span><span class="p">);</span>
-<span class="k">const</span><span class="w"> </span><span class="n">writeStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createWriteStream</span><span class="p">(</span><span class="s1">&#39;copy.bin&#39;</span><span class="p">);</span>
+<pre class="codehilite"><code>const readStream = createReadStream('huge-file.bin');
+const writeStream = createWriteStream('copy.bin');
 
-<span class="n">readStream</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">canContinue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">writeStream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">);</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">canContinue</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">readStream</span><span class="o">.</span><span class="n">pause</span><span class="p">();</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="n">Stop</span><span class="w"> </span><span class="n">reading</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">full</span>
-<span class="w">    </span><span class="n">writeStream</span><span class="o">.</span><span class="n">once</span><span class="p">(</span><span class="s1">&#39;drain&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">readStream</span><span class="o">.</span><span class="n">resume</span><span class="p">());</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="n">Resume</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">drained</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">});</span>
-<span class="o">//</span><span class="w"> </span><span class="n">Note</span><span class="p">:</span><span class="w"> </span><span class="n">pipeline</span><span class="p">()</span><span class="w"> </span><span class="n">handles</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">automatically</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="n">prefer</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="n">manual</span><span class="w"> </span><span class="n">piping</span>
-</code></pre></div>
+readStream.on('data', (chunk) =&gt; {
+  const canContinue = writeStream.write(chunk);
+  if (!canContinue) {
+    readStream.pause(); // Stop reading — buffer is full
+    writeStream.once('drain', () =&gt; readStream.resume()); // Resume when drained
+  }
+});
+// Note: pipeline() handles this automatically — prefer it over manual piping
+</code></pre>
 
 <p><strong>Bottom line:</strong> Streams are essential for processing data that exceeds memory limits. The pipeline() API should be your default — it handles backpressure, error propagation, and cleanup correctly. Avoid raw .pipe() and .on('data') patterns unless you have a specific reason. See also: <a href="/en/tech/caching-strategies-web-apps.html">Caching Strategies</a> and <a href="/en/tech/rest-api-best-practices.html">REST API Best Practices</a>.</p>]]></content:encoded>
       <pubDate>Wed, 20 May 2026 00:00:00 GMT</pubDate>
@@ -1233,48 +1233,48 @@
 <p><strong>Rule:</strong> Use cursor-based pagination by default. Only use offset when you need random page access.</p>
 <h2>3. Idempotency Keys</h2>
 <p>Network is unreliable. Clients retry. Without idempotency, a retried payment request = double charge. The fix: idempotency keys.</p>
-<div class="codehilite"><pre><span></span><code><span class="c1">// Client sends a unique key:</span>
-<span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">charges</span>
-<span class="n">Idempotency</span><span class="o">-</span><span class="n">Key</span><span class="p">:</span><span class="w"> </span><span class="mf">8f7</span><span class="n">d3a2c</span><span class="o">-</span><span class="mf">9e4</span><span class="n">b</span><span class="o">-</span><span class="mi">4</span><span class="n">a1d</span><span class="o">-</span><span class="mi">8</span><span class="n">c6f</span><span class="o">-</span><span class="mi">3</span><span class="n">b5e7d9a0f2c</span>
+<pre class="codehilite"><code>// Client sends a unique key:
+POST /api/charges
+Idempotency-Key: 8f7d3a2c-9e4b-4a1d-8c6f-3b5e7d9a0f2c
 
-<span class="c1">// Server logic:</span>
-<span class="c1">// 1. Check if key exists in idempotency store (e.g., Redis with 24h TTL)</span>
-<span class="c1">// 2. If NOT found: process request, store response with key</span>
-<span class="c1">// 3. If found: return stored response (same status code, same body)</span>
-</code></pre></div>
+// Server logic:
+// 1. Check if key exists in idempotency store (e.g., Redis with 24h TTL)
+// 2. If NOT found: process request, store response with key
+// 3. If found: return stored response (same status code, same body)
+</code></pre>
 
 <p><strong>Where to use:</strong> Payment endpoints, order creation, any mutation where duplicates are harmful. Stripe's API is the gold standard for idempotency.</p>
 <h2>4. Bulk Operations</h2>
 <p>Single-resource endpoints don't scale when users need to operate on 100 items. Add bulk endpoints for common batch operations.</p>
-<div class="codehilite"><pre><span></span><code><span class="c1">// ❌ 100 individual requests:</span>
-<span class="n">DELETE</span><span class="w"> </span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">tags</span><span class="o">/</span><span class="mi">1</span>
-<span class="n">DELETE</span><span class="w"> </span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">tags</span><span class="o">/</span><span class="mi">2</span>
-<span class="c1">// ... x98</span>
+<pre class="codehilite"><code>// ❌ 100 individual requests:
+DELETE /api/tags/1
+DELETE /api/tags/2
+// ... x98
 
-<span class="c1">// ✅ Bulk endpoint:</span>
-<span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">tags</span><span class="o">/</span><span class="n">bulk</span><span class="o">-</span><span class="nb">delete</span>
-<span class="p">{</span><span class="w"> </span><span class="s">&quot;ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="mi">100</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+// ✅ Bulk endpoint:
+POST /api/tags/bulk-delete
+{ &quot;ids&quot;: [1, 2, 3, ..., 100] }
 
-<span class="c1">// Response is partial-success aware:</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="s">&quot;results&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;deleted&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;not_found&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;forbidden&quot;</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c1">// not owned by user</span>
-<span class="w">  </span><span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div>
+// Response is partial-success aware:
+{
+  &quot;results&quot;: [
+    { &quot;id&quot;: 1, &quot;status&quot;: &quot;deleted&quot; },
+    { &quot;id&quot;: 2, &quot;status&quot;: &quot;not_found&quot; },
+    { &quot;id&quot;: 3, &quot;status&quot;: &quot;forbidden&quot; }  // not owned by user
+  ]
+}
+</code></pre>
 
 <h2>5. Webhooks — Reliable Event Delivery</h2>
 <p>Webhooks let your API push events to external systems. The key is reliable delivery.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">//</span><span class="w"> </span><span class="n">Webhook</span><span class="w"> </span><span class="n">delivery</span><span class="w"> </span><span class="n">pattern</span><span class="p">:</span>
-<span class="o">//</span><span class="w"> </span><span class="mf">1.</span><span class="w"> </span><span class="n">Sign</span><span class="w"> </span><span class="n">payloads</span><span class="w"> </span><span class="p">(</span><span class="n">HMAC</span><span class="o">-</span><span class="n">SHA256</span><span class="p">)</span><span class="w"> </span><span class="n">so</span><span class="w"> </span><span class="n">receivers</span><span class="w"> </span><span class="n">verify</span><span class="w"> </span><span class="n">authenticity</span>
-<span class="o">//</span><span class="w"> </span><span class="mf">2.</span><span class="w"> </span><span class="n">Retry</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">exponential</span><span class="w"> </span><span class="n">backoff</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="nb">min</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="nb">min</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="nb">min</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="n">h</span><span class="p">)</span>
-<span class="o">//</span><span class="w"> </span><span class="mf">3.</span><span class="w"> </span><span class="n">Mark</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="n">after</span><span class="w"> </span><span class="mi">24</span><span class="n">h</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">retries</span>
-<span class="o">//</span><span class="w"> </span><span class="mf">4.</span><span class="w"> </span><span class="n">Provide</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">dashboard</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">manual</span><span class="w"> </span><span class="n">retry</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="n">deliveries</span>
-<span class="o">//</span><span class="w"> </span><span class="mf">5.</span><span class="w"> </span><span class="n">Set</span><span class="w"> </span><span class="n">reasonable</span><span class="w"> </span><span class="n">timeouts</span><span class="w"> </span><span class="p">(</span><span class="mi">10</span><span class="n">s</span><span class="w"> </span><span class="n">connect</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="n">s</span><span class="w"> </span><span class="n">read</span><span class="p">)</span>
-<span class="o">//</span><span class="w"> </span><span class="mf">6.</span><span class="w"> </span><span class="n">Log</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">delivery</span><span class="w"> </span><span class="n">attempts</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">debugging</span>
-</code></pre></div>
+<pre class="codehilite"><code>// Webhook delivery pattern:
+// 1. Sign payloads (HMAC-SHA256) so receivers verify authenticity
+// 2. Retry with exponential backoff (1min, 5min, 25min, 2h, 24h)
+// 3. Mark as failed after 24h of retries
+// 4. Provide a dashboard for manual retry of failed deliveries
+// 5. Set reasonable timeouts (10s connect, 30s read)
+// 6. Log all delivery attempts for debugging
+</code></pre>
 
 <p>Stripe's webhook system is the implementation to study — signatures, retries, and a dashboard for debugging.</p>
 <h2>Quick Checklist</h2>
@@ -2109,89 +2109,89 @@
 </table>
 <h2>Container Queries — The Game Changer</h2>
 <p>Media queries respond to the viewport. Container queries respond to the parent element. This means a component adapts to the space it's given — not the browser window. Write once, drop into any layout.</p>
-<div class="codehilite"><pre><span></span><code><span class="cm">/* Define a container */</span>
-<span class="p">.</span><span class="nx">card</span><span class="o">-</span><span class="nx">container</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">container</span><span class="o">-</span><span class="k">type</span><span class="p">:</span><span class="w"> </span><span class="nx">inline</span><span class="o">-</span><span class="nx">size</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">container</span><span class="o">-</span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="nx">card</span><span class="p">;</span>
-<span class="p">}</span>
+<pre class="codehilite"><code>/* Define a container */
+.card-container {
+  container-type: inline-size;
+  container-name: card;
+}
 
-<span class="cm">/* Style based on container width, NOT viewport */</span>
-<span class="err">@</span><span class="nx">container</span><span class="w"> </span><span class="nx">card</span><span class="w"> </span><span class="p">(</span><span class="nx">min</span><span class="o">-</span><span class="nx">width</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="nx">px</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="p">.</span><span class="nx">card</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">display</span><span class="p">:</span><span class="w"> </span><span class="nx">grid</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">grid</span><span class="o">-</span><span class="nx">template</span><span class="o">-</span><span class="nx">columns</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="nx">fr</span><span class="w"> </span><span class="mi">1</span><span class="nx">fr</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+/* Style based on container width, NOT viewport */
+@container card (min-width: 400px) {
+  .card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
-<span class="err">@</span><span class="nx">container</span><span class="w"> </span><span class="nx">card</span><span class="w"> </span><span class="p">(</span><span class="nx">max</span><span class="o">-</span><span class="nx">width</span><span class="p">:</span><span class="w"> </span><span class="mi">399</span><span class="nx">px</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="p">.</span><span class="nx">card</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">display</span><span class="p">:</span><span class="w"> </span><span class="nx">flex</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">flex</span><span class="o">-</span><span class="nx">direction</span><span class="p">:</span><span class="w"> </span><span class="nx">column</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+@container card (max-width: 399px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+}
+</code></pre>
 
 <h2>Fluid Typography with clamp()</h2>
-<div class="codehilite"><pre><span></span><code><span class="c">/* Instead of 5 media query breakpoints: */</span>
-<span class="nt">h1</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="nf">clamp</span><span class="p">(</span><span class="mi">2</span><span class="kt">rem</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="kt">vw</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="kt">rem</span><span class="p">);</span>
-<span class="w">  </span><span class="c">/* min: 2rem, preferred: 5vw, max: 4rem */</span>
-<span class="w">  </span><span class="c">/* Smoothly scales between viewport widths — no breakpoints */</span>
-<span class="p">}</span>
+<pre class="codehilite"><code>/* Instead of 5 media query breakpoints: */
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  /* min: 2rem, preferred: 5vw, max: 4rem */
+  /* Smoothly scales between viewport widths — no breakpoints */
+}
 
-<span class="nt">p</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="nf">clamp</span><span class="p">(</span><span class="mi">1</span><span class="kt">rem</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="kt">vw</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.875</span><span class="kt">rem</span><span class="p">,</span><span class="w"> </span><span class="mf">1.25</span><span class="kt">rem</span><span class="p">);</span>
-<span class="p">}</span>
+p {
+  font-size: clamp(1rem, 0.5vw + 0.875rem, 1.25rem);
+}
 
-<span class="c">/* Fluid spacing too */</span>
-<span class="nt">section</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="nf">clamp</span><span class="p">(</span><span class="mi">1</span><span class="kt">rem</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="kt">vw</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="kt">rem</span><span class="p">)</span><span class="w"> </span><span class="nf">clamp</span><span class="p">(</span><span class="mi">1</span><span class="kt">rem</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="kt">vw</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="kt">rem</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
+/* Fluid spacing too */
+section {
+  padding: clamp(1rem, 5vw, 4rem) clamp(1rem, 5vw, 6rem);
+}
+</code></pre>
 
 <h2>Modern Grid Layout</h2>
-<div class="codehilite"><pre><span></span><code><span class="cm">/* Auto-responsive grid — no media queries needed */</span>
-<span class="na">.grid</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nl">display:</span><span class="w"> </span><span class="nf">grid</span><span class="c1">;</span>
-<span class="w">  </span><span class="nl">grid-template-columns:</span><span class="w"> </span><span class="na">rep</span><span class="nf">eat</span><span class="p">(</span><span class="no">auto-fit</span><span class="p">,</span><span class="w"> </span><span class="no">minmax</span><span class="p">(</span><span class="no">min</span><span class="p">(</span><span class="mi">300</span><span class="no">px</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="err">%</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="no">fr</span><span class="p">))</span><span class="c1">;</span>
-<span class="w">  </span><span class="nl">gap:</span><span class="w"> </span><span class="err">1</span><span class="nf">rem</span><span class="c1">;</span>
-<span class="err">}</span>
-<span class="cm">/* min(300px, 100%) — prevents overflow on mobile.</span>
-<span class="cm">   auto-fit — adds/removes columns as space allows.</span>
-<span class="cm">   This one line replaces 3 media queries. */</span>
-</code></pre></div>
+<pre class="codehilite"><code>/* Auto-responsive grid — no media queries needed */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 1rem;
+}
+/* min(300px, 100%) — prevents overflow on mobile.
+   auto-fit — adds/removes columns as space allows.
+   This one line replaces 3 media queries. */
+</code></pre>
 
 <h2>Dynamic Viewport Height (Fix Mobile Safari)</h2>
-<div class="codehilite"><pre><span></span><code><span class="o">/*</span><span class="w"> </span><span class="n">Old</span><span class="w"> </span><span class="n">way</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="n">broken</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">mobile</span><span class="w"> </span><span class="p">(</span><span class="n">Safari</span><span class="w"> </span><span class="n">toolbar</span><span class="w"> </span><span class="n">overlaps</span><span class="p">)</span><span class="w"> </span><span class="o">*/</span>
-<span class="o">.</span><span class="n">hero</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="n">vh</span><span class="p">;</span><span class="w"> </span><span class="o">/*</span><span class="w"> </span><span class="err">❌</span><span class="w"> </span><span class="n">Content</span><span class="w"> </span><span class="n">hidden</span><span class="w"> </span><span class="n">behind</span><span class="w"> </span><span class="n">Safari</span><span class="w"> </span><span class="n">toolbar</span><span class="w"> </span><span class="o">*/</span>
-<span class="p">}</span>
+<pre class="codehilite"><code>/* Old way — broken on mobile (Safari toolbar overlaps) */
+.hero {
+  height: 100vh; /* ❌ Content hidden behind Safari toolbar */
+}
 
-<span class="o">/*</span><span class="w"> </span><span class="n">New</span><span class="w"> </span><span class="n">way</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="n">accounts</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">dynamic</span><span class="w"> </span><span class="n">toolbar</span><span class="w"> </span><span class="o">*/</span>
-<span class="o">.</span><span class="n">hero</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="n">dvh</span><span class="p">;</span><span class="w"> </span><span class="o">/*</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="n">Works</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">mobile</span><span class="w"> </span><span class="n">browsers</span><span class="w"> </span><span class="o">*/</span>
-<span class="w">  </span><span class="o">/*</span><span class="w"> </span><span class="n">dvh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dynamic</span><span class="w"> </span><span class="n">viewport</span><span class="w"> </span><span class="n">height</span><span class="o">.</span>
-<span class="w">     </span><span class="n">svh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">smallest</span><span class="w"> </span><span class="p">(</span><span class="n">toolbar</span><span class="w"> </span><span class="n">visible</span><span class="p">)</span><span class="o">.</span>
-<span class="w">     </span><span class="n">lvh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">largest</span><span class="w"> </span><span class="p">(</span><span class="n">toolbar</span><span class="w"> </span><span class="n">hidden</span><span class="p">)</span><span class="o">.</span><span class="w"> </span><span class="o">*/</span>
-<span class="p">}</span>
-</code></pre></div>
+/* New way — accounts for dynamic toolbar */
+.hero {
+  height: 100dvh; /* ✅ Works on all mobile browsers */
+  /* dvh = dynamic viewport height.
+     svh = smallest (toolbar visible).
+     lvh = largest (toolbar hidden). */
+}
+</code></pre>
 
 <h2>The :has() Selector — Parent Styling</h2>
-<div class="codehilite"><pre><span></span><code><span class="cm">/* Style a card differently when it contains an image */</span>
-<span class="nl">.card:</span><span class="nf">has</span><span class="p">(</span><span class="no">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nl">grid-column:</span><span class="w"> </span><span class="nf">span</span><span class="w"> </span><span class="mi">2</span><span class="c1">;</span>
-<span class="err">}</span>
+<pre class="codehilite"><code>/* Style a card differently when it contains an image */
+.card:has(img) {
+  grid-column: span 2;
+}
 
-<span class="cm">/* Style form group when input is invalid */</span>
-<span class="nl">.form-group:</span><span class="nf">has</span><span class="p">(</span><span class="no">input</span><span class="p">:</span><span class="no">invalid</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nl">border-left:</span><span class="w"> </span><span class="err">3</span><span class="nf">px</span><span class="w"> </span><span class="no">solid</span><span class="w"> </span><span class="no">red</span><span class="c1">;</span>
-<span class="err">}</span>
+/* Style form group when input is invalid */
+.form-group:has(input:invalid) {
+  border-left: 3px solid red;
+}
 
-<span class="cm">/* Style a section when it&#39;s empty */</span>
-<span class="nl">section:</span><span class="nf">has</span><span class="p">(:</span><span class="no">not</span><span class="p">(*))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nl">display:</span><span class="w"> </span><span class="nf">none</span><span class="c1">;</span>
-<span class="err">}</span>
-</code></pre></div>
+/* Style a section when it's empty */
+section:has(:not(*)) {
+  display: none;
+}
+</code></pre>
 
 <h2>Responsive Layout Patterns</h2>
 <table>
