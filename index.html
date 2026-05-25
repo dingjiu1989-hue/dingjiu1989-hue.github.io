@@ -90,5 +90,13 @@
 
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>本网站使用 Cookie 进行分析和个性化广告。继续使用即表示同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 — Page Not Found | SourceHub</title>
-  <meta name="description" content="The page you are looking for does not exist or has been moved. Browse our developer tutorials, tool comparisons, and AI guides.">
+  <title>404 — Page Not Found | AI Study Room</title>
+  <meta name="description" content="The page you are looking for does not exist or has been moved. Browse our 859+ developer tutorials, tool comparisons, and AI guides.">
   <meta name="robots" content="noindex, follow">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="canonical" href="https://aidev.fit/en/">
@@ -43,5 +43,13 @@
 </main>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
+if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+</script>
 </body>
 </html>

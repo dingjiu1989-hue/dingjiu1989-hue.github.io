@@ -634,6 +634,7 @@ Crawl-Delay: 10
 
 Sitemap: {BASE}/sitemap.xml
 Sitemap: {BASE}/images/sitemap.xml
+Sitemap: {BASE}/en/news-sitemap.xml
 """
     (ROOT / "robots.txt").write_text(robots, encoding="utf-8")
     print("  robots.txt updated: 36 AI crawler rules")

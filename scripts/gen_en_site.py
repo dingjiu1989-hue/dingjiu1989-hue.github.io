@@ -13162,7 +13162,7 @@ BODIES['ai-coding-tools-90-days'] = '''
 <h2>Further Reading</h2>
 <p>For a more detailed feature-by-feature comparison of Cursor vs Copilot vs Claude Code, see my <a href="{BASE}/en/compare/cursor-vs-copilot-vs-claude-code.html">full comparison article</a>. For benchmark data on LLM coding performance across more models, check the <a href="{BASE}/en/ai/best-llms-for-coding-2026.html">LLM for coding guide</a>.</p>
 
-<p><em>This article was originally published on <a href="{BASE}/en/ai/ai-coding-tools-90-days.html">SourceHub</a>.</em></p>
+<p><em>This article was originally published on <a href="{BASE}/en/ai/ai-coding-tools-90-days.html">AI Study Room</a>.</em></p>
 '''
 
 # Helper: escape a string for safe interpolation into JSON string values
@@ -13379,17 +13379,17 @@ def make_article_html(art, board_id, board_name, all_posts):
     meta_desc = art['description']
     if len(meta_desc) < 120:
         board_suffixes = {
-            'ai': ' — in-depth AI guide with practical examples on SourceHub.',
-            'tech': ' — comprehensive developer tutorial on SourceHub.',
-            'tools': ' — detailed tool review and comparison on SourceHub.',
-            'architecture': ' — software architecture deep-dive on SourceHub.',
-            'database': ' — database engineering guide on SourceHub.',
-            'security': ' — security best practices guide on SourceHub.',
-            'compare': ' — unbiased tool comparison on SourceHub.',
-            'sidehustle': ' — developer business and monetization guide on SourceHub.',
-            'daily': ' — AI news digest curated on SourceHub.',
+            'ai': ' — in-depth AI guide with practical examples on AI Study Room.',
+            'tech': ' — comprehensive developer tutorial on AI Study Room.',
+            'tools': ' — detailed tool review and comparison on AI Study Room.',
+            'architecture': ' — software architecture deep-dive on AI Study Room.',
+            'database': ' — database engineering guide on AI Study Room.',
+            'security': ' — security best practices guide on AI Study Room.',
+            'compare': ' — unbiased tool comparison on AI Study Room.',
+            'sidehustle': ' — developer business and monetization guide on AI Study Room.',
+            'daily': ' — AI news digest curated on AI Study Room.',
         }
-        suffix = board_suffixes.get(board_id, ' — developer guide on SourceHub.')
+        suffix = board_suffixes.get(board_id, ' — developer guide on AI Study Room.')
         # Ensure total ≤ 160 chars, cutting at word boundary
         max_original = 160 - len(suffix)
         if len(meta_desc) > max_original:
@@ -13406,7 +13406,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     <meta property="og:description" content="{meta_desc}">
     <meta property="og:url" content="{art_url}">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="{cover_url}">
     <meta property="og:image:width" content="1200">
@@ -13638,8 +13638,9 @@ def make_article_html(art, board_id, board_name, all_posts):
       <a href="#giscus-section">Join the discussion ↓</a>
     </div>'''
 
-    # Mid-content AdSense — placed after article body at ~60% scroll depth
-    ad_mid = f'''<div style="margin:2rem 0;text-align:center;">
+    # Mid-content AdSense — placed after article body with clear label
+    ad_mid = f'''<div class="ad-container">
+    <div class="ad-label">— Advertisement —</div>
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3258394111169733"
@@ -13708,7 +13709,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
 {og_tags}
     <link rel="preload" as="image" href="{cover_webp}" type="image/webp" fetchpriority="high">
-    <title>{art['title']} — SourceHub</title>
+    <title>{art['title']} — AI Study Room</title>
     <meta name="description" content="{meta_desc}">
     <meta name="keywords" content="{tags_str}">
 {cn_hreflang}    <link rel="alternate" hreflang="en" href="{en_url}">
@@ -13729,8 +13730,19 @@ def make_article_html(art, board_id, board_name, all_posts):
       "inLanguage": "en",
       "isAccessibleForFree": true{proficiency},
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "author": {{"@type": "Person", "name": "SourceHub"}},
-      "publisher": {{"@type": "Organization", "name": "SourceHub", "logo": {{"@type": "ImageObject", "url": "{BASE}/images/logo.png"}}}},
+      "author": {{"@type": "Person", "name": "AI Study Room"}},
+      "publisher": {{
+        "@type": "NewsMediaOrganization",
+        "name": "AI Study Room",
+        "url": "{BASE}/en/",
+        "logo": {{"@type": "ImageObject", "url": "{BASE}/images/logo.png"}},
+        "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+        "correctionsPolicy": "{BASE}/en/corrections.html",
+        "ethicsPolicy": "{BASE}/en/ethics.html",
+        "diversityPolicy": "{BASE}/en/editorial-standards.html",
+        "actionableFeedbackPolicy": "{BASE}/en/about.html",
+        "foundingDate": "2025"
+      }},
       "mainEntityOfPage": {{"@type": "WebPage", "@id": "{art_url}"}}{sameas_json},
       "articleBody": {body_json}
     }}
@@ -13772,11 +13784,15 @@ def make_article_html(art, board_id, board_name, all_posts):
         <div class="article-tags">{pin_h}{tags_h}</div>
         <h1 class="article-title">{art['title']}</h1>
         <div class="article-meta">
+          <span class="author-name">By AI Study Room</span>
+          <span class="meta-sep">·</span>
           <time datetime="{art['date']}">{art['date']}</time>
           <span class="meta-sep">·</span>
           <span>{read_time} min read</span>
           <span class="meta-sep">·</span>
           <span>{article_views} views</span>
+          <span class="meta-sep">·</span>
+          <span>{word_est} words</span>
         </div>
         <picture><source srcset="{cover_webp}" type="image/webp"><img class="article-cover" src="{cover_url}" alt="{art['title']}" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         {toc_inline_html}
@@ -13814,6 +13830,14 @@ def make_article_html(art, board_id, board_name, all_posts):
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){{localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}}
+if(!localStorage.getItem('cookies_accepted')){{document.addEventListener('DOMContentLoaded',function(){{document.getElementById('cookie-banner').classList.add('show');}});}}
+</script>
 </body>
 </html>'''
 
@@ -13856,23 +13880,23 @@ def make_homepage(data):
     gtag('config', 'G-XGFYGQE9NS');
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
-    <meta property="og:title" content="SourceHub — {site['tagline']}">
+    <meta property="og:title" content="AI Study Room — {site['tagline']}">
     <meta property="og:description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
     <meta property="og:url" content="{BASE}/en/">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="{BASE}/images/logo.png">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SourceHub — {site['tagline']}">
+    <meta name="twitter:title" content="AI Study Room — {site['tagline']}">
     <meta name="twitter:description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
     <meta name="twitter:image" content="{BASE}/images/logo.png">
-    <title>SourceHub — {site['tagline']}</title>
+    <title>AI Study Room — {site['tagline']}</title>
     <meta name="description" content="Forum-style resource library aggregating tech tutorials, side hustle ideas, tool recommendations, and AI guides.">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="alternate" type="application/rss+xml" title="SourceHub RSS" href="/en/feed.xml">
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room RSS" href="/en/feed.xml">
     <link rel="hub" href="https://pubsubhubbub.appspot.com/">
     <link rel="alternate" hreflang="zh-CN" href="{BASE}/">
     <link rel="alternate" hreflang="en" href="{BASE}/en/">
@@ -13882,7 +13906,7 @@ def make_homepage(data):
     {{
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "SourceHub",
+      "name": "AI Study Room",
       "url": "{BASE}/en/",
       "description": "{site['tagline']}",
       "acquireLicensePage": "{BASE}/en/about.html",
@@ -13899,10 +13923,16 @@ def make_homepage(data):
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "SourceHub",
+      "@type": "NewsMediaOrganization",
+      "name": "AI Study Room",
       "url": "{BASE}/en/",
-      "logo": "{BASE}/images/logo.png"
+      "logo": "{BASE}/images/logo.png",
+      "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"],
+      "correctionsPolicy": "{BASE}/en/corrections.html",
+      "ethicsPolicy": "{BASE}/en/ethics.html",
+      "diversityPolicy": "{BASE}/en/editorial-standards.html",
+      "actionableFeedbackPolicy": "{BASE}/en/about.html",
+      "foundingDate": "2025"
     }}
     </script>
     <script>
@@ -13928,7 +13958,7 @@ def make_homepage(data):
 <main>
   <section class="hero">
     <div class="container">
-      <h1>📚 Welcome to SourceHub</h1>
+      <h1>📚 Welcome to AI Study Room</h1>
       <p>{site['tagline']}</p>
       <div class="hero-stats" id="hero-stats">
         <span class="hero-stat">📂 {total_boards} boards</span>
@@ -13956,6 +13986,14 @@ def make_homepage(data):
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
 <script src="/js/search.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){{localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}}
+if(!localStorage.getItem('cookies_accepted')){{document.addEventListener('DOMContentLoaded',function(){{document.getElementById('cookie-banner').classList.add('show');}});}}
+</script>
 </body>
 </html>'''
 
@@ -14060,20 +14098,20 @@ def make_category(data, board_id):
     gtag('config', 'G-XGFYGQE9NS');
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3258394111169733" crossorigin="anonymous"></script>
-    <meta property="og:title" content="{title} — SourceHub">
+    <meta property="og:title" content="{title} — AI Study Room">
     <meta property="og:description" content="{board_descs[board_id]}">
     <meta property="og:url" content="{en_url}">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="{BASE}/images/logo.png">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{title} — SourceHub">
+    <meta name="twitter:title" content="{title} — AI Study Room">
     <meta name="twitter:description" content="{board_descs[board_id]}">
     <meta name="twitter:image" content="{BASE}/images/logo.png">
-    <title>{title} — SourceHub</title>
+    <title>{title} — AI Study Room</title>
     <meta name="description" content="{board_descs[board_id]}">
     <meta name="keywords" content="{board_keywords[board_id]}">
     <link rel="stylesheet" href="/css/style.css">
@@ -14138,6 +14176,14 @@ def make_category(data, board_id):
 
 <script src="/js/include.js"></script>
 <script src="/js/render.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){{localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}}
+if(!localStorage.getItem('cookies_accepted')){{document.addEventListener('DOMContentLoaded',function(){{document.getElementById('cookie-banner').classList.add('show');}});}}
+</script>
 </body>
 </html>'''
 
@@ -14173,34 +14219,34 @@ def make_all_html(data):
     <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
     <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All {total} Articles — SourceHub</title>
+    <title>All {total} Articles — AI Study Room</title>
     <meta name="description" content="Complete index of {total} developer articles across {len(data['boards'])} topic boards: tech tutorials, AI guides, tool comparisons, side hustle, security, database, and architecture.">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="canonical" href="{BASE}/en/all.html">
     <link rel="alternate" hreflang="en" href="{BASE}/en/all.html">
     <link rel="alternate" hreflang="zh-CN" href="{BASE}/all.html">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="All {total} Articles — SourceHub">
+    <meta property="og:title" content="All {total} Articles — AI Study Room">
     <meta property="og:description" content="Complete index of {total} developer articles across {len(data['boards'])} topic boards.">
     <meta property="og:url" content="{BASE}/en/all.html">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:site_name" content="AI Study Room">
     <meta property="og:image" content="{BASE}/images/og-default.jpg">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="All {total} Articles — SourceHub">
+    <meta name="twitter:title" content="All {total} Articles — AI Study Room">
     <meta name="twitter:description" content="Complete developer article index: {total} articles across {len(data['boards'])} topic boards.">
     <meta name="twitter:image" content="{BASE}/images/og-default.jpg">
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",
       "@type": "CollectionPage",
-      "name": "All Articles — SourceHub",
+      "name": "All Articles — AI Study Room",
       "description": "Complete index of {total} developer articles across {len(data['boards'])} topic boards.",
       "url": "{BASE}/en/all.html",
       "isAccessibleForFree": true,
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "about": {{"@type": "WebSite", "name": "SourceHub", "url": "{BASE}/en/"}}
+      "about": {{"@type": "WebSite", "name": "AI Study Room", "url": "{BASE}/en/"}}
     }}
     </script>
 </head>
@@ -14218,6 +14264,14 @@ def make_all_html(data):
 </main>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
+<div id="cookie-banner" class="cookie-banner">
+  <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
+  <button onclick="acceptCookies()">Accept</button>
+</div>
+<script>
+function acceptCookies(){{localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}}
+if(!localStorage.getItem('cookies_accepted')){{document.addEventListener('DOMContentLoaded',function(){{document.getElementById('cookie-banner').classList.add('show');}});}}
+</script>
 </body>
 </html>'''
 
