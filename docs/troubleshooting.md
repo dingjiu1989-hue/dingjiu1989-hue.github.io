@@ -426,6 +426,109 @@ data-mapping: "pathname"
 
 ---
 
+## GitHub Actions: ModuleNotFoundError from Missing PYTHONPATH
+
+**Symptoms:** CI job fails immediately with:
+```
+ModuleNotFoundError: No module named 'html2text'
+ModuleNotFoundError: No module named 'scripts'
+ModuleNotFoundError: No module named 'site_config'
+```
+
+**Root cause (triple failure):**
+
+1. **`PYTHONPATH=.` missing** — any script that does `from scripts.site_config import ...` needs `PYTHONPATH=.` in the environment. This applies to: `gen_en_site.py`, `gen_ai_friendly.py`, `gen_rss.py`, `generate_json_feed.py`, `indexnow_submit.py`.
+
+2. **`html2text markdown Pillow` not installed** — these are runtime dependencies for site/feed generation, not just local dev deps. Every workflow that calls gen scripts needs `pip install Pillow html2text markdown` before running them.
+
+3. **Subprocess calls inside Python scripts** — `maintain.py` uses `subprocess.run(cmd, shell=True)` to call other scripts. These also need PYTHONPATH. Fix either in the caller (prefix cmd) or in the workflow (set PYTHONPATH in env).
+
+**Fix (2026-05-25):** Applied to `maintenance.yml`, `daily-news.yml`, `weekly-maintenance.yml`, and `scripts/maintain.py`:
+- Added `PYTHONPATH=.` before every script call that imports from `scripts.*`
+- Added `pip install Pillow html2text markdown` as a dedicated step (before any generation scripts)
+- In `maintain.py`, changed `python3 scripts/gen_ai_friendly.py` → `PYTHONPATH=. python3 scripts/gen_ai_friendly.py`
+
+**Files involved:**
+- `.github/workflows/maintenance.yml`
+- `.github/workflows/daily-news.yml`
+- `.github/workflows/weekly-maintenance.yml`
+- `scripts/maintain.py`
+
+---
+
+## GitHub Actions: Non-Critical Steps Failing Entire Workflow
+
+**Symptoms:** `weekly-maintenance.yml` fails at "Run maintenance" step with exit code 1, skipping all subsequent steps (IndexNow, search engine submission, JSON feeds, social syndication, commit).
+
+**Root cause:** `maintain.py` uses `ok &= run(...)` for every step. If any step fails (GSC OAuth, Bing sync), `ok` becomes `False` and `main()` returns 1. The GSC/Bing steps depend on external services and OAuth tokens that routinely expire on CI runners.
+
+**Fix (2026-05-25):** Made non-critical steps non-blocking in `scripts/maintain.py`:
+```python
+# Before:
+ok &= run("python3 scripts/bing_sync.py", "Bing Webmaster sync")
+ok &= resubmit_sitemaps()
+
+# After:
+run("python3 scripts/bing_sync.py", "Bing Webmaster sync")  # non-blocking
+resubmit_sitemaps()  # non-blocking: GSC OAuth may fail on CI
+```
+
+**Design principle:** Steps that depend on external services (GSC API, Bing Webmaster API) should log warnings but not fail the build. Only steps critical to content generation should gate the `ok` flag.
+
+---
+
+## CN RSS/JSON Feed: Wrong Content Language and Broken URLs
+
+**Symptoms:**
+- CN RSS (`feed.xml`) item URLs have double slash: `https://aidev.fit//daily/...`
+- CN RSS `<content:encoded>` body is English (not Chinese)
+- CN JSON Feed (`feed.json`) article URLs point to `/en/daily/...` instead of `/daily/...`
+
+**Root cause (three bugs in gen_rss.py + generate_json_feed.py):**
+
+1. **Double slash**: CN `base_path` is `""` (empty, because CN pages live at root). `f'{BASE}/{base_path}/{board}/{slug}.html'` → `https://aidev.fit//daily/...`.
+
+2. **English body in CN RSS**: `get_body_html()` always reads from `ROOT / 'md' / 'en' / ...`. CN content is at `md/zh/`. Also, `lang` parameter in `build_feed()` is `zh-CN` but the filesystem directory is `zh` (not `zh-CN`).
+
+3. **`/en/` prefix in CN JSON Feed**: `art_url = f"{SITE_URL}/en/{board['id']}/{art['slug']}.html"` — hardcoded `/en/` for all languages.
+
+**Fix (2026-05-25):**
+
+`gen_rss.py`:
+```python
+# URL: handle empty base_path to avoid double slash
+url = f'{BASE}/{base_path}/{p["board"]}/{p["slug"]}.html' if base_path else f'{BASE}/{p["board"]}/{p["slug"]}.html'
+
+# MD: map lang code to filesystem directory
+md_lang = 'zh' if lang == 'zh-CN' else 'en'
+body = get_body_html(p['slug'], p['board'], md_lang)
+```
+
+`generate_json_feed.py`:
+```python
+# URL: use url_prefix parameter ('' for CN, 'en' for EN)
+if url_prefix:
+    art_url = f"{SITE_URL}/{url_prefix}/{board['id']}/{art['slug']}.html"
+else:
+    art_url = f"{SITE_URL}/{board['id']}/{art['slug']}.html"
+
+# MD: map language code
+md_lang = 'zh' if language == 'zh-CN' else 'en'
+body_html = get_body(art['slug'], board['id'], md_lang)
+```
+
+**CN vs EN URL structure (authoritative):**
+| Aspect | EN | CN |
+|--------|-----|-----|
+| HTML pages | `/en/{board}/{slug}.html` | `/{board}/{slug}.html` |
+| RSS feed | `/en/feed.xml` | `/feed.xml` |
+| JSON Feed | `/en/feed.json` | `/feed.json` |
+| MD source | `md/en/{board}/{slug}.md` | `md/zh/{board}/{slug}.md` |
+| Language tag | `en`, `lang="en"` | `zh-CN`, `lang="zh-CN"` |
+| No `/zh/` path exists — CN is the default language with hreflang alternates |
+
+---
+
 ## Adding a New Issue
 
 When you discover a new problem:
