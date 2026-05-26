@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小米集团全面投资分析报告（2026年）</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            line-height: 1.8;
+            color: #1f2937;
+            background-color: #FFFFFF;
+        }
+        .prose-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 80px 50px 80px 50px;
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            line-height: 1.8;
+            text-align: justify;
+            word-wrap: break-word;
+        }
+        h1.report-title {
+            font-size: 2.5rem !important;
+            font-weight: 800;
+            color: #000000;
+            line-height: 1.2;
+            text-align: center;
+        }
+        h2 {
+            font-size: 1.8rem !important;
+            font-weight: 700;
+            color: #111;
+            margin-top: 2.5rem !important;
+            margin-bottom: 1.5rem !important;
+            border-bottom: 2px solid #F3F4F6;
+            padding-bottom: 0.5rem;
+        }
+        h3 {
+            font-size: 1.4rem !important;
+            font-weight: 600;
+            color: #374151;
+            margin-top: 2rem !important;
+            margin-bottom: 1rem !important;
+        }
+        h4 {
+            font-size: 1.1rem !important;
+            font-weight: 600;
+            color: #374151;
+            margin-top: 1.5rem !important;
+            margin-bottom: 0.8rem !important;
+        }
+        p {
+            font-size: 1.05rem !important;
+            margin-bottom: 1.25em !important;
+            text-align: justify;
+            color: #333;
+        }
+        strong { font-weight: 700 !important; }
+        .prose-container ul, .prose-container ol {
+            list-style: revert;
+            padding-left: 1.75rem;
+            margin: 1.5em 0 !important;
+            font-size: 1.05rem;
+        }
+        .prose-container li {
+            margin-bottom: 0.8em !important;
+            padding-left: 0.5rem;
+        }
+        .widget-box {
+            border: 1px solid #E5E7EB;
+            border-radius: 10px;
+            background: #FAFAFA;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin: 2rem 0;
+            overflow: auto;
+            max-width: 100%;
+        }
+        .widget-header {
+            background: #F9FAFB;
+            padding: 10px 16px;
+            border-bottom: 1px solid #E5E7EB;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #4B5563;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.05em;
+        }
+        .widget-body {
+            padding: 20px;
+            font-size: 0.95rem;
+        }
+        .chart-container {
+            position: relative;
+            height: 250px;
+            width: 100%;
+        }
+        .table-container {
+            overflow: auto;
+        }
+        .indicator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 1.5rem; text-align: center; }
+        .indicator-item { background: #F9FAFB; padding: 1rem; border-radius: 8px; border: 1px solid #F3F4F6; }
+        .indicator-label { font-size: 0.75rem; color: #6B7280; margin-bottom: 0.25rem; }
+        .indicator-value { font-size: 1.25rem; font-weight: 700; color: #111827; }
+        .indicator-signal { font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 99px; }
+        .signal-buy { background-color: #D1FAE5; color: #065F46; }
+        .signal-sell { background-color: #FEE2E2; color: #991B1B; }
+        .signal-neutral { background-color: #E5E7EB; color: #374151; }
+        @media (max-width: 768px) {
+            .prose-container {
+                padding: 20px;
+                margin: 20px auto;
+                line-height: 1.7;
+            }
+            h1.report-title { font-size: 1.8rem !important; }
+            h2 { font-size: 1.25rem !important; }
+            h3 { font-size: 1.1rem !important; }
+            h4 { font-size: 1rem !important; }
+            p { font-size: 0.95rem !important; }
+            .prose-container ul, .prose-container ol {
+                padding-left: 1rem;
+                font-size: 0.95rem;
+            }
+        }
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin: 2em 0;
+        }
+        .custom-table th, .custom-table td {
+            border: 1px solid #E5E7EB;
+            padding: 10px 12px;
+            text-align: left;
+        }
+        .custom-table th {
+            background-color: #F9FAFB;
+            font-weight: 600;
+            color: #4B5563;
+        }
+        .custom-table tr:nth-child(even) {
+            background-color: #F9FAFB;
+        }
+    </style>
+</head>
+<body>
+    <div class="prose-container">
+        <header class="flex flex-col items-center text-center">
+            <div class="flex gap-3 mb-8">
+                <span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-widest rounded">Deep Research</span>
+                <span class="px-3 py-1 bg-orange-600 text-white text-xs font-bold uppercase tracking-widest rounded">小米集团</span>
+            </div>
+            <h1 class="report-title">小米集团全面投资分析报告（2026年）</h1>
+            <div class="flex items-center text-sm text-gray-500 font-sans mb-4 border-t border-gray-100 pt-4 mt-4">
+                <div class="mr-8"><span class="font-bold">日期:</span><script>document.write(new Date().toLocaleDateString('zh-CN'))</script></div>
+                <div><span class="font-bold">股票:</span> 01810.HK</div>
+            </div>
+        </header>
+
+        <div class="bg-gray-800 text-white p-8 rounded-xl shadow-lg mb-4 relative overflow-hidden">
+            <h3 class="text-xl font-bold text-white flex items-center gap-3 border-b border-gray-700 pb-4 !mt-0 !mb-6">
+                <i class="fas fa-bolt text-yellow-400"></i>核心摘要
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+                <div>
+                    <div class="text-sm text-gray-400 uppercase mb-2 font-bold">业绩创新高</div>
+                    <div class="text-base text-gray-200 leading-relaxed">2025年营收4573亿元（+25.0%），经调整净利润392亿元（+43.8%），汽车业务首次实现年度盈利，毛利率达24.3%。</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-400 uppercase mb-2 font-bold">短期承压</div>
+                    <div class="text-base text-gray-200 leading-relaxed">存储芯片价格暴涨致手机毛利率降至10.1%（2026Q1），经营现金流净流出179亿元，股价从高点回撤52%。</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-400 uppercase mb-2 font-bold">长期价值</div>
+                    <div class="text-base text-gray-200 leading-relaxed">"人车家全生态"战略成型，SOTP估值6290-7990亿元，AI大模型跻身全球第一梯队，回购计划支撑信心。</div>
+                </div>
+            </div>
+        </div>
+
+        <p><strong>摘要</strong></p>
+        <p>本报告对小米集团（01810.HK）进行了全方位分析，重点关注其业务模式转型、财务表现、技术实力、市场情绪、竞品对比、估值合理性及主要风险。小米已从单一手机厂商转型为"人车家全生态"的科技巨头，2025年实现营收4573亿元、经调整净利润392亿元，创历史新高。2026年Q1财报显示营收991亿元、经调整净利润61亿元，手机业务ASP创历史新高，汽车业务交付量同比增长6.6%。然而，存储芯片价格暴涨导致手机业务毛利率承压，汽车业务尚未实现盈利。当前小米港股市值约7690亿港元，处于合理区间中枢。综合分析认为，小米短期面临存储成本压力与盈利修复挑战，但长期受益于高端化、全球化与AI战略的协同效应，建议投资者根据风险偏好采取差异化策略。</p>
+
+        <h2>1. 公司概况：业务模式、市值、护城河及行业地位</h2>
+
+        <h3>1.1 业务模式：从"手机+互联网"到"人车家全生态"</h3>
+        <p>小米集团已从早期的"硬件+互联网"双轮驱动模式，成功转型为<strong>"人车家全生态"</strong>的科技巨头。目前，小米业务架构清晰分为三大板块：</p>
+        <p><strong>手机×AIoT分部</strong>：作为集团的基本盘，2025年实现收入3512亿元，占总收入的76.8%。该业务包括智能手机、IoT与生活消费产品及互联网服务，形成完整的生态闭环：</p>
+        <ul>
+            <li><strong>智能手机</strong>：2025年收入1864亿元，全球出货量1.652亿台，连续五年稳居全球前三</li>
+            <li><strong>IoT与生活消费产品</strong>：2025年收入1232亿元，同比增长18.3%，毛利率创历史新高达23.1%</li>
+            <li><strong>互联网服务</strong>：2025年收入374亿元，毛利率高达76.5%，全球月活跃用户达7.541亿</li>
+        </ul>
+        <p><strong>智能电动汽车及AI等创新业务分部</strong>：2025年实现收入1061亿元，同比增长223.8%，占总收入23.2%。其中，智能电动汽车收入1033亿元，全年交付41.1万辆，首次实现年度经营利润转正9亿元，标志着小米汽车业务已跨过盈亏平衡点。</p>
+        <p>小米的业务模式核心优势在于<strong>"硬件+数据+AI"的闭环</strong>，通过手机获取用户入口，通过IoT设备提升用户粘性，通过汽车业务实现高价值转化，形成完整的生态链。2025年底，小米AIoT平台连接设备数达10.79亿台，拥有5台及以上设备的用户达2270万，这些用户平均购买的小米设备数量和种类均高于单一设备用户，形成强大的生态网络效应。</p>
+
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-chart-pie"></i> 2025年营收结构（按业务板块）</div>
+            <div class="widget-body">
+                <div class="chart-container" style="height: 280px;">
+                    <canvas id="chart_revenue"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <h3>1.2 市值与估值：合理区间中枢，长期价值显现</h3>
+        <p>截至2026年5月26日，小米集团港股收盘价为29.76港元，总市值约7690亿港元，较2025年底的7900亿港元略有下滑。当前市盈率(TTM)为16.69，市净率为2.63，处于历史中等水平。</p>
+        <p>从估值方法看，小米已不适合单一PE估值法，因其业务结构复杂多元，应采用<strong>SOTP（分部加总）估值法</strong>：</p>
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr><th>业务板块</th><th>估值区间（亿元）</th><th>估值倍数</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>手机业务</td><td>700-900</td><td>0.38x-0.48x PS</td></tr>
+                    <tr><td>IoT业务</td><td>1000-1300</td><td>0.8x-1.05x PS</td></tr>
+                    <tr><td>互联网服务</td><td>2200-2800</td><td>5.9x-7.5x PS</td></tr>
+                    <tr><td>汽车业务</td><td>1500-2000</td><td>1.4x-1.9x PS</td></tr>
+                    <tr><td>投资资产及其他</td><td>约1000</td><td>—</td></tr>
+                    <tr><td><strong>合计</strong></td><td><strong>6290-7990</strong></td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>综合估值区间为6290亿-7990亿元人民币，当前市值处于合理区间中枢，估值尚未完全反映汽车业务的高增长潜力和AI技术的长期价值。</p>
+
+        <h3>1.3 护城河：三大核心壁垒构筑竞争壁垒</h3>
+        <p><strong>生态飞轮效应</strong>：小米构建了全球最大的消费级物联网生态，截至2025年底连接设备数达10.79亿台，月活用户7.42亿。"手机获客→IoT留存→汽车增值"的生态飞轮已形成，约70%的小米汽车车主同时是小米手机或IoT用户，这种交叉销售能力是小米的核心竞争力。</p>
+        <p><strong>供应链整合能力</strong>：小米作为全球第六大芯片采购商，在存储芯片短缺周期中展现出强大的供应链组织能力。2025年原材料库存同比增长67.4%至239.7亿元，通过提前备货锁定低价存储芯片，为终端产品争取涨价缓冲期。此外，小米在汽车供应链上开始垂直整合，电机自研比例超50%，电池领域成立全资子公司北京小米景旭科技，逐步实现核心部件的自主可控。</p>
+        <p><strong>研发投入与技术积累</strong>：小米坚持"技术立业"战略，2025年研发投入达331亿元，接近全年利润，同比增长37.8%。未来五年计划再投入2000亿元，重点布局芯片、操作系统与AI三大技术领域。截至2025年底，小米累计专利申请超10万件，其中电池系统专利486项（已获批190项），电机电控专利1600余项，AI大模型MiMo-V2-Pro在全球开源模型综合智能指数中位列第一。</p>
+
+        <h3>1.4 行业地位：多赛道领先，生态闭环优势显著</h3>
+        <p><strong>手机领域</strong>：全球市占率13.3%（第三），中国内地市占率16.6%（第二），高端化战略持续推进。2025年中国大陆3000元以上机型销量占比达27.1%，同比提升3.8个百分点。2026年Q1全球市占率11.3%（第三），中国大陆市占率14.4%（第五），虽受存储涨价冲击，但ASP逆势提升8.2%至1310元，创历史新高。</p>
+        <p><strong>IoT领域</strong>：全球最大的消费级物联网平台，连接设备数超10.79亿台，可穿戴设备全球出货量排名第一，TWS耳机全球第二，智能家居领域与华为鸿蒙生态形成直接竞争。</p>
+        <p><strong>汽车领域</strong>：2025年交付41.1万辆，2026年Q1交付8.1万辆（同比增长6.6%），SU7系列稳居20万以上纯电轿车销量第一，YU7系列位列SUV销量前列。小米汽车毛利率达24.3%（2025年），远超行业平均水平，证明其产品定价能力与成本控制能力。</p>
+        <p><strong>AI领域</strong>：自研大模型MiMo-V2-Pro已进入全球第一梯队，2026年4月开启公测并开源，同时推出Xiaomi Miclaw端侧智能助手，加速AI技术在"人车家全生态"中的落地。</p>
+
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-chart-bar"></i> 各业务板块行业地位</div>
+            <div class="widget-body">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        <div class="text-sm text-blue-700">智能手机全球份额</div>
+                        <div class="text-3xl font-bold text-blue-900 my-2">13.3%</div>
+                        <div class="text-xs text-blue-600">全球第三，连续五年稳居前三</div>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-100">
+                        <div class="text-sm text-green-700">汽车交付量（2025）</div>
+                        <div class="text-3xl font-bold text-green-900 my-2">41.1万辆</div>
+                        <div class="text-xs text-green-600">毛利率24.3%，远超行业平均</div>
+                    </div>
+                    <div class="bg-purple-50 p-4 rounded-lg border border-purple-100">
+                        <div class="text-sm text-purple-700">AIoT连接设备</div>
+                        <div class="text-3xl font-bold text-purple-900 my-2">10.79亿台</div>
+                        <div class="text-xs text-purple-600">全球最大消费级物联网平台</div>
+                    </div>
+                    <div class="bg-orange-50 p-4 rounded-lg border border-orange-100">
+                        <div class="text-sm text-orange-700">研发投入（2025）</div>
+                        <div class="text-3xl font-bold text-orange-900 my-2">331亿元</div>
+                        <div class="text-xs text-orange-600">同比+37.8%，接近全年利润</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>2. 财务数据：营收趋势、利润、资产负债与现金流</h2>
+
+        <h3>2.1 营收结构：汽车业务高速增长，传统业务承压</h3>
+        <p>小米集团2025年全年营收4573亿元，同比增长25.0%，经调整净利润392亿元，同比增长43.8%，均创历史新高。从分业务收入看：</p>
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr><th>业务板块</th><th>2025年收入（亿元）</th><th>同比增长</th><th>占总收入比例</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>手机×AIoT分部</td><td>3512</td><td>+5.4%</td><td>76.8%</td></tr>
+                    <tr><td>　其中：智能手机</td><td>1864</td><td>-2.8%</td><td>40.8%</td></tr>
+                    <tr><td>　IoT与生活消费产品</td><td>1232</td><td>+18.3%</td><td>26.9%</td></tr>
+                    <tr><td>　互联网服务</td><td>374</td><td>+9.7%</td><td>8.2%</td></tr>
+                    <tr><td>智能电动汽车及AI等创新业务</td><td>1061</td><td>+223.8%</td><td>23.2%</td></tr>
+                    <tr><td>　其中：智能电动汽车</td><td>1033</td><td>+221.8%</td><td>22.6%</td></tr>
+                    <tr><td>　其他相关业务</td><td>28</td><td>+26.7%</td><td>0.6%</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>2026年Q1营收结构：总收入991.42亿元，同比下降10.9%。其中手机×AIoT分部收入793亿元（-14.5%），智能电动汽车及AI等创新业务收入199亿元（+6.9%）。</p>
+
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-chart-line"></i> 各业务板块毛利率趋势</div>
+            <div class="widget-body">
+                <div class="chart-container" style="height: 280px;">
+                    <canvas id="chart_margin"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <h3>2.2 利润质量：汽车业务首次盈利，手机业务承压</h3>
+        <p><strong>2025年全年</strong>：毛利率22.3%（+1.4pp），手机业务毛利率10.9%（-1.7pp），IoT业务毛利率23.1%（+2.8pp），互联网服务毛利率76.5%（稳定），汽车业务毛利率24.3%（+5.8pp），首次实现年度经营利润转正9亿元。</p>
+        <p><strong>2025年Q4</strong>：毛利率20.8%（环比-2.1pp），手机业务毛利率8.3%（创2020年以来单季最低），汽车业务毛利率22.7%（环比-2.8pp），但实现经营利润11亿元。</p>
+        <p><strong>2026年Q1</strong>：毛利率22.0%（同比-0.8pp，环比+1.2pp），手机业务毛利率10.1%（环比+1.8pp），IoT业务毛利率25.2%（环比+5.1pp），汽车业务毛利率20.1%，经营亏损31亿元。</p>
+
+        <div class="my-8 p-6 bg-gray-50 rounded-lg border-l-4 border-gray-700">
+            <div class="flex items-baseline gap-4">
+                <i class="fas fa-quote-left mt-1"></i>
+                <h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">利润关键转折</h4>
+            </div>
+            <p class="mt-2 !mb-0 leading-relaxed">汽车业务2025年首次实现年度盈利（经营利润9亿元），标志着小米造车已跨越"死亡之谷"。但2026年Q1重新陷入亏损（-31亿元），反映核心零部件涨价与补贴退坡的双重压力。</p>
+        </div>
+
+        <h3>2.3 资产负债状况：研发投入持续加大，存货压力显现</h3>
+        <p>2025年资产负债情况：总资产约7000亿元，总负债约3500亿元，净资产约3500亿元，资产负债率约50%。研发投入331亿元（占收入7.2%，+37.8%），销售及推广开支332亿元（占收入7.3%，+30.8%）。</p>
+        <p>存货结构分析：2025年底存货809.9亿元（+28.3%），其中原材料库存239.7亿元（+67.4%），制成品占61.8%，在制品占5.7%，备品备件占4.9%。原材料库存中存储芯片占比超50%，面临较大价格波动风险。小米采用"成本与可变现净值孰低"原则计提存货跌价准备，2025年底计提约68.48亿元。</p>
+        <p>2026年Q1：研发投入90亿元（+33.4%），存货预计达850亿元，存货周转天数可能延长至90天以上。应付账款约720亿元（-20%），现金及现金等价物约2206亿元，为后续业务发展提供充裕资金支持。</p>
+
+        <h3>2.4 现金流分析：经营现金流承压，资本开支持续增长</h3>
+        <p>2025年全年：经营活动现金流净额341.4亿元（-13.6%），投资活动现金流净额-945.7亿元（研发投入和汽车工厂建设），融资活动现金流净额247.7亿元，自由现金流-356.6亿元（连续三年为负），反映小米处于高投入扩张期。</p>
+        <p>2026年Q1：经营活动现金流净额-179.2亿元（同比转负），主因汽车业务亏损31亿元、手机库存积压清仓、应付账款因供应链紧张被迫提前支付。资本开支32.7亿元（+12.7%），主要用于汽车工厂扩建和AI研发设备。研发投入90亿元（+33.4%）。</p>
+
+        <h2>3. 技术分析：价格趋势、指标及支撑/阻力位</h2>
+
+        <h3>3.1 价格趋势分析：从高点回落，但企稳迹象显现</h3>
+        <p>小米集团港股（01810.HK）自2025年6月触达61.45港元的高点后，一路下跌至2026年5月的29.76港元，跌幅近52%。2026年Q1财报发布后，股价在30港元附近波动，呈现企稳迹象。股价下跌主要反映市场对存储芯片涨价周期下手机业务毛利率承压的担忧，以及对汽车业务盈利可持续性的质疑。</p>
+        <p>从长期趋势看，小米股价已接近2020-2022年的支撑区域（25-28港元），若2026年下半年存储芯片价格回落且汽车业务交付量提升，股价有望迎来反弹。技术面显示，小米股价目前处于超卖区域，RSI指标在30以下，MACD指标在零轴下方形成金叉，短期或有反弹机会。</p>
+
+        <h3>3.2 关键技术指标分析</h3>
+        <div class="indicator-grid">
+            <div class="indicator-item">
+                <div class="indicator-label">RSI (14)</div>
+                <div class="indicator-value">29.3</div>
+                <span class="indicator-signal signal-buy">超卖</span>
+            </div>
+            <div class="indicator-item">
+                <div class="indicator-label">50日均线</div>
+                <div class="indicator-value">≈30港元</div>
+                <span class="indicator-signal signal-neutral">支撑</span>
+            </div>
+            <div class="indicator-item">
+                <div class="indicator-label">200日均线</div>
+                <div class="indicator-value">≈35港元</div>
+                <span class="indicator-signal signal-sell">压制</span>
+            </div>
+            <div class="indicator-item">
+                <div class="indicator-label">布林带</div>
+                <div class="indicator-value">下轨≈28.5</div>
+                <span class="indicator-signal signal-buy">筑底</span>
+            </div>
+            <div class="indicator-item">
+                <div class="indicator-label">MACD</div>
+                <div class="indicator-value">金叉</div>
+                <span class="indicator-signal signal-buy">反弹信号</span>
+            </div>
+            <div class="indicator-item">
+                <div class="indicator-label">成交量</div>
+                <div class="indicator-value">萎缩</div>
+                <span class="indicator-signal signal-neutral">观望</span>
+            </div>
+        </div>
+        <p>移动平均线（MA）：小米股价已跌破200日移动平均线（约35港元），但50日移动平均线（约30港元）已形成支撑，若能站稳该线，短期反弹概率较大。布林带（BOLL）：股价已触及布林带下轨（约28.5港元），且带宽收窄，表明市场波动性降低，可能进入筑底阶段。成交量分析：2026年Q1财报发布当日成交量达1.48亿股，为近期高点，但随后成交量萎缩，显示市场观望情绪浓厚。</p>
+
+        <h3>3.3 支撑与阻力位分析</h3>
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr><th>周期</th><th>支撑位（港元）</th><th>阻力位（港元）</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>短期</td><td>25.00 / 27.50 / 30.00（50日均线）</td><td>32.50 / 35.00（200日均线） / 38.00</td></tr>
+                    <tr><td>中期</td><td>22.00（2021年低点） / 24.50</td><td>40.00 / 45.00</td></tr>
+                    <tr><td>长期</td><td>18.00（2019年上市价） / 20.00</td><td>50.00 / 60.00（2025年高点）</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>3.4 技术面投资信号</h3>
+        <ul>
+            <li><strong>短期信号</strong>：超卖反弹信号，但需警惕30港元上方套牢盘压力</li>
+            <li><strong>中期信号</strong>：若能站稳30港元并突破35港元，中期反弹概率较大</li>
+            <li><strong>长期信号</strong>：汽车业务实现稳定盈利且AI技术商业化落地，股价有望重回40港元以上</li>
+        </ul>
+
+        <h2>4. 市场情绪：评级、舆情与新闻影响</h2>
+
+        <h3>4.1 分析师评级：整体中性偏多，但目标价下调</h3>
+        <p>截至2026年5月26日，24家投行对小米的评级中，近90天内有24家给出"买入"评级，目标均价为42.47港元，显示分析师对小米长期价值的认可。但部分投行已下调目标价：高盛从47.5港元下调至41港元，杰富瑞从43港元下调至39港元，瑞银从40港元下调至36港元。</p>
+        <p>分析师观点分歧主要集中在两个方面：乐观派看好汽车业务快速盈利和AI技术商业化潜力，认为小米已跨越"死亡之谷"；悲观派担忧存储芯片涨价周期延长对手机毛利率的持续冲击，以及汽车业务扩张的资本开支压力。</p>
+
+        <h3>4.2 舆情分析：正面与负面情绪并存</h3>
+        <p><strong>正面舆情</strong>：小米汽车SU7/YU7系列市场表现强劲，SU7稳居20万以上纯电轿车销量第一；自研大模型MiMo-V2-Pro综合智能水平位列全球第六、国内第二；小米YU7 GT以7分22秒755的成绩刷新纽北SUV圈速纪录，成为"纽北最速SUV"；宣布200亿港元回购计划，已回购约84亿港元。</p>
+        <p><strong>负面舆情</strong>：手机Q4毛利率跌至8.3%，创2020年以来单季最低；存储芯片价格暴涨对手机业务毛利率形成持续压力；2025年存货达809.9亿元（+28.3%），原材料库存增长67.4%；2026年Q1经营现金流净流出179.2亿元；印度市场税务纠纷与外汇管理合规问题导致约6.1亿美元资产被冻结。</p>
+
+        <h3>4.3 近期新闻事件影响</h3>
+        <p><strong>积极影响</strong>：2026年3月发布Xiaomi MiMo-V2-Pro大模型并开源；2026年5月成立北京小米景旭科技进军电池制造；小米汽车累计交付量突破65.5万辆；小米YU7 GT刷新纽北SUV圈速纪录；宣布200亿港元回购计划。</p>
+        <p><strong>消极影响</strong>：2025年Q4手机毛利率跌至8.3%；2026年Q1经营现金流净流出179.2亿元；首代SU7停产、产能重构；印度税务纠纷面临资产冻结；库存积压、高端化转型受阻传闻。</p>
+
+        <h2>5. 竞品对比：竞争对手市场份额和财务指标</h2>
+
+        <h3>5.1 智能手机市场：高端化竞争加剧，小米份额承压</h3>
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr><th>厂商</th><th>2025年全球份额</th><th>2026年Q1全球份额</th><th>2026年Q1中国份额</th><th>毛利率</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>苹果</td><td>21.0%</td><td>21.0%</td><td>—</td><td>38.7%</td></tr>
+                    <tr><td>三星</td><td>20.0%</td><td>20.0%</td><td>—</td><td>—</td></tr>
+                    <tr><td>华为</td><td>—</td><td>—</td><td>25.8%</td><td>~35.0%</td></tr>
+                    <tr><td><strong>小米</strong></td><td><strong>13.3%</strong></td><td><strong>11.3%</strong></td><td><strong>14.4%</strong></td><td><strong>22.3%</strong></td></tr>
+                    <tr><td>OPPO</td><td>12.0%</td><td>16.0%</td><td>—</td><td>~18.0%</td></tr>
+                    <tr><td>vivo</td><td>8.0%</td><td>15.0%</td><td>—</td><td>~18.5%</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>5.2 IoT市场：生态竞争白热化，小米保持领先</h3>
+        <p>智能家居市场：华为连接设备数超12亿台（市场份额约20%），小米连接设备数10.79亿台（市场份额约18%），拥有5台及以上设备的用户达2270万（+22.3%）。可穿戴设备：小米腕带设备全球出货量排名第一、中国大陆第二，苹果全球份额约25%，华为约18%。</p>
+
+        <h3>5.3 新能源汽车市场：小米交付量领先，毛利率优势明显</h3>
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr><th>厂商</th><th>2025年交付量</th><th>2026年Q1交付量</th><th>毛利率</th><th>研发投入（亿元）</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>比亚迪</td><td>186.3万辆</td><td>~47万辆</td><td>17.5%</td><td>~200</td></tr>
+                    <tr><td>特斯拉</td><td>162.4万辆</td><td>~34万辆</td><td>17.8%</td><td>~490</td></tr>
+                    <tr><td>理想</td><td>40.6万辆</td><td>~10万辆</td><td>18.7%</td><td>~113</td></tr>
+                    <tr><td><strong>小米</strong></td><td><strong>41.1万辆</strong></td><td><strong>8.1万辆</strong></td><td><strong>24.3%</strong></td><td><strong>331</strong></td></tr>
+                    <tr><td>小鹏</td><td>42.9万辆</td><td>~11万辆</td><td>18.9%</td><td>—</td></tr>
+                    <tr><td>蔚来</td><td>32.7万辆</td><td>~8万辆</td><td>13.6%</td><td>—</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-chart-bar"></i> 新能源汽车毛利率对比</div>
+            <div class="widget-body">
+                <div class="chart-container" style="height: 280px;">
+                    <canvas id="chart_ev_margin"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <h2>6. 估值与健康：PE/PB/DCF估值合理性及财务健康度</h2>
+
+        <h3>6.1 估值方法：SOTP分部加总法更适用</h3>
+        <p>小米集团不适合单一PE估值法，因其业务结构复杂多元，应采用SOTP（分部加总）估值法。综合估值区间为6290亿-7990亿元人民币，当前市值约7690亿元人民币（按汇率1:0.9计算），处于合理区间中枢，估值较为合理。</p>
+
+        <h3>6.2 财务健康度：研发投入大，但现金流承压</h3>
+        <p><strong>盈利能力</strong>：2025年经调整净利润率8.6%（+1.1pp），手机业务约5.0%，IoT业务约18.0%，互联网服务约78.0%，汽车业务约8.0%。</p>
+        <p><strong>资产负债</strong>：资产负债率约50%，处于健康水平。存货周转率约4.5次/年，低于行业平均水平。应收账款周转率约35天，应付账款周转率约60天。</p>
+        <p><strong>现金流</strong>：2025年经营活动现金流净额341.4亿元（-13.6%），2026年Q1为-179.2亿元，自由现金流连续三年为负，反映高投入扩张期特征。</p>
+        <p><strong>研发</strong>：2025年研发投入331亿元接近全年利润，2026年Q1为90亿元（+33.4%），未来五年计划超2000亿元（占收入比例将提升至约10%）。</p>
+
+        <div class="widget-box">
+            <div class="widget-header"><i class="fas fa-heartbeat"></i> 财务健康度评分</div>
+            <div class="widget-body">
+                <div class="chart-container" style="height: 280px;">
+                    <canvas id="chart_health"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <h2>7. 主要风险：行业竞争风险、政策风险、地缘风险</h2>
+
+        <h3>7.1 行业竞争风险：多赛道竞争加剧</h3>
+        <p><strong>手机业务</strong>：存储芯片价格持续上涨（2026年Q1 DRAM价格同比上涨超300%），中端市场萎缩（2026年Q1中国2000-4000元价位段手机销量同比下滑12%），华为强势回归（2026年4月中国手机市场份额达25.8%）。</p>
+        <p><strong>汽车业务</strong>：新能源汽车市场进入淘汰赛阶段，2026年目标交付55万辆，行业价格战加剧（2025年Q4汽车毛利率从25.5%回落至22.7%），新势力车企加速追赶。</p>
+        <p><strong>IoT业务</strong>：华为鸿蒙生态连接设备数超12亿台形成直接竞争，家电市场面临美的、海尔等传统巨头压力，智能家居领域面临苹果HomeKit、谷歌Nest等国际巨头挑战。</p>
+
+        <h3>7.2 政策风险：监管环境变化</h3>
+        <p>汽车安全监管：2025年3月SU7辅助驾驶事故引发安全争议，监管部门加强智能驾驶安全法规。2026年新能源汽车购置税由免征转为减半征收，单车最高减税额度上限下调至1.5万元。数据隐私：欧盟GDPR限制小米在欧洲市场的智能家居服务功能，中国《个人信息保护法》增加互联网业务合规成本。贸易政策：印度市场税务纠纷与外汇管理合规问题导致约6.1亿美元资产被冻结，美国对华科技企业出口管制政策可能影响供应链稳定性。</p>
+
+        <h3>7.3 地缘风险：全球供应链不确定性</h3>
+        <p>供应链分散风险：小米汽车核心电芯仍依赖宁德时代（80%）和比亚迪（17.9%），手机关键零部件如SiC MOSFET芯片仍依赖英飞凌、博世等国际供应商，全球地缘政治紧张加剧芯片等关键零部件供应不确定性。海外市场风险：印度市场面临税务纠纷与资产冻结，东南亚市场面临OPPO、vivo等本土品牌压力，欧洲市场面临严格的数据隐私法规和高成本压力。</p>
+
+        <h2>8. 结论建议：短期、中期与长期投资策略</h2>
+
+        <h3>8.1 短期投资建议（1-6个月）：谨慎观望，等待右侧时机</h3>
+        <p><strong>短期风险</strong>：存储芯片价格可能继续上涨，2026年Q2-Q3手机毛利率压力仍存。</p>
+        <p><strong>短期机会</strong>：小米汽车交付量有望逐季提升，2026年Q2-Q3交付量或达14-18万辆。</p>
+        <p><strong>操作建议</strong>：可在25-27港元区间分批建仓，目标价32-35港元，止损位22港元。</p>
+        <p><strong>关注催化剂</strong>：2026年Q2-Q3小米汽车交付量数据、存储芯片价格拐点信号、小米高端手机市场份额变化、AI技术商业化进展。</p>
+
+        <h3>8.2 中期投资建议（6-12个月）：逢低布局，把握结构性机会</h3>
+        <p><strong>中期风险</strong>：手机业务毛利率修复速度不及预期。</p>
+        <p><strong>中期机会</strong>：小米汽车产能释放，2026年全年交付量有望达55万辆。</p>
+        <p><strong>操作建议</strong>：在30-32港元区间逢低加仓，目标价40-45港元，止损位25港元。</p>
+        <p><strong>关注催化剂</strong>：小米汽车第二代车型发布及市场反响、AI大模型在消费电子领域的商业化落地、存货结构优化及现金流改善情况、手机高端化战略成效。</p>
+
+        <h3>8.3 长期投资建议（1-3年）：战略布局，长期看好</h3>
+        <p><strong>长期风险</strong>：汽车市场竞争加剧，毛利率持续下滑。</p>
+        <p><strong>长期机会</strong>：小米"人车家全生态"战略持续深化，生态协同效应显现。</p>
+        <p><strong>操作建议</strong>：在35-40港元区间分批建仓，长期持有，目标价50-60港元。</p>
+        <p><strong>关注催化剂</strong>：小米汽车实现稳定盈利（毛利率稳定在20%以上）、AI技术在消费电子领域商业化落地、存货周转率改善至5次/年以上现金流转正、高端手机市场份额提升至10%以上。</p>
+
+        <h2>9. 总结与展望</h2>
+        <p>小米集团已成功完成从单一手机厂商到"人车家全生态"科技巨头的转型，2025年营收与利润均创历史新高。手机业务面临存储芯片涨价压力，毛利率承压，但ASP持续提升，高端化战略成效显著；IoT业务保持稳健增长，毛利率持续提升；汽车业务实现突破，毛利率达24.3%，首次实现年度盈利；AI技术布局全面加速，大模型能力跻身全球第一梯队。</p>
+        <p>从财务健康度看，小米研发投入持续加大，2025年达331亿元，接近全年利润，但存货压力显著，2025年底存货达809.9亿元（+28.3%）。经营现金流2025年Q4及2026年Q1承压，但现金储备充足（约2206亿元），为后续业务发展提供保障。</p>
+        <p>从估值角度看，小米当前市值约7690亿港元，处于合理区间中枢，但估值尚未完全反映汽车业务的高增长潜力和AI技术的长期价值。采用SOTP分部加总估值法，合理估值区间为6290亿-7990亿元人民币。</p>
+        <p>从风险角度看，小米面临存储芯片涨价、汽车市场竞争加剧、存货周转率低等多重挑战，但同时也拥有强大的生态协同效应、供应链整合能力和研发创新能力。</p>
+        <p>未来1-3年，小米有望在以下方面取得突破：存储芯片价格回落→手机毛利率修复；汽车业务交付量提升至55万辆/年→毛利率稳定在20%以上；AI技术在消费电子领域的商业化落地→形成新增长点；生态协同效应持续深化→交叉销售比例提升。</p>
+        <p>总体而言，小米已跨越"死亡之谷"，从硬件制造商向科技生态公司转型，虽然短期面临成本压力，但长期增长动力充足。建议投资者根据风险偏好，采取差异化策略：<strong>短期投资者可等待右侧时机，中期投资者可逢低布局，长期投资者可战略性配置。</strong></p>
+
+        <div class="bg-gray-800 text-white p-8 rounded-xl shadow-lg mb-4 relative overflow-hidden mt-8">
+            <h3 class="text-xl font-bold text-white flex items-center gap-3 border-b border-gray-700 pb-4 !mt-0 !mb-6">
+                <i class="fas fa-lightbulb text-yellow-400"></i>投资策略总结
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+                <div>
+                    <div class="text-sm text-gray-400 uppercase mb-2 font-bold">短期（1-6月）</div>
+                    <div class="text-base text-gray-200 leading-relaxed">25-27港元分批建仓<br>目标32-35港元<br>止损22港元<br>等待存储芯片拐点</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-400 uppercase mb-2 font-bold">中期（6-12月）</div>
+                    <div class="text-base text-gray-200 leading-relaxed">30-32港元逢低加仓<br>目标40-45港元<br>止损25港元<br>关注汽车产能释放</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-400 uppercase mb-2 font-bold">长期（1-3年）</div>
+                    <div class="text-base text-gray-200 leading-relaxed">35-40港元分批建仓<br>目标50-60港元<br>长期持有<br>等待生态协同效应</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>参考来源</h2>
+        <ol style="font-size: 0.8rem; color: #6B7280; word-break: break-all;">
+            <li>重新给小米"称个重" — 36氪 <a href="https://www.36kr.com/p/3764941017039362" style="color: #3B82F6;">链接</a></li>
+            <li>小米交出4572亿成绩单：手机毛利率受冲击，全生态与AI托底 — 东方财富网 <a href="https://finance.eastmoney.com/a/202603253684198637.html" style="color: #3B82F6;">链接</a></li>
+            <li>小米减资与股东退出背后，雷军的新命题已不是手机 — 中国经济网 <a href="http://finance.ce.cn/stock/gsgdbd/202604/t20260409_2891715.shtml" style="color: #3B82F6;">链接</a></li>
+            <li>小米集团（1810.HK）2025年度业绩快评解析：全面增长与智能电动汽车成关键增长引擎</li>
+            <li>小米集团发布2025年财报：营收4573亿、经调整净利润392亿均创历史新高 — 东方财富网 <a href="https://finance.eastmoney.com/a/202603243682901086.html" style="color: #3B82F6;">链接</a></li>
+            <li>小米26Q1财报即将揭晓，短期业绩承压，结构优化与AI打开新空间 — 东方财富网 <a href="https://finance.eastmoney.com/a/202605253747904770.html" style="color: #3B82F6;">链接</a></li>
+            <li>国信证券：维持小米集团-W"优于大市"评级，智能电动汽车全年盈利 — 智通财经 <a href="https://cn.investing.com/news/stock-market-news/article-3315958" style="color: #3B82F6;">链接</a></li>
+            <li>小米集团2025年度报告 <a href="https://pdf.dfcfw.com/pdf/H2_AN202604281821667855_1.pdf?1777408318000.pdf" style="color: #3B82F6;">链接</a></li>
+            <li>小米一季度净利润超60亿元，同比降43%，计划实施200亿港元回购计划 — 同花顺 <a href="http://stock.10jqka.com.cn/hks/20260526/c676984192.shtml" style="color: #3B82F6;">链接</a></li>
+            <li>苹果领跑Q1手机市场，安卓高端化提速，全球格局分化加剧 — 东方财富网 <a href="https://finance.eastmoney.com/a/202605063728823393.html" style="color: #3B82F6;">链接</a></li>
+            <li>车企2026年销量目标：小米、零跑、长城等车企已披露 — BitAuto <a href="https://www.bitauto.com/article/1003106531546/" style="color: #3B82F6;">链接</a></li>
+            <li>雷军回应"小字营销"等多个质疑，并公布小米汽车2026年交付目标 — 21经济网 <a href="https://www.21jingji.com/article/20260104/herald/ecff47aba8f2c71813e44ebbe48ae8cd.html" style="color: #3B82F6;">链接</a></li>
+            <li>华为25.8%份额领跑，2026年4月国内手机市场 — 今日头条 <a href="https://www.toutiao.com/a7644022685467329024/" style="color: #3B82F6;">链接</a></li>
+            <li>小米汽车2026年Q1交付超8万辆，汽车业务收入190亿元 — 汽车之家 <a href="https://youchuang.autohome.com.cn/info/25561392" style="color: #3B82F6;">链接</a></li>
+            <li>小米集团-W发布Q1业绩，总收入991亿元 — 证券之星 <a href="http://stock.stockstar.com/RB2026052600031660.shtml" style="color: #3B82F6;">链接</a></li>
+            <li>雷军宣布2026年小米汽车交付目标55万辆 — 财新网 <a href="https://www.caixin.com/2026-01-04/102400104.html" style="color: #3B82F6;">链接</a></li>
+            <li>小米2026年Q1财报：营收991亿稳居高位，核心业务经营利润环比大增近2倍 — 南方网 <a href="https://news.southcn.com/node_810c33d731/fe6c5f0c03.shtml" style="color: #3B82F6;">链接</a></li>
+            <li>小米破解65.6万辆车供应链困局：成立1000万公司全资造电池 — 今日头条 <a href="https://www.toutiao.com/a7643604058930020905/" style="color: #3B82F6;">链接</a></li>
+            <li>小米发布2025年财报：营收4573亿，净利润392亿 — 亿欧 <a href="http://www.iyiou.com/analysis/202603251125049" style="color: #3B82F6;">链接</a></li>
+            <li>小米手机出货量连续23个季度全球前三！平均售价创历史新高 — 快科技 <a href="https://news.mydrivers.com/1/1125/1125099.htm" style="color: #3B82F6;">链接</a></li>
+            <li>小米"人车家全生态"再提速：全球月活用户达7.42亿 — ITBear <a href="https://www.itbear.com.cn/html/2025-12/1056347.html" style="color: #3B82F6;">链接</a></li>
+            <li>小米集团发布2026年Q1财报，总营收达991亿元 — 今日头条 <a href="https://www.toutiao.com/article/7644134221807698459/" style="color: #3B82F6;">链接</a></li>
+            <li>过去5年投1055亿未来将投2000亿：雷军披露小米核心技术攻坚规划 — 今日头条 <a href="https://www.toutiao.com/a7644109646998929920/" style="color: #3B82F6;">链接</a></li>
+            <li>小米下滑35%！国内2026年一季度手机份额出炉 — 今日头条 <a href="https://www.toutiao.com/article/7628439553916863016/" style="color: #3B82F6;">链接</a></li>
+            <li>小米AI战略全景分析：物理AI时代的生态重构者 — 今日头条 <a href="https://www.toutiao.com/a7606536440196923945/" style="color: #3B82F6;">链接</a></li>
+            <li>小米AIoT连接10.79亿设备：人车家全生态如何实现闭环 — 今日头条 <a href="https://www.toutiao.com/a7629262612122927668/" style="color: #3B82F6;">链接</a></li>
+            <li>汽车+AI双引擎驱动：小米穿越周期的长期主义答案 — 新浪新闻 <a href="https://k.sina.com.cn/article_7857201856_1d45362c001904f4qk.html" style="color: #3B82F6;">链接</a></li>
+            <li>小米官宣进军电池制造 — B站 <a href="https://www.bilibili.com/video/BV1qEduBtEtY" style="color: #3B82F6;">链接</a></li>
+            <li>科创001｜财报数据创新高，小米股价为何还是跌？ — 东方财富网 <a href="https://finance.eastmoney.com/a/202603253684352883.html" style="color: #3B82F6;">链接</a></li>
+            <li>小米2026财年第一财季经调整净利润60.72亿元，同比下降43.1% — IT之家 <a href="https://wap.ithome.com/html/955542.htm" style="color: #3B82F6;">链接</a></li>
+            <li>小米手机也"扛不动"了：内存涨价还要涨两年，大家电能救场吗？ — 腾讯新闻</li>
+            <li>小米集团2025年汽车收入增长两倍至1033亿元 — 东方财富网</li>
+            <li>小米青黄交接：增长靠汽车，压力在手机 — 21经济网</li>
+            <li>小米汽车赚翻了，营收破千亿，毛利率24%，达成最快盈利成就 — 36氪</li>
+            <li>雷军的考验还没完 — 虎嗅 <a href="https://www.toutiao.com/article/7624457634548072998/" style="color: #3B82F6;">链接</a></li>
+            <li>上升期的小米遇上涨价的内存，利润从夯到拉只用一个季度 — 正观新闻</li>
+            <li>小米集团：Q1新车交付量达到80856辆，同比增长6.6% — 36氪</li>
+            <li>单车均价23.5万元！小米汽车Q1交付新车80,856辆 — 新浪科技</li>
+            <li>交出"最强财报"后，谁在抛售小米？ — 21经济网</li>
+            <li>小米Q1财报：手机ASP同比提升8.2%创新高 — 金融界 <a href="https://www.cls.cn/detail/2381834" style="color: #3B82F6;">链接</a></li>
+            <li>小米汽车Q1营收190亿元，交付超8万辆 — 网易</li>
+            <li>雷军晒小米成绩单：Q1营收991亿，汽车交付破8万，AI还要砸600亿 — 搜狐 <a href="https://www.sohu.com/a/1027940848_100190264" style="color: #3B82F6;">链接</a></li>
+            <li>小米Q1利润骤降43%，但收入仍超预期：AI、汽车投入全面加码 — 金融界 <a href="https://stock.jrj.com.cn/2026/05/26180357204918.shtml" style="color: #3B82F6;">链接</a></li>
+            <li>小米业绩前瞻出炉！机构有分歧了 — 搜狐 <a href="https://www.sohu.com/a/1027858987_121963166" style="color: #3B82F6;">链接</a></li>
+            <li>小米Q1营收991亿元超预期，宣布200亿港元新回购计划 — 腾讯新闻 <a href="https://news.qq.com/rain/a/20260526A0926B00" style="color: #3B82F6;">链接</a></li>
+            <li>小米Q1收入991亿元同比降10.9%，经调整净利61亿元 — 证券之星 <a href="https://finance.stockstar.com/IG2026052600033089.shtml" style="color: #3B82F6;">链接</a></li>
+            <li>小米交出史上最强财报，股价为什么反而不涨 — 今日头条 <a href="https://www.toutiao.com/a7629742163546489384/" style="color: #3B82F6;">链接</a></li>
+            <li>小米2026年Q1财报出炉：营收净利双降，手机均价却逆势创新高 — 今日头条 <a href="https://www.toutiao.com/a7644139490033893922/" style="color: #3B82F6;">链接</a></li>
+            <li>小米Q1智能电动汽车及AI创新业务分部经营亏损31亿元 — 北京商报 <a href="http://www.bbtnews.com.cn/2026/0526/594410.shtml" style="color: #3B82F6;">链接</a></li>
+            <li>小米Q1新车交付量达到80856辆，同比增长6.6% — 金十数据 <a href="https://flash.jin10.com/detail/20260526173050625800" style="color: #3B82F6;">链接</a></li>
+            <li>小米财报新高，市值却腰斩！600亿AI豪赌是未来希望还是无底洞？ — 百家号</li>
+            <li>小米Q1手机业务收入443亿元，毛利率10.1% — 金十数据 <a href="https://flash.jin10.com/detail/20260526173326723800" style="color: #3B82F6;">链接</a></li>
+            <li>小米集团-W于市场实施200亿港元股份购回计划 — 证券之星 <a href="http://stock.stockstar.com/RB2026052600032891.shtml" style="color: #3B82F6;">链接</a></li>
+            <li>小米集团-W发布Q1业绩，总收入991亿元 — 新浪财经 <a href="http://cj.sina.com.cn/article/normal_detail?url=https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-05-26/doc-inhzfmyh2817116.shtml" style="color: #3B82F6;">链接</a></li>
+            <li>小米2026年Q1财报出炉：净利降43.1%拟斥200亿港元回购 — 今日头条 <a href="https://www.toutiao.com/a7644148867654631990/" style="color: #3B82F6;">链接</a></li>
+            <li>小米业绩大降！宣布200亿港元回购计划 — 东方财富网 <a href="https://finance.eastmoney.com/a/202605263749819349.html" style="color: #3B82F6;">链接</a></li>
+            <li>小米Q1营收991亿元超预期，宣布200亿港元新回购计划 — 凤凰网 <a href="https://finance.ifeng.com/c/8tRhpknOh6u" style="color: #3B82F6;">链接</a></li>
+            <li>国信证券：维持小米集团-W"优于大市"评级，智能电动汽车全年盈利 <a href="http://stock.stockstar.com/IG2026041700023045.shtml" style="color: #3B82F6;">链接</a></li>
+            <li>富瑞降小米目标价至26.98元，记忆体成本压力未见顶 <a href="http://www.aastocks.com/tc/stocks/news/aafn-con/NOW.1526047/top-news/AAFN" style="color: #3B82F6;">链接</a></li>
+            <li>国盛证券重申小米"买入"评级，目标价42港元 <a href="http://stock.stockstar.com/IG2026050500003165.shtml" style="color: #3B82F6;">链接</a></li>
+            <li>摩根大通：重申小米目标价35港元以及"中性"评级 <a href="https://fund.eastmoney.com/a/202605123734330774.html" style="color: #3B82F6;">链接</a></li>
+            <li>高盛：维持小米集团-W"买入"评级，目标价47.5港元</li>
+            <li>花旗：小米集团-W给予"买入"评级，目标价37港元 <a href="https://finance.sina.com.cn/wm/2026-05-25/doc-inhzamvq2599666.shtml" style="color: #3B82F6;">链接</a></li>
+            <li>小米集团2026年Q1业绩发布：总收入下滑，研发投入90亿同比劲增33.4% — 今日头条 <a href="https://www.toutiao.com/a7644138615043342863/" style="color: #3B82F6;">链接</a></li>
+            <li>华为2025年报：销售收入8809亿元，研发投入达1923亿元 <a href="https://www.cnstock.com/commonDetail/662426" style="color: #3B82F6;">链接</a></li>
+            <li>华为2025年营收8809亿元，仅比历史峰值少105亿元 — 36氪 <a href="https://36kr.com/p/3748132636295944" style="color: #3B82F6;">链接</a></li>
+            <li>小米集团-W最新价格行情 — 英为财情 <a href="https://cn.investing.com/equities/xiaomi?cid=1075487" style="color: #3B82F6;">链接</a></li>
+            <li>小米集团-W股票股价实时行情 — 新浪财经 <a href="http://stock.sina.com.cn/hkstock/view/stock.php?code=01810&level2=1" style="color: #3B82F6;">链接</a></li>
+            <li>小米集团-W最新价格走势图 — 东方财富网 <a href="http://quote.eastmoney.com/hk/01810.html" style="color: #3B82F6;">链接</a></li>
+            <li>中信建投证券予小米集团-W"买入"评级 <a href="http://stock.stockstar.com/IG2026051100023566.shtml" style="color: #3B82F6;">链接</a></li>
+            <li>一份财报，两个小米 — 澎湃新闻 <a href="https://www.thepaper.cn/newsDetail_forward_31445750" style="color: #3B82F6;">链接</a></li>
+        </ol>
+        <p style="text-align: center; color: #9CA3AF; font-size: 0.75rem; margin-top: 2rem;">报告由AI生成，仅供参考，不构成投资建议。数据截至2026年5月26日。</p>
+    </div>
+
+    <script>
+        // Chart: Revenue Structure
+        new Chart(document.getElementById('chart_revenue'), {
+            type: 'doughnut',
+            data: {
+                labels: ['智能手机', 'IoT与生活消费', '互联网服务', '智能电动汽车', '其他'],
+                datasets: [{
+                    data: [1864, 1232, 374, 1033, 70],
+                    backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#6B7280'],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+        });
+
+        // Chart: Margin Trends
+        new Chart(document.getElementById('chart_margin'), {
+            type: 'bar',
+            data: {
+                labels: ['智能手机', 'IoT', '互联网', '汽车(2025)', '汽车(2026Q1)'],
+                datasets: [{
+                    label: '毛利率 (%)',
+                    data: [10.9, 23.1, 76.5, 24.3, 20.1],
+                    backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#F87171'],
+                    borderRadius: 3
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { borderDash: [4, 4] }, title: { display: true, text: '%' } } } }
+        });
+
+        // Chart: EV Gross Margin Comparison
+        new Chart(document.getElementById('chart_ev_margin'), {
+            type: 'bar',
+            data: {
+                labels: ['小米', '理想', '小鹏', '比亚迪', '特斯拉', '蔚来'],
+                datasets: [{
+                    label: '2025年毛利率 (%)',
+                    data: [24.3, 18.7, 18.9, 17.5, 17.8, 13.6],
+                    backgroundColor: ['#EF4444', '#10B981', '#3B82F6', '#F59E0B', '#6B7280', '#8B5CF6'],
+                    borderRadius: 3
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { borderDash: [4, 4] }, title: { display: true, text: '%' } } } }
+        });
+
+        // Chart: Financial Health Score
+        new Chart(document.getElementById('chart_health'), {
+            type: 'bar',
+            data: {
+                labels: ['盈利能力', '现金流', '负债结构', '资产周转', '研发效率'],
+                datasets: [{
+                    label: '评分 (1-5)',
+                    data: [3.5, 2.0, 3.5, 2.5, 4.0],
+                    backgroundColor: ['#FBBF24', '#EF4444', '#60A5FA', '#F59E0B', '#10B981'],
+                    borderRadius: 3
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { grid: { borderDash: [4, 4] }, max: 5, title: { display: true, text: '分数' } } } }
+        });
+    </script>
+</body>
+</html>
