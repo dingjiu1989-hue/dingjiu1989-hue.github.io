@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 — Page Not Found | AI Study Room</title>
-  <meta name="description" content="The page you are looking for does not exist or has been moved. Browse our 859+ developer tutorials, tool comparisons, and AI guides.">
+  <meta name="description" content="The page you are looking for does not exist or has been moved.">
   <meta name="robots" content="noindex, follow">
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="canonical" href="https://aidev.fit/en/">
+  <link rel="canonical" href="https://aidev.fit/">
   <style>
     .error-page { text-align: center; padding: 4rem 1rem; max-width: 600px; margin: 0 auto; }
     .error-page h1 { font-size: 4rem; margin: 0; color: #d73a49; }
@@ -16,40 +16,109 @@
     .error-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-top: 1.5rem; }
     .error-links a { display: inline-block; padding: 0.5rem 1rem; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px; color: #0969da; text-decoration: none; font-size: 0.9rem; }
     .error-links a:hover { background: #eaeef2; }
+    .lang-switch { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #d0d7de; font-size: 0.85rem; color: #656d76; }
+    .lang-switch a { color: #0969da; cursor: pointer; text-decoration: underline; }
+    .error-cn { display: none; }
+    .error-en { display: none; }
   </style>
 </head>
 <body>
 <div id="nav-placeholder"></div>
 <main>
   <div class="container">
-    <div class="error-page">
+    <div class="error-page error-en">
       <h1>404</h1>
       <h2>Page Not Found</h2>
-      <p>The page you were looking for doesn't exist, has been moved, or the URL is incorrect. Our 900+ articles are still here — try searching or browsing by category.</p>
+      <p>The page you were looking for doesn't exist, has been moved, or the URL is incorrect. Our articles are still here — try searching or browsing by category.</p>
       <div class="error-links">
-        <a href="/en/">🏠 Home</a>
-        <a href="/en/tech/">💻 Tech Tutorials</a>
-        <a href="/en/ai/">🤖 AI Guides</a>
-        <a href="/en/tools/">🔧 Tools</a>
-        <a href="/en/compare/">⚖️ Comparisons</a>
-        <a href="/en/sidehustle/">💼 Side Hustle</a>
-        <a href="/en/security/">🔒 Security</a>
-        <a href="/en/database/">🗄️ Database</a>
-        <a href="/en/architecture/">🏗️ Architecture</a>
-        <a href="/en/all.html">📚 All Articles</a>
+        <a href="/en/">Home</a>
+        <a href="/en/tech/">Tech</a>
+        <a href="/en/ai/">AI Guides</a>
+        <a href="/en/tools/">Tools</a>
+        <a href="/en/compare/">Comparisons</a>
+        <a href="/en/sidehustle/">Side Hustle</a>
+        <a href="/en/security/">Security</a>
+        <a href="/en/database/">Database</a>
+        <a href="/en/architecture/">Architecture</a>
+        <a href="/en/all.html">All Articles</a>
       </div>
+    </div>
+    <div class="error-page error-cn">
+      <h1>404</h1>
+      <h2>页面未找到</h2>
+      <p>您访问的页面不存在、已被移动或网址有误。我们的文章资源仍在 — 试试搜索或按分类浏览。</p>
+      <div class="error-links">
+        <a href="/">首页</a>
+        <a href="/tech/">技术教程</a>
+        <a href="/ai/">AI 教程</a>
+        <a href="/tools/">工具推荐</a>
+        <a href="/sidehustle/">副业资源</a>
+        <a href="/daily/">AI每日资讯</a>
+        <a href="/all.html">全部文章</a>
+      </div>
+    </div>
+    <div class="lang-switch">
+      <span class="switch-en" style="display:none"><a onclick="switchLang('zh')">切换到中文</a></span>
+      <span class="switch-cn" style="display:none"><a onclick="switchLang('en')">Switch to English</a></span>
     </div>
   </div>
 </main>
 <div id="footer-placeholder"></div>
 <script src="/js/include.js"></script>
-<div id="cookie-banner" class="cookie-banner">
+<div id="cookie-banner" class="cookie-banner cookie-banner-en">
   <p>This site uses cookies for analytics and personalized ads. By continuing, you consent to our <a href="/en/privacy.html">Privacy Policy</a>.</p>
   <button onclick="acceptCookies()">Accept</button>
 </div>
+<div id="cookie-banner-cn" class="cookie-banner" style="display:none">
+  <p>本站使用 cookie 进行分析和个性化广告。继续使用即同意我们的 <a href="/privacy.html">隐私政策</a>。</p>
+  <button onclick="acceptCookies()">接受</button>
+</div>
 <script>
-function acceptCookies(){localStorage.setItem('cookies_accepted','1');document.getElementById('cookie-banner').classList.remove('show');}
-if(!localStorage.getItem('cookies_accepted')){document.addEventListener('DOMContentLoaded',function(){document.getElementById('cookie-banner').classList.add('show');});}
+function acceptCookies(){localStorage.setItem('cookies_accepted','1');
+  var b=document.getElementById('cookie-banner');if(b)b.classList.remove('show');
+  var c=document.getElementById('cookie-banner-cn');if(c)c.classList.remove('show');}
+function switchLang(lang){
+  localStorage.setItem('lang', lang);
+  applyLang(lang);
+}
+function applyLang(lang){
+  var isCN = (lang === 'zh');
+  document.documentElement.lang = isCN ? 'zh-CN' : 'en';
+  document.querySelector('.error-en').style.display = isCN ? 'none' : '';
+  document.querySelector('.error-cn').style.display = isCN ? '' : 'none';
+  document.querySelector('.switch-en').style.display = isCN ? '' : 'none';
+  document.querySelector('.switch-cn').style.display = isCN ? 'none' : '';
+  document.querySelector('.cookie-banner-en').style.display = isCN ? 'none' : '';
+  document.getElementById('cookie-banner-cn').style.display = isCN ? '' : 'none';
+  if (isCN) {
+    document.title = '404 — 页面未找到 | AI自习室';
+    document.querySelector('meta[name="description"]').content = '您访问的页面不存在、已被移动或网址有误。';
+    document.querySelector('link[rel="canonical"]').href = 'https://aidev.fit/';
+  } else {
+    document.title = '404 — Page Not Found | AI Study Room';
+    document.querySelector('meta[name="description"]').content = 'The page you are looking for does not exist or has been moved.';
+    document.querySelector('link[rel="canonical"]').href = 'https://aidev.fit/en/';
+  }
+}
+(function(){
+  var path = window.location.pathname;
+  var stored = localStorage.getItem('lang');
+  var isCNPath = path === '/' || (path.length > 1 && !path.startsWith('/en/'));
+  var lang;
+  if (stored) {
+    lang = stored;
+  } else if (isCNPath) {
+    lang = 'zh';
+  } else {
+    lang = 'en';
+  }
+  applyLang(lang);
+  if(!localStorage.getItem('cookies_accepted')){
+    document.addEventListener('DOMContentLoaded', function(){
+      (document.getElementById('cookie-banner') || document.getElementById('cookie-banner-cn')).classList.add('show');
+    });
+  }
+})();
 </script>
 </body>
 </html>
