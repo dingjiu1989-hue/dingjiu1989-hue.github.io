@@ -641,7 +641,9 @@ def make_category(data, board_id):
     board = next(b for b in data['boards'] if b['id'] == board_id)
     count = len(board['posts'])
     cn_url = f'{BASE}/{board_id}/'
-    en_url = f'{BASE}/en/{board_id}/'
+    en_board_dir = ROOT / 'en' / board_id
+    has_en_board = en_board_dir.exists()
+    en_url = f'{BASE}/en/{board_id}/' if has_en_board else ''
 
     item_list = ', '.join(
         '{{"@type": "ListItem", "position": {i}, "url": "{url}"}}'.format(
@@ -660,6 +662,8 @@ def make_category(data, board_id):
         f'<li><a href="/{board_id}/{p["slug"]}.html">{p["title"]}</a> <small>{p["date"]}</small></li>'
         for p in board['posts']
     )
+
+    en_hreflang = f'    <link rel="alternate" hreflang="en" href="{en_url}">\n' if has_en_board else ''
 
     return f'''<!DOCTYPE html>
 <html lang="zh-CN" data-render="category" data-board="{board_id}">
@@ -705,8 +709,7 @@ def make_category(data, board_id):
     <meta name="keywords" content="{keywords}">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" hreflang="zh-CN" href="{cn_url}">
-    <link rel="alternate" hreflang="en" href="{en_url}">
-    <link rel="canonical" href="{cn_url}">
+{en_hreflang}    <link rel="canonical" href="{cn_url}">
     <meta name="robots" content="index, follow">
     <script type="application/ld+json">
     {{
@@ -789,6 +792,7 @@ def make_all_html(data):
             f'<ul>{items}</ul>'
             f'</section>'
         )
+
 
     return f'''<!DOCTYPE html>
 <html lang="zh-CN">
