@@ -1,16 +1,12 @@
 (function () {
   'use strict';
 
-  var input = document.getElementById('search-input');
+  var input = document.getElementById('search-input') || document.getElementById('nav-search-input');
   if (!input) return;
 
-  var results = document.getElementById('search-results');
-  var articles = [];
-  var boards = {};
-  var selectedIndex = -1;
+  var isEn = document.documentElement.lang === 'en' || window.location.pathname.indexOf('/en/') === 0;
 
-  // Board name mapping (mirrors BOARD_NAMES_EN)
-  var boardNames = {
+  var boardNames = isEn ? {
     'daily': 'AI Daily Digest',
     'tech': 'Tech Tutorials',
     'sidehustle': 'Side Hustle Guides',
@@ -20,11 +16,40 @@
     'security': 'Security Guides',
     'database': 'Database Tutorials',
     'architecture': 'Architecture Patterns'
+  } : {
+    'daily': '每日资讯',
+    'tech': '技术教程',
+    'sidehustle': '副业资源',
+    'tools': '工具推荐',
+    'ai': 'AI 教程',
+    'compare': '工具对比',
+    'security': '安全指南',
+    'database': '数据库教程',
+    'architecture': '架构模式',
+    'ai-analyst': 'AI 分析师'
   };
+
+  var dataUrl = isEn ? '/en/articles.json?' : '/articles.json?';
+  var basePath = isEn ? '/en/' : '/';
+
+  var results = document.getElementById('search-results');
+  if (!results) {
+    results = document.createElement('div');
+    results.id = 'search-results';
+    results.className = 'search-results';
+    var wrapper = document.createElement('span');
+    wrapper.className = 'nav-search-wrap';
+    input.parentNode.insertBefore(wrapper, input);
+    wrapper.appendChild(input);
+    wrapper.appendChild(results);
+  }
+
+  var articles = [];
+  var selectedIndex = -1;
 
   function loadData() {
     var req = new XMLHttpRequest();
-    req.open('GET', '/en/articles.json?' + Date.now());
+    req.open('GET', dataUrl + Date.now());
     req.onload = function () {
       try {
         var data = JSON.parse(req.responseText);
@@ -61,24 +86,24 @@
   function doSearch(query) {
     if (!query || query.length < 2) return [];
     var q = query.toLowerCase();
-    var results = [];
+    var out = [];
     for (var i = 0; i < articles.length; i++) {
       var a = articles[i];
       if (matchText(a.title, q) ||
           matchText(a.description, q) ||
           matchText(a.tags, q) ||
           matchText(a.boardName, q)) {
-        results.push(a);
-        if (results.length >= 20) break;
+        out.push(a);
+        if (out.length >= 20) break;
       }
     }
-    return results;
+    return out;
   }
 
   function renderResults(items) {
     selectedIndex = -1;
     if (items.length === 0) {
-      results.innerHTML = '<div class="search-no-results">No articles found</div>';
+      results.innerHTML = '<div class="search-no-results">' + (isEn ? 'No articles found' : '未找到相关文章') + '</div>';
       results.classList.add('active');
       return;
     }
@@ -86,16 +111,16 @@
     for (var i = 0; i < items.length; i++) {
       var a = items[i];
       var icon = a.board === 'daily' ? '📰' : a.board === 'sidehustle' ? '💼' : '📄';
+      var metaLabel = isEn ? 'replies' : '条回复';
       html += '<div class="search-result-item" data-index="' + i + '" data-slug="' + a.slug + '" data-board="' + a.board + '">' +
         '<div class="search-result-title">' + esc(a.title) + '</div>' +
-        '<div class="search-result-meta">' + icon + ' ' + esc(a.boardName) + ' · ' + a.date + ' · ' + a.replies + ' replies</div>' +
+        '<div class="search-result-meta">' + icon + ' ' + esc(a.boardName) + ' · ' + a.date + ' · ' + a.replies + ' ' + metaLabel + '</div>' +
         (a.description ? '<div class="search-result-desc">' + esc(a.description.substring(0, 120)) + '</div>' : '') +
         '</div>';
     }
     results.innerHTML = html;
     results.classList.add('active');
 
-    // Click handler
     var resultEls = results.querySelectorAll('.search-result-item');
     for (var k = 0; k < resultEls.length; k++) {
       resultEls[k].addEventListener('click', function () {
@@ -110,7 +135,7 @@
   }
 
   function goToArticle(slug, board) {
-    window.location.href = '/en/' + board + '/' + slug + '.html';
+    window.location.href = basePath + board + '/' + slug + '.html';
   }
 
   function highlightNext() {
@@ -139,7 +164,6 @@
     }
   }
 
-  // Event listeners
   var debounceTimer;
   input.addEventListener('input', function () {
     clearTimeout(debounceTimer);
@@ -170,7 +194,6 @@
     }
   });
 
-  // Close on outside click
   document.addEventListener('click', function (e) {
     if (!input.contains(e.target) && !results.contains(e.target)) {
       results.classList.remove('active');

@@ -13409,6 +13409,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="{cover_url}">
+    <meta property="og:image:alt" content="{art['title']}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
@@ -13608,6 +13609,8 @@ def make_article_html(art, board_id, board_name, all_posts):
       <ol>{"".join(toc_items)}</ol>
     </nav>'''
             toc_inline_html = f'<details class="article-toc-inline"><summary>Table of Contents ({len(toc_items)})</summary><ol>{"".join(toc_items)}</ol></details>'
+
+    sidebar_html = f'    <aside class="article-sidebar">\n      {toc_sidebar_html}\n    </aside>' if toc_sidebar_html else ''
 
     # Inline "See also" with diverse anchor text
     see_also = ''
@@ -13821,9 +13824,7 @@ def make_article_html(art, board_id, board_name, all_posts):
       </div>
       <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <aside class="article-sidebar">
-      {toc_sidebar_html}
-    </aside>
+{sidebar_html}
   </div>
 </main>
 <button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
@@ -13887,6 +13888,7 @@ def make_homepage(data):
     <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="{BASE}/images/logo.png">
+    <meta property="og:image:alt" content="{SITE_NAME} logo">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
@@ -14107,6 +14109,7 @@ def make_category(data, board_id):
     <meta property="og:site_name" content="AI Study Room">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="{BASE}/images/logo.png">
+    <meta property="og:image:alt" content="{SITE_NAME} logo">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
@@ -14164,10 +14167,7 @@ def make_category(data, board_id):
         <h1>{board['icon']} {title}</h1>
         <p class="board-description">{board_descs[board_id]} ({count} articles)</p>
       </div>
-      <label for="sort-select" class="sr-only">Sort articles by</label>
-      <select id="sort-select" class="sort-select" disabled>
-        <option>Sort: Newest ↓</option>
-      </select>
+      <span class="sort-indicator">Sort: Newest ↓</span>
     </div>
 
     <div id="category-posts"><noscript><ul>{noscript_links}</ul></noscript></div>
@@ -14234,6 +14234,7 @@ def make_all_html(data):
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="AI Study Room">
     <meta property="og:image" content="{BASE}/images/og-default.jpg">
+    <meta property="og:image:alt" content="{SITE_NAME}">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="All {total} Articles — AI Study Room">

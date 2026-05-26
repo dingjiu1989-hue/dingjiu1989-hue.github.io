@@ -67,6 +67,8 @@ a:hover { text-decoration: underline; }
   font-size: 0.8rem;
   width: 140px;
 }
+.nav-toggle { display: none; }
+.nav-toggle-label { display: none; }
 .nav-search::placeholder { color: var(--c-nav-muted); }
 .nav-actions {
   display: flex;
@@ -175,13 +177,9 @@ a:hover { text-decoration: underline; }
 .page-header h2 { font-size: 1.3rem; display: flex; align-items: center; gap: 0.5rem; }
 .page-header .post-count { color: var(--c-muted); font-size: 0.85rem; }
 
-.sort-select {
-  background: var(--c-bg);
-  border: 1px solid var(--c-border);
-  padding: 0.35rem 0.6rem;
-  border-radius: 6px;
+.sort-indicator {
   font-size: 0.8rem;
-  color: var(--c-text);
+  color: var(--c-muted);
 }
 
 /* === Post Table (Category Page) === */
@@ -903,6 +901,18 @@ a:hover { text-decoration: underline; }
   color: var(--c-muted);
 }
 
+/* Nav search dropdown wrapper */
+.nav-search-wrap {
+  position: relative;
+  display: inline-block;
+}
+.nav-search-wrap .search-results {
+  width: 320px;
+  left: auto;
+  right: 0;
+  max-height: 50vh;
+}
+
 /* ═══════════════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════════════ */
@@ -929,6 +939,44 @@ a:hover { text-decoration: underline; }
 
   .nav-links { display: none; }
   .nav-search { width: 100px; }
+
+  .nav-toggle-label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-toggle-label span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--c-nav-text);
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+  .nav-toggle:checked ~ .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 48px;
+    left: 0;
+    right: 0;
+    background: var(--c-nav);
+    padding: 1rem 1.25rem;
+    gap: 0.75rem;
+    border-top: 1px solid #484f58;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
 
   .article-title { font-size: 1.5rem; }
 

@@ -174,6 +174,8 @@ def make_article_html(art, board_id, board_name, all_posts):
         )
         toc_sidebar_html = f'<nav class="toc-sidebar" aria-label="目录"><div class="toc-title">本页目录</div><ul>{nav_items}</ul></nav>'
 
+    sidebar_html = f'    <aside class="article-sidebar">\n      {toc_sidebar_html}\n    </aside>' if toc_sidebar_html else ''
+
     # Meta
     tags = art.get('tags', []) if isinstance(art.get('tags', []), list) else []
     tags_str = ', '.join(tags)
@@ -206,6 +208,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     <meta property="og:site_name" content="{CN_SITE_NAME}">
     <meta property="og:locale" content="zh_CN">
     <meta property="og:image" content="{cover_url}">
+    <meta property="og:image:alt" content="{_esc(title_for_meta)}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="article:published_time" content="{pub_date}">
@@ -463,9 +466,7 @@ def make_article_html(art, board_id, board_name, all_posts):
         </section>
         <div id="giscus-section" data-giscus-loaded="false"></div>
     </div>
-    <aside class="article-sidebar">
-      {toc_sidebar_html}
-    </aside>
+{sidebar_html}
   </div>
 </main>
 <button id="back-to-top" aria-label="回到顶部" title="回到顶部">↑</button>
@@ -529,6 +530,7 @@ def make_homepage(data):
     <meta property="og:site_name" content="{CN_SITE_NAME}">
     <meta property="og:locale" content="zh_CN">
     <meta property="og:image" content="{BASE}/images/logo.png">
+    <meta property="og:image:alt" content="{CN_SITE_NAME} logo">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
@@ -691,6 +693,7 @@ def make_category(data, board_id):
     <meta property="og:site_name" content="{CN_SITE_NAME}">
     <meta property="og:locale" content="zh_CN">
     <meta property="og:image" content="{BASE}/images/logo.png">
+    <meta property="og:image:alt" content="{CN_SITE_NAME} logo">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
     <meta name="twitter:card" content="summary_large_image">
@@ -746,10 +749,7 @@ def make_category(data, board_id):
         <h1>{icon} {title}</h1>
         <p class="board-description">{desc}（{count} 篇文章）</p>
       </div>
-      <label for="sort-select" class="sr-only">文章排序</label>
-      <select id="sort-select" class="sort-select" disabled>
-        <option>排序：最新 ↓</option>
-      </select>
+      <span class="sort-indicator">排序：最新 ↓</span>
     </div>
 
     <div id="category-posts"><noscript><ul>{noscript_links}</ul></noscript></div>
@@ -810,6 +810,7 @@ def make_all_html(data):
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{CN_SITE_NAME}">
     <meta property="og:image" content="{BASE}/images/og-default.jpg">
+    <meta property="og:image:alt" content="{CN_SITE_NAME}">
     <meta property="og:locale" content="zh_CN">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="全部 {total} 篇文章 — {CN_SITE_NAME}">
