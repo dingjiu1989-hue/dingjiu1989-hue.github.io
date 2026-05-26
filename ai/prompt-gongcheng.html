@@ -58,7 +58,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/prompt-gongcheng.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "325",
+      "wordCount": "273",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "zh-CN",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/prompt-gongcheng.html"},
-      "articleBody": "Prompt工程的核心原则   Prompt工程是LLM应用开发的基础技能。写好Prompt需要遵循四个核心原则：明确性、结构化、示例引导和边界控制。   思维链提示   思维链（Chain-of-Thought, CoT）是提升LLM推理能力最有效的方法之一。其核心思想是引导模型在给出最终答案前展示推理过程。   Zero-shot CoT   只需在Prompt末尾添加\"请逐步思考\"或\"Let's think step by step\"，就能显著提升模型在数学和逻辑推理任务上的表现。   Few-shot CoT   提供包含完整推理过程的示例，让模型模仿推理路径。示例的数量通常为2-5个，过多会超出上下文限制，过少则不足以引导。   Auto-CoT   自动生成推理链示例，避免人工构造的成本。具体做法是先对问题进行聚类，然后从每个类别中选择代表性样本并自动生成推理过程。   Few-shot学习技巧   Few-shot学习的质量取决于示例的选择和排列：      示例代表性 ：选择与目标问题在语义和难度上相近的示例    示例多样性 ：覆盖不同类型的输入场景    示例顺序 ：将最相似的示例放在最后（近因效应）    标签平衡 ：各类别的示例数量保持均衡     结构化Prompt设计   将Prompt分解为多个功能模块，形成标准化结构：        ## 角色定义  你是一个{角色}，擅长{能力描述}。   ## 任务说明  你需要完成以下任务：{具体任务描述}   ## 约束条件   -    如果缺乏必要信息，请明确说明  -    输出格式必须为JSON  -    保持客观中立的语气   ## 输出格式  {期望的输出格式模板}   ## 上下文信息  {提供给模型的外部知识}       这种模块化设计便于维护和复用，也方便A/B测试不同模块的效果。   进阶技巧      分步引导 ：将复杂任务拆解为多个步骤，每一步使用独立的Prompt    对抗性Prompt ：在Prompt中加入对抗性示例，提升模型的鲁棒性    自一致性 ：多次采样取最一致的答案，提高准确性    主动提示 ：让模型在不确定时主动提问，而不是猜测    工具调用 ：定义函数签名，让模型自主决定何时调用外部工具     掌握这些进阶技巧后，可以系统性地提升LLM应用的表现，减少幻觉和错误输出。"
+      "articleBody": "Prompt工程的核心原则   Prompt工程是LLM应用开发的基础技能。写好Prompt需要遵循四个核心原则：明确性、结构化、示例引导和边界控制。   思维链提示   思维链（Chain-of-Thought, CoT）是提升LLM推理能力最有效的方法之一。其核心思想是引导模型在给出最终答案前展示推理过程。   Zero-shot CoT   只需在Prompt末尾添加\"请逐步思考\"或\"Let's think step by step\"，就能显著提升模型在数学和逻辑推理任务上的表现。   Few-shot CoT   提供包含完整推理过程的示例，让模型模仿推理路径。示例的数量通常为2-5个，过多会超出上下文限制，过少则不足以引导。   Auto-CoT   自动生成推理链示例，避免人工构造的成本。具体做法是先对问题进行聚类，然后从每个类别中选择代表性样本并自动生成推理过程。   Few-shot学习技巧   Few-shot学习的质量取决于示例的选择和排列：      示例代表性 ：选择与目标问题在语义和难度上相近的示例    示例多样性 ：覆盖不同类型的输入场景    示例顺序 ：将最相似的示例放在最后（近因效应）    标签平衡 ：各类别的示例数量保持均衡     结构化Prompt设计   将Prompt分解为多个功能模块，形成标准化结构：    ## 角色定义 你是一个{角色}，擅长{能力描述}。  ## 任务说明 你需要完成以下任务：{具体任务描述}  ## 约束条件 - 如果缺乏必要信息，请明确说明 - 输出格式必须为JSON - 保持客观中立的语气  ## 输出格式 {期望的输出格式模板}  ## 上下文信息 {提供给模型的外部知识}      这种模块化设计便于维护和复用，也方便A/B测试不同模块的效果。   进阶技巧      分步引导 ：将复杂任务拆解为多个步骤，每一步使用独立的Prompt    对抗性Prompt ：在Prompt中加入对抗性示例，提升模型的鲁棒性    自一致性 ：多次采样取最一致的答案，提高准确性    主动提示 ：让模型在不确定时主动提问，而不是猜测    工具调用 ：定义函数签名，让模型自主决定何时调用外部工具     掌握这些进阶技巧后，可以系统性地提升LLM应用的表现，减少幻觉和错误输出。"
     }
     </script>
     <script type="application/ld+json">
@@ -123,7 +123,7 @@
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>325 字</span>
+          <span>273 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/prompt-gongcheng.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/prompt-gongcheng.png" alt="Prompt工程进阶：思维链、Few-shot、结构化Prompt设计模式" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（8）</summary><ol><li><a href="#prompt工程的核心原则">Prompt工程的核心原则</a></li><li><a href="#思维链提示">思维链提示</a></li><li><a href="#zero-shot-cot">Zero-shot CoT</a></li><li><a href="#few-shot-cot">Few-shot CoT</a></li><li><a href="#auto-cot">Auto-CoT</a></li><li><a href="#few-shot学习技巧">Few-shot学习技巧</a></li><li><a href="#结构化prompt设计">结构化Prompt设计</a></li><li><a href="#进阶技巧">进阶技巧</a></li></ol></details>
@@ -147,23 +147,23 @@
 </ul>
 <h2>结构化Prompt设计</h2>
 <p>将Prompt分解为多个功能模块，形成标准化结构：</p>
-<div class="codehilite"><pre><span></span><code><span class="gu">## 角色定义</span>
+<pre class="codehilite"><code class="language-markdown">## 角色定义
 你是一个{角色}，擅长{能力描述}。
 
-<span class="gu">## 任务说明</span>
+## 任务说明
 你需要完成以下任务：{具体任务描述}
 
-<span class="gu">## 约束条件</span>
-<span class="k">-</span><span class="w"> </span>如果缺乏必要信息，请明确说明
-<span class="k">-</span><span class="w"> </span>输出格式必须为JSON
-<span class="k">-</span><span class="w"> </span>保持客观中立的语气
+## 约束条件
+- 如果缺乏必要信息，请明确说明
+- 输出格式必须为JSON
+- 保持客观中立的语气
 
-<span class="gu">## 输出格式</span>
+## 输出格式
 {期望的输出格式模板}
 
-<span class="gu">## 上下文信息</span>
+## 上下文信息
 {提供给模型的外部知识}
-</code></pre></div>
+</code></pre>
 
 <p>这种模块化设计便于维护和复用，也方便A/B测试不同模块的效果。</p>
 <h2>进阶技巧</h2>

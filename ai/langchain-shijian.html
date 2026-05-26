@@ -58,7 +58,7 @@
       "image": "https://aidev.fit/images/covers/en/ai/langchain-shijian.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "966",
+      "wordCount": "472",
       "keywords": "AI, Machine Learning, LLM",
       "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
       "inLanguage": "zh-CN",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/ai/langchain-shijian.html"},
-      "articleBody": "LangChain框架概览   LangChain是构建LLM应用最流行的框架之一，以模块化设计著称。其核心抽象包括Chain、Agent、Memory、Tool和Callback，理解这些组件的协作方式是掌握LangChain的关键。   Chain：任务执行的基本单元   Chain是LangChain中最基础的执行单元，代表一个完整的任务处理流程。   常见Chain类型    LLMChain：  最简单的Chain，组合Prompt模板和LLM调用。        from     langchain.chains     import   LLMChain   from     langchain.prompts     import   PromptTemplate    prompt   =   PromptTemplate  (       template  =  &quot;请用  {language}  写一首关于  {topic}  的诗&quot;  ,       input_variables  =  [  &quot;language&quot;  ,   &quot;topic&quot;  ]   )   chain   =   LLMChain  (  llm  =  llm  ,   prompt  =  prompt  )   result   =   chain  .  run  (  language  =  &quot;中文&quot;  ,   topic  =  &quot;人工智能&quot;  )         SequentialChain：  串联多个Chain，前一个的输出作为后一个的输入。    RouterChain：  根据输入内容动态选择执行哪个子Chain，适合多意图处理场景。   Memory：对话记忆管理   Memory组件用于在多轮对话中维护上下文信息。   内置Memory类型      ConversationBufferMemory ：完整记录所有历史消息    ConversationSummaryMemory ：对历史进行摘要压缩，节省Token    ConversationBufferWindowMemory ：只保留最近K轮对话    VectorStoreRetrieverMemory ：基于向量检索的长时记忆     选择合适的Memory类型需要权衡记忆完整性和Token消耗。对于长对话，推荐使用摘要记忆或窗口记忆。   Agent：自主决策的核心   Agent是LangChain中最强大的组件，它能够根据任务目标自主决定调用哪些Tool以及以什么顺序调用。   Agent类型      OpenAI Tools Agent ：使用OpenAI的function calling能力    ReAct Agent ：基于Think-Act-Observe循环的推理模式    Plan-and-Execute Agent ：先制定计划，再逐步执行     Agent的执行涉及观察环境、推理决策、执行动作和更新记忆的循环过程。   Tool：Agent的能力扩展   Tool是Agent与外部世界交互的接口。LangChain内置了丰富的Tool集：      计算器 ：执行数学运算    搜索引擎 ：获取实时信息    数据库查询 ：访问结构化数据    文件操作 ：读写和处理文件    API集成 ：调用第三方服务     自定义Tool只需继承BaseTool并实现_run方法即可。   Callback：全流程监控   Callback机制允许开发者监听Chain和Agent执行的各个阶段，用于日志记录、性能监控和调试。        class     MyCallbackHandler  (  BaseCallbackHandler  ):       def     on_llm_start  (  self  ,   serialized  ,   prompts  ,   **  kwargs  ):           print  (  f  &quot;LLM开始处理:   {  prompts  }  &quot;  )       def     on_llm_end  (  self  ,   response  ,   **  kwargs  ):           print  (  f  &quot;LLM处理完成:   {  response  }  &quot;  )        LangChain的组件化设计让开发者可以灵活组合这些核心抽象，快速构建从简单到复杂的LLM应用。"
+      "articleBody": "LangChain框架概览   LangChain是构建LLM应用最流行的框架之一，以模块化设计著称。其核心抽象包括Chain、Agent、Memory、Tool和Callback，理解这些组件的协作方式是掌握LangChain的关键。   Chain：任务执行的基本单元   Chain是LangChain中最基础的执行单元，代表一个完整的任务处理流程。   常见Chain类型    LLMChain：  最简单的Chain，组合Prompt模板和LLM调用。    from langchain.chains import LLMChain from langchain.prompts import PromptTemplate  prompt = PromptTemplate(     template=&quot;请用{language}写一首关于{topic}的诗&quot;,     input_variables=[&quot;language&quot;, &quot;topic&quot;] ) chain = LLMChain(llm=llm, prompt=prompt) result = chain.run(language=&quot;中文&quot;, topic=&quot;人工智能&quot;)       SequentialChain：  串联多个Chain，前一个的输出作为后一个的输入。    RouterChain：  根据输入内容动态选择执行哪个子Chain，适合多意图处理场景。   Memory：对话记忆管理   Memory组件用于在多轮对话中维护上下文信息。   内置Memory类型      ConversationBufferMemory ：完整记录所有历史消息    ConversationSummaryMemory ：对历史进行摘要压缩，节省Token    ConversationBufferWindowMemory ：只保留最近K轮对话    VectorStoreRetrieverMemory ：基于向量检索的长时记忆     选择合适的Memory类型需要权衡记忆完整性和Token消耗。对于长对话，推荐使用摘要记忆或窗口记忆。   Agent：自主决策的核心   Agent是LangChain中最强大的组件，它能够根据任务目标自主决定调用哪些Tool以及以什么顺序调用。   Agent类型      OpenAI Tools Agent ：使用OpenAI的function calling能力    ReAct Agent ：基于Think-Act-Observe循环的推理模式    Plan-and-Execute Agent ：先制定计划，再逐步执行     Agent的执行涉及观察环境、推理决策、执行动作和更新记忆的循环过程。   Tool：Agent的能力扩展   Tool是Agent与外部世界交互的接口。LangChain内置了丰富的Tool集：      计算器 ：执行数学运算    搜索引擎 ：获取实时信息    数据库查询 ：访问结构化数据    文件操作 ：读写和处理文件    API集成 ：调用第三方服务     自定义Tool只需继承BaseTool并实现_run方法即可。   Callback：全流程监控   Callback机制允许开发者监听Chain和Agent执行的各个阶段，用于日志记录、性能监控和调试。    class MyCallbackHandler(BaseCallbackHandler):     def on_llm_start(self, serialized, prompts, **kwargs):         print(f&quot;LLM开始处理: {prompts}&quot;)     def on_llm_end(self, response, **kwargs):         print(f&quot;LLM处理完成: {response}&quot;)      LangChain的组件化设计让开发者可以灵活组合这些核心抽象，快速构建从简单到复杂的LLM应用。"
     }
     </script>
     <script type="application/ld+json">
@@ -119,11 +119,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>4 分钟阅读</span>
+          <span>2 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>966 字</span>
+          <span>472 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/ai/langchain-shijian.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/ai/langchain-shijian.png" alt="LangChain实战：Chain、Agent、Memory、Tool使用详解" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（9）</summary><ol><li><a href="#langchain框架概览">LangChain框架概览</a></li><li><a href="#chain任务执行的基本单元">Chain：任务执行的基本单元</a></li><li><a href="#常见chain类型">常见Chain类型</a></li><li><a href="#memory对话记忆管理">Memory：对话记忆管理</a></li><li><a href="#内置memory类型">内置Memory类型</a></li><li><a href="#agent自主决策的核心">Agent：自主决策的核心</a></li><li><a href="#agent类型">Agent类型</a></li><li><a href="#toolagent的能力扩展">Tool：Agent的能力扩展</a></li><li><a href="#callback全流程监控">Callback：全流程监控</a></li></ol></details>
@@ -133,16 +133,16 @@
 <p>Chain是LangChain中最基础的执行单元，代表一个完整的任务处理流程。</p>
 <h3>常见Chain类型</h3>
 <p><strong>LLMChain：</strong> 最简单的Chain，组合Prompt模板和LLM调用。</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">langchain.chains</span><span class="w"> </span><span class="kn">import</span> <span class="n">LLMChain</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptTemplate</span>
+<pre class="codehilite"><code class="language-python">from langchain.chains import LLMChain
+from langchain.prompts import PromptTemplate
 
-<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
-    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;请用</span><span class="si">{language}</span><span class="s2">写一首关于</span><span class="si">{topic}</span><span class="s2">的诗&quot;</span><span class="p">,</span>
-    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;language&quot;</span><span class="p">,</span> <span class="s2">&quot;topic&quot;</span><span class="p">]</span>
-<span class="p">)</span>
-<span class="n">chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">language</span><span class="o">=</span><span class="s2">&quot;中文&quot;</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;人工智能&quot;</span><span class="p">)</span>
-</code></pre></div>
+prompt = PromptTemplate(
+    template=&quot;请用{language}写一首关于{topic}的诗&quot;,
+    input_variables=[&quot;language&quot;, &quot;topic&quot;]
+)
+chain = LLMChain(llm=llm, prompt=prompt)
+result = chain.run(language=&quot;中文&quot;, topic=&quot;人工智能&quot;)
+</code></pre>
 
 <p><strong>SequentialChain：</strong> 串联多个Chain，前一个的输出作为后一个的输入。</p>
 <p><strong>RouterChain：</strong> 根据输入内容动态选择执行哪个子Chain，适合多意图处理场景。</p>
@@ -177,12 +177,12 @@
 <p>自定义Tool只需继承BaseTool并实现_run方法即可。</p>
 <h2>Callback：全流程监控</h2>
 <p>Callback机制允许开发者监听Chain和Agent执行的各个阶段，用于日志记录、性能监控和调试。</p>
-<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MyCallbackHandler</span><span class="p">(</span><span class="n">BaseCallbackHandler</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">on_llm_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serialized</span><span class="p">,</span> <span class="n">prompts</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LLM开始处理: </span><span class="si">{</span><span class="n">prompts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">on_llm_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LLM处理完成: </span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">class MyCallbackHandler(BaseCallbackHandler):
+    def on_llm_start(self, serialized, prompts, **kwargs):
+        print(f&quot;LLM开始处理: {prompts}&quot;)
+    def on_llm_end(self, response, **kwargs):
+        print(f&quot;LLM处理完成: {response}&quot;)
+</code></pre>
 
 <p>LangChain的组件化设计让开发者可以灵活组合这些核心抽象，快速构建从简单到复杂的LLM应用。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/ai/ai-agent-development.html"><span class="related-title">AI Agent实战指南：从入门到生产部署</span><span class="related-meta">AI 教程 · 2026-05-11</span></a>
 <a class="related-card" href="/ai/ai-agent-kuangjia.html"><span class="related-title">AI Agent框架对比：LangGraph vs CrewAI vs AutoGen</span><span class="related-meta">AI 教程 · 2026-05-12</span></a>

@@ -58,7 +58,7 @@
       "image": "https://aidev.fit/images/covers/en/tech/ci-cd-liu-cheng.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1709",
+      "wordCount": "508",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/ci-cd-liu-cheng.html"},
-      "articleBody": "CI/CD核心原则   持续集成和持续部署是现代软件工程的核心实践。好的CI/CD流水线应遵循：快速反馈、可靠性优先、安全左移和环境一致性。   GitHub Actions基础   GitHub Actions使用YAML定义工作流，核心概念包括Workflow、Job、Step和Action。   基础工作流        name  :     CI Pipeline   on  :       push  :         branches  :     [  main  ]       pull_request  :         branches  :     [  main  ]    jobs  :       test  :         runs-on  :     ubuntu-latest         steps  :           -     uses  :     actions/checkout@v4           -     uses  :     actions/setup-node@v4             with  :               node-version  :     &#39;20&#39;           -     run  :     npm ci           -     run  :     npm test        构建优化   缓存策略   合理缓存依赖可以显著减少构建时间：        -     uses  :     actions/cache@v3       with  :         path  :     ~/.npm         key  :     ${{ runner.os }}-node-${{ hashFiles(&#39;**/package-lock.json&#39;) }}         restore-keys  :     |           ${{ runner.os }}-node-        矩阵构建   并行测试多个版本和平台：        strategy  :       matrix  :         node-version  :     [  18  ,     20  ,     22  ]         os  :     [  ubuntu-latest  ,     windows-latest  ]        安全集成   代码质量与安全      Lint检查 ：ESLint、Pylint等    SAST扫描 ：CodeQL、SonarQube    依赖扫描 ：Dependabot、Snyk    密钥检测 ：防止硬编码密钥泄露     容器安全   构建镜像后自动扫描漏洞：        -     name  :     Build and scan Docker image       run  :     |         docker build -t myapp:${{ github.sha }} .         trivy image myapp:${{ github.sha }}        部署策略   环境分离       开发分支 → 自动部署到dev环境 功能分支 → 预览环境（PR触发） 主分支 → 自动部署到staging → 手动审批 → 生产环境       金丝雀发布   通过GitHub Actions的部署环境功能实现逐步发布：        environment  :       name  :     production       url  :     https://myapp.com    # 分阶段发布   -     name  :     Deploy 10% traffic       run  :     ./deploy-canary.sh 10   -     name  :     Wait for health check       run  :     ./wait-for-health.sh   -     name  :     Deploy 100%       run  :     ./deploy-full.sh        生产级配置示例   一个完整的CI/CD流程      代码提交 触发CI流水线   并行运行lint、测试、构建   测试通过后构建Docker镜像   镜像安全扫描   推送到容器仓库   自动部署到预发布环境   集成测试   手动审批后部署到生产环境   部署后监控     状态通知   集成Slack、邮件或飞书通知构建状态：        -     name  :     Notify on failure       if  :     failure()       uses  :     slackapi/slack-github-action@v1       with  :         payload  :     &#39;{&quot;text&quot;:     &quot;构建失败:     ${{     github.repository     }}&quot;}&#39;        设计良好的CI/CD流水线是团队高效交付的基石，值得投入时间持续优化。"
+      "articleBody": "CI/CD核心原则   持续集成和持续部署是现代软件工程的核心实践。好的CI/CD流水线应遵循：快速反馈、可靠性优先、安全左移和环境一致性。   GitHub Actions基础   GitHub Actions使用YAML定义工作流，核心概念包括Workflow、Job、Step和Action。   基础工作流    name: CI Pipeline on:   push:     branches: [main]   pull_request:     branches: [main]  jobs:   test:     runs-on: ubuntu-latest     steps:       - uses: actions/checkout@v4       - uses: actions/setup-node@v4         with:           node-version: '20'       - run: npm ci       - run: npm test      构建优化   缓存策略   合理缓存依赖可以显著减少构建时间：    - uses: actions/cache@v3   with:     path: ~/.npm     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}     restore-keys: |       ${{ runner.os }}-node-      矩阵构建   并行测试多个版本和平台：    strategy:   matrix:     node-version: [18, 20, 22]     os: [ubuntu-latest, windows-latest]      安全集成   代码质量与安全      Lint检查 ：ESLint、Pylint等    SAST扫描 ：CodeQL、SonarQube    依赖扫描 ：Dependabot、Snyk    密钥检测 ：防止硬编码密钥泄露     容器安全   构建镜像后自动扫描漏洞：    - name: Build and scan Docker image   run: |     docker build -t myapp:${{ github.sha }} .     trivy image myapp:${{ github.sha }}      部署策略   环境分离    开发分支 → 自动部署到dev环境 功能分支 → 预览环境（PR触发） 主分支 → 自动部署到staging → 手动审批 → 生产环境      金丝雀发布   通过GitHub Actions的部署环境功能实现逐步发布：    environment:   name: production   url: https://myapp.com  # 分阶段发布 - name: Deploy 10% traffic   run: ./deploy-canary.sh 10 - name: Wait for health check   run: ./wait-for-health.sh - name: Deploy 100%   run: ./deploy-full.sh      生产级配置示例   一个完整的CI/CD流程      代码提交 触发CI流水线   并行运行lint、测试、构建   测试通过后构建Docker镜像   镜像安全扫描   推送到容器仓库   自动部署到预发布环境   集成测试   手动审批后部署到生产环境   部署后监控     状态通知   集成Slack、邮件或飞书通知构建状态：    - name: Notify on failure   if: failure()   uses: slackapi/slack-github-action@v1   with:     payload: '{&quot;text&quot;: &quot;构建失败: ${{ github.repository }}&quot;}'      设计良好的CI/CD流水线是团队高效交付的基石，值得投入时间持续优化。"
     }
     </script>
     <script type="application/ld+json">
@@ -119,11 +119,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>8 分钟阅读</span>
+          <span>2 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>1709 字</span>
+          <span>508 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/ci-cd-liu-cheng.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/ci-cd-liu-cheng.png" alt="CI/CD流水线设计：GitHub Actions从入门到生产级配置" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（15）</summary><ol><li><a href="#cicd核心原则">CI/CD核心原则</a></li><li><a href="#github-actions基础">GitHub Actions基础</a></li><li><a href="#基础工作流">基础工作流</a></li><li><a href="#构建优化">构建优化</a></li><li><a href="#缓存策略">缓存策略</a></li><li><a href="#矩阵构建">矩阵构建</a></li><li><a href="#安全集成">安全集成</a></li><li><a href="#代码质量与安全">代码质量与安全</a></li><li><a href="#容器安全">容器安全</a></li><li><a href="#部署策略">部署策略</a></li><li><a href="#环境分离">环境分离</a></li><li><a href="#金丝雀发布">金丝雀发布</a></li><li><a href="#生产级配置示例">生产级配置示例</a></li><li><a href="#一个完整的cicd流程">一个完整的CI/CD流程</a></li><li><a href="#状态通知">状态通知</a></li></ol></details>
@@ -132,43 +132,43 @@
 <h2>GitHub Actions基础</h2>
 <p>GitHub Actions使用YAML定义工作流，核心概念包括Workflow、Job、Step和Action。</p>
 <h3>基础工作流</h3>
-<div class="codehilite"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CI Pipeline</span>
-<span class="nt">on</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<pre class="codehilite"><code class="language-yaml">name: CI Pipeline
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
-<span class="nt">jobs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">test</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
-<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-node@v4</span>
-<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">node-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;20&#39;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm ci</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm test</span>
-</code></pre></div>
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm test
+</code></pre>
 
 <h2>构建优化</h2>
 <h3>缓存策略</h3>
 <p>合理缓存依赖可以显著减少构建时间：</p>
-<div class="codehilite"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/cache@v3</span>
-<span class="w">  </span><span class="nt">with</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.npm</span>
-<span class="w">    </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ runner.os }}-node-${{ hashFiles(&#39;**/package-lock.json&#39;) }}</span>
-<span class="w">    </span><span class="nt">restore-keys</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">      </span><span class="no">${{ runner.os }}-node-</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">- uses: actions/cache@v3
+  with:
+    path: ~/.npm
+    key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+    restore-keys: |
+      ${{ runner.os }}-node-
+</code></pre>
 
 <h3>矩阵构建</h3>
 <p>并行测试多个版本和平台：</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">strategy</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">matrix</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">node-version</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">18</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">22</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">os</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ubuntu-latest</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">windows-latest</span><span class="p p-Indicator">]</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">strategy:
+  matrix:
+    node-version: [18, 20, 22]
+    os: [ubuntu-latest, windows-latest]
+</code></pre>
 
 <h2>安全集成</h2>
 <h3>代码质量与安全</h3>
@@ -180,33 +180,33 @@
 </ul>
 <h3>容器安全</h3>
 <p>构建镜像后自动扫描漏洞：</p>
-<div class="codehilite"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build and scan Docker image</span>
-<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">    </span><span class="no">docker build -t myapp:${{ github.sha }} .</span>
-<span class="w">    </span><span class="no">trivy image myapp:${{ github.sha }}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">- name: Build and scan Docker image
+  run: |
+    docker build -t myapp:${{ github.sha }} .
+    trivy image myapp:${{ github.sha }}
+</code></pre>
 
 <h2>部署策略</h2>
 <h3>环境分离</h3>
-<div class="codehilite"><pre><span></span><code>开发分支 → 自动部署到dev环境
+<pre class="codehilite"><code>开发分支 → 自动部署到dev环境
 功能分支 → 预览环境（PR触发）
 主分支 → 自动部署到staging → 手动审批 → 生产环境
-</code></pre></div>
+</code></pre>
 
 <h3>金丝雀发布</h3>
 <p>通过GitHub Actions的部署环境功能实现逐步发布：</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">environment</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
-<span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://myapp.com</span>
+<pre class="codehilite"><code class="language-yaml">environment:
+  name: production
+  url: https://myapp.com
 
-<span class="c1"># 分阶段发布</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy 10% traffic</span>
-<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./deploy-canary.sh 10</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Wait for health check</span>
-<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./wait-for-health.sh</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy 100%</span>
-<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./deploy-full.sh</span>
-</code></pre></div>
+# 分阶段发布
+- name: Deploy 10% traffic
+  run: ./deploy-canary.sh 10
+- name: Wait for health check
+  run: ./wait-for-health.sh
+- name: Deploy 100%
+  run: ./deploy-full.sh
+</code></pre>
 
 <h2>生产级配置示例</h2>
 <h3>一个完整的CI/CD流程</h3>
@@ -223,12 +223,12 @@
 </ol>
 <h3>状态通知</h3>
 <p>集成Slack、邮件或飞书通知构建状态：</p>
-<div class="codehilite"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Notify on failure</span>
-<span class="w">  </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">failure()</span>
-<span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slackapi/slack-github-action@v1</span>
-<span class="w">  </span><span class="nt">with</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">payload</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{&quot;text&quot;:</span><span class="nv"> </span><span class="s">&quot;构建失败:</span><span class="nv"> </span><span class="s">${{</span><span class="nv"> </span><span class="s">github.repository</span><span class="nv"> </span><span class="s">}}&quot;}&#39;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">- name: Notify on failure
+  if: failure()
+  uses: slackapi/slack-github-action@v1
+  with:
+    payload: '{&quot;text&quot;: &quot;构建失败: ${{ github.repository }}&quot;}'
+</code></pre>
 
 <p>设计良好的CI/CD流水线是团队高效交付的基石，值得投入时间持续优化。</p></div><section class="see-also"><h3>📖 相关阅读</h3><div class="related-grid"><a class="related-card" href="/tech/api-design-best-practices.html"><span class="related-title">API设计最佳实践</span><span class="related-meta">技术教程 · 2026-05-11</span></a>
 <a class="related-card" href="/tech/api-she-ji.html"><span class="related-title">RESTful API设计规范：资源命名、状态码、版本管理、分页</span><span class="related-meta">技术教程 · 2026-05-12</span></a>

@@ -5,7 +5,7 @@
     <link>https://aidev.fit/</link>
     <description>开发者教程、工具对比、副业指南、AI洞见。</description>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 26 May 2026 02:33:29 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 26 May 2026 03:58:58 GMT</lastBuildDate>
     <atom:link href="https://aidev.fit/feed.xml" rel="self" type="application/rss+xml"/>
     <atom:link rel="hub" href="https://pubsubhubbub.appspot.com/"/>
     <item>
@@ -273,46 +273,46 @@
 <li><strong>减少回归 Bug</strong> — 修一个 Bug 加一个测试，同样的错不会再犯第二次</li>
 </ul>
 <p>AAA 模式（Arrange-Act-Assert）</p>
-<div class="codehilite"><pre><span></span><code>def test_add_two_numbers():
+<pre class="codehilite"><code>def test_add_two_numbers():
     # Arrange（准备）
     a, b = 2, 3
     # Act（执行）
     result = add(a, b)
     # Assert（断言）
     assert result == 5
-</code></pre></div>
+</code></pre>
 
 <p>第一个真实测试</p>
-<div class="codehilite"><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="nx">user_service</span><span class="p">.</span><span class="nx">py</span>
-<span class="nx">def</span><span class="w"> </span><span class="nx">get_full_name</span><span class="p">(</span><span class="nx">user</span><span class="p">):</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">f</span><span class="s">&quot;{user.first_name} {user.last_name}&quot;</span>
+<pre class="codehilite"><code># user_service.py
+def get_full_name(user):
+    return f&quot;{user.first_name} {user.last_name}&quot;
 
-<span class="err">#</span><span class="w"> </span><span class="nx">test_user_service</span><span class="p">.</span><span class="nx">py</span>
-<span class="nx">def</span><span class="w"> </span><span class="nx">test_get_full_name</span><span class="p">():</span>
-<span class="w">    </span><span class="nx">user</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">type</span><span class="p">(</span><span class="err">&#39;</span><span class="nx">User</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(),</span><span class="w"> </span><span class="p">{</span><span class="err">&#39;</span><span class="nx">first_name</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="sc">&#39;张&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">last_name</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="sc">&#39;三&#39;</span><span class="p">})()</span>
-<span class="w">    </span><span class="nx">assert</span><span class="w"> </span><span class="nx">get_full_name</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;张 三&quot;</span>
+# test_user_service.py
+def test_get_full_name():
+    user = type('User', (), {'first_name': '张', 'last_name': '三'})()
+    assert get_full_name(user) == &quot;张 三&quot;
 
-<span class="nx">def</span><span class="w"> </span><span class="nx">test_get_full_name_empty_last</span><span class="p">():</span>
-<span class="w">    </span><span class="nx">user</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">type</span><span class="p">(</span><span class="err">&#39;</span><span class="nx">User</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(),</span><span class="w"> </span><span class="p">{</span><span class="err">&#39;</span><span class="nx">first_name</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="sc">&#39;李&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">last_name</span><span class="err">&#39;</span><span class="p">:</span><span class="w"> </span><span class="err">&#39;&#39;</span><span class="p">})()</span>
-<span class="w">    </span><span class="nx">assert</span><span class="w"> </span><span class="nx">get_full_name</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;李 &quot;</span>
-</code></pre></div>
+def test_get_full_name_empty_last():
+    user = type('User', (), {'first_name': '李', 'last_name': ''})()
+    assert get_full_name(user) == &quot;李 &quot;
+</code></pre>
 
 <p>Mock 和 Fixture</p>
-<div class="codehilite"><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="nl">Fixture</span><span class="p">:</span><span class="w"> </span><span class="n">共享的测试数据</span>
-<span class="nv">@pytest</span><span class="p">.</span><span class="n">fixture</span>
-<span class="n">def</span><span class="w"> </span><span class="n">sample_user</span><span class="p">()</span><span class="err">:</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">User</span><span class="p">(</span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;张三&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="o">=</span><span class="ss">&quot;zhang@test.com&quot;</span><span class="p">)</span>
+<pre class="codehilite"><code># Fixture: 共享的测试数据
+@pytest.fixture
+def sample_user():
+    return User(id=1, name=&quot;张三&quot;, email=&quot;zhang@test.com&quot;)
 
-<span class="n">def</span><span class="w"> </span><span class="n">test_user_email</span><span class="p">(</span><span class="n">sample_user</span><span class="p">)</span><span class="err">:</span>
-<span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="n">sample_user</span><span class="p">.</span><span class="n">email</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;zhang@test.com&quot;</span>
+def test_user_email(sample_user):
+    assert sample_user.email == &quot;zhang@test.com&quot;
 
-<span class="err">#</span><span class="w"> </span><span class="nl">Mock</span><span class="p">:</span><span class="w"> </span><span class="n">隔离外部依赖</span>
-<span class="nv">@patch</span><span class="p">(</span><span class="ss">&quot;requests.get&quot;</span><span class="p">)</span>
-<span class="n">def</span><span class="w"> </span><span class="n">test_fetch_user</span><span class="p">(</span><span class="n">mock_get</span><span class="p">)</span><span class="err">:</span>
-<span class="w">    </span><span class="n">mock_get</span><span class="p">.</span><span class="n">return_value</span><span class="p">.</span><span class="n">json</span><span class="p">.</span><span class="n">return_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;name&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;张三&quot;</span><span class="err">}</span>
-<span class="w">    </span><span class="k">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetch_user</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="w">    </span><span class="n">assert</span><span class="w"> </span><span class="k">result</span><span class="o">[</span><span class="n">&quot;name&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;张三&quot;</span>
-</code></pre></div>
+# Mock: 隔离外部依赖
+@patch(&quot;requests.get&quot;)
+def test_fetch_user(mock_get):
+    mock_get.return_value.json.return_value = {&quot;name&quot;: &quot;张三&quot;}
+    result = fetch_user(1)
+    assert result[&quot;name&quot;] == &quot;张三&quot;
+</code></pre>
 
 <p>什么该测、什么不该测</p>
 <ul>
@@ -415,29 +415,29 @@
 </tr>
 </tbody>
 </table>
-<div class="codehilite"><pre><span></span><code><span class="o">#</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="w"> </span>验证手机号（中国大陆）
-<span class="o">^</span><span class="mi">1</span><span class="p">[</span><span class="mi">3</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span>\<span class="nv">d</span><span class="p">{</span><span class="mi">9</span><span class="p">}$</span>
+<pre class="codehilite"><code># 1. 验证手机号（中国大陆）
+^1[3-9]\d{9}$
 
-<span class="o">#</span><span class="w"> </span><span class="mi">2</span><span class="o">.</span><span class="w"> </span>提取邮箱地址
-<span class="p">[</span><span class="nv">a</span><span class="o">-</span><span class="nv">zA</span><span class="o">-</span><span class="nv">Z0</span><span class="o">-</span><span class="mi">9</span><span class="o">.</span><span class="nv">_%</span><span class="o">+-</span><span class="p">]</span><span class="o">+@</span><span class="p">[</span><span class="nv">a</span><span class="o">-</span><span class="nv">zA</span><span class="o">-</span><span class="nv">Z0</span><span class="o">-</span><span class="mi">9</span><span class="o">.-</span><span class="p">]</span><span class="o">+</span>\<span class="o">.</span><span class="p">[</span><span class="nv">a</span><span class="o">-</span><span class="nv">zA</span><span class="o">-</span><span class="nv">Z</span><span class="p">]{</span><span class="mi">2</span><span class="p">,}</span>
+# 2. 提取邮箱地址
+[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}
 
-<span class="o">#</span><span class="w"> </span><span class="mi">3</span><span class="o">.</span><span class="w"> </span>匹配<span class="w"> </span><span class="nv">URL</span>
-<span class="nv">https</span>?<span class="o">://</span><span class="p">[</span>\<span class="nv">w</span><span class="o">.-</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="o">:</span>\<span class="nv">d</span><span class="o">+</span><span class="p">)</span>?<span class="p">(</span><span class="o">/</span><span class="p">[</span>\<span class="nv">w</span><span class="o">./-</span><span class="p">]</span><span class="o">*</span><span class="p">)</span>?
+# 3. 匹配 URL
+https?://[\w.-]+(:\d+)?(/[\w./-]*)?
 
-<span class="o">#</span><span class="w"> </span><span class="mi">4</span><span class="o">.</span><span class="w"> </span>提取<span class="w"> </span><span class="nv">HTML</span><span class="w"> </span>标签内容
-<span class="o">&gt;</span><span class="p">([</span><span class="o">^&lt;</span><span class="p">]</span><span class="o">+</span><span class="p">)</span><span class="o">&lt;</span>
+# 4. 提取 HTML 标签内容
+&gt;([^&lt;]+)&lt;
 
-<span class="o">#</span><span class="w"> </span><span class="mi">5</span><span class="o">.</span><span class="w"> </span>验证日期格式<span class="w"> </span><span class="nv">YYYY</span><span class="o">-</span><span class="nv">MM</span><span class="o">-</span><span class="nv">DD</span>
-<span class="o">^</span>\<span class="nv">d</span><span class="p">{</span><span class="mi">4</span><span class="p">}</span><span class="o">-</span><span class="p">(</span><span class="mi">0</span><span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span><span class="o">|</span><span class="mi">1</span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span><span class="o">-</span><span class="p">(</span><span class="mi">0</span><span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span><span class="o">|</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span>\<span class="nv">d</span><span class="o">|</span><span class="mi">3</span><span class="p">[</span><span class="mi">01</span><span class="p">])$</span>
-</code></pre></div>
+# 5. 验证日期格式 YYYY-MM-DD
+^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+</code></pre>
 
 <p>分组和捕获</p>
-<div class="codehilite"><pre><span></span><code># 匹配 &quot;2026-05-07&quot;，分别捕获年月日
+<pre class="codehilite"><code># 匹配 &quot;2026-05-07&quot;，分别捕获年月日
 (\d{4})-(\d{2})-(\d{2})
 
 # Python 中可以用 group(1) group(2) group(3) 获取
 # 等价于 \1 \2 \3 在替换中引用
-</code></pre></div>
+</code></pre>
 
 <table>
 <thead>
@@ -485,42 +485,42 @@
       <description><![CDATA[零基础 Python 编程入门，30 分钟掌握变量、条件、循环、函数等核心语法，手写第一个可运行程序。]]></description>
       <content:encoded><![CDATA[
 <p>Python 是最适合初学者的编程语言——语法接近自然语言，生态强大到几乎无所不能。这篇教程带你 30 分钟入门。 安装 Python macOS 自带 Python 3，终端输入 <code>python3 --version</code> 检查。Windows 去 python.org 下载安装包，安装时勾选 "Add Python to PATH"。 第一个程序</p>
-<div class="codehilite"><pre><span></span><code>print(&quot;Hello, World!&quot;)
-</code></pre></div>
+<pre class="codehilite"><code>print(&quot;Hello, World!&quot;)
+</code></pre>
 
 <p>保存为 <code>hello.py</code>，终端运行 <code>python3 hello.py</code>，看到输出就成功了。 变量和数据类型</p>
-<div class="codehilite"><pre><span></span><code>name = &quot;小明&quot;        # 字符串
+<pre class="codehilite"><code>name = &quot;小明&quot;        # 字符串
 age = 25             # 整数
 height = 1.75        # 浮点数
 is_student = True    # 布尔值
 
 print(f&quot;{name}今年{age}岁&quot;)
-</code></pre></div>
+</code></pre>
 
 <p>条件判断</p>
-<div class="codehilite"><pre><span></span><code><span class="nv">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">85</span>
-<span class="k">if</span><span class="w"> </span><span class="nv">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">90</span>:
-<span class="w">    </span><span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;优秀&quot;</span><span class="ss">)</span>
-<span class="nv">elif</span><span class="w"> </span><span class="nv">score</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">60</span>:
-<span class="w">    </span><span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;及格&quot;</span><span class="ss">)</span>
-<span class="k">else</span>:
-<span class="w">    </span><span class="nv">print</span><span class="ss">(</span><span class="s2">&quot;不及格&quot;</span><span class="ss">)</span>
-</code></pre></div>
+<pre class="codehilite"><code>score = 85
+if score &gt;= 90:
+    print(&quot;优秀&quot;)
+elif score &gt;= 60:
+    print(&quot;及格&quot;)
+else:
+    print(&quot;不及格&quot;)
+</code></pre>
 
 <p>循环</p>
-<div class="codehilite"><pre><span></span><code>#<span class="w"> </span><span class="k">for</span><span class="w"> </span>循环
-<span class="k">for</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">range</span><span class="ss">(</span><span class="mi">5</span><span class="ss">)</span>:
-<span class="w">    </span><span class="nv">print</span><span class="ss">(</span><span class="nv">f</span><span class="s2">&quot;第{i+1}次&quot;</span><span class="ss">)</span>
+<pre class="codehilite"><code># for 循环
+for i in range(5):
+    print(f&quot;第{i+1}次&quot;)
 
-#<span class="w"> </span><span class="k">while</span><span class="w"> </span>循环
-<span class="nv">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="k">while</span><span class="w"> </span><span class="nv">count</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span>:
-<span class="w">    </span><span class="nv">print</span><span class="ss">(</span><span class="nv">f</span><span class="s2">&quot;count = {count}&quot;</span><span class="ss">)</span>
-<span class="w">    </span><span class="nv">count</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
-</code></pre></div>
+# while 循环
+count = 0
+while count &lt; 3:
+    print(f&quot;count = {count}&quot;)
+    count += 1
+</code></pre>
 
 <p>列表和字典</p>
-<div class="codehilite"><pre><span></span><code># 列表 — 有序集合
+<pre class="codehilite"><code># 列表 — 有序集合
 fruits = [&quot;苹果&quot;, &quot;香蕉&quot;, &quot;橘子&quot;]
 fruits.append(&quot;葡萄&quot;)
 print(fruits[0])  # 苹果
@@ -528,14 +528,14 @@ print(fruits[0])  # 苹果
 # 字典 — 键值对
 user = {&quot;name&quot;: &quot;小明&quot;, &quot;age&quot;: 25, &quot;city&quot;: &quot;北京&quot;}
 print(user[&quot;name&quot;])  # 小明
-</code></pre></div>
+</code></pre>
 
 <p>函数</p>
-<div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">greet</span><span class="ss">(</span><span class="nv">name</span><span class="ss">)</span>:
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nv">f</span><span class="s2">&quot;你好，{name}！&quot;</span>
+<pre class="codehilite"><code>def greet(name):
+    return f&quot;你好，{name}！&quot;
 
-<span class="nv">print</span><span class="ss">(</span><span class="nv">greet</span><span class="ss">(</span><span class="s2">&quot;小明&quot;</span><span class="ss">))</span><span class="w">  </span>#<span class="w"> </span>你好，小明！
-</code></pre></div>
+print(greet(&quot;小明&quot;))  # 你好，小明！
+</code></pre>
 
 <p>下一步学什么</p>
 <ol>
@@ -566,32 +566,32 @@ print(user[&quot;name&quot;])  # 小明
 <li><strong>DOM 型 XSS</strong> ：纯前端问题，JS 把不可信数据写入了 innerHTML。</li>
 </ul>
 <p><strong>防御方案</strong> ：</p>
-<div class="codehilite"><pre><span></span><code><span class="o">//</span><span class="w"> </span><span class="err">❌</span><span class="w"> </span><span class="err">危险：直接把用户输入插入</span><span class="w"> </span><span class="n">HTML</span>
-<span class="n">element</span><span class="o">.</span><span class="n">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userInput</span><span class="p">;</span>
+<pre class="codehilite"><code>// ❌ 危险：直接把用户输入插入 HTML
+element.innerHTML = userInput;
 
-<span class="o">//</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="err">安全：转义</span><span class="w"> </span><span class="n">HTML</span><span class="w"> </span><span class="err">实体</span>
-<span class="n">function</span><span class="w"> </span><span class="n">escapeHtml</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">div</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">document</span><span class="o">.</span><span class="n">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
-<span class="w">  </span><span class="n">div</span><span class="o">.</span><span class="n">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">str</span><span class="p">;</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">div</span><span class="o">.</span><span class="n">innerHTML</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="n">element</span><span class="o">.</span><span class="n">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">escapeHtml</span><span class="p">(</span><span class="n">userInput</span><span class="p">);</span>
+// ✅ 安全：转义 HTML 实体
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+element.innerHTML = escapeHtml(userInput);
 
-<span class="o">//</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="err">更安全：用</span><span class="w"> </span><span class="n">textContent</span><span class="w"> </span><span class="err">替代</span><span class="w"> </span><span class="n">innerHTML</span>
-<span class="n">element</span><span class="o">.</span><span class="n">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userInput</span><span class="p">;</span>
-</code></pre></div>
+// ✅ 更安全：用 textContent 替代 innerHTML
+element.textContent = userInput;
+</code></pre>
 
 <p>现代框架（React、Vue）默认会转义变量输出，但 <code>dangerouslySetInnerHTML</code> 和 <code>v-html</code> 仍然有风险。 2. 参数化查询防 SQL 注入 SQL 注入至今仍是 OWASP Top 10 的常客。原理是将恶意 SQL 片段注入到查询语句中。</p>
-<div class="codehilite"><pre><span></span><code><span class="o">//</span><span class="w"> </span><span class="err">❌</span><span class="w"> </span><span class="n">危险</span><span class="err">：</span><span class="n">字符串拼接</span>
-<span class="n">const</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">`</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;${username}&#39;</span><span class="err">`</span><span class="p">;</span>
-<span class="o">//</span><span class="w"> </span><span class="n">如果</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;admin&#39; OR &#39;1&#39;=&#39;1&quot;</span>
-<span class="o">//</span><span class="w"> </span><span class="n">结果</span><span class="err">：</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;admin&#39;</span><span class="w"> </span><span class="ow">OR</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="o">=</span><span class="s1">&#39;1&#39;</span>
-<span class="o">//</span><span class="w"> </span><span class="n">直接返回所有用户</span><span class="err">！</span>
+<pre class="codehilite"><code>// ❌ 危险：字符串拼接
+const query = `SELECT * FROM users WHERE name = '${username}'`;
+// 如果 username = &quot;admin' OR '1'='1&quot;
+// 结果：SELECT * FROM users WHERE name = 'admin' OR '1'='1'
+// 直接返回所有用户！
 
-<span class="o">//</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="n">安全</span><span class="err">：</span><span class="n">参数化查询</span>
-<span class="n">const</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;SELECT * FROM users WHERE name = ?&#39;</span><span class="p">;</span>
-<span class="n">db</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="o">[</span><span class="n">username</span><span class="o">]</span><span class="p">);</span><span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="n">被当做值</span><span class="err">，</span><span class="n">不会被执行为</span><span class="w"> </span><span class="k">SQL</span>
-</code></pre></div>
+// ✅ 安全：参数化查询
+const query = 'SELECT * FROM users WHERE name = ?';
+db.query(query, [username]);  // username 被当做值，不会被执行为 SQL
+</code></pre>
 
 <p>使用 ORM（Prisma、TypeORM、SQLAlchemy）能很大程度上避免这个问题，但手写 SQL 时务必用参数化。 3. CSRF Token 防跨站请求伪造 CSRF 利用的是浏览器自动携带 Cookie 的特性。你在 A 网站登录了银行，然后访问了恶意网站 B，B 网站偷偷向 A 银行发了一个转账请求——浏览器自动带上了你的 Cookie，转账成功。 <strong>防御方案</strong> ：</p>
 <ul>
@@ -600,85 +600,85 @@ print(user[&quot;name&quot;])  # 小明
 <li><strong>自定义 Header</strong> ：Ajax 请求加 <code>X-Requested-With: XMLHttpRequest</code>，服务端校验。</li>
 </ul>
 <p>4. HTTPS 和 HSTS HTTP 是明文传输，中间人可以窃听和篡改。HTTPS 是底线——<strong>2026 年了，没有理由不用 HTTPS</strong> 。 更进一步：启用 <strong>HSTS（HTTP Strict Transport Security）</strong> 。它告诉浏览器"以后只通过 HTTPS 访问我"，防止 SSL 剥离攻击。</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Nginx 配置</span>
-<span class="n">add_header</span><span class="w"> </span><span class="n">Strict</span><span class="o">-</span><span class="n">Transport</span><span class="o">-</span><span class="n">Security</span><span class="w"> </span><span class="s2">&quot;max-age=63072000; includeSubDomains; preload&quot;</span><span class="p">;</span>
-</code></pre></div>
+<pre class="codehilite"><code># Nginx 配置
+add_header Strict-Transport-Security &quot;max-age=63072000; includeSubDomains; preload&quot;;
+</code></pre>
 
 <p>5. 正确配置 CORS CORS（跨域资源共享）是最容易被误解和误配的安全机制。常见错误：</p>
-<div class="codehilite"><pre><span></span><code><span class="o">//</span><span class="w"> </span><span class="err">❌</span><span class="w"> </span><span class="err">危险：允许所有来源</span>
-<span class="n">Access</span><span class="o">-</span><span class="n">Control</span><span class="o">-</span><span class="n">Allow</span><span class="o">-</span><span class="n">Origin</span><span class="p">:</span><span class="w"> </span><span class="o">*</span>
+<pre class="codehilite"><code>// ❌ 危险：允许所有来源
+Access-Control-Allow-Origin: *
 
-<span class="o">//</span><span class="w"> </span><span class="err">❌</span><span class="w"> </span><span class="err">危险：反射式允许（攻击者可以伪造</span><span class="w"> </span><span class="n">Origin</span><span class="w"> </span><span class="err">头）</span>
-<span class="o">//</span><span class="w"> </span><span class="err">不要从请求的</span><span class="w"> </span><span class="n">Origin</span><span class="w"> </span><span class="err">头反射回</span><span class="w"> </span><span class="n">Access</span><span class="o">-</span><span class="n">Control</span><span class="o">-</span><span class="n">Allow</span><span class="o">-</span><span class="n">Origin</span>
+// ❌ 危险：反射式允许（攻击者可以伪造 Origin 头）
+// 不要从请求的 Origin 头反射回 Access-Control-Allow-Origin
 
-<span class="o">//</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="err">安全：白名单验证</span>
-<span class="k">const</span><span class="w"> </span><span class="n">allowedOrigins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;https://myapp.com&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;https://admin.myapp.com&#39;</span><span class="p">];</span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">allowedOrigins</span><span class="o">.</span><span class="n">includes</span><span class="p">(</span><span class="n">requestOrigin</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">res</span><span class="o">.</span><span class="n">setHeader</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">requestOrigin</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
+// ✅ 安全：白名单验证
+const allowedOrigins = ['https://myapp.com', 'https://admin.myapp.com'];
+if (allowedOrigins.includes(requestOrigin)) {
+  res.setHeader('Access-Control-Allow-Origin', requestOrigin);
+}
+</code></pre>
 
 <p>6. 密码存储：bcrypt 而不是 MD5 密码永远不要明文存储，也不要用快速哈希算法（MD5、SHA-1）。用专为密码设计的慢哈希算法：</p>
-<div class="codehilite"><pre><span></span><code><span class="o">//</span><span class="w"> </span><span class="n">Node</span><span class="o">.</span><span class="n">js</span><span class="w"> </span><span class="p">(</span><span class="n">bcrypt</span><span class="p">)</span>
-<span class="k">const</span><span class="w"> </span><span class="n">bcrypt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;bcrypt&#39;</span><span class="p">);</span>
-<span class="k">const</span><span class="w"> </span><span class="n">saltRounds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+<pre class="codehilite"><code>// Node.js (bcrypt)
+const bcrypt = require('bcrypt');
+const saltRounds = 12;
 
-<span class="o">//</span><span class="w"> </span><span class="err">注册时哈希密码</span>
-<span class="k">const</span><span class="w"> </span><span class="nb">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">await</span><span class="w"> </span><span class="n">bcrypt</span><span class="o">.</span><span class="n">hash</span><span class="p">(</span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="n">saltRounds</span><span class="p">);</span>
-<span class="n">await</span><span class="w"> </span><span class="n">db</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">insert</span><span class="p">({</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">:</span><span class="w"> </span><span class="nb">hash</span><span class="w"> </span><span class="p">});</span>
+// 注册时哈希密码
+const hash = await bcrypt.hash(password, saltRounds);
+await db.users.insert({ email, password: hash });
 
-<span class="o">//</span><span class="w"> </span><span class="err">登录时验证</span>
-<span class="k">const</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">await</span><span class="w"> </span><span class="n">db</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">findOne</span><span class="p">({</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="p">});</span>
-<span class="k">const</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">await</span><span class="w"> </span><span class="n">bcrypt</span><span class="o">.</span><span class="n">compare</span><span class="p">(</span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">);</span>
-</code></pre></div>
+// 登录时验证
+const user = await db.users.findOne({ email });
+const valid = await bcrypt.compare(password, user.password);
+</code></pre>
 
 <p><strong>盐值（Salt）是关键</strong> ：即使两个用户用相同的密码，哈希结果也不一样。大部分哈希库会自动处理。 7. 环境变量管理密钥 API Key、数据库密码、JWT Secret 硬编码在代码里——这是教科书级别的安全灾难。一旦代码泄露到 GitHub，攻击者可以用自动化工具在几分钟内扫描到。</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># ✅ 用 .env 文件 + .gitignore</span>
-<span class="nf">DATABASE_URL</span><span class="err">=</span><span class="no">postgres</span><span class="p">:</span><span class="c1">//...</span>
-<span class="nf">STRIPE_SECRET</span><span class="err">=</span><span class="no">sk_live_...</span>
-<span class="nf">JWT_SECRET</span><span class="err">=</span><span class="no">your-256-bit-secret</span>
+<pre class="codehilite"><code># ✅ 用 .env 文件 + .gitignore
+DATABASE_URL=postgres://...
+STRIPE_SECRET=sk_live_...
+JWT_SECRET=your-256-bit-secret
 
-<span class="c1"># ✅ .gitignore 必须包含</span>
-<span class="na">.env</span>
-<span class="na">.env.local</span>
-<span class="err">*</span><span class="na">.pem</span>
-</code></pre></div>
+# ✅ .gitignore 必须包含
+.env
+.env.local
+*.pem
+</code></pre>
 
 <p>使用 <code>dotenv</code> 或框架内置的环境变量加载。生产环境用平台的环境变量注入（Vercel Env、GitHub Secrets、K8s Secrets）。 8. 限制速率（Rate Limiting） 没有速率限制的 API 就是开放的 DDoS 攻击面和暴力破解入口。</p>
-<div class="codehilite"><pre><span></span><code><span class="o">//</span><span class="w"> </span><span class="n">Express</span><span class="w"> </span><span class="err">中间件示例</span><span class="w"> </span><span class="p">(</span><span class="n">express</span><span class="o">-</span><span class="n">rate</span><span class="o">-</span><span class="n">limit</span><span class="p">)</span>
-<span class="k">const</span><span class="w"> </span><span class="n">rateLimit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">require</span><span class="p">(</span><span class="s1">&#39;express-rate-limit&#39;</span><span class="p">);</span>
+<pre class="codehilite"><code>// Express 中间件示例 (express-rate-limit)
+const rateLimit = require('express-rate-limit');
 
-<span class="k">const</span><span class="w"> </span><span class="n">loginLimiter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rateLimit</span><span class="p">({</span>
-<span class="w">  </span><span class="n">windowMs</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="err">分钟</span>
-<span class="w">  </span><span class="nb">max</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">                      </span><span class="o">//</span><span class="w"> </span><span class="err">最多</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="err">次请求</span>
-<span class="w">  </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;登录尝试过于频繁，请 15 分钟后再试&#39;</span>
-<span class="p">});</span>
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,  // 15 分钟
+  max: 5,                      // 最多 5 次请求
+  message: '登录尝试过于频繁，请 15 分钟后再试'
+});
 
-<span class="n">app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">loginLimiter</span><span class="p">,</span><span class="w"> </span><span class="n">loginHandler</span><span class="p">);</span>
-</code></pre></div>
+app.post('/login', loginLimiter, loginHandler);
+</code></pre>
 
 <p>关键端点（登录、注册、密码重置、API）都要加限速。 9. 依赖安全审计 你的应用代码可能没问题，但你引用的 300 个 npm 包中可能隐藏着已知漏洞。</p>
-<div class="codehilite"><pre><span></span><code># npm 审计
+<pre class="codehilite"><code># npm 审计
 npm audit          # 列出已知漏洞
 npm audit fix      # 自动修复（安全的补丁版本）
 
 # 定期检查
 npm outdated       # 查看过时的依赖
-</code></pre></div>
+</code></pre>
 
 <p>GitHub Dependabot 会自动扫描你的仓库并提 PR 修复漏洞。打开它，免费的。 10. 安全响应头 几个 HTTP 头可以防御大量常见攻击：</p>
-<div class="codehilite"><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="nt">防点击劫持</span>
-<span class="nt">X-Frame-Options</span><span class="o">:</span><span class="w"> </span><span class="nt">DENY</span>
+<pre class="codehilite"><code># 防点击劫持
+X-Frame-Options: DENY
 
-<span class="err">#</span><span class="w"> </span><span class="nt">防</span><span class="w"> </span><span class="nt">MIME</span><span class="w"> </span><span class="nt">类型嗅探</span>
-<span class="nt">X-Content-Type-Options</span><span class="o">:</span><span class="w"> </span><span class="nt">nosniff</span>
+# 防 MIME 类型嗅探
+X-Content-Type-Options: nosniff
 
-<span class="err">#</span><span class="w"> </span><span class="nt">内容安全策略</span><span class="err">（</span><span class="nt">CSP</span><span class="err">）——</span><span class="nt">最强防线之一</span>
-<span class="nt">Content-Security-Policy</span><span class="o">:</span><span class="w"> </span><span class="nt">default-src</span><span class="w"> </span><span class="s1">&#39;self&#39;</span><span class="o">;</span><span class="w"> </span><span class="nt">script-src</span><span class="w"> </span><span class="s1">&#39;self&#39;</span><span class="w"> </span><span class="nt">https</span><span class="o">://</span><span class="nt">trusted-cdn</span><span class="p">.</span><span class="nc">com</span><span class="o">;</span>
+# 内容安全策略（CSP）——最强防线之一
+Content-Security-Policy: default-src 'self'; script-src 'self' https://trusted-cdn.com;
 
-<span class="err">#</span><span class="w"> </span><span class="nt">禁用浏览器特性探测</span><span class="err">（</span><span class="nt">生产环境用不到</span><span class="err">）</span>
-<span class="nt">Permissions-Policy</span><span class="o">:</span><span class="w"> </span><span class="nt">camera</span><span class="o">=(),</span><span class="w"> </span><span class="nt">microphone</span><span class="o">=(),</span><span class="w"> </span><span class="nt">geolocation</span><span class="o">=()</span>
-</code></pre></div>
+# 禁用浏览器特性探测（生产环境用不到）
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+</code></pre>
 
 <table>
 <thead>
@@ -1009,37 +1009,37 @@ npm outdated       # 查看过时的依赖
 </tr>
 </tbody>
 </table>
-<div class="codehilite"><pre><span></span><code><span class="gh">#</span> 本周 AI 工具快报 #12
+<pre class="codehilite"><code># 本周 AI 工具快报 #12
 **日期**: 2026-05-09
 **订阅人数**: 847
 
 ---
-<span class="gu">##</span> 本周精选
+## 本周精选
 
-<span class="gu">##</span># 1. [工具名] — [一句话描述]
+### 1. [工具名] — [一句话描述]
 [你为什么要关注它，1-2 句解读]
 🔗 链接 | ⭐ 推荐度: 8/10
 
-<span class="gu">##</span># 2. [工具名] — [一句话描述]
+### 2. [工具名] — [一句话描述]
 [1-2 句解读]
 🔗 链接 | ⭐ 推荐度: 7/10
 
-<span class="gu">##</span># 3. [工具名] — [一句话描述]
+### 3. [工具名] — [一句话描述]
 🔗 链接
 
 ---
-<span class="gu">##</span> 快讯（3-5 条一句话新闻）
-<span class="k">-</span> OpenAI 发布了 xxx...
-<span class="k">-</span> Anthropic 更新了 xxx...
+## 快讯（3-5 条一句话新闻）
+- OpenAI 发布了 xxx...
+- Anthropic 更新了 xxx...
 
 ---
-<span class="gu">##</span> 每周技巧
+## 每周技巧
 [1 个实用小技巧，300 字以内]
 
 ---
-<span class="gs">*Thanks for reading. 如果这期有帮助，请转发给同事。*</span>
+*Thanks for reading. 如果这期有帮助，请转发给同事。*
 *[退订链接]*
-</code></pre></div>
+</code></pre>
 
 <p>这个模板一期只需 30-45 分钟就能完成。关键是<strong>保持节奏</strong> ——每周一期比不定期高质量更重要。 第四步：获得前 100 个订阅 最难的不是写内容，是让第一个人看到。策略：</p>
 <ul>
@@ -1265,16 +1265,16 @@ npm outdated       # 查看过时的依赖
       <description><![CDATA[进阶 Git 技巧三件套：用交互式 rebase 整理提交历史、用 cherry-pick 精确移植代码、用 bisect 二分法定位 Bug，让你的 Git 段位从熟练进化到精通。]]></description>
       <content:encoded><![CDATA[
 <p>如果你已经会 add/commit/push/pull，是时候学这三个进阶命令了。它们不会让你每天多用 Git，但在关键时刻能省下几个小时。 交互式 Rebase：整理你的提交历史 场景：你吭哧吭哧写了一下午，做了 12 个小提交，但提交信息都是 "wip"、"fix"、"fix again"。现在要提交 PR 了——这些乱七八糟的提交历史会让同事鄙视你。</p>
-<div class="codehilite"><pre><span></span><code>git rebase -i HEAD~12
-</code></pre></div>
+<pre class="codehilite"><code>git rebase -i HEAD~12
+</code></pre>
 
 <p>会打开编辑器，列出最近 12 个提交：</p>
-<div class="codehilite"><pre><span></span><code>pick a1b2c3d wip
+<pre class="codehilite"><code>pick a1b2c3d wip
 pick e4f5g6h fix typo
 pick i7j8k9l fix again
 pick m0n1o2p actually works now
 ...
-</code></pre></div>
+</code></pre>
 
 <p>核心操作：</p>
 <ul>
@@ -1285,23 +1285,23 @@ pick m0n1o2p actually works now
 <li><strong>edit (e)</strong> — 停下来让你修改这个提交的内容</li>
 </ul>
 <p>把 12 个乱七八糟的提交整理成 3 个逻辑清晰的提交：</p>
-<div class="codehilite"><pre><span></span><code>pick a1b2c3d feat: 添加用户登录 API
+<pre class="codehilite"><code>pick a1b2c3d feat: 添加用户登录 API
 fixup e4f5g6h wip
 fixup i7j8k9l fix typo
 pick m0n1o2p feat: 添加 JWT Token 验证
 fixup n2o3p4q fix again
 pick r5s6t7u docs: 更新 API 文档
 fixup v8w9x0y wip doc
-</code></pre></div>
+</code></pre>
 
 <p>保存退出，Git 自动完成。提交历史从一团乱麻变成清晰的叙事。<strong>注意：只在还没 push 的分支上做 rebase。已经 push 的提交，rebase 会改写历史，需要 force push——在共享分支上这是灾难。</strong> Cherry-Pick：精准移植代码 场景：你在 feature-A 分支上写了一个特别好用的工具函数，feature-B 也需要它。但你不想合并整个 feature-A 分支。</p>
-<div class="codehilite"><pre><span></span><code># 找到那个提交的 hash
+<pre class="codehilite"><code># 找到那个提交的 hash
 git log feature-A --oneline
 
 # 摘樱桃
 git checkout feature-B
 git cherry-pick a1b2c3d
-</code></pre></div>
+</code></pre>
 
 <p>Git 会把这个提交的变更单独应用到 feature-B 上，生成一个新的提交（hash 不同，内容相同）。 常见用法：</p>
 <ul>
@@ -1321,7 +1321,7 @@ git cherry-pick --continue</p>
 </li>
 </ul>
 <p>Git Bisect：二分法定位 Bug 场景：两周前一切正常，今天发现一个 Bug，但中间有 200 个提交。是谁引入的？ Bisect 用二分查找自动定位——你只需要告诉 Git 哪个提交是好的、哪个是坏的，然后 Git 切到中间点让你测试。</p>
-<div class="codehilite"><pre><span></span><code>git bisect start
+<pre class="codehilite"><code>git bisect start
 git bisect bad HEAD          # 当前版本有 Bug
 git bisect good v2.0.0       # v2.0.0 是正常的
 
@@ -1339,16 +1339,16 @@ git bisect good
 
 # 结束 bisect
 git bisect reset
-</code></pre></div>
+</code></pre>
 
 <p>200 个提交，log2(200) ≈ 8 次测试就能定位。比一个一个找快 25 倍。</p>
-<div class="codehilite"><pre><span></span><code><span class="gh">#</span> 自动化 bisect（如果你的测试可以用脚本跑）
+<pre class="codehilite"><code># 自动化 bisect（如果你的测试可以用脚本跑）
 git bisect start
 git bisect bad HEAD
 git bisect good v2.0.0
 git bisect run python test_specific_feature.py
-<span class="gh">#</span> Git 自动二分查找，输出引入 Bug 的提交
-</code></pre></div>
+# Git 自动二分查找，输出引入 Bug 的提交
+</code></pre>
 
 <table>
 <thead>
@@ -1565,7 +1565,7 @@ git bisect run python test_specific_feature.py
 <li><strong>测试覆盖（人 + AI）。</strong> 让 AI 为你的代码生成测试用例，但你需要确认测试是否覆盖了所有重要路径。</li>
 </ol>
 <p>代码生成提示词示例 编写清晰的提示词是 AI 编程的核心技能。以下是一个经过优化的实际案例：</p>
-<div class="codehilite"><pre><span></span><code>请用 TypeScript 实现一个带过期时间的 LRU 缓存。
+<pre class="codehilite"><code>请用 TypeScript 实现一个带过期时间的 LRU 缓存。
 
 要求：
 - 支持 get(key)、set(key, value, ttlSeconds) 方法
@@ -1578,7 +1578,7 @@ git bisect run python test_specific_feature.py
 1. 完整的 TypeScript 代码
 2. 单元测试（使用 Vitest）
 3. 使用示例
-</code></pre></div>
+</code></pre>
 
 <p>这个提示词包含了角色暗示（TypeScript 开发）、明确的功能边界（LRU + TTL）、数据结构选择提示（Map + 链表）、以及输出格式要求（代码 + 测试 + 示例）。AI 的生成结果可以直接粘贴到项目中，需要的修改通常不超过 10%。 审查 AI 代码的四个必查点 AI 生成的代码表面看起来可能很完美，但以下四个问题几乎必然出现在 AI 代码中：</p>
 <ul>
@@ -1676,13 +1676,13 @@ git bisect run python test_specific_feature.py
 <li>使用小写字母和连字符：<code>/user-profiles</code>而非<code>/userProfiles</code></li>
 </ul>
 <h3>最佳实践</h3>
-<div class="codehilite"><pre><span></span><code><span class="err">GET /users                    # 获取用户列表</span>
-<span class="err">GET /users/{id}               # 获取单个用户</span>
-<span class="err">POST /users                   # 创建用户</span>
-<span class="err">PATCH /users/{id}             # 部分更新用户</span>
-<span class="err">DELETE /users/{id}            # 删除用户</span>
-<span class="err">GET /users/{id}/orders        # 获取用户的订单列表</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-http">GET /users                    # 获取用户列表
+GET /users/{id}               # 获取单个用户
+POST /users                   # 创建用户
+PATCH /users/{id}             # 部分更新用户
+DELETE /users/{id}            # 删除用户
+GET /users/{id}/orders        # 获取用户的订单列表
+</code></pre>
 
 <h3>常见反模式</h3>
 <ul>
@@ -1707,16 +1707,16 @@ git bisect run python test_specific_feature.py
 <li><strong>500 Internal Server Error</strong>：服务器内部错误</li>
 </ul>
 <h3>错误响应格式</h3>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USER_NOT_FOUND&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;用户不存在&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;userId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345&quot;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-json">{
+    &quot;error&quot;: {
+        &quot;code&quot;: &quot;USER_NOT_FOUND&quot;,
+        &quot;message&quot;: &quot;用户不存在&quot;,
+        &quot;details&quot;: {
+            &quot;userId&quot;: &quot;12345&quot;
+        }
+    }
+}
+</code></pre>
 
 <h2>版本管理</h2>
 <h3>版本策略</h3>
@@ -1734,31 +1734,31 @@ git bisect run python test_specific_feature.py
 </ul>
 <h2>分页设计</h2>
 <h3>分页方案</h3>
-<div class="codehilite"><pre><span></span><code><span class="err">GET /users?page=1&amp;per_page=20</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-http">GET /users?page=1&amp;per_page=20
+</code></pre>
 
 <p>响应中包含分页元数据：</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;pagination&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;per_page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;total_pages&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;links&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;first&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/users?page=1&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;prev&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;next&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/users?page=2&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;last&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/users?page=8&quot;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-json">{
+    &quot;data&quot;: [...],
+    &quot;pagination&quot;: {
+        &quot;page&quot;: 1,
+        &quot;per_page&quot;: 20,
+        &quot;total&quot;: 156,
+        &quot;total_pages&quot;: 8,
+        &quot;links&quot;: {
+            &quot;first&quot;: &quot;/users?page=1&quot;,
+            &quot;prev&quot;: null,
+            &quot;next&quot;: &quot;/users?page=2&quot;,
+            &quot;last&quot;: &quot;/users?page=8&quot;
+        }
+    }
+}
+</code></pre>
 
 <h3>游标分页</h3>
 <p>对于实时数据，游标分页比偏移分页更稳定：</p>
-<div class="codehilite"><pre><span></span><code><span class="err">GET /users?cursor=eyJpZCI6MTB9&amp;limit=20</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-http">GET /users?cursor=eyJpZCI6MTB9&amp;limit=20
+</code></pre>
 
 <p>游标分页在数据发生增删时不会导致重复或遗漏，适合社交信息流等场景。</p>
 <h2>安全与规范</h2>
@@ -1782,43 +1782,43 @@ git bisect run python test_specific_feature.py
 <h2>GitHub Actions基础</h2>
 <p>GitHub Actions使用YAML定义工作流，核心概念包括Workflow、Job、Step和Action。</p>
 <h3>基础工作流</h3>
-<div class="codehilite"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CI Pipeline</span>
-<span class="nt">on</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<pre class="codehilite"><code class="language-yaml">name: CI Pipeline
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
-<span class="nt">jobs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">test</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
-<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-node@v4</span>
-<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">node-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;20&#39;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm ci</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm test</span>
-</code></pre></div>
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm test
+</code></pre>
 
 <h2>构建优化</h2>
 <h3>缓存策略</h3>
 <p>合理缓存依赖可以显著减少构建时间：</p>
-<div class="codehilite"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/cache@v3</span>
-<span class="w">  </span><span class="nt">with</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.npm</span>
-<span class="w">    </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ runner.os }}-node-${{ hashFiles(&#39;**/package-lock.json&#39;) }}</span>
-<span class="w">    </span><span class="nt">restore-keys</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">      </span><span class="no">${{ runner.os }}-node-</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">- uses: actions/cache@v3
+  with:
+    path: ~/.npm
+    key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+    restore-keys: |
+      ${{ runner.os }}-node-
+</code></pre>
 
 <h3>矩阵构建</h3>
 <p>并行测试多个版本和平台：</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">strategy</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">matrix</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">node-version</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">18</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">22</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="nt">os</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ubuntu-latest</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">windows-latest</span><span class="p p-Indicator">]</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">strategy:
+  matrix:
+    node-version: [18, 20, 22]
+    os: [ubuntu-latest, windows-latest]
+</code></pre>
 
 <h2>安全集成</h2>
 <h3>代码质量与安全</h3>
@@ -1830,33 +1830,33 @@ git bisect run python test_specific_feature.py
 </ul>
 <h3>容器安全</h3>
 <p>构建镜像后自动扫描漏洞：</p>
-<div class="codehilite"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build and scan Docker image</span>
-<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">    </span><span class="no">docker build -t myapp:${{ github.sha }} .</span>
-<span class="w">    </span><span class="no">trivy image myapp:${{ github.sha }}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">- name: Build and scan Docker image
+  run: |
+    docker build -t myapp:${{ github.sha }} .
+    trivy image myapp:${{ github.sha }}
+</code></pre>
 
 <h2>部署策略</h2>
 <h3>环境分离</h3>
-<div class="codehilite"><pre><span></span><code>开发分支 → 自动部署到dev环境
+<pre class="codehilite"><code>开发分支 → 自动部署到dev环境
 功能分支 → 预览环境（PR触发）
 主分支 → 自动部署到staging → 手动审批 → 生产环境
-</code></pre></div>
+</code></pre>
 
 <h3>金丝雀发布</h3>
 <p>通过GitHub Actions的部署环境功能实现逐步发布：</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">environment</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">production</span>
-<span class="w">  </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://myapp.com</span>
+<pre class="codehilite"><code class="language-yaml">environment:
+  name: production
+  url: https://myapp.com
 
-<span class="c1"># 分阶段发布</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy 10% traffic</span>
-<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./deploy-canary.sh 10</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Wait for health check</span>
-<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./wait-for-health.sh</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy 100%</span>
-<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./deploy-full.sh</span>
-</code></pre></div>
+# 分阶段发布
+- name: Deploy 10% traffic
+  run: ./deploy-canary.sh 10
+- name: Wait for health check
+  run: ./wait-for-health.sh
+- name: Deploy 100%
+  run: ./deploy-full.sh
+</code></pre>
 
 <h2>生产级配置示例</h2>
 <h3>一个完整的CI/CD流程</h3>
@@ -1873,12 +1873,12 @@ git bisect run python test_specific_feature.py
 </ol>
 <h3>状态通知</h3>
 <p>集成Slack、邮件或飞书通知构建状态：</p>
-<div class="codehilite"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Notify on failure</span>
-<span class="w">  </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">failure()</span>
-<span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slackapi/slack-github-action@v1</span>
-<span class="w">  </span><span class="nt">with</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">payload</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;{&quot;text&quot;:</span><span class="nv"> </span><span class="s">&quot;构建失败:</span><span class="nv"> </span><span class="s">${{</span><span class="nv"> </span><span class="s">github.repository</span><span class="nv"> </span><span class="s">}}&quot;}&#39;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">- name: Notify on failure
+  if: failure()
+  uses: slackapi/slack-github-action@v1
+  with:
+    payload: '{&quot;text&quot;: &quot;构建失败: ${{ github.repository }}&quot;}'
+</code></pre>
 
 <p>设计良好的CI/CD流水线是团队高效交付的基石，值得投入时间持续优化。</p>]]></content:encoded>
       <pubDate>Tue, 12 May 2026 00:00:00 GMT</pubDate>
@@ -1892,9 +1892,9 @@ git bisect run python test_specific_feature.py
 <p>Code Review是保障代码质量、传播技术知识和预防缺陷最有效的手段之一。除了发现Bug，它还能确保代码风格统一、架构设计合理，并促进团队成员之间的技术交流。</p>
 <h2>审查流程</h2>
 <h3>标准流程</h3>
-<div class="codehilite"><pre><span></span><code>开发分支 → 提交PR → CI检查通过 → 至少1人Review → 通过 → 合并
+<pre class="codehilite"><code>开发分支 → 提交PR → CI检查通过 → 至少1人Review → 通过 → 合并
                          ↘ 不通过 → 修改后重新提交
-</code></pre></div>
+</code></pre>
 
 <h3>关键节点</h3>
 <ol>
@@ -1993,17 +1993,17 @@ git bisect run python test_specific_feature.py
 </ul>
 <h3>多阶段构建</h3>
 <p>多阶段构建是减小镜像体积的最佳实践：</p>
-<div class="codehilite"><pre><span></span><code><span class="c"># 构建阶段</span>
-<span class="k">FROM</span><span class="w"> </span><span class="s">golang:1.22</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
-<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
-<span class="k">RUN</span><span class="w"> </span>go<span class="w"> </span>build<span class="w"> </span>-o<span class="w"> </span>app
+<pre class="codehilite"><code class="language-dockerfile"># 构建阶段
+FROM golang:1.22 AS builder
+WORKDIR /app
+COPY . .
+RUN go build -o app
 
-<span class="c"># 运行阶段</span>
-<span class="k">FROM</span><span class="w"> </span><span class="s">alpine:3.19</span>
-<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/app/app<span class="w"> </span>/app
-<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;/app&quot;</span><span class="p">]</span>
-</code></pre></div>
+# 运行阶段
+FROM alpine:3.19
+COPY --from=builder /app/app /app
+CMD [&quot;/app&quot;]
+</code></pre>
 
 <p>通过这种方式，可以将Golang应用的镜像从1GB以上减小到20MB左右。</p>
 <h3>层优化</h3>
@@ -2014,23 +2014,23 @@ git bisect run python test_specific_feature.py
 </ul>
 <h2>Docker Compose编排</h2>
 <p>Docker Compose用于定义和运行多容器应用：</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.8&#39;</span>
-<span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">web</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8080:8080&quot;</span>
-<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
-<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:16</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pgdata:/var/lib/postgresql/data</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
-<span class="nt">volumes</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">pgdata</span><span class="p">:</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - &quot;8080:8080&quot;
+    depends_on:
+      - db
+  db:
+    image: postgres:16
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: myapp
+volumes:
+  pgdata:
+</code></pre>
 
 <h2>生产环境最佳实践</h2>
 <h3>安全加固</h3>
@@ -2042,14 +2042,14 @@ git bisect run python test_specific_feature.py
 </ul>
 <h3>日志管理</h3>
 <p>容器应输出日志到stdout/stderr，由Docker日志驱动统一收集。生产环境推荐使用json-file驱动并配合日志轮转：</p>
-<div class="codehilite"><pre><span></span><code>docker run --log-opt max-size=10m --log-opt max-file=3 myapp
-</code></pre></div>
+<pre class="codehilite"><code>docker run --log-opt max-size=10m --log-opt max-file=3 myapp
+</code></pre>
 
 <h3>监控与健康检查</h3>
 <p>在Dockerfile中定义健康检查指令：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">HEALTHCHECK</span><span class="w"> </span>--interval<span class="o">=</span>30s<span class="w"> </span>--timeout<span class="o">=</span>3s<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="k">CMD</span><span class="w"> </span>curl<span class="w"> </span>-f<span class="w"> </span>http://localhost:8080/health<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-dockerfile">HEALTHCHECK --interval=30s --timeout=3s \
+  CMD curl -f http://localhost:8080/health || exit 1
+</code></pre>
 
 <p>Docker的价值在于标准化应用的构建、分发和部署流程，掌握这些核心实践能显著提升开发和运维效率。</p>]]></content:encoded>
       <pubDate>Tue, 12 May 2026 00:00:00 GMT</pubDate>
@@ -2064,8 +2064,8 @@ git bisect run python test_specific_feature.py
 <h2>交互式Rebase</h2>
 <p>交互式Rebase是整理提交历史最强大的工具。</p>
 <h3>常用命令</h3>
-<div class="codehilite"><pre><span></span><code>git rebase -i HEAD~5
-</code></pre></div>
+<pre class="codehilite"><code>git rebase -i HEAD~5
+</code></pre>
 
 <p>进入交互模式后，可以对最近5个提交执行以下操作：</p>
 <ul>
@@ -2088,43 +2088,43 @@ git bisect run python test_specific_feature.py
 <h2>Bisect调试</h2>
 <p>Git Bisect利用二分查找算法快速定位引入Bug的提交。</p>
 <h3>使用流程</h3>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 开始二分查找</span>
-git<span class="w"> </span>bisect<span class="w"> </span>start
+<pre class="codehilite"><code class="language-bash"># 开始二分查找
+git bisect start
 
-<span class="c1"># 标记当前版本为bad</span>
-git<span class="w"> </span>bisect<span class="w"> </span>bad
+# 标记当前版本为bad
+git bisect bad
 
-<span class="c1"># 标记一个已知的ok版本</span>
-git<span class="w"> </span>bisect<span class="w"> </span>good<span class="w"> </span>v1.0
+# 标记一个已知的ok版本
+git bisect good v1.0
 
-<span class="c1"># Git会自动切换到一个中间提交</span>
-<span class="c1"># 测试后标记</span>
-git<span class="w"> </span>bisect<span class="w"> </span>good<span class="w">  </span><span class="c1"># 如果当前版本没有Bug</span>
-git<span class="w"> </span>bisect<span class="w"> </span>bad<span class="w">   </span><span class="c1"># 如果当前版本有Bug</span>
+# Git会自动切换到一个中间提交
+# 测试后标记
+git bisect good  # 如果当前版本没有Bug
+git bisect bad   # 如果当前版本有Bug
 
-<span class="c1"># 重复直到定位到首个bad提交</span>
-<span class="c1"># 完成后退出</span>
-git<span class="w"> </span>bisect<span class="w"> </span>reset
-</code></pre></div>
+# 重复直到定位到首个bad提交
+# 完成后退出
+git bisect reset
+</code></pre>
 
 <h3>自动化</h3>
 <p>对于可以脚本化测试的Bug，使用自动Bisect：</p>
-<div class="codehilite"><pre><span></span><code>git<span class="w"> </span>bisect<span class="w"> </span>run<span class="w"> </span>npm<span class="w"> </span><span class="nb">test</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">git bisect run npm test
+</code></pre>
 
 <p>Git会自动二分查找，每次运行测试脚本并根据退出码判断好坏。这可以将数小时的排查工作缩短到几分钟。</p>
 <h2>子模块管理</h2>
 <p>当项目依赖其他仓库的特定版本时，子模块是标准解决方案。</p>
 <h3>基本操作</h3>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 添加子模块</span>
-git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>https://github.com/example/lib.git<span class="w"> </span>libs/lib
+<pre class="codehilite"><code class="language-bash"># 添加子模块
+git submodule add https://github.com/example/lib.git libs/lib
 
-<span class="c1"># 初始化子模块</span>
-git<span class="w"> </span>submodule<span class="w"> </span>init
+# 初始化子模块
+git submodule init
 
-<span class="c1"># 更新子模块到最新提交</span>
-git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--remote
-</code></pre></div>
+# 更新子模块到最新提交
+git submodule update --remote
+</code></pre>
 
 <h3>替代方案</h3>
 <p>Git Subtree提供了另一种依赖管理方式，将外部仓库的代码直接嵌入到主仓库，适合对版本控制要求更严格的场景。</p>
@@ -2156,14 +2156,14 @@ git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w
 </ul>
 <h3>资源管理</h3>
 <p>合理设置资源请求和限制是保证集群稳定的关键：</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">resources</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">requests</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;256Mi&quot;</span>
-<span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;500m&quot;</span>
-<span class="w">  </span><span class="nt">limits</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;512Mi&quot;</span>
-<span class="w">    </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1000m&quot;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">resources:
+  requests:
+    memory: &quot;256Mi&quot;
+    cpu: &quot;500m&quot;
+  limits:
+    memory: &quot;512Mi&quot;
+    cpu: &quot;1000m&quot;
+</code></pre>
 
 <h3>调度策略</h3>
 <ul>
@@ -2182,46 +2182,46 @@ git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w
 </ul>
 <h3>Ingress控制器</h3>
 <p>Ingress负责将外部HTTP/HTTPS流量路由到集群内部服务：</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
-<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
-<span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp-ingress</span>
-<span class="nt">spec</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp.example.com</span>
-<span class="w">    </span><span class="nt">http</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">paths</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/api</span>
-<span class="w">        </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
-<span class="w">        </span><span class="nt">backend</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">service</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api-service</span>
-<span class="w">            </span><span class="nt">port</span><span class="p">:</span>
-<span class="w">              </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myapp-ingress
+spec:
+  rules:
+  - host: myapp.example.com
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 80
+</code></pre>
 
 <h2>自动伸缩</h2>
 <h3>HPA（水平Pod自动伸缩）</h3>
 <p>基于CPU、内存或自定义指标自动调整Pod数量：</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">autoscaling/v2</span>
-<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HorizontalPodAutoscaler</span>
-<span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp-hpa</span>
-<span class="nt">spec</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">scaleTargetRef</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
-<span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myapp</span>
-<span class="w">  </span><span class="nt">minReplicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
-<span class="w">  </span><span class="nt">maxReplicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<span class="w">  </span><span class="nt">metrics</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Resource</span>
-<span class="w">    </span><span class="nt">resource</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cpu</span>
-<span class="w">      </span><span class="nt">target</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Utilization</span>
-<span class="w">        </span><span class="nt">averageUtilization</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">70</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: myapp-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: myapp
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+</code></pre>
 
 <h2>生产环境运维</h2>
 <h3>监控与日志</h3>
@@ -2281,15 +2281,15 @@ git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w
 </ul>
 <h3>日志分析技巧</h3>
 <p>使用组合命令快速定位问题：</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 统计最近5分钟的错误数</span>
-grep<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>date<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;5 min ago&#39;</span><span class="w"> </span><span class="s1">&#39;+%H:%M&#39;</span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>app.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>ERROR<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+<pre class="codehilite"><code class="language-bash"># 统计最近5分钟的错误数
+grep &quot;$(date -d '5 min ago' '+%H:%M')&quot; app.log | grep ERROR | wc -l
 
-<span class="c1"># 找出出现最频繁的IP</span>
-awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="w"> </span>access.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-nr<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-10
+# 找出出现最频繁的IP
+awk '{print $1}' access.log | sort | uniq -c | sort -nr | head -10
 
-<span class="c1"># 提取两个时间戳之间的日志</span>
-sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;/2026-05-12 10:00/,/2026-05-12 11:00/p&#39;</span><span class="w"> </span>app.log
-</code></pre></div>
+# 提取两个时间戳之间的日志
+sed -n '/2026-05-12 10:00/,/2026-05-12 11:00/p' app.log
+</code></pre>
 
 <h2>网络诊断</h2>
 <h3>连接检查</h3>
@@ -2312,18 +2312,18 @@ sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;/2026
 <li><strong>host example.com</strong>：简单的IP查询</li>
 </ul>
 <h2>常用组合技巧</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 查找大文件</span>
-find<span class="w"> </span>/<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-size<span class="w"> </span>+100M<span class="w"> </span>-exec<span class="w"> </span>ls<span class="w"> </span>-lh<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
+<pre class="codehilite"><code class="language-bash"># 查找大文件
+find / -type f -size +100M -exec ls -lh {} \;
 
-<span class="c1"># 杀死僵尸进程</span>
-ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Z<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span><span class="nb">kill</span><span class="w"> </span>-9
+# 杀死僵尸进程
+ps aux | grep Z | awk '{print $2}' | xargs kill -9
 
-<span class="c1"># 实时追踪系统调用</span>
-strace<span class="w"> </span>-p<span class="w"> </span>PID<span class="w"> </span>-e<span class="w"> </span><span class="nv">trace</span><span class="o">=</span>network
+# 实时追踪系统调用
+strace -p PID -e trace=network
 
-<span class="c1"># 批量替换文本</span>
-find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.conf&quot;</span><span class="w"> </span>-exec<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/old/new/g&#39;</span><span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
-</code></pre></div>
+# 批量替换文本
+find . -name &quot;*.conf&quot; -exec sed -i 's/old/new/g' {} \;
+</code></pre>
 
 <p>掌握这些命令能帮助运维人员在日常工作中快速定位和解决问题，提升系统稳定性。</p>]]></content:encoded>
       <pubDate>Tue, 12 May 2026 00:00:00 GMT</pubDate>
@@ -2481,19 +2481,19 @@ find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </spa
 <li><strong>企业级特性</strong>：配置中心、服务发现、熔断器等开箱即用</li>
 </ul>
 <h3>入门示例</h3>
-<div class="codehilite"><pre><span></span><code><span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/users&quot;</span><span class="p">)</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserController</span><span class="w"> </span><span class="p">{</span>
+<pre class="codehilite"><code class="language-java">@RestController
+@RequestMapping(&quot;/api/users&quot;)
+public class UserController {
 
-<span class="w">    </span><span class="nd">@Autowired</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserService</span><span class="w"> </span><span class="n">userService</span><span class="p">;</span>
+    @Autowired
+    private UserService userService;
 
-<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/{id}&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getUser</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="n">userService</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">));</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;User&gt; getUser(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.findById(id));
+    }
+}
+</code></pre>
 
 <h3>局限</h3>
 <ul>
@@ -2511,19 +2511,19 @@ find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </spa
 <li><strong>GraalVM支持</strong>：支持编译为原生可执行文件</li>
 </ul>
 <h3>入门示例</h3>
-<div class="codehilite"><pre><span></span><code><span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;/api/users&quot;</span><span class="p">)</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserResource</span><span class="w"> </span><span class="p">{</span>
+<pre class="codehilite"><code class="language-java">@Path(&quot;/api/users&quot;)
+public class UserResource {
 
-<span class="w">    </span><span class="nd">@Inject</span>
-<span class="w">    </span><span class="n">UserService</span><span class="w"> </span><span class="n">userService</span><span class="p">;</span>
+    @Inject
+    UserService userService;
 
-<span class="w">    </span><span class="nd">@GET</span>
-<span class="w">    </span><span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;/{id}&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">getUser</span><span class="p">(</span><span class="nd">@PathParam</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">userService</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+    @GET
+    @Path(&quot;/{id}&quot;)
+    public User getUser(@PathParam Long id) {
+        return userService.findById(id);
+    }
+}
+</code></pre>
 
 <h2>对比分析</h2>
 <table>
@@ -2617,17 +2617,17 @@ find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </spa
 - <strong>Summary</strong>：分位数统计，类似Histogram但客户端计算</p>
 <h3>指标暴露</h3>
 <p>在应用中集成Prometheus客户端库：</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">prometheus_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">Histogram</span><span class="p">,</span> <span class="n">generate_latest</span>
+<pre class="codehilite"><code class="language-python">from prometheus_client import Counter, Histogram, generate_latest
 
-<span class="n">REQUEST_COUNT</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s1">&#39;http_requests_total&#39;</span><span class="p">,</span> <span class="s1">&#39;Total requests&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="s1">&#39;endpoint&#39;</span><span class="p">])</span>
-<span class="n">REQUEST_DURATION</span> <span class="o">=</span> <span class="n">Histogram</span><span class="p">(</span><span class="s1">&#39;http_request_duration_seconds&#39;</span><span class="p">,</span> <span class="s1">&#39;Request duration&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">])</span>
+REQUEST_COUNT = Counter('http_requests_total', 'Total requests', ['method', 'endpoint'])
+REQUEST_DURATION = Histogram('http_request_duration_seconds', 'Request duration', ['method'])
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/users&#39;</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_users</span><span class="p">():</span>
-    <span class="n">REQUEST_COUNT</span><span class="o">.</span><span class="n">labels</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s1">&#39;/api/users&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">inc</span><span class="p">()</span>
-    <span class="k">with</span> <span class="n">REQUEST_DURATION</span><span class="o">.</span><span class="n">labels</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">time</span><span class="p">():</span>
-        <span class="k">return</span> <span class="n">get_users_from_db</span><span class="p">()</span>
-</code></pre></div>
+@app.route('/api/users')
+def get_users():
+    REQUEST_COUNT.labels(method='GET', endpoint='/api/users').inc()
+    with REQUEST_DURATION.labels(method='GET').time():
+        return get_users_from_db()
+</code></pre>
 
 <h2>Grafana可视化</h2>
 <h3>数据源配置</h3>
@@ -2640,49 +2640,49 @@ find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </spa
 </ol>
 <h3>常用面板示例</h3>
 <p><strong>系统概览面板：</strong></p>
-<div class="codehilite"><pre><span></span><code>CPU使用率: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode=&quot;idle&quot;}[5m])) <span class="gs">* 100)</span>
-<span class="gs">内存使用率: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) *</span> 100
+<pre class="codehilite"><code>CPU使用率: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode=&quot;idle&quot;}[5m])) * 100)
+内存使用率: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100
 磁盘IO: rate(node_disk_io_time_seconds_total[5m])
 网络流量: rate(node_network_receive_bytes_total[5m])
-</code></pre></div>
+</code></pre>
 
 <h2>Alertmanager告警</h2>
 <h3>告警规则配置</h3>
-<div class="codehilite"><pre><span></span><code><span class="nt">groups</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server_alerts</span>
-<span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HighCPUUsage</span>
-<span class="w">    </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100 - (avg by(instance)(rate(node_cpu_seconds_total{mode=&quot;idle&quot;}[5m])) * 100) &gt; 80</span>
-<span class="w">    </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span>
-<span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">warning</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;实例</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$labels.instance</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">CPU使用率超过80%&quot;</span>
-<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CPU使用率当前为</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">$value</span><span class="nv"> </span><span class="s">}}%&quot;</span>
+<pre class="codehilite"><code class="language-yaml">groups:
+- name: server_alerts
+  rules:
+  - alert: HighCPUUsage
+    expr: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode=&quot;idle&quot;}[5m])) * 100) &gt; 80
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: &quot;实例 {{ $labels.instance }} CPU使用率超过80%&quot;
+      description: &quot;CPU使用率当前为 {{ $value }}%&quot;
 
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DiskSpaceLow</span>
-<span class="w">    </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(node_filesystem_avail_bytes / node_filesystem_size_bytes) &lt; 0.1</span>
-<span class="w">    </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2m</span>
-<span class="w">    </span><span class="nt">labels</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">critical</span>
-<span class="w">    </span><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">$labels.instance</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">磁盘空间不足&quot;</span>
-</code></pre></div>
+  - alert: DiskSpaceLow
+    expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes) &lt; 0.1
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: &quot;{{ $labels.instance }} 磁盘空间不足&quot;
+</code></pre>
 
 <h3>告警路由与通知</h3>
-<div class="codehilite"><pre><span></span><code><span class="nt">route</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">receiver</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;team-ops&#39;</span>
-<span class="w">  </span><span class="nt">routes</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">match</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">critical</span>
-<span class="w">    </span><span class="nt">receiver</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;team-ops-critical&#39;</span>
-<span class="w">    </span><span class="nt">repeat_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span>
+<pre class="codehilite"><code class="language-yaml">route:
+  receiver: 'team-ops'
+  routes:
+  - match:
+      severity: critical
+    receiver: 'team-ops-critical'
+    repeat_interval: 5m
 
-<span class="nt">receivers</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;team-ops-critical&#39;</span>
-<span class="w">  </span><span class="nt">webhook_configs</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://hooks.example.com/alert&#39;</span>
-</code></pre></div>
+receivers:
+- name: 'team-ops-critical'
+  webhook_configs:
+  - url: 'https://hooks.example.com/alert'
+</code></pre>
 
 <h2>告警管理最佳实践</h2>
 <ol>
@@ -2693,12 +2693,12 @@ find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </spa
 <li><strong>告警升级机制</strong>：长时间未处理逐级升级通知</li>
 </ol>
 <h2>实战架构</h2>
-<div class="codehilite"><pre><span></span><code>应用/服务器 → Exporter(节点指标) → Prometheus(存储+查询)
+<pre class="codehilite"><code>应用/服务器 → Exporter(节点指标) → Prometheus(存储+查询)
                                        ↓
                                   Alertmanager → 通知(飞书/Slack/邮件)
                                        ↓
                                   Grafana(可视化 + 告警管理)
-</code></pre></div>
+</code></pre>
 
 <p>完善的监控体系是保障系统稳定性的基础，能够在问题影响用户之前及时发现和处理。</p>]]></content:encoded>
       <pubDate>Tue, 12 May 2026 00:00:00 GMT</pubDate>
@@ -2713,88 +2713,88 @@ find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </spa
 <h2>协程与事件循环</h2>
 <h3>协程的定义</h3>
 <p>协程是使用<code>async def</code>定义的函数，调用时返回一个协程对象：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fetch_data</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="k">async</span> <span class="k">with</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientSession</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
-        <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
-            <span class="k">return</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">async def fetch_data(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            return await response.json()
+</code></pre>
 
 <p>协程只有在事件循环中执行才会真正运行。</p>
 <h3>事件循环</h3>
 <p>事件循环是异步编程的核心调度器，负责管理所有待执行的协程：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;https://api.example.com/data&quot;</span><span class="p">)</span>
+<pre class="codehilite"><code class="language-python">async def main():
+    result = await fetch_data(&quot;https://api.example.com/data&quot;)
 
-<span class="c1"># Python 3.7+ 自动创建事件循环</span>
-<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
-</code></pre></div>
+# Python 3.7+ 自动创建事件循环
+asyncio.run(main())
+</code></pre>
 
 <h2>并发执行模式</h2>
 <h3>使用asyncio.gather</h3>
 <p>并发执行多个协程并等待所有完成：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
-        <span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;https://api1.com&quot;</span><span class="p">),</span>
-        <span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;https://api2.com&quot;</span><span class="p">),</span>
-        <span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;https://api3.com&quot;</span><span class="p">),</span>
-        <span class="n">return_exceptions</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># 不因单个异常中断</span>
-    <span class="p">)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">async def main():
+    results = await asyncio.gather(
+        fetch_data(&quot;https://api1.com&quot;),
+        fetch_data(&quot;https://api2.com&quot;),
+        fetch_data(&quot;https://api3.com&quot;),
+        return_exceptions=True  # 不因单个异常中断
+    )
+</code></pre>
 
 <h3>使用asyncio.create_task</h3>
 <p>创建后台任务，适用于不需要立即等待的场景：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="n">task1</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;url1&quot;</span><span class="p">))</span>
-    <span class="n">task2</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;url2&quot;</span><span class="p">))</span>
-    <span class="c1"># 执行其他操作</span>
-    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="c1"># 等待任务完成</span>
-    <span class="n">result1</span> <span class="o">=</span> <span class="k">await</span> <span class="n">task1</span>
-    <span class="n">result2</span> <span class="o">=</span> <span class="k">await</span> <span class="n">task2</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">async def main():
+    task1 = asyncio.create_task(fetch_data(&quot;url1&quot;))
+    task2 = asyncio.create_task(fetch_data(&quot;url2&quot;))
+    # 执行其他操作
+    await asyncio.sleep(1)
+    # 等待任务完成
+    result1 = await task1
+    result2 = await task2
+</code></pre>
 
 <h2>高级模式</h2>
 <h3>异步上下文管理器</h3>
 <p>使用<code>async with</code>管理异步资源：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AsyncDB</span><span class="p">:</span>
-    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="k">await</span> <span class="n">create_connection</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span>
+<pre class="codehilite"><code class="language-python">class AsyncDB:
+    async def __aenter__(self):
+        self.conn = await create_connection()
+        return self.conn
 
-    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aexit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
-        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</code></pre></div>
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        await self.conn.close()
+</code></pre>
 
 <h3>异步迭代器</h3>
 <p>使用<code>async for</code>处理异步数据流：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">read_stream</span><span class="p">():</span>
-    <span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">stream_reader</span><span class="p">:</span>
-        <span class="n">process</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">async def read_stream():
+    async for chunk in stream_reader:
+        process(chunk)
+</code></pre>
 
 <h3>限制并发数</h3>
 <p>使用asyncio.Semaphore控制并发度：</p>
-<div class="codehilite"><pre><span></span><code><span class="n">sem</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<pre class="codehilite"><code class="language-python">sem = asyncio.Semaphore(10)
 
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">limited_fetch</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="k">async</span> <span class="k">with</span> <span class="n">sem</span><span class="p">:</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="n">fetch_data</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-</code></pre></div>
+async def limited_fetch(url):
+    async with sem:
+        return await fetch_data(url)
+</code></pre>
 
 <h2>常见陷阱与最佳实践</h2>
 <h3>避免阻塞事件循环</h3>
 <p>在协程中使用同步阻塞调用会阻塞整个事件循环。</p>
 <p><strong>错误示例：</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">bad</span><span class="p">():</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 阻塞整个事件循环！</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">async def bad():
+    time.sleep(1)  # 阻塞整个事件循环！
+</code></pre>
 
 <p><strong>正确做法：</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">good</span><span class="p">():</span>
-    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 非阻塞</span>
-    <span class="c1"># 或使用线程池执行阻塞操作</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">to_thread</span><span class="p">(</span><span class="n">sync_function</span><span class="p">)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">async def good():
+    await asyncio.sleep(1)  # 非阻塞
+    # 或使用线程池执行阻塞操作
+    result = await asyncio.to_thread(sync_function)
+</code></pre>
 
 <h3>线程安全</h3>
 <p>大部分asyncio对象不是线程安全的，跨线程调用需要使用<code>loop.call_soon_threadsafe</code>。</p>
@@ -2816,36 +2816,36 @@ find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </spa
 <p>Redis不仅是一个缓存，更是一个数据结构服务器。理解每种数据类型的特性和适用场景是充分发挥Redis能力的关键。</p>
 <h3>String</h3>
 <p>最基本的数据类型，适合缓存、计数器、分布式ID等场景：</p>
-<div class="codehilite"><pre><span></span><code>SET<span class="w"> </span>user:1001:name<span class="w"> </span><span class="s2">&quot;张三&quot;</span>
-INCR<span class="w"> </span>article:123:views
-SETEX<span class="w"> </span>session:abc<span class="w"> </span><span class="m">3600</span><span class="w"> </span><span class="s2">&quot;user_data&quot;</span><span class="w">  </span><span class="c1"># 带过期时间的设置</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">SET user:1001:name &quot;张三&quot;
+INCR article:123:views
+SETEX session:abc 3600 &quot;user_data&quot;  # 带过期时间的设置
+</code></pre>
 
 <h3>Hash</h3>
 <p>适合存储对象数据，可单独更新某个字段：</p>
-<div class="codehilite"><pre><span></span><code>HSET<span class="w"> </span>user:1001<span class="w"> </span>name<span class="w"> </span><span class="s2">&quot;张三&quot;</span><span class="w"> </span>age<span class="w"> </span><span class="m">28</span><span class="w"> </span>city<span class="w"> </span><span class="s2">&quot;北京&quot;</span>
-HGET<span class="w"> </span>user:1001<span class="w"> </span>name
-HINCRBY<span class="w"> </span>user:1001<span class="w"> </span>age<span class="w"> </span><span class="m">1</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">HSET user:1001 name &quot;张三&quot; age 28 city &quot;北京&quot;
+HGET user:1001 name
+HINCRBY user:1001 age 1
+</code></pre>
 
 <h3>List</h3>
 <p>基于链表实现，适合消息队列和时间线场景：</p>
-<div class="codehilite"><pre><span></span><code>LPUSH<span class="w"> </span>timeline:user:1001<span class="w"> </span><span class="s2">&quot;post:1&quot;</span>
-LRANGE<span class="w"> </span>timeline:user:1001<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">9</span><span class="w">  </span><span class="c1"># 获取最近10条</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">LPUSH timeline:user:1001 &quot;post:1&quot;
+LRANGE timeline:user:1001 0 9  # 获取最近10条
+</code></pre>
 
 <h3>Set</h3>
 <p>无序集合，适合标签、去重和社交关系：</p>
-<div class="codehilite"><pre><span></span><code>SADD<span class="w"> </span>article:1:tags<span class="w"> </span><span class="s2">&quot;技术&quot;</span><span class="w"> </span><span class="s2">&quot;Redis&quot;</span><span class="w"> </span><span class="s2">&quot;缓存&quot;</span>
-SINTER<span class="w"> </span>article:1:tags<span class="w"> </span>article:2:tags<span class="w">  </span><span class="c1"># 共同标签</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">SADD article:1:tags &quot;技术&quot; &quot;Redis&quot; &quot;缓存&quot;
+SINTER article:1:tags article:2:tags  # 共同标签
+</code></pre>
 
 <h3>Sorted Set</h3>
 <p>有序集合，适合排行榜、延迟队列等场景：</p>
-<div class="codehilite"><pre><span></span><code>ZADD<span class="w"> </span>leaderboard<span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="s2">&quot;user1&quot;</span>
-ZINCRBY<span class="w"> </span>leaderboard<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="s2">&quot;user1&quot;</span>
-ZREVRANGE<span class="w"> </span>leaderboard<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">9</span><span class="w"> </span>WITHSCORES<span class="w">  </span><span class="c1"># Top 10</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">ZADD leaderboard 1000 &quot;user1&quot;
+ZINCRBY leaderboard 10 &quot;user1&quot;
+ZREVRANGE leaderboard 0 9 WITHSCORES  # Top 10
+</code></pre>
 
 <h2>过期与淘汰策略</h2>
 <h3>过期策略</h3>
@@ -2867,30 +2867,30 @@ ZREVRANGE<span class="w"> </span>leaderboard<span class="w"> </span><span class=
 <h2>分布式锁</h2>
 <h3>基本实现</h3>
 <p>使用SET命令的NX和EX参数实现：</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">redis</span>
+<pre class="codehilite"><code class="language-python">import redis
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">Redis</span><span class="p">()</span>
+r = redis.Redis()
 
-<span class="k">def</span><span class="w"> </span><span class="nf">acquire_lock</span><span class="p">(</span><span class="n">lock_name</span><span class="p">,</span> <span class="n">acquire_timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">lock_timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
-    <span class="n">identifier</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
-    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">acquire_timeout</span>
-    <span class="k">while</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lock:</span><span class="si">{</span><span class="n">lock_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">identifier</span><span class="p">,</span> <span class="n">nx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ex</span><span class="o">=</span><span class="n">lock_timeout</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">identifier</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
-    <span class="k">return</span> <span class="kc">None</span>
+def acquire_lock(lock_name, acquire_timeout=10, lock_timeout=30):
+    identifier = str(uuid.uuid4())
+    end = time.time() + acquire_timeout
+    while time.time() &lt; end:
+        if r.set(f&quot;lock:{lock_name}&quot;, identifier, nx=True, ex=lock_timeout):
+            return identifier
+        time.sleep(0.01)
+    return None
 
-<span class="k">def</span><span class="w"> </span><span class="nf">release_lock</span><span class="p">(</span><span class="n">lock_name</span><span class="p">,</span> <span class="n">identifier</span><span class="p">):</span>
-    <span class="c1"># 使用Lua脚本保证原子性</span>
-    <span class="n">script</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    if redis.call(&quot;get&quot;, KEYS[1]) == ARGV[1] then</span>
-<span class="s2">        return redis.call(&quot;del&quot;, KEYS[1])</span>
-<span class="s2">    else</span>
-<span class="s2">        return 0</span>
-<span class="s2">    end</span>
-<span class="s2">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;lock:</span><span class="si">{</span><span class="n">lock_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">identifier</span><span class="p">)</span>
-</code></pre></div>
+def release_lock(lock_name, identifier):
+    # 使用Lua脚本保证原子性
+    script = &quot;&quot;&quot;
+    if redis.call(&quot;get&quot;, KEYS[1]) == ARGV[1] then
+        return redis.call(&quot;del&quot;, KEYS[1])
+    else
+        return 0
+    end
+    &quot;&quot;&quot;
+    return r.eval(script, 1, f&quot;lock:{lock_name}&quot;, identifier)
+</code></pre>
 
 <h3>Redlock算法</h3>
 <p>对于需要更高安全性的场景，可以使用Redlock算法在多个Redis节点上获取锁。</p>
@@ -2938,19 +2938,19 @@ ZREVRANGE<span class="w"> </span>leaderboard<span class="w"> </span><span class=
 <li><strong>使用Amazon Linux兼容的预编译二进制文件</strong></li>
 </ol>
 <p><strong>初始化优化：</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 将客户端初始化放在函数外部（全局作用域）</span>
-<span class="c1"># 这样可以在容器复用期间重用连接</span>
+<pre class="codehilite"><code class="language-python"># 将客户端初始化放在函数外部（全局作用域）
+# 这样可以在容器复用期间重用连接
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+import boto3
 
-<span class="c1"># 全局初始化（冷启动时执行一次）</span>
-<span class="n">dynamodb</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;dynamodb&#39;</span><span class="p">)</span>
-<span class="n">table</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s1">&#39;Users&#39;</span><span class="p">)</span>
+# 全局初始化（冷启动时执行一次）
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('Users')
 
-<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-    <span class="c1"># 热启动时跳过初始化</span>
-    <span class="k">return</span> <span class="n">table</span><span class="o">.</span><span class="n">get_item</span><span class="p">(</span><span class="n">Key</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]})</span>
-</code></pre></div>
+def lambda_handler(event, context):
+    # 热启动时跳过初始化
+    return table.get_item(Key={'id': event['id']})
+</code></pre>
 
 <h2>冷启动优化</h2>
 <p>冷启动是Serverless面临的主要性能挑战，指函数首次调用或长时间未调用时需要加载代码和执行初始化。</p>
@@ -2983,25 +2983,25 @@ AWS Lambda SnapStart对Java函数的快照功能，冷启动时间缩短到200ms
 </ul>
 <h3>结构化日志</h3>
 <p>使用JSON格式输出日志，便于查询和分析：</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<pre class="codehilite"><code class="language-python">import json
+import logging
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
-<span class="k">def</span><span class="w"> </span><span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
-        <span class="s2">&quot;requestId&quot;</span><span class="p">:</span> <span class="n">context</span><span class="o">.</span><span class="n">aws_request_id</span><span class="p">,</span>
-        <span class="s2">&quot;event&quot;</span><span class="p">:</span> <span class="n">event</span><span class="p">,</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">context</span><span class="o">.</span><span class="n">log_group_name</span>
-    <span class="p">}))</span>
-</code></pre></div>
+def lambda_handler(event, context):
+    logger.info(json.dumps({
+        &quot;requestId&quot;: context.aws_request_id,
+        &quot;event&quot;: event,
+        &quot;timestamp&quot;: context.log_group_name
+    }))
+</code></pre>
 
 <h3>分布式追踪</h3>
 <p>使用AWS X-Ray实现端到端的请求追踪：</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aws_xray_sdk.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">patch_all</span>
-<span class="n">patch_all</span><span class="p">()</span>  <span class="c1"># 自动追踪HTTP、AWS SDK等调用</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">from aws_xray_sdk.core import patch_all
+patch_all()  # 自动追踪HTTP、AWS SDK等调用
+</code></pre>
 
 <h2>安全性最佳实践</h2>
 <ul>
@@ -3031,55 +3031,55 @@ AWS Lambda SnapStart对Java函数的快照功能，冷启动时间缩短到200ms
 <h2>类型体操</h2>
 <h3>条件类型</h3>
 <p>根据条件选择不同的类型：</p>
-<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">IsString</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">true</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">;</span>
-<span class="kr">type</span><span class="w"> </span><span class="nx">Result1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IsString</span><span class="o">&lt;</span><span class="s2">&quot;hello&quot;</span><span class="o">&gt;</span><span class="p">;</span><span class="w">  </span><span class="c1">// true</span>
-<span class="kr">type</span><span class="w"> </span><span class="nx">Result2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">IsString</span><span class="o">&lt;</span><span class="mf">42</span><span class="o">&gt;</span><span class="p">;</span><span class="w">       </span><span class="c1">// false</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-typescript">type IsString&lt;T&gt; = T extends string ? true : false;
+type Result1 = IsString&lt;&quot;hello&quot;&gt;;  // true
+type Result2 = IsString&lt;42&gt;;       // false
+</code></pre>
 
 <h3>映射类型</h3>
 <p>对已有类型的属性进行变换：</p>
-<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">Readonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">readonly</span><span class="w"> </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
-<span class="p">};</span>
+<pre class="codehilite"><code class="language-typescript">type Readonly&lt;T&gt; = {
+    readonly [P in keyof T]: T[P];
+};
 
-<span class="kr">type</span><span class="w"> </span><span class="nx">Partial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="p">]</span><span class="nx">?</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
-<span class="p">};</span>
+type Partial&lt;T&gt; = {
+    [P in keyof T]?: T[P];
+};
 
-<span class="kr">type</span><span class="w"> </span><span class="nx">Pick</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span><span class="w"> </span><span class="nx">K</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">K</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
-<span class="p">};</span>
-</code></pre></div>
+type Pick&lt;T, K extends keyof T&gt; = {
+    [P in K]: T[P];
+};
+</code></pre>
 
 <h3>递归类型</h3>
 <p>处理嵌套结构的类型：</p>
-<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">DeepPartial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="p">]</span><span class="nx">?</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">object</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">DeepPartial</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
-<span class="p">};</span>
+<pre class="codehilite"><code class="language-typescript">type DeepPartial&lt;T&gt; = {
+    [P in keyof T]?: T[P] extends object ? DeepPartial&lt;T[P]&gt; : T[P];
+};
 
-<span class="kr">type</span><span class="w"> </span><span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">readonly</span><span class="w"> </span><span class="p">[</span><span class="nx">P</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">keyof</span><span class="w"> </span><span class="nx">T</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">object</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">DeepReadonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="p">[</span><span class="nx">P</span><span class="p">];</span>
-<span class="p">};</span>
-</code></pre></div>
+type DeepReadonly&lt;T&gt; = {
+    readonly [P in keyof T]: T[P] extends object ? DeepReadonly&lt;T[P]&gt; : T[P];
+};
+</code></pre>
 
 <h3>infer关键字</h3>
 <p>从类型中提取子类型：</p>
-<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">ReturnType</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="p">(</span><span class="nx">...args</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">[])</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">infer</span><span class="w"> </span><span class="nx">R</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">R</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">never</span><span class="p">;</span>
-<span class="kr">type</span><span class="w"> </span><span class="nx">ArrayItem</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="p">(</span><span class="nx">infer</span><span class="w"> </span><span class="nx">U</span><span class="p">)[]</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">U</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">never</span><span class="p">;</span>
-<span class="kr">type</span><span class="w"> </span><span class="nx">PromiseValue</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">infer</span><span class="w"> </span><span class="nx">U</span><span class="o">&gt;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">U</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-typescript">type ReturnType&lt;T&gt; = T extends (...args: any[]) =&gt; infer R ? R : never;
+type ArrayItem&lt;T&gt; = T extends (infer U)[] ? U : never;
+type PromiseValue&lt;T&gt; = T extends Promise&lt;infer U&gt; ? U : T;
+</code></pre>
 
 <h2>泛型进阶</h2>
 <h3>泛型约束</h3>
 <p>使用extends约束泛型参数的范围：</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">HasId</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
-<span class="p">}</span>
+<pre class="codehilite"><code class="language-typescript">interface HasId {
+    id: number;
+}
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">getById</span><span class="o">&lt;</span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">HasId</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">items</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">[],</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">undefined</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">items</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">item</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">id</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
+function getById&lt;T extends HasId&gt;(items: T[], id: number): T | undefined {
+    return items.find(item =&gt; item.id === id);
+}
+</code></pre>
 
 <h3>泛型工具类型</h3>
 <p>TypeScript内置了大量有用的工具类型，需要深入理解其使用场景：</p>
@@ -3094,30 +3094,30 @@ AWS Lambda SnapStart对Java函数的快照功能，冷启动时间缩短到200ms
 </ul>
 <h3>模板字面量类型</h3>
 <p>TypeScript 4.1+支持的模板字面量类型：</p>
-<div class="codehilite"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">EventName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`on</span><span class="si">${</span><span class="nx">Capitalize</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
-<span class="kr">type</span><span class="w"> </span><span class="nx">CSSProperty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`--</span><span class="si">${</span><span class="kt">string</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-typescript">type EventName = `on${Capitalize&lt;string&gt;}`;
+type CSSProperty = `--${string}`;
+</code></pre>
 
 <h2>装饰器</h2>
 <h3>类装饰器</h3>
 <p>修改类的行为和结构：</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">LogClass</span><span class="o">&lt;</span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="p">(</span><span class="nx">...args</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">[])</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">}</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">constructor</span><span class="o">:</span><span class="w"> </span><span class="kt">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="kr">constructor</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">createdAt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span>
-<span class="w">    </span><span class="p">};</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-typescript">function LogClass&lt;T extends { new (...args: any[]): {} }&gt;(constructor: T) {
+    return class extends constructor {
+        createdAt = new Date();
+    };
+}
+</code></pre>
 
 <h3>方法装饰器</h3>
 <p>拦截方法调用，实现日志、缓存等功能：</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">Log</span><span class="p">(</span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="nx">propertyKey</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">descriptor</span><span class="o">:</span><span class="w"> </span><span class="kt">PropertyDescriptor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">original</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">descriptor</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">descriptor</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">...args</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Calling </span><span class="si">${</span><span class="nx">propertyKey</span><span class="si">}</span><span class="sb"> with`</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">original</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="p">);</span>
-<span class="w">    </span><span class="p">};</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-typescript">function Log(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    const original = descriptor.value;
+    descriptor.value = function(...args: any[]) {
+        console.log(`Calling ${propertyKey} with`, args);
+        return original.apply(this, args);
+    };
+}
+</code></pre>
 
 <h2>实践建议</h2>
 <ol>
@@ -3147,22 +3147,22 @@ AWS Lambda SnapStart对Java函数的快照功能，冷启动时间缩短到200ms
 <li><strong>配置灵活</strong>：丰富的模块和指令</li>
 </ul>
 <h3>配置示例</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">server</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
-<span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">example.com</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-nginx">server {
+    listen 80;
+    server_name example.com;
 
-<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://localhost:3000</span><span class="p">;</span>
-<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$host</span><span class="p">;</span>
-<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Real-IP</span><span class="w"> </span><span class="nv">$remote_addr</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
 
-<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/static/</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kn">alias</span><span class="w"> </span><span class="s">/var/www/static/</span><span class="p">;</span>
-<span class="w">        </span><span class="kn">expires</span><span class="w"> </span><span class="s">7d</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+    location /static/ {
+        alias /var/www/static/;
+        expires 7d;
+    }
+}
+</code></pre>
 
 <h3>适用场景</h3>
 <p>高并发网站、反向代理、负载均衡、静态资源服务。</p>
@@ -3176,18 +3176,18 @@ AWS Lambda SnapStart对Java函数的快照功能，冷启动时间缩短到200ms
 <li><strong>插件生态</strong>：可通过插件扩展功能</li>
 </ul>
 <h3>配置示例</h3>
-<div class="codehilite"><pre><span></span><code><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">reverse_proxy</span><span class="w"> </span><span class="n">localhost</span><span class="p">:</span><span class="mi">3000</span>
+<pre class="codehilite"><code class="language-caddy">example.com {
+    reverse_proxy localhost:3000
 
-<span class="w">    </span><span class="c1"># 静态文件服务</span>
-<span class="w">    </span><span class="n">handle_path</span><span class="w"> </span><span class="o">/</span><span class="k">static</span><span class="o">/*</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">root</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="k">static</span>
-<span class="w">        </span><span class="n">file_server</span>
-<span class="w">    </span><span class="p">}</span>
+    # 静态文件服务
+    handle_path /static/* {
+        root * /var/www/static
+        file_server
+    }
 
-<span class="w">    </span><span class="c1"># 自动HTTPS默认开启</span>
-<span class="p">}</span>
-</code></pre></div>
+    # 自动HTTPS默认开启
+}
+</code></pre>
 
 <h3>适用场景</h3>
 <p>中小型项目、需要快速配置的项目、对HTTPS有强依赖的场景。</p>
@@ -3413,12 +3413,12 @@ AWS Lambda SnapStart对Java函数的快照功能，冷启动时间缩短到200ms
 <li><strong>ChartMogul</strong>：SaaS指标分析（MRR、Churn、LTV）</li>
 </ul>
 <h3>需要追踪的关键事件</h3>
-<div class="codehilite"><pre><span></span><code>- 用户注册
+<pre class="codehilite"><code>- 用户注册
 - 首次使用核心功能
 - 支付成功
 - 取消订阅
 - 邀请好友
-</code></pre></div>
+</code></pre>
 
 <h2>监控告警</h2>
 <h3>可用性监控</h3>
@@ -3500,8 +3500,8 @@ AWS Lambda SnapStart对Java函数的快照功能，冷启动时间缩短到200ms
 <h3>分层定价</h3>
 <p>设置3-4个固定价格层级，每个层级包含不同的功能组合。</p>
 <p><strong>经典层级设计：</strong></p>
-<div class="codehilite"><pre><span></span><code>免费版 → $19/月 → $49/月 → $99/月
-</code></pre></div>
+<pre class="codehilite"><code>免费版 → $19/月 → $49/月 → $99/月
+</code></pre>
 
 <p><strong>设计原则：</strong>
 - 每个层级的功能增量应该诱导用户升级
@@ -3688,11 +3688,11 @@ AWS Lambda SnapStart对Java函数的快照功能，冷启动时间缩短到200ms
 <li><strong>Hacker News</strong>：全球技术社区，好内容爆发力强</li>
 </ul>
 <h3>推广节奏</h3>
-<div class="codehilite"><pre><span></span><code>发布文章 → 24小时内社交媒体推广
+<pre class="codehilite"><code>发布文章 → 24小时内社交媒体推广
         → 3天后更新补充内容
         → 1周后在社区二次分享
         → 1月后更新数据重新发布
-</code></pre></div>
+</code></pre>
 
 <h2>开发者关系</h2>
 <h3>建立信任</h3>
@@ -3784,42 +3784,42 @@ AWS Lambda SnapStart对Java函数的快照功能，冷启动时间缩短到200ms
 <h3>收入相关指标</h3>
 <p><strong>MRR（月度经常性收入）：</strong>
 所有付费订阅的月度收入总和。计算公式：</p>
-<div class="codehilite"><pre><span></span><code>MRR = Σ(每个客户的月度订阅费)
-</code></pre></div>
+<pre class="codehilite"><code>MRR = Σ(每个客户的月度订阅费)
+</code></pre>
 
 <p><strong>ARR（年度经常性收入）：</strong></p>
-<div class="codehilite"><pre><span></span><code>ARR = MRR × 12
-</code></pre></div>
+<pre class="codehilite"><code>ARR = MRR × 12
+</code></pre>
 
 <p><strong>ARPU（每用户平均收入）：</strong></p>
-<div class="codehilite"><pre><span></span><code>ARPU = MRR / 总活跃用户数
-</code></pre></div>
+<pre class="codehilite"><code>ARPU = MRR / 总活跃用户数
+</code></pre>
 
 <h3>增长指标</h3>
 <p><strong>CAC（客户获取成本）：</strong></p>
-<div class="codehilite"><pre><span></span><code>CAC = 销售和营销总支出 / 新增客户数
-</code></pre></div>
+<pre class="codehilite"><code>CAC = 销售和营销总支出 / 新增客户数
+</code></pre>
 
 <p><strong>LTV（客户生命周期价值）：</strong></p>
-<div class="codehilite"><pre><span></span><code>LTV = ARPU × 客户平均生命周期（月数）
-</code></pre></div>
+<pre class="codehilite"><code>LTV = ARPU × 客户平均生命周期（月数）
+</code></pre>
 
 <p><strong>健康指标：LTV / CAC &gt; 3</strong>，这是SaaS产品的黄金标准。</p>
 <h3>留存指标</h3>
 <p><strong>Churn Rate（流失率）：</strong></p>
-<div class="codehilite"><pre><span></span><code>月度流失率 = 当月流失客户数 / 月初客户总数
-</code></pre></div>
+<pre class="codehilite"><code>月度流失率 = 当月流失客户数 / 月初客户总数
+</code></pre>
 
 <p><strong>Net Revenue Retention（NRR）：</strong>
 考虑升级、降级和流失后的收入留存率。NRR &gt; 100% 意味着现有客户带来的收入在增长。</p>
 <h3>转化指标</h3>
 <p><strong>免费→付费转化率：</strong></p>
-<div class="codehilite"><pre><span></span><code>转化率 = 付费用户数 / 注册总用户数
-</code></pre></div>
+<pre class="codehilite"><code>转化率 = 付费用户数 / 注册总用户数
+</code></pre>
 
 <p><strong>激活率：</strong></p>
-<div class="codehilite"><pre><span></span><code>激活率 = 完成核心动作用户数 / 新注册用户数
-</code></pre></div>
+<pre class="codehilite"><code>激活率 = 完成核心动作用户数 / 新注册用户数
+</code></pre>
 
 <h2>追踪工具</h2>
 <h3>产品分析</h3>
@@ -3849,8 +3849,8 @@ Amplitude/Mixpanel（产品）+ ChartMogul（商业）+ dbt（数据转换）+ M
 </ol>
 <h3>增长实验</h3>
 <p><strong>实验流程：</strong></p>
-<div class="codehilite"><pre><span></span><code>假设 → 设计实验 → 实施 → 测量结果 → 学习 → 迭代
-</code></pre></div>
+<pre class="codehilite"><code>假设 → 设计实验 → 实施 → 测量结果 → 学习 → 迭代
+</code></pre>
 
 <p><strong>实验示例：</strong>
 - 假设：简化注册流程将提高转化率20%
@@ -4008,105 +4008,105 @@ Amplitude/Mixpanel（产品）+ ChartMogul（商业）+ dbt（数据转换）+ M
 <p>Stripe是全球最流行的在线支付平台之一，尤其适合SaaS产品的支付需求。其API设计优雅，文档完善，支持订阅管理、发票和退款等全流程支付功能。</p>
 <h2>基础集成</h2>
 <h3>支付流程</h3>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">stripe</span>
-<span class="n">stripe</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="s2">&quot;sk_test_...&quot;</span>
+<pre class="codehilite"><code class="language-python">import stripe
+stripe.api_key = &quot;sk_test_...&quot;
 
-<span class="c1"># 1. 创建支付Intent</span>
-<span class="n">intent</span> <span class="o">=</span> <span class="n">stripe</span><span class="o">.</span><span class="n">PaymentIntent</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">amount</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>  <span class="c1"># 单位：分</span>
-    <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;usd&quot;</span><span class="p">,</span>
-    <span class="n">customer</span><span class="o">=</span><span class="n">customer_id</span><span class="p">,</span>
-<span class="p">)</span>
+# 1. 创建支付Intent
+intent = stripe.PaymentIntent.create(
+    amount=2000,  # 单位：分
+    currency=&quot;usd&quot;,
+    customer=customer_id,
+)
 
-<span class="c1"># 2. 返回client_secret给前端</span>
-<span class="c1"># 前端使用Stripe Elements完成支付确认</span>
-</code></pre></div>
+# 2. 返回client_secret给前端
+# 前端使用Stripe Elements完成支付确认
+</code></pre>
 
 <h3>前端集成</h3>
 <p>使用Stripe提供的预构建UI组件，避免处理敏感的支付信息：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Elements</span><span class="p">,</span><span class="w"> </span><span class="nx">PaymentElement</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@stripe/react-stripe-js&#39;</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-javascript">import { Elements, PaymentElement } from '@stripe/react-stripe-js';
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">CheckoutForm</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="o">&lt;</span><span class="nx">form</span><span class="w"> </span><span class="nx">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSubmit</span><span class="p">}</span><span class="o">&gt;</span>
-<span class="w">      </span><span class="o">&lt;</span><span class="nx">PaymentElement</span><span class="w"> </span><span class="o">/&gt;</span>
-<span class="w">      </span><span class="o">&lt;</span><span class="nx">button</span><span class="o">&gt;</span><span class="nx">支付</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
-<span class="w">    </span><span class="o">&lt;</span><span class="err">/form&gt;</span>
-<span class="w">  </span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
+function CheckoutForm() {
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;PaymentElement /&gt;
+      &lt;button&gt;支付&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}
+</code></pre>
 
 <h2>订阅管理</h2>
 <p>订阅是SaaS产品的核心支付模式。</p>
 <h3>创建订阅</h3>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 创建价格</span>
-<span class="n">price</span> <span class="o">=</span> <span class="n">stripe</span><span class="o">.</span><span class="n">Price</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">product</span><span class="o">=</span><span class="s2">&quot;prod_xxx&quot;</span><span class="p">,</span>
-    <span class="n">unit_amount</span><span class="o">=</span><span class="mi">1999</span><span class="p">,</span>  <span class="c1"># $19.99</span>
-    <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;usd&quot;</span><span class="p">,</span>
-    <span class="n">recurring</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;interval&quot;</span><span class="p">:</span> <span class="s2">&quot;month&quot;</span><span class="p">},</span>
-<span class="p">)</span>
+<pre class="codehilite"><code class="language-python"># 创建价格
+price = stripe.Price.create(
+    product=&quot;prod_xxx&quot;,
+    unit_amount=1999,  # $19.99
+    currency=&quot;usd&quot;,
+    recurring={&quot;interval&quot;: &quot;month&quot;},
+)
 
-<span class="c1"># 创建订阅</span>
-<span class="n">subscription</span> <span class="o">=</span> <span class="n">stripe</span><span class="o">.</span><span class="n">Subscription</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">customer</span><span class="o">=</span><span class="n">customer_id</span><span class="p">,</span>
-    <span class="n">items</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">price</span><span class="o">.</span><span class="n">id</span><span class="p">}],</span>
-    <span class="n">trial_period_days</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>  <span class="c1"># 14天免费试用</span>
-<span class="p">)</span>
-</code></pre></div>
+# 创建订阅
+subscription = stripe.Subscription.create(
+    customer=customer_id,
+    items=[{&quot;price&quot;: price.id}],
+    trial_period_days=14,  # 14天免费试用
+)
+</code></pre>
 
 <h3>订阅状态管理</h3>
 <p>订阅的生命周期包括：trialing、active、past_due、canceled、incomplete。</p>
 <p>需通过Webhook监听订阅状态变更：</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Webhook处理</span>
-<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/stripe/webhook&quot;</span><span class="p">)</span>
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">stripe_webhook</span><span class="p">(</span><span class="n">payload</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">sig</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="n">event</span> <span class="o">=</span> <span class="n">stripe</span><span class="o">.</span><span class="n">Webhook</span><span class="o">.</span><span class="n">construct_event</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">webhook_secret</span><span class="p">)</span>
+<pre class="codehilite"><code class="language-python"># Webhook处理
+@app.post(&quot;/stripe/webhook&quot;)
+async def stripe_webhook(payload: bytes, sig: str):
+    event = stripe.Webhook.construct_event(payload, sig, webhook_secret)
 
-    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;customer.subscription.updated&quot;</span><span class="p">:</span>
-        <span class="n">subscription</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span>
-        <span class="c1"># 更新数据库中的订阅状态</span>
-    <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;invoice.payment_succeeded&quot;</span><span class="p">:</span>
-        <span class="c1"># 处理成功付款</span>
-    <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;invoice.payment_failed&quot;</span><span class="p">:</span>
-        <span class="c1"># 处理付款失败（发送提醒邮件）</span>
-</code></pre></div>
+    if event.type == &quot;customer.subscription.updated&quot;:
+        subscription = event.data.object
+        # 更新数据库中的订阅状态
+    elif event.type == &quot;invoice.payment_succeeded&quot;:
+        # 处理成功付款
+    elif event.type == &quot;invoice.payment_failed&quot;:
+        # 处理付款失败（发送提醒邮件）
+</code></pre>
 
 <h2>发票功能</h2>
 <p>Stripe Invoice支持自动生成和发送发票。</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 创建发票</span>
-<span class="n">invoice</span> <span class="o">=</span> <span class="n">stripe</span><span class="o">.</span><span class="n">Invoice</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">customer</span><span class="o">=</span><span class="n">customer_id</span><span class="p">,</span>
-    <span class="n">auto_advance</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># 自动发送</span>
-    <span class="n">collection_method</span><span class="o">=</span><span class="s2">&quot;charge_automatically&quot;</span><span class="p">,</span>
-    <span class="n">days_until_due</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
-<span class="p">)</span>
+<pre class="codehilite"><code class="language-python"># 创建发票
+invoice = stripe.Invoice.create(
+    customer=customer_id,
+    auto_advance=True,  # 自动发送
+    collection_method=&quot;charge_automatically&quot;,
+    days_until_due=30,
+)
 
-<span class="c1"># 手动添加费用项</span>
-<span class="n">stripe</span><span class="o">.</span><span class="n">InvoiceItem</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">customer</span><span class="o">=</span><span class="n">customer_id</span><span class="p">,</span>
-    <span class="n">amount</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
-    <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;usd&quot;</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;额外存储服务&quot;</span><span class="p">,</span>
-    <span class="n">invoice</span><span class="o">=</span><span class="n">invoice</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
-<span class="p">)</span>
+# 手动添加费用项
+stripe.InvoiceItem.create(
+    customer=customer_id,
+    amount=5000,
+    currency=&quot;usd&quot;,
+    description=&quot;额外存储服务&quot;,
+    invoice=invoice.id,
+)
 
-<span class="c1"># 发送发票</span>
-<span class="n">stripe</span><span class="o">.</span><span class="n">Invoice</span><span class="o">.</span><span class="n">send_invoice</span><span class="p">(</span><span class="n">invoice</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-</code></pre></div>
+# 发送发票
+stripe.Invoice.send_invoice(invoice.id)
+</code></pre>
 
 <h2>退款处理</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 全额退款</span>
-<span class="n">stripe</span><span class="o">.</span><span class="n">Refund</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">payment_intent</span><span class="o">=</span><span class="n">pi_id</span><span class="p">,</span>
-<span class="p">)</span>
+<pre class="codehilite"><code class="language-python"># 全额退款
+stripe.Refund.create(
+    payment_intent=pi_id,
+)
 
-<span class="c1"># 部分退款</span>
-<span class="n">stripe</span><span class="o">.</span><span class="n">Refund</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">payment_intent</span><span class="o">=</span><span class="n">pi_id</span><span class="p">,</span>
-    <span class="n">amount</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-<span class="p">)</span>
-</code></pre></div>
+# 部分退款
+stripe.Refund.create(
+    payment_intent=pi_id,
+    amount=1000,
+)
+</code></pre>
 
 <h2>多币种处理</h2>
 <h3>币种支持</h3>
@@ -4117,13 +4117,13 @@ Amplitude/Mixpanel（产品）+ ChartMogul（商业）+ dbt（数据转换）+ M
 <li>结算货币：商家可以选择接收结算的货币</li>
 </ol>
 <h3>价格配置</h3>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 多币种价格</span>
-<span class="n">prices</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;usd&quot;</span><span class="p">:</span> <span class="n">stripe</span><span class="o">.</span><span class="n">Price</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">product</span><span class="o">=</span><span class="n">prod</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">unit_amount</span><span class="o">=</span><span class="mi">1999</span><span class="p">,</span> <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;usd&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;eur&quot;</span><span class="p">:</span> <span class="n">stripe</span><span class="o">.</span><span class="n">Price</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">product</span><span class="o">=</span><span class="n">prod</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">unit_amount</span><span class="o">=</span><span class="mi">1899</span><span class="p">,</span> <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;eur&quot;</span><span class="p">),</span>
-    <span class="s2">&quot;cny&quot;</span><span class="p">:</span> <span class="n">stripe</span><span class="o">.</span><span class="n">Price</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">product</span><span class="o">=</span><span class="n">prod</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">unit_amount</span><span class="o">=</span><span class="mi">12900</span><span class="p">,</span> <span class="n">currency</span><span class="o">=</span><span class="s2">&quot;cny&quot;</span><span class="p">),</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python"># 多币种价格
+prices = {
+    &quot;usd&quot;: stripe.Price.create(product=prod.id, unit_amount=1999, currency=&quot;usd&quot;),
+    &quot;eur&quot;: stripe.Price.create(product=prod.id, unit_amount=1899, currency=&quot;eur&quot;),
+    &quot;cny&quot;: stripe.Price.create(product=prod.id, unit_amount=12900, currency=&quot;cny&quot;),
+}
+</code></pre>
 
 <p>Stripe作为支付基础设施，能够处理从简单到复杂的各类支付场景，是SaaS产品国际化的首选支付方案。</p>]]></content:encoded>
       <pubDate>Tue, 12 May 2026 00:00:00 GMT</pubDate>
@@ -4147,25 +4147,25 @@ Amplitude/Mixpanel（产品）+ ChartMogul（商业）+ dbt（数据转换）+ M
 </ul>
 <h3>实用工作流示例</h3>
 <p><strong>客户支持工单处理：</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">1. Form提交 → 2. 创建GitHub Issue</span>
-<span class="w">           </span><span class="l l-Scalar l-Scalar-Plain">→ 3. 发送Slack通知</span>
-<span class="w">           </span><span class="l l-Scalar l-Scalar-Plain">→ 4. 发送确认邮件</span>
-<span class="w">           </span><span class="l l-Scalar l-Scalar-Plain">→ 5. 添加到CRM记录</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">1. Form提交 → 2. 创建GitHub Issue
+           → 3. 发送Slack通知
+           → 4. 发送确认邮件
+           → 5. 添加到CRM记录
+</code></pre>
 
 <p><strong>定时账单提醒：</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">1. Cron触发器（每月1号）→ 2. 查询数据库过期订阅</span>
-<span class="w">                       </span><span class="l l-Scalar l-Scalar-Plain">→ 3. 发送提醒邮件</span>
-<span class="w">                       </span><span class="l l-Scalar l-Scalar-Plain">→ 4. Slack通知管理员</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">1. Cron触发器（每月1号）→ 2. 查询数据库过期订阅
+                       → 3. 发送提醒邮件
+                       → 4. Slack通知管理员
+</code></pre>
 
 <h3>部署方式</h3>
-<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--name<span class="w"> </span>n8n<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-p<span class="w"> </span><span class="m">5678</span>:5678<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>~/.n8n:/home/node/.n8n<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>n8nio/n8n
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">docker run -d \
+  --name n8n \
+  -p 5678:5678 \
+  -v ~/.n8n:/home/node/.n8n \
+  n8nio/n8n
+</code></pre>
 
 <h2>Zapier：云端自动化首选</h2>
 <p>Zapier是最大的云端自动化平台，集成5000+应用。</p>

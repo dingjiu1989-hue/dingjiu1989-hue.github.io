@@ -58,7 +58,7 @@
       "image": "https://aidev.fit/images/covers/en/tech/python-jin-cheng.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1713",
+      "wordCount": "602",
       "keywords": "Technology, DevOps, Cloud",
       "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
       "inLanguage": "zh-CN",
@@ -74,7 +74,7 @@
         "sameAs": ["https://github.com/dingjiu1989-hue", "https://dev.to/dingjiu1989"]
       },
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aidev.fit/tech/python-jin-cheng.html"},
-      "articleBody": "异步编程基础   Python的异步编程通过asyncio库实现，核心概念包括协程、事件循环和Future。理解这些概念是掌握异步编程的前提。   协程与事件循环   协程的定义   协程是使用 async def 定义的函数，调用时返回一个协程对象：        async   def     fetch_data  (  url  ):       async   with   aiohttp  .  ClientSession  ()   as   session  :           async   with   session  .  get  (  url  )   as   response  :               return   await   response  .  json  ()        协程只有在事件循环中执行才会真正运行。   事件循环   事件循环是异步编程的核心调度器，负责管理所有待执行的协程：        async   def     main  ():       result   =   await   fetch_data  (  &quot;https://api.example.com/data&quot;  )    # Python 3.7+ 自动创建事件循环   asyncio  .  run  (  main  ())        并发执行模式   使用asyncio.gather   并发执行多个协程并等待所有完成：        async   def     main  ():       results   =   await   asyncio  .  gather  (           fetch_data  (  &quot;https://api1.com&quot;  ),           fetch_data  (  &quot;https://api2.com&quot;  ),           fetch_data  (  &quot;https://api3.com&quot;  ),           return_exceptions  =  True    # 不因单个异常中断       )        使用asyncio.create_task   创建后台任务，适用于不需要立即等待的场景：        async   def     main  ():       task1   =   asyncio  .  create_task  (  fetch_data  (  &quot;url1&quot;  ))       task2   =   asyncio  .  create_task  (  fetch_data  (  &quot;url2&quot;  ))       # 执行其他操作       await   asyncio  .  sleep  (  1  )       # 等待任务完成       result1   =   await   task1       result2   =   await   task2        高级模式   异步上下文管理器   使用 async with 管理异步资源：        class     AsyncDB  :       async   def     __aenter__  (  self  ):           self  .  conn   =   await   create_connection  ()           return   self  .  conn        async   def     __aexit__  (  self  ,   exc_type  ,   exc_val  ,   exc_tb  ):           await   self  .  conn  .  close  ()        异步迭代器   使用 async for 处理异步数据流：        async   def     read_stream  ():       async   for   chunk   in   stream_reader  :           process  (  chunk  )        限制并发数   使用asyncio.Semaphore控制并发度：        sem   =   asyncio  .  Semaphore  (  10  )    async   def     limited_fetch  (  url  ):       async   with   sem  :           return   await   fetch_data  (  url  )        常见陷阱与最佳实践   避免阻塞事件循环   在协程中使用同步阻塞调用会阻塞整个事件循环。    错误示例：         async   def     bad  ():       time  .  sleep  (  1  )    # 阻塞整个事件循环！         正确做法：         async   def     good  ():       await   asyncio  .  sleep  (  1  )    # 非阻塞       # 或使用线程池执行阻塞操作       result   =   await   asyncio  .  to_thread  (  sync_function  )        线程安全   大部分asyncio对象不是线程安全的，跨线程调用需要使用 loop.call_soon_threadsafe 。   调试异步代码     启用 PYTHONASYNCIODEBUG=1 环境变量   使用 asyncio.run(main(), debug=True)    设置 loop.slow_callback_duration 检测慢回调     异步编程能显著提升IO密集型应用的性能，但需要理解其底层机制才能编写出正确高效的代码。"
+      "articleBody": "异步编程基础   Python的异步编程通过asyncio库实现，核心概念包括协程、事件循环和Future。理解这些概念是掌握异步编程的前提。   协程与事件循环   协程的定义   协程是使用 async def 定义的函数，调用时返回一个协程对象：    async def fetch_data(url):     async with aiohttp.ClientSession() as session:         async with session.get(url) as response:             return await response.json()      协程只有在事件循环中执行才会真正运行。   事件循环   事件循环是异步编程的核心调度器，负责管理所有待执行的协程：    async def main():     result = await fetch_data(&quot;https://api.example.com/data&quot;)  # Python 3.7+ 自动创建事件循环 asyncio.run(main())      并发执行模式   使用asyncio.gather   并发执行多个协程并等待所有完成：    async def main():     results = await asyncio.gather(         fetch_data(&quot;https://api1.com&quot;),         fetch_data(&quot;https://api2.com&quot;),         fetch_data(&quot;https://api3.com&quot;),         return_exceptions=True  # 不因单个异常中断     )      使用asyncio.create_task   创建后台任务，适用于不需要立即等待的场景：    async def main():     task1 = asyncio.create_task(fetch_data(&quot;url1&quot;))     task2 = asyncio.create_task(fetch_data(&quot;url2&quot;))     # 执行其他操作     await asyncio.sleep(1)     # 等待任务完成     result1 = await task1     result2 = await task2      高级模式   异步上下文管理器   使用 async with 管理异步资源：    class AsyncDB:     async def __aenter__(self):         self.conn = await create_connection()         return self.conn      async def __aexit__(self, exc_type, exc_val, exc_tb):         await self.conn.close()      异步迭代器   使用 async for 处理异步数据流：    async def read_stream():     async for chunk in stream_reader:         process(chunk)      限制并发数   使用asyncio.Semaphore控制并发度：    sem = asyncio.Semaphore(10)  async def limited_fetch(url):     async with sem:         return await fetch_data(url)      常见陷阱与最佳实践   避免阻塞事件循环   在协程中使用同步阻塞调用会阻塞整个事件循环。    错误示例：     async def bad():     time.sleep(1)  # 阻塞整个事件循环！       正确做法：     async def good():     await asyncio.sleep(1)  # 非阻塞     # 或使用线程池执行阻塞操作     result = await asyncio.to_thread(sync_function)      线程安全   大部分asyncio对象不是线程安全的，跨线程调用需要使用 loop.call_soon_threadsafe 。   调试异步代码     启用 PYTHONASYNCIODEBUG=1 环境变量   使用 asyncio.run(main(), debug=True)    设置 loop.slow_callback_duration 检测慢回调     异步编程能显著提升IO密集型应用的性能，但需要理解其底层机制才能编写出正确高效的代码。"
     }
     </script>
     <script type="application/ld+json">
@@ -119,11 +119,11 @@
           <span class="meta-sep">·</span>
           <time datetime="2026-05-12">2026-05-12</time>
           <span class="meta-sep">·</span>
-          <span>8 分钟阅读</span>
+          <span>3 分钟阅读</span>
           <span class="meta-sep">·</span>
           <span>0 次浏览</span>
           <span class="meta-sep">·</span>
-          <span>1713 字</span>
+          <span>602 字</span>
         </div>
         <picture><source srcset="https://aidev.fit/images/covers/en/tech/python-jin-cheng.webp" type="image/webp"><img class="article-cover" src="https://aidev.fit/images/covers/en/tech/python-jin-cheng.png" alt="Python异步编程：asyncio、协程、并发模式详解" width="1200" height="630" fetchpriority="high" decoding="sync"></picture>
         <details class="article-toc-inline"><summary>目录（15）</summary><ol><li><a href="#异步编程基础">异步编程基础</a></li><li><a href="#协程与事件循环">协程与事件循环</a></li><li><a href="#协程的定义">协程的定义</a></li><li><a href="#事件循环">事件循环</a></li><li><a href="#并发执行模式">并发执行模式</a></li><li><a href="#使用asynciogather">使用asyncio.gather</a></li><li><a href="#使用asynciocreate_task">使用asyncio.create_task</a></li><li><a href="#高级模式">高级模式</a></li><li><a href="#异步上下文管理器">异步上下文管理器</a></li><li><a href="#异步迭代器">异步迭代器</a></li><li><a href="#限制并发数">限制并发数</a></li><li><a href="#常见陷阱与最佳实践">常见陷阱与最佳实践</a></li><li><a href="#避免阻塞事件循环">避免阻塞事件循环</a></li><li><a href="#线程安全">线程安全</a></li><li><a href="#调试异步代码">调试异步代码</a></li></ol></details>
@@ -132,88 +132,88 @@
 <h2>协程与事件循环</h2>
 <h3>协程的定义</h3>
 <p>协程是使用<code>async def</code>定义的函数，调用时返回一个协程对象：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fetch_data</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="k">async</span> <span class="k">with</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientSession</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
-        <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
-            <span class="k">return</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">async def fetch_data(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            return await response.json()
+</code></pre>
 
 <p>协程只有在事件循环中执行才会真正运行。</p>
 <h3>事件循环</h3>
 <p>事件循环是异步编程的核心调度器，负责管理所有待执行的协程：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;https://api.example.com/data&quot;</span><span class="p">)</span>
+<pre class="codehilite"><code class="language-python">async def main():
+    result = await fetch_data(&quot;https://api.example.com/data&quot;)
 
-<span class="c1"># Python 3.7+ 自动创建事件循环</span>
-<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
-</code></pre></div>
+# Python 3.7+ 自动创建事件循环
+asyncio.run(main())
+</code></pre>
 
 <h2>并发执行模式</h2>
 <h3>使用asyncio.gather</h3>
 <p>并发执行多个协程并等待所有完成：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
-        <span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;https://api1.com&quot;</span><span class="p">),</span>
-        <span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;https://api2.com&quot;</span><span class="p">),</span>
-        <span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;https://api3.com&quot;</span><span class="p">),</span>
-        <span class="n">return_exceptions</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># 不因单个异常中断</span>
-    <span class="p">)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">async def main():
+    results = await asyncio.gather(
+        fetch_data(&quot;https://api1.com&quot;),
+        fetch_data(&quot;https://api2.com&quot;),
+        fetch_data(&quot;https://api3.com&quot;),
+        return_exceptions=True  # 不因单个异常中断
+    )
+</code></pre>
 
 <h3>使用asyncio.create_task</h3>
 <p>创建后台任务，适用于不需要立即等待的场景：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="n">task1</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;url1&quot;</span><span class="p">))</span>
-    <span class="n">task2</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">fetch_data</span><span class="p">(</span><span class="s2">&quot;url2&quot;</span><span class="p">))</span>
-    <span class="c1"># 执行其他操作</span>
-    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="c1"># 等待任务完成</span>
-    <span class="n">result1</span> <span class="o">=</span> <span class="k">await</span> <span class="n">task1</span>
-    <span class="n">result2</span> <span class="o">=</span> <span class="k">await</span> <span class="n">task2</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">async def main():
+    task1 = asyncio.create_task(fetch_data(&quot;url1&quot;))
+    task2 = asyncio.create_task(fetch_data(&quot;url2&quot;))
+    # 执行其他操作
+    await asyncio.sleep(1)
+    # 等待任务完成
+    result1 = await task1
+    result2 = await task2
+</code></pre>
 
 <h2>高级模式</h2>
 <h3>异步上下文管理器</h3>
 <p>使用<code>async with</code>管理异步资源：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AsyncDB</span><span class="p">:</span>
-    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="k">await</span> <span class="n">create_connection</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span>
+<pre class="codehilite"><code class="language-python">class AsyncDB:
+    async def __aenter__(self):
+        self.conn = await create_connection()
+        return self.conn
 
-    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__aexit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
-        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</code></pre></div>
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        await self.conn.close()
+</code></pre>
 
 <h3>异步迭代器</h3>
 <p>使用<code>async for</code>处理异步数据流：</p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">read_stream</span><span class="p">():</span>
-    <span class="k">async</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">stream_reader</span><span class="p">:</span>
-        <span class="n">process</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">async def read_stream():
+    async for chunk in stream_reader:
+        process(chunk)
+</code></pre>
 
 <h3>限制并发数</h3>
 <p>使用asyncio.Semaphore控制并发度：</p>
-<div class="codehilite"><pre><span></span><code><span class="n">sem</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<pre class="codehilite"><code class="language-python">sem = asyncio.Semaphore(10)
 
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">limited_fetch</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="k">async</span> <span class="k">with</span> <span class="n">sem</span><span class="p">:</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="n">fetch_data</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-</code></pre></div>
+async def limited_fetch(url):
+    async with sem:
+        return await fetch_data(url)
+</code></pre>
 
 <h2>常见陷阱与最佳实践</h2>
 <h3>避免阻塞事件循环</h3>
 <p>在协程中使用同步阻塞调用会阻塞整个事件循环。</p>
 <p><strong>错误示例：</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">bad</span><span class="p">():</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 阻塞整个事件循环！</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">async def bad():
+    time.sleep(1)  # 阻塞整个事件循环！
+</code></pre>
 
 <p><strong>正确做法：</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">good</span><span class="p">():</span>
-    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 非阻塞</span>
-    <span class="c1"># 或使用线程池执行阻塞操作</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">to_thread</span><span class="p">(</span><span class="n">sync_function</span><span class="p">)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">async def good():
+    await asyncio.sleep(1)  # 非阻塞
+    # 或使用线程池执行阻塞操作
+    result = await asyncio.to_thread(sync_function)
+</code></pre>
 
 <h3>线程安全</h3>
 <p>大部分asyncio对象不是线程安全的，跨线程调用需要使用<code>loop.call_soon_threadsafe</code>。</p>
