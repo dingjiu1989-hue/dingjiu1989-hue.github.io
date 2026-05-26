@@ -13939,6 +13939,8 @@ def make_homepage(data):
     // Language auto-redirect — only on English homepage
     (function(){{
       if (window.location.pathname !== '/en/') return;
+      var ua = navigator.userAgent.toLowerCase();
+      if (/bot|spider|crawler|googlebot|bingbot/i.test(ua)) return;
       var choice = localStorage.getItem('lang');
       if (!choice) {{
         var lang = navigator.language || '';

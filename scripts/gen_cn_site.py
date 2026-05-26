@@ -568,6 +568,8 @@ def make_homepage(data):
     <script>
     (function(){{
       if (window.location.pathname !== '/') return;
+      var ua = navigator.userAgent.toLowerCase();
+      if (/bot|spider|crawler|googlebot|bingbot/i.test(ua)) return;
       var choice = localStorage.getItem('lang');
       if (!choice) {{
         var lang = navigator.language || '';
