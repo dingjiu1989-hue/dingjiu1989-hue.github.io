@@ -306,8 +306,10 @@ def make_article_html(art, board_id, board_name, all_posts):
     about_tags = ', '.join(f'{{"@type": "Thing", "name": "{_js(t)}"}}' for t in tags[:8])
     body_json = json.dumps(re.sub(r'<[^>]+>', ' ', body_raw).replace('\n', ' ').strip()[:5000], ensure_ascii=False)
 
-    # Robots meta
-    robots_meta = 'index, follow, max-image-preview:large'
+    # Thin content guard: noindex articles under 1200 chars plain text to protect site quality
+    body_text = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', body_raw)).strip()
+    body_text_len = len(body_text)
+    robots_meta = 'noindex, follow' if body_text_len < 1200 else 'index, follow, max-image-preview:large'
 
     # See also (inline mid-article)
     see_also_html = ''
