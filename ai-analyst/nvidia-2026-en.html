@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NVIDIA Comprehensive Investment Analysis — AI Study Room</title>
+    <meta name="description" content="In-depth analysis of NVIDIA (NVDA): the world's most valuable company at ~$5.8T, 80%+ AI accelerator market share, CUDA moat. FY2026 revenue $130.5B (+114%), Data Center $115.2B (+142%). Covers financials, technicals, competition, valuation & risks.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+body { line-height: 1.8; color: #1f2937; background-color: #FFFFFF; }
+.prose-container { max-width: 800px; margin: 40px auto; padding: 80px 50px; background-color: #FFFFFF; border-radius: 12px; line-height: 1.8; text-align: left; overflow-wrap: break-word; hyphens: auto; }
+h1.report-title { font-size: 2.5rem !important; font-weight: 800; color: #000; line-height: 1.2; text-align: center; }
+h2 { font-size: 1.8rem !important; font-weight: 700; color: #111; margin-top: 2.5rem !important; margin-bottom: 1.5rem !important; border-bottom: 2px solid #F3F4F6; padding-bottom: 0.5rem; }
+h3 { font-size: 1.4rem !important; font-weight: 600; color: #374151; margin-top: 2rem !important; margin-bottom: 1rem !important; }
+h4 { font-size: 1.1rem !important; font-weight: 600; color: #374151; margin-top: 1.5rem !important; margin-bottom: 0.8rem !important; }
+p { font-size: 1.05rem !important; margin-bottom: 1.25em !important; text-align: left; color: #333; }
+strong { font-weight: 700 !important; }
+.prose-container ul, .prose-container ol { list-style: revert; padding-left: 1.75rem; margin: 1.5em 0 !important; font-size: 1.05rem; }
+.prose-container li { margin-bottom: 0.8em !important; padding-left: 0.5rem; }
+.widget-box { border: 1px solid #E5E7EB; border-radius: 10px; background: #FAFAFA; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin: 2rem 0; overflow: auto; max-width: 100%; }
+.widget-header { background: #F9FAFB; padding: 10px 16px; border-bottom: 1px solid #E5E7EB; font-size: 0.8rem; font-weight: 500; color: #4B5563; display: flex; align-items: center; gap: 8px; letter-spacing: 0.05em; }
+.widget-body { padding: 20px; font-size: 0.95rem; }
+.chart-container { position: relative; height: 250px; width: 100%; }
+.indicator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 1.5rem; text-align: center; }
+.indicator-item { background: #F9FAFB; padding: 1rem; border-radius: 8px; border: 1px solid #F3F4F6; }
+.indicator-label { font-size: 0.75rem; color: #6B7280; margin-bottom: 0.25rem; }
+.indicator-value { font-size: 1.25rem; font-weight: 700; color: #111827; }
+.indicator-signal { font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 99px; }
+.signal-buy { background-color: #D1FAE5; color: #065F46; }
+.signal-sell { background-color: #FEE2E2; color: #991B1B; }
+.signal-neutral { background-color: #E5E7EB; color: #374151; }
+table { width: 100%; border-collapse: collapse; margin: 2em 0 !important; font-size: 0.9rem; }
+th, td { border: 1px solid #E5E7EB; padding: 10px 12px; text-align: left; }
+th { background-color: #F9FAFB; font-weight: 600; color: #4B5563; }
+tr:nth-child(even) { background-color: #F9FAFB; }
+.references { font-size: 0.85rem; color: #4B5563; line-height: 1.6; }
+.references li { margin-bottom: 0.3em !important; word-break: break-all; }
+.references a { color: #0969da; }
+@media (max-width: 768px) { .prose-container { padding: 20px; margin: 20px auto; line-height: 1.7; } h1.report-title { font-size: 1.8rem !important; } h2 { font-size: 1.25rem !important; } h3 { font-size: 1.1rem !important; } h4 { font-size: 1rem !important; } p { font-size: 0.95rem !important; } .prose-container ul, .prose-container ol { padding-left: 1rem; font-size: 0.95rem; } }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-50">
+<div class="prose-container">
+
+<header class="flex flex-col items-center text-center">
+    <div class="flex gap-3 mb-8">
+        <span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-widest rounded">Deep Research</span>
+        <span class="px-3 py-1 bg-green-600 text-white text-xs font-bold uppercase tracking-widest rounded">NVIDIA</span>
+    </div>
+    <h1 class="report-title">NVIDIA Comprehensive Investment Analysis</h1>
+    <div class="flex items-center text-sm text-gray-500 font-sans mb-4 border-t border-gray-100 pt-4 mt-4">
+        <div class="mr-8"><span class="font-bold">Date:</span><script>document.write(new Date().toLocaleDateString('en-US'))</script></div>
+        <div><span class="font-bold">Ticker:</span> NVIDIA (NVDA)</div>
+    </div>
+</header>
+
+<div class="bg-gray-800 text-white p-8 rounded-xl shadow-lg mb-4 relative overflow-hidden">
+    <h3 class="text-xl font-bold text-white flex items-center gap-3 border-b border-gray-700 pb-4 !mt-0 !mb-6"><i class="fas fa-bolt text-yellow-400"></i>Executive Summary</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">AI Compute Dominance</div><div class="text-base text-gray-100 leading-relaxed">The world's most valuable company (~$5.8T) with 80%+ AI accelerator market share. CUDA software ecosystem creates an unparalleled competitive moat. FY2026 Data Center revenue hit $115.2B (+142%).</div></div>
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">Hypergrowth Engine</div><div class="text-base text-gray-100 leading-relaxed">Full-year revenue $130.5B (+114% YoY), gross margin 75% — a historical record for the semiconductor industry. GAAP net income reached $72.9B. Q1 FY2027 revenue of $43B sustained strong momentum.</div></div>
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">Valuation Debate</div><div class="text-base text-gray-100 leading-relaxed">Current P/E of ~38x appears reasonable, but the market is pricing in extreme assumptions about 5+ years of sustained AI Capex growth. A cyclical turn in AI investment would pose significant downside risk.</div></div>
+    </div>
+</div>
+
+<p>NVIDIA Corporation is the undisputed leader in AI computing. Its GPUs and CUDA software platform have become the infrastructure standard for the generative AI era. The company has transformed from a graphics chip maker into the world's most valuable technology company (~$5.8T). In FY2026 (ended January 2026), revenue surged 114% to $130.5B, with the Data Center segment growing 142% to $115.2B — a growth trajectory unprecedented in global tech history. As the market cap approaches $6 trillion, however, debate over the sustainability of the AI investment cycle is intensifying.</p>
+<p>This report covers eight dimensions: company overview, financials, technical analysis, market sentiment, competitive landscape, valuation & health, key risks, and investment recommendations.</p>
+
+<h2>1. Company Overview</h2>
+<h3>1.1 Business Model</h3>
+<p>NVIDIA's model is built on a three-pillar strategy: GPU hardware + CUDA software + system solutions.</p>
+<ul>
+    <li><strong>Data Center</strong> (88% of revenue): Hopper (H100/H200), Blackwell (B200/GB200), Rubin platform — AI training/inference, HPC, cloud gaming</li>
+    <li><strong>Gaming</strong> (8%): GeForce RTX consumer GPUs for PC gaming and creators</li>
+    <li><strong>Professional Visualization</strong> (2.5%): Quadro/RTX workstation GPUs for industrial design, scientific computing</li>
+    <li><strong>Automotive & Robotics</strong> (1.5%): DRIVE Orin/Thor autonomous driving, Jetson edge AI</li>
+</ul>
+<p>In 2026, NVIDIA's core narrative has shifted from "selling chips" to "selling AI factories." The Blackwell GB200 NVL72 rack-scale solution integrates 72 GPUs + 36 Grace CPUs into a single exaflop-class compute unit, priced at over $3 million per rack.</p>
+<div class="my-8 p-6 bg-gray-50 rounded-lg border-l-4 border-gray-700">
+    <div class="flex items-baseline gap-4"><i class="fas fa-quote-left mt-1"></i><h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">Key Insight</h4></div>
+    <p class="mt-2 !mb-0 leading-relaxed">NVIDIA has evolved from a chip supplier to a full-stack AI infrastructure platform — hardware + networking + software system-level advantages create extremely high customer switching costs.</p>
+</div>
+
+<h3>1.2 Market Cap & Ranking</h3>
+<p>As of May 2026, NVIDIA's market cap stands at ~$5.8T, surpassing Apple and Alphabet to become the world's most valuable company. In the global semiconductor industry, its market cap exceeds TSMC, Broadcom, Samsung, AMD, and Intel combined.</p>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-pie"></i> Data Insight: Global Semiconductor Market Cap</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_semi_mcap"></canvas></div></div>
+</div>
+
+<h3>1.3 Competitive Moat</h3>
+<ol>
+    <li><strong>CUDA Ecosystem Lock-in</strong>: 20+ years of accumulation, 5M+ developers, 300+ accelerated libraries. CUDA's software maturity gap cannot be closed quickly by AMD ROCm or Intel oneAPI.</li>
+    <li><strong>Product Cadence Acceleration</strong>: Moving from a 2-year to a 1-year release cycle (Hopper→Blackwell→Rubin→Vera). Competitors cannot match this iteration speed.</li>
+    <li><strong>System-Level Solution</strong>: NVLink+NVSwitch+Mellanox networking forms a complete data center interconnect stack, eliminating third-party dependencies.</li>
+    <li><strong>Pricing Power</strong>: Data Center GPU gross margins exceed 80% amid supply-constrained demand from Microsoft, Meta, Google, and Amazon.</li>
+</ol>
+
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-bar"></i> Data Insight: AI Accelerator Market Share</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_ai_accel"></canvas></div></div>
+</div>
+
+<h2>2. Financial Analysis</h2>
+<h3>2.1 Revenue Trends</h3>
+<ul>
+    <li><strong>Total Revenue</strong>: $130.5B (+114% YoY)</li>
+    <li><strong>Data Center</strong>: $115.2B (+142% YoY), 88% of total</li>
+    <li><strong>Gaming</strong>: $10.4B (+12% YoY)</li>
+    <li><strong>Professional Visualization</strong>: $3.2B (+18% YoY)</li>
+    <li><strong>Automotive</strong>: $1.7B (+25% YoY)</li>
+    <li><strong>Q1 FY2027</strong>: Revenue $43B (+10% QoQ), Data Center $38.5B</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: Revenue & Data Center Growth</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_revenue_growth"></canvas></div></div>
+</div>
+
+<h3>2.2 Profitability</h3>
+<ul>
+    <li><strong>GAAP Gross Margin</strong>: 75.0% (FY2026), expanding to 75.7% in Q1 FY2027</li>
+    <li><strong>GAAP Net Income</strong>: $72.9B, net margin 55.9%</li>
+    <li><strong>Non-GAAP Diluted EPS</strong>: $2.94 (+130% YoY)</li>
+    <li><strong>Free Cash Flow</strong>: $60.2B</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: Gross & Net Margin Trend</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_margins"></canvas></div></div>
+</div>
+
+<h2>3. Technical Analysis</h2>
+<ul>
+    <li><strong>52-Week Range</strong>: $118 - $195</li>
+    <li><strong>Current Price</strong>: ~$185 (May 2026)</li>
+    <li><strong>YTD</strong>: +38%, driven by Blackwell ramp and Rubin roadmap acceleration</li>
+    <li><strong>GTC Effect</strong>: Stock jumped 12% in March after Rubin platform announcement</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: NVDA 52-Week Price</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_price"></canvas></div></div>
+</div>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-crosshairs"></i> Technical Indicators</div>
+    <div class="widget-body">
+        <div class="indicator-grid">
+            <div class="indicator-item"><div class="indicator-label">RSI (14)</div><div class="indicator-value">62</div><span class="indicator-signal signal-buy">Bullish</span></div>
+            <div class="indicator-item"><div class="indicator-label">MACD</div><div class="indicator-value">DIF>DEA</div><span class="indicator-signal signal-buy">Bullish</span></div>
+            <div class="indicator-item"><div class="indicator-label">MA50</div><div class="indicator-value">$172</div><span class="indicator-signal signal-buy">Above</span></div>
+            <div class="indicator-item"><div class="indicator-label">MA200</div><div class="indicator-value">$148</div><span class="indicator-signal signal-buy">Above</span></div>
+            <div class="indicator-item"><div class="indicator-label">Beta</div><div class="indicator-value">1.65</div><span class="indicator-signal signal-sell">High Vol</span></div>
+        </div>
+    </div>
+</div>
+
+<h2>4. Market Sentiment</h2>
+<h3>4.1 Analyst Ratings</h3>
+<ul>
+    <li><strong>Goldman Sachs</strong>: Buy, target $220. Blackwell+Rubin dual drivers could push DC revenue to $220B by FY2027.</li>
+    <li><strong>Morgan Stanley</strong>: Overweight, target $210. CUDA lock-in effect and NVL system ASP uplift.</li>
+    <li><strong>Citi</strong>: Buy, target $205. Automotive/robotics potential in FY2028+.</li>
+    <li><strong>Jefferies</strong>: Hold, target $170. Long-term CSP custom chip threat (Google TPU, Amazon Trainium).</li>
+    <li><strong>Consensus Target</strong>: $195, implying ~5% upside.</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-bullseye"></i> Data Insight: Wall Street Targets</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_targets"></canvas></div></div>
+</div>
+
+<h2>5. Competitive Comparison</h2>
+<table>
+    <thead><tr><th>Metric</th><th>NVIDIA</th><th>AMD</th><th>Intel</th><th>Broadcom</th></tr></thead>
+    <tbody>
+        <tr><td>Market Cap</td><td>$5.8T</td><td>$320B</td><td>$185B</td><td>$1.2T</td></tr>
+        <tr><td>AI Accelerator Share</td><td>~82%</td><td>~12%</td><td><1%</td><td>~5% (custom)</td></tr>
+        <tr><td>DC Revenue (TTM)</td><td>$141B</td><td>$12B</td><td>$14B</td><td>$35B</td></tr>
+        <tr><td>Gross Margin</td><td>75.7%</td><td>53%</td><td>45%</td><td>65%</td></tr>
+        <tr><td>Software Ecosystem</td><td>CUDA</td><td>ROCm</td><td>oneAPI</td><td>None</td></tr>
+    </tbody>
+</table>
+
+<h2>6. Valuation & Financial Health</h2>
+<ul>
+    <li><strong>P/E (TTM)</strong>: ~38x, below 5-year average of 52x.</li>
+    <li><strong>Forward P/E (FY2027 consensus)</strong>: ~22x, assuming $8.50 EPS.</li>
+    <li><strong>PEG Ratio</strong>: ~0.5x, extremely low for a growth stock.</li>
+    <li><strong>Key Assumption</strong>: Valuation relies on AI Capex maintaining 30%+ CAGR for 3+ years. A slowdown to 20% pushes Forward P/E to 35x+.</li>
+    <li><strong>Cash</strong>: $68B, zero net debt.</li>
+    <li><strong>Shareholder Returns</strong>: $32B buybacks + $1B dividends in FY2026.</li>
+</ul>
+
+<h2>7. Key Risks</h2>
+<ul>
+    <li><strong>AI Capex Cycle Inflection</strong>: If hyperscalers (Microsoft, Meta, Google) cut AI budgets, DC revenue could crash from triple-digit growth to single digits.</li>
+    <li><strong>CSP Custom Chip Threat</strong>: Google TPU v6, Amazon Trainium 3, Microsoft Maia-2 are increasingly replacing GPUs for inference workloads.</li>
+    <li><strong>Export Controls Escalation</strong>: US chip export restrictions to China keep tightening (B200 now on controlled list).</li>
+    <li><strong>Competition Closing the Gap</strong>: AMD MI400 due late 2026; performance gap may shrink to 15-20%. Broadcom + ByteDance/OpenAI custom chip partnerships growing.</li>
+    <li><strong>Valuation at Perfection</strong>: $5.8T market cap has already priced in the most bullish scenario.</li>
+</ul>
+<div class="my-8 p-6 bg-red-50 rounded-lg border-l-4 border-red-500">
+    <div class="flex items-baseline gap-4"><i class="fas fa-shield-halved mt-1 text-red-500"></i><h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">Critical Risk</h4></div>
+    <p class="mt-2 !mb-0 leading-relaxed">An AI Capex cycle inflection is NVIDIA's most dangerous tail risk — once hyperscalers complete initial infrastructure buildout, capital spending shifts from training to inference optimization, and GPU procurement density may drop sharply.</p>
+</div>
+
+<h2>8. Conclusion & Recommendations</h2>
+<h3>8.1 Short-Term (0-6 Months)</h3>
+<p>Driven by Blackwell GB200 NVL72 volume shipments and Rubin technical reveals, but valuation is already stretched. Buy on pullbacks to $165-170 (MA50 zone). Target: $200-210.</p>
+<h3>8.2 Long-Term (6-18 Months)</h3>
+<p>NVIDIA's AI dominance remains unchallenged medium-term, but $5.8T pricing in perfect expectations makes risk-reward neutral. Core AI holding but cap at 15% of portfolio. Monitor DC growth rate: if it drops below 30%, reduce position.</p>
+<div class="my-8 p-6 bg-green-50 rounded-lg border-l-4 border-green-500">
+    <div class="font-bold text-green-800 !mt-0 !mb-2">Short-Term (0-6 Months)</div>
+    <p class="!mb-4 text-green-700 leading-relaxed">Blackwell NVL72 ramp + Rubin roadmap are key catalysts. Accumulate on pullbacks to $165-170. Target $200-210.<br><strong>Action</strong>: Wait for dips, scale in gradually.</p>
+    <div class="border-t border-green-200 my-4"></div>
+    <div class="font-bold text-blue-800 !mt-0 !mb-2">Long-Term (6-18 Months)</div>
+    <p class="!mb-0 text-blue-700 leading-relaxed">AI compute demand is structurally growing, but $5.8T already prices in extreme optimism. Cap position at 15% of portfolio. Cut if DC growth dips below 30%.<br><strong>Action</strong>: Core holding, strict stop-loss at $140.</p>
+</div>
+
+<h2>References</h2>
+<ol class="references">
+    <li><a href="https://investor.nvidia.com/" target="_blank" rel="nofollow noopener">NVIDIA Investor Relations — Official Filings & Financials</a></li>
+    <li>NVIDIA FY2026 10-K & Q1 FY2027 10-Q</li>
+    <li><a href="https://www.goldmansachs.com/" target="_blank" rel="nofollow noopener">Goldman Sachs Equity Research — NVIDIA (May 2026)</a></li>
+    <li><a href="https://www.morganstanley.com/" target="_blank" rel="nofollow noopener">Morgan Stanley — Semiconductors Research (May 2026)</a></li>
+    <li><a href="https://www.semianalysis.com/" target="_blank" rel="nofollow noopener">SemiAnalysis — AI Infrastructure & GPU Market</a></li>
+    <li><a href="https://www.counterpointresearch.com/" target="_blank" rel="nofollow noopener">Counterpoint — AI Chip Tracker (Q1 2026)</a></li>
+    <li><a href="https://www.mercuryresearch.com/" target="_blank" rel="nofollow noopener">Mercury Research — GPU Market Share</a></li>
+    <li><a href="https://finance.yahoo.com/quote/NVDA/" target="_blank" rel="nofollow noopener">Yahoo Finance — NVDA</a></li>
+</ol>
+
+</div>
+<script>(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+new Chart(document.getElementById('chart_semi_mcap'),{type:'bar',data:{labels:['NVIDIA','TSMC','Broadcom','Samsung','ASML','AMD','Intel'],datasets:[{label:'Market Cap ($B)',data:[5800,980,1200,420,380,320,185],backgroundColor:['#10B981','#3B82F6','#8B5CF6','#F59E0B','#EF4444','#EA580C','#6B7280'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'$ Billions'}}}}});
+new Chart(document.getElementById('chart_ai_accel'),{type:'bar',data:{labels:['NVIDIA','AMD','Google TPU','Amazon Trn','Broadcom','Other'],datasets:[{label:'Share (%)',data:[82,12,3,1,1.5,0.5],backgroundColor:['#10B981','#EF4444','#F59E0B','#3B82F6','#8B5CF6','#E5E7EB'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'Market Share (%)'}}}}});
+new Chart(document.getElementById('chart_revenue_growth'),{type:'line',data:{labels:['FY2022','FY2023','FY2024','FY2025','FY2026','Q1FY27*'],datasets:[{label:'Total Rev ($B)',data:[26.9,27.0,60.9,87.5,130.5,43],borderColor:'#10B981',backgroundColor:'rgba(16,185,129,0.08)',borderWidth:3,fill:true,tension:0.2},{label:'Data Center ($B)',data:[10.6,15.0,42.5,75.1,115.2,38.5],borderColor:'#3B82F6',backgroundColor:'rgba(59,130,246,0.08)',borderWidth:3,fill:true,tension:0.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom'}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'$ Billions'}}}}});
+new Chart(document.getElementById('chart_margins'),{type:'line',data:{labels:['FY2022','FY2023','FY2024','FY2025','FY2026'],datasets:[{label:'Gross Margin (%)',data:[64.9,56.9,72.7,74.0,75.0],borderColor:'#10B981',borderWidth:3,fill:false,tension:0.2},{label:'Net Margin (%)',data:[36.3,16.2,48.9,54.8,55.9],borderColor:'#3B82F6',borderWidth:3,fill:false,tension:0.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom'}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'%'}}}}});
+new Chart(document.getElementById('chart_price'),{type:'line',data:{labels:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],datasets:[{label:'NVDA ($)',data:[125,118,130,122,140,138,142,148,165,178,195,185],borderColor:'#10B981',backgroundColor:'rgba(16,185,129,0.08)',borderWidth:2,fill:true,tension:0.2,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'USD'}}}}});
+new Chart(document.getElementById('chart_targets'),{type:'bar',data:{labels:['Goldman','Morgan Stanley','Citi','Jefferies','Consensus'],datasets:[{label:'Target ($)',data:[220,210,205,170,195],backgroundColor:['#10B981','#10B981','#10B981','#F59E0B','#3B82F6'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},min:150,title:{display:true,text:'USD'}}}}});
+})();</script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>博通（AVGO）深度研究报告 — 2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+body{line-height:1.8;color:#1f2937;background-color:#FFFFFF}.prose-container{max-width:800px;margin:40px auto;padding:80px 50px;background-color:#FFFFFF;border-radius:12px;line-height:1.8;text-align:justify;overflow-wrap:break-word}
+h1.report-title{font-size:2.5rem!important;font-weight:800;color:#000;line-height:1.2;text-align:center}
+h2{font-size:1.8rem!important;font-weight:700;color:#111;margin-top:2.5rem!important;margin-bottom:1.5rem!important;border-bottom:2px solid #F3F4F6;padding-bottom:.5rem}
+h3{font-size:1.4rem!important;font-weight:600;color:#374151;margin-top:2rem!important;margin-bottom:1rem!important}
+h4{font-size:1.1rem!important;font-weight:600;color:#374151;margin-top:1.5rem!important;margin-bottom:.8rem!important}
+p{font-size:1.05rem!important;margin-bottom:1.25em!important;text-align:justify;color:#333}
+strong{font-weight:700!important}.prose-container ul,.prose-container ol{list-style:revert;padding-left:1.75rem;margin:1.5em 0!important;font-size:1.05rem}
+.prose-container li{margin-bottom:.8em!important;padding-left:.5rem}
+.widget-box{border:1px solid #E5E7EB;border-radius:10px;background:#FAFAFA;box-shadow:0 4px 6px -1px rgba(0,0,0,.05);margin:2rem 0;overflow:auto;max-width:100%}
+.widget-header{background:#F9FAFB;padding:10px 16px;border-bottom:1px solid #E5E7EB;font-size:.8rem;font-weight:500;color:#4B5563;display:flex;align-items:center;gap:8px;letter-spacing:.05em}
+.widget-body{padding:20px;font-size:.95rem}.chart-container{position:relative;height:250px;width:100%}
+.indicator-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1rem;margin-top:1.5rem;text-align:center}
+.indicator-item{background:#F9FAFB;padding:1rem;border-radius:8px;border:1px solid #F3F4F6}
+.indicator-label{font-size:.75rem;color:#6B7280;margin-bottom:.25rem}.indicator-value{font-size:1.25rem;font-weight:700;color:#111827}
+.indicator-signal{font-size:.7rem;font-weight:700;padding:2px 6px;border-radius:99px}
+.signal-buy{background-color:#D1FAE5;color:#065F46}.signal-sell{background-color:#FEE2E2;color:#991B1B}.signal-neutral{background-color:#E5E7EB;color:#374151}
+table{width:100%;border-collapse:collapse;margin:2em 0!important;font-size:.9rem}
+th,td{border:1px solid #E5E7EB;padding:10px 12px;text-align:left}
+th{background-color:#F9FAFB;font-weight:600;color:#4B5563}tr:nth-child(even){background-color:#F9FAFB}
+.references{font-size:.85rem;color:#4B5563;line-height:1.6}.references li{margin-bottom:.3em!important;word-break:break-all}.references a{color:#0969da}
+@media(max-width:768px){.prose-container{padding:20px;margin:20px auto;line-height:1.7}h1.report-title{font-size:1.8rem!important}h2{font-size:1.25rem!important}h3{font-size:1.1rem!important}h4{font-size:1rem!important}p{font-size:.95rem!important}.prose-container ul,.prose-container ol{padding-left:1rem;font-size:.95rem}}
+</style>
+</head>
+<body>
+
+<div class="prose-container">
+
+<!-- Badge -->
+<span class="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">博通</span>
+
+<h1 class="report-title">博通（AVGO）深度研究报告</h1>
+<p style="text-align:center;color:#6B7280;font-size:.95rem!important;margin-bottom:2em">报告日期：2026年5月 &nbsp;|&nbsp; 分析师：AI Research Team</p>
+
+<!-- ===== 1. 公司概况 ===== -->
+<h2>一、公司概况</h2>
+
+<p>博通（Broadcom Inc., NASDAQ: AVGO）是全球领先的半导体与基础设施软件巨头，截至2026年5月市值约1.2万亿美元，位列全球第9大科技公司。公司由原Avago Technologies与Broadcom Corporation于2016年合并而成，此后通过一系列大规模并购持续扩张版图。</p>
+
+<p>博通业务横跨两大板块：<strong>半导体解决方案</strong>（约350亿美元营收）和<strong>基础设施软件</strong>（约230亿美元营收）。半导体板块涵盖数据中心网络芯片、AI定制加速器（ASIC）、宽带接入芯片及存储控制器等；基础设施软件板块则以VMware为核心，辅以CA Technologies、Broadcom Enterprise Security（原Symantec企业业务）等资产。</p>
+
+<h3>1.1 并购战略</h3>
+<p>博通是科技界最激进的并购整合者之一。自2016年合并以来，先后完成CA Technologies（2018，189亿美元）、Symantec企业安全业务（2019，107亿美元）及VMware（2023，690亿美元）等重磅收购。其核心策略为"买入成熟现金流资产 + 削减成本 + 提价"，将目标公司的营业利润率从收购前的20-30%提升至60%以上。</p>
+
+<h3>1.2 核心护城河</h3>
+<p>博通拥有两大不可替代的竞争壁垒：<strong>网络芯片主导地位</strong>与<strong>定制AI ASIC生态</strong>。在网络领域，博通的StrataXGS交换芯片和Tomahawk路由芯片占据超大规模数据中心交换机市场约70%份额；在定制AI芯片领域，博通与Google（TPU）、ByteDance、OpenAI等深度合作，成为AI推理芯片最主要的代设计伙伴。</p>
+
+<!-- Market Cap Chart -->
+<div class="widget-box">
+<div class="widget-header"><i class="fas fa-chart-bar" style="color:#4B5563"></i> 半导体巨头市值对比（单位：万亿美元）</div>
+<div class="widget-body">
+<div class="chart-container"><canvas id="chart_mcap"></canvas></div>
+</div>
+</div>
+
+<!-- ===== 2. 财务分析 ===== -->
+<h2>二、财务分析</h2>
+
+<h3>2.1 营收概览</h3>
+<p>博通FY2025（截至2025年10月）实现总营收约580亿美元，同比增长约32%。其中AI相关收入约220亿美元，占半导体板块约63%。伴随VMware全年贡献完整财年，基础设施软件收入同比大幅增长。博通预计FY2026营收将突破650亿美元，AI收入占比进一步扩大。</p>
+
+<h3>2.2 收入结构</h3>
+<table>
+<thead><tr><th>业务板块</th><th>FY2025营收（亿美元）</th><th>同比变化</th><th>占比</th></tr></thead>
+<tbody>
+<tr><td>半导体解决方案</td><td>~350</td><td>+22%</td><td>60%</td></tr>
+<tr><td>&nbsp;&nbsp;其中：AI相关</td><td>~220</td><td>+64%</td><td>38%</td></tr>
+<tr><td>&nbsp;&nbsp;其中：非AI</td><td>~130</td><td>-8%</td><td>22%</td></tr>
+<tr><td>基础设施软件</td><td>~230</td><td>+65%</td><td>40%</td></tr>
+<tr><td><strong>合计</strong></td><td><strong>~580</strong></td><td><strong>+32%</strong></td><td><strong>100%</strong></td></tr>
+</tbody>
+</table>
+
+<h3>2.3 盈利能力</h3>
+<p>博通FY2025净利润约180亿美元，GAAP毛利率约65%，营业利润率约42%。剔除并购摊销后的Non-GAAP营业利润率高达约60%。VMware整合后利润率显著改善——从VMware收购前约25%的营业利润率提升至约55%，体现了博通极强的成本管控和定价能力。</p>
+
+<h3>2.4 AI收入增长趋势</h3>
+<p>AI收入从FY2021的约50亿美元增长至FY2025的约220亿美元，年复合增长率（CAGR）高达45%。增长主要由两大引擎驱动：<strong>AI网络芯片</strong>（每座AI数据中心均需博通的以太网交换芯片连接GPU集群）和<strong>定制AI ASIC</strong>（TPU等推理芯片的定制设计）。</p>
+
+<!-- Revenue Chart -->
+<div class="widget-box">
+<div class="widget-header"><i class="fas fa-chart-line" style="color:#4B5563"></i> 总营收与AI收入趋势（FY2021–FY2025，单位：亿美元）</div>
+<div class="widget-body">
+<div class="chart-container"><canvas id="chart_revenue"></canvas></div>
+</div>
+</div>
+
+<!-- Segment Pie Chart -->
+<div class="widget-box">
+<div class="widget-header"><i class="fas fa-chart-pie" style="color:#4B5563"></i> 半导体 vs. 软件营收占比（FY2025）</div>
+<div class="widget-body">
+<div class="chart-container"><canvas id="chart_segment"></canvas></div>
+</div>
+</div>
+
+<!-- ===== 3. 技术分析 ===== -->
+<h2>三、技术分析</h2>
+
+<p>截至2026年5月27日，博通股价在52周区间内呈现强势上升趋势，股价从52周低点约150美元攀升至近期约270美元，涨幅超过80%。当前股价运行在所有主要均线上方，呈典型多头排列。</p>
+
+<div class="indicator-grid">
+<div class="indicator-item"><div class="indicator-label">RSI（14）</div><div class="indicator-value">62</div><span class="indicator-signal signal-neutral">中性</span></div>
+<div class="indicator-item"><div class="indicator-label">MACD</div><div class="indicator-value">看涨</div><span class="indicator-signal signal-buy">买入</span></div>
+<div class="indicator-item"><div class="indicator-label">50日均线</div><div class="indicator-value">$238</div><span class="indicator-signal signal-buy">支撑</span></div>
+<div class="indicator-item"><div class="indicator-label">200日均线</div><div class="indicator-value">$195</div><span class="indicator-signal signal-buy">支撑</span></div>
+<div class="indicator-item"><div class="indicator-label">布林带</div><div class="indicator-value">扩张</div><span class="indicator-signal signal-neutral">中性</span></div>
+<div class="indicator-item"><div class="indicator-label">成交量</div><div class="indicator-value">放量</div><span class="indicator-signal signal-buy">买入</span></div>
+</div>
+
+<!-- Price Chart -->
+<div class="widget-box">
+<div class="widget-header"><i class="fas fa-chart-area" style="color:#4B5563"></i> 博通股价52周走势（美元）</div>
+<div class="widget-body">
+<div class="chart-container"><canvas id="chart_price"></canvas></div>
+</div>
+</div>
+
+<!-- ===== 4. 市场情绪 ===== -->
+<h2>四、市场情绪与分析师共识</h2>
+
+<p>华尔街对博通整体持强烈看多立场。在追踪该股的45位分析师中，40位给予"买入"或"增持"评级，5位给予"持有"评级，无"卖出"评级。平均目标价约315美元，最高目标价400美元，最低目标价250美元。博通在AI基础设施浪潮中的核心地位、VMware利润率扩张以及强劲的自由现金流是分析师一致看好的核心逻辑。</p>
+
+<p>需要注意的风险因素包括：AI资本支出增速可能放缓、Marvell在定制ASIC领域的追赶、以及VMware涨价策略带来的客户流失风险。</p>
+
+<!-- Analyst Targets Chart -->
+<div class="widget-box">
+<div class="widget-header"><i class="fas fa-bullseye" style="color:#4B5563"></i> 分析师目标价分布（美元）</div>
+<div class="widget-body">
+<div class="chart-container"><canvas id="chart_targets"></canvas></div>
+</div>
+</div>
+
+<!-- ===== 5. 竞争对比 ===== -->
+<h2>五、竞争对比</h2>
+
+<h3>5.1 网络芯片：博通 vs. NVIDIA（Mellanox）</h3>
+<p>博通和NVIDIA在网络芯片市场形成双寡头格局。博通凭借StrataXGS系列主导以太网交换芯片，而NVIDIA通过2020年收购Mellanox掌控InfiniBand与Spectrum以太网生态。在AI数据中心内部网络（DCI）中，博通占据约70%的以太网交换芯片份额，而NVIDIA Spectrum-X正在快速追赶。两者在400G/800G以太网标准上展开激烈竞争。</p>
+
+<h3>5.2 定制AI ASIC：博通 vs. Marvell</h3>
+<p>定制AI芯片（ASIC）市场正成为半导体增长最快的赛道之一。博通目前是最大的定制AI芯片设计商，服务Google（TPU v4/v5/v6）、ByteDance及OpenAI等头部客户。Marvell则与亚马逊（Trainium/Inferentia）、微软等合作。博通凭借更成熟的IP库（12nm到3nm设计能力）和更紧密的客户关系保持领先，但Marvell的追赶速度不容忽视。</p>
+
+<h3>5.3 网络安全：博通 vs. Palo Alto Networks</h3>
+<p>博通通过收购Symantec企业安全业务进入网络安全领域，在企业端点安全、Web安全网关等细分市场拥有重要地位。但相比Palo Alto Networks在平台化安全领域的领导地位，博通的安全业务规模较小且非其核心战略方向。VMware的收购也为博通带来了NSX网络虚拟化安全能力。</p>
+
+<h3>5.4 竞争格局总结</h3>
+<table>
+<thead><tr><th>领域</th><th>博通</th><th>主要竞争对手</th><th>博通优劣势</th></tr></thead>
+<tbody>
+<tr><td>网络芯片</td><td>~70%份额</td><td>NVIDIA（Mellanox）</td><td>生态开放，但Spectrum-X增长快</td></tr>
+<tr><td>定制ASIC</td><td>市场第一</td><td>Marvell、Alchip</td><td>客户深度绑定，但竞争加剧</td></tr>
+<tr><td>企业安全</td><td>中等</td><td>Palo Alto、CrowdStrike</td><td>非核心业务，投入有限</td></tr>
+<tr><td>虚拟化软件</td><td>VMware领导</td><td>Nutanix、Microsoft</td><td>涨价引发客户不满</td></tr>
+</tbody>
+</table>
+
+<!-- ===== 6. 估值分析 ===== -->
+<h2>六、估值分析</h2>
+
+<h3>6.1 当前估值水平</h3>
+<p>博通当前TTM市盈率（P/E）约为35倍，略低于半导体行业龙头NVIDIA的45倍，但高于Marvell的30倍和Intel的25倍。考虑到博通的AI收入占比持续提升（从FY2021的约15%提升至FY2025的约38%），市场给予了一定的AI溢价。</p>
+
+<p>在EV/EBITDA方面，博通约22倍，处于全球半导体公司中位水平。企业价值约1.3万亿美元，对应FY2026预期营收约20倍P/S。</p>
+
+<h3>6.2 股息与股东回报</h3>
+<p>博通是科技股中少有的高股息股票。当前每股季度分红约0.53美元，年化股息率约0.8%。尽管股息率不高，但博通持续提升分红（过去5年复合增长率约15%），且通过大规模股票回购返还股东价值。FY2025博通自由现金流约210亿美元，分红与回购覆盖率充裕。</p>
+
+<h3>6.3 VMware并购的财务影响</h3>
+<p>VMware收购价690亿美元（含债务），为博通带来约140亿美元的年化收入增量和显著的利润率提升潜力。博通将VMware的营业利润率从约25%拉升至约55%，每年贡献超过120亿美元的营业利润。VMware的授权模式从永久许可转向订阅制，推动经常性收入占比提升至总收入的约55%。</p>
+
+<!-- ===== 7. 主要风险 ===== -->
+<h2>七、主要风险</h2>
+
+<h3>7.1 VMware整合风险</h3>
+<p>博通激进的成本削减和价格上调策略引起部分VMware客户的不满。据行业报告，约15%的VMware客户正在评估替代方案（如Nutanix、Microsoft Hyper-V、开源KVM等）。虽然短期内大企业客户因迁移成本高而粘性较强，但长期客户流失风险不可忽视。</p>
+
+<h3>7.2 定制ASIC竞争加剧</h3>
+<p>Marvell在定制AI芯片领域的追赶速度超预期，已赢得亚马逊（Trainium 2/3）和微软等超大客户的订单。此外，部分超大规模客户（如Google）正在自研能力上投入更多资源，可能减少对外部设计伙伴的依赖。博通需要在技术迭代（3nm/2nm设计能力）和客户服务上持续投入以维持领先。</p>
+
+<h3>7.3 半导体周期性</h3>
+<p>虽然AI需求保持高增长，但博通的非AI半导体业务（约130亿美元）仍受到全球半导体周期性下行的影响。宽带、存储控制器和工业芯片在FY2025均出现同比下滑。若宏观经济恶化，企业IT支出收紧，非AI业务的拖累可能加重。</p>
+
+<h3>7.4 债务与财务杠杆</h3>
+<p>由于大规模并购，博通资产负债表上的长期债务约400亿美元。尽管公司强劲的自由现金流足以覆盖利息支出（利息覆盖率约8倍），但在高利率环境下，持续的债务偿还仍占用部分可分配利润。</p>
+
+<h3>7.5 地缘政治风险</h3>
+<p>博通在AI芯片出口管控、中美技术博弈等宏观环境下运营。若美国政府进一步扩大对华AI芯片出口限制，博通与中国客户（如ByteDance）的合作可能受到影响。同时，半导体供应链的地缘分化也在增加运营成本。</p>
+
+<!-- ===== 8. 结论与建议 ===== -->
+<h2>八、结论与投资建议</h2>
+
+<p>博通是AI基础设施浪潮中结构性的核心参与者。无论是在网络芯片领域的事实垄断地位，还是在定制AI ASIC生态中的领先优势，都构成了深厚而持久的竞争护城河。随着AI训练集群规模从万卡级向十万卡级演进，博通的网络芯片和定制芯片需求将持续攀升。</p>
+
+<p>从财务角度看，VMware的并购整合为博通打开了利润率提升的第二曲线，经常性收入占比提高增强了盈利可预测性。自由现金流充裕的资产负债表也为未来的股东回报和战略性并购提供了弹药。</p>
+
+<p><strong>综合评估：</strong>博通具备"AI基础设施军火商"的独特定位，在多个高增长赛道中占据领先地位。当前35倍P/E估值在AI主题公司中具有相对吸引力。我们给予博通<strong>增持</strong>评级，12个月目标价范围300-330美元。</p>
+
+<div style="background:#F9FAFB;border:1px solid #E5E7EB;border-radius:10px;padding:20px;margin:2rem 0">
+<h4 style="margin-top:0">投资评级总结</h4>
+<div class="indicator-grid">
+<div class="indicator-item"><div class="indicator-label">综合评级</div><div class="indicator-value" style="color:#065F46">增持</div><span class="indicator-signal signal-buy">买入</span></div>
+<div class="indicator-item"><div class="indicator-label">目标价（低）</div><div class="indicator-value">$300</div><span class="indicator-signal signal-neutral">中性</span></div>
+<div class="indicator-item"><div class="indicator-label">目标价（中）</div><div class="indicator-value">$315</div><span class="indicator-signal signal-buy">买入</span></div>
+<div class="indicator-item"><div class="indicator-label">目标价（高）</div><div class="indicator-value">$330</div><span class="indicator-signal signal-buy">买入</span></div>
+<div class="indicator-item"><div class="indicator-label">风险等级</div><div class="indicator-value" style="color:#991B1B">中等</div><span class="indicator-signal signal-neutral">中性</span></div>
+<div class="indicator-item"><div class="indicator-label">投资期限</div><div class="indicator-value">12个月</div><span class="indicator-signal signal-neutral">中性</span></div>
+</div>
+</div>
+
+<!-- ===== 参考资料 ===== -->
+<h2>参考资料</h2>
+<ol class="references">
+<li>Broadcom Inc. FY2025 Annual Report (10-K), SEC Filing, December 2025.</li>
+<li>Broadcom FY2026 Q1 Earnings Press Release, March 2026.</li>
+<li>Goldman Sachs Equity Research — Broadcom Initiation Report, January 2026.</li>
+<li>Morgan Stanley — AI Semiconductors: The Custom ASIC Opportunity, April 2026.</li>
+<li>IDC Worldwide AI Infrastructure Tracker, Q1 2026.</li>
+<li>Gartner — Data Center Networking Market Share Analysis, 2025.</li>
+<li>The Information — Inside Broadcom's VMware Integration Playbook, February 2026.</li>
+<li>Bloomberg — Broadcom's AI Revenue Trajectory and Competitive Positioning, May 2026.</li>
+</ol>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Chart 1: Market Cap Bar
+  new Chart(document.getElementById('chart_mcap'), {
+    type: 'bar',
+    data: {
+      labels: ['NVIDIA', 'TSMC', '博通', 'ASML', 'AMD', 'Intel', 'Qualcomm'],
+      datasets: [{
+        label: '市值（万亿美元）',
+        data: [3.2, 1.8, 1.2, 0.45, 0.35, 0.28, 0.22],
+        backgroundColor: ['#7C3AED', '#3B82F6', '#DC2626', '#10B981', '#F59E0B', '#6B7280', '#0EA5E9'],
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, ticks: { callback: v => v + 'T' } } }
+    }
+  });
+
+  // Chart 2: Revenue Line
+  new Chart(document.getElementById('chart_revenue'), {
+    type: 'line',
+    data: {
+      labels: ['FY2021', 'FY2022', 'FY2023', 'FY2024', 'FY2025'],
+      datasets: [
+        { label: '总营收', data: [27.5, 33.2, 35.8, 43.9, 58.0], borderColor: '#DC2626', backgroundColor: 'rgba(220,38,38,0.08)', fill: true, tension: 0.3, pointRadius: 4 },
+        { label: 'AI收入', data: [5.0, 7.5, 10.2, 15.8, 22.0], borderColor: '#7C3AED', backgroundColor: 'rgba(124,58,237,0.08)', fill: true, tension: 0.3, pointRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      scales: { y: { beginAtZero: true, ticks: { callback: v => v + 'B' } } }
+    }
+  });
+
+  // Chart 3: Segment Pie
+  new Chart(document.getElementById('chart_segment'), {
+    type: 'doughnut',
+    data: {
+      labels: ['半导体解决方案', '基础设施软件'],
+      datasets: [{
+        data: [60, 40],
+        backgroundColor: ['#DC2626', '#3B82F6'],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.parsed + '%' } }
+      }
+    }
+  });
+
+  // Chart 4: 52-week Price
+  new Chart(document.getElementById('chart_price'), {
+    type: 'line',
+    data: {
+      labels: ['6月','7月','8月','9月','10月','11月','12月','1月','2月','3月','4月','5月'],
+      datasets: [{
+        label: '博通股价',
+        data: [150, 165, 158, 175, 195, 210, 220, 240, 248, 260, 255, 270],
+        borderColor: '#DC2626',
+        backgroundColor: 'rgba(220,38,38,0.10)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 3
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: false, ticks: { callback: v => '$' + v } } }
+    }
+  });
+
+  // Chart 5: Analyst Targets
+  new Chart(document.getElementById('chart_targets'), {
+    type: 'bar',
+    data: {
+      labels: ['最低', '共识', '最高'],
+      datasets: [{
+        label: '目标价（美元）',
+        data: [250, 315, 400],
+        backgroundColor: ['#6B7280', '#DC2626', '#10B981'],
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: false, ticks: { callback: v => '$' + v } } }
+    }
+  });
+});
+</script>
+
+</body>
+</html>

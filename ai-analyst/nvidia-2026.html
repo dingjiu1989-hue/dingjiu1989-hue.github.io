@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NVIDIA 全面投资分析 — AI自习室</title>
+    <meta name="description" content="深度分析 NVIDIA（NVDA）：全球最高市值公司（~$5.8T），AI加速器市场份额80%+，CUDA生态构筑坚固护城河。FY2026营收$130.5B（+114%），数据中心$115.2B（+142%）。覆盖财务、技术面、竞品、估值与风险。">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+body { line-height: 1.8; color: #1f2937; background-color: #FFFFFF; }
+.prose-container { max-width: 800px; margin: 40px auto; padding: 80px 50px; background-color: #FFFFFF; border-radius: 12px; line-height: 1.8; text-align: justify; overflow-wrap: break-word; }
+h1.report-title { font-size: 2.5rem !important; font-weight: 800; color: #000; line-height: 1.2; text-align: center; }
+h2 { font-size: 1.8rem !important; font-weight: 700; color: #111; margin-top: 2.5rem !important; margin-bottom: 1.5rem !important; border-bottom: 2px solid #F3F4F6; padding-bottom: 0.5rem; }
+h3 { font-size: 1.4rem !important; font-weight: 600; color: #374151; margin-top: 2rem !important; margin-bottom: 1rem !important; }
+h4 { font-size: 1.1rem !important; font-weight: 600; color: #374151; margin-top: 1.5rem !important; margin-bottom: 0.8rem !important; }
+p { font-size: 1.05rem !important; margin-bottom: 1.25em !important; text-align: justify; color: #333; }
+strong { font-weight: 700 !important; }
+.prose-container ul, .prose-container ol { list-style: revert; padding-left: 1.75rem; margin: 1.5em 0 !important; font-size: 1.05rem; }
+.prose-container li { margin-bottom: 0.8em !important; padding-left: 0.5rem; }
+.widget-box { border: 1px solid #E5E7EB; border-radius: 10px; background: #FAFAFA; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin: 2rem 0; overflow: auto; max-width: 100%; }
+.widget-header { background: #F9FAFB; padding: 10px 16px; border-bottom: 1px solid #E5E7EB; font-size: 0.8rem; font-weight: 500; color: #4B5563; display: flex; align-items: center; gap: 8px; letter-spacing: 0.05em; }
+.widget-body { padding: 20px; font-size: 0.95rem; }
+.chart-container { position: relative; height: 250px; width: 100%; }
+.table-container { overflow: auto; }
+.indicator-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 1.5rem; text-align: center; }
+.indicator-item { background: #F9FAFB; padding: 1rem; border-radius: 8px; border: 1px solid #F3F4F6; }
+.indicator-label { font-size: 0.75rem; color: #6B7280; margin-bottom: 0.25rem; }
+.indicator-value { font-size: 1.25rem; font-weight: 700; color: #111827; }
+.indicator-signal { font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 99px; }
+.signal-buy { background-color: #D1FAE5; color: #065F46; }
+.signal-sell { background-color: #FEE2E2; color: #991B1B; }
+.signal-neutral { background-color: #E5E7EB; color: #374151; }
+table { width: 100%; border-collapse: collapse; margin: 2em 0 !important; font-size: 0.9rem; }
+th, td { border: 1px solid #E5E7EB; padding: 10px 12px; text-align: left; }
+th { background-color: #F9FAFB; font-weight: 600; color: #4B5563; }
+tr:nth-child(even) { background-color: #F9FAFB; }
+.references { font-size: 0.85rem; color: #4B5563; line-height: 1.6; }
+.references li { margin-bottom: 0.3em !important; word-break: break-all; }
+.references a { color: #0969da; }
+@media (max-width: 768px) { .prose-container { padding: 20px; margin: 20px auto; line-height: 1.7; } h1.report-title { font-size: 1.8rem !important; } h2 { font-size: 1.25rem !important; } h3 { font-size: 1.1rem !important; } h4 { font-size: 1rem !important; } p { font-size: 0.95rem !important; } .prose-container ul, .prose-container ol { padding-left: 1rem; font-size: 0.95rem; } }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-50">
+<div class="prose-container">
+
+<header class="flex flex-col items-center text-center">
+    <div class="flex gap-3 mb-8">
+        <span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase tracking-widest rounded">Deep Research</span>
+        <span class="px-3 py-1 bg-green-600 text-white text-xs font-bold uppercase tracking-widest rounded">NVIDIA</span>
+    </div>
+    <h1 class="report-title">NVIDIA 全面投资分析</h1>
+    <div class="flex items-center text-sm text-gray-500 font-sans mb-4 border-t border-gray-100 pt-4 mt-4">
+        <div class="mr-8"><span class="font-bold">日期:</span><script>document.write(new Date().toLocaleDateString('zh-CN'))</script></div>
+        <div><span class="font-bold">股票:</span> NVIDIA (NVDA)</div>
+    </div>
+</header>
+
+<div class="bg-gray-800 text-white p-8 rounded-xl shadow-lg mb-4 relative overflow-hidden">
+    <h3 class="text-xl font-bold text-white flex items-center gap-3 border-b border-gray-700 pb-4 !mt-0 !mb-6"><i class="fas fa-bolt text-yellow-400"></i>核心摘要</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">AI算力霸主</div><div class="text-base text-gray-100 leading-relaxed">全球最高市值公司（~$5.8T），AI加速器市场份额80%+，CUDA软件生态构筑无可匹敌的竞争壁垒。FY2026数据中心收入$115.2B（+142%）。</div></div>
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">超高速增长</div><div class="text-base text-gray-100 leading-relaxed">全年营收$130.5B（+114% YoY），毛利率75%创半导体行业历史新高，GAAP净利润$72.9B。Q1 FY2027营收$43B维持强劲动能。</div></div>
+        <div><div class="text-sm text-gray-300 uppercase mb-3 font-bold tracking-wide">估值争议</div><div class="text-base text-gray-100 leading-relaxed">当前P/E约38x看似合理，但市场隐含未来5年AI Capex持续高增长的极端假设。若AI投资周期转向，估值回调风险显著。</div></div>
+    </div>
+</div>
+
+<p>NVIDIA Corporation 是全球AI计算领域的绝对领导者，其GPU和CUDA软件平台已成为生成式AI时代的基础设施标准。公司已从一家图形芯片公司蜕变为全球市值最高的科技巨头（~$5.8T）。FY2026（截至2026年1月），营收同比增长114%至$130.5B，数据中心业务增长142%至$115.2B——这种增速在全球科技史上前所未有。然而，随着市值逼近$6万亿，市场对AI投资周期持续性的分歧日益加大。</p>
+<p>本文从公司概况、财务数据、技术分析、市场情绪、竞品对比、估值与健康度、主要风险因素及投资建议八个维度，对NVIDIA进行全面分析。</p>
+
+<h2>一、公司概况：业务模式、市值、护城河及行业地位</h2>
+
+<h3>1.1 业务模式</h3>
+<p>NVIDIA的业务模式围绕"GPU硬件+CUDA软件+系统方案"三位一体展开：</p>
+<ul>
+    <li><strong>数据中心</strong>（占营收88%）：Hopper (H100/H200)、Blackwell (B200/GB200)、Rubin平台，面向AI训练/推理、HPC、云游戏</li>
+    <li><strong>游戏</strong>（占营收8%）：GeForce RTX消费级GPU，PC游戏和创作者市场</li>
+    <li><strong>专业可视化</strong>（占营收2.5%）：Quadro/RTX工作站GPU，工业设计、科学计算</li>
+    <li><strong>汽车与机器人</strong>（占营收1.5%）：DRIVE Orin/Thor自动驾驶平台，Jetson边缘AI</li>
+</ul>
+<p>2026年，NVIDIA的核心叙事从"卖芯片"升级为"卖AI工厂"——Blackwell GB200 NVL72机架级系统将72颗GPU+36颗Grace CPU集成为一个exaflop级计算单元，单机架售价超$300万。</p>
+<div class="my-8 p-6 bg-gray-50 rounded-lg border-l-4 border-gray-700">
+    <div class="flex items-baseline gap-4"><i class="fas fa-quote-left mt-1"></i><h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">关键结论</h4></div>
+    <p class="mt-2 !mb-0 leading-relaxed">NVIDIA已从芯片供应商进化为AI基础设施的全栈平台公司——硬件+网络+软件的系统级优势构筑了极高的客户转换成本。</p>
+</div>
+
+<h3>1.2 市值与排名</h3>
+<p>截至2026年5月，NVIDIA市值约$5.8万亿，超越Apple和Alphabet成为全球最高市值公司。在全球半导体行业，其市值超过台积电、博通、三星、AMD之和。</p>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-pie"></i> Data Insight: 全球半导体公司市值对比</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_semi_mcap"></canvas></div></div>
+</div>
+
+<h3>1.3 护城河分析</h3>
+<ol>
+    <li><strong>CUDA生态锁定</strong>：CUDA积累20年的500万+开发者、300+加速库和SDK，是竞争对手无法短期复制的核心壁垒。任何替代方案（AMD ROCm、Intel oneAPI）在软件成熟度上差距显著。</li>
+    <li><strong>产品迭代速度</strong>：从2年一代加速到1年一代（Hopper→Blackwell→Rubin→Vera），竞争窗口被极致压缩。</li>
+    <li><strong>系统级方案</strong>：NVLink+NVSwitch+ConnectX+BlueField+Spectrum-X构成完整数据中心网络方案，不再依赖第三方互连。</li>
+    <li><strong>规模效应与定价权</strong>：数据中心GPU毛利率超80%，客户（微软、Meta、Google、Amazon）竞相采购，供不应求格局短期难破。</li>
+</ol>
+
+<h3>1.4 行业地位</h3>
+<p>NVIDIA在多个高增长赛道占据统治地位：AI训练GPU（95%+份额）、AI推理加速器（80%+份额）、高速网络（InfiniBand/Spectrum-X）、自动驾驶芯片（与高通并列第一梯队）。</p>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-bar"></i> Data Insight: AI加速器市场份额</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_ai_accel"></canvas></div></div>
+</div>
+
+<h2>二、财务分析</h2>
+<h3>2.1 营收趋势</h3>
+<p>NVIDIA FY2026各项业务全面爆发：</p>
+<ul>
+    <li><strong>总营收</strong>：$130.5B（+114% YoY）</li>
+    <li><strong>数据中心</strong>：$115.2B（+142% YoY），占总营收88%</li>
+    <li><strong>游戏</strong>：$10.4B（+12% YoY）</li>
+    <li><strong>专业可视化</strong>：$3.2B（+18% YoY）</li>
+    <li><strong>汽车与机器人</strong>：$1.7B（+25% YoY）</li>
+    <li><strong>Q1 FY2027</strong>：营收$43B（+10% QoQ），数据中心$38.5B</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: 营收与数据中心增长</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_revenue_growth"></canvas></div></div>
+</div>
+
+<h3>2.2 盈利能力</h3>
+<ul>
+    <li><strong>GAAP毛利率</strong>：75.0%（FY2026），Q1 FY2027提升至75.7%。Blackwell高ASP推动利润率持续扩张。</li>
+    <li><strong>GAAP净利润</strong>：$72.9B（FY2026全年），净利率55.9%。</li>
+    <li><strong>Non-GAAP摊薄EPS</strong>：$2.94（FY2026全年），+130% YoY。</li>
+    <li><strong>自由现金流</strong>：$60.2B（FY2026），充裕的现金生成能力支撑激进研发和回购。</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: 毛利率与净利率趋势</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_margins"></canvas></div></div>
+</div>
+
+<h2>三、技术面分析</h2>
+<h3>3.1 价格走势</h3>
+<ul>
+    <li><strong>52周范围</strong>：$118 - $195</li>
+    <li><strong>当前价格</strong>：约$185（2026年5月）</li>
+    <li><strong>年内表现</strong>：+38% YTD，受益于Blackwell量产爬坡和Rubin路线图提前</li>
+    <li><strong>关键事件</strong>：2026年3月GTC大会Rubin平台发布后股价跳涨12%</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-chart-line"></i> Data Insight: NVDA 股价走势（52周）</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_price"></canvas></div></div>
+</div>
+
+<h3>3.2 技术指标</h3>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-crosshairs"></i> 技术面分析</div>
+    <div class="widget-body">
+        <div class="indicator-grid">
+            <div class="indicator-item"><div class="indicator-label">RSI (14)</div><div class="indicator-value">62</div><span class="indicator-signal signal-buy">偏多</span></div>
+            <div class="indicator-item"><div class="indicator-label">MACD</div><div class="indicator-value">DIF>DEA</div><span class="indicator-signal signal-buy">多头</span></div>
+            <div class="indicator-item"><div class="indicator-label">MA50</div><div class="indicator-value">$172</div><span class="indicator-signal signal-buy">上方</span></div>
+            <div class="indicator-item"><div class="indicator-label">MA200</div><div class="indicator-value">$148</div><span class="indicator-signal signal-buy">上方</span></div>
+            <div class="indicator-item"><div class="indicator-label">Beta</div><div class="indicator-value">1.65</div><span class="indicator-signal signal-sell">高波动</span></div>
+        </div>
+    </div>
+</div>
+
+<h2>四、市场情绪</h2>
+<h3>4.1 分析师评级</h3>
+<ul>
+    <li><strong>高盛</strong>：买入，目标价$220。认为Blackwell+Rubin双轮驱动下数据中心营收2027年可达$220B。</li>
+    <li><strong>摩根士丹利</strong>：增持，目标价$210。强调CUDA锁定效应和NVL系统级方案的ASP提升。</li>
+    <li><strong>花旗</strong>：买入，目标价$205。看好汽车和机器人业务在FY2028的爆发潜力。</li>
+    <li><strong>Jefferies</strong>：持有，目标价$170。担忧CSP客户自研芯片（Google TPU、Amazon Trainium）的长期替代风险。</li>
+    <li><strong>综合平均目标价</strong>：$195，隐含约5%上行空间。</li>
+</ul>
+<div class="widget-box">
+    <div class="widget-header"><i class="fas fa-bullseye"></i> Data Insight: 华尔街目标价</div>
+    <div class="widget-body"><div class="chart-container"><canvas id="chart_targets"></canvas></div></div>
+</div>
+
+<h2>五、竞品对比</h2>
+<table>
+    <thead><tr><th>指标</th><th>NVIDIA</th><th>AMD</th><th>Intel</th><th>Broadcom</th></tr></thead>
+    <tbody>
+        <tr><td>市值</td><td>$5.8T</td><td>$320B</td><td>$185B</td><td>$1.2T</td></tr>
+        <tr><td>AI加速器份额</td><td>~82%</td><td>~12%</td><td><1%</td><td>~5%（定制）</td></tr>
+        <tr><td>数据中心营收（TTM）</td><td>$141B</td><td>$12B</td><td>$14B</td><td>$35B</td></tr>
+        <tr><td>毛利率</td><td>75.7%</td><td>53%</td><td>45%</td><td>65%</td></tr>
+        <tr><td>软件生态</td><td>CUDA</td><td>ROCm</td><td>oneAPI</td><td>无</td></tr>
+    </tbody>
+</table>
+
+<h2>六、估值与财务健康度</h2>
+<h3>6.1 估值框架</h3>
+<ul>
+    <li><strong>P/E（TTM）</strong>：约38x，低于5年均值52x。</li>
+    <li><strong>Forward P/E（FY2027 consensus）</strong>：约22x，基于市场一致预期的$8.50 EPS。</li>
+    <li><strong>PEG Ratio</strong>：约0.5x（基于未来3-5年60%+的EPS CAGR预期），在成长股中处于极端低估区间。</li>
+    <li><strong>关键假设</strong>：当前估值依赖于AI Capex未来3年维持30%+ CAGR的强假设。若增速放缓至20%，Forward P/E将升至35x+。</li>
+</ul>
+<h3>6.2 财务健康度</h3>
+<ul>
+    <li><strong>现金储备</strong>：$68B现金及等价物，零净负债。</li>
+    <li><strong>研发投入</strong>：FY2026 R&D支出$13.1B（占营收10%），研发强度为所有半导体公司最高。</li>
+    <li><strong>股东回报</strong>：FY2026回购$32B+派息$1B。$75B回购授权剩余额度充足。</li>
+</ul>
+
+<h2>七、主要风险因素</h2>
+<h3>7.1 核心风险</h3>
+<ul>
+    <li><strong>AI Capex周期拐点</strong>：若微软/Meta/Google等超大规模客户削减AI预算，NVIDIA数据中心营收可能从三位数增长骤降至个位数。</li>
+    <li><strong>CSP自研芯片替代</strong>：Google TPU v6、Amazon Trainium3、微软Maia-2等自研ASIC在推理场景逐步替代GPU，长期侵蚀NVIDIA的TAM。</li>
+    <li><strong>出口管制升级</strong>：美国对华芯片出口限制持续收紧（B200已被列入管制清单），中国市场营收占比大幅萎缩。</li>
+    <li><strong>竞争格局演变</strong>：AMD MI400预计2026年末上市，性能差距有望缩小至15-20%。博通+字节/OpenAI定制芯片合作增加。</li>
+    <li><strong>估值过高</strong>：$5.8T市值已将最乐观的增长情景计入定价，任何低于预期的财报都可能触发显著回调。</li>
+</ul>
+<div class="my-8 p-6 bg-red-50 rounded-lg border-l-4 border-red-500">
+    <div class="flex items-baseline gap-4"><i class="fas fa-shield-halved mt-1 text-red-500"></i><h4 class="font-bold uppercase mb-2 !mt-0 !mb-1">最大风险</h4></div>
+    <p class="mt-2 !mb-0 leading-relaxed">AI Capex周期拐点是NVIDIA最致命的尾部风险——当超大规模云客户完成初始基础设施部署后，资本支出将从训练转向推理优化，GPU采购密度可能大幅下降。</p>
+</div>
+
+<h2>八、结论与投资建议</h2>
+<h3>8.1 短期投资建议（0-6个月）</h3>
+<p>短期NVIDIA股价受Blackwell GB200 NVL72大规模交付和Rubin平台技术细节推动，但估值已不便宜。建议关注每次财报后的支撑确认，逢回调至$165-170区域（MA50附近）分批建仓。目标价$200-210。</p>
+<h3>8.2 长期投资建议（6-18个月）</h3>
+<p>NVIDIA在AI计算领域的统治地位中期难以撼动，但当前$5.8T市值隐含的完美预期使风险收益比趋于中性。建议作为AI主题核心配置但控制仓位不超过组合的15%，密切关注每个季度的数据中心增速和CSP Capex指引变化。若数据中心增速跌破30%，应果断减仓。</p>
+<div class="my-8 p-6 bg-green-50 rounded-lg border-l-4 border-green-500">
+    <div class="font-bold text-green-800 !mt-0 !mb-2">短期（0-6个月）</div>
+    <p class="!mb-4 text-green-700 leading-relaxed">Blackwell NVL72大规模交付+Rubin路线图是核心催化剂。逢回调至$165-170区域分批建仓。目标$200-210。<br><strong>操作</strong>：等待回调，分批建仓。</p>
+    <div class="border-t border-green-200 my-4"></div>
+    <div class="font-bold text-blue-800 !mt-0 !mb-2">长期（6-18个月）</div>
+    <p class="!mb-0 text-blue-700 leading-relaxed">AI算力需求结构性增长，但$5.8T已price in极高期望。控制仓位≤15%，跟踪CSP Capex。若数据中心增速<30%则减仓。<br><strong>操作</strong>：核心持仓，严格止损$140。</p>
+</div>
+
+<h2>参考来源</h2>
+<ol class="references">
+    <li><a href="https://investor.nvidia.com/" target="_blank" rel="nofollow noopener">NVIDIA Investor Relations — 官方财报与SEC文件</a></li>
+    <li>NVIDIA FY2026 10-K Annual Report & Q1 FY2027 10-Q</li>
+    <li><a href="https://www.goldmansachs.com/" target="_blank" rel="nofollow noopener">Goldman Sachs Equity Research — NVIDIA (May 2026)</a></li>
+    <li><a href="https://www.morganstanley.com/" target="_blank" rel="nofollow noopener">Morgan Stanley Research — Semiconductors (May 2026)</a></li>
+    <li><a href="https://www.mercuryresearch.com/" target="_blank" rel="nofollow noopener">Mercury Research — GPU & AI Accelerator Market Share</a></li>
+    <li><a href="https://www.semianalysis.com/" target="_blank" rel="nofollow noopener">SemiAnalysis — AI Infrastructure & GPU Market Analysis</a></li>
+    <li><a href="https://www.counterpointresearch.com/" target="_blank" rel="nofollow noopener">Counterpoint — AI Chip Market Tracker (Q1 2026)</a></li>
+    <li><a href="https://finance.yahoo.com/quote/NVDA/" target="_blank" rel="nofollow noopener">Yahoo Finance — NVDA实时行情</a></li>
+</ol>
+
+</div>
+<script>(function(){if(typeof Chart==='undefined'){setTimeout(arguments.callee,100);return;}
+new Chart(document.getElementById('chart_semi_mcap'),{type:'bar',data:{labels:['NVIDIA','TSMC','Broadcom','Samsung','ASML','AMD','Intel'],datasets:[{label:'市值 (十亿美元)',data:[5800,980,1200,420,380,320,185],backgroundColor:['#10B981','#3B82F6','#8B5CF6','#F59E0B','#EF4444','#EA580C','#6B7280'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'十亿美元'}}}}});
+new Chart(document.getElementById('chart_ai_accel'),{type:'bar',data:{labels:['NVIDIA','AMD','Google TPU','Amazon Trainium','Broadcom定制','其他'],datasets:[{label:'AI加速器份额 (%)',data:[82,12,3,1,1.5,0.5],backgroundColor:['#10B981','#EF4444','#F59E0B','#3B82F6','#8B5CF6','#E5E7EB'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'市场份额 (%)'}}}}});
+new Chart(document.getElementById('chart_revenue_growth'),{type:'line',data:{labels:['FY2022','FY2023','FY2024','FY2025','FY2026','Q1FY27*'],datasets:[{label:'总营收 ($B)',data:[26.9,27.0,60.9,87.5,130.5,43],borderColor:'#10B981',backgroundColor:'rgba(16,185,129,0.08)',borderWidth:3,fill:true,tension:0.2},{label:'数据中心 ($B)',data:[10.6,15.0,42.5,75.1,115.2,38.5],borderColor:'#3B82F6',backgroundColor:'rgba(59,130,246,0.08)',borderWidth:3,fill:true,tension:0.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom'}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'十亿美元'}}}}});
+new Chart(document.getElementById('chart_margins'),{type:'line',data:{labels:['FY2022','FY2023','FY2024','FY2025','FY2026'],datasets:[{label:'毛利率 (%)',data:[64.9,56.9,72.7,74.0,75.0],borderColor:'#10B981',borderWidth:3,fill:false,tension:0.2},{label:'净利率 (%)',data:[36.3,16.2,48.9,54.8,55.9],borderColor:'#3B82F6',borderWidth:3,fill:false,tension:0.2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom'}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'%'}}}}});
+new Chart(document.getElementById('chart_price'),{type:'line',data:{labels:['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],datasets:[{label:'NVDA ($)',data:[125,118,130,122,140,138,142,148,165,178,195,185],borderColor:'#10B981',backgroundColor:'rgba(16,185,129,0.08)',borderWidth:2,fill:true,tension:0.2,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},title:{display:true,text:'USD'}}}}});
+new Chart(document.getElementById('chart_targets'),{type:'bar',data:{labels:['高盛','摩根士丹利','花旗','Jefferies','综合平均'],datasets:[{label:'目标价 ($)',data:[220,210,205,170,195],backgroundColor:['#10B981','#10B981','#10B981','#F59E0B','#3B82F6'],borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{borderDash:[4,4]},min:150,title:{display:true,text:'USD'}}}}});
+})();</script>
+</body>
+</html>
